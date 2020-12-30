@@ -582,7 +582,7 @@ paths:
                     criterion:
                       allOf:
                         - $ref: '#/components/schemas/Criterion'
-                        - description: 'A condition that specifies the property, operator, and value to use to filter the results.'
+                        - description: 'A condition that specifies the property, operator, and one or more values to use to filter the results.'
                 name:
                   description: '<p>A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users of your account might be able to see the filter''s name, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
                   type: string
@@ -1465,7 +1465,7 @@ paths:
                     criterion:
                       allOf:
                         - $ref: '#/components/schemas/Criterion'
-                        - description: 'A condition that specifies the property, operator, and value to use to filter the results.'
+                        - description: 'A condition that specifies the property, operator, and one or more values to use to filter the results.'
                 name:
                   description: '<p>A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users might be able to see the filter''s name, depending on the actions that they''re allowed to perform in Amazon Macie.</p>'
                   type: string
@@ -1749,7 +1749,7 @@ paths:
               type: object
               properties:
                 criteria:
-                  description: 'Specifies, as a map, one or more attribute-based conditions that filter the results of a query for information about S3 buckets.'
+                  description: 'Specifies, as a map, one or more property-based conditions that filter the results of a query for information about S3 buckets.'
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/BucketCriteriaAdditionalProperties'
@@ -1766,7 +1766,7 @@ paths:
                     attributeName:
                       allOf:
                         - $ref: '#/components/schemas/__string'
-                        - description: 'The name of the attribute to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.'
+                        - description: 'The name of the property to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.'
                     orderBy:
                       allOf:
                         - $ref: '#/components/schemas/OrderBy'
@@ -2932,7 +2932,7 @@ paths:
                     criterion:
                       allOf:
                         - $ref: '#/components/schemas/Criterion'
-                        - description: 'A condition that specifies the property, operator, and value to use to filter the results.'
+                        - description: 'A condition that specifies the property, operator, and one or more values to use to filter the results.'
                 groupBy:
                   description: '<p>The finding property to use to group the query results. Valid values are:</p> <ul><li><p>classificationDetails.jobId - The unique identifier for the classification job that produced the finding.</p></li> <li><p>resourcesAffected.s3Bucket.name - The name of the S3 bucket that the finding applies to.</p></li> <li><p>severity.description - The severity level of the finding, such as High or Medium.</p></li> <li><p>type - The type of finding, such as Policy:IAMUser/S3BucketPublic and SensitiveData:S3Object/Personal.</p></li></ul>'
                   type: string
@@ -3620,7 +3620,7 @@ paths:
                     criterion:
                       allOf:
                         - $ref: '#/components/schemas/Criterion'
-                        - description: 'A condition that specifies the property, operator, and value to use to filter the results.'
+                        - description: 'A condition that specifies the property, operator, and one or more values to use to filter the results.'
                 maxResults:
                   description: The maximum number of items to include in each page of the response.
                   type: integer
@@ -4054,7 +4054,7 @@ components:
             - description: The unique identifier for the filter that was created.
     Criterion:
       type: object
-      description: 'Specifies a condition that defines a property, operator, and value to use to filter the results of a query for findings.'
+      description: 'Specifies a condition that defines a property, operator, and one or more values to filter the results of a query for findings. The number of values depends on the property and operator specified by the condition. For information about defining filter conditions, see <a href="https://docs.aws.amazon.com/macie/latest/user/findings-filter-basics.html">Fundamentals of filtering findings</a> in the <i>Amazon Macie User Guide</i>.'
       additionalProperties:
         $ref: '#/components/schemas/CriterionAdditionalProperties'
     CreateInvitationsResponse:
@@ -4128,32 +4128,32 @@ components:
         eq:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: An equal to condition to apply to a specified attribute value for buckets.
+            - description: 'The value for the property matches (equals) the specified value. If you specify multiple values, Macie uses OR logic to join the values.'
         gt:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: A greater than condition to apply to a specified attribute value for buckets.
+            - description: The value for the property is greater than the specified value.
         gte:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: A greater than or equal to condition to apply to a specified attribute value for buckets.
+            - description: The value for the property is greater than or equal to the specified value.
         lt:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: A less than condition to apply to a specified attribute value for buckets.
+            - description: The value for the property is less than the specified value.
         lte:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: A less than or equal to condition to apply to a specified attribute value for buckets.
+            - description: The value for the property is less than or equal to the specified value.
         neq:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: A not equal to condition to apply to a specified attribute value for buckets.
+            - description: 'The value for the property doesn''t match (doesn''t equal) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.'
         prefix:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: The prefix of the buckets to include in the results.
-      description: Specifies the operator to use in an attribute-based condition that filters the results of a query for information about S3 buckets.
+            - description: The name of the bucket begins with the specified value.
+      description: Specifies the operator to use in a property-based condition that filters the results of a query for information about S3 buckets.
     OrderBy:
       type: string
       enum:
@@ -4193,7 +4193,7 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job, or you paused the job while it had a status of RUNNING and you didn''t resume it within 30 days of pausing it.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don''t resume the job within 30 days of pausing it, the job expires and is cancelled. To check the job''s expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
+            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it''s a one-time job, you paused the job and didn''t resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don''t resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job''s type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
         jobType:
           allOf:
             - $ref: '#/components/schemas/JobType'
@@ -4233,7 +4233,7 @@ components:
         userPausedDetails:
           allOf:
             - $ref: '#/components/schemas/UserPausedDetails'
-            - description: 'If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job will expire and be cancelled if it isn''t resumed. This value is present only if the value for jobStatus is USER_PAUSED.'
+            - description: 'If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn''t resumed. This value is present only if the value for jobStatus is USER_PAUSED.'
     DescribeOrganizationConfigurationResponse:
       type: object
       properties:
@@ -4936,11 +4936,11 @@ components:
         kmsManaged:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: ' <p>The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt objects. These buckets use AWS managed AWS KMS (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.</p>'
+            - description: ' <p>The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) by default to encrypt objects. These buckets use AWS managed AWS KMS (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.</p>'
         s3Managed:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of buckets that use an Amazon S3 managed key to encrypt objects. These buckets use Amazon S3 managed (SSE-S3) encryption.
+            - description: The total number of buckets that use an Amazon S3 managed key by default to encrypt objects. These buckets use Amazon S3 managed (SSE-S3) encryption.
         unencrypted:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -4968,7 +4968,7 @@ components:
       description: Provides information about the number of S3 buckets that are shared with other AWS accounts.
     BucketCriteria:
       type: object
-      description: 'Specifies, as a map, one or more attribute-based conditions that filter the results of a query for information about S3 buckets.'
+      description: 'Specifies, as a map, one or more property-based conditions that filter the results of a query for information about S3 buckets.'
       additionalProperties:
         $ref: '#/components/schemas/BucketCriteriaAdditionalProperties'
     BucketPolicy:
@@ -5202,7 +5202,7 @@ components:
         attributeName:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: 'The name of the attribute to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.'
+            - description: 'The name of the property to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.'
         orderBy:
           allOf:
             - $ref: '#/components/schemas/OrderBy'
@@ -5456,7 +5456,7 @@ components:
         criterion:
           allOf:
             - $ref: '#/components/schemas/Criterion'
-            - description: 'A condition that specifies the property, operator, and value to use to filter the results.'
+            - description: 'A condition that specifies the property, operator, and one or more values to use to filter the results.'
       description: 'Specifies, as a map, one or more property-based conditions that filter the results of a query for findings.'
     CreateFindingsFilterRequest:
       type: object
@@ -5548,32 +5548,32 @@ components:
         eq:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: An equal to condition to apply to a specified property value for findings.
+            - description: 'The value for the property matches (equals) the specified value. If you specify multiple values, Macie uses OR logic to join the values.'
         eqExactMatch:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: 'A condition that requires an array field to exactly match the specified property values. You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.'
+            - description: '<p>The value for the property exclusively matches (equals an exact match for) all the specified values. If you specify multiple values, Amazon Macie uses AND logic to join the values.</p> <p>You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.</p>'
         gt:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: A greater than condition to apply to a specified property value for findings.
+            - description: The value for the property is greater than the specified value.
         gte:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: A greater than or equal to condition to apply to a specified property value for findings.
+            - description: The value for the property is greater than or equal to the specified value.
         lt:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: A less than condition to apply to a specified property value for findings.
+            - description: The value for the property is less than the specified value.
         lte:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: A less than or equal to condition to apply to a specified property value for findings.
+            - description: The value for the property is less than or equal to the specified value.
         neq:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: A not equal to condition to apply to a specified property value for findings.
-      description: Specifies the operator to use in a property-based condition that filters the results of a query for findings.
+            - description: 'The value for the property doesn''t match (doesn''t equal) the specified value. If you specify multiple values, Macie uses OR logic to join the values.'
+      description: 'Specifies the operator to use in a property-based condition that filters the results of a query for findings. For detailed information and examples of each operator, see <a href="https://docs.aws.amazon.com/macie/latest/user/findings-filter-basics.html">Fundamentals of filtering findings</a> in the <i>Amazon Macie User Guide</i>.'
     Currency:
       type: string
       enum:
@@ -5779,16 +5779,16 @@ components:
         jobExpiresAt:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
-            - description: 'The date and time, in UTC and extended ISO 8601 format, when the job will expire and be cancelled if you don''t resume it first. If you don''t resume a job within 30 days of pausing it, the job expires and Amazon Macie cancels it.'
+            - description: 'The date and time, in UTC and extended ISO 8601 format, when the job or job run will expire and be cancelled if you don''t resume it first.'
         jobImminentExpirationHealthEventArn:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to notify you of the job's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.
+            - description: The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to notify you of the job or job run's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.
         jobPausedAt:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
             - description: 'The date and time, in UTC and extended ISO 8601 format, when you paused the job.'
-      description: Provides information about when a classification job was paused and when it will expire and be cancelled if it isn't resumed. This object is present only if a job's current status (jobStatus) is USER_PAUSED. The information in this object applies only to a job that was paused while it had a status of RUNNING.
+      description: 'Provides information about when a classification job was paused. For a one-time job, this object also specifies when the job will expire and be cancelled if it isn''t resumed. For a recurring job, this object also specifies when the paused job run will expire and be cancelled if it isn''t resumed. This object is present only if a job''s current status (jobStatus) is USER_PAUSED. The information in this object applies only to a job that was paused while it had a status of RUNNING.'
     DescribeOrganizationConfigurationRequest:
       type: object
       title: DescribeOrganizationConfigurationRequest
@@ -6510,7 +6510,7 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job, or you paused the job while it had a status of RUNNING and you didn''t resume it within 30 days of pausing it.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don''t resume the job within 30 days of pausing it, the job expires and is cancelled. To check the job''s expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
+            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it''s a one-time job, you paused the job and didn''t resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don''t resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job''s type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
         jobType:
           allOf:
             - $ref: '#/components/schemas/JobType'
@@ -6526,7 +6526,7 @@ components:
         userPausedDetails:
           allOf:
             - $ref: '#/components/schemas/UserPausedDetails'
-            - description: 'If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job will expire and be cancelled if it isn''t resumed. This value is present only if the value for jobStatus is USER_PAUSED.'
+            - description: 'If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn''t resumed. This value is present only if the value for jobStatus is USER_PAUSED.'
       description: 'Provides information about a classification job, including the current status of the job.'
     KeyValuePair:
       type: object
@@ -7118,7 +7118,7 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. You can''t resume a job after you cancel it. This value is valid only if the job''s current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job''s current status is USER_PAUSED. If you specify this value, Amazon Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other configuration settings for the job.</p></li> <li><p>USER_PAUSED - Pauses the job. This value is valid only if the job''s current status is IDLE or RUNNING. If you specify this value and the job''s current status is RUNNING, Macie immediately begins to pause all processing tasks for the job.</p> <p>If you pause a job when its status is RUNNING and you don''t resume the job within 30 days, the job expires and Macie cancels it. You can''t resume a job after it''s cancelled.</p></li></ul>'
+            - description: '<p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. This value is valid only if the job''s current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p> <p>If you specify this value and the job''s current status is RUNNING, Amazon Macie immediately begins to stop all processing tasks for the job. You can''t resume or restart a job after you cancel it.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job''s current status is USER_PAUSED.</p> <p>If you paused the job while it was actively running and you specify this value less than 30 days after you paused the job, Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other settings for the job.</p></li> <li><p>USER_PAUSED - Pauses the job temporarily. This value is valid only if the job''s current status is IDLE or RUNNING. If you specify this value and the job''s current status is RUNNING, Macie immediately begins to pause all processing tasks for the job.</p> <p>If you pause a one-time job and you don''t resume it within 30 days, the job expires and Macie cancels the job. If you pause a recurring job when its status is RUNNING and you don''t resume it within 30 days, the job run expires and Macie cancels the run. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
     UpdateFindingsFilterRequest:
       type: object
       title: UpdateFindingsFilterRequest

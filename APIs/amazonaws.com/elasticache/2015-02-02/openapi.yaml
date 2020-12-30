@@ -1742,7 +1742,7 @@ paths:
     get:
       x-aws-operation-name: CreateGlobalReplicationGroup
       operationId: GET_CreateGlobalReplicationGroup
-      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
+      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1824,7 +1824,7 @@ paths:
     post:
       x-aws-operation-name: CreateGlobalReplicationGroup
       operationId: POST_CreateGlobalReplicationGroup
-      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
+      description: '<p>Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html">Replication Across Regions Using Global Datastore</a>. </p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p> </li> <li> <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -2660,14 +2660,14 @@ paths:
         - name: Engine
           in: query
           required: true
-          description: 'Must be Redis. '
+          description: 'The current supported value is Redis. '
           schema:
             type: string
             pattern: '[a-zA-Z]*'
         - name: Passwords
           in: query
           required: false
-          description: Passwords used for this user account. You can create up to two passwords for each user.
+          description: Passwords used for this user. You can create up to two passwords for each user.
           schema:
             type: array
             items:
@@ -2676,14 +2676,14 @@ paths:
         - name: AccessString
           in: query
           required: true
-          description: Access permissions string used for this user account.
+          description: Access permissions string used for this user.
           schema:
             type: string
             pattern: .*\S.*
         - name: NoPasswordRequired
           in: query
           required: false
-          description: Indicates a password is not required for this user account.
+          description: Indicates a password is not required for this user.
           schema:
             type: boolean
         - name: Action
@@ -2827,7 +2827,7 @@ paths:
         - name: Engine
           in: query
           required: true
-          description: 'Must be Redis. '
+          description: 'The current supported value is Redis. '
           schema:
             type: string
             pattern: '[a-zA-Z]*'
@@ -7897,7 +7897,7 @@ paths:
         - name: AuthTokenUpdateStrategy
           in: query
           required: false
-          description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
+          description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
           schema:
             type: string
             enum:
@@ -8695,7 +8695,7 @@ paths:
         - name: AuthTokenUpdateStrategy
           in: query
           required: false
-          description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
+          description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
           schema:
             type: string
             enum:
@@ -9158,7 +9158,7 @@ paths:
         - name: AccessString
           in: query
           required: false
-          description: Access permissions string used for this user account.
+          description: Access permissions string used for this user.
           schema:
             type: string
             pattern: .*\S.*
@@ -9172,7 +9172,7 @@ paths:
         - name: Passwords
           in: query
           required: false
-          description: The passwords belonging to the user account. You are allowed up to two.
+          description: The passwords belonging to the user. You are allowed up to two.
           schema:
             type: array
             items:
@@ -9181,7 +9181,7 @@ paths:
         - name: NoPasswordRequired
           in: query
           required: false
-          description: Indicates no password is required for the user account.
+          description: Indicates no password is required for the user.
           schema:
             type: boolean
         - name: Action
@@ -10730,7 +10730,7 @@ components:
         PrimaryOutpostArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The output ARN of the primary node.
+            - description: The outpost ARN of the primary node.
         ReplicaOutpostArns:
           allOf:
             - $ref: '#/components/schemas/OutpostArnsList'
@@ -10771,11 +10771,11 @@ components:
         Engine:
           allOf:
             - $ref: '#/components/schemas/EngineType'
-            - description: 'Must be Redis. '
+            - description: The current supported value is Redis.
         AccessString:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Access permissions string used for this user account.
+            - description: Access permissions string used for this user.
         UserGroupIds:
           allOf:
             - $ref: '#/components/schemas/UserGroupIdList'
@@ -10787,7 +10787,7 @@ components:
         ARN:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the user account.
+            - description: The Amazon Resource Name (ARN) of the user.
     UserAlreadyExistsFault: {}
     UserQuotaExceededFault: {}
     DuplicateUserNameFault: {}
@@ -10805,7 +10805,7 @@ components:
         Engine:
           allOf:
             - $ref: '#/components/schemas/EngineType'
-            - description: 'Must be Redis. '
+            - description: 'The current supported value is Redis. '
         UserIds:
           allOf:
             - $ref: '#/components/schemas/UserIdList'
@@ -12715,7 +12715,7 @@ components:
         Engine:
           allOf:
             - $ref: '#/components/schemas/EngineType'
-            - description: 'Must be Redis. '
+            - description: 'The current supported value is Redis. '
         UserIds:
           allOf:
             - $ref: '#/components/schemas/UserIdListInput'
@@ -12748,19 +12748,19 @@ components:
         Engine:
           allOf:
             - $ref: '#/components/schemas/EngineType'
-            - description: 'Must be Redis. '
+            - description: 'The current supported value is Redis. '
         Passwords:
           allOf:
             - $ref: '#/components/schemas/PasswordListInput'
-            - description: Passwords used for this user account. You can create up to two passwords for each user.
+            - description: Passwords used for this user. You can create up to two passwords for each user.
         AccessString:
           allOf:
             - $ref: '#/components/schemas/AccessString'
-            - description: Access permissions string used for this user account.
+            - description: Access permissions string used for this user.
         NoPasswordRequired:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: Indicates a password is not required for this user account.
+            - description: Indicates a password is not required for this user.
     CustomerNodeEndpointList:
       type: array
       items:
@@ -13775,7 +13775,7 @@ components:
         AuthTokenUpdateStrategy:
           allOf:
             - $ref: '#/components/schemas/AuthTokenUpdateStrategyType'
-            - description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
+            - description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
       description: Represents the input of a <code>ModifyCacheCluster</code> operation.
     ParameterNameValueList:
       type: array
@@ -13944,7 +13944,7 @@ components:
         AuthTokenUpdateStrategy:
           allOf:
             - $ref: '#/components/schemas/AuthTokenUpdateStrategyType'
-            - description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
+            - description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
         UserGroupIdsToAdd:
           allOf:
             - $ref: '#/components/schemas/UserGroupIdList'
@@ -14043,7 +14043,7 @@ components:
         AccessString:
           allOf:
             - $ref: '#/components/schemas/AccessString'
-            - description: Access permissions string used for this user account.
+            - description: Access permissions string used for this user.
         AppendAccessString:
           allOf:
             - $ref: '#/components/schemas/AccessString'
@@ -14051,11 +14051,11 @@ components:
         Passwords:
           allOf:
             - $ref: '#/components/schemas/PasswordListInput'
-            - description: The passwords belonging to the user account. You are allowed up to two.
+            - description: The passwords belonging to the user. You are allowed up to two.
         NoPasswordRequired:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: Indicates no password is required for the user account.
+            - description: Indicates no password is required for the user.
     MultiAZStatus:
       type: string
       enum:
@@ -14878,7 +14878,7 @@ components:
         UserIdsToRemove:
           allOf:
             - $ref: '#/components/schemas/UserIdList'
-            - description: The list of user group IDs ro remove.
+            - description: The list of user IDs to remove.
         UserIdsToAdd:
           allOf:
             - $ref: '#/components/schemas/UserIdList'
