@@ -120,6 +120,10 @@ responses:
       items:
         $ref: "#/definitions/BranchProtection"
       type: array
+  CombinedStatus:
+    description: CombinedStatus
+    schema:
+      $ref: "#/definitions/CombinedStatus"
   Comment:
     description: Comment
     schema:
@@ -159,6 +163,16 @@ responses:
     schema:
       items:
         $ref: "#/definitions/Commit"
+      type: array
+  CommitStatus:
+    description: CommitStatus
+    schema:
+      $ref: "#/definitions/CommitStatus"
+  CommitStatusList:
+    description: CommitStatusList
+    schema:
+      items:
+        $ref: "#/definitions/CommitStatus"
       type: array
   ContentsListResponse:
     description: ContentsListResponse
@@ -431,16 +445,6 @@ responses:
     description: ServerVersion
     schema:
       $ref: "#/definitions/ServerVersion"
-  Status:
-    description: Status
-    schema:
-      $ref: "#/definitions/Status"
-  StatusList:
-    description: StatusList
-    schema:
-      items:
-        $ref: "#/definitions/Status"
-      type: array
   StopWatch:
     description: StopWatch
     schema:
@@ -1871,6 +1875,11 @@ paths:
           in: query
           name: priority_owner_id
           type: integer
+        - description: search only for repos that belong to the given team id
+          format: int64
+          in: query
+          name: team_id
+          type: integer
         - description: search only for repos that the user with the given id has starred
           format: int64
           in: query
@@ -2449,7 +2458,7 @@ paths:
       summary: Get a list of all commits from a repository
       tags:
         - repository
-  "/repos/{owner}/{repo}/commits/{ref}/statuses":
+  "/repos/{owner}/{repo}/commits/{ref}/status":
     get:
       operationId: repoGetCombinedStatusByRef
       parameters:
@@ -2468,18 +2477,79 @@ paths:
           name: ref
           required: true
           type: string
-        - description: page number of results
+        - description: page number of results to return (1-based)
           in: query
           name: page
+          type: integer
+        - description: page size of results
+          in: query
+          name: limit
           type: integer
       produces:
         - application/json
       responses:
         "200":
-          $ref: "#/responses/Status"
+          $ref: "#/responses/CombinedStatus"
         "400":
           $ref: "#/responses/error"
       summary: Get a commit's combined status, by branch/tag/commit reference
+      tags:
+        - repository
+  "/repos/{owner}/{repo}/commits/{ref}/statuses":
+    get:
+      operationId: repoListStatusesByRef
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: name of branch/tag/commit
+          in: path
+          name: ref
+          required: true
+          type: string
+        - description: type of sort
+          enum:
+            - oldest
+            - recentupdate
+            - leastupdate
+            - leastindex
+            - highestindex
+          in: query
+          name: sort
+          type: string
+        - description: type of state
+          enum:
+            - pending
+            - success
+            - error
+            - failure
+            - warning
+          in: query
+          name: state
+          type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: page size of results
+          in: query
+          name: limit
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: "#/responses/CommitStatusList"
+        "400":
+          $ref: "#/responses/error"
+      summary: Get a commit's statuses, by branch/tag/commit reference
       tags:
         - repository
   "/repos/{owner}/{repo}/contents":
@@ -4431,6 +4501,10 @@ paths:
           name: index
           required: true
           type: integer
+        - description: optional filter by user (available for issue managers)
+          in: query
+          name: user
+          type: string
         - description: Only show times updated after the given time. This is a timestamp in RFC 3339 format
           format: date-time
           in: query
@@ -6242,7 +6316,7 @@ paths:
         - application/json
       responses:
         "200":
-          $ref: "#/responses/StatusList"
+          $ref: "#/responses/CommitStatusList"
         "400":
           $ref: "#/responses/error"
       summary: Get a commit's statuses
@@ -6274,7 +6348,7 @@ paths:
         - application/json
       responses:
         "201":
-          $ref: "#/responses/Status"
+          $ref: "#/responses/CommitStatus"
         "400":
           $ref: "#/responses/error"
       summary: Create a commit status
@@ -6414,7 +6488,7 @@ paths:
           name: repo
           required: true
           type: string
-        - description: optional filter by user
+        - description: optional filter by user (available for issue managers)
           in: query
           name: user
           type: string
@@ -7944,7 +8018,7 @@ paths:
       produces:
         - application/json
       responses:
-        "200":
+        "201":
           $ref: "#/responses/AccessToken"
       summary: Create an access token
       tags:
@@ -8234,6 +8308,33 @@ definitions:
         x-go-name: Updated
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
+  CombinedStatus:
+    description: CombinedStatus holds the combined state of several statuses for a single commit
+    properties:
+      commit_url:
+        type: string
+        x-go-name: CommitURL
+      repository:
+        $ref: "#/definitions/Repository"
+      sha:
+        type: string
+        x-go-name: SHA
+      state:
+        $ref: "#/definitions/CommitStatusState"
+      statuses:
+        items:
+          $ref: "#/definitions/CommitStatus"
+        type: array
+        x-go-name: Statuses
+      total_count:
+        format: int64
+        type: integer
+        x-go-name: TotalCount
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   Comment:
     description: Comment represents a comment on a commit or issue
     properties:
@@ -8328,6 +8429,46 @@ definitions:
         x-go-name: URL
     title: CommitMeta contains meta information of a commit in terms of API.
     type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  CommitStatus:
+    description: CommitStatus holds a single status of a single Commit
+    properties:
+      context:
+        type: string
+        x-go-name: Context
+      created_at:
+        format: date-time
+        type: string
+        x-go-name: Created
+      creator:
+        $ref: "#/definitions/User"
+      description:
+        type: string
+        x-go-name: Description
+      id:
+        format: int64
+        type: integer
+        x-go-name: ID
+      status:
+        $ref: "#/definitions/CommitStatusState"
+      target_url:
+        type: string
+        x-go-name: TargetURL
+      updated_at:
+        format: date-time
+        type: string
+        x-go-name: Updated
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  CommitStatusState:
+    description: >-
+      CommitStatusState holds the state of a CommitStatus
+
+      It can be "pending", "success", "error", "failure", and "warning"
+    type: string
     x-go-package: code.gitea.io/gitea/modules/structs
   CommitUser:
     properties:
@@ -8617,7 +8758,7 @@ definitions:
     description: CreateIssueOption options to create one issue
     properties:
       assignee:
-        description: username of assignee
+        description: deprecated
         type: string
         x-go-name: Assignee
       assignees:
@@ -8647,6 +8788,9 @@ definitions:
         format: int64
         type: integer
         x-go-name: Milestone
+      ref:
+        type: string
+        x-go-name: Ref
       title:
         type: string
         x-go-name: Title
@@ -8923,7 +9067,7 @@ definitions:
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   CreateStatusOption:
-    description: CreateStatusOption holds the information needed to create a new Status for a Commit
+    description: CreateStatusOption holds the information needed to create a new CommitStatus for a Commit
     properties:
       context:
         type: string
@@ -8932,7 +9076,7 @@ definitions:
         type: string
         x-go-name: Description
       state:
-        $ref: "#/definitions/StatusState"
+        $ref: "#/definitions/CommitStatusState"
       target_url:
         type: string
         x-go-name: TargetURL
@@ -9254,6 +9398,7 @@ definitions:
     description: EditIssueOption options for editing an issue
     properties:
       assignee:
+        description: deprecated
         type: string
         x-go-name: Assignee
       assignees:
@@ -9272,6 +9417,9 @@ definitions:
         format: int64
         type: integer
         x-go-name: Milestone
+      ref:
+        type: string
+        x-go-name: Ref
       state:
         type: string
         x-go-name: State
@@ -9807,6 +9955,9 @@ definitions:
       http_git_disabled:
         type: boolean
         x-go-name: HTTPGitDisabled
+      migrations_disabled:
+        type: boolean
+        x-go-name: MigrationsDisabled
       mirrors_disabled:
         type: boolean
         x-go-name: MirrorsDisabled
@@ -11125,46 +11276,6 @@ definitions:
     x-go-package: code.gitea.io/gitea/modules/structs
   StateType:
     description: StateType issue state type
-    type: string
-    x-go-package: code.gitea.io/gitea/modules/structs
-  Status:
-    description: Status holds a single Status of a single Commit
-    properties:
-      context:
-        type: string
-        x-go-name: Context
-      created_at:
-        format: date-time
-        type: string
-        x-go-name: Created
-      creator:
-        $ref: "#/definitions/User"
-      description:
-        type: string
-        x-go-name: Description
-      id:
-        format: int64
-        type: integer
-        x-go-name: ID
-      status:
-        $ref: "#/definitions/StatusState"
-      target_url:
-        type: string
-        x-go-name: TargetURL
-      updated_at:
-        format: date-time
-        type: string
-        x-go-name: Updated
-      url:
-        type: string
-        x-go-name: URL
-    type: object
-    x-go-package: code.gitea.io/gitea/modules/structs
-  StatusState:
-    description: >-
-      StatusState holds the state of a Status
-
-      It can be "pending", "success", "error", "failure", and "warning"
     type: string
     x-go-package: code.gitea.io/gitea/modules/structs
   StopWatch:

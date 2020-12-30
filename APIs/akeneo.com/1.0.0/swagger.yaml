@@ -116,6 +116,13 @@ parameters:
     name: with_count
     required: false
     type: boolean
+  with_quality_scores:
+    default: false
+    description: Return product quality scores in the response. (Only available in the PIM Serenity version.)
+    in: query
+    name: with_quality_scores
+    required: false
+    type: boolean
 responses:
   400Error:
     description: Bad request
@@ -17791,6 +17798,12 @@ paths:
           name: with_attribute_options
           required: false
           type: boolean
+        - default: false
+          description: Return product quality scores in the response. (Only available in the PIM Serenity version.)
+          in: query
+          name: with_quality_scores
+          required: false
+          type: boolean
       responses:
         "200":
           description: Return products paginated
@@ -17814,6 +17827,19 @@ paths:
                   groups: []
                   identifier: top
                   parent: null
+                  quality_scores:
+                    - data: A
+                      locale: en_US
+                      scope: ecommerce
+                    - data: B
+                      locale: fr_FR
+                      scope: ecommerce
+                    - data: D
+                      locale: en_US
+                      scope: tablet
+                    - data: E
+                      locale: fr_FR
+                      scope: tablet
                   quantified_associations:
                     PRODUCT_SET:
                       product_models:
@@ -17903,6 +17929,19 @@ paths:
                   groups: []
                   identifier: cap
                   parent: null
+                  quality_scores:
+                    - data: A
+                      locale: en_US
+                      scope: ecommerce
+                    - data: B
+                      locale: fr_FR
+                      scope: ecommerce
+                    - data: C
+                      locale: en_US
+                      scope: tablet
+                    - data: D
+                      locale: fr_FR
+                      scope: tablet
                   quantified_associations: {}
                   updated: 2016-06-25T17:56:12+02:00
                   values:
@@ -17956,6 +17995,7 @@ paths:
                   groups: []
                   identifier: sweat
                   parent: null
+                  quality_scores: {}
                   quantified_associations: {}
                   updated: 2016-06-23T11:24:44+02:00
                   values: {}
@@ -18035,6 +18075,19 @@ paths:
                                 groups: []
                                 identifier: top
                                 parent: null
+                                quality_scores:
+                                  - data: A
+                                    locale: en_US
+                                    scope: ecommerce
+                                  - data: B
+                                    locale: fr_FR
+                                    scope: ecommerce
+                                  - data: D
+                                    locale: en_US
+                                    scope: tablet
+                                  - data: E
+                                    locale: fr_FR
+                                    scope: tablet
                                 quantified_associations:
                                   PRODUCT_SET:
                                     product_models:
@@ -18182,6 +18235,11 @@ paths:
                                   description: Code of the parent product model when the product is a variant (only available since the 2.0). This parent can be modified since the 2.3.
                                   type: string
                                   x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
+                                quality_scores:
+                                  description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                                  type: object
+                                  x-immutable: true
+                                  x-read-only: true
                                 quantified_associations:
                                   description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
                                   properties:
@@ -18347,6 +18405,19 @@ paths:
               groups: []
               identifier: top
               parent: null
+              quality_scores:
+                - data: A
+                  locale: en_US
+                  scope: ecommerce
+                - data: B
+                  locale: fr_FR
+                  scope: ecommerce
+                - data: D
+                  locale: en_US
+                  scope: tablet
+                - data: E
+                  locale: fr_FR
+                  scope: tablet
               quantified_associations:
                 PRODUCT_SET:
                   product_models:
@@ -18494,6 +18565,11 @@ paths:
                 description: Code of the parent product model when the product is a variant (only available since the 2.0). This parent can be modified since the 2.3.
                 type: string
                 x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
+              quality_scores:
+                description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                type: object
+                x-immutable: true
+                x-read-only: true
               quantified_associations:
                 description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
                 properties:
@@ -18683,6 +18759,19 @@ paths:
               groups: []
               identifier: top
               parent: null
+              quality_scores:
+                - data: A
+                  locale: en_US
+                  scope: ecommerce
+                - data: B
+                  locale: fr_FR
+                  scope: ecommerce
+                - data: D
+                  locale: en_US
+                  scope: tablet
+                - data: E
+                  locale: fr_FR
+                  scope: tablet
               quantified_associations:
                 PRODUCT_SET:
                   product_models:
@@ -18830,6 +18919,11 @@ paths:
                 description: Code of the parent product model when the product is a variant (only available since the 2.0). This parent can be modified since the 2.3.
                 type: string
                 x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
+              quality_scores:
+                description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                type: object
+                x-immutable: true
+                x-read-only: true
               quantified_associations:
                 description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
                 properties:
@@ -19074,6 +19168,12 @@ paths:
           name: with_attribute_options
           required: false
           type: boolean
+        - default: false
+          description: Return product quality scores in the response. (Only available in the PIM Serenity version.)
+          in: query
+          name: with_quality_scores
+          required: false
+          type: boolean
       responses:
         "200":
           description: OK
@@ -19093,6 +19193,19 @@ paths:
               groups: []
               identifier: top
               parent: null
+              quality_scores:
+                - data: A
+                  locale: en_US
+                  scope: ecommerce
+                - data: B
+                  locale: fr_FR
+                  scope: ecommerce
+                - data: D
+                  locale: en_US
+                  scope: tablet
+                - data: E
+                  locale: fr_FR
+                  scope: tablet
               quantified_associations:
                 PRODUCT_SET:
                   product_models:
@@ -19240,6 +19353,11 @@ paths:
                 description: Code of the parent product model when the product is a variant (only available since the 2.0). This parent can be modified since the 2.3.
                 type: string
                 x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
+              quality_scores:
+                description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                type: object
+                x-immutable: true
+                x-read-only: true
               quantified_associations:
                 description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
                 properties:
@@ -19404,6 +19522,19 @@ paths:
               groups: []
               identifier: top
               parent: null
+              quality_scores:
+                - data: A
+                  locale: en_US
+                  scope: ecommerce
+                - data: B
+                  locale: fr_FR
+                  scope: ecommerce
+                - data: D
+                  locale: en_US
+                  scope: tablet
+                - data: E
+                  locale: fr_FR
+                  scope: tablet
               quantified_associations:
                 PRODUCT_SET:
                   product_models:
@@ -19551,6 +19682,11 @@ paths:
                 description: Code of the parent product model when the product is a variant (only available since the 2.0). This parent can be modified since the 2.3.
                 type: string
                 x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
+              quality_scores:
+                description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                type: object
+                x-immutable: true
+                x-read-only: true
               quantified_associations:
                 description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
                 properties:
@@ -19733,6 +19869,19 @@ paths:
               groups: []
               identifier: top
               parent: null
+              quality_scores:
+                - data: A
+                  locale: en_US
+                  scope: ecommerce
+                - data: B
+                  locale: fr_FR
+                  scope: ecommerce
+                - data: D
+                  locale: en_US
+                  scope: tablet
+                - data: E
+                  locale: fr_FR
+                  scope: tablet
               quantified_associations:
                 PRODUCT_SET:
                   product_models:
@@ -19880,6 +20029,11 @@ paths:
                 description: Code of the parent product model when the product is a variant (only available since the 2.0). This parent can be modified since the 2.3.
                 type: string
                 x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
+              quality_scores:
+                description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                type: object
+                x-immutable: true
+                x-read-only: true
               quantified_associations:
                 description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
                 properties:
@@ -25742,6 +25896,19 @@ definitions:
       groups: []
       identifier: top
       parent: null
+      quality_scores:
+        - data: A
+          locale: en_US
+          scope: ecommerce
+        - data: B
+          locale: fr_FR
+          scope: ecommerce
+        - data: D
+          locale: en_US
+          scope: tablet
+        - data: E
+          locale: fr_FR
+          scope: tablet
       quantified_associations:
         PRODUCT_SET:
           product_models:
@@ -25889,6 +26056,11 @@ definitions:
         description: Code of the parent product model when the product is a variant (only available since the 2.0). This parent can be modified since the 2.3.
         type: string
         x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
+      quality_scores:
+        description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+        type: object
+        x-immutable: true
+        x-read-only: true
       quantified_associations:
         description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
         properties:
@@ -25983,6 +26155,19 @@ definitions:
           groups: []
           identifier: top
           parent: null
+          quality_scores:
+            - data: A
+              locale: en_US
+              scope: ecommerce
+            - data: B
+              locale: fr_FR
+              scope: ecommerce
+            - data: D
+              locale: en_US
+              scope: tablet
+            - data: E
+              locale: fr_FR
+              scope: tablet
           quantified_associations:
             PRODUCT_SET:
               product_models:
@@ -26130,6 +26315,11 @@ definitions:
             description: Code of the parent product model when the product is a variant (only available since the 2.0). This parent can be modified since the 2.3.
             type: string
             x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
+          quality_scores:
+            description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+            type: object
+            x-immutable: true
+            x-read-only: true
           quantified_associations:
             description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
             properties:

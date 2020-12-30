@@ -271,6 +271,16 @@ paths:
           name: search
           schema:
             type: string
+        - description: Disable fuzziness for the search query.
+          in: query
+          name: search_precise
+          schema:
+            type: boolean
+        - description: Mark the search query as exact.
+          in: query
+          name: search_exact
+          schema:
+            type: boolean
         - description: "Filter by parent platforms, for example: `1,2,3`."
           in: query
           name: parent_platforms
@@ -326,6 +336,11 @@ paths:
           name: platforms_count
           schema:
             type: integer
+        - description: "Filter by a metacritic rating, for example: `80,100`."
+          in: query
+          name: metacritic
+          schema:
+            type: string
         - description: "Exclude games from a particular collection, for example: `123`."
           in: query
           name: exclude_collection
@@ -346,7 +361,7 @@ paths:
           name: exclude_game_series
           schema:
             type: boolean
-        - description: "Available fields: `name`, `released`, `added`, `created`, `updated`, `rating`. You can reverse the sort order adding a hyphen, for example: `-released`."
+        - description: "Available fields: `name`, `released`, `added`, `created`, `updated`, `rating`, `metacritic`. You can reverse the sort order adding a hyphen, for example: `-released`."
           in: query
           name: ordering
           schema:

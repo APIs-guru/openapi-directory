@@ -1133,13 +1133,13 @@ definitions:
     description: Common properties for all collection  responses
     example:
       links:
-        - href: /data/world/v1/some/resource?offset=0&limit=5
+        - href: /v1/some/resource?offset=0&limit=5
           rel: first
-        - href: /data/world/v1/some/resource?offset=0&limit=5
+        - href: /v1/some/resource?offset=0&limit=5
           rel: prev
-        - href: /data/world/v1/some/resource?offset=10&limit=5
+        - href: /v1/some/resource?offset=10&limit=5
           rel: next
-        - href: /data/world/v1/some/resource?offset=95&limit=5
+        - href: /v1/some/resource?offset=95&limit=5
           rel: last
       metadata:
         currentOffset: 5
@@ -1196,13 +1196,13 @@ definitions:
           name: Kenya
           wikiDataId: Q114
       links:
-        - href: /data/world/v1/geo/countries?offset=0&limit=5
+        - href: /v1/geo/countries?offset=0&limit=5
           rel: first
-        - href: /data/world/v1/geo/countries?offset=0&limit=5
+        - href: /v1/geo/countries?offset=0&limit=5
           rel: prev
-        - href: /data/world/v1/geo/countries?offset=10&limit=5
+        - href: /v1/geo/countries?offset=10&limit=5
           rel: next
-        - href: /data/world/v1/geo/countries?offset=195&limit=5
+        - href: /v1/geo/countries?offset=195&limit=5
           rel: last
       metadata:
         currentOffset: 5
@@ -1300,26 +1300,31 @@ definitions:
         - code: AWG
           countryCodes:
             - AW
+          symbol: AWG
         - code: AZN
           countryCodes:
             - AZ
+          symbol: AZN
         - code: BAM
           countryCodes:
             - BA
+          symbol: BAM
         - code: BBD
           countryCodes:
             - BB
+          symbol: BBD
         - code: BDT
           countryCodes:
             - BD
+          symbol: BDT
       links:
-        - href: /data/world/v1/locale/currencies?offset=0&limit=5
+        - href: /v1/locale/currencies?offset=0&limit=5
           rel: first
-        - href: /data/world/v1/locale/currencies?offset=5&limit=5
+        - href: /v1/locale/currencies?offset=5&limit=5
           rel: prev
-        - href: /data/world/v1/locale/currencies?offset=15&limit=5
+        - href: /v1/locale/currencies?offset=15&limit=5
           rel: next
-        - href: /data/world/v1/locale/currencies?offset=200&limit=5
+        - href: /v1/locale/currencies?offset=200&limit=5
           rel: last
       metadata:
         currentOffset: 10
@@ -1637,13 +1642,13 @@ definitions:
         - code: pt
           name: Portuguese
       links:
-        - href: /data/world/v1/locale/languages?offset=0&limit=3
+        - href: /v1/locale/languages?offset=0&limit=3
           rel: first
-        - href: /data/world/v1/locale/languages?offset=0&limit=3
+        - href: /v1/locale/languages?offset=0&limit=3
           rel: prev
-        - href: /data/world/v1/locale/languages?offset=6&limit=3
+        - href: /v1/locale/languages?offset=6&limit=3
           rel: next
-        - href: /data/world/v1/locale/languages?offset=6&limit=3
+        - href: /v1/locale/languages?offset=6&limit=3
           rel: last
       metadata:
         currentOffset: 3
@@ -1653,7 +1658,7 @@ definitions:
   Link:
     description: A HATEAOS link
     example:
-      href: /data/world/v1/geo/cities?offset=10&limit=10
+      href: /v1/geo/cities?offset=10&limit=10
       rel: next
     properties:
       href:
@@ -1683,22 +1688,25 @@ definitions:
     description: A list of locales
     example:
       data:
-        - code: eu
-        - code: ar_MR
-        - code: es_DO
-        - code: ru
-        - code: az
+        - code: nds
+          name: Low German
+        - code: ti_ET
+          name: Tigrinya (Ethiopia)
+        - code: ta_SG
+          name: Tamil (Singapore)
+        - code: lv
+          name: Latvian
+        - code: en_NU
+          name: English (Niue)
       links:
-        - href: /data/world/v1/locale/locales?offset=0&limit=5
+        - href: /v1/locale/locales?offset=0&limit=5
           rel: first
-        - href: /data/world/v1/locale/locales?offset=45&limit=5
-          rel: prev
-        - href: /data/world/v1/locale/locales?offset=55&limit=5
+        - href: /v1/locale/locales?offset=5&limit=5
           rel: next
-        - href: /data/world/v1/locale/locales?offset=770&limit=5
+        - href: /v1/locale/locales?offset=770&limit=5
           rel: last
       metadata:
-        currentOffset: 50
+        currentOffset: 0
         totalCount: 772
     title: Locales Response
     type: object
@@ -1944,13 +1952,13 @@ definitions:
           type: CITY
           wikiDataId: Q1050185
       links:
-        - href: /data/world/v1/geo/cities?offset=0&limit=5
+        - href: /v1/geo/cities?offset=0&limit=5
           rel: first
-        - href: /data/world/v1/geo/cities?offset=0&limit=5
+        - href: /v1/geo/cities?offset=0&limit=5
           rel: prev
-        - href: /data/world/v1/geo/cities?offset=10&limit=5
+        - href: /v1/geo/cities?offset=10&limit=5
           rel: next
-        - href: /data/world/v1/geo/cities?offset=273685&limit=5
+        - href: /v1/geo/cities?offset=273685&limit=5
           rel: last
       metadata:
         currentOffset: 5
@@ -2074,13 +2082,13 @@ definitions:
           name: Hawaii
           wikiDataId: Q782
       links:
-        - href: /data/world/v1/geo/countries/US/regions?offset=0&limit=5
+        - href: /v1/geo/countries/US/regions?offset=0&limit=5
           rel: first
-        - href: /data/world/v1/geo/countries/US/regions?offset=0&limit=5
+        - href: /v1/geo/countries/US/regions?offset=0&limit=5
           rel: prev
-        - href: /data/world/v1/geo/countries/US/regions?offset=10&limit=5
+        - href: /v1/geo/countries/US/regions?offset=10&limit=5
           rel: next
-        - href: /data/world/v1/geo/countries/US/regions?offset=55&limit=5
+        - href: /v1/geo/countries/US/regions?offset=55&limit=5
           rel: last
       metadata:
         currentOffset: 5
@@ -2145,13 +2153,13 @@ definitions:
           name: Western Indonesia Time
           rawUtcOffsetHours: 7
       links:
-        - href: /data/world/v1/locale/timezones?offset=0&limit=5
+        - href: /v1/locale/timezones?offset=0&limit=5
           rel: first
-        - href: /data/world/v1/locale/timezones?offset=0&limit=5
+        - href: /v1/locale/timezones?offset=0&limit=5
           rel: prev
-        - href: /data/world/v1/locale/timezones?offset=10&limit=5
+        - href: /v1/locale/timezones?offset=10&limit=5
           rel: next
-        - href: /data/world/v1/locale/timezones?offset=595&limit=5
+        - href: /v1/locale/timezones?offset=595&limit=5
           rel: last
       metadata:
         currentOffset: 5

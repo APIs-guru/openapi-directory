@@ -434,7 +434,7 @@ components:
           description: The original price for the deal item, and the discount amount and percentage.
         price:
           $ref: "#/components/schemas/Amount"
-          description: The price for the deal item.
+          description: "The price for the deal item. Note: The price does include the value-added tax (VAT) for applicable jurisdictions when requested from supported marketplaces. In this case, users must pass the X-EBAY-C-MARKETPLACE-ID request header specifying the supported marketplace (such as EBAY_GB) to see the VAT-inclusive pricing. For more information on VAT, refer to VAT Obligations in the EU."
         qualifiedPrograms:
           description: A list of programs applicable to the item.
           items:
@@ -738,7 +738,7 @@ components:
       properties:
         shippingCost:
           $ref: "#/components/schemas/Amount"
-          description: The final shipping cost for all items after all discounts are applied.
+          description: "The final shipping cost for all items after all discounts are applied. Note: The price does include the value-added tax (VAT) for applicable jurisdictions when requested from supported marketplaces. In this case, users must pass the X-EBAY-C-MARKETPLACE-ID request header specifying the supported marketplace (such as EBAY_GB) to see the VAT-inclusive pricing. For more information on VAT, refer to VAT Obligations in the EU."
         shippingCostType:
           description: "The class of the shipping cost. Valid Values: FIXED or CALCULATED Code so that your app gracefully handles any future changes to this list."
           type: string

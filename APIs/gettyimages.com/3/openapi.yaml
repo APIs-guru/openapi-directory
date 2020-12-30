@@ -2434,6 +2434,12 @@ paths:
           schema:
             description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
             type: string
+        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+          in: header
+          name: GI-Country-Code
+          schema:
+            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+            type: string
         - in: query
           name: editorial_segment
           schema:
@@ -2653,6 +2659,12 @@ paths:
           name: Accept-Language
           schema:
             description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            type: string
+        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+          in: header
+          name: GI-Country-Code
+          schema:
+            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
             type: string
         - description: Filter based on the age of individuals in an image.
           explode: false
@@ -3040,6 +3052,12 @@ paths:
           schema:
             description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
             type: string
+        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+          in: header
+          name: GI-Country-Code
+          schema:
+            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+            type: string
         - description: Filter based on the age of individuals in an image.
           explode: false
           in: query
@@ -3334,6 +3352,12 @@ paths:
           schema:
             description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
             type: string
+        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+          in: header
+          name: GI-Country-Code
+          schema:
+            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+            type: string
         - description: Specifies the location of the image to use in the search.
           in: query
           name: image_url
@@ -3591,6 +3615,12 @@ paths:
           name: Accept-Language
           schema:
             description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            type: string
+        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+          in: header
+          name: GI-Country-Code
+          schema:
+            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
             type: string
         - description: Filter based on the age of individuals in an image.
           explode: false
@@ -4051,6 +4081,12 @@ paths:
           schema:
             description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
             type: string
+        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+          in: header
+          name: GI-Country-Code
+          schema:
+            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+            type: string
         - description: Provides filtering according to the age of individuals in a video.
           explode: false
           in: query
@@ -4434,6 +4470,12 @@ paths:
           name: Accept-Language
           schema:
             description: "Provide a header to specify the language of result values. Supported values: en-GB, de, nl, fr, en-US, it, ja, pt-PT, es, sv, ko (creative assets only), pl (creative assets only), pt-BR, zh-HK (creative assets only), zh-TW (creative assets only), ru (creative assets only), tr."
+            type: string
+        - description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
+          in: header
+          name: GI-Country-Code
+          schema:
+            description: Use of this parameter requires configuration changes to your API key. Please contact your sales representative to learn more.
             type: string
         - description: Provides filtering according to the age of individuals in a video.
           explode: false
@@ -7832,8 +7874,8 @@ components:
         - collection_id
         - collection_name
         - color_type
-        - copyright
         - comp
+        - copyright
         - date_created
         - date_submitted
         - detail_set
@@ -7841,14 +7883,16 @@ components:
         - download_sizes
         - download_product
         - downloads
-        - era
         - editorial_segments
         - entity_details
+        - era
+        - istock_collection
+        - istock_licenses
         - keywords
         - license_model
         - mastered_to
-        - originally_shot_on
         - object_name
+        - originally_shot_on
         - preview
         - product_types
         - referral_destinations
@@ -7857,8 +7901,6 @@ components:
         - summary_set
         - thumb
         - title
-        - istock_licenses
-        - istock_collection
       type: string
     VideoFormatsRequest:
       enum:

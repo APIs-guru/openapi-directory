@@ -3944,7 +3944,7 @@ paths:
             - Nothing
             - Vocaloid
             - UTAU
-            - CeVIO
+            - Other
           in: query
           name: vocalist
           required: false
@@ -5785,6 +5785,7 @@ paths:
             - Band
             - Vocalist
             - Character
+            - SynthesizerV
           in: query
           name: artistType
           required: false
@@ -6971,6 +6972,7 @@ definitions:
           - Band
           - Vocalist
           - Character
+          - SynthesizerV
         type: string
       deleted:
         type: boolean
@@ -7089,6 +7091,7 @@ definitions:
           - Band
           - Vocalist
           - Character
+          - SynthesizerV
         type: string
       baseVoicebank:
         $ref: "#/definitions/ArtistContract"
@@ -7406,6 +7409,7 @@ definitions:
           - Band
           - Vocalist
           - Character
+          - SynthesizerV
         type: string
       createDate:
         format: date-time

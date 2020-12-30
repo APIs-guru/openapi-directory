@@ -150,6 +150,69 @@ paths:
       summary: Products
       tags:
         - Products
+  /api/register:
+    post:
+      description: Use this endpoint to make the initial call with your email and password (same as on brainbi.net) and get your bearer token in response.
+      operationId: register
+      parameters:
+        - description: required
+          in: query
+          name: first_name
+          schema:
+            example: Felix
+            type: string
+        - description: required
+          in: query
+          name: last_name
+          schema:
+            example: Weber
+            type: string
+        - description: required
+          in: query
+          name: company_name
+          schema:
+            example: Fiverr
+            type: string
+        - description: required
+          in: query
+          name: shop_url
+          schema:
+            example: https;//www.fiverr.de
+            type: string
+        - description: required
+          in: query
+          name: email
+          schema:
+            example: fiverr2@fiverr.de
+            type: string
+        - description: required
+          in: query
+          name: store_name
+          schema:
+            example: Fiverr Store
+            type: string
+        - description: required
+          in: query
+          name: store_url
+          schema:
+            example: https;//www.fiverr.de
+            type: string
+        - description: required
+          in: query
+          name: password
+          schema:
+            example: "12345678"
+            type: string
+        - description: required (always 1)
+          in: query
+          name: fromuser
+          schema:
+            example: "1"
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: Register
   /api/rule:
     get:
       description: This resource lists all pricing rules that are currently saved in you account.

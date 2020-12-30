@@ -3980,6 +3980,7 @@ components:
           type: string
       type: object
     OfferingUser:
+      additionalProperties: false
       properties:
         email:
           minLength: 1
@@ -4364,6 +4365,7 @@ components:
           type: number
       type: object
     User:
+      additionalProperties: false
       properties:
         email:
           format: email

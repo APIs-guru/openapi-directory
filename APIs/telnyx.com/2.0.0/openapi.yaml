@@ -69,6 +69,8 @@ tags:
     name: Mobile Operator Networks
   - description: Notification settings operations
     name: Notifications
+  - description: Background jobs performed over a batch of phone numbers
+    name: Number Background Jobs
   - description: Configure your phone numbers
     name: Number Configurations
   - description: Look up phone number data
@@ -2595,14 +2597,7 @@ paths:
         - $ref: "#/components/parameters/PageNumber"
         - $ref: "#/components/parameters/PageSize"
         - $ref: "#/components/parameters/FilterConnectionName"
-        - description: Identifies the associated outbound voice profile.
-          in: query
-          name: filter[outbound_voice_profile_id]
-          required: false
-          schema:
-            example: "1293384261075731499"
-            format: int64
-            type: string
+        - $ref: "#/components/parameters/FilterOutboundVoiceProfileId"
         - $ref: "#/components/parameters/SortConnection"
       responses:
         "200":
@@ -2616,6 +2611,7 @@ paths:
       summary: List connections
       tags:
         - Connections
+      x-group-parameters: "true"
       x-latency-category: responsive
   "/connections/{id}":
     get:
@@ -2649,7 +2645,7 @@ paths:
         - $ref: "#/components/parameters/PageNumber"
         - $ref: "#/components/parameters/PageSize"
         - $ref: "#/components/parameters/FilterConnectionName"
-        - $ref: "#/components/parameters/FilterOutboundVoiceProfileId"
+        - $ref: "#/components/parameters/FilterInnerOutboundVoiceProfileId"
         - $ref: "#/components/parameters/SortConnection"
       responses:
         "200":
@@ -2663,6 +2659,7 @@ paths:
       summary: List credential connections
       tags:
         - Credential Connections
+      x-group-parameters: "true"
       x-latency-category: responsive
     post:
       description: Creates a credential connection.
@@ -2727,7 +2724,7 @@ paths:
           description: Unauthorized
         "404":
           description: Resource not found
-      summary: Retrieve a connection
+      summary: Retrieve a credential connection
       tags:
         - Credential Connections
       x-latency-category: responsive
@@ -3072,6 +3069,7 @@ paths:
       summary: List Fqdn connections
       tags:
         - FQDN Connections
+      x-group-parameters: "true"
       x-latency-category: responsive
     post:
       description: Creates a FQDN connection.
@@ -3180,27 +3178,23 @@ paths:
         - description: ID of the FQDN connection to which the FQDN belongs.
           in: query
           name: filter[connection_id]
-          required: false
           schema:
             type: string
         - description: FQDN represented by the resource.
           in: query
           name: filter[fqdn]
-          required: false
           schema:
             example: example.com
             type: string
         - description: Port to use when connecting to the FQDN.
           in: query
           name: filter[port]
-          required: false
           schema:
             example: 5060
             type: integer
         - description: DNS record type used by the FQDN.
           in: query
           name: filter[dns_record_type]
-          required: false
           schema:
             example: a
             type: string
@@ -3214,6 +3208,7 @@ paths:
       summary: List Fqdns
       tags:
         - FQDNs
+      x-group-parameters: "true"
       x-latency-category: responsive
     post:
       description: Create a new FQDN object.
@@ -3296,7 +3291,7 @@ paths:
         - $ref: "#/components/parameters/PageNumber"
         - $ref: "#/components/parameters/PageSize"
         - $ref: "#/components/parameters/FilterConnectionName"
-        - $ref: "#/components/parameters/FilterOutboundVoiceProfileId"
+        - $ref: "#/components/parameters/FilterInnerOutboundVoiceProfileId"
         - $ref: "#/components/parameters/SortConnection"
       responses:
         "200":
@@ -3310,6 +3305,7 @@ paths:
       summary: List Ip connections
       tags:
         - IP Connections
+      x-group-parameters: "true"
       x-latency-category: responsive
     post:
       description: Creates an IP connection.
@@ -3418,20 +3414,17 @@ paths:
         - description: ID of the IP Connection to which this IP should be attached.
           in: query
           name: filter[connection_id]
-          required: false
           schema:
             type: string
         - description: IP adddress represented by this resource.
           in: query
           name: filter[ip_address]
-          required: false
           schema:
             example: 192.168.0.0
             type: string
         - description: Port to use when connecting to this IP.
           in: query
           name: filter[port]
-          required: false
           schema:
             example: 5060
             type: integer
@@ -3445,6 +3438,7 @@ paths:
       summary: List Ips
       tags:
         - IPs
+      x-group-parameters: "true"
       x-latency-category: responsive
     post:
       description: Create a new IP object.
@@ -4888,7 +4882,7 @@ paths:
   /outbound_voice_profiles:
     get:
       description: Get all outbound voice profiles belonging to the user that match the given filters.
-      operationId: getOutboundVoiceProfiles
+      operationId: listOutboundVoiceProfiles
       parameters:
         - $ref: "#/components/parameters/PageNumber"
         - $ref: "#/components/parameters/PageSize"
@@ -4896,7 +4890,7 @@ paths:
         - $ref: "#/components/parameters/SortOutboundVoiceProfile"
       responses:
         "200":
-          $ref: "#/components/responses/OutboundVoiceProfilesResponse"
+          $ref: "#/components/responses/ListOutboundVoiceProfilesResponse"
         "401":
           description: Unauthorized
         "422":
@@ -4904,6 +4898,7 @@ paths:
       summary: Get all outbound voice profiles
       tags:
         - Outbound Voice Profiles
+      x-group-parameters: "true"
       x-latency-category: responsive
     post:
       description: Create an outbound voice profile.
@@ -4912,7 +4907,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OutboundVoiceProfileWritable"
+              $ref: "#/components/schemas/CreateOutboundVoiceProfileRequest"
         description: Parameters that can be defined when creating an outbound voice profile
         required: true
       responses:
@@ -4949,7 +4944,7 @@ paths:
       x-latency-category: responsive
     get:
       description: Retrieves the details of an existing outbound voice profile.
-      operationId: getOutboundVoiceProfile
+      operationId: retrieveOutboundVoiceProfile
       parameters:
         - $ref: "#/components/parameters/id"
       responses:
@@ -4974,7 +4969,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OutboundVoiceProfileWritable"
+              $ref: "#/components/schemas/UpdateOutboundVoiceProfileRequest"
         description: Parameters that can be updated on an outbound voice profile
         required: true
       responses:
@@ -5282,6 +5277,124 @@ paths:
       summary: Update inbound channels
       tags:
         - Inbound Channels
+      x-latency-category: responsive
+  /phone_numbers/jobs:
+    get:
+      operationId: listPhoneNumbersJobs
+      parameters:
+        - description: Filter the phone number jobs by type.
+          in: query
+          name: filter[type]
+          schema:
+            description: Identifies the type of the background job.
+            enum:
+              - update_emergency_settings
+              - delete_phone_numbers
+            example: update_emergency_settings
+            type: string
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - description: Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+          in: query
+          name: sort
+          required: false
+          schema:
+            enum:
+              - created_at
+            example: created_at
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/ListPhoneNumbersJobsResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Lists the phone numbers jobs
+      tags:
+        - Number Background Jobs
+      x-group-parameters: "true"
+      x-latency-category: responsive
+  /phone_numbers/jobs/delete_phone_numbers:
+    post:
+      description: Creates a new background job to delete a batch of numbers. At most one thousand numbers can be updated per API call.
+      operationId: createPhoneNumbersJobDeletePhoneNumbers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhoneNumbersJobDeletePhoneNumbersRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/PhoneNumbersJob"
+                title: Phone Numbers Job Delete Phone Numbers
+                type: object
+          description: Phone numbers job delete phone numbers requested.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Delete a batch of numbers
+      tags:
+        - Number Background Jobs
+      x-group-parameters: "true"
+      x-latency-category: background
+  /phone_numbers/jobs/update_emergency_settings:
+    post:
+      description: Creates a background job to update the emergency settings of a collection of phone numbers. At most one thousand numbers can be updated per API call.
+      operationId: createPhoneNumbersJobUpdateEmergencySettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhoneNumbersJobUpdateEmergencySettingsRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/PhoneNumbersJob"
+                title: Phone Numbers Enable Emergency
+                type: object
+          description: Phone numbers enable emergency requested.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Update the emergency settings from a batch of numbers
+      tags:
+        - Number Background Jobs
+      x-latency-category: background
+  "/phone_numbers/jobs/{id}":
+    get:
+      operationId: retrievePhoneNumbersJob
+      parameters:
+        - description: Identifies the Phone Numbers Job.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/PhoneNumbersJob"
+                title: Phone Numbers Job
+                type: object
+          description: Phone numbers job details.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve a phone numbers job
+      tags:
+        - Number Background Jobs
+      x-group-parameters: "true"
       x-latency-category: responsive
   /phone_numbers/messaging:
     get:
@@ -6673,7 +6786,6 @@ paths:
         - description: If present, applications with <code>friendly_name</code> containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
           in: query
           name: filter[friendly_name][contains]
-          required: false
           schema:
             default: "null"
             type: string
@@ -6915,6 +7027,7 @@ paths:
       summary: List all Verify profiles
       tags:
         - Verify
+      x-group-parameters: "true"
       x-latency-category: responsive
     post:
       description: Creates a new Verify profile to associate verifications with.
@@ -6988,7 +7101,7 @@ paths:
       tags:
         - Verify
       x-latency-category: responsive
-    put:
+    patch:
       operationId: updateVerifyProfile
       parameters:
         - description: The identifier of the Verify profile to update.
@@ -7244,7 +7357,6 @@ components:
       description: If present, applications with <code>application_name</code> containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
       in: query
       name: filter[application_name][contains]
-      required: false
       schema:
         default: "null"
         type: string
@@ -7336,9 +7448,8 @@ components:
       description: If present, connections with <code>connection_name</code> containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
       in: query
       name: filter[connection_name][contains]
-      required: false
       schema:
-        default: "null"
+        default: null
         type: string
     FilterCustomerReferenceContains:
       description: If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
@@ -7354,6 +7465,14 @@ components:
       required: false
       schema:
         type: string
+    FilterInnerOutboundVoiceProfileId:
+      description: Identifies the associated outbound voice profile.
+      in: query
+      name: filter[outbound.outbound_voice_profile_id]
+      schema:
+        example: "1293384261075731499"
+        format: int64
+        type: string
     FilterName:
       description: Filter by name
       in: query
@@ -7363,8 +7482,7 @@ components:
     FilterOutboundVoiceProfileId:
       description: Identifies the associated outbound voice profile.
       in: query
-      name: filter[outbound.outbound_voice_profile_id]
-      required: false
+      name: filter[outbound_voice_profile_id]
       schema:
         example: "1293384261075731499"
         format: int64
@@ -7409,8 +7527,8 @@ components:
       name: id
       required: true
       schema:
-        example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
-        format: uuid
+        example: "1517907029795014409"
+        format: int64
         type: string
     Id:
       description: The id of the resource.
@@ -7640,7 +7758,6 @@ components:
         </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
       in: query
       name: sort
-      required: false
       schema:
         default: created_at
         enum:
@@ -8224,6 +8341,8 @@ components:
                 items:
                   $ref: "#/components/schemas/Fqdn"
                 type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
             title: List Fqdns Response
             type: object
       description: Successful response with a list of FQDN connections.
@@ -8393,6 +8512,20 @@ components:
             title: List Number Reservations Response
             type: object
       description: Successful response with a list of number reservations.
+    ListOutboundVoiceProfilesResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/OutboundVoiceProfile"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            title: List Outbound Voice Profiles Response
+            type: object
+      description: Successful response
     ListParticipantsResponse:
       content:
         application/json:
@@ -8421,6 +8554,20 @@ components:
             title: List Phone Number Regulatory Requirements Response
             type: object
       description: Successful response with a list of phone number regulatory requirements.
+    ListPhoneNumbersJobsResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/PhoneNumbersJob"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            title: List Phone Numbers Background Jobs Response
+            type: object
+      description: Successful response with a list of phone numbers background jobs.
     ListPhoneNumbersResponse:
       content:
         application/json:
@@ -8654,13 +8801,11 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/SingleOutboundVoiceProfile"
-      description: Successful response
-    OutboundVoiceProfilesResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/MultipleOutboundVoiceProfiles"
+            properties:
+              data:
+                $ref: "#/components/schemas/OutboundVoiceProfile"
+            title: Outbound Voice Profile Response
+            type: object
       description: Successful response
     PUTSIMCardNetworkPreferenceResponse:
       content:
@@ -9044,6 +9189,8 @@ components:
           description: ISO 8601 formatted date indicating when the resource was updated.
           example: 2018-02-02T22:25:27.521Z
           type: string
+        validate_address:
+          $ref: "#/components/schemas/validate_address"
       title: Address
       type: object
     AddressCreate:
@@ -9076,6 +9223,8 @@ components:
           $ref: "#/components/schemas/postal_code"
         street_address:
           $ref: "#/components/schemas/street_address"
+        validate_address:
+          $ref: "#/components/schemas/validate_address"
       required:
         - first_name
         - last_name
@@ -12577,20 +12726,7 @@ components:
           example: true
           type: boolean
         anchorsite_override:
-          description: "`Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media."
-          enum:
-            - Latency
-            - Chicago, IL
-            - Ashburn, VA
-            - San Jose, CA
-            - Sydney, Australia
-            - Amsterdam, Netherlands
-            - London, UK
-            - Toronto, Canada
-            - Vancouver, Canada
-            - Frankfurt, Germany
-          example: Latency
-          type: string
+          $ref: "#/components/schemas/AnchorsiteOverride"
         connection_name:
           example: string
           type: string
@@ -12629,7 +12765,7 @@ components:
           nullable: true
           type: string
         webhook_event_url:
-          default: ""
+          default: null
           description: The URL where webhooks related to this connection will be sent.
           example: https://example.com
           format: url
@@ -12666,7 +12802,7 @@ components:
             - rtcp-mux
             - rtp+1
         report_frequency_secs:
-          default: 10
+          default: 5
           description: RTCP reports are sent to customers based on the frequency set. Frequency is in seconds and it can be set to values from 5 to 3000 seconds.
           example: 10
           type: integer
@@ -12903,19 +13039,7 @@ components:
           description: Defaults to true
           type: boolean
         anchorsite_override:
-          description: "`Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media."
-          enum:
-            - Latency
-            - Chicago, IL
-            - Ashburn, VA
-            - San Jose, CA
-            - Sydney, Australia
-            - Amsterdam, Netherlands
-            - London, UK
-            - Toronto, Canada
-            - Vancouver, Canada
-            - Frankfurt, Germany
-          type: string
+          $ref: "#/components/schemas/AnchorsiteOverride"
         connection_name:
           type: string
         default_on_hold_comfort_noise_enabled:
@@ -12923,23 +13047,13 @@ components:
           description: When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
           type: boolean
         dtmf_type:
-          default: RFC 2833
-          description: Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          enum:
-            - RFC 2833
-            - Inband
-            - SIP INFO
-          type: string
+          $ref: "#/components/schemas/DtmfType"
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
           type: boolean
         encrypted_media:
-          description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
-          enum:
-            - SRTP
-            - ZRTP
-          type: string
+          $ref: "#/components/schemas/EncryptedMedia"
         inbound:
           $ref: "#/components/schemas/CredentialInbound"
         onnet_t38_passthrough_enabled:
@@ -12953,23 +13067,7 @@ components:
           example: my123secure456password789
           type: string
         rtcp_settings:
-          properties:
-            capture_enabled:
-              default: false
-              description: BETA - Enable the capture and storage of RTCP messages to create QoS reports on the Telnyx Mission Control Portal.
-              example: true
-              type: boolean
-            port:
-              default: rtp+1
-              description: RTCP port by default is rtp+1, it can also be set to rtcp-mux
-              enum:
-                - rtcp-mux
-                - rtp+1
-            report_frequency_seconds:
-              default: 10
-              description: RTCP reports are sent to customers based on the frequency set. Frequency is in seconds and it can be set to values from 5 to 3000 seconds.
-              type: integer
-          type: object
+          $ref: "#/components/schemas/ConnectionRtcpSettings"
         sip_uri_calling_preference:
           default: disabled
           description: This feature enables inbound SIP URI calls to your Credential Auth Connection. If enabled for all (unrestricted) then anyone who calls the SIP URI <your-username>@telnyx.com will be connected to your Connection. You can also choose to allow only calls that are originated on any Connections under your account (internal).
@@ -13010,6 +13108,10 @@ components:
           minimum: 0
           nullable: true
           type: integer
+      required:
+        - user_name
+        - password
+        - connection_name
       title: Create Credential Connection Request
       type: object
     CreateFaxApplicationRequest:
@@ -13114,22 +13216,11 @@ components:
         webhook_timeout_secs: 25
       properties:
         active:
+          default: true
           description: Defaults to true
           type: boolean
         anchorsite_override:
-          description: "`Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media."
-          enum:
-            - Latency
-            - Chicago, IL
-            - Ashburn, VA
-            - San Jose, CA
-            - Sydney, Australia
-            - Amsterdam, Netherlands
-            - London, UK
-            - Toronto, Canada
-            - Vancouver, Canada
-            - Frankfurt, Germany
-          type: string
+          $ref: "#/components/schemas/AnchorsiteOverride"
         connection_name:
           type: string
         default_on_hold_comfort_noise_enabled:
@@ -13137,25 +13228,15 @@ components:
           description: When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
           type: boolean
         dtmf_type:
-          default: RFC 2833
-          description: Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          enum:
-            - RFC 2833
-            - Inband
-            - SIP INFO
-          type: string
+          $ref: "#/components/schemas/DtmfType"
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
           type: boolean
         encrypted_media:
-          description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
-          enum:
-            - SRTP
-            - ZRTP
-          type: string
+          $ref: "#/components/schemas/EncryptedMedia"
         inbound:
-          $ref: "#/components/schemas/CreateInboundFqdnRequest"
+          $ref: "#/components/schemas/InboundFqdn"
         onnet_t38_passthrough_enabled:
           default: false
           description: Enable on-net T38 if you prefer the sender and receiver negotiating T38 directly if both are on the Telnyx network. If this is disabled, Telnyx will be able to use T38 on just one leg of the call depending on each leg's settings.
@@ -13163,13 +13244,7 @@ components:
         rtcp_settings:
           $ref: "#/components/schemas/ConnectionRtcpSettings"
         transport_protocol:
-          default: UDP
-          description: One of UDP, TLS, or TCP. Applies only to connections with IP authentication or FQDN authentication.
-          enum:
-            - UDP
-            - TCP
-            - TLS
-          type: string
+          $ref: "#/components/schemas/FqdnConnectionTransportProtocol"
         webhook_api_version:
           default: "1"
           description: Determines which webhook format will be used, Telnyx API v1 or v2.
@@ -13198,10 +13273,12 @@ components:
           minimum: 0
           nullable: true
           type: integer
+      required:
+        - connection_name
       title: Create Fqdn Connection Request
     CreateFqdnRequest:
       example:
-        connection_id: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+        connection_id: "1516447646313612565"
         dns_record_type: a
         fqdn: example.com
         port: 8080
@@ -13221,115 +13298,13 @@ components:
           default: 5060
           description: Port to use when connecting to this FQDN.
           example: 5060
+          nullable: true
           type: integer
       required:
         - fqdn
+        - dns_record_type
+        - connection_id
       title: Create Fqdn Request
-      type: object
-    CreateInboundFqdnRequest:
-      example:
-        ani_number_format: +E.164
-        channel_limit: 10
-        codecs: G722
-        default_routing_method: sequential
-        dnis_number_format: +e164
-        generate_ringback_tone: true
-        isup_headers_enabled: true
-        prack_enabled: true
-        privacy_zone_enabled: true
-        sip_compact_headers_enabled: true
-        sip_region: US
-        sip_subdomain: test
-        sip_subdomain_receive_settings: only_my_connections
-        timeout_1xx_secs: 10
-        timeout_2xx_secs: 20
-      properties:
-        ani_number_format:
-          default: E.164-national
-          description: This setting allows you to set the format with which the caller's number (ANI) is sent for inbound phone calls.
-          enum:
-            - +E.164
-            - E.164
-            - +E.164-national
-            - E.164-national
-          type: string
-        channel_limit:
-          default: null
-          description: When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
-          type: integer
-        codecs:
-          default:
-            - G722
-            - G711U
-            - G711A
-            - G729
-            - OPUS
-            - H.264
-          description: "Defines the list of codecs that Telnyx will send for inbound calls to a specific number on your portal account, in priority order. This only works when the Connection the number is assigned to uses Media Handling mode: default. OPUS and H.264 codecs are available only when using TCP or TLS transport for SIP."
-          items:
-            type: string
-          type: array
-        default_routing_method:
-          description: Default routing method to be used when a number is associated with the connection. Must be one of the routing method types or left blank, other values are not allowed.
-          enum:
-            - sequential
-            - round-robin
-          type: string
-        dnis_number_format:
-          default: e164
-          enum:
-            - +e164
-            - e164
-            - national
-          type: string
-        generate_ringback_tone:
-          default: false
-          description: Generate ringback tone through 183 session progress message with early media.
-          type: boolean
-        isup_headers_enabled:
-          default: false
-          description: When set, inbound phone calls will receive ISUP parameters via SIP headers. (Only when available and only when using TCP or TLS transport.)
-          type: boolean
-        prack_enabled:
-          default: false
-          description: Enable PRACK messages as defined in RFC3262.
-          type: boolean
-        privacy_zone_enabled:
-          default: false
-          description: By default, Telnyx does not send caller-id information when the caller has chosen to hide this information. When this option is enabled, Telnyx will send the SIP header Privacy:id plus the caller-id information so that the receiver side can choose when to hide it.
-          type: boolean
-        sip_compact_headers_enabled:
-          default: true
-          description: Defaults to true.
-          type: boolean
-        sip_region:
-          default: US
-          description: Selects which `sip_region` to receive inbound calls from. If null, the default region (US) will be used.
-          enum:
-            - US
-            - Europe
-            - Australia
-          type: string
-        sip_subdomain:
-          description: 'Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.'
-          type: string
-        sip_subdomain_receive_settings:
-          description: 'This option can be enabled to receive calls from: "Anyone" (any SIP endpoint in the public Internet) or "Only my connections" (any connection assigned to the same Telnyx user).'
-          enum:
-            - only_my_connections
-            - from_anyone
-          type: string
-        timeout_1xx_secs:
-          default: 3
-          description: Time(sec) before aborting if connection is not made.
-          maximum: 120
-          minimum: 1
-          type: integer
-        timeout_2xx_secs:
-          default: 90
-          description: "Time(sec) before aborting if call is unanswered (min: 1, max: 600)."
-          type: integer
-      title: Create Inbound Fqdn Request
       type: object
     CreateInboundIpRequest:
       example:
@@ -13493,20 +13468,7 @@ components:
           example: true
           type: boolean
         anchorsite_override:
-          description: "`Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media."
-          enum:
-            - Latency
-            - Chicago, IL
-            - Ashburn, VA
-            - San Jose, CA
-            - Sydney, Australia
-            - Amsterdam, Netherlands
-            - London, UK
-            - Toronto, Canada
-            - Vancouver, Canada
-            - Frankfurt, Germany
-          example: Chicago, IL
-          type: string
+          $ref: "#/components/schemas/AnchorsiteOverride"
         connection_name:
           example: string
           type: string
@@ -13516,26 +13478,14 @@ components:
           example: true
           type: boolean
         dtmf_type:
-          default: RFC 2833
-          description: Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          enum:
-            - RFC 2833
-            - Inband
-            - SIP INFO
-          example: RFC 2833
-          type: string
+          $ref: "#/components/schemas/DtmfType"
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
           example: true
           type: boolean
         encrypted_media:
-          description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
-          enum:
-            - SRTP
-            - ZRTP
-          example: SRTP
-          type: string
+          $ref: "#/components/schemas/EncryptedMedia"
         inbound:
           $ref: "#/components/schemas/CreateInboundIpRequest"
         onnet_t38_passthrough_enabled:
@@ -14063,6 +14013,87 @@ components:
           format: datetime
           readOnly: true
           type: string
+    CreateOutboundVoiceProfileRequest:
+      example:
+        billing_group_id: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+        concurrent_call_limit: 10
+        daily_spend_limit: "100.00"
+        daily_spend_limit_enabled: true
+        enabled: true
+        max_destination_rate: 10
+        name: office
+        service_plan: global
+        tags:
+          - office-profile
+        traffic_type: conversational
+        usage_payment_method: rate-deck
+        whitelisted_destinations:
+          - US
+          - BR
+          - AU
+      properties:
+        billing_group_id:
+          default: null
+          description: The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
+          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+          format: uuid
+          nullable: true
+          type: string
+        call_recording:
+          $ref: "#/components/schemas/OutboundCallRecording"
+        concurrent_call_limit:
+          description: Must be no more than your global concurrent call limit. Null means no limit.
+          example: 10
+          nullable: true
+          type: integer
+        daily_spend_limit:
+          description: The maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls.
+          example: "100.00"
+          type: string
+        daily_spend_limit_enabled:
+          default: false
+          description: Specifies whether to enforce the daily_spend_limit on this outbound voice profile.
+          example: true
+          type: boolean
+        enabled:
+          default: true
+          description: Specifies whether the outbound voice profile can be used. Disabled profiles will result in outbound calls being blocked for the associated Connections.
+          example: true
+          type: boolean
+        max_destination_rate:
+          description: Maximum rate (price per minute) for a Destination to be allowed when making outbound calls.
+          type: number
+        name:
+          default: ""
+          description: A user-supplied name to help with organization.
+          example: office
+          type: string
+        service_plan:
+          $ref: "#/components/schemas/ServicePlan"
+        tags:
+          example:
+            - office-profile
+          items:
+            type: string
+          type: array
+        traffic_type:
+          $ref: "#/components/schemas/TrafficType"
+        usage_payment_method:
+          $ref: "#/components/schemas/UsagePaymentMethod"
+        whitelisted_destinations:
+          default:
+            - US
+            - CA
+          description: The list of destinations you want to be able to call using this outbound voice profile formatted in alpha2.
+          example:
+            - US
+            - BR
+            - AU
+          items:
+            type: string
+          type: array
+      title: Outbound Voice Profile
+      type: object
     CreateShortCodeMessageRequest:
       example:
         from: "+18445550001"
@@ -14304,19 +14335,7 @@ components:
           description: Defaults to true
           type: boolean
         anchorsite_override:
-          description: "`Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media."
-          enum:
-            - Latency
-            - Chicago, IL
-            - Ashburn, VA
-            - San Jose, CA
-            - Sydney, Australia
-            - Amsterdam, Netherlands
-            - London, UK
-            - Toronto, Canada
-            - Vancouver, Canada
-            - Frankfurt, Germany
-          type: string
+          $ref: "#/components/schemas/AnchorsiteOverride"
         connection_name:
           type: string
         created_at:
@@ -14324,27 +14343,17 @@ components:
           example: 2018-02-02T22:25:27.521Z
           type: string
         default_on_hold_comfort_noise_enabled:
-          default: false
+          default: true
           description: When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
           type: boolean
         dtmf_type:
-          default: RFC 2833
-          description: Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          enum:
-            - RFC 2833
-            - Inband
-            - SIP INFO
-          type: string
+          $ref: "#/components/schemas/DtmfType"
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
           type: boolean
         encrypted_media:
-          description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
-          enum:
-            - SRTP
-            - ZRTP
-          type: string
+          $ref: "#/components/schemas/EncryptedMedia"
         id:
           description: Identifies the type of resource.
           example: "1293384261075731499"
@@ -14367,30 +14376,15 @@ components:
           example: credential_connection
           type: string
         rtcp_settings:
-          properties:
-            capture_enabled:
-              default: false
-              description: BETA - Enable the capture and storage of RTCP messages to create QoS reports on the Telnyx Mission Control Portal.
-              example: true
-              type: boolean
-            port:
-              default: rtp+1
-              description: RTCP port by default is rtp+1, it can also be set to rtcp-mux
-              enum:
-                - rtcp-mux
-                - rtp+1
-            report_frequency_seconds:
-              default: 10
-              description: RTCP reports are sent to customers based on the frequency set. Frequency is in seconds and it can be set to values from 5 to 3000 seconds.
-              type: integer
-          type: object
+          $ref: "#/components/schemas/ConnectionRtcpSettings"
         sip_uri_calling_preference:
-          default: disabled
+          default: null
           description: This feature enables inbound SIP URI calls to your Credential Auth Connection. If enabled for all (unrestricted) then anyone who calls the SIP URI <your-username>@telnyx.com will be connected to your Connection. You can also choose to allow only calls that are originated on any Connections under your account (internal).
           enum:
             - disabled
             - unrestricted
             - internal
+          example: disabled
           type: string
         updated_at:
           description: ISO-8601 formatted date indicating when the resource was updated.
@@ -14506,6 +14500,8 @@ components:
         timeout_2xx_secs:
           default: "90"
           description: "Time(sec) before aborting if call is unanswered (min: 1, max: 600)."
+          maximum: 600
+          minimum: 1
           type: string
       title: Credential Inbound
       type: object
@@ -14549,7 +14545,7 @@ components:
           description: When set, ringback will not wait for indication before sending ringback tone to calling party.
           type: boolean
         localization:
-          default: null
+          default: US
           description: A 2-character country code specifying the country whose national dialing rules should be used. For example, if set to `US` then any US number can be dialed without preprending +1 to the number. When left blank, Telnyx will try US and GB dialing rules, in that order, by default.
           example: US
           type: string
@@ -14671,6 +14667,14 @@ components:
             - deprovisioning
           type: string
       type: object
+    EncryptedMedia:
+      description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
+      enum:
+        - SRTP
+        - ZRTP
+      example: SRTP
+      nullable: true
+      type: string
     Error:
       properties:
         code:
@@ -15257,11 +15261,11 @@ components:
       type: integer
     Fqdn:
       example:
-        connection_id: "3456789987654"
+        connection_id: "1516447646313612565"
         created_at: 2018-02-02T22:25:27.521Z
         dns_record_type: a
         fqdn: example.com
-        id: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+        id: "1293384261075731499"
         port: 5060
         record_type: fqdn
         updated_at: 2018-02-02T22:25:27.521Z
@@ -15311,7 +15315,7 @@ components:
         dtmf_type: RFC 2833
         encode_contact_header_enabled: true
         encrypted_media: SRTP
-        id: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+        id: "1293384261075731499"
         inbound:
           ani_number_format: +E.164
           channel_limit: 10
@@ -15346,19 +15350,7 @@ components:
           description: Defaults to true
           type: boolean
         anchorsite_override:
-          description: "`Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media."
-          enum:
-            - Latency
-            - Chicago, IL
-            - Ashburn, VA
-            - San Jose, CA
-            - Sydney, Australia
-            - Amsterdam, Netherlands
-            - London, UK
-            - Toronto, Canada
-            - Vancouver, Canada
-            - Frankfurt, Germany
-          type: string
+          $ref: "#/components/schemas/AnchorsiteOverride"
         connection_name:
           type: string
         created_at:
@@ -15370,23 +15362,13 @@ components:
           description: When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
           type: boolean
         dtmf_type:
-          default: RFC 2833
-          description: Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          enum:
-            - RFC 2833
-            - Inband
-            - SIP INFO
-          type: string
+          $ref: "#/components/schemas/DtmfType"
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
           type: boolean
         encrypted_media:
-          description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
-          enum:
-            - SRTP
-            - ZRTP
-          type: string
+          $ref: "#/components/schemas/EncryptedMedia"
         id:
           description: Identifies the resource.
           example: "1293384261075731499"
@@ -15405,13 +15387,7 @@ components:
         rtcp_settings:
           $ref: "#/components/schemas/ConnectionRtcpSettings"
         transport_protocol:
-          default: UDP
-          description: One of UDP, TLS, or TCP.
-          enum:
-            - UDP
-            - TCP
-            - TLS
-          type: string
+          $ref: "#/components/schemas/FqdnConnectionTransportProtocol"
         updated_at:
           description: ISO 8601 formatted date indicating when the resource was updated.
           example: 2018-02-02T22:25:27.521Z
@@ -15444,8 +15420,18 @@ components:
           minimum: 0
           nullable: true
           type: integer
+      required:
+        - connection_name
       title: Fqdn Connection
       type: object
+    FqdnConnectionTransportProtocol:
+      default: UDP
+      description: One of UDP, TLS, or TCP. Applies only to connections with IP authentication or FQDN authentication.
+      enum:
+        - UDP
+        - TCP
+        - TLS
+      type: string
     GatherUsingAudioRequest:
       example:
         audio_url: http://example.com/message.wav
@@ -15700,7 +15686,8 @@ components:
       example:
         ani_number_format: +E.164
         channel_limit: 10
-        codecs: G722
+        codecs:
+          - G722
         default_routing_method: sequential
         dnis_number_format: +e164
         generate_ringback_tone: true
@@ -15726,6 +15713,7 @@ components:
         channel_limit:
           default: null
           description: When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
+          nullable: true
           type: integer
         codecs:
           default:
@@ -15735,15 +15723,17 @@ components:
             - G729
             - OPUS
             - H.264
-          description: Defines the list of codecs that Telnyx will send for inbound calls to a specific number on your portal account, in priority order. OPUS and H.264 codecs are available only when using TCP or TLS transport for SIP.
+          description: "Defines the list of codecs that Telnyx will send for inbound calls to a specific number on your portal account, in priority order. This only works when the Connection the number is assigned to uses Media Handling mode: default. OPUS and H.264 codecs are available only when using TCP or TLS transport for SIP."
           items:
             type: string
           type: array
         default_routing_method:
-          description: Default routing method to be used when a number is associated with the connection. Must be one of the routing method types or left blank, other values are not allowed.
+          default: null
+          description: Default routing method to be used when a number is associated with the connection. Must be one of the routing method types or null, other values are not allowed.
           enum:
             - sequential
             - round-robin
+          nullable: true
           type: string
         dnis_number_format:
           default: e164
@@ -15781,9 +15771,12 @@ components:
             - Australia
           type: string
         sip_subdomain:
+          default: null
           description: 'Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.'
+          nullable: true
           type: string
         sip_subdomain_receive_settings:
+          default: from_anyone
           description: 'This option can be enabled to receive calls from: "Anyone" (any SIP endpoint in the public Internet) or "Only my connections" (any connection assigned to the same Telnyx user).'
           enum:
             - only_my_connections
@@ -16337,20 +16330,7 @@ components:
           example: true
           type: boolean
         anchorsite_override:
-          description: "`Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media."
-          enum:
-            - Latency
-            - Chicago, IL
-            - Ashburn, VA
-            - San Jose, CA
-            - Sydney, Australia
-            - Amsterdam, Netherlands
-            - London, UK
-            - Toronto, Canada
-            - Vancouver, Canada
-            - Frankfurt, Germany
-          example: latency
-          type: string
+          $ref: "#/components/schemas/AnchorsiteOverride"
         connection_name:
           example: string
           type: string
@@ -16364,26 +16344,14 @@ components:
           example: true
           type: boolean
         dtmf_type:
-          default: RFC 2833
-          description: Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          enum:
-            - RFC 2833
-            - Inband
-            - SIP INFO
-          example: RFC 2833
-          type: string
+          $ref: "#/components/schemas/DtmfType"
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
           example: true
           type: boolean
         encrypted_media:
-          description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
-          enum:
-            - SRTP
-            - ZRTP
-          example: SRTP
-          type: string
+          $ref: "#/components/schemas/EncryptedMedia"
         id:
           description: Identifies the type of resource.
           example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
@@ -17371,15 +17339,6 @@ components:
       items:
         $ref: "#/components/schemas/MobileOperatorNetworkPreferencesResponse"
       type: array
-    MultipleOutboundVoiceProfiles:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/OutboundVoiceProfile"
-          type: array
-        meta:
-          $ref: "#/components/schemas/PaginationMeta"
-      type: object
     NewBillingGroup:
       example:
         name: string
@@ -17963,6 +17922,45 @@ components:
           format: datetime
           readOnly: true
           type: string
+    OutboundCallRecording:
+      example:
+        call_recording_caller_phone_numbers:
+          - "+19705555098"
+        call_recording_channels: dual
+        call_recording_format: mp3
+        call_recording_type: by_caller_phone_number
+      properties:
+        call_recording_caller_phone_numbers:
+          description: When call_recording_type is 'by_caller_phone_number', only outbound calls using one of these numbers will be recorded. Numbers must be specified in E164 format.
+          example:
+            - "+19705555098"
+          items:
+            type: string
+          type: array
+        call_recording_channels:
+          default: single
+          description: When using 'dual' channels, the final audio file will be a stereo recording with the first leg on channel A, and the rest on channel B.
+          enum:
+            - single
+            - dual
+          example: dual
+          type: string
+        call_recording_format:
+          default: wav
+          description: The audio file format for calls being recorded.
+          enum:
+            - wav
+            - mp3
+          example: mp3
+          type: string
+        call_recording_type:
+          description: Specifies which calls are recorded.
+          enum:
+            - all
+            - none
+            - by_caller_phone_number
+          type: string
+      type: object
     OutboundIp:
       example:
         ani_override: string
@@ -18322,7 +18320,7 @@ components:
             - "+19705555098"
           call_recording_channels: dual
           call_recording_format: mp3
-          call_recording_type: by_call_phone_number
+          call_recording_type: by_caller_phone_number
         concurrent_call_limit: 10
         connections_count: 12
         created_at: 2018-02-02T22:25:27.521Z
@@ -18349,44 +18347,14 @@ components:
           description: The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
           example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
           format: uuid
+          nullable: true
           type: string
         call_recording:
-          properties:
-            call_recording_caller_phone_numbers:
-              description: When call_recording_type is 'by_caller_phone_number', only outbound calls using one of these numbers will be recorded. Numbers must be specified in E164 format.
-              example:
-                - "+19705555098"
-              items:
-                type: string
-              type: array
-            call_recording_channels:
-              default: single
-              description: When using 'dual' channels, the final audio file will be a stereo recording with the first leg on channel A, and the rest on channel B.
-              enum:
-                - single
-                - dual
-              example: dual
-              type: string
-            call_recording_format:
-              default: wav
-              description: The audio file format for calls being recorded.
-              enum:
-                - wav
-                - mp3
-              example: mp3
-              type: string
-            call_recording_type:
-              description: Specifies which calls are recorded.
-              enum:
-                - all
-                - none
-                - by_call_phone_number
-              example: by_call_phone_number
-              type: string
-          type: object
+          $ref: "#/components/schemas/OutboundCallRecording"
         concurrent_call_limit:
           description: Must be no more than your global concurrent call limit. Null means no limit.
           example: 10
+          nullable: true
           type: integer
         connections_count:
           description: Amount of connections associated with this outbound voice profile.
@@ -18428,14 +18396,7 @@ components:
           example: outbound_voice_profile
           type: string
         service_plan:
-          default: global
-          description: Indicates the coverage of the termination regions. International and Global are the same but International may only be used for high volume/short duration Outbound Voice Profiles.
-          enum:
-            - us
-            - international
-            - global
-          example: global
-          type: string
+          $ref: "#/components/schemas/ServicePlan"
         tags:
           example:
             - office-profile
@@ -18443,25 +18404,13 @@ components:
             type: string
           type: array
         traffic_type:
-          default: conversational
-          description: Specifies the type of traffic allowed in this profile.
-          enum:
-            - conversational
-            - short_duration
-          example: conversational
-          type: string
+          $ref: "#/components/schemas/TrafficType"
         updated_at:
           description: ISO 8601 formatted date-time indicating when the resource was updated.
           example: 2018-02-02T22:25:27.521Z
           type: string
         usage_payment_method:
-          default: rate-deck
-          description: Setting for how costs for outbound profile are calculated.
-          enum:
-            - tariff
-            - rate-deck
-          example: tariff
-          type: string
+          $ref: "#/components/schemas/UsagePaymentMethod"
         whitelisted_destinations:
           default:
             - US
@@ -18482,135 +18431,6 @@ components:
       format: int64
       title: Outbound Voice Profile ID
       type: string
-    OutboundVoiceProfileWritable:
-      example:
-        billing_group_id: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
-        concurrent_call_limit: 10
-        daily_spend_limit: "100.00"
-        daily_spend_limit_enabled: true
-        enabled: true
-        max_destination_rate: 10
-        name: office
-        service_plan: global
-        tags:
-          - office-profile
-        traffic_type: conversational
-        usage_payment_method: rate-deck
-        whitelisted_destinations:
-          - US
-          - BR
-          - AU
-      properties:
-        billing_group_id:
-          default: null
-          description: The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
-          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
-          format: uuid
-          type: string
-        call_recording:
-          properties:
-            call_recording_caller_phone_numbers:
-              description: When call_recording_type is 'by_caller_phone_number', only outbound calls using one of these numbers will be recorded. Numbers must be specified in E164 format.
-              example:
-                - "+19705555098"
-              items:
-                type: string
-              type: array
-            call_recording_channels:
-              default: single
-              description: When using 'dual' channels, the final audio file will be a stereo recording with the first leg on channel A, and the rest on channel B.
-              enum:
-                - single
-                - dual
-              example: dual
-              type: string
-            call_recording_format:
-              default: wav
-              description: The audio file format for calls being recorded.
-              enum:
-                - wav
-                - mp3
-              example: mp3
-              type: string
-            call_recording_type:
-              description: Specifies which calls are recorded.
-              enum:
-                - all
-                - none
-                - by_call_phone_number
-              type: string
-          type: object
-        concurrent_call_limit:
-          description: Must be no more than your global concurrent call limit. Null means no limit.
-          example: 10
-          type: integer
-        daily_spend_limit:
-          description: The maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls.
-          example: "100.00"
-          type: string
-        daily_spend_limit_enabled:
-          default: false
-          description: Specifies whether to enforce the daily_spend_limit on this outbound voice profile.
-          example: true
-          type: boolean
-        enabled:
-          default: true
-          description: Specifies whether the outbound voice profile can be used. Disabled profiles will result in outbound calls being blocked for the associated Connections.
-          example: true
-          type: boolean
-        max_destination_rate:
-          description: Maximum rate (price per minute) for a Destination to be allowed when making outbound calls.
-          type: number
-        name:
-          default: ""
-          description: A user-supplied name to help with organization.
-          example: office
-          type: string
-        service_plan:
-          default: global
-          description: Indicates the coverage of the termination regions. International and Global are the same but International may only be used for high volume/short duration Outbound Voice Profiles.
-          enum:
-            - us
-            - international
-            - global
-          example: global
-          type: string
-        tags:
-          example:
-            - office-profile
-          items:
-            type: string
-          type: array
-        traffic_type:
-          default: conversational
-          description: Specifies the type of traffic allowed in this profile.
-          enum:
-            - conversational
-            - short_duration
-          example: conversational
-          type: string
-        usage_payment_method:
-          default: rate-deck
-          description: Setting for how costs for outbound profile are calculated.
-          enum:
-            - tariff
-            - rate-deck
-          example: tariff
-          type: string
-        whitelisted_destinations:
-          default:
-            - US
-            - CA
-          description: The list of destinations you want to be able to call using this outbound voice profile formatted in alpha2.
-          example:
-            - US
-            - BR
-            - AU
-          items:
-            type: string
-          type: array
-      title: Outbound Voice Profile
-      type: object
     PaginationMeta:
       properties:
         page_number:
@@ -19183,6 +19003,157 @@ components:
             - channel
           example: pay-per-minute
           type: string
+      type: object
+    PhoneNumbersJob:
+      example:
+        created_at: 2020-10-23T18:10:00.000Z
+        created_by: 015e81fc-11b7-4170-974d-5592ce987da7
+        etc: 2020-10-30T18:10:00.000Z
+        failed_operations:
+          - errors:
+              - code: "10015"
+                detail: The field is invalid.
+                source: /emergency_address_id
+                title: Bad Request
+            id: "3388768018273"
+            phone_number: "+19705551234"
+        id: 42587e44-3a3e-46de-9255-0c9a7a1d1ec7
+        record_type: phone_numbers_job
+        status: pending
+        successful_operations:
+          - id: "2637816387126861836"
+            phone_number: "+19705555098"
+          - id: "33081887126861836"
+            phone_number: "+19715555098"
+        type: update_emergency_settings
+        updated_at: 2020-10-23T18:10:01.000Z
+      properties:
+        created_at:
+          description: ISO 8601 formatted date indicating when the resource was created.
+          readOnly: true
+          type: string
+        created_by:
+          description: Identifies the user which created the resource.
+          example: 42587e44-3a3e-46de-9255-0c9a7a1d1ec7
+          format: uuid
+          readOnly: true
+          type: string
+        etc:
+          description: ISO 8601 formatted date indicating when the estimated time of completion of the background job.
+          format: date-time
+          readOnly: true
+          type: string
+        failed_operations:
+          items:
+            $ref: "#/components/schemas/PhoneNumbersJobFailedOperation"
+          readOnly: true
+          type: array
+        id:
+          description: Identifies the resource.
+          example: 42587e44-3a3e-46de-9255-0c9a7a1d1ec7
+          format: uuid
+          readOnly: true
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: phone_numbers_job
+          readOnly: true
+          type: string
+        status:
+          default: pending
+          description: Indicates the completion status of the background update.
+          enum:
+            - pending
+            - in_progress
+            - completed
+            - failed
+            - expired
+          example: pending
+          readOnly: true
+          type: string
+        successful_operations:
+          items:
+            $ref: "#/components/schemas/PhoneNumbersJobSuccessfulOperation"
+            description: The phone numbers successfully updated.
+          readOnly: true
+          type: array
+        type:
+          description: Identifies the type of the background job.
+          enum:
+            - update_emergency_settings
+            - delete_phone_numbers
+          example: update_emergency_settings
+          readOnly: true
+          type: string
+        updated_at:
+          description: ISO 8601 formatted date indicating when the resource was updated.
+          readOnly: true
+          type: string
+      type: object
+    PhoneNumbersJobDeletePhoneNumbersRequest:
+      example:
+        phone_numbers:
+          - "+19705555098"
+          - "+19715555098"
+          - "32873127836"
+      properties:
+        phone_numbers:
+          items:
+            description: The phone numbers or IDs to be updated.
+            type: string
+          type: array
+      required:
+        - phone_numbers
+      type: object
+    PhoneNumbersJobFailedOperation:
+      properties:
+        errors:
+          items:
+            $ref: "#/components/schemas/Error"
+          type: array
+        id:
+          description: The phone number's ID
+          format: int64
+          type: string
+        phone_number:
+          description: The phone number in e164 format.
+          format: e164
+          type: string
+    PhoneNumbersJobSuccessfulOperation:
+      properties:
+        id:
+          description: The phone number's ID
+          format: int64
+          type: string
+        phone_number:
+          description: The phone number in e164 format.
+          format: e164
+          type: string
+    PhoneNumbersJobUpdateEmergencySettingsRequest:
+      example:
+        emergency_address_id: "53829456729313"
+        emergency_enabled: true
+        phone_numbers:
+          - "+19705555098"
+          - "+19715555098"
+          - "32873127836"
+      properties:
+        emergency_address_id:
+          description: Identifies the address to be used with emergency services.
+          format: int64
+          type: string
+        emergency_enabled:
+          description: Indicates whether to enable emergency services on this number.
+          type: boolean
+        phone_numbers:
+          items:
+            description: The phone numbers or IDs to be updated.
+            type: string
+          type: array
+      required:
+        - emergency_enabled
+        - emergency_address_id
+        - phone_numbers
       type: object
     PlayAudioUrlRequest:
       example:
@@ -20235,6 +20206,15 @@ components:
         - to
       title: Send fax request
       type: object
+    ServicePlan:
+      default: global
+      description: Indicates the coverage of the termination regions. International and Global are the same but International may only be used for high volume/short duration Outbound Voice Profiles.
+      enum:
+        - us
+        - international
+        - global
+      example: global
+      type: string
     ShortCode:
       example:
         country_code: US
@@ -20410,11 +20390,6 @@ components:
           readOnly: true
           type: string
       title: OTAUpdate
-      type: object
-    SingleOutboundVoiceProfile:
-      properties:
-        data:
-          $ref: "#/components/schemas/OutboundVoiceProfile"
       type: object
     SpeakRequest:
       example:
@@ -20843,6 +20818,14 @@ components:
       example: +E.164
       format: address
       type: string
+    TrafficType:
+      default: conversational
+      description: Specifies the type of traffic allowed in this profile.
+      enum:
+        - conversational
+        - short_duration
+      example: conversational
+      type: string
     TransferCallRequest:
       example:
         answering_machine_detection: detect
@@ -21164,19 +21147,7 @@ components:
           description: Defaults to true
           type: boolean
         anchorsite_override:
-          description: "`Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media."
-          enum:
-            - Latency
-            - Chicago, IL
-            - Ashburn, VA
-            - San Jose, CA
-            - Sydney, Australia
-            - Amsterdam, Netherlands
-            - London, UK
-            - Toronto, Canada
-            - Vancouver, Canada
-            - Frankfurt, Germany
-          type: string
+          $ref: "#/components/schemas/AnchorsiteOverride"
         connection_name:
           type: string
         default_on_hold_comfort_noise_enabled:
@@ -21184,23 +21155,13 @@ components:
           description: When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
           type: boolean
         dtmf_type:
-          default: RFC 2833
-          description: Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          enum:
-            - RFC 2833
-            - Inband
-            - SIP INFO
-          type: string
+          $ref: "#/components/schemas/DtmfType"
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
           type: boolean
         encrypted_media:
-          description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
-          enum:
-            - SRTP
-            - ZRTP
-          type: string
+          $ref: "#/components/schemas/EncryptedMedia"
         inbound:
           $ref: "#/components/schemas/CredentialInbound"
         onnet_t38_passthrough_enabled:
@@ -21214,23 +21175,7 @@ components:
           example: my123secure456password789
           type: string
         rtcp_settings:
-          properties:
-            capture_enabled:
-              default: false
-              description: BETA - Enable the capture and storage of RTCP messages to create QoS reports on the Telnyx Mission Control Portal.
-              example: true
-              type: boolean
-            port:
-              default: rtp+1
-              description: RTCP port by default is rtp+1, it can also be set to rtcp-mux
-              enum:
-                - rtcp-mux
-                - rtp+1
-            report_frequency_seconds:
-              default: 10
-              description: RTCP reports are sent to customers based on the frequency set. Frequency is in seconds and it can be set to values from 5 to 3000 seconds.
-              type: integer
-          type: object
+          $ref: "#/components/schemas/ConnectionRtcpSettings"
         sip_uri_calling_preference:
           default: disabled
           description: This feature enables inbound SIP URI calls to your Credential Auth Connection. If enabled for all (unrestricted) then anyone who calls the SIP URI <your-username>@telnyx.com will be connected to your Connection. You can also choose to allow only calls that are originated on any Connections under your account (internal).
@@ -21378,19 +21323,7 @@ components:
           description: Defaults to true
           type: boolean
         anchorsite_override:
-          description: "`Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media."
-          enum:
-            - Latency
-            - Chicago, IL
-            - Ashburn, VA
-            - San Jose, CA
-            - Sydney, Australia
-            - Amsterdam, Netherlands
-            - London, UK
-            - Toronto, Canada
-            - Vancouver, Canada
-            - Frankfurt, Germany
-          type: string
+          $ref: "#/components/schemas/AnchorsiteOverride"
         connection_name:
           type: string
         default_on_hold_comfort_noise_enabled:
@@ -21398,23 +21331,13 @@ components:
           description: When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
           type: boolean
         dtmf_type:
-          default: RFC 2833
-          description: Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          enum:
-            - RFC 2833
-            - Inband
-            - SIP INFO
-          type: string
+          $ref: "#/components/schemas/DtmfType"
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
           type: boolean
         encrypted_media:
-          description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
-          enum:
-            - SRTP
-            - ZRTP
-          type: string
+          $ref: "#/components/schemas/EncryptedMedia"
         inbound:
           $ref: "#/components/schemas/InboundFqdn"
         onnet_t38_passthrough_enabled:
@@ -21424,13 +21347,7 @@ components:
         rtcp_settings:
           $ref: "#/components/schemas/ConnectionRtcpSettings"
         transport_protocol:
-          default: UDP
-          description: One of UDP, TLS, or TCP.
-          enum:
-            - UDP
-            - TCP
-            - TLS
-          type: string
+          $ref: "#/components/schemas/FqdnConnectionTransportProtocol"
         webhook_api_version:
           default: "1"
           description: Determines which webhook format will be used, Telnyx API v1 or v2.
@@ -21462,7 +21379,7 @@ components:
       title: Update Fqdn Connection Request
     UpdateFqdnRequest:
       example:
-        connection_id: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+        connection_id: "1516447646313612565"
         dns_record_type: a
         fqdn: example.com
         port: 8080
@@ -21482,9 +21399,8 @@ components:
           default: 5060
           description: Port to use when connecting to this FQDN.
           example: 5060
+          nullable: true
           type: integer
-      required:
-        - fqdn
       title: Update Fqdn Request
       type: object
     UpdateIpConnectionRequest:
@@ -21543,19 +21459,7 @@ components:
           description: Defaults to true
           type: boolean
         anchorsite_override:
-          description: "`Latency` directs Telnyx to route media through the site with the lowest round-trip time to the user's connection. Telnyx calculates this time using ICMP ping messages. This can be disabled by specifying a site to handle all media."
-          enum:
-            - Latency
-            - Chicago, IL
-            - Ashburn, VA
-            - San Jose, CA
-            - Sydney, Australia
-            - Amsterdam, Netherlands
-            - London, UK
-            - Toronto, Canada
-            - Vancouver, Canada
-            - Frankfurt, Germany
-          type: string
+          $ref: "#/components/schemas/AnchorsiteOverride"
         connection_name:
           type: string
         default_on_hold_comfort_noise_enabled:
@@ -21563,23 +21467,13 @@ components:
           description: When enabled, Telnyx will generate comfort noise when you place the call on hold. If disabled, you will need to generate comfort noise or on hold music to avoid RTP timeout.
           type: boolean
         dtmf_type:
-          default: RFC 2833
-          description: Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
-          enum:
-            - RFC 2833
-            - Inband
-            - SIP INFO
-          type: string
+          $ref: "#/components/schemas/DtmfType"
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
           type: boolean
         encrypted_media:
-          description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
-          enum:
-            - SRTP
-            - ZRTP
-          type: string
+          $ref: "#/components/schemas/EncryptedMedia"
         inbound:
           $ref: "#/components/schemas/InboundIp"
         onnet_t38_passthrough_enabled:
@@ -21846,6 +21740,87 @@ components:
           format: datetime
           readOnly: true
           type: string
+    UpdateOutboundVoiceProfileRequest:
+      example:
+        billing_group_id: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+        concurrent_call_limit: 10
+        daily_spend_limit: "100.00"
+        daily_spend_limit_enabled: true
+        enabled: true
+        max_destination_rate: 10
+        name: office
+        service_plan: global
+        tags:
+          - office-profile
+        traffic_type: conversational
+        usage_payment_method: rate-deck
+        whitelisted_destinations:
+          - US
+          - BR
+          - AU
+      properties:
+        billing_group_id:
+          default: null
+          description: The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
+          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+          format: uuid
+          nullable: true
+          type: string
+        call_recording:
+          $ref: "#/components/schemas/OutboundCallRecording"
+        concurrent_call_limit:
+          description: Must be no more than your global concurrent call limit. Null means no limit.
+          example: 10
+          nullable: true
+          type: integer
+        daily_spend_limit:
+          description: The maximum amount of usage charges, in USD, you want Telnyx to allow on this outbound voice profile in a day before disallowing new calls.
+          example: "100.00"
+          type: string
+        daily_spend_limit_enabled:
+          default: false
+          description: Specifies whether to enforce the daily_spend_limit on this outbound voice profile.
+          example: true
+          type: boolean
+        enabled:
+          default: true
+          description: Specifies whether the outbound voice profile can be used. Disabled profiles will result in outbound calls being blocked for the associated Connections.
+          example: true
+          type: boolean
+        max_destination_rate:
+          description: Maximum rate (price per minute) for a Destination to be allowed when making outbound calls.
+          type: number
+        name:
+          default: ""
+          description: A user-supplied name to help with organization.
+          example: office
+          type: string
+        service_plan:
+          $ref: "#/components/schemas/ServicePlan"
+        tags:
+          example:
+            - office-profile
+          items:
+            type: string
+          type: array
+        traffic_type:
+          $ref: "#/components/schemas/TrafficType"
+        usage_payment_method:
+          $ref: "#/components/schemas/UsagePaymentMethod"
+        whitelisted_destinations:
+          default:
+            - US
+            - CA
+          description: The list of destinations you want to be able to call using this outbound voice profile formatted in alpha2.
+          example:
+            - US
+            - BR
+            - AU
+          items:
+            type: string
+          type: array
+      title: Outbound Voice Profile
+      type: object
     UpdatePhoneNumberMessagingSettingsRequest:
       example:
         messaging_product: P2P
@@ -22121,6 +22096,14 @@ components:
       required:
         - domain
       type: object
+    UsagePaymentMethod:
+      default: rate-deck
+      description: Setting for how costs for outbound profile are calculated.
+      enum:
+        - tariff
+        - rate-deck
+      example: tariff
+      type: string
     UserBalance:
       example:
         available_credit: "400.00"
@@ -22230,7 +22213,7 @@ components:
           type: string
         record_type:
           description: Identifies the type of the resource.
-          example: verify_verification
+          example: verification
           type: string
         status:
           $ref: "#/components/schemas/VerificationStatus"
@@ -22695,6 +22678,11 @@ components:
       description: The primary street address information about the address.
       example: 311 W Superior Street
       type: string
+    validate_address:
+      default: true
+      description: Indicates whether or not the address should be validated for emergency use upon creation or not. This should be left with the default value of `true` unless you have used the `/addresses/actions/validate` endpoint to validate the address separately prior to creation. If an address is not validated for emergency use upon creation and it is not valid, it will not be able to be used for emergency services.
+      example: true
+      type: boolean
     webhook_delivery:
       description: Record of all attempts to deliver a webhook.
       properties:

@@ -1085,6 +1085,8 @@ paths:
                       type: string
                     postalCode:
                       type: string
+                    state:
+                      type: string
                     streetAndNumber:
                       type: string
                   type: object
@@ -1098,7 +1100,75 @@ paths:
                     longitude:
                       type: number
                   type: object
+                openingHours:
+                  properties:
+                    "0":
+                      items:
+                        properties:
+                          endTime:
+                            type: string
+                          startTime:
+                            type: string
+                        type: object
+                      type: array
+                    "1":
+                      items:
+                        properties:
+                          endTime:
+                            type: string
+                          startTime:
+                            type: string
+                        type: object
+                      type: array
+                    "2":
+                      items:
+                        properties:
+                          endTime:
+                            type: string
+                          startTime:
+                            type: string
+                        type: object
+                      type: array
+                    "3":
+                      items:
+                        properties:
+                          endTime:
+                            type: string
+                          startTime:
+                            type: string
+                        type: object
+                      type: array
+                    "4":
+                      items:
+                        properties:
+                          endTime:
+                            type: string
+                          startTime:
+                            type: string
+                        type: object
+                      type: array
+                    "5":
+                      items:
+                        properties:
+                          endTime:
+                            type: string
+                          startTime:
+                            type: string
+                        type: object
+                      type: array
+                    "6":
+                      items:
+                        properties:
+                          endTime:
+                            type: string
+                          startTime:
+                            type: string
+                        type: object
+                      type: array
+                  type: object
                 operatorName:
+                  type: string
+                timezone:
                   type: string
               type: object
         description: Include location properties to create here
@@ -2093,7 +2163,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: 4783f25a7ba86ed1597ce7ff733ebbd84ae5e33b
+x-github-sha: 2df8793f7607c6d41b7c8c4c552d6423896000ca
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:

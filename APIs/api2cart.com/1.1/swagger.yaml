@@ -429,6 +429,16 @@ paths:
           name: lightspeed_api_secret
           required: false
           type: string
+        - description: CommerceHQ api key
+          in: query
+          name: commercehq_api_key
+          required: false
+          type: string
+        - description: CommerceHQ api secret
+          in: query
+          name: commercehq_api_secret
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -2130,6 +2140,7 @@ paths:
             - AspDotNetStorefront
             - BigcommerceApi
             - Creloaded
+            - CommerceHQ
             - Cscart
             - Cubecart
             - Demandware
@@ -2492,6 +2503,16 @@ paths:
         - description: Shopware api key
           in: query
           name: shopware_api_key
+          required: false
+          type: string
+        - description: CommerceHQ api key
+          in: query
+          name: commercehq_api_key
+          required: false
+          type: string
+        - description: CommerceHQ api secret
+          in: query
+          name: commercehq_api_secret
           required: false
           type: string
       produces:
@@ -7633,6 +7654,94 @@ paths:
           store_key: []
       tags:
         - product
+  /product.variant.image.add.json:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Add image to product
+      operationId: ProductVariantImageAdd
+      parameters:
+        - description: Defines product id where the variant image has to be added
+          in: query
+          name: product_id
+          required: true
+          type: string
+        - description: Defines product's variants specified by variant id
+          in: query
+          name: product_variant_id
+          required: true
+          type: integer
+        - description: Defines image's name
+          in: query
+          name: image_name
+          required: true
+          type: string
+        - default: base
+          description: Defines image's types that are specified by comma-separated list
+          enum:
+            - small
+            - base
+            - additional
+            - thumbnail
+          in: query
+          name: type
+          required: true
+          type: string
+        - description: Defines URL of the image that has to be added
+          in: query
+          name: url
+          required: false
+          type: string
+        - description: Content(body) encoded in base64 of image file
+          in: query
+          name: content
+          required: false
+          type: string
+        - description: Defines alternative text that has to be attached to the picture
+          in: query
+          name: label
+          required: false
+          type: string
+        - description: Mime type of image http://en.wikipedia.org/wiki/Internet_media_type.
+          in: query
+          name: mime
+          required: false
+          type: string
+        - default: 0
+          description: Defines image’s position in the list
+          in: query
+          name: position
+          required: false
+          type: integer
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  id:
+                    type: string
+                  image_path:
+                    type: string
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - product
   /product.variant.info.json:
     get:
       consumes:
@@ -8554,6 +8663,7 @@ definitions:
           - AspDotNetStorefront
           - BigcommerceApi
           - Creloaded
+          - CommerceHQ
           - Cscart
           - Cubecart
           - Demandware
@@ -8589,6 +8699,12 @@ definitions:
           - Xtcommerce
           - XtcommerceVeyton
           - Zencart137
+        type: string
+      commercehq_api_key:
+        description: CommerceHQ api key
+        type: string
+      commercehq_api_secret:
+        description: CommerceHQ api secret
         type: string
       db_tables_prefix:
         description: This parameter is deprecated for this method. Please, use this parameter in method account.config.update
@@ -10569,6 +10685,10 @@ definitions:
       order_id:
         description: Defines the order id
         type: string
+      send_notifications:
+        default: false
+        description: Send notifications to customer after tracking was created
+        type: boolean
       shipment_id:
         description: Shipment id indicates the number of delivery
         type: string

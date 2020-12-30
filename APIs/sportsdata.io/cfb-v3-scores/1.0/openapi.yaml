@@ -518,6 +518,9 @@ components:
           type: array
     Game:
       properties:
+        AwayPointSpreadPayout:
+          nullable: true
+          type: integer
         AwayRotationNumber:
           nullable: true
           type: integer
@@ -568,6 +571,9 @@ components:
           type: integer
         GlobalHomeTeamID:
           nullable: false
+          type: integer
+        HomePointSpreadPayout:
+          nullable: true
           type: integer
         HomeRotationNumber:
           nullable: true

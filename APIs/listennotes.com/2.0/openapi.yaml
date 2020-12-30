@@ -56,7 +56,7 @@ paths:
           name: genre_id
           required: false
           schema:
-            example: 93
+            example: "93"
             type: string
           style: form
         - description: Page number of those podcasts in this genre.
@@ -236,7 +236,7 @@ paths:
   /episodes:
     post:
       description: >
-        Batch fetch basic meta data for up to 10 episodes. This endpoint could be used to implement custom playlists for individual episodes. For detailed meta data of an individual episode, you need to use `GET /episodes/{id}`. This endpoint is available only in the PRO plan.
+        Batch fetch basic meta data for up to 10 episodes. This endpoint could be used to implement custom playlists for individual episodes. For detailed meta data of an individual episode, you need to use `GET /episodes/{id}`. This endpoint is available only in the PRO/ENTERPRISE plan.
       operationId: getEpisodesInBatch
       parameters:
         - description: Get API Key on listennotes.com/api
@@ -297,9 +297,19 @@ paths:
           name: id
           required: true
           schema:
-            example: 02f0123246c944e289ee2bb90804e41b
+            example: 6b6d65930c5a4f71b254465871fed370
             type: string
           style: simple
+        - description: To include the transcript of this episode or not? If it is 1, then include the transcript in the **transcript** field. The default value is 0 - we don't include transcript by default, because 1) it would make the response data very big, thus slow response time; 2) less than 1% of episodes have transcripts. The transcript field is available only in the PRO/ENTERPRISE plan.
+          explode: false
+          in: query
+          name: show_transcript
+          required: false
+          schema:
+            default: "0"
+            example: "1"
+            type: string
+          style: form
       responses:
         "200":
           content:
@@ -730,7 +740,7 @@ paths:
 
         allowing users to import a bunch of podcasts via rss urls.
 
-        For detailed meta data (including episodes) of an individual podcast, you need to use `GET /podcasts/{id}`. This endpoint is available only in the PRO plan.
+        For detailed meta data (including episodes) of an individual podcast, you need to use `GET /podcasts/{id}`. This endpoint is available only in the PRO/ENTERPRISE plan.
       operationId: getPodcastsInBatch
       parameters:
         - description: Get API Key on listennotes.com/api
@@ -1230,7 +1240,7 @@ paths:
             type: string
           style: form
         - description: >
-            A podcast id (the **podcast_id** field in response). This parameter is to limit search results in a specific podcast. It works only when **type** is *episode*.
+            A comma-delimited string of podcast ids (up to 5 podcasts) - you can get a podcast id from the **podcast_id** field in response. This parameter is to limit search results from only a few specific podcasts. It works only when **type** is *episode*.
           explode: true
           in: query
           name: ocid
@@ -1239,7 +1249,7 @@ paths:
             type: string
           style: form
         - description: >
-            A podcast id (the **podcast_id** field in response). This parameter is to exclude search results from a specific podcast. It works only when **type** is *episode*.
+            A comma-delimited string of podcast ids (up to 5 podcasts) - you can get a podcast id from the **podcast_id** field in response. This parameter is to exclude search results of a few specific podcasts. It works only when **type** is *episode*.
           explode: true
           in: query
           name: ncid
@@ -1434,7 +1444,7 @@ components:
       name: genre_id
       required: false
       schema:
-        example: 93
+        example: "93"
         type: string
       style: form
     queryParam:
@@ -1721,7 +1731,7 @@ components:
       example: 1470667902000
       type: integer
     EmailField:
-      description: The email of this podcast's producer. This field is available only in the PRO plan.
+      description: The email of this podcast's producer. This field is available only in the PRO/ENTERPRISE plan.
       example: hello@example.com
       type: string
     EpisodeDescriptionField:
@@ -1759,6 +1769,8 @@ components:
           $ref: "#/components/schemas/EpisodeThumbnailField"
         title:
           $ref: "#/components/schemas/EpisodeNameField"
+        transcript:
+          $ref: "#/components/schemas/TranscriptField"
       type: object
     EpisodeIdField:
       description: Episode id.
@@ -1770,7 +1782,7 @@ components:
 
         If an episode doesn't have its own image, then this field would be the url of the podcast artwork image.
 
-        If you are using PRO plan, then it's
+        If you are using PRO/ENTERPRISE plan, then it's
 
         a high resolution image (1400x1400). If you are using FREE plan, then it's the same as **thumbnail**,
 
@@ -1852,31 +1864,7 @@ components:
         listennotes_url:
           $ref: "#/components/schemas/EpisodeLNUrlField"
         podcast:
-          description: The podcast that this episode belongs to.
-          properties:
-            genre_ids:
-              $ref: "#/components/schemas/GenreIdsField"
-            id:
-              $ref: "#/components/schemas/PodcastIdField"
-            image:
-              $ref: "#/components/schemas/ImageField"
-            listen_score:
-              $ref: "#/components/schemas/ListenScoreField"
-            listen_score_global_rank:
-              $ref: "#/components/schemas/ListenScoreGlobalRankField"
-            listennotes_url:
-              $ref: "#/components/schemas/PodcastLNUrlField"
-            publisher_highlighted:
-              $ref: "#/components/schemas/PublisherHighlightedField"
-            publisher_original:
-              $ref: "#/components/schemas/PublisherOriginalField"
-            thumbnail:
-              $ref: "#/components/schemas/ThumbnailField"
-            title_highlighted:
-              $ref: "#/components/schemas/PodcastTitleHighlightedField"
-            title_original:
-              $ref: "#/components/schemas/PodcastTitleOriginalField"
-          type: object
+          $ref: "#/components/schemas/EpisodeSearchResult_podcast"
         pub_date_ms:
           $ref: "#/components/schemas/EpisodePubDateMsField"
         rss:
@@ -1898,6 +1886,32 @@ components:
               00:21:27  when Disney bought the <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> franchise from George Lucas they had a plan lots of <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> movies new <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> movies every month another one was just released while I was talking
             type: string
           type: array
+      type: object
+    EpisodeSearchResult_podcast:
+      description: The podcast that this episode belongs to.
+      properties:
+        genre_ids:
+          $ref: "#/components/schemas/GenreIdsField"
+        id:
+          $ref: "#/components/schemas/PodcastIdField"
+        image:
+          $ref: "#/components/schemas/ImageField"
+        listen_score:
+          $ref: "#/components/schemas/ListenScoreField"
+        listen_score_global_rank:
+          $ref: "#/components/schemas/ListenScoreGlobalRankField"
+        listennotes_url:
+          $ref: "#/components/schemas/PodcastLNUrlField"
+        publisher_highlighted:
+          $ref: "#/components/schemas/PublisherHighlightedField"
+        publisher_original:
+          $ref: "#/components/schemas/PublisherOriginalField"
+        thumbnail:
+          $ref: "#/components/schemas/ThumbnailField"
+        title_highlighted:
+          $ref: "#/components/schemas/PodcastTitleHighlightedField"
+        title_original:
+          $ref: "#/components/schemas/PodcastTitleOriginalField"
       type: object
     EpisodeSimple:
       properties:
@@ -2148,7 +2162,7 @@ components:
       type: object
     ImageField:
       description: >
-        Image url for this podcast's artwork. If you are using PRO plan, then it's
+        Image url for this podcast's artwork. If you are using PRO/ENTERPRISE plan, then it's
 
         a high resolution image (1400x1400). If you are using FREE plan, then it's the same as **thumbnail**,
 
@@ -2319,33 +2333,7 @@ components:
           type: integer
         playlists:
           items:
-            description: A playlist
-            properties:
-              description:
-                $ref: "#/components/schemas/PlaylistDescriptionField"
-              episode_count:
-                description: The number of episodes (including custom audio) in this playlist.
-                example: 23
-                type: integer
-              id:
-                $ref: "#/components/schemas/PlaylistIdField"
-              image:
-                $ref: "#/components/schemas/PlaylistImageField"
-              last_timestamp_ms:
-                $ref: "#/components/schemas/PlaylistLastTimestampMsField"
-              listennotes_url:
-                $ref: "#/components/schemas/PlaylistListennotesUrlField"
-              name:
-                $ref: "#/components/schemas/PlaylistNameField"
-              podcast_count:
-                description: The number of podcasts in this playlist.
-                example: 10
-                type: integer
-              thumbnail:
-                $ref: "#/components/schemas/PlaylistThumbnailField"
-              visibility:
-                $ref: "#/components/schemas/PlaylistVisibilityField"
-            type: object
+            $ref: "#/components/schemas/PlaylistsResponse_playlists"
           type: array
         previous_page_number:
           example: 1
@@ -2353,6 +2341,34 @@ components:
         total:
           example: 325
           type: integer
+      type: object
+    PlaylistsResponse_playlists:
+      description: A playlist
+      properties:
+        description:
+          $ref: "#/components/schemas/PlaylistDescriptionField"
+        episode_count:
+          description: The number of episodes (including custom audio) in this playlist.
+          example: 23
+          type: integer
+        id:
+          $ref: "#/components/schemas/PlaylistIdField"
+        image:
+          $ref: "#/components/schemas/PlaylistImageField"
+        last_timestamp_ms:
+          $ref: "#/components/schemas/PlaylistLastTimestampMsField"
+        listennotes_url:
+          $ref: "#/components/schemas/PlaylistListennotesUrlField"
+        name:
+          $ref: "#/components/schemas/PlaylistNameField"
+        podcast_count:
+          description: The number of podcasts in this playlist.
+          example: 10
+          type: integer
+        thumbnail:
+          $ref: "#/components/schemas/PlaylistThumbnailField"
+        visibility:
+          $ref: "#/components/schemas/PlaylistVisibilityField"
       type: object
     PodcastDescriptionField:
       description: Html of this episode's full description
@@ -2661,7 +2677,7 @@ components:
       example: Star Wars Daily, by Allen Voivod
       type: string
     RssField:
-      description: RSS url of this podcast. This field is available only in the PRO plan.
+      description: RSS url of this podcast. This field is available only in the PRO/ENTERPRISE plan.
       example: https://sw7x7.libsyn.com/rss
       type: string
     SearchResponse:
@@ -2727,6 +2743,11 @@ components:
       description: Total number of episodes in this podcast.
       example: 324
       type: integer
+    TranscriptField:
+      description: The transcript of this episode, in plain text (with the newline character \n). If there's not transcript, it is null. This field is available only in the PRO/ENTERPRISE plan.
+      example: >
+        00:00:07 Welcome to this podcast...
+      type: string
     TypeaheadResponse:
       properties:
         genres:

@@ -1406,7 +1406,7 @@ definitions:
         example: '[ {"product" : "lawnmower"},{"purchase" : "1 yr maintenance"} ]'
         type: string
       email_address:
-        description: " AN<br><strong>Description: </strong>An array of cardholder email addresses."
+        description: " AN<br><strong>Description: </strong>An array of account holder email addresses."
         example: '["jdoe@qualpay.com", "john.doe@qualpay.com"]'
         items:
           type: string
@@ -1851,6 +1851,12 @@ definitions:
         description: "<strong>Format: </strong>Variable length<br><strong>Description: </strong>This field contains a JSON array of field data that will be echoed back in the response message."
         example: '[ {"product" : "lawnmower"},{"purchase" : "1 yr maintenance"} ]'
         type: string
+      email_address:
+        description: " AN<br><strong>Description: </strong>An array of account holder email addresses."
+        example: '["jdoe@qualpay.com", "john.doe@qualpay.com"]'
+        items:
+          type: string
+        type: array
       exp_date:
         description: '<strong>Format: </strong>Fixed length, 4 N, MMYY format<br><strong>Description: </strong>Expiration date of cardholder card number. Required when the field card_number is present. If card_swipe is present in the request, this field must NOT be present. When card_id or customer_id is present in the request this field may also be present; if it is not, then the expiration date from the Card Vault will be used.<br><strong>Conditional Requirement: </strong>Refer to <a href="/developer/api/reference#card-source-conditional-requirements"target="_blank">Card or Bank Account Data Sources and Conditional Requirements</a>'
         example: "0921"

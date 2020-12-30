@@ -6366,6 +6366,18 @@ paths:
                   $ref: "#/components/schemas/subscriptionPushReporting"
                 type: array
           description: Subscription push reporting info
+          headers:
+            Link:
+              description: Based on the RFC 5988 - Web Linking, the page navigation will be indicated here with the rel=next, rel=previous, rel=first, rel=last, the pageNumber and the pageSize will be indicated in the link param
+              schema:
+                items:
+                  type: string
+                type: array
+              style: simple
+            X-Total-Count:
+              description: The total item count related to this query
+              schema:
+                type: integer
         "404":
           $ref: "#/components/responses/subscriptionNotFoundResponse"
         default:
