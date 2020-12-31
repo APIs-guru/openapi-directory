@@ -7393,12 +7393,12 @@ components:
       items:
         $ref: '#/components/schemas/Tag'
       maxItems: 20
-    AllowedValue:
+    String:
       type: string
     AllowedValues:
       type: array
       items:
-        $ref: '#/components/schemas/AllowedValue'
+        $ref: '#/components/schemas/String'
     ApproximateCount:
       type: integer
     BudgetName:
@@ -8418,6 +8418,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/AllowedValues'
             - description: The values that the administrator has allowed for the parameter.
+        AllowedPattern:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A regular expression that represents the patterns that allow for <code>String</code> types. The pattern must match the entire parameter value provided.
+        ConstraintDescription:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>A string that explains a constraint when the constraint is violated. For example, without a constraint description, a parameter that has an allowed pattern of <code>[A-Za-z0-9]+</code> displays the following error message when the user specifies an invalid value:</p> <p> <code>Malformed input-Parameter MyParameter must match pattern [A-Za-z0-9]+</code> </p> <p>By adding a constraint description, such as must only contain letters (uppercase and lowercase) and numbers, you can display the following customized error message:</p> <p> <code>Malformed input-Parameter MyParameter must only contain uppercase and lowercase letters and numbers.</code> </p>'
+        MaxLength:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An integer value that determines the largest number of characters you want to allow for <code>String</code> types. '
+        MinLength:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An integer value that determines the smallest number of characters you want to allow for <code>String</code> types.
+        MaxValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A numeric value that determines the largest numeric value you want to allow for <code>Number</code> types.
+        MinValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A numeric value that determines the smallest numeric value you want to allow for <code>Number</code> types. '
       description: The constraints that the administrator has put on the parameter.
     ParameterKey:
       type: string
