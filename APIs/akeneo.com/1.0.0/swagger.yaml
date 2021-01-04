@@ -8175,6 +8175,7 @@ paths:
                   date_min: null
                   decimals_allowed: false
                   default_metric_unit: null
+                  default_value: null
                   group: other
                   group_labels:
                     en_US: Other
@@ -8209,6 +8210,7 @@ paths:
                   date_min: 2017-06-28T08:00:00
                   decimals_allowed: false
                   default_metric_unit: null
+                  default_value: null
                   group: marketing
                   labels:
                     en_US: Sale date
@@ -8299,6 +8301,7 @@ paths:
                                 date_min: 2017-06-28T08:00:00
                                 decimals_allowed: null
                                 default_metric_unit: null
+                                default_value: null
                                 group: marketing
                                 group_labels:
                                   en_US: Marketing
@@ -8361,6 +8364,10 @@ paths:
                                   type: string
                                   x-validation-rules: Required for `pim_catalog_metric` attribute type
                                   x-warning: Only for `pim_catalog_metric` attribute type
+                                default_value:
+                                  description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+                                  type: boolean
+                                  x-warning: Only for `pim_catalog_boolean` attribute type
                                 group:
                                   description: Attribute group
                                   type: string
@@ -8553,6 +8560,7 @@ paths:
               date_min: 2017-06-28T08:00:00
               decimals_allowed: null
               default_metric_unit: null
+              default_value: null
               group: marketing
               group_labels:
                 en_US: Marketing
@@ -8615,6 +8623,10 @@ paths:
                 type: string
                 x-validation-rules: Required for `pim_catalog_metric` attribute type
                 x-warning: Only for `pim_catalog_metric` attribute type
+              default_value:
+                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+                type: boolean
+                x-warning: Only for `pim_catalog_boolean` attribute type
               group:
                 description: Attribute group
                 type: string
@@ -8849,6 +8861,7 @@ paths:
               date_min: 2017-06-28T08:00:00
               decimals_allowed: null
               default_metric_unit: null
+              default_value: null
               group: marketing
               group_labels:
                 en_US: Marketing
@@ -8911,6 +8924,10 @@ paths:
                 type: string
                 x-validation-rules: Required for `pim_catalog_metric` attribute type
                 x-warning: Only for `pim_catalog_metric` attribute type
+              default_value:
+                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+                type: boolean
+                x-warning: Only for `pim_catalog_boolean` attribute type
               group:
                 description: Attribute group
                 type: string
@@ -9914,6 +9931,7 @@ paths:
               date_min: 2017-06-28T08:00:00
               decimals_allowed: null
               default_metric_unit: null
+              default_value: null
               group: marketing
               group_labels:
                 en_US: Marketing
@@ -9976,6 +9994,10 @@ paths:
                 type: string
                 x-validation-rules: Required for `pim_catalog_metric` attribute type
                 x-warning: Only for `pim_catalog_metric` attribute type
+              default_value:
+                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+                type: boolean
+                x-warning: Only for `pim_catalog_boolean` attribute type
               group:
                 description: Attribute group
                 type: string
@@ -10185,6 +10207,7 @@ paths:
               date_min: 2017-06-28T08:00:00
               decimals_allowed: null
               default_metric_unit: null
+              default_value: null
               group: marketing
               group_labels:
                 en_US: Marketing
@@ -10247,6 +10270,10 @@ paths:
                 type: string
                 x-validation-rules: Required for `pim_catalog_metric` attribute type
                 x-warning: Only for `pim_catalog_metric` attribute type
+              default_value:
+                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+                type: boolean
+                x-warning: Only for `pim_catalog_boolean` attribute type
               group:
                 description: Attribute group
                 type: string
@@ -23761,6 +23788,7 @@ definitions:
       date_min: 2017-06-28T08:00:00
       decimals_allowed: null
       default_metric_unit: null
+      default_value: null
       group: marketing
       group_labels:
         en_US: Marketing
@@ -23823,6 +23851,10 @@ definitions:
         type: string
         x-validation-rules: Required for `pim_catalog_metric` attribute type
         x-warning: Only for `pim_catalog_metric` attribute type
+      default_value:
+        description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+        type: boolean
+        x-warning: Only for `pim_catalog_boolean` attribute type
       group:
         description: Attribute group
         type: string
@@ -24061,6 +24093,7 @@ definitions:
           date_min: 2017-06-28T08:00:00
           decimals_allowed: null
           default_metric_unit: null
+          default_value: null
           group: marketing
           group_labels:
             en_US: Marketing
@@ -24123,6 +24156,10 @@ definitions:
             type: string
             x-validation-rules: Required for `pim_catalog_metric` attribute type
             x-warning: Only for `pim_catalog_metric` attribute type
+          default_value:
+            description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+            type: boolean
+            x-warning: Only for `pim_catalog_boolean` attribute type
           group:
             description: Attribute group
             type: string

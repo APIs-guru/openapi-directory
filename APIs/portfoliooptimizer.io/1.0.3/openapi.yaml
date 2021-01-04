@@ -11,7 +11,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://portfoliooptimizer.io/terms-of-service
   title: Portfolio Optimizer
-  version: 1.0.0
+  version: 1.0.3
   x-apisguru-categories:
     - financial
   x-origin:
@@ -104,13 +104,23 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsCorrelationMatrix:
-                  - - 1
-                    - 0.9999999999999999
-                  - - 0.9999999999999999
-                    - 1
+              examples:
+                From covariance matrix:
+                  value:
+                    assetsCorrelationMatrix:
+                      - - 1
+                        - -0.4999999999999999
+                      - - -0.4999999999999999
+                        - 1
+                From returns:
+                  value:
+                    assetsCorrelationMatrix:
+                      - - 1
+                        - 0.9999999999999999
+                      - - 0.9999999999999999
+                        - 1
           description: OK
+      summary: Correlation Matrix
       tags:
         - Assets Correlation
       x-codegen-request-body-name: body
@@ -122,13 +132,15 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsCorrelationMatrix:
-                - - 1
-                  - -0.00035
-                - - -0.00035
-                  - 1
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCorrelationMatrix:
+                    - - 1
+                      - -0.00035
+                    - - -0.00035
+                      - 1
             schema:
               properties:
                 assets:
@@ -145,9 +157,12 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                message: valid correlation matrix
+              examples:
+                Example:
+                  value:
+                    message: valid correlation matrix
           description: OK
+      summary: Correlation Matrix Validation
       tags:
         - Assets Correlation
       x-codegen-request-body-name: body
@@ -207,13 +222,23 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsCovarianceMatrix:
-                  - - 0.00035
-                    - 0.00035
-                  - - 0.00035
-                    - 0.00035
+              examples:
+                From correlation matrix and standard deviations:
+                  value:
+                    assetsCovarianceMatrix:
+                      - - 0.010000000000000002
+                        - -0.0025000000000000005
+                      - - -0.0025000000000000005
+                        - 0.0025000000000000005
+                From returns:
+                  value:
+                    assetsCovarianceMatrix:
+                      - - 0.00035
+                        - 0.00035
+                      - - 0.00035
+                        - 0.00035
           description: OK
+      summary: Covariance Matrix
       tags:
         - Assets Covariance
       x-codegen-request-body-name: body
@@ -225,17 +250,19 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsReturns:
-                - - 0.01
-                  - 0.01
-                  - 0.02
-                  - 0.01
-                - - -0.02
-                  - -0.02
-                  - -0.04
-                  - -0.02
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0.01
+                      - 0.02
+                      - 0.01
+                    - - -0.02
+                      - -0.02
+                      - -0.04
+                      - -0.02
             schema:
               properties:
                 assets:
@@ -252,13 +279,16 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsCovarianceMatrix:
-                  - - 0.000025
-                    - -0.00005
-                  - - -0.00005
-                    - 0.0001
+              examples:
+                Example:
+                  value:
+                    assetsCovarianceMatrix:
+                      - - 0.000025
+                        - -0.00005
+                      - - -0.00005
+                        - 0.0001
           description: OK
+      summary: Sample Covariance Matrix
       tags:
         - Assets Covariance
       x-codegen-request-body-name: body
@@ -270,13 +300,15 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsCovarianceMatrix:
-                - - 0.00035
-                  - -0.00035
-                - - -0.00035
-                  - 0.00035
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.00035
+                      - -0.00035
+                    - - -0.00035
+                      - 0.00035
             schema:
               properties:
                 assets:
@@ -293,9 +325,12 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                message: valid covariance matrix
+              examples:
+                Example:
+                  value:
+                    message: valid covariance matrix
           description: OK
+      summary: Covariance Matrix Validation
       tags:
         - Assets Covariance
       x-codegen-request-body-name: body
@@ -307,14 +342,16 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsPrices:
-                - - 1
-                  - 2
-                - - 2
-                  - 3
-                  - 6
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsPrices:
+                    - - 1
+                      - 2
+                    - - 2
+                      - 3
+                      - 6
             schema:
               properties:
                 assets:
@@ -331,12 +368,15 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsReturns:
-                  - - 1
-                  - - 0.5
-                    - 1
+              examples:
+                Example:
+                  value:
+                    assetsReturns:
+                      - - 1
+                      - - 0.5
+                        - 1
           description: OK
+      summary: Arithmetic Returns
       tags:
         - Assets Returns
       x-codegen-request-body-name: body
@@ -377,6 +417,7 @@ paths:
                   - 0.025
                   - 0
           description: OK
+      summary: Average Returns
       tags:
         - Assets Returns
       x-codegen-request-body-name: body
@@ -388,14 +429,16 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsPrices:
-                - - 1
-                  - 2
-                - - 2
-                  - 3
-                  - 6
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsPrices:
+                    - - 1
+                      - 2
+                    - - 2
+                      - 3
+                      - 6
             schema:
               properties:
                 assets:
@@ -412,12 +455,15 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsReturns:
-                  - - 0.6931471805599453
-                  - - 0.4054651081081644
-                    - 0.6931471805599453
+              examples:
+                Example:
+                  value:
+                    assetsReturns:
+                      - - 0.6931471805599453
+                      - - 0.4054651081081644
+                        - 0.6931471805599453
           description: OK
+      summary: Logarithmic Returns
       tags:
         - Assets Returns
       x-codegen-request-body-name: body
@@ -429,14 +475,16 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              portfoliosValues:
-                - - 100
-                  - 95
-                  - 100
-                  - 90
-                  - 85
-                  - 70
+            examples:
+              Example:
+                value:
+                  portfoliosValues:
+                    - - 100
+                      - 95
+                      - 100
+                      - 90
+                      - 85
+                      - 70
             schema:
               properties:
                 portfoliosValues:
@@ -451,25 +499,28 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                portfolios:
-                  - portfolioDrawdowns:
-                      - 0
-                      - 0.05
-                      - 0
-                      - 0.1
-                      - 0.15
-                      - 0.3
-                    portfolioWorstDrawdowns:
-                      - drawdownBottom: 6
-                        drawdownDepth: 0.3
-                        drawdownEnd: 0
-                        drawdownStart: 3
-                      - drawdownBottom: 2
-                        drawdownDepth: 0.05
-                        drawdownEnd: 3
-                        drawdownStart: 1
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioDrawdowns:
+                          - 0
+                          - 0.05
+                          - 0
+                          - 0.1
+                          - 0.15
+                          - 0.3
+                        portfolioWorstDrawdowns:
+                          - drawdownBottom: 6
+                            drawdownDepth: 0.3
+                            drawdownEnd: 0
+                            drawdownStart: 3
+                          - drawdownBottom: 2
+                            drawdownDepth: 0.05
+                            drawdownEnd: 3
+                            drawdownStart: 1
           description: OK
+      summary: Portfolio Drawdowns
       tags:
         - Portfolio Analysis
       x-codegen-request-body-name: body
@@ -539,13 +590,16 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                portfolios:
-                  - portfolioReturn: 0.01
-                    portfolioVolatility: 0.05
-                  - portfolioReturn: 0.05
-                    portfolioVolatility: 0.1
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioReturn: 0.01
+                        portfolioVolatility: 0.05
+                      - portfolioReturn: 0.05
+                        portfolioVolatility: 0.1
           description: OK
+      summary: Portfolio Mean-Variance
       tags:
         - Portfolio Analysis
       x-codegen-request-body-name: body
@@ -557,21 +611,23 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsCovarianceMatrix:
-                - - 0.0025
-                  - 0.0005
-                - - 0.0005
-                  - 0.01
-              assetsReturns:
-                - 0.01
-                - 0.05
-              constraints:
-                minimumAssetsWeights:
-                  - 0.2
-                  - 0
-              portfolios: 3
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  assetsReturns:
+                    - 0.01
+                    - 0.05
+                  constraints:
+                    minimumAssetsWeights:
+                      - 0.2
+                      - 0
+                  portfolios: 3
             schema:
               properties:
                 assets:
@@ -611,24 +667,27 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                efficientFrontierPortfolios:
-                  - assetsWeights:
-                      - 0.8260869565217391
-                      - 0.17391304347826086
-                    portfolioReturn: 0.016956521739130433
-                    portfolioVolatility: 0.0463915284620315
-                  - assetsWeights:
-                      - 0.5130434782608696
-                      - 0.48695652173913045
-                    portfolioReturn: 0.02947826086956522
-                    portfolioVolatility: 0.05726369211623199
-                  - assetsWeights:
-                      - 0.2
-                      - 0.8
-                    portfolioReturn: 0.04200000000000001
-                    portfolioVolatility: 0.08160882305241265
+              examples:
+                Example:
+                  value:
+                    efficientFrontierPortfolios:
+                      - assetsWeights:
+                          - 0.8260869565217391
+                          - 0.17391304347826086
+                        portfolioReturn: 0.016956521739130433
+                        portfolioVolatility: 0.0463915284620315
+                      - assetsWeights:
+                          - 0.5130434782608696
+                          - 0.48695652173913045
+                        portfolioReturn: 0.02947826086956522
+                        portfolioVolatility: 0.05726369211623199
+                      - assetsWeights:
+                          - 0.2
+                          - 0.8
+                        portfolioReturn: 0.04200000000000001
+                        portfolioVolatility: 0.08160882305241265
           description: OK
+      summary: Mean-Variance Efficient Frontier
       tags:
         - Portfolio Analysis
       x-codegen-request-body-name: body
@@ -640,21 +699,23 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsCovarianceMatrix:
-                - - 0.0025
-                  - 0.0005
-                - - 0.0005
-                  - 0.01
-              assetsReturns:
-                - 0.01
-                - 0.05
-              constraints:
-                minimumAssetsWeights:
-                  - 0.2
-                  - 0
-              portfolios: 4
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  assetsReturns:
+                    - 0.01
+                    - 0.05
+                  constraints:
+                    minimumAssetsWeights:
+                      - 0.2
+                      - 0
+                  portfolios: 4
             schema:
               properties:
                 assets:
@@ -694,29 +755,32 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                minimumVarianceFrontierPortfolios:
-                  - assetsWeights:
-                      - 1
-                      - 0
-                    portfolioReturn: 0.01
-                    portfolioVolatility: 0.05
-                  - assetsWeights:
-                      - 0.7333333333333333
-                      - 0.2666666666666667
-                    portfolioReturn: 0.02066666666666667
-                    portfolioVolatility: 0.04744587559642156
-                  - assetsWeights:
-                      - 0.4666666666666667
-                      - 0.5333333333333333
-                    portfolioReturn: 0.03133333333333334
-                    portfolioVolatility: 0.06031399321697891
-                  - assetsWeights:
-                      - 0.2
-                      - 0.8
-                    portfolioReturn: 0.04200000000000001
-                    portfolioVolatility: 0.08160882305241265
+              examples:
+                Example:
+                  value:
+                    minimumVarianceFrontierPortfolios:
+                      - assetsWeights:
+                          - 1
+                          - 0
+                        portfolioReturn: 0.01
+                        portfolioVolatility: 0.05
+                      - assetsWeights:
+                          - 0.7333333333333333
+                          - 0.2666666666666667
+                        portfolioReturn: 0.02066666666666667
+                        portfolioVolatility: 0.04744587559642156
+                      - assetsWeights:
+                          - 0.4666666666666667
+                          - 0.5333333333333333
+                        portfolioReturn: 0.03133333333333334
+                        portfolioVolatility: 0.06031399321697891
+                      - assetsWeights:
+                          - 0.2
+                          - 0.8
+                        portfolioReturn: 0.04200000000000001
+                        portfolioVolatility: 0.08160882305241265
           description: OK
+      summary: Mean-Variance Minimum Variance Frontier
       tags:
         - Portfolio Analysis
       x-codegen-request-body-name: body
@@ -728,17 +792,19 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 3
-              assetsPrices:
-                - 10
-                - 25
-                - 500
-              assetsWeights:
-                - 0.05
-                - 0.6
-                - 0.35
-              portfolioValue: 10000
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsPrices:
+                    - 10
+                    - 25
+                    - 500
+                  assetsWeights:
+                    - 0.05
+                    - 0.6
+                    - 0.35
+                  portfolioValue: 10000
             schema:
               properties:
                 assets:
@@ -763,16 +829,19 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsPositions:
-                  - 50
-                  - 240
-                  - 7
-                assetsWeights:
-                  - 0.05
-                  - 0.6
-                  - 0.35
+              examples:
+                Example:
+                  value:
+                    assetsPositions:
+                      - 50
+                      - 240
+                      - 7
+                    assetsWeights:
+                      - 0.05
+                      - 0.6
+                      - 0.35
           description: OK
+      summary: Investable Portfolio
       tags:
         - Portfolio Construction
       x-codegen-request-body-name: body
@@ -784,19 +853,21 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 3
-              assetsPrices:
-                - - 100
-                  - 105
-                  - 110
-                - - 15
-                  - 12.5
-                  - 11.25
-                - - 0.5
-                  - 0.51
-                  - 0.49
-              portfolios: 2
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsPrices:
+                    - - 100
+                      - 105
+                      - 110
+                    - - 15
+                      - 12.5
+                      - 11.25
+                    - - 0.5
+                      - 0.51
+                      - 0.49
+                  portfolios: 2
             schema:
               properties:
                 assets:
@@ -813,17 +884,20 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                portfolios:
-                  - portfolioValues:
-                      - 100
-                      - 90.8178403620342
-                      - 84.65407625993741
-                  - portfolioValues:
-                      - 100
-                      - 102.43258698946813
-                      - 101.32419718013273
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioValues:
+                          - 100
+                          - 90.8178403620342
+                          - 84.65407625993741
+                      - portfolioValues:
+                          - 100
+                          - 102.43258698946813
+                          - 101.32419718013273
           description: OK
+      summary: Random Portfolio Values
       tags:
         - Portfolio Generation
       x-codegen-request-body-name: body
@@ -835,9 +909,11 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 3
-              portfolios: 2
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  portfolios: 2
             schema:
               properties:
                 assets:
@@ -865,17 +941,20 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                portfolios:
-                  - assetsWeights:
-                      - 0.11429744284625785
-                      - 0.0038592674702259393
-                      - 0.8818432896835162
-                  - assetsWeights:
-                      - 0.546026607601722
-                      - 0.07707923859010406
-                      - 0.376894153808174
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - assetsWeights:
+                          - 0.11429744284625785
+                          - 0.0038592674702259393
+                          - 0.8818432896835162
+                      - assetsWeights:
+                          - 0.546026607601722
+                          - 0.07707923859010406
+                          - 0.376894153808174
           description: OK
+      summary: Random Portfolio Weights
       tags:
         - Portfolio Generation
       x-codegen-request-body-name: body
@@ -887,17 +966,19 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsCovarianceMatrix:
-                - - 0.0025
-                  - 0.0005
-                - - 0.0005
-                  - 0.01
-              constraints:
-                maximumAssetsWeights:
-                  - 0.4
-                  - 1
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  constraints:
+                    maximumAssetsWeights:
+                      - 0.4
+                      - 1
             schema:
               properties:
                 assets:
@@ -925,11 +1006,68 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsWeights:
-                  - 0.4
-                  - 0.5999975015091795
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.4
+                      - 0.5999975015091795
           description: OK
+      summary: Equal Risk Contributions Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/equal-sharpe-ratio-contributions:
+    post:
+      description: Computes the weights of the assets composing an equal Sharpe Ratio contributions portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#equal-sharpe-ratio-contributions-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.05
+                      - 0.02
+                    - - 0.02
+                      - 0.07
+                  assetsReturns:
+                    - 0.05
+                    - 0.1
+                  riskFreeRate: 0
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    type: number
+                  type: array
+                riskFreeRate:
+                  type: number
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.6666666666666666
+                      - 0.3333333333333333
+          description: OK
+      summary: Equal Sharpe Ratio Contributions Portfolio
       tags:
         - Portfolio Optimization
       x-codegen-request-body-name: body
@@ -941,8 +1079,10 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
+            examples:
+              Example:
+                value:
+                  assets: 2
             schema:
               properties:
                 assets:
@@ -953,11 +1093,14 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsWeights:
-                  - 0.5
-                  - 0.5
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.5
+                      - 0.5
           description: OK
+      summary: Equal Weighted Portfolio
       tags:
         - Portfolio Optimization
       x-codegen-request-body-name: body
@@ -969,11 +1112,13 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsVariances:
-                - 1
-                - 0.5
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsVariances:
+                    - 1
+                    - 0.5
             schema:
               properties:
                 assets:
@@ -988,11 +1133,14 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsWeights:
-                  - 0.3333333333333333
-                  - 0.6666666666666666
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.3333333333333333
+                      - 0.6666666666666666
           description: OK
+      summary: Inverse Variance Weighted Portfolio
       tags:
         - Portfolio Optimization
       x-codegen-request-body-name: body
@@ -1004,11 +1152,13 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsVolatilities:
-                - 0.05
-                - 0.1
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsVolatilities:
+                    - 0.05
+                    - 0.1
             schema:
               properties:
                 assets:
@@ -1023,11 +1173,54 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsWeights:
-                  - 0.6666666666666666
-                  - 0.3333333333333333
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.6666666666666666
+                      - 0.3333333333333333
           description: OK
+      summary: Inverse Volatility Weighted Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/market-capitalization-weighted:
+    post:
+      description: Computes the weights of the assets composing a market capitalization weighted portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#market-capitalization-weighted-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsMarketCapitalizations:
+                    - 1
+                    - 2
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsMarketCapitalizations:
+                  items:
+                    type: number
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.3333333333333333
+                      - 0.6666666666666666
+          description: OK
+      summary: Market Capitalization Weighted Portfolio
       tags:
         - Portfolio Optimization
       x-codegen-request-body-name: body
@@ -1039,18 +1232,20 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 3
-              assetsCorrelationMatrix:
-                - - 1
-                  - 0.9
-                  - 0.85
-                - - 0.9
-                  - 1
-                  - 0.7
-                - - 0.85
-                  - 0.7
-                  - 1
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsCorrelationMatrix:
+                    - - 1
+                      - 0.9
+                      - 0.85
+                    - - 0.9
+                      - 1
+                      - 0.7
+                    - - 0.85
+                      - 0.7
+                      - 1
             schema:
               properties:
                 assets:
@@ -1082,12 +1277,15 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsWeights:
-                  - 0
-                  - 0.5
-                  - 0.5
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0
+                      - 0.5
+                      - 0.5
           description: OK
+      summary: Maximum Decorrelation Portfolio
       tags:
         - Portfolio Optimization
       x-codegen-request-body-name: body
@@ -1099,17 +1297,19 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsCovarianceMatrix:
-                - - 0.05
-                  - 0.02
-                - - 0.02
-                  - 0.07
-              assetsReturns:
-                - 0.05
-                - 0.1
-              riskFreeRate: 0
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.05
+                      - 0.02
+                    - - 0.02
+                      - 0.07
+                  assetsReturns:
+                    - 0.05
+                    - 0.1
+                  riskFreeRate: 0
             schema:
               properties:
                 assets:
@@ -1147,11 +1347,14 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsWeights:
-                  - 0.27272727272727276
-                  - 0.7272727272727273
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.27272727272727276
+                      - 0.7272727272727273
           description: OK
+      summary: Maximum Sharpe Ratio Portfolio
       tags:
         - Portfolio Optimization
       x-codegen-request-body-name: body
@@ -1163,18 +1366,20 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsCovarianceMatrix:
-                - - 1
-                  - 0.3
-                - - 0.3
-                  - 1
-              assetsReturns:
-                - 0.1
-                - 0.2
-              constraints:
-                portfolioReturn: 0.15
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 1
+                      - 0.3
+                    - - 0.3
+                      - 1
+                  assetsReturns:
+                    - 0.1
+                    - 0.2
+                  constraints:
+                    portfolioReturn: 0.15
             schema:
               properties:
                 assets:
@@ -1210,11 +1415,14 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsWeights:
-                  - 0.5
-                  - 0.5
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.5
+                      - 0.5
           description: OK
+      summary: Mean-Variance Efficient Portfolio
       tags:
         - Portfolio Optimization
       x-codegen-request-body-name: body
@@ -1226,22 +1434,24 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 3
-              assetsCorrelationMatrix:
-                - - 1
-                  - 0.9
-                  - 0.85
-                - - 0.9
-                  - 1
-                  - 0.7
-                - - 0.85
-                  - 0.7
-                  - 1
-              assetsVolatilities:
-                - 0.14
-                - 0.18
-                - 0.22
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsCorrelationMatrix:
+                    - - 1
+                      - 0.9
+                      - 0.85
+                    - - 0.9
+                      - 1
+                      - 0.7
+                    - - 0.85
+                      - 0.7
+                      - 1
+                  assetsVolatilities:
+                    - 0.14
+                    - 0.18
+                    - 0.22
             schema:
               properties:
                 assets:
@@ -1262,12 +1472,15 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsWeights:
-                  - 0.21059806981924115
-                  - 0.3087866303991204
-                  - 0.48061529978163836
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.21059806981924115
+                      - 0.3087866303991204
+                      - 0.48061529978163836
           description: OK
+      summary: Minimum Correlation Portfolio
       tags:
         - Portfolio Optimization
       x-codegen-request-body-name: body
@@ -1279,19 +1492,21 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsCovarianceMatrix:
-                - - 0.0025
-                  - 0.0005
-                - - 0.0005
-                  - 0.01
-              constraints:
-                maximumAssetsWeights:
-                  - 0.4
-                  - 1
-                maximumPortfolioExposure: 0.5
-                minimumPortfolioExposure: 0.5
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  constraints:
+                    maximumAssetsWeights:
+                      - 0.4
+                      - 1
+                    maximumPortfolioExposure: 0.5
+                    minimumPortfolioExposure: 0.5
             schema:
               properties:
                 assets:
@@ -1323,11 +1538,14 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsWeights:
-                  - 0.4
-                  - 0.09999999999998999
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.4
+                      - 0.09999999999998999
           description: OK
+      summary: Minimum Variance Portfolio
       tags:
         - Portfolio Optimization
       x-codegen-request-body-name: body
@@ -1339,13 +1557,15 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              assets: 2
-              assetsCovarianceMatrix:
-                - - 0.04
-                  - 0.01
-                - - 0.01
-                  - 0.01
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.04
+                      - 0.01
+                    - - 0.01
+                      - 0.01
             schema:
               properties:
                 assets:
@@ -1377,11 +1597,14 @@ paths:
         "200":
           content:
             application/json:
-              example:
-                assetsWeights:
-                  - 0.33333333333333337
-                  - 0.6666666666666666
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.33333333333333337
+                      - 0.6666666666666666
           description: OK
+      summary: Most Diversified Portfolio
       tags:
         - Portfolio Optimization
       x-codegen-request-body-name: body

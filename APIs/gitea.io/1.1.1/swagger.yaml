@@ -9621,6 +9621,10 @@ definitions:
         x-go-name: IgnoreWhitespaceConflicts
       internal_tracker:
         $ref: "#/definitions/InternalTracker"
+      mirror_interval:
+        description: set to a string like `8h30m0s` to set the mirror interval time
+        type: string
+        x-go-name: MirrorInterval
       name:
         description: name of the repository
         type: string
@@ -10379,6 +10383,9 @@ definitions:
       mirror:
         type: boolean
         x-go-name: Mirror
+      mirror_interval:
+        type: string
+        x-go-name: MirrorInterval
       private:
         type: boolean
         x-go-name: Private
@@ -10439,6 +10446,9 @@ definitions:
       mirror:
         type: boolean
         x-go-name: Mirror
+      mirror_interval:
+        type: string
+        x-go-name: MirrorInterval
       private:
         type: boolean
         x-go-name: Private
@@ -11177,6 +11187,9 @@ definitions:
       mirror:
         type: boolean
         x-go-name: Mirror
+      mirror_interval:
+        type: string
+        x-go-name: MirrorInterval
       name:
         type: string
         x-go-name: Name

@@ -87,7 +87,8 @@ paths:
           name: pageNumber
           required: false
           type: integer
-        - in: query
+        - description: '(optional) Supply one of: "DateUpdated", "DateCreated", "CompanyName","DateUpdated desc","DateCreated desc", "CompanyName desc"'
+          in: query
           name: Sort
           required: false
           type: string
@@ -568,6 +569,14 @@ paths:
           name: ExpensePaymentMethodIDFK
           required: false
           type: integer
+        - in: query
+          name: ExpenseApprovalStatusCode
+          required: false
+          type: string
+        - in: query
+          name: Search
+          required: false
+          type: string
         - description: Number of items per page (max 1000)
           format: int32
           in: query
@@ -664,6 +673,35 @@ paths:
       summary: Gets an Expense Entry by Expense ID
       tags:
         - Expense
+  /api/ExpenseCategory:
+    get:
+      consumes: []
+      description: The default sort order is by Name asc
+      operationId: ExpenseCategory_Get
+      parameters:
+        - description: Optional filter on for enabled/disabled categories. Defaults to true.
+          in: query
+          name: isEnabled
+          required: false
+          type: boolean
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ExpenseCategoryList"
+        "401":
+          description: Unauthorized
+      security:
+        - oauth2:
+            - read_expenses
+      summary: Gets list of Expense Categories
+      tags:
+        - ExpenseCategory
   /api/FixedAmount:
     get:
       consumes: []
@@ -2785,11 +2823,37 @@ definitions:
         format: int32
         type: integer
     type: object
+  ExpenseCategoryDetails:
+    properties:
+      Enabled:
+        type: boolean
+      ExpenseCategoryID:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      UnitName:
+        type: string
+      UnitPrice:
+        format: double
+        type: number
+      hasUnitPrice:
+        type: boolean
+    type: object
+  ExpenseCategoryList:
+    properties:
+      Categories:
+        items:
+          $ref: "#/definitions/ExpenseCategoryDetails"
+        type: array
+    type: object
   ExpenseDetails:
     properties:
       Amount:
         format: double
         type: number
+      AttachmentPreviewURL:
+        type: string
       AttachmentURL:
         type: string
       ChargeableStatusCode:
