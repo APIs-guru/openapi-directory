@@ -1433,6 +1433,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Certificate'
             - description: '<p>The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. Required when <code>Protocols</code> is set to <code>FTPS</code>.</p> <p>To request a new public certificate, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html">Request a public certificate</a> in the <i> AWS Certificate Manager User Guide</i>.</p> <p>To import an existing certificate into ACM, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html">Importing certificates into ACM</a> in the <i> AWS Certificate Manager User Guide</i>.</p> <p>To request a private certificate to use FTPS through private IP addresses, see <a href="https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html">Request a private certificate</a> in the <i> AWS Certificate Manager User Guide</i>.</p> <p>Certificates with the following cryptographic algorithms and key sizes are supported:</p> <ul> <li> <p>2048-bit RSA (RSA_2048)</p> </li> <li> <p>4096-bit RSA (RSA_4096)</p> </li> <li> <p>Elliptic Prime Curve 256 bit (EC_prime256v1)</p> </li> <li> <p>Elliptic Prime Curve 384 bit (EC_secp384r1)</p> </li> <li> <p>Elliptic Prime Curve 521 bit (EC_secp521r1)</p> </li> </ul> <note> <p>The certificate must be a valid SSL/TLS X.509 version 3 certificate with FQDN or IP address specified and information about the issuer.</p> </note>'
+        Domain:
+          $ref: '#/components/schemas/Domain'
         EndpointDetails:
           allOf:
             - $ref: '#/components/schemas/EndpointDetails'
@@ -1513,6 +1515,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Policy'
             - description: '<p>A scope-down policy for your user so you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p> <note> <p>For scope-down policies, AWS Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the <code>Policy</code> argument.</p> <p>For an example of a scope-down policy, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down">Creating a scope-down policy</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AssumeRole</a> in the <i>AWS Security Token Service API Reference</i>.</p> </note>'
+        PosixProfile:
+          $ref: '#/components/schemas/PosixProfile'
         Role:
           allOf:
             - $ref: '#/components/schemas/Role'
@@ -1995,6 +1999,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Policy'
             - description: '<p>Allows you to supply a scope-down policy for your user so you can use the same IAM role across multiple users. The policy scopes down user access to portions of your Amazon S3 bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>, <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p> <note> <p>For scope-down policies, AWS Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the <code>Policy</code> argument.</p> <p>For an example of a scope-down policy, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down">Creating a scope-down policy</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AssumeRole</a> in the <i>AWS Security Token Service API Reference</i>.</p> </note>'
+        PosixProfile:
+          $ref: '#/components/schemas/PosixProfile'
         Role:
           allOf:
             - $ref: '#/components/schemas/Role'
@@ -2021,6 +2027,11 @@ components:
     Certificate:
       type: string
       maxLength: 1600
+    Domain:
+      type: string
+      enum:
+        - S3
+        - EFS
     EndpointDetails:
       type: object
       properties:
@@ -2117,6 +2128,18 @@ components:
     Policy:
       type: string
       maxLength: 2048
+    PosixProfile:
+      type: object
+      required:
+        - Uid
+        - Gid
+      properties:
+        Uid:
+          $ref: '#/components/schemas/PosixId'
+        Gid:
+          $ref: '#/components/schemas/PosixId'
+        SecondaryGids:
+          $ref: '#/components/schemas/SecondaryGids'
     SshPublicKeyBody:
       type: string
       pattern: '^ssh-rsa\s+[A-Za-z0-9+/]+[=]{0,3}(\s+.+)?\s*$'
@@ -2177,6 +2200,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Certificate'
             - description: Specifies the ARN of the AWS Certificate Manager (ACM) certificate. Required when <code>Protocols</code> is set to <code>FTPS</code>.
+        Domain:
+          $ref: '#/components/schemas/Domain'
         EndpointDetails:
           allOf:
             - $ref: '#/components/schemas/EndpointDetails'
@@ -2251,6 +2276,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Policy'
             - description: Specifies the name of the policy in use for the described user.
+        PosixProfile:
+          $ref: '#/components/schemas/PosixProfile'
         Role:
           allOf:
             - $ref: '#/components/schemas/Role'
@@ -2363,6 +2390,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: Specifies the unique Amazon Resource Name (ARN) for a server to be listed.
+        Domain:
+          $ref: '#/components/schemas/Domain'
         IdentityProviderType:
           allOf:
             - $ref: '#/components/schemas/IdentityProviderType'
@@ -2426,6 +2455,16 @@ components:
       type: string
       pattern: '^$|arn:.*role/.*'
       maxLength: 2048
+    PosixId:
+      type: integer
+      minimum: 0
+      maximum: 4294967295
+    SecondaryGids:
+      type: array
+      items:
+        $ref: '#/components/schemas/PosixId'
+      minItems: 0
+      maxItems: 16
     Protocol:
       type: string
       enum:
