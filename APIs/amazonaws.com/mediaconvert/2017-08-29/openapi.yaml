@@ -4112,19 +4112,19 @@ components:
             - $ref: '#/components/schemas/ChannelMapping'
             - xml:
                 name: channelMapping
-              description: Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel. Units are in dB. Acceptable values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification).
+              description: 'Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel, in dB. Specify remix values to indicate how much of the content from your input audio channel you want in your output audio channels. Each instance of the InputChannels or InputChannelsFineTune array specifies these values for one output channel. Use one instance of this array for each output channel. In the console, each array corresponds to a column in the graphical depiction of the mapping matrix. The rows of the graphical matrix correspond to input channels. Valid values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification). Use InputChannels or InputChannelsFineTune to specify your remix values. Don''t use both.'
         ChannelsIn:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max64'
             - xml:
                 name: channelsIn
-              description: 'Specify the number of audio channels from your input that you want to use in your output. With remixing, you might combine or split the data in these channels, so the number of channels in your final output might be different.'
+              description: 'Specify the number of audio channels from your input that you want to use in your output. With remixing, you might combine or split the data in these channels, so the number of channels in your final output might be different. If you are doing both input channel mapping and output channel mapping, the number of output channels in your input mapping must be the same as the number of input channels in your output mapping.'
         ChannelsOut:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max64'
             - xml:
                 name: channelsOut
-              description: 'Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.)'
+              description: 'Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.) If you are doing both input channel mapping and output channel mapping, the number of output channels in your input mapping must be the same as the number of input channels in your output mapping.'
       description: 'Use Manual audio remixing (RemixSettings) to adjust audio levels for each audio channel in each output of your job. With audio remixing, you can output more or fewer audio channels than your input audio source provides.'
     __stringPatternWS:
       type: string
@@ -4539,7 +4539,8 @@ components:
         - CLASS_50
         - CLASS_100
         - CLASS_200
-      description: Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality.
+        - CLASS_4K_2K
+      description: 'Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality. Note that for Class 4K/2K, MediaConvert supports only 4:2:2 chroma subsampling.'
     AvcIntraFramerateControl:
       type: string
       enum:
@@ -4562,6 +4563,22 @@ components:
         - FOLLOW_TOP_FIELD
         - FOLLOW_BOTTOM_FIELD
       description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
+    AvcIntraScanTypeConversionMode:
+      type: string
+      enum:
+        - INTERLACED
+        - INTERLACED_OPTIMIZE
+      description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
+    AvcIntraUhdSettings:
+      type: object
+      properties:
+        QualityTuningLevel:
+          allOf:
+            - $ref: '#/components/schemas/AvcIntraUhdQualityTuningLevel'
+            - xml:
+                name: qualityTuningLevel
+              description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how many transcoding passes MediaConvert does with your video. When you choose Multi-pass (MULTI_PASS), your video quality is better and your output bitrate is more accurate. That is, the actual bitrate of your output is closer to the target bitrate defined in the specification. When you choose Single-pass (SINGLE_PASS), your encoding time is faster. The default behavior is Single-pass (SINGLE_PASS).'
+      description: 'Optional when you set AVC-Intra class (avcIntraClass) to Class 4K/2K (CLASS_4K_2K). When you set AVC-Intra class to a different value, this object isn''t allowed.'
     __integerMin1Max1001:
       type: integer
       minimum: 1
@@ -4590,7 +4607,13 @@ components:
             - $ref: '#/components/schemas/AvcIntraClass'
             - xml:
                 name: avcIntraClass
-              description: Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality.
+              description: 'Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality. Note that for Class 4K/2K, MediaConvert supports only 4:2:2 chroma subsampling.'
+        AvcIntraUhdSettings:
+          allOf:
+            - $ref: '#/components/schemas/AvcIntraUhdSettings'
+            - xml:
+                name: avcIntraUhdSettings
+              description: 'Optional when you set AVC-Intra class (avcIntraClass) to Class 4K/2K (CLASS_4K_2K). When you set AVC-Intra class to a different value, this object isn''t allowed.'
         FramerateControl:
           allOf:
             - $ref: '#/components/schemas/AvcIntraFramerateControl'
@@ -4621,6 +4644,12 @@ components:
             - xml:
                 name: interlaceMode
               description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
+        ScanTypeConversionMode:
+          allOf:
+            - $ref: '#/components/schemas/AvcIntraScanTypeConversionMode'
+            - xml:
+                name: scanTypeConversionMode
+              description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
         SlowPal:
           allOf:
             - $ref: '#/components/schemas/AvcIntraSlowPal'
@@ -4633,7 +4662,13 @@ components:
             - xml:
                 name: telecine
               description: 'When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine (HARD) to create a smoother picture. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.'
-      description: 'Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936.'
+      description: 'Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.'
+    AvcIntraUhdQualityTuningLevel:
+      type: string
+      enum:
+        - SINGLE_PASS
+        - MULTI_PASS
+      description: 'Optional. Use Quality tuning level (qualityTuningLevel) to choose how many transcoding passes MediaConvert does with your video. When you choose Multi-pass (MULTI_PASS), your video quality is better and your output bitrate is more accurate. That is, the actual bitrate of your output is closer to the target bitrate defined in the specification. When you choose Single-pass (SINGLE_PASS), your encoding time is faster. The default behavior is Single-pass (SINGLE_PASS).'
     BillingTagsSource:
       type: string
       enum:
@@ -5350,8 +5385,8 @@ components:
             - $ref: '#/components/schemas/__listOfOutputChannelMapping'
             - xml:
                 name: outputChannels
-              description: List of output channels
-      description: Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel. Units are in dB. Acceptable values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification).
+              description: 'In your JSON job specification, include one child of OutputChannels for each audio channel that you want in your output. Each child should contain one instance of InputChannels or InputChannelsFineTune.'
+      description: 'Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel, in dB. Specify remix values to indicate how much of the content from your input audio channel you want in your output audio channels. Each instance of the InputChannels or InputChannelsFineTune array specifies these values for one output channel. Use one instance of this array for each output channel. In the console, each array corresponds to a column in the graphical depiction of the mapping matrix. The rows of the graphical matrix correspond to input channels. Valid values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification). Use InputChannels or InputChannelsFineTune to specify your remix values. Don''t use both.'
     CmafAdditionalManifest:
       type: object
       properties:
@@ -5697,6 +5732,12 @@ components:
         - DEFAULT_CODEC_DURATION
         - MATCH_VIDEO_DURATION
       description: 'Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec.'
+    CmfcIFrameOnlyManifest:
+      type: string
+      enum:
+        - INCLUDE
+        - EXCLUDE
+      description: 'Choose Include (INCLUDE) to have MediaConvert generate an HLS child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don''t need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).'
     CmfcScte35Esam:
       type: string
       enum:
@@ -5718,6 +5759,12 @@ components:
             - xml:
                 name: audioDuration
               description: 'Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec.'
+        IFrameOnlyManifest:
+          allOf:
+            - $ref: '#/components/schemas/CmfcIFrameOnlyManifest'
+            - xml:
+                name: iFrameOnlyManifest
+              description: 'Choose Include (INCLUDE) to have MediaConvert generate an HLS child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don''t need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).'
         Scte35Esam:
           allOf:
             - $ref: '#/components/schemas/CmfcScte35Esam'
@@ -8151,6 +8198,12 @@ components:
         - DISABLED
         - ENABLED
       description: 'Places a PPS header on each encoded picture, even if repeated.'
+    H264ScanTypeConversionMode:
+      type: string
+      enum:
+        - INTERLACED
+        - INTERLACED_OPTIMIZE
+      description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
     H264SceneChangeDetect:
       type: string
       enum:
@@ -8398,6 +8451,12 @@ components:
             - xml:
                 name: repeatPps
               description: 'Places a PPS header on each encoded picture, even if repeated.'
+        ScanTypeConversionMode:
+          allOf:
+            - $ref: '#/components/schemas/H264ScanTypeConversionMode'
+            - xml:
+                name: scanTypeConversionMode
+              description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
         SceneChangeDetect:
           allOf:
             - $ref: '#/components/schemas/H264SceneChangeDetect'
@@ -8598,6 +8657,12 @@ components:
         - ADAPTIVE
         - 'OFF'
       description: Specify Sample Adaptive Offset (SAO) filter strength.  Adaptive mode dynamically selects best strength based on content
+    H265ScanTypeConversionMode:
+      type: string
+      enum:
+        - INTERLACED
+        - INTERLACED_OPTIMIZE
+      description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
     H265SceneChangeDetect:
       type: string
       enum:
@@ -8835,6 +8900,12 @@ components:
             - xml:
                 name: sampleAdaptiveOffsetFilterMode
               description: Specify Sample Adaptive Offset (SAO) filter strength.  Adaptive mode dynamically selects best strength based on content
+        ScanTypeConversionMode:
+          allOf:
+            - $ref: '#/components/schemas/H265ScanTypeConversionMode'
+            - xml:
+                name: scanTypeConversionMode
+              description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
         SceneChangeDetect:
           allOf:
             - $ref: '#/components/schemas/H265SceneChangeDetect'
@@ -9288,7 +9359,7 @@ components:
       enum:
         - INCLUDE
         - EXCLUDE
-      description: 'When set to INCLUDE, writes I-Frame Only Manifest in addition to the HLS manifest'
+      description: 'Choose Include (INCLUDE) to have MediaConvert generate a child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don''t need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).'
     HlsSettings:
       type: object
       properties:
@@ -9321,7 +9392,7 @@ components:
             - $ref: '#/components/schemas/HlsIFrameOnlyManifest'
             - xml:
                 name: iFrameOnlyManifest
-              description: 'When set to INCLUDE, writes I-Frame Only Manifest in addition to the HLS manifest'
+              description: 'Choose Include (INCLUDE) to have MediaConvert generate a child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don''t need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).'
         SegmentModifier:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -10444,7 +10515,13 @@ components:
       enum:
         - VBR
         - CBR
-      description: Use Rate control mode (Mpeg2RateControlMode) to specifiy whether the bitrate is variable (vbr) or constant (cbr).
+      description: Use Rate control mode (Mpeg2RateControlMode) to specify whether the bitrate is variable (vbr) or constant (cbr).
+    Mpeg2ScanTypeConversionMode:
+      type: string
+      enum:
+        - INTERLACED
+        - INTERLACED_OPTIMIZE
+      description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
     Mpeg2SceneChangeDetect:
       type: string
       enum:
@@ -10640,7 +10717,13 @@ components:
             - $ref: '#/components/schemas/Mpeg2RateControlMode'
             - xml:
                 name: rateControlMode
-              description: Use Rate control mode (Mpeg2RateControlMode) to specifiy whether the bitrate is variable (vbr) or constant (cbr).
+              description: Use Rate control mode (Mpeg2RateControlMode) to specify whether the bitrate is variable (vbr) or constant (cbr).
+        ScanTypeConversionMode:
+          allOf:
+            - $ref: '#/components/schemas/Mpeg2ScanTypeConversionMode'
+            - xml:
+                name: scanTypeConversionMode
+              description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
         SceneChangeDetect:
           allOf:
             - $ref: '#/components/schemas/Mpeg2SceneChangeDetect'
@@ -11067,7 +11150,7 @@ components:
             - $ref: '#/components/schemas/__stringMin0'
             - xml:
                 name: preset
-              description: 'Use Preset (Preset) to specifiy a preset for your transcoding settings. Provide the system or custom preset name. You can specify either Preset (Preset) or Container settings (ContainerSettings), but not both.'
+              description: 'Use Preset (Preset) to specify a preset for your transcoding settings. Provide the system or custom preset name. You can specify either Preset (Preset) or Container settings (ContainerSettings), but not both.'
         VideoDescription:
           allOf:
             - $ref: '#/components/schemas/VideoDescription'
@@ -11079,6 +11162,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/__integerMinNegative60Max6'
+    __listOf__doubleMinNegative60Max6:
+      type: array
+      items:
+        $ref: '#/components/schemas/__doubleMinNegative60Max6'
     OutputChannelMapping:
       type: object
       properties:
@@ -11087,7 +11174,13 @@ components:
             - $ref: '#/components/schemas/__listOf__integerMinNegative60Max6'
             - xml:
                 name: inputChannels
-              description: List of input channels
+              description: 'Use this setting to specify your remix values when they are integers, such as -10, 0, or 4.'
+        InputChannelsFineTune:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__doubleMinNegative60Max6'
+            - xml:
+                name: inputChannelsFineTune
+              description: 'Use this setting to specify your remix values when they have a decimal component, such as  -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.'
       description: OutputChannel mapping settings.
     VideoDetail:
       type: object
@@ -11239,7 +11332,7 @@ components:
         - APPLE_PRORES_422_HQ
         - APPLE_PRORES_422_LT
         - APPLE_PRORES_422_PROXY
-      description: Use Profile (ProResCodecProfile) to specifiy the type of Apple ProRes codec to use for this output.
+      description: Use Profile (ProResCodecProfile) to specify the type of Apple ProRes codec to use for this output.
     ProresFramerateControl:
       type: string
       enum:
@@ -11268,6 +11361,12 @@ components:
         - INITIALIZE_FROM_SOURCE
         - SPECIFIED
       description: 'Optional. Specify how the service determines the pixel aspect ratio (PAR) for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE), uses the PAR from your input video for your output. To specify a different PAR in the console, choose any value other than Follow source. To specify a different PAR by editing the JSON job specification, choose SPECIFIED. When you choose SPECIFIED for this setting, you must also specify values for the parNumerator and parDenominator settings.'
+    ProresScanTypeConversionMode:
+      type: string
+      enum:
+        - INTERLACED
+        - INTERLACED_OPTIMIZE
+      description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
     ProresSlowPal:
       type: string
       enum:
@@ -11288,7 +11387,7 @@ components:
             - $ref: '#/components/schemas/ProresCodecProfile'
             - xml:
                 name: codecProfile
-              description: Use Profile (ProResCodecProfile) to specifiy the type of Apple ProRes codec to use for this output.
+              description: Use Profile (ProResCodecProfile) to specify the type of Apple ProRes codec to use for this output.
         FramerateControl:
           allOf:
             - $ref: '#/components/schemas/ProresFramerateControl'
@@ -11337,6 +11436,12 @@ components:
             - xml:
                 name: parNumerator
               description: 'Required when you set Pixel aspect ratio (parControl) to SPECIFIED. On the console, this corresponds to any value other than Follow source. When you specify an output pixel aspect ratio (PAR) that is different from your input video PAR, provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would specify the ratio 40:33. In this example, the value for parNumerator is 40.'
+        ScanTypeConversionMode:
+          allOf:
+            - $ref: '#/components/schemas/ProresScanTypeConversionMode'
+            - xml:
+                name: scanTypeConversionMode
+              description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
         SlowPal:
           allOf:
             - $ref: '#/components/schemas/ProresSlowPal'
@@ -11741,6 +11846,12 @@ components:
         - INTERLACED
         - PROGRESSIVE
       description: 'Optional. Choose the scan line type for this output. If you don''t specify a value, MediaConvert will create a progressive output.'
+    Vc3ScanTypeConversionMode:
+      type: string
+      enum:
+        - INTERLACED
+        - INTERLACED_OPTIMIZE
+      description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
     Vc3SlowPal:
       type: string
       enum:
@@ -11786,6 +11897,12 @@ components:
             - xml:
                 name: interlaceMode
               description: 'Optional. Choose the scan line type for this output. If you don''t specify a value, MediaConvert will create a progressive output.'
+        ScanTypeConversionMode:
+          allOf:
+            - $ref: '#/components/schemas/Vc3ScanTypeConversionMode'
+            - xml:
+                name: scanTypeConversionMode
+              description: 'Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn''t suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can''t use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).'
         SlowPal:
           allOf:
             - $ref: '#/components/schemas/Vc3SlowPal'
@@ -11997,7 +12114,7 @@ components:
             - $ref: '#/components/schemas/AvcIntraSettings'
             - xml:
                 name: avcIntraSettings
-              description: 'Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936.'
+              description: 'Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.'
         Codec:
           allOf:
             - $ref: '#/components/schemas/VideoCodec'
@@ -12187,6 +12304,9 @@ components:
         - RIFF
         - RF64
       description: 'The service defaults to using RIFF for WAV outputs. If your output audio is likely to exceed 4 GB in file size, or if you otherwise need the extended support of the RF64 format, set your output WAV file format to RF64.'
+    __doubleMinNegative60Max6:
+      type: number
+      format: double
     __integerMinNegative60Max6:
       type: integer
       minimum: -60
