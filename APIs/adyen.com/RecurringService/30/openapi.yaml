@@ -1,48 +1,70 @@
 openapi: 3.0.3
 servers:
-  - url: 'https://pal-test.adyen.com/pal/servlet/Recurring/v30'
+  - url: https://pal-test.adyen.com/pal/servlet/Recurring/v30
 info:
   contact:
     email: support@adyen.com
     name: Adyen Support
-    url: 'https://support.adyen.com/'
-  description: |-
+    url: https://support.adyen.com/
+    x-twitter: Adyen
+  description: >-
     The Recurring APIs allow you to manage and remove your tokens or saved payment details. Tokens should be created with validation during a payment request.
 
+
     For more information, refer to our [Tokenization documentation](https://docs.adyen.com/checkout/tokenization).
+
     ## Authentication
+
     To connect to the Recurring API, you must use your basic authentication credentials. For this, create your web service user, as described in [How to get the WS user password](https://docs.adyen.com/user-management/how-to-get-the-web-service-ws-user-password). Then use its credentials to authenticate your request, for example:
 
+
     ```
+
     curl
+
     -U "ws@Company.YourCompany":"YourWsPassword" \
+
     -H "Content-Type: application/json" \
+
     ...
+
     ```
+
     Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
 
+
     ## Versioning
+
     Recurring API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
+
     For example:
+
     ```
+
     https://pal-test.adyen.com/pal/servlet/Recurring/v30/disable
+
     ```
-  termsOfService: 'https://www.adyen.com/legal/terms-and-conditions'
+  termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Adyen Recurring API
-  version: '30'
+  version: "30"
+  x-apisguru-categories:
+    - payment
+  x-logo:
+    url: https://twitter.com/Adyen/profile_image?size=original
   x-origin:
     - format: openapi
-      url: 'https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/RecurringService-v30.json'
-      version: '3.0'
-  x-preferred: false
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/RecurringService-v30.json
+      version: "3.0"
   x-providerName: adyen.com
   x-serviceName: RecurringService
+  x-preferred: false
 paths:
   /disable:
     post:
-      description: |-
+      description: >-
         Disables stored payment details to stop charging a shopper with this particular recurring detail ID.
+
 
         For more information, refer to [Disable stored details](https://docs.adyen.com/classic-integration/recurring-payments/disable-stored-details/).
       operationId: post-disable
@@ -50,31 +72,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DisableRequest'
+              $ref: "#/components/schemas/DisableRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DisableResult'
+                $ref: "#/components/schemas/DisableResult"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Disables stored payment details.
       x-groupName: General
       x-sortIndex: 2
   /listRecurringDetails:
     post:
-      description: |-
+      description: >-
         Lists the stored payment details for a shopper, if there are any available. The recurring detail ID can be used with a regular authorisation request to charge the shopper. A summary of the payment detail is returned for presentation to the shopper.
+
 
         For more information, refer to [Retrieve stored details](https://docs.adyen.com/classic-integration/recurring-payments/retrieve-stored-details/).
       operationId: post-listRecurringDetails
@@ -82,55 +105,57 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RecurringDetailsRequest'
+              $ref: "#/components/schemas/RecurringDetailsRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecurringDetailsResult'
+                $ref: "#/components/schemas/RecurringDetailsResult"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Retrieves stored payment details for a shopper.
       x-groupName: General
       x-sortIndex: 1
   /scheduleAccountUpdater:
     post:
-      description: |-
+      description: >-
         When making the API call, you can submit either the credit card information, or the recurring detail reference and the shopper reference:
+
         * If the card information is provided, all the sub-fields for `card` are mandatory.
+
         * If the recurring detail reference is provided, the fields for `shopperReference` and `selectedRecurringDetailReference` are mandatory.
       operationId: post-scheduleAccountUpdater
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ScheduleAccountUpdaterRequest'
+              $ref: "#/components/schemas/ScheduleAccountUpdaterRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ScheduleAccountUpdaterResult'
+                $ref: "#/components/schemas/ScheduleAccountUpdaterResult"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Schedules running of the Account Updater.
       x-groupName: General
@@ -143,24 +168,27 @@ components:
           description: The name of the city.
           type: string
         country:
-          description: |-
+          description: >-
             The two-character country code as defined in ISO-3166-1 alpha-2. For example, **US**.
+
             > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         houseNumberOrName:
           description: The number or name of the house.
           type: string
         postalCode:
-          description: 'A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.'
+          description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
           type: string
         stateOrProvince:
-          description: |-
+          description: >-
             State or province codes as defined in ISO 3166-2. For example, **CA** in the US or **ON** in Canada.
+
             > Required for the US and Canada.
           type: string
         street:
-          description: |-
+          description: >-
             The name of the street.
+
             > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
           type: string
       required:
@@ -184,29 +212,40 @@ components:
           description: The name of the bank.
           type: string
         bic:
-          description: 'The [Business Identifier Code](https://en.wikipedia.org/wiki/ISO_9362) (BIC) is the SWIFT address assigned to a bank. The field value is `nil` in most cases.'
+          description: The [Business Identifier Code](https://en.wikipedia.org/wiki/ISO_9362) (BIC) is the SWIFT address assigned to a bank. The field value is `nil` in most cases.
           type: string
         countryCode:
-          description: |-
+          description: >-
             Country code where the bank is located.
+
 
             A valid value is an ISO two-character country code (e.g. 'NL').
           type: string
         iban:
-          description: 'The [International Bank Account Number](https://en.wikipedia.org/wiki/International_Bank_Account_Number) (IBAN).'
+          description: The [International Bank Account Number](https://en.wikipedia.org/wiki/International_Bank_Account_Number) (IBAN).
           type: string
         ownerName:
-          description: |-
+          description: >-
             The name of the bank account holder.
+
             If you submit a name with non-Latin characters, we automatically replace some of them with corresponding Latin characters to meet the FATF recommendations. For example:
+
             * χ12 is converted to ch12.
+
             * üA is converted to euA.
+
             * Peter Møller is converted to Peter Mller, because banks don't accept 'ø'.
+
             After replacement, the ownerName must have at least three alphanumeric characters (A-Z, a-z, 0-9), and at least one of them must be a valid Latin character (A-Z, a-z). For example:
+
             * John17 - allowed.
+
             * J17 - allowed.
+
             * 171 - not allowed.
+
             * John-7 - allowed.
+
             > If provided details don't match the required format, the response returns the error message: 203 'Invalid bank account holder name'.
           type: string
         taxId:
@@ -215,34 +254,43 @@ components:
     Card:
       properties:
         cvc:
-          description: |-
+          description: >-
             The [card verification code](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-security-code-cvc-cvv-cid) (1-20 characters). Depending on the card brand, it is known also as:
+
             * CVV2/CVC2 – length: 3 digits
+
             * CID – length: 4 digits
+
             > If you are using [Client-Side Encryption](https://docs.adyen.com/classic-integration/cse-integration-ecommerce), the CVC code is present in the encrypted data. You must never post the card details to the server.
+
             > This field must be always present in a [one-click payment request](https://docs.adyen.com/classic-integration/recurring-payments).
+
             > When this value is returned in a response, it is always empty because it is not stored.
           maxLength: 20
           minLength: 1
           type: string
         expiryMonth:
-          description: |-
+          description: >-
             The card expiry month.
+
             Format: 2 digits, zero-padded for single digits. For example:
+
             * 03 = March
+
             * 11 = November
           maxLength: 2
           minLength: 1
           type: string
         expiryYear:
-          description: |-
+          description: >-
             The card expiry year.
+
             Format: 4 digits. For example: 2020
           maxLength: 4
           minLength: 4
           type: string
         holderName:
-          description: 'The name of the cardholder, as printed on the card.'
+          description: The name of the cardholder, as printed on the card.
           maxLength: 50
           minLength: 1
           type: string
@@ -252,8 +300,9 @@ components:
           minLength: 1
           type: string
         number:
-          description: |-
+          description: >-
             The card number (4-19 characters). Do not use any separators.
+
             When this value is returned in a response, only the last 4 digits of the card number are returned.
           maxLength: 19
           minLength: 4
@@ -276,26 +325,32 @@ components:
     DisableRequest:
       properties:
         contract:
-          description: |-
+          description: >-
             Specify the contract if you only want to disable a specific use.
 
+
             This field can be set to one of the following values, or to their combination (comma-separated):
+
             * ONECLICK
+
             * RECURRING
+
             * PAYOUT
           type: string
         merchantAccount:
           description: The merchant account identifier with which you want to process the transaction.
           type: string
         recurringDetailReference:
-          description: |-
+          description: >-
             The ID that uniquely identifies the recurring detail reference.
+
 
             If it is not provided, the whole recurring contract of the `shopperReference` will be disabled, which includes all recurring details.
           type: string
         shopperReference:
-          description: |-
+          description: >-
             The ID that uniquely identifies the shopper.
+
 
             This `shopperReference` must be the same as the `shopperReference` used in the initial payment.
           type: string
@@ -305,7 +360,7 @@ components:
     DisableResult:
       properties:
         response:
-          description: 'Depending on whether a specific recurring detail was in the request, result is either [detail-successfully-disabled] or [all-details-successfully-disabled].'
+          description: Depending on whether a specific recurring detail was in the request, result is either [detail-successfully-disabled] or [all-details-successfully-disabled].
           type: string
     Name:
       properties:
@@ -313,8 +368,9 @@ components:
           description: The first name.
           type: string
         gender:
-          description: |-
+          description: >-
             The gender.
+
             >The following values are permitted: `MALE`, `FEMALE`, `UNKNOWN`.
           enum:
             - MALE
@@ -324,8 +380,9 @@ components:
           minLength: 1
           type: string
         infix:
-          description: |-
+          description: >-
             The name's infix, if applicable.
+
             >A maximum length of twenty (20) characters is imposed.
           type: string
         lastName:
@@ -338,12 +395,17 @@ components:
     Recurring:
       properties:
         contract:
-          description: |-
+          description: >-
             The type of recurring contract to be used.
+
             Possible values:
+
             * `ONECLICK` – Payment details can be used to initiate a one-click payment, where the shopper enters the [card security code (CVC/CVV)](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-security-code-cvc-cvv-cid).
+
             * `RECURRING` – Payment details can be used without the card security code to initiate [card-not-present transactions](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-not-present-cnp).
+
             * `ONECLICK,RECURRING` – Payment details can be used regardless of whether the shopper is on your site or not.
+
             * `PAYOUT` – Payment details can be used to [make a payout](https://docs.adyen.com/checkout/online-payouts).
           enum:
             - ONECLICK
@@ -364,31 +426,34 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          description: |-
+          description: >-
             This field contains additional data, which may be returned in a particular response.
+
 
             The additionalData object consists of entries, each of which includes the key and value.
           type: object
         alias:
-          description: |-
+          description: >-
             The alias of the credit card number.
+
 
             Applies only to recurring contracts storing credit card details
           type: string
         aliasType:
-          description: |-
+          description: >-
             The alias type of the credit card number.
+
 
             Applies only to recurring contracts storing credit card details.
           type: string
         bank:
-          $ref: '#/components/schemas/BankAccount'
+          $ref: "#/components/schemas/BankAccount"
           description: A container for bank account data.
         billingAddress:
-          $ref: '#/components/schemas/Address'
+          $ref: "#/components/schemas/Address"
           description: The billing address.
         card:
-          $ref: '#/components/schemas/Card'
+          $ref: "#/components/schemas/Card"
           description: A container for card data.
         contractTypes:
           description: Types of recurring contracts.
@@ -406,19 +471,19 @@ components:
           description: An optional descriptive name for this recurring detail.
           type: string
         paymentMethodVariant:
-          description: 'The  type or sub-brand of a payment method used, e.g. Visa Debit, Visa Corporate, etc. For more information, refer to [PaymentMethodVariant](https://docs.adyen.com/development-resources/paymentmethodvariant).'
+          description: The  type or sub-brand of a payment method used, e.g. Visa Debit, Visa Corporate, etc. For more information, refer to [PaymentMethodVariant](https://docs.adyen.com/development-resources/paymentmethodvariant).
           type: string
         recurringDetailReference:
           description: The reference that uniquely identifies the recurring detail.
           type: string
         shopperName:
-          $ref: '#/components/schemas/Name'
+          $ref: "#/components/schemas/Name"
           description: The name of the shopper.
         socialSecurityNumber:
           description: A shopper's social security number (only in countries where it is legal to collect).
           type: string
         variant:
-          description: 'The payment method, such as “mc", "visa", "ideal", "paypal".'
+          description: The payment method, such as “mc", "visa", "ideal", "paypal".
           type: string
       required:
         - recurringDetailReference
@@ -429,11 +494,13 @@ components:
           description: The merchant account identifier you want to process the (transaction) request with.
           type: string
         recurring:
-          $ref: '#/components/schemas/Recurring'
-          description: |-
+          $ref: "#/components/schemas/Recurring"
+          description: >-
             A container for the type of a recurring contract to be retrieved.
 
+
             The contract value needs to match the contract value submitted in the payment transaction used to create a recurring contract.
+
             However, if `ONECLICK,RECURRING` is the original contract definition in the initial payment, then `contract` should take either `ONECLICK` or `RECURRING`, depending on whether or not you want the shopper to enter their card's security code when they finalize their purchase.
         shopperReference:
           description: The reference you use to uniquely identify the shopper (e.g. user ID or account ID).
@@ -450,7 +517,7 @@ components:
         details:
           description: Payment details stored for recurring payments.
           items:
-            $ref: '#/components/schemas/RecurringDetail'
+            $ref: "#/components/schemas/RecurringDetail"
           type: array
         lastKnownShopperEmail:
           description: The most recent email for this shopper (if available).
@@ -463,12 +530,13 @@ components:
         additionalData:
           additionalProperties:
             type: string
-          description: 'This field contains additional data, which may be required for a particular request.'
+          description: This field contains additional data, which may be required for a particular request.
           type: object
         card:
-          $ref: '#/components/schemas/Card'
-          description: |-
+          $ref: "#/components/schemas/Card"
+          description: >-
             A container for credit card data.
+
 
             Optional if `shopperReference` and `selectedRecurringDetailReference` are provided.
         merchantAccount:
@@ -478,14 +546,16 @@ components:
           description: A reference that merchants can apply for the call.
           type: string
         selectedRecurringDetailReference:
-          description: |-
+          description: >-
             The selected detail recurring reference.
+
 
             Optional if `card` is provided.
           type: string
         shopperReference:
-          description: |-
+          description: >-
             The reference of the shopper that owns the recurring contract.
+
 
             Optional if `card` is provided.
           type: string
@@ -498,7 +568,7 @@ components:
           description: Adyen's 16-character unique reference associated with the transaction. This value is globally unique; quote it when communicating with us about this request.
           type: string
         result:
-          description: 'The result of scheduling an Account Updater. If scheduling was successful, this field returns **Success**; otherwise it contains the error message.'
+          description: The result of scheduling an Account Updater. If scheduling was successful, this field returns **Success**; otherwise it contains the error message.
           type: string
       required:
         - pspReference

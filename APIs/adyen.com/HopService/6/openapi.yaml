@@ -1,68 +1,84 @@
 openapi: 3.0.3
 servers:
-  - url: 'https://cal-test.adyen.com/cal/services/Hop/v6'
+  - url: https://cal-test.adyen.com/cal/services/Hop/v6
 info:
   contact:
     email: support@adyen.com
     name: Adyen Support
-    url: 'https://support.adyen.com/'
-  description: |-
+    url: https://support.adyen.com/
+  description: >-
     The Hosted Onboarding Page (HOP) API provides endpoints for using the Hosted Onboarding Page. The related entities include account holders only. 
+
     For more information, refer to our [documentation](https://docs.adyen.com/platforms/onboarding-and-verification/hosted-onboarding-page).
+
     ## Authentication
+
     To connect to the HOP API, you must use basic authentication credentials of your web service user. If you don't have one, please contact the [Adyen Support Team](https://support.adyen.com/hc/en-us/requests/new). Then use its credentials to authenticate your request, for example:
 
+
     ```
+
     curl
+
     -U "ws@MarketPlace.YourMarketPlace":"YourWsPassword" \
+
     -H "Content-Type: application/json" \
+
     ...
+
     ```
+
     Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
 
+
     ## Versioning
+
     The HOP API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
+
     For example:
+
     ```
+
     https://cal-test.adyen.com/cal/services/Hop/v6/getOnboardingUrl
+
     ```
-  termsOfService: 'https://www.adyen.com/legal/terms-and-conditions'
-  title: 'Adyen for Platforms: Hosted Onboarding Page API'
-  version: '6'
+  termsOfService: https://www.adyen.com/legal/terms-and-conditions
+  title: "Adyen for Platforms: Hosted Onboarding Page API"
+  version: "6"
   x-origin:
     - format: openapi
-      url: 'https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/HopService-v6.json'
-      version: '3.0'
-  x-preferred: true
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/HopService-v6.json
+      version: "3.0"
   x-providerName: adyen.com
   x-serviceName: HopService
+  x-preferred: true
 paths:
   /getOnboardingUrl:
     post:
-      description: 'This endpoint is used to get a new onboarding url for a specific account holder. Each account holder represents a single sub-merchant, and each sub-merchant must be represented by an account holder. A returnUrl can also be specified as part of this request.'
+      description: This endpoint is used to get a new onboarding url for a specific account holder. Each account holder represents a single sub-merchant, and each sub-merchant must be represented by an account holder. A returnUrl can also be specified as part of this request.
       operationId: post-getOnboardingUrl
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetOnboardingUrlRequest'
+              $ref: "#/components/schemas/GetOnboardingUrlRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetOnboardingUrlResponse'
+                $ref: "#/components/schemas/GetOnboardingUrlResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Get a new onboarding url for an account holder.
       x-groupName: Hosted Onboarding Page
@@ -79,7 +95,7 @@ components:
           description: A description of the validation error.
           type: string
         fieldType:
-          $ref: '#/components/schemas/FieldType'
+          $ref: "#/components/schemas/FieldType"
           description: The type of error field.
     FieldType:
       properties:
@@ -198,7 +214,7 @@ components:
             - webAddress
           type: string
         shareholderCode:
-          description: 'The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.'
+          description: The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.
           type: string
     GetOnboardingUrlRequest:
       properties:
@@ -212,7 +228,7 @@ components:
           description: The platform name which will show up in the welcome page.
           type: string
         returnUrl:
-          description: 'The URL where the sub-merchant will be redirected back to after they complete the onboarding, or if their session times out. Maximum length of 500 characters. If you don''t provide this, the sub-merchant will be redirected back to the default return URL configured in your platform account.'
+          description: The URL where the sub-merchant will be redirected back to after they complete the onboarding, or if their session times out. Maximum length of 500 characters. If you don't provide this, the sub-merchant will be redirected back to the default return URL configured in your platform account.
           type: string
       required:
         - accountHolderCode
@@ -221,7 +237,7 @@ components:
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.

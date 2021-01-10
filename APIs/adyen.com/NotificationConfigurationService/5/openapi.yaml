@@ -1,78 +1,99 @@
 openapi: 3.0.3
 servers:
-  - url: 'https://cal-test.adyen.com/cal/services/Notification/v5'
+  - url: https://cal-test.adyen.com/cal/services/Notification/v5
 info:
   contact:
     email: support@adyen.com
     name: Adyen Support
-    url: 'https://support.adyen.com/'
-  description: |-
+    url: https://support.adyen.com/
+    x-twitter: Adyen
+  description: >-
     The Notification Configuration API provides endpoints for setting up and testing notifications that inform you of events on your platform, for example when a KYC check or a payout has been completed.
 
+
     For more information, refer to our [documentation](https://docs.adyen.com/platforms/marketpay-notifications).
+
     ## Authentication
+
     To connect to the Notification Configuration API, you must use basic authentication credentials of your web service user. If you don't have one, contact our [Adyen Support Team](https://support.adyen.com/hc/en-us/requests/new). Then use its credentials to authenticate your request, for example:
 
+
     ```
+
     curl
+
     -U "ws@MarketPlace.YourMarketPlace":"YourWsPassword" \
+
     -H "Content-Type: application/json" \
+
     ...
+
     ```
+
     Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
 
+
     ## Versioning
+
     The Notification Configuration API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
+
     For example:
+
     ```
+
     https://cal-test.adyen.com/cal/services/Notification/v5/createNotificationConfiguration
+
     ```
-  termsOfService: 'https://www.adyen.com/legal/terms-and-conditions'
-  title: 'Adyen for Platforms: Notification Configuration API'
-  version: '5'
+  termsOfService: https://www.adyen.com/legal/terms-and-conditions
+  title: "Adyen for Platforms: Notification Configuration API"
+  version: "5"
+  x-apisguru-categories:
+    - payment
+  x-logo:
+    url: https://twitter.com/Adyen/profile_image?size=original
   x-origin:
     - format: openapi
-      url: 'https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/NotificationConfigurationService-v5.json'
-      version: '3.0'
-  x-preferred: false
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/NotificationConfigurationService-v5.json
+      version: "3.0"
   x-providerName: adyen.com
   x-serviceName: NotificationConfigurationService
+  x-preferred: false
 paths:
   /createNotificationConfiguration:
     post:
-      description: 'Creates a subscription to notifications informing you of events on your platform. After the subscription is created, the events specified in the configuration will be sent to the URL specified in the configuration. Subscriptions must be configured on a per-event basis (as opposed to, for example, a per-account holder basis), so all event notifications of a marketplace and of a given type will be sent to the same endpoint(s). A marketplace may have multiple endpoints if desired; an event notification may be sent to as many or as few different endpoints as configured.'
+      description: Creates a subscription to notifications informing you of events on your platform. After the subscription is created, the events specified in the configuration will be sent to the URL specified in the configuration. Subscriptions must be configured on a per-event basis (as opposed to, for example, a per-account holder basis), so all event notifications of a marketplace and of a given type will be sent to the same endpoint(s). A marketplace may have multiple endpoints if desired; an event notification may be sent to as many or as few different endpoints as configured.
       operationId: post-createNotificationConfiguration
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateNotificationConfigurationRequest'
+              $ref: "#/components/schemas/CreateNotificationConfigurationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetNotificationConfigurationResponse'
+                $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
       summary: Subscribe to notifications.
       x-groupName: General
       x-sortIndex: 1
   /deleteNotificationConfigurations:
     post:
-      description: 'This endpoint is used to delete an existing notification subscription configuration. After the subscription is deleted, no further event notifications will be sent to the URL that was in the subscription.'
+      description: This endpoint is used to delete an existing notification subscription configuration. After the subscription is deleted, no further event notifications will be sent to the URL that was in the subscription.
       operationId: post-deleteNotificationConfigurations
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeleteNotificationConfigurationRequest'
+              $ref: "#/components/schemas/DeleteNotificationConfigurationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
+                $ref: "#/components/schemas/GenericResponse"
           description: OK - the request has succeeded.
       summary: Delete an existing notification subscription configuration.
       x-groupName: General
@@ -85,13 +106,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetNotificationConfigurationRequest'
+              $ref: "#/components/schemas/GetNotificationConfigurationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetNotificationConfigurationResponse'
+                $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
       summary: Retrieve an existing notification subscription configuration.
       x-groupName: General
@@ -104,51 +125,51 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EmptyRequest'
+              $ref: "#/components/schemas/EmptyRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetNotificationConfigurationListResponse'
+                $ref: "#/components/schemas/GetNotificationConfigurationListResponse"
           description: OK - the request has succeeded.
       summary: Retrieve a list of existing notification subscription configurations.
       x-groupName: General
       x-sortIndex: 3
   /testNotificationConfiguration:
     post:
-      description: 'This endpoint is used to test an existing notification subscription configuration. For each event type specified, a test notification will be generated and sent to the URL configured in the subscription specified.'
+      description: This endpoint is used to test an existing notification subscription configuration. For each event type specified, a test notification will be generated and sent to the URL configured in the subscription specified.
       operationId: post-testNotificationConfiguration
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TestNotificationConfigurationRequest'
+              $ref: "#/components/schemas/TestNotificationConfigurationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TestNotificationConfigurationResponse'
+                $ref: "#/components/schemas/TestNotificationConfigurationResponse"
           description: OK - the request has succeeded.
       summary: Test an existing notification configuration.
       x-groupName: General
       x-sortIndex: 4
   /updateNotificationConfiguration:
     post:
-      description: 'This endpoint is used to update an existing notification subscription configuration. If updating the event types, all event types desired must be provided, otherwise the previous event type configuration will be overwritten.'
+      description: This endpoint is used to update an existing notification subscription configuration. If updating the event types, all event types desired must be provided, otherwise the previous event type configuration will be overwritten.
       operationId: post-updateNotificationConfiguration
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateNotificationConfigurationRequest'
+              $ref: "#/components/schemas/UpdateNotificationConfigurationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetNotificationConfigurationResponse'
+                $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
       summary: Update an existing notification subscription configuration.
       x-groupName: General
@@ -158,7 +179,7 @@ components:
     CreateNotificationConfigurationRequest:
       properties:
         configurationDetails:
-          $ref: '#/components/schemas/NotificationConfigurationDetails'
+          $ref: "#/components/schemas/NotificationConfigurationDetails"
           description: Details of the prospective notification subscription configuration.
       required:
         - configurationDetails
@@ -183,7 +204,7 @@ components:
           description: A description of the validation error.
           type: string
         fieldType:
-          $ref: '#/components/schemas/FieldType'
+          $ref: "#/components/schemas/FieldType"
           description: The type of error field.
     ExchangeMessage:
       properties:
@@ -308,14 +329,14 @@ components:
             - webAddress
           type: string
         shareholderCode:
-          description: 'The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.'
+          description: The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.
           type: string
     GenericResponse:
       properties:
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
@@ -328,12 +349,12 @@ components:
         configurations:
           description: Details of the notification subscription configurations.
           items:
-            $ref: '#/components/schemas/NotificationConfigurationDetails'
+            $ref: "#/components/schemas/NotificationConfigurationDetails"
           type: array
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
@@ -354,12 +375,12 @@ components:
     GetNotificationConfigurationResponse:
       properties:
         configurationDetails:
-          $ref: '#/components/schemas/NotificationConfigurationDetails'
+          $ref: "#/components/schemas/NotificationConfigurationDetails"
           description: Details of the notification subscription configuration.
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
@@ -384,19 +405,22 @@ components:
         eventConfigs:
           description: The types of events whose notifications apply to this configuration.
           items:
-            $ref: '#/components/schemas/NotificationEventConfiguration'
+            $ref: "#/components/schemas/NotificationEventConfiguration"
           type: array
         hmacSignatureKey:
-          description: |-
+          description: >-
             A string with which to salt the notification(s) before hashing. If this field is provided, a hash value will be included under the notification header `HmacSignature` and the hash protocol will be included under the notification header `Protocol`. A notification body along with its `hmacSignatureKey` and `Protocol` can be used to calculate a hash value; matching this hash value with the `HmacSignature` will ensure that the notification body has not been tampered with or corrupted.
 
+
             >Must be a 32-byte hex-encoded string (i.e. a string containing 64 hexadecimal characters; e.g. "b0ea55c2fe60d4d1d605e9c385e0e7f7e6cafbb939ce07010f31a327a0871f27").
+
 
             The omission of this field will preclude the provision of the `HmacSignature` and `Protocol` headers in notification(s).
           type: string
         notificationId:
-          description: |-
+          description: >-
             The ID of the configuration.
+
             >Required if updating an existing configuration, ignored during the creation of a configuration.
           format: int64
           type: integer
@@ -410,8 +434,9 @@ components:
           description: The username to use when accessing the notifyURL.
           type: string
         sslProtocol:
-          description: |-
+          description: >-
             The SSL protocol employed by the endpoint.
+
             >Permitted values: `SSL`, `SSLInsecureCiphers`, `TLS`, `TLSv10`, `TLSv10InsecureCiphers`, `TLSv11`, `TLSv12`.
           enum:
             - SSL
@@ -428,8 +453,9 @@ components:
     NotificationEventConfiguration:
       properties:
         eventType:
-          description: |-
+          description: >-
             The type of event triggering the notification.
+
             >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_STORE_STATUS_CHANGE`, `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
           enum:
             - ACCOUNT_CLOSED
@@ -453,10 +479,13 @@ components:
             - TRANSFER_FUNDS
           type: string
         includeMode:
-          description: |-
+          description: >-
             Indicates whether the specified eventType is to be sent to the endpoint or all events other than the specified eventType (and other specified eventTypes) are to be sent.
+
             >Permitted values: `INCLUDE`, `EXCLUDE`.
+
             >- `INCLUDE`: send the specified eventType.
+
             >- `EXCLUDE`: send all eventTypes other than the specified eventType (and other eventTypes marked with `EXCLUDE`).
           enum:
             - EXCLUDE
@@ -468,8 +497,9 @@ components:
     TestNotificationConfigurationRequest:
       properties:
         eventTypes:
-          description: |-
+          description: >-
             The event types to test.  If left blank, then all of the configured event types will be tested.
+
             >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_STORE_STATUS_CHANGE` `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
           items:
             enum:
@@ -508,8 +538,9 @@ components:
             type: string
           type: array
         eventTypes:
-          description: |-
+          description: >-
             The event types that were tested.
+
             >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_STORE_STATUS_CHANGE` `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
           items:
             enum:
@@ -537,12 +568,12 @@ components:
         exchangeMessages:
           description: The notification message and related response messages.
           items:
-            $ref: '#/components/schemas/ExchangeMessage'
+            $ref: "#/components/schemas/ExchangeMessage"
           type: array
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         notificationId:
           description: The ID of the notification subscription configuration.
@@ -567,7 +598,7 @@ components:
     UpdateNotificationConfigurationRequest:
       properties:
         configurationDetails:
-          $ref: '#/components/schemas/NotificationConfigurationDetails'
+          $ref: "#/components/schemas/NotificationConfigurationDetails"
           description: Details of the notification subscription configuration to be updated.
       required:
         - configurationDetails
