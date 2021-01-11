@@ -3209,7 +3209,7 @@ paths:
         - name: EngineVersion
           in: query
           required: false
-          description: '<p>The version number of the database engine to use.</p> <p>For a list of valid engine versions, use the <code>DescribeDBEngineVersions</code> action.</p> <p>The following are the database engines and links to information about the major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS Region.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The version number of the database engine to be used by the DB instance is managed by the DB cluster.</p> <p> <b>MariaDB</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt">MariaDB on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>Microsoft SQL Server</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport">Microsoft SQL Server Versions on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>MySQL</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt">MySQL on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>Oracle</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html">Oracle Database Engine Release Notes</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>PostgreSQL</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions">Supported PostgreSQL Database Versions</a> in the <i>Amazon RDS User Guide.</i> </p>'
+          description: '<p>The version number of the database engine to use.</p> <p>For a list of valid engine versions, use the <code>DescribeDBEngineVersions</code> action.</p> <p>The following are the database engines and links to information about the major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS Region.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The version number of the database engine to be used by the DB instance is managed by the DB cluster.</p> <p> <b>MariaDB</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt">MariaDB on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>Microsoft SQL Server</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport">Microsoft SQL Server Versions on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>MySQL</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt">MySQL on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>Oracle</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html">Oracle Database Engine Release Notes</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>PostgreSQL</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts">Amazon RDS for PostgreSQL versions and extensions</a> in the <i>Amazon RDS User Guide.</i> </p>'
           schema:
             type: string
         - name: AutoMinorVersionUpgrade
@@ -3233,7 +3233,7 @@ paths:
         - name: OptionGroupName
           in: query
           required: false
-          description: '<p>Indicates that the DB instance should be associated with the specified option group.</p> <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can''t be removed from an option group. Also, that option group can''t be removed from a DB instance once it is associated with a DB instance</p>'
+          description: '<p>A value that indicates that the DB instance should be associated with the specified option group.</p> <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can''t be removed from an option group. Also, that option group can''t be removed from a DB instance once it is associated with a DB instance</p>'
           schema:
             type: string
         - name: CharacterSetName
@@ -3371,7 +3371,7 @@ paths:
         - name: EnableCloudwatchLogsExports
           in: query
           required: false
-          description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. CloudWatch Logs exports are managed by the DB cluster. </p> <p> <b>MariaDB</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Microsoft SQL Server</b> </p> <p>Possible values are <code>agent</code> and <code>error</code>. </p> <p> <b>MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Oracle</b> </p> <p>Possible values are <code>alert</code>, <code>audit</code>, <code>listener</code>, and <code>trace</code>. </p> <p> <b>PostgreSQL</b> </p> <p>Possible values are <code>postgresql</code> and <code>upgrade</code>. </p>'
+          description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. CloudWatch Logs exports are managed by the DB cluster. </p> <p> <b>MariaDB</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Microsoft SQL Server</b> </p> <p>Possible values are <code>agent</code> and <code>error</code>. </p> <p> <b>MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Oracle</b> </p> <p>Possible values are <code>alert</code>, <code>audit</code>, <code>listener</code>, <code>trace</code>, and <code>oemagent</code>. </p> <p> <b>PostgreSQL</b> </p> <p>Possible values are <code>postgresql</code> and <code>upgrade</code>. </p>'
           schema:
             type: array
             items:
@@ -13567,7 +13567,7 @@ paths:
         - name: EngineVersion
           in: query
           required: false
-          description: '<p> The version number of the database engine to upgrade to. Changing this parameter results in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is enabled for this request. </p> <p>For major version upgrades, if a nondefault DB parameter group is currently in use, a new DB parameter group in the DB parameter group family for the new engine version must be specified. The new DB parameter group can be the default for that DB parameter group family.</p> <p>For information about valid engine versions, see <code>CreateDBInstance</code>, or call <code>DescribeDBEngineVersions</code>.</p>'
+          description: '<p> The version number of the database engine to upgrade to. Changing this parameter results in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is enabled for this request. </p> <p>For major version upgrades, if a nondefault DB parameter group is currently in use, a new DB parameter group in the DB parameter group family for the new engine version must be specified. The new DB parameter group can be the default for that DB parameter group family.</p> <p>If you specify only a major version, Amazon RDS will update the DB instance to the default minor version if the current minor version is lower. For information about valid engine versions, see <code>CreateDBInstance</code>, or call <code>DescribeDBEngineVersions</code>.</p>'
           schema:
             type: string
         - name: AllowMajorVersionUpgrade
@@ -13597,7 +13597,7 @@ paths:
         - name: OptionGroupName
           in: query
           required: false
-          description: '<p> Indicates that the DB instance should be associated with the specified option group. Changing this parameter doesn''t result in an outage except in the following case and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is enabled for this request. If the parameter change results in an option group that enables OEM, this change can cause a brief (sub-second) period during which new connections are rejected but existing connections are not interrupted. </p> <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can''t be removed from an option group, and that option group can''t be removed from a DB instance once it is associated with a DB instance</p>'
+          description: '<p> A value that indicates the DB instance should be associated with the specified option group. Changing this parameter doesn''t result in an outage except in the following case and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is enabled for this request. If the parameter change results in an option group that enables OEM, this change can cause a brief (sub-second) period during which new connections are rejected but existing connections are not interrupted. </p> <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can''t be removed from an option group, and that option group can''t be removed from a DB instance once it is associated with a DB instance</p>'
           schema:
             type: string
         - name: NewDBInstanceIdentifier
@@ -14922,6 +14922,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidGlobalClusterStateFault'
+        '482':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
+        '483':
+          description: InvalidDBInstanceStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
       parameters:
         - name: GlobalClusterIdentifier
           in: query
@@ -14939,6 +14951,18 @@ paths:
           in: query
           required: false
           description: ' Indicates if the global database cluster has deletion protection enabled. The global database cluster can''t be deleted when deletion protection is enabled. '
+          schema:
+            type: boolean
+        - name: EngineVersion
+          in: query
+          required: false
+          description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p> <p>To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p> <p>To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-mysql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p> <p>To list all of the available engine versions for <code>aurora-postgresql</code>, use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p>'
+          schema:
+            type: string
+        - name: AllowMajorVersionUpgrade
+          in: query
+          required: false
+          description: '<p>A value that indicates whether major version upgrades are allowed.</p> <p>Constraints: You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the DB cluster''s current version.</p> <p>If you upgrade the major version of a global database, the cluster and DB instance parameter groups are set to the default parameter groups for the new version. Apply any custom parameter groups after completing the upgrade.</p>'
           schema:
             type: boolean
         - name: Action
@@ -14986,6 +15010,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidGlobalClusterStateFault'
+        '482':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
+        '483':
+          description: InvalidDBInstanceStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
       requestBody:
         content:
           text/xml:
@@ -22724,7 +22760,7 @@ components:
         DBClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The DBClusterIdentifier for the DB cluster.
+            - description: The DBClusterIdentifier value for the DB cluster.
         MasterUserPassword:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22732,7 +22768,7 @@ components:
         IAMDatabaseAuthenticationEnabled:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: Whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
+            - description: A value that indicates whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23711,7 +23747,7 @@ components:
         PendingModifiedValues:
           allOf:
             - $ref: '#/components/schemas/ClusterPendingModifiedValues'
-            - description: Specifies that changes to the DB cluster are pending. This element is only included when changes are pending. Specific changes are identified by subelements.
+            - description: A value that specifies that changes to the DB cluster are pending. This element is only included when changes are pending. Specific changes are identified by subelements.
       description: '<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <code>DescribeDBClusters</code>, <code>StopDBCluster</code>, and <code>StartDBCluster</code> actions. </p>'
     CreateDBClusterSnapshotMessage:
       type: object
@@ -23826,7 +23862,7 @@ components:
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The version number of the database engine to use.</p> <p>For a list of valid engine versions, use the <code>DescribeDBEngineVersions</code> action.</p> <p>The following are the database engines and links to information about the major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS Region.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The version number of the database engine to be used by the DB instance is managed by the DB cluster.</p> <p> <b>MariaDB</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt">MariaDB on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>Microsoft SQL Server</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport">Microsoft SQL Server Versions on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>MySQL</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt">MySQL on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>Oracle</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html">Oracle Database Engine Release Notes</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>PostgreSQL</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions">Supported PostgreSQL Database Versions</a> in the <i>Amazon RDS User Guide.</i> </p>'
+            - description: '<p>The version number of the database engine to use.</p> <p>For a list of valid engine versions, use the <code>DescribeDBEngineVersions</code> action.</p> <p>The following are the database engines and links to information about the major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS Region.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The version number of the database engine to be used by the DB instance is managed by the DB cluster.</p> <p> <b>MariaDB</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt">MariaDB on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>Microsoft SQL Server</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport">Microsoft SQL Server Versions on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>MySQL</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt">MySQL on Amazon RDS Versions</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>Oracle</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html">Oracle Database Engine Release Notes</a> in the <i>Amazon RDS User Guide.</i> </p> <p> <b>PostgreSQL</b> </p> <p>See <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts">Amazon RDS for PostgreSQL versions and extensions</a> in the <i>Amazon RDS User Guide.</i> </p>'
         AutoMinorVersionUpgrade:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -23842,7 +23878,7 @@ components:
         OptionGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>Indicates that the DB instance should be associated with the specified option group.</p> <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can''t be removed from an option group. Also, that option group can''t be removed from a DB instance once it is associated with a DB instance</p>'
+            - description: '<p>A value that indicates that the DB instance should be associated with the specified option group.</p> <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can''t be removed from an option group. Also, that option group can''t be removed from a DB instance once it is associated with a DB instance</p>'
         CharacterSetName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23930,7 +23966,7 @@ components:
         EnableCloudwatchLogsExports:
           allOf:
             - $ref: '#/components/schemas/LogTypeList'
-            - description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. CloudWatch Logs exports are managed by the DB cluster. </p> <p> <b>MariaDB</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Microsoft SQL Server</b> </p> <p>Possible values are <code>agent</code> and <code>error</code>. </p> <p> <b>MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Oracle</b> </p> <p>Possible values are <code>alert</code>, <code>audit</code>, <code>listener</code>, and <code>trace</code>. </p> <p> <b>PostgreSQL</b> </p> <p>Possible values are <code>postgresql</code> and <code>upgrade</code>. </p>'
+            - description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. CloudWatch Logs exports are managed by the DB cluster. </p> <p> <b>MariaDB</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Microsoft SQL Server</b> </p> <p>Possible values are <code>agent</code> and <code>error</code>. </p> <p> <b>MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Oracle</b> </p> <p>Possible values are <code>alert</code>, <code>audit</code>, <code>listener</code>, <code>trace</code>, and <code>oemagent</code>. </p> <p> <b>PostgreSQL</b> </p> <p>Possible values are <code>postgresql</code> and <code>upgrade</code>. </p>'
         ProcessorFeatures:
           allOf:
             - $ref: '#/components/schemas/ProcessorFeatureList'
@@ -24164,7 +24200,7 @@ components:
         PendingModifiedValues:
           allOf:
             - $ref: '#/components/schemas/PendingModifiedValues'
-            - description: Specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements.
+            - description: A value that specifies that changes to the DB instance are pending. This element is only included when changes are pending. Specific changes are identified by subelements.
         LatestRestorableTime:
           allOf:
             - $ref: '#/components/schemas/TStamp'
@@ -24180,7 +24216,7 @@ components:
         AutoMinorVersionUpgrade:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates that minor version patches are applied automatically.
+            - description: A value that indicates that minor version patches are applied automatically.
         ReadReplicaSourceDBInstanceIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -25139,7 +25175,7 @@ components:
         MultiAZ:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: Indicates that the Single-AZ DB instance will change to a Multi-AZ deployment.
+            - description: A value that indicates that the Single-AZ DB instance will change to a Multi-AZ deployment.
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -25178,7 +25214,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: Whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
-      description: ' This data type is used as a response element in the <code>ModifyDBInstance</code> action and contains changes that will be applied during the next maintenance window. '
+      description: ' This data type is used as a response element in the <code>ModifyDBInstance</code> operation and contains changes that will be applied during the next maintenance window. '
     ReadReplicaDBInstanceIdentifierList:
       type: array
       items:
@@ -27471,7 +27507,7 @@ components:
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p> The version number of the database engine to upgrade to. Changing this parameter results in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is enabled for this request. </p> <p>For major version upgrades, if a nondefault DB parameter group is currently in use, a new DB parameter group in the DB parameter group family for the new engine version must be specified. The new DB parameter group can be the default for that DB parameter group family.</p> <p>For information about valid engine versions, see <code>CreateDBInstance</code>, or call <code>DescribeDBEngineVersions</code>.</p>'
+            - description: '<p> The version number of the database engine to upgrade to. Changing this parameter results in an outage and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is enabled for this request. </p> <p>For major version upgrades, if a nondefault DB parameter group is currently in use, a new DB parameter group in the DB parameter group family for the new engine version must be specified. The new DB parameter group can be the default for that DB parameter group family.</p> <p>If you specify only a major version, Amazon RDS will update the DB instance to the default minor version if the current minor version is lower. For information about valid engine versions, see <code>CreateDBInstance</code>, or call <code>DescribeDBEngineVersions</code>.</p>'
         AllowMajorVersionUpgrade:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -27491,7 +27527,7 @@ components:
         OptionGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p> Indicates that the DB instance should be associated with the specified option group. Changing this parameter doesn''t result in an outage except in the following case and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is enabled for this request. If the parameter change results in an option group that enables OEM, this change can cause a brief (sub-second) period during which new connections are rejected but existing connections are not interrupted. </p> <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can''t be removed from an option group, and that option group can''t be removed from a DB instance once it is associated with a DB instance</p>'
+            - description: '<p> A value that indicates the DB instance should be associated with the specified option group. Changing this parameter doesn''t result in an outage except in the following case and the change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is enabled for this request. If the parameter change results in an option group that enables OEM, this change can cause a brief (sub-second) period during which new connections are rejected but existing connections are not interrupted. </p> <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE, can''t be removed from an option group, and that option group can''t be removed from a DB instance once it is associated with a DB instance</p>'
         NewDBInstanceIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -27775,6 +27811,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: ' Indicates if the global database cluster has deletion protection enabled. The global database cluster can''t be deleted when deletion protection is enabled. '
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p> <p>To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p> <p>To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-mysql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p> <p>To list all of the available engine versions for <code>aurora-postgresql</code>, use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p>'
+        AllowMajorVersionUpgrade:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: '<p>A value that indicates whether major version upgrades are allowed.</p> <p>Constraints: You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the DB cluster''s current version.</p> <p>If you upgrade the major version of a global database, the cluster and DB instance parameter groups are set to the default parameter groups for the new version. Apply any custom parameter groups after completing the upgrade.</p>'
     OptionConfigurationList:
       type: array
       items:

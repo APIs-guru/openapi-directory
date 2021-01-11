@@ -2186,7 +2186,7 @@ paths:
   /#X-Amz-Target=TrentService.ListGrants:
     post:
       operationId: ListGrants
-      description: '<p>Gets a list of all grants for the specified customer master key (CMK).</p> <note> <p>The <code>GranteePrincipal</code> field in the <code>ListGrants</code> response usually contains the user or role designated as the grantee principal in the grant. However, when the grantee principal in the grant is an AWS service, the <code>GranteePrincipal</code> field contains the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services">service principal</a>, which might represent several different grantee principals.</p> </note> <p> <b>Cross-account use</b>: Yes. To perform this operation on a CMK in a different AWS account, specify the key ARN in the value of the <code>KeyId</code> parameter.</p> <p> <b>Required permissions</b>: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">kms:ListGrants</a> (key policy)</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a>CreateGrant</a> </p> </li> <li> <p> <a>ListRetirableGrants</a> </p> </li> <li> <p> <a>RetireGrant</a> </p> </li> <li> <p> <a>RevokeGrant</a> </p> </li> </ul>'
+      description: '<p>Gets a list of all grants for the specified customer master key (CMK). </p> <p>You must specify the CMK in all requests. You can filter the grant list by grant ID or grantee principal.</p> <note> <p>The <code>GranteePrincipal</code> field in the <code>ListGrants</code> response usually contains the user or role designated as the grantee principal in the grant. However, when the grantee principal in the grant is an AWS service, the <code>GranteePrincipal</code> field contains the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services">service principal</a>, which might represent several different grantee principals.</p> </note> <p> <b>Cross-account use</b>: Yes. To perform this operation on a CMK in a different AWS account, specify the key ARN in the value of the <code>KeyId</code> parameter.</p> <p> <b>Required permissions</b>: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">kms:ListGrants</a> (key policy)</p> <p> <b>Related operations:</b> </p> <ul> <li> <p> <a>CreateGrant</a> </p> </li> <li> <p> <a>ListRetirableGrants</a> </p> </li> <li> <p> <a>RetireGrant</a> </p> </li> <li> <p> <a>RevokeGrant</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -2213,18 +2213,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidMarkerException'
         '483':
+          description: InvalidGrantIdException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGrantIdException'
+        '484':
           description: InvalidArnException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidArnException'
-        '484':
+        '485':
           description: KMSInternalException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInternalException'
-        '485':
+        '486':
           description: KMSInvalidStateException
           content:
             application/json:
@@ -3542,7 +3548,7 @@ components:
         GrantId:
           allOf:
             - $ref: '#/components/schemas/GrantIdType'
-            - description: <p>The unique identifier for the grant.</p> <p>You can use the <code>GrantId</code> in a subsequent <a>RetireGrant</a> or <a>RevokeGrant</a> operation.</p>
+            - description: '<p>The unique identifier for the grant.</p> <p>You can use the <code>GrantId</code> in a <a>ListGrants</a>, <a>RetireGrant</a>, or <a>RevokeGrant</a> operation.</p>'
     CreateGrantRequest:
       type: object
       required:
@@ -4359,7 +4365,16 @@ components:
         KeyId:
           allOf:
             - $ref: '#/components/schemas/KeyIdType'
-            - description: '<p>A unique identifier for the customer master key (CMK).</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
+            - description: '<p>Returns only grants for the specified customer master key (CMK). This parameter is required.</p> <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.</p> <p>For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> </ul> <p>To get the key ID and key ARN for a CMK, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>'
+        GrantId:
+          allOf:
+            - $ref: '#/components/schemas/GrantIdType'
+            - description: 'Returns only the grant with the specified grant ID. The grant ID uniquely identifies the grant. '
+        GranteePrincipal:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalIdType'
+            - description: Returns only grants where the specified principal is the grantee principal for the grant.
+    InvalidGrantIdException: {}
     ListKeyPoliciesResponse:
       type: object
       example:
@@ -4607,7 +4622,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrantIdType'
             - description: <p>Unique identifier of the grant to retire. The grant ID is returned in the response to a <code>CreateGrant</code> operation.</p> <ul> <li> <p>Grant ID Example - 0123456789012345678901234567890123456789012345678901234567890123</p> </li> </ul>
-    InvalidGrantIdException: {}
     RevokeGrantRequest:
       type: object
       required:
@@ -4851,15 +4865,11 @@ components:
         TargetKeyId:
           allOf:
             - $ref: '#/components/schemas/KeyIdType'
-            - description: String that contains the key identifier of the CMK associated with the alias.
+            - description: String that contains the key identifier referred to by the alias.
         CreationDate:
-          allOf:
-            - $ref: '#/components/schemas/DateType'
-            - description: Date and time that the alias was most recently created in the account and Region. Formatted as Unix time.
+          $ref: '#/components/schemas/DateType'
         LastUpdatedDate:
-          allOf:
-            - $ref: '#/components/schemas/DateType'
-            - description: Date and time that the alias was most recently associated with a CMK in the account and Region. Formatted as Unix time.
+          $ref: '#/components/schemas/DateType'
       description: Contains information about an alias.
     AliasList:
       type: array
