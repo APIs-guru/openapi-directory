@@ -10,7 +10,7 @@ info:
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
 
-    > Date: 02 December, 2020
+    > Date: 06 January, 2021
 
     >
 
@@ -28,7 +28,7 @@ info:
 
     [Meraki Homepage](https://www.meraki.com)
   title: Meraki Dashboard API
-  version: 1.4.0
+  version: 1.5.0
   x-apisguru-categories:
     - iot
   x-logo:
@@ -104,7 +104,6 @@ tags:
   - name: dhcpServerPolicy
   - name: dscpTaggingOptions
   - name: dscpToCosMappings
-  - name: environmental
   - name: eventTypes
   - name: events
   - name: failedConnections
@@ -213,9 +212,11 @@ tags:
   - name: uplink
   - name: uplinkBandwidth
   - name: uplinkSelection
+  - name: uplinks
   - name: uplinksLossAndLatency
   - name: usageHistories
   - name: usageHistory
+  - name: userAccessDevices
   - name: users
   - name: video
   - name: videoLink
@@ -6954,8 +6955,6 @@ paths:
             required:
               - id
               - name
-              - subnet
-              - applianceIp
             type: object
       responses:
         "201":
@@ -9520,101 +9519,6 @@ paths:
         - networks
         - configure
         - devices
-  "/networks/{networkId}/environmental/events":
-    get:
-      description: List the environmental events for the network
-      operationId: getNetworkEnvironmentalEvents
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          type: string
-        - description: A list of event types. The returned events will be filtered to only include events with these types.
-          in: query
-          items:
-            type: string
-          name: includedEventTypes
-          type: array
-        - description: A list of event types. The returned events will be filtered to exclude events with these types.
-          in: query
-          items:
-            type: string
-          name: excludedEventTypes
-          type: array
-        - description: The serial of the sensor device which the list of events will be filtered with
-          in: query
-          name: sensorSerial
-          type: string
-        - description: The serial of the environmental gateway device which the list of events will be filtered with
-          in: query
-          name: gatewaySerial
-          type: string
-        - description: The number of entries per page returned. Acceptable range is 3 - 1000. Default is 10.
-          in: query
-          name: perPage
-          type: integer
-        - description: A token used by the server to indicate the start of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
-          in: query
-          name: startingAfter
-          type: string
-        - description: A token used by the server to indicate the end of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
-          in: query
-          name: endingBefore
-          type: string
-      responses:
-        "200":
-          description: Successful operation
-          examples:
-            application/json:
-              events:
-                - description: Application upgraded
-                  eventData:
-                    version: mt_1_1
-                  gatewaySerial: Q234-ABCD-5678
-                  networkId: N_24329156
-                  occurredAt: 2018-02-11T00:00:00.090210Z
-                  sensorSerial: Q234-ABCD-5678
-                  type: mt_application_upgraded
-              pageEndAt: 2018-02-11T00:00:00.090210Z
-              pageStartAt: 2018-02-11T00:00:00.090210Z
-          headers:
-            Link:
-              description: A comma-separated list of first, last, prev, and next relative links used for subsequent paginated requests.
-              type: string
-          schema:
-            type: object
-      summary: List the environmental events for the network
-      tags:
-        - networks
-        - monitor
-        - environmental
-        - events
-  "/networks/{networkId}/environmental/events/eventTypes":
-    get:
-      description: List the event type to human-readable description
-      operationId: getNetworkEnvironmentalEventsEventTypes
-      parameters:
-        - in: path
-          name: networkId
-          required: true
-          type: string
-      responses:
-        "200":
-          description: Successful operation
-          examples:
-            application/json:
-              - category: Environmental
-                description: Application upgraded
-                type: mt_application_upgraded
-          schema:
-            type: object
-      summary: List the event type to human-readable description
-      tags:
-        - networks
-        - configure
-        - environmental
-        - events
-        - eventTypes
   "/networks/{networkId}/events":
     get:
       description: List the events for the network
@@ -14154,6 +14058,78 @@ paths:
         - sm
         - configure
         - targetGroups
+  "/networks/{networkId}/sm/userAccessDevices":
+    get:
+      description: List User Access Devices and its Trusted Access Connections
+      operationId: getNetworkSmUserAccessDevices
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - description: The number of entries per page returned. Acceptable range is 3 - 1000. Default is 100.
+          in: query
+          name: perPage
+          type: integer
+        - description: A token used by the server to indicate the start of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
+          in: query
+          name: startingAfter
+          type: string
+        - description: A token used by the server to indicate the end of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
+          in: query
+          name: endingBefore
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              - email: miles@meraki.com
+                id: "1284392014819"
+                mac: 00:11:22:33:44:55
+                name: My Personal Phone
+                systemType: ios
+                tags:
+                  - tag1
+                  - tag2
+                trustedAccessConnections:
+                  - downloadedAt: 2018-02-11T00:00:00Z
+                    lastConnectedAt: 2018-05-12T00:00:00Z
+                    scepCompletedAt: 2018-05-12T00:00:00Z
+                    trustedAccessConfigId: "1234"
+                username: milesmeraki
+          headers:
+            Link:
+              description: A comma-separated list of first, last, prev, and next relative links used for subsequent paginated requests.
+              type: string
+          schema:
+            type: object
+      summary: List User Access Devices and its Trusted Access Connections
+      tags:
+        - sm
+        - configure
+        - userAccessDevices
+  "/networks/{networkId}/sm/userAccessDevices/{userAccessDeviceId}":
+    delete:
+      description: Delete a User Access Device
+      operationId: deleteNetworkSmUserAccessDevice
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: userAccessDeviceId
+          required: true
+          type: string
+      responses:
+        "204":
+          description: Successful operation
+      summary: Delete a User Access Device
+      tags:
+        - sm
+        - configure
+        - userAccessDevices
   "/networks/{networkId}/sm/users":
     get:
       description: List the owners in an SM network with various specified fields and filters
@@ -20822,13 +20798,7 @@ paths:
           description: Successful operation
           examples:
             application/json:
-              - activeDirectoryCredentials:
-                  logonName: foo@bar.com
-                  password: mypassword
-                activeDirectoryServers:
-                  - host: 0.0.0.0
-                    port: 3000
-                adminSplashUrl: http://example.com
+              - adminSplashUrl: http://example.com
                 authMode: 8021x-radius
                 availabilityTags:
                   - test-tag
@@ -20837,12 +20807,6 @@ paths:
                 enabled: true
                 encryptionMode: wpa-eap
                 ipAssignmentMode: NAT mode
-                ldapCredentials:
-                  distinguishedName: foo@bar.com
-                  password: mypassword
-                ldapServers:
-                  - host: 0.0.0.0
-                    port: 3000
                 mandatoryDhcpEnabled: false
                 minBitrate: 11
                 name: My SSID
@@ -20859,7 +20823,6 @@ paths:
                 radiusServers:
                   - host: 0.0.0.0
                     port: 3000
-                splashGuestSponsorDomains: []
                 splashPage: Click-through splash page
                 splashTimeout: 30 minutes
                 ssidAdminAccessible: false
@@ -20894,12 +20857,6 @@ paths:
           description: Successful operation
           examples:
             application/json:
-              activeDirectoryCredentials:
-                logonName: foo@bar.com
-                password: mypassword
-              activeDirectoryServers:
-                - host: 0.0.0.0
-                  port: 3000
               adminSplashUrl: http://example.com
               authMode: 8021x-radius
               availabilityTags:
@@ -20909,12 +20866,6 @@ paths:
               enabled: true
               encryptionMode: wpa-eap
               ipAssignmentMode: NAT mode
-              ldapCredentials:
-                distinguishedName: foo@bar.com
-                password: mypassword
-              ldapServers:
-                - host: 0.0.0.0
-                  port: 3000
               mandatoryDhcpEnabled: false
               minBitrate: 11
               name: My SSID
@@ -20931,7 +20882,6 @@ paths:
               radiusServers:
                 - host: 0.0.0.0
                   port: 3000
-              splashGuestSponsorDomains: []
               splashPage: Click-through splash page
               splashTimeout: 30 minutes
               ssidAdminAccessible: false
@@ -21147,9 +21097,6 @@ paths:
                     - host
                   type: object
                 type: array
-              radiusTestingEnabled:
-                description: If true, Meraki devices will periodically send Access-Request messages to configured RADIUS servers using identity 'meraki_8021x_test' to ensure that the RADIUS servers are reachable.
-                type: boolean
               splashPage:
                 description: The type of splash page for the SSID ('None', 'Click-through splash page', 'Billing', 'Password-protected with Meraki RADIUS', 'Password-protected with custom RADIUS', 'Password-protected with Active Directory', 'Password-protected with LDAP', 'SMS authentication', 'Systems Manager Sentry', 'Facebook Wi-Fi', 'Google OAuth', 'Sponsored guest' or 'Cisco ISE'). This attribute is not supported for template children.
                 enum:
@@ -21199,12 +21146,6 @@ paths:
           description: Successful operation
           examples:
             application/json:
-              activeDirectoryCredentials:
-                logonName: foo@bar.com
-                password: mypassword
-              activeDirectoryServers:
-                - host: 0.0.0.0
-                  port: 3000
               adminSplashUrl: http://example.com
               authMode: 8021x-radius
               availabilityTags:
@@ -21214,12 +21155,6 @@ paths:
               enabled: true
               encryptionMode: wpa-eap
               ipAssignmentMode: NAT mode
-              ldapCredentials:
-                distinguishedName: foo@bar.com
-                password: mypassword
-              ldapServers:
-                - host: 0.0.0.0
-                  port: 3000
               mandatoryDhcpEnabled: false
               minBitrate: 11
               name: My SSID
@@ -21236,7 +21171,6 @@ paths:
               radiusServers:
                 - host: 0.0.0.0
                   port: 3000
-              splashGuestSponsorDomains: []
               splashPage: Click-through splash page
               splashTimeout: 30 minutes
               ssidAdminAccessible: false
@@ -21727,9 +21661,6 @@ paths:
           description: Successful operation
           examples:
             application/json:
-              guestSponsorship:
-                duratonInMinutes: 30
-                guestCanRequestTimeframe: false
               redirectUrl: https://example.com
               splashImage:
                 ? md5
@@ -23103,12 +23034,31 @@ paths:
           in: query
           name: endingBefore
           type: string
+        - description: A list of network IDs. The returned devices will be filtered to only include these networks.
+          in: query
+          items:
+            type: string
+          name: networkIds
+          type: array
+        - description: A list of serial numbers. The returned devices will be filtered to only include these serials.
+          in: query
+          items:
+            type: string
+          name: serials
+          type: array
+        - description: A list of ICCIDs. The returned devices will be filtered to only include these ICCIDs.
+          in: query
+          items:
+            type: string
+          name: iccids
+          type: array
       responses:
         "200":
           description: Successful operation
           examples:
             application/json:
               - lastReportedAt: 2018-02-11T00:00:00Z
+                model: MX68C
                 networkId: N_24329156
                 serial: Q234-ABCD-5678
                 uplinks:
@@ -23122,6 +23072,7 @@ paths:
                     status: active
                   - apn: internet
                     connectionType: 4g
+                    iccid: "123456789"
                     interface: cellular
                     ip: 1.2.3.4
                     model: integrated
@@ -24406,6 +24357,79 @@ paths:
         - organizations
         - configure
         - brandingPolicies
+  "/organizations/{organizationId}/cellularGateway/uplink/statuses":
+    get:
+      description: List the uplink status of every Meraki MG cellular gateway in the organization
+      operationId: getOrganizationCellularGatewayUplinkStatuses
+      parameters:
+        - in: path
+          name: organizationId
+          required: true
+          type: string
+        - description: The number of entries per page returned. Acceptable range is 3 - 1000. Default is 1000.
+          in: query
+          name: perPage
+          type: integer
+        - description: A token used by the server to indicate the start of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
+          in: query
+          name: startingAfter
+          type: string
+        - description: A token used by the server to indicate the end of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
+          in: query
+          name: endingBefore
+          type: string
+        - description: A list of network IDs. The returned devices will be filtered to only include these networks.
+          in: query
+          items:
+            type: string
+          name: networkIds
+          type: array
+        - description: A list of serial numbers. The returned devices will be filtered to only include these serials.
+          in: query
+          items:
+            type: string
+          name: serials
+          type: array
+        - description: A list of ICCIDs. The returned devices will be filtered to only include these ICCIDs.
+          in: query
+          items:
+            type: string
+          name: iccids
+          type: array
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              - lastReportedAt: 2018-02-11T00:00:00Z
+                model: MG21
+                networkId: N_24329156
+                serial: Q234-ABCD-5678
+                uplinks:
+                  - apn: internet
+                    connectionType: 4g
+                    iccid: "123456789"
+                    interface: cellular
+                    ip: 1.2.3.4
+                    model: integrated
+                    provider: at&t
+                    publicIp: 123.123.123.1
+                    signalStat:
+                      rsrp: "-120"
+                      rsrq: "-13"
+                    status: ready
+          headers:
+            Link:
+              description: A comma-separated list of first, last, prev, and next relative links used for subsequent paginated requests.
+              type: string
+          schema:
+            type: object
+      summary: List the uplink status of every Meraki MG cellular gateway in the organization
+      tags:
+        - cellularGateway
+        - monitor
+        - uplink
+        - statuses
   "/organizations/{organizationId}/claim":
     post:
       description: Claim a list of devices, licenses, and/or orders into an organization. When claiming by order, all devices and licenses in the order will be claimed; licenses will be added to the organization and devices will be placed in the organization's inventory.
@@ -27002,6 +27026,104 @@ paths:
         - switch
         - configure
         - devices
+  "/organizations/{organizationId}/uplinks/statuses":
+    get:
+      description: List the uplink status of every Meraki MX, MG and Z series devices in the organization
+      operationId: getOrganizationUplinksStatuses
+      parameters:
+        - in: path
+          name: organizationId
+          required: true
+          type: string
+        - description: The number of entries per page returned. Acceptable range is 3 - 1000. Default is 1000.
+          in: query
+          name: perPage
+          type: integer
+        - description: A token used by the server to indicate the start of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
+          in: query
+          name: startingAfter
+          type: string
+        - description: A token used by the server to indicate the end of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
+          in: query
+          name: endingBefore
+          type: string
+        - description: A list of network IDs. The returned devices will be filtered to only include these networks.
+          in: query
+          items:
+            type: string
+          name: networkIds
+          type: array
+        - description: A list of serial numbers. The returned devices will be filtered to only include these serials.
+          in: query
+          items:
+            type: string
+          name: serials
+          type: array
+        - description: A list of ICCIDs. The returned devices will be filtered to only include these ICCIDs.
+          in: query
+          items:
+            type: string
+          name: iccids
+          type: array
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              - lastReportedAt: 2018-02-11T00:00:00Z
+                model: MX68C
+                networkId: N_24329156
+                serial: Q234-ABCD-5678
+                uplinks:
+                  - gateway: 1.2.3.5
+                    interface: wan1
+                    ip: 1.2.3.4
+                    ipAssignedBy: static
+                    primaryDns: 8.8.8.8
+                    publicIp: 123.123.123.1
+                    secondaryDns: 8.8.4.4
+                    status: active
+                  - apn: internet
+                    connectionType: 4g
+                    iccid: "123456789"
+                    interface: cellular
+                    ip: 1.2.3.4
+                    model: integrated
+                    provider: at&t
+                    publicIp: 123.123.123.1
+                    signalStat:
+                      rsrp: "-120"
+                      rsrq: "-13"
+                    status: ready
+              - lastReportedAt: 2018-02-11T00:00:00Z
+                model: MG21
+                networkId: N_24329156
+                serial: Q234-ABCD-5678
+                uplinks:
+                  - apn: internet
+                    connectionType: 4g
+                    iccid: "123456789"
+                    interface: cellular
+                    ip: 1.2.3.4
+                    model: integrated
+                    provider: at&t
+                    publicIp: 123.123.123.1
+                    signalStat:
+                      rsrp: "-120"
+                      rsrq: "-13"
+                    status: ready
+          headers:
+            Link:
+              description: A comma-separated list of first, last, prev, and next relative links used for subsequent paginated requests.
+              type: string
+          schema:
+            type: object
+      summary: List the uplink status of every Meraki MX, MG and Z series devices in the organization
+      tags:
+        - organizations
+        - monitor
+        - uplinks
+        - statuses
   "/organizations/{organizationId}/webhooks/alertTypes":
     get:
       description: Return a list of alert types to be used with managing webhook alerts
@@ -27016,8 +27138,11 @@ paths:
           description: Successful operation
           examples:
             application/json:
-              - alertName: APs went down
-                alertType: stopped_reporting
+              - alertData: {}
+                alertId: "0000000000000000"
+                alertLevel: warning
+                alertType: APs went down
+                alertTypeId: stopped_reporting
                 deviceMac: 00:11:22:33:44:55
                 deviceModel: MR34
                 deviceName: My AP
@@ -27026,20 +27151,16 @@ paths:
                   - tag1
                   - tag2
                 deviceUrl: https://n1.meraki.com//n//manage/nodes/new_list/000000000000
-                example:
-                  alertData: {}
-                  alertId: "0000000000000000"
-                  alertType: APs went down
-                  occurredAt: 2018-02-11T00:00:00.123450Z
-                  sentAt: 2020-07-11T00:03:12.331789Z
-                  sharedSecret: secret
-                  version: "0.1"
                 networkId: N_24329156
                 networkName: Main Office
                 networkUrl: https://n1.meraki.com//n//manage/nodes/list
+                occurredAt: 2018-02-11T00:00:00.123450Z
                 organizationId: "2930418"
                 organizationName: My organization
                 organizationUrl: https://dashboard.meraki.com/o/VjjsAd/manage/organization/overview
+                sentAt: 2020-07-11T00:03:12.331789Z
+                sharedSecret: secret
+                version: "0.1"
           schema:
             type: object
       summary: Return a list of alert types to be used with managing webhook alerts
@@ -27192,6 +27313,10 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/switch/dscpToCosMappings
     summary: Update the DSCP to CoS mappings
+  - group: Firmware upgrades update
+    operation: update
+    resource: /networks/{networkId}/firmwareUpgrades
+    summary: Update current maintenance window for a network
   - group: Floor plan
     operation: destroy
     resource: /networks/{networkId}/floorPlans/{floorPlanId}
@@ -27552,6 +27677,10 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/appliance/trafficShaping/uplinkSelection
     summary: Update uplink selection settings for an MX network
+  - group: User access device
+    operation: destroy
+    resource: /networks/{networkId}/sm/userAccessDevices/{userAccessDeviceId}
+    summary: Delete a User Access Device
   - group: VLAN
     operation: create
     resource: /networks/{networkId}/appliance/vlans

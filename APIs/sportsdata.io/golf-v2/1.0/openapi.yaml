@@ -595,12 +595,24 @@ components:
           $ref: "#/components/schemas/Tournament"
     News:
       properties:
+        Author:
+          nullable: true
+          type: string
+        Categories:
+          nullable: true
+          type: string
         Content:
           nullable: true
           type: string
         NewsID:
           nullable: false
           type: integer
+        OriginalSource:
+          nullable: true
+          type: string
+        OriginalSourceUrl:
+          nullable: true
+          type: string
         PlayerID:
           nullable: true
           type: integer

@@ -1137,6 +1137,9 @@ definitions:
         type: integer
       inchi_key:
         type: string
+      max_phase:
+        format: int32
+        type: integer
       molecular_species:
         type: string
       molecular_type:
@@ -1144,6 +1147,8 @@ definitions:
       molecule_chembl_id:
         type: string
       parent_chembl_id:
+        type: string
+      pref_name:
         type: string
       prodrug:
         format: double

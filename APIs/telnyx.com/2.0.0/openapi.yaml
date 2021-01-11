@@ -9257,6 +9257,11 @@ components:
         webhook_url: https://www.example.com/server-b/
         webhook_url_method: POST
       properties:
+        billing_group_id:
+          description: Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
+          example: f5586561-8ff0-4291-a0ac-84fe544797bd
+          format: uuid
+          type: string
         client_state:
           description: Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
           example: aGF2ZSBhIG5pY2UgZGF5ID1d
@@ -11194,6 +11199,11 @@ components:
         audio_url:
           description: The URL of a file to be played back to the callee when the call is answered. The URL can point to either a WAV or MP3 file.
           example: http://example.com/message.wav
+          type: string
+        billing_group_id:
+          description: Use this field to set the Billing Group ID for the call. Must be a valid and existing Billing Group ID.
+          example: f5586561-8ff0-4291-a0ac-84fe544797bd
+          format: uuid
           type: string
         client_state:
           description: Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
@@ -20019,12 +20029,13 @@ components:
          <li><code>provisioning</code> - the IP is being provisioned.</li>
          <li><code>provisioned</code> - the IP was provisioned and the SIM is reachable on the public internet.</li>
          <li><code>failed</code> - the provisioning had failed for a reason and it requires an intervention.</li>
+         <li><code>decommissioning</code> - the public IP is being removed from the SIM card.</li>
          </ul>
          Transitioning between the provisioning and provisioned states may take some time.
       properties:
         code:
           default: null
-          description: This attribute is an [error code](https://developers.telnyx.com/docs/api/v2/overview#errors) related to the failure reason.
+          description: This attribute is an <a href="https://developers.telnyx.com/docs/api/v2/overview#errors">error code</a> related to the failure reason.
           example: null
           readOnly: true
           type: string

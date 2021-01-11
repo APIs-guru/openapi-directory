@@ -2196,426 +2196,6 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
-  "/restaurants/{restaurantId}/food-safety/addons":
-    get:
-      description: Get all addon's food safety information for a restaurant
-      parameters:
-        - description: Restaurant Id (Encrypted)
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: >
-            If not provided will bring all data.
-
-            Type of data being fetched (separated by comma)
-
-            - allergens
-
-            - additives
-
-            - nutritional
-
-            - manufacturer
-
-            - storage
-
-            - ingredients
-
-
-            e.g &select=allergens,additives,ingredients
-          in: query
-          name: select
-          required: false
-          schema:
-            type: string
-        - description: The maximum number of records to fetch.
-          in: query
-          name: limit
-          required: false
-          schema:
-            default: 100
-            format: int32
-            maximum: 500
-            minimum: 1
-            type: integer
-        - description: Value representing a cursor - position to use when retrieving the next page of data. If provided, the value of this parameter must be URL encoded.
-          in: query
-          name: after
-          required: false
-          schema:
-            type: string
-        - description: Indicates what type of response client understands and is also used for content type negotiation (if version is specified), otherwise tells the server to return the latest version
-          example: application/json;v=1
-          in: header
-          name: Accept
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json;v=1:
-              schema:
-                $ref: "#/components/schemas/PagedFoodSafetyResponse"
-          description: Request succeeded.
-          headers:
-            cache-control:
-              description: Information about how the response can be cached.
-              schema:
-                description: Information about how the response can be cached. (No caching will be applied)
-                enum:
-                  - no-store
-                type: string
-            content-type:
-              description: Content type of document including version
-              example: application/json;v=1
-              schema:
-                type: string
-        "400":
-          content:
-            application/json;v=1:
-              example:
-                errors:
-                  - description: The supplied restaurantId does not meet one or more validation requirements (e.g encryption failed).
-                    errorCode: BadRequest
-                    validationErrors:
-                      - errorMessage: The value 'R19f61' is not valid for restaurantId.
-                        field: restaurantId
-                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Bad request.
-        "500":
-          content:
-            application/json;v=1:
-              example:
-                errors:
-                  - description: Internal Server Error
-                    errorCode: InternalServerError
-                faultId: 6b25dd26-59e7-41a6-b4ba-60849cadddcb
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/500ErrorSchema"
-          description: Internal Server Error.
-      summary: Get all addon's food safety
-      tags:
-        - RestaurantProduct
-        - publicly-accessible
-        - takeaway
-      x-status: Draft
-  "/restaurants/{restaurantId}/food-safety/addons/{addonId}":
-    get:
-      description: Get a single addon's food safety information for a restaurant
-      parameters:
-        - description: Restaurant Id (Encrypted)
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Addon Id (Encrypted)
-          in: path
-          name: addonId
-          required: true
-          schema:
-            type: string
-        - description: >
-            If not provided will bring all data.
-
-            Type of data being fetched (separated by comma)
-
-            - allergens
-
-            - additives
-
-            - nutritional
-
-            - manufacturer
-
-            - storage
-
-            - ingredients
-
-
-            e.g &select=allergens,additives,ingredients
-          in: query
-          name: select
-          required: false
-          schema:
-            type: string
-        - description: Indicates what type of response client understands and is also used for content type negotiation (if version is specified), otherwise tells the server to return the latest version
-          example: application/json;v=1
-          in: header
-          name: Accept
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json;v=1:
-              schema:
-                $ref: "#/components/schemas/ProductFoodSafety"
-          description: Request succeeded.
-          headers:
-            cache-control:
-              description: Information about how the response can be cached.
-              schema:
-                description: Information about how the response can be cached. (No caching will be applied)
-                enum:
-                  - no-store
-                type: string
-            content-type:
-              description: Content type of document including version
-              example: application/json;v=1
-              schema:
-                type: string
-        "400":
-          content:
-            application/json;v=1:
-              example:
-                errors:
-                  - description: The supplied restaurantId does not meet one or more validation requirements (e.g encryption failed).
-                    errorCode: BadRequest
-                    validationErrors:
-                      - errorMessage: The value 'R19f61' is not valid for restaurantId.
-                        field: restaurantId
-                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Bad request.
-        "500":
-          content:
-            application/json;v=1:
-              example:
-                errors:
-                  - description: Internal Server Error
-                    errorCode: InternalServerError
-                faultId: 6b25dd26-59e7-41a6-b4ba-60849cadddcb
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/500ErrorSchema"
-          description: Internal Server Error.
-      summary: Get a single addon's food safety
-      tags:
-        - RestaurantProduct
-        - publicly-accessible
-        - takeaway
-      x-status: Draft
-  "/restaurants/{restaurantId}/food-safety/products":
-    get:
-      description: Get all product's food safety information for a restaurant
-      parameters:
-        - description: Restaurant Id (Encrypted)
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: >
-            If not provided will bring all data.
-
-            Type of data being fetched (separated by comma)
-
-            - allergens
-
-            - additives
-
-            - nutritional
-
-            - manufacturer
-
-            - storage
-
-            - ingredients
-
-
-            e.g &select=allergens,additives,ingredients
-          in: query
-          name: select
-          required: false
-          schema:
-            type: string
-        - description: The maximum number of records to fetch.
-          in: query
-          name: limit
-          required: false
-          schema:
-            default: 100
-            format: int32
-            maximum: 500
-            minimum: 1
-            type: integer
-        - description: Value representing a cursor - position to use when retrieving the next page of data. If provided, the value of this parameter must be URL encoded.
-          in: query
-          name: after
-          required: false
-          schema:
-            type: string
-        - description: Indicates what type of response client understands and is also used for content type negotiation (if version is specified), otherwise tells the server to return the latest version
-          example: application/json;v=1
-          in: header
-          name: Accept
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json;v=1:
-              schema:
-                $ref: "#/components/schemas/PagedFoodSafetyResponse"
-          description: Request succeeded.
-          headers:
-            cache-control:
-              description: Information about how the response can be cached.
-              schema:
-                description: Information about how the response can be cached. (No caching will be applied)
-                enum:
-                  - no-store
-                type: string
-            content-type:
-              description: Content type of document including version
-              example: application/json;v=1
-              schema:
-                type: string
-        "400":
-          content:
-            application/json;v=1:
-              example:
-                errors:
-                  - description: The supplied restaurantId does not meet one or more validation requirements (e.g encryption failed).
-                    errorCode: BadRequest
-                    validationErrors:
-                      - errorMessage: The value 'R19f61' is not valid for restaurantId.
-                        field: restaurantId
-                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Bad request.
-        "500":
-          content:
-            application/json;v=1:
-              example:
-                errors:
-                  - description: Internal Server Error
-                    errorCode: InternalServerError
-                faultId: 6b25dd26-59e7-41a6-b4ba-60849cadddcb
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/500ErrorSchema"
-          description: Internal Server Error.
-      summary: Get all product's food safety
-      tags:
-        - RestaurantProduct
-        - publicly-accessible
-        - takeaway
-      x-status: Draft
-  "/restaurants/{restaurantId}/food-safety/products/{productId}":
-    get:
-      description: Get a single product's food safety information for a restaurant
-      parameters:
-        - description: Restaurant Id (Encrypted)
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Product Id (Encrypted)
-          in: path
-          name: productId
-          required: true
-          schema:
-            type: string
-        - description: >
-            If not provided will bring all data.
-
-            Type of data being fetched (separated by comma)
-
-            - allergens
-
-            - additives
-
-            - nutritional
-
-            - manufacturer
-
-            - storage
-
-            - ingredients
-
-
-            e.g &select=allergens,additives,ingredients
-          in: query
-          name: select
-          required: false
-          schema:
-            type: string
-        - description: Indicates what type of response client understands and is also used for content type negotiation (if version is specified), otherwise tells the server to return the latest version
-          example: application/json;v=1
-          in: header
-          name: Accept
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json;v=1:
-              schema:
-                $ref: "#/components/schemas/ProductFoodSafety"
-          description: Request succeeded.
-          headers:
-            cache-control:
-              description: Information about how the response can be cached.
-              schema:
-                description: Information about how the response can be cached. (No caching will be applied)
-                enum:
-                  - no-store
-                type: string
-            content-type:
-              description: Content type of document including version
-              example: application/json;v=1
-              schema:
-                type: string
-        "400":
-          content:
-            application/json;v=1:
-              example:
-                errors:
-                  - description: The supplied restaurantId does not meet one or more validation requirements (e.g encryption failed).
-                    errorCode: BadRequest
-                    validationErrors:
-                      - errorMessage: The value 'R19f61' is not valid for restaurantId.
-                        field: restaurantId
-                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Bad request.
-        "500":
-          content:
-            application/json;v=1:
-              example:
-                errors:
-                  - description: Internal Server Error
-                    errorCode: InternalServerError
-                faultId: 6b25dd26-59e7-41a6-b4ba-60849cadddcb
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/500ErrorSchema"
-          description: Internal Server Error.
-      summary: Get a single product's food safety
-      tags:
-        - RestaurantProduct
-        - publicly-accessible
-        - takeaway
-      x-status: Draft
   "/restaurants/{tenant}/{restaurantId}/catalogue":
     get:
       description: Get details of the restaurant's product catalogue
@@ -9497,14 +9077,35 @@ components:
         - subject
       type: object
     CurrentUserResponse:
+      example:
+        accountType: Registered
+        email: example@just-eat.com
+        firstName: Bob
+        globalUserId: 8It2lEaJjG82nJtxO00Iab0CoF0=
+        lastName: Smith
       properties:
+        accountType:
+          description: The account type of the consumer.
+          enum:
+            - Registered
+            - Guest
+          type: string
         email:
+          description: The consumer's email address.
+          format: email
+          nullable: true
           type: string
         firstName:
+          description: The consumer's first name.
+          nullable: true
           type: string
         globalUserId:
+          description: Global identifier for consumer and tenant.
+          nullable: true
           type: string
         lastName:
+          description: The consumer's last name.
+          nullable: true
           type: string
       type: object
     CustomisationResponse:
@@ -13207,7 +12808,7 @@ components:
           value: 7.5
         caffeine:
           unit: mg
-          value: 10
+          value: null
         calories:
           unit: kcal
           value: 42
@@ -13245,7 +12846,7 @@ components:
               type: string
             value:
               description: Value of the item
-              nullable: false
+              nullable: true
               type: number
         caffeine:
           description: Caffeine milligram value for product
@@ -13256,7 +12857,7 @@ components:
               type: string
             value:
               description: Value of the item
-              nullable: false
+              nullable: true
               type: number
         calories:
           description: Calories value for product
@@ -13267,7 +12868,7 @@ components:
               type: string
             value:
               description: Value of the item
-              nullable: false
+              nullable: true
               type: number
         carbohydrate:
           description: Carbohydrate value for product
@@ -13278,7 +12879,7 @@ components:
               type: string
             value:
               description: Value of the item
-              nullable: false
+              nullable: true
               type: number
         energy:
           description: Energy value for product
@@ -13289,7 +12890,7 @@ components:
               type: string
             value:
               description: Value of the item
-              nullable: false
+              nullable: true
               type: number
         fat:
           description: Fat value for product
@@ -13300,7 +12901,7 @@ components:
               type: string
             value:
               description: Value of the item
-              nullable: false
+              nullable: true
               type: number
         fattyAcidTotal:
           description: Fatty Acid value for product
@@ -13311,7 +12912,7 @@ components:
               type: string
             value:
               description: Value of the item
-              nullable: false
+              nullable: true
               type: number
         protein:
           description: Protein value for product
@@ -13322,7 +12923,7 @@ components:
               type: string
             value:
               description: Value of the item
-              nullable: false
+              nullable: true
               type: number
         salt:
           description: Salt value for product
@@ -13333,7 +12934,7 @@ components:
               type: string
             value:
               description: Value of the item
-              nullable: false
+              nullable: true
               type: number
         sodium:
           description: Sodium value for product
@@ -13344,7 +12945,7 @@ components:
               type: string
             value:
               description: Value of the item
-              nullable: false
+              nullable: true
               type: number
         sugar:
           description: Sugar value for product
@@ -13355,7 +12956,7 @@ components:
               type: string
             value:
               description: Value of the item
-              nullable: false
+              nullable: true
               type: number
       type: object
     Offer:
@@ -15876,15 +15477,38 @@ components:
           format: enum
           type: string
       type: object
+    RestaurantOrderCustomerInfo:
+      description: Information about a customer
+      properties:
+        deliveryAddress:
+          description: The delivery address of the order
+          items:
+            description: The address line
+            type: string
+          nullable: true
+          type: array
+        name:
+          description: The customer name
+          nullable: true
+          type: string
+        noteToOrder:
+          description: The customer note to the order
+          nullable: true
+          type: string
+      type: object
     RestaurantOrderDetails:
       description: An order details
       example:
         currencyCode: GBP
-        fees:
-          - type: Card
-            value: 50
-          - type: Delivery
-            value: 200
+        customerInfo:
+          deliveryAddress:
+            - 13 Moon road
+            - Mars
+            - BS5 1KG
+            - Bristol
+          name: Simon Moon
+          orderNote: Contact-free delivery
+        dueDate: 2020-01-01T10:15:00.000Z
         friendlyId: 821367535
         id: rtvtgo0wwugmiiikdpzvsg
         orderItems:
@@ -15936,9 +15560,14 @@ components:
           taxes: 0
           tips: 0
           vouchers: 0
-        orderStatus: Accepted
+        orderStatus: Rejected
         orderType: Delivery
         paymentInfo:
+          fees:
+            - type: Card
+              value: 50
+            - type: Delivery
+              value: 200
           paidDate: 2020-01-01T09:31:00.000Z
           paymentLines:
             - fee: 0
@@ -15947,10 +15576,20 @@ components:
             - fee: 50
               paymentMethod: Card
               value: 1549
+        paymentType: Card
         placedDate: 2020-01-01T09:30:00.000Z
+        statusReason: RejectedByRestaurant
+        transactionReference: 123334567667989
       properties:
         currencyCode:
           description: The ISO-4217 currency code associated with the all prices and money amounts in order details
+          type: string
+        customerInfo:
+          $ref: "#/components/schemas/RestaurantOrderCustomerInfo"
+          description: Information about a customer
+        dueDate:
+          description: The due date of the order
+          format: date-time
           type: string
         friendlyId:
           description: The friendly order Id
@@ -15975,7 +15614,7 @@ components:
           enum:
             - Accepted
             - Cancelled
-            - Declined
+            - Rejected
         orderType:
           description: Type of order (collection or delivery)
           enum:
@@ -15984,9 +15623,34 @@ components:
         paymentInfo:
           $ref: "#/components/schemas/RestaurantOrderPaymentInfo"
           description: Information about a payment
+        paymentType:
+          description: The payment type (cash or card)
+          enum:
+            - Card
+            - Cash
         placedDate:
           description: The order placed date
           format: date-time
+          type: string
+        statusReason:
+          description: The reason for the order's status, if known
+          enum:
+            - TooFar
+            - FakeDelivered
+            - FakeNotDelivered
+            - FaxNotReceived
+            - IncorrectOrder
+            - NoAnswerFromRestaurant
+            - MissedByRestaurant
+            - FakeNotCollected
+            - RestaurantCannotDeliver
+            - RejectedByRestaurant
+            - NewTimeRejected
+            - SystemError
+            - RestaurantIsBusy
+            - TestOrder
+        transactionReference:
+          description: The payment transaction reference, if known
           type: string
       type: object
     RestaurantOrderHistory:
@@ -15997,20 +15661,17 @@ components:
             id: rtvtgo0wwugmiiikdpzvsg
             orderPrice: 2099
             orderStatus: Accepted
-            orderType: Delivery
+            paymentType: Card
             placedDate: 2020-01-01T09:30:00.000Z
-            usedPaymentMethods:
-              - AccountCredit
-              - Card
+            serviceType: Delivery
           - currencyCode: GBP
             friendlyId: 829022736
             id: uerbbymdfkxdecduuerbby
             orderPrice: 99900
-            orderStatus: Declined
-            orderType: Collection
+            orderStatus: Rejected
+            paymentType: Cash
             placedDate: 2020-01-02T19:20:00.000Z
-            usedPaymentMethods:
-              - Cash
+            serviceType: Collection
         paging:
           cursors:
             after: NDMyNzQyODI3OTQw
@@ -16139,6 +15800,45 @@ components:
           format: integer
           type: number
       type: object
+    RestaurantOrderSummaries:
+      description: An orders summary for date range (all total values in smallest unit of relevant currency)
+      example:
+        count: 27
+        currencyCode: GBP
+        totalCardOrderValue: 92059
+        totalCashOrderValue: 7003
+        totalCollectionOrderValue: 22241
+        totalDeliveryOrderValue: 77721
+        totalOrderValue: 99962
+      properties:
+        count:
+          description: Total number of all orders for date range
+          format: int32
+          type: integer
+        currencyCode:
+          description: The ISO-4217 currency code associated with the total values
+          type: string
+        totalCardOrderValue:
+          description: Total value of card orders for date range
+          format: int32
+          type: number
+        totalCashOrderValue:
+          description: Total value of cash orders for date range
+          format: int32
+          type: number
+        totalCollectionOrderValue:
+          description: Total value of collection orders for date range
+          format: int32
+          type: number
+        totalDeliveryOrderValue:
+          description: Total value of delivery orders for date range
+          format: int32
+          type: number
+        totalOrderValue:
+          description: Total value of all orders for date range
+          format: int32
+          type: number
+      type: object
     RestaurantOrderSummary:
       description: An order summary
       properties:
@@ -16160,22 +15860,21 @@ components:
           enum:
             - Accepted
             - Cancelled
-            - Declined
-        orderType:
-          description: Type of order (collection or delivery)
+            - Rejected
+        paymentType:
+          description: The payment type (cash or card)
           enum:
-            - Delivery
-            - Collection
+            - Card
+            - Cash
         placedDate:
           description: The order placed date
           format: date-time
           type: string
-        usedPaymentMethods:
-          description: The list of payment methods used for order payment
-          items:
-            description: The payment method, such as cash or card
-            type: string
-          type: array
+        serviceType:
+          description: Type of service (collection or delivery)
+          enum:
+            - Collection
+            - Delivery
       type: object
     RestaurantPromotedPlacementInfo:
       example:
@@ -16412,6 +16111,52 @@ components:
           nullable: true
           oneOf:
             - $ref: "#/components/schemas/OrdersData"
+      type: object
+    ReverseGeocodingResponse:
+      description: Best guess address for passed lat long
+      example:
+        geometry:
+          coordinates:
+            - -0.01938
+            - 51.10234
+          type: Point
+        properties:
+          address:
+            - Flat 3
+            - Greystoke House
+            - 127 High Street
+            - Chelmsford
+            - Essex
+            - CM1 4QQ
+        type: Feature
+      properties:
+        geometry:
+          description: Geometry information for consumers location
+          properties:
+            coordinates:
+              description: longitude and latitude
+              items:
+                format: double
+                type: number
+              maxItems: 2
+              minItems: 2
+              type: array
+            type:
+              description: type of primitive
+              type: string
+          type: object
+        properties:
+          description: feature metadata
+          properties:
+            address:
+              description: list of address chunks
+              items:
+                type: string
+              type: array
+          type: object
+        type:
+          description: type of primitive
+          type: string
       type: object
     SearchByConsumerResponse:
       properties:
@@ -22451,6 +22196,3 @@ x-tagGroups:
       - Restaurant Webhooks
       - Products
       - Logistics POS Restaurants
-  - name: Takeaway Endpoints
-    tags:
-      - takeaway

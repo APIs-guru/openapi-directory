@@ -14,7 +14,7 @@ info:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
   title: eBay Finances API
-  version: 1.6.0
+  version: 1.7.0
   x-apisguru-categories:
     - ecommerce
   x-logo:
@@ -372,7 +372,7 @@ paths:
                 description: The transfer id was not found.
                 domain: API_FINANCES
         "500":
-          description: Internal Server Error.
+          description: Internal Server Error
           x-response-codes:
             errors:
               "135000":
@@ -504,7 +504,7 @@ components:
           $ref: "#/components/schemas/Amount"
           description: The amount of the fee.
         feeType:
-          description: The enumeration value returned here indicates the type of fee that was deducted from the seller's payout. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:FeeTypeEnum'>eBay API documentation</a>
+          description: The enumeration value returned here indicates the type of fee that was deducted from the seller's payout. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay API documentation</a>
           type: string
       type: object
     FundingSource:
@@ -661,7 +661,7 @@ components:
           $ref: "#/components/schemas/Buyer"
           description: This is the unique eBay user ID for the buyer who purchased the order. This field is not returned for TRANSFER monetary transaction types.
         feeType:
-          description: The type of fee. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:FeeTypeEnum'>eBay API documentation</a>
+          description: The type of fee. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/api:FeeTypeEnum'>eBay API documentation</a>
           type: string
         orderId:
           description: The unique identifier of the eBay order associated with the monetary transaction.
@@ -710,6 +710,26 @@ components:
     TransactionSummaryResponse:
       description: This type is the base response type of the getTransactionSummary method, and based on the filters that are used in the getTransactionSummary call URI, the response may include total count and amount of the seller's sales and credits, total count and amount of buyer refunds, and total count and amount of seller payment holds.
       properties:
+        adjustmentAmount:
+          $ref: "#/components/schemas/Amount"
+          description: Total adjustment amount for given payee within a specified period.
+        adjustmentBookingEntry:
+          description: The credit debit sign indicator for adjustment. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+          type: string
+        adjustmentCount:
+          description: Total adjustment count for given payee within a specified period.
+          format: int32
+          type: integer
+        balanceTransferAmount:
+          $ref: "#/components/schemas/Amount"
+          description: The total balance transfer amount for given payee within the specified period.
+        balanceTransferBookingEntry:
+          description: The credit debit sign indicator for the balance transfer. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/finances/types/pay:BookingEntryEnum'>eBay API documentation</a>
+          type: string
+        balanceTransferCount:
+          description: The total balance transfer count for given payee within the specified period.
+          format: int32
+          type: integer
         creditAmount:
           $ref: "#/components/schemas/Amount"
           description: "This amount is the total dollar value of all the seller's sales and/or credits that match the input criteria. Note: Unless the transactionType filter is used in the request to retrieve a specific type of monetary transaction, the creditCount and creditAmount fields account for both order sales and seller credits (the count and value is not distinguished between the two monetary transaction types). If there are no sales/credits (creditCount=0), this container is not returned."

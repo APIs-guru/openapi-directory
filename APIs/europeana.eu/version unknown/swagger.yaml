@@ -27,6 +27,836 @@ tags:
   - description: Query Translation Controller
     name: Search
 paths:
+  /record/opensearch.rss:
+    get:
+      deprecated: false
+      operationId: openSearch_1
+      parameters:
+        - default: 12
+          description: count
+          format: int32
+          in: query
+          name: count
+          required: false
+          type: integer
+        - description: searchTerms
+          in: query
+          name: searchTerms
+          required: true
+          type: string
+        - default: 1
+          description: startIndex
+          format: int32
+          in: query
+          name: startIndex
+          required: false
+          type: integer
+      produces:
+        - application/xml
+        - application/rss+xml
+        - application/xhtml+xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: basic search function following the OpenSearch specification
+      tags:
+        - Search
+  /record/search.json:
+    get:
+      deprecated: false
+      operationId: searchRecords_1
+      parameters:
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: colourpalette
+          in: query
+          items:
+            type: string
+          name: colourpalette
+          required: false
+          type: array
+        - description: cursor
+          in: query
+          name: cursor
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: facet
+          in: query
+          items:
+            type: string
+          name: facet
+          required: false
+          type: array
+        - description: hit.fl
+          in: query
+          name: hit.fl
+          required: false
+          type: string
+        - description: hit.selectors
+          in: query
+          name: hit.selectors
+          required: false
+          type: string
+        - description: landingpage
+          in: query
+          name: landingpage
+          required: false
+          type: boolean
+        - description: media
+          in: query
+          name: media
+          required: false
+          type: boolean
+        - default: standard
+          description: profile
+          in: query
+          name: profile
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: qf
+          in: query
+          items:
+            type: string
+          name: qf
+          required: false
+          type: array
+        - description: query
+          in: query
+          name: query
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: reusability
+          in: query
+          items:
+            type: string
+          name: reusability
+          required: false
+          type: array
+        - default: 12
+          description: rows
+          format: int32
+          in: query
+          name: rows
+          required: false
+          type: integer
+        - description: sort
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: 1
+          description: start
+          format: int32
+          in: query
+          name: start
+          required: false
+          type: integer
+        - description: text_fulltext
+          in: query
+          name: text_fulltext
+          required: false
+          type: boolean
+        - description: theme
+          in: query
+          name: theme
+          required: false
+          type: string
+        - description: thumbnail
+          in: query
+          name: thumbnail
+          required: false
+          type: boolean
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: search for records
+      tags:
+        - Search
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      operationId: searchRecordsPost_1
+      parameters:
+        - description: searchRequest
+          in: body
+          name: searchRequest
+          required: true
+          schema:
+            $ref: "#/definitions/SearchRequest"
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: search for records post
+      tags:
+        - Search
+  /record/v2/opensearch.rss:
+    get:
+      deprecated: false
+      operationId: openSearch_2
+      parameters:
+        - default: 12
+          description: count
+          format: int32
+          in: query
+          name: count
+          required: false
+          type: integer
+        - description: searchTerms
+          in: query
+          name: searchTerms
+          required: true
+          type: string
+        - default: 1
+          description: startIndex
+          format: int32
+          in: query
+          name: startIndex
+          required: false
+          type: integer
+      produces:
+        - application/xml
+        - application/rss+xml
+        - application/xhtml+xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: basic search function following the OpenSearch specification
+      tags:
+        - Search
+  /record/v2/search.json:
+    get:
+      deprecated: false
+      operationId: searchRecords_2
+      parameters:
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: colourpalette
+          in: query
+          items:
+            type: string
+          name: colourpalette
+          required: false
+          type: array
+        - description: cursor
+          in: query
+          name: cursor
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: facet
+          in: query
+          items:
+            type: string
+          name: facet
+          required: false
+          type: array
+        - description: hit.fl
+          in: query
+          name: hit.fl
+          required: false
+          type: string
+        - description: hit.selectors
+          in: query
+          name: hit.selectors
+          required: false
+          type: string
+        - description: landingpage
+          in: query
+          name: landingpage
+          required: false
+          type: boolean
+        - description: media
+          in: query
+          name: media
+          required: false
+          type: boolean
+        - default: standard
+          description: profile
+          in: query
+          name: profile
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: qf
+          in: query
+          items:
+            type: string
+          name: qf
+          required: false
+          type: array
+        - description: query
+          in: query
+          name: query
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: reusability
+          in: query
+          items:
+            type: string
+          name: reusability
+          required: false
+          type: array
+        - default: 12
+          description: rows
+          format: int32
+          in: query
+          name: rows
+          required: false
+          type: integer
+        - description: sort
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: 1
+          description: start
+          format: int32
+          in: query
+          name: start
+          required: false
+          type: integer
+        - description: text_fulltext
+          in: query
+          name: text_fulltext
+          required: false
+          type: boolean
+        - description: theme
+          in: query
+          name: theme
+          required: false
+          type: string
+        - description: thumbnail
+          in: query
+          name: thumbnail
+          required: false
+          type: boolean
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: search for records
+      tags:
+        - Search
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      operationId: searchRecordsPost_2
+      parameters:
+        - description: searchRequest
+          in: body
+          name: searchRequest
+          required: true
+          schema:
+            $ref: "#/definitions/SearchRequest"
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: search for records post
+      tags:
+        - Search
+  "/record/v2/{collectionId}/{recordId}.json":
+    get:
+      deprecated: false
+      operationId: getSingleRecordJson_1
+      parameters:
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          type: string
+        - default: full
+          description: profile
+          in: query
+          name: profile
+          required: false
+          type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: get a single record in JSON format
+      tags:
+        - Record
+  "/record/v2/{collectionId}/{recordId}.jsonld":
+    get:
+      deprecated: false
+      operationId: getSingleRecordJsonLD_1
+      parameters:
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/json;charset=UTF-8
+        - application/ld+json;charset=UTF-8
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: get single record in JSON LD format
+      tags:
+        - Record
+  "/record/v2/{collectionId}/{recordId}.rdf":
+    get:
+      deprecated: false
+      operationId: getSingleRecordRDF_1
+      parameters:
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/rdf+xml;charset=UTF-8
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: get single record in RDF format)
+      tags:
+        - Record
+  "/record/v2/{collectionId}/{recordId}.schema.jsonld":
+    get:
+      deprecated: false
+      operationId: getSingleRecordSchemaOrg_1
+      parameters:
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/json;charset=UTF-8
+        - application/ld+json;charset=UTF-8
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: get single record in Schema.org JSON LD format
+      tags:
+        - Record
+  "/record/v2/{collectionId}/{recordId}.ttl":
+    get:
+      deprecated: false
+      operationId: getSingleRecordTurtle_1
+      parameters:
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/x-turtle
+        - text/turtle
+        - application/turtle
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: get single record in turtle format)
+      tags:
+        - Record
+  "/record/{collectionId}/{recordId}.json":
+    get:
+      deprecated: false
+      operationId: getSingleRecordJson_2
+      parameters:
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          type: string
+        - default: full
+          description: profile
+          in: query
+          name: profile
+          required: false
+          type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: get a single record in JSON format
+      tags:
+        - Record
+  "/record/{collectionId}/{recordId}.jsonld":
+    get:
+      deprecated: false
+      operationId: getSingleRecordJsonLD_2
+      parameters:
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/json;charset=UTF-8
+        - application/ld+json;charset=UTF-8
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: get single record in JSON LD format
+      tags:
+        - Record
+  "/record/{collectionId}/{recordId}.rdf":
+    get:
+      deprecated: false
+      operationId: getSingleRecordRDF_2
+      parameters:
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/rdf+xml;charset=UTF-8
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: get single record in RDF format)
+      tags:
+        - Record
+  "/record/{collectionId}/{recordId}.schema.jsonld":
+    get:
+      deprecated: false
+      operationId: getSingleRecordSchemaOrg_2
+      parameters:
+        - description: callback
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/json;charset=UTF-8
+        - application/ld+json;charset=UTF-8
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: get single record in Schema.org JSON LD format
+      tags:
+        - Record
+  "/record/{collectionId}/{recordId}.ttl":
+    get:
+      deprecated: false
+      operationId: getSingleRecordTurtle_2
+      parameters:
+        - description: collectionId
+          in: path
+          name: collectionId
+          required: true
+          type: string
+        - description: recordId
+          in: path
+          name: recordId
+          required: true
+          type: string
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/x-turtle
+        - text/turtle
+        - application/turtle
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: get single record in turtle format)
+      tags:
+        - Record
   /v2/opensearch.rss:
     get:
       deprecated: false
@@ -161,7 +991,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.rdf":
     get:
       deprecated: false
-      operationId: getSingleRecordRDF
+      operationId: getSingleRecordRDF_3
       parameters:
         - description: collectionId
           in: path
@@ -197,7 +1027,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.schema.jsonld":
     get:
       deprecated: false
-      operationId: getSingleRecordSchemaOrg
+      operationId: getSingleRecordSchemaOrg_3
       parameters:
         - description: callback
           in: query

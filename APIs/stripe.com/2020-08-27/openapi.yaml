@@ -620,6 +620,51 @@ paths:
                           type: array
                       title: documents_param
                       type: object
+                    company_license:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_memorandum_of_association:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_ministerial_decree:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_registration_verification:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_tax_id_verification:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
                   title: documents_specs
                   type: object
                 email:
@@ -3824,6 +3869,51 @@ paths:
                           type: array
                       title: documents_param
                       type: object
+                    company_license:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_memorandum_of_association:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_ministerial_decree:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_registration_verification:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_tax_id_verification:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
                   title: documents_specs
                   type: object
                 email:
@@ -4649,6 +4739,51 @@ paths:
                   description: Documents that may be submitted to satisfy various informational requests.
                   properties:
                     bank_account_ownership_verification:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_license:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_memorandum_of_association:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_ministerial_decree:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_registration_verification:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                    company_tax_id_verification:
                       properties:
                         files:
                           items:
@@ -18622,7 +18757,7 @@ paths:
                       type: string
                   description: The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
                 application_fee_amount:
-                  description: A fee in %s that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#invoices).
+                  description: A fee in %s that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
                   type: integer
                 auto_advance:
                   description: Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
@@ -19723,7 +19858,7 @@ paths:
                       type: string
                   description: The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
                 application_fee_amount:
-                  description: A fee in %s that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#invoices).
+                  description: A fee in %s that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/billing/invoices/connect#collecting-fees).
                   type: integer
                 auto_advance:
                   description: Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.

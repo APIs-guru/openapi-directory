@@ -812,6 +812,11 @@ components:
           items:
             $ref: "#/components/schemas/Item"
           type: array
+        correlationId:
+          description: "CorrelationId can be used to group similar log messages together into a single discoverable batch. A correlation ID could be a session ID from ASP.NET Core,\r
+
+            a unique string spanning multiple microsservices handling the same request, or similar."
+          type: string
         data:
           description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r
 
@@ -966,6 +971,11 @@ components:
           items:
             $ref: "#/components/schemas/Item"
           type: array
+        correlationId:
+          description: "CorrelationId can be used to group similar log messages together into a single discoverable batch. A correlation ID could be a session ID from ASP.NET Core,\r
+
+            a unique string spanning multiple microsservices handling the same request, or similar."
+          type: string
         data:
           description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r
 
@@ -1053,6 +1063,11 @@ components:
           items:
             $ref: "#/components/schemas/Item"
           type: array
+        correlationId:
+          description: "CorrelationId can be used to group similar log messages together into a single discoverable batch. A correlation ID could be a session ID from ASP.NET Core,\r
+
+            a unique string spanning multiple microsservices handling the same request, or similar."
+          type: string
         data:
           description: "A key/value pair of user-defined fields and their values. When logging an exception, the Data dictionary of\r
 

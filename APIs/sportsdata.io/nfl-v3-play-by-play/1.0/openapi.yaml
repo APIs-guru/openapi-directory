@@ -653,6 +653,9 @@ components:
         NeutralVenue:
           nullable: true
           type: boolean
+        OverPayout:
+          nullable: true
+          type: integer
         OverUnder:
           nullable: true
           type: number
@@ -689,9 +692,6 @@ components:
         SeasonType:
           nullable: false
           type: integer
-        SportRadarGameID:
-          nullable: true
-          type: string
         StadiumDetails:
           $ref: "#/components/schemas/Stadium"
         StadiumID:
@@ -703,6 +703,9 @@ components:
         TimeRemaining:
           nullable: true
           type: string
+        UnderPayout:
+          nullable: true
+          type: integer
         Week:
           nullable: false
           type: integer

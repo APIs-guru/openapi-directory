@@ -669,9 +669,9 @@ paths:
           $ref: "#/components/responses/error422"
         "500":
           $ref: "#/components/responses/error500"
-      summary: Merge multiple templates
+      summary: Generate document (multiple templates)
       tags:
-        - Templates
+        - Documents
       x-code-samples:
         - lang: Shell + Curl
           source: >-
@@ -1749,9 +1749,9 @@ paths:
           $ref: "#/components/responses/error422"
         "500":
           $ref: "#/components/responses/error500"
-      summary: Merge template
+      summary: Generate document
       tags:
-        - Templates
+        - Documents
       x-code-samples:
         - lang: Shell + Curl
           source: >-
@@ -2863,6 +2863,7 @@ x-tagGroups:
   - name: API References
     tags:
       - Templates
+      - Documents
       - Workspaces
   - name: Models
     tags:

@@ -4378,6 +4378,60 @@ paths:
             - privileged
       tags:
         - User
+  "/{userId}/projects/vendor":
+    get:
+      description: Get a list of user/vendor projects
+      operationId: getVendorProjectsByUserId
+      parameters:
+        - description: User ID
+          in: path
+          name: userId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Return only projects that this user has already joined
+          in: query
+          name: joined
+          required: false
+          schema:
+            type: boolean
+        - description: Return only projects that have been completed. When `true`, this makes `joined` true as well.
+          in: query
+          name: completed
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: page
+          required: false
+          schema:
+            default: 1
+            format: int64
+            type: integer
+        - in: query
+          name: per_page
+          required: false
+          schema:
+            default: 10
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectList"
+          description: Vendor project list
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: VendorNotFound - this is not a vendor user account
+      summary: Get a list of user/vendor projects
+      tags:
+        - Project
   "/{userId}/reject":
     post:
       operationId: rejectVendorApplication
@@ -5671,6 +5725,10 @@ components:
               $ref: "#/components/schemas/Href"
             glossaries:
               $ref: "#/components/schemas/Href"
+            payment:
+              $ref: "#/components/schemas/Href"
+            quote-pdf:
+              $ref: "#/components/schemas/Href"
             styleguides:
               $ref: "#/components/schemas/Href"
           type: object
@@ -6165,6 +6223,9 @@ components:
       allOf:
         - $ref: "#/components/schemas/Address"
         - properties:
+            birthday:
+              format: date
+              type: string
             email:
               description: Optional. User e-mail.
               type: string

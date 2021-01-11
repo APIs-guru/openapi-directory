@@ -11,7 +11,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://portfoliooptimizer.io/terms-of-service
   title: Portfolio Optimizer
-  version: 1.0.3
+  version: 1.0.4
   x-apisguru-categories:
     - financial
   x-origin:
@@ -38,6 +38,14 @@ tags:
       description: External documentation
       url: https://docs.portfoliooptimizer.io/#assets-covariance
     name: Assets Covariance
+  - externalDocs:
+      description: External documentation
+      url: https://docs.portfoliooptimizer.io/#assets-variances
+    name: Assets Variances
+  - externalDocs:
+      description: External documentation
+      url: https://docs.portfoliooptimizer.io/#assets-volatilities
+    name: Assets Volatilities
   - externalDocs:
       description: External documentation
       url: https://docs.portfoliooptimizer.io/#portfolio-generation
@@ -168,7 +176,7 @@ paths:
       x-codegen-request-body-name: body
   /assets/covariance/matrix:
     post:
-      description: Computes the covariance matrix of assets [from their returns](https://docs.portfoliooptimizer.io/#covariance-matrix-from-returns) or [from their correlation matrix and their volatilities](https://docs.portfoliooptimizer.io/#covariance-matrix-from-correlation-matrix-and-standard-deviations) (i.e., standard deviations).
+      description: Computes the covariance matrix of assets [from their returns](https://docs.portfoliooptimizer.io/#covariance-matrix-from-returns) or [from their correlation matrix and their volatilities](https://docs.portfoliooptimizer.io/#covariance-matrix-from-correlation-matrix-and-standard-deviations) (i.e., standard deviations) or [from their correlation matrix and their variances](https://docs.portfoliooptimizer.io/#covariance-matrix-from-correlation-matrix-and-variances).
       requestBody:
         content:
           application/json:
@@ -184,6 +192,17 @@ paths:
                   assetsVolatilities:
                     - 0.1
                     - 0.05
+              From correlation matrix and variances:
+                value:
+                  assets: 2
+                  assetsCorrelationMatrix:
+                    - - 1
+                      - -0.5
+                    - - -0.5
+                      - 1
+                  assetsVariances:
+                    - 0.01
+                    - 0.0025
               From returns:
                 value:
                   assets: 2
@@ -212,6 +231,10 @@ paths:
                       type: number
                     type: array
                   type: array
+                assetsVariances:
+                  items:
+                    type: number
+                  type: array
                 assetsVolatilities:
                   items:
                     type: number
@@ -224,6 +247,13 @@ paths:
             application/json:
               examples:
                 From correlation matrix and standard deviations:
+                  value:
+                    assetsCovarianceMatrix:
+                      - - 0.010000000000000002
+                        - -0.0025000000000000005
+                      - - -0.0025000000000000005
+                        - 0.0025000000000000005
+                From correlation matrix and variances:
                   value:
                     assetsCovarianceMatrix:
                       - - 0.010000000000000002
@@ -466,6 +496,262 @@ paths:
       summary: Logarithmic Returns
       tags:
         - Assets Returns
+      x-codegen-request-body-name: body
+  /assets/variances:
+    post:
+      description: Computes the variances of assets [from their returns](https://docs.portfoliooptimizer.io/#variances-from-returns) or [from their covariance matrix](https://docs.portfoliooptimizer.io/#variances-from-covariance-matrix) or [from their volatilities](https://docs.portfoliooptimizer.io/#variances-from-volatilities).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From covariance matrix:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.01
+                      - -0.0025
+                    - - -0.0025
+                      - 0.0025
+              From returns:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+              From volatilities:
+                value:
+                  assets: 2
+                  assetsVolatilities:
+                    - 0.1
+                    - 0.05
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsVolatilities:
+                  items:
+                    type: number
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                From covariance matrix:
+                  value:
+                    assetsVariances:
+                      - 0.01
+                      - 0.0025
+                From returns:
+                  value:
+                    assetsVariances:
+                      - 0.00035
+                      - 0.00035
+                From volatilities:
+                  value:
+                    assetsVariances:
+                      - 0.010000000000000002
+                      - 0.0025000000000000005
+          description: OK
+      summary: Variances
+      tags:
+        - Assets Variances
+      x-codegen-request-body-name: body
+  /assets/variances/sample:
+    post:
+      description: Computes the sample variances of assets from their returns.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#sample-variances-from-returns
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0.01
+                      - 0.02
+                      - 0.01
+                    - - -0.02
+                      - -0.02
+                      - -0.04
+                      - -0.02
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsVariances:
+                      - 0.000025
+                      - 0.0001
+          description: OK
+      summary: Sample variances
+      tags:
+        - Assets Variances
+      x-codegen-request-body-name: body
+  /assets/volatilities:
+    post:
+      description: Computes the volatilities (i.e., standard deviations) of assets [from their returns](https://docs.portfoliooptimizer.io/#volatilities-from-returns) or [from their covariance matrix](https://docs.portfoliooptimizer.io/#volatilities-from-covariance-matrix) or [from their variances](https://docs.portfoliooptimizer.io/#volatilities-from-variances).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From covariance matrix:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.01
+                      - -0.0025
+                    - - -0.0025
+                      - 0.0025
+              From returns:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+              From variances:
+                value:
+                  assets: 2
+                  assetsVariances:
+                    - 0.01
+                    - 0.0025
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsVariances:
+                  items:
+                    type: number
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                From covariance matrix:
+                  value:
+                    assetsVolatilities:
+                      - 0.1
+                      - 0.05
+                From returns:
+                  value:
+                    assetsVolatilities:
+                      - 0.01870828693386971
+                      - 0.01870828693386971
+                From variances:
+                  value:
+                    assetsVolatilities:
+                      - 0.1
+                      - 0.05
+          description: OK
+      summary: Volatilities
+      tags:
+        - Assets Volatilities
+      x-codegen-request-body-name: body
+  /assets/volatilities/sample:
+    post:
+      description: Computes the sample volatilities (i.e., sample standard deviations) of assets from their returns.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#sample-volatilities-from-returns
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0.01
+                      - 0.02
+                      - 0.01
+                    - - -0.02
+                      - -0.02
+                      - -0.04
+                      - -0.02
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsVolatilities:
+                      - 0.005
+                      - 0.01
+          description: OK
+      summary: Sample volatilities
+      tags:
+        - Assets Volatilities
       x-codegen-request-body-name: body
   /portfolio/analysis/drawdowns:
     post:
