@@ -238,7 +238,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v2/{logName}":
     delete:
-      description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted. Entries received after the delete operation with a timestamp before the operation will be deleted.
+      description: Deletes all the log entries in a log for the _Default Log Bucket. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted. Entries received after the delete operation with a timestamp before the operation will be deleted.
       operationId: logging.projects.logs.delete
       parameters:
         - description: 'Required. The resource name of the log to delete: "projects/[PROJECT_ID]/logs/[LOG_ID]" "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]" "folders/[FOLDER_ID]/logs/[LOG_ID]" [LOG_ID] must be URL-encoded. For example, "projects/my-project-id/logs/syslog", "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity". For more information about log names, see LogEntry.'
@@ -2045,7 +2045,7 @@ components:
           type: string
       type: object
     LogSink:
-      description: "Describes a sink used to export log entries to one of the following destinations in any project: a Cloud Storage bucket, a BigQuery dataset, or a Cloud Pub/Sub topic. A logs filter controls which log entries are exported. The sink must be created within a project, organization, billing account, or folder."
+      description: "Describes a sink used to export log entries to one of the following destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a Cloud Pub/Sub topic or a Cloud Logging Bucket. A logs filter controls which log entries are exported. The sink must be created within a project, organization, billing account, or folder."
       properties:
         bigqueryOptions:
           $ref: "#/components/schemas/BigQueryOptions"

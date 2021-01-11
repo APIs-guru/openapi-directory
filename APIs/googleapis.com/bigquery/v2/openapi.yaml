@@ -2287,8 +2287,6 @@ components:
     Binding:
       description: Associates `members` with a `role`.
       properties:
-        bindingId:
-          type: string
         condition:
           $ref: "#/components/schemas/Expr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the members in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
@@ -2432,7 +2430,7 @@ components:
       description: Evaluation metrics for clustering models.
       properties:
         clusters:
-          description: "[Beta] Information for all clusters."
+          description: Information for all clusters.
           items:
             $ref: "#/components/schemas/Cluster"
           type: array
@@ -2886,7 +2884,7 @@ components:
           description: "[Optional] Additional options if sourceFormat is set to GOOGLE_SHEETS."
         hivePartitioningOptions:
           $ref: "#/components/schemas/HivePartitioningOptions"
-          description: "[Optional, Trusted Tester] Options to configure hive partitioning support."
+          description: "[Optional] Options to configure hive partitioning support."
         ignoreUnknownValues:
           description: "[Optional] Indicates if BigQuery should allow extra values that are not represented in the table schema. If true, the extra values are ignored. If false, records with extra columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. The sourceFormat property determines what BigQuery treats as an extra value: CSV: Trailing columns JSON: Named values that don't match any column names Google Cloud Bigtable: This setting is ignored. Google Cloud Datastore backups: This setting is ignored. Avro: This setting is ignored."
           type: boolean
@@ -3179,7 +3177,7 @@ components:
           description: "[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a 'notFound' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion."
           type: string
         decimalTargetTypes:
-          description: '[Trusted Tester] Defines the list of possible SQL data types to which the source decimal values are converted. This list and the precision and the scale parameters of the decimal field determine the target type. In the order of NUMERIC, BIGNUMERIC, and STRING, a type is picked if it is in the specified list and if it supports the precision and the scale. STRING supports all precision and scale values. If none of the listed types supports the precision and the scale, the type supporting the widest range in the specified list is picked, and if a value exceeds the supported range when reading the data, an error will be thrown. For example: suppose decimal_target_type = ["NUMERIC", "BIGNUMERIC"]. Then if (precision,scale) is: * (38,9) -> NUMERIC; * (39,9) -> BIGNUMERIC (NUMERIC cannot hold 30 integer digits); * (38,10) -> BIGNUMERIC (NUMERIC cannot hold 10 fractional digits); * (76,38) -> BIGNUMERIC; * (77,38) -> BIGNUMERIC (error if value exeeds supported range). For duplicated types in this field, only one will be considered and the rest will be ignored. The order of the types in this field is ignored. For example, ["BIGNUMERIC", "NUMERIC"] is the same as ["NUMERIC", "BIGNUMERIC"] and NUMERIC always takes precedence over BIGNUMERIC.'
+          description: 'Defines the list of possible SQL data types to which the source decimal values are converted. This list and the precision and the scale parameters of the decimal field determine the target type. In the order of NUMERIC, BIGNUMERIC ([Preview](/products/#product-launch-stages)), and STRING, a type is picked if it is in the specified list and if it supports the precision and the scale. STRING supports all precision and scale values. If none of the listed types supports the precision and the scale, the type supporting the widest range in the specified list is picked, and if a value exceeds the supported range when reading the data, an error will be thrown. Example: Suppose the value of this field is ["NUMERIC", "BIGNUMERIC"]. If (precision,scale) is: * (38,9) -> NUMERIC; * (39,9) -> BIGNUMERIC (NUMERIC cannot hold 30 integer digits); * (38,10) -> BIGNUMERIC (NUMERIC cannot hold 10 fractional digits); * (76,38) -> BIGNUMERIC; * (77,38) -> BIGNUMERIC (error if value exeeds supported range). This field cannot contain duplicate types. The order of the types in this field is ignored. For example, ["BIGNUMERIC", "NUMERIC"] is the same as ["NUMERIC", "BIGNUMERIC"] and NUMERIC always takes precedence over BIGNUMERIC. Defaults to ["NUMERIC", "STRING"] for ORC and ["NUMERIC"] for the other file formats.'
           items:
             type: string
           type: array
@@ -3200,10 +3198,13 @@ components:
           type: string
         hivePartitioningOptions:
           $ref: "#/components/schemas/HivePartitioningOptions"
-          description: "[Optional, Trusted Tester] Options to configure hive partitioning support."
+          description: "[Optional] Options to configure hive partitioning support."
         ignoreUnknownValues:
           description: "[Optional] Indicates if BigQuery should allow extra values that are not represented in the table schema. If true, the extra values are ignored. If false, records with extra columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. The sourceFormat property determines what BigQuery treats as an extra value: CSV: Trailing columns JSON: Named values that don't match any column names"
           type: boolean
+        jsonExtension:
+          description: "[Optional] If sourceFormat is set to newline-delimited JSON, indicates whether it should be processed as a JSON variant such as GeoJSON. For a sourceFormat other than JSON, omit this field. If the sourceFormat is newline-delimited JSON: - for newline-delimited GeoJSON: set to GEOJSON."
+          type: string
         maxBadRecords:
           description: "[Optional] The maximum number of bad records that BigQuery can ignore when running the job. If the number of bad records exceeds this value, an invalid error is returned in the job result. This is only valid for CSV and JSON. The default value is 0, which requires that all records are valid."
           format: int32
@@ -4165,7 +4166,7 @@ components:
           format: double
           type: number
         rSquared:
-          description: R^2 score.
+          description: R^2 score. This corresponds to r2_score in ML.EVALUATE.
           format: double
           type: number
       type: object
@@ -4628,7 +4629,7 @@ components:
               type: array
           type: object
         type:
-          description: "[Required] The field data type. Possible values include STRING, BYTES, INTEGER, INT64 (same as INTEGER), FLOAT, FLOAT64 (same as FLOAT), BOOLEAN, BOOL (same as BOOLEAN), TIMESTAMP, DATE, TIME, DATETIME, RECORD (where RECORD indicates that the field contains a nested schema) or STRUCT (same as RECORD)."
+          description: "[Required] The field data type. Possible values include STRING, BYTES, INTEGER, INT64 (same as INTEGER), FLOAT, FLOAT64 (same as FLOAT), NUMERIC, BIGNUMERIC, BOOLEAN, BOOL (same as BOOLEAN), TIMESTAMP, DATE, TIME, DATETIME, RECORD (where RECORD indicates that the field contains a nested schema) or STRUCT (same as RECORD)."
           type: string
       type: object
     TableList:
@@ -4761,6 +4762,7 @@ components:
           type: string
       type: object
     TrainingOptions:
+      description: Options used in model training.
       properties:
         autoArima:
           description: Whether to enable auto ARIMA or not.
@@ -4784,6 +4786,7 @@ components:
             - WEEKLY
             - DAILY
             - HOURLY
+            - PER_MINUTE
           type: string
         dataSplitColumn:
           description: "The column to split data with. This column won't be used as a feature. 1. When data_split_method is CUSTOM, the corresponding column should be boolean. The rows with true value tag are eval data, and the false are training data. 2. When data_split_method is SEQ, the first DATA_SPLIT_EVAL_FRACTION rows (from smallest to largest) in the corresponding column are used as training data, and the rest are eval data. It respects the order in Orderable data types: https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data-type-properties"
@@ -4981,7 +4984,7 @@ components:
           format: double
           type: number
         modelUri:
-          description: "[Beta] Google Cloud Storage URI from which the model was imported. Only applicable for imported models."
+          description: Google Cloud Storage URI from which the model was imported. Only applicable for imported models.
           type: string
         nonSeasonalOrder:
           $ref: "#/components/schemas/ArimaOrder"

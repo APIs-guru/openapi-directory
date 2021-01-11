@@ -37,7 +37,7 @@ tags:
 paths:
   /v1/accounts:
     get:
-      description: Lists the AdMob publisher account accessible with the client credential. Currently, all credentials have access to at most one AdMob account.
+      description: List the AdMob publisher account accessible with the client credential. Currently, all credentials have access to at most one AdMob account.
       operationId: admob.accounts.list
       parameters:
         - description: Maximum number of accounts to return.

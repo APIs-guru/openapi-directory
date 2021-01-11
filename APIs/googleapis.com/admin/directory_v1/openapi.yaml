@@ -56,7 +56,7 @@ paths:
       description: Retrieves a paginated list of Chrome OS devices within an account.
       operationId: directory.chromeosdevices.list
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -162,7 +162,7 @@ paths:
       description: Move or insert multiple Chrome OS devices to an organizational unit. You can move up to 50 devices at once.
       operationId: directory.chromeosdevices.moveDevicesToOu
       parameters:
-        - description: Immutable ID of the G Suite account
+        - description: Immutable ID of the Google Workspace account
           in: path
           name: customerId
           required: true
@@ -194,7 +194,7 @@ paths:
       description: Retrieves a Chrome OS device's properties.
       operationId: directory.chromeosdevices.get
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -249,7 +249,7 @@ paths:
       description: Updates a device's updatable properties, such as `annotatedUser`, `annotatedLocation`, `notes`, `orgUnitPath`, or `annotatedAssetId`. This method supports [patch semantics](/admin-sdk/directory/v1/guides/performance#patch).
       operationId: directory.chromeosdevices.patch
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -293,7 +293,7 @@ paths:
       description: Updates a device's updatable properties, such as `annotatedUser`, `annotatedLocation`, `notes`, `orgUnitPath`, or `annotatedAssetId`.
       operationId: directory.chromeosdevices.update
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -338,7 +338,7 @@ paths:
       description: Gets command data a specific command issued to the device.
       operationId: admin.customer.devices.chromeos.commands.get
       parameters:
-        - description: Immutable. Immutable ID of the G Suite account.
+        - description: Immutable. Immutable ID of the Google Workspace account.
           in: path
           name: customerId
           required: true
@@ -403,7 +403,7 @@ paths:
       description: Issues a command for the device to execute.
       operationId: admin.customer.devices.chromeos.issueCommand
       parameters:
-        - description: Immutable. Immutable ID of the G Suite account.
+        - description: Immutable. Immutable ID of the Google Workspace account.
           in: path
           name: customerId
           required: true
@@ -451,7 +451,7 @@ paths:
       description: Takes an action that affects a Chrome OS Device. This includes deprovisioning, disabling, and re-enabling devices. *Warning:* * Deprovisioning a device will stop device policy syncing and remove device-level printers. After a device is deprovisioned, it must be wiped before it can be re-enrolled. * Lost or stolen devices should use the disable action. * Re-enabling a disabled device will consume a device license. If you do not have sufficient licenses available when completing the re-enable action, you will receive an error. For more information about deprovisioning and disabling devices, visit the [help center](https://support.google.com/chrome/a/answer/3523633).
       operationId: directory.chromeosdevices.action
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -483,7 +483,7 @@ paths:
       description: Retrieves a paginated list of all mobile devices for an account.
       operationId: directory.mobiledevices.list
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -578,7 +578,7 @@ paths:
       description: Removes a mobile device.
       operationId: directory.mobiledevices.delete
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -604,7 +604,7 @@ paths:
       description: Retrieves a mobile device's properties.
       operationId: directory.mobiledevices.get
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -676,7 +676,7 @@ paths:
       description: Takes an action that affects a mobile device. For example, remotely wiping a device.
       operationId: directory.mobiledevices.action
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -712,7 +712,7 @@ paths:
       description: Retrieves a list of all organizational units for an account.
       operationId: directory.orgunits.list
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -766,7 +766,7 @@ paths:
       description: Adds an organizational unit.
       operationId: directory.orgunits.insert
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -796,7 +796,7 @@ paths:
       description: Removes an organizational unit.
       operationId: directory.orgunits.delete
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -822,7 +822,7 @@ paths:
       description: Retrieves an organizational unit.
       operationId: directory.orgunits.get
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -868,7 +868,7 @@ paths:
       description: Updates an organizational unit. This method supports [patch semantics](/admin-sdk/directory/v1/guides/performance#patch)
       operationId: directory.orgunits.patch
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -903,7 +903,7 @@ paths:
       description: Updates an organizational unit.
       operationId: directory.orgunits.update
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
           in: path
           name: customerId
           required: true
@@ -939,7 +939,7 @@ paths:
       description: Retrieve all schemas for a customer
       operationId: directory.schemas.list
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customerId
           required: true
@@ -979,7 +979,7 @@ paths:
       description: Create schema.
       operationId: directory.schemas.insert
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customerId
           required: true
@@ -1009,7 +1009,7 @@ paths:
       description: Delete schema
       operationId: directory.schemas.delete
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customerId
           required: true
@@ -1035,7 +1035,7 @@ paths:
       description: Retrieve schema
       operationId: directory.schemas.get
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customerId
           required: true
@@ -1081,7 +1081,7 @@ paths:
       description: Patch Schema via Apiary Patch Orchestration
       operationId: directory.schemas.patch
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customerId
           required: true
@@ -1116,7 +1116,7 @@ paths:
       description: Update schema
       operationId: directory.schemas.update
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customerId
           required: true
@@ -1152,7 +1152,7 @@ paths:
       description: Lists the domain aliases of the customer.
       operationId: directory.domainAliases.list
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -1197,7 +1197,7 @@ paths:
       description: Inserts a domain alias of the customer.
       operationId: directory.domainAliases.insert
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -1227,7 +1227,7 @@ paths:
       description: Deletes a domain Alias of the customer.
       operationId: directory.domainAliases.delete
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -1253,7 +1253,7 @@ paths:
       description: Retrieves a domain alias of the customer.
       operationId: directory.domainAliases.get
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -1300,7 +1300,7 @@ paths:
       description: Lists the domains of the customer.
       operationId: directory.domains.list
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -1340,7 +1340,7 @@ paths:
       description: Inserts a domain of the customer.
       operationId: directory.domains.insert
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -1370,7 +1370,7 @@ paths:
       description: Deletes a domain of the customer.
       operationId: directory.domains.delete
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -1396,7 +1396,7 @@ paths:
       description: Retrieves a domain of the customer.
       operationId: directory.domains.get
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -1443,7 +1443,7 @@ paths:
       description: Retrieves a list of buildings for an account.
       operationId: directory.resources.buildings.list
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1495,7 +1495,7 @@ paths:
       description: Inserts a building.
       operationId: directory.resources.buildings.insert
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1535,7 +1535,7 @@ paths:
       description: Deletes a building.
       operationId: directory.resources.buildings.delete
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1561,7 +1561,7 @@ paths:
       description: Retrieves a building.
       operationId: directory.resources.buildings.get
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1607,7 +1607,7 @@ paths:
       description: Patches a building via Apiary Patch Orchestration.
       operationId: directory.resources.buildings.patch
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1652,7 +1652,7 @@ paths:
       description: Updates a building.
       operationId: directory.resources.buildings.update
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1698,7 +1698,7 @@ paths:
       description: Retrieves a list of calendar resources for an account.
       operationId: directory.resources.calendars.list
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1760,7 +1760,7 @@ paths:
       description: Inserts a calendar resource.
       operationId: directory.resources.calendars.insert
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1790,7 +1790,7 @@ paths:
       description: Deletes a calendar resource.
       operationId: directory.resources.calendars.delete
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1816,7 +1816,7 @@ paths:
       description: Retrieves a calendar resource.
       operationId: directory.resources.calendars.get
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1862,7 +1862,7 @@ paths:
       description: Patches a calendar resource via Apiary Patch Orchestration.
       operationId: directory.resources.calendars.patch
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1897,7 +1897,7 @@ paths:
       description: Updates a calendar resource. This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved.
       operationId: directory.resources.calendars.update
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1933,7 +1933,7 @@ paths:
       description: Retrieves a list of features for an account.
       operationId: directory.resources.features.list
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -1985,7 +1985,7 @@ paths:
       description: Inserts a feature.
       operationId: directory.resources.features.insert
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -2015,7 +2015,7 @@ paths:
       description: Deletes a feature.
       operationId: directory.resources.features.delete
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -2041,7 +2041,7 @@ paths:
       description: Retrieves a feature.
       operationId: directory.resources.features.get
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -2087,7 +2087,7 @@ paths:
       description: Patches a feature via Apiary Patch Orchestration.
       operationId: directory.resources.features.patch
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -2122,7 +2122,7 @@ paths:
       description: Updates a feature.
       operationId: directory.resources.features.update
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -2170,7 +2170,7 @@ paths:
       description: Renames a feature.
       operationId: directory.resources.features.rename
       parameters:
-        - description: The unique ID for the customer's G Suite account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+        - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
           in: path
           name: customer
           required: true
@@ -2202,7 +2202,7 @@ paths:
       description: Retrieves a paginated list of all roleAssignments.
       operationId: directory.roleAssignments.list
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -2264,7 +2264,7 @@ paths:
       description: Creates a role assignment.
       operationId: directory.roleAssignments.insert
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -2294,7 +2294,7 @@ paths:
       description: Deletes a role assignment.
       operationId: directory.roleAssignments.delete
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -2320,7 +2320,7 @@ paths:
       description: Retrieve a role assignment.
       operationId: directory.roleAssignments.get
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -2367,7 +2367,7 @@ paths:
       description: Retrieves a paginated list of all the roles in a domain.
       operationId: directory.roles.list
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -2419,7 +2419,7 @@ paths:
       description: Creates a role.
       operationId: directory.roles.insert
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -2449,7 +2449,7 @@ paths:
       description: Retrieves a paginated list of all privileges for a customer.
       operationId: directory.privileges.list
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -2490,7 +2490,7 @@ paths:
       description: Deletes a role.
       operationId: directory.roles.delete
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -2516,7 +2516,7 @@ paths:
       description: Retrieves a role.
       operationId: directory.roles.get
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -2562,7 +2562,7 @@ paths:
       description: Patch role via Apiary Patch Orchestration
       operationId: directory.roles.patch
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -2597,7 +2597,7 @@ paths:
       description: Updates a role.
       operationId: directory.roles.update
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Workspace account.
           in: path
           name: customer
           required: true
@@ -2732,7 +2732,7 @@ paths:
       description: Retrieve all groups of a domain or of a user given a userKey (paginated)
       operationId: directory.groups.list
       parameters:
-        - description: The unique ID for the customer's G Suite account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users)
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users)
           in: query
           name: customer
           schema:
@@ -3391,7 +3391,7 @@ paths:
           name: customFieldMask
           schema:
             type: string
-        - description: The unique ID for the customer's G Suite account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users). Either the `customer` or the `domain` parameter must be provided.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users). Either the `customer` or the `domain` parameter must be provided.
           in: query
           name: customer
           schema:
@@ -3539,7 +3539,7 @@ paths:
           name: customFieldMask
           schema:
             type: string
-        - description: Immutable ID of the G Suite account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.
+        - description: Immutable ID of the Google Workspace account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.
           in: query
           name: customer
           schema:
@@ -5228,7 +5228,7 @@ components:
           description: ETag of the resource.
           type: string
         id:
-          description: The unique ID for the customer's G Suite account. (Readonly)
+          description: The unique ID for the customer's Google Workspace account. (Readonly)
           type: string
         kind:
           default: admin#directory#customer
@@ -5602,13 +5602,13 @@ components:
           type: boolean
       type: object
     MobileDevice:
-      description: G Suite Mobile Management includes Android, [Google Sync](http://support.google.com/a/bin/answer.py?answer=135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
+      description: Google Workspace Mobile Management includes Android, [Google Sync](http://support.google.com/a/bin/answer.py?answer=135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
       properties:
         adbStatus:
           description: Adb (USB debugging) enabled or disabled on device (Read-only)
           type: boolean
         applications:
-          description: The list of applications installed on an Android mobile device. It is not applicable to Google Sync and iOS devices. The list includes any Android applications that access G Suite data. When updating an applications list, it is important to note that updates replace the existing list. If the Android device has two existing applications and the API updates the list with five applications, the is now the updated list of five applications.
+          description: The list of applications installed on an Android mobile device. It is not applicable to Google Sync and iOS devices. The list includes any Android applications that access Google Workspace data. When updating an applications list, it is important to note that updates replace the existing list. If the Android device has two existing applications and the API updates the list with five applications, the is now the updated list of five applications.
           items:
             properties:
               displayName:
@@ -5803,7 +5803,7 @@ components:
           description: The unique ID of the organizational unit.
           type: string
         orgUnitPath:
-          description: The full path to the organizational unit. The `orgUnitPath` is a derived property. When listed, it is derived from `parentOrgunitPath` and organizational unit's `name`. For example, for an organizational unit named 'apps' under parent organization '/engineering', the orgUnitPath is '/engineering/apps'. In order to edit an `orgUnitPath`, either update the name of the organization or the `parentOrgunitPath`. A user's organizational unit determines which G Suite services the user has access to. If the user is moved to a new organization, the user's access changes. For more information about organization structures, see the [administration help center](http://support.google.com/a/bin/answer.py?answer=182433&topic=1227584&ctx=topic). For more information about moving a user to a different organization, see [Update a user](/admin-sdk/directory/v1/guides/manage-users.html#update_user).
+          description: The full path to the organizational unit. The `orgUnitPath` is a derived property. When listed, it is derived from `parentOrgunitPath` and organizational unit's `name`. For example, for an organizational unit named 'apps' under parent organization '/engineering', the orgUnitPath is '/engineering/apps'. In order to edit an `orgUnitPath`, either update the name of the organization or the `parentOrgunitPath`. A user's organizational unit determines which Google Workspace services the user has access to. If the user is moved to a new organization, the user's access changes. For more information about organization structures, see the [administration help center](http://support.google.com/a/bin/answer.py?answer=182433&topic=1227584&ctx=topic). For more information about moving a user to a different organization, see [Update a user](/admin-sdk/directory/v1/guides/manage-users.html#update_user).
           type: string
         parentOrgUnitId:
           description: The unique ID of the parent organizational unit. Required, unless `parentOrgUnitPath` is set.
@@ -6170,7 +6170,7 @@ components:
         ims:
           description: The user's Instant Messenger (IM) accounts. A user account can have multiple ims properties. But, only one of these ims properties can be the primary IM contact. The maximum allowed data size for this field is 2Kb.
         includeInGlobalAddressList:
-          description: Indicates if the user's profile is visible in the G Suite global address list when the contact sharing feature is enabled for the domain. For more information about excluding user profiles, see the [administration help center](http://support.google.com/a/bin/answer.py?answer=1285988).
+          description: Indicates if the user's profile is visible in the Google Workspace global address list when the contact sharing feature is enabled for the domain. For more information about excluding user profiles, see the [administration help center](http://support.google.com/a/bin/answer.py?answer=1285988).
           type: boolean
         ipWhitelisted:
           description: If `true`, the user's IP address is [white listed](http://support.google.com/a/bin/answer.py?answer=60752).

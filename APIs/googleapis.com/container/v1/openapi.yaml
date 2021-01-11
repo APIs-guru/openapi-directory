@@ -4655,27 +4655,27 @@ components:
       description: UpgradeEvent is a notification sent to customers by the cluster server when a resource is upgrading.
       properties:
         currentVersion:
-          description: Required. The current version before the upgrade.
+          description: The current version before the upgrade.
           type: string
         operation:
-          description: Required. The operation associated with this upgrade.
+          description: The operation associated with this upgrade.
           type: string
         operationStartTime:
-          description: Required. The time when the operation was started.
+          description: The time when the operation was started.
           format: google-datetime
           type: string
         resource:
-          description: Optional. Optional relative path to the resource. For example in node pool upgrades, the relative path of the node pool.
+          description: Optional relative path to the resource. For example in node pool upgrades, the relative path of the node pool.
           type: string
         resourceType:
-          description: Required. The resource type that is upgrading.
+          description: The resource type that is upgrading.
           enum:
             - UPGRADE_RESOURCE_TYPE_UNSPECIFIED
             - MASTER
             - NODE_POOL
           type: string
         targetVersion:
-          description: Required. The target version for the upgrade.
+          description: The target version for the upgrade.
           type: string
       type: object
     UpgradeSettings:

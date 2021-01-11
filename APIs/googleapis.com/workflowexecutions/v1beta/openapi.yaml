@@ -297,7 +297,7 @@ components:
       description: A running instance of a [Workflow](/workflows/docs/reference/rest/v1beta/projects.locations.workflows).
       properties:
         argument:
-          description: Input parameters of the execution represented as a JSON string. The size limit is 32KB.
+          description: "Input parameters of the execution represented as a JSON string. The size limit is 32KB. *Note*: If you are using the REST API directly to run your workflow, you must escape any JSON string value of `argument`. Example: `'{\"argument\":\"{\\\"firstName\\\":\\\"FIRST\\\",\\\"lastName\\\":\\\"LAST\\\"}\"}'`"
           type: string
         endTime:
           description: Output only. Marks the end of execution, successful or not.

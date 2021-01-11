@@ -2329,7 +2329,7 @@ paths:
       description: Inserts a new stream for the authenticated user.
       operationId: youtube.liveStreams.insert
       parameters:
-        - description: The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. The part properties that you can include in the parameter value are id, snippet, cdn, and status.
+        - description: The *part* parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. The part properties that you can include in the parameter value are id, snippet, cdn, content_details, and status.
           explode: true
           in: query
           name: part

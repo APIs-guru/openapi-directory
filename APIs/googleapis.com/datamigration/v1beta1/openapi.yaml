@@ -26,7 +26,7 @@ info:
   x-serviceName: datamigration
   x-preferred: null
 externalDocs:
-  url: https://cloud.google.com/datamigration/
+  url: https://cloud.google.com/database-migration/
 tags:
   - name: projects
 paths:
@@ -1071,7 +1071,7 @@ components:
           description: 'The database flags passed to the Cloud SQL instance at startup. An object containing a list of "key": value pairs. Example: { "name": "wrench", "mass": "1.3kg", "count": "3" }.'
           type: object
         databaseVersion:
-          description: The database engine type and version (such as `MYSQL_5_7` / `POSTGRES_9_6`).
+          description: The database engine type and version.
           enum:
             - SQL_DATABASE_VERSION_UNSPECIFIED
             - MYSQL_5_6
@@ -1096,7 +1096,7 @@ components:
           format: int64
           type: string
         tier:
-          description: "The tier (or machine type) for this instance, for example: `db-n1-standard-1` (MySQL instances) or `db-custom-1-3840` (PostgreSQL instances). For more information, see [Cloud SQL Instance Settings](https://cloud.google.com/sql/docs/mysql/instance-settings)."
+          description: "The tier (or machine type) for this instance, for example: `db-n1-standard-1` (MySQL instances). For more information, see [Cloud SQL Instance Settings](https://cloud.google.com/sql/docs/mysql/instance-settings)."
           type: string
         userLabels:
           additionalProperties:

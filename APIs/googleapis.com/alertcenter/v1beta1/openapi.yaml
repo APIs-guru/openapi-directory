@@ -11,7 +11,7 @@ info:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: G Suite Alert Center API
+  title: Google Workspace Alert Center API
   version: v1beta1
   x-apiClientRegistration:
     url: https://console.developers.google.com
@@ -41,7 +41,7 @@ paths:
       description: Lists the alerts.
       operationId: alertcenter.alerts.list
       parameters:
-        - description: Optional. The unique identifier of the G Suite organization account of the customer the alerts are associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alerts are associated with. Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
@@ -103,7 +103,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The unique identifier of the G Suite organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
@@ -132,7 +132,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The unique identifier of the G Suite organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
@@ -174,7 +174,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The unique identifier of the G Suite organization account of the customer the alert feedback are associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert feedback are associated with. Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
@@ -220,7 +220,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The unique identifier of the G Suite organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
@@ -255,7 +255,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The unique identifier of the G Suite organization account of the customer the alert metadata is associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert metadata is associated with. Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
@@ -403,7 +403,7 @@ paths:
       description: Returns customer-level settings.
       operationId: alertcenter.getSettings
       parameters:
-        - description: Optional. The unique identifier of the G Suite organization account of the customer the alert settings are associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert settings are associated with. Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
@@ -438,7 +438,7 @@ paths:
       description: Updates the customer-level settings.
       operationId: alertcenter.updateSettings
       parameters:
-        - description: Optional. The unique identifier of the G Suite organization account of the customer the alert settings are associated with. Inferred from the caller identity if not provided.
+        - description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert settings are associated with. Inferred from the caller identity if not provided.
           in: query
           name: customerId
           schema:
@@ -637,7 +637,7 @@ components:
           format: google-datetime
           type: string
         type:
-          description: Required. The type of the alert. This is output only after alert is created. For a list of available alert types see [G Suite Alert types](/admin-sdk/alertcenter/reference/alert-types).
+          description: Required. The type of the alert. This is output only after alert is created. For a list of available alert types see [Google Workspace Alert types](/admin-sdk/alertcenter/reference/alert-types).
           type: string
         updateTime:
           description: Output only. The time this alert was last updated.
@@ -741,7 +741,7 @@ components:
             type: string
           type: array
         customerId:
-          description: Optional. The unique identifier of the G Suite organization account of the customer the alerts are associated with.
+          description: Optional. The unique identifier of the Google Workspace organization account of the customer the alerts are associated with.
           type: string
       type: object
     BatchDeleteAlertsResponse:
@@ -767,7 +767,7 @@ components:
             type: string
           type: array
         customerId:
-          description: Optional. The unique identifier of the G Suite organization account of the customer the alerts are associated with.
+          description: Optional. The unique identifier of the Google Workspace organization account of the customer the alerts are associated with.
           type: string
       type: object
     BatchUndeleteAlertsResponse:
@@ -1015,7 +1015,7 @@ components:
           description: For matched detector defined by administrators.
       type: object
     Notification:
-      description: Settings for callback notifications. For more details see [G Suite Alert Notification](/admin-sdk/alertcenter/guides/notifications).
+      description: Settings for callback notifications. For more details see [Google Workspace Alert Notification](/admin-sdk/alertcenter/guides/notifications).
       properties:
         cloudPubsubTopic:
           $ref: "#/components/schemas/CloudPubsubTopic"
@@ -1222,7 +1222,7 @@ components:
       description: A request to undelete a specific alert that was marked for deletion.
       properties:
         customerId:
-          description: Optional. The unique identifier of the G Suite organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
+          description: Optional. The unique identifier of the Google Workspace organization account of the customer the alert is associated with. Inferred from the caller identity if not provided.
           type: string
       type: object
     User:

@@ -38,7 +38,7 @@ paths:
       description: Lists the applications available for data transfer for a customer.
       operationId: datatransfer.applications.list
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - description: Immutable ID of the Google Workspace account.
           in: query
           name: customerId
           schema:
@@ -131,7 +131,7 @@ paths:
       description: Lists the transfers for a customer by source user, destination user, or status.
       operationId: datatransfer.transfers.list
       parameters:
-        - description: Immutable ID of the Google Apps account.
+        - description: Immutable ID of the Google Workspace account.
           in: query
           name: customerId
           schema:
