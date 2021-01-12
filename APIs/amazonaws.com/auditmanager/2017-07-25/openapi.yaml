@@ -776,6 +776,13 @@ paths:
                   items:
                     $ref: '#/components/schemas/CreateAssessmentFrameworkControlSet'
                   minItems: 1
+                tags:
+                  description: ' The tags associated with the framework. '
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -930,7 +937,7 @@ paths:
                   pattern: '^[\w\W\s\S]*$'
                   maxLength: 1000
                 controlMappingSources:
-                  description: ' The data source that determines from where AWS Audit Manager collects evidence for the control. '
+                  description: ' The data mapping sources for the specified control. '
                   type: array
                   items:
                     $ref: '#/components/schemas/CreateControlMappingSource'
@@ -1553,7 +1560,7 @@ paths:
                   pattern: '^[\w\W\s\S]*$'
                   maxLength: 1000
                 controlMappingSources:
-                  description: ' The data source that determines from where AWS Audit Manager collects evidence for the control. '
+                  description: ' The data mapping sources for the specified control. '
                   type: array
                   items:
                     $ref: '#/components/schemas/ControlMappingSource'
@@ -4523,6 +4530,10 @@ components:
     AssessmentFrameworkMetadata:
       type: object
       properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/AuditManagerArn'
+            - description: ' The Amazon Resource Name (ARN) of the framework. '
         id:
           allOf:
             - $ref: '#/components/schemas/UUID'
@@ -4895,7 +4906,7 @@ components:
         errorMessage:
           allOf:
             - $ref: '#/components/schemas/ErrorMessage'
-            - description: ' The error message returned by the <code>BatchImportEvidenceToAssessmentControlError</code> API. '
+            - description: ' The error message returned by the <code>BatchImportEvidenceToAssessmentControl</code> API. '
       description: ' An error entity for the <code>BatchImportEvidenceToAssessmentControl</code> API. This is used to provide more meaningful errors than a simple string message. '
     BatchImportEvidenceToAssessmentControlErrors:
       type: array
@@ -5027,7 +5038,7 @@ components:
         controlSources:
           allOf:
             - $ref: '#/components/schemas/ControlSources'
-            - description: ' The data mapping sources for the specified control. '
+            - description: ' The data source that determines from where AWS Audit Manager collects evidence for the control. '
         controlMappingSources:
           allOf:
             - $ref: '#/components/schemas/ControlMappingSources'
@@ -5220,6 +5231,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreateAssessmentFrameworkControlSets'
             - description: ' The control sets to be associated with the framework. '
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags associated with the framework. '
     Framework:
       type: object
       properties:
@@ -5275,6 +5290,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LastUpdatedBy'
             - description: ' The IAM user or role that most recently updated the framework. '
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags associated with the framework. '
       description: ' The file used to structure and automate AWS Audit Manager assessments for a given compliance standard. '
     CreateAssessmentReportRequest:
       type: object
@@ -5361,7 +5380,7 @@ components:
         controlMappingSources:
           allOf:
             - $ref: '#/components/schemas/CreateControlMappingSources'
-            - description: ' The data source that determines from where AWS Audit Manager collects evidence for the control. '
+            - description: ' The data mapping sources for the specified control. '
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -6032,7 +6051,7 @@ components:
         controlMappingSources:
           allOf:
             - $ref: '#/components/schemas/ControlMappingSources'
-            - description: ' The data source that determines from where AWS Audit Manager collects evidence for the control. '
+            - description: ' The data mapping sources for the specified control. '
     UpdateSettingsRequest:
       type: object
       title: UpdateSettingsRequest

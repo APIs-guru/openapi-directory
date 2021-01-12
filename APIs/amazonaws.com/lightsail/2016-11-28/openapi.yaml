@@ -918,7 +918,7 @@ paths:
   /#X-Amz-Target=Lightsail_20161128.CreateContainerService:
     post:
       operationId: CreateContainerService
-      description: '<p>Creates an Amazon Lightsail container service.</p> <p>A Lightsail container service is a compute resource to which you can deploy containers. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-containers">Container services in Amazon Lightsail</a> in the <i>Lightsail Dev Guide</i>.</p>'
+      description: '<p>Creates an Amazon Lightsail container service.</p> <p>A Lightsail container service is a compute resource to which you can deploy containers. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-services">Container services in Amazon Lightsail</a> in the <i>Lightsail Dev Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -9240,6 +9240,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.SetIpAddressType:
+    post:
+      operationId: SetIpAddressType
+      description: '<p>Sets the IP address type for a Amazon Lightsail resource.</p> <p>Use this action to enable dual-stack for a resource, which enables IPv4 and IPv6 for the specified resource. Alternately, you can use this action to disable dual-stack, and enable IPv4 only.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetIpAddressTypeResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: OperationFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationFailureException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: AccountSetupInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountSetupInProgressException'
+        '486':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetIpAddressTypeRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.SetIpAddressType
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Lightsail_20161128.StartInstance:
     post:
       operationId: StartInstance
@@ -10893,6 +10968,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: '<p>The bundle ID to use for the distribution.</p> <p>A distribution bundle describes the specifications of your distribution, such as the monthly cost and monthly network transfer quota.</p> <p>Use the <code>GetDistributionBundles</code> action to get a list of distribution bundle IDs that you can specify.</p>'
+        ipAddressType:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressType'
+            - description: '<p>The IP address type for the distribution.</p> <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for IPv4 and IPv6.</p> <p>The default value is <code>dualstack</code>.</p>'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -11019,6 +11098,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AddOnRequestList'
             - description: An array of objects representing the add-ons to enable for the new instance.
+        ipAddressType:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressType'
+            - description: '<p>The IP address type for the instance.</p> <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for IPv4 and IPv6.</p> <p>The default value is <code>dualstack</code>.</p>'
     CreateInstancesFromSnapshotResult:
       type: object
       properties:
@@ -11070,6 +11153,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AddOnRequestList'
             - description: An array of objects representing the add-ons to enable for the new instance.
+        ipAddressType:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressType'
+            - description: '<p>The IP address type for the instance.</p> <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for IPv4 and IPv6.</p> <p>The default value is <code>dualstack</code>.</p>'
         sourceInstanceName:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -11157,6 +11244,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: <p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
+        ipAddressType:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressType'
+            - description: '<p>The IP address type for the load balancer.</p> <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for IPv4 and IPv6.</p> <p>The default value is <code>dualstack</code>.</p>'
     CreateLoadBalancerTlsCertificateResult:
       type: object
       properties:
@@ -13402,6 +13493,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContactMethodVerificationProtocol'
             - description: 'The protocol to verify, such as <code>Email</code> or <code>SMS</code> (text messaging).'
+    SetIpAddressTypeResult:
+      type: object
+      properties:
+        operations:
+          allOf:
+            - $ref: '#/components/schemas/OperationList'
+            - description: 'An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.'
+    SetIpAddressTypeRequest:
+      type: object
+      required:
+        - resourceType
+        - resourceName
+        - ipAddressType
+      title: SetIpAddressTypeRequest
+      properties:
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: '<p>The resource type.</p> <p>The possible values are <code>Distribution</code>, <code>Instance</code>, and <code>LoadBalancer</code>.</p> <note> <p>Distribution-related APIs are available only in the N. Virginia (<code>us-east-1</code>) AWS Region. Set your AWS Region configuration to <code>us-east-1</code> to create, view, or edit distributions.</p> </note>'
+        resourceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the resource for which to set the IP address type.
+        ipAddressType:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressType'
+            - description: '<p>The IP address type to set for the specified resource.</p> <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for IPv4 and IPv6.</p>'
     StartInstanceResult:
       type: object
       properties:
@@ -14640,11 +14758,11 @@ components:
         fromPort:
           allOf:
             - $ref: '#/components/schemas/Port'
-            - description: '<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP type. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> </ul>'
+            - description: '<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP type for IPv4 addresses. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> <li> <p>ICMPv6 - The ICMP type for IPv6 addresses. For example, specify <code>128</code> as the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6 code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet Control Message Protocol for IPv6</a>.</p> </li> </ul>'
         toPort:
           allOf:
             - $ref: '#/components/schemas/Port'
-            - description: '<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP code. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> </ul>'
+            - description: '<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP code for IPv4 addresses. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> <li> <p>ICMPv6 - The ICMP code for IPv6 addresses. For example, specify <code>128</code> as the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6 code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet Control Message Protocol for IPv6</a>.</p> </li> </ul>'
         protocol:
           allOf:
             - $ref: '#/components/schemas/NetworkProtocol'
@@ -14652,7 +14770,11 @@ components:
         cidrs:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: '<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p> <p>Examples:</p> <ul> <li> <p>To allow the IP address <code>192.0.2.44</code>, specify <code>192.0.2.44</code> or <code>192.0.2.44/32</code>. </p> </li> <li> <p>To allow the IP addresses <code>192.0.2.0</code> to <code>192.0.2.255</code>, specify <code>192.0.2.0/24</code>.</p> </li> </ul> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
+            - description: '<p>The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol.</p> <note> <p>The <code>ipv6Cidrs</code> parameter lists the IPv6 addresses that are allowed to connect to an instance.</p> </note> <p>Examples:</p> <ul> <li> <p>To allow the IP address <code>192.0.2.44</code>, specify <code>192.0.2.44</code> or <code>192.0.2.44/32</code>. </p> </li> <li> <p>To allow the IP addresses <code>192.0.2.0</code> to <code>192.0.2.255</code>, specify <code>192.0.2.0/24</code>.</p> </li> </ul> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
+        ipv6Cidrs:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: '<p>The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol. Only devices with an IPv6 address can connect to an instance through IPv6; otherwise, IPv4 should be used.</p> <note> <p>The <code>cidrs</code> parameter lists the IPv4 addresses that are allowed to connect to an instance.</p> </note> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
         cidrListAliases:
           allOf:
             - $ref: '#/components/schemas/StringList'
@@ -15219,6 +15341,11 @@ components:
             - $ref: '#/components/schemas/OriginProtocolPolicyEnum'
             - description: The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
       description: '<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>An origin can be a Lightsail instance or load balancer. A distribution pulls content from an origin, caches it, and serves it to viewers via a worldwide network of edge servers.</p>'
+    IpAddressType:
+      type: string
+      enum:
+        - dualstack
+        - ipv4
     LightsailDistribution:
       type: object
       properties:
@@ -15294,6 +15421,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/boolean'
             - description: '<p>Indicates whether the bundle that is currently applied to your distribution, specified using the <code>distributionName</code> parameter, can be changed to another bundle.</p> <p>Use the <code>UpdateDistributionBundle</code> action to change your distribution''s bundle.</p>'
+        ipAddressType:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressType'
+            - description: '<p>The IP address type of the distribution.</p> <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for IPv4 and IPv6.</p>'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -15934,10 +16065,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/IpAddress'
             - description: The public IP address of the instance.
-        ipv6Address:
+        ipv6Addresses:
           allOf:
-            - $ref: '#/components/schemas/IpV6Address'
-            - description: The IPv6 address of the instance.
+            - $ref: '#/components/schemas/Ipv6AddressList'
+            - description: The IPv6 addresses of the instance.
+        ipAddressType:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressType'
+            - description: '<p>The IP address type of the instance.</p> <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for IPv4 and IPv6.</p>'
         hardware:
           allOf:
             - $ref: '#/components/schemas/InstanceHardware'
@@ -16133,6 +16268,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LoadBalancerConfigurationOptions'
             - description: A string to string map of the configuration options for your load balancer. Valid values are listed below.
+        ipAddressType:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressType'
+            - description: '<p>The IP address type of the load balancer.</p> <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for IPv4 and IPv6.</p>'
       description: Describes the Lightsail load balancer.
     LoadBalancerTlsCertificateList:
       type: array
@@ -16471,9 +16610,10 @@ components:
     IpAddress:
       type: string
       pattern: '([0-9]{1,3}\.){3}[0-9]{1,3}'
-    IpV6Address:
-      type: string
-      pattern: '([A-F0-9]{1,4}:){7}[A-F0-9]{1,4}'
+    Ipv6AddressList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Ipv6Address'
     InstanceHardware:
       type: object
       properties:
@@ -16540,7 +16680,7 @@ components:
         portInfoSource:
           allOf:
             - $ref: '#/components/schemas/PortInfoSourceType'
-            - description: '<p>The port configuration to use for the new Amazon EC2 instance.</p> <p>The following configuration options are available:</p> <ul> <li> <p> <code>DEFAULT</code> - Use the default firewall settings from the Lightsail instance blueprint.</p> </li> <li> <p> <code>INSTANCE</code> - Use the configured firewall settings from the source Lightsail instance.</p> </li> <li> <p> <code>NONE</code> - Use the default Amazon EC2 security group.</p> </li> <li> <p> <code>CLOSED</code> - All ports closed.</p> </li> </ul> <note> <p>If you configured <code>lightsail-connect</code> as a <code>cidrListAliases</code> on your instance, or if you chose to allow the Lightsail browser-based SSH or RDP clients to connect to your instance, that configuration is not carried over to your new Amazon EC2 instance.</p> </note>'
+            - description: '<p>The port configuration to use for the new Amazon EC2 instance.</p> <p>The following configuration options are available:</p> <ul> <li> <p> <code>DEFAULT</code> - Use the default firewall settings from the Lightsail instance blueprint. If this is specified, then IPv4 and IPv6 will be configured for the new instance that is created in Amazon EC2.</p> </li> <li> <p> <code>INSTANCE</code> - Use the configured firewall settings from the source Lightsail instance. If this is specified, the new instance that is created in Amazon EC2 will be configured to match the configuration of the source Lightsail instance. For example, if the source instance is configured for dual-stack (IPv4 and IPv6), then IPv4 and IPv6 will be configured for the new instance that is created in Amazon EC2. If the source instance is configured for IPv4 only, then only IPv4 will be configured for the new instance that is created in Amazon EC2.</p> </li> <li> <p> <code>NONE</code> - Use the default Amazon EC2 security group. If this is specified, then only IPv4 will be configured for the new instance that is created in Amazon EC2.</p> </li> <li> <p> <code>CLOSED</code> - All ports closed. If this is specified, then only IPv4 will be configured for the new instance that is created in Amazon EC2.</p> </li> </ul> <note> <p>If you configured <code>lightsail-connect</code> as a <code>cidrListAliases</code> on your instance, or if you chose to allow the Lightsail browser-based SSH or RDP clients to connect to your instance, that configuration is not carried over to your new Amazon EC2 instance.</p> </note>'
         userData:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -16623,11 +16763,11 @@ components:
         fromPort:
           allOf:
             - $ref: '#/components/schemas/Port'
-            - description: '<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP type. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> </ul>'
+            - description: '<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP type for IPv4 addresses. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> <li> <p>ICMPv6 - The ICMP type for IPv6 addresses. For example, specify <code>128</code> as the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6 code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet Control Message Protocol for IPv6</a>.</p> </li> </ul>'
         toPort:
           allOf:
             - $ref: '#/components/schemas/Port'
-            - description: '<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP code. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> </ul>'
+            - description: '<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP code for IPv4 addresses. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> <li> <p>ICMPv6 - The ICMP code for IPv6 addresses. For example, specify <code>128</code> as the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6 code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet Control Message Protocol for IPv6</a>.</p> </li> </ul>'
         protocol:
           allOf:
             - $ref: '#/components/schemas/NetworkProtocol'
@@ -16651,7 +16791,11 @@ components:
         cidrs:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: '<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
+            - description: '<p>The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol.</p> <note> <p>The <code>ipv6Cidrs</code> parameter lists the IPv6 addresses that are allowed to connect to an instance.</p> </note> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
+        ipv6Cidrs:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: '<p>The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol. Only devices with an IPv6 address can connect to an instance through IPv6; otherwise, IPv4 should be used.</p> <note> <p>The <code>cidrs</code> parameter lists the IPv4 addresses that are allowed to connect to an instance.</p> </note> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
         cidrListAliases:
           allOf:
             - $ref: '#/components/schemas/StringList'
@@ -16668,11 +16812,11 @@ components:
         fromPort:
           allOf:
             - $ref: '#/components/schemas/Port'
-            - description: '<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP type. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> </ul>'
+            - description: '<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP type for IPv4 addresses. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> <li> <p>ICMPv6 - The ICMP type for IPv6 addresses. For example, specify <code>128</code> as the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6 code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet Control Message Protocol for IPv6</a>.</p> </li> </ul>'
         toPort:
           allOf:
             - $ref: '#/components/schemas/Port'
-            - description: '<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP code. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> </ul>'
+            - description: '<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - The ICMP code for IPv4 addresses. For example, specify <code>8</code> as the <code>fromPort</code> (ICMP type), and <code>-1</code> as the <code>toPort</code> (ICMP code), to enable ICMP Ping. For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages">Control Messages</a> on <i>Wikipedia</i>.</p> </li> <li> <p>ICMPv6 - The ICMP code for IPv6 addresses. For example, specify <code>128</code> as the <code>fromPort</code> (ICMPv6 type), and <code>0</code> as <code>toPort</code> (ICMPv6 code). For more information, see <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6">Internet Control Message Protocol for IPv6</a>.</p> </li> </ul>'
         protocol:
           allOf:
             - $ref: '#/components/schemas/NetworkProtocol'
@@ -16684,7 +16828,11 @@ components:
         cidrs:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: '<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
+            - description: '<p>The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol.</p> <note> <p>The <code>ipv6Cidrs</code> parameter lists the IPv6 addresses that are allowed to connect to an instance.</p> </note> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
+        ipv6Cidrs:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: '<p>The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed to connect to an instance through the ports, and the protocol. Only devices with an IPv6 address can connect to an instance through IPv6; otherwise, IPv4 should be used.</p> <note> <p>The <code>cidrs</code> parameter lists the IPv4 addresses that are allowed to connect to an instance.</p> </note> <p>For more information about CIDR block notation, see <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>'
         cidrListAliases:
           allOf:
             - $ref: '#/components/schemas/StringList'
@@ -16696,6 +16844,9 @@ components:
         - pending
         - error
         - available
+    Ipv6Address:
+      type: string
+      pattern: '([A-F0-9]{1,4}:){7}[A-F0-9]{1,4}'
     Origin:
       type: object
       properties:
@@ -17076,6 +17227,7 @@ components:
         - AttachCertificateToDistribution
         - DetachCertificateFromDistribution
         - UpdateDistributionBundle
+        - SetIpAddressType
         - CreateCertificate
         - DeleteCertificate
         - CreateContainerService
