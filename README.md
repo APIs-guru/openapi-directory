@@ -49,7 +49,7 @@ API definition acceptance criteria
 Update procedure
 --------------------------
 All definitions are automatically updated from their original source.
-You can see this in the `x-origin` property within [each](https://github.com/APIs-guru/openapi-directory/search?utf8=%E2%9C%93&q=x-origin+filename%3Aswagger.yaml) `openapi.yaml` or `swagger.yaml` file.
+You can see this in the `x-origin` property within each [openapi.yaml](https://github.com/APIs-guru/openapi-directory/search?utf8=%E2%9C%93&q=x-origin+filename%3Aopenapi.yaml) or [swagger.yaml](https://github.com/APIs-guru/openapi-directory/search?utf8=%E2%9C%93&q=x-origin+filename%3Aswagger.yaml) file.
 We run our update script at least weekly and automatically revalidate before committing.
 If you see some APIs are not updated for more than 2 weeks please open [an issue](https://github.com/APIs-guru/openapi-directory/issues/new).
 
@@ -94,7 +94,7 @@ Instead, we strongly recommend you to use our [REST API][apiDoc-link].
 
 Licenses
 --------------------------
-All code is released under the [MIT](http://opensource.org/licenses/MIT) licence.<br>
+All code in this repository is released under the [MIT](http://opensource.org/licenses/MIT) licence.<br>
 All API definitions contributed to project by authors are covered by the [CC01.0](https://creativecommons.org/publicdomain/zero/1.0/) license.<br>
 All API definitions acquired from public sources under the [Fair use](http://en.wikipedia.org/wiki/Fair_use) principle.
 
@@ -102,7 +102,7 @@ Definition sources
 --------------------------
 Some definitions are taken from Open Source projects:
  - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI description for Instagram API
- - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI definition for BBC Nitro and iBL APIs
+ - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI definitions for the BBC Nitro and iBL APIs
  - [amardeshbd/medium-api-specification](https://github.com/amardeshbd/medium-api-specification) - OpenAPI 2.0 description for Medium API
  - [faragorn/open-api-specs](https://github.com/faragorn/open-api-specs) - OpenAPI definition for the Giphy API
 
@@ -123,7 +123,7 @@ Some definitions are taken from Open Source projects:
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+This project exists thanks to all the people who contribute. [Contribute](CONTRIBUTING.md).
 <a href="https://github.com/APIs-guru/openapi-directory/graphs/contributors"><img src="https://opencollective.com/openapi-directory/contributors.svg?width=890&button=false" /></a>
 
 ## Asynchronous APIs
@@ -132,14 +132,14 @@ See also [AsyncAPI-Directory](https://github.com/APIs-guru/asyncapi-directory)
 
 ## Backers
 
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/openapi-directory#backer)]
+Thank you to all our backers! 🙏 [Become a backer](https://opencollective.com/openapi-directory#backer).
 
 <a href="https://opencollective.com/openapi-directory#backers" target="_blank"><img src="https://opencollective.com/openapi-directory/backers.svg?width=890"></a>
 
 
 ## Sponsors
 
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/openapi-directory#sponsor)]
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [Become a sponsor](https://opencollective.com/openapi-directory#sponsor).
 
 <a href="https://opencollective.com/openapi-directory/sponsor/0/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/openapi-directory/sponsor/1/website" target="_blank"><img src="https://opencollective.com/openapi-directory/sponsor/1/avatar.svg"></a>
@@ -154,6 +154,4 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 
 ## Partners
 
-Support this project by becoming a partner. Your logo will show up here with a link to your website. [[Become a partner](https://opencollective.com/openapi-directory#partner)]
-
-<a href="https://opencollective.com/openapi-directory" target="_blank"><img src="https://opencollective.com/openapi-directory/partners.svg?width=890&button=false"></a>
+Support this project by becoming a partner. Your logo will be displayed prominently in this project and we will work with you to publicise and showcase your projects. [Become a partner](https://opencollective.com/openapi-directory#partner).
