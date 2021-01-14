@@ -653,7 +653,7 @@ paths:
   /#X-Amz-Target=AWSCognitoIdentityService.GetOpenIdToken:
     post:
       operationId: GetOpenIdToken
-      description: '<p>Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by <a>GetId</a>. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link.</p> <p>The OpenId token is valid for 10 minutes.</p> <p>This is a public API. You do not need any credentials to call this API.</p>'
+      description: '<p>Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by <a>GetId</a>. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link.</p> <p>The OpenID token is valid for 10 minutes.</p> <p>This is a public API. You do not need any credentials to call this API.</p>'
       responses:
         '200':
           description: Success
@@ -792,6 +792,69 @@ paths:
             type: string
             enum:
               - AWSCognitoIdentityService.GetOpenIdTokenForDeveloperIdentity
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSCognitoIdentityService.GetPrincipalTagAttributeMap:
+    post:
+      operationId: GetPrincipalTagAttributeMap
+      description: Use <code>GetPrincipalTagAttributeMap</code> to list all mappings between <code>PrincipalTags</code> and user attributes.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPrincipalTagAttributeMapResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: NotAuthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPrincipalTagAttributeMapInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSCognitoIdentityService.GetPrincipalTagAttributeMap
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1210,10 +1273,73 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSCognitoIdentityService.SetPrincipalTagAttributeMap:
+    post:
+      operationId: SetPrincipalTagAttributeMap
+      description: You can use this operation to use default (username and clientID) attribute or custom attribute mappings.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetPrincipalTagAttributeMapResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: NotAuthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPrincipalTagAttributeMapInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSCognitoIdentityService.SetPrincipalTagAttributeMap
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSCognitoIdentityService.TagResource:
     post:
       operationId: TagResource
-      description: '<p>Assigns a set of tags to an Amazon Cognito identity pool. A tag is a label that you can use to categorize and manage identity pools in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of an identity pool, one for testing and another for production, you might assign an <code>Environment</code> tag key to both identity pools. The value of this key might be <code>Test</code> for one identity pool and <code>Production</code> for the other.</p> <p>Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your identity pools. In an IAM policy, you can constrain permissions for identity pools based on specific tags or tag values.</p> <p>You can use this action up to 5 times per second, per account. An identity pool can have as many as 50 tags.</p>'
+      description: '<p>Assigns a set of tags to the specified Amazon Cognito identity pool. A tag is a label that you can use to categorize and manage identity pools in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of an identity pool, one for testing and another for production, you might assign an <code>Environment</code> tag key to both identity pools. The value of this key might be <code>Test</code> for one identity pool and <code>Production</code> for the other.</p> <p>Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your identity pools. In an IAM policy, you can constrain permissions for identity pools based on specific tags or tag values.</p> <p>You can use this action up to 5 times per second, per account. An identity pool can have as many as 50 tags.</p>'
       responses:
         '200':
           description: Success
@@ -1412,7 +1538,7 @@ paths:
   /#X-Amz-Target=AWSCognitoIdentityService.UntagResource:
     post:
       operationId: UntagResource
-      description: 'Removes the specified tags from an Amazon Cognito identity pool. You can use this action up to 5 times per second, per account'
+      description: 'Removes the specified tags from the specified Amazon Cognito identity pool. You can use this action up to 5 times per second, per account'
       responses:
         '200':
           description: Success
@@ -1640,7 +1766,7 @@ components:
         OpenIdConnectProviderARNs:
           allOf:
             - $ref: '#/components/schemas/OIDCProviderList'
-            - description: A list of OpendID Connect provider ARNs.
+            - description: The ARNs of the OpenID Connect providers.
         CognitoIdentityProviders:
           allOf:
             - $ref: '#/components/schemas/CognitoIdentityProviderList'
@@ -1684,7 +1810,7 @@ components:
         OpenIdConnectProviderARNs:
           allOf:
             - $ref: '#/components/schemas/OIDCProviderList'
-            - description: A list of OpendID Connect provider ARNs.
+            - description: The Amazon Resource Names (ARN) of the OpenID Connect providers.
         CognitoIdentityProviders:
           allOf:
             - $ref: '#/components/schemas/CognitoIdentityProviderList'
@@ -1802,7 +1928,7 @@ components:
         Logins:
           allOf:
             - $ref: '#/components/schemas/LoginsMap'
-            - description: '<p>A set of optional name-value pairs that map provider names to provider tokens. The name-value pair will follow the syntax "provider_name": "provider_user_identifier".</p> <p>Logins should not be specified when trying to get credentials for an unauthenticated identity.</p> <p>The Logins parameter is required when using identities associated with external identity providers such as FaceBook. For examples of <code>Logins</code> maps, see the code examples in the <a href="http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html">External Identity Providers</a> section of the Amazon Cognito Developer Guide.</p>'
+            - description: '<p>A set of optional name-value pairs that map provider names to provider tokens. The name-value pair will follow the syntax "provider_name": "provider_user_identifier".</p> <p>Logins should not be specified when trying to get credentials for an unauthenticated identity.</p> <p>The Logins parameter is required when using identities associated with external identity providers such as Facebook. For examples of <code>Logins</code> maps, see the code examples in the <a href="https://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html">External Identity Providers</a> section of the Amazon Cognito Developer Guide.</p>'
         CustomRoleArn:
           allOf:
             - $ref: '#/components/schemas/ARNString'
@@ -1889,7 +2015,7 @@ components:
         Logins:
           allOf:
             - $ref: '#/components/schemas/LoginsMap'
-            - description: 'A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider''s authflow. For accounts.google.com, an Amazon Cognito user pool provider, or any other OpenId Connect provider, always include the <code>id_token</code>.'
+            - description: 'A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider''s authflow. For accounts.google.com, an Amazon Cognito user pool provider, or any other OpenID Connect provider, always include the <code>id_token</code>.'
       description: Input to the GetOpenIdToken action.
     GetOpenIdTokenForDeveloperIdentityResponse:
       type: object
@@ -1922,12 +2048,50 @@ components:
           allOf:
             - $ref: '#/components/schemas/LoginsMap'
             - description: 'A set of optional name-value pairs that map provider names to provider tokens. Each name-value pair represents a user from a public provider or developer provider. If the user is from a developer provider, the name-value pair will follow the syntax <code>"developer_provider_name": "developer_user_identifier"</code>. The developer provider is the "domain" by which Cognito will refer to your users; you provided this domain while creating/updating the identity pool. The developer user identifier is an identifier from your backend that uniquely identifies a user. When you create an identity pool, you can specify the supported logins.'
+        PrincipalTags:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalTags'
+            - description: 'Use this operation to configure attribute mappings for custom providers. '
         TokenDuration:
           allOf:
             - $ref: '#/components/schemas/TokenDuration'
             - description: '<p>The expiration time of the token, in seconds. You can specify a custom expiration time for the token so that you can cache it. If you don''t provide an expiration time, the token is valid for 15 minutes. You can exchange the token with Amazon STS for temporary AWS credentials, which are valid for a maximum of one hour. The maximum token duration you can set is 24 hours. You should take care in setting the expiration time for a token, as there are significant security implications: an attacker could use a leaked token to access your AWS resources for the token''s duration.</p> <note> <p>Please provide for a small grace period, usually no more than 5 minutes, to account for clock skew.</p> </note>'
       description: Input to the <code>GetOpenIdTokenForDeveloperIdentity</code> action.
     DeveloperUserAlreadyRegisteredException: {}
+    GetPrincipalTagAttributeMapResponse:
+      type: object
+      properties:
+        IdentityPoolId:
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolId'
+            - description: You can use this operation to get the ID of the Identity Pool you setup attribute mappings for.
+        IdentityProviderName:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProviderName'
+            - description: You can use this operation to get the provider name.
+        UseDefaults:
+          allOf:
+            - $ref: '#/components/schemas/UseDefaults'
+            - description: 'You can use this operation to list '
+        PrincipalTags:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalTags'
+            - description: You can use this operation to add principal tags. The <code>PrincipalTags</code>operation enables you to reference user attributes in your IAM permissions policy.
+    GetPrincipalTagAttributeMapInput:
+      type: object
+      required:
+        - IdentityPoolId
+        - IdentityProviderName
+      title: GetPrincipalTagAttributeMapInput
+      properties:
+        IdentityPoolId:
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolId'
+            - description: You can use this operation to get the ID of the Identity Pool you setup attribute mappings for.
+        IdentityProviderName:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProviderName'
+            - description: You can use this operation to get the provider name.
     ListIdentitiesResponse:
       type: object
       properties:
@@ -2107,9 +2271,51 @@ components:
         RoleMappings:
           allOf:
             - $ref: '#/components/schemas/RoleMappingMap'
-            - description: '<p>How users for a specific identity provider are to mapped to roles. This is a string to <a>RoleMapping</a> object map. The string identifies the identity provider, for example, "graph.facebook.com" or "cognito-idp-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".</p> <p>Up to 25 rules can be specified per identity provider.</p>'
+            - description: '<p>How users for a specific identity provider are to mapped to roles. This is a string to <a>RoleMapping</a> object map. The string identifies the identity provider, for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".</p> <p>Up to 25 rules can be specified per identity provider.</p>'
       description: Input to the <code>SetIdentityPoolRoles</code> action.
     ConcurrentModificationException: {}
+    SetPrincipalTagAttributeMapResponse:
+      type: object
+      properties:
+        IdentityPoolId:
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolId'
+            - description: The ID of the Identity Pool you want to set attribute mappings for.
+        IdentityProviderName:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProviderName'
+            - description: The provider name you want to use for attribute mappings.
+        UseDefaults:
+          allOf:
+            - $ref: '#/components/schemas/UseDefaults'
+            - description: You can use this operation to select default (username and clientID) attribute mappings.
+        PrincipalTags:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalTags'
+            - description: You can use this operation to add principal tags. The <code>PrincipalTags</code>operation enables you to reference user attributes in your IAM permissions policy.
+    SetPrincipalTagAttributeMapInput:
+      type: object
+      required:
+        - IdentityPoolId
+        - IdentityProviderName
+      title: SetPrincipalTagAttributeMapInput
+      properties:
+        IdentityPoolId:
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolId'
+            - description: The ID of the Identity Pool you want to set attribute mappings for.
+        IdentityProviderName:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProviderName'
+            - description: The provider name you want to use for attribute mappings.
+        UseDefaults:
+          allOf:
+            - $ref: '#/components/schemas/UseDefaults'
+            - description: You can use this operation to use default (username and clientID) attribute mappings.
+        PrincipalTags:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalTags'
+            - description: You can use this operation to add principal tags.
     TagResourceResponse:
       type: object
       properties: {}
@@ -2123,7 +2329,7 @@ components:
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/ARNString'
-            - description: The Amazon Resource Name (ARN) of the identity pool to assign the tags to.
+            - description: The Amazon Resource Name (ARN) of the identity pool.
         Tags:
           allOf:
             - $ref: '#/components/schemas/IdentityPoolTagsType'
@@ -2188,7 +2394,7 @@ components:
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/ARNString'
-            - description: The Amazon Resource Name (ARN) of the identity pool that the tags are assigned to.
+            - description: The Amazon Resource Name (ARN) of the identity pool.
         TagKeys:
           allOf:
             - $ref: '#/components/schemas/IdentityPoolTagsListType'
@@ -2357,12 +2563,23 @@ components:
       maxProperties: 10
       additionalProperties:
         $ref: '#/components/schemas/RoleMapping'
+    PrincipalTags:
+      type: object
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/PrincipalTagValue'
     TokenDuration:
       type: integer
       minimum: 1
       maximum: 86400
     OIDCToken:
       type: string
+    IdentityProviderName:
+      type: string
+      minLength: 1
+      maxLength: 128
+    UseDefaults:
+      type: boolean
     HideDisabled:
       type: boolean
     IdentitiesList:
@@ -2404,10 +2621,6 @@ components:
     IdentityProviderId:
       type: string
       pattern: '[\w.;_/-]+'
-      minLength: 1
-      maxLength: 128
-    IdentityProviderName:
-      type: string
       minLength: 1
       maxLength: 128
     IdentityProviderToken:
@@ -2461,6 +2674,14 @@ components:
         $ref: '#/components/schemas/MappingRule'
       minItems: 1
       maxItems: 400
+    PrincipalTagID:
+      type: string
+      minLength: 1
+      maxLength: 128
+    PrincipalTagValue:
+      type: string
+      minLength: 1
+      maxLength: 256
     RoleMappingType:
       type: string
       enum:
