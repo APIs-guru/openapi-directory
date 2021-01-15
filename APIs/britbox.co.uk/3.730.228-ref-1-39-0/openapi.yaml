@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://isl.britbox.co.uk/api
+  - url: /api
 info:
   description: >
     An Orchestration Layer that takes ISL services and packages them in a more targeted way for front-end applications.
@@ -12,13 +12,13 @@ info:
 
     best suits the application they are developing.
   title: Rocket Services
-  version: 3.730.205-ref-1-39-0
+  version: 3.730.228-ref-1-39-0
   x-apisguru-categories:
     - entertainment
   x-origin:
-    - format: swagger
+    - format: openapi
       url: https://isl.britbox.co.uk/api/spec
-      version: "2.0"
+      version: "3.0"
   x-providerName: britbox.co.uk
   x-preferred: null
 paths:
@@ -869,7 +869,7 @@ paths:
 
         Once authorized, the device will then be able to sign in to that account
 
-        via the `/authorization/device` endpoint, without needing to provide the
+        via the `/authorization/device` endpoint, without needing to provide the 
 
         credentials of the user.
       operationId: authorizeDevice
@@ -2242,7 +2242,7 @@ paths:
 
         For a watched show it returns the last incompletely watched episode by the profile,
 
-        or the episode that immediately follows the last completely watched episode
+        or the episode that immediately follows the last completely watched episode 
 
         or nothing.
 
@@ -3649,7 +3649,7 @@ paths:
 
         Once authorized, the device will then be able to sign in to that account
 
-        via the `/authorization/device` endpoint, without needing to provide the
+        via the `/authorization/device` endpoint, without needing to provide the 
 
         credentials of the user.
       operationId: generateDeviceAuthorizationCode
@@ -3915,10 +3915,62 @@ paths:
       tags:
         - authorization
     x-serviceId: auth
+  "/bt/plan/{token}":
+    get:
+      description: Returns all the plans available for BT flow including additional description data.
+      operationId: getPlanByToken
+      parameters:
+        - description: The identifier of the user provided by BT in an initial URL.
+          in: path
+          name: token
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/Language"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BtPlanListItem"
+          description: Available plan for current user.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad request.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Not found.
+        "415":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unsupported Media Type
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal server error.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Service error.
+      tags:
+        - bt
+    x-serviceId: itvBt
   /bt/plans:
     get:
       description: Returns all the plans available for BT flow including additional description data.
-      operationId: getPlansBT
+      operationId: getPlans
       parameters:
         - $ref: "#/components/parameters/Language"
       responses:
@@ -4408,7 +4460,6 @@ paths:
   /ee/plans:
     get:
       description: Returns all the plans available for EE flow including additional description data.
-      operationId: getPlansEE
       parameters:
         - $ref: "#/components/parameters/Language"
       responses:
@@ -4454,7 +4505,7 @@ paths:
   "/ee/plans/{id}":
     get:
       description: Returns the plan description for EE flow including additional description data.
-      operationId: getPlanEE
+      operationId: getPlan
       parameters:
         - description: The identifier of the plan received from ee/offers.
           in: path
@@ -5532,7 +5583,6 @@ paths:
   "/itv/itemsummary/{externalId}":
     get:
       description: Redirects to corresponding Axis Item details page.
-      operationId: getItemItv
       parameters:
         - description: The external identifier of the item.
           in: path
@@ -5906,7 +5956,6 @@ paths:
   "/itv/plans/{platform}":
     get:
       description: Returns the plans available for specified payment platform.
-      operationId: getPlansITV
       parameters:
         - description: The identifier of the payment platform (stripe/itunes).
           in: path
@@ -5961,7 +6010,6 @@ paths:
   /itv/profile:
     get:
       description: Returns the ITV profile object.
-      operationId: getProfileItv
       parameters:
         - $ref: "#/components/parameters/Language"
       responses:
@@ -6128,7 +6176,6 @@ paths:
         A cancelled subscription will continue to be valid until the subscription
 
         expiry date or next renewal date.
-      operationId: cancelSubscriptionItv
       parameters:
         - description: The identifier of the payment platform (stripe/itunes).
           in: path
@@ -6259,6 +6306,68 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ItvPurchase"
+          description: Details of purchased subscription.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad request.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Not found.
+        "415":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unsupported Media Type
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal server error.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Service error.
+      security:
+        - accountAuth:
+            - Catalog
+      tags:
+        - itv
+    x-serviceId: itvSubscription
+  "/itv/purchase/{platform}/strong":
+    post:
+      description: Confirms purchase and returns the details of purchased subscription for specified payment platform.
+      operationId: confirmPurchaseStrong
+      parameters:
+        - description: The identifier of the payment platform (stripe/itunes).
+          in: path
+          name: platform
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/Language"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ItvPurchaseStrongRequest"
+        description: Details of a purchase request.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItvPurchaseStrongResponse"
           description: Details of purchased subscription.
         "400":
           content:
@@ -6433,6 +6542,64 @@ paths:
               schema:
                 $ref: "#/components/schemas/ItvGetDiscountResponse"
           description: Avalable save offer plan, if any.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad request.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Not found.
+        "415":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unsupported Media Type
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal server error.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Service error.
+      security:
+        - accountAuth:
+            - Catalog
+      tags:
+        - itv
+    x-serviceId: itvSubscription
+  "/itv/updatePayment/strong/{platform}":
+    put:
+      description: Change payment method details.
+      operationId: updatePaymentMethodStrong
+      parameters:
+        - description: The identifier of the payment platform (stripe only is currently supported).
+          in: path
+          name: platform
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/Language"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ItvUpdatePaymentStrongRequest"
+        description: Details of change card details request.
+        required: true
+      responses:
+        "204":
+          description: OK
         "400":
           content:
             application/json:
@@ -6916,7 +7083,6 @@ paths:
   "/plans/{id}":
     get:
       description: Returns the details of a Plan with the specified id.
-      operationId: getPlan
       parameters:
         - description: The identifier of the Plan to load.
           in: path
@@ -7148,11 +7314,11 @@ paths:
         page of the website.
 
 
-        From the reset-password page a user should enter the new password they wish to use.
+        From the reset-password page a user should enter the new password they wish to use. 
 
         It should then be submitted to this endpoint,
 
-        along with the reset token from the email link.
+        along with the reset token from the email link. 
 
         The token should be provided in the body as resetToken property.
       operationId: resetPassword
@@ -7290,9 +7456,9 @@ paths:
         ```
 
 
-        Please remember that `date` and `hour` combined represent a normal datetime,
+        Please remember that `date` and `hour` combined represent a normal datetime, 
 
-        so they should be converted to UTC on the client - this will help to avoid
+        so they should be converted to UTC on the client - this will help to avoid 
 
         issues with EPG schedules near midnight.
 
@@ -7328,7 +7494,7 @@ paths:
             format: date
             type: string
         - description: >
-            The base hour in the day, defined by the `date` parameter, you wish to load schedules for
+            The base hour in the day, defined by the `date` parameter, you wish to load schedules for 
 
             (converted to UTC - see main description).
 
@@ -7851,7 +8017,7 @@ components:
       type: object
       x-emoji: 🔑
     Account:
-      additionalProperties: false
+      additionalProperties: true
       properties:
         address:
           $ref: "#/components/schemas/Address"
@@ -7864,9 +8030,6 @@ components:
           x-deprecated: Replaced with defaultPaymentMethodId
         defaultPaymentMethodId:
           description: The id of the payment method to use by default for account transactions.
-          type: string
-        email:
-          description: The email address belonging to the account.
           type: string
         emailVerified:
           description: >
@@ -8115,7 +8278,7 @@ components:
       properties:
         makeDefault:
           description: >
-            Whether this payment method should become the account default when
+            Whether this payment method should become the account default when 
 
             making purchases.
 
@@ -8254,6 +8417,10 @@ components:
     AppConfigLinear:
       additionalProperties: false
       properties:
+        scheduleCacheMaxAgeMinutes:
+          description: The maximum minutes of schedule cache time.
+          format: int32
+          type: integer
         viewingWindowDaysAfter:
           description: Number of available upcoming day schedules.
           format: int32
@@ -9286,7 +9453,7 @@ components:
       type: object
       x-emoji: 💰
     ItemSchedule:
-      additionalProperties: false
+      additionalProperties: true
       properties:
         blackout:
           description: True if this schedule represents time when the channel is completely off air.
@@ -9303,8 +9470,6 @@ components:
           type: boolean
         id:
           type: string
-        item:
-          $ref: "#/components/schemas/ItemSummary"
         live:
           description: True if this is a live event.
           type: boolean
@@ -9457,8 +9622,8 @@ components:
           description: The identifier of the show this item belongs to, if the item is a season or episode.
           type: string
         showTitle:
-          description: The title of the show this item belongs to, if the item is a season or episode.
           type: string
+          x-descritpion: The title of the show this item belongs to, if the item is a season or episode.
         subtype:
           description: >
             Subtype of the item. Mainly used to identify different types when `type`
@@ -9932,6 +10097,9 @@ components:
         product:
           description: The product description.
           type: string
+        savingLabel:
+          description: The saving label.
+          type: string
         switchingText:
           description: The text to switch for.
           type: string
@@ -10016,13 +10184,49 @@ components:
         - profileToken
         - cardToken
       type: object
+    ItvPurchaseStrongRequest:
+      additionalProperties: false
+      properties:
+        paymentMethodId:
+          description: A paymentMethodId from Stripe.
+          type: string
+        planId:
+          description: The identifier of the plan to purchase.
+          type: string
+        profileToken:
+          description: The ITV profile token.
+          type: string
+        voucher:
+          description: A coupon/voucher for a discount.
+          type: string
+      required:
+        - planId
+        - profileToken
+        - paymentMethodId
+      type: object
+    ItvPurchaseStrongResponse:
+      additionalProperties: false
+      properties:
+        customerId:
+          description: The identifier of user in payment system.
+          type: string
+        planId:
+          description: The identifier of subscription plan.
+          type: string
+        subscriptionId:
+          description: The identifier of subscription in payment system.
+          type: string
+      required:
+        - planId
+      type: object
+      x-emoji: 💰
     ItvSubscriptionState:
       additionalProperties: false
       properties:
         effective_entitlements:
           description: The array of entitlement objects.
           items:
-            type: object
+            $ref: "#/components/schemas/ItvEntitlement"
           type: array
         failed_availability_checks:
           description: The results of availability checks.
@@ -10044,6 +10248,19 @@ components:
         - purchased
       type: object
       x-emoji: 💳
+    ItvUpdatePaymentStrongRequest:
+      additionalProperties: false
+      properties:
+        paymentMethodId:
+          description: The paymentMethodId from Stripe.
+          type: string
+        profileToken:
+          description: The ITV profile token.
+          type: string
+      required:
+        - profileToken
+        - paymentMethodId
+      type: object
     ItvUpdateProfileRequest:
       additionalProperties: false
       properties:
@@ -10266,6 +10483,9 @@ components:
 
             Featured menu items may have a more prominent presentation than others in the navigation.
           type: boolean
+        icon:
+          description: The icon for this nav entry.
+          type: string
         label:
           description: The text label for this nav entry.
           type: string
@@ -10296,6 +10516,11 @@ components:
           $ref: "#/components/schemas/NavEntry"
         header:
           description: The header navigation.
+          items:
+            $ref: "#/components/schemas/NavEntry"
+          type: array
+        mobile:
+          description: The mobile navigation.
           items:
             $ref: "#/components/schemas/NavEntry"
           type: array
@@ -11303,74 +11528,74 @@ components:
             the time specified by the "expires" parameter.
           type: boolean
         sections:
-          additionalProperties: false
           description: Preview sections
           items:
-            additionalProperties: false
-            properties:
-              position:
-                description: Section position. If specified, sections are shown in ascending position order.
-                format: int32
-                type: integer
-              tiles:
-                additionalProperties: false
-                description: Tiles within the section
-                items:
-                  additionalProperties: false
-                  properties:
-                    action_data:
-                      description: Data to send to the application when the tile is clicked
-                      type: string
-                    display_from:
-                      description: Time to begin showing the tile
-                      format: date-time
-                      type: string
-                    display_until:
-                      description: Time to stop showing the tile
-                      format: date-time
-                      type: string
-                    image_ratio:
-                      description: >
-                        Thumbnail image aspect ratio
-                          "16:9"
-                          "4:3"
-                          "1:1" (default)
-                          "2:3"
-                          The thumbnail height is fixed at 250 px on presentation.
-                      type: string
-                    image_url:
-                      description: Thumbnail image URL
-                      format: uri
-                      type: string
-                    is_playable:
-                      description: If "true", a "Play" icon is shown over the thumbnail image
-                      type: boolean
-                    position:
-                      description: Section position. If specified, sections are shown in ascending position order
-                      format: int32
-                      type: integer
-                    subtitle:
-                      description: Tile subtitle
-                      type: string
-                    title:
-                      description: Tile title
-                      type: string
-                  required:
-                    - image_url
-                    - image_ratio
-                    - action_data
-                    - is_playable
-                  type: object
-                type: array
-              title:
-                description: Section title
-                type: string
-            required:
-              - tiles
-            type: object
+            $ref: "#/components/schemas/SamsungPreviewSection"
           type: array
       required:
         - sections
+      type: object
+    SamsungPreviewSection:
+      additionalProperties: false
+      properties:
+        position:
+          description: Section position. If specified, sections are shown in ascending position order.
+          format: int32
+          type: integer
+        tiles:
+          description: Tiles within the section
+          items:
+            additionalProperties: false
+            properties:
+              action_data:
+                description: Data to send to the application when the tile is clicked
+                type: string
+              display_from:
+                description: Time to begin showing the tile
+                format: date-time
+                type: string
+              display_until:
+                description: Time to stop showing the tile
+                format: date-time
+                type: string
+              image_ratio:
+                description: >
+                  Thumbnail image aspect ratio
+                    "16:9"
+                    "4:3"
+                    "1:1" (default)
+                    "2:3"
+                    The thumbnail height is fixed at 250 px on presentation.
+                type: string
+              image_url:
+                description: Thumbnail image URL
+                format: uri
+                type: string
+              is_playable:
+                description: If "true", a "Play" icon is shown over the thumbnail image
+                type: boolean
+              position:
+                description: Section position. If specified, sections are shown in ascending position order
+                format: int32
+                type: integer
+              subtitle:
+                description: Tile subtitle
+                type: string
+              title:
+                description: Tile title
+                type: string
+            required:
+              - image_url
+              - image_ratio
+              - action_data
+              - is_playable
+            type: object
+          type: array
+        title:
+          description: Section title
+          type: string
+      required:
+        - tiles
       type: object
     SearchResults:
       additionalProperties: false
@@ -11450,7 +11675,7 @@ components:
             If this flag is set to true then accounts will be linked automatically.
 
 
-            If this flag is not set or set to false and an existing account is found
+            If this flag is not set or set to false and an existing account is found 
 
             then an http 401 with subcode `6001` will be returned. Client apps can then present the
 
