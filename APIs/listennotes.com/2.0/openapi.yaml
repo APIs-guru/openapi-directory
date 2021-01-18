@@ -19,8 +19,8 @@ info:
     url: https://twitter.com/listennotes/profile_image?size=original
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: openapi
       url: https://listen-api.listennotes.com/api/v2/openapi.yaml
       version: "3.0"
@@ -308,7 +308,7 @@ paths:
           schema:
             default: "0"
             example: "1"
-            type: string
+            type: integer
           style: form
       responses:
         "200":

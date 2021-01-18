@@ -21,8 +21,8 @@ info:
     url: https://twitter.com/BoxHQ/profile_image?size=original
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: openapi
       url: https://opensource.box.com/box-openapi/openapi.json
       version: "3.0"
@@ -26288,22 +26288,6 @@ components:
           example:
             amount: "100"
           type: object
-        use_index:
-          description: >-
-            The name of the search index to use for this query. A search index is
-
-            required when a metadata template is assigned to more than 10,000 files
-
-            and folders.
-
-
-            Please contact our
-
-            [Metadata Query team](mailto:metadata-query-feedback@box.com)
-
-            to create a search index.
-          example: amountAsc
-          type: string
       required:
         - from
         - ancestor_folder_id

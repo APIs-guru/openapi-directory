@@ -4447,6 +4447,70 @@ paths:
           store_key: []
       tags:
         - customer
+  /customer.update.json:
+    put:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Update information of customer in store.
+      operationId: CustomerUpdate
+      parameters:
+        - description: Entity id
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: Customer group_id
+          in: query
+          name: group_id
+          required: false
+          type: string
+        - description: Groups that will be assigned to a customer
+          in: query
+          name: group_ids
+          required: false
+          type: string
+        - description: Defines customer's first name
+          in: query
+          name: first_name
+          required: false
+          type: string
+        - description: Defines customer's last name
+          in: query
+          name: last_name
+          required: false
+          type: string
+        - description: Defines whether the newsletter subscription is available for the user
+          in: query
+          name: news_letter_subscription
+          required: false
+          type: boolean
+        - description: Customer tags
+          in: query
+          name: tags
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  updated:
+                    type: string
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - customer
   /order.abandoned.list.json:
     get:
       consumes:
@@ -11296,6 +11360,9 @@ definitions:
       price:
         description: Defines product's price that has to be added
         type: number
+      product_class:
+        description: A categorization for the product
+        type: string
       quantity:
         default: 0
         description: Defines product's quantity that has to be added
@@ -11553,6 +11620,9 @@ definitions:
         type: number
       short_description:
         description: Defines short description
+        type: string
+      sku:
+        description: Defines variant's sku that has to be added
         type: string
       special_price:
         description: Specifies variant's model that has to be added

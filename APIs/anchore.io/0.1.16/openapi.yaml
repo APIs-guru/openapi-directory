@@ -5547,6 +5547,7 @@ components:
       properties:
         expires_on:
           format: date-time
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:\:\d+)?[A-Z]?$
           type: string
         gate:
           type: string

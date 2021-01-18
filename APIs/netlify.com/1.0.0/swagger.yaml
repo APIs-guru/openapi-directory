@@ -47,6 +47,19 @@ securityDefinitions:
     type: oauth2
 security:
   - netlifyAuth: []
+parameters:
+  page:
+    format: int32
+    in: query
+    name: page
+    required: false
+    type: integer
+  perPage:
+    format: int32
+    in: query
+    name: per_page
+    required: false
+    type: integer
 responses:
   error:
     description: error
@@ -213,6 +226,8 @@ paths:
         - in: query
           name: log_type
           type: string
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/perPage"
       responses:
         "200":
           description: OK
@@ -673,6 +688,8 @@ paths:
           name: form_id
           required: true
           type: string
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/perPage"
       responses:
         "200":
           description: OK
@@ -916,6 +933,8 @@ paths:
           in: query
           name: filter
           type: string
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/perPage"
       responses:
         "200":
           description: OK
@@ -1136,7 +1155,7 @@ paths:
           name: buildHook
           required: true
           schema:
-            $ref: "#/definitions/buildHook"
+            $ref: "#/definitions/buildHookSetup"
       responses:
         "201":
           description: Created
@@ -1185,7 +1204,7 @@ paths:
           name: buildHook
           required: true
           schema:
-            $ref: "#/definitions/buildHook"
+            $ref: "#/definitions/buildHookSetup"
       responses:
         "204":
           description: No content
@@ -1196,6 +1215,9 @@ paths:
   "/sites/{site_id}/builds":
     get:
       operationId: listSiteBuilds
+      parameters:
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/perPage"
       responses:
         "200":
           description: OK
@@ -1245,6 +1267,9 @@ paths:
   "/sites/{site_id}/deploys":
     get:
       operationId: listSiteDeploys
+      parameters:
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/perPage"
       responses:
         "200":
           description: OK
@@ -1739,6 +1764,8 @@ paths:
           name: site_id
           required: true
           type: string
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/perPage"
       responses:
         "200":
           description: OK
@@ -1908,6 +1935,8 @@ paths:
         - in: query
           name: query
           type: string
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/perPage"
       responses:
         "200":
           description: OK
@@ -1938,6 +1967,25 @@ paths:
           $ref: "#/responses/error"
       tags:
         - user
+  "/{account_id}/builds/status":
+    get:
+      operationId: getAccountBuildStatus
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/buildStatus"
+            type: array
+        default:
+          $ref: "#/responses/error"
+      tags:
+        - build
+    parameters:
+      - in: path
+        name: account_id
+        required: true
+        type: string
   "/{account_slug}/members":
     get:
       operationId: listMembersForAccount
@@ -1993,6 +2041,8 @@ paths:
           name: account_slug
           required: true
           type: string
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/perPage"
       responses:
         "200":
           description: OK
@@ -2262,12 +2312,52 @@ definitions:
       url:
         type: string
     type: object
+  buildHookSetup:
+    properties:
+      branch:
+        type: string
+      title:
+        type: string
+    type: object
   buildLogMsg:
     properties:
       error:
         type: boolean
       message:
         type: string
+    type: object
+  buildStatus:
+    properties:
+      active:
+        type: integer
+      build_count:
+        type: integer
+      enqueued:
+        type: integer
+      minutes:
+        properties:
+          current:
+            type: integer
+          current_average_sec:
+            type: integer
+          included_minutes:
+            type: string
+          included_minutes_with_packs:
+            type: string
+          last_updated_at:
+            format: dateTime
+            type: string
+          period_end_date:
+            format: dateTime
+            type: string
+          period_start_date:
+            format: dateTime
+            type: string
+          previous:
+            type: integer
+        type: object
+      pending_concurrency:
+        type: integer
     type: object
   deploy:
     properties:

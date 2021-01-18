@@ -48,8 +48,8 @@ info:
     url: https://twitter.com/icons_8/profile_image?size=original
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: apiBlueprint
       url: https://raw.githubusercontent.com/icons8/api-docs/master/apiary.apib
       version: 1A
@@ -124,6 +124,7 @@ paths:
         The operation will not return the categories that have less than 10 icons.
 
         We need it to test the categories without showing garbage on the production website.
+      operationId: Categories
       parameters:
         - description: the platform that we are searching icons for
           in: path
@@ -266,6 +267,7 @@ paths:
   "/api/iconsets/v3/category?category={category}&subcategory={subcategory}&amount={amount}&offset={offset}&platform={platform}&language={language}":
     get:
       description: ""
+      operationId: By Category
       parameters:
         - description: the code of category
           example: free_icons
@@ -418,6 +420,7 @@ paths:
   "/api/iconsets/v3/latest?term={term}&amount={amount}&offset={offset}&platform={platform}&language={language}":
     get:
       description: ""
+      operationId: Latest
       parameters:
         - description: the maximum number of icons which you'd like to receive
           in: path
@@ -555,6 +558,7 @@ paths:
   "/api/iconsets/v3/search?term={term}&amount={amount}&offset={offset}&platform={platform}&language={language}&exact_amount={exact_amount}":
     get:
       description: ""
+      operationId: By Keyword v3
       parameters:
         - description: >
             the name or tag of the icon or any other phrase.
@@ -710,6 +714,7 @@ paths:
   "/api/iconsets/v3/total?since={since}":
     get:
       description: ""
+      operationId: Totals
       parameters:
         - description: >
             the optional date to calculate the total number of icons that were created after it.
@@ -764,6 +769,7 @@ paths:
   "/api/iconsets/v4/search?term={term}&amount={amount}&offset={offset}&platform={platform}&language={language}&exact_amount={exact_amount}":
     get:
       description: ""
+      operationId: By Keyword v4
       parameters:
         - description: >
             the name or tag of the icon or any other phrase.
@@ -888,8 +894,9 @@ paths:
   /api/task/web-font/collection:
     post:
       description: ""
+      operationId: From a Collection
       requestBody:
-        $ref: "#/components/requestBodies/Body"
+        $ref: "#/components/requestBodies/From_a_CollectionBody"
       responses:
         "200":
           content:
@@ -946,8 +953,9 @@ paths:
   /api/task/web-font/icons:
     post:
       description: ""
+      operationId: From Separate Icons
       requestBody:
-        $ref: "#/components/requestBodies/Body"
+        $ref: "#/components/requestBodies/From_a_CollectionBody"
       responses:
         "200":
           content:
@@ -1003,7 +1011,7 @@ paths:
       tags: []
 components:
   requestBodies:
-    Body:
+    From_a_CollectionBody:
       content:
         application/json:
           schema:

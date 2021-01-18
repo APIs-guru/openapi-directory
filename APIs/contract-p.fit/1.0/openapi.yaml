@@ -1,0 +1,293 @@
+openapi: 3.0.0
+servers:
+  - url: //cfportal.contract-p.fit/api
+x-hasEquivalentPaths: true
+info:
+  description: "This describes the Contract.fit product API. If you don't have authorization keys yet, please request them there: https://contract.fit/contact-us"
+  title: Contract.fit API
+  version: "1.0"
+  x-apisguru-categories:
+    - text
+  x-origin:
+    - format: openapi
+      url: https://cfportal.contract-p.fit/swagger.json
+      version: "3.0"
+  x-providerName: contract-p.fit
+  x-preferred: null
+security:
+  - basic: []
+  - token: []
+tags:
+  - description: File manipulation endpoint
+    name: documents
+paths:
+  /documents/:
+    post:
+      operationId: post_simple_documents_resource
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: File to handle
+                  format: binary
+                  type: string
+                inbox_id:
+                  type: string
+                key_value_flag:
+                  default: true
+                  type: boolean
+              required:
+                - file
+              type: object
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+        - documents
+  "/documents/{document_id}":
+    delete:
+      operationId: delete_document_resource
+      responses:
+        "200":
+          description: Success
+      tags:
+        - documents
+    get:
+      operationId: get_document_resource
+      parameters:
+        - description: An optional fields mask
+          in: header
+          name: X-Fields
+          schema:
+            format: mask
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentModelGet"
+          description: Success
+      tags:
+        - documents
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{document_id}/original_file":
+    get:
+      operationId: get_document_original_file_resource
+      responses:
+        "200":
+          description: Success
+      tags:
+        - documents
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{document_id}/page/{page_range}":
+    get:
+      operationId: get_document_page_image_resource
+      responses:
+        "200":
+          description: Success
+      tags:
+        - documents
+    parameters:
+      - description: The number of the page, starting from 0. A range of pages, separated by ":" is also allowed to return a zip file.
+        in: path
+        name: page_range
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{document_id}/text":
+    get:
+      operationId: get_document_text_resource
+      responses:
+        "200":
+          description: Success
+      tags:
+        - documents
+    parameters:
+      - in: path
+        name: document_id
+        required: true
+        schema:
+          type: string
+  "/documents/{inbox_id}":
+    parameters:
+      - in: path
+        name: inbox_id
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: post_documents_resource
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: File to handle
+                  format: binary
+                  type: string
+                hints:
+                  description: 'Additional hints as a dictionary. Example: {"VAT_number":{"blacklist":"XXXX.XXX.XXX", "whitelist": ["YYYY.YYY.YYY", "ZZZZ.ZZZ.ZZZ"]}}'
+                  pattern: '\{ *("(Reference|includes_water|el_EAN|process_label|email_address|phone_number|url|fax_number|company_number|sender_company_number|receiver_company_number|VAT_number|sender_VAT|receiver_VAT|cost_bucket|vendor_VAT|receiver_company|IBAN|baloise_IBAN|holder_iban|sender_IBAN|receiver_IBAN|bank_account|energy_supplier|energy_el_consumption|BIC|invoice_number|due_date|invoice_date|payment_terms|document_date|gross_amount|tax_amount|tax_rate|net_amount|tax_item|net_item|baloise_t_amount|baloise_t_kwitantienummer|amount_payable|insurance_name|sender_name|receiver_name|registered_sender_name|registered_receiver_name|address_filter_ligging|address_after_gegevens|address_filter_first|person|zip|city|street|number|structured|unstructured|detail_MUT|detail_PL|license_plate|PO_number|PO_item|document_type_label|document_type|reminder|direct_debit|GL_number|robi_number|internal_order|Periodicity|ExpiryDate|StartDate|end_date|start_date|payment_frequency|annual_premium|insurance_policy_number|product_name|Building|Content|Vehicles|SolarPanels|FirstRisk|OccupationType|PropertyType|QualificationType|language|country|currency_estimate|currency|Siret|Siret_legal_name|Siret_commercial_name|kvk_number|CIF_number|insured_insz|insured_birthdate|print_date|insured_first_name|insured_last_name|Detailfiche als werknemer|Detailfiche als zelfstandige|sender_address|receiver_address|registered_sender_address|registered_receiver_address|sender_address_line_1|sender_address_line_2|sender_post_code|sender_city|sender_country|receiver_address_line_1|receiver_address_line_2|receiver_post_code|receiver_city|receiver_country|registered_sender_address_line_1|registered_sender_address_line_2|registered_sender_post_code|registered_sender_city|registered_sender_country|registered_receiver_address_line_1|registered_receiver_address_line_2|registered_receiver_post_code|registered_receiver_city|registered_receiver_country|secci_APR|secci_duration|secci_installments|secci_total_amount_to_pay|receipt_lines|line_items_with_detail|TaxTotal|contract_number|contract_number_lbfo|shading|rotation|folding_lines|source|resolution|payslips_document_type|employee_lastname|employee_firstname|payslip_issue_date|dependent_children|national_registration_number|employee_street_number|employee_street_name|employee_postal_code|employer_name|employer_street_number|employer_street_name|employer_postal_code|payslip_period|contract_type|entry_date|working_time|onss|net_salary|advance_payment|holder_first_name|holder_last_name|Matches|translation|firstname|lastname|birthdate|id_first_name|id_last_name|id_gender|id_nationality|id_card_number|id_national_number|id_birth_date|legal_type_document|legal_type_infraction|legal_penalty|legal_infraction|baloise_signature|signature|logo|handwritten_text|barcode_detection|barcode|steuernummer|cnr_uk|tak_label|tax_compound|payslip_employer_name|payslip_employee_name|employer_address_street|employer_address_number|employer_address_zip|employer_address_city|employee_address_street|employee_address_number|employee_address_zip|employee_address_city|claim_number|policy_number|receipt_lines_with_categories|car_policy_holder_birth_date|car_policy_comissioning_date|car_policy_city|car_policy_brand|car_policy_catalog_value|car_policy_power|car_policy_driver_license_date|car_policy_model|car_policy_payment_term|car_policy_usage|car_policy_fuel|car_policy_street|car_policy_holder_first_name|car_policy_funding_ratio|car_policy_holder_last_name|car_policy_start_date|car_policy_business_type|car_policy_holder|car_policy_postal_code|email_sender|email_receiver|email_subject|email_date|offer_number|client_number|producer|table|table_extraction|table_transformer|baloise_t_payment_method|generate_policy_numbers|generate_claim_numbers|por_code|insurance_type|afdeling_label|maatschappij_label|inputchannel_id|text_categorize|unreadable_attachment|release_date|payslip_days_worked|civil_status|job_status|employment_type|gross_salary|salary_seizure|tax_notice_national_registration_number|tax_notice_national_registration_number_2|tax_notice_civil_status|tax_notice_civil_status_2|taxable_income_for_independents|taxable_income_for_independents_2|dependent_children_1030|dependent_children_1034|dependent_children_1036|dependent_children_2030|dependent_children_2034|dependent_children_2036|contract_number_uw|document_language_uw|dossier_number_uw|license_plate_number_uw|declaration_number_uw|process_label_uw|claim_number_claims|medium|correspondent|sinister_date|contract_number_claims|process_label_claims|information_only|start_of_regular_old_age_pension|disability_pension|todays_pension_entitlement|retirement_pension|regular_retirement_pension_1_percent|regular_retirement_pension_2_percent|retirement_issue_date|laveba_document_reference|laveba_supplier_number|laveba_receiver_email|laveba_document_number|laveba_desired_date|receipt_number|receipt_address|brand_car|court_chamber|decision_judge|direction|drunk|examination_doctor|fine|fine_multiplier|fine_suspended|fund_prodeo|fund_victims|infraction|infraction_city|infraction_date|infraction_date||infraction_time|infraction_location|infraction_time|judge_name|judgement_date|judgement_number|kostenprocedure|law_limit_alcohol|lawyer_present|lessons_obligation|license_ban|license_ban_suspended|license_ban_weekend|license_plate_legal|measured_alcohol|offender_birthdate_place|offender_domicile|offender_domicilewoonplaats|offender_name|police_court|procureur|prosecutor|pv_number||date_pv|roll_number|speach|speed_corrected|speed_limit|speed_measured|system_number|time_red|trial_date||trial_hour|walk)" *: *\{( *"(blacklist|whitelist)"* *:( *\[)?( *"[A-z0-9._ -]*" *,?){1,}\]? *,?){1,} *\} *,? *){1,} *\}'
+                  type: string
+                sync:
+                  default: true
+                  type: boolean
+              required:
+                - file
+              type: object
+        required: true
+      responses:
+        "200":
+          description: Success
+      tags:
+        - documents
+components:
+  responses:
+    Exception:
+      description: Forward a BUIserverException to the final user
+    MaskError:
+      description: When any error occurs on mask
+    ParseError:
+      description: When a mask can't be parsed
+  schemas:
+    DocumentModelGet:
+      properties:
+        escalate:
+          $ref: "#/components/schemas/StateModelGet"
+        evaluation_data:
+          items:
+            type: object
+          type: array
+        feedback:
+          type: object
+        files:
+          type: object
+        flag_for_review:
+          type: boolean
+        id:
+          type: string
+        inbox:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+        last_version:
+          type: string
+        lock:
+          $ref: "#/components/schemas/StateModelGet"
+        meta_information:
+          type: object
+        original_filename:
+          type: string
+        page_count:
+          type: integer
+        prediction:
+          type: object
+        reject:
+          $ref: "#/components/schemas/StateModelGet"
+        status_data:
+          $ref: "#/components/schemas/StatusDataModel"
+        submitted:
+          $ref: "#/components/schemas/StateModelGet"
+        timings:
+          $ref: "#/components/schemas/TimingsModelGet"
+        usage_data:
+          type: object
+      required:
+        - id
+        - inbox
+        - original_filename
+        - page_count
+      type: object
+    StateModelGet:
+      properties:
+        by:
+          example: abcdef123456789abcdef123
+          maxLength: 24
+          minLength: 24
+          pattern: "[A-z0-9]"
+          type: string
+        since:
+          format: date-time
+          type: string
+        value:
+          type: boolean
+      type: object
+    StatusDataModel:
+      properties:
+        archived:
+          type: boolean
+        data:
+          type: boolean
+        escalate:
+          type: boolean
+        feedback:
+          type: boolean
+        lock:
+          type: boolean
+        ready_accepted:
+          type: boolean
+        ready_attempts:
+          type: integer
+        reject:
+          type: boolean
+        reject_accepted:
+          type: boolean
+        reject_attempts:
+          type: integer
+        sampling:
+          type: boolean
+        submit_accepted:
+          type: boolean
+        submit_attempts:
+          type: integer
+        success:
+          type: boolean
+      type: object
+    TimingsModelGet:
+      properties:
+        done_time:
+          format: date-time
+          type: string
+        feedback_time:
+          format: date-time
+          type: string
+        processing_period:
+          type: number
+        receive_time:
+          format: date-time
+          type: string
+        start_time:
+          format: date-time
+          type: string
+      type: object
+  securitySchemes:
+    basic:
+      description: username and password
+      scheme: basic
+      type: http
+    token:
+      in: header
+      name: Authorization
+      type: apiKey

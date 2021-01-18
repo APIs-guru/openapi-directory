@@ -18,6 +18,7 @@ info:
 paths:
   /account:
     get:
+      description: Deprecated. Authenticate and get a token, then you can use the bearer token here to retrieve details about your account.
       operationId: GET_account
       responses:
         "200":
@@ -40,22 +41,29 @@ paths:
               schema:
                 properties:
                   environment:
+                    description: Deprecated. Whether you are using your production or sandbox API key will impact what environment is displayed here, as well as stats and features information. If you use your sandbox key, the environment is "sandbox." If you use your production key, the environment is "production."
                     type: string
                   features:
+                    description: "Deprecated. What features are enabled for your account. Choices include: app.dynamic_metadata - the ability to dynamically tag videos to better segment and understand your audiences, app.event_log - the ability to create and retrieve a log detailing how your videos were interacted with, player.white_label - the ability to customise your player, stats.player_events - the ability to see statistics about how your player is being used, transcode.mp4_support - the ability to reformat content into mp4 using the H264 codec."
+                    example: '["app.dynamic_metadata, app.event_log"]'
                     items:
                       type: string
                     type: array
                   quota:
+                    description: Deprecated
                     properties:
                       quotaRemaining:
+                        description: Deprecated
                         type: number
                       quotaTotal:
+                        description: Deprecated
                         type: number
                       quotaUsed:
+                        description: Deprecated
                         type: number
                     type: object
                 type: object
-          description: ""
+          description: Success
         "404":
           content:
             application/vnd.api.video+json:
@@ -68,7 +76,7 @@ paths:
                     type: https://docs.api.video/docs/resourcenot_found
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: Show account
@@ -78,7 +86,9 @@ paths:
     get:
       operationId: GET_analytics-live-streams-liveStreamId
       parameters:
-        - in: path
+        - description: The unique identifier for the live stream you want to retrieve analytics for.
+          example: vi4k0jvEUuaTdRAEjQ4Jfrgz
+          in: path
           name: liveStreamId
           required: true
           schema:
@@ -87,18 +97,19 @@ paths:
             Period must have one of the following formats: 
 
 
-            - For a day : 2018-01-01,
+            - For a day : "2018-01-01",
 
-            - For a week: 2018-W01, 
+            - For a week: "2018-W01", 
 
-            - For a month: 2018-01
+            - For a month: "2018-01"
 
-            - For a year: 2018
+            - For a year: "2018"
 
 
             For a range period: 
 
-            -  Date range: 2018-01-01/2018-01-15
+            -  Date range: "2018-01-01/2018-01-15"
+          example: 2019-01-01
           in: query
           name: period
           required: false
@@ -106,6 +117,7 @@ paths:
             format: date
             type: string
         - description: Number of the page to display
+          example: 2
           in: query
           name: currentPage
           required: false
@@ -176,7 +188,7 @@ paths:
                   pagination:
                     $ref: "#/components/schemas/pagination"
                 type: object
-          description: ""
+          description: Success
         "404":
           content:
             application/vnd.api.video+json:
@@ -189,7 +201,7 @@ paths:
                     type: https://docs.api.video/docs/resourcenot_found
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: List live stream player sessions
@@ -200,12 +212,15 @@ paths:
       description: Useful to track and measure video's engagement.
       operationId: GET_analytics-sessions-sessionId-events
       parameters:
-        - in: path
+        - description: A unique identifier you can use to reference and track a session with.
+          example: psEmFwGQUAXR2lFHj5nDOpy
+          in: path
           name: sessionId
           required: true
           schema:
             type: string
-        - description: Number of the page to display
+        - description: Number of the page to display.
+          example: 4
           in: query
           name: currentPage
           required: false
@@ -213,7 +228,8 @@ paths:
             default: 1
             minimum: 1
             type: integer
-        - description: Expected number of items to display on the page. Might be lower on the last page
+        - description: Expected number of items to display on the page. Might be lower on the last page if there are not enough items.
+          example: 30
           in: query
           name: pageSize
           required: false
@@ -334,7 +350,7 @@ paths:
                   pagination:
                     $ref: "#/components/schemas/pagination"
                 type: object
-          description: ""
+          description: Success
         "404":
           content:
             application/vnd.api.video+json:
@@ -347,7 +363,7 @@ paths:
                     type: https://docs.api.video/docs/resourcenot_found
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: List player session events
@@ -355,9 +371,12 @@ paths:
         - Raw statistics
   "/analytics/videos/{videoId}":
     get:
+      description: Retrieve all available user sessions for a specific video.
       operationId: GET_analytics-videos-videoId
       parameters:
-        - in: path
+        - description: The unique identifier for the video you want to retrieve session information for.
+          example: vi4k0jvEUuaTdRAEjQ4Prklg
+          in: path
           name: videoId
           required: true
           schema:
@@ -384,7 +403,8 @@ paths:
           schema:
             format: date
             type: string
-        - description: Metadata and Dynamic Metadata filter.
+        - description: Metadata and Dynamic Metadata filter. Send an array of key value pairs you want to filter sessios with.
+          example: '[{"key": "Author", "value": "John Doe"}, {"key": "Format", "value": "Tutorial"}]'
           explode: true
           in: query
           name: metadata
@@ -393,7 +413,8 @@ paths:
             items:
               type: string
             type: array
-        - description: Number of the page to display
+        - description: Number of the page to display.
+          example: 3
           in: query
           name: currentPage
           required: false
@@ -401,7 +422,8 @@ paths:
             default: 1
             minimum: 1
             type: integer
-        - description: Expected number of items to display on the page. Might be lower on the last page
+        - description: Expected number of items to display on the page. Might be lower on the last page.
+          example: 30
           in: query
           name: pageSize
           required: false
@@ -464,7 +486,7 @@ paths:
                   pagination:
                     $ref: "#/components/schemas/pagination"
                 type: object
-          description: ""
+          description: Success
         "404":
           content:
             application/vnd.api.video+json:
@@ -477,7 +499,7 @@ paths:
                     type: https://docs.api.video/docs/resourcenot_found
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: List video player sessions
@@ -581,26 +603,32 @@ paths:
         - Authentication
   /live-streams:
     get:
-      description: With no parameters added to the url, this will return all Livestreams. Query by name or Key to limit the list.
+      description: With no parameters added to the url, this will return all livestreams. Query by name or key to limit the list.
       operationId: GET_live-streams
       parameters:
-        - in: query
+        - description: The unique stream key that allows you to stream videos.
+          example: 30087931-229e-42cf-b5f9-e91bcc1f7332
+          in: query
           name: streamKey
           required: false
           schema:
             type: string
-        - in: query
+        - description: You can filter live streams by their name or a part of their name.
+          example: My Video
+          in: query
           name: name
           required: false
           schema:
             type: string
-        - description: "Allowed: createdAt, publishedAt, name"
+        - description: "Allowed: createdAt, publishedAt, name. createdAt - the time a livestream was created using the specified streamKey. publishedAt - the time a livestream was published using the specified streamKey. name - the name of the livestream. If you choose one of the time based options, the time is presented in ISO-8601 format."
+          example: createdAt
           in: query
           name: sortBy
           required: false
           schema:
             type: string
-        - description: "Allowed: asc, desc"
+        - description: "Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending."
+          example: desc
           in: query
           name: sortOrder
           required: false
@@ -609,7 +637,8 @@ paths:
               - asc
               - desc
             type: string
-        - description: Number of the page to display
+        - description: Number of the page to display.
+          example: 3
           in: query
           name: currentPage
           required: false
@@ -617,7 +646,8 @@ paths:
             default: 1
             minimum: 1
             type: integer
-        - description: Expected number of items to display on the page. Might be lower on the last page
+        - description: Expected number of items to display on the page. If there are not enough items to fill the last page, it will be partially filled.
+          example: 30
           in: query
           name: pageSize
           required: false
@@ -683,7 +713,7 @@ paths:
                   - data
                   - pagination
                 type: object
-          description: ""
+          description: Success
       security:
         - bearerAuth: []
       summary: List all live streams
@@ -706,11 +736,17 @@ paths:
                 record: true
               properties:
                 name:
+                  description: Add a name for your live stream here.
+                  example: My Live Stream Video
                   type: string
                 playerId:
+                  description: The unique identifier for the player. Player IDs begin with "pl."
+                  example: pl4f4ferf5erfr5zed4fsdd
                   type: string
                 record:
                   default: false
+                  description: Whether you are recording or not. True for record, false for not record.
+                  example: true
                   type: boolean
               required:
                 - name
@@ -752,7 +788,9 @@ paths:
     delete:
       operationId: DELETE_live-streams-liveStreamId
       parameters:
-        - in: path
+        - description: The unique ID for the live stream that you want to remove.
+          example: li400mYKSgQ6xs7taUeSaEKr
+          in: path
           name: liveStreamId
           required: true
           schema:
@@ -769,7 +807,9 @@ paths:
       description: Supply a LivestreamId, and you'll get all the details for streaming into, and watching the livestream.
       operationId: GET_live-streams-liveStreamId
       parameters:
-        - in: path
+        - description: The unique ID for the live stream you want to watch.
+          example: li400mYKSgQ6xs7taUeSaEKr
+          in: path
           name: liveStreamId
           required: true
           schema:
@@ -805,7 +845,9 @@ paths:
       description: "Use this endpoint to update the player, or to turn recording on/off (saving a copy of the livestream). NOTE: If the livestream is actively streaming, changing the recording status will only affect the NEXT stream."
       operationId: PATCH_live-streams-liveStreamId
       parameters:
-        - in: path
+        - description: The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+          example: li400mYKSgQ6xs7taUeSaEKr
+          in: path
           name: liveStreamId
           required: true
           schema:
@@ -816,10 +858,16 @@ paths:
             schema:
               properties:
                 name:
+                  description: The name you want to use for your live stream.
+                  example: My Live Stream Video
                   type: string
                 playerId:
+                  description: The unique ID for the player associated with a live stream that you want to update.
+                  example: pl45KFKdlddgk654dspkze
                   type: string
                 record:
+                  description: Use this to indicate whether you want the recording on or off. On is true, off is false.
+                  example: true
                   type: boolean
               type: object
       responses:
@@ -857,9 +905,12 @@ paths:
         - Live
   "/live-streams/{liveStreamId}/thumbnail":
     delete:
+      description: Send the unique identifier for a live stream to delete it from the system.
       operationId: DELETE_live-streams-liveStreamId-thumbnail
       parameters:
-        - in: path
+        - description: The unique identifier for the live stream you want to delete. Live stream IDs begin with "li."
+          example: li400mYKSgQ6xs7taUeSaEKr
+          in: path
           name: liveStreamId
           required: true
           schema:
@@ -870,7 +921,7 @@ paths:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/live-stream"
-          description: ""
+          description: Success
         "404":
           content:
             application/vnd.api.video+json:
@@ -883,17 +934,19 @@ paths:
                     type: https://docs.api.video/docs/resourcenot_found
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: Delete a thumbnail
       tags:
         - Live
     post:
-      description: Upload an image to use as a backdrop for your livestream
+      description: Upload an image to use as a backdrop for your livestream.
       operationId: POST_live-streams-liveStreamId-thumbnail
       parameters:
-        - in: path
+        - description: The unique ID for the live stream you want to upload.
+          example: vi4k0jvEUuaTdRAEjQ4Jfrgz
+          in: path
           name: liveStreamId
           required: true
           schema:
@@ -906,7 +959,7 @@ paths:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/live-stream"
-          description: ""
+          description: Created
         "400":
           content:
             application/vnd.api.video+json:
@@ -919,7 +972,7 @@ paths:
                     type: https://docs.api.video/docs/fileextension
               schema:
                 $ref: "#/components/schemas/bad-request"
-          description: ""
+          description: Bad Request
         "404":
           content:
             application/vnd.api.video+json:
@@ -932,7 +985,7 @@ paths:
                     type: https://docs.api.video/docs/resourcenot_found
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: Upload a thumbnail
@@ -940,9 +993,11 @@ paths:
         - Live
   /players:
     get:
+      description: Retrieve a list of all the players you created, as well as details about each one.
       operationId: GET_players
       parameters:
-        - description: ""
+        - description: createdAt is the time the player was created. updatedAt is the time the player was last updated. The time is presented in ISO-8601 format.
+          example: createdAt
           in: query
           name: sortBy
           required: false
@@ -951,7 +1006,8 @@ paths:
               - createdAt
               - updatedAt
             type: string
-        - description: "Allowed: asc, desc"
+        - description: "Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones."
+          example: asc
           in: query
           name: sortOrder
           required: false
@@ -960,7 +1016,8 @@ paths:
               - asc
               - desc
             type: string
-        - description: Number of the page to display
+        - description: Number of the page to display.
+          example: 3
           in: query
           name: currentPage
           required: false
@@ -968,7 +1025,8 @@ paths:
             default: 1
             minimum: 1
             type: integer
-        - description: Expected number of items to display on the page. Might be lower on the last page
+        - description: Expected number of items to display on the page. Might be lower on the last page.
+          example: 30
           in: query
           name: pageSize
           required: false
@@ -1084,6 +1142,7 @@ paths:
       tags:
         - Players
     post:
+      description: Create a player for your video, and customise it.
       operationId: POST_players
       requestBody:
         $ref: "#/components/requestBodies/playerinput"
@@ -1118,7 +1177,7 @@ paths:
                     updatedAt: 2020-01-13T10:09:17+00:00
               schema:
                 $ref: "#/components/schemas/player"
-          description: ""
+          description: Created
       security:
         - bearerAuth: []
       summary: Create a player
@@ -1126,9 +1185,12 @@ paths:
         - Players
   "/players/{playerId}":
     delete:
+      description: Delete a player if you no longer need it. You can delete any player that you have the player ID for.
       operationId: DELETE_players-playerId
       parameters:
-        - in: path
+        - description: The unique identifier for the player you want to delete.
+          example: pl45d5vFFGrfdsdsd156dGhh
+          in: path
           name: playerId
           required: true
           schema:
@@ -1155,9 +1217,12 @@ paths:
       tags:
         - Players
     get:
+      description: Use a player ID to retrieve details about the player and display it for viewers.
       operationId: GET_players-playerId
       parameters:
-        - in: path
+        - description: The unique identifier for the player you want to retrieve. Player IDs start with "pl."
+          example: pl45d5vFFGrfdsdsd156dGhh
+          in: path
           name: playerId
           required: true
           schema:
@@ -1193,7 +1258,7 @@ paths:
                     updatedAt: 2020-01-13T11:12:14+00:00
               schema:
                 $ref: "#/components/schemas/player"
-          description: ""
+          description: Success
         "404":
           content:
             application/vnd.api.video+json:
@@ -1213,10 +1278,12 @@ paths:
       tags:
         - Players
     patch:
-      description: It may take up to 10 min before the new player configuration is available from our CDN.
+      description: "Use a player ID to update specific details for a player. NOTE: It may take up to 10 min before the new player configuration is available from our CDN."
       operationId: PATCH_players-playerId
       parameters:
-        - in: path
+        - description: The unique identifier for the player. Player IDs start with "pl."
+          example: pl45d5vFFGrfdsdsd156dGhh
+          in: path
           name: playerId
           required: true
           schema:
@@ -1277,7 +1344,9 @@ paths:
     delete:
       operationId: DELETE_players-playerId-logo
       parameters:
-        - in: path
+        - description: The unique identifier for the player. Player IDs begin with pl.
+          example: pl14Db6oMJRH6SRVoOwORacK
+          in: path
           name: playerId
           required: true
           schema:
@@ -1288,7 +1357,7 @@ paths:
             application/vnd.api.video+json:
               schema:
                 type: object
-          description: ""
+          description: No Content
         "404":
           content:
             application/vnd.api.video+json:
@@ -1301,7 +1370,7 @@ paths:
                     type: https://docs.api.video/docs/resourcenot_found
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: Delete logo
@@ -1314,7 +1383,9 @@ paths:
         It will be scaled down to 30px height and converted to PNG to be displayed in the player.
       operationId: POST_players-playerId-logo
       parameters:
-        - in: path
+        - description: The unique identifier for the player. Player IDs start with pl.
+          example: pl14Db6oMJRH6SRVoOwORacK
+          in: path
           name: playerId
           required: true
           schema:
@@ -1325,9 +1396,12 @@ paths:
             schema:
               properties:
                 file:
-                  format: binary
+                  description: The name of the file you want to use for your logo.
+                  example: mylogo.jpg
                   type: string
                 link:
+                  description: The path to the file you want to upload and use as a logo.
+                  example: path/to/my/logo/mylogo.jpg
                   format: uri
                   type: string
               required:
@@ -1438,12 +1512,16 @@ paths:
         We have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
       operationId: POST_upload
       parameters:
-        - in: query
+        - description: The unique identifier for the token you want to use to upload a video.
+          example: to1tcmSFHeYY5KzyhOqVKMKb
+          in: query
           name: token
           required: false
           schema:
             type: string
-        - in: header
+        - description: Content-Range represents the range of bytes that will be returned as a result of the request. Byte ranges are inclusive, meaning that bytes 0-999 represents the first 1000 bytes in a file or object.
+          example: "Content-Range: bytes 200-100/5000"
+          in: header
           name: Content-Range
           required: false
           schema:
@@ -1455,8 +1533,8 @@ paths:
             schema:
               properties:
                 file:
-                  description: The video you'd like to upload.
-                  format: binary
+                  description: The path to the video you want to upload.
+                  example: path/to/video/video.mp4
                   type: string
                 videoId:
                   description: The video id returned by the first call to this endpoint in a large video upload scenario.
@@ -1473,7 +1551,7 @@ paths:
                   value:
                     assets:
                       hls: https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8
-                      iframe: <iframe src='//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae' width='100%' height='100%' frameborder='0' scrolling='no' allowfullscreen=''></iframe>
+                      iframe: <iframe src="//embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
                       player: https://embed.api.video/vi4k0jvEUuaTdRAEjQ4Jfrgz?token=831a9bd9-9f50-464c-a369-8e9d914371ae
                       thumbnail: https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/thumbnail.jpg
                     description: An amazing video explaining the string theory
@@ -1502,16 +1580,17 @@ paths:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/bad-request"
-          description: ""
+          description: Bad Request
       summary: Upload with an upload token
       tags:
         - Videos - Delegated upload
   /upload-tokens:
     get:
-      description: Returns a list of all currently active delegated tokens
+      description: A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens.
       operationId: GET_upload-tokens
       parameters:
-        - description: "Allowed: createdAt, ttl"
+        - description: "Allowed: createdAt, ttl. You can use these to sort by when a token was created, or how much longer the token will be active (ttl - time to live). Date and time is presented in ISO-8601 format."
+          example: ttl
           in: query
           name: sortBy
           required: false
@@ -1520,7 +1599,8 @@ paths:
               - createdAt
               - ttl
             type: string
-        - description: "Allowed: asc, desc"
+        - description: "Allowed: asc, desc. Ascending is 0-9 or A-Z. Descending is 9-0 or Z-A."
+          example: asc
           in: query
           name: sortOrder
           required: false
@@ -1529,7 +1609,8 @@ paths:
               - asc
               - desc
             type: string
-        - description: Number of the page to display
+        - description: Number of the page to display.
+          example: 3
           in: query
           name: currentPage
           required: false
@@ -1537,7 +1618,8 @@ paths:
             default: 1
             minimum: 1
             type: integer
-        - description: Expected number of items to display on the page. Might be lower on the last page
+        - description: Expected number of items to display on the page. If there are less items than fill a page, the page will be shorter than the requested number of items.
+          example: 20
           in: query
           name: pageSize
           required: false
@@ -1587,13 +1669,14 @@ paths:
                   - data
                   - pagination
                 type: object
-          description: ""
+          description: Success
       security:
         - bearerAuth: []
-      summary: List all upload tokens
+      summary: List all active upload tokens.
       tags:
         - Videos - Delegated upload
     post:
+      description: Use this endpoint to generate an upload token. You can use this token to authenticate video uploads while keeping your API key safe.
       operationId: POST_upload-tokens
       requestBody:
         content:
@@ -1622,13 +1705,13 @@ paths:
                     ttl: 3600
               schema:
                 $ref: "#/components/schemas/upload-token"
-          description: ""
+          description: Success
         "400":
           content:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/bad-request"
-          description: ""
+          description: Bad Request
       security:
         - bearerAuth: []
       summary: Generate an upload token
@@ -1636,31 +1719,37 @@ paths:
         - Videos - Delegated upload
   "/upload-tokens/{uploadToken}":
     delete:
+      description: Delete an existing upload token. This is especially useful for tokens you may have created that do not expire.
       operationId: DELETE_upload-tokens-uploadToken
       parameters:
-        - in: path
+        - description: The unique identifier for the upload token you want to delete. Deleting a token will make it so the token can no longer be used for authentication.
+          example: to1tcmSFHeYY5KzyhOqVKMKb
+          in: path
           name: uploadToken
           required: true
           schema:
             type: string
       responses:
         "204":
-          description: ""
+          description: No Content
         "404":
           content:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: Delete an upload token
       tags:
         - Videos - Delegated upload
     get:
+      description: You can retrieve details about a specific upload token if you have the unique identifier for the upload token. Add it in the path of the endpoint. Details include time-to-live (ttl), when the token was created, and when it will expire.
       operationId: GET_upload-tokens-uploadToken
       parameters:
-        - in: path
+        - description: The unique identifier for the token you want information about.
+          example: to1tcmSFHeYY5KzyhOqVKMKb
+          in: path
           name: uploadToken
           required: true
           schema:
@@ -1798,7 +1887,7 @@ paths:
                           - video
                         title: Maths video
                         updateddAt: 2019-12-16T08:48:49+00:00
-                        videoId: c188ed58-3403-46a2-b91b-44603d10b2c9
+                        videoId: vi4k0jvEUuaTdRAEjQ4Prklg
                       - assets:
                           hls: https://cdn.api.video/stream/831a9bd9-9f50-464c-a369-8e9d914371ae/hls/manifest.m3u8
                           iframe: <iframe src="//embed.api.video/1b9d6ae8-8f57-4b6d-8552-d636926b4f5f?token=831a9bd9-9f50-464c-a369-8e9d914371ae" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
@@ -2135,10 +2224,11 @@ paths:
       tags:
         - Videos
     get:
-      description: This call provides the same JSON information provided on video creation. For private videos, it will generate a unique token url.
+      description: This call provides the same JSON information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.
       operationId: GET-video
       parameters:
-        - in: path
+        - description: The unique identifier for the video you want details about.
+          in: path
           name: videoId
           required: true
           schema:
@@ -2198,7 +2288,7 @@ paths:
       tags:
         - Videos
     patch:
-      description: Use this endpoint to update the parameters associated with your video. The video you are updating is determined by the video ID you provide in the path. Everything else, provided in the request body, can be updated.
+      description: "Use this endpoint to update the parameters associated with your video. The video you are updating is determined by the video ID you provide in the path. For each parameter you want to update, include the update in the request body. NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it."
       operationId: PATCH-video
       parameters:
         - description: The video ID for the video you want to delete.
@@ -2234,7 +2324,7 @@ paths:
                   example: A film about good books.
                   type: string
                 metadata:
-                  description: A list (array) of dictionaries where each dictionary contains a key value pair that describes the video.
+                  description: A list (array) of dictionaries where each dictionary contains a key value pair that describes the video. As with tags, you must send the complete list of metadata you want as whatever you send here will overwrite the existing metadata for the video.
                   items:
                     properties:
                       key:
@@ -2256,7 +2346,7 @@ paths:
                   example: false
                   type: boolean
                 playerId:
-                  description: The unique ID for the player you want to change details for.
+                  description: The unique ID for the player you want to associate with your video.
                   example: pl4k0jvEUuaTdRAEjQ4Jfrgz
                   type: string
                 public:
@@ -2270,7 +2360,7 @@ paths:
                     type: string
                   type: array
                 title:
-                  description: The name of the video you want to alter details for.
+                  description: The title you want to use for your video.
                   type: string
               type: object
       responses:
@@ -2304,7 +2394,7 @@ paths:
                       - string theory
                       - video
                     title: Maths video
-                    updateddAt: 2019-12-16T08:48:49+00:00
+                    updatedAt: 2019-12-16T08:48:49+00:00
                     videoId: vi4k0jvEUuaTdRAEjQ4Jfrgz
               schema:
                 $ref: "#/components/schemas/video"
@@ -2352,9 +2442,12 @@ paths:
         - Videos
   "/videos/{videoId}/captions":
     get:
+      description: Retrieve a list of available captions for the videoId you provide.
       operationId: GET_videos-videoId-captions
       parameters:
-        - in: path
+        - description: The unique identifier for the video you want to retrieve a list of captions for.
+          example: vi4k0jvEUuaTdRAEjQ4Prklg
+          in: path
           name: videoId
           required: true
           schema:
@@ -2411,14 +2504,18 @@ paths:
         - Captions
   "/videos/{videoId}/captions/{language}":
     delete:
+      description: Delete a caption in a specific language by providing the video ID for the video you want to delete the caption from and the language the caption is in.
       operationId: DELETE_videos-videoId-captions-language
       parameters:
-        - in: path
+        - description: The unique identifier for the video you want to delete a caption from.
+          example: vi4k0jvEUuaTdRAEjQ4Prklgc
+          in: path
           name: videoId
           required: true
           schema:
             type: string
-        - description: A valid BCP 47 language representation
+        - description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+          example: en
           in: path
           name: language
           required: true
@@ -2426,27 +2523,31 @@ paths:
             type: string
       responses:
         "204":
-          description: ""
+          description: No Content
         "404":
           content:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: Delete a caption
       tags:
         - Captions
     get:
+      description: Display a caption for a video in a specific language. If the language is available, the caption is returned. Otherwise, you will get a response indicating the caption was not found.
       operationId: GET_videos-videoId-captions-language
       parameters:
-        - in: path
+        - description: The unique identifier for the video you want captions for.
+          example: vi4k0jvEUuaTdRAEjQ4Prklg
+          in: path
           name: videoId
           required: true
           schema:
             type: string
-        - description: A valid BCP 47 language representation
+        - description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+          example: en
           in: path
           name: language
           required: true
@@ -2465,13 +2566,13 @@ paths:
                     uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/en
               schema:
                 $ref: "#/components/schemas/subtitle"
-          description: ""
+          description: Success
         "404":
           content:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: Show a caption
@@ -2481,12 +2582,15 @@ paths:
       description: "To have the captions on automatically, use this PATCH to set default: true."
       operationId: PATCH_videos-videoId-captions-language
       parameters:
-        - in: path
+        - description: The unique identifier for the video you want to have automatic captions for. Video ids always start with "vi."
+          example: vi4k0jvEUuaTdRAEjQ4Prklg
+          in: path
           name: videoId
           required: true
           schema:
             type: string
-        - description: A valid BCP 47 language representation
+        - description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+          example: en
           in: path
           name: language
           required: true
@@ -2528,7 +2632,7 @@ paths:
                     type: string (required)
               schema:
                 $ref: "#/components/schemas/bad-request"
-          description: ""
+          description: Bad Request
         "404":
           content:
             application/vnd.api.video+json:
@@ -2541,7 +2645,7 @@ paths:
                     type: Lorem sit culpa non
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: Update caption
@@ -2553,12 +2657,15 @@ paths:
          Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
       operationId: POST_videos-videoId-captions-language
       parameters:
-        - in: path
+        - description: The unique identifier for the video you want to add a caption to.
+          example: vi4k0jvEUuaTdRAEjQ4Prklg
+          in: path
           name: videoId
           required: true
           schema:
             type: string
-        - description: A valid BCP 47 language representation
+        - description: A valid BCP 47 language representation.
+          example: en
           in: path
           name: language
           required: true
@@ -2570,7 +2677,8 @@ paths:
             schema:
               properties:
                 file:
-                  description: The VTT you'd like to upload.
+                  description: The video text track (VTT) you want to upload.
+                  example: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/captions/en.vtt
                   format: binary
                   type: string
               required:
@@ -2589,19 +2697,19 @@ paths:
                     uri: /videos/vi3N6cDinStg3oBbN79GklWS/captions/en
               schema:
                 $ref: "#/components/schemas/subtitle"
-          description: ""
+          description: Success
         "400":
           content:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/bad-request"
-          description: ""
+          description: Bad Request
         "404":
           content:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: Upload a caption
@@ -2609,9 +2717,12 @@ paths:
         - Captions
   "/videos/{videoId}/chapters":
     get:
+      description: Retrieve a list of all chapters for a specified video.
       operationId: GET_videos-videoId-chapters
       parameters:
-        - in: path
+        - description: The unique identifier for the video you want to retrieve a list of chapters for.
+          example: vi4k0jvEUuaTdRAEjQ4Jfrgz
+          in: path
           name: videoId
           required: true
           schema:
@@ -2652,13 +2763,13 @@ paths:
                   pagination:
                     $ref: "#/components/schemas/pagination"
                 type: object
-          description: ""
+          description: Success
         "404":
           content:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: List video chapters
@@ -2668,12 +2779,15 @@ paths:
     delete:
       operationId: DELETE_videos-videoId-chapters-language
       parameters:
-        - in: path
+        - description: The unique identifier for the video you want to delete a chapter from. Video IDs begin with "vi."
+          example: vi4k0jvEUuaTdRAEjQ4Jfrgz
+          in: path
           name: videoId
           required: true
           schema:
             type: string
-        - description: A valid BCP 47 language representation
+        - description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+          example: en
           in: path
           name: language
           required: true
@@ -2681,13 +2795,13 @@ paths:
             type: string
       responses:
         "204":
-          description: ""
+          description: No Content
         "404":
           content:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: Delete a chapter
@@ -2696,12 +2810,15 @@ paths:
     get:
       operationId: GET_videos-videoId-chapters-language
       parameters:
-        - in: path
+        - description: The unique identifier for the video you want to show a chapter for. Video IDs always begin with "vi."
+          example: vi4k0jvEUuaTdRAEjQ4Jfrgz
+          in: path
           name: videoId
           required: true
           schema:
             type: string
-        - description: A valid BCP 47 language representation
+        - description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+          example: en
           in: path
           name: language
           required: true
@@ -2719,13 +2836,13 @@ paths:
                     uri: /videos/vi3N6cDinStg3oBbN79GklWS/chapters/fr
               schema:
                 $ref: "#/components/schemas/chapter"
-          description: ""
+          description: Success
         "404":
           content:
             application/vnd.api.video+json:
               schema:
                 $ref: "#/components/schemas/not-found"
-          description: ""
+          description: Not Found
       security:
         - bearerAuth: []
       summary: Show a chapter
@@ -2735,12 +2852,15 @@ paths:
       description: Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
       operationId: POST_videos-videoId-chapters-language
       parameters:
-        - in: path
+        - description: The unique identifier for the video you want to upload a chapter for.
+          example: vi4k0jvEUuaTdRAEjQ4Jfrgz
+          in: path
           name: videoId
           required: true
           schema:
             type: string
-        - description: A valid BCP 47 language representation
+        - description: A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+          example: en
           in: path
           name: language
           required: true
@@ -2752,8 +2872,7 @@ paths:
             schema:
               properties:
                 file:
-                  description: The VTT file describing the chapters you'd like to upload.
-                  format: binary
+                  description: The VTT file describing the chapters you want to upload.
                   type: string
               required:
                 - file
@@ -2791,7 +2910,7 @@ paths:
   "/videos/{videoId}/source":
     post:
       description: >-
-        To upload a video to an existing videoId. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload.
+        To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
 
 
         ```bash
@@ -2802,7 +2921,7 @@ paths:
           ```
       operationId: POST_videos-videoId-source
       parameters:
-        - description: Enter the existing videoId you want to use to upload your video. This will replace whatever was associated with the videoId already.
+        - description: Enter the videoId you want to use to upload your video.
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
           in: path
           name: videoId
@@ -2823,9 +2942,8 @@ paths:
             schema:
               properties:
                 file:
-                  description: The path to the video you would like to upload.
-                  example: https://www.video.com/myvideo.mp4
-                  format: binary
+                  description: The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
+                  example: "@/path/to/video.mp4"
                   type: string
               required:
                 - file
@@ -2994,7 +3112,7 @@ paths:
       description: Pick a thumbnail from the given time code. If you'd like to upload an image for your thumbnail, use the [Upload a Thumbnail](https://docs.api.video/reference#post_videos-videoid-thumbnail) endpoint. There may be a short delay for the thumbnail to update.
       operationId: PATCH_videos-videoId-thumbnail
       parameters:
-        - description: "Unique identifier of the chosen video "
+        - description: Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
           example: vi4k0jvEUuaTdRAEjQ4Jfrgz
           in: path
           name: videoId
@@ -3012,9 +3130,9 @@ paths:
                   description: >-
                     Frame in video to be used as a placeholder before the video plays. 
 
-                    Example: "00:01:00.000" for 1 minute into the video.
+                    Example: '"00:01:00.000" for 1 minute into the video.'
 
-                    Valid Patterns : 
+                    Valid Patterns: 
 
                     "hh:mm:ss.ms"
 
@@ -3080,7 +3198,7 @@ paths:
       tags:
         - Videos
     post:
-      description: In creating a thumbnail, you may either upload an image, or you can pick a time in the video to be used as thumbnail. This endpoint is to upload an image. Use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video. There may be a short delay before the new thumbnail is delivered to our CDN.
+      description: In creating a thumbnail, you may either upload an image, or you can pick a time in the video to be used as thumbnail. This endpoint is for uploading an image. Use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video. There may be a short delay before the new thumbnail is delivered to our CDN.
       operationId: POST_videos-videoId-thumbnail
       parameters:
         - description: "Unique identifier of the chosen video "
@@ -3180,32 +3298,39 @@ components:
         minimum: 1
         type: integer
     trait_paginatedListLivesStats_currentPage:
+      description: The number for the page you are currently viewing.
+      example: 4
       in: query
       name: currentPage
       required: false
       schema:
         type: integer
     trait_paginatedListLivesStats_pageSize:
+      description: The number of items you want to display per page. If there are less items than the page size, the page will be only partially full.
+      example: 30
       in: query
       name: pageSize
       required: false
       schema:
         type: integer
     trait_paginatedListLivesStats_sortBy:
-      description: "Allowed: emitted_at, title"
+      description: "Allowed: emitted_at, title. Allowed: emitted_at, title. Sort by when an event occurred, an event is something that happens during a session like ready, play, pause, resume, seek.backward, seek.forward, or end. The date-time format for an event occurrence is ISO-8601. You can also sort by title. Use the sortOrder parameter to choose the order in which information is returned."
       in: query
       name: sortBy
       required: false
       schema:
         type: string
     trait_paginatedListLivesStats_sortOrder:
-      description: "Allowed: asc, desc"
+      description: "Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending."
+      example: desc
       in: query
       name: sortOrder
       required: false
       schema:
         type: string
     trait_paginatedListSessionEventsStats_currentPage:
+      description: The number for the page you are currently on.
+      example: 3
       in: query
       name: currentPage
       required: false
@@ -3222,20 +3347,24 @@ components:
           type: string
         type: array
     trait_paginatedListSessionEventsStats_pageSize:
+      description: The number of items returned per page. If there are not enough items for a page, the page will be partially filled.
+      example: 30
       in: query
       name: pageSize
       required: false
       schema:
         type: integer
     trait_paginatedListSessionEventsStats_sortBy:
-      description: "Allowed: emitted_at, title"
+      description: "Allowed: emitted_at, title. Allowed: emitted_at, title. Sort by when an event occurred, an event is something that happens during a session like ready, play, pause, resume, seek.backward, seek.forward, or end. The date-time format for an event occurrence is ISO-8601. You can also sort by title. Use the sortOrder parameter to choose the order in which information is returned."
+      example: My Movie
       in: query
       name: sortBy
       required: false
       schema:
         type: string
     trait_paginatedListSessionEventsStats_sortOrder:
-      description: "Allowed: asc, desc"
+      description: "Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending."
+      example: asc
       in: query
       name: sortOrder
       required: false
@@ -3251,20 +3380,24 @@ components:
           type: string
         type: array
     trait_paginatedListVideo_sortBy:
-      description: "Allowed: publishedAt, title"
+      description: "Allowed: publishedAt, title. Sort by when a video was published, using the time in ISO-8601 format, or by title. Use sortOrder to choose the order in which these are sorted."
+      example: publishedAt
       in: query
       name: sortBy
       required: false
       schema:
         type: string
     trait_paginatedListVideo_sortOrder:
-      description: "Allowed: asc, desc"
+      description: "Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending."
+      example: desc
       in: query
       name: sortOrder
       required: false
       schema:
         type: string
     trait_paginatedListVideosStats_currentPage:
+      description: The number of the page you want to view.
+      example: 3
       in: query
       name: currentPage
       required: false
@@ -3272,6 +3405,7 @@ components:
         type: integer
     trait_paginatedListVideosStats_metadata:
       description: Metadata and Dynamic Metadata filter.
+      example: '[{"key": "Author", "value": "John Doe"}, {"key": "Format", "value": "Tutorial"}]'
       explode: true
       in: query
       name: metadata
@@ -3281,26 +3415,31 @@ components:
           type: string
         type: array
     trait_paginatedListVideosStats_pageSize:
+      description: How many items will be returned per page. If you do not have enough items for a page, there will be less items than the requested page size.
+      example: 30
       in: query
       name: pageSize
       required: false
       schema:
         type: integer
     trait_paginatedListVideosStats_sortBy:
-      description: "Allowed: emitted_at, title"
+      description: "Allowed: emitted_at, title. Sort by when an event occurred, an event is something that happens during a session like ready, play, pause, resume, seek.backward, seek.forward, or end. The date-time format for an event occurrence is ISO-8601. You can also sort by title. Use the sortOrder parameter to choose the order in which information is returned."
       in: query
       name: sortBy
       required: false
       schema:
         type: string
     trait_paginatedListVideosStats_sortOrder:
-      description: "Allowed: asc, desc"
+      description: "Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending."
+      example: asc
       in: query
       name: sortOrder
       required: false
       schema:
         type: string
     trait_paginatedListVideosStats_tags:
+      description: Tags can be used to categorise the video.
+      example: '["maths", "string theory", "video"]'
       explode: true
       in: query
       name: tags
@@ -3317,7 +3456,6 @@ components:
             properties:
               file:
                 description: The image to be added as a thumbnail.
-                format: binary
                 type: string
             required:
               - file
@@ -3464,10 +3602,16 @@ components:
     bytes_range:
       properties:
         from:
+          description: The starting point for the range of bytes for a chunk of a video.
+          example: 0
           type: integer
         to:
+          description: The ending point for the range of bytes for a chunk of a video.
+          example: 9999
           type: integer
         total:
+          description: The total number of bytes in the provided range.
+          example: 10000
           type: integer
       title: bytes_range
       type: object
@@ -3476,6 +3620,8 @@ components:
         language:
           type: string
         src:
+          description: The link to your VTT file, which contains your chapters information for the video.
+          example: https://cdn.api.video/vod/vi3N6cDinStg3oBbN79GklWS/chapters/fr.vtt
           type: string
         uri:
           type: string
@@ -3486,85 +3632,142 @@ components:
         assets:
           properties:
             hls:
+              description: The http live streaming (HLS) link for your live video stream.
+              example: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
               format: uri
               type: string
             iframe:
+              description: The embed code for the iframe containing your live video stream.
+              example: <iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\" width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>
               type: string
             player:
+              description: A link to the video player that is playing your live stream.
+              example: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
               format: uri
               type: string
             thumbnail:
+              description: A link to the thumbnail for your video.
+              example: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
               format: uri
               type: string
           type: object
         broadcasting:
+          description: Whether or not you are broadcasting the live video you recorded for others to see. True means you are broadcasting to viewers, false means you are not.
+          example: true
           type: boolean
         liveStreamId:
+          description: The unique identifier for the live stream. Live stream IDs begin with "li."
+          example: li400mYKSgQ6xs7taUeSaEKr
           type: string
         name:
+          description: The name of your live stream.
+          example: My Live Stream
           type: string
         playerId:
+          description: The unique identifier for the player, these start with "pl."
+          example: pl45d5vFFGrfdsdsd156dGhh
           type: string
         record:
+          description: Whether you are recording or not.
+          example: true
           type: boolean
         streamKey:
+          description: The unique, private stream key that you use to begin streaming.
+          example: cc1b4df0-d1c5-4064-a8f9-9f0368385135
           type: string
       title: LiveStream
       type: object
     live-stream-session:
       properties:
         client:
+          description: What kind of browser the viewer is using for the live stream session.
           properties:
             name:
+              description: The name of the browser used to view the live stream session.
+              example: Firefox
               type: string
             version:
+              description: The version of the browser used to view the live stream session.
+              example: "67.0"
               type: string
           type: object
         device:
+          description: What type of device the user is on when in the live stream session.
           properties:
             model:
+              description: The specific model of the device, if known.
+              example: unknown
               type: string
             type:
+              description: What the type is like desktop, laptop, mobile.
+              example: desktop
               type: string
             vendor:
+              description: If known, what the brand of the device is, like Apple, Dell, etc.
+              example: Dell
               type: string
           type: object
         location:
+          description: The location of the viewer of the live stream.
           properties:
             city:
+              description: The city of the viewer of the live stream.
+              example: Paris
               type: string
             country:
+              description: The country of the viewer of the live stream.
+              example: France
               type: string
           type: object
         os:
+          description: The operating system the viewer is on.
           properties:
             name:
+              description: The name of the operating system.
+              example: Microsoft Windows
               type: string
             shortname:
+              description: The nickname for the operating system, often representing the version.
+              example: W10
               type: string
             version:
+              description: The version of the operating system.
+              example: Windows 10
               type: string
           type: object
         referrer:
           properties:
             medium:
+              description: The type of search that brought the viewer to the live stream. Organic would be they found it on their own, paid would be they found it via an advertisement.
+              example: organic
               type: string
             searchTerm:
+              description: What term they searched for that led them to the live stream.
+              example: video stream
               type: string
             source:
+              description: Where the viewer came from to see the live stream (usually where they searched from).
+              example: https://google.com
               type: string
             url:
+              description: The website the viewer of the live stream was referred to in order to view the live stream.
+              example: https://api.video
               type: string
           type: object
         session:
           properties:
             endedAt:
+              description: When the session ended, with the date and time presented in ISO-8601 format.
+              example: 2019-06-24T12:45:01.109+00
               format: date-time
               type: string
             loadedAt:
+              description: When the session started, with the date and time presented in ISO-8601 format.
+              example: 2019-06-24T11:45:01.109+00
               format: date-time
               type: string
             sessionId:
+              description: A unique identifier for your session. You can use this to track what happens during a specific session.
               type: string
           type: object
       title: Live Stream Session
@@ -3645,10 +3848,12 @@ components:
         assets:
           properties:
             link:
-              description: url
+              description: The path to the file containing your logo.
+              example: path/to/my/logo/mylogo.jpg
               type: string
             logo:
-              description: filename of image used for logo
+              description: The name of the file containing the logo you want to use.
+              example: mylogo.jpg
               type: string
           type: object
         backgroundBottom:
@@ -3661,7 +3866,8 @@ components:
           description: "RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7)"
           type: string
         createdAt:
-          description: Creation date
+          description: When the player was created, presented in ISO-8601 format.
+          example: 2020-01-31T10:17:47+00:00
           format: date-time
           type: string
         enableApi:
@@ -3720,7 +3926,8 @@ components:
           description: "RGBA color playback bar: downloaded but unplayed (buffered) content. Default: rgba(255, 255, 255, .35)"
           type: string
         updatedAt:
-          description: Last update date
+          description: When the player was last updated, presented in ISO-8601 format.
+          example: 2020-01-31T10:18:47+00:00
           format: date-time
           type: string
       title: Player
@@ -3730,6 +3937,8 @@ components:
         at:
           type: integer
         emittedAt:
+          description: When an event occurred, presented in ISO-8601 format.
+          example: 2019-06-24T11:45:01.109+00
           format: date-time
           type: string
         from:
@@ -3822,14 +4031,17 @@ components:
     quality:
       properties:
         quality:
+          description: The quality of the video you have, in pixels. Choices include 360p, 480p, 720p, 1080p, and 2160p.
           enum:
             - 360p
             - 480p
             - 720p
             - 1080p
             - 2160p
+          example: 720p
           type: string
         status:
+          description: The status of your video. Statuses include waiting - the video is waiting to be encoded. encoding - the video is in the process of being encoded. encoded - the video was successfully encoded. failed - the video failed to be encoded.
           enum:
             - waiting
             - encoding
@@ -3842,6 +4054,8 @@ components:
       properties:
         default:
           default: false
+          description: Whether you will have subtitles or not. True for yes you will have subtitles, false for no you will not have subtitles.
+          example: false
           type: boolean
         src:
           type: string
@@ -3854,14 +4068,21 @@ components:
     upload-token:
       properties:
         createdAt:
+          description: When the token was created, displayed in ISO-8601 format.
+          example: 2019-12-16T08:25:51+00:00
           format: date-time
           type: string
         expiresAt:
+          description: When the token expires, displayed in ISO-8601 format.
+          example: 2019-12-16T09:25:51+00:00
           format: date-time
           type: string
         token:
+          description: The unique identifier for the token you will use to authenticate an upload.
+          example: to1tcmSFHeYY5KzyhOqVKMKb
           type: string
         ttl:
+          description: Time-to-live - how long the upload token is valid for.
           maximum: 2147483647
           minimum: 0
           type: integer
@@ -3889,7 +4110,7 @@ components:
           - string theory
           - video
         title: Maths video
-        videoId: c188ed58-3403-46a2-b91b-44603d10b2c9
+        videoId: vi4k0jvEUuaTdRAEjQ4Jfrgz
       title: Video
     video-session:
       example:
@@ -3919,57 +4140,94 @@ components:
           sessionId: psEmFwGQUAXR2lFHj5nDOpy
       properties:
         client:
+          description: What kind of browser the viewer is using for the video session.
           properties:
             name:
+              description: The name of the browser used to view the video session.
+              example: Firefox
               type: string
             version:
+              description: The version of the browser used to view the video session.
+              example: "67.0"
               type: string
           type: object
         device:
+          description: What type of device the user is on when in the video session.
           properties:
             model:
+              description: The specific model of the device, if known.
+              example: unknown
               type: string
             type:
+              description: What the type is like desktop, laptop, mobile.
+              example: desktop
               type: string
             vendor:
+              description: If known, what the brand of the device is, like Apple, Dell, etc.
+              example: Dell
               type: string
           type: object
         location:
+          description: The location of the viewer.
           properties:
             city:
+              description: The city of the viewer.
+              example: Paris
               type: string
             country:
+              description: The country of the viewer.
+              example: France
               type: string
           type: object
         os:
+          description: The operating system the viewer is on.
           properties:
             name:
+              description: The name of the operating system.
+              example: Microsoft Windows
               type: string
             shortname:
+              description: The nickname for the operating system, often representing the version.
+              example: W10
               type: string
             version:
+              description: The version of the operating system.
+              example: Windows 10
               type: string
           type: object
         referrer:
           properties:
             medium:
+              description: How they arrived at the site, for example organic or paid. Organic meaning they found it themselves and paid meaning they followed a link from an advertisement.
+              example: organic
               type: string
             searchTerm:
+              description: The search term they typed to arrive at the video session.
               type: string
             source:
+              description: The source the referrer came from to the video session. For example if they searched through google to find the stream.
+              example: https://google.com
               type: string
             url:
+              description: The link the viewer used to reach the video session.
+              example: https://api.video
               type: string
           type: object
         session:
           properties:
             endedAt:
+              description: When the video session ended, presented in ISO-8601 format.
+              example: 2019-06-24T12:45:01.109+00
               format: date-time
               type: string
             loadedAt:
+              description: When the video session started, presented in ISO-8601 format.
+              example: 2019-06-24T11:45:01.109+00
               format: date-time
               type: string
             sessionId:
+              description: The unique identifier for the session that you can use to track what happens during it.
+              example: psEmFwGQUAXR2lFHj5nDOpy
               type: string
           type: object
       title: Video Session
@@ -4054,13 +4312,15 @@ components:
                     type: object
                   type: array
                 liveStreamId:
+                  description: The unique identifier for the live stream.
+                  example: li400mYKSgQ6xs7taUeSaEKr
                   type: string
               type: object
             type:
               type: string
             uri:
               description: The URL where the video is stored.
-              example: /videos/c188ed58-3403-46a2-b91b-44603d10b2c9/source
+              example: /videos/vi4k0jvEUuaTdRAEjQ4Prklg/source
               type: string
           type: object
         tags:
@@ -4081,7 +4341,7 @@ components:
           type: string
         videoId:
           description: The unique identifier of the video object.
-          example: c188ed58-3403-46a2-b91b-44603d10b2c9
+          example: vi4k0jvEUuaTdRAEjQ4Prklg
           type: string
       title: VideoOutput
       type: object
@@ -4131,6 +4391,7 @@ components:
                 aspectRatio:
                   type: string
                 audioCodec:
+                  description: The method used to compress and decompress digital audio for your video.
                   type: string
                 bitrate:
                   description: The number of bits processed per second.
@@ -4150,6 +4411,8 @@ components:
                   example: 48000
                   type: integer
                 videoCodec:
+                  description: "The method used to compress and decompress digital video. API Video supports all codecs in the libavcodec library. "
+                  example: null
                   type: string
                 width:
                   description: The width of the video in pixels.

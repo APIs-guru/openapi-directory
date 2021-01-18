@@ -57,6 +57,8 @@ tags:
     name: IPs
   - description: Inbound channels operations
     name: Inbound Channels
+  - description: Managed Accounts operations
+    name: Managed Accounts
   - description: Messages
     name: Messages
   - description: Manage your messaging hosted numbers
@@ -261,6 +263,7 @@ paths:
         - $ref: "#/components/parameters/PageSize"
         - $ref: "#/components/parameters/FilterCustomerReferenceEquals"
         - $ref: "#/components/parameters/FilterCustomerReferenceContains"
+        - $ref: "#/components/parameters/FilterUsedAsEmergency"
         - $ref: "#/components/parameters/FilterStreetAddress"
         - $ref: "#/components/parameters/FilterAddressBook"
         - $ref: "#/components/parameters/SortAddress"
@@ -486,6 +489,12 @@ paths:
           name: filter[reservable]
           schema:
             example: true
+            type: boolean
+        - description: Filter to exclude phone numbers that are currently on hold for your account.
+          in: query
+          name: filter[exclude_held_numbers]
+          schema:
+            example: false
             type: boolean
       responses:
         "200":
@@ -3546,6 +3555,117 @@ paths:
       tags:
         - Reports
       x-latency-category: background
+  /managed_accounts:
+    get:
+      description: Lists the accounts managed by the current user. Users need to be explictly approved by Telnyx in order to become manager accounts.
+      operationId: listManagedAccounts
+      parameters:
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/FilterEmailContains"
+        - $ref: "#/components/parameters/FilterEmailEq"
+        - $ref: "#/components/parameters/Sort"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListManagedAccountsResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+      summary: Lists accounts managed by the current user.
+      tags:
+        - Managed Accounts
+      x-latency-category: responsive
+    post:
+      description: Create a new managed account owned by the authenticated user. You need to be explictly approved by Telnyx in order to become a manager account.
+      operationId: createManagedAccount
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateManagedAccountRequest"
+        description: Parameters that define the managed account to be created
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/ManagedAccountResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableManagedAccountEntity"
+      summary: Create a new managed account.
+      tags:
+        - Managed Accounts
+      x-latency-category: responsive
+  "/managed_accounts/{id}":
+    get:
+      description: Retrieves the details of a single managed account.
+      operationId: retrieveManagedAccount
+      parameters:
+        - description: Managed Account User ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/ManagedAccountResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "404":
+          description: Resource not found
+      summary: Retrieve a managed account
+      tags:
+        - Managed Accounts
+      x-latency-category: responsive
+  "/managed_accounts/{id}/actions/disable":
+    post:
+      description: Disables a managed account, forbidding it to use Telnyx services, including sending or receiving phone calls and SMS messages. Ongoing phone calls will not be affected. The managed account and its sub-users will still be able to log in via the mission control portal.
+      operationId: disableManagedAccount
+      parameters:
+        - description: Managed Account User ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/ManagedAccountResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "404":
+          description: Resource not found
+        "422":
+          $ref: "#/components/responses/UnprocessableManagedAccountEntity"
+      summary: Disables a managed account
+      tags:
+        - Managed Accounts
+      x-latency-category: responsive
+  "/managed_accounts/{id}/actions/enable":
+    post:
+      description: Enables a managed account and its sub-users to use Telnyx services.
+      operationId: enableManagedAccount
+      parameters:
+        - description: Managed Account User ID
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/ManagedAccountResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "404":
+          description: Resource not found
+        "422":
+          $ref: "#/components/responses/UnprocessableManagedAccountEntity"
+      summary: Enables a managed account
+      tags:
+        - Managed Accounts
+      x-latency-category: responsive
   /messages:
     post:
       callbacks:
@@ -5477,7 +5597,7 @@ paths:
         - $ref: "#/components/parameters/IntId"
       responses:
         "200":
-          $ref: "#/components/responses/PhoneNumberResponse"
+          $ref: "#/components/responses/DeletePhoneNumberResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Delete a phone number
@@ -6893,7 +7013,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/VerificationRequest"
+              $ref: "#/components/schemas/CreateVerificationRequest"
         required: true
       responses:
         "200":
@@ -6902,7 +7022,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/CreateVerificationResponse"
           description: Expected verifications response to a valid request.
-        default:
+        "400":
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Trigger a verification
       tags:
@@ -6910,9 +7030,9 @@ paths:
       x-latency-category: responsive
   "/verifications/by_phone_number/{phone_number}":
     get:
-      operationId: retrieveVerificationByPhoneNumber
+      operationId: listVerifications
       parameters:
-        - description: The phone number associated with the verification to retrieve.
+        - description: The phone number associated with the verifications to retrieve.
           in: path
           name: phone_number
           required: true
@@ -6927,17 +7047,17 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListVerificationsResponse"
           description: Expected verifications response to a valid request.
-        default:
+        "400":
           $ref: "#/components/responses/GenericErrorResponse"
-      summary: Retrieve a verification by phone number
+      summary: List verifications by phone number
       tags:
         - Verify
       x-latency-category: responsive
   "/verifications/by_phone_number/{phone_number}/actions/verify":
     post:
-      operationId: verifyVerificationByPhoneNumber
+      operationId: verifyVerificationCode
       parameters:
-        - description: The phone number associated with the verification being verified.
+        - description: The phone number associated with the verification code being verified.
           in: path
           name: phone_number
           required: true
@@ -6949,16 +7069,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/VerificationCodeRequest"
+              $ref: "#/components/schemas/VerifyVerificationCodeRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VerificationVerify"
+                $ref: "#/components/schemas/VerifyVerificationCodeResponse"
           description: Expected verify response to a valid request.
-        default:
+        "400":
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Submit a verification code
       tags:
@@ -6966,7 +7086,7 @@ paths:
       x-latency-category: responsive
   "/verifications/{verification_id}":
     get:
-      operationId: retrieveVerificationById
+      operationId: retrieveVerification
       parameters:
         - description: The identifier of the verification to retrieve.
           in: path
@@ -6983,7 +7103,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/RetrieveVerificationResponse"
           description: Expected verifications response to a valid request.
-        default:
+        "400":
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Retrieve a verification
       tags:
@@ -7022,7 +7142,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListVerifyProfilesResponse"
           description: Expected Verify profile response to a valid request.
-        default:
+        "400":
           $ref: "#/components/responses/GenericErrorResponse"
       summary: List all Verify profiles
       tags:
@@ -7036,16 +7156,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/VerifyProfileRequest"
+              $ref: "#/components/schemas/CreateVerifyProfileRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CreateVerifyProfileResponse"
+                $ref: "#/components/schemas/VerifyProfileResponse"
           description: Expected Verify profile response to a valid request.
-        default:
+        "400":
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Create a Verify profile
       tags:
@@ -7068,9 +7188,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DeleteVerifyProfileResponse"
+                $ref: "#/components/schemas/VerifyProfileResponse"
           description: Expected Verify profile response to a valid request.
-        default:
+        "400":
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Delete a Verify profile
       tags:
@@ -7093,9 +7213,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CreateVerifyProfileResponse"
+                $ref: "#/components/schemas/VerifyProfileResponse"
           description: Expected Verify profile response to a valid request.
-        default:
+        "400":
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Retrieve a Verify profile
       tags:
@@ -7116,16 +7236,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/VerifyProfileRequest"
+              $ref: "#/components/schemas/UpdateVerifyProfileRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UpdateVerifyProfileResponse"
+                $ref: "#/components/schemas/VerifyProfileResponse"
           description: Expected Verify profile response to a valid request.
-        default:
+        "400":
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Update a Verify profile
       tags:
@@ -7465,6 +7585,22 @@ components:
       required: false
       schema:
         type: string
+    FilterEmailContains:
+      description: If present, email containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
+      in: query
+      name: filter[email][contains]
+      required: false
+      schema:
+        default: "null"
+        type: string
+    FilterEmailEq:
+      description: If present, only returns results with the <code>email</code> matching exactly the value given.
+      in: query
+      name: filter[email][eq]
+      required: false
+      schema:
+        default: "null"
+        type: string
     FilterInnerOutboundVoiceProfileId:
       description: Identifies the associated outbound voice profile.
       in: query
@@ -7517,6 +7653,14 @@ components:
       description: If present, addresses with <code>street_address</code> containing the given value will be returned. Matching is not case-sensitive. Requires at least three characters.
       in: query
       name: filter[street_address][contains]
+      required: false
+      schema:
+        default: "null"
+        type: string
+    FilterUsedAsEmergency:
+      description: "If set as 'true', only addresses used as the emergency address for at least one active phone-number will be returned. When set to 'false', the opposite happens: only addresses not used as the emergency address from phone-numbers will be returned."
+      in: query
+      name: filter[used_as_emergency]
       required: false
       schema:
         default: "null"
@@ -7712,6 +7856,31 @@ components:
       required: true
       schema:
         format: uuid
+        type: string
+    Sort:
+      description: >-
+        Specifies the sort order for results. By default sorting direction is ascending. To have the results sorted in descending order add the <code> -</code> prefix.<br/><br/>
+
+        That is: <ul>
+          <li>
+            <code>email</code>: sorts the result by the
+            <code>email</code> field in ascending order.
+          </li>
+
+          <li>
+            <code>-email</code>: sorts the result by the
+            <code>email</code> field in descending order.
+          </li>
+        </ul> <br/> If not given, results are sorted by <code>created_at</code> in descending order.
+      in: query
+      name: sort
+      required: false
+      schema:
+        default: created_at
+        enum:
+          - created_at
+          - email
+        example: email
         type: string
     SortAddress:
       description: >-
@@ -7995,6 +8164,16 @@ components:
                 $ref: "#/components/schemas/BillingGroup"
             type: object
       description: Expected billing group response to a valid request
+    DeletePhoneNumberResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/PhoneNumberDeletedDetailed"
+            title: Phone Number Response
+            type: object
+      description: Successful response with details about a phone number.
     DeleteSimCardGroupResponse:
       content:
         application/json:
@@ -8372,6 +8551,19 @@ components:
             title: List Ips Response
             type: object
       description: Successful response with a list of IPs.
+    ListManagedAccountsResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/ManagedAccount"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: Successful response with a list of managed accounts.
     ListMessagingHostedNumberOrdersResponse:
       content:
         application/json:
@@ -8697,6 +8889,15 @@ components:
                 $ref: "#/components/schemas/PaginationMetaSimple"
             type: object
       description: A paginated array of webhook_delivery attempts
+    ManagedAccountResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/ManagedAccount"
+            type: object
+      description: Successful response with information about a single managed account.
     MessageResponse:
       content:
         application/json:
@@ -9086,6 +9287,17 @@ components:
       description: Unprocessable entity. Check the 'detail' field in response for details.
     UnprocessableEntityResponse:
       description: Unprocessable entity
+    UnprocessableManagedAccountEntity:
+      content:
+        application/json:
+          schema:
+            properties:
+              errors:
+                items:
+                  $ref: "#/components/schemas/UnprocessableEntityError"
+                type: array
+            type: object
+      description: Unprocessable entity. Check the 'detail' field in response for details.
     UpdateBillingGroupResponse:
       content:
         application/json:
@@ -13632,6 +13844,27 @@ components:
         - from
         - to
       type: object
+    CreateManagedAccountRequest:
+      example:
+        business_name: Larry's Cat Food Inc
+        email: larry_cat_food@customer.org
+        password: 3jVjLq!tMuWKyWx4NN*CvhnB
+      properties:
+        business_name:
+          description: The name of the business for which the new managed account is being created, that will be used as the managed accounts's organization's name.
+          example: Larry's Cat Food Inc
+          type: string
+        email:
+          description: The email address for the managed account. If not provided, the email address will be generated based on the email address of the manager account.
+          example: new_managed_account@customer.org
+          type: string
+        password:
+          description: Password for the managed account. If a password is not supplied, the account will not be able to be signed into directly. (A password reset may still be performed later to enable sign-in via password.)
+          example: 3jVjLq!tMuWKyWx4NN*CvhnB
+          type: string
+      required:
+        - business_name
+      title: Create Managed Account Request
     CreateMessageRequest:
       example:
         from: "+18445550001"
@@ -14074,9 +14307,9 @@ components:
           description: Maximum rate (price per minute) for a Destination to be allowed when making outbound calls.
           type: number
         name:
-          default: ""
           description: A user-supplied name to help with organization.
           example: office
+          minLength: 3
           type: string
         service_plan:
           $ref: "#/components/schemas/ServicePlan"
@@ -14102,6 +14335,8 @@ components:
           items:
             type: string
           type: array
+      required:
+        - name
       title: Outbound Voice Profile
       type: object
     CreateShortCodeMessageRequest:
@@ -14271,6 +14506,30 @@ components:
         - voice_url
       title: Create Texml Application Request
       type: object
+    CreateVerificationRequest:
+      description: The request body when creating a verification.
+      properties:
+        phone_number:
+          description: +E164 formatted phone number.
+          example: "+13035551234"
+          type: string
+        timeout_secs:
+          description: "This is the number of seconds before the code of the request is expired. Once this request has expired, the code will no longer verify the user. Note: this will override the `default_timeout_secs` on the Verify profile."
+          example: 300
+          type: integer
+        type:
+          $ref: "#/components/schemas/VerificationType"
+        verify_profile_id:
+          description: The identifier of the associated Verify profile.
+          example: 12ade33a-21c0-473b-b055-b3c836e1c292
+          format: uuid
+          type: string
+      required:
+        - phone_number
+        - verify_profile_id
+        - type
+      title: CreateVerificationRequest
+      type: object
     CreateVerificationResponse:
       properties:
         data:
@@ -14278,6 +14537,37 @@ components:
       required:
         - data
       title: CreateVerifyVerificationResponse
+      type: object
+    CreateVerifyProfileRequest:
+      description: The request body when creating a Verify profile.
+      properties:
+        default_timeout_secs:
+          description: For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
+          example: 300
+          type: integer
+        messaging_enabled:
+          default: true
+          description: Enables SMS text messaging for the Verify profile.
+          example: true
+          type: boolean
+        messaging_template:
+          default: null
+          description: Optionally sets a messaging text template when sending the verification code. Uses `{code}` to template in the actual verification code.
+          example: "Hello, this is the Acme Inc verification code you requested: {code}."
+          nullable: true
+          type: string
+        name:
+          description: The human readable label for the Verify profile.
+          example: Test Profile
+          type: string
+        rcs_enabled:
+          default: false
+          description: Enables RCS messaging for the Verify profile.
+          example: true
+          type: boolean
+      required:
+        - name
+      title: CreateVerifyProfileRequest
       type: object
     CreateVerifyProfileResponse:
       properties:
@@ -16574,6 +16864,101 @@ components:
       oneOf:
         - type: string
         - type: integer
+    ManagedAccount:
+      properties:
+        api_key:
+          description: The managed account's V2 API access key
+          example: KEY0174227C1D16D1B180A8FF742AD37F70_1bA4vlJKHpZcJGaSXaadFu
+          type: string
+        api_token:
+          description: The managed account's V1 API token
+          example: x6oexQNHTs-fZ7-QsDMOeg
+          type: string
+        api_user:
+          description: The manager account's email, which serves as the V1 API user identifier
+          example: managed_account@example.com
+          type: string
+        balance:
+          $ref: "#/components/schemas/ManagedAccountBalance"
+        created_at:
+          description: ISO 8601 formatted date indicating when the resource was created.
+          example: 2018-02-02T22:25:27.521Z
+          type: string
+        email:
+          description: The managed account's email.
+          example: user@example.com
+          format: email
+          type: string
+        id:
+          description: Uniquely identifies the managed account.
+          example: f65ceda4-6522-4ad6-aede-98de83385123
+          format: UUID
+          type: string
+        manager_account_id:
+          description: The ID of the manager account associated with the managed account.
+          example: f65ceda4-6522-4ad6-aede-98de83385123
+          type: string
+        organization_name:
+          description: The organization the managed account is associated with.
+          example: Example Company LLC
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          enum:
+            - managed_account
+          example: managed_account
+          type: string
+        updated_at:
+          description: ISO 8601 formatted date indicating when the resource was updated.
+          example: 2018-02-02T22:25:27.521Z
+          type: string
+      required:
+        - record_type
+        - id
+        - email
+        - api_key
+        - api_user
+        - api_token
+        - manager_account_id
+        - created_at
+        - updated_at
+      title: ManagedAccount
+      type: object
+    ManagedAccountBalance:
+      example:
+        available_credit: "400.00"
+        balance: "300.00"
+        credit_limit: "100.00"
+        currency: USD
+        record_type: balance
+      properties:
+        available_credit:
+          description: Available amount to spend (balance + credit limit)
+          example: "400.00"
+          format: decimal
+          type: string
+        balance:
+          description: The account's current balance.
+          example: "300.00"
+          format: decimal
+          type: string
+        credit_limit:
+          description: The account's credit limit.
+          example: "100.00"
+          format: decimal
+          type: string
+        currency:
+          description: The ISO 4217 currency identifier.
+          example: USD
+          format: iso4217
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          enum:
+            - balance
+          example: balance
+          type: string
+      type: object
     MdrDeleteDetailReportV2Resp:
       properties:
         data:
@@ -18397,9 +18782,9 @@ components:
           description: Maximum rate (price per minute) for a Destination to be allowed when making outbound calls.
           type: number
         name:
-          default: ""
           description: A user-supplied name to help with organization.
           example: office
+          minLength: 3
           type: string
         record_type:
           description: Identifies the type of the resource.
@@ -18433,6 +18818,8 @@ components:
           items:
             type: string
           type: array
+      required:
+        - name
       title: Outbound Voice Profile
       type: object
     OutboundVoiceProfileId:
@@ -18636,6 +19023,130 @@ components:
             - failure
           readOnly: true
           type: string
+    PhoneNumberDeletedDetailed:
+      example:
+        billing_group_id: 86f58db9-0fe3-4adc-9d1f-46e66e6e9323
+        call_forwarding_enabled: true
+        call_recording_enabled: true
+        caller_id_name_enabled: true
+        cnam_listing_enabled: true
+        connection_id: "1293384261075731499"
+        connection_name: connection-name
+        created_at: 2019-10-23T18:10:00.000Z
+        customer_reference: customer-reference
+        emergency_address_id: "1315261609962112019"
+        emergency_enabled: true
+        external_pin: "1234"
+        id: "1293384261075731499"
+        messaging_profile_id: abc85f64-5717-4562-b3fc-2c9600000000
+        messaging_profile_name: regional-customers
+        phone_number: "+19705555098"
+        purchased_at: 2019-10-23T18:10:00.000Z
+        record_type: phone_number
+        status: deleted
+        t38_fax_gateway_enabled: true
+        tags:
+          - tag_1
+          - tag_2
+        updated_at: 2019-10-24T18:10:00.000Z
+      properties:
+        billing_group_id:
+          description: Identifies the billing group associated with the phone number.
+          type: string
+        call_forwarding_enabled:
+          default: true
+          description: Indicates if call forwarding will be enabled for this number if forwards_to and forwarding_type are filled in. Defaults to true for backwards compatibility with APIV1 use of numbers endpoints.
+          readOnly: true
+          type: boolean
+        call_recording_enabled:
+          description: Indicates whether call recording is enabled for this number.
+          readOnly: true
+          type: boolean
+        caller_id_name_enabled:
+          description: Indicates whether caller ID is enabled for this number.
+          readOnly: true
+          type: boolean
+        cnam_listing_enabled:
+          description: Indicates whether a CNAM listing is enabled for this number.
+          readOnly: true
+          type: boolean
+        connection_id:
+          description: Identifies the connection associated with the phone number.
+          type: string
+        connection_name:
+          description: The user-assigned name of the connection to be associated with this phone number.
+          readOnly: true
+          type: string
+        created_at:
+          description: ISO 8601 formatted date indicating when the time it took to activate after the purchase.
+          readOnly: true
+          type: string
+        customer_reference:
+          description: A customer reference string for customer look ups.
+          example: MY REF 001
+          type: string
+        emergency_address_id:
+          description: Identifies the emergency address associated with the phone number.
+          format: int64
+          readOnly: true
+          type: string
+        emergency_enabled:
+          description: Indicates whether emergency services are enabled for this number.
+          readOnly: true
+          type: boolean
+        external_pin:
+          description: If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, Telnyx will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
+          type: string
+        id:
+          $ref: "#/components/schemas/IntId"
+        messaging_profile_id:
+          description: Identifies the messaging profile associated with the phone number.
+          type: string
+        messaging_profile_name:
+          description: The name of the messaging profile associated with the phone number.
+          example: regional-customers
+          type: string
+        phone_number:
+          description: The +E.164-formatted phone number associated with this record.
+          readOnly: true
+          type: string
+        purchased_at:
+          description: ISO 8601 formatted date indicating the time the request was made to purchase the number.
+          readOnly: true
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: phone_number
+          readOnly: true
+          type: string
+        status:
+          description: The phone number's current status.
+          enum:
+            - purchase-pending
+            - purchase-failed
+            - port-pending
+            - port-failed
+            - active
+            - deleted
+            - emergency-only
+            - ported-out
+            - port-out-pending
+          readOnly: true
+          type: string
+        t38_fax_gateway_enabled:
+          description: Indicates whether T38 Fax Gateway for inbound calls to this number.
+          readOnly: true
+          type: boolean
+        tags:
+          description: A list of user-assigned tags to help manage the phone number.
+          items:
+            type: string
+          type: array
+        updated_at:
+          description: ISO 8601 formatted date indicating when the resource was updated.
+          readOnly: true
+          type: string
+      type: object
     PhoneNumberDetailed:
       example:
         billing_group_id: 86f58db9-0fe3-4adc-9d1f-46e66e6e9323
@@ -18755,10 +19266,6 @@ components:
           items:
             type: string
           type: array
-        updated_at:
-          description: ISO 8601 formatted date indicating when the resource was updated.
-          readOnly: true
-          type: string
       type: object
     PhoneNumberEnableEmergencyRequest:
       example:
@@ -19758,7 +20265,7 @@ components:
           $ref: "#/components/schemas/Verification"
       required:
         - data
-      title: RetrieveVerifyVerificationResponse
+      title: RetrieveVerificationResponse
       type: object
     SIMCard:
       properties:
@@ -21008,6 +21515,30 @@ components:
         - to
       title: Transfer Call Request
       type: object
+    UnprocessableEntityError:
+      properties:
+        code:
+          format: int
+          type: string
+        detail:
+          type: string
+        meta:
+          type: object
+        source:
+          properties:
+            parameter:
+              description: Indicates which query parameter caused the error.
+              type: string
+            pointer:
+              description: JSON pointer (RFC6901) to the offending entity.
+              format: json-pointer
+              type: string
+          type: object
+        title:
+          type: string
+      required:
+        - code
+        - title
     UpdateBillingGroup:
       example:
         name: string
@@ -21802,9 +22333,9 @@ components:
           description: Maximum rate (price per minute) for a Destination to be allowed when making outbound calls.
           type: number
         name:
-          default: ""
           description: A user-supplied name to help with organization.
           example: office
+          minLength: 3
           type: string
         service_plan:
           $ref: "#/components/schemas/ServicePlan"
@@ -21830,6 +22361,8 @@ components:
           items:
             type: string
           type: array
+      required:
+        - name
       title: Outbound Voice Profile
       type: object
     UpdatePhoneNumberMessagingSettingsRequest:
@@ -22036,6 +22569,37 @@ components:
         - voice_url
       title: Update Texml Application Request
       type: object
+    UpdateVerifyProfileRequest:
+      description: The request body when updating a Verify profile.
+      properties:
+        default_timeout_secs:
+          description: For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
+          example: 300
+          type: integer
+        messaging_enabled:
+          default: true
+          description: Enables SMS text messaging for the Verify profile.
+          example: true
+          type: boolean
+        messaging_template:
+          default: null
+          description: Optionally sets a messaging text template when sending the verification code. Uses `{code}` to template in the actual verification code.
+          example: "Hello, this is the Acme Inc verification code you requested: {code}."
+          nullable: true
+          type: string
+        name:
+          description: The human readable label for the Verify profile.
+          example: Test Profile
+          type: string
+        rcs_enabled:
+          default: false
+          description: Enables RCS messaging for the Verify profile.
+          example: true
+          type: boolean
+      required:
+        - name
+      title: UpdateVerifyProfileRequest
+      type: object
     UpdateVerifyProfileResponse:
       properties:
         data:
@@ -22212,7 +22776,6 @@ components:
       properties:
         created_at:
           example: 2020-09-14T17:03:32.965812
-          format: date-time
           type: string
         id:
           example: 12ade33a-21c0-473b-b055-b3c836e1c292
@@ -22236,7 +22799,6 @@ components:
           $ref: "#/components/schemas/VerificationType"
         updated_at:
           example: 2020-09-14T17:03:32.965812
-          format: date-time
           type: string
         verify_profile_id:
           description: The identifier of the associated Verify profile.
@@ -22253,61 +22815,6 @@ components:
         - updated_at
       title: Verification
       type: object
-    VerificationAggregate:
-      properties:
-        data:
-          items:
-            properties:
-              aggregations:
-                properties:
-                  count:
-                    type: integer
-                type: object
-              fields:
-                properties:
-                  status:
-                    type: string
-                  verify_profile_id:
-                    type: string
-                type: object
-            type: object
-          type: array
-      title: VerificationAggregate
-      type: object
-    VerificationCodeRequest:
-      properties:
-        code:
-          description: This is the code the user submits for verification.
-          example: "17686"
-          type: string
-      required:
-        - code
-      title: VerifyVerificationCodeRequest
-      type: object
-    VerificationRequest:
-      description: The request body when creating a verification.
-      properties:
-        phone_number:
-          description: +E164 formatted phone number.
-          example: "+13035551234"
-          type: string
-        timeout_secs:
-          description: "This is the number of seconds before the code of the request is expired. Once this request has expired, the code will no longer verify the user. Note: this will override the `default_timeout_secs` on the Verify profile."
-          example: 300
-          type: integer
-        type:
-          $ref: "#/components/schemas/VerificationType"
-        verify_profile_id:
-          description: The identifier of the associated Verify profile.
-          example: 12ade33a-21c0-473b-b055-b3c836e1c292
-          format: uuid
-          type: string
-      required:
-        - phone_number
-        - verify_profile_id
-        - type
-      title: VerifyVerificationRequest
-      type: object
     VerificationStatus:
       description: The possible statuses of the verification request.
       enum:
@@ -22322,29 +22829,8 @@ components:
         - invalid_destination
         - timed_out
       example: accepted
-      title: VerifyVerificationStatus
+      title: VerificationStatus
       type: string
-    VerificationSubmissionReponseCode:
-      description: Identifies if the verification code has been accepted or rejected.
-      enum:
-        - accepted
-        - rejected
-      example: accepted
-      title: VerifyVerificationSubmissionReponseCode
-      type: string
-    VerificationSubmissionResponse:
-      properties:
-        phone_number:
-          description: +E164 formatted phone number.
-          example: "+13035551234"
-          type: string
-        response_code:
-          $ref: "#/components/schemas/VerificationSubmissionReponseCode"
-      required:
-        - phone_number
-        - response_code
-      title: VerifyVerificationSubmissionResponse
-      type: object
     VerificationType:
       description: The verification request type.
       enum:
@@ -22352,19 +22838,10 @@ components:
       example: sms
       title: VerificationType
       type: string
-    VerificationVerify:
-      properties:
-        data:
-          $ref: "#/components/schemas/VerificationSubmissionResponse"
-      required:
-        - data
-      title: VerificationVerify
-      type: object
     VerifyProfile:
       properties:
         created_at:
           example: 2020-09-14T17:03:32.965812
-          format: date-time
           type: string
         default_timeout_secs:
           description: For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
@@ -22396,8 +22873,11 @@ components:
           type: string
         updated_at:
           example: 2020-09-14T17:03:32.965812
-          format: date-time
           type: string
+        vsms_enabled:
+          description: Enables VSMS for the Verify profile.
+          example: true
+          type: boolean
       required:
         - id
         - name
@@ -22407,34 +22887,45 @@ components:
         - rcs_enabled
       title: VerifyProfile
       type: object
-    VerifyProfileRequest:
-      description: The request body when creating a Verify profile.
+    VerifyProfileResponse:
+      description: A Verify profile
       properties:
-        default_timeout_secs:
-          description: For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
-          example: 300
-          type: integer
-        messaging_enabled:
-          default: false
-          description: Enables SMS text messaging for the Verify profile.
-          example: true
-          type: boolean
-        messaging_template:
-          description: Optionally sets a messaging text template when sending the verification code. Uses `{code}` to template in the actual verification code.
-          example: "Hello, this is the Acme Inc verification code you requested: {code}."
+        data:
+          $ref: "#/components/schemas/VerifyProfile"
+      title: VerifyProfilesResponse
+      type: object
+    VerifyVerificationCodeRequest:
+      properties:
+        code:
+          description: This is the code the user submits for verification.
+          example: "17686"
           type: string
-        name:
-          description: The human readable label for the Verify profile.
-          example: Test Profile
-          type: string
-        rcs_enabled:
-          default: false
-          description: Enables RCS messaging for the Verify profile.
-          example: true
-          type: boolean
       required:
-        - name
-      title: VerifyProfileRequest
+        - code
+      title: VerifyVerificationCodeRequest
+      type: object
+    VerifyVerificationCodeResponse:
+      properties:
+        data:
+          properties:
+            phone_number:
+              description: +E164 formatted phone number.
+              example: "+13035551234"
+              type: string
+            response_code:
+              description: Identifies if the verification code has been accepted or rejected.
+              enum:
+                - accepted
+                - rejected
+              example: accepted
+              type: string
+          required:
+            - phone_number
+            - response_code
+          type: object
+      required:
+        - data
+      title: VerifyVerificationCodeResponse
       type: object
     WdrReport:
       properties:

@@ -1,5 +1,9 @@
 openapi: 3.0.1
 info:
+  contact:
+    email: support@pdfbroker.io
+    name: PdfBroker.io Support
+    url: https://www.pdfbroker.io/docs
   description: PdfBroker.io is an api for creating pdf files from Xsl-Fo or Html and other useful pdf utilities.
   termsOfService: https://www.pdfbroker.io/terms
   title: PdfBroker.io API
@@ -19,8 +23,25 @@ paths:
   /api/pdf:
     get:
       responses:
-        "200":
-          description: Success
+        "400":
+          content:
+            application/json:
+              example: "{\r
+
+                \  \"description\": \"Always empty in the public response, used for internal error transport to logs\",\r
+
+                \  \"statusCode\": 400,\r
+
+                \  \"errorMessage\": \"The error message provided to client\"\r
+
+                }"
+              schema:
+                $ref: "#/components/schemas/ErrorResponseDto"
+          description: If any error occurs parsing input
+        "415":
+          description: If content-type of request is not set to multipart/form-data or application/json
+        "429":
+          description: If you reach the monthly request limit for your subscription plan
       summary: Basic method to verify api is up and running
       tags:
         - Pdf
@@ -64,39 +85,39 @@ paths:
         "200":
           content:
             application/json:
+              example: "{\r
+
+                \  \"pdfFileBase64String\": \"Base64 encoded pdf file content\",\r
+
+                \  \"errorMessage\": \"If any error occured, info will be provided here\"\r
+
+                }"
               schema:
                 $ref: "#/components/schemas/PdfResponseDto"
             application/pdf:
               schema:
-                $ref: "#/components/schemas/PdfResponseDto"
+                format: binary
+                type: string
           description: Returns the newly created pdf file. Either the file directly or serialized as Json if Accept-header is set to application/json
         "400":
           content:
             application/json:
+              example: "{\r
+
+                \  \"description\": \"Always empty in the public response, used for internal error transport to logs\",\r
+
+                \  \"statusCode\": 400,\r
+
+                \  \"errorMessage\": \"The error message provided to client\"\r
+
+                }"
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/ErrorResponseDto"
           description: If any error occurs parsing input
         "415":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: If content-type of request is not set to multipart/form-data or application/json
         "429":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Client Error
+          description: If you reach the monthly request limit for your subscription plan
       summary: Concatenate multiple pdf files into single pdf file..
       tags:
         - Pdf
@@ -156,63 +177,47 @@ paths:
         "200":
           content:
             application/json:
+              example: "{\r
+
+                \  \"imageBase64String\": \"Image file base64 encoded. This is a complete data uri, including media type that can be used directly as src on a img-tag e.g.\",\r
+
+                \  \"errorMessage\": \"If any error occurred, information will be provided here\"\r
+
+                }"
               schema:
                 $ref: "#/components/schemas/ImageResponseDto"
             image/gif:
               schema:
-                $ref: "#/components/schemas/ImageResponseDto"
+                format: binary
+                type: string
             image/jpeg:
               schema:
-                $ref: "#/components/schemas/ImageResponseDto"
+                format: binary
+                type: string
             image/png:
               schema:
-                $ref: "#/components/schemas/ImageResponseDto"
-          description: Success
+                format: binary
+                type: string
+          description: Generate an image of the provided pdf file. Either the image file directly or serialized as Json if Accept-header is set to application/json
         "400":
           content:
             application/json:
+              example: "{\r
+
+                \  \"description\": \"Always empty in the public response, used for internal error transport to logs\",\r
+
+                \  \"statusCode\": 400,\r
+
+                \  \"errorMessage\": \"The error message provided to client\"\r
+
+                }"
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            image/gif:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            image/jpeg:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            image/png:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Bad Request
+                $ref: "#/components/schemas/ErrorResponseDto"
+          description: If any error occurs parsing input
         "415":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            image/gif:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            image/jpeg:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            image/png:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Client Error
+          description: If content-type of request is not set to multipart/form-data or application/json
         "429":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            image/gif:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            image/jpeg:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            image/png:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Client Error
+          description: If you reach the monthly request limit for your subscription plan
       summary: Generate an image of to provided pdf file
       tags:
         - Pdf
@@ -294,39 +299,39 @@ paths:
         "200":
           content:
             application/json:
+              example: "{\r
+
+                \  \"pdfFileBase64String\": \"Base64 encoded pdf file content\",\r
+
+                \  \"errorMessage\": \"If any error occured, info will be provided here\"\r
+
+                }"
               schema:
                 $ref: "#/components/schemas/PdfResponseDto"
             application/pdf:
               schema:
-                $ref: "#/components/schemas/PdfResponseDto"
+                format: binary
+                type: string
           description: Returns the newly created pdf file. Either the file directly or serialized as Json if Accept-header is set to application/json
         "400":
           content:
             application/json:
+              example: "{\r
+
+                \  \"description\": \"Always empty in the public response, used for internal error transport to logs\",\r
+
+                \  \"statusCode\": 400,\r
+
+                \  \"errorMessage\": \"The error message provided to client\"\r
+
+                }"
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/ErrorResponseDto"
           description: If any error occurs parsing input
         "415":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: If content-type of request is not set to multipart/form-data or application/json
         "429":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Client Error
+          description: If you reach the monthly request limit for your subscription plan
       summary: Write text on a page in a pdf document.
       tags:
         - Pdf
@@ -359,39 +364,39 @@ paths:
         "200":
           content:
             application/json:
+              example: "{\r
+
+                \  \"pdfFileBase64String\": \"Base64 encoded pdf file content\",\r
+
+                \  \"errorMessage\": \"If any error occured, info will be provided here\"\r
+
+                }"
               schema:
                 $ref: "#/components/schemas/PdfResponseDto"
             application/pdf:
               schema:
-                $ref: "#/components/schemas/PdfResponseDto"
+                format: binary
+                type: string
           description: Returns the newly created pdf file. Either the file directly or serialized as Json if Accept-header is set to application/json
         "400":
           content:
             application/json:
+              example: "{\r
+
+                \  \"description\": \"Always empty in the public response, used for internal error transport to logs\",\r
+
+                \  \"statusCode\": 400,\r
+
+                \  \"errorMessage\": \"The error message provided to client\"\r
+
+                }"
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/ErrorResponseDto"
           description: If any error occurs executing request
         "415":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: If content-type of request is not set to application/json
         "429":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-          description: Client Error
+          description: If you reach the monthly request limit for your subscription plan
       summary: Generate pdf file from url using the excellent tool wkhtmltopdf.
       tags:
         - Pdf
@@ -435,38 +440,38 @@ paths:
         "200":
           content:
             application/json:
+              example: "{\r
+
+                \  \"pdfFileBase64String\": \"Base64 encoded pdf file content\",\r
+
+                \  \"errorMessage\": \"If any error occured, info will be provided here\"\r
+
+                }"
               schema:
                 $ref: "#/components/schemas/PdfResponseDto"
             application/pdf:
               schema:
-                $ref: "#/components/schemas/PdfResponseDto"
+                format: binary
+                type: string
           description: Returns the newly created pdf file. Either the file directly or serialized as Json if Accept-header is set to application/json
         "400":
           content:
             application/json:
+              example: "{\r
+
+                \  \"description\": \"Always empty in the public response, used for internal error transport to logs\",\r
+
+                \  \"statusCode\": 400,\r
+
+                \  \"errorMessage\": \"The error message provided to client\"\r
+
+                }"
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/ErrorResponseDto"
           description: If any error occurs parsing input
         "415":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: If content-type of request is not set to multipart/form-data or application/json
         "429":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: If you reach the monthly request limit for your subscription plan
       summary: Create pdf-file from complete XSL-FO document.
       tags:
@@ -519,38 +524,38 @@ paths:
         "200":
           content:
             application/json:
+              example: "{\r
+
+                \  \"pdfFileBase64String\": \"Base64 encoded pdf file content\",\r
+
+                \  \"errorMessage\": \"If any error occured, info will be provided here\"\r
+
+                }"
               schema:
                 $ref: "#/components/schemas/PdfResponseDto"
             application/pdf:
               schema:
-                $ref: "#/components/schemas/PdfResponseDto"
+                format: binary
+                type: string
           description: Returns the newly created pdf file. Either the file directly or serialized as Json if Accept-header is set to application/json
         "400":
           content:
             application/json:
+              example: "{\r
+
+                \  \"description\": \"Always empty in the public response, used for internal error transport to logs\",\r
+
+                \  \"statusCode\": 400,\r
+
+                \  \"errorMessage\": \"The error message provided to client\"\r
+
+                }"
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/ErrorResponseDto"
           description: If any error occurs parsing input
         "415":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: If content-type of request is not set to multipart/form-data or application/json
         "429":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
-            application/pdf:
-              schema:
-                $ref: "#/components/schemas/ProblemDetails"
           description: If you reach the monthly request limit for your subscription plan
       summary: Create pdf-file from transforming xml document with Xsl-Fo transform document.
       tags:
@@ -561,21 +566,21 @@ components:
       additionalProperties: false
       description: Set color
       properties:
-        b:
+        B:
           description: Get or sets B value of RGB color
           format: int32
           maximum: 255
           minimum: 0
           readOnly: true
           type: integer
-        g:
+        G:
           description: Get or sets G value of RGB color
           format: int32
           maximum: 255
           minimum: 0
           readOnly: true
           type: integer
-        r:
+        R:
           description: Get or sets R value of RGB color
           format: int32
           maximum: 255
@@ -583,124 +588,152 @@ components:
           readOnly: true
           type: integer
       type: object
+    ErrorResponseDto:
+      additionalProperties: false
+      properties:
+        Description:
+          nullable: true
+          type: string
+        ErrorMessage:
+          description: If any error occurs the message will be displayed in here
+          nullable: true
+          type: string
+        StatusCode:
+          format: int32
+          type: integer
+      type: object
     FoRequestDto:
       additionalProperties: false
       description: The basic request with the XSL-FO document as a Base64 encoded string with a set of resources provided with a name and the data of the resource as a Base64 encoded string.
       properties:
-        foDocumentBase64String:
+        FoDocumentBase64String:
           description: This is the complete XSL-FO document provided using Base64 encoding.
+          nullable: true
           type: string
-        resources:
+        Resources:
           additionalProperties:
             type: string
           description: This is a set of key-value pairs of digital resources like images that is referenced in the XSL-FO document. It uses the filename as key and the data is provided as a Base64 encoded string.
+          nullable: true
           type: object
       type: object
     FoTransformRequestDto:
       additionalProperties: false
       description: The XSL-FO transform document and xml data document as a Base64 encoded string with a set of resources provided with a name and the data of the resource as a Base64 encoded string.
       properties:
-        foDocumentBase64String:
+        FoDocumentBase64String:
           description: This is the complete XSL-FO document provided using Base64 encoding.
+          nullable: true
           type: string
-        resources:
+        Resources:
           additionalProperties:
             type: string
           description: This is a set of key-value pairs of digital resources like images that is referenced in the XSL-FO document. It uses the filename as key and the data is provided as a Base64 encoded string.
+          nullable: true
           type: object
-        xmlDataDocumentBase64String:
+        XmlDataDocumentBase64String:
           description: This is xml data document on which the XSL-FO transform document is applied. Provided using Base64 encoding.
+          nullable: true
           type: string
       type: object
     FontDto:
       additionalProperties: false
       description: The Font dto object
       properties:
-        name:
+        Name:
           description: Gets the name of the font
+          nullable: true
           readOnly: true
           type: string
-        size:
+        Size:
           description: Gets the size of the font
           format: float
           readOnly: true
           type: number
-        style:
-          description: Gets the style of the font
-          enum:
-            - Regular
-            - Bold
-            - Italic
-            - BoldItalic
-          readOnly: true
-          type: string
+        Style:
+          $ref: "#/components/schemas/FontStyle"
       type: object
+    FontStyle:
+      description: Font style enum representing Regular, Bold, Italic, BoldItalic
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+      format: int32
+      type: integer
     ImageResponseDto:
       additionalProperties: false
       description: When setting the Accept-header in the request to "application/json" the image file will be return as Base64 encoded string. Note that converting data to Base64 encoded strings increases the response size with approximately 33%, if you can accept the a binary format it's better to use Accept-header "image/jpeg", "image/png" or "image/gif".
       properties:
-        errorMessage:
+        ErrorMessage:
           description: If any error occurs the message will be displayed in here
+          nullable: true
           type: string
-        imageBase64String:
-          description: The Base64 encoded string that is the image file.
+        ImageBase64String:
+          description: The Base64 encoded string that is the image file. This is a complete data uri, including media type that can be used directly as src on a img-tag e.g.
+          nullable: true
           type: string
       type: object
     PdfConcatenationRequestDto:
       additionalProperties: false
       description: Request to concatenate a list of Pdf documents to a single Pdf document.
       properties:
-        pdfDocumentsAsBase64String:
+        PdfDocumentsAsBase64String:
           description: The list of Pdf documents encoded as Base64 strings.
           items:
             type: string
+          nullable: true
           type: array
       type: object
     PdfResponseDto:
       additionalProperties: false
       description: When setting the Accept-header in the request to "application/json" the content of the pdf file will be return as Base64 encoded string. Note that converting data to Base64 encoded strings increases the response size with approximately 33%, if you can accept the a binary format it's better to use Accept-header "application/pdf".
       properties:
-        errorMessage:
+        ErrorMessage:
           description: If any error occurs the message will be displayed in here
+          nullable: true
           type: string
-        pdfFileBase64String:
+        PdfFileBase64String:
           description: The Base64 encoded string that is the pdf file.
+          nullable: true
           type: string
       type: object
     PdfToImageOptions:
       additionalProperties: false
       properties:
-        height:
+        Height:
           description: Set the height of the output image, default value is width of source document. To scale height, and keeping proportions, do not set width;
           format: int32
           type: integer
-        horizontalResolution:
+        HorizontalResolution:
           description: Set the horizontal resolution, default is 96 dpi;
           format: double
           type: number
-        imageFormat:
+        ImageFormat:
           description: Valid options are "image/jpeg", "image/png" or "image/gif". Default is "image/png"
+          nullable: true
           type: string
-        jpegQuality:
+        JpegQuality:
           description: Sets the quality of jpeg images, range 0 to 100, default is 75
           format: int32
           type: integer
-        pageNumber:
+        PageNumber:
           description: Which page of the pdf file to generate image from, default is first page
           format: int32
           type: integer
-        pngCompressionLevel:
+        PngCompressionLevel:
           description: Sets the png compression level, range 1 - 9, default is 6
           format: int32
           type: integer
-        transparent:
+        Transparent:
           description: Keep the background of the image transparent. This setting is not available in JPEG-files, since transparency is not supported in the JPEG format.
           type: boolean
-        verticalResolution:
+        VerticalResolution:
           description: Set the vertical resolution, default is 96 dpi;
           format: double
           type: number
-        width:
+        Width:
           description: Set the width of the output image, default value is width of source document. To scale width, and keeping proportions, do not set height;
           format: int32
           type: integer
@@ -708,46 +741,38 @@ components:
     PdfToImageRequestDto:
       additionalProperties: false
       properties:
-        options:
+        Options:
           $ref: "#/components/schemas/PdfToImageOptions"
-        pdfFileBase64String:
+        PdfFileBase64String:
           description: The pdf file to generate image from, as Base64 encoded string.
+          nullable: true
           type: string
       type: object
     PdfWriteStringOptions:
       additionalProperties: false
       description: Options for writing string in pdf page;
       properties:
-        font:
+        Font:
           $ref: "#/components/schemas/FontDto"
-        pageNumber:
+        PageNumber:
           description: Get or set which page in the pdf to write on, default is first page.
           format: int32
           type: integer
-        text:
+        Text:
           description: The text to write in the pdf
+          nullable: true
           type: string
-        textColor:
+        TextColor:
           $ref: "#/components/schemas/ColorDto"
-        xOrigin:
-          description: Get or set the point from where the X axis position should be calculated from. Default value is from left side of page.
-          enum:
-            - Left
-            - Center
-            - Right
-          type: string
-        xPosition:
+        XOrigin:
+          $ref: "#/components/schemas/XOriginPoint"
+        XPosition:
           description: Get or set the X axis position on where to write string, in reference to XOrigin.
           format: float
           type: number
-        yOrigin:
-          description: Get or set the point from where the Y axis position should be calculated from. Default value is from top of page.
-          enum:
-            - Top
-            - Center
-            - Bottom
-          type: string
-        yPosition:
+        YOrigin:
+          $ref: "#/components/schemas/YOriginPoint"
+        YPosition:
           description: Get or set the Y axis position on where to write string, in reference to YOrigin.
           format: float
           type: number
@@ -756,53 +781,56 @@ components:
       additionalProperties: false
       description: The request dto object to write a string on pdf page
       properties:
-        fontFileBase64String:
+        FontFileBase64String:
           description: System fonts are available, but you can provide your own font file to be embedded in the pdf document. Send font as Base64 encoded string.
-          type: string
-        options:
-          $ref: "#/components/schemas/PdfWriteStringOptions"
-        pdfFileBase64String:
-          description: The pdf file to add text to, as Base64 encoded string.
-          type: string
-      type: object
-    ProblemDetails:
-      additionalProperties:
-        type: object
-      properties:
-        detail:
-          type: string
-        instance:
-          type: string
-        status:
-          format: int32
           nullable: true
-          type: integer
-        title:
           type: string
-        type:
+        Options:
+          $ref: "#/components/schemas/PdfWriteStringOptions"
+        PdfFileBase64String:
+          description: The pdf file to add text to, as Base64 encoded string.
+          nullable: true
           type: string
       type: object
     WkHtmlToPdfRequestDto:
       additionalProperties: false
       description: WkHtmlToPdfRequestDto is the data transfer object for generating a pdf using wkhtmltopdf;
       properties:
-        htmlBase64String:
+        HtmlBase64String:
           description: Base64 encoded string with html. If property Url is set, it will be used, not HtmlBase64String.
+          nullable: true
           type: string
-        resources:
+        Resources:
           additionalProperties:
             type: string
           description: This is a set of key-value pairs of digital resources like images that is referenced in the HtmlBase64String document. It uses the filename including relative path as key and the data is provided as a Base64 encoded string.
+          nullable: true
           type: object
-        url:
+        Url:
           description: The url to generate pdf from. Url has precedence over HtmlBase64String value if both are set.
+          nullable: true
           type: string
-        wkHtmlToPdfArguments:
+        WkHtmlToPdfArguments:
           additionalProperties:
             type: string
           description: Command line arguments passed to wkhtmltopdf.
+          nullable: true
           type: object
       type: object
+    XOriginPoint:
+      enum:
+        - 0
+        - 1
+        - 2
+      format: int32
+      type: integer
+    YOriginPoint:
+      enum:
+        - 0
+        - 1
+        - 2
+      format: int32
+      type: integer
   securitySchemes:
     OAuth2:
       flows:

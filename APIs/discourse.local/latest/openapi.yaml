@@ -1,6 +1,5 @@
 openapi: 3.0.3
 servers:
-  - url: http://discourse.local
   - url: https://discourse.example.com
 x-hasEquivalentPaths: true
 info:
@@ -110,6 +109,7 @@ info:
       url: http://docs.discourse.org/openapi.json
       version: "3.0"
   x-providerName: discourse.local
+  x-preferred: null
 paths:
   /about.json:
     get:

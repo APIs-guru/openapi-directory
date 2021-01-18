@@ -1,0 +1,4771 @@
+openapi: 3.0.0
+servers:
+  - url: https://www.envoice.in
+info:
+  contact:
+    x-twitter: envoicein
+  description: "[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/80638214aa04722c9203)\r
+
+    <span style='margin-left: 0.5em;'>or</span>\r
+
+    <a href='https://documenter.getpostman.com/view/3559821/TVeqcn2L' class='openapi-button' _ngcontent-c6>View Postman docs</a>\r
+
+    \r
+
+    # Quickstart\r
+
+    \r
+
+    Visit [github](https://github.com/EmitKnowledge/Envoice) to view the quickstart tutorial.\r
+
+    \r
+
+    <div class='postman-tutorial'>\r
+
+    \r
+
+    # Tutorial for running the API in postman\r
+
+    \r
+
+    Click on \"\"Run in Postman\"\" button\r
+
+    <br /><br />\r
+
+    ![postman - tutorial - 1](/Assets/images/api/postman-tutorial/postman-tutorial-1.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    A new page will open.\r
+
+    Click the \"\"Postman for windows\"\" to run postman as a desktop app.\r
+
+    Make sure you have already [installed](https://www.getpostman.com/docs/postman/launching_postman/installation_and_updates) Postman.\r
+
+    <br /><br />\r
+
+    ![postman - tutorial - 2](/Assets/images/api/postman-tutorial/postman-tutorial-2.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    In chrome an alert might show up to set a default app for opening postman links. Click on \"\"Open Postman\"\".\r
+
+    <br /><br />\r
+
+    ![postman - tutorial - 3](/Assets/images/api/postman-tutorial/postman-tutorial-3.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    The OpenAPI specification will be imported in Postman as a new collection named \"\"Envoice api\"\"\r
+
+    <br /><br />\r
+
+    ![postman - tutorial - 4](/Assets/images/api/postman-tutorial/postman-tutorial-4.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    When testing be sure to check and modify the environment variables to suit your api key and secret. The domain is set to envoice's endpoint so you don't really need to change that.  \r
+
+    <sub>\\*Eye button in top right corner </sub>\r
+
+    <br /><br /> \r
+
+    ![postman - tutorial - 5](/Assets/images/api/postman-tutorial/postman-tutorial-5.png)\r
+
+    <br /><br /> \r
+
+    ![postman - tutorial - 6](/Assets/images/api/postman-tutorial/postman-tutorial-6.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    You don't need to change the values of the header parameters, because they will be replaced automatically when you send a request with real values from the environment configured in the previous step.\r
+
+    <br /><br />\r
+
+    ![postman - tutorial - 7](/Assets/images/api/postman-tutorial/postman-tutorial-7.png)\r
+
+    \r
+
+    \ --- \r
+
+    \r
+
+    Modify the example data to suit your needs and send a request.\r
+
+    <br /><br />\r
+
+    ![postman - tutorial - 8](/Assets/images/api/postman-tutorial/postman-tutorial-8.png)\r
+
+    </div>\r
+
+    \r
+
+    # Webhooks\r
+
+    \r
+
+    Webhooks allow you to build or set up Envoice Apps which subscribe to invoice activities. \r
+
+    When one of those events is triggered, we'll send a HTTP POST payload to the webhook's configured URL. \r
+
+    Webhooks can be used to update an external invoice data storage.\r
+
+    \r
+
+    In order to use webhooks visit [this link](/account/settings#api-tab) and add upto 10 webhook urls that will return status `200` in order to signal that the webhook is working.\r
+
+    All nonworking webhooks will be ignored after a certain period of time and several retry attempts.\r
+
+    If after several attempts the webhook starts to work, we will send you all activities, both past and present, in chronological order.\r
+
+    \r
+
+    The payload of the webhook is in format:\r
+
+    ```\r
+
+    {\r
+
+    \    Signature: \"\"sha256 string\"\",\r
+
+    \    Timestamp: \"\"YYYY-MM-DDTHH:mm:ss.FFFFFFFZ\"\",\r
+
+    \    Activity: {\r
+
+    \        Message: \"string\",\r
+
+    \        Link: \"share url\",\r
+
+    \        Type: int,        \r
+
+    \        InvoiceNumber: \"string\",\r
+
+    \        InvoiceId: int,        \r
+
+    \        OrderNumber: \"string\",\r
+
+    \        OrderId: int,\r
+
+    \        Id: int,\r
+
+    \        CreatedOn: \"YYYY-MM-DDTHH:mm:ss.FFFFFFFZ\"\r
+
+    \    }\r
+
+    }\r
+
+    ```            "
+  title: API v1.0.0
+  version: v1
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: https://twitter.com/envoicein/profile_image?size=original
+  x-origin:
+    - format: openapi
+      url: https://www.envoice.in/docs/api/v1/specification
+      version: "3.0"
+  x-providerName: envoice.in
+  x-preferred: null
+paths:
+  /api/client/all:
+    get:
+      operationId: ClientApi_All
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ClientDetailsApiModel"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ClientDetailsApiModel"
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ClientDetailsApiModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ClientDetailsApiModel"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ClientDetailsApiModel"
+                type: array
+          description: OK
+      summary: Return all clients for the account
+      tags:
+        - Client
+  /api/client/candelete:
+    get:
+      operationId: ClientApi_CanDelete
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/html:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+          description: OK
+      summary: Check if the provided client can be deleted
+      tags:
+        - Client
+  /api/client/delete:
+    post:
+      operationId: ClientApi_Delete
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientDeleteApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ClientDeleteApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/ClientDeleteApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/ClientDeleteApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ClientDeleteApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/ClientDeleteApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Delete an existing client
+      tags:
+        - Client
+  /api/client/details:
+    get:
+      operationId: ClientApi_Details
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientDetailsApiModel"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ClientDetailsApiModel"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ClientDetailsApiModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ClientDetailsApiModel"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/ClientDetailsApiModel"
+          description: OK
+      summary: Return client details. Activities and invoices included.
+      tags:
+        - Client
+  /api/client/new:
+    post:
+      operationId: ClientApi_New
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientCreateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ClientCreateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/ClientCreateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/ClientCreateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ClientCreateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/ClientCreateApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Create a client
+      tags:
+        - Client
+  /api/client/update:
+    post:
+      operationId: ClientApi_Update
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientUpdateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ClientUpdateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/ClientUpdateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/ClientUpdateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ClientUpdateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/ClientUpdateApiModel"
+        required: true
+      responses:
+        "204":
+          description: No Content
+      summary: Update an existing client
+      tags:
+        - Client
+  /api/general/countries:
+    get:
+      operationId: GeneralApi_Countries
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CountryDetailsApiModel"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CountryDetailsApiModel"
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CountryDetailsApiModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CountryDetailsApiModel"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CountryDetailsApiModel"
+                type: array
+          description: OK
+      summary: Return all of the platform supported countries
+      tags:
+        - General
+  /api/general/currencies:
+    get:
+      operationId: GeneralApi_Currencies
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CurrencyDetailsApiModel"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CurrencyDetailsApiModel"
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CurrencyDetailsApiModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CurrencyDetailsApiModel"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CurrencyDetailsApiModel"
+                type: array
+          description: OK
+      summary: Return all of the platform supported currencies
+      tags:
+        - General
+  /api/general/dateformats:
+    get:
+      operationId: GeneralApi_DateFormats
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            application/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/html:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/json:
+              schema:
+                items:
+                  type: string
+                type: array
+            text/xml:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: OK
+      summary: Return all of the platform supported Date Formats
+      tags:
+        - General
+  /api/general/uilanguages:
+    get:
+      operationId: GeneralApi_UiLanguages
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/UILanguageDetailsApiModel"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/UILanguageDetailsApiModel"
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: "#/components/schemas/UILanguageDetailsApiModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/UILanguageDetailsApiModel"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/UILanguageDetailsApiModel"
+                type: array
+          description: OK
+      summary: Return all of the platform supported UI languages
+      tags:
+        - General
+  /api/invoice/all:
+    get:
+      operationId: InvoiceApi_All
+      parameters:
+        - in: query
+          name: queryOptions.page
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: queryOptions.pageSize
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListResult_InvoiceDetailsApiModel_"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ListResult_InvoiceDetailsApiModel_"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ListResult_InvoiceDetailsApiModel_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ListResult_InvoiceDetailsApiModel_"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/ListResult_InvoiceDetailsApiModel_"
+          description: OK
+      summary: Return all invoices for the account
+      tags:
+        - Invoice
+  /api/invoice/allcategories:
+    get:
+      parameters:
+        - in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListResult_InvoiceCategoryApiModel_"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ListResult_InvoiceCategoryApiModel_"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ListResult_InvoiceCategoryApiModel_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ListResult_InvoiceCategoryApiModel_"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/ListResult_InvoiceCategoryApiModel_"
+          description: OK
+      summary: Return all invoice categories for the account
+      tags:
+        - Invoice
+  /api/invoice/changestatus:
+    post:
+      operationId: InvoiceApi_ChangeStatus
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangeStatusApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ChangeStatusApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/ChangeStatusApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/ChangeStatusApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ChangeStatusApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/ChangeStatusApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/html:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+          description: OK
+      summary: Change invoice status
+      tags:
+        - Invoice
+  /api/invoice/delete:
+    post:
+      operationId: InvoiceApi_Delete
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceDeleteApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/InvoiceDeleteApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceDeleteApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/InvoiceDeleteApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceDeleteApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceDeleteApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Delete an existing invoice
+      tags:
+        - Invoice
+  /api/invoice/deletecategory:
+    post:
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryDeleteApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryDeleteApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryDeleteApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryDeleteApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryDeleteApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryDeleteApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Delete an existing invoice category
+      tags:
+        - Invoice
+  /api/invoice/details:
+    get:
+      operationId: InvoiceApi_Details
+      parameters:
+        - description: ""
+          in: query
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+          description: OK
+      summary: Return invoice data
+      tags:
+        - Invoice
+  /api/invoice/new:
+    post:
+      operationId: InvoiceApi_New
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceCreateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/InvoiceCreateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceCreateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/InvoiceCreateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceCreateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceCreateApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+          description: OK
+      summary: Create an invoice
+      tags:
+        - Invoice
+  /api/invoice/newcategory:
+    post:
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryCreateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryCreateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryCreateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryCreateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryCreateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryCreateApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceCategoryApiModel"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceCategoryApiModel"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/InvoiceCategoryApiModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceCategoryApiModel"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceCategoryApiModel"
+          description: OK
+      summary: Create an invoice category
+      tags:
+        - Invoice
+  /api/invoice/sendtoaccountant:
+    post:
+      operationId: InvoiceApi_SendToAccountant
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToAccountantApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToAccountantApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToAccountantApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToAccountantApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToAccountantApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToAccountantApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Send the provided invoice to the accountant
+      tags:
+        - Invoice
+  /api/invoice/sendtoclient:
+    post:
+      operationId: InvoiceApi_SendToClient
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToClientApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToClientApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToClientApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToClientApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToClientApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/SendInvoiceToClientApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Send the provided invoice to the client
+      tags:
+        - Invoice
+  /api/invoice/status:
+    get:
+      operationId: InvoiceApi_Status
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                enum:
+                  - Draft
+                  - Paid
+                  - Unpaid
+                  - Overdue
+                  - Void
+                type: string
+            application/xml:
+              schema:
+                enum:
+                  - Draft
+                  - Paid
+                  - Unpaid
+                  - Overdue
+                  - Void
+                type: string
+            text/html:
+              schema:
+                enum:
+                  - Draft
+                  - Paid
+                  - Unpaid
+                  - Overdue
+                  - Void
+                type: string
+            text/json:
+              schema:
+                enum:
+                  - Draft
+                  - Paid
+                  - Unpaid
+                  - Overdue
+                  - Void
+                type: string
+            text/xml:
+              schema:
+                enum:
+                  - Draft
+                  - Paid
+                  - Unpaid
+                  - Overdue
+                  - Void
+                type: string
+          description: OK
+      summary: Retrieve the status of the invoice
+      tags:
+        - Invoice
+  /api/invoice/update:
+    post:
+      operationId: InvoiceApi_Update
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceUpdateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/InvoiceUpdateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceUpdateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/InvoiceUpdateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceUpdateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceUpdateApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceFullDetailsApiModel"
+          description: OK
+      summary: Update an existing invoice
+      tags:
+        - Invoice
+  /api/invoice/updatecategory:
+    post:
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryUpdateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryUpdateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryUpdateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryUpdateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryUpdateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/InvoiceCategoryUpdateApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceCategoryApiModel"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceCategoryApiModel"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/InvoiceCategoryApiModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceCategoryApiModel"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceCategoryApiModel"
+          description: OK
+      summary: Update an existing invoice category
+      tags:
+        - Invoice
+  /api/invoice/uri:
+    get:
+      operationId: InvoiceApi_Uri
+      parameters:
+        - description: ""
+          in: query
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceUriApiModel"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceUriApiModel"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/InvoiceUriApiModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/InvoiceUriApiModel"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/InvoiceUriApiModel"
+          description: OK
+      summary: Return the unique url to the client's invoice
+      tags:
+        - Invoice
+  /api/order/all:
+    get:
+      operationId: OrderApi_All
+      parameters:
+        - in: query
+          name: queryOptions.page
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: queryOptions.pageSize
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListResult_OrderDetailsApiModel_"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ListResult_OrderDetailsApiModel_"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ListResult_OrderDetailsApiModel_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ListResult_OrderDetailsApiModel_"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/ListResult_OrderDetailsApiModel_"
+          description: OK
+      summary: Return all orders for the account
+      tags:
+        - Order
+  /api/order/changeshippingdetails:
+    post:
+      operationId: OrderApi_ChangeShippingDetails
+      parameters:
+        - in: query
+          name: orderId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderShippingDetailsApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/OrderShippingDetailsApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/OrderShippingDetailsApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/OrderShippingDetailsApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/OrderShippingDetailsApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/OrderShippingDetailsApiModel"
+        required: true
+      responses:
+        "204":
+          description: No Content
+      summary: Change order shipping details
+      tags:
+        - Order
+  /api/order/changestatus:
+    post:
+      operationId: OrderApi_ChangeStatus
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangeOrderStatusApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ChangeOrderStatusApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/ChangeOrderStatusApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/ChangeOrderStatusApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ChangeOrderStatusApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/ChangeOrderStatusApiModel"
+        required: true
+      responses:
+        "204":
+          description: No Content
+      summary: Change order status
+      tags:
+        - Order
+  /api/order/delete:
+    post:
+      operationId: OrderApi_Delete
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderDeleteApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/OrderDeleteApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/OrderDeleteApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/OrderDeleteApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/OrderDeleteApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/OrderDeleteApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Delete an existing order
+      tags:
+        - Order
+  /api/order/details:
+    get:
+      operationId: OrderApi_Details
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderFullDetailsApiModel"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/OrderFullDetailsApiModel"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/OrderFullDetailsApiModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/OrderFullDetailsApiModel"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/OrderFullDetailsApiModel"
+          description: OK
+      summary: Return order details
+      tags:
+        - Order
+  /api/order/new:
+    post:
+      operationId: OrderApi_New
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderCreateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/OrderCreateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/OrderCreateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/OrderCreateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/OrderCreateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/OrderCreateApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Create an order
+      tags:
+        - Order
+  /api/payment/supported:
+    get:
+      operationId: PaymentApi_Supported
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PaymentGatewayDetailsApiModel"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PaymentGatewayDetailsApiModel"
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PaymentGatewayDetailsApiModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PaymentGatewayDetailsApiModel"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PaymentGatewayDetailsApiModel"
+                type: array
+          description: OK
+      summary: Return all supported payment gateways (no currencies means all are supported)
+      tags:
+        - Payment
+  /api/product/all:
+    get:
+      operationId: ProductApi_All
+      parameters:
+        - in: query
+          name: queryOptions.page
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: queryOptions.pageSize
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListResult_ProductDetailsApiModel_"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ListResult_ProductDetailsApiModel_"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ListResult_ProductDetailsApiModel_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ListResult_ProductDetailsApiModel_"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/ListResult_ProductDetailsApiModel_"
+          description: OK
+      summary: Return all products for the account
+      tags:
+        - Product
+  /api/product/delete:
+    post:
+      operationId: ProductApi_Delete
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductDeleteApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProductDeleteApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/ProductDeleteApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/ProductDeleteApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ProductDeleteApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/ProductDeleteApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Delete an existing product
+      tags:
+        - Product
+  /api/product/details:
+    get:
+      operationId: ProductApi_Details
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductFullDetailsApiModel"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ProductFullDetailsApiModel"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/ProductFullDetailsApiModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProductFullDetailsApiModel"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/ProductFullDetailsApiModel"
+          description: OK
+      summary: Return product details
+      tags:
+        - Product
+  /api/product/new:
+    post:
+      operationId: ProductApi_New
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductCreateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProductCreateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/ProductCreateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/ProductCreateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ProductCreateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/ProductCreateApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Create a product
+      tags:
+        - Product
+  /api/product/update:
+    post:
+      operationId: ProductApi_Update
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductUpdateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ProductUpdateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/ProductUpdateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/ProductUpdateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ProductUpdateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/ProductUpdateApiModel"
+        required: true
+      responses:
+        "204":
+          description: No Content
+      summary: Update an existing product
+      tags:
+        - Product
+  /api/tax/all:
+    get:
+      operationId: TaxApi_All
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TaxDetailsApiModel"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TaxDetailsApiModel"
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TaxDetailsApiModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TaxDetailsApiModel"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TaxDetailsApiModel"
+                type: array
+          description: OK
+      summary: Return all taxes for the account
+      tags:
+        - Tax
+  /api/tax/delete:
+    post:
+      operationId: TaxApi_Delete
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaxDeleteApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/TaxDeleteApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/TaxDeleteApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/TaxDeleteApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/TaxDeleteApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/TaxDeleteApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Delete an existing tax
+      tags:
+        - Tax
+  /api/tax/new:
+    post:
+      operationId: TaxApi_New
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaxCreateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/TaxCreateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/TaxCreateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/TaxCreateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/TaxCreateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/TaxCreateApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Create a tax
+      tags:
+        - Tax
+  /api/tax/update:
+    post:
+      operationId: TaxApi_Update
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaxUpdateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/TaxUpdateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/TaxUpdateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/TaxUpdateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/TaxUpdateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/TaxUpdateApiModel"
+        required: true
+      responses:
+        "204":
+          description: No Content
+      summary: Update an existing tax
+      tags:
+        - Tax
+  /api/worktype/all:
+    get:
+      operationId: WorkTypeApi_All
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+                type: array
+          description: OK
+      summary: Return all work types for the account
+      tags:
+        - WorkType
+  /api/worktype/delete:
+    post:
+      operationId: WorkTypeApi_Delete
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkTypeDeleteApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/WorkTypeDeleteApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/WorkTypeDeleteApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/WorkTypeDeleteApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/WorkTypeDeleteApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/WorkTypeDeleteApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Delete an existing work type
+      tags:
+        - WorkType
+  /api/worktype/details:
+    get:
+      operationId: WorkTypeApi_Details
+      parameters:
+        - in: query
+          name: workTypeId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+            text/html:
+              schema:
+                $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+          description: OK
+      summary: Return work type details
+      tags:
+        - WorkType
+  /api/worktype/new:
+    post:
+      operationId: WorkTypeApi_New
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkTypeCreateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/WorkTypeCreateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/WorkTypeCreateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/WorkTypeCreateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/WorkTypeCreateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/WorkTypeCreateApiModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/html:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      summary: Create a work type
+      tags:
+        - WorkType
+  /api/worktype/search:
+    get:
+      operationId: WorkTypeApi_Search
+      parameters:
+        - in: query
+          name: queryOptions.query
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: queryOptions.orderBy
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: queryOptions.order
+          required: false
+          schema:
+            enum:
+              - None
+              - Asc
+              - Desc
+            type: string
+        - in: query
+          name: queryOptions.page
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: queryOptions.pageSize
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+                type: array
+            text/html:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/WorkTypeDetailsApiModel"
+                type: array
+          description: OK
+      summary: Return all work types for the account that match the query param
+      tags:
+        - WorkType
+  /api/worktype/update:
+    post:
+      operationId: WorkTypeApi_Update
+      parameters:
+        - description: ""
+          in: header
+          name: x-auth-key
+          required: true
+          schema:
+            default: "[authentication key]"
+            type: string
+        - description: ""
+          in: header
+          name: x-auth-secret
+          required: true
+          schema:
+            default: "[authentication secret]"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkTypeUpdateApiModel"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/WorkTypeUpdateApiModel"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/WorkTypeUpdateApiModel"
+          text/html:
+            schema:
+              $ref: "#/components/schemas/WorkTypeUpdateApiModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/WorkTypeUpdateApiModel"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/WorkTypeUpdateApiModel"
+        required: true
+      responses:
+        "204":
+          description: No Content
+      summary: Update an existing work type
+      tags:
+        - WorkType
+components:
+  schemas:
+    AdditionalClientEmailApiModel:
+      properties:
+        Email:
+          description: CC
+          type: string
+      type: object
+    ChangeOrderStatusApiModel:
+      properties:
+        Id:
+          description: Order Id
+          format: int32
+          type: integer
+        Reason:
+          description: Reason for status change
+          type: string
+        Status:
+          description: New status of the order
+          enum:
+            - PendingPayment
+            - Processing
+            - Shipped
+            - Completed
+            - OnHold
+            - Cancelled
+            - Refunded
+            - Failed
+          type: string
+      type: object
+    ChangeStatusApiModel:
+      properties:
+        Id:
+          description: Invoice Id
+          format: int32
+          type: integer
+        Status:
+          description: New status of the invoice
+          enum:
+            - Draft
+            - Paid
+            - Unpaid
+            - Overdue
+            - Void
+          type: string
+      type: object
+    ClientCreateApiModel:
+      properties:
+        AdditionalEmails:
+          description: Client additional emails contact for CC
+          items:
+            $ref: "#/components/schemas/AdditionalClientEmailApiModel"
+          type: array
+        Address:
+          description: Client business address
+          type: string
+        ClientCountryId:
+          description: Indicates the country where the clients is from
+          format: int32
+          type: integer
+        ClientCurrencyId:
+          description: Indicates the default system currency used by the user for the client
+          format: int32
+          type: integer
+        CompanyRegistrationNumber:
+          description: Client's Company Registration Number
+          type: string
+        DefaultDueDateInDays:
+          description: Client custom payment terms
+          format: int32
+          type: integer
+        Email:
+          description: Client email
+          type: string
+        Name:
+          description: Name of the client
+          type: string
+        PhoneNumber:
+          description: Client phone numer
+          type: string
+        UiLanguageId:
+          description: Hold a value of the language in which the invoice will be sent
+          format: int32
+          type: integer
+        Vat:
+          description: Client's VAT number
+          type: string
+      type: object
+    ClientDeleteApiModel:
+      properties:
+        Id:
+          description: Id of client to be deleted
+          format: int32
+          type: integer
+      type: object
+    ClientDetailsApiModel:
+      properties:
+        AdditionalEmails:
+          description: Client additional emails contact for CC
+          items:
+            $ref: "#/components/schemas/AdditionalClientEmailApiModel"
+          type: array
+        Address:
+          description: Client business address
+          type: string
+        ClientCountryId:
+          description: Indicates the country where the clients is from
+          format: int32
+          type: integer
+        ClientCurrencyId:
+          description: Indicates the default system currency used by the user for the client
+          format: int32
+          type: integer
+        CompanyRegistrationNumber:
+          description: Client's Company Registration Number
+          type: string
+        CreatedOn:
+          description: Date of creation
+          format: date-time
+          type: string
+        DefaultDueDateInDays:
+          description: Client custom payment terms
+          format: int32
+          type: integer
+        Email:
+          description: Client email
+          type: string
+        Id:
+          description: Entity id
+          format: int32
+          type: integer
+        Name:
+          description: Name of the client
+          type: string
+        PhoneNumber:
+          description: Client phone numer
+          type: string
+        UiLanguageId:
+          description: Hold a value of the language in which the invoice will be sent
+          format: int32
+          type: integer
+        Vat:
+          description: Client's VAT number
+          type: string
+      type: object
+    ClientUpdateApiModel:
+      properties:
+        AdditionalEmails:
+          description: Client additional emails contact for CC
+          items:
+            $ref: "#/components/schemas/AdditionalClientEmailApiModel"
+          type: array
+        Address:
+          description: Client business address
+          type: string
+        ClientCountryId:
+          description: Indicates the country where the clients is from
+          format: int32
+          type: integer
+        ClientCurrencyId:
+          description: Indicates the default system currency used by the user for the client
+          format: int32
+          type: integer
+        CompanyRegistrationNumber:
+          description: Client's Company Registration Number
+          type: string
+        DefaultDueDateInDays:
+          description: Client custom payment terms
+          format: int32
+          type: integer
+        Email:
+          description: Client email
+          type: string
+        Id:
+          description: Entity id
+          format: int32
+          type: integer
+        Name:
+          description: Name of the client
+          type: string
+        PhoneNumber:
+          description: Client phone numer
+          type: string
+        UiLanguageId:
+          description: Hold a value of the language in which the invoice will be sent
+          format: int32
+          type: integer
+        Vat:
+          description: Client's VAT number
+          type: string
+      type: object
+    CountryDetailsApiModel:
+      properties:
+        Id:
+          description: Entity id
+          format: int32
+          type: integer
+        Name:
+          description: Name of the country
+          type: string
+        Value:
+          description: Country short code
+          type: string
+      type: object
+    CurrencyApiModel:
+      properties:
+        Name:
+          description: Name of the currency
+          type: string
+        Value:
+          description: Currency short code
+          type: string
+      type: object
+    CurrencyDetailsApiModel:
+      properties:
+        Code:
+          description: Currency short numeric code
+          type: string
+        Id:
+          description: Entity id
+          format: int32
+          type: integer
+        Name:
+          description: Name of the country
+          type: string
+        Symbol:
+          description: Currency symbol
+          type: string
+        Value:
+          description: Currency short alpha code
+          type: string
+      type: object
+    IErrorInfo:
+      properties:
+        Code:
+          readOnly: true
+          type: string
+        FaultMessage:
+          readOnly: true
+          type: string
+        Group:
+          readOnly: true
+          type: string
+        UserVisibleMessage:
+          readOnly: true
+          type: string
+      type: object
+    InvoiceActivityApiModel:
+      properties:
+        Id:
+          description: Id of invoice activity
+          format: int32
+          type: integer
+        InvoiceNumber:
+          description: Indicates to which invoice this activity refers to
+          type: string
+        Link:
+          description: "Url which point out to a certain activity action. Ex: Click to view the payment"
+          type: string
+        Message:
+          description: Message associated with the activity
+          type: string
+        Type:
+          description: Type of the activity
+          enum:
+            - Created
+            - Draft
+            - Cloned
+            - SentViaEmail
+            - SentViaSms
+            - SentReminderViaEmail
+            - SentReminderViaSms
+            - Opened
+            - Viewed
+            - Rejected
+            - Updated
+            - Paid
+            - Unpaid
+            - Overdue
+            - NewManualPayment
+            - NewPaymentWithPaypal
+            - NewPaymentWithStripe
+            - NewPaymentWithPayoneer
+            - SentToAccountant
+            - DownloadedAsPdf
+            - MarkAsPaidByTheClient
+            - OpenedAttachment
+            - NewPaymentWithSquare
+            - NewPaymentWithKlikAndPay
+            - NewPaymentWithRazorpay
+            - NewPaymentWithWepay
+            - NewPaymentWithHalkbank
+            - ChangeStatus
+            - OrderUpdated
+            - OrderCreated
+            - NewPaymentWithTwoCheckout
+            - NewPaymentWithPaymentWall
+            - NewPaymentWithBamboraEU
+            - NewPaymentWithBamboraNA
+            - Void
+            - NewPaymentWithNlb
+            - NewPaymentWithAuthorizeNet
+            - NewPaymentWithBraintree
+          type: string
+      type: object
+    InvoiceAttachmentApiModel:
+      properties:
+        Id:
+          description: Id of invoice attachment
+          format: int32
+          type: integer
+        Link:
+          description: Link to the file
+          type: string
+        ObfuscatedFileName:
+          description: Hashed file name to avoid url wildguessing
+          type: string
+        OriginalFileName:
+          description: Name of the file
+          type: string
+        Size:
+          description: File size number in bytes
+          format: int64
+          type: integer
+        Type:
+          description: Type of the link (Attached or external)
+          enum:
+            - External
+            - Uploaded
+          type: string
+      type: object
+    InvoiceCategoryApiModel:
+      properties:
+        Id:
+          description: Entity id
+          format: int32
+          type: integer
+        Name:
+          description: Category name
+          type: string
+      type: object
+    InvoiceCategoryCreateApiModel:
+      properties:
+        Name:
+          description: Category name
+          type: string
+      type: object
+    InvoiceCategoryDeleteApiModel:
+      properties:
+        Id:
+          format: int32
+          type: integer
+      type: object
+    InvoiceCategoryUpdateApiModel:
+      properties:
+        Id:
+          description: Entity id
+          format: int32
+          type: integer
+        Name:
+          description: Category name
+          type: string
+      type: object
+    InvoiceCreateApiModel:
+      properties:
+        Attachments:
+          description: List of invoice attachments
+          items:
+            $ref: "#/components/schemas/InvoiceCreateAttachmentApiModel"
+          type: array
+        ClientId:
+          description: The client to whom this invoice is assigned
+          format: int32
+          type: integer
+        ClonedFromId:
+          description: Indicate from which invoice this invoice has been cloned from
+          format: int32
+          type: integer
+        CurrencyId:
+          description: Id of the currency for the invoice amounts
+          format: int32
+          type: integer
+        Duedate:
+          description: Indicates when the invoice will be proclamed as due
+          format: date-time
+          type: string
+        InvoiceCategoryId:
+          description: Hold the id of the invoice category
+          format: int32
+          type: integer
+        IssuedOn:
+          description: Indicates when the invoice was issued
+          format: date-time
+          type: string
+        Items:
+          description: List of invoice items
+          items:
+            $ref: "#/components/schemas/InvoiceCreateItemApiModel"
+          type: array
+        Notes:
+          description: Internal note regarding the invoice
+          type: string
+        Number:
+          description: Unique invoice number
+          type: string
+        PaymentGateways:
+          description: List of enabled payment gateways for this invoice
+          items:
+            $ref: "#/components/schemas/InvoiceGatewayApiModel"
+          type: array
+        PoNumber:
+          description: Unique number generated by the buyer
+          type: string
+        RecurringProfile:
+          $ref: "#/components/schemas/InvoiceRecurringApiModel"
+        RecurringProfileId:
+          description: Hold the id of the recurring profile
+          format: int32
+          type: integer
+        ShouldSendReminders:
+          description: Should send email reminders to client?
+          type: boolean
+        Status:
+          description: Indicate the status of the invoice (paid/unpaid/overdue)
+          enum:
+            - Draft
+            - Paid
+            - Unpaid
+            - Overdue
+            - Void
+          type: string
+        Terms:
+          description: Terms of agreement
+          type: string
+      type: object
+    InvoiceCreateAttachmentApiModel:
+      properties:
+        Link:
+          description: Link to the file
+          type: string
+        ObfuscatedFileName:
+          description: Hashed file name to avoid url wildguessing
+          type: string
+        OriginalFileName:
+          description: Name of the file
+          type: string
+        Size:
+          description: File size number in bytes
+          format: int64
+          type: integer
+        Type:
+          description: Type of the link (Attached or external)
+          enum:
+            - External
+            - Uploaded
+          type: string
+      type: object
+    InvoiceCreateItemApiModel:
+      properties:
+        Cost:
+          description: Amount per unit
+          format: double
+          type: number
+        Description:
+          description: Additional description attached to the invoice item
+          type: string
+        DiscountPercentage:
+          description: Discount percentage for the overall amount
+          format: double
+          type: number
+        Quantity:
+          description: Quantity in total used for the work type
+          format: double
+          type: number
+        TaxId:
+          description: Tax applied on the item
+          format: int32
+          type: integer
+        TaxPercentage:
+          description: "Task percentage. Ex: 18%"
+          format: double
+          type: number
+        WorkTypeId:
+          description: Work type (Name of the service)
+          format: int32
+          type: integer
+      type: object
+    InvoiceDeleteApiModel:
+      properties:
+        Id:
+          description: Id of invoice to be deleted
+          format: int32
+          type: integer
+      type: object
+    InvoiceDetailsApiModel:
+      properties:
+        AccessToken:
+          description: Security access token used for accessing the invoice anonymously
+          type: string
+        Client:
+          $ref: "#/components/schemas/ClientDetailsApiModel"
+        ClonedFromId:
+          description: Indicate from which invoice this invoice has been cloned from
+          format: int32
+          type: integer
+        Currency:
+          $ref: "#/components/schemas/CurrencyDetailsApiModel"
+        DiscountAmount:
+          description: Amount that goes as a discount
+          format: double
+          type: number
+        Duedate:
+          description: Indicates when the invoice will be proclamed as due
+          format: date-time
+          type: string
+        EnablePartialPayments:
+          description: Indicate that the invoice allows the user to pay the invoice partially
+          type: boolean
+        Id:
+          description: Invoice id
+          format: int32
+          type: integer
+        InvoiceCategoryId:
+          description: Hold the id of the invoice category
+          format: int32
+          type: integer
+        IssuedOn:
+          description: Indicates when the invoice was issued
+          format: date-time
+          type: string
+        Notes:
+          description: Internal note regarding the invoice
+          type: string
+        Number:
+          description: Unique invoice number
+          type: string
+        PoNumber:
+          description: Unique number generated by the buyer
+          type: string
+        RecurringProfile:
+          $ref: "#/components/schemas/InvoiceRecurringApiModel"
+        RecurringProfileId:
+          description: Hold the id of the recurring profile
+          format: int32
+          type: integer
+        ShouldSendReminders:
+          description: Should send email reminders to client?
+          type: boolean
+        Status:
+          description: Indicate the status of the invoice (paid/unpaid/overdue)
+          enum:
+            - Draft
+            - Paid
+            - Unpaid
+            - Overdue
+            - Void
+          type: string
+        SubTotalAmount:
+          description: Total amount of the invoice without tax
+          format: double
+          type: number
+        TaxAmount:
+          description: Amount that goes to the tax
+          format: double
+          type: number
+        Terms:
+          description: Terms of agreement
+          type: string
+        TotalAmount:
+          description: Total amount of the invoice with tax
+          format: double
+          type: number
+      type: object
+    InvoiceFullDetailsApiModel:
+      properties:
+        AccessToken:
+          description: Security access token used for accessing the invoice anonymously
+          type: string
+        Activities:
+          description: List of invoice activities. Invoice audit log
+          items:
+            $ref: "#/components/schemas/InvoiceActivityApiModel"
+          type: array
+        Attachments:
+          description: List of invoice attachments
+          items:
+            $ref: "#/components/schemas/InvoiceAttachmentApiModel"
+          type: array
+        Client:
+          $ref: "#/components/schemas/ClientDetailsApiModel"
+        ClonedFromId:
+          description: Indicate from which invoice this invoice has been cloned from
+          format: int32
+          type: integer
+        Currency:
+          $ref: "#/components/schemas/CurrencyDetailsApiModel"
+        DiscountAmount:
+          description: Amount that goes as a discount
+          format: double
+          type: number
+        Duedate:
+          description: Indicates when the invoice will be proclamed as due
+          format: date-time
+          type: string
+        EnablePartialPayments:
+          description: Indicate that the invoice allows the user to pay the invoice partially
+          type: boolean
+        Id:
+          description: Invoice id
+          format: int32
+          type: integer
+        InvoiceCategoryId:
+          description: Hold the id of the invoice category
+          format: int32
+          type: integer
+        IssuedOn:
+          description: Indicates when the invoice was issued
+          format: date-time
+          type: string
+        Items:
+          description: List of invoice items
+          items:
+            $ref: "#/components/schemas/InvoiceItemApiModel"
+          type: array
+        Notes:
+          description: Internal note regarding the invoice
+          type: string
+        Number:
+          description: Unique invoice number
+          type: string
+        PaymentGateways:
+          description: List of enabled payment gateways for this invoice
+          items:
+            $ref: "#/components/schemas/InvoiceGatewayApiModel"
+          type: array
+        Payments:
+          description: List of invoice payments
+          items:
+            $ref: "#/components/schemas/InvoicePaymentApiModel"
+          type: array
+        PoNumber:
+          description: Unique number generated by the buyer
+          type: string
+        RecurringProfile:
+          $ref: "#/components/schemas/InvoiceRecurringApiModel"
+        RecurringProfileId:
+          description: Hold the id of the recurring profile
+          format: int32
+          type: integer
+        ShouldSendReminders:
+          description: Should send email reminders to client?
+          type: boolean
+        Status:
+          description: Indicate the status of the invoice (paid/unpaid/overdue)
+          enum:
+            - Draft
+            - Paid
+            - Unpaid
+            - Overdue
+            - Void
+          type: string
+        SubTotalAmount:
+          description: Total amount of the invoice without tax
+          format: double
+          type: number
+        TaxAmount:
+          description: Amount that goes to the tax
+          format: double
+          type: number
+        Terms:
+          description: Terms of agreement
+          type: string
+        TotalAmount:
+          description: Total amount of the invoice with tax
+          format: double
+          type: number
+      type: object
+    InvoiceGatewayApiModel:
+      properties:
+        Name:
+          description: Name of the payment gateway
+          type: string
+      type: object
+    InvoiceItemApiModel:
+      properties:
+        Cost:
+          description: Amount per unit
+          format: double
+          type: number
+        Description:
+          description: Additional description attached to the invoice item
+          type: string
+        DiscountAmount:
+          description: Amount that goes as a discount
+          format: double
+          type: number
+        DiscountPercentage:
+          description: Discount percentage for the overall amount
+          format: double
+          type: number
+        Id:
+          description: Id of invoice item
+          format: int32
+          type: integer
+        Quantity:
+          description: Quantity in total used for the work type
+          format: double
+          type: number
+        SubTotalAmount:
+          description: Sub-Total amount of the invoice item (Amount without tax)
+          format: double
+          type: number
+        TaxAmount:
+          description: Amount that goes to the tax
+          format: double
+          type: number
+        TaxId:
+          description: Tax applied on the item
+          format: int32
+          type: integer
+        TaxPercentage:
+          description: "Task percentage. Ex: 18%"
+          format: double
+          type: number
+        TotalAmount:
+          description: Total amount of the invoice item
+          format: double
+          type: number
+        WorkTypeId:
+          description: Work type (Name of the service)
+          format: int32
+          type: integer
+      type: object
+    InvoicePaymentApiModel:
+      properties:
+        Amount:
+          description: Total amount of the payment
+          format: double
+          type: number
+        Id:
+          description: Id of invoice payment
+          format: int32
+          type: integer
+        IsAutomatic:
+          description: Indicate if the payment is automatic or manual
+          type: boolean
+        Note:
+          description: Internal payment note
+          type: string
+        PaidOn:
+          description: When the payment was done by the client
+          format: date-time
+          type: string
+        ReferenceId:
+          description: Id of the payment
+          type: string
+        Type:
+          description: Type of payment
+          enum:
+            - Other
+            - Paypal
+            - Stripe
+            - Payoneer
+            - Bank
+            - Cash
+            - Cheque
+            - Ach
+            - Sepa
+            - Square
+            - KlikAndPay
+            - Razorpay
+            - Wepay
+            - Halkbank
+            - TwoCheckout
+            - PaymentWall
+            - BamboraEU
+            - BamboraNA
+            - Nlb
+            - AuthorizeNet
+            - Braintree
+          type: string
+      type: object
+    InvoiceRecurringApiModel:
+      description: Definition of invoice recurring profile
+      properties:
+        DayOfMonth:
+          description: Day of month when the recurrance should happen
+          format: int32
+          type: integer
+        DayOfWeek:
+          description: Day when the recurrance should happen
+          enum:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+          type: string
+        DueDateInDays:
+          description: Total number of days for the client to pay the invoice after issuing it
+          format: int32
+          type: integer
+        EndOfRecurrance:
+          description: Indcate the date when the recurrance should stop
+          format: date-time
+          type: string
+        Month:
+          description: Month when the recurrance should happen
+          format: int32
+          type: integer
+        RecurrancePattern:
+          description: How often the recurrance occurs
+          enum:
+            - Daily
+            - Weekly
+            - Monthly
+            - Yearly
+          type: string
+        RecurranceValue:
+          description: "Recurring every [value] RecurrancePattern\r
+
+            Ex: Recur every 1 week"
+          format: int32
+          type: integer
+        StartOfRecurrance:
+          description: Indcate the date when the recurrance has started
+          format: date-time
+          type: string
+        Status:
+          description: The status of the recurrance
+          enum:
+            - Pending
+            - Active
+            - Cancelled
+            - Finished
+          type: string
+        Title:
+          description: "Title of the recurring profile. \r
+
+            Ex: BRAND PACKAGE - 2017-08-16 - 2018-08-16"
+          type: string
+      type: object
+    InvoiceUpdateApiModel:
+      properties:
+        Attachments:
+          description: List of invoice attachments
+          items:
+            $ref: "#/components/schemas/InvoiceUpdateAttachmentApiModel"
+          type: array
+        ClientId:
+          description: The client to whom this invoice is assigned
+          format: int32
+          type: integer
+        ClonedFromId:
+          description: Indicate from which invoice this invoice has been cloned from
+          format: int32
+          type: integer
+        CurrencyId:
+          description: Id of the currency for the invoice amounts
+          format: int32
+          type: integer
+        Duedate:
+          description: Indicates when the invoice will be proclamed as due
+          format: date-time
+          type: string
+        Id:
+          description: Invoice id
+          format: int32
+          type: integer
+        InvoiceCategoryId:
+          description: Hold the id of the invoice category
+          format: int32
+          type: integer
+        IssuedOn:
+          description: Indicates when the invoice was issued
+          format: date-time
+          type: string
+        Items:
+          description: List of invoice items
+          items:
+            $ref: "#/components/schemas/InvoiceUpdateItemApiModel"
+          type: array
+        Notes:
+          description: Internal note regarding the invoice
+          type: string
+        Number:
+          description: Unique invoice number
+          type: string
+        PaymentGateways:
+          description: List of enabled payment gateways for this invoice
+          items:
+            $ref: "#/components/schemas/InvoiceGatewayApiModel"
+          type: array
+        PoNumber:
+          description: Unique number generated by the buyer
+          type: string
+        RecurringProfile:
+          $ref: "#/components/schemas/InvoiceRecurringApiModel"
+        RecurringProfileId:
+          description: Hold the id of the recurring profile
+          format: int32
+          type: integer
+        ShouldSendReminders:
+          description: Should send email reminders to client?
+          type: boolean
+        Status:
+          description: Indicate the status of the invoice (paid/unpaid/overdue)
+          enum:
+            - Draft
+            - Paid
+            - Unpaid
+            - Overdue
+            - Void
+          type: string
+        Terms:
+          description: Terms of agreement
+          type: string
+      type: object
+    InvoiceUpdateAttachmentApiModel:
+      properties:
+        Id:
+          description: Id of invoice attachment
+          format: int32
+          type: integer
+        Link:
+          description: Link to the file
+          type: string
+        ObfuscatedFileName:
+          description: Hashed file name to avoid url wildguessing
+          type: string
+        OriginalFileName:
+          description: Name of the file
+          type: string
+        Size:
+          description: File size number in bytes
+          format: int64
+          type: integer
+        Type:
+          description: Type of the link (Attached or external)
+          enum:
+            - External
+            - Uploaded
+          type: string
+      type: object
+    InvoiceUpdateItemApiModel:
+      properties:
+        Cost:
+          description: Amount per unit
+          format: double
+          type: number
+        Description:
+          description: Additional description attached to the invoice item
+          type: string
+        DiscountPercentage:
+          description: Discount percentage for the overall amount
+          format: double
+          type: number
+        Id:
+          description: Id of invoice item
+          format: int32
+          type: integer
+        Quantity:
+          description: Quantity in total used for the work type
+          format: double
+          type: number
+        TaxId:
+          description: Tax applied on the item
+          format: int32
+          type: integer
+        TaxPercentage:
+          description: "Task percentage. Ex: 18%"
+          format: double
+          type: number
+        WorkTypeId:
+          description: Work type (Name of the service)
+          format: int32
+          type: integer
+      type: object
+    InvoiceUriApiModel:
+      properties:
+        Link:
+          description: Unique link to the invoice
+          type: string
+      type: object
+    ListResult_InvoiceCategoryApiModel_:
+      properties:
+        Count:
+          format: int32
+          readOnly: true
+          type: integer
+        ErrorMessages:
+          items:
+            $ref: "#/components/schemas/IErrorInfo"
+          type: array
+        IsFaulted:
+          type: boolean
+        Result:
+          items:
+            $ref: "#/components/schemas/InvoiceCategoryApiModel"
+          type: array
+        TotalCount:
+          format: int32
+          type: integer
+      type: object
+    ListResult_InvoiceDetailsApiModel_:
+      properties:
+        Count:
+          format: int32
+          readOnly: true
+          type: integer
+        ErrorMessages:
+          items:
+            $ref: "#/components/schemas/IErrorInfo"
+          type: array
+        IsFaulted:
+          type: boolean
+        Result:
+          items:
+            $ref: "#/components/schemas/InvoiceDetailsApiModel"
+          type: array
+        TotalCount:
+          format: int32
+          type: integer
+      type: object
+    ListResult_OrderDetailsApiModel_:
+      properties:
+        Count:
+          format: int32
+          readOnly: true
+          type: integer
+        ErrorMessages:
+          items:
+            $ref: "#/components/schemas/IErrorInfo"
+          type: array
+        IsFaulted:
+          type: boolean
+        Result:
+          items:
+            $ref: "#/components/schemas/OrderDetailsApiModel"
+          type: array
+        TotalCount:
+          format: int32
+          type: integer
+      type: object
+    ListResult_ProductDetailsApiModel_:
+      properties:
+        Count:
+          format: int32
+          readOnly: true
+          type: integer
+        ErrorMessages:
+          items:
+            $ref: "#/components/schemas/IErrorInfo"
+          type: array
+        IsFaulted:
+          type: boolean
+        Result:
+          items:
+            $ref: "#/components/schemas/ProductDetailsApiModel"
+          type: array
+        TotalCount:
+          format: int32
+          type: integer
+      type: object
+    OrderAttachmentApiModel:
+      properties:
+        Link:
+          description: Link to the file
+          type: string
+        ObfuscatedFileName:
+          description: Hashed file name to avoid url wildguessing
+          type: string
+        OriginalFileName:
+          description: Name of the file
+          type: string
+        Size:
+          description: File size number in bytes
+          format: int64
+          type: integer
+        Type:
+          description: Type of the link (Attached or external)
+          enum:
+            - External
+            - Uploaded
+          type: string
+      type: object
+    OrderBillingDetailsApiModel:
+      properties:
+        Address:
+          description: Client street and number
+          type: string
+        CountryId:
+          description: Client country id
+          format: int32
+          type: integer
+        Email:
+          description: Client email
+          type: string
+        Name:
+          description: Client name
+          type: string
+        PhoneNumber:
+          description: Client phone number
+          type: string
+      type: object
+    OrderCreateApiModel:
+      properties:
+        AfterPaymentDescription:
+          description: After payment description
+          type: string
+        Attachments:
+          description: List of Order attachments
+          items:
+            $ref: "#/components/schemas/OrderAttachmentApiModel"
+          type: array
+        CouponCode:
+          description: Coupon to apply in order to get the discount
+          type: string
+        CurrencyId:
+          description: Foreign key Currency
+          format: int32
+          type: integer
+        Description:
+          description: Product description
+          type: string
+        DiscountAmount:
+          description: Discount amount
+          format: double
+          type: number
+        Items:
+          description: List of Order items
+          items:
+            $ref: "#/components/schemas/OrderItemApiModel"
+          type: array
+        Name:
+          description: Product alias
+          type: string
+        Note:
+          description: Customer note to seller
+          type: string
+        OrderBillingDetails:
+          $ref: "#/components/schemas/OrderBillingDetailsApiModel"
+        OrderShippingDetails:
+          $ref: "#/components/schemas/OrderShippingDetailsApiModel"
+        ProductId:
+          description: Product id
+          format: int32
+          type: integer
+        Referral:
+          description: Represent the referral for this order
+          type: string
+        ShippingAmount:
+          description: Cost for shipping the product
+          format: double
+          type: number
+        ShippingDescription:
+          description: Client instructions for shipping
+          type: string
+        Status:
+          description: Order status
+          enum:
+            - PendingPayment
+            - Processing
+            - Shipped
+            - Completed
+            - OnHold
+            - Cancelled
+            - Refunded
+            - Failed
+          type: string
+        SubTotalAmount:
+          description: Sub total amount
+          format: double
+          type: number
+        TaxAmount:
+          description: Tax amount
+          format: double
+          type: number
+        TotalAmount:
+          description: Total amount
+          format: double
+          type: number
+        WhatHappensNextDescription:
+          description: What happens next description
+          type: string
+      type: object
+    OrderDeleteApiModel:
+      properties:
+        Id:
+          description: Id of order to be deleted
+          format: int32
+          type: integer
+      type: object
+    OrderDetailsApiModel:
+      properties:
+        AccessToken:
+          description: Product short link
+          type: string
+        AfterPaymentDescription:
+          description: After payment description
+          type: string
+        CouponCode:
+          description: Coupon to apply in order to get the discount
+          type: string
+        Currency:
+          $ref: "#/components/schemas/CurrencyDetailsApiModel"
+        CurrencyId:
+          description: Foreign key Currency
+          format: int32
+          type: integer
+        Description:
+          description: Product description
+          type: string
+        DiscountAmount:
+          description: Discount amount
+          format: double
+          type: number
+        Id:
+          description: Order id
+          format: int32
+          type: integer
+        Name:
+          description: Product alias
+          type: string
+        Note:
+          description: Customer note to seller
+          type: string
+        OrderBillingDetails:
+          $ref: "#/components/schemas/OrderBillingDetailsApiModel"
+        OrderShippingDetails:
+          $ref: "#/components/schemas/OrderShippingDetailsApiModel"
+        ProductId:
+          description: Product id
+          format: int32
+          type: integer
+        Referral:
+          description: Represent the referral for this order
+          type: string
+        ShippingAmount:
+          description: Cost for shipping the product
+          format: double
+          type: number
+        ShippingDescription:
+          description: Client instructions for shipping
+          type: string
+        Status:
+          description: Order status
+          enum:
+            - PendingPayment
+            - Processing
+            - Shipped
+            - Completed
+            - OnHold
+            - Cancelled
+            - Refunded
+            - Failed
+          type: string
+        SubTotalAmount:
+          description: Sub total amount
+          format: double
+          type: number
+        TaxAmount:
+          description: Tax amount
+          format: double
+          type: number
+        TotalAmount:
+          description: Total amount
+          format: double
+          type: number
+        TotalWithShipping:
+          description: Total amount with shipping
+          format: double
+          type: number
+        WhatHappensNextDescription:
+          description: What happens next description
+          type: string
+      type: object
+    OrderFullDetailsApiModel:
+      properties:
+        AccessToken:
+          description: Product short link
+          type: string
+        AfterPaymentDescription:
+          description: After payment description
+          type: string
+        Attachments:
+          description: List of Order attachments
+          items:
+            $ref: "#/components/schemas/OrderAttachmentApiModel"
+          type: array
+        CouponCode:
+          description: Coupon to apply in order to get the discount
+          type: string
+        Currency:
+          $ref: "#/components/schemas/CurrencyDetailsApiModel"
+        CurrencyId:
+          description: Foreign key Currency
+          format: int32
+          type: integer
+        Description:
+          description: Product description
+          type: string
+        DiscountAmount:
+          description: Discount amount
+          format: double
+          type: number
+        Id:
+          description: Order id
+          format: int32
+          type: integer
+        Items:
+          description: List of Order items
+          items:
+            $ref: "#/components/schemas/OrderItemApiModel"
+          type: array
+        Name:
+          description: Product alias
+          type: string
+        Note:
+          description: Customer note to seller
+          type: string
+        OrderBillingDetails:
+          $ref: "#/components/schemas/OrderBillingDetailsApiModel"
+        OrderShippingDetails:
+          $ref: "#/components/schemas/OrderShippingDetailsApiModel"
+        ProductId:
+          description: Product id
+          format: int32
+          type: integer
+        Referral:
+          description: Represent the referral for this order
+          type: string
+        ShippingAmount:
+          description: Cost for shipping the product
+          format: double
+          type: number
+        ShippingDescription:
+          description: Client instructions for shipping
+          type: string
+        Status:
+          description: Order status
+          enum:
+            - PendingPayment
+            - Processing
+            - Shipped
+            - Completed
+            - OnHold
+            - Cancelled
+            - Refunded
+            - Failed
+          type: string
+        SubTotalAmount:
+          description: Sub total amount
+          format: double
+          type: number
+        TaxAmount:
+          description: Tax amount
+          format: double
+          type: number
+        TotalAmount:
+          description: Total amount
+          format: double
+          type: number
+        TotalWithShipping:
+          description: Total amount with shipping
+          format: double
+          type: number
+        WhatHappensNextDescription:
+          description: What happens next description
+          type: string
+      type: object
+    OrderItemApiModel:
+      properties:
+        Cost:
+          description: Work item cost
+          format: double
+          type: number
+        Description:
+          description: General description
+          type: string
+        ProductItemId:
+          description: Foreign key product item id
+          format: int32
+          type: integer
+        Quantity:
+          description: Work item quantity
+          format: double
+          type: number
+        ReferenceId:
+          description: Order SKU
+          type: string
+        SubTotalAmount:
+          description: Subtotal amount of product
+          format: double
+          type: number
+        TaxAmount:
+          description: Tax amount
+          format: double
+          type: number
+        TaxId:
+          description: Foreign key Tax id
+          format: int32
+          type: integer
+        TaxPercentage:
+          description: Tax percentage
+          format: double
+          type: number
+        TotalAmount:
+          description: Total amount of product
+          format: double
+          type: number
+        WorkTypeId:
+          description: Foreign key work type id
+          format: int32
+          type: integer
+      type: object
+    OrderShippingDetailsApiModel:
+      properties:
+        Address:
+          description: Client street and number
+          type: string
+        CountryId:
+          description: Client country id
+          format: int32
+          type: integer
+        Email:
+          description: Client email
+          type: string
+        Name:
+          description: Client name
+          type: string
+        PhoneNumber:
+          description: Client phone number
+          type: string
+      type: object
+    PaymentGatewayDetailsApiModel:
+      properties:
+        Name:
+          description: Name of the payment gateway
+          type: string
+        SupportedCurrencies:
+          description: List of supported currencies.
+          items:
+            $ref: "#/components/schemas/CurrencyApiModel"
+          type: array
+      type: object
+    ProductAttachmentApiModel:
+      properties:
+        Id:
+          description: Product attachment id
+          format: int32
+          type: integer
+        Link:
+          description: Link to the file
+          type: string
+        ObfuscatedFileName:
+          description: Hashed file name to avoid url wildguessing
+          type: string
+        OriginalFileName:
+          description: Name of the file
+          type: string
+        Size:
+          description: File size number in bytes
+          format: int64
+          type: integer
+        Type:
+          description: Type of the link (Attached or external)
+          enum:
+            - External
+            - Uploaded
+          type: string
+      type: object
+    ProductCouponApiModel:
+      properties:
+        Code:
+          description: Coupon to apply in order to get the discount
+          type: string
+        DiscountAmount:
+          description: Discount amount
+          format: double
+          type: number
+        DiscountPercentage:
+          description: Discount percentage
+          format: double
+          type: number
+        Id:
+          description: Product coupon id
+          format: int32
+          type: integer
+        ValidUntil:
+          description: Coupon expiration date
+          format: date-time
+          type: string
+      type: object
+    ProductCreateApiModel:
+      properties:
+        AfterPaymentDescription:
+          description: After payment description
+          type: string
+        Attachments:
+          description: List of product attachments
+          items:
+            $ref: "#/components/schemas/ProductAttachmentApiModel"
+          type: array
+        Coupons:
+          description: List of product coupons
+          items:
+            $ref: "#/components/schemas/ProductCouponApiModel"
+          type: array
+        CurrencyId:
+          description: Foreign key Currency
+          format: int32
+          type: integer
+        Description:
+          description: Product description
+          type: string
+        Discounts:
+          description: List of product discounts
+          items:
+            $ref: "#/components/schemas/ProductDiscountApiModel"
+          type: array
+        Items:
+          description: List of product items
+          items:
+            $ref: "#/components/schemas/ProductItemApiModel"
+          type: array
+        Name:
+          description: Product alias
+          type: string
+        PaymentGateways:
+          description: List of enabled payment gateways for this product
+          items:
+            $ref: "#/components/schemas/ProductGatewayApiModel"
+          type: array
+        ShippingAmount:
+          description: Cost for shipping the product
+          format: double
+          type: number
+        ShippingDescription:
+          description: Client instructions for shipping
+          type: string
+        Status:
+          description: Product availability status
+          enum:
+            - Active
+            - NotAvailable
+            - Inactive
+          type: string
+        WhatHappensNextDescription:
+          description: What happens next description
+          type: string
+      type: object
+    ProductDeleteApiModel:
+      properties:
+        Id:
+          description: Id of product to be deleted
+          format: int32
+          type: integer
+      type: object
+    ProductDetailsApiModel:
+      properties:
+        AccessToken:
+          description: Product short link
+          type: string
+        AfterPaymentDescription:
+          description: After payment description
+          type: string
+        Currency:
+          $ref: "#/components/schemas/CurrencyDetailsApiModel"
+        CurrencyId:
+          description: Foreign key Currency
+          format: int32
+          type: integer
+        Description:
+          description: Product description
+          type: string
+        Id:
+          description: Product id
+          format: int32
+          type: integer
+        Name:
+          description: Product alias
+          type: string
+        ShippingAmount:
+          description: Cost for shipping the product
+          format: double
+          type: number
+        ShippingDescription:
+          description: Client instructions for shipping
+          type: string
+        Status:
+          description: Product availability status
+          enum:
+            - Active
+            - NotAvailable
+            - Inactive
+          type: string
+        SubTotalAmount:
+          description: Subtotal amount of product
+          format: double
+          type: number
+        TotalAmount:
+          description: Total amount of product
+          format: double
+          type: number
+        TotalWithShipping:
+          description: Total amount of product with shipping
+          format: double
+          type: number
+        WhatHappensNextDescription:
+          description: What happens next description
+          type: string
+      type: object
+    ProductDiscountApiModel:
+      properties:
+        DiscountAmount:
+          description: Discount amount
+          format: double
+          type: number
+        DiscountPercentage:
+          description: Discount percentage
+          format: double
+          type: number
+        Id:
+          description: Product discount id
+          format: int32
+          type: integer
+        Name:
+          description: Name
+          type: string
+        ValidFrom:
+          description: Discount start date
+          format: date-time
+          type: string
+        ValidTo:
+          description: Discount expiration date
+          format: date-time
+          type: string
+      type: object
+    ProductFullDetailsApiModel:
+      properties:
+        AccessToken:
+          description: Product short link
+          type: string
+        AfterPaymentDescription:
+          description: After payment description
+          type: string
+        Attachments:
+          description: List of product attachments
+          items:
+            $ref: "#/components/schemas/ProductAttachmentApiModel"
+          type: array
+        Coupons:
+          description: List of product coupons
+          items:
+            $ref: "#/components/schemas/ProductCouponApiModel"
+          type: array
+        Currency:
+          $ref: "#/components/schemas/CurrencyDetailsApiModel"
+        CurrencyId:
+          description: Foreign key Currency
+          format: int32
+          type: integer
+        Description:
+          description: Product description
+          type: string
+        Discounts:
+          description: List of product discounts
+          items:
+            $ref: "#/components/schemas/ProductDiscountApiModel"
+          type: array
+        Id:
+          description: Product id
+          format: int32
+          type: integer
+        Items:
+          description: List of product items
+          items:
+            $ref: "#/components/schemas/ProductItemApiModel"
+          type: array
+        Name:
+          description: Product alias
+          type: string
+        PaymentGateways:
+          description: List of enabled payment gateways for this product
+          items:
+            $ref: "#/components/schemas/ProductGatewayApiModel"
+          type: array
+        ShippingAmount:
+          description: Cost for shipping the product
+          format: double
+          type: number
+        ShippingDescription:
+          description: Client instructions for shipping
+          type: string
+        Status:
+          description: Product availability status
+          enum:
+            - Active
+            - NotAvailable
+            - Inactive
+          type: string
+        SubTotalAmount:
+          description: Subtotal amount of product
+          format: double
+          type: number
+        TotalAmount:
+          description: Total amount of product
+          format: double
+          type: number
+        TotalWithShipping:
+          description: Total amount of product with shipping
+          format: double
+          type: number
+        WhatHappensNextDescription:
+          description: What happens next description
+          type: string
+      type: object
+    ProductGatewayApiModel:
+      properties:
+        Name:
+          description: Payment gateway name
+          type: string
+      type: object
+    ProductItemApiModel:
+      properties:
+        Cost:
+          description: Work item cost
+          format: double
+          type: number
+        Description:
+          description: General description
+          type: string
+        Id:
+          description: Product item id
+          format: int32
+          type: integer
+        MinimumQuantity:
+          description: Minimum required quantity in order to buy a work item
+          format: double
+          type: number
+        ReferenceId:
+          description: Product SKU
+          type: string
+        SubTotalAmount:
+          description: Subtotal amount of product
+          format: double
+          type: number
+        TaxAmount:
+          description: Tax amount
+          format: double
+          type: number
+        TaxId:
+          description: Foreign key Tax id
+          format: int32
+          type: integer
+        TaxPercentage:
+          description: Tax percentage
+          format: double
+          type: number
+        TotalAmount:
+          description: Total amount of product
+          format: double
+          type: number
+        WorkTypeId:
+          description: Foreign key work type id
+          format: int32
+          type: integer
+      type: object
+    ProductUpdateApiModel:
+      properties:
+        AfterPaymentDescription:
+          description: After payment description
+          type: string
+        Attachments:
+          description: List of product attachments
+          items:
+            $ref: "#/components/schemas/ProductAttachmentApiModel"
+          type: array
+        Coupons:
+          description: List of product coupons
+          items:
+            $ref: "#/components/schemas/ProductCouponApiModel"
+          type: array
+        CurrencyId:
+          description: Foreign key Currency
+          format: int32
+          type: integer
+        Description:
+          description: Product description
+          type: string
+        Discounts:
+          description: List of product discounts
+          items:
+            $ref: "#/components/schemas/ProductDiscountApiModel"
+          type: array
+        Id:
+          description: Product id
+          format: int32
+          type: integer
+        Items:
+          description: List of product items
+          items:
+            $ref: "#/components/schemas/ProductItemApiModel"
+          type: array
+        Name:
+          description: Product alias
+          type: string
+        PaymentGateways:
+          description: List of enabled payment gateways for this product
+          items:
+            $ref: "#/components/schemas/ProductGatewayApiModel"
+          type: array
+        ShippingAmount:
+          description: Cost for shipping the product
+          format: double
+          type: number
+        ShippingDescription:
+          description: Client instructions for shipping
+          type: string
+        Status:
+          description: Product availability status
+          enum:
+            - Active
+            - NotAvailable
+            - Inactive
+          type: string
+        WhatHappensNextDescription:
+          description: What happens next description
+          type: string
+      type: object
+    QueryOptions:
+      properties:
+        Page:
+          format: int32
+          type: integer
+        PageSize:
+          format: int32
+          type: integer
+      type: object
+    SearchRequest:
+      properties:
+        Order:
+          enum:
+            - None
+            - Asc
+            - Desc
+          type: string
+        OrderBy:
+          type: string
+        Page:
+          format: int32
+          type: integer
+        PageSize:
+          format: int32
+          type: integer
+        Query:
+          type: string
+      type: object
+    SendInvoiceToAccountantApiModel:
+      properties:
+        Id:
+          description: Id of the invoice
+          format: int32
+          type: integer
+      type: object
+    SendInvoiceToClientApiModel:
+      properties:
+        Id:
+          description: Id of the invoice
+          format: int32
+          type: integer
+        InvoiceId:
+          description: Id of the invoice
+          format: int32
+          type: integer
+        Message:
+          description: Message to be embedded in the email
+          type: string
+        SendToSelf:
+          description: Should email copy be send to self
+          type: boolean
+        Subject:
+          description: Subject for the email
+          type: string
+      type: object
+    TaxCreateApiModel:
+      properties:
+        Name:
+          description: Name of the task
+          type: string
+        Percentage:
+          description: "Task percentage. Ex: 18%"
+          format: double
+          type: number
+      type: object
+    TaxDeleteApiModel:
+      properties:
+        Id:
+          description: Id of tax to be deleted
+          format: int32
+          type: integer
+      type: object
+    TaxDetailsApiModel:
+      properties:
+        CreatedOn:
+          description: Date of creation
+          format: date-time
+          type: string
+        Id:
+          description: Entity id
+          format: int32
+          type: integer
+        Name:
+          description: Name of the task
+          type: string
+        Percentage:
+          description: "Task percentage. Ex: 18%"
+          format: double
+          type: number
+      type: object
+    TaxUpdateApiModel:
+      properties:
+        Id:
+          description: Entity id
+          format: int32
+          type: integer
+        Name:
+          description: Name of the task
+          type: string
+        Percentage:
+          description: "Task percentage. Ex: 18%"
+          format: double
+          type: number
+      type: object
+    UILanguageDetailsApiModel:
+      properties:
+        Id:
+          description: Entity id
+          format: int32
+          type: integer
+        Name:
+          description: Name of the country
+          type: string
+        UiCulture:
+          description: Ui culture options
+          type: string
+      type: object
+    WorkTypeCreateApiModel:
+      properties:
+        Title:
+          description: Indicates the title of of the work type (Logo design, development...)
+          type: string
+      type: object
+    WorkTypeDeleteApiModel:
+      properties:
+        Id:
+          description: Id of work type to be deleted
+          format: int32
+          type: integer
+      type: object
+    WorkTypeDetailsApiModel:
+      properties:
+        CreatedOn:
+          description: Date of creation
+          format: date-time
+          type: string
+        Id:
+          description: Entity id
+          format: int32
+          type: integer
+        Title:
+          description: Indicates the title of of the work type (Logo design, development...)
+          type: string
+      type: object
+    WorkTypeUpdateApiModel:
+      properties:
+        Id:
+          description: Entity id
+          format: int32
+          type: integer
+        Title:
+          description: Indicates the title of of the work type (Logo design, development...)
+          type: string
+      type: object
+  securitySchemes:
+    x-auth-key:
+      description: Your account API key. Can be retrieved from your [account settings](/account/settings#api-tab).
+      in: header
+      name: x-auth-key
+      type: apiKey
+    x-auth-secret:
+      description: Your account API secret. Can be retrieved from your [account settings](/account/settings#api-tab). Keep it hidden.
+      in: header
+      name: x-auth-secret
+      type: apiKey

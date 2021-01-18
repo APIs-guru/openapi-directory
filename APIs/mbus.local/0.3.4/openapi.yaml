@@ -1,6 +1,5 @@
 openapi: 3.0.3
 servers:
-  - url: http://mbus.local
   - url: /
 info:
   title: M-Bus HTTPD API
@@ -12,6 +11,7 @@ info:
       url: https://raw.githubusercontent.com/packom/mbus-api/master/api/openapi.yaml
       version: "3.0"
   x-providerName: mbus.local
+  x-preferred: null
 paths:
   /mbus/api:
     get:

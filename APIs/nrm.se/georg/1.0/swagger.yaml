@@ -1,7 +1,5 @@
 swagger: "2.0"
 basePath: /api/
-servers:
-  - url: https://georg.nrm.se
 info:
   title: Georg API
   version: "1.0"
@@ -13,6 +11,7 @@ info:
       version: "2.0"
   x-providerName: nrm.se
   x-serviceName: georg
+  x-preferred: null
 tags:
   - description: Georeference tool
     name: georg

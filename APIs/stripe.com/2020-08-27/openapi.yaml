@@ -10602,6 +10602,11 @@ paths:
                       description:
                         maxLength: 5000
                         type: string
+                      dynamic_tax_rates:
+                        items:
+                          maxLength: 5000
+                          type: string
+                        type: array
                       images:
                         items:
                           maxLength: 5000
@@ -26515,6 +26520,16 @@ paths:
             maxLength: 5000
             type: string
           style: form
+        - description: Only return transactions that have the given type. One of `capture` or `refund`.
+          in: query
+          name: type
+          required: false
+          schema:
+            enum:
+              - capture
+              - refund
+            type: string
+          style: form
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -40324,6 +40339,10 @@ paths:
                 active:
                   description: Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
                   type: boolean
+                country:
+                  description: Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+                  maxLength: 5000
+                  type: string
                 description:
                   description: An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
                   maxLength: 5000
@@ -40353,6 +40372,10 @@ paths:
                 percentage:
                   description: This represents the tax rate percent out of 100.
                   type: number
+                state:
+                  description: '[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, "NY" for New York, United States.'
+                  maxLength: 2
+                  type: string
               required:
                 - display_name
                 - inclusive
@@ -40444,6 +40467,10 @@ paths:
                 active:
                   description: Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
                   type: boolean
+                country:
+                  description: Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+                  maxLength: 5000
+                  type: string
                 description:
                   description: An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
                   maxLength: 5000
@@ -40471,6 +40498,10 @@ paths:
                         - ""
                       type: string
                   description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+                state:
+                  description: '[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, "NY" for New York, United States.'
+                  maxLength: 2
+                  type: string
               type: object
         required: false
       responses:
@@ -46046,6 +46077,11 @@ components:
             oneOf:
               - $ref: "#/components/schemas/customer"
               - $ref: "#/components/schemas/deleted_customer"
+        customer_details:
+          anyOf:
+            - $ref: "#/components/schemas/payment_pages_checkout_session_customer_details"
+          description: The customer details including the customer's tax exempt status and the customer's tax IDs.
+          nullable: true
         customer_email:
           description: >-
             If provided, this value will be used when the Customer object is created.
@@ -46260,6 +46296,7 @@ components:
       type: object
       x-expandableFields:
         - customer
+        - customer_details
         - line_items
         - payment_intent
         - setup_intent
@@ -56694,6 +56731,82 @@ components:
       title: payment_method_sofort
       type: object
       x-expandableFields: []
+    payment_pages_checkout_session_customer_details:
+      description: ""
+      properties:
+        email:
+          description: The customer’s email at time of checkout.
+          maxLength: 5000
+          nullable: true
+          type: string
+        tax_exempt:
+          description: The customer’s tax exempt status at time of checkout.
+          enum:
+            - exempt
+            - none
+            - reverse
+          nullable: true
+          type: string
+        tax_ids:
+          description: The customer’s tax IDs at time of checkout.
+          items:
+            $ref: "#/components/schemas/payment_pages_checkout_session_tax_id"
+          nullable: true
+          type: array
+      title: PaymentPagesCheckoutSessionCustomerDetails
+      type: object
+      x-expandableFields:
+        - tax_ids
+    payment_pages_checkout_session_tax_id:
+      description: ""
+      properties:
+        type:
+          description: The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, or `unknown`
+          enum:
+            - ae_trn
+            - au_abn
+            - br_cnpj
+            - br_cpf
+            - ca_bn
+            - ca_qst
+            - ch_vat
+            - cl_tin
+            - es_cif
+            - eu_vat
+            - hk_br
+            - id_npwp
+            - in_gst
+            - jp_cn
+            - jp_rn
+            - kr_brn
+            - li_uid
+            - mx_rfc
+            - my_frp
+            - my_itn
+            - my_sst
+            - no_vat
+            - nz_gst
+            - ru_inn
+            - ru_kpp
+            - sa_vat
+            - sg_gst
+            - sg_uen
+            - th_vat
+            - tw_vat
+            - unknown
+            - us_ein
+            - za_vat
+          type: string
+        value:
+          description: The value of the tax ID.
+          maxLength: 5000
+          nullable: true
+          type: string
+      required:
+        - type
+      title: PaymentPagesCheckoutSessionTaxID
+      type: object
+      x-expandableFields: []
     payment_pages_checkout_session_total_details:
       description: ""
       properties:
@@ -57185,6 +57298,11 @@ components:
     person:
       description: >-
         This is an object representing a person associated with a Stripe account.
+
+
+        A platform cannot access a Standard or Express account's persons after the account starts onboarding, such as after generating an account link for the account.
+
+        See the [Standard onboarding](https://stripe.com/docs/connect/standard-accounts) or [Express onboarding documentation](https://stripe.com/docs/connect/express-accounts) for information about platform pre-filling and account onboarding steps.
 
 
         Related guide: [Handling Identity Verification with the API](https://stripe.com/docs/connect/identity-verification-api#person-information).
@@ -61532,7 +61650,7 @@ components:
         invoice_settings:
           anyOf:
             - $ref: "#/components/schemas/invoice_setting_subscription_schedule_setting"
-          description: The subscription schedule's default invoice settings.
+          description: The invoice settings applicable during this phase.
           nullable: true
         items:
           description: Subscription items to configure the subscription to during this phase of the subscription schedule.
@@ -61880,6 +61998,11 @@ components:
         active:
           description: Defaults to `true`. When set to `false`, this tax rate cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
           type: boolean
+        country:
+          description: Two-letter country code ([ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+          maxLength: 5000
+          nullable: true
+          type: string
         created:
           description: Time at which the object was created. Measured in seconds since the Unix epoch.
           format: unix-time
@@ -61923,6 +62046,11 @@ components:
         percentage:
           description: This represents the tax rate percent out of 100.
           type: number
+        state:
+          description: '[ISO 3166-2 subdivision code](https://en.wikipedia.org/wiki/ISO_3166-2:US), without country prefix. For example, "NY" for New York, United States.'
+          maxLength: 5000
+          nullable: true
+          type: string
       required:
         - active
         - created

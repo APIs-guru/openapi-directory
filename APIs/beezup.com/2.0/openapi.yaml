@@ -11653,6 +11653,7 @@ components:
       description: Footer Content HTML
       maxLength: 1000
       type: string
+      x-minLength: "0"
     friendCountryIsoCodeAlpha3:
       description: Your friend's user country iso code alpha 3
       example: USA
@@ -12015,6 +12016,7 @@ components:
       description: Header Content HTML
       maxLength: 1000
       type: string
+      x-minLength: "0"
     href:
       description: Indicate the relative uri for this link
       example: /merchant/orders/v1/{marketplaceCode}/{IMNOrderId}

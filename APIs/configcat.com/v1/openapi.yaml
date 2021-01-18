@@ -3616,10 +3616,10 @@ components:
         value:
           additionalProperties: false
           description: The value to serve when the user falls in the percentage rule. It must respect the setting type.
+          nullable: true
           type: object
       required:
         - percentage
-        - value
       type: object
     RolloutRuleComparator:
       enum:
@@ -3660,11 +3660,11 @@ components:
         value:
           additionalProperties: false
           description: The value to serve when the comparison matches. It must respect the setting type.
+          nullable: true
           type: object
       required:
         - comparisonAttribute
         - comparisonValue
-        - value
       type: object
     SdkKeysModel:
       additionalProperties: false

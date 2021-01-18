@@ -1811,6 +1811,10 @@ paths:
           in: query
           name: mentioned
           type: boolean
+        - description: filter pulls requesting your review, default is false
+          in: query
+          name: review_requested
+          type: boolean
         - description: page number of results to return (1-based)
           in: query
           name: page

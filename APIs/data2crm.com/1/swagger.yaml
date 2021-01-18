@@ -25044,27 +25044,32 @@ definitions:
         description: Entity
         enum:
           - account
-          - contact
-          - lead
-          - opportunity
-          - task
+          - attachment
           - call
+          - campaign
+          - case
+          - comment
+          - contact
           - email
           - event
-          - meeting
-          - note
-          - attachment
-          - case
-          - product
-          - campaign
-          - project
           - invoice
           - invoiceItem
-          - quote
-          - quoteItem
+          - lead
+          - meeting
+          - note
+          - opportunity
+          - opportunityProduct
+          - post
           - priceBook
           - priceBookItem
-          - comment
+          - product
+          - project
+          - quote
+          - quoteItem
+          - tag
+          - task
+          - ticket
+          - user
         type: string
       id:
         description: Tag Identifier
