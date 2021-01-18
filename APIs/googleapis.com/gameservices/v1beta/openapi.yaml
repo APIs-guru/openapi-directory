@@ -22,8 +22,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://gameservices.googleapis.com/$discovery/rest?version=v1beta
       version: v1
@@ -106,7 +106,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask"
+        - description: Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
           in: query
           name: updateMask
           schema:
@@ -286,7 +286,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask"
+        - description: Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
           in: query
           name: updateMask
           schema:
@@ -338,7 +338,7 @@ paths:
           name: previewTime
           schema:
             type: string
-        - description: "Optional. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask"
+        - description: Optional. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
           in: query
           name: updateMask
           schema:
@@ -516,7 +516,7 @@ paths:
           name: previewTime
           schema:
             type: string
-        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask"
+        - description: Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
           in: query
           name: updateMask
           schema:
@@ -1440,6 +1440,15 @@ components:
     GameServerCluster:
       description: A game server cluster resource.
       properties:
+        allocationPriority:
+          description: Optional. The allocation priority assigned to the game server cluster. Game server clusters receive new game server allocations based on the relative allocation priorites set for each cluster, if the realm is configured for multicluster allocation.
+          enum:
+            - PRIORITY_UNSPECIFIED
+            - P1
+            - P2
+            - P3
+            - P4
+          type: string
         connectionInfo:
           $ref: "#/components/schemas/GameServerClusterConnectionInfo"
           description: The game server cluster connection information. This information is used to manage game server clusters.
@@ -1474,6 +1483,9 @@ components:
         gkeClusterReference:
           $ref: "#/components/schemas/GkeClusterReference"
           description: Reference to the GKE cluster where the game servers are installed.
+        gkeHubClusterReference:
+          $ref: "#/components/schemas/GkeHubClusterReference"
+          description: Reference to a Kubernetes cluster registered through GKE Hub. See https://cloud.google.com/anthos/multicluster-management/ for more information about registering Kubernetes clusters.
         namespace:
           description: Namespace designated on the game server cluster where the Agones game server instances will be created. Existence of the namespace will be validated during creation.
           type: string
@@ -1584,6 +1596,13 @@ components:
       properties:
         cluster:
           description: "The full or partial name of a GKE cluster, using one of the following forms: * `projects/{project}/locations/{location}/clusters/{cluster}` * `locations/{location}/clusters/{cluster}` * `{cluster}` If project and location are not specified, the project and location of the GameServerCluster resource are used to generate the full name of the GKE cluster."
+          type: string
+      type: object
+    GkeHubClusterReference:
+      description: GkeHubClusterReference represents a reference to a Kubernetes cluster registered through GKE Hub.
+      properties:
+        membership:
+          description: "The full or partial name of a GKE Hub membership, using one of the following forms: * `https://gkehub.googleapis.com/v1beta1/projects/{project_id}/locations/global/memberships/{membership_id}` * `projects/{project_id}/locations/global/memberships/{membership_id}` * `{membership_id}` If project is not specified, the project of the GameServerCluster resource is used to generate the full name of the GKE Hub membership."
           type: string
       type: object
     LabelSelector:

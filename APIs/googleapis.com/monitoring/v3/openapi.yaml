@@ -22,8 +22,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://monitoring.googleapis.com/$discovery/rest?version=v3
       version: v1
@@ -33,6 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/monitoring/api/
 tags:
+  - name: folders
+  - name: organizations
   - name: projects
   - name: services
   - name: uptimeCheckIps
@@ -902,7 +904,7 @@ paths:
       description: Lists time series that match a filter. This method does not require a Workspace.
       operationId: monitoring.projects.timeSeries.list
       parameters:
-        - description: "Required. The project on which to execute the request. The format is: projects/[PROJECT_ID_OR_NUMBER] "
+        - description: "Required. The project, organization or folder on which to execute the request. The format is: projects/[PROJECT_ID_OR_NUMBER] organizations/[ORGANIZATION_ID] folders/[FOLDER_ID] "
           in: path
           name: name
           required: true
@@ -2354,6 +2356,19 @@ components:
             - RUNNING
           type: string
       type: object
+    IstioCanonicalService:
+      description: Canonical service scoped to an Istio mesh. Anthos clusters running ASM >= 1.6.8 will have their services ingested as this type.
+      properties:
+        canonicalService:
+          description: The name of the canonical service underlying this service. Corresponds to the destination_canonical_service_name metric label in label in Istio metrics (https://cloud.google.com/monitoring/api/metrics_istio).
+          type: string
+        canonicalServiceNamespace:
+          description: The namespace of the canonical service underlying this service. Corresponds to the destination_canonical_service_namespace metric label in Istio metrics (https://cloud.google.com/monitoring/api/metrics_istio).
+          type: string
+        meshUid:
+          description: Identifier for the Istio mesh in which this canonical service is defined. Corresponds to the mesh_uid metric label in Istio metrics (https://cloud.google.com/monitoring/api/metrics_istio).
+          type: string
+      type: object
     LabelDescriptor:
       description: A description of a label.
       properties:
@@ -3053,6 +3068,9 @@ components:
         displayName:
           description: Name used for UI elements listing this Service.
           type: string
+        istioCanonicalService:
+          $ref: "#/components/schemas/IstioCanonicalService"
+          description: Type used for canonical services scoped to an Istio mesh. Metrics for Istio are documented here (https://istio.io/latest/docs/reference/config/metrics/)
         meshIstio:
           $ref: "#/components/schemas/MeshIstio"
           description: Type used for Istio services scoped to an Istio mesh.

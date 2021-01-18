@@ -33,6 +33,8 @@ tags:
   - name: accounts
   - name: accountstatuses
   - name: accounttax
+  - name: collections
+  - name: collectionstatuses
   - name: csses
   - name: datafeeds
   - name: datafeedstatuses
@@ -263,6 +265,146 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AccountLabel"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accounts
+  "/content/v2.1/accounts/{accountId}/returncarrier":
+    get:
+      description: Lists available return carriers in the merchant account.
+      operationId: content.accounts.returncarrier.list
+      parameters:
+        - description: Required. The Merchant Center Account Id under which the Return Carrier is to be linked.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAccountReturnCarrierResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Links return carrier to a merchant account.
+      operationId: content.accounts.returncarrier.create
+      parameters:
+        - description: Required. The Merchant Center Account Id under which the Return Carrier is to be linked.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountReturnCarrier"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountReturnCarrier"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accounts
+  "/content/v2.1/accounts/{accountId}/returncarrier/{carrierAccountId}":
+    delete:
+      description: Delete a return carrier in the merchant account.
+      operationId: content.accounts.returncarrier.delete
+      parameters:
+        - description: Required. The Merchant Center Account Id under which the Return Carrier is to be linked.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: Required. The Google-provided unique carrier ID, used to update the resource.
+          in: path
+          name: carrierAccountId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates a return carrier in the merchant account.
+      operationId: content.accounts.returncarrier.patch
+      parameters:
+        - description: Required. The Merchant Center Account Id under which the Return Carrier is to be linked.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: Required. The Google-provided unique carrier ID, used to update the resource.
+          in: path
+          name: carrierAccountId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountReturnCarrier"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountReturnCarrier"
           description: Successful response
       security:
         - Oauth2:
@@ -1530,6 +1672,241 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounttax
+  "/content/v2.1/{merchantId}/collections":
+    get:
+      description: Lists the collections in your Merchant Center account. The response might contain fewer items than specified by page_size. Rely on next_page_token to determine if there are more items to be requested.
+      operationId: content.collections.list
+      parameters:
+        - description: Required. The ID of the account that contains the collection. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of collections to return in the response, used for paging. Defaults to 50; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token (if provided) to retrieve the subsequent page. All other parameters must match the original call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCollectionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - collections
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Uploads a collection to your Merchant Center account. If a collection with the same collectionId already exists, this method updates that entry. In each update, the collection is completely replaced by the fields in the body of the update request.
+      operationId: content.collections.create
+      parameters:
+        - description: Required. The ID of the account that contains the collection. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Collection"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Collection"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - collections
+  "/content/v2.1/{merchantId}/collections/{collectionId}":
+    delete:
+      description: Deletes a collection from your Merchant Center account.
+      operationId: content.collections.delete
+      parameters:
+        - description: Required. The ID of the account that contains the collection. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. The collectionId of the collection. CollectionId is the same as the REST ID of the collection.
+          in: path
+          name: collectionId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - collections
+    get:
+      description: Retrieves a collection from your Merchant Center account.
+      operationId: content.collections.get
+      parameters:
+        - description: Required. The ID of the account that contains the collection. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. The REST ID of the collection.
+          in: path
+          name: collectionId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Collection"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - collections
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/content/v2.1/{merchantId}/collectionstatuses":
+    get:
+      description: Lists the statuses of the collections in your Merchant Center account.
+      operationId: content.collectionstatuses.list
+      parameters:
+        - description: Required. The ID of the account that contains the collection. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of collection statuses to return in the response, used for paging. Defaults to 50; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token (if provided) to retrieve the subsequent page. All other parameters must match the original call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCollectionStatusesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - collectionstatuses
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/content/v2.1/{merchantId}/collectionstatuses/{collectionId}":
+    get:
+      description: Gets the status of a collection from your Merchant Center account.
+      operationId: content.collectionstatuses.get
+      parameters:
+        - description: Required. The ID of the account that contains the collection. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. The collectionId of the collection. CollectionId is the same as the REST ID of the collection.
+          in: path
+          name: collectionId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionStatus"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - collectionstatuses
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/content/v2.1/{merchantId}/datafeeds":
     get:
       description: Lists the configurations for datafeeds in your Merchant Center account.
@@ -5813,6 +6190,12 @@ components:
         adultContent:
           description: Indicates whether the merchant sells adult content.
           type: boolean
+        automaticLabelIds:
+          description: List of automatically created label IDs that are assigned to the account by CSS Center.
+          items:
+            format: uint64
+            type: string
+          type: array
         businessInformation:
           $ref: "#/components/schemas/AccountBusinessInformation"
           description: The business information of the account.
@@ -5831,7 +6214,7 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#account`"'
           type: string
         labelIds:
-          description: List of label IDs that are assigned to the account by CSS.
+          description: List of manually created label IDs that are assigned to the account by CSS.
           items:
             format: uint64
             type: string
@@ -5946,8 +6329,38 @@ components:
           format: int64
           readOnly: true
           type: string
+        labelType:
+          description: Output only. The type of this label.
+          enum:
+            - LABEL_TYPE_UNSPECIFIED
+            - MANUAL
+            - AUTOMATIC
+          readOnly: true
+          type: string
         name:
           description: The display name of this label.
+          type: string
+      type: object
+    AccountReturnCarrier:
+      description: " The return carrier information. This service is designed for merchants enrolled in the Buy on Google program. "
+      properties:
+        carrierAccountId:
+          description: Output only. Immutable. The Google-provided unique carrier ID, used to update the resource.
+          format: int64
+          readOnly: true
+          type: string
+        carrierAccountName:
+          description: Name of the carrier account.
+          type: string
+        carrierAccountNumber:
+          description: Number of the carrier account.
+          type: string
+        carrierCode:
+          description: The carrier code enum. Accepts the values FEDEX or UPS.
+          enum:
+            - CARRIER_CODE_UNSPECIFIED
+            - FEDEX
+            - UPS
           type: string
       type: object
     AccountStatus:
@@ -6249,7 +6662,7 @@ components:
           description: The ID of the linked account.
           type: string
         services:
-          description: List of provided services.
+          description: ' Acceptable values are: - "`shoppingAdsProductManagement`" - "`shoppingAdsOther`" - "`shoppingActionsProductManagement`" - "`shoppingActionsOrderManagement`" - "`shoppingActionsOther`" '
           items:
             type: string
           type: array
@@ -6494,6 +6907,131 @@ components:
           items:
             type: string
           type: array
+      type: object
+    Collection:
+      description: The collection message.
+      properties:
+        customLabel0:
+          description: Label that you assign to a collection to help organize bidding and reporting in Shopping campaigns. Custom label
+          type: string
+        customLabel1:
+          description: Label that you assign to a collection to help organize bidding and reporting in Shopping campaigns.
+          type: string
+        customLabel2:
+          description: Label that you assign to a collection to help organize bidding and reporting in Shopping campaigns.
+          type: string
+        customLabel3:
+          description: Label that you assign to a collection to help organize bidding and reporting in Shopping campaigns.
+          type: string
+        customLabel4:
+          description: Label that you assign to a collection to help organize bidding and reporting in Shopping campaigns.
+          type: string
+        featuredProduct:
+          description: This identifies one or more products associated with the collection. Used as a lookup to the corresponding product ID in your product feeds. Provide a maximum of 100 featuredProduct (for collections). Provide up to 10 featuredProduct (for Shoppable Images only) with ID and X and Y coordinates. featured_product attribute
+          items:
+            $ref: "#/components/schemas/CollectionFeaturedProduct"
+          type: array
+        headline:
+          description: Your collection's name. headline attribute
+          items:
+            type: string
+          type: array
+        id:
+          description: Required. The REST ID of the collection. Content API methods that operate on collections take this as their collectionId parameter. The REST ID for a collection is of the form collectionId. id attribute
+          type: string
+        imageLink:
+          description: The URL of a collection’s image. image_link attribute
+          items:
+            type: string
+          type: array
+        language:
+          description: The language of a collection and the language of any featured products linked to the collection. language attribute
+          type: string
+        link:
+          description: A collection’s landing page. URL directly linking to your collection's page on your website. link attribute
+          type: string
+        mobileLink:
+          description: A collection’s mobile-optimized landing page when you have a different URL for mobile and desktop traffic. mobile_link attribute
+          type: string
+        productCountry:
+          description: product_country attribute
+          type: string
+      type: object
+    CollectionFeaturedProduct:
+      description: The message for FeaturedProduct. FeaturedProduct
+      properties:
+        offerId:
+          description: The unique identifier for the product item.
+          type: string
+        x:
+          description: Required. X-coordinate of the product callout on the Shoppable Image.
+          format: float
+          type: number
+        y:
+          description: Required. Y-coordinate of the product callout on the Shoppable Image.
+          format: float
+          type: number
+      type: object
+    CollectionStatus:
+      description: The collectionstatus message.
+      properties:
+        collectionLevelIssuses:
+          description: A list of all issues associated with the collection.
+          items:
+            $ref: "#/components/schemas/CollectionStatusItemLevelIssue"
+          type: array
+        creationDate:
+          description: 'Date on which the collection has been created in [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format: Date, time, and offset, e.g. "2020-01-02T09:00:00+01:00" or "2020-01-02T09:00:00Z"'
+          type: string
+        destinationStatuses:
+          description: The intended destinations for the collection.
+          items:
+            $ref: "#/components/schemas/CollectionStatusDestinationStatus"
+          type: array
+        id:
+          description: Required. The ID of the collection for which status is reported.
+          type: string
+        lastUpdateDate:
+          description: 'Date on which the collection has been last updated in [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format: Date, time, and offset, e.g. "2020-01-02T09:00:00+01:00" or "2020-01-02T09:00:00Z"'
+          type: string
+      type: object
+    CollectionStatusDestinationStatus:
+      description: Destination status message.
+      properties:
+        destination:
+          description: The name of the destination
+          type: string
+        status:
+          description: The status for the specified destination.
+          type: string
+      type: object
+    CollectionStatusItemLevelIssue:
+      description: Issue associated with the collection.
+      properties:
+        attributeName:
+          description: The attribute's name, if the issue is caused by a single attribute.
+          type: string
+        code:
+          description: The error code of the issue.
+          type: string
+        description:
+          description: A short issue description in English.
+          type: string
+        destination:
+          description: The destination the issue applies to.
+          type: string
+        detail:
+          description: A detailed issue description in English.
+          type: string
+        documentation:
+          description: The URL of a web page to help with resolving this issue.
+          type: string
+        resolution:
+          description: Whether the issue can be resolved by the merchant.
+          type: string
+        servability:
+          description: How this issue affects the serving of the collection.
+          type: string
       type: object
     Css:
       description: Information about CSS domain.
@@ -7116,6 +7654,7 @@ components:
             - TRIUMPHED_OVER_BY_SAME_TYPE_RULE
             - TRIUMPHED_OVER_BY_OTHER_RULE_ON_OFFER
             - RESTRICTIONS_NOT_MET
+            - UNCATEGORIZED
           type: string
       type: object
     Installment:
@@ -7418,6 +7957,39 @@ components:
         nextPageToken:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
+      type: object
+    ListAccountReturnCarrierResponse:
+      description: Response for listing account return carriers.
+      properties:
+        accountReturnCarriers:
+          description: List of all available account return carriers for the merchant.
+          items:
+            $ref: "#/components/schemas/AccountReturnCarrier"
+          type: array
+      type: object
+    ListCollectionStatusesResponse:
+      description: Response message for the ListCollectionStatuses method.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        resources:
+          description: The collectionstatuses listed.
+          items:
+            $ref: "#/components/schemas/CollectionStatus"
+          type: array
+      type: object
+    ListCollectionsResponse:
+      description: Response message for the ListCollections method.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        resources:
+          description: The collections listed.
+          items:
+            $ref: "#/components/schemas/Collection"
+          type: array
       type: object
     ListCssesResponse:
       description: The response message for the `ListCsses` method
@@ -9676,7 +10248,7 @@ components:
           description: Target gender of the item.
           type: string
         googleProductCategory:
-          description: Google's category of the item (see Google product taxonomy).
+          description: Google's category of the item (see [Google product taxonomy](https://support.google.com/merchants/answer/1705911)). When querying products, this field will contain the user provided value. There is currently no way to get back the auto assigned google product categories through the API.
           type: string
         gtin:
           description: Global Trade Item Number (GTIN) of the item.
@@ -10446,7 +11018,6 @@ components:
           description: Type of the rule.
           enum:
             - REPRICING_RULE_TYPE_UNSPECIFIED
-            - TYPE_WIN_BUY_BOX
             - TYPE_STATS_BASED
             - TYPE_COGS_BASED
           type: string
@@ -10502,7 +11073,6 @@ components:
           description: Required. Immutable. The type of the rule.
           enum:
             - REPRICING_RULE_TYPE_UNSPECIFIED
-            - TYPE_WIN_BUY_BOX
             - TYPE_STATS_BASED
             - TYPE_COGS_BASED
           type: string
@@ -10609,7 +11179,6 @@ components:
           description: Type of the rule.
           enum:
             - REPRICING_RULE_TYPE_UNSPECIFIED
-            - TYPE_WIN_BUY_BOX
             - TYPE_STATS_BASED
             - TYPE_COGS_BASED
           type: string

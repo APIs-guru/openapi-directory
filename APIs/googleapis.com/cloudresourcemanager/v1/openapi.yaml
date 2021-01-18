@@ -22,8 +22,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v1
       version: v1
@@ -1818,7 +1818,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
@@ -1827,7 +1827,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

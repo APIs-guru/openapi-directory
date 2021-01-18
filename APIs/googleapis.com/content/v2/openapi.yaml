@@ -22,8 +22,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://www.googleapis.com/discovery/v1/apis/content/v2/rest
       version: v1
@@ -7885,7 +7885,7 @@ components:
           description: 'Target gender of the item. Acceptable values are: - "`female`" - "`male`" - "`unisex`" '
           type: string
         googleProductCategory:
-          description: Google's category of the item (see Google product taxonomy).
+          description: Google's category of the item (see [Google product taxonomy](https://support.google.com/merchants/answer/1705911)). When querying products, this field will contain the user provided value. There is currently no way to get back the auto assigned google product categories through the API.
           type: string
         gtin:
           description: Global Trade Item Number (GTIN) of the item.

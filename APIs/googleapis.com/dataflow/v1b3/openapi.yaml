@@ -22,8 +22,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://dataflow.googleapis.com/$discovery/rest?version=v1b3
       version: v1
@@ -125,7 +125,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Level of information requested in response. Default is `JOB_VIEW_SUMMARY`.
+        - description: Deprecated. ListJobs always returns summaries now. Use GetJob for other JobViews.
           in: query
           name: view
           schema:
@@ -849,7 +849,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Level of information requested in response. Default is `JOB_VIEW_SUMMARY`.
+        - description: Deprecated. ListJobs always returns summaries now. Use GetJob for other JobViews.
           in: query
           name: view
           schema:
@@ -1054,7 +1054,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Level of information requested in response. Default is `JOB_VIEW_SUMMARY`.
+        - description: Deprecated. ListJobs always returns summaries now. Use GetJob for other JobViews.
           in: query
           name: view
           schema:
@@ -3882,6 +3882,13 @@ components:
         enableStreamingEngine:
           description: Whether to enable Streaming Engine for the job.
           type: boolean
+        flexrsGoal:
+          description: Set FlexRS goal for the job. https://cloud.google.com/dataflow/docs/guides/flexrs
+          enum:
+            - FLEXRS_UNSPECIFIED
+            - FLEXRS_SPEED_OPTIMIZED
+            - FLEXRS_COST_OPTIMIZED
+          type: string
         ipConfiguration:
           description: Configuration for VM IPs.
           enum:
@@ -4081,7 +4088,7 @@ components:
           description: The sum of all values being aggregated.
       type: object
     Job:
-      description: Defines a job to be run by the Cloud Dataflow service.
+      description: "Defines a job to be run by the Cloud Dataflow service. nextID: 26"
       properties:
         clientRequestId:
           description: The client's unique identifier of the job, re-used across retried attempts. If this field is set, the service will ensure its uniqueness. The request to create a job will fail if the service has knowledge of a previously submitted job with the same client's ID and job name. The caller may use this field to ensure idempotence of job creation across retried attempts to create a job. By default, the field is empty and, in that case, the service ignores it.
@@ -4166,6 +4173,9 @@ components:
             - JOB_STATE_QUEUED
             - JOB_STATE_RESOURCE_CLEANING_UP
           type: string
+        satisfiesPzs:
+          description: Reserved for future use. This field is set only in responses from the server; it is ignored if it is set in any requests.
+          type: boolean
         stageStates:
           description: This field may be mutated by the Cloud Dataflow service; callers cannot mutate it.
           items:
@@ -4365,7 +4375,7 @@ components:
         transformNameMappings:
           additionalProperties:
             type: string
-          description: Users need to set transform_name_mappings Ex:{"oldTransformName":"newTransformName",...}'
+          description: Use this to pass transform_name_mappings for streaming update jobs. Ex:{"oldTransformName":"newTransformName",...}'
           type: object
         update:
           description: Set this to true if you are sending a request to update a running streaming job. When set, the job name should be the same as the running job.

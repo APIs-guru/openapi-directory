@@ -22,8 +22,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://prod-tt-sasportal.googleapis.com/$discovery/rest?version=v1alpha1
       version: v1
@@ -476,6 +476,82 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - nodes
+  "/v1alpha1/{parent}/deployments":
+    get:
+      description: Lists deployments.
+      operationId: prod_tt_sasportal.nodes.nodes.deployments.list
+      parameters:
+        - description: Required. The parent resource name, for example, "nodes/1", customer/1/nodes/2.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of deployments to return in the response.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A pagination token returned from a previous call to ListDeployments method that indicates where this listing should continue from.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SasPortalListDeploymentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
+      tags:
+        - nodes
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new deployment.
+      operationId: prod_tt_sasportal.nodes.nodes.deployments.create
+      parameters:
+        - description: Required. The parent resource name where the deployment is to be created.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SasPortalDeployment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SasPortalDeployment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
+      tags:
+        - nodes
   "/v1alpha1/{parent}/devices":
     get:
       description: Lists devices under a node or customer.
@@ -549,48 +625,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SasPortalDevice"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
-      tags:
-        - nodes
-  "/v1alpha1/{parent}/devices:bulk":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a device under a node or customer. Returned devices are unordered.
-      operationId: prod_tt_sasportal.nodes.nodes.devices.bulk
-      parameters:
-        - description: Required. The name of the parent resource.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SasPortalBulkCreateDeviceRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SasPortalBulkCreateDeviceResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -805,22 +839,6 @@ components:
           description: Required. Role that is assigned to `members`.
           type: string
       type: object
-    SasPortalBulkCreateDeviceRequest:
-      description: Request for BulkCreateDevice method.
-      properties:
-        csv:
-          description: Required. A csv with each row representing a [device]. Each row must conform to the regulations described on CreateDeviceRequest's device field.
-          type: string
-      type: object
-    SasPortalBulkCreateDeviceResponse:
-      description: Response for BulkCreateDevice method.
-      properties:
-        devices:
-          description: Required. The devices that were imported.
-          items:
-            $ref: "#/components/schemas/SasPortalDevice"
-          type: array
-      type: object
     SasPortalCreateSignedDeviceRequest:
       description: Request for CreateSignedDevice method.
       properties:
@@ -843,6 +861,38 @@ components:
           type: string
         sasUserIds:
           description: User IDs used by the devices belonging to this customer.
+          items:
+            type: string
+          type: array
+      type: object
+    SasPortalDeployment:
+      description: The Deployment.
+      properties:
+        allowedBillingModes:
+          description: The allowed billing modes under this deployment.
+          items:
+            enum:
+              - BILLING_MODE_UNSPECIFIED
+              - MOBILE
+              - FIXED_WIRELESS
+            type: string
+          type: array
+        defaultBillingMode:
+          description: Default billing mode for the deployment and devices under it.
+          enum:
+            - BILLING_MODE_UNSPECIFIED
+            - MOBILE
+            - FIXED_WIRELESS
+          type: string
+        displayName:
+          description: The deployment's display name.
+          type: string
+        name:
+          description: Output only. Resource name.
+          readOnly: true
+          type: string
+        sasUserIds:
+          description: User id used by the devices belonging to this deployment. Each deployment should be associated with one unique user_id.
           items:
             type: string
           type: array
@@ -1135,6 +1185,18 @@ components:
           type: array
         nextPageToken:
           description: A pagination token returned from a previous call to ListCustomers method that indicates from where listing should continue. If the field is missing or empty, it means there are no more customers.
+          type: string
+      type: object
+    SasPortalListDeploymentsResponse:
+      description: Response for ListDeployments method.
+      properties:
+        deployments:
+          description: The deployments that match the request.
+          items:
+            $ref: "#/components/schemas/SasPortalDeployment"
+          type: array
+        nextPageToken:
+          description: A pagination token returned from a previous call to ListDeployments method that indicates from where listing should continue. If the field is missing or empty, it means there is no more deployments.
           type: string
       type: object
     SasPortalListDevicesResponse:

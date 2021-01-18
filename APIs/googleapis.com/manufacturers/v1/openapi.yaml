@@ -22,8 +22,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://manufacturers.googleapis.com/$discovery/rest?version=v1
       version: v1
@@ -295,7 +295,7 @@ components:
         type: string
   schemas:
     Attributes:
-      description: "Attributes of the product. For more information, see https://support.google.com/manufacturers/answer/6124116. Next tag: 47"
+      description: "Attributes of the product. For more information, see https://support.google.com/manufacturers/answer/6124116. Next tag: 48"
       properties:
         additionalImageLink:
           description: The additional images of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#addlimage.
@@ -371,6 +371,11 @@ components:
           description: The details of the product. For more information, see https://support.google.com/manufacturers/answer/6124116#productdetail.
           items:
             $ref: "#/components/schemas/ProductDetail"
+          type: array
+        productHighlight:
+          description: The product highlights. For more information, see https://support.google.com/manufacturers/answer/10066942
+          items:
+            type: string
           type: array
         productLine:
           description: The name of the group of products related to the product. For more information, see https://support.google.com/manufacturers/answer/6124116#productline.

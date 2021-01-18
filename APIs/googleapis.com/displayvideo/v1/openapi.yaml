@@ -22,8 +22,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://displayvideo.googleapis.com/$discovery/rest?version=v1
       version: v1
@@ -7083,6 +7083,7 @@ components:
             - SDF_VERSION_5
             - SDF_VERSION_5_1
             - SDF_VERSION_5_2
+            - SDF_VERSION_5_3
           type: string
       type: object
     Creative:
@@ -7264,7 +7265,7 @@ components:
           description: "Optional. Indicates that the creative requires MRAID (Mobile Rich Media Ad Interface Definitions system). Set this if the creative relies on mobile gestures for interactivity, such as swiping or tapping. Optional and only valid for third-party tag creatives. Third-party tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_STANDARD` * `CREATIVE_TYPE_EXPANDABLE`"
           type: boolean
         requirePingForAttribution:
-          description: "Optional. Indicates that the creative will wait for a return ping for attribution. Only valid when using a Campaign Manager 360 tracking ad with a third-party ad server parameter and the ${DC_DBM_TOKEN} macro. Optional and only valid for third-party tag creatives or third-party VAST tag creatives. Third-party tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_STANDARD` * `CREATIVE_TYPE_EXPANDABLE` Third-party VAST tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_VIDEO`"
+          description: "Optional. Indicates that the creative will wait for a return ping for attribution. Only valid when using a Campaign Manager 360 tracking ad with a third-party ad server parameter and the ${DC_DBM_TOKEN} macro. Optional and only valid for third-party tag creatives or third-party VAST tag creatives. Third-party tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_STANDARD` * `CREATIVE_TYPE_EXPANDABLE` Third-party VAST tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_AUDIO` * `CREATIVE_TYPE_VIDEO`"
           type: boolean
         reviewStatus:
           $ref: "#/components/schemas/ReviewStatusInfo"
@@ -7309,7 +7310,7 @@ components:
           readOnly: true
           type: string
         vastTagUrl:
-          description: "Optional. The URL of the VAST tag for a third-party VAST tag creative. Required and only valid for third-party VAST tag creatives. Third-party VAST tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_VIDEO`"
+          description: "Optional. The URL of the VAST tag for a third-party VAST tag creative. Required and only valid for third-party VAST tag creatives. Third-party VAST tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_AUDIO` * `CREATIVE_TYPE_VIDEO`"
           type: string
         vpaid:
           description: "Output only. Indicates the third-party VAST tag creative requires VPAID (Digital Video Player-Ad Interface). Output only and only valid for third-party VAST tag creatives. Third-party VAST tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_VIDEO`"
@@ -8471,6 +8472,8 @@ components:
             - GOOGLE_AUDIENCE_TYPE_IN_MARKET
             - GOOGLE_AUDIENCE_TYPE_INSTALLED_APPS
             - GOOGLE_AUDIENCE_TYPE_NEW_MOBILE_DEVICES
+            - GOOGLE_AUDIENCE_TYPE_LIFE_EVENT
+            - GOOGLE_AUDIENCE_TYPE_EXTENDED_DEMOGRAPHIC
           readOnly: true
           type: string
         name:
@@ -10031,11 +10034,11 @@ components:
       description: Settings that control the performance goal of a campaign or insertion order.
       properties:
         performanceGoalAmountMicros:
-          description: "The goal amount, in micros of the advertiser's currency. Applicable when performance_goal_type is one of: * `PERFORMANCE_GOAL_TYPE_CPM` * `PERFORMANCE_GOAL_TYPE_CPC` * `PERFORMANCE_GOAL_TYPE_CPA` * `PERFORMANCE_GOAL_TYPE_CPIAVC` For example 1500000 represents 1.5 standard units of the currency."
+          description: "The goal amount, in micros of the advertiser's currency. Applicable when performance_goal_type is one of: * `PERFORMANCE_GOAL_TYPE_CPM` * `PERFORMANCE_GOAL_TYPE_CPC` * `PERFORMANCE_GOAL_TYPE_CPA` * `PERFORMANCE_GOAL_TYPE_CPIAVC` * `PERFORMANCE_GOAL_TYPE_VCPM` For example 1500000 represents 1.5 standard units of the currency."
           format: int64
           type: string
         performanceGoalPercentageMicros:
-          description: "The decimal representation of the goal percentage in micros. Applicable when performance_goal_type is one of: * `PERFORMANCE_GOAL_TYPE_CTR` * `PERFORMANCE_GOAL_TYPE_VIEWABILITY` For example, 70000 represents 7% (decimal 0.07)."
+          description: "The decimal representation of the goal percentage in micros. Applicable when performance_goal_type is one of: * `PERFORMANCE_GOAL_TYPE_CTR` * `PERFORMANCE_GOAL_TYPE_VIEWABILITY` * `PERFORMANCE_GOAL_TYPE_CVR_CLICKS` * `PERFORMANCE_GOAL_TYPE_CVR_IMPRESSIONS` * `PERFORMANCE_GOAL_TYPE_VTR` * `PERFORMANCE_GOAL_TYPE_AUDIO_COMPLETION_RATE` * `PERFORMANCE_GOAL_TYPE_VIDEO_COMPLETION_RATE` For example, 70000 represents 7% (decimal 0.07)."
           format: int64
           type: string
         performanceGoalString:
@@ -10205,6 +10208,7 @@ components:
             - SDF_VERSION_5
             - SDF_VERSION_5_1
             - SDF_VERSION_5_2
+            - SDF_VERSION_5_3
           type: string
       type: object
     SdfDownloadTask:
@@ -10236,6 +10240,7 @@ components:
             - SDF_VERSION_5
             - SDF_VERSION_5_1
             - SDF_VERSION_5_2
+            - SDF_VERSION_5_3
           type: string
       type: object
     SearchTargetingOptionsRequest:

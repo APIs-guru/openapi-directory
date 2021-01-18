@@ -26,7 +26,7 @@ info:
   x-serviceName: area120tables
   x-preferred: null
 externalDocs:
-  url: https://tables.area120.google.com
+  url: https://support.google.com/area120-tables/answer/10011390
 tags:
   - name: tables
   - name: workspaces
@@ -486,6 +486,60 @@ paths:
             - https://www.googleapis.com/auth/tables
       tags:
         - tables
+  "/v1alpha1/{parent}/rows:batchDelete":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes multiple rows.
+      operationId: area120tables.tables.rows.batchDelete
+      parameters:
+        - description: "Required. The parent table shared by all rows being deleted. Format: tables/{table}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchDeleteRowsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.file
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.file
+        - Oauth2:
+            - https://www.googleapis.com/auth/spreadsheets
+          Oauth2c:
+            - https://www.googleapis.com/auth/spreadsheets
+        - Oauth2:
+            - https://www.googleapis.com/auth/tables
+          Oauth2c:
+            - https://www.googleapis.com/auth/tables
+      tags:
+        - tables
   "/v1alpha1/{parent}/rows:batchUpdate":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -632,6 +686,15 @@ components:
           description: The created rows.
           items:
             $ref: "#/components/schemas/Row"
+          type: array
+      type: object
+    BatchDeleteRowsRequest:
+      description: Request message for TablesService.BatchDeleteRows
+      properties:
+        names:
+          description: "Required. The names of the rows to delete. All rows must belong to the parent table or else the entire batch will fail. A maximum of 500 rows can be deleted in a batch. Format: tables/{table}/rows/{row}"
+          items:
+            type: string
           type: array
       type: object
     BatchUpdateRowsRequest:

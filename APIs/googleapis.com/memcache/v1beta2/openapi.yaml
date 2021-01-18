@@ -22,8 +22,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://memcache.googleapis.com/$discovery/rest?version=v1beta2
       version: v1
@@ -720,6 +720,10 @@ components:
           type: string
         rolloutManagementPolicy:
           description: The rollout management policy this maintenance schedule is associated with. When doing reschedule update request, the reschedule should be against this given policy.
+          type: string
+        scheduleDeadlineTime:
+          description: schedule_deadline_time is the time deadline any schedule start time cannot go beyond, including reschedule. It's normally the initial schedule start time plus a week. If the reschedule type is next window, simply take this value as start time. If reschedule type is IMMEDIATELY or BY_TIME, current or selected time cannot go beyond this deadline.
+          format: google-datetime
           type: string
         startTime:
           description: The scheduled start time for the maintenance.

@@ -22,8 +22,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://cloudkms.googleapis.com/$discovery/rest?version=v1
       version: v1
@@ -1228,6 +1228,14 @@ components:
           description: "Integrity verification field. A CRC32C checksum of the returned AsymmetricDecryptResponse.plaintext. An integrity check of AsymmetricDecryptResponse.plaintext can be performed by computing the CRC32C checksum of AsymmetricDecryptResponse.plaintext and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type. NOTE: This field is in Beta."
           format: int64
           type: string
+        protectionLevel:
+          description: The ProtectionLevel of the CryptoKeyVersion used in decryption.
+          enum:
+            - PROTECTION_LEVEL_UNSPECIFIED
+            - SOFTWARE
+            - HSM
+            - EXTERNAL
+          type: string
         verifiedCiphertextCrc32c:
           description: "Integrity verification field. A flag indicating whether AsymmetricDecryptRequest.ciphertext_crc32c was received by KeyManagementService and used for the integrity verification of the ciphertext. A false value of this field indicates either that AsymmetricDecryptRequest.ciphertext_crc32c was left unset or that it was not delivered to KeyManagementService. If you've set AsymmetricDecryptRequest.ciphertext_crc32c but this field is still false, discard the response and perform a limited number of retries. NOTE: This field is in Beta."
           type: boolean
@@ -1248,6 +1256,14 @@ components:
       properties:
         name:
           description: "The resource name of the CryptoKeyVersion used for signing. Check this field to verify that the intended resource was used for signing. NOTE: This field is in Beta."
+          type: string
+        protectionLevel:
+          description: The ProtectionLevel of the CryptoKeyVersion used for signing.
+          enum:
+            - PROTECTION_LEVEL_UNSPECIFIED
+            - SOFTWARE
+            - HSM
+            - EXTERNAL
           type: string
         signature:
           description: The created signature.
@@ -1520,6 +1536,17 @@ components:
           description: "Integrity verification field. A CRC32C checksum of the returned DecryptResponse.plaintext. An integrity check of DecryptResponse.plaintext can be performed by computing the CRC32C checksum of DecryptResponse.plaintext and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: receiving this response message indicates that KeyManagementService is able to successfully decrypt the ciphertext. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type. NOTE: This field is in Beta."
           format: int64
           type: string
+        protectionLevel:
+          description: The ProtectionLevel of the CryptoKeyVersion used in decryption.
+          enum:
+            - PROTECTION_LEVEL_UNSPECIFIED
+            - SOFTWARE
+            - HSM
+            - EXTERNAL
+          type: string
+        usedPrimary:
+          description: Whether the Decryption was performed using the primary key version.
+          type: boolean
       type: object
     DestroyCryptoKeyVersionRequest:
       description: Request message for KeyManagementService.DestroyCryptoKeyVersion.
@@ -1574,6 +1601,14 @@ components:
           type: string
         name:
           description: The resource name of the CryptoKeyVersion used in encryption. Check this field to verify that the intended resource was used for encryption.
+          type: string
+        protectionLevel:
+          description: The ProtectionLevel of the CryptoKeyVersion used in encryption.
+          enum:
+            - PROTECTION_LEVEL_UNSPECIFIED
+            - SOFTWARE
+            - HSM
+            - EXTERNAL
           type: string
         verifiedAdditionalAuthenticatedDataCrc32c:
           description: "Integrity verification field. A flag indicating whether EncryptRequest.additional_authenticated_data_crc32c was received by KeyManagementService and used for the integrity verification of the AAD. A false value of this field indicates either that EncryptRequest.additional_authenticated_data_crc32c was left unset or that it was not delivered to KeyManagementService. If you've set EncryptRequest.additional_authenticated_data_crc32c but this field is still false, discard the response and perform a limited number of retries. NOTE: This field is in Beta."
@@ -1895,6 +1930,14 @@ components:
         pemCrc32c:
           description: "Integrity verification field. A CRC32C checksum of the returned PublicKey.pem. An integrity check of PublicKey.pem can be performed by computing the CRC32C checksum of PublicKey.pem and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type. NOTE: This field is in Beta."
           format: int64
+          type: string
+        protectionLevel:
+          description: The ProtectionLevel of the CryptoKeyVersion public key.
+          enum:
+            - PROTECTION_LEVEL_UNSPECIFIED
+            - SOFTWARE
+            - HSM
+            - EXTERNAL
           type: string
       type: object
     RestoreCryptoKeyVersionRequest:

@@ -23,8 +23,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://cloudfunctions.googleapis.com/$discovery/rest?version=v1
       version: v1
@@ -731,6 +731,9 @@ components:
         buildId:
           description: Output only. The Cloud Build ID of the latest successful deployment of the function.
           readOnly: true
+          type: string
+        buildWorkerPool:
+          description: Name of the Cloud Build Custom Worker Pool that should be used to build the function. The format of this field is `projects/{project}/locations/{region}/workerPools/{workerPool}` where {project} and {region} are the project id and region respectively where the worker pool is defined and {workerPool} is the short name of the worker pool. If the project id is not the same as the function, then the Cloud Functions Service Agent (service-@gcf-admin-robot.iam.gserviceaccount.com) must be granted the role Cloud Build Custom Workers Builder (roles/cloudbuild.customworkers.builder) in the project.
           type: string
         description:
           description: User-provided description of a function.

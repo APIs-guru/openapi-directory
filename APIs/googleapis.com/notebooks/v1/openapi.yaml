@@ -237,6 +237,43 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:getInstanceHealth":
+    get:
+      description: Check if a notebook instance is healthy.
+      operationId: notebooks.projects.locations.instances.getInstanceHealth
+      parameters:
+        - description: "Required. Format: `projects/{project_id}/locations/{location}/instances/{instance_id}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetInstanceHealthResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:report":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1205,6 +1242,26 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
+    GetInstanceHealthResponse:
+      description: Response for checking if a notebook instance is healthy.
+      properties:
+        healthInfo:
+          additionalProperties:
+            type: string
+          description: 'Output only. Additional information about instance health. Example: healthInfo": { "docker_proxy_agent_status": "1", "docker_status": "1", "jupyterlab_api_status": "-1", "jupyterlab_status": "-1", "updated": "2020-10-18 09:40:03.573409" }'
+          readOnly: true
+          type: object
+        healthState:
+          description: Output only. Runtime health_state.
+          enum:
+            - HEALTH_STATE_UNSPECIFIED
+            - HEALTHY
+            - UNHEALTHY
+            - AGENT_NOT_INSTALLED
+            - AGENT_NOT_RUNNING
+          readOnly: true
+          type: string
+      type: object
     GuestOsFeature:
       description: Guest OS features for boot disk.
       properties:
@@ -1316,6 +1373,14 @@ components:
         serviceAccount:
           description: The service account on this instance, giving access to other Google Cloud services. You can use any service account within the same project, but you must have the service account user permission to use the instance. If not specified, the [Compute Engine default service account](https://cloud.google.com/compute/docs/access/service-accounts#default_service_account) is used.
           type: string
+        serviceAccountScopes:
+          description: "Optional. The URIs of service account scopes to be included in Compute Engine instances. If not specified, the following [scopes](https://cloud.google.com/compute/docs/access/service-accounts#accesscopesiam) are defined: - https://www.googleapis.com/auth/cloud-platform - https://www.googleapis.com/auth/userinfo.email If not using default scopes, you need at least: https://www.googleapis.com/auth/compute"
+          items:
+            type: string
+          type: array
+        shieldedInstanceConfig:
+          $ref: "#/components/schemas/ShieldedInstanceConfig"
+          description: Optional. Shielded VM configuration. [Images using supported Shielded VM features] (https://cloud.google.com/compute/docs/instances/modifying-shielded-vm).
         state:
           description: Output only. The state of this instance.
           enum:
@@ -1334,6 +1399,11 @@ components:
         subnet:
           description: "The name of the subnet that this instance is in. Format: `projects/{project_id}/regions/{region}/subnetworks/{subnetwork_id}`"
           type: string
+        tags:
+          description: Optional. The Compute Engine tags to add to runtime (see [Tagging instances](https://cloud.google.com/compute/docs/label-or-tag-resources#tags)).
+          items:
+            type: string
+          type: array
         updateTime:
           description: Output only. Instance update time.
           format: google-datetime
@@ -1582,6 +1652,19 @@ components:
           description: Required. The [Compute Engine machine type](https://cloud.google.com/compute/docs/machine-types).
           type: string
       type: object
+    ShieldedInstanceConfig:
+      description: A set of Shielded Instance options. Check [Images using supported Shielded VM features] Not all combinations are valid.
+      properties:
+        enableIntegrityMonitoring:
+          description: Defines whether the instance has integrity monitoring enabled. Enables monitoring and attestation of the boot integrity of the instance. The attestation is performed against the integrity policy baseline. This baseline is initially derived from the implicitly trusted boot image when the instance is created. Enabled by default.
+          type: boolean
+        enableSecureBoot:
+          description: Defines whether the instance has Secure Boot enabled. Secure Boot helps ensure that the system only runs authentic software by verifying the digital signature of all boot components, and halting the boot process if signature verification fails. Disabled by default.
+          type: boolean
+        enableVtpm:
+          description: Defines whether the instance has the vTPM enabled. Enabled by default.
+          type: boolean
+      type: object
     StartInstanceRequest:
       description: Request for starting a notebook instance
       properties: {}
@@ -1627,7 +1710,15 @@ components:
           type: array
       type: object
     UpgradeHistoryEntry:
+      description: The entry of VM image upgrade history.
       properties:
+        action:
+          description: Action. Rolloback or Upgrade.
+          enum:
+            - ACTION_UNSPECIFIED
+            - UPGRADE
+            - ROLLBACK
+          type: string
         containerImage:
           description: The container image before this instance upgrade.
           type: string
@@ -1648,6 +1739,9 @@ components:
             - STARTED
             - SUCCEEDED
             - FAILED
+          type: string
+        targetImage:
+          description: "Target VM Image. Format: ainotebooks-vm/project/image-name/name."
           type: string
         version:
           description: The version of the notebook instance before this upgrade.

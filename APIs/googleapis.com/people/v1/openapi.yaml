@@ -22,8 +22,8 @@ info:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
+        url: https://github.com/mermade/oas-kit
+        version: 7.0.4
       format: google
       url: https://people.googleapis.com/$discovery/rest?version=v1
       version: v1
@@ -1308,7 +1308,7 @@ components:
           readOnly: true
           type: integer
         memberResourceNames:
-          description: Output only. The list of contact person resource names that are members of the contact group. The field is not populated for LIST requests and can only be updated through the [ModifyContactGroupMembers](/people/api/rest/v1/contactgroups/members/modify).
+          description: Output only. The list of contact person resource names that are members of the contact group. The field is only populated for GET requests and will only return as many members as `maxMembers` in the get request.
           items:
             type: string
           readOnly: true
@@ -2423,11 +2423,11 @@ components:
             https://www.googleapis.com/auth/contacts.readonly: See and download your contacts
             https://www.googleapis.com/auth/directory.readonly: See and download your organization's GSuite directory
             https://www.googleapis.com/auth/user.addresses.read: View your street addresses
-            https://www.googleapis.com/auth/user.birthday.read: View your complete date of birth
+            https://www.googleapis.com/auth/user.birthday.read: See and download your exact date of birth
             https://www.googleapis.com/auth/user.emails.read: View your email addresses
             https://www.googleapis.com/auth/user.gender.read: See your gender
             https://www.googleapis.com/auth/user.organization.read: See your education, work history and org info
-            https://www.googleapis.com/auth/user.phonenumbers.read: View your phone numbers
+            https://www.googleapis.com/auth/user.phonenumbers.read: See and download your personal phone numbers
             https://www.googleapis.com/auth/userinfo.email: View your email address
             https://www.googleapis.com/auth/userinfo.profile: See your personal info, including any personal info you've made publicly available
       type: oauth2
@@ -2442,11 +2442,11 @@ components:
             https://www.googleapis.com/auth/contacts.readonly: See and download your contacts
             https://www.googleapis.com/auth/directory.readonly: See and download your organization's GSuite directory
             https://www.googleapis.com/auth/user.addresses.read: View your street addresses
-            https://www.googleapis.com/auth/user.birthday.read: View your complete date of birth
+            https://www.googleapis.com/auth/user.birthday.read: See and download your exact date of birth
             https://www.googleapis.com/auth/user.emails.read: View your email addresses
             https://www.googleapis.com/auth/user.gender.read: See your gender
             https://www.googleapis.com/auth/user.organization.read: See your education, work history and org info
-            https://www.googleapis.com/auth/user.phonenumbers.read: View your phone numbers
+            https://www.googleapis.com/auth/user.phonenumbers.read: See and download your personal phone numbers
             https://www.googleapis.com/auth/userinfo.email: View your email address
             https://www.googleapis.com/auth/userinfo.profile: See your personal info, including any personal info you've made publicly available
           tokenUrl: https://accounts.google.com/o/oauth2/token

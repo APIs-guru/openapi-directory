@@ -139,6 +139,9 @@ components:
     GoogleIdentityStsV1ExchangeTokenRequest:
       description: Request message for ExchangeToken.
       properties:
+        audience:
+          description: "The full resource name of the identity provider; for example: `//iam.googleapis.com/projects//workloadIdentityPools//providers/`. Required when exchanging an external credential for a Google access token."
+          type: string
         grantType:
           description: Required. The grant type. Must be `urn:ietf:params:oauth:grant-type:token-exchange`, which indicates a token exchange.
           type: string
@@ -147,6 +150,9 @@ components:
           type: string
         requestedTokenType:
           description: Required. An identifier for the type of requested security token. Must be `urn:ietf:params:oauth:token-type:access_token`.
+          type: string
+        scope:
+          description: The OAuth 2.0 scopes to include on the resulting access token, formatted as a list of space-delimited, case-sensitive strings. Required when exchanging an external credential for a Google access token.
           type: string
         subjectToken:
           description: Required. The input token. You can use a Google-issued OAuth 2.0 access token with this field to obtain an access token with new security attributes applied, such as a Credential Access Boundary. If an access token already contains security attributes, you cannot apply additional security attributes.
@@ -162,13 +168,13 @@ components:
           description: An OAuth 2.0 security token, issued by Google, in response to the token exchange request.
           type: string
         expires_in:
-          description: The amount of time, in seconds, between the time when the `access_token` was issued and the time when the `access_token` will expire. This field is absent when the `subject_token` in the request is a Google-issued, short-lived access token. In this case, the `access_token` has the same expiration time as the `subject_token`.
+          description: The amount of time, in seconds, between the time when the access token was issued and the time when the access token will expire. This field is absent when the `subject_token` in the request is a Google-issued, short-lived access token. In this case, the access token has the same expiration time as the `subject_token`.
           format: int32
           type: integer
         issued_token_type:
           description: The token type. Always matches the value of `requested_token_type` from the request.
           type: string
         token_type:
-          description: The type of `access_token`. Always has the value `Bearer`.
+          description: The type of access token. Always has the value `Bearer`.
           type: string
       type: object
