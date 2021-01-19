@@ -3,7 +3,7 @@ info:
   version: '2018-05-01'
   x-release: v4
   title: Amazon Chime
-  description: '<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes some server-side API actions to use with the Amazon Chime SDK. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p>You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>.</p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>.</p> </dd> <dt>Using REST</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports Signature Version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/security-iam.html">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
+  description: '<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes some server-side API actions to use with the Amazon Chime SDK. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html"> Using the Amazon Chime SDK </a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p> You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>. </p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>. </p> </dd> <dt>Using REST APIs</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/security-iam.html">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -452,7 +452,7 @@ paths:
   '/meetings/{meetingId}/attendees#operation=batch-create':
     post:
       operationId: BatchCreateAttendee
-      description: 'Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. '
+      description: ' Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. '
       responses:
         '201':
           description: Success
@@ -548,7 +548,7 @@ paths:
   '/accounts/{accountId}/rooms/{roomId}/memberships#operation=batch-create':
     post:
       operationId: BatchCreateRoomMembership
-      description: Adds up to 50 members to a chat room in an Amazon Chime Enterprise account. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
+      description: Adds up to 50 members to a chat room in an Amazon Chime Enterprise account. Members can be users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
       responses:
         '201':
           description: Success
@@ -646,7 +646,7 @@ paths:
   /phone-numbers#operation=batch-delete:
     post:
       operationId: BatchDeletePhoneNumber
-      description: <p>Moves phone numbers into the <b>Deletion queue</b>. Phone numbers must be disassociated from any users or Amazon Chime Voice Connectors before they can be deleted.</p> <p>Phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>
+      description: <p> Moves phone numbers into the <b>Deletion queue</b>. Phone numbers must be disassociated from any users or Amazon Chime Voice Connectors before they can be deleted. </p> <p> Phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently. </p>
       responses:
         '200':
           description: Success
@@ -730,7 +730,7 @@ paths:
   '/accounts/{accountId}/users#operation=suspend':
     post:
       operationId: BatchSuspendUser
-      description: '<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are disassociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action. </p> <p>To sign out users without suspending them, use the <a>LogoutUser</a> action.</p>'
+      description: '<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are disassociated from the account,but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action.</p> <p> To sign out users without suspending them, use the <a>LogoutUser</a> action. </p>'
       responses:
         '200':
           description: Success
@@ -821,7 +821,7 @@ paths:
   '/accounts/{accountId}/users#operation=unsuspend':
     post:
       operationId: BatchUnsuspendUser
-      description: '<p>Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime <code>EnterpriseLWA</code> account. Only users on <code>EnterpriseLWA</code> accounts can be unsuspended using this action. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Previously suspended users who are unsuspended using this action are returned to <code>Registered</code> status. Users who are not previously suspended are ignored.</p>'
+      description: '<p>Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime <code>EnterpriseLWA</code> account. Only users on <code>EnterpriseLWA</code> accounts can be unsuspended using this action. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p> Previously suspended users who are unsuspended using this action are returned to <code>Registered</code> status. Users who are not previously suspended are ignored. </p>'
       responses:
         '200':
           description: Success
@@ -912,7 +912,7 @@ paths:
   /phone-numbers#operation=batch-update:
     post:
       operationId: BatchUpdatePhoneNumber
-      description: '<p>Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code>. For example, you can update either the product type or the calling name.</p> <p>For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>'
+      description: '<p> Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code> . For example, you can update either the product type or the calling name. </p> <p>For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>'
       responses:
         '200':
           description: Success
@@ -995,7 +995,7 @@ paths:
   '/accounts/{accountId}/users':
     post:
       operationId: BatchUpdateUser
-      description: 'Updates user details within the <a>UpdateUserRequestItem</a> object for up to 20 users for the specified Amazon Chime account. Currently, only <code>LicenseType</code> updates are supported for this action.'
+      description: ' Updates user details within the <a>UpdateUserRequestItem</a> object for up to 20 users for the specified Amazon Chime account. Currently, only <code>LicenseType</code> updates are supported for this action. '
       responses:
         '200':
           description: Success
@@ -1258,7 +1258,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListAccounts
-      description: 'Lists the Amazon Chime accounts under the administrator''s AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, you can filter by the user''s email address, which returns one account result.'
+      description: 'Lists the Amazon Chime accounts under the administrator''s AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, toucan filter by the user''s email address, which returns one account result.'
       responses:
         '200':
           description: Success
@@ -1355,7 +1355,7 @@ paths:
   /app-instances:
     post:
       operationId: CreateAppInstance
-      description: Creates an Amazon Chime Messaging SDK <code>AppInstance</code> under an AWS Account. Only Messaging SDK customers use this API. <code>CreateAppInstance</code> supports <code>idempotency</code> behavior as described in the AWS API Standard.
+      description: Creates an Amazon Chime SDK messaging <code>AppInstance</code> under an AWS account. Only SDK messaging customers use this API. <code>CreateAppInstance</code> supports idempotency behavior as described in the AWS API Standard.
       responses:
         '201':
           description: Success
@@ -1423,26 +1423,33 @@ paths:
                 - ClientRequestToken
               properties:
                 Name:
-                  description: The name of the app instance.
+                  description: The name of the <code>AppInstance</code>.
                   type: string
                   pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
                   minLength: 1
                   maxLength: 256
                   format: password
                 Metadata:
-                  description: The metadata of the app instance. Limited to a 1KB string in UTF-8.
+                  description: The metadata of the <code>AppInstance</code>. Limited to a 1KB string in UTF-8.
                   type: string
                   pattern: .*
                   minLength: 0
                   maxLength: 1024
                   format: password
                 ClientRequestToken:
-                  description: The <code>ClientRequestToken</code> of the app instance.
+                  description: The <code>ClientRequestToken</code> of the <code>AppInstance</code>.
                   type: string
                   pattern: '[-_a-zA-Z0-9]*'
                   minLength: 2
                   maxLength: 64
                   format: password
+                Tags:
+                  description: Tags assigned to the <code>AppInstanceUser</code>.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1453,7 +1460,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListAppInstances
-      description: Lists all Amazon Chime app instances created under a single AWS account.
+      description: Lists all Amazon Chime <code>AppInstance</code>s created under a single AWS account.
       responses:
         '200':
           description: Success
@@ -1501,7 +1508,7 @@ paths:
         - name: max-results
           in: query
           required: false
-          description: The maximum number of app instances that you want to return.
+          description: The maximum number of <code>AppInstance</code>s that you want to return.
           schema:
             type: integer
             minimum: 1
@@ -1509,7 +1516,7 @@ paths:
         - name: next-token
           in: query
           required: false
-          description: The token passed by previous API requests until you reach the maximum number of app instances.
+          description: The token passed by previous API requests until you reach the maximum number of <code>AppInstance</code>s.
           schema:
             type: string
             pattern: .*
@@ -1531,7 +1538,7 @@ paths:
   '/app-instances/{appInstanceArn}/admins':
     post:
       operationId: CreateAppInstanceAdmin
-      description: <p>Promotes an <code>AppInstanceUser</code> to an <code>AppInstanceAdmin</code>. The promoted user can perform the following actions. </p> <ul> <li> <p> <code>ChannelModerator</code> actions across all channels in the app instance.</p> </li> <li> <p> <code>DeleteChannelMessage</code> actions.</p> </li> </ul> <p>Only an <code>AppInstanceUser</code> can be promoted to an <code>AppInstanceAdmin</code> role.</p>
+      description: <p>Promotes an <code>AppInstanceUser</code> to an <code>AppInstanceAdmin</code>. The promoted user can perform the following actions. </p> <ul> <li> <p> <code>ChannelModerator</code> actions across all channels in the <code>AppInstance</code>.</p> </li> <li> <p> <code>DeleteChannelMessage</code> actions.</p> </li> </ul> <p>Only an <code>AppInstanceUser</code> can be promoted to an <code>AppInstanceAdmin</code> role.</p>
       responses:
         '201':
           description: Success
@@ -1591,7 +1598,7 @@ paths:
         - name: appInstanceArn
           in: path
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1607,7 +1614,7 @@ paths:
                 - AppInstanceAdminArn
               properties:
                 AppInstanceAdminArn:
-                  description: The ARN of the administrator of the current app instance.
+                  description: The ARN of the administrator of the current <code>AppInstance</code>.
                   type: string
                   pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
                   minLength: 5
@@ -1622,7 +1629,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListAppInstanceAdmins
-      description: Returns a list of the administrators in the app instance.
+      description: Returns a list of the administrators in the <code>AppInstance</code>.
       responses:
         '200':
           description: Success
@@ -1643,30 +1650,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ForbiddenException'
         '482':
-          description: ResourceLimitExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceLimitExceededException'
-        '483':
           description: ThrottledClientException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottledClientException'
-        '484':
+        '483':
           description: UnauthorizedClientException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedClientException'
-        '485':
+        '484':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '486':
+        '485':
           description: ServiceFailureException
           content:
             application/json:
@@ -1676,7 +1677,7 @@ paths:
         - name: appInstanceArn
           in: path
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -1785,13 +1786,13 @@ paths:
                 - ClientRequestToken
               properties:
                 AppInstanceArn:
-                  description: The ARN of the app instance request.
+                  description: The ARN of the <code>AppInstance</code> request.
                   type: string
                   pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
                   minLength: 5
                   maxLength: 1600
                 AppInstanceUserId:
-                  description: The user ID of the app instance.
+                  description: The user ID of the <code>AppInstance</code>.
                   type: string
                   pattern: '[A-Za-z0-9][A-Za-z0-9\:\-\_\.\@]{3,50}[A-Za-z0-9]'
                   minLength: 1
@@ -1812,12 +1813,19 @@ paths:
                   maxLength: 1024
                   format: password
                 ClientRequestToken:
-                  description: The token assigned to the user requesting an app instance.
+                  description: The token assigned to the user requesting an <code>AppInstance</code>.
                   type: string
                   pattern: '[-_a-zA-Z0-9]*'
                   minLength: 2
                   maxLength: 64
                   format: password
+                Tags:
+                  description: Tags assigned to the <code>AppInstanceUser</code>.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1829,7 +1837,7 @@ paths:
   '/meetings/{meetingId}/attendees':
     post:
       operationId: CreateAttendee
-      description: 'Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: ' Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. '
       responses:
         '201':
           description: Success
@@ -1903,7 +1911,7 @@ paths:
                 - ExternalUserId
               properties:
                 ExternalUserId:
-                  description: 'The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.'
+                  description: The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
                   type: string
                   minLength: 2
                   maxLength: 64
@@ -1925,7 +1933,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListAttendees
-      description: 'Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: ' Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
       responses:
         '200':
           description: Success
@@ -2190,7 +2198,7 @@ paths:
   /channels:
     post:
       operationId: CreateChannel
-      description: '<p>Creates a channel to which you can add users and send messages.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy.</p>'
+      description: '<p>Creates a channel to which you can add users and send messages.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
       responses:
         '201':
           description: Success
@@ -2246,7 +2254,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceFailureException'
-      parameters: []
+      parameters:
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
       requestBody:
         required: true
         content:
@@ -2278,7 +2295,7 @@ paths:
                     - UNRESTRICTED
                     - RESTRICTED
                 Privacy:
-                  description: 'The channel''s privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private channels aren''t discoverable by users outside the channel. Public channels are discoverable by anyone in the app instance.'
+                  description: 'The channel''s privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private channels aren''t discoverable by users outside the channel. Public channels are discoverable by anyone in the <code>AppInstance</code>.'
                   type: string
                   enum:
                     - PUBLIC
@@ -2298,7 +2315,7 @@ paths:
                   maxLength: 64
                   format: password
                 Tags:
-                  description: ''
+                  description: The tags for the creation request.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -2315,7 +2332,7 @@ paths:
   '/channels/{channelArn}/bans':
     post:
       operationId: CreateChannelBan
-      description: '<p>Permanently bans a member from a channel. Moderators can''t add banned members to a channel. To undo a ban, you first have to <code>DeleteChannelBan</code>, and then <code>CreateChannelMembership</code>. Bans are cleaned up when you delete users or channels. </p> <p>If you ban a user who is already part of a channel, that user is automatically kicked from the channel.</p>'
+      description: '<p>Permanently bans a member from a channel. Moderators can''t add banned members to a channel. To undo a ban, you first have to <code>DeleteChannelBan</code>, and then <code>CreateChannelMembership</code>. Bans are cleaned up when you delete users or channels.</p> <p>If you ban a user who is already part of a channel, that user is automatically kicked from the channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
       responses:
         '201':
           description: Success
@@ -2381,6 +2398,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
       requestBody:
         required: true
         content:
@@ -2406,7 +2432,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListChannelBans
-      description: Lists all the users banned from a particular channel.
+      description: <p>Lists all the users banned from a particular channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -2478,6 +2504,15 @@ paths:
             minLength: 0
             maxLength: 2048
             format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
         - name: MaxResults
           in: query
           schema:
@@ -2493,7 +2528,7 @@ paths:
   '/channels/{channelArn}/memberships':
     post:
       operationId: CreateChannelMembership
-      description: '<p>Adds a user to a channel. The <code>InvitedBy</code> response field is derived from the request header. A channel member can:</p> <ul> <li> <p>List messages</p> </li> <li> <p>Send messages</p> </li> <li> <p>Receive messages</p> </li> <li> <p>Edit their own messages</p> </li> <li> <p>Leave the channel</p> </li> </ul> <p>Privacy settings impact this action as follows:</p> <ul> <li> <p>Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.</p> </li> <li> <p>Private Channels: You must be a member to list or send messages.</p> </li> </ul>'
+      description: '<p>Adds a user to a channel. The <code>InvitedBy</code> response field is derived from the request header. A channel member can:</p> <ul> <li> <p>List messages</p> </li> <li> <p>Send messages</p> </li> <li> <p>Receive messages</p> </li> <li> <p>Edit their own messages</p> </li> <li> <p>Leave the channel</p> </li> </ul> <p>Privacy settings impact this action as follows:</p> <ul> <li> <p>Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.</p> </li> <li> <p>Private Channels: You must be a member to list or send messages.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
       responses:
         '201':
           description: Success
@@ -2559,6 +2594,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
       requestBody:
         required: true
         content:
@@ -2591,7 +2635,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListChannelMemberships
-      description: Lists all channel memberships in a channel.
+      description: <p>Lists all channel memberships in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -2665,13 +2709,22 @@ paths:
         - name: next-token
           in: query
           required: false
-          description: The token passed by previous API calls until all requested channel memberships are returned..
+          description: The token passed by previous API calls until all requested channel memberships are returned.
           schema:
             type: string
             pattern: .*
             minLength: 0
             maxLength: 2048
             format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
         - name: MaxResults
           in: query
           schema:
@@ -2687,7 +2740,7 @@ paths:
   '/channels/{channelArn}/moderators':
     post:
       operationId: CreateChannelModerator
-      description: '<p>Creates a new <code>ChannelModerator</code>. A channel moderator can:</p> <ul> <li> <p>Add and remove other members of the channel.</p> </li> <li> <p>Add and remove other moderators of the channel.</p> </li> <li> <p>Add and remove user bans for the channel.</p> </li> <li> <p>Redact messages in the channel.</p> </li> <li> <p>List messages in the channel.</p> </li> </ul>'
+      description: '<p>Creates a new <code>ChannelModerator</code>. A channel moderator can:</p> <ul> <li> <p>Add and remove other members of the channel.</p> </li> <li> <p>Add and remove other moderators of the channel.</p> </li> <li> <p>Add and remove user bans for the channel.</p> </li> <li> <p>Redact messages in the channel.</p> </li> <li> <p>List messages in the channel.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
       responses:
         '201':
           description: Success
@@ -2753,6 +2806,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
       requestBody:
         required: true
         content:
@@ -2778,7 +2840,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListChannelModerators
-      description: Lists all the moderators for a channel.
+      description: <p>Lists all the moderators for a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -2850,6 +2912,15 @@ paths:
             minLength: 0
             maxLength: 2048
             format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
         - name: MaxResults
           in: query
           schema:
@@ -2865,7 +2936,7 @@ paths:
   /meetings:
     post:
       operationId: CreateMeeting
-      description: 'Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: ' Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i> . For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
       responses:
         '201':
           description: Success
@@ -2945,7 +3016,7 @@ paths:
                   maxLength: 64
                   format: password
                 MediaRegion:
-                  description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
+                  description: '<p> The Region in which to create the meeting. Default: <code>us-east-1</code>. </p> <p> Available values: <code>af-south-1</code> , <code>ap-northeast-1</code> , <code>ap-northeast-2</code> , <code>ap-south-1</code> , <code>ap-southeast-1</code> , <code>ap-southeast-2</code> , <code>ca-central-1</code> , <code>eu-central-1</code> , <code>eu-north-1</code> , <code>eu-south-1</code> , <code>eu-west-1</code> , <code>eu-west-2</code> , <code>eu-west-3</code> , <code>sa-east-1</code> , <code>us-east-1</code> , <code>us-east-2</code> , <code>us-west-1</code> , <code>us-west-2</code> . </p>'
                   type: string
                 Tags:
                   description: The tag key-value pairs.
@@ -2955,7 +3026,7 @@ paths:
                   minItems: 1
                   maxItems: 50
                 NotificationsConfiguration:
-                  description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (<code>us-east-1</code>).
+                  description: ' The resource target configurations for receiving Amazon Chime SDK meeting and attendee event notifications. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (<code>us-east-1</code>). '
                   type: object
                   properties:
                     SnsTopicArn:
@@ -2976,7 +3047,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListMeetings
-      description: 'Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: ' Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
       responses:
         '200':
           description: Success
@@ -3050,7 +3121,7 @@ paths:
   '/meetings/{meetingId}/dial-outs':
     post:
       operationId: CreateMeetingDialOut
-      description: '<p>Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and joins them into Chime meeting. Also ensures that the From number belongs to the customer.</p> <p>To play welcome audio or implement an interactive voice response (IVR), use the <code>CreateSipMediaApplicationCall</code> API with the corresponding SIP media application ID.</p>'
+      description: '<p>Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and join them into a Chime meeting. Also ensures that the From number belongs to the customer.</p> <p>To play welcome audio or implement an interactive voice response (IVR), use the <code>CreateSipMediaApplicationCall</code> action with the corresponding SIP media application ID.</p>'
       responses:
         '201':
           description: Success
@@ -3104,7 +3175,7 @@ paths:
         - name: meetingId
           in: path
           required: true
-          description: '<p>The Amazon Chime SDK meeting ID.</p> <p>Type: String</p> <p>Pattern: [a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}</p> <p>Required: No</p>'
+          description: The Amazon Chime SDK meeting ID.
           schema:
             type: string
             pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
@@ -3130,7 +3201,7 @@ paths:
                   pattern: '^\+?[1-9]\d{1,14}$'
                   format: password
                 JoinToken:
-                  description: 'Token used by the Amazon Chime SDK attendee. Call the <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.html"> CreateAttendee API</a> to get a join token. '
+                  description: 'Token used by the Amazon Chime SDK attendee. Call the <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.htmlCreateAttendee">CreateAttendee</a> action to get a join token.'
                   type: string
                   pattern: '^[a-zA-Z0-9+/]+$'
                   minLength: 2
@@ -3147,7 +3218,7 @@ paths:
   /meetings#operation=create-attendees:
     post:
       operationId: CreateMeetingWithAttendees
-      description: 'Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: ' Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i> . For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
       responses:
         '201':
           description: Success
@@ -3234,7 +3305,7 @@ paths:
                   maxLength: 64
                   format: password
                 MediaRegion:
-                  description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
+                  description: '<p> The Region in which to create the meeting. Default: <code>us-east-1</code> . </p> <p> Available values: <code>af-south-1</code> , <code>ap-northeast-1</code> , <code>ap-northeast-2</code> , <code>ap-south-1</code> , <code>ap-southeast-1</code> , <code>ap-southeast-2</code> , <code>ca-central-1</code> , <code>eu-central-1</code> , <code>eu-north-1</code> , <code>eu-south-1</code> , <code>eu-west-1</code> , <code>eu-west-2</code> , <code>eu-west-3</code> , <code>sa-east-1</code> , <code>us-east-1</code> , <code>us-east-2</code> , <code>us-west-1</code> , <code>us-west-2</code> . </p>'
                   type: string
                 Tags:
                   description: The tag key-value pairs.
@@ -3244,7 +3315,7 @@ paths:
                   minItems: 1
                   maxItems: 50
                 NotificationsConfiguration:
-                  description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (<code>us-east-1</code>).
+                  description: ' The resource target configurations for receiving Amazon Chime SDK meeting and attendee event notifications. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (<code>us-east-1</code>). '
                   type: object
                   properties:
                     SnsTopicArn:
@@ -4118,10 +4189,11 @@ paths:
               type: object
               required:
                 - AwsRegion
+                - Name
                 - Endpoints
               properties:
                 AwsRegion:
-                  description: AWS Region assigned to the SIP media application.
+                  description: The AWS Region assigned to the SIP media application.
                   type: string
                 Name:
                   description: The SIP media application name.
@@ -4284,6 +4356,9 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - FromPhoneNumber
+                - ToPhoneNumber
               properties:
                 FromPhoneNumber:
                   description: The phone number that a user calls from.
@@ -4291,7 +4366,7 @@ paths:
                   pattern: '^\+?[1-9]\d{1,14}$'
                   format: password
                 ToPhoneNumber:
-                  description: The phone number that the user dials in order to connect to a meeting
+                  description: The phone number that the user dials in order to connect to a meeting.
                   type: string
                   pattern: '^\+?[1-9]\d{1,14}$'
                   format: password
@@ -4387,13 +4462,13 @@ paths:
                   minLength: 1
                   maxLength: 256
                 TriggerType:
-                  description: The type of trigger whose value is assigned to the SIP rule in <code>TriggerValue</code>. Allowed trigger values are <code>RequestUriHostname</code> and <code>ToPhoneNumber</code>.
+                  description: 'The type of trigger assigned to the SIP rule in <code>TriggerValue</code>, currently <code>RequestUriHostname</code> or <code>ToPhoneNumber</code>.'
                   type: string
                   enum:
                     - ToPhoneNumber
                     - RequestUriHostname
                 TriggerValue:
-                  description: 'If <code>TriggerType</code> is <code>RequestUriHostname</code> then the value can be the outbound host name of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code> then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered if the SIP application requests a host name, or a If <code>TriggerType</code> is <code>RequestUriHostname</code>, then the value can be the outbound hostname of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code>, then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered if the SIP application requests a host name, or a <code>ToPhoneNumber</code> value matches the incoming SIP request.'
+                  description: 'If <code>TriggerType</code> is <code>RequestUriHostname</code>, the value can be the outbound host name of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code>, the value can be a customer-owned phone number in the E164 format. The <code>SipMediaApplication</code> specified in the <code>SipRule</code> is triggered if the request URI in an incoming SIP request matches the <code>RequestUriHostname</code>, or if the <code>To</code> header in the incoming SIP request matches the <code>ToPhoneNumber</code> value.'
                   type: string
                   pattern: .*\S.*
                 Disabled:
@@ -4601,7 +4676,7 @@ paths:
   /voice-connectors:
     post:
       operationId: CreateVoiceConnector
-      description: '<p>Creates an Amazon Chime Voice Connector under the administrator''s AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region.</p> <p>Enabling <a>CreateVoiceConnectorRequest$RequireEncryption</a> configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.</p>'
+      description: '<p>Creates an Amazon Chime Voice Connector under the administrator''s AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region.</p> <p> Enabling <a>CreateVoiceConnectorRequest$RequireEncryption</a> configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked. </p>'
       responses:
         '201':
           description: Success
@@ -4674,7 +4749,7 @@ paths:
                   minLength: 1
                   maxLength: 256
                 AwsRegion:
-                  description: 'The AWS Region in which the Amazon Chime Voice Connector is created. Default value: <code>us-east-1</code>.'
+                  description: ' The AWS Region in which the Amazon Chime Voice Connector is created. Default value: <code>us-east-1</code> . '
                   type: string
                   enum:
                     - us-east-1
@@ -4926,7 +5001,7 @@ paths:
   '/accounts/{accountId}':
     delete:
       operationId: DeleteAccount
-      description: '<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting a <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action to do so.</p> <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended.</p> <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore a deleted account from your <code>Disabled</code> accounts list, you must contact AWS Support.</p> <p>After 90 days, deleted accounts are permanently removed from your <code>Disabled</code> accounts list.</p>'
+      description: '<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action to dodo.</p> <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended.</p> <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore deleted account from your <code>Disabled</code> accounts list, you must contact AWS Support.</p> <p> After 90 days, deleted accounts are permanently removed from your <code>Disabled</code> accounts list. </p>'
       responses:
         '204':
           description: Success
@@ -5178,7 +5253,7 @@ paths:
         - name: appInstanceArn
           in: path
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5242,7 +5317,7 @@ paths:
         - name: appInstanceArn
           in: path
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5304,7 +5379,7 @@ paths:
         - name: appInstanceArn
           in: path
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5359,30 +5434,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ForbiddenException'
         '483':
-          description: ResourceLimitExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceLimitExceededException'
-        '484':
           description: ThrottledClientException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottledClientException'
-        '485':
+        '484':
           description: UnauthorizedClientException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedClientException'
-        '486':
+        '485':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '487':
+        '486':
           description: ServiceFailureException
           content:
             application/json:
@@ -5392,7 +5461,7 @@ paths:
         - name: appInstanceAdminArn
           in: path
           required: true
-          description: The ARN of the app instance's administrator.
+          description: The ARN of the <code>AppInstance</code>'s administrator.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5401,7 +5470,7 @@ paths:
         - name: appInstanceArn
           in: path
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5465,7 +5534,7 @@ paths:
         - name: appInstanceAdminArn
           in: path
           required: true
-          description: The ARN of the app instance administrator.
+          description: The ARN of the <code>AppInstanceAdmin</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5474,7 +5543,7 @@ paths:
         - name: appInstanceArn
           in: path
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5483,7 +5552,7 @@ paths:
   '/app-instances/{appInstanceArn}/streaming-configurations':
     delete:
       operationId: DeleteAppInstanceStreamingConfigurations
-      description: Deletes the streaming configurations of an app instance.
+      description: Deletes the streaming configurations of an <code>AppInstance</code>.
       responses:
         '204':
           description: Success
@@ -5549,7 +5618,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetAppInstanceStreamingConfigurations
-      description: Gets the streaming settings for an app instance.
+      description: Gets the streaming settings for an <code>AppInstance</code>.
       responses:
         '200':
           description: Success
@@ -5603,7 +5672,7 @@ paths:
         - name: appInstanceArn
           in: path
           required: true
-          description: 'The ARN of the app instance. '
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5611,7 +5680,7 @@ paths:
             maxLength: 1600
     put:
       operationId: PutAppInstanceStreamingConfigurations
-      description: The data streaming configurations of an app instance.
+      description: The data streaming configurations of an <code>AppInstance</code>.
       responses:
         '200':
           description: Success
@@ -5665,7 +5734,7 @@ paths:
         - name: appInstanceArn
           in: path
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5681,7 +5750,7 @@ paths:
                 - AppInstanceStreamingConfigurations
               properties:
                 AppInstanceStreamingConfigurations:
-                  description: The streaming configurations set for an app instance.
+                  description: The streaming configurations set for an <code>AppInstance</code>.
                   type: array
                   items:
                     $ref: '#/components/schemas/AppInstanceStreamingConfiguration'
@@ -5750,7 +5819,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeAppInstanceUser
-      description: Returns the full details of an <code>AppInstanceUser</code>.
+      description: ' Returns the full details of an <code>AppInstanceUser</code> . '
       responses:
         '200':
           description: Success
@@ -5798,7 +5867,7 @@ paths:
         - name: appInstanceUserArn
           in: path
           required: true
-          description: The ARN of the app instance user.
+          description: The ARN of the <code>AppInstanceUser</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5806,7 +5875,7 @@ paths:
             maxLength: 1600
     put:
       operationId: UpdateAppInstanceUser
-      description: Updates the details for an <code>AppInstanceUser</code>. You can update names and metadata.
+      description: Updates the details of an <code>AppInstanceUser</code>. You can update names and metadata.
       responses:
         '200':
           description: Success
@@ -5860,7 +5929,7 @@ paths:
         - name: appInstanceUserArn
           in: path
           required: true
-          description: The ARN of the app instance user.
+          description: The ARN of the <code>AppInstanceUser</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -5876,14 +5945,14 @@ paths:
                 - Name
               properties:
                 Name:
-                  description: The name of the app instance user.
+                  description: The name of the <code>AppInstanceUser</code>.
                   type: string
                   pattern: .*\S.*
                   minLength: 1
                   maxLength: 100
                   format: password
                 Metadata:
-                  description: The metadata of the app instance user.
+                  description: The metadata of the <code>AppInstanceUser</code>.
                   type: string
                   pattern: .*
                   minLength: 0
@@ -5892,7 +5961,7 @@ paths:
   '/meetings/{meetingId}/attendees/{attendeeId}':
     delete:
       operationId: DeleteAttendee
-      description: 'Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: ' Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code> . Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
       responses:
         '204':
           description: Success
@@ -5963,7 +6032,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetAttendee
-      description: 'Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: ' Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
       responses:
         '200':
           description: Success
@@ -6031,7 +6100,7 @@ paths:
   '/channels/{channelArn}':
     delete:
       operationId: DeleteChannel
-      description: Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.
+      description: <p>Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '204':
           description: Success
@@ -6081,6 +6150,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6091,7 +6169,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeChannel
-      description: Returns the full details of a channel in an Amazon Chime app instance.
+      description: <p>Returns the full details of a channel in an Amazon Chime <code>AppInstance</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -6145,9 +6223,18 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
     put:
       operationId: UpdateChannel
-      description: '<p>Update a channel''s attributes.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy.</p>'
+      description: '<p>Update a channel''s attributes.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
       responses:
         '200':
           description: Success
@@ -6207,6 +6294,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
       requestBody:
         required: true
         content:
@@ -6231,7 +6327,7 @@ paths:
                     - UNRESTRICTED
                     - RESTRICTED
                 Metadata:
-                  description: The metadata of the channel.
+                  description: The metadata for the update request.
                   type: string
                   pattern: .*
                   minLength: 0
@@ -6240,7 +6336,7 @@ paths:
   '/channels/{channelArn}/bans/{memberArn}':
     delete:
       operationId: DeleteChannelBan
-      description: Removes a user from a channel's ban list.
+      description: <p>Removes a user from a channel's ban list.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '204':
           description: Success
@@ -6284,7 +6380,7 @@ paths:
         - name: channelArn
           in: path
           required: true
-          description: The ARN of the channel from which the app instance user was banned.
+          description: The ARN of the channel from which the <code>AppInstanceUser</code> was banned.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -6293,7 +6389,16 @@ paths:
         - name: memberArn
           in: path
           required: true
-          description: The ARN of the app instance user that you want to reinstate.
+          description: The ARN of the <code>AppInstanceUser</code> that you want to reinstate.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -6309,7 +6414,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeChannelBan
-      description: Returns the full details of a channel ban.
+      description: <p>Returns the full details of a channel ban.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -6378,10 +6483,19 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
   '/channels/{channelArn}/memberships/{memberArn}':
     delete:
       operationId: DeleteChannelMembership
-      description: Removes a member from a channel.
+      description: <p>Removes a member from a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '204':
           description: Success
@@ -6440,6 +6554,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6450,7 +6573,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeChannelMembership
-      description: Returns the full details of a user's channel membership.
+      description: <p>Returns the full details of a user's channel membership.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -6519,10 +6642,19 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
   '/channels/{channelArn}/messages/{messageId}':
     delete:
       operationId: DeleteChannelMessage
-      description: Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by <code>UpdateChannelMessage</code>.
+      description: <p>Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by <code>UpdateChannelMessage</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '204':
           description: Success
@@ -6581,6 +6713,15 @@ paths:
             pattern: '[-_a-zA-Z0-9]*'
             minLength: 1
             maxLength: 128
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6591,7 +6732,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetChannelMessage
-      description: Gets the full details of a channel message.
+      description: <p>Gets the full details of a channel message.</p> <note> <p>The x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -6660,9 +6801,18 @@ paths:
             pattern: '[-_a-zA-Z0-9]*'
             minLength: 1
             maxLength: 128
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
     put:
       operationId: UpdateChannelMessage
-      description: Updates the content of a message.
+      description: <p>Updates the content of a message.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -6731,6 +6881,15 @@ paths:
             pattern: '[-_a-zA-Z0-9]*'
             minLength: 1
             maxLength: 128
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
       requestBody:
         required: true
         content:
@@ -6755,7 +6914,7 @@ paths:
   '/channels/{channelArn}/moderators/{channelModeratorArn}':
     delete:
       operationId: DeleteChannelModerator
-      description: Deletes a channel moderator.
+      description: <p>Deletes a channel moderator.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '204':
           description: Success
@@ -6814,6 +6973,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6824,7 +6992,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeChannelModerator
-      description: Returns the full details of a single ChannelModerator.
+      description: <p>Returns the full details of a single ChannelModerator.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -6888,6 +7056,15 @@ paths:
           in: path
           required: true
           description: The ARN of the channel moderator.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -6961,7 +7138,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetEventsConfiguration
-      description: 'Gets details for an events configuration that allows a bot to receive outgoing events, such as an HTTPS endpoint or Lambda function ARN. '
+      description: 'Gets details for an events configuration that allows a bot to receive outgoing events, such as an HTTPS endpoint or Lambda function ARN.'
       responses:
         '200':
           description: Success
@@ -7111,7 +7288,7 @@ paths:
   '/meetings/{meetingId}':
     delete:
       operationId: DeleteMeeting
-      description: 'Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are also deleted and clients can no longer join it. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: 'Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are also deleted, clients connected to the meeting are disconnected, and clients can no longer join the meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
       responses:
         '204':
           description: Success
@@ -7175,7 +7352,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetMeeting
-      description: 'Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.'
+      description: ' Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . '
       responses:
         '200':
           description: Success
@@ -7236,7 +7413,7 @@ paths:
   '/phone-numbers/{phoneNumberId}':
     delete:
       operationId: DeletePhoneNumber
-      description: <p>Moves the specified phone number into the <b>Deletion queue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p>Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>
+      description: <p>Moves the specified phone number into the <b>Deletionqueue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p> Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently. </p>
       responses:
         '204':
           description: Success
@@ -8185,7 +8362,7 @@ paths:
             pattern: .*\S.*
     put:
       operationId: UpdateSipMediaApplication
-      description: Updates the details for the specified SIP media application.
+      description: Updates the details of the specified SIP media application.
       responses:
         '200':
           description: Success
@@ -8401,7 +8578,7 @@ paths:
             pattern: .*\S.*
     put:
       operationId: UpdateSipRule
-      description: Updates the details for the specified SIP rule.
+      description: Updates the details of the specified SIP rule.
       responses:
         '202':
           description: Success
@@ -8568,7 +8745,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetVoiceConnector
-      description: 'Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps, name, outbound host, and encryption requirements.'
+      description: 'Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps,name, outbound host, and encryption requirements.'
       responses:
         '200':
           description: Success
@@ -8909,7 +9086,7 @@ paths:
   '/voice-connector-groups/{voiceConnectorGroupId}':
     delete:
       operationId: DeleteVoiceConnectorGroup
-      description: Deletes the specified Amazon Chime Voice Connector group. Any <code>VoiceConnectorItems</code> and phone numbers associated with the group must be removed before it can be deleted.
+      description: ' Deletes the specified Amazon Chime Voice Connector group. Any <code>VoiceConnectorItems</code> and phone numbers associated with the group must be removed before it can be deleted. '
       responses:
         '204':
           description: Success
@@ -8979,7 +9156,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetVoiceConnectorGroup
-      description: 'Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps, name, and associated <code>VoiceConnectorItems</code>.'
+      description: ' Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated <code>VoiceConnectorItems</code> . '
       responses:
         '200':
           description: Success
@@ -9039,7 +9216,7 @@ paths:
             pattern: .*\S.*
     put:
       operationId: UpdateVoiceConnectorGroup
-      description: 'Updates details for the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.'
+      description: 'Updates details of the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.'
       responses:
         '202':
           description: Success
@@ -9119,7 +9296,7 @@ paths:
                   minLength: 1
                   maxLength: 256
                 VoiceConnectorItems:
-                  description: The <code>VoiceConnectorItems</code> to associate with the group.
+                  description: ' The <code>VoiceConnectorItems</code> to associate with the group. '
                   type: array
                   items:
                     $ref: '#/components/schemas/VoiceConnectorItem'
@@ -9681,7 +9858,7 @@ paths:
             pattern: .*\S.*
     put:
       operationId: PutVoiceConnectorStreamingConfiguration
-      description: 'Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.'
+      description: 'Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Indonesians. It also sets the retention period, in hours, for the Amazon Kinesis data.'
       responses:
         '200':
           description: Success
@@ -10077,7 +10254,7 @@ paths:
   '/channels/{channelArn}#scope=app-instance-user-membership&app-instance-user-arn':
     get:
       operationId: DescribeChannelMembershipForAppInstanceUser
-      description: Returns the details of a channel based on the membership of the <code>AppInstanceUser</code> specified.
+      description: <p> Returns the details of a channel based on the membership of the specified <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -10140,6 +10317,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
         - name: scope
           in: query
           required: true
@@ -10158,7 +10344,7 @@ paths:
   '/channels/{channelArn}#scope=app-instance-user-moderated-channel&app-instance-user-arn':
     get:
       operationId: DescribeChannelModeratedByAppInstanceUser
-      description: Returns the full details of a channel moderated by the specified <code>AppInstanceUser</code>.
+      description: <p>Returns the full details of a channel moderated by the specified <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -10215,7 +10401,16 @@ paths:
         - name: app-instance-user-arn
           in: query
           required: true
-          description: The ARN of the app instance user in the moderated channel.
+          description: The ARN of the <code>AppInstanceUser</code> in the moderated channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -10591,7 +10786,7 @@ paths:
   '/accounts/{accountId}/settings':
     get:
       operationId: GetAccountSettings
-      description: 'Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dial out settings. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
+      description: 'Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dialout settings. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
       responses:
         '200':
           description: Success
@@ -10747,7 +10942,7 @@ paths:
   '/app-instances/{appInstanceArn}/retention-settings':
     get:
       operationId: GetAppInstanceRetentionSettings
-      description: Gets the retention settings for an app instance.
+      description: Gets the retention settings for an <code>AppInstance</code>.
       responses:
         '200':
           description: Success
@@ -10801,7 +10996,7 @@ paths:
         - name: appInstanceArn
           in: path
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -10817,7 +11012,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutAppInstanceRetentionSettings
-      description: Sets the amount of time in days that a given app instance retains data.
+      description: Sets the amount of time in days that a given <code>AppInstance</code> retains data.
       responses:
         '200':
           description: Success
@@ -10877,7 +11072,7 @@ paths:
         - name: appInstanceArn
           in: path
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -10893,13 +11088,13 @@ paths:
                 - AppInstanceRetentionSettings
               properties:
                 AppInstanceRetentionSettings:
-                  description: The length of time in days to retain messages.
+                  description: The details of the data-retention settings for an <code>AppInstance</code>.
                   type: object
                   properties:
                     ChannelRetentionSettings:
                       allOf:
                         - $ref: '#/components/schemas/ChannelRetentionSettings'
-                        - description: The length of time in days to retain a channel.
+                        - description: The length of time in days to retain the messages in a channel.
   '/accounts/{accountId}/bots/{botId}':
     get:
       operationId: GetBot
@@ -11180,7 +11375,7 @@ paths:
   /endpoints/messaging-session:
     get:
       operationId: GetMessagingSessionEndpoint
-      description: The endpoint for the messaging session.
+      description: The details of the endpoint for the messaging session.
       responses:
         '200':
           description: Success
@@ -11230,7 +11425,7 @@ paths:
   '/phone-number-orders/{phoneNumberOrderId}':
     get:
       operationId: GetPhoneNumberOrder
-      description: 'Retrieves details for the specified phone number order, such as order creation timestamp, phone numbers in E.164 format, product type, and order status.'
+      description: 'Retrieves details for the specified phone number order, such as the order creation timestamp, phone numbers in E.164 format, product type, and order status.'
       responses:
         '200':
           description: Success
@@ -11411,7 +11606,7 @@ paths:
   '/accounts/{accountId}/retention-settings':
     get:
       operationId: GetRetentionSettings
-      description: 'Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i>.'
+      description: ' Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i> . '
       responses:
         '200':
           description: Success
@@ -11479,7 +11674,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutRetentionSettings
-      description: '<p>Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html">Logging Amazon Chime API Calls with AWS CloudTrail</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>To turn off existing retention settings, remove the number of days from the corresponding <b>RetentionDays</b> field in the <b>RetentionSettings</b> object. For more information about retention settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
+      description: '<p> Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html">Logging Amazon Chime API Calls with AWS CloudTrail</a> in the <i>Amazon Chime Administration Guide</i> . </p> <p> To turn off existing retention settings, remove the number of days from the corresponding <b>RetentionDays</b> field in the <b>RetentionSettings</b> object. For more information about retention settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i> . </p>'
       responses:
         '204':
           description: Success
@@ -11553,7 +11748,7 @@ paths:
                 - RetentionSettings
               properties:
                 RetentionSettings:
-                  description: The retention settings for an Amazon Chime Enterprise account that determine how long to retain items such as chat room messages and chat conversation messages.
+                  description: The retention settings for an Amazon Chime Enterprise account that determine how long to retain items such as chat-room messages and chat-conversation messages.
                   type: object
                   properties:
                     RoomRetentionSettings:
@@ -11621,7 +11816,7 @@ paths:
         - name: sipMediaApplicationId
           in: path
           required: true
-          description: The ID of the SIP media application.
+          description: The SIP media application ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -11689,7 +11884,7 @@ paths:
         - name: sipMediaApplicationId
           in: path
           required: true
-          description: The ID of the specified SIP media application
+          description: The SIP media application ID.
           schema:
             type: string
             pattern: .*\S.*
@@ -11711,7 +11906,7 @@ paths:
   '/accounts/{accountId}/users/{userId}':
     get:
       operationId: GetUser
-      description: '<p>Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN.</p> <p>To retrieve user details with an email address instead of a user ID, use the <a>ListUsers</a> action, and then filter by email address.</p>'
+      description: '<p>Retrieves details for the specified user ID, such as primary email address, license type,and personal meeting PIN.</p> <p> To retrieve user details with an email address instead of a user ID, use the <a>ListUsers</a> action, and then filter by email address. </p>'
       responses:
         '200':
           description: Success
@@ -11786,7 +11981,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateUser
-      description: 'Updates user details for a specified user ID. Currently, only <code>LicenseType</code> updates are supported for this action.'
+      description: ' Updates user details for a specified user ID. Currently, only <code>LicenseType</code> updates are supported for this action. '
       responses:
         '200':
           description: Success
@@ -12039,7 +12234,7 @@ paths:
   '/voice-connectors/{voiceConnectorId}/logging-configuration':
     get:
       operationId: GetVoiceConnectorLoggingConfiguration
-      description: Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch.
+      description: Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
       responses:
         '200':
           description: Success
@@ -12254,7 +12449,7 @@ paths:
   '/accounts/{accountId}/users#operation=add':
     post:
       operationId: InviteUsers
-      description: 'Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime <code>Team</code> account. Only <code>Team</code> account types are currently supported for this action. '
+      description: 'Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime <code>Team</code> account. Only <code>Team</code> account types are currently supported for this action.'
       responses:
         '201':
           description: Success
@@ -12351,7 +12546,7 @@ paths:
   /app-instance-users#app-instance-arn:
     get:
       operationId: ListAppInstanceUsers
-      description: List all <code>AppInstanceUsers</code> created under a single app instance.
+      description: ' List all <code>AppInstanceUsers</code> created under a single <code>AppInstance</code>. '
       responses:
         '200':
           description: Success
@@ -12399,7 +12594,7 @@ paths:
         - name: app-instance-arn
           in: query
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -12522,7 +12717,7 @@ paths:
   /channels#scope=app-instance-user-memberships:
     get:
       operationId: ListChannelMembershipsForAppInstanceUser
-      description: Lists all channels that a particular <code>AppInstanceUser</code> is a part of. Only an <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their own.
+      description: <p> Lists all channels that a particular <code>AppInstanceUser</code> is a part of. Only an <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their own. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -12570,7 +12765,7 @@ paths:
         - name: app-instance-user-arn
           in: query
           required: false
-          description: The ARN of the app instance users
+          description: The ARN of the <code>AppInstanceUser</code>s
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -12579,7 +12774,7 @@ paths:
         - name: max-results
           in: query
           required: false
-          description: 'The maximum number of users that you want returned. '
+          description: The maximum number of users that you want returned.
           schema:
             type: integer
             minimum: 1
@@ -12594,6 +12789,15 @@ paths:
             minLength: 0
             maxLength: 2048
             format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
         - name: MaxResults
           in: query
           schema:
@@ -12624,7 +12828,7 @@ paths:
   '/channels/{channelArn}/messages':
     get:
       operationId: ListChannelMessages
-      description: '<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. Sorted in descending order by default, based on the creation timestamp.</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> </note>'
+      description: '<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order .</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
       responses:
         '200':
           description: Success
@@ -12690,7 +12894,7 @@ paths:
         - name: not-before
           in: query
           required: false
-          description: 'The initial or starting time stamp for your requested messages. '
+          description: The initial or starting time stamp for your requested messages.
           schema:
             type: string
             format: date-time
@@ -12719,6 +12923,15 @@ paths:
             minLength: 0
             maxLength: 2048
             format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
         - name: MaxResults
           in: query
           schema:
@@ -12741,7 +12954,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: SendChannelMessage
-      description: <p>Sends a message to a particular channel that the member is a part of.</p> <note> <p> <code>STANDARD</code> messages can contain 4KB of data and the 1KB of metadata. <code>CONTROL</code> messages can contain 30 bytes of data and no metadata.</p> </note>
+      description: '<p>Sends a message to a particular channel that the member is a part of.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> <p>Also, <code>STANDARD</code> messages can contain 4KB of data and the 1KB of metadata. <code>CONTROL</code> messages can contain 30 bytes of data and no metadata.</p> </note>'
       responses:
         '201':
           description: Success
@@ -12801,6 +13014,15 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
       requestBody:
         required: true
         content:
@@ -12818,7 +13040,6 @@ paths:
                   type: string
                   pattern: '[\s\S]*'
                   minLength: 1
-                  maxLength: 4096
                   format: password
                 Type:
                   description: 'The type of message, <code>STANDARD</code> or <code>CONTROL</code>.'
@@ -12833,7 +13054,7 @@ paths:
                     - PERSISTENT
                     - NON_PERSISTENT
                 Metadata:
-                  description: 'The optional metadata for each message. '
+                  description: The optional metadata for each message.
                   type: string
                   pattern: .*
                   minLength: 0
@@ -12849,7 +13070,7 @@ paths:
   /channels#app-instance-arn:
     get:
       operationId: ListChannels
-      description: <p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class="title"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account</p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul>
+      description: <p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class="title"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p> Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account </p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -12897,7 +13118,7 @@ paths:
         - name: app-instance-arn
           in: query
           required: true
-          description: The ARN of the app instance.
+          description: The ARN of the <code>AppInstance</code>.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -12906,7 +13127,7 @@ paths:
         - name: privacy
           in: query
           required: false
-          description: The privacy setting. <code>PUBLIC</code> retrieves all the public channels. <code>PRIVATE</code> retrieves private channels. Only an app instance administrator can retrieve private channels.
+          description: ' The privacy setting. <code>PUBLIC</code> retrieves all the public channels. <code>PRIVATE</code> retrieves private channels. Only an <code>AppInstanceAdmin</code> can retrieve private channels. '
           schema:
             type: string
             enum:
@@ -12930,6 +13151,15 @@ paths:
             minLength: 0
             maxLength: 2048
             format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
         - name: MaxResults
           in: query
           schema:
@@ -12953,7 +13183,7 @@ paths:
   /channels#scope=app-instance-user-moderated-channels:
     get:
       operationId: ListChannelsModeratedByAppInstanceUser
-      description: A list of the channels moderated by an app instance user.
+      description: <p>A list of the channels moderated by an <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -13025,6 +13255,15 @@ paths:
             minLength: 0
             maxLength: 2048
             format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
         - name: MaxResults
           in: query
           schema:
@@ -13151,18 +13390,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
           description: ThrottledClientException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottledClientException'
-        '484':
+        '485':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '485':
+        '486':
           description: ServiceFailureException
           content:
             application/json:
@@ -13550,7 +13795,7 @@ paths:
   '/channels/{channelArn}/messages/{messageId}#operation=redact':
     post:
       operationId: RedactChannelMessage
-      description: 'Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.'
+      description: '<p>Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
       responses:
         '200':
           description: Success
@@ -13613,6 +13858,15 @@ paths:
             pattern: '[-_a-zA-Z0-9]*'
             minLength: 1
             maxLength: 128
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
         - name: operation
           in: query
           required: true
@@ -14719,7 +14973,7 @@ paths:
   '/channels/{channelArn}/readMarker':
     put:
       operationId: UpdateChannelReadMarker
-      description: Sets the timestamp to the point when a user last read messages in a channel.
+      description: <p>The details of the time when a user last read messages in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
       responses:
         '200':
           description: Success
@@ -14774,6 +15028,15 @@ paths:
           in: path
           required: true
           description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: false
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
           schema:
             type: string
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -14898,7 +15161,7 @@ components:
         ExternalUserId:
           allOf:
             - $ref: '#/components/schemas/ExternalUserIdType'
-            - description: '<p>The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.</p> <p>The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.</p>'
+            - description: The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
         Tags:
           allOf:
             - $ref: '#/components/schemas/AttendeeTagList'
@@ -14974,7 +15237,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CallingName'
             - description: The outbound calling name to update.
-      description: 'The phone number ID, product type, or calling name fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.'
+      description: ' The phone number ID, product type, or calling name fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions. '
     BatchUpdateUserResponse:
       type: object
       properties:
@@ -15003,45 +15266,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/AlexaForBusinessMetadata'
             - description: The Alexa for Business metadata.
-      description: 'The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.'
+      description: ' The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action. '
     CreateAccountResponse:
       type: object
       properties:
         Account:
-          $ref: '#/components/schemas/Account'
+          allOf:
+            - $ref: '#/components/schemas/Account'
+            - description: The Amazon Chime account details.
     CreateAppInstanceResponse:
       type: object
       properties:
         AppInstanceArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The Amazon Resource Number (ARN) of the app instance.
-    ConflictException: {}
-    CreateAppInstanceAdminResponse:
-      type: object
-      properties:
-        AppInstanceAdmin:
-          allOf:
-            - $ref: '#/components/schemas/Identity'
-            - description: The name and ARN of the admin for the app instance.
-        AppInstanceArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the of the admin for the app instance.
-    CreateAppInstanceUserResponse:
-      type: object
-      properties:
-        AppInstanceUserArn:
-          allOf:
-            - $ref: '#/components/schemas/ChimeArn'
-            - description: The user's ARN.
-    CreateAttendeeResponse:
-      type: object
-      properties:
-        Attendee:
-          allOf:
-            - $ref: '#/components/schemas/Attendee'
-            - description: 'The attendee information, including attendee ID and join token.'
+            - description: The Amazon Resource Number (ARN) of the <code>AppInstance</code>.
     Tag:
       type: object
       required:
@@ -15057,6 +15296,32 @@ components:
             - $ref: '#/components/schemas/TagValue'
             - description: The value of the tag.
       description: Describes a tag applied to a resource.
+    ConflictException: {}
+    CreateAppInstanceAdminResponse:
+      type: object
+      properties:
+        AppInstanceAdmin:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The name and ARN of the admin for the <code>AppInstance</code>.
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the of the admin for the <code>AppInstance</code>.
+    CreateAppInstanceUserResponse:
+      type: object
+      properties:
+        AppInstanceUserArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The user's ARN.
+    CreateAttendeeResponse:
+      type: object
+      properties:
+        Attendee:
+          allOf:
+            - $ref: '#/components/schemas/Attendee'
+            - description: 'The attendee information, including attendee ID and join token.'
     CreateBotResponse:
       type: object
       properties:
@@ -15110,7 +15375,7 @@ components:
         Meeting:
           allOf:
             - $ref: '#/components/schemas/Meeting'
-            - description: 'The meeting information, including the meeting ID and <code>MediaPlacement</code>.'
+            - description: ' The meeting information, including the meeting ID and <code>MediaPlacement</code> . '
     Arn:
       type: string
       pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
@@ -15182,15 +15447,15 @@ components:
         SipMediaApplication:
           allOf:
             - $ref: '#/components/schemas/SipMediaApplication'
-            - description: The Sip media application details.
+            - description: The SIP media application details.
     SipMediaApplicationEndpoint:
       type: object
       properties:
         LambdaArn:
           allOf:
             - $ref: '#/components/schemas/FunctionArn'
-            - description: Valid Amazon Resource Name (ARN) of the Lambda function of the same AWS Region where the SIP media application is created.
-      description: Endpoints to specify as part of a SIP media application.
+            - description: Valid Amazon Resource Name (ARN) of the Lambda function. The function must be created in the same AWS Region as the SIP media application.
+      description: The endpoint assigned to the SIP media application.
     CreateSipMediaApplicationCallResponse:
       type: object
       properties:
@@ -15219,8 +15484,8 @@ components:
         AwsRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: AWS Region of target application.
-      description: Target SIP media application along with other details like priority and AWS Region to be specified in the SIP rule. Only one SIP rule per AWS Region can be provided.
+            - description: The AWS Region of the target application.
+      description: 'Target SIP media application and other details, such as priority and AWS Region, to be specified in the SIP rule. Only one SIP rule per AWS Region can be provided.'
     CreateUserResponse:
       type: object
       properties:
@@ -15253,8 +15518,8 @@ components:
         Priority:
           allOf:
             - $ref: '#/components/schemas/VoiceConnectorItemPriority'
-            - description: 'The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first. '
-      description: 'For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to which to route inbound calls. Includes priority configuration settings. Limit: 3 <code>VoiceConnectorItems</code> per Amazon Chime Voice Connector group.'
+            - description: 'The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first.'
+      description: ' For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to which to route inbound calls. Includes priority configuration settings. Limit: 3 <code>VoiceConnectorItems</code> per Amazon Chime Voice Connector group. '
     DeleteAccountResponse:
       type: object
       properties: {}
@@ -15268,21 +15533,21 @@ components:
         AppInstance:
           allOf:
             - $ref: '#/components/schemas/AppInstance'
-            - description: 'The ARN, metadata, created and last-updated timestamps, and the name of the app instance. All timestamps use epoch milliseconds.'
+            - description: 'The ARN, metadata, created and last-updated timestamps, and the name of the <code>AppInstance</code>. All timestamps use epoch milliseconds.'
     DescribeAppInstanceAdminResponse:
       type: object
       properties:
         AppInstanceAdmin:
           allOf:
             - $ref: '#/components/schemas/AppInstanceAdmin'
-            - description: 'The ARN and name of the app instance user, the ARN of the app instance, and the created and last-updated timestamps. All timestamps use epoch milliseconds.'
+            - description: 'The ARN and name of the <code>AppInstanceUser</code>, the ARN of the <code>AppInstance</code>, and the created and last-updated timestamps. All timestamps use epoch milliseconds.'
     DescribeAppInstanceUserResponse:
       type: object
       properties:
         AppInstanceUser:
           allOf:
             - $ref: '#/components/schemas/AppInstanceUser'
-            - description: The name of the app instance user.
+            - description: The name of the <code>AppInstanceUser</code>.
     DescribeChannelResponse:
       type: object
       properties:
@@ -15349,7 +15614,9 @@ components:
       type: object
       properties:
         Account:
-          $ref: '#/components/schemas/Account'
+          allOf:
+            - $ref: '#/components/schemas/Account'
+            - description: The Amazon Chime account details.
     GetAccountSettingsResponse:
       type: object
       properties:
@@ -15363,7 +15630,7 @@ components:
         AppInstanceRetentionSettings:
           allOf:
             - $ref: '#/components/schemas/AppInstanceRetentionSettings'
-            - description: The retention settings for the app instance.
+            - description: The retention settings for the <code>AppInstance</code>.
         InitiateDeletionTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -15593,18 +15860,18 @@ components:
         Accounts:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: The list of accounts.
+            - description: List of Amazon Chime accounts and account details.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The account's user token.
+            - description: The token to use to retrieve the next page of results.
     ListAppInstanceAdminsResponse:
       type: object
       properties:
         AppInstanceArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the app instance.
+            - description: The ARN of the <code>AppInstance</code>.
         AppInstanceAdmins:
           allOf:
             - $ref: '#/components/schemas/AppInstanceAdminList'
@@ -15619,11 +15886,11 @@ components:
         AppInstanceArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the app instance.
+            - description: The ARN of the <code>AppInstance</code>.
         AppInstanceUsers:
           allOf:
             - $ref: '#/components/schemas/AppInstanceUserList'
-            - description: The information for each of the requested app instance users.
+            - description: The information for each requested <code>AppInstanceUser</code>.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -15634,11 +15901,11 @@ components:
         AppInstances:
           allOf:
             - $ref: '#/components/schemas/AppInstanceList'
-            - description: The information for each app instance.
+            - description: The information for each <code>AppInstance</code>.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: The token passed by previous API requests until the maximum number of app instances is reached.
+            - description: The token passed by previous API requests until the maximum number of <code>AppInstance</code>s is reached.
     ListAttendeeTagsResponse:
       type: object
       properties:
@@ -15723,7 +15990,7 @@ components:
         ChannelMessages:
           allOf:
             - $ref: '#/components/schemas/ChannelMessageSummaryList'
-            - description: The information about and content of each requested message.
+            - description: 'The information about, and content of, each requested message.'
     ListChannelModeratorsResponse:
       type: object
       properties:
@@ -15923,15 +16190,15 @@ components:
         RetentionDays:
           allOf:
             - $ref: '#/components/schemas/RetentionDays'
-            - description: The time in days to retain a channel.
-      description: The retention settings for a channel.
+            - description: The time in days to retain the messages in a channel.
+      description: The details of the retention settings for a channel.
     PutAppInstanceStreamingConfigurationsResponse:
       type: object
       properties:
         AppInstanceStreamingConfigurations:
           allOf:
             - $ref: '#/components/schemas/AppInstanceStreamingConfigurationList'
-            - description: The streaming configurations of an app instance.
+            - description: The streaming configurations of an <code>AppInstance</code>.
     AppInstanceStreamingConfiguration:
       type: object
       required:
@@ -15941,12 +16208,12 @@ components:
         AppInstanceDataType:
           allOf:
             - $ref: '#/components/schemas/AppInstanceDataType'
-            - description: The data type of the app instance.
+            - description: The type of data to be streamed.
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The resource ARN.
-      description: The streaming configuration of an app instance.
+      description: The details of the streaming configuration of an <code>AppInstance</code>.
     PutEventsConfigurationResponse:
       type: object
       properties:
@@ -15969,23 +16236,21 @@ components:
         RetentionDays:
           allOf:
             - $ref: '#/components/schemas/RetentionDays'
-            - description: The number of days for which to retain chat room messages.
-      description: The retention settings that determine how long to retain chat room messages for an Amazon Chime Enterprise account.
+            - description: The number of days for which to retain chat-room messages.
+      description: The retention settings that determine how long to retain chat-room messages for an Amazon Chime Enterprise account.
     ConversationRetentionSettings:
       type: object
       properties:
         RetentionDays:
           allOf:
             - $ref: '#/components/schemas/RetentionDays'
-            - description: The number of days for which to retain chat conversation messages.
-      description: The retention settings that determine how long to retain chat conversation messages for an Amazon Chime Enterprise account.
+            - description: The number of days for which to retain conversation messages.
+      description: The retention settings that determine how long to retain conversation messages for an Amazon Chime Enterprise account.
     PutSipMediaApplicationLoggingConfigurationResponse:
       type: object
       properties:
         SipMediaApplicationLoggingConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/SipMediaApplicationLoggingConfiguration'
-            - description: The actual logging configuration.
+          $ref: '#/components/schemas/SipMediaApplicationLoggingConfiguration'
     Boolean:
       type: boolean
     PutVoiceConnectorEmergencyCallingConfigurationResponse:
@@ -16123,7 +16388,7 @@ components:
         MessageId:
           allOf:
             - $ref: '#/components/schemas/MessageId'
-            - description: 'The ID string assigned to each message. '
+            - description: The ID string assigned to each message.
     TagKey:
       type: string
       minLength: 1
@@ -16133,7 +16398,9 @@ components:
       type: object
       properties:
         Account:
-          $ref: '#/components/schemas/Account'
+          allOf:
+            - $ref: '#/components/schemas/Account'
+            - description: The updated Amazon Chime account details.
     UpdateAccountSettingsResponse:
       type: object
       properties: {}
@@ -16143,14 +16410,14 @@ components:
         AppInstanceArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the app instance.
+            - description: The ARN of the <code>AppInstance</code>.
     UpdateAppInstanceUserResponse:
       type: object
       properties:
         AppInstanceUserArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the app instance user.
+            - description: The ARN of the <code>AppInstanceUser</code>.
     UpdateBotResponse:
       type: object
       properties:
@@ -16393,24 +16660,24 @@ components:
         AppInstanceArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: 'The ARN of the messaging instance. '
+            - description: The ARN of the messaging instance.
         Name:
           allOf:
             - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The name of an app instance.
+            - description: The name of an <code>AppInstance</code>.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of an app instance.
+            - description: The metadata of an <code>AppInstance</code>.
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which an app instance was created. In epoch milliseconds.
+            - description: The time at which an <code>AppInstance</code> was created. In epoch milliseconds.
         LastUpdatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The time an app instance was last updated. In epoch milliseconds.
-      description: An instance of a Chime messaging application.
+            - description: The time an <code>AppInstance</code> was last updated. In epoch milliseconds.
+      description: 'The details of an <code>AppInstance</code>, an instance of an Amazon Chime SDK messaging application.'
     Identity:
       type: object
       properties:
@@ -16422,31 +16689,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name in an Identity.
-      description: The ARN and name of a user.
+      description: The details of a user.
     AppInstanceAdmin:
       type: object
       properties:
         Admin:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: The name and metadata of the app instance administrator.
+            - description: The <code>AppInstanceAdmin</code> data.
         AppInstanceArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the app instance administrator.
+            - description: The ARN of the <code>AppInstance</code> for which the user is an administrator.
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which an administrator was created.
-      description: Promotes a user to the administrator role for the duration of an app instance.
+      description: The details of an <code>AppInstanceAdmin</code>.
     AppInstanceAdminSummary:
       type: object
       properties:
         Admin:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: The name and metadata of the app instance administrator.
-      description: The identity and metadata of an administrator.
+            - description: The details of the <code>AppInstanceAdmin</code>.
+      description: Summary of the details of an <code>AppInstanceAdmin</code>.
     AppInstanceAdminList:
       type: array
       items:
@@ -16462,16 +16729,16 @@ components:
         AppInstanceArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The app instance ARN.
+            - description: The <code>AppInstance</code> ARN.
         Name:
           allOf:
             - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The name of the app instance summary.
+            - description: The name of the <code>AppInstance</code>.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the app instance summary.
-      description: The summary data for an app instance.
+            - description: The metadata of the <code>AppInstance</code>.
+      description: Summary of the data for an <code>AppInstance</code>.
     AppInstanceList:
       type: array
       items:
@@ -16482,8 +16749,8 @@ components:
         ChannelRetentionSettings:
           allOf:
             - $ref: '#/components/schemas/ChannelRetentionSettings'
-            - description: The length of time in days to retain a channel.
-      description: The length of time in days to retain messages.
+            - description: The length of time in days to retain the messages in a channel.
+      description: The details of the data-retention settings for an <code>AppInstance</code>.
     AppInstanceStreamingConfigurationList:
       type: array
       items:
@@ -16502,40 +16769,40 @@ components:
         AppInstanceUserArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the app instance user.
+            - description: The ARN of the <code>AppInstanceUser</code>.
         Name:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: The name of the app instance user.
+            - description: The name of the <code>AppInstanceUser</code>.
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the app instance user was created.
+            - description: The time at which the <code>AppInstanceUser</code> was created.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the app instance user.
+            - description: The metadata of the <code>AppInstanceUser</code>.
         LastUpdatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the app instance user was last updated.
-      description: The app instance user.
+            - description: The time at which the <code>AppInstanceUser</code> was last updated.
+      description: The details of an <code>AppInstanceUser</code>.
     AppInstanceUserSummary:
       type: object
       properties:
         AppInstanceUserArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the app instance user.
+            - description: The ARN of the <code>AppInstanceUser</code>.
         Name:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: The name in an app instance user summary.
+            - description: The name of an <code>AppInstanceUser</code>.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: The metadata in an app instance user summary.
-      description: The app instance user summary data .
+            - description: The metadata of the <code>AppInstanceUser</code>.
+      description: Summary of the details of an <code>AppInstanceUser</code>.
     AppInstanceUserList:
       type: array
       items:
@@ -16551,12 +16818,12 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/ChannelMembershipType'
-            - description: 'The type of channel summary, '
+            - description: The type of <code>ChannelMembership</code>.
         ReadMarkerTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which a summary was last read.
-      description: Lists the channels to which app instance users belong.
+            - description: The time at which a message was last read.
+      description: Summary of the membership details of an <code>AppInstanceUser</code>.
     AssociatePhoneNumberWithUserRequest:
       type: object
       required:
@@ -16635,7 +16902,7 @@ components:
         ExternalUserId:
           allOf:
             - $ref: '#/components/schemas/ExternalUserIdType'
-            - description: 'The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.'
+            - description: The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
         AttendeeId:
           allOf:
             - $ref: '#/components/schemas/GuidString'
@@ -16644,7 +16911,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/JoinTokenString'
             - description: The join token used by the Amazon Chime SDK attendee.
-      description: '<p>An Amazon Chime SDK meeting attendee. Includes a unique <code>AttendeeId</code> and <code>JoinToken</code>. The <code>JoinToken</code> allows a client to authenticate and join as the specified attendee. The <code>JoinToken</code> expires when the meeting ends or when <a>DeleteAttendee</a> is called. After that, the attendee is unable to join the meeting.</p> <p>We recommend securely transferring each <code>JoinToken</code> from your server application to the client so that no other client has access to the token except for the one authorized to represent the attendee.</p>'
+      description: '<p> An Amazon Chime SDK meeting attendee. Includes a unique <code>AttendeeId</code> and <code>JoinToken</code> . The <code>JoinToken</code> allows a client to authenticate and join as the specified attendee. The <code>JoinToken</code> expires when the meeting ends or when <a>DeleteAttendee</a> is called. After that, the attendee is unable to join the meeting. </p> <p>We recommend securely transferring each <code>JoinToken</code> from your server application to the client so that no other client has access to the token except for the one authorized to represent the attendee.</p>'
     AttendeeList:
       type: array
       items:
@@ -16667,7 +16934,7 @@ components:
         ExternalUserId:
           allOf:
             - $ref: '#/components/schemas/ExternalUserIdType'
-            - description: 'The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.'
+            - description: The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
         ErrorCode:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -16888,28 +17155,28 @@ components:
         Privacy:
           allOf:
             - $ref: '#/components/schemas/ChannelPrivacy'
-            - description: 'The channel''s privacy setting, <code>PUBLIC</code> or <code>HIDDEN</code>.'
+            - description: The channel's privacy setting.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the channel.
+            - description: The channel's metadata.
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: The administrator who created the channel.
+            - description: The <code>AppInstanceUser</code> who created the channel.
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which the administrator created the channel.
+            - description: The time at which the <code>AppInstanceUser</code> created the channel.
         LastMessageTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The time at which a member sent the last message in a session.
+            - description: The time at which a member sent the last message in the channel.
         LastUpdatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which a channel was last updated.
-      description: Creates a channel.
+      description: The details of a channel.
     ChannelBan:
       type: object
       properties:
@@ -16928,8 +17195,8 @@ components:
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: The parameter of the action.
-      description: Bans a user from a channel.
+            - description: The <code>AppInstanceUser</code> who created the ban.
+      description: The details of a channel ban.
     ChannelBanSummary:
       type: object
       properties:
@@ -16937,7 +17204,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Identity'
             - description: The member being banned from a channel.
-      description: The summary data for the channel ban.
+      description: Summary of the details of a <code>ChannelBan</code>.
     ChannelBanSummaryList:
       type: array
       items:
@@ -16948,7 +17215,7 @@ components:
         InvitedBy:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: The identifier of the member who invited another member. Taken from the message header.
+            - description: The identifier of the member who invited another member.
         Type:
           allOf:
             - $ref: '#/components/schemas/ChannelMembershipType'
@@ -16964,40 +17231,40 @@ components:
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time at which the channel membership was created. '
+            - description: The time at which the channel membership was created.
         LastUpdatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which a channel membership was last updated.
-      description: Creates a channel member.
+      description: The details of a channel member.
     ChannelSummary:
       type: object
       properties:
         Name:
           allOf:
             - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The parameter of the action.
+            - description: The name of the channel.
         ChannelArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the channel summary.
+            - description: The ARN of the channel.
         Mode:
           allOf:
             - $ref: '#/components/schemas/ChannelMode'
-            - description: The summary mode of the channel.
+            - description: The mode of the channel.
         Privacy:
           allOf:
             - $ref: '#/components/schemas/ChannelPrivacy'
-            - description: 'The privacy setting of the channel being summarized, <code>PUBLIC</code> or <code>HIDDEN</code>.'
+            - description: The privacy setting of the channel.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the channel summary.
+            - description: The metadata of the channel.
         LastMessageTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which the last message in a channel was sent.
-      description: The summary data for a channel.
+      description: Summary of the details of a <code>Channel</code>.
     ChannelMembershipForAppInstanceUserSummary:
       type: object
       properties:
@@ -17006,8 +17273,8 @@ components:
         AppInstanceUserMembershipSummary:
           allOf:
             - $ref: '#/components/schemas/AppInstanceUserMembershipSummary'
-            - description: Returns the channel membership data for an app instance.
-      description: Returns the channel membership summary data for an app instance.
+            - description: Returns the channel membership data for an <code>AppInstance</code>.
+      description: Summary of the channel membership details of an <code>AppInstanceUser</code>.
     ChannelMembershipForAppInstanceUserSummaryList:
       type: array
       items:
@@ -17019,7 +17286,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Identity'
             - description: A member's summary data.
-      description: The summary data of a channel membership.
+      description: Summary of the details of a <code>ChannelMembership</code>.
     ChannelMembershipSummaryList:
       type: array
       items:
@@ -17089,46 +17356,52 @@ components:
         Redacted:
           allOf:
             - $ref: '#/components/schemas/NonNullableBoolean'
-            - description: 'Hides the content of a message. The message still exists on the back end, but this action only returns metadata.'
+            - description: Hides the content of a message.
         Persistence:
-          $ref: '#/components/schemas/ChannelMessagePersistenceType'
-      description: Creates a message in a channel.
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessagePersistenceType'
+            - description: The persistence setting for a channel message.
+      description: The details of a message in a channel.
     ChannelMessageSummary:
       type: object
       properties:
         MessageId:
           allOf:
             - $ref: '#/components/schemas/MessageId'
-            - description: The ID of the message summary.
+            - description: The ID of the message.
         Content:
           allOf:
             - $ref: '#/components/schemas/Content'
-            - description: The content of the message summary.
+            - description: The content of the message.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the message summary.
+            - description: The metadata of the message.
         Type:
           allOf:
             - $ref: '#/components/schemas/ChannelMessageType'
-            - description: The type of message summary.
+            - description: The type of message.
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time at which the message summary was created.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/Timestamp'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which a message was last updated.
         LastEditedTimestamp:
-          $ref: '#/components/schemas/Timestamp'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which a message was last edited.
         Sender:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: The sender of the message summary.
+            - description: The message sender.
         Redacted:
           allOf:
             - $ref: '#/components/schemas/NonNullableBoolean'
-            - description: Redacts the content of a message summary.
-      description: A summary of the messages in a channel.
+            - description: Indicates whether a message was redacted.
+      description: Summary of the messages in a <code>Channel</code>.
     ChannelMessageSummaryList:
       type: array
       items:
@@ -17138,7 +17411,7 @@ components:
       properties:
         ChannelSummary:
           $ref: '#/components/schemas/ChannelSummary'
-      description: Returns the summary data for a moderated channel.
+      description: Summary of the details of a moderated channel.
     ChannelModeratedByAppInstanceUserSummaryList:
       type: array
       items:
@@ -17161,8 +17434,8 @@ components:
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/Identity'
-            - description: The member who created the moderator.
-      description: Creates a moderator on a channel.
+            - description: The <code>AppInstanceUser</code> who created the moderator.
+      description: The details of a channel moderator.
     ChannelModeratorSummary:
       type: object
       properties:
@@ -17170,7 +17443,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Identity'
             - description: The data for a moderator.
-      description: Summary data of the moderators in a channel.
+      description: Summary of the details of a <code>ChannelModerator</code>.
     ChannelModeratorSummaryList:
       type: array
       items:
@@ -17214,7 +17487,13 @@ components:
         AppInstanceAdminArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the administrator of the current app instance.
+            - description: The ARN of the administrator of the current <code>AppInstance</code>.
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 50
     CreateAppInstanceRequest:
       type: object
       required:
@@ -17225,15 +17504,19 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/NonEmptyResourceName'
-            - description: The name of the app instance.
+            - description: The name of the <code>AppInstance</code>.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the app instance. Limited to a 1KB string in UTF-8.
+            - description: The metadata of the <code>AppInstance</code>. Limited to a 1KB string in UTF-8.
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
-            - description: The <code>ClientRequestToken</code> of the app instance.
+            - description: The <code>ClientRequestToken</code> of the <code>AppInstance</code>.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Tags assigned to the <code>AppInstanceUser</code>.
     UserId:
       type: string
       pattern: '[A-Za-z0-9][A-Za-z0-9\:\-\_\.\@]{3,50}[A-Za-z0-9]'
@@ -17252,11 +17535,11 @@ components:
         AppInstanceArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the app instance request.
+            - description: The ARN of the <code>AppInstance</code> request.
         AppInstanceUserId:
           allOf:
             - $ref: '#/components/schemas/UserId'
-            - description: The user ID of the app instance.
+            - description: The user ID of the <code>AppInstance</code>.
         Name:
           allOf:
             - $ref: '#/components/schemas/UserName'
@@ -17268,7 +17551,11 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
-            - description: The token assigned to the user requesting an app instance.
+            - description: The token assigned to the user requesting an <code>AppInstance</code>.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Tags assigned to the <code>AppInstanceUser</code>.
     CreateAttendeeRequest:
       type: object
       required:
@@ -17278,7 +17565,7 @@ components:
         ExternalUserId:
           allOf:
             - $ref: '#/components/schemas/ExternalUserIdType'
-            - description: 'The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.'
+            - description: The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
         Tags:
           allOf:
             - $ref: '#/components/schemas/AttendeeTagList'
@@ -17332,12 +17619,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the moderator.
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
-      minItems: 1
-      maxItems: 50
     CreateChannelRequest:
       type: object
       required:
@@ -17361,7 +17642,7 @@ components:
         Privacy:
           allOf:
             - $ref: '#/components/schemas/ChannelPrivacy'
-            - description: 'The channel''s privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private channels aren''t discoverable by users outside the channel. Public channels are discoverable by anyone in the app instance.'
+            - description: 'The channel''s privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private channels aren''t discoverable by users outside the channel. Public channels are discoverable by anyone in the <code>AppInstance</code>.'
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
@@ -17371,7 +17652,9 @@ components:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: The client token for the request. An <code>Idempotency</code> token.
         Tags:
-          $ref: '#/components/schemas/TagList'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the creation request.
     CreateMeetingDialOutRequest:
       type: object
       required:
@@ -17391,7 +17674,7 @@ components:
         JoinToken:
           allOf:
             - $ref: '#/components/schemas/JoinTokenString'
-            - description: 'Token used by the Amazon Chime SDK attendee. Call the <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.html"> CreateAttendee API</a> to get a join token. '
+            - description: 'Token used by the Amazon Chime SDK attendee. Call the <a href="https://docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.htmlCreateAttendee">CreateAttendee</a> action to get a join token.'
     ExternalMeetingIdType:
       type: string
       minLength: 2
@@ -17414,7 +17697,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The SQS queue ARN.
-      description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (<code>us-east-1</code>).
+      description: ' The resource target configurations for receiving Amazon Chime SDK meeting and attendee event notifications. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (<code>us-east-1</code>). '
     CreateMeetingRequest:
       type: object
       required:
@@ -17436,7 +17719,7 @@ components:
         MediaRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
+            - description: '<p> The Region in which to create the meeting. Default: <code>us-east-1</code>. </p> <p> Available values: <code>af-south-1</code> , <code>ap-northeast-1</code> , <code>ap-northeast-2</code> , <code>ap-south-1</code> , <code>ap-southeast-1</code> , <code>ap-southeast-2</code> , <code>ca-central-1</code> , <code>eu-central-1</code> , <code>eu-north-1</code> , <code>eu-south-1</code> , <code>eu-west-1</code> , <code>eu-west-2</code> , <code>eu-west-3</code> , <code>sa-east-1</code> , <code>us-east-1</code> , <code>us-east-2</code> , <code>us-west-1</code> , <code>us-west-2</code> . </p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/MeetingTagList'
@@ -17463,7 +17746,7 @@ components:
         MediaRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The Region in which to create the meeting. Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
+            - description: ' The Region in which you create the meeting. Available values: <code>af-south-1</code> , <code>ap-northeast-1</code> , <code>ap-northeast-2</code> , <code>ap-south-1</code> , <code>ap-southeast-1</code> , <code>ap-southeast-2</code> , <code>ca-central-1</code> , <code>eu-central-1</code> , <code>eu-north-1</code> , <code>eu-south-1</code> , <code>eu-west-1</code> , <code>eu-west-2</code> , <code>eu-west-3</code> , <code>sa-east-1</code> , <code>us-east-1</code> , <code>us-east-2</code> , <code>us-west-1</code> , <code>us-west-2</code> . '
       description: A meeting created using the Amazon Chime SDK.
     CreateMeetingWithAttendeesRequestItemList:
       type: array
@@ -17492,7 +17775,7 @@ components:
         MediaRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
+            - description: '<p> The Region in which to create the meeting. Default: <code>us-east-1</code> . </p> <p> Available values: <code>af-south-1</code> , <code>ap-northeast-1</code> , <code>ap-northeast-2</code> , <code>ap-south-1</code> , <code>ap-southeast-1</code> , <code>ap-southeast-2</code> , <code>ca-central-1</code> , <code>eu-central-1</code> , <code>eu-north-1</code> , <code>eu-south-1</code> , <code>eu-west-1</code> , <code>eu-west-2</code> , <code>eu-west-3</code> , <code>sa-east-1</code> , <code>us-east-1</code> , <code>us-east-2</code> , <code>us-west-1</code> , <code>us-west-2</code> . </p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/MeetingTagList'
@@ -17545,11 +17828,11 @@ components:
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
-            - description: 'The phone number order creation timestamp, in ISO 8601 format.'
+            - description: 'The phone number order creation time stamp, in ISO 8601 format.'
         UpdatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
-            - description: 'The updated phone number order timestamp, in ISO 8601 format.'
+            - description: 'The updated phone number order time stamp, in ISO 8601 format.'
       description: The details of a phone number order created for Amazon Chime.
     NonEmptyString128:
       type: string
@@ -17659,15 +17942,15 @@ components:
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
-            - description: 'The created timestamp, in ISO 8601 format.'
+            - description: 'The created time stamp, in ISO 8601 format.'
         UpdatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
-            - description: 'The updated timestamp, in ISO 8601 format.'
+            - description: 'The updated time stamp, in ISO 8601 format.'
         EndedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
-            - description: 'The ended timestamp, in ISO 8601 format.'
+            - description: 'The ended time stamp, in ISO 8601 format.'
         Participants:
           allOf:
             - $ref: '#/components/schemas/Participants'
@@ -17770,6 +18053,9 @@ components:
       description: The Amazon Chime chat room details.
     CreateSipMediaApplicationCallRequest:
       type: object
+      required:
+        - FromPhoneNumber
+        - ToPhoneNumber
       title: CreateSipMediaApplicationCallRequest
       properties:
         FromPhoneNumber:
@@ -17779,7 +18065,7 @@ components:
         ToPhoneNumber:
           allOf:
             - $ref: '#/components/schemas/E164PhoneNumber'
-            - description: The phone number that the user dials in order to connect to a meeting
+            - description: The phone number that the user dials in order to connect to a meeting.
     SipMediaApplicationCall:
       type: object
       properties:
@@ -17802,13 +18088,14 @@ components:
       type: object
       required:
         - AwsRegion
+        - Name
         - Endpoints
       title: CreateSipMediaApplicationRequest
       properties:
         AwsRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: AWS Region assigned to the SIP media application.
+            - description: The AWS Region assigned to the SIP media application.
         Name:
           allOf:
             - $ref: '#/components/schemas/SipMediaApplicationName'
@@ -17844,7 +18131,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
             - description: 'The SIP media application updated timestamp, in ISO 8601 format.'
-      description: 'The SIP media application details, including name and endpoints. An AWS account can have multiple SIP media applications.'
+      description: 'The details of the SIP media application, including name and endpoints. An AWS account can have multiple SIP media applications.'
     SipRuleName:
       type: string
       minLength: 1
@@ -17876,11 +18163,11 @@ components:
         TriggerType:
           allOf:
             - $ref: '#/components/schemas/SipRuleTriggerType'
-            - description: The type of trigger whose value is assigned to the SIP rule in <code>TriggerValue</code>. Allowed trigger values are <code>RequestUriHostname</code> and <code>ToPhoneNumber</code>.
+            - description: 'The type of trigger assigned to the SIP rule in <code>TriggerValue</code>, currently <code>RequestUriHostname</code> or <code>ToPhoneNumber</code>.'
         TriggerValue:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'If <code>TriggerType</code> is <code>RequestUriHostname</code> then the value can be the outbound host name of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code> then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered if the SIP application requests a host name, or a If <code>TriggerType</code> is <code>RequestUriHostname</code>, then the value can be the outbound hostname of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code>, then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered if the SIP application requests a host name, or a <code>ToPhoneNumber</code> value matches the incoming SIP request.'
+            - description: 'If <code>TriggerType</code> is <code>RequestUriHostname</code>, the value can be the outbound host name of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code>, the value can be a customer-owned phone number in the E164 format. The <code>SipMediaApplication</code> specified in the <code>SipRule</code> is triggered if the request URI in an incoming SIP request matches the <code>RequestUriHostname</code>, or if the <code>To</code> header in the incoming SIP request matches the <code>ToPhoneNumber</code> value.'
         Disabled:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
@@ -17903,11 +18190,11 @@ components:
         Disabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates if the SIP rule is enabled or disabled. You must disable a rule before you can delete it.
+            - description: Indicates whether the SIP rule is enabled or disabled. You must disable a rule before you can delete it.
         TriggerType:
           allOf:
             - $ref: '#/components/schemas/SipRuleTriggerType'
-            - description: The type of trigger whose value is assigned to the SIP rule in <code>TriggerValue</code>.
+            - description: 'The type of trigger assigned to the SIP rule in <code>TriggerValue</code>, currently <code>RequestUriHostname</code> or <code>ToPhoneNumber</code>.'
         TriggerValue:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -17915,15 +18202,15 @@ components:
         TargetApplications:
           allOf:
             - $ref: '#/components/schemas/SipRuleTargetApplicationList'
-            - description: List of SIP media applications with priority and AWS Region. You can only use one SIP application per AWS Region and priority combination.
+            - description: 'Target SIP media application and other details, such as priority and AWS Region, to be specified in the SIP rule. Only one SIP rule per AWS Region can be provided.'
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
-            - description: 'The SIP rule created timestamp, in ISO 8601 format.'
+            - description: 'The time at which the SIP rule was created, in ISO 8601 format.'
         UpdatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
-            - description: 'The SIP rule updated timestamp, in ISO 8601 format.'
+            - description: 'The time at which the SIP rule was last updated, in ISO 8601 format.'
       description: 'The SIP rule details, including name, triggers, and target applications. An AWS account can have multiple SIP rules.'
     UserType:
       type: string
@@ -18044,11 +18331,11 @@ components:
         CreatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
-            - description: 'The Amazon Chime Voice Connector group creation timestamp, in ISO 8601 format.'
+            - description: 'The Amazon Chime Voice Connector group creation time stamp, in ISO 8601 format.'
         UpdatedTimestamp:
           allOf:
             - $ref: '#/components/schemas/Iso8601Timestamp'
-            - description: 'The updated Amazon Chime Voice Connector group timestamp, in ISO 8601 format.'
+            - description: 'The updated Amazon Chime Voice Connector group time stamp, in ISO 8601 format.'
       description: 'The Amazon Chime Voice Connector group configuration, including associated Amazon Chime Voice Connectors. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.'
     VoiceConnectorName:
       type: string
@@ -18073,7 +18360,7 @@ components:
         AwsRegion:
           allOf:
             - $ref: '#/components/schemas/VoiceConnectorAwsRegion'
-            - description: 'The AWS Region in which the Amazon Chime Voice Connector is created. Default value: <code>us-east-1</code>.'
+            - description: ' The AWS Region in which the Amazon Chime Voice Connector is created. Default value: <code>us-east-1</code> . '
         RequireEncryption:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -18088,7 +18375,7 @@ components:
         AwsRegion:
           allOf:
             - $ref: '#/components/schemas/VoiceConnectorAwsRegion'
-            - description: 'The AWS Region in which the Amazon Chime Voice Connector is created. Default: <code>us-east-1</code>.'
+            - description: ' The AWS Region in which the Amazon Chime Voice Connector is created. Default: <code>us-east-1</code>. '
         Name:
           allOf:
             - $ref: '#/components/schemas/VoiceConnectorName'
@@ -18428,8 +18715,8 @@ components:
         Url:
           allOf:
             - $ref: '#/components/schemas/UrlType'
-            - description: The URL of a meeting session endpoint.
-      description: The endpoint of a meeting session.
+            - description: The endpoint to which you establish a websocket connection.
+      description: The websocket endpoint used to connect to Amazon Chime SDK messaging.
     GetPhoneNumberOrderRequest:
       type: object
       title: GetPhoneNumberOrderRequest
@@ -18509,7 +18796,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConversationRetentionSettings'
             - description: The chat conversation retention settings.
-      description: The retention settings for an Amazon Chime Enterprise account that determine how long to retain items such as chat room messages and chat conversation messages.
+      description: The retention settings for an Amazon Chime Enterprise account that determine how long to retain items such as chat-room messages and chat-conversation messages.
     GetRoomRequest:
       type: object
       title: GetRoomRequest
@@ -19044,7 +19331,6 @@ components:
       type: string
       pattern: '[\s\S]*'
       minLength: 1
-      maxLength: 4096
       format: password
     NotificationTarget:
       type: string
@@ -19113,7 +19399,7 @@ components:
         Weight:
           allOf:
             - $ref: '#/components/schemas/OriginationRouteWeight'
-            - description: 'The weight associated with the host. If hosts are equal in priority, calls are distributed among them based on their relative weight.'
+            - description: 'The weight associated with the host. If hosts are equal in priority, calls are redistributed among them based on their relative weight.'
       description: 'Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: Ten origination routes for each Amazon Chime Voice Connector.'
     Participant:
       type: object
@@ -19233,7 +19519,7 @@ components:
         AppInstanceStreamingConfigurations:
           allOf:
             - $ref: '#/components/schemas/AppInstanceStreamingConfigurationList'
-            - description: The streaming configurations set for an app instance.
+            - description: The streaming configurations set for an <code>AppInstance</code>.
     PutEventsConfigurationRequest:
       type: object
       title: PutEventsConfigurationRequest
@@ -19408,7 +19694,7 @@ components:
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: 'The optional metadata for each message. '
+            - description: The optional metadata for each message.
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
@@ -19548,11 +19834,11 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: The name of the app instance user.
+            - description: The name of the <code>AppInstanceUser</code>.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the app instance user.
+            - description: The metadata of the <code>AppInstanceUser</code>.
     UpdateBotRequest:
       type: object
       title: UpdateBotRequest
@@ -19595,7 +19881,7 @@ components:
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: The metadata of the channel.
+            - description: The metadata for the update request.
     UpdateGlobalSettingsRequest:
       type: object
       required:
@@ -19733,7 +20019,7 @@ components:
         VoiceConnectorItems:
           allOf:
             - $ref: '#/components/schemas/VoiceConnectorItemList'
-            - description: The <code>VoiceConnectorItems</code> to associate with the group.
+            - description: ' The <code>VoiceConnectorItems</code> to associate with the group. '
     UpdateVoiceConnectorRequest:
       type: object
       required:
