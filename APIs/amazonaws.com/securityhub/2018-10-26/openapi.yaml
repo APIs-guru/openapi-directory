@@ -514,7 +514,7 @@ paths:
                     Status:
                       allOf:
                         - $ref: '#/components/schemas/WorkflowStatus'
-                        - description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> </ul>'
+                        - description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets <code>WorkFlowStatus</code> from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> </ul>'
                 RelatedFindings:
                   description: A list of findings that are related to the updated findings.
                   type: array
@@ -969,7 +969,7 @@ paths:
                     WorkflowStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
+                        - description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
                     RecordState:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1728,7 +1728,7 @@ paths:
                     WorkflowStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
+                        - description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
                     RecordState:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3267,7 +3267,7 @@ paths:
                     WorkflowStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
+                        - description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
                     RecordState:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3678,7 +3678,7 @@ paths:
                     WorkflowStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
+                        - description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
                     RecordState:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -4633,6 +4633,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PatchSummary'
             - description: Provides an overview of the patch compliance status for an instance against a selected compliance standard.
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/Action'
+            - description: Provides details about an action that was detected for the finding.
       description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>'
     BatchUpdateFindingsResponse:
       type: object
@@ -5104,6 +5108,232 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NonEmptyString'
+    NetworkConnectionAction:
+      type: object
+      properties:
+        ConnectionDirection:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The direction of the network connection request (<code>IN</code> or <code>OUT</code>).
+        RemoteIpDetails:
+          allOf:
+            - $ref: '#/components/schemas/ActionRemoteIpDetails'
+            - description: Information about the remote IP address that issued the network connection request.
+        RemotePortDetails:
+          allOf:
+            - $ref: '#/components/schemas/ActionRemotePortDetails'
+            - description: Information about the port on the remote IP address.
+        LocalPortDetails:
+          allOf:
+            - $ref: '#/components/schemas/ActionLocalPortDetails'
+            - description: Information about the port on the EC2 instance.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The protocol used to make the network connection request.
+        Blocked:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the network connection attempt was blocked.
+      description: Provided if <code>ActionType</code> is <code>NETWORK_CONNECTION</code>. It provides details about the attempted network connection that was detected.
+    AwsApiCallAction:
+      type: object
+      properties:
+        Api:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the API method that was issued.
+        ServiceName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the AWS service that the API method belongs to.
+        CallerType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Indicates whether the API call originated from a remote IP address (<code>remoteip</code>) or from a DNS domain (<code>domain</code>).
+        RemoteIpDetails:
+          allOf:
+            - $ref: '#/components/schemas/ActionRemoteIpDetails'
+            - description: Provided if <code>CallerType</code> is <code>remoteIp</code>. Provides information about the remote IP address that the API call originated from.
+        DomainDetails:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiCallActionDomainDetails'
+            - description: Provided if <code>CallerType</code> is <code>domain</code>. Provides information about the DNS domain that the API call originated from.
+        AffectedResources:
+          allOf:
+            - $ref: '#/components/schemas/FieldMap'
+            - description: Identifies the resources that were affected by the API call.
+        FirstSeen:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: An ISO8601-formatted timestamp that indicates when the API call was first observed.
+        LastSeen:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: An ISO8601-formatted timestamp that indicates when the API call was most recently observed.
+      description: Provided if <code>ActionType</code> is <code>AWS_API_CALL</code>. It provides details about the API call that was detected.
+    DnsRequestAction:
+      type: object
+      properties:
+        Domain:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The DNS domain that is associated with the DNS request.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The protocol that was used for the DNS request.
+        Blocked:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the DNS request was blocked.
+      description: Provided if <code>ActionType</code> is <code>DNS_REQUEST</code>. It provides details about the DNS request that was detected.
+    PortProbeAction:
+      type: object
+      properties:
+        PortProbeDetails:
+          allOf:
+            - $ref: '#/components/schemas/PortProbeDetailList'
+            - description: Information about the ports affected by the port probe.
+        Blocked:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the port probe was blocked.
+      description: Provided if <code>ActionType</code> is <code>PORT_PROBE</code>. It provides details about the attempted port probe that was detected.
+    Action:
+      type: object
+      properties:
+        ActionType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The type of action that was detected. The possible action types are:</p> <ul> <li> <p> <code>NETWORK_CONNECTION</code> </p> </li> <li> <p> <code>AWS_API_CALL</code> </p> </li> <li> <p> <code>DNS_REQUEST</code> </p> </li> <li> <p> <code>PORT_PROBE</code> </p> </li> </ul>'
+        NetworkConnectionAction:
+          allOf:
+            - $ref: '#/components/schemas/NetworkConnectionAction'
+            - description: Included if <code>ActionType</code> is <code>NETWORK_CONNECTION</code>. Provides details about the network connection that was detected.
+        AwsApiCallAction:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiCallAction'
+            - description: 'Included if <code>ActionType</code> is <code>AWS_API_CALL</code>. Provides details about the API call that was detected. '
+        DnsRequestAction:
+          allOf:
+            - $ref: '#/components/schemas/DnsRequestAction'
+            - description: 'Included if <code>ActionType</code> is <code>DNS_REQUEST</code>. Provides details about the DNS request that was detected. '
+        PortProbeAction:
+          allOf:
+            - $ref: '#/components/schemas/PortProbeAction'
+            - description: 'Included if <code>ActionType</code> is <code>PORT_PROBE</code>. Provides details about the port probe that was detected. '
+      description: '<p>Provides details about one of the following actions that were detected for the finding:</p> <ul> <li> <p>A remote IP address issued an AWS API call</p> </li> <li> <p>A DNS request was received</p> </li> <li> <p>A remote IP address attempted to connect to an EC2 instance</p> </li> <li> <p>A remote IP address attempted a port probe on an EC2 instance</p> </li> </ul>'
+    ActionLocalIpDetails:
+      type: object
+      properties:
+        IpAddressV4:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The IP address.
+      description: Provides information about the IP address where the scanned port is located.
+    Integer:
+      type: integer
+    ActionLocalPortDetails:
+      type: object
+      properties:
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of the port.
+        PortName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The port name of the local connection.
+      description: 'For <code>NetworkConnectionAction</code> and <code>PortProbeDetails</code>, <code>LocalPortDetails</code> provides information about the local port that was involved in the action.'
+    IpOrganizationDetails:
+      type: object
+      properties:
+        Asn:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The Autonomous System Number (ASN) of the internet provider
+        AsnOrg:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the organization that registered the ASN.
+        Isp:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ISP information for the internet provider.
+        Org:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the internet provider.
+      description: Provides information about an internet provider.
+    Country:
+      type: object
+      properties:
+        CountryCode:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The 2-letter ISO 3166 country code for the country.
+        CountryName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the country.
+      description: Information about a country.
+    City:
+      type: object
+      properties:
+        CityName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the city.
+      description: Information about a city.
+    GeoLocation:
+      type: object
+      properties:
+        Lon:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The longitude of the location.
+        Lat:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The latitude of the location.
+      description: Provides the latitude and longitude coordinates of a location.
+    ActionRemoteIpDetails:
+      type: object
+      properties:
+        IpAddressV4:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The IP address.
+        Organization:
+          allOf:
+            - $ref: '#/components/schemas/IpOrganizationDetails'
+            - description: The internet service provider (ISP) organization associated with the remote IP address.
+        Country:
+          allOf:
+            - $ref: '#/components/schemas/Country'
+            - description: The country where the remote IP address is located.
+        City:
+          allOf:
+            - $ref: '#/components/schemas/City'
+            - description: The city where the remote IP address is located.
+        GeoLocation:
+          allOf:
+            - $ref: '#/components/schemas/GeoLocation'
+            - description: The coordinates of the location of the remote IP address.
+      description: 'For <code>AwsApiAction</code>, <code>NetworkConnectionAction</code>, and <code>PortProbeAction</code>, <code>RemoteIpDetails</code> provides information about the remote IP address that was involved in the action.'
+    ActionRemotePortDetails:
+      type: object
+      properties:
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of the port.
+        PortName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The port name of the remote connection.
+      description: Provides information about the remote port that was involved in an attempted network connection.
     ActionTarget:
       type: object
       required:
@@ -5173,6 +5403,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AvailabilityZone'
+    AwsApiCallActionDomainDetails:
+      type: object
+      properties:
+        Domain:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the DNS domain that issued the API call.
+      description: Provided if <code>CallerType</code> is <code>domain</code>. It provides information about the DNS domain that issued the API call.
+    FieldMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/NonEmptyString'
     AwsApiGatewayAccessLogSettings:
       type: object
       properties:
@@ -5185,10 +5427,6 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The ARN of the CloudWatch Logs log group that receives the access logs.
       description: Contains information about settings for logging access for the stage.
-    FieldMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/NonEmptyString'
     Boolean:
       type: boolean
     AwsApiGatewayCanarySettings:
@@ -5223,8 +5461,6 @@ components:
             - $ref: '#/components/schemas/NonEmptyStringList'
             - description: '<p>A list of endpoint types for the REST API.</p> <p>For an edge-optimized API, the endpoint type is <code>EDGE</code>. For a Regional API, the endpoint type is <code>REGIONAL</code>. For a private API, the endpoint type is <code>PRIVATE</code>.</p>'
       description: Contains information about the endpoints for the API.
-    Integer:
-      type: integer
     AwsApiGatewayMethodSettings:
       type: object
       properties:
@@ -6563,6 +6799,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AwsEc2NetworkInterfaceSecurityGroup'
+    AwsEc2NetworkInterfaceIpV6AddressList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEc2NetworkInterfaceIpV6AddressDetail'
+    AwsEc2NetworkInterfacePrivateIpAddressList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEc2NetworkInterfacePrivateIpAddressDetail'
     AwsEc2NetworkInterfaceDetails:
       type: object
       properties:
@@ -6582,7 +6826,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Indicates whether traffic to or from the instance is validated.
+        IpV6Addresses:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2NetworkInterfaceIpV6AddressList'
+            - description: The IPv6 addresses associated with the network interface.
+        PrivateIpAddresses:
+          allOf:
+            - $ref: '#/components/schemas/AwsEc2NetworkInterfacePrivateIpAddressList'
+            - description: The private IPv4 addresses associated with the network interface.
+        PublicDnsName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The public DNS name of the network interface.
+        PublicIp:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The address of the Elastic IP address bound to the network interface.
       description: Details about the network interface
+    AwsEc2NetworkInterfaceIpV6AddressDetail:
+      type: object
+      properties:
+        IpV6Address:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The IPV6 address.
+      description: Provides information about an IPV6 address that is associated with the network interface.
+    AwsEc2NetworkInterfacePrivateIpAddressDetail:
+      type: object
+      properties:
+        PrivateIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The IP address.
+        PrivateDnsName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The private DNS name for the IP address.
+      description: Provides information about a private IPv4 address that is with the network interface.
     AwsEc2NetworkInterfaceSecurityGroup:
       type: object
       properties:
@@ -8110,7 +8390,7 @@ components:
         Engine:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The name of the database engine that you want to use for this DB instance.
         AllocatedStorage:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -8266,64 +8546,64 @@ components:
         DbInstanceClass:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The new DB instance class for the DB instance.
         AllocatedStorage:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: <p/>
+            - description: The new value of the allocated storage for the DB instance.
         MasterUserPassword:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The new master user password for the DB instance.
         Port:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: <p/>
+            - description: The new port for the DB instance.
         BackupRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: <p/>
+            - description: The new backup retention period for the DB instance.
         MultiAZ:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: <p/>
+            - description: Indicates that a single Availability Zone DB instance is changing to a multiple Availability Zone deployment.
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The new engine version for the DB instance.
         LicenseModel:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The new license model value for the DB instance.
         Iops:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: <p/>
+            - description: The new provisioned IOPS value for the DB instance.
         DbInstanceIdentifier:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The new DB instance identifier for the DB instance.
         StorageType:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The new storage type for the DB instance.
         CaCertificateIdentifier:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The new CA certificate identifier for the DB instance.
         DbSubnetGroupName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The name of the new subnet group for the DB instance.
         PendingCloudWatchLogsExports:
           allOf:
             - $ref: '#/components/schemas/AwsRdsPendingCloudWatchLogsExports'
-            - description: <p/>
+            - description: A list of log types that are being enabled or disabled.
         ProcessorFeatures:
           allOf:
             - $ref: '#/components/schemas/AwsRdsDbProcessorFeatures'
-            - description: <p/>
-      description: <p/>
+            - description: Processor features that are being updated.
+      description: Changes to a DB instance that are currently pending.
     AwsRdsDbOptionGroupMemberships:
       type: array
       items:
@@ -8584,24 +8864,24 @@ components:
         OptionGroupName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The name of the option group.
         Status:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
-      description: <p/>
+            - description: The status of the option group membership.
+      description: An option group membership.
     AwsRdsDbParameterGroup:
       type: object
       properties:
         DbParameterGroupName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The name of the parameter group.
         ParameterApplyStatus:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
-      description: <p/>
+            - description: The status of parameter updates.
+      description: Provides information about a parameter group for a DB instance.
     AwsRdsPendingCloudWatchLogsExports:
       type: object
       properties:
@@ -8620,124 +8900,124 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The name of the processor feature.
         Value:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
-      description: <p/>
+            - description: The value of the processor feature.
+      description: A processor feature.
     AwsRdsDbSnapshotDetails:
       type: object
       properties:
         DbSnapshotIdentifier:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The name or ARN of the DB snapshot that is used to restore the DB instance.
         DbInstanceIdentifier:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: A name for the DB instance.
         SnapshotCreateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: When the snapshot was taken in Coordinated Universal Time (UTC).
         Engine:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The name of the database engine to use for this DB instance.
         AllocatedStorage:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: <p/>
+            - description: The amount of storage (in gigabytes) to be initially allocated for the database instance.
         Status:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The status of this DB snapshot.
         Port:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: <p/>
+            - description: The port that the database engine was listening on at the time of the snapshot.
         AvailabilityZone:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: Specifies the name of the Availability Zone in which the DB instance was located at the time of the DB snapshot.
         VpcId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The VPC ID associated with the DB snapshot.
         InstanceCreateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: 'Specifies the time in Coordinated Universal Time (UTC) when the DB instance, from which the snapshot was taken, was created.'
         MasterUsername:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The master user name for the DB snapshot.
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The version of the database engine.
         LicenseModel:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: License model information for the restored DB instance.
         SnapshotType:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The type of the DB snapshot.
         Iops:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: <p/>
+            - description: The provisioned IOPS (I/O operations per second) value of the DB instance at the time of the snapshot.
         OptionGroupName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The option group name for the DB snapshot.
         PercentProgress:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: <p/>
+            - description: The percentage of the estimated data that has been transferred.
         SourceRegion:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The AWS Region that the DB snapshot was created in or copied from.
         SourceDbSnapshotIdentifier:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The DB snapshot ARN that the DB snapshot was copied from.
         StorageType:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The storage type associated with the DB snapshot.
         TdeCredentialArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The ARN from the key store with which to associate the instance for TDE encryption.
         Encrypted:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: <p/>
+            - description: Whether the DB snapshot is encrypted.
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: 'If <code>Encrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted DB snapshot.'
         Timezone:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: The time zone of the DB snapshot.
         IamDatabaseAuthenticationEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: <p/>
+            - description: Whether mapping of IAM accounts to database accounts is enabled.
         ProcessorFeatures:
           allOf:
             - $ref: '#/components/schemas/AwsRdsDbProcessorFeatures'
-            - description: <p/>
+            - description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
         DbiResourceId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
-      description: <p/>
+            - description: The identifier for the source DB instance.
+      description: Provides details about an Amazon RDS DB cluster snapshot.
     AwsRdsDbStatusInfo:
       type: object
       properties:
@@ -9529,7 +9809,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/WorkflowStatus'
-            - description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
+            - description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p> <code>RecordState</code> changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p> <code>ComplianceStatus</code> changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
       description: Provides information about the status of the investigation into a finding.
     RecordState:
       type: string
@@ -9924,7 +10204,7 @@ components:
         WorkflowStatus:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
-            - description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
+            - description: '<p>The status of the investigation into a finding. Allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that the resource owner has been notified about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved. </p> </li> </ul>'
         RecordState:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -10018,6 +10298,98 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: 'The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS moves messages after the value of <code>maxReceiveCount</code> is exceeded. '
       description: Data about a queue.
+    AwsSsmComplianceSummary:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The current patch compliance status.</p> <p>The possible status values are:</p> <ul> <li> <p> <code>COMPLIANT</code> </p> </li> <li> <p> <code>NON_COMPLIANT</code> </p> </li> <li> <p> <code>UNSPECIFIED_DATA</code> </p> </li> </ul>'
+        CompliantCriticalCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patches that are compliant, the number that have a severity of <code>CRITICAL</code>.'
+        CompliantHighCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patches that are compliant, the number that have a severity of <code>HIGH</code>.'
+        CompliantMediumCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patches that are compliant, the number that have a severity of <code>MEDIUM</code>.'
+        ExecutionType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The type of execution that was used determine compliance.
+        NonCompliantCriticalCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patch items that are noncompliant, the number of items that have a severity of <code>CRITICAL</code>.'
+        CompliantInformationalCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patches that are compliant, the number that have a severity of <code>INFORMATIONAL</code>.'
+        NonCompliantInformationalCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patches that are noncompliant, the number that have a severity of <code>INFORMATIONAL</code>.'
+        CompliantUnspecifiedCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patches that are compliant, the number that have a severity of <code>UNSPECIFIED</code>.'
+        NonCompliantLowCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patches that are noncompliant, the number that have a severity of <code>LOW</code>.'
+        NonCompliantHighCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patches that are noncompliant, the number that have a severity of <code>HIGH</code>.'
+        CompliantLowCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patches that are compliant, the number that have a severity of <code>LOW</code>.'
+        ComplianceType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The type of resource for which the compliance was determined. For <code>AwsSsmPatchCompliance</code>, <code>ComplianceType</code> is <code>Patch</code>. '
+        PatchBaselineId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the patch baseline. The patch baseline lists the patches that are approved for installation.
+        OverallSeverity:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The highest severity for the patches.
+        NonCompliantMediumCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patches that are noncompliant, the number that have a severity of <code>MEDIUM</code>.'
+        NonCompliantUnspecifiedCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For the patches that are noncompliant, the number that have a severity of <code>UNSPECIFIED</code>.'
+        PatchGroup:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the patch group for which compliance was determined. A patch group uses tags to group EC2 instances that should have the same patch compliance.
+      description: Provides the details about the compliance status for a patch.
+    AwsSsmPatch:
+      type: object
+      properties:
+        ComplianceSummary:
+          allOf:
+            - $ref: '#/components/schemas/AwsSsmComplianceSummary'
+            - description: The compliance status details for the patch.
+      description: Provides details about the compliance for a patch.
+    AwsSsmPatchComplianceDetails:
+      type: object
+      properties:
+        Patch:
+          allOf:
+            - $ref: '#/components/schemas/AwsSsmPatch'
+            - description: Information about the status of a patch.
+      description: Provides information about the state of a patch on an instance based on the patch baseline that was used to patch the instance.
     AwsWafWebAclRuleList:
       type: array
       items:
@@ -10177,7 +10549,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/WorkflowStatus'
-            - description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> </ul>'
+            - description: '<p>The status of the investigation into the finding. The allowed values are the following.</p> <ul> <li> <p> <code>NEW</code> - The initial state of a finding, before it is reviewed.</p> <p>Security Hub also resets <code>WorkFlowStatus</code> from <code>NOTIFIED</code> or <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p> <ul> <li> <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p> </li> <li> <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>, <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p> </li> </ul> </li> <li> <p> <code>NOTIFIED</code> - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.</p> </li> <li> <p> <code>RESOLVED</code> - The finding was reviewed and remediated and is now considered resolved.</p> </li> <li> <p> <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be acted upon.</p> </li> </ul>'
       description: Used to update information about the investigation into the finding.
     BatchUpdateFindingsRequest:
       type: object
@@ -11040,6 +11412,26 @@ components:
         - aws
         - aws-cn
         - aws-us-gov
+    PortProbeDetailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PortProbeDetail'
+    PortProbeDetail:
+      type: object
+      properties:
+        LocalPortDetails:
+          allOf:
+            - $ref: '#/components/schemas/ActionLocalPortDetails'
+            - description: Provides information about the port that was scanned.
+        LocalIpDetails:
+          allOf:
+            - $ref: '#/components/schemas/ActionLocalIpDetails'
+            - description: Provides information about the IP address where the scanned port is located.
+        RemoteIpDetails:
+          allOf:
+            - $ref: '#/components/schemas/ActionRemoteIpDetails'
+            - description: Provides information about the remote IP address that performed the scan.
+      description: 'A port scan that was part of the port probe. For each scan, PortProbeDetails provides information about the local IP address and port that were scanned, and the remote IP address that the scan originated from.'
     Product:
       type: object
       required:
@@ -11168,11 +11560,11 @@ components:
         AwsApiGatewayV2Stage:
           allOf:
             - $ref: '#/components/schemas/AwsApiGatewayV2StageDetails'
-            - description: <p/>
+            - description: Provides information about a version 2 stage for Amazon API Gateway.
         AwsApiGatewayV2Api:
           allOf:
             - $ref: '#/components/schemas/AwsApiGatewayV2ApiDetails'
-            - description: <p/>
+            - description: Provides information about a version 2 API in Amazon API Gateway.
         AwsDynamoDbTable:
           allOf:
             - $ref: '#/components/schemas/AwsDynamoDbTableDetails'
@@ -11180,31 +11572,35 @@ components:
         AwsApiGatewayStage:
           allOf:
             - $ref: '#/components/schemas/AwsApiGatewayStageDetails'
-            - description: <p/>
+            - description: Provides information about a version 1 Amazon API Gateway stage.
         AwsApiGatewayRestApi:
           allOf:
             - $ref: '#/components/schemas/AwsApiGatewayRestApiDetails'
-            - description: <p/>
+            - description: Provides information about a REST API in version 1 of Amazon API Gateway.
         AwsCloudTrailTrail:
           allOf:
             - $ref: '#/components/schemas/AwsCloudTrailTrailDetails'
-            - description: <p/>
+            - description: Provides details about a CloudTrail trail.
+        AwsSsmPatchCompliance:
+          allOf:
+            - $ref: '#/components/schemas/AwsSsmPatchComplianceDetails'
+            - description: Provides information about the state of a patch on an instance based on the patch baseline that was used to patch the instance.
         AwsCertificateManagerCertificate:
           allOf:
             - $ref: '#/components/schemas/AwsCertificateManagerCertificateDetails'
-            - description: <p/>
+            - description: Provides details about an AWS Certificate Manager (ACM) certificate.
         AwsRedshiftCluster:
           allOf:
             - $ref: '#/components/schemas/AwsRedshiftClusterDetails'
-            - description: <p/>
+            - description: Contains details about an Amazon Redshift cluster.
         AwsElbLoadBalancer:
           allOf:
             - $ref: '#/components/schemas/AwsElbLoadBalancerDetails'
-            - description: <p/>
+            - description: contains details about a Classic Load Balancer.
         AwsIamGroup:
           allOf:
             - $ref: '#/components/schemas/AwsIamGroupDetails'
-            - description: <p/>
+            - description: Contains details about an IAM group.
         AwsIamRole:
           allOf:
             - $ref: '#/components/schemas/AwsIamRoleDetails'
@@ -11283,7 +11679,7 @@ components:
         ResourceRole:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p/>
+            - description: 'Identifies the role of the resource in the finding. A resource is either the actor or target of the finding activity,'
         Tags:
           allOf:
             - $ref: '#/components/schemas/FieldMap'
@@ -11444,7 +11840,7 @@ components:
         StandardsStatus:
           allOf:
             - $ref: '#/components/schemas/StandardsStatus'
-            - description: The status of the standards subscription.
+            - description: '<p>The status of the standard subscription.</p> <p>The status values are as follows:</p> <ul> <li> <p> <code>PENDING</code> - Standard is in the process of being enabled.</p> </li> <li> <p> <code>READY</code> - Standard is enabled.</p> </li> <li> <p> <code>INCOMPLETE</code> - Standard could not be enabled completely. Some controls may not be available.</p> </li> <li> <p> <code>DELETING</code> - Standard is in the process of being disabled.</p> </li> <li> <p> <code>FAILED</code> - Standard could not be disabled.</p> </li> </ul>'
       description: A resource that represents your subscription to a supported standard.
     StatusReason:
       type: object

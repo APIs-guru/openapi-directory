@@ -2219,6 +2219,102 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/clusters/{clusterArn}/nodes/type':
+    put:
+      operationId: UpdateBrokerType
+      description: |2-
+
+                    <p>Updates EC2 instance type.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBrokerTypeResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>
+                     
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - currentVersion
+                - targetInstanceType
+              properties:
+                currentVersion:
+                  description: |2-
+
+                                <p>The cluster version that you want to change. After this operation completes successfully, the cluster will have a new version.</p>
+                             
+                  type: string
+                targetInstanceType:
+                  description: |2-
+
+                                <p>The Amazon MSK broker type that you want all of the brokers in this cluster to be.</p>
+                             
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/clusters/{clusterArn}/nodes/storage':
     put:
       operationId: UpdateBrokerStorage
@@ -3410,6 +3506,27 @@ components:
 
                             <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
                          
+    UpdateBrokerTypeResponse:
+      type: object
+      properties:
+        ClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: clusterArn
+              description: |2-
+
+                            <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                         
+        ClusterOperationArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: clusterOperationArn
+              description: |2-
+
+                            <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
+                         
     UpdateBrokerStorageResponse:
       type: object
       properties:
@@ -4161,6 +4278,15 @@ components:
             - $ref: '#/components/schemas/LoggingInfo'
             - xml:
                 name: loggingInfo
+        InstanceType:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin5Max32'
+            - xml:
+                name: instanceType
+              description: |2-
+
+                            <p>Information about the Amazon MSK broker type.</p>
+                            
       description: |2-
 
                     <p>Information about cluster attributes that can be updated via update APIs.</p>
@@ -5154,6 +5280,31 @@ components:
               description: |2-
 
                             <p>The number of broker nodes that you want the cluster to have after this operation completes successfully.</p>
+                         
+    UpdateBrokerTypeRequest:
+      type: object
+      required:
+        - CurrentVersion
+        - TargetInstanceType
+      title: UpdateBrokerTypeRequest
+      properties:
+        CurrentVersion:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: currentVersion
+              description: |2-
+
+                            <p>The cluster version that you want to change. After this operation completes successfully, the cluster will have a new version.</p>
+                         
+        TargetInstanceType:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: targetInstanceType
+              description: |2-
+
+                            <p>The Amazon MSK broker type that you want all of the brokers in this cluster to be.</p>
                          
     UpdateBrokerStorageRequest:
       type: object
