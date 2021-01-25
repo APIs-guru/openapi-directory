@@ -309,6 +309,7 @@ info:
       url: https://snyk.docs.apiary.io/api-description-document
       version: "2.0"
   x-providerName: snyk.io
+  x-preferred: null
 tags:
   - name: General
   - name: Users
@@ -777,11 +778,11 @@ paths:
 
                     The items that will be copied are:
 
-                    \+ Source control integrations
+                    \+ Source control integrations 
 
-                    \+ Platform as a Service and Serverless integrations
+                    \+ Platform as a Service and Serverless integrations 
 
-                    \+ Notification integrations
+                    \+ Notification integrations 
 
                     \+ Licence policy
 
@@ -1679,7 +1680,7 @@ paths:
   "/org/{orgId}/integrations/{integrationId}/authentication/switch-token":
     post:
       description: >-
-        Switch the existing broker token with the provisioned token for this integration and any other in the same group.
+        Switch the existing broker token with the provisioned token for this integration and any other in the same group. 
 
         Only perform this action when you have a Broker client running with the provisioned token.
 
@@ -10161,7 +10162,7 @@ paths:
                             [zendframework/zendframework](https://packagist.org/packages/zendframework/zendframework) provides functionality for consuming RSS and Atom feeds.
 
 
-                            Affected versions of this package are vulnerable to Arbitrary URL Rewrite. The request URI marshaling process contains logic that inspects HTTP request headers that are specific to a given server-side URL rewrite mechanism.
+                            Affected versions of this package are vulnerable to Arbitrary URL Rewrite. The request URI marshaling process contains logic that inspects HTTP request headers that are specific to a given server-side URL rewrite mechanism. 
 
 
                             When these headers are present on systems not running the specific URL rewriting mechanism, the URLs are subject to rewriting, allowing a malicious client or proxy to emulate the headers to request arbitrary content.
@@ -17093,7 +17094,7 @@ components:
                   - golang
                   - php
                   - dotnet
-                  - swift
+                  - swift-objective-c
                   - docker
                   - terraform
                   - kubernetes
@@ -17176,7 +17177,7 @@ components:
                   - golang
                   - php
                   - dotnet
-                  - swift
+                  - swift-objective-c
                   - docker
                   - terraform
                   - kubernetes
@@ -17226,7 +17227,7 @@ components:
                   - golang
                   - php
                   - dotnet
-                  - swift
+                  - swift-objective-c
                   - docker
                   - terraform
                   - kubernetes
@@ -17660,11 +17661,11 @@ components:
 
             The items that will be copied are:
 
-            \+ Source control integrations
+            \+ Source control integrations 
 
-            \+ Platform as a Service and Serverless integrations
+            \+ Platform as a Service and Serverless integrations 
 
-            \+ Notification integrations
+            \+ Notification integrations 
 
             \+ Licence policy
 
