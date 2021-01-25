@@ -910,6 +910,9 @@ components:
     Domain:
       description: If the domain is being changed, it will be placed into the UPDATING state, which indicates that the resource is being reconciled. At this point, Get will reflect an intermediate state.
       properties:
+        auditLogsEnabled:
+          description: Optional. Configuration for audit logs. True if audit logs are enabled, else false. Default is audit logs disabled.
+          type: boolean
         authorizedNetworks:
           description: Optional. The full names of the Google Compute Engine [networks](/compute/docs/networks-and-firewalls#networks) to which the instance is connected. Network can be added using UpdateDomain later. Domain is only available on network part of authorized_networks. Caller needs to make sure that CIDR subnets do not overlap between networks, else domain creation will fail.
           items:

@@ -866,7 +866,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Adds data points to a dataset. The dataset need not be previously created. All points within the given dataset will be returned with subsquent calls to retrieve this dataset. Data points can belong to more than one dataset. This method does not use patch semantics.
+      description: "Adds data points to a dataset. The dataset need not be previously created. All points within the given dataset will be returned with subsquent calls to retrieve this dataset. Data points can belong to more than one dataset. This method does not use patch semantics: the data points provided are merely inserted, with no existing data replaced."
       operationId: fitness.users.dataSources.datasets.patch
       parameters:
         - description: Patch a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
@@ -881,7 +881,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Dataset identifier that is a composite of the minimum data point start time and maximum data point end time represented as nanoseconds from the epoch. The ID is formatted like: "startTime-endTime" where startTime and endTime are 64 bit integers.'
+        - description: This field is not used, and can be safely omitted.
           in: path
           name: datasetId
           required: true

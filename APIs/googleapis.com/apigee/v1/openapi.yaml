@@ -5632,13 +5632,13 @@ components:
       description: Request for ProvisionOrganization.
       properties:
         analyticsRegion:
-          description: Primary Cloud Platform region for analytics data storage. For valid values, see [Create an organization](https://docs.apigee.com/hybrid/latest/precog-provision). Defaults to us-west1.
+          description: Primary Cloud Platform region for analytics data storage. For valid values, see [Create an organization](https://cloud.google.com/apigee/docs/hybrid/latest/precog-provision). Defaults to `us-west1`.
           type: string
         authorizedNetwork:
           description: Name of the customer project's VPC network. If provided, the network needs to be peered through Service Networking. If none is provided, the organization will have access only to the public internet.
           type: string
         runtimeLocation:
-          description: Cloud Platform location for the runtime instance. Defaults to us-west1-a.
+          description: Cloud Platform location for the runtime instance. Defaults to `us-west1-a`.
           type: string
       type: object
     GoogleCloudApigeeV1Query:

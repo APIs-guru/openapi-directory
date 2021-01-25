@@ -5725,7 +5725,7 @@ components:
           description: A list of errors defined if, and only if, the request failed.
         gmbAccounts:
           $ref: "#/components/schemas/GmbAccounts"
-          description: The the list of accessible GMB accounts.
+          description: The list of accessible GMB accounts.
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsCustomBatchResponseEntry`"'
           type: string
@@ -7811,7 +7811,7 @@ components:
           description: Color of the item.
           type: string
         condition:
-          description: 'Condition or state of the item. Acceptable values are: - "`local`" - "`online`" '
+          description: 'Condition or state of the item. Acceptable values are: - "`new`" - "`refurbished`" - "`used`" '
           type: string
         contentLanguage:
           description: Required. The two-letter ISO 639-1 language code for the item.

@@ -558,9 +558,9 @@ components:
     GoogleCloudDocumentaiV1BatchProcessMetadataIndividualProcessStatus:
       description: The status of a each individual document in the batch process.
       properties:
-        humanReviewOperation:
-          description: The name of the operation triggered by the processed document. If the human review process is not triggered, this field will be empty. It has the same response type and metadata as the long running operation returned by ReviewDocument method.
-          type: string
+        humanReviewStatus:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1HumanReviewStatus"
+          description: The status of human review on the processed document.
         inputGcsSource:
           description: The source of the document, same as the [input_gcs_source] field in the request when the batch process started. The batch process is started by take snapshot of that document, since a user can move or change that document during the process.
           type: string
@@ -598,6 +598,25 @@ components:
         updateTime:
           description: The last update time of the operation.
           format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1HumanReviewStatus:
+      description: The status of human review on a processed document.
+      properties:
+        humanReviewOperation:
+          description: The name of the operation triggered by the processed document. Non-empty only when the [state] is [HUMAN_REVIEW_IN_PROGRESS]. It has the same response type and metadata as the long running operation returned by [ReviewDocument] method.
+          type: string
+        state:
+          description: The state of human review on the processing request.
+          enum:
+            - STATE_UNSPECIFIED
+            - HUMAN_REVIEW_SKIPPED
+            - HUMAN_REVIEW_VALIDATION_PASSED
+            - HUMAN_REVIEW_IN_PROGRESS
+            - HUMAN_REVIEW_ERROR
+          type: string
+        stateMessage:
+          description: A message providing more details about the human review state.
           type: string
       type: object
     GoogleCloudDocumentaiV1ReviewDocumentOperationMetadata:
@@ -2230,8 +2249,11 @@ components:
       description: The status of a each individual document in the batch process.
       properties:
         humanReviewOperation:
-          description: The name of the operation triggered by the processed document. If the human review process is not triggered, this field will be empty. It has the same response type and metadata as the long running operation returned by ReviewDocument method.
+          description: The name of the operation triggered by the processed document. If the human review process is not triggered, this field will be empty. It has the same response type and metadata as the long running operation returned by ReviewDocument method. .
           type: string
+        humanReviewStatus:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3HumanReviewStatus"
+          description: The status of human review on the processed document.
         inputGcsSource:
           description: The source of the document, same as the [input_gcs_source] field in the request when the batch process started. The batch process is started by take snapshot of that document, since a user can move or change that document during the process.
           type: string
@@ -2253,6 +2275,9 @@ components:
         outputConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3BatchProcessRequestBatchOutputConfig"
           description: The overall output config for batch process.
+        skipHumanReview:
+          description: Whether Human Review feature should be skipped for this request. Default to false.
+          type: boolean
       type: object
     GoogleCloudDocumentaiV1beta3BatchProcessRequestBatchInputConfig:
       description: The message for input config in batch process.
@@ -2977,6 +3002,25 @@ components:
           description: Text translated into the target language.
           type: string
       type: object
+    GoogleCloudDocumentaiV1beta3HumanReviewStatus:
+      description: The status of human review on a processed document.
+      properties:
+        humanReviewOperation:
+          description: The name of the operation triggered by the processed document. Non-empty only when the [state] is [HUMAN_REVIEW_IN_PROGRESS]. It has the same response type and metadata as the long running operation returned by [ReviewDocument] method.
+          type: string
+        state:
+          description: The state of human review on the processing request.
+          enum:
+            - STATE_UNSPECIFIED
+            - HUMAN_REVIEW_SKIPPED
+            - HUMAN_REVIEW_VALIDATION_PASSED
+            - HUMAN_REVIEW_IN_PROGRESS
+            - HUMAN_REVIEW_ERROR
+          type: string
+        stateMessage:
+          description: A message providing more details about the human review state.
+          type: string
+      type: object
     GoogleCloudDocumentaiV1beta3NormalizedVertex:
       description: "A vertex represents a 2D point in the image. NOTE: the normalized vertex coordinates are relative to the original image and range from 0 to 1."
       properties:
@@ -3006,8 +3050,11 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3Document"
           description: The document payload, will populate fields based on the processor's behavior.
         humanReviewOperation:
-          description: The name of the operation triggered by the processed document. If the human review process is not triggered, this field will be empty. It has the same response type and metadata as the long running operation returned by ReviewDocument method.
+          description: The name of the operation triggered by the processed document. If the human review process is not triggered, this field will be empty. It has the same response type and metadata as the long running operation returned by ReviewDocument method. .
           type: string
+        humanReviewStatus:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3HumanReviewStatus"
+          description: The status of human review on the processed document.
       type: object
     GoogleCloudDocumentaiV1beta3ReviewDocumentOperationMetadata:
       description: The long running operation metadata for review document method.

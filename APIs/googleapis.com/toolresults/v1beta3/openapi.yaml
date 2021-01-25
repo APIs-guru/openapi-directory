@@ -2323,6 +2323,10 @@ components:
             $ref: "#/components/schemas/TestCase"
           type: array
       type: object
+    LogcatCollectionError:
+      description: A warning that there were issues in logcat collection.
+      properties: {}
+      type: object
     MatrixDimensionDefinition:
       description: One dimension of the matrix of different runs of a step.
       properties: {}
@@ -3057,6 +3061,7 @@ components:
             - overlappingUiElements
             - unityException
             - deviceOutOfMemory
+            - logcatCollectionError
           type: string
         warning:
           $ref: "#/components/schemas/Any"

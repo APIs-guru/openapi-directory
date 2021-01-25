@@ -1671,7 +1671,7 @@ components:
           format: int32
           type: integer
         bootDiskType:
-          description: 'Optional. Type of the boot disk (default is "pd-standard"). Valid values: "pd-ssd" (Persistent Disk Solid State Drive) or "pd-standard" (Persistent Disk Hard Disk Drive).'
+          description: 'Optional. Type of the boot disk (default is "pd-standard"). Valid values: "pd-balanced" (Persistent Disk Balanced Solid State Drive), "pd-ssd" (Persistent Disk Solid State Drive), or "pd-standard" (Persistent Disk Hard Disk Drive). See Disk types (https://cloud.google.com/compute/docs/disks#disk-types).'
           type: string
         numLocalSsds:
           description: Optional. Number of attached SSDs, from 0 to 4 (default is 0). If SSDs are not attached, the boot disk is used to store runtime logs and HDFS (https://hadoop.apache.org/docs/r1.2.1/hdfs_user_guide.html) data. If one or more SSDs are attached, this runtime bulk data is spread across them, and the boot disk contains only basic config and installed binaries.
@@ -1756,7 +1756,7 @@ components:
           type: array
         shieldedInstanceConfig:
           $ref: "#/components/schemas/ShieldedInstanceConfig"
-          description: Optional. Shielded Instance Config for clusters using shielded VMs.
+          description: Optional. Shielded Instance Config for clusters using Compute Engine Shielded VMs (https://cloud.google.com/security/shielded-cloud/shielded-vm).
         subnetworkUri:
           description: "Optional. The Compute Engine subnetwork to be used for machine communications. Cannot be specified with network_uri.A full URL, partial URI, or short name are valid. Examples: https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/subnetworks/sub0 projects/[project_id]/regions/us-east1/subnetworks/sub0 sub0"
           type: string
@@ -2184,7 +2184,7 @@ components:
           format: google-duration
           type: string
         idleDeleteTtl:
-          description: Optional. The duration to keep the cluster alive while idling (when no jobs are running). Passing this threshold will cause the cluster to be deleted. Minimum value is 5 minutes; maximum value is 14 days (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json).
+          description: Optional. The duration to keep the cluster alive while idling (when no jobs are running). Passing this threshold will cause the cluster to be deleted. Minimum value is 5 minutes; maximum value is 14 days (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)).
           format: google-duration
           type: string
         idleStartTime:
@@ -2571,7 +2571,7 @@ components:
           description: "REQUIRED: The complete policy to be applied to the resource. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them."
       type: object
     ShieldedInstanceConfig:
-      description: Shielded Instance Config for clusters using shielded VMs.
+      description: Shielded Instance Config for clusters using Compute Engine Shielded VMs (https://cloud.google.com/security/shielded-cloud/shielded-vm).
       properties:
         enableIntegrityMonitoring:
           description: Optional. Defines whether instances have integrity monitoring enabled.

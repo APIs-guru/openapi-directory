@@ -42,6 +42,11 @@ paths:
       description: List all contact groups owned by the authenticated user. Members of the contact groups are not populated.
       operationId: people.contactGroups.list
       parameters:
+        - description: "Optional. A field mask to restrict which fields on the group are returned. Defaults to `metadata`, `groupType`, `memberCount`, and `name` if not set or set to empty. Valid fields are: * clientData * groupType * memberCount * metadata * name"
+          in: query
+          name: groupFields
+          schema:
+            type: string
         - description: Optional. The maximum number of resources to return. Valid values are between 1 and 1000, inclusive. Defaults to 30 if not set or set to 0.
           in: query
           name: pageSize
@@ -114,6 +119,11 @@ paths:
       description: Get a list of contact groups owned by the authenticated user by specifying a list of contact group resource names.
       operationId: people.contactGroups.batchGet
       parameters:
+        - description: "Optional. A field mask to restrict which fields on the group are returned. Defaults to `metadata`, `groupType`, `memberCount`, and `name` if not set or set to empty. Valid fields are: * clientData * groupType * memberCount * metadata * name"
+          in: query
+          name: groupFields
+          schema:
+            type: string
         - description: Optional. Specifies the maximum number of members to return for each group. Defaults to 0 if not set, which will return zero members.
           in: query
           name: maxMembers
@@ -1287,6 +1297,11 @@ components:
     ContactGroup:
       description: A contact group.
       properties:
+        clientData:
+          description: The group's client data.
+          items:
+            $ref: "#/components/schemas/GroupClientData"
+          type: array
         etag:
           description: The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the resource. Used for web cache validation.
           type: string
@@ -1399,6 +1414,10 @@ components:
         contactGroup:
           $ref: "#/components/schemas/ContactGroup"
           description: Required. The contact group to create.
+        readGroupFields:
+          description: "Optional. A field mask to restrict which fields on the group are returned. Defaults to `metadata`, `groupType`, and `name` if not set or set to empty. Valid fields are: * clientData * groupType * metadata * name"
+          format: google-fieldmask
+          type: string
       type: object
     Date:
       description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
@@ -1537,6 +1556,16 @@ components:
           items:
             $ref: "#/components/schemas/PersonResponse"
           type: array
+      type: object
+    GroupClientData:
+      description: Arbitrary client data that is populated by clients. Duplicate keys and values are allowed. LINT.IfChange(GroupClientData)
+      properties:
+        key:
+          description: The client specified key of the client data.
+          type: string
+        value:
+          description: The client specified value of the client data.
+          type: string
       type: object
     ImClient:
       description: A person's instant messaging client.
@@ -2351,6 +2380,14 @@ components:
         contactGroup:
           $ref: "#/components/schemas/ContactGroup"
           description: Required. The contact group to update.
+        readGroupFields:
+          description: "Optional. A field mask to restrict which fields on the group are returned. Defaults to `metadata`, `groupType`, and `name` if not set or set to empty. Valid fields are: * clientData * groupType * memberCount * metadata * name"
+          format: google-fieldmask
+          type: string
+        updateGroupFields:
+          description: "Optional. A field mask to restrict which fields on the group are updated. Multiple fields can be specified by separating them with commas. Defaults to `name` if not set or set to empty. Updated fields are replaced. Valid values are: * clientData * name"
+          format: google-fieldmask
+          type: string
       type: object
     UpdateContactPhotoRequest:
       description: "A request to update an existing contact's photo. All requests must have a valid photo format: JPEG or PNG."

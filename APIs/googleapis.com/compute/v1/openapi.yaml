@@ -31237,7 +31237,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Updates an instance's network interface. This method follows PATCH semantics.
+      description: Updates an instance's network interface. This method can only update an interface's alias IP range and attached network. See Modifying alias IP ranges for an existing instance for instructions on changing alias IP ranges. See Migrating a VM between networks for instructions on migrating an interface. This method follows PATCH semantics.
       operationId: compute.instances.updateNetworkInterface
       parameters:
         - description: Project ID for this request.
@@ -34840,6 +34840,13 @@ components:
               type: string
           type: object
       type: object
+    AdvancedMachineFeatures:
+      description: Specifies options for controlling advanced machine features. Options that would traditionally be configured in a BIOS belong here. Features that require operating system support may have corresponding entries in the GuestOsFeatures of an Image (e.g., whether or not the OS in the Image supports nested virtualization being enabled or disabled).
+      properties:
+        enableNestedVirtualization:
+          description: Whether to enable nested virtualization or not (default is false).
+          type: boolean
+      type: object
     AliasIpRange:
       description: An alias IP range attached to an instance's network interface.
       properties:
@@ -37040,7 +37047,7 @@ components:
           type: array
         allowOriginRegexes:
           description: >-
-            Specifies the regualar expression patterns that match allowed origins. For regular expression grammar please see en.cppreference.com/w/cpp/regex/ecmascript 
+            Specifies the regualar expression patterns that match allowed origins. For regular expression grammar please see github.com/google/re2/wiki/Syntax 
 
             An origin is allowed if it matches either an item in allowOrigins or an item in allowOriginRegexes.
           items:
@@ -37220,6 +37227,9 @@ components:
           items:
             type: string
           type: array
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         selfLink:
           description: "[Output Only] Server-defined fully-qualified URL for this resource."
           type: string
@@ -38479,9 +38489,6 @@ components:
 
 
             Must be set to `0.0.0.0` when the target is targetGrpcProxy that has validateForProxyless field set to true.
-
-
-            For Private Service Connect forwarding rules that forward traffic to Google APIs, IP address must be provided.
           type: string
         IPProtocol:
           description: >-
@@ -38555,6 +38562,11 @@ components:
           default: compute#forwardingRule
           description: "[Output Only] Type of the resource. Always compute#forwardingRule for Forwarding Rule resources."
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels for this resource. These can only be added or modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
+          type: object
         loadBalancingScheme:
           description: >-
             Specifies the forwarding rule type.
@@ -38613,9 +38625,6 @@ components:
 
 
             For Internal TCP/UDP Load Balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used.
-
-
-            For Private Service Connect forwarding rules that forward traffic to Google APIs, a network must be provided.
           type: string
         networkTier:
           description: >-
@@ -38705,16 +38714,7 @@ components:
             If the network specified is in auto subnet mode, this field is optional. However, if the network is in custom subnet mode, a subnetwork must be specified.
           type: string
         target:
-          description: >-
-            The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
-
-
-            For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle. Currently, the supported Google API bundles include:
-
-             
-            - vpc-sc - GCP APIs that support VPC Service Controls. For more information about which APIs support VPC Service Controls, refer to VPC-SC supported products and limitations.  
-
-            - all-apis - All GCP APIs. For more information about which APIs are supported with this bundle, refer to Private Google Access-specific domains and VIPs.
+          description: The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
           type: string
       type: object
     ForwardingRuleAggregatedList:
@@ -39871,7 +39871,7 @@ components:
             Note that rangeMatch is not supported for Loadbalancers that have their loadBalancingScheme set to EXTERNAL.
         regexMatch:
           description: >-
-            The value of the header must match the regular expression specified in regexMatch. For regular expression grammar, please see:  en.cppreference.com/w/cpp/regex/ecmascript 
+            The value of the header must match the regular expression specified in regexMatch. For regular expression grammar, please see:  github.com/google/re2/wiki/Syntax 
 
             For matching against a port specified in the HTTP request, use a headerMatch with headerName set to PORT and a regular expression that satisfies the RFC2616 Host header's port specifier.
 
@@ -40050,7 +40050,7 @@ components:
           type: boolean
         regexMatch:
           description: >-
-            The queryParameterMatch matches if the value of the parameter matches the regular expression specified by regexMatch. For the regular expression grammar, please see en.cppreference.com/w/cpp/regex/ecmascript 
+            The queryParameterMatch matches if the value of the parameter matches the regular expression specified by regexMatch. For the regular expression grammar, please see github.com/google/re2/wiki/Syntax 
 
             Only one of presentMatch, exactMatch or regexMatch must be set.
 
@@ -40326,7 +40326,7 @@ components:
           type: array
         regexMatch:
           description: >-
-            For satisfying the matchRule condition, the path of the request must satisfy the regular expression specified in regexMatch after removing any query parameters and anchor supplied with the original URL. For regular expression grammar please see en.cppreference.com/w/cpp/regex/ecmascript 
+            For satisfying the matchRule condition, the path of the request must satisfy the regular expression specified in regexMatch after removing any query parameters and anchor supplied with the original URL. For regular expression grammar please see github.com/google/re2/wiki/Syntax 
 
             Only one of prefixMatch, fullPathMatch or regexMatch must be specified.
 
@@ -40746,6 +40746,9 @@ components:
 
         An instance is a virtual machine that is hosted on Google Cloud Platform. For more information, read Virtual Machine Instances. (== resource_for {$api_version}.instances ==)
       properties:
+        advancedMachineFeatures:
+          $ref: "#/components/schemas/AdvancedMachineFeatures"
+          description: Controls for advanced machine-related behavior features.
         canIpForward:
           description: Allows this instance to send and receive packets with non-matching destination or source IPs. This is required if you plan to use this instance to forward routes. For more information, see Enabling IP Forwarding.
           type: boolean
@@ -40866,6 +40869,9 @@ components:
           items:
             type: string
           type: array
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         scheduling:
           $ref: "#/components/schemas/Scheduling"
           description: Sets the scheduling options for this instance.
@@ -41576,7 +41582,7 @@ components:
         maxSurge:
           $ref: "#/components/schemas/FixedOrPercent"
           description: >-
-            The maximum number of instances that can be created above the specified targetSize during the update process. By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
+            The maximum number of instances that can be created above the specified targetSize during the update process. This value can be either a fixed number or, if the group has 10 or more instances, a percentage. If you set a percentage, the number of instances is rounded up if necessary. The default value for maxSurge is a fixed value equal to the number of zones in which the managed instance group operates.
 
 
             At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxSurge.
@@ -41588,7 +41594,7 @@ components:
              
             - The instance's status is RUNNING. 
 
-            - If there is a health check on the instance group, the instance's liveness health check result must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
+            - If there is a health check on the instance group, the instance's health check status must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  This value can be either a fixed number or, if the group has 10 or more instances, a percentage. If you set a percentage, the number of instances is rounded up if necessary. The default value for maxUnavailable is a fixed value equal to the number of zones in which the managed instance group operates.
 
 
             At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxUnavailable.
@@ -42280,6 +42286,9 @@ components:
     InstanceProperties:
       description: ""
       properties:
+        advancedMachineFeatures:
+          $ref: "#/components/schemas/AdvancedMachineFeatures"
+          description: Controls for advanced machine-related behavior features.
         canIpForward:
           description: Enables instances created based on these properties to send packets with source IP addresses other than their own and receive packets with destination IP addresses other than their own. If these instances will be used as an IP gateway or it will be set as the next-hop in a Route resource, specify true. If unsure, leave this set to false. See the Enable IP forwarding documentation for more information.
           type: boolean
@@ -44466,7 +44475,7 @@ components:
           description: Optional IPv4 address of network endpoint. The IP address must belong to a VM in Compute Engine (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used.
           type: string
         port:
-          description: Optional port number of network endpoint. If not specified and the NetworkEndpointGroup.network_endpoint_type is GCE_IP_PORT, the defaultPort for the network endpoint group will be used.
+          description: Optional port number of network endpoint. If not specified, the defaultPort for the network endpoint group will be used.
           format: int32
           type: integer
       type: object
@@ -47451,6 +47460,7 @@ components:
             - CPUS
             - CPUS_ALL_REGIONS
             - DISKS_TOTAL_GB
+            - E2_CPUS
             - EXTERNAL_NETWORK_LB_FORWARDING_RULES
             - EXTERNAL_PROTOCOL_FORWARDING_RULES
             - EXTERNAL_VPN_GATEWAYS
@@ -47495,6 +47505,7 @@ components:
             - NVIDIA_T4_VWS_GPUS
             - NVIDIA_V100_GPUS
             - PACKET_MIRRORINGS
+            - PD_EXTREME_TOTAL_PROVISIONED_IOPS
             - PREEMPTIBLE_CPUS
             - PREEMPTIBLE_LOCAL_SSD_GB
             - PREEMPTIBLE_NVIDIA_A100_GPUS
@@ -47605,6 +47616,9 @@ components:
             - DOWN
             - UP
           type: string
+        supportsPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         zones:
           description: "[Output Only] A list of zones available in this region, in the form of resource URLs."
           items:
@@ -50377,6 +50391,9 @@ components:
           description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
@@ -50754,7 +50771,7 @@ components:
           description: "[Output only] Detailed statuses of the domains specified for managed certificate resource."
           type: object
         domains:
-          description: The domains for which a managed SSL certificate will be generated. Currently only single-domain certs are supported.
+          description: The domains for which a managed SSL certificate will be generated. Each Google-managed SSL certificate supports up to the [maximum number of domains per Google-managed SSL certificate](/load-balancing/docs/quotas#ssl_certificates).
           items:
             type: string
           type: array
@@ -53299,12 +53316,31 @@ components:
       type: object
     TestFailure:
       properties:
+        actualOutputUrl:
+          description: The actual output URL evaluated by load balancer containing the scheme, host, path and query parameters.
+          type: string
+        actualRedirectResponseCode:
+          description: Actual HTTP status code for rule with `urlRedirect` calculated by load balancer
+          format: int32
+          type: integer
         actualService:
           description: BackendService or BackendBucket returned by load balancer.
           type: string
+        expectedOutputUrl:
+          description: The expected output URL evaluated by load balancer containing the scheme, host, path and query parameters.
+          type: string
+        expectedRedirectResponseCode:
+          description: Expected HTTP status code for rule with `urlRedirect` calculated by load balancer
+          format: int32
+          type: integer
         expectedService:
           description: Expected BackendService or BackendBucket resource the given URL should be mapped to.
           type: string
+        headers:
+          description: HTTP headers of the request.
+          items:
+            $ref: "#/components/schemas/UrlMapTestHeader"
+          type: array
         host:
           description: Host portion of the URL.
           type: string
@@ -53527,6 +53563,28 @@ components:
         description:
           description: Description of this test case.
           type: string
+        expectedOutputUrl:
+          description: >-
+            The expected output URL evaluated by load balancer containing the scheme, host, path and query parameters.
+
+            For rules that forward requests to backends, the test passes only when expectedOutputUrl matches the request forwarded by load balancer to backends. For rules with urlRewrite, the test verifies that the forwarded request matches hostRewrite and pathPrefixRewrite in the urlRewrite action. When service is specified, expectedOutputUrl`s scheme is ignored.
+
+            For rules with urlRedirect, the test passes only if expectedOutputUrl matches the URL in the load balancer's redirect response. If urlRedirect specifies https_redirect, the test passes only if the scheme in expectedOutputUrl is also set to https. If urlRedirect specifies strip_query, the test passes only if expectedOutputUrl does not contain any query parameters.
+
+            expectedOutputUrl is optional when service is specified.
+          type: string
+        expectedRedirectResponseCode:
+          description: >-
+            For rules with urlRedirect, the test passes only if expectedRedirectResponseCode matches the HTTP status code in load balancer's redirect response.
+
+            expectedRedirectResponseCode cannot be set when service is set.
+          format: int32
+          type: integer
+        headers:
+          description: HTTP headers for this request. If headers contains a host header, then host must also match the header value.
+          items:
+            $ref: "#/components/schemas/UrlMapTestHeader"
+          type: array
         host:
           description: Host portion of the URL. If headers contains a host header, then host must also match the header value.
           type: string
@@ -53538,6 +53596,16 @@ components:
             Expected BackendService or BackendBucket resource the given URL should be mapped to.
 
             service cannot be set if expectedRedirectResponseCode is set.
+          type: string
+      type: object
+    UrlMapTestHeader:
+      description: HTTP headers used in UrlMapTests.
+      properties:
+        name:
+          description: Header name.
+          type: string
+        value:
+          description: Header value.
           type: string
       type: object
     UrlMapValidationResult:
@@ -54795,6 +54863,9 @@ components:
             - DOWN
             - UP
           type: string
+        supportsPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
       type: object
     ZoneList:
       description: Contains a list of zone resources.

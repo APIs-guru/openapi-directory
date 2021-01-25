@@ -565,7 +565,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Remove IAM policy that is currently set on the given resource.
-      operationId: datafusion.projects.removeIamPolicy
+      operationId: datafusion.projects.locations.removeIamPolicy
       parameters:
         - description: The resource on which IAM policy to be removed is attached to.
           in: path

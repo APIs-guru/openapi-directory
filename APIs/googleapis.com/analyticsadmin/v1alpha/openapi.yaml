@@ -56,6 +56,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
             - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/analytics.readonly
@@ -101,6 +105,10 @@ paths:
                 $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListAccountsResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
         - Oauth2:
             - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
@@ -188,6 +196,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
             - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/analytics.readonly
@@ -271,6 +283,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
             - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/analytics.readonly
@@ -352,6 +368,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
             - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/analytics.readonly
@@ -370,7 +390,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an android app stream with the specified location and attributes.
+      description: Creates an Android app stream with the specified location and attributes. Note that an Android app stream must be linked to a Firebase app to receive traffic. To create a working app stream, make sure your property is linked to a Firebase project. Then, use the Firebase API to create a Firebase app, which will also create an appropriate data stream in Analytics (may take up to 24 hours).
       operationId: analyticsadmin.properties.androidAppDataStreams.create
       parameters:
         - description: "Required. The parent resource where this android app data stream will be created. Format: properties/123"
@@ -427,6 +447,10 @@ paths:
                 $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListFirebaseLinksResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
         - Oauth2:
             - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
@@ -504,6 +528,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
             - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/analytics.readonly
@@ -580,6 +608,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
             - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/analytics.readonly
@@ -598,7 +630,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an iOS app data stream with the specified location and attributes.
+      description: Creates an iOS app stream with the specified location and attributes. Note that an iOS app stream must be linked to a Firebase app to receive traffic. To create a working app stream, make sure your property is linked to a Firebase project. Then, use the Firebase API to create a Firebase app, which will also create an appropriate data stream in Analytics (may take up to 24 hours).
       operationId: analyticsadmin.properties.iosAppDataStreams.create
       parameters:
         - description: "Required. The parent resource where this ios app data stream will be created. Format: properties/123"
@@ -655,6 +687,10 @@ paths:
                 $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListUserLinksResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.manage.users
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.manage.users
         - Oauth2:
             - https://www.googleapis.com/auth/analytics.manage.users.readonly
           Oauth2c:
@@ -743,6 +779,10 @@ paths:
                 $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAuditUserLinksResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.manage.users
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.manage.users
         - Oauth2:
             - https://www.googleapis.com/auth/analytics.manage.users.readonly
           Oauth2c:
@@ -862,6 +902,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/analytics.manage.users
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.manage.users
+        - Oauth2:
             - https://www.googleapis.com/auth/analytics.manage.users.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/analytics.manage.users.readonly
@@ -950,6 +994,10 @@ paths:
                 $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListWebDataStreamsResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
         - Oauth2:
             - https://www.googleapis.com/auth/analytics.readonly
           Oauth2c:

@@ -1388,6 +1388,14 @@ components:
         layout:
           description: Output only. The YAML layout for this manifest.
           type: string
+        manifestSizeBytes:
+          description: Output only. The computed size of the fully expanded manifest.
+          format: int64
+          type: string
+        manifestSizeLimitBytes:
+          description: Output only. The size limit for expanded manifests in the project.
+          format: int64
+          type: string
         name:
           description: Output only. The name of the manifest.
           type: string

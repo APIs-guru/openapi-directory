@@ -93,6 +93,7 @@ tags:
   - name: routers
   - name: routes
   - name: securityPolicies
+  - name: serviceAttachments
   - name: snapshots
   - name: sslCertificates
   - name: sslPolicies
@@ -24859,6 +24860,252 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - routers
+  "/projects/{project}/regions/{region}/serviceAttachments":
+    get:
+      description: Lists the ServiceAttachments for a project in the given scope.
+      operationId: compute.serviceAttachments.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: >-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+
+
+            You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: >-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+
+            You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+
+            Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceAttachmentList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - serviceAttachments
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates a ServiceAttachment in the specified project in the given scope using the parameters that are included in the request.
+      operationId: compute.serviceAttachments.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceAttachment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - serviceAttachments
+  "/projects/{project}/regions/{region}/serviceAttachments/{serviceAttachment}":
+    delete:
+      description: Deletes the specified ServiceAttachment in the given scope
+      operationId: compute.serviceAttachments.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the ServiceAttachment resource to delete.
+          in: path
+          name: serviceAttachment
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - serviceAttachments
+    get:
+      description: Returns the specified ServiceAttachment resource in the given scope.
+      operationId: compute.serviceAttachments.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region of this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the ServiceAttachment resource to return.
+          in: path
+          name: serviceAttachment
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceAttachment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - serviceAttachments
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
   "/projects/{project}/regions/{region}/sslCertificates":
     get:
       description: Retrieves the list of SslCertificate resources available to the specified project in the specified region.
@@ -35394,7 +35641,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Updates an instance's network interface. This method follows PATCH semantics.
+      description: Updates an instance's network interface. This method can only update an interface's alias IP range and attached network. See Modifying alias IP ranges for an existing instance for instructions on changing alias IP ranges. See Migrating a VM between networks for instructions on migrating an interface. This method follows PATCH semantics.
       operationId: compute.instances.updateNetworkInterface
       parameters:
         - description: Project ID for this request.
@@ -40246,6 +40493,9 @@ components:
           items:
             $ref: "#/components/schemas/BackendBucketCdnPolicyNegativeCachingPolicy"
           type: array
+        requestCoalescing:
+          description: If true then Cloud CDN will combine multiple concurrent cache fill requests into a small number of requests to the origin.
+          type: boolean
         serveWhileStale:
           description: Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default "max-stale" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.
           format: int32
@@ -40747,6 +40997,9 @@ components:
           items:
             $ref: "#/components/schemas/BackendServiceCdnPolicyNegativeCachingPolicy"
           type: array
+        requestCoalescing:
+          description: If true then Cloud CDN will combine multiple concurrent cache fill requests into a small number of requests to the origin.
+          type: boolean
         serveWhileStale:
           description: Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default "max-stale" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.
           format: int32
@@ -40799,6 +41052,34 @@ components:
             - ALWAYS_PERSIST
             - DEFAULT_FOR_PROTOCOL
             - NEVER_PERSIST
+          type: string
+        idleTimeoutSec:
+          description: >-
+            Specifies how long to keep a Connection Tracking entry while there is no matching traffic (in seconds).
+
+
+            For L4 ILB the minimum(default) is 10 minutes and maximum is 16 hours.
+
+
+            For NLB the minimum(default) is 60 seconds and the maximum is 16 hours.
+
+
+            This field will be supported only if the Connection Tracking key is less than 5-tuple.
+          format: int32
+          type: integer
+        trackingMode:
+          description: >-
+            Specifies the key used for connection tracking. There are two options:
+
+
+            PER_CONNECTION: This is the default mode. The Connection Tracking is performed as per the Connection Key (default Hash Method) for the specific protocol.
+
+
+            PER_SESSION: The Connection Tracking is performed as per the configured Session Affinity. It matches the configured Session Affinity.
+          enum:
+            - INVALID_TRACKING_MODE
+            - PER_CONNECTION
+            - PER_SESSION
           type: string
       type: object
     BackendServiceFailoverPolicy:
@@ -41678,7 +41959,7 @@ components:
           type: array
         allowOriginRegexes:
           description: >-
-            Specifies the regualar expression patterns that match allowed origins. For regular expression grammar please see en.cppreference.com/w/cpp/regex/ecmascript 
+            Specifies the regualar expression patterns that match allowed origins. For regular expression grammar please see github.com/google/re2/wiki/Syntax 
 
             An origin is allowed if it matches either an item in allowOrigins or an item in allowOriginRegexes.
           items:
@@ -41884,6 +42165,9 @@ components:
           items:
             type: string
           type: array
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         selfLink:
           description: "[Output Only] Server-defined fully-qualified URL for this resource."
           type: string
@@ -41958,7 +42242,7 @@ components:
           description: "[Output Only] The unique ID of the snapshot used to create this disk. This value identifies the exact snapshot that was used to create this persistent disk. For example, if you created the persistent disk from a snapshot that was later deleted and recreated under the same name, the source snapshot ID would identify the exact version of the snapshot that was used."
           type: string
         sourceStorageObject:
-          description: The full Google Cloud Storage URI where the disk image is stored. This file must be a gzip-compressed tarball whose name ends in .tar.gz or virtual machine disk whose name ends in vmdk. Valid URIs may start with gs:// or https://storage.googleapis.com/.
+          description: The full Google Cloud Storage URI where the disk image is stored. This file must be a gzip-compressed tarball whose name ends in .tar.gz or virtual machine disk whose name ends in vmdk. Valid URIs may start with gs:// or https://storage.googleapis.com/. This flag is not optimized for creating multiple disks from a source storage object. To create many disks from a source storage object, use gcloud compute images import instead.
           type: string
         status:
           description: "[Output Only] The status of disk creation. CREATING: Disk is provisioning. RESTORING: Source data is being copied into the disk. FAILED: Disk creation failed. READY: Disk is ready for use. DELETING: Disk is deleting."
@@ -43125,7 +43409,7 @@ components:
           type: string
         match:
           $ref: "#/components/schemas/FirewallPolicyRuleMatcher"
-          description: A match condition that incoming traffic is evaluated against. If it evaluates to true, the corresponding ?action? is enforced.
+          description: A match condition that incoming traffic is evaluated against. If it evaluates to true, the corresponding 'action' is enforced.
         priority:
           description: An integer indicating the priority of a rule in the list. The priority must be a positive value between 0 and 2147483647. Rules are evaluated from highest to lowest priority where 0 is the highest priority and 2147483647 is the lowest prority.
           format: int32
@@ -43135,7 +43419,7 @@ components:
           format: int32
           type: integer
         targetResources:
-          description: A list of network resource URLs to which this rule applies. This field allows you to control which network?s VMs get this rule. If this field is left blank, all VMs within the organization will receive the rule.
+          description: A list of network resource URLs to which this rule applies. This field allows you to control which network's VMs get this rule. If this field is left blank, all VMs within the organization will receive the rule.
           items:
             type: string
           type: array
@@ -43253,9 +43537,6 @@ components:
 
 
             Must be set to `0.0.0.0` when the target is targetGrpcProxy that has validateForProxyless field set to true.
-
-
-            For Private Service Connect forwarding rules that forward traffic to Google APIs, IP address must be provided.
           type: string
         IPProtocol:
           description: >-
@@ -43400,9 +43681,6 @@ components:
 
 
             For Internal TCP/UDP Load Balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used.
-
-
-            For Private Service Connect forwarding rules that forward traffic to Google APIs, a network must be provided.
           type: string
         networkTier:
           description: >-
@@ -43501,16 +43779,7 @@ components:
             If the network specified is in auto subnet mode, this field is optional. However, if the network is in custom subnet mode, a subnetwork must be specified.
           type: string
         target:
-          description: >-
-            The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
-
-
-            For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle. Currently, the supported Google API bundles include:
-
-             
-            - vpc-sc - GCP APIs that support VPC Service Controls. For more information about which APIs support VPC Service Controls, refer to VPC-SC supported products and limitations.  
-
-            - all-apis - All GCP APIs. For more information about which APIs are supported with this bundle, refer to Private Google Access-specific domains and VIPs.
+          description: The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
           type: string
       type: object
     ForwardingRuleAggregatedList:
@@ -44704,7 +44973,7 @@ components:
             Note that rangeMatch is not supported for Loadbalancers that have their loadBalancingScheme set to EXTERNAL.
         regexMatch:
           description: >-
-            The value of the header must match the regular expression specified in regexMatch. For regular expression grammar, please see:  en.cppreference.com/w/cpp/regex/ecmascript 
+            The value of the header must match the regular expression specified in regexMatch. For regular expression grammar, please see:  github.com/google/re2/wiki/Syntax 
 
             For matching against a port specified in the HTTP request, use a headerMatch with headerName set to PORT and a regular expression that satisfies the RFC2616 Host header's port specifier.
 
@@ -44883,7 +45152,7 @@ components:
           type: boolean
         regexMatch:
           description: >-
-            The queryParameterMatch matches if the value of the parameter matches the regular expression specified by regexMatch. For the regular expression grammar, please see en.cppreference.com/w/cpp/regex/ecmascript 
+            The queryParameterMatch matches if the value of the parameter matches the regular expression specified by regexMatch. For the regular expression grammar, please see github.com/google/re2/wiki/Syntax 
 
             Only one of presentMatch, exactMatch or regexMatch must be set.
 
@@ -45177,7 +45446,7 @@ components:
           type: array
         regexMatch:
           description: >-
-            For satisfying the matchRule condition, the path of the request must satisfy the regular expression specified in regexMatch after removing any query parameters and anchor supplied with the original URL. For regular expression grammar please see en.cppreference.com/w/cpp/regex/ecmascript 
+            For satisfying the matchRule condition, the path of the request must satisfy the regular expression specified in regexMatch after removing any query parameters and anchor supplied with the original URL. For regular expression grammar please see github.com/google/re2/wiki/Syntax 
 
             Only one of prefixMatch, fullPathMatch or regexMatch must be specified.
 
@@ -45723,6 +45992,9 @@ components:
           items:
             type: string
           type: array
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         scheduling:
           $ref: "#/components/schemas/Scheduling"
           description: Sets the scheduling options for this instance.
@@ -46457,7 +46729,7 @@ components:
         maxSurge:
           $ref: "#/components/schemas/FixedOrPercent"
           description: >-
-            The maximum number of instances that can be created above the specified targetSize during the update process. By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
+            The maximum number of instances that can be created above the specified targetSize during the update process. This value can be either a fixed number or, if the group has 10 or more instances, a percentage. If you set a percentage, the number of instances is rounded up if necessary. The default value for maxSurge is a fixed value equal to the number of zones in which the managed instance group operates.
 
 
             At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxSurge.
@@ -46469,7 +46741,7 @@ components:
              
             - The instance's status is RUNNING. 
 
-            - If there is a health check on the instance group, the instance's liveness health check result must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
+            - If there is a health check on the instance group, the instance's health check status must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  This value can be either a fixed number or, if the group has 10 or more instances, a percentage. If you set a percentage, the number of instances is rounded up if necessary. The default value for maxUnavailable is a fixed value equal to the number of zones in which the managed instance group operates.
 
 
             At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxUnavailable.
@@ -49633,7 +49905,7 @@ components:
           description: Optional IPv4 address of network endpoint. The IP address must belong to a VM in Compute Engine (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used.
           type: string
         port:
-          description: Optional port number of network endpoint. If not specified and the NetworkEndpointGroup.network_endpoint_type is GCE_IP_PORT, the defaultPort for the network endpoint group will be used.
+          description: Optional port number of network endpoint. If not specified, the defaultPort for the network endpoint group will be used.
           format: int32
           type: integer
       type: object
@@ -52749,6 +53021,7 @@ components:
             - CPUS
             - CPUS_ALL_REGIONS
             - DISKS_TOTAL_GB
+            - E2_CPUS
             - EXTERNAL_NETWORK_LB_FORWARDING_RULES
             - EXTERNAL_PROTOCOL_FORWARDING_RULES
             - EXTERNAL_VPN_GATEWAYS
@@ -52793,6 +53066,7 @@ components:
             - NVIDIA_T4_VWS_GPUS
             - NVIDIA_V100_GPUS
             - PACKET_MIRRORINGS
+            - PD_EXTREME_TOTAL_PROVISIONED_IOPS
             - PREEMPTIBLE_CPUS
             - PREEMPTIBLE_LOCAL_SSD_GB
             - PREEMPTIBLE_NVIDIA_A100_GPUS
@@ -52904,6 +53178,9 @@ components:
             - DOWN
             - UP
           type: string
+        supportsPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         zones:
           description: "[Output Only] A list of zones available in this region, in the form of resource URLs."
           items:
@@ -55896,6 +56173,147 @@ components:
             type: string
           type: array
       type: object
+    ServiceAttachment:
+      description: >-
+        Represents a ServiceAttachment resource.
+
+
+        A service attachment represents a service that a producer has exposed. It encapsulates the load balancer which fronts the service runs and a list of NAT IP ranges that the producers uses to represent the consumers connecting to the service.
+      properties:
+        connectionPreference:
+          description: The connection preference of service attachment. The value can be set to ACCEPT_AUTOMATIC. An ACCEPT_AUTOMATIC service attachment is one that always accepts the connection from consumer forwarding rules.
+          enum:
+            - ACCEPT_AUTOMATIC
+            - CONNECTION_PREFERENCE_UNSPECIFIED
+          type: string
+        consumerForwardingRules:
+          description: "[Output Only] An array of forwarding rules for all the consumers connected to this service attachment."
+          items:
+            $ref: "#/components/schemas/ServiceAttachmentConsumerForwardingRule"
+          type: array
+        creationTimestamp:
+          description: "[Output Only] Creation timestamp in RFC3339 text format."
+          type: string
+        description:
+          description: An optional description of this resource. Provide this property when you create the resource.
+          type: string
+        enableProxyProtocol:
+          description: If true, enable the proxy protocol which is for supplying client TCP/IP address data in TCP connections that traverse proxies on their way to destination servers.
+          type: boolean
+        id:
+          description: "[Output Only] The unique identifier for the resource type. The server generates this identifier."
+          format: uint64
+          type: string
+        kind:
+          default: compute#serviceAttachment
+          description: "[Output Only] Type of the resource. Always compute#serviceAttachment for service attachments."
+          type: string
+        name:
+          description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+          type: string
+        natSubnets:
+          description: An array of URLs where each entry is the URL of a subnet provided by the service producer to use for NAT in this service attachment.
+          items:
+            type: string
+          type: array
+        producerForwardingRule:
+          description: The URL of a forwarding rule with loadBalancingScheme INTERNAL* that is serving the endpoint identified by this service attachment.
+          type: string
+        region:
+          description: "[Output Only] URL of the region where the service attachment resides. This field applies only to the region resource. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
+          type: string
+        selfLink:
+          description: "[Output Only] Server-defined URL for the resource."
+          type: string
+      type: object
+    ServiceAttachmentConsumerForwardingRule:
+      description: "[Output Only] A consumer forwarding rule connected to this service attachment."
+      properties:
+        forwardingRule:
+          description: The url of a consumer forwarding rule.
+          type: string
+        status:
+          description: The status of the forwarding rule.
+          enum:
+            - ACTIVE
+            - INACTIVE
+            - PENDING
+            - STATUS_UNSPECIFIED
+          type: string
+      type: object
+    ServiceAttachmentList:
+      properties:
+        id:
+          description: "[Output Only] Unique identifier for the resource; defined by the server."
+          type: string
+        items:
+          description: A list of ServiceAttachment resources.
+          items:
+            $ref: "#/components/schemas/ServiceAttachment"
+          type: array
+        kind:
+          default: compute#serviceAttachmentList
+          description: "[Output Only] Type of the resource. Always compute#serviceAttachment for service attachments."
+          type: string
+        nextPageToken:
+          description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
+          type: string
+        selfLink:
+          description: "[Output Only] Server-defined URL for this resource."
+          type: string
+        warning:
+          description: "[Output Only] Informational warning message."
+          properties:
+            code:
+              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - PARTIAL_SUCCESS
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: >-
+                [Output Only] Metadata about this warning in key: value format. For example:
+
+                "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+              items:
+                properties:
+                  key:
+                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
+                    type: string
+                  value:
+                    description: "[Output Only] A warning data value corresponding to the key."
+                    type: string
+                type: object
+              type: array
+            message:
+              description: "[Output Only] A human-readable description of the warning code."
+              type: string
+          type: object
+      type: object
     ShieldedInstanceConfig:
       description: A set of Shielded Instance options.
       properties:
@@ -56061,6 +56479,9 @@ components:
           description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
@@ -56507,7 +56928,7 @@ components:
           description: "[Output only] Detailed statuses of the domains specified for managed certificate resource."
           type: object
         domains:
-          description: The domains for which a managed SSL certificate will be generated. Currently only single-domain certs are supported.
+          description: The domains for which a managed SSL certificate will be generated. Each Google-managed SSL certificate supports up to the [maximum number of domains per Google-managed SSL certificate](/load-balancing/docs/quotas#ssl_certificates).
           items:
             type: string
           type: array
@@ -56901,6 +57322,7 @@ components:
             - INTERNAL_HTTPS_LOAD_BALANCER
             - PRIVATE
             - PRIVATE_RFC_1918
+            - PRIVATE_SERVICE_CONNECT
           type: string
         region:
           description: URL of the region where the Subnetwork resides. This field can be set only at resource creation time.
@@ -59164,12 +59586,31 @@ components:
       type: object
     TestFailure:
       properties:
+        actualOutputUrl:
+          description: The actual output URL evaluated by load balancer containing the scheme, host, path and query parameters.
+          type: string
+        actualRedirectResponseCode:
+          description: Actual HTTP status code for rule with `urlRedirect` calculated by load balancer
+          format: int32
+          type: integer
         actualService:
           description: BackendService or BackendBucket returned by load balancer.
           type: string
+        expectedOutputUrl:
+          description: The expected output URL evaluated by load balancer containing the scheme, host, path and query parameters.
+          type: string
+        expectedRedirectResponseCode:
+          description: Expected HTTP status code for rule with `urlRedirect` calculated by load balancer
+          format: int32
+          type: integer
         expectedService:
           description: Expected BackendService or BackendBucket resource the given URL should be mapped to.
           type: string
+        headers:
+          description: HTTP headers of the request.
+          items:
+            $ref: "#/components/schemas/UrlMapTestHeader"
+          type: array
         host:
           description: Host portion of the URL.
           type: string
@@ -59392,6 +59833,28 @@ components:
         description:
           description: Description of this test case.
           type: string
+        expectedOutputUrl:
+          description: >-
+            The expected output URL evaluated by load balancer containing the scheme, host, path and query parameters.
+
+            For rules that forward requests to backends, the test passes only when expectedOutputUrl matches the request forwarded by load balancer to backends. For rules with urlRewrite, the test verifies that the forwarded request matches hostRewrite and pathPrefixRewrite in the urlRewrite action. When service is specified, expectedOutputUrl`s scheme is ignored.
+
+            For rules with urlRedirect, the test passes only if expectedOutputUrl matches the URL in the load balancer's redirect response. If urlRedirect specifies https_redirect, the test passes only if the scheme in expectedOutputUrl is also set to https. If urlRedirect specifies strip_query, the test passes only if expectedOutputUrl does not contain any query parameters.
+
+            expectedOutputUrl is optional when service is specified.
+          type: string
+        expectedRedirectResponseCode:
+          description: >-
+            For rules with urlRedirect, the test passes only if expectedRedirectResponseCode matches the HTTP status code in load balancer's redirect response.
+
+            expectedRedirectResponseCode cannot be set when service is set.
+          format: int32
+          type: integer
+        headers:
+          description: HTTP headers for this request. If headers contains a host header, then host must also match the header value.
+          items:
+            $ref: "#/components/schemas/UrlMapTestHeader"
+          type: array
         host:
           description: Host portion of the URL. If headers contains a host header, then host must also match the header value.
           type: string
@@ -59403,6 +59866,16 @@ components:
             Expected BackendService or BackendBucket resource the given URL should be mapped to.
 
             service cannot be set if expectedRedirectResponseCode is set.
+          type: string
+      type: object
+    UrlMapTestHeader:
+      description: HTTP headers used in UrlMapTests.
+      properties:
+        name:
+          description: Header name.
+          type: string
+        value:
+          description: Header value.
           type: string
       type: object
     UrlMapValidationResult:
@@ -60673,6 +61146,9 @@ components:
             - DOWN
             - UP
           type: string
+        supportsPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
       type: object
     ZoneList:
       description: Contains a list of zone resources.

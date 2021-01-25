@@ -6183,7 +6183,7 @@ components:
       description: Account data. After the creation of a new account it may take a few minutes before it is fully operational. The methods delete, insert, and update require the admin role.
       properties:
         adsLinks:
-          description: List of linked Ads accounts that are active or pending approval. To create a new link request, add a new link with status `active` to the list. It will remain in a `pending` state until approved or rejected either in the Ads interface or through the AdWords API. To delete an active link, or to cancel a link request, remove it from the list.
+          description: Linked Ads accounts that are active or pending approval. To create a new link request, add a new link with status `active` to the list. It will remain in a `pending` state until approved or rejected either in the Ads interface or through the AdWords API. To delete an active link, or to cancel a link request, remove it from the list.
           items:
             $ref: "#/components/schemas/AccountAdsLink"
           type: array
@@ -6191,7 +6191,7 @@ components:
           description: Indicates whether the merchant sells adult content.
           type: boolean
         automaticLabelIds:
-          description: List of automatically created label IDs that are assigned to the account by CSS Center.
+          description: Automatically created label IDs that are assigned to the account by CSS Center.
           items:
             format: uint64
             type: string
@@ -6214,7 +6214,7 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#account`"'
           type: string
         labelIds:
-          description: List of manually created label IDs that are assigned to the account by CSS.
+          description: Manually created label IDs that are assigned to the account by CSS.
           items:
             format: uint64
             type: string
@@ -6234,7 +6234,7 @@ components:
           description: The merchant's website.
           type: string
         youtubeChannelLinks:
-          description: List of linked YouTube channels that are active or pending approval. To create a new link request, add a new link with status `active` to the list. It will remain in a `pending` state until approved or rejected in the YT Creator Studio interface. To delete an active link, or to cancel a link request, remove it from the list.
+          description: Linked YouTube channels that are active or pending approval. To create a new link request, add a new link with status `active` to the list. It will remain in a `pending` state until approved or rejected in the YT Creator Studio interface. To delete an active link, or to cancel a link request, remove it from the list.
           items:
             $ref: "#/components/schemas/AccountYouTubeChannelLink"
           type: array

@@ -71,15 +71,6 @@ paths:
           in: query
           name: clientInfo.operatingSystem
           schema:
-            enum:
-              - PLATFORM_UNSPECIFIED
-              - EDITOR
-              - MAC_OS
-              - WINDOWS
-              - LINUX
-              - ANDROID
-              - IOS
-              - WEB_GL
             type: string
         - description: Platform where the application is running.
           in: query
@@ -123,6 +114,11 @@ paths:
               type: string
             type: array
           style: form
+        - description: Flag indicating whether 3D building models should be enabled. If this is set structures will be returned as 3D modeled volumes rather than 2.5D extruded areas where possible.
+          in: query
+          name: enableModeledVolumes
+          schema:
+            type: boolean
         - description: Flag indicating whether political features should be returned.
           in: query
           name: enablePoliticalFeatures
@@ -423,7 +419,7 @@ components:
             $ref: "#/components/schemas/Area"
           type: array
         extrudedAreas:
-          description: The extruded areas present in this geometry.
+          description: The extruded areas present in this geometry. Not populated if modeled_volumes are included in this geometry unless always_include_building_footprints is set in GetFeatureTileRequest, in which case the client should decide which (extruded areas or modeled volumes) should be used (they should not be rendered together).
           items:
             $ref: "#/components/schemas/ExtrudedArea"
           type: array
@@ -433,7 +429,7 @@ components:
             $ref: "#/components/schemas/Line"
           type: array
         modeledVolumes:
-          description: The modeled volumes present in this geometry.
+          description: The modeled volumes present in this geometry. Not populated unless enable_modeled_volumes has been set in GetFeatureTileRequest.
           items:
             $ref: "#/components/schemas/ModeledVolume"
           type: array
