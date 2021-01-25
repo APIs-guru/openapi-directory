@@ -1145,6 +1145,34 @@ paths:
       summary: Retrieve customer's certificates
       tags:
         - v2
+  "/v2/customers/{customerId}/certificates/acme/externalAccountBinding":
+    get:
+      description: Use this endpoint to retrieve a key identifier and Hash-based Message Authentication Code (HMAC) key for Automated Certificate Management Environment (ACME) External Account Binding (EAB). These credentials can be used with an ACME client that supports EAB (ex. CertBot) to automate the issuance request and deployment of DV SSL certificates
+      operationId: getAcmeExternalAccountBinding
+      parameters:
+        - $ref: "#/components/parameters/customerId"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExternalAccountBinding"
+          description: Acme key identifier and HMAC key for the external account binding. Directory URI is also provided for making ACME requests.
+        "401":
+          $ref: "#/components/responses/401"
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "422":
+          $ref: "#/components/responses/422"
+        "429":
+          $ref: "#/components/responses/429"
+        "500":
+          $ref: "#/components/responses/500"
+      summary: Retrieves the external account binding for the specified customer
+      tags:
+        - v2
   "/v2/customers/{customerId}/certificates/{certificateId}":
     get:
       description: Once the certificate order has been created, this method can be used to check the status of the certificate. This method can also be used to retrieve details of the certificate. <ul><li>**shopperId** is **not the same** as **customerId**. **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
@@ -2507,6 +2535,22 @@ components:
           type: object
         - $ref: "#/components/schemas/Error"
       x-error-model: true
+    ExternalAccountBinding:
+      properties:
+        directoryUrl:
+          description: ACME directory resource URL.
+          format: url
+          type: string
+        hmacKey:
+          description: EAB HMAC key for the ACME account
+          type: string
+        keyId:
+          description: EAB key identifier for the ACME account.
+          type: string
+      required:
+        - directoryUrl
+        - keyId
+        - hmacKey
     JurisdictionOfIncorporation:
       properties:
         city:

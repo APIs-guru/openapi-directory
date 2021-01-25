@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: //budgea.biapi.pro/2.0/
+  - url: //budgea.biapi.pro/2.0
 info:
   description: >
     # Budgea Development Guides
@@ -2478,7 +2478,7 @@ paths:
         - Providers
   "/banks/{id_connector}/connections":
     get:
-      description: By default, it selects a set of 3 connections.<br><br>
+      description: By default, it selects a set of 3 connections with the 'diversity' method<br><br>
       parameters:
         - description: ""
           in: path
@@ -2486,21 +2486,27 @@ paths:
           required: true
           schema:
             type: integer
-        - description: the length of the connection subset
+        - description: methode of selection use between 'diversity' (default), 'cover' and 'type_select'
           in: query
-          name: range
+          name: method
+          required: false
+          schema:
+            type: string
+        - description: the number of requested connections, if applicable by the method
+          in: query
+          name: n
           required: false
           schema:
             type: integer
-        - description: to target a specific account type which will be
+        - description: for 'type_select' method. Specific account type id (weboob_type_id) to select
           in: query
           name: type
           required: false
           schema:
             type: integer
-        - description: require at least N accounts of the targeted
+        - description: for 'type_select' method. Each connection requires at least N
           in: query
-          name: occurrences
+          name: occurences
           required: false
           schema:
             type: integer
@@ -2526,7 +2532,7 @@ paths:
                   - connections
                 type: object
           description: connections
-      summary: Get a subset of id_connection with the largest diversity of account
+      summary: Get a subset of id_connection for a given bank. Different selection methode are possible
       tags:
         - Banks
         - Connections
@@ -8264,8 +8270,8 @@ components:
         coming: 0
         company_name: ""
         currency: ""
-        deleted: 2021-01-17 22:18:55.488545
-        disabled: 2021-01-17 22:18:55.488584
+        deleted: 2021-01-22 15:19:15.660489
+        disabled: 2021-01-22 15:19:15.660551
         display: true
         error: ""
         iban: ""
@@ -8275,10 +8281,10 @@ components:
         id_source: 0
         id_type: 0
         id_user: 0
-        last_update: 2021-01-17 22:18:55.488502
+        last_update: 2021-01-22 15:19:15.660442
         name: ""
         number: ""
-        opening_date: 2021-01-17
+        opening_date: 2021-01-22
         original_name: ""
         ownership: ""
         usage: ""
@@ -8586,7 +8592,7 @@ components:
       type: object
     Certificate:
       example:
-        created: 2021-01-17 22:18:55.415714
+        created: 2021-01-22 15:19:15.572979
         id: 0
         id_private_key_file: 0
         id_public_key_file: 0
@@ -8684,20 +8690,20 @@ components:
     Connection:
       example:
         active: true
-        created: <function datetime.now at 0x7f86d2cf5c80>
+        created: <function datetime.now at 0x7f7342751c80>
         id: 0
         id_connector: 0
         id_user: 0
-        last_push: 2021-01-17 22:18:55.391781
-        last_update: 2021-01-17 22:18:55.391636
-        next_try: 2021-01-17 22:18:55.391832
+        last_push: 2021-01-22 15:19:15.545573
+        last_update: 2021-01-22 15:19:15.545415
+        next_try: 2021-01-22 15:19:15.545627
       properties:
         active:
           default: true
           description: This connection is active and will be automatically synced
           type: boolean
         created:
-          default: <function datetime.now at 0x7f86d2cf5c80>
+          default: <function datetime.now at 0x7f7342751c80>
           description: Creation date
           format: date-time
           type: string
@@ -8739,9 +8745,9 @@ components:
         id_user: 0
         login: ""
         nb_accounts: 0
-        next_try: 2021-01-17 22:18:55.492444
+        next_try: 2021-01-22 15:19:15.665384
         session_folder_id: ""
-        start: 2021-01-17 22:18:55.493080
+        start: 2021-01-22 15:19:15.666313
         statut: 0
         timestamp: CURRENT_TIMESTAMP
         worker: ""
@@ -8808,16 +8814,16 @@ components:
       type: object
     ConnectionSource:
       example:
-        access_expire: 2021-01-17 22:18:55.471316
-        created: <function datetime.now at 0x7f86d2ca6ae8>
-        disabled: 2021-01-17 22:18:55.471172
-        expire: 2021-01-17 22:18:55.471364
+        access_expire: 2021-01-22 15:19:15.638088
+        created: <function datetime.now at 0x7f7342702ae8>
+        disabled: 2021-01-22 15:19:15.637920
+        expire: 2021-01-22 15:19:15.638132
         id: 0
         id_connection: 0
         id_connector_source: 0
-        last_update: 2021-01-17 22:18:55.471129
+        last_update: 2021-01-22 15:19:15.637864
         name: ""
-        next_try: 2021-01-17 22:18:55.471492
+        next_try: 2021-01-22 15:19:15.638288
         state: ""
       properties:
         access_expire:
@@ -8825,7 +8831,7 @@ components:
           format: date-time
           type: string
         created:
-          default: <function datetime.now at 0x7f86d2ca6ae8>
+          default: <function datetime.now at 0x7f7342702ae8>
           description: Creation date of the connection source
           format: date-time
           type: string
@@ -8980,7 +8986,7 @@ components:
     ConnectorSource:
       example:
         auth_mechanism: ""
-        disabled: 2021-01-17 22:18:55.392664
+        disabled: 2021-01-22 15:19:15.546475
         fallback: ""
         id: 0
         id_connector: 0
@@ -9060,7 +9066,7 @@ components:
     Currency:
       example:
         crypto: false
-        datetime: 2021-01-17 22:18:55.397458
+        datetime: 2021-01-22 15:19:15.551614
         id: ""
         marketcap: 0
         precision: 2
@@ -9137,8 +9143,8 @@ components:
     Document:
       example:
         currency: ""
-        date: 2021-01-17 22:18:55.423492
-        duedate: 2021-01-17
+        date: 2021-01-22 15:19:15.581153
+        duedate: 2021-01-22
         has_file_on_website: true
         id: 0
         id_category: 0
@@ -9149,7 +9155,7 @@ components:
         id_user: 0
         income: true
         issuer: ""
-        last_update: 2021-01-17 22:18:55.424239
+        last_update: 2021-01-22 15:19:15.582260
         name: ""
         number: ""
         readonly: true
@@ -9376,7 +9382,7 @@ components:
       example:
         code: ""
         code_type: ""
-        deleted: 2021-01-17 22:18:55.467815
+        deleted: 2021-01-22 15:19:15.633812
         description: ""
         diff: 0
         diff_percent: 0
@@ -9384,7 +9390,7 @@ components:
         id_account: 0
         id_security: 0
         label: ""
-        last_update: 2021-01-17 22:18:55.467775
+        last_update: 2021-01-22 15:19:15.633766
         original_currency: ""
         original_diff: 0
         original_unitprice: 0
@@ -9392,13 +9398,13 @@ components:
         original_valuation: 0
         portfolio_share: 0
         prev_diff: 0
-        prev_vdate: 2021-01-17
+        prev_vdate: 2021-01-22
         quantity: 0
         source: ""
         unitprice: 0
         unitvalue: 0
         valuation: 0
-        vdate: 2021-01-17
+        vdate: 2021-01-22
       properties:
         code:
           description: Investment code
@@ -9509,7 +9515,7 @@ components:
         original_currency: ""
         original_unitvalue: 0
         unitvalue: 0
-        vdate: 2021-01-17
+        vdate: 2021-01-22
       properties:
         id:
           description: ID of the value
@@ -9585,14 +9591,14 @@ components:
       example:
         amount: 0
         code: ""
-        created: 2021-01-17 22:18:55.465234
-        date: 2021-01-17
-        deleted: 2021-01-17 22:18:55.465279
-        execution_date: 2021-01-17
+        created: 2021-01-22 15:19:15.630895
+        date: 2021-01-22
+        deleted: 2021-01-22 15:19:15.630939
+        execution_date: 2021-01-22
         id: 0
         id_account: 0
         label: ""
-        last_update: 2021-01-17 22:18:55.465167
+        last_update: 2021-01-22 15:19:15.630835
         ordervalue: 0
         payment_method: ""
         quantity: 0
@@ -9600,7 +9606,7 @@ components:
         stock_market: ""
         unitprice: 0
         unitvalue: 0
-        validity_date: 2021-01-17
+        validity_date: 2021-01-22
         webid: ""
       properties:
         amount:
@@ -9702,7 +9708,7 @@ components:
         error_code: ""
         error_description: ""
         id: 0
-        register_date: 2021-01-17 22:18:55.406929
+        register_date: 2021-01-22 15:19:15.563100
         state: ""
         validate_uri: ""
       properties:
@@ -9768,14 +9774,14 @@ components:
       type: object
     Pocket:
       example:
-        availability_date: 2021-01-17
+        availability_date: 2021-01-22
         condition: inconnu
-        deleted: 2021-01-17 22:18:55.440514
+        deleted: 2021-01-22 15:19:15.600865
         id: 0
         id_account: 0
         id_investment: 0
         label: ""
-        last_update: 2021-01-17 22:18:55.440469
+        last_update: 2021-01-22 15:19:15.600809
         quantity: 0
         value: 0
       properties:
@@ -9932,18 +9938,18 @@ components:
         bank_name: ""
         category: ""
         currency: ""
-        deleted: 2021-01-17 22:18:55.468751
-        enabled_at: 2021-01-17 22:18:55.468830
+        deleted: 2021-01-22 15:19:15.634949
+        enabled_at: 2021-01-22 15:19:15.635046
         error: ""
-        expire: 2021-01-17 22:18:55.468792
+        expire: 2021-01-22 15:19:15.635004
         iban: ""
         id: 0
         id_account: 0
         id_target_account: 0
         label: ""
-        last_update: 2021-01-17 22:18:55.468662
+        last_update: 2021-01-22 15:19:15.634850
         state: ""
-        time_scraped: 2021-01-17 22:18:55.468703
+        time_scraped: 2021-01-22 15:19:15.634897
         webid: ""
       properties:
         add_verified:
@@ -10056,7 +10062,7 @@ components:
         code: ""
         id: 0
         id_type: 0
-        last_update: 2021-01-17 22:18:55.405802
+        last_update: 2021-01-22 15:19:15.561808
         name: ""
       properties:
         code:
@@ -10081,19 +10087,19 @@ components:
       type: object
     Subscription:
       example:
-        deleted: 2021-01-17 22:18:55.483859
-        disabled: 2021-01-17 22:18:55.483909
+        deleted: 2021-01-22 15:19:15.654169
+        disabled: 2021-01-22 15:19:15.654240
         error: ""
         id: 0
         id_connection: 0
         id_source: 0
         id_user: 0
         label: ""
-        last_update: 2021-01-17 22:18:55.483811
+        last_update: 2021-01-22 15:19:15.654110
         number: ""
-        renewdate: 2021-01-17
+        renewdate: 2021-01-22
         subscriber: ""
-        validity: 2021-01-17
+        validity: 2021-01-22
       properties:
         deleted:
           description: This subscription is not found on the website anymore
@@ -10188,8 +10194,8 @@ components:
       type: object
     TermsOfService:
       example:
-        created: 2021-01-17 22:18:55.382245
-        deleted: 2021-01-17 22:18:55.382292
+        created: 2021-01-22 15:19:15.535511
+        deleted: 2021-01-22 15:19:15.535561
         id: 0
         version: ""
       properties:
@@ -10211,8 +10217,8 @@ components:
     Transaction:
       example:
         active: true
-        application_date: 2021-01-17
-        bdate: 2021-01-17
+        application_date: 2021-01-22
+        bdate: 2021-01-22
         card: ""
         coming: false
         comment: ""
@@ -10220,23 +10226,23 @@ components:
         commission_currency: ""
         counterparty: ""
         country: ""
-        date: 2021-01-17
-        date_scraped: 2021-01-17 22:18:55.437052
-        deleted: 2021-01-17 22:18:55.438087
+        date: 2021-01-22
+        date_scraped: 2021-01-22 15:19:15.596589
+        deleted: 2021-01-22 15:19:15.597913
         gross_value: 0
         id: 0
         id_account: 0
         id_category: 0
         id_cluster: 0
-        last_update: 2021-01-17 22:18:55.438045
+        last_update: 2021-01-22 15:19:15.597869
         nature: inconnu
         original_currency: ""
         original_gross_value: 0
         original_value: 0
-        rdate: 2021-01-17
+        rdate: 2021-01-22
         state: new
         value: 0
-        vdate: 2021-01-17
+        vdate: 2021-01-22
         webid: ""
         wording: ""
       properties:
@@ -10399,7 +10405,7 @@ components:
         id_category: 0
         mean_amount: 0
         median_increment: 0
-        next_date: 2021-01-17
+        next_date: 2021-01-22
         wording: ""
       properties:
         created_by:
@@ -10441,7 +10447,7 @@ components:
         beneficiary_type: recipient
         currency: ""
         error: ""
-        exec_date: 2021-01-17
+        exec_date: 2021-01-22
         fees: 0
         id: 0
         id_account: 0
@@ -10450,7 +10456,7 @@ components:
         id_user: 0
         label: ""
         recipient_iban: ""
-        register_date: 2021-01-17 22:18:55.441830
+        register_date: 2021-01-22 15:19:15.602644
         state: ""
         validate_mechanism: ""
         webid: ""
@@ -10674,18 +10680,18 @@ components:
       type: object
     Webhook:
       example:
-        created: 2021-01-17 22:18:55.400791
-        deleted: 2021-01-17 22:18:55.400888
+        created: 2021-01-22 15:19:15.555203
+        deleted: 2021-01-22 15:19:15.555305
         id: 0
         id_auth: 0
         id_event: 0
         id_service: 0
         id_user: 0
-        updated: 2021-01-17 22:18:55.400844
+        updated: 2021-01-22 15:19:15.555261
         url: ""
       properties:
         add_to_data:
-          description: json object to describe data to add
+          description: json value to describe data to add
           type: string
         created:
           description: Date of the webhook creation
@@ -10694,6 +10700,9 @@ components:
         deleted:
           description: Date of the webhook deletion
           format: date-time
+          type: string
+        flush_fail:
+          description: json value to store last related webhook data flushing fail
           type: string
         id:
           description: ID of the webhook
@@ -10724,14 +10733,14 @@ components:
       type: object
     WebhookData:
       example:
-        created: 2021-01-17 22:18:55.402602
+        created: 2021-01-22 15:19:15.557607
         id: 0
         id_resource: 0
         id_service: 0
         id_user: 0
         id_webhook: 0
         mimetype: ""
-        success: 2021-01-17 22:18:55.402650
+        success: 2021-01-22 15:19:15.557661
       properties:
         created:
           description: Timestamp when the hook data was generated
@@ -10772,10 +10781,10 @@ components:
         id_service: 0
         id_user: 0
         id_webhook_data: 0
-        next_try: 2021-01-17 22:18:55.403488
+        next_try: 2021-01-22 15:19:15.558828
         response_code: 0
-        response_date: 2021-01-17 22:18:55.403131
-        timestamp: 2021-01-17 22:18:55.403087
+        response_date: 2021-01-22 15:19:15.558340
+        timestamp: 2021-01-22 15:19:15.558271
       properties:
         id:
           description: ID of the log
@@ -10820,6 +10829,7 @@ x-query-services:
   - pfm
   - providers
   - recipients
+  - service
   - terms
   - timeline
   - transfer

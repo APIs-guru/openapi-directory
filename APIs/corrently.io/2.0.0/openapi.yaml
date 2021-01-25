@@ -46,7 +46,47 @@ tags:
     name: Metering (Decorator)
   - description: Tariff information for the German market region. Provides base price and energy price information for private households (Standardlastprofil H0, SLP H0 Tarifinformation).
     name: Tariff (Price API)
+  - description: Helper services and endpoints for smarthome and home automation systems.
+    name: SmartHome
 paths:
+  /gsi/bestHour:
+    get:
+      description: >
+        Simple Wrapper around the GreenPowerIndex for easy integration into almost any SmartHome system that allows access to a JSON/REST Service This endpoint is designed to indicate if a device should be turned on or off. (Switch state).
+      operationId: gsiBesthour
+      parameters:
+        - description: Zipcode (Postleitzahl) of a city in Germany.
+          in: query
+          name: zip
+          schema:
+            type: string
+        - description: Any valid Stromkonto account (address).
+          in: query
+          name: key
+          schema:
+            type: string
+        - description: Number of hours to check (default 24 hours from now).
+          in: query
+          name: timeframe
+          schema:
+            type: integer
+        - description: How many hours in row do you need the device turned on?
+          in: query
+          name: hours
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: true if device should be turned on now. false if not.
+                type: boolean
+          description: Success
+      summary: Get best hour (with most regional green energy) in a given timeframe.
+      tags:
+        - GreenPowerIndex (GrünstromIndex)
+        - SmartHome
   /gsi/dispatch:
     get:
       description: >

@@ -222,6 +222,309 @@ paths:
       tags:
         - Consumers
         - publicly-accessible
+  "/consumers/{tenant}/me/communication-preferences":
+    get:
+      description: Get all communication preferences for a given consumer.
+      parameters:
+        - description: Request tenant.
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                marketing:
+                  isDefault: false
+                  subscribedChannels:
+                    - email
+                    - sms
+              schema:
+                $ref: "#/components/schemas/CommunicationPreferences"
+          description: Success
+          headers:
+            cache-control:
+              description: Information about how the response can be cached.
+              schema:
+                type: string
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: You are unauthorized to perform this request.
+                    errorCode: Unauthorized
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Tenant could not be found.
+                    errorCode: NotFound
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Not Found
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+          description: Internal Server Error
+      summary: Get communication preferences
+      tags:
+        - Consumers
+        - publicly-accessible
+  "/consumers/{tenant}/me/communication-preferences/{type}":
+    get:
+      description: Get channel subscriptions for a given consumer's communication preference type
+      parameters:
+        - description: Request tenant.
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: The type of communication preferences.
+          in: path
+          name: type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CommunicationTypes"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                isDefault: false
+                subscribedChannels:
+                  - email
+                  - sms
+              schema:
+                $ref: "#/components/schemas/ChannelSubscriptionsWithDerivedField"
+          description: Success
+          headers:
+            cache-control:
+              description: Information about how the response can be cached.
+              schema:
+                type: string
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: You are unauthorized to perform this request.
+                    errorCode: Unauthorized
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Tenant could not be found.
+                    errorCode: NotFound
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Not Found
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+          description: Internal Server Error
+      summary: Get channel subscriptions for a given consumer's communication preference type
+      tags:
+        - Consumers
+        - publicly-accessible
+    put:
+      description: Set only the channel subscriptions for a given consumer's communication preference type. E.g., An empty list of subscribed Channels implies unsubscribe from all channels.
+      parameters:
+        - description: Request tenant.
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: The type of communication preferences.
+          in: path
+          name: type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CommunicationTypes"
+      requestBody:
+        content:
+          application/json:
+            example:
+              subscribedChannels:
+                - email
+                - sms
+            schema:
+              $ref: "#/components/schemas/ChannelSubscriptions"
+        description: The list of channels that the consumer should be subscribed to.
+        required: true
+      responses:
+        "204":
+          content: {}
+          description: Success
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: You are unauthorized to perform this request.
+                    errorCode: Unauthorized
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Tenant could not be found.
+                    errorCode: NotFound
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Not Found
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+          description: Internal Server Error
+      summary: Set only the channel subscriptions for a given consumer's communication preference type
+      tags:
+        - Consumers
+        - publicly-accessible
+  "/consumers/{tenant}/me/communication-preferences/{type}/subscribedChannels/{channel}":
+    delete:
+      description: Remove subscription of a specific communication preference channel.
+      parameters:
+        - description: Request tenant.
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: The type of communication preference.
+          in: path
+          name: type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CommunicationTypes"
+        - description: The channel.
+          in: path
+          name: channel
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content: {}
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: Success
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: You are unauthorized to perform this request.
+                    errorCode: Unauthorized
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Tenant could not be found.
+                    errorCode: NotFound
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Not Found
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+          description: Internal Server Error
+      summary: Remove subscription of a specific communication preference channel
+      tags:
+        - Consumers
+        - publicly-accessible
+    post:
+      description: Subscribe to a specific communication preference channel.
+      parameters:
+        - description: Request tenant.
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: The type of communication preferences.
+          in: path
+          name: type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CommunicationTypes"
+        - description: The channel.
+          in: path
+          name: channel
+          required: true
+          schema:
+            $ref: "#/components/schemas/CommunicationChannels"
+      requestBody:
+        content: {}
+        required: false
+      responses:
+        "204":
+          content: {}
+          description: Success
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: You are unauthorized to perform this request.
+                    errorCode: Unauthorized
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Tenant could not be found.
+                    errorCode: NotFound
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Not Found
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+          description: Internal Server Error
+      summary: Subscribe to a specific communication preference channel
+      tags:
+        - Consumers
+        - publicly-accessible
   /delivery-failed:
     put:
       description: This webhook will be invoked whenever an attempted delivery event is created from the device.
@@ -3394,6 +3697,7 @@ paths:
         - publicly-accessible
       x-status: Stable
     put:
+      description: This will begin an asynchronous process that will lead to that menu becoming live on the Just Eat platform
       operationId: putMenuForIngestion
       parameters:
         - description: The tenant of the restaurant in which to put a menu
@@ -3442,7 +3746,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ConsumerErrorResponse"
           description: Server Error
-      summary: Ingest a menu and begin an asynchronous process that will lead to that menu becoming live on the Just Eat platform
+      summary: Create or update a menu
       tags:
         - Restaurants
         - publicly-accessible
@@ -4831,6 +5135,12 @@ components:
         Retry-After:
           $ref: "#/components/headers/Retry-After"
   schemas:
+    400ConnectTokenResponse:
+      properties:
+        error:
+          description: A description of the error that occurred.
+          type: string
+      type: object
     400CourierSyncErrorResponse:
       description: The error object returned when an operation fails
       properties:
@@ -6188,6 +6498,25 @@ components:
           description: The message with the details of what prices need to be changed
           type: string
       type: object
+    ChannelSubscriptions:
+      properties:
+        subscribedChannels:
+          description: The list of channels that the consumer should only be subscribed to.
+          items:
+            $ref: "#/components/schemas/CommunicationChannels"
+          type: array
+      type: object
+    ChannelSubscriptionsWithDerivedField:
+      properties:
+        isDefault:
+          description: Are these channel subscriptions the default or have they been set elsewhere. This is a read-only derived field.
+          type: boolean
+        subscribedChannels:
+          description: The list of channels that are subscribed
+          items:
+            $ref: "#/components/schemas/CommunicationChannels"
+          type: array
+      type: object
     CheckedInState:
       description: The state of a courier on a shift. A courier might be checked in or not.
       enum:
@@ -7033,6 +7362,23 @@ components:
         - PREPEND
         - REMOVE
       type: string
+    CommunicationChannels:
+      enum:
+        - email
+        - sms
+        - push
+      type: string
+    CommunicationPreferences:
+      properties:
+        marketing:
+          $ref: "#/components/schemas/ChannelSubscriptionsWithDerivedField"
+          description: The marketing communication preferences.
+          type: object
+      type: object
+    CommunicationTypes:
+      enum:
+        - marketing
+      type: string
     ConflictMarketingResponse:
       allOf:
         - $ref: "#/components/schemas/MarketingErrorResponse"
@@ -7042,6 +7388,79 @@ components:
             faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
             message: A marketing campaign already exists with this configuration
           type: object
+    ConnectTokenRequest:
+      properties:
+        acr_values:
+          description: >-
+            Allows passing in additional authentication related information for the `password` grant type - the following  are special proprietary acr_values:
+
+            - `idp:name_of_idp` bypasses the login/home realm screen and forwards the user directly to the selected identity provider (if allowed per client configuration)
+
+            - `tenant:name_of_tenant` can be used to pass a tenant name to the token endpoint
+          type: string
+        client_id:
+          description: client identifier
+          type: string
+        client_secret:
+          description: The client secret - either in the post body, or as a basic authentication header.
+          type: string
+        code:
+          description: The authorization code (required for `authorization_code` grant type)
+          type: string
+        code_verifier:
+          description: PKCE proof key
+          type: string
+        device_code:
+          description: The device code (required for `urn:ietf:params:oauth:grant-type:device_code` grant type)
+          type: string
+        grant_type:
+          description: The grant type which determines the type of flow. A custom value is also allowed.
+          enum:
+            - authorization_code
+            - client_credentials
+            - password
+            - refresh_token
+            - urn:ietf:params:oauth:grant-type:device_code
+          type: string
+        password:
+          description: Resource owner password (required for `password` grant type)
+          type: string
+        redirect_uri:
+          description: Required for the `authorization_code` grant type
+          type: string
+        refresh_token:
+          description: The refresh token (required for `refresh_token` grant type)
+          type: string
+        scope:
+          description: One or more registered scopes. If not specified, a token for all explicitly  allowed scopes will be issued.
+          type: string
+        username:
+          description: Resource owner username (required for `password` grant type)
+          type: string
+      required:
+        - client_id
+        - grant_type
+    ConnectTokenResponse:
+      properties:
+        access_token:
+          description: The access token. This is a JSON web token (JWT) encoded as Base64 URL-encoding. This is returned if the `response_type` included `token`.
+          type: string
+        expires_in:
+          description: The number of seconds until the access token expires.
+          type: integer
+        id_token:
+          description: >-
+            An ID token. This is a JSON web token (JWT) encoded as Base64 URL-encoding. 
+
+            This is returned if the `response_type` included `id_token`.
+          type: string
+        scope:
+          description: The original scopes you provided.
+          type: string
+        token_type:
+          description: This is always `bearer`, and is returned only  when `token` is specified as a `response_type`.
+          type: string
+      type: object
     ConsumerCreate:
       example:
         emailAddress: consumer@just-eat.com
@@ -13237,7 +13656,7 @@ components:
           minItems: 0
           type: array
         nextAvailableAt:
-          description: Time when items will be brought back online.
+          description: Time when items will be brought back online (ISO-8601 Date Time UTC).
           format: date-time
           type: string
         variationIds:
@@ -13260,7 +13679,7 @@ components:
             type: string
           type: string
         nextAvailableAt:
-          description: Time when item(s) will be brought back online.
+          description: Time when item(s) will be brought back online (ISO-8601 Date Time UTC).
           format: date-time
           type: string
         type:
@@ -22150,6 +22569,7 @@ components:
 x-tagGroups:
   - name: Consumer Experience
     tags:
+      - Authorization
       - Consumers
       - ConsumerOffers
       - ConsumerQueries

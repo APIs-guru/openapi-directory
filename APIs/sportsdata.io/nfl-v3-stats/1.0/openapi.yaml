@@ -454,7 +454,7 @@ paths:
       summary: Season Current
   "/{format}/CurrentWeek":
     get:
-      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight EST. Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.
+      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
       operationId: WeekCurrent
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -1183,13 +1183,7 @@ paths:
       summary: Season Last Completed
   "/{format}/LastCompletedWeek":
     get:
-      description: "
-
-        \        Number of the last completed week in the current NFL season. This value changes immediately after the last game of the week is completed and the data is available. This usually happens right after the Monday night game.
-
-        \        Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.
-
-        \      "
+      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
       operationId: WeekLastCompleted
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
@@ -2704,7 +2698,7 @@ paths:
       summary: Season Upcoming
   "/{format}/UpcomingWeek":
     get:
-      description: Number of the upcoming week of the NFL season. This value changes immediately after the final game of the week is completed. We consider upcoming week to be the current week, until current week is over. Week number is an integer between 1 and 21 or the word current. Weeks 1 through 17 are regular season weeks. Weeks 18 through 21 are post-season weeks.
+      description: Number of the current week of the NFL season. This value usually changes on Tuesday nights or Wednesday mornings at midnight ET.
       operationId: WeekUpcoming
       parameters:
         - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.

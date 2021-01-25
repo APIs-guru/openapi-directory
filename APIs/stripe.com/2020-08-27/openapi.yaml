@@ -10676,8 +10676,6 @@ paths:
                           maxLength: 5000
                           type: string
                         type: array
-                    required:
-                      - quantity
                     title: line_item_params
                     type: object
                   type: array
@@ -48962,12 +48960,12 @@ components:
 
         invoice is automatically marked paid, and we add the amount due to the
 
-        customer's running account balance which is applied to the next invoice.
+        customer's credit balance which is applied to the next invoice.
 
 
-        More details on the customer's account balance are
+        More details on the customer's credit balance are
 
-        [here](https://stripe.com/docs/api/customers/object#customer_object-account_balance).
+        [here](https://stripe.com/docs/billing/customer/balance).
 
 
         Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
@@ -50281,9 +50279,15 @@ components:
             oneOf:
               - $ref: "#/components/schemas/issuing.transaction"
       required:
+        - amount
+        - created
+        - currency
+        - evidence
         - id
         - livemode
+        - metadata
         - object
+        - status
         - transaction
       title: IssuingDispute
       type: object
@@ -50486,7 +50490,6 @@ components:
           description: The nature of the transaction.
           enum:
             - capture
-            - dispute
             - refund
           type: string
           x-stripeBypassValidation: true
@@ -51317,6 +51320,7 @@ components:
             - usps
           nullable: true
           type: string
+          x-stripeBypassValidation: true
         eta:
           description: A unix timestamp representing a best estimate of when the card will be delivered.
           format: unix-time
@@ -53271,7 +53275,7 @@ components:
       description: A line item.
       properties:
         amount_subtotal:
-          description: Total before any discounts or taxes is applied.
+          description: Total before any discounts or taxes are applied.
           nullable: true
           type: integer
         amount_total:
@@ -53300,7 +53304,10 @@ components:
             - item
           type: string
         price:
-          $ref: "#/components/schemas/price"
+          anyOf:
+            - $ref: "#/components/schemas/price"
+          description: The price used to generate the line item.
+          nullable: true
         quantity:
           description: The quantity of products being purchased.
           nullable: true
@@ -53315,7 +53322,6 @@ components:
         - description
         - id
         - object
-        - price
       title: LineItem
       type: object
       x-expandableFields:

@@ -1702,6 +1702,83 @@ paths:
       summary: Submit reports for a project
       tags:
         - Project
+  "/projects/{id}/sales/activities":
+    get:
+      operationId: getSalesActivities
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - in: query
+          name: excludeOwner
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: type
+          required: false
+          schema:
+            $ref: "#/components/schemas/SalesActivityType"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SalesActivities"
+          description: Activities fetched successfully
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Get sales activities for a project
+      tags:
+        - Activity
+    post:
+      operationId: insertSalesActivity
+      parameters:
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                subject:
+                  type: string
+                timestamp:
+                  format: int64
+                  type: integer
+                type:
+                  description: Activity Type
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Acvitity inserted successfully
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: BadRequest
+      summary: Insert sales activity for a project
+      tags:
+        - Activity
   "/projects/{id}/webhooks":
     delete:
       description: Delete project webhooks. Projects currently support registering only 1 webhook. This endpoint deletes the previously registered webhook.
@@ -5833,6 +5910,33 @@ components:
             $ref: "#/components/schemas/Responsivity"
           type: array
       type: object
+    SalesActivities:
+      properties:
+        activities:
+          items:
+            $ref: "#/components/schemas/SalesActivity"
+          type: array
+      type: object
+    SalesActivity:
+      properties:
+        body:
+          type: string
+        created_at:
+          description: timestamp
+          format: int64
+          type: integer
+        created_by:
+          type: string
+        type:
+          type: string
+      type: object
+    SalesActivityType:
+      enum:
+        - EMAIL
+        - NOTE
+        - INCOMING_EMAIL
+        - TASK
+      type: string
     SearchEverywhereResult:
       properties:
         meta:

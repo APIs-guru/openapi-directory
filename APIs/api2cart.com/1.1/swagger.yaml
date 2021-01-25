@@ -7519,6 +7519,11 @@ paths:
           name: manufacturer_id
           required: false
           type: string
+        - description: Defines product add that is specified by comma-separated categories id
+          in: query
+          name: categories_ids
+          required: false
+          type: string
         - description: Defines new product's description
           in: query
           name: description
@@ -7608,6 +7613,11 @@ paths:
           name: taxable
           required: false
           type: boolean
+        - description: A categorization for the product
+          in: query
+          name: product_class
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -10511,6 +10521,9 @@ definitions:
         default: 0
         description: Discounts for order with gift certificates
         type: number
+      id:
+        description: Defines order's id
+        type: string
       inventory_behaviour:
         default: bypass
         description: "The behaviour to use when updating inventory.<hr><div style=\"font-style:normal\">Values description:<div style=\"margin-left: 2%; padding-top: 2%\"><div style=\"font-size:85%\"><b>bypass</b> = Do not claim inventory </br></br><b>decrement_ignoring_policy</b> = Ignore the product's </br> inventory policy and claim amounts</br></br><b>decrement_obeying_policy</b> =  Obey the product's </br> inventory policy.</br></br></div></div></div>"
@@ -11434,6 +11447,9 @@ definitions:
       sprice_modified:
         description: Defines the date of special price modification
         type: string
+      status:
+        description: Defines product's status
+        type: string
       stores_ids:
         default: 0
         description: Assign product to the stores that is specified by comma-separated stores' id
@@ -11472,6 +11488,9 @@ definitions:
         default: 0
         description: Specifies the number of product's reviews
         type: integer
+      visible:
+        description: Set visibility status
+        type: string
       warehouse_id:
         description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
         type: string

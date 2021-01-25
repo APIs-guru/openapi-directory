@@ -174,6 +174,45 @@ paths:
       summary: Update a Company record.
       tags:
         - Company
+  /api/Company/Lookup:
+    get:
+      consumes: []
+      description: Certain roles see a restricted set of companies based on their project memberships
+      operationId: CompanyLookup
+      parameters:
+        - description: Number of items per page (max 1000)
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - description: Search string to match against Company title
+          in: query
+          name: search
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/CompanyDropdownList"
+      security:
+        - oauth2:
+            - read_contacts
+      summary: Gets minimal list of Companies.
+      tags:
+        - Company
   "/api/Company/{id}":
     get:
       consumes: []
@@ -537,6 +576,11 @@ paths:
           name: UserEmail
           required: false
           type: string
+        - format: int32
+          in: query
+          name: UserID
+          required: false
+          type: integer
         - in: query
           name: CategoryName
           required: false
@@ -702,6 +746,103 @@ paths:
       summary: Gets list of Expense Categories
       tags:
         - ExpenseCategory
+  /api/ExpenseGroup/Lookup:
+    get:
+      consumes: []
+      description: Expense Groups are for adhoc grouping of reported expenses. e.g. for expenses incurred on a Trip
+      operationId: ExpenseGroupLookup
+      parameters:
+        - description: Number of items per page (max 1000)
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - description: Search string to match against Expense Group Name
+          in: query
+          name: search
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ExpenseGroupDropdownList"
+      security:
+        - oauth2:
+            - read_expenses
+      summary: Gets minimal list of Expense Groups.
+      tags:
+        - ExpenseGroup
+  /api/ExpenseMerchant/Lookup:
+    get:
+      consumes: []
+      operationId: ExpenseMerchangeLookup
+      parameters:
+        - description: Number of items per page (max 1000)
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Page to display. Starts from 1.
+          format: int32
+          in: query
+          name: pageNumber
+          required: false
+          type: integer
+        - description: Search string to match against Expense Group Name
+          in: query
+          name: search
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ExpenseMerchantDropdownList"
+      security:
+        - oauth2:
+            - read_expenses
+      summary: Gets minimal list of Expense Merchants.
+      tags:
+        - ExpenseMerchant
+  /api/ExpensePaymentMethod/Lookup:
+    get:
+      consumes: []
+      operationId: ExpensePaymentMethodLookup
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ExpensePaymentMethodDropdownList"
+      security:
+        - oauth2:
+            - read_expenses
+      summary: Gets minimal list of Expense Payment Methods.
+      tags:
+        - ExpensePaymentMethod
   /api/FixedAmount:
     get:
       consumes: []
@@ -1155,10 +1296,16 @@ paths:
           name: pageNumber
           required: false
           type: integer
-        - description: Filter to the projects that the supplied UserID can add timesheets to
+        - description: Optionally Filter to the projects that the supplied UserID can add timesheets to
           format: int32
           in: query
           name: TimesheetUserID
+          required: false
+          type: integer
+        - description: Optionally Filter for a specific Company ID
+          format: int32
+          in: query
+          name: CompanyIDFK
           required: false
           type: integer
         - description: Search string to match against Project title and Customer name
@@ -2417,6 +2564,15 @@ definitions:
       CurrentServerTimeISO:
         description: 'Format: ISO "YYYY-MM-DD HH:mm:ss.SSS"'
         type: string
+      DefaultCurrencyCode:
+        description: ISO 3 letter base Currency Code for the account
+        type: string
+      ExpenseApprovalRequired:
+        description: Whether the account requires expenses be approved.
+        type: boolean
+      LockApprovedExpenses:
+        description: Approved expenses get locked from subsequent editing by standard expense users.
+        type: boolean
       LockApprovedTimesheets:
         type: boolean
       SC:
@@ -2525,6 +2681,22 @@ definitions:
       TimeZone:
         type: string
     type: object
+  CompanyDropdownList:
+    properties:
+      Companies:
+        items:
+          $ref: "#/definitions/CompanyMinimal"
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
   CompanyList:
     properties:
       Companies:
@@ -2540,6 +2712,14 @@ definitions:
       TotalCount:
         format: int32
         type: integer
+    type: object
+  CompanyMinimal:
+    properties:
+      CompanyID:
+        format: int64
+        type: integer
+      CompanyName:
+        type: string
     type: object
   ContactList:
     properties:
@@ -2945,6 +3125,30 @@ definitions:
       isReimbursable:
         type: boolean
     type: object
+  ExpenseGroupDropdownList:
+    properties:
+      ExpenseGroups:
+        items:
+          $ref: "#/definitions/ExpenseGroupMinimal"
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  ExpenseGroupMinimal:
+    properties:
+      ExpenseGroupID:
+        format: int64
+        type: integer
+      Name:
+        type: string
+    type: object
   ExpenseList:
     properties:
       Expenses:
@@ -2960,6 +3164,42 @@ definitions:
       TotalCount:
         format: int32
         type: integer
+    type: object
+  ExpenseMerchantDropdownList:
+    properties:
+      ExpenseMerchants:
+        items:
+          $ref: "#/definitions/ExpenseMerchantMinimal"
+        type: array
+      PageNumber:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalCount:
+        format: int32
+        type: integer
+    type: object
+  ExpenseMerchantMinimal:
+    properties:
+      MerchantName:
+        type: string
+    type: object
+  ExpensePaymentMethodDropdownList:
+    properties:
+      ExpensePaymentMethods:
+        items:
+          $ref: "#/definitions/ExpensePaymentMethodMinimal"
+        type: array
+    type: object
+  ExpensePaymentMethodMinimal:
+    properties:
+      ExpensePaymentMethodID:
+        format: int64
+        type: integer
+      Name:
+        type: string
     type: object
   FixedAmountDetails:
     properties:

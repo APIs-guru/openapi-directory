@@ -2705,6 +2705,11 @@ paths:
           required: false
           type: string
         - description: "~"
+          in: query
+          name: exactMatch
+          required: false
+          type: boolean
+        - description: "~"
           format: int32
           in: query
           name: contactCount

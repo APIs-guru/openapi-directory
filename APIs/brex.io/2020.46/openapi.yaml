@@ -85,52 +85,57 @@ paths:
       summary: Retrieves announcement data
       tags:
         - v1-company
-  "/api/v1/company/deepsearch/isin/{number}":
-    get:
+  /api/v1/company/deepsearch/isin:
+    post:
       description: Lookup stock exchange listings identified by an ISIN (International Securities Identification Number) number. Search is forwarded to a provider.
       operationId: CompanyDeepsearchISIN
-      parameters:
-        - description: ISIN number
-          in: path
-          name: number
-          required: true
-          schema:
-            format: string
-            type: string
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                isin:
+                  description: A list of ISIN numbers seperated by comma (maximum) is 100
+                  type: string
+              type: object
+        description: ISIN bulk deepsearch parameters
       responses:
         "200":
           content:
             application/json:
               schema:
-                properties:
-                  isin:
-                    type: string
-                  listings:
-                    items:
-                      properties:
-                        additionalSecurityType:
-                          type: string
-                        exchCode:
-                          type: string
-                        identifier:
-                          type: string
-                        marketSector:
-                          type: string
-                        name:
-                          type: string
-                        securityDescription:
-                          type: string
-                        securityType:
-                          type: string
-                        shareClassId:
-                          type: string
-                        stockId:
-                          type: string
-                        symbol:
-                          type: string
-                    type: array
-                  validIsin:
-                    type: boolean
+                items:
+                  properties:
+                    isin:
+                      type: string
+                    listings:
+                      items:
+                        properties:
+                          additionalSecurityType:
+                            type: string
+                          exchCode:
+                            type: string
+                          identifier:
+                            type: string
+                          marketSector:
+                            type: string
+                          name:
+                            type: string
+                          securityDescription:
+                            type: string
+                          securityType:
+                            type: string
+                          shareClassId:
+                            type: string
+                          stockId:
+                            type: string
+                          symbol:
+                            type: string
+                      type: array
+                    validIsin:
+                      type: boolean
+                type: array
           description: Result of a lookup by ISIN number
         default:
           $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
@@ -151,6 +156,14 @@ paths:
           schema:
             format: string
             type: string
+        - description: Pagination for the ISIN number results (1000 numbers per page)
+          example: 1
+          in: query
+          name: page
+          required: false
+          schema:
+            format: int32
+            type: integer
       responses:
         "200":
           content:
@@ -202,12 +215,23 @@ paths:
                       - id
                       - name
                       - registrationNumber
+                  current_page:
+                    format: int32
+                    type: integer
                   isins:
                     items:
                       type: string
                     type: array
+                  last_page:
+                    format: int32
+                    type: integer
                   lei:
                     type: string
+                  next_page:
+                    type: string
+                  total_num_isins:
+                    format: int32
+                    type: integer
                   validLei:
                     type: boolean
           description: Result of a lookup by LEI number
@@ -644,6 +668,12 @@ paths:
           schema:
             format: string
             type: string
+        - description: Try to retrieve additional stock information for this company. (Only available on refresh)
+          in: query
+          name: check_stock_listing
+          required: false
+          schema:
+            type: boolean
         - description: company master data by id
           in: path
           name: dataset

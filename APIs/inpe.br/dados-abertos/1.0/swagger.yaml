@@ -1,7 +1,5 @@
 swagger: "2.0"
 basePath: /queimadas/dados-abertos/api
-servers:
-  - url: http://queimadas.dgi.inpe.br/queimadas/dados-abertos/api
 info:
   description: API de Dados Abertos com dados processados pelo grupo de monitoramento de Queimadas do INPE.
   title: Dados Abertos - API
@@ -15,6 +13,7 @@ info:
       version: "2.0"
   x-providerName: inpe.br
   x-serviceName: dados-abertos
+  x-preferred: null
 consumes:
   - application/json
 produces:

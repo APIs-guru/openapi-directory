@@ -211,7 +211,7 @@ paths:
       description: >
         Register the SIM cards associated with the provided registration codes to the current user's account.<br/><br/>
 
-        If <code>sim_card_group_id</code> is provided, the SIM cards will be associated with that group. Otherwise, the default group for the current user, which is already data-enabled, will be used.<br/><br/>
+        If <code>sim_card_group_id</code> is provided, the SIM cards will be associated with that group. Otherwise, the default group for the current user will be used.<br/><br/>
       operationId: SimCardRegister
       requestBody:
         content:
@@ -6059,7 +6059,7 @@ paths:
       tags:
         - Number Order Regulatory Requirements
       x-latency-category: responsive
-  /reports/mdr_reports:
+  /reports/batch_mdr_reports:
     get:
       description: "Fetch all previous requests for messaging detail reports. Messaging detail reports are reports for pulling all messaging records. "
       operationId: getCdrRequests
@@ -6083,7 +6083,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MdrGetDetailReportV2Resp"
+                $ref: "#/components/schemas/MdrGetDetailReportResponse"
           description: Successful
       security:
         - bearerAuth: []
@@ -6097,7 +6097,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/MdrPostDetailReportV2Req"
+              $ref: "#/components/schemas/MdrPostDetailReportRequest"
         description: Mdr detail request data
         required: true
       responses:
@@ -6105,14 +6105,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MdrPostDetailReportV2Resp"
+                $ref: "#/components/schemas/MdrPostDetailReportResponse"
           description: Successful
       security:
         - bearerAuth: []
       tags:
         - Submit Mdr Detail Report Request
       x-latency-category: background
-  "/reports/mdr_reports/{id}":
+  "/reports/batch_mdr_reports/{id}":
     delete:
       description: Delete generated messaging detail report by id
       operationId: deleteMdrRequest
@@ -6130,7 +6130,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MdrDeleteDetailReportV2Resp"
+                $ref: "#/components/schemas/MdrDeleteDetailReportResponse"
           description: Successful
       security:
         - bearerAuth: []
@@ -6154,7 +6154,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MdrGetDetailReportByIdV2Resp"
+                $ref: "#/components/schemas/MdrGetDetailReportByIdResponse"
           description: Successful
       security:
         - bearerAuth: []
@@ -6185,7 +6185,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MdrGetUsageReportsV2Resp"
+                $ref: "#/components/schemas/MdrGetUsageReportsResponse"
           description: Successful
       security:
         - bearerAuth: []
@@ -6199,7 +6199,7 @@ paths:
         content:
           "*/*":
             schema:
-              $ref: "#/components/schemas/MdrPostUsageReportV2Req"
+              $ref: "#/components/schemas/MdrPostUsageReportRequest"
         description: Mdr usage report data
         required: true
       responses:
@@ -6207,7 +6207,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MdrPostUsageReportsV2Resp"
+                $ref: "#/components/schemas/MdrPostUsageReportsResponse"
           description: Successful
       security:
         - bearerAuth: []
@@ -6232,7 +6232,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MdrDeleteUsageReportsV2Resp"
+                $ref: "#/components/schemas/MdrDeleteUsageReportsResponse"
           description: Successful
       security:
         - bearerAuth: []
@@ -6256,7 +6256,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MdrGetUsageReportsByIdV2Resp"
+                $ref: "#/components/schemas/MdrGetUsageReportsByIdResponse"
           description: Successful
       security:
         - bearerAuth: []
@@ -6278,17 +6278,68 @@ paths:
           name: end_date
           schema:
             type: string
-        - description: End date of last fetched page
-          in: query
-          name: last_fetched_date
+        - in: query
+          name: id
           schema:
+            description: Message uuid
+            example: e093fbe0-5bde-11eb-ae93-0242ac130002
+            type: string
+        - in: query
+          name: direction
+          schema:
+            description: Direction (inbound or outbound)
+            enum:
+              - INBOUND
+              - OUTBOUND
+            example: INBOUND
+            type: string
+        - in: query
+          name: profile
+          schema:
+            description: Name of the profile
+            example: My profile
+            type: string
+        - in: query
+          name: cld
+          schema:
+            description: Destination number
+            example: "+15551237654"
+            type: string
+        - in: query
+          name: cli
+          schema:
+            description: Origination number
+            example: "+15551237654"
+            type: string
+        - in: query
+          name: status
+          schema:
+            description: Message status
+            enum:
+              - GW_TIMEOUT
+              - DELIVERED
+              - DLR_UNCONFIRMED
+              - DLR_TIMEOUT
+              - RECEIVED
+              - GW_REJECT
+              - FAILED
+            example: DELIVERED
+            type: string
+        - in: query
+          name: message_type
+          schema:
+            description: Type of message
+            enum:
+              - SMS
+              - MMS
+            example: SMS
             type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MdrGetDetailV2Resp"
+                $ref: "#/components/schemas/MdrGetDetailResponse"
           description: Successful
       security:
         - bearerAuth: []
@@ -6569,7 +6620,7 @@ paths:
       description: >
         The SIM card will be able to connect to the network once the enabling is complete, thus making it possible to consume data.<br/>
 
-        To enable a SIM card, it must be associated with a data-enabled SIM card group.<br/>
+        To enable a SIM card, it must be associated with SIM card group.<br/>
 
         Transitioning to the enabled state may take a period of time. Until the transition is completed, the SIM card status will be <code>enabling</code>.
       operationId: SimCardEnable
@@ -6656,8 +6707,10 @@ paths:
       parameters:
         - $ref: "#/components/parameters/SIMCardId"
       responses:
+        "200":
+          $ref: "#/components/responses/DecommissionedSIMCardPublicIPResponse"
         "202":
-          $ref: "#/components/responses/SIMCardPublicIPResponse"
+          $ref: "#/components/responses/ReceivedSIMCardPublicIPResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Delete SIM card public IP
@@ -6689,7 +6742,7 @@ paths:
         - $ref: "#/components/parameters/SIMCardId"
       responses:
         "202":
-          $ref: "#/components/responses/SIMCardPublicIPResponse"
+          $ref: "#/components/responses/ReceivedSIMCardPublicIPResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Set SIM card public IP
@@ -8155,6 +8208,15 @@ components:
         A successful network preferences deletion response. <br/><br/>
 
         The delete won't be done right away - this is an asynchronous operation. The request will return the resource with an in-progress OTA update resource (in the ota_updates node) representing the delete operation. Similarly to the PUT API, the resource will only be deleted when the OTA updated is successfully completed.
+    DecommissionedSIMCardPublicIPResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/SIMCardPublicIP"
+            type: object
+      description: A successful and synchronous decommission of a public IP. This response happens when no further processing is required. Therefore, a new public IP can be requested right away.
     DeleteBillingGroupResponse:
       content:
         application/json:
@@ -9086,6 +9148,15 @@ components:
                 $ref: "#/components/schemas/PortoutDetails"
             type: object
       description: Portout Response
+    ReceivedSIMCardPublicIPResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/SIMCardPublicIP"
+            type: object
+      description: A successful response on an asynchronous operation. The content in this response represents the current status of the public IP. But, it'll change during the operation processing.
     RecordingResponse:
       content:
         application/json:
@@ -9756,7 +9827,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             from:
@@ -9839,7 +9910,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             from:
@@ -10198,7 +10269,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
           type: object
@@ -10254,7 +10325,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
           type: object
@@ -10347,7 +10418,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             digits:
@@ -10441,7 +10512,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             from:
@@ -10550,7 +10621,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             direction:
@@ -10640,7 +10711,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             from:
@@ -10724,7 +10795,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             from:
@@ -10808,7 +10879,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             media_url:
@@ -10892,7 +10963,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             media_url:
@@ -11004,7 +11075,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             public_recording_urls:
@@ -11111,7 +11182,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             from:
@@ -11191,7 +11262,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             from:
@@ -11271,7 +11342,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             from:
@@ -11426,7 +11497,7 @@ components:
           example: 891510ac-f3e4-11e8-af5b-de00688a4901
           type: string
         connection_id:
-          description: The ID of the connection to be used when dialing the destination.
+          description: The ID of the Call Control App (formerly ID of the connection) to be used when dialing the destination.
           type: string
         custom_headers:
           description: Custom headers to be added to the SIP INVITE.
@@ -11535,7 +11606,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             status:
@@ -11608,7 +11679,7 @@ components:
               example: aGF2ZSBhIG5pY2UgZGF5ID1d
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
           type: object
@@ -11766,7 +11837,7 @@ components:
         updated_at: 2019-01-23T18:10:02.574Z
       properties:
         connection_id:
-          description: Identifies the connection associated with the conference
+          description: Identifies the connection (Call Control App) associated with the conference
           example: 3fa85f64-9191-4567-b3fc-2c963f66afa6
           type: string
         created_at:
@@ -11973,7 +12044,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             occurred_at:
@@ -12046,7 +12117,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             occurred_at:
@@ -12158,7 +12229,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
           type: object
@@ -12229,7 +12300,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
           type: object
@@ -12298,7 +12369,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             creator_call_session_id:
@@ -12380,7 +12451,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             creator_call_session_id:
@@ -12461,7 +12532,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             creator_call_session_id:
@@ -12538,7 +12609,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             creator_call_session_id:
@@ -12618,7 +12689,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             creator_call_session_id:
@@ -12680,7 +12751,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             creator_call_session_id:
@@ -12741,7 +12812,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             creator_call_session_id:
@@ -12876,7 +12947,7 @@ components:
               example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
               type: string
             connection_id:
-              description: Telnyx connection ID used in the call.
+              description: Call Control App ID (formerly Telnyx connection ID) used in the call.
               example: 7267xxxxxxxxxxxxxx
               type: string
             creator_call_session_id:
@@ -14922,17 +14993,6 @@ components:
         - data
       title: DeleteVerifyProfileResponse
       type: object
-    DetailRecordPaginationMeta:
-      properties:
-        current_page_size:
-          example: 55
-          format: int32
-          type: integer
-        last_fetched_date:
-          example: 2020-07-01T00:00:00-06:00
-          format: date-time
-          type: string
-      type: object
     DtmfType:
       default: RFC 2833
       description: Sets the type of DTMF digits sent from Telnyx to this Connection. Note that DTMF digits sent to Telnyx will be accepted in all formats.
@@ -16959,17 +17019,17 @@ components:
           example: balance
           type: string
       type: object
-    MdrDeleteDetailReportV2Resp:
+    MdrDeleteDetailReportResponse:
       properties:
         data:
-          $ref: "#/components/schemas/MdrDetailReportV2Resp"
+          $ref: "#/components/schemas/MdrDetailReportResponse"
       type: object
-    MdrDeleteUsageReportsV2Resp:
+    MdrDeleteUsageReportsResponse:
       properties:
         data:
-          $ref: "#/components/schemas/MdrUsageReportV2Resp"
+          $ref: "#/components/schemas/MdrUsageReportResponse"
       type: object
-    MdrDetailReportV2Resp:
+    MdrDetailReportResponse:
       properties:
         connections:
           items:
@@ -17035,7 +17095,7 @@ components:
           format: date-time
           type: string
       type: object
-    MdrDetailV2Resp:
+    MdrDetailResponse:
       properties:
         cld:
           description: The destination number for a call, or the callee
@@ -17054,6 +17114,16 @@ components:
           example: 2020-07-01T00:00:00-06:00
           format: date-time
           type: string
+        currency:
+          description: Currency of the rate and cost
+          enum:
+            - AUD
+            - CAD
+            - EUR
+            - GBP
+            - USD
+          example: USD
+          type: string
         direction:
           description: Direction of message - inbound or outbound.
           example: outbound
@@ -17061,6 +17131,13 @@ components:
         id:
           description: Id of message detail record
           example: 99b637f3-07fd-45ac-b9ca-b87208c24650
+          type: string
+        message_type:
+          description: Type of message
+          enum:
+            - SMS
+            - MMS
+          example: SMS
           type: string
         parts:
           description: Number of parts this message has. Max number of character is 160. If message contains more characters then that it will be broken down in multiple parts
@@ -17090,44 +17167,44 @@ components:
           example: DELIVERED
           type: string
       type: object
-    MdrGetDetailReportByIdV2Resp:
+    MdrGetDetailReportByIdResponse:
       properties:
         data:
-          $ref: "#/components/schemas/MdrDetailReportV2Resp"
+          $ref: "#/components/schemas/MdrDetailReportResponse"
       type: object
-    MdrGetDetailReportV2Resp:
+    MdrGetDetailReportResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/MdrDetailReportV2Resp"
+            $ref: "#/components/schemas/MdrDetailReportResponse"
           type: array
         meta:
           $ref: "#/components/schemas/PaginationMeta"
       type: object
-    MdrGetDetailV2Resp:
+    MdrGetDetailResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/MdrDetailV2Resp"
-          type: array
-        meta:
-          $ref: "#/components/schemas/DetailRecordPaginationMeta"
-      type: object
-    MdrGetUsageReportsByIdV2Resp:
-      properties:
-        data:
-          $ref: "#/components/schemas/MdrUsageReportV2Resp"
-      type: object
-    MdrGetUsageReportsV2Resp:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/MdrUsageReportV2Resp"
+            $ref: "#/components/schemas/MdrDetailResponse"
           type: array
         meta:
           $ref: "#/components/schemas/PaginationMeta"
       type: object
-    MdrPostDetailReportV2Req:
+    MdrGetUsageReportsByIdResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/MdrUsageReportResponse"
+      type: object
+    MdrGetUsageReportsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/MdrUsageReportResponse"
+          type: array
+        meta:
+          $ref: "#/components/schemas/PaginationMeta"
+      type: object
+    MdrPostDetailReportRequest:
       properties:
         connections:
           items:
@@ -17173,12 +17250,12 @@ components:
         - end_date
         - start_date
       type: object
-    MdrPostDetailReportV2Resp:
+    MdrPostDetailReportResponse:
       properties:
         data:
-          $ref: "#/components/schemas/MdrDetailReportV2Resp"
+          $ref: "#/components/schemas/MdrDetailReportResponse"
       type: object
-    MdrPostUsageReportV2Req:
+    MdrPostUsageReportRequest:
       properties:
         aggregation_type:
           enum:
@@ -17202,10 +17279,10 @@ components:
         - end_date
         - start_date
       type: object
-    MdrPostUsageReportsV2Resp:
+    MdrPostUsageReportsResponse:
       properties:
         data:
-          $ref: "#/components/schemas/MdrUsageReportV2Resp"
+          $ref: "#/components/schemas/MdrUsageReportResponse"
       type: object
     MdrUsageRecord:
       properties:
@@ -17223,6 +17300,9 @@ components:
           type: string
         direction:
           example: outbound
+          type: string
+        message_type:
+          example: SMS
           type: string
         parts:
           example: "0"
@@ -17242,8 +17322,11 @@ components:
         tags:
           example: All
           type: string
+        tn_type:
+          example: TF
+          type: string
       type: object
-    MdrUsageReportV2Resp:
+    MdrUsageReportResponse:
       properties:
         aggregation_type:
           enum:
@@ -20372,10 +20455,6 @@ components:
           example: 2018-02-02T22:25:27.521Z
           readOnly: true
           type: string
-        data_enabled:
-          description: It toggles data consumption on all SIM cards in a group. <br/><br/> It's important to note that the data_limit will be respected even though this attribute is set to `true`.
-          example: true
-          type: boolean
         data_limit:
           description: Upper limit on the amount of data the SIM cards, within the group, can use.
           example: 2048
@@ -20409,10 +20488,6 @@ components:
       type: object
     SIMCardGroupCreate:
       properties:
-        data_enabled:
-          description: It enables or not data consumption on all SIM cards in a group. <br/><br/> It's important to note that the data_limit will be respected even though this attribute is set to `true`.
-          example: true
-          type: boolean
         data_limit:
           description: Upper limit on the amount of data the SIM cards, within the group, can use.
           example: 2048
@@ -20427,10 +20502,6 @@ components:
       type: object
     SIMCardGroupPatch:
       properties:
-        data_enabled:
-          description: It enables or not data consumption on all SIM cards in a group. <br/><br/> It's important to note that the data_limit will be respected even though this attribute is set to `true`.
-          example: true
-          type: boolean
         data_limit:
           description: Upper limit on the amount of data the SIM cards, within the group, can use.
           example: 2048

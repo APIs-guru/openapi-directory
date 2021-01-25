@@ -727,6 +727,8 @@ paths:
               examples:
                 ApiValidationError:
                   $ref: "#/components/examples/ApiValidationError"
+                SchemaQueryError:
+                  $ref: "#/components/examples/SchemaQueryError"
               schema:
                 $ref: "#/components/schemas/Error"
           description: Bad Request
@@ -2424,6 +2426,17 @@ paths:
                   top:
                     type: integer
           description: Learners progress
+        "400":
+          content:
+            application/json:
+              examples:
+                ApiValidationError:
+                  $ref: "#/components/examples/ApiValidationError"
+                SchemaQueryError:
+                  $ref: "#/components/examples/SchemaQueryError"
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Bad Request
         "401":
           $ref: "#/components/responses/NotAuthorizedError"
         "403":
@@ -3058,6 +3071,13 @@ components:
       required: true
       schema:
         type: string
+    sectionId:
+      description: section's id
+      in: path
+      name: sectionId
+      required: true
+      schema:
+        type: string
     submissionId:
       description: submission id
       in: path
@@ -3547,6 +3567,8 @@ components:
               type: string
         name:
           type: string
+        tasksEnabled:
+          type: boolean
       title: Course
       type: object
     CourseResponse:
@@ -3854,6 +3876,8 @@ components:
         start:
           format: date-time
           type: string
+        tasksEnabled:
+          type: boolean
         trailerVideoUrl:
           minLength: 1
           type: string
@@ -3975,6 +3999,8 @@ components:
         start:
           format: date-time
           type: string
+        tasksEnabled:
+          type: boolean
         trailerVideoUrl:
           minLength: 1
           type: string

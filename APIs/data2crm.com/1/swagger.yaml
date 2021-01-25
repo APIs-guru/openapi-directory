@@ -22165,6 +22165,11 @@ definitions:
         $ref: "#/definitions/Company"
         description: Application Company
         type: object
+      created_at:
+        description: Created At
+        example: 2015-01-01T05:18:23-0700
+        format: date-time
+        type: string
       description:
         description: Application description
         type: string
@@ -22173,6 +22178,11 @@ definitions:
         type: boolean
       key:
         description: Application key
+        type: string
+      last_used_at:
+        description: Last Used At
+        example: 2015-02-10T17:12:23-0700
+        format: date-time
         type: string
       me:
         $ref: "#/definitions/UserEntity"
@@ -22188,6 +22198,11 @@ definitions:
       type:
         description: Application platform type
         type: string
+      updated_at:
+        description: Updated At
+        example: 2015-02-10T17:12:23-0700
+        format: date-time
+        type: string
       url:
         description: Application URL
         type: string
@@ -22201,14 +22216,29 @@ definitions:
         $ref: "#/definitions/Company"
         description: Application Company
         type: object
+      created_at:
+        description: Created At
+        example: 2015-01-01T05:18:23-0700
+        format: date-time
+        type: string
       description:
         description: Application description
         type: string
       key:
         description: Application key
         type: string
+      last_used_at:
+        description: Last Used At
+        example: 2015-02-10T17:12:23-0700
+        format: date-time
+        type: string
       type:
         description: Application platform type
+        type: string
+      updated_at:
+        description: Updated At
+        example: 2015-02-10T17:12:23-0700
+        format: date-time
         type: string
       url:
         description: Application URL

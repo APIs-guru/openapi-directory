@@ -1673,6 +1673,66 @@ paths:
       summary: Gets the active charging data of a pico station
       tags:
         - PicoCharging
+  /api/rocketmaster/smartmedevices:
+    get:
+      deprecated: false
+      operationId: RocketmasterSmartMeDevices_Get
+      parameters:
+        - in: query
+          name: filter
+          required: true
+          schema:
+            enum:
+              - MeterFamilyTypeUnknown
+              - MeterFamilyTypeSmartMeConnectV1
+              - MeterFamiliyTypeSmartMeMeter
+              - MeterFamiliyTypeSmartMeMeterWithSwitch
+              - MeterFamilyTypeMBusGatewayV1
+              - MeterFamilyTypeRS485GatewayV1
+              - MeterFamilyTypeKamstrupModule
+              - MeterFamilyTypeSmartMe3PhaseMeter80A
+              - MeterFamilyTypeSmartMe3PhaseMeter32A
+              - MeterFamilyTypeSmartMe3PhaseTelstarTransformer
+              - MeterFamilyTypeLandisGyrModule
+              - MeterFamilyTypeFnnOpticalModule
+              - MeterFamilyTypeSmartMe3PhaseTelstar80AWiFi
+              - MeterFamilyTypeSmartMe3PhaseTelstar80AMobile
+              - MeterFamilyTypeSmartMe1PhaseMeter80AV2WiFi
+              - MeterFamilyTypeSmartMe1PhaseMeter32AV2WiFi
+              - MeterFamilyTypeSmartMe1PhaseMeter80AGprs
+              - MeterFamilyTypeSmartMe1PhaseMeter32AGprs
+              - MeterFamilyTypeWMBusGatewayV1
+              - MeterFamilyTypeMithralHallV1
+              - MeterFamilyTypeRestApiMeter
+              - MeterFamilyTypeVirtualBillingMeter
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SmartMeDeviceData"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SmartMeDeviceData"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SmartMeDeviceData"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SmartMeDeviceData"
+                type: array
+          description: OK
+      summary: Gets all smart-me devices
+      tags:
+        - RocketmasterSmartMeDevices
 components:
   schemas:
     AccessTokenToPut:
@@ -2411,6 +2471,14 @@ components:
     MeterFolderInformation:
       description: Container Class for the Web API
       properties:
+        CommunicationModuleFirmwareVersion:
+          description: The Version of the Communication Module (if exists)
+          format: int32
+          type: integer
+        CommunicationModuleHardwareVersion:
+          description: The Version of the Communication Module (if exists)
+          format: int32
+          type: integer
         FirmwareVersion:
           description: The Firmware Version of a Meter
           format: int32
@@ -2653,6 +2721,81 @@ components:
             - UploadInterval_6h
             - UploadInterval_12h
             - UploadInterval_24h
+          type: string
+      type: object
+    SmartMeDeviceData:
+      description: Container for the smart-me device data (rocketmaster)
+      properties:
+        Connection:
+          description: The state of the connection
+          type: string
+        HWVersion:
+          description: The HW version of the meter
+          format: int32
+          type: integer
+        Id:
+          description: The ID of the device
+          type: string
+        IsOnline:
+          description: Flag if the meter is online
+          type: boolean
+        MeterFamilyType:
+          description: The meter family type
+          enum:
+            - MeterFamilyTypeUnknown
+            - MeterFamilyTypeSmartMeConnectV1
+            - MeterFamiliyTypeSmartMeMeter
+            - MeterFamiliyTypeSmartMeMeterWithSwitch
+            - MeterFamilyTypeMBusGatewayV1
+            - MeterFamilyTypeRS485GatewayV1
+            - MeterFamilyTypeKamstrupModule
+            - MeterFamilyTypeSmartMe3PhaseMeter80A
+            - MeterFamilyTypeSmartMe3PhaseMeter32A
+            - MeterFamilyTypeSmartMe3PhaseTelstarTransformer
+            - MeterFamilyTypeLandisGyrModule
+            - MeterFamilyTypeFnnOpticalModule
+            - MeterFamilyTypeSmartMe3PhaseTelstar80AWiFi
+            - MeterFamilyTypeSmartMe3PhaseTelstar80AMobile
+            - MeterFamilyTypeSmartMe1PhaseMeter80AV2WiFi
+            - MeterFamilyTypeSmartMe1PhaseMeter32AV2WiFi
+            - MeterFamilyTypeSmartMe1PhaseMeter80AGprs
+            - MeterFamilyTypeSmartMe1PhaseMeter32AGprs
+            - MeterFamilyTypeWMBusGatewayV1
+            - MeterFamilyTypeMithralHallV1
+            - MeterFamilyTypeRestApiMeter
+            - MeterFamilyTypeVirtualBillingMeter
+          type: string
+        MeterUpateInProgress:
+          description: Flag if there is a meter update in progress
+          type: boolean
+        MeterUpdate:
+          description: Flag if there is a meter update
+          type: boolean
+        Name:
+          description: The name
+          type: string
+        SSID:
+          description: The wifi ssid
+          type: string
+        SWVerison:
+          description: The SW Version of the meter
+          format: int32
+          type: integer
+        SerialNumber:
+          description: The serial number
+          format: int64
+          type: integer
+        SupportReboot:
+          description: Flag if the device supports a reboot
+          type: boolean
+        SupportWiFiUpdate:
+          description: Flag if the device supports a wifi update
+          type: boolean
+        User:
+          description: The EMail of the user
+          type: string
+        WiFiVersion:
+          description: The version of the wifi module
           type: string
       type: object
     SwitchConfigurationContainer:

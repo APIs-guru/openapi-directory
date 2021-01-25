@@ -1,6 +1,4 @@
 openapi: 3.0.2
-servers:
-  - url: https://nlpcloud.io
 info:
   title: NLPCloud
   version: 1.0.0
@@ -11,6 +9,7 @@ info:
       url: https://nlpcloud.io/openapi.json
       version: "3.0"
   x-providerName: nlpcloud.io
+  x-preferred: null
 security:
   - bearerAuth: []
 paths:

@@ -175,10 +175,15 @@ parameters:
     type: integer
   order_by:
     description: >
-      A list of field names or aggregation, followed by an order (asc | desc).
+      A comma-separated list of field names or aggregations to sort on, followed by an order (`asc` or `desc`).
 
 
-      example: **sum(age) desc, name asc**
+      Sorts results according to the specified fields' values in ascending order by default.
+
+      To sort results in descending order, use the `desc` keyword.
+
+
+      Example: `sum(age) desc, name asc`
     in: query
     items:
       collectionFormat: csv
@@ -263,12 +268,10 @@ parameters:
     type: string
   sort:
     description: >
+      **Deprecated, use `order_by` instead.**
+
+
       A list of field names, each possibly prefixed with a minus (-).
-
-
-      May also be 'random(seed)', where seed can be omitted but if specified must be an int. This allows to keep
-
-      relative ordering during pagination.
 
 
       Sorts results according to the specified fields' values. By default, the sort is ascending (from the smallest
@@ -498,6 +501,7 @@ paths:
         - $ref: "#/parameters/limit"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
         - $ref: "#/parameters/pretty"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
@@ -651,6 +655,7 @@ paths:
         - $ref: "#/parameters/limit_export"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
         - default: ;
@@ -689,6 +694,7 @@ paths:
         - $ref: "#/parameters/limit_export"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/pretty"
@@ -718,6 +724,7 @@ paths:
         - $ref: "#/parameters/limit_export"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
       produces:
@@ -746,6 +753,7 @@ paths:
         - $ref: "#/parameters/limit_export"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/pretty"
         - $ref: "#/parameters/timezone"
@@ -775,6 +783,7 @@ paths:
         - $ref: "#/parameters/limit_export"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
       produces:
@@ -803,6 +812,7 @@ paths:
         - $ref: "#/parameters/limit_export"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
       produces:
@@ -831,6 +841,7 @@ paths:
         - $ref: "#/parameters/limit_export"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
       produces:
@@ -940,6 +951,7 @@ paths:
         - $ref: "#/parameters/limit"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/pretty"
         - $ref: "#/parameters/timezone"

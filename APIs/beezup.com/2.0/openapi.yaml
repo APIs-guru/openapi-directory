@@ -243,9 +243,10 @@ paths:
           description: Requested too many batch operations
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "Send a batch of operations to change your marketplace Order information: accept, ship, etc.  (max 100 items per call)"
+      summary: "[PLANNED] Send a batch of operations to change your marketplace Order information: accept, ship, etc.  (max 100 items per call)"
       tags:
         - Marketplaces - Orders V3 - Batches
+      x-releaseStatus: PLANNED
   /orders/v3/batches/clearMerchantOrderInfos:
     post:
       deprecated: false
@@ -268,9 +269,10 @@ paths:
           description: Requested too many batch operations
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Send a batch of operations to clear an Order's merchant information (max 100 items per call)
+      summary: "[PLANNED] Send a batch of operations to clear an Order's merchant information (max 100 items per call)"
       tags:
         - Marketplaces - Orders V3 - Batches
+      x-releaseStatus: PLANNED
   /orders/v3/batches/setMerchantOrderInfos:
     post:
       description: The purpose of this operation is to reduce the amount of request to the API.
@@ -292,9 +294,10 @@ paths:
           description: Requested too many batch operations
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Send a batch of operations to set an Order's merchant information  (max 100 items per call)
+      summary: "[PLANNED] Send a batch of operations to set an Order's merchant information  (max 100 items per call)"
       tags:
         - Marketplaces - Orders V3 - Batches
+      x-releaseStatus: PLANNED
   /orders/v3/exportations:
     get:
       operationId: GetOrderExportationsV3
@@ -346,9 +349,10 @@ paths:
           description: Could not process request for given parameters values. Please check error message for more details.
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get a paginated list of Order report exportations
+      summary: "[PLANNED] Get a paginated list of Order report exportations"
       tags:
         - Marketplaces - Orders V3 - Exports
+      x-releaseStatus: PLANNED
     post:
       deprecated: false
       description: A new file will be generated containing a summary of all the Orders matching the requested filter settings.
@@ -372,9 +376,10 @@ paths:
           description: No orders have been found for this request.
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Request a new Order report exportation to be generated
+      summary: "[PLANNED] Request a new Order report exportation to be generated"
       tags:
         - Marketplaces - Orders V3 - Exports
+      x-releaseStatus: PLANNED
   /orders/v3/harvest:
     post:
       deprecated: false
@@ -415,9 +420,10 @@ paths:
                 type: integer
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Send harvest request to all your marketplaces
+      summary: "[PLANNED] Send harvest request to all your marketplaces"
       tags:
         - Marketplaces - Orders V3 - Global
+      x-releaseStatus: PLANNED
   /orders/v3/list/full:
     post:
       deprecated: false
@@ -645,9 +651,10 @@ paths:
           description: Requested Order could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Clear an Order's merchant information
+      summary: "[PLANNED] Clear an Order's merchant information"
       tags:
         - Marketplaces - Orders V3 - Order
+      x-releaseStatus: PLANNED
   "/orders/v3/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/harvest":
     post:
       deprecated: false
@@ -683,9 +690,15 @@ paths:
                 type: integer
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Send harvest request for a single Order
+      summary: "[PLANNED] Send harvest request for a single Order"
       tags:
         - Marketplaces - Orders V3 - Order
+      x-releaseStatus: PLANNED
+      x-validation:
+        - statusCode: "401"
+          validatorName: userAuthorized
+        - statusCode: "404"
+          validatorName: orderExists
   "/orders/v3/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/history":
     get:
       deprecated: false
@@ -711,9 +724,10 @@ paths:
           description: Requested Order could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get an Order's harvest and change history
+      summary: "[PLANNED] Get an Order's harvest and change history"
       tags:
         - Marketplaces - Orders V3 - Order
+      x-releaseStatus: PLANNED
   "/orders/v3/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/history/{orderChangeExecutionUUID}":
     get:
       deprecated: false
@@ -746,9 +760,10 @@ paths:
           description: Requested Order could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get the order change reporting
+      summary: "[PLANNED] Get the order change reporting"
       tags:
         - Marketplaces - Orders V3 - Order
+      x-releaseStatus: PLANNED
   "/orders/v3/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/setMerchantOrderInfo":
     post:
       deprecated: false
@@ -776,9 +791,10 @@ paths:
           description: Requested Order could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Set an Order's merchant information
+      summary: "[PLANNED] Set an Order's merchant information"
       tags:
         - Marketplaces - Orders V3 - Order
+      x-releaseStatus: PLANNED
   "/orders/v3/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/{changeOrderType}":
     post:
       deprecated: false
@@ -835,9 +851,10 @@ paths:
           $ref: "#/components/responses/412_PreConditionFailed"
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Change your marketplace Order Information (accept, ship, etc.)
+      summary: "[PREVIEW] Change your marketplace Order Information (accept, ship, etc.)"
       tags:
         - Marketplaces - Orders V3 - Order
+      x-releaseStatus: PREVIEW
   /v2/public/channels/:
     get:
       description: Use this operation to get the correct link to the channels and to the list of values
@@ -11653,7 +11670,7 @@ components:
       description: Footer Content HTML
       maxLength: 1000
       type: string
-      x-minLength: "0"
+      x-minValueLength: "0"
     friendCountryIsoCodeAlpha3:
       description: Your friend's user country iso code alpha 3
       example: USA
@@ -12016,7 +12033,7 @@ components:
       description: Header Content HTML
       maxLength: 1000
       type: string
-      x-minLength: "0"
+      x-minValueLength: "0"
     href:
       description: Indicate the relative uri for this link
       example: /merchant/orders/v1/{marketplaceCode}/{IMNOrderId}

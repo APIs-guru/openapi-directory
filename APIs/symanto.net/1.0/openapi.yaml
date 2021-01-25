@@ -44,11 +44,14 @@ paths:
         * self-revealing
       operationId: communication
       parameters:
-        - in: query
+        - explode: true
+          in: query
           name: all
+          required: false
           schema:
             default: false
             type: boolean
+          style: form
       requestBody:
         content:
           application/json:
@@ -68,6 +71,61 @@ paths:
                 $ref: "#/components/schemas/ValidationErrors"
           description: Validation Error
       summary: Communication & Tonality
+      tags:
+        - Text Analysis
+  /ekman-emotion:
+    post:
+      description: >-
+        Detect the emotions of the text based on Ekman.
+
+
+        Supported Langauges: [`en`, `de`, `es`]
+
+
+        Returned labels:
+
+        * anger
+
+        * disgust
+
+        * fear
+
+        * joy
+
+        * sadness
+
+        * surprise
+
+        * no-emotion
+      operationId: ekman-emotion
+      parameters:
+        - explode: true
+          in: query
+          name: all
+          required: false
+          schema:
+            default: false
+            type: boolean
+          style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PredictionResults"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrors"
+          description: Validation Error
+      summary: Emotion Analysis
       tags:
         - Text Analysis
   /emotion:
@@ -94,11 +152,14 @@ paths:
         * uncategorized
       operationId: emotion
       parameters:
-        - in: query
+        - explode: true
+          in: query
           name: all
+          required: false
           schema:
             default: false
             type: boolean
+          style: form
       requestBody:
         content:
           application/json:
@@ -168,11 +229,14 @@ paths:
         * rational
       operationId: personality
       parameters:
-        - in: query
+        - explode: true
+          in: query
           name: all
+          required: false
           schema:
             default: false
             type: boolean
+          style: form
       requestBody:
         content:
           application/json:
@@ -210,11 +274,14 @@ paths:
         * negative
       operationId: sentiment
       parameters:
-        - in: query
+        - explode: true
+          in: query
           name: all
+          required: false
           schema:
             default: false
             type: boolean
+          style: form
       requestBody:
         content:
           application/json:
@@ -241,13 +308,18 @@ paths:
       operationId: topic-sentiment
       parameters:
         - description: Provide analysis domain for better extraction (optional)
+          explode: true
           in: query
           name: domain
+          required: false
           schema:
             enum:
               - Ecom
               - Employee
+              - Hotel
+              - Restaurant
             type: string
+          style: form
       requestBody:
         content:
           application/json:
@@ -302,7 +374,7 @@ components:
       properties:
         id:
           description: id of the post.
-          example: 1
+          example: "1"
           type: string
         language:
           description: language_code of the text.
@@ -313,8 +385,8 @@ components:
           example: I love the service
           type: string
       required:
-        - text
         - language
+        - text
       title: Post
       type: object
     PostPredicted:

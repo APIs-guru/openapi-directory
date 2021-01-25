@@ -10504,7 +10504,7 @@ components:
     SongListForEditContract:
       properties:
         author:
-          $ref: "#/components/schemas/UserWithEmailContract"
+          $ref: "#/components/schemas/UserForApiContract"
         canEdit:
           type: boolean
         deleted:
@@ -10712,16 +10712,6 @@ components:
         sender:
           $ref: "#/components/schemas/UserForApiContract"
         subject:
-          type: string
-      type: object
-    UserWithEmailContract:
-      properties:
-        email:
-          type: string
-        id:
-          format: int32
-          type: integer
-        name:
           type: string
       type: object
     VenueContract:

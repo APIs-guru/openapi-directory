@@ -9033,7 +9033,7 @@ definitions:
         type: string
         x-go-name: Gitignores
       issue_labels:
-        description: Issue Label set to use
+        description: Label-Set to use
         type: string
         x-go-name: IssueLabels
       license:
@@ -11302,6 +11302,9 @@ definitions:
         format: date-time
         type: string
         x-go-name: Created
+      duration:
+        type: string
+        x-go-name: Duration
       issue_index:
         format: int64
         type: integer
@@ -11315,6 +11318,10 @@ definitions:
       repo_owner_name:
         type: string
         x-go-name: RepoOwnerName
+      seconds:
+        format: int64
+        type: integer
+        x-go-name: Seconds
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   SubmitPullReviewOptions:

@@ -4,7 +4,7 @@ servers:
 info:
   contact:
     name: Support
-    url: https://support.github.com
+    url: https://support.github.com/contact
   description: GitHub's v3 REST API.
   license:
     name: MIT
@@ -525,24 +525,7 @@ paths:
             schema:
               properties:
                 permissions:
-                  example:
-                    contents: read
-                    deployments: write
-                    issues: read
-                    single_file: read
-                  properties:
-                    contents:
-                      type: string
-                    def_not_a_repo:
-                      example: '"read"'
-                      type: string
-                    deployments:
-                      type: string
-                    issues:
-                      type: string
-                    single_file:
-                      type: string
-                  type: object
+                  $ref: "#/components/schemas/app-permissions"
                 repositories:
                   description: List of repository names that the token should have access to
                   items:
@@ -3169,7 +3152,7 @@ paths:
                 default:
                   $ref: "#/components/examples/gist"
               schema:
-                $ref: "#/components/schemas/gist-full"
+                $ref: "#/components/schemas/gist-simple"
           description: response
           headers:
             Location:
@@ -3322,7 +3305,7 @@ paths:
                 default:
                   $ref: "#/components/examples/gist"
               schema:
-                $ref: "#/components/schemas/gist-full"
+                $ref: "#/components/schemas/gist-simple"
           description: response
         "304":
           $ref: "#/components/responses/not_modified"
@@ -3364,7 +3347,13 @@ paths:
                   type: string
                 files:
                   additionalProperties:
-                    additionalProperties: false
+                    anyOf:
+                      - required:
+                          - content
+                      - required:
+                          - filename
+                      - maxProperties: 0
+                        type: object
                     nullable: true
                     properties:
                       content:
@@ -3390,7 +3379,7 @@ paths:
                 default:
                   $ref: "#/components/examples/gist"
               schema:
-                $ref: "#/components/schemas/gist-full"
+                $ref: "#/components/schemas/gist-simple"
           description: response
         "404":
           $ref: "#/components/responses/not_found"
@@ -3665,7 +3654,7 @@ paths:
                   $ref: "#/components/examples/gist-fork-items"
               schema:
                 items:
-                  $ref: "#/components/schemas/gist-full"
+                  $ref: "#/components/schemas/gist-simple"
                 type: array
           description: response
           headers:
@@ -3833,7 +3822,7 @@ paths:
                 default:
                   $ref: "#/components/examples/gist"
               schema:
-                $ref: "#/components/schemas/gist-full"
+                $ref: "#/components/schemas/gist-simple"
           description: response
         "403":
           $ref: "#/components/responses/forbidden"
@@ -4585,7 +4574,11 @@ paths:
         subcategory: marketplace
   /meta:
     get:
-      description: This endpoint provides a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://help.github.com/articles/about-github-s-ip-addresses/)."
+      description: >-
+        Returns meta information about GitHub, including a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://help.github.com/articles/about-github-s-ip-addresses/)."
+
+
+        **Note:** The IP addresses shown in the documentation's response are only example values. You must always query the API directly to get the latest list of IP addresses.
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/v3/meta/#get-github-meta-information
@@ -5129,6 +5122,7 @@ paths:
                     Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
                   type: boolean
                 members_can_create_pages:
+                  default: true
                   description: >-
                     Toggles whether organization members can create GitHub Pages sites. Can be one of:  
 
@@ -5137,6 +5131,8 @@ paths:
                     \* `false` - no organization members can create GitHub Pages sites. Existing published sites will not be impacted.  
 
                     Default: `true`. 
+                  type: boolean
+                members_can_create_private_pages:
                   type: boolean
                 members_can_create_private_repositories:
                   description: >-
@@ -5147,6 +5143,8 @@ paths:
                     \* `false` - only organization owners can create private repositories.  
 
                     Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
+                  type: boolean
+                members_can_create_public_pages:
                   type: boolean
                 members_can_create_public_repositories:
                   description: >-
@@ -6961,6 +6959,43 @@ paths:
         githubCloudOnly: false
         previews: []
         subcategory: events
+  "/orgs/{org}/failed_invitations":
+    get:
+      description: The return hash contains `failed_at` and `failed_reason` fields which represent the time at which the invitation failed and the reason for the failure.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/orgs#list-failed-organization-invitations
+      operationId: orgs/list-failed-invitations
+      parameters:
+        - $ref: "#/components/parameters/org"
+        - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/page"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/organization-invitation-items"
+              schema:
+                items:
+                  $ref: "#/components/schemas/organization-invitation"
+                type: array
+          description: response
+          headers:
+            Link:
+              $ref: "#/components/headers/link"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: List failed organization invitations
+      tags:
+        - orgs
+      x-github:
+        category: orgs
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: members
   "/orgs/{org}/hooks":
     get:
       description: ""
@@ -7517,7 +7552,7 @@ paths:
         Invite people to an organization by using their GitHub user ID or their email address. In order to create invitations in an organization, the authenticated user must be an organization owner.
 
 
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/orgs#create-an-organization-invitation
@@ -7577,6 +7612,37 @@ paths:
         "422":
           $ref: "#/components/responses/validation_failed"
       summary: Create an organization invitation
+      tags:
+        - orgs
+      x-github:
+        category: orgs
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: members
+        triggersNotification: true
+  "/orgs/{org}/invitations/{invitation_id}":
+    delete:
+      description: >-
+        Cancel an organization invitation. In order to cancel an organization invitation, the authenticated user must be an organization owner.
+
+
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications).
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/orgs#cancel-an-organization-invitation
+      operationId: orgs/cancel-invitation
+      parameters:
+        - $ref: "#/components/parameters/org"
+        - $ref: "#/components/parameters/invitation_id"
+      responses:
+        "204":
+          description: Empty response
+        "404":
+          $ref: "#/components/responses/not_found"
+        "422":
+          $ref: "#/components/responses/validation_failed"
+      summary: Cancel an organization invitation
       tags:
         - orgs
       x-github:
@@ -9423,7 +9489,7 @@ paths:
         Creates a new discussion post on a team's page. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
 
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
 
 
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/{org_id}/team/{team_id}/discussions`.
@@ -9690,7 +9756,7 @@ paths:
         Creates a new comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
 
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
 
 
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments`.
@@ -15877,6 +15943,78 @@ paths:
         previews: []
         requestBodyParameterName: users
         subcategory: branches
+  "/repos/{owner}/{repo}/branches/{branch}/rename":
+    post:
+      description: >-
+        Renames a branch in a repository.
+
+
+        **Note:** Although the API responds immediately, the branch rename process might take some extra time to complete in the background. You won't be able to push to the old branch name while the rename process is in progress. For more information, see "[Renaming a branch](https://docs.github.com/github/administering-a-repository/renaming-a-branch)".
+
+
+        The permissions required to use this endpoint depends on whether you are renaming the default branch.
+
+
+        To rename a non-default branch:
+
+
+        * Users must have push access.
+
+        * GitHub Apps must have the `contents:write` repository permission.
+
+
+        To rename the default branch:
+
+
+        * Users must have admin or owner permissions.
+
+        * GitHub Apps must have the `administration:write` repository permission.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/repos#rename-a-branch
+      operationId: repos/rename-branch
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - $ref: "#/components/parameters/branch"
+      requestBody:
+        content:
+          application/json:
+            example:
+              new_name: my_renamed_branch
+            schema:
+              properties:
+                new_name:
+                  description: The new name of the branch.
+                  type: string
+              required:
+                - new_name
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/branch-with-protection"
+              schema:
+                $ref: "#/components/schemas/branch-with-protection"
+          description: response
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+        "422":
+          $ref: "#/components/responses/validation_failed"
+      summary: Rename a branch
+      tags:
+        - repos
+      x-github:
+        category: repos
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: branches
   "/repos/{owner}/{repo}/check-runs":
     post:
       description: >-
@@ -15946,6 +16084,20 @@ paths:
                   started_at: 2018-05-04T01:14:52Z
                   status: in_progress
             schema:
+              anyOf:
+                - additionalProperties: true
+                  properties:
+                    status:
+                      enum:
+                        - completed
+                  required:
+                    - conclusion
+                - additionalProperties: true
+                  properties:
+                    status:
+                      enum:
+                        - queued
+                        - in_progress
               properties:
                 actions:
                   description: Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
@@ -15953,18 +16105,22 @@ paths:
                     properties:
                       description:
                         description: A short explanation of what this action would do. The maximum size is 40 characters.
+                        maxLength: 40
                         type: string
                       identifier:
                         description: A reference for the action on the integrator's system. The maximum size is 20 characters.
+                        maxLength: 20
                         type: string
                       label:
                         description: The text to be displayed on a button in the web UI. The maximum size is 20 characters.
+                        maxLength: 20
                         type: string
                     required:
                       - label
                       - description
                       - identifier
                     type: object
+                  maxItems: 3
                   type: array
                 completed_at:
                   description: "The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`."
@@ -16040,6 +16196,7 @@ paths:
                           - annotation_level
                           - message
                         type: object
+                      maxItems: 50
                       type: array
                     images:
                       description: Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://docs.github.com/rest/reference/checks#images-object) description for details.
@@ -16061,9 +16218,11 @@ paths:
                       type: array
                     summary:
                       description: The summary of the check run. This parameter supports Markdown.
+                      maxLength: 65535
                       type: string
                     text:
                       description: The details of the check run. This parameter supports Markdown.
+                      maxLength: 65535
                       type: string
                     title:
                       description: The title of the check run.
@@ -16188,6 +16347,20 @@ paths:
               started_at: 2018-05-04T01:14:52Z
               status: completed
             schema:
+              anyOf:
+                - additionalProperties: true
+                  properties:
+                    status:
+                      enum:
+                        - completed
+                  required:
+                    - conclusion
+                - additionalProperties: true
+                  properties:
+                    status:
+                      enum:
+                        - queued
+                        - in_progress
               properties:
                 actions:
                   description: Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
@@ -16195,18 +16368,22 @@ paths:
                     properties:
                       description:
                         description: A short explanation of what this action would do. The maximum size is 40 characters.
+                        maxLength: 40
                         type: string
                       identifier:
                         description: A reference for the action on the integrator's system. The maximum size is 20 characters.
+                        maxLength: 20
                         type: string
                       label:
                         description: The text to be displayed on a button in the web UI. The maximum size is 20 characters.
+                        maxLength: 20
                         type: string
                     required:
                       - label
                       - description
                       - identifier
                     type: object
+                  maxItems: 3
                   type: array
                 completed_at:
                   description: "The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`."
@@ -16279,6 +16456,7 @@ paths:
                           - annotation_level
                           - message
                         type: object
+                      maxItems: 50
                       type: array
                     images:
                       description: Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://docs.github.com/rest/reference/checks#annotations-object-1) description for details.
@@ -16300,9 +16478,11 @@ paths:
                       type: array
                     summary:
                       description: Can contain Markdown.
+                      maxLength: 65535
                       type: string
                     text:
                       description: Can contain Markdown.
+                      maxLength: 65535
                       type: string
                     title:
                       description: "**Required**."
@@ -16962,7 +17142,7 @@ paths:
         subcategory: collaborators
     put:
       description: >-
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
 
 
         For more information the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
@@ -17664,7 +17844,7 @@ paths:
         Create a comment for a commit using its `:commit_sha`.
 
 
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/repos#create-a-commit-comment
@@ -17855,6 +18035,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
       responses:
         "200":
           content:
@@ -17900,6 +18081,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
         - $ref: "#/components/parameters/check_name"
         - $ref: "#/components/parameters/status"
         - description: Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
@@ -17966,6 +18148,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
         - description: Filters check suites by GitHub App `id`.
           example: 1
           in: query
@@ -18038,6 +18221,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
       responses:
         "200":
           content:
@@ -18079,6 +18263,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/page"
       responses:
@@ -18342,6 +18527,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
       requestBody:
         content:
           application/json:
@@ -18485,6 +18671,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
         - description: "The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)"
           in: query
           name: ref
@@ -18544,6 +18731,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
       requestBody:
         content:
           application/json:
@@ -18904,9 +19092,12 @@ paths:
                   description: Name for the target deployment environment (e.g., `production`, `staging`, `qa`).
                   type: string
                 payload:
-                  default: ""
-                  description: JSON payload with extra information about the deployment.
-                  type: string
+                  oneOf:
+                    - additionalProperties: true
+                      type: object
+                    - default: ""
+                      description: JSON payload with extra information about the deployment.
+                      type: string
                 production_environment:
                   description: >-
                     Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.  
@@ -19354,8 +19545,10 @@ paths:
         The `client_payload` parameter is available for any extra information that your workflow might need. This parameter is a JSON payload that will be passed on when the webhook event is dispatched. For example, the `client_payload` can include a message that a user would like to send using a GitHub Actions workflow. Or the `client_payload` can be used as a test to debug your workflow.
 
 
-        To give you write access to the repository, you must use a personal access token with the `repo` scope. For more information, see "[Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line)" in the GitHub Help documentation.
+        This endpoint requires write access to the repository by providing either:
 
+          - Personal access tokens with `repo` scope. For more information, see "[Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line)" in the GitHub Help documentation.
+          - GitHub Apps with both `metadata:read` and `contents:read&write` permissions.
 
         This input example shows how you can use the `client_payload` as a test to debug your workflow.
       externalDocs:
@@ -19483,7 +19676,7 @@ paths:
         Create a fork for the authenticated user.
 
 
-        **Note**: Forking a Repository happens asynchronously. You may have to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be sure to contact [GitHub Support](https://github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com).
+        **Note**: Forking a Repository happens asynchronously. You may have to wait a short period of time before you can access the git objects. If this takes longer than 5 minutes, be sure to contact [GitHub Support](https://support.github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com).
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/repos#create-a-fork
@@ -19924,6 +20117,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/page"
       responses:
@@ -19970,6 +20164,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
       responses:
         "200":
           content:
@@ -20064,6 +20259,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
       responses:
         "204":
           description: Empty response
@@ -20093,6 +20289,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
       requestBody:
         content:
           application/json:
@@ -20975,7 +21172,7 @@ paths:
 
         *   `auth_failed` - the import requires authentication in order to connect to the original repository. To update authentication for the import, please see the [Update an import](https://docs.github.com/rest/reference/migrations#update-an-import) section.
 
-        *   `error` - the import encountered an error. The import progress response will include the `failed_step` and an error message. Contact [GitHub Support](https://github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com) for more information.
+        *   `error` - the import encountered an error. The import progress response will include the `failed_step` and an error message. Contact [GitHub Support](https://support.github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com) for more information.
 
         *   `detection_needs_auth` - the importer requires authentication for the originating repository to continue detection. To update authentication for the import, please see the [Update an import](https://docs.github.com/rest/reference/migrations#update-an-import) section.
 
@@ -21680,7 +21877,7 @@ paths:
         Any user with pull access to a repository can create an issue. If [issues are disabled in the repository](https://help.github.com/articles/disabling-issues/), the API returns a `410 Gone` status.
 
 
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/v3/issues/#create-an-issue
@@ -21720,8 +21917,10 @@ paths:
                       - type: string
                       - properties:
                           color:
+                            nullable: true
                             type: string
                           description:
+                            nullable: true
                             type: string
                           id:
                             type: integer
@@ -21730,12 +21929,16 @@ paths:
                         type: object
                   type: array
                 milestone:
-                  description: "The `number` of the milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._"
                   nullable: true
-                  type: integer
+                  oneOf:
+                    - type: string
+                    - description: "The `number` of the milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._"
+                      type: integer
                 title:
                   description: The title of the issue.
-                  type: string
+                  oneOf:
+                    - type: string
+                    - type: integer
               required:
                 - title
               type: object
@@ -22349,6 +22552,7 @@ paths:
               properties:
                 assignee:
                   description: Login for the user that this issue should be assigned to. **This field is deprecated.**
+                  nullable: true
                   type: string
                 assignees:
                   description: "Logins for Users to assign to this issue. Pass one or more user logins to _replace_ the set of assignees on this Issue. Send an empty array (`[]`) to clear all assignees from the Issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._"
@@ -22365,8 +22569,10 @@ paths:
                       - type: string
                       - properties:
                           color:
+                            nullable: true
                             type: string
                           description:
+                            nullable: true
                             type: string
                           id:
                             type: integer
@@ -22375,9 +22581,11 @@ paths:
                         type: object
                   type: array
                 milestone:
-                  description: "The `number` of the milestone to associate this issue with or `null` to remove current. _NOTE: Only users with push access can set the milestone for issues. The milestone is silently dropped otherwise._"
                   nullable: true
-                  type: integer
+                  oneOf:
+                    - type: string
+                    - description: "The `number` of the milestone to associate this issue with or `null` to remove current. _NOTE: Only users with push access can set the milestone for issues. The milestone is silently dropped otherwise._"
+                      type: integer
                 state:
                   description: State of the issue. Either `open` or `closed`.
                   enum:
@@ -22386,7 +22594,9 @@ paths:
                   type: string
                 title:
                   description: The title of the issue.
-                  type: string
+                  oneOf:
+                    - type: string
+                    - type: integer
               type: object
       responses:
         "200":
@@ -22566,7 +22776,7 @@ paths:
             required: false
         subcategory: comments
     post:
-      description: This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
+      description: This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/issues#create-an-issue-comment
@@ -22924,6 +23134,7 @@ paths:
         content:
           application/json:
             schema:
+              nullable: true
               properties:
                 lock_reason:
                   description: >-
@@ -24246,6 +24457,9 @@ paths:
                   description: Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see "[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)."
                   nullable: true
                   type: string
+                public:
+                  description: Configures access controls for the GitHub Pages site. If public is set to `true`, the site is accessible to anyone on the internet. If set to `false`, the site will only be accessible to users who have at least `read` access to the repository that published the site. This includes anyone in your Enterprise if the repository is set to `internal` visibility. This feature is only available to repositories in an organization on an Enterprise plan.
+                  type: boolean
                 source:
                   anyOf:
                     - description: Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
@@ -24646,7 +24860,7 @@ paths:
         You can create a new pull request.
 
 
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/v3/pulls/#create-a-pull-request
@@ -25414,7 +25628,7 @@ paths:
         **Note:** The position value equals the number of lines down from the first "@@" hunk header in the file you want to add a comment. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the diff continues to increase through lines of whitespace and additional hunks until the beginning of a new file.
 
 
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/pulls#create-a-review-comment-for-a-pull-request
@@ -25552,7 +25766,7 @@ paths:
         Creates a reply to a review comment for a pull request. For the `comment_id`, provide the ID of the review comment you are replying to. This must be the ID of a _top-level review comment_, not a reply to that comment. Replies to replies are not supported.
 
 
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/pulls#create-a-reply-for-a-review-comment
@@ -25719,6 +25933,7 @@ paths:
         content:
           application/json:
             schema:
+              nullable: true
               properties:
                 commit_message:
                   description: Extra detail to append to automatic commit message.
@@ -25971,7 +26186,7 @@ paths:
         subcategory: reviews
     post:
       description: >-
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
 
 
         Pull request reviews created in the `PENDING` state do not include the `submitted_at` property in the response.
@@ -26343,6 +26558,7 @@ paths:
             example:
               expected_head_sha: 6dcb09b5b57875f334f61aebed695e2e4193db5e
             schema:
+              nullable: true
               properties:
                 expected_head_sha:
                   description: "The expected SHA of the pull request's HEAD ref. This is the most recent commit on the pull request's branch. If the expected SHA does not match the pull request's HEAD, you will receive a `422 Unprocessable Entity` status. You can use the \"[List commits](https://docs.github.com/rest/reference/repos#list-commits)\" endpoint to find the most recent commit SHA. Default: SHA of the pull request's current HEAD ref."
@@ -26478,7 +26694,7 @@ paths:
         Users with push access to the repository can create a release.
 
 
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/repos#create-a-release
@@ -26702,6 +26918,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
       responses:
         "200":
           content:
@@ -26902,7 +27119,7 @@ paths:
 
         *   GitHub renames asset filenames that have special characters, non-alphanumeric characters, and leading or trailing periods. The "[List assets for a release](https://docs.github.com/rest/reference/repos#list-assets-for-a-release)"
 
-        endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://github.com/contact).
+        endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://support.github.com/contact).
 
         *   If you upload an asset with the same filename as another uploaded asset, you'll receive an error and must delete the old file before you can re-upload the new asset.
       externalDocs:
@@ -27350,6 +27567,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
       requestBody:
         content:
           application/json:
@@ -27908,13 +28126,15 @@ paths:
             schema:
               properties:
                 new_owner:
-                  description: "**Required:** The username or organization name the repository will be transferred to."
+                  description: The username or organization name the repository will be transferred to.
                   type: string
                 team_ids:
                   description: ID of the team or teams to add to the repository. Teams can only be added to organization-owned repositories.
                   items:
                     type: integer
                   type: array
+              required:
+                - new_owner
               type: object
       responses:
         "202":
@@ -30194,7 +30414,7 @@ paths:
         Creates a new discussion post on a team's page. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
 
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/teams#create-a-discussion-legacy
@@ -30471,7 +30691,7 @@ paths:
         Creates a new comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
 
-        This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
+        This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/teams#create-a-discussion-comment-legacy
@@ -35616,6 +35836,9 @@ components:
         total_count: 2
     api-overview:
       value:
+        actions:
+          - 13.64.0.0/16
+          - 13.65.0.0/16
         api:
           - 192.30.252.0/22
           - 185.199.108.0/22
@@ -38037,7 +38260,7 @@ components:
           week: 1336280400
     commit-comment:
       value:
-        author_association: collaborator
+        author_association: COLLABORATOR
         body: Great stuff
         commit_id: 6dcb09b5b57875f334f61aebed695e2e4193db5e
         created_at: 2011-04-14T16:00:49Z
@@ -38070,7 +38293,7 @@ components:
           url: https://api.github.com/users/octocat
     commit-comment-2:
       value:
-        author_association: collaborator
+        author_association: COLLABORATOR
         body: Nice change
         commit_id: 6dcb09b5b57875f334f61aebed695e2e4193db5e
         created_at: 2011-04-14T16:00:49Z
@@ -38103,7 +38326,7 @@ components:
           url: https://api.github.com/users/octocat
     commit-comment-items:
       value:
-        - author_association: collaborator
+        - author_association: COLLABORATOR
           body: Great stuff
           commit_id: 6dcb09b5b57875f334f61aebed695e2e4193db5e
           created_at: 2011-04-14T16:00:49Z
@@ -40300,7 +40523,7 @@ components:
         url: https://api.github.com/gists/aa5a315d61ae9438b18d
     gist-comment:
       value:
-        author_association: collaborator
+        author_association: COLLABORATOR
         body: Just commenting for the sake of commenting
         created_at: 2011-04-18T23:23:56Z
         id: 1
@@ -40328,7 +40551,7 @@ components:
           url: https://api.github.com/users/octocat
     gist-comment-items:
       value:
-        - author_association: collaborator
+        - author_association: COLLABORATOR
           body: Just commenting for the sake of commenting
           created_at: 2011-04-18T23:23:56Z
           id: 1
@@ -40384,10 +40607,47 @@ components:
           version: 57a7f021a713b1c5a6a199b54cc514735d2d462f
     gist-fork-items:
       value:
-        - created_at: 2011-04-14T16:00:49Z
-          id: dee9c42e4998ce2ea439
-          updated_at: 2011-04-14T16:00:49Z
-          url: https://api.github.com/gists/dee9c42e4998ce2ea439
+        - comments: 1
+          comments_url: https://api.github.com/gists/aa5a315d61ae9438b18d/comments/
+          commits_url: https://api.github.com/gists/aa5a315d61ae9438b18d/commits
+          created_at: 2010-04-14T02:15:15Z
+          description: Hello World Examples
+          files:
+            hello_world.rb:
+              filename: hello_world.rb
+              language: Ruby
+              raw_url: https://gist.githubusercontent.com/octocat/6cad326836d38bd3a7ae/raw/db9c55113504e46fa076e7df3a04ce592e2e86d8/hello_world.rb
+              size: 167
+              type: application/x-ruby
+          forks_url: https://api.github.com/gists/aa5a315d61ae9438b18d/forks
+          git_pull_url: https://gist.github.com/aa5a315d61ae9438b18d.git
+          git_push_url: https://gist.github.com/aa5a315d61ae9438b18d.git
+          html_url: https://gist.github.com/aa5a315d61ae9438b18d
+          id: aa5a315d61ae9438b18d
+          node_id: MDQ6R2lzdGFhNWEzMTVkNjFhZTk0MzhiMThk
+          owner:
+            avatar_url: https://github.com/images/error/octocat_happy.gif
+            events_url: https://api.github.com/users/octocat/events{/privacy}
+            followers_url: https://api.github.com/users/octocat/followers
+            following_url: https://api.github.com/users/octocat/following{/other_user}
+            gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+            gravatar_id: ""
+            html_url: https://github.com/octocat
+            id: 1
+            login: octocat
+            node_id: MDQ6VXNlcjE=
+            organizations_url: https://api.github.com/users/octocat/orgs
+            received_events_url: https://api.github.com/users/octocat/received_events
+            repos_url: https://api.github.com/users/octocat/repos
+            site_admin: false
+            starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+            subscriptions_url: https://api.github.com/users/octocat/subscriptions
+            type: User
+            url: https://api.github.com/users/octocat
+          public: true
+          updated_at: 2011-06-20T11:34:15Z
+          url: https://api.github.com/gists/aa5a315d61ae9438b18d
+          user: null
     git-commit:
       value:
         author:
@@ -40398,10 +40658,12 @@ components:
           date: 2014-11-07T22:01:45Z
           email: octocat@github.com
           name: Monalisa Octocat
+        html_url: https://github.com/octocat/Hello-World/commit/7638417db6d59f3c431d3e1f261cc637155684cd
         message: my commit message
         node_id: MDY6Q29tbWl0NzYzODQxN2RiNmQ1OWYzYzQzMWQzZTFmMjYxY2M2MzcxNTU2ODRjZA==
         parents:
-          - sha: 7d1b31e74ee336d15cbd21741bc88a537ed063a0
+          - html_url: https://github.com/octocat/Hello-World/commit/7d1b31e74ee336d15cbd21741bc88a537ed063a0
+            sha: 7d1b31e74ee336d15cbd21741bc88a537ed063a0
             url: https://api.github.com/repos/octocat/Hello-World/git/commits/7d1b31e74ee336d15cbd21741bc88a537ed063a0
         sha: 7638417db6d59f3c431d3e1f261cc637155684cd
         tree:
@@ -40423,10 +40685,12 @@ components:
           date: 2014-11-07T22:01:45Z
           email: octocat@github.com
           name: Monalisa Octocat
+        html_url: https://github.com/octocat/Hello-World/commit/7638417db6d59f3c431d3e1f261cc637155684cd
         message: added readme, because im a good github citizen
         node_id: MDY6Q29tbWl0NmRjYjA5YjViNTc4NzVmMzM0ZjYxYWViZWQ2OTVlMmU0MTkzZGI1ZQ==
         parents:
-          - sha: 1acc419d4d6a9ce985db7be48c6349a0475975b5
+          - html_url: https://github.com/octocat/Hello-World/commit/7638417db6d59f3c431d3e1f261cc637155684cd
+            sha: 1acc419d4d6a9ce985db7be48c6349a0475975b5
             url: https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5
         sha: 7638417db6d59f3c431d3e1f261cc637155684cd
         tree:
@@ -41217,7 +41481,7 @@ components:
             subscriptions_url: https://api.github.com/users/octocat/subscriptions
             type: User
             url: https://api.github.com/users/octocat
-        author_association: collaborator
+        author_association: COLLABORATOR
         body: I'm having a problem with this.
         closed_at: null
         closed_by:
@@ -41323,7 +41587,7 @@ components:
           url: https://api.github.com/users/octocat
     issue-comment:
       value:
-        author_association: collaborator
+        author_association: COLLABORATOR
         body: Me too
         created_at: 2011-04-14T16:00:49Z
         html_url: https://github.com/octocat/Hello-World/issues/1347#issuecomment-1
@@ -41353,7 +41617,7 @@ components:
           url: https://api.github.com/users/octocat
     issue-comment-items:
       value:
-        - author_association: collaborator
+        - author_association: COLLABORATOR
           body: Me too
           created_at: 2011-04-14T16:00:49Z
           html_url: https://github.com/octocat/Hello-World/issues/1347#issuecomment-1
@@ -41447,7 +41711,7 @@ components:
               subscriptions_url: https://api.github.com/users/octocat/subscriptions
               type: User
               url: https://api.github.com/users/octocat
-          author_association: collaborator
+          author_association: COLLABORATOR
           body: I'm having a problem with this.
           closed_at: null
           comments: 0
@@ -41628,7 +41892,7 @@ components:
                 subscriptions_url: https://api.github.com/users/octocat/subscriptions
                 type: User
                 url: https://api.github.com/users/octocat
-            author_association: collaborator
+            author_association: COLLABORATOR
             body: I'm having a problem with this.
             closed_at: null
             comments: 0
@@ -41720,7 +41984,7 @@ components:
         incomplete_results: false
         items:
           - assignee: null
-            author_association: collaborator
+            author_association: COLLABORATOR
             body: ...
             closed_at: null
             comments: 15
@@ -41882,7 +42146,7 @@ components:
             subscriptions_url: https://api.github.com/users/other_user/subscriptions
             type: User
             url: https://api.github.com/users/other_user
-        author_association: collaborator
+        author_association: COLLABORATOR
         body: I'm having a problem with this.
         closed_at: null
         comments: 0
@@ -42008,7 +42272,7 @@ components:
               subscriptions_url: https://api.github.com/users/octocat/subscriptions
               type: User
               url: https://api.github.com/users/octocat
-          author_association: collaborator
+          author_association: COLLABORATOR
           body: I'm having a problem with this.
           closed_at: null
           comments: 0
@@ -42134,7 +42398,7 @@ components:
               subscriptions_url: https://api.github.com/users/octocat/subscriptions
               type: User
               url: https://api.github.com/users/octocat
-          author_association: collaborator
+          author_association: COLLABORATOR
           body: I'm having a problem with this.
           closed_at: null
           comments: 0
@@ -44734,12 +44998,15 @@ components:
           type: User
           url: https://api.github.com/users/other_user
         login: monalisa
+        node_id: MDQ6VXNlcjE=
         role: direct_member
         team_count: 2
     organization-invitation-items:
       value:
         - created_at: 2016-11-30T06:46:10-08:00
           email: octocat@github.com
+          failed_at: ""
+          failed_reason: ""
           id: 1
           invitation_team_url: https://api.github.com/organizations/2/invitations/1/teams
           inviter:
@@ -44762,6 +45029,7 @@ components:
             type: User
             url: https://api.github.com/users/other_user
           login: monalisa
+          node_id: MDQ6VXNlcjE=
           role: direct_member
           team_count: 2
     organization-simple-items:
@@ -44804,6 +45072,7 @@ components:
         cname: developer.github.com
         custom_404: false
         html_url: https://developer.github.com
+        public: true
         source:
           branch: master
           path: /
@@ -46195,7 +46464,7 @@ components:
             href: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
           pull_request:
             href: https://api.github.com/repos/octocat/Hello-World/pulls/12
-        author_association: collaborator
+        author_association: COLLABORATOR
         body: This is close to perfect! Please address the suggested inline change.
         commit_id: ecdd80bb57125d7ba9641ffaa4d7d2c19d3f3091
         html_url: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
@@ -46230,7 +46499,7 @@ components:
             href: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
           pull_request:
             href: https://api.github.com/repos/octocat/Hello-World/pulls/12
-        author_association: collaborator
+        author_association: COLLABORATOR
         body: Here is the body for the review.
         commit_id: ecdd80bb57125d7ba9641ffaa4d7d2c19d3f3091
         html_url: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
@@ -46265,7 +46534,7 @@ components:
             href: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
           pull_request:
             href: https://api.github.com/repos/octocat/Hello-World/pulls/12
-        author_association: collaborator
+        author_association: COLLABORATOR
         body: Here is the body for the review.
         commit_id: ecdd80bb57125d7ba9641ffaa4d7d2c19d3f3091
         html_url: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
@@ -46300,7 +46569,7 @@ components:
             href: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
           pull_request:
             href: https://api.github.com/repos/octocat/Hello-World/pulls/12
-        author_association: collaborator
+        author_association: COLLABORATOR
         body: This is close to perfect! Please address the suggested inline change. And add more about this.
         commit_id: ecdd80bb57125d7ba9641ffaa4d7d2c19d3f3091
         html_url: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
@@ -46539,7 +46808,7 @@ components:
               href: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
             pull_request:
               href: https://api.github.com/repos/octocat/Hello-World/pulls/12
-          author_association: collaborator
+          author_association: COLLABORATOR
           body: Here is the body for the review.
           commit_id: ecdd80bb57125d7ba9641ffaa4d7d2c19d3f3091
           html_url: https://github.com/octocat/Hello-World/pull/12#pullrequestreview-80
@@ -49054,6 +49323,7 @@ components:
           os: linux
     runner-group:
       value:
+        allows_public_repositories: true
         default: false
         id: 2
         inherited: false
@@ -49063,6 +49333,7 @@ components:
         visibility: selected
     runner-group-enterprise:
       value:
+        allows_public_repositories: false
         default: false
         id: 2
         name: octo-runner-group
@@ -49071,6 +49342,7 @@ components:
         visibility: selected
     runner-group-item:
       value:
+        allows_public_repositories: true
         default: false
         id: 2
         inherited: false
@@ -49080,6 +49352,7 @@ components:
         visibility: selected
     runner-group-update-enterprise:
       value:
+        allows_public_repositories: true
         default: false
         id: 2
         name: Expensive hardware runners
@@ -49089,18 +49362,21 @@ components:
     runner-groups-enterprise:
       value:
         runner_groups:
-          - default: true
+          - allows_public_repositories: false
+            default: true
             id: 1
             name: Default
             runners_url: https://api.github.com/enterprises/octo-corp/actions/runner_groups/1/runners
             visibility: all
-          - default: false
+          - allows_public_repositories: true
+            default: false
             id: 2
             name: octo-runner-group
             runners_url: https://api.github.com/enterprises/octo-corp/actions/runner_groups/2/runners
             selected_organizations_url: https://api.github.com/enterprises/octo-corp/actions/runner_groups/2/organizations
             visibility: selected
-          - default: false
+          - allows_public_repositories: true
+            default: false
             id: 3
             name: expensive-hardware
             runners_url: https://api.github.com/enterprises/octo-corp/actions/runner_groups/3/runners
@@ -49109,20 +49385,23 @@ components:
     runner-groups-org:
       value:
         runner_groups:
-          - default: true
+          - allows_public_repositories: true
+            default: true
             id: 1
             inherited: false
             name: Default
             runners_url: https://api.github.com/orgs/octo-org/actions/runner_groups/1/runners
             visibility: all
-          - default: false
+          - allows_public_repositories: true
+            default: false
             id: 2
             inherited: true
             name: octo-runner-group
             runners_url: https://api.github.com/orgs/octo-org/actions/runner_groups/2/runners
             selected_repositories_url: https://api.github.com/orgs/octo-org/actions/runner_groups/2/repositories
             visibility: selected
-          - default: false
+          - allows_public_repositories: true
+            default: false
             id: 3
             inherited: false
             name: expensive-hardware
@@ -49620,7 +49899,6 @@ components:
             members_url: https://api.github.com/teams/1/members{/member}
             name: Justice League
             node_id: MDQ6VGVhbTE=
-            parent: null
             permission: admin
             privacy: closed
             repositories_url: https://api.github.com/teams/1/repos
@@ -50965,6 +51243,7 @@ components:
           title: Greetings
           type: Issue
           url: https://api.github.com/repos/octokit/octokit.rb/issues/123
+        subscription_url: https://api.github.com/notifications/threads/1/subscription
         unread: true
         updated_at: 2014-11-07T22:01:45Z
         url: https://api.github.com/notifications/threads/1
@@ -51045,6 +51324,7 @@ components:
             title: Greetings
             type: Issue
             url: https://api.github.com/repos/octokit/octokit.rb/issues/123
+          subscription_url: https://api.github.com/notifications/threads/1/subscription
           unread: true
           updated_at: 2014-11-07T22:01:45Z
           url: https://api.github.com/notifications/threads/1
@@ -51784,12 +52064,13 @@ components:
       schema:
         type: string
     branch:
-      description: branch+ parameter
+      description: The name of the branch.
       in: path
       name: branch
       required: true
       schema:
         type: string
+      x-multi-segment: true
     card_id:
       description: card_id parameter
       in: path
@@ -51846,12 +52127,13 @@ components:
       schema:
         type: integer
     commit_sha:
-      description: commit_sha+ parameter
+      description: commit_sha parameter
       in: path
       name: commit_sha
       required: true
       schema:
         type: string
+      x-multi-segment: true
     count:
       description: "Used for pagination: the number of results to return."
       in: query
@@ -52590,6 +52872,13 @@ components:
     api-overview:
       description: Api Overview
       properties:
+        actions:
+          example:
+            - 13.64.0.0/16
+            - 13.65.0.0/16
+          items:
+            type: string
+          type: array
         api:
           example:
             - 127.0.0.1/32
@@ -52602,9 +52891,6 @@ components:
           items:
             type: string
           type: array
-        github_services_sha:
-          example: 3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15
-          type: string
         hooks:
           example:
             - 127.0.0.1/32
@@ -52618,8 +52904,6 @@ components:
           items:
             type: string
           type: array
-        installed_version:
-          type: string
         pages:
           example:
             - 192.30.252.153/32
@@ -53062,6 +53346,20 @@ components:
         - expires_at
       title: Authentication Token
       type: object
+    author_association:
+      description: How the author is associated with the repository.
+      enum:
+        - COLLABORATOR
+        - CONTRIBUTOR
+        - FIRST_TIMER
+        - FIRST_TIME_CONTRIBUTOR
+        - MANNEQUIN
+        - MEMBER
+        - NONE
+        - OWNER
+      example: OWNER
+      title: author_association
+      type: string
     authorization:
       description: The authorization for an OAuth app, GitHub App, or a Personal Access Token.
       properties:
@@ -54587,7 +54885,7 @@ components:
       description: Commit Comment
       properties:
         author_association:
-          type: string
+          $ref: "#/components/schemas/author_association"
         body:
           type: string
         commit_id:
@@ -56449,7 +56747,7 @@ components:
       description: A comment made to a gist.
       properties:
         author_association:
-          type: string
+          $ref: "#/components/schemas/author_association"
         body:
           description: The comment text.
           example: Body of the attachment
@@ -56523,169 +56821,6 @@ components:
         - change_status
       title: Gist Commit
       type: object
-    gist-full:
-      allOf:
-        - $ref: "#/components/schemas/gist-simple"
-        - properties:
-            comments:
-              example: 1
-              type: integer
-            comments_url:
-              example: '"https://api.github.com/gists/d8de7663c84491ba9eeb9ca1fd20ced8/comments"'
-              type: string
-            commits_url:
-              example: '"https://api.github.com/gists/d8de7663c84491ba9eeb9ca1fd20ced8/commits"'
-              type: string
-            created_at:
-              example: '"2020-07-09T00:18:06Z"'
-              type: string
-            description:
-              example: '"description"'
-              nullable: true
-              type: string
-            fork_of:
-              allOf:
-                - $ref: "#/components/schemas/gist-simple"
-              nullable: true
-            forks:
-              items:
-                properties:
-                  created_at:
-                    type: string
-                  id:
-                    type: string
-                  updated_at:
-                    type: string
-                  url:
-                    type: string
-                  user:
-                    properties:
-                      avatar_url:
-                        type: string
-                      events_url:
-                        type: string
-                      followers_url:
-                        type: string
-                      following_url:
-                        type: string
-                      gists_url:
-                        type: string
-                      gravatar_id:
-                        type: string
-                      html_url:
-                        type: string
-                      id:
-                        type: integer
-                      login:
-                        type: string
-                      node_id:
-                        type: string
-                      organizations_url:
-                        type: string
-                      received_events_url:
-                        type: string
-                      repos_url:
-                        type: string
-                      site_admin:
-                        type: boolean
-                      starred_url:
-                        type: string
-                      subscriptions_url:
-                        type: string
-                      type:
-                        type: string
-                      url:
-                        type: string
-                    type: object
-                type: object
-              type: array
-            forks_url:
-              example: '"https://api.github.com/gists/d8de7663c84491ba9eeb9ca1fd20ced8/forks"'
-              type: string
-            git_pull_url:
-              example: '"https://gist.github.com/d8de7663c84491ba9eeb9ca1fd20ced8.git"'
-              type: string
-            git_push_url:
-              example: '"https://gist.github.com/d8de7663c84491ba9eeb9ca1fd20ced8.git"'
-              type: string
-            history:
-              items:
-                properties:
-                  change_status:
-                    properties:
-                      additions:
-                        type: integer
-                      deletions:
-                        type: integer
-                      total:
-                        type: integer
-                    type: object
-                  committed_at:
-                    type: string
-                  url:
-                    type: string
-                  user:
-                    nullable: true
-                    properties:
-                      avatar_url:
-                        type: string
-                      events_url:
-                        type: string
-                      followers_url:
-                        type: string
-                      following_url:
-                        type: string
-                      gists_url:
-                        type: string
-                      gravatar_id:
-                        type: string
-                      html_url:
-                        type: string
-                      id:
-                        type: integer
-                      login:
-                        type: string
-                      node_id:
-                        type: string
-                      organizations_url:
-                        type: string
-                      received_events_url:
-                        type: string
-                      repos_url:
-                        type: string
-                      site_admin:
-                        type: boolean
-                      starred_url:
-                        type: string
-                      subscriptions_url:
-                        type: string
-                      type:
-                        type: string
-                      url:
-                        type: string
-                    type: object
-                  version:
-                    type: string
-                type: object
-              type: array
-            html_url:
-              example: '"https://gist.github.com/d8de7663c84491ba9eeb9ca1fd20ced8"'
-              type: string
-            id:
-              example: '"d8de7663c84491ba9eeb9ca1fd20ced8"'
-              type: string
-            node_id:
-              example: '"MDQ6R2lzdGQ4ZGU3NjYzYzg0NDkxYmE5ZWViOWNhMWZkMjBjZWQ4"'
-              type: string
-            updated_at:
-              example: '"2020-07-09T00:18:06Z"'
-              type: string
-            url:
-              example: '"https://api.github.com/gists/d8de7663c84491ba9eeb9ca1fd20ced8/cb5b95fe0f15ada6d34a421007ba2e4a34e2771e"'
-              type: string
-          type: object
-      description: Gist Full
-      title: Gist Full
     gist-simple:
       description: Gist Simple
       properties:
@@ -57814,7 +57949,7 @@ components:
           nullable: true
           type: array
         author_association:
-          type: string
+          $ref: "#/components/schemas/author_association"
         body:
           description: Contents of the issue
           example: It looks like the new widget form is broken on Safari. When I try and create the widget, Safari crashes. This is reproducible on 10.8, but not 10.9. Maybe a browser bug?
@@ -57979,16 +58114,7 @@ components:
       description: Comments provide a way for people to collaborate on an issue.
       properties:
         author_association:
-          enum:
-            - collaborator
-            - contributor
-            - first_timer
-            - first_time_contributor
-            - mannequin
-            - member
-            - none
-            - owner
-          type: string
+          $ref: "#/components/schemas/author_association"
         body:
           description: Contents of the issue comment
           example: What version of Safari were you using when you observed this bug?
@@ -58060,7 +58186,7 @@ components:
             - $ref: "#/components/schemas/simple-user"
           nullable: true
         author_association:
-          type: string
+          $ref: "#/components/schemas/author_association"
         commit_id:
           example: 6dcb09b5b57875f334f61aebed695e2e4193db5e
           nullable: true
@@ -58146,8 +58272,7 @@ components:
         actor:
           $ref: "#/components/schemas/simple-user"
         author_association:
-          example: '"COLLABORATOR"'
-          type: string
+          $ref: "#/components/schemas/author_association"
         body:
           example: '":+1:"'
           type: string
@@ -58278,7 +58403,7 @@ components:
           nullable: true
           type: array
         author_association:
-          type: string
+          $ref: "#/components/schemas/author_association"
         body:
           type: string
         body_html:
@@ -58439,7 +58564,7 @@ components:
           nullable: true
           type: array
         author_association:
-          type: string
+          $ref: "#/components/schemas/author_association"
         body:
           example: I'm having a problem with this.
           type: string
@@ -60000,6 +60125,10 @@ components:
         email:
           nullable: true
           type: string
+        failed_at:
+          type: string
+        failed_reason:
+          type: string
         id:
           type: integer
         invitation_team_url:
@@ -60123,6 +60252,10 @@ components:
           example: https://example.com
           format: uri
           type: string
+        public:
+          description: Whether the GitHub Pages site is publicly visible. If set to `true`, the site is accessible to anyone on the internet. If set to `false`, the site will only be accessible to users who have at least `read` access to the repository that published the site.
+          example: true
+          type: boolean
         source:
           $ref: "#/components/schemas/pages-source-hash"
         status:
@@ -60144,6 +60277,7 @@ components:
         - status
         - cname
         - custom_404
+        - public
       title: GitHub Pages
       type: object
     page-build:
@@ -61025,8 +61159,7 @@ components:
           nullable: true
           type: array
         author_association:
-          example: OWNER
-          type: string
+          $ref: "#/components/schemas/author_association"
         base:
           properties:
             label:
@@ -62208,7 +62341,7 @@ components:
             - pull_request
           type: object
         author_association:
-          type: string
+          $ref: "#/components/schemas/author_association"
         body:
           description: The text of the review.
           example: This looks great.
@@ -62297,9 +62430,7 @@ components:
             - pull_request
           type: object
         author_association:
-          description: How the author of the comment is associated with the pull request.
-          example: OWNER
-          type: string
+          $ref: "#/components/schemas/author_association"
         body:
           description: The text of the comment.
           example: We should probably include a check for null values here.
@@ -62492,8 +62623,7 @@ components:
           nullable: true
           type: array
         author_association:
-          example: OWNER
-          type: string
+          $ref: "#/components/schemas/author_association"
         base:
           properties:
             label:
@@ -63983,7 +64113,7 @@ components:
             - pull_request
           type: object
         author_association:
-          type: string
+          $ref: "#/components/schemas/author_association"
         body:
           example: Great stuff
           type: string
@@ -66632,7 +66762,7 @@ components:
                   type: integer
               required:
                 - total_ms
-                - job
+                - jobs
               type: object
             UBUNTU:
               properties:
@@ -66642,7 +66772,7 @@ components:
                   type: integer
               required:
                 - total_ms
-                - job
+                - jobs
               type: object
             WINDOWS:
               properties:

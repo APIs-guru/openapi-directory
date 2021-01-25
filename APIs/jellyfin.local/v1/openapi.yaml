@@ -1,6 +1,5 @@
 openapi: 3.0.1
 servers:
-  - url: http://jellyfin.local
   - url: http://localhost
 x-hasEquivalentPaths: true
 info:
@@ -14,6 +13,7 @@ info:
       url: https://repo.jellyfin.org/releases/openapi/stable/jellyfin-openapi-10.7.0-rc2.json
       version: "3.0"
   x-providerName: jellyfin.local
+  x-preferred: null
 paths:
   "/Albums/{id}/InstantMix":
     get:
