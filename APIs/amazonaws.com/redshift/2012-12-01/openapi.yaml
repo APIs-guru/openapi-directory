@@ -15198,7 +15198,7 @@ components:
             - description: The port that the database engine is listening on.
         VpcEndpoints:
           allOf:
-            - $ref: '#/components/schemas/SpartaProxyVpcEndpointList'
+            - $ref: '#/components/schemas/VpcEndpointsList'
             - description: Describes a connection endpoint.
       description: Describes a connection endpoint.
     TStamp:
@@ -17562,13 +17562,13 @@ components:
             - $ref: '#/components/schemas/IntegerOptional'
             - description: '<p>The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
       description: <p/>
-    SpartaProxyVpcEndpointList:
+    VpcEndpointsList:
       type: array
       items:
         allOf:
-          - $ref: '#/components/schemas/SpartaProxyVpcEndpoint'
+          - $ref: '#/components/schemas/VpcEndpoint'
           - xml:
-              name: SpartaProxyVpcEndpoint
+              name: VpcEndpoint
     Event:
       type: object
       properties:
@@ -18702,14 +18702,6 @@ components:
       enum:
         - ASC
         - DESC
-    SpartaProxyVpcEndpoint:
-      type: object
-      properties:
-        VpcEndpointId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
-      description: The connection endpoint for connecting an Amazon Redshift cluster through the proxy.
     Subnet:
       type: object
       properties:
@@ -18798,6 +18790,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UsageLimit'
+    VpcEndpoint:
+      type: object
+      properties:
+        VpcEndpointId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
+      description: The connection endpoint for connecting an Amazon Redshift cluster through the proxy.
     VpcSecurityGroupMembership:
       type: object
       properties:
