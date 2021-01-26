@@ -6,7 +6,7 @@ info:
     x-twitter: theTechComp
   description: KeyServ API
   title: KeyServ
-  version: 1.2.5
+  version: 1.4.5
   x-apisguru-categories:
     - iot
   x-logo:
@@ -170,7 +170,7 @@ paths:
       parameters:
         - in: query
           name: page
-          required: true
+          required: false
           schema:
             format: int32
             nullable: true
@@ -203,7 +203,7 @@ paths:
       parameters:
         - in: query
           name: page
-          required: true
+          required: false
           schema:
             format: int32
             nullable: true
@@ -457,7 +457,7 @@ paths:
       parameters:
         - in: query
           name: page
-          required: true
+          required: false
           schema:
             format: int32
             nullable: true
