@@ -1,0 +1,3266 @@
+openapi: 3.0.0
+servers:
+  - url: /
+info:
+  contact:
+    name: Open Build Service
+    url: https://openbuildservice.org/
+  description: >
+    The _Open Build Service API_ is a XML API.
+
+
+    To authenticate, use [HTTP basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) by passing the _Authorization_ header in the form of `Authorization: Basic <credentials>`.
+
+
+    There is no API versioning as there is no need for it right now.
+
+
+    Only rudimentary rate limiting is implemented, so please be gentle when using the API concurrently, especially with potentially expensive operations.
+
+    In case of abuse, we will limit/remove your access.
+
+
+    For command-line users, we recommend using [osc](https://github.com/openSUSE/osc) with its _api_ command to interact with the API.
+
+    It's as simple as this example: `osc api /about` (_about_ is one of the endpoints documented below)
+  license:
+    name: GNU General Public License v2.0
+    url: https://github.com/openSUSE/open-build-service/blob/master/COPYING
+  title: Open Build Service API
+  version: 2.10.50
+  x-apisguru-categories:
+    - developer_tools
+  x-origin:
+    - format: openapi
+      url: https://build.opensuse.org/apidocs-new/OBS-v2.10.50.yaml
+      version: "3.0"
+  x-providerName: opensuse.org
+  x-serviceName: obs
+externalDocs:
+  description: Open Build Service - Documentation
+  url: https://openbuildservice.org/help/
+tags:
+  - name: General Information
+  - name: Groups
+  - name: Issue Trackers
+  - name: Person
+  - name: Attribute Namespaces
+  - name: Attributes
+  - name: Request
+  - name: Configuration
+  - name: Distributions
+paths:
+  /about:
+    get:
+      description: Get generic information about the API.
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                properties:
+                  commit:
+                    example: 7b5d82e6143442a8eb8459f35cc94d2fbe263ebe
+                    type: string
+                  description:
+                    example: API to the Open Build Service
+                    type: string
+                  last_deployment:
+                    example: 2020-11-10 15:07:02 +0000
+                    type: string
+                  revision:
+                    example: 2.11~alpha.20201110T101235.7b5d82e614
+                    type: string
+                  title:
+                    example: Open Build Service API
+                    type: string
+                type: object
+          description: >
+            OK. The request has succeeded.
+
+
+            XML Schema used for body validation: [about.xsd](../schema/about.xsd)
+      summary: Get information about API.
+      tags:
+        - General Information
+  /architectures:
+    get:
+      description: >
+        Get a list of all known architectures known to OBS in general. This is not the list of architectures provided by this instance. Check the schedulers element from the `/configuration` route for this.
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                count: "4"
+                entry:
+                  - name: aarch64
+                  - name: armv7l
+                  - name: s390x
+                  - name: x86_64
+              schema:
+                properties:
+                  count:
+                    type: integer
+                    xml:
+                      attribute: true
+                  entry:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                type: object
+                xml:
+                  name: directory
+          description: OK. The request has succeeded.
+        "401":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                anonymous_user:
+                  summary: Anonymous User
+                  value:
+                    code: anonymous_user
+                    summary: Anonymous user is not allowed here - please login
+                authentication_required:
+                  summary: Authentication Required
+                  value:
+                    code: authentication_required
+                    summary: Unknown user 'Admin' or invalid password
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Unauthorized.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+      security:
+        - basic_authentication: []
+      summary: List all known architectures.
+      tags:
+        - General Information
+  "/architectures/{architecture_name}":
+    get:
+      description: Show information about one architecture.
+      parameters:
+        - description: Architecture name
+          example: x86_64
+          in: path
+          name: architecture_name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                example:
+                  name: x86_64
+                properties:
+                  name:
+                    type: string
+                    xml:
+                      attribute: true
+                type: object
+                xml:
+                  name: architecture
+          description: OK. The request has succeeded.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: unknown_architecture
+                summary: "Architecture does not exist: x999"
+              schema:
+                properties:
+                  code:
+                    type: string
+                    xml:
+                      attribute: true
+                  data:
+                    items:
+                      type: string
+                    type: array
+                  summary:
+                    type: string
+                type: object
+                xml:
+                  name: status
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Show one architecture.
+      tags:
+        - General Information
+  /attribute:
+    get:
+      description: List all attribute namespaces.
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                count: "2"
+                entry:
+                  - name: OBS
+                  - name: openSUSE
+              schema:
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeeded.
+
+
+            XML Schema used for body validation: [directory.xsd](../schema/directory.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: List all attribute namespaces.
+      tags:
+        - Attribute Namespaces
+  "/attribute/{namespace}":
+    delete:
+      description: >
+        Delete an attribute namespace and all attributes below.
+
+
+        This operation is the same as the one defined with [DELETE /attribute/{namespace}/_meta](#/Attributes/delete_attribute__namespace___meta).
+      parameters:
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: ok
+                summary: Ok
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeeded.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: Delete an attribute namespace and all attributes below.
+      tags:
+        - Attribute Namespaces
+    get:
+      description: List all attributes under a given attribute namespace.
+      parameters:
+        - description: The namespace
+          example: OBS_TEST
+          in: path
+          name: namespace
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                count: "2"
+                entry:
+                  - name: AutoCleanup
+                  - name: OwnerRootProject
+              schema:
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeeded.
+
+
+            XML Schema used for body validation: [directory.xsd](../schema/directory.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find AttribNamespace
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: List all attributes below a namespace.
+      tags:
+        - Attribute Namespaces
+  "/attribute/{namespace}/_meta":
+    delete:
+      description: >
+        Delete an attribute namespace and all attributes below.
+
+
+        This operation is the same as the one defined with [DELETE /attribute/{namespace}](#/Attributes/delete_attribute__namespace_).
+      parameters:
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: Delete an attribute namespace and all attributes below.
+      tags:
+        - Attribute Namespaces
+    get:
+      description: Shows attribute namespace.
+      parameters:
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                properties:
+                  modifiable_by:
+                    items:
+                      properties:
+                        user:
+                          example: user_login_name
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                  name:
+                    example: OBS_TEST
+                    type: string
+                    xml:
+                      attribute: true
+                type: object
+                xml:
+                  name: namespace
+          description: >
+            OK. The request has succeeded.
+
+
+            XML Schema used for body validation: [attribute_namespace_meta.xsd](../schema/attribute_namespace_meta.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find AttribNamespace
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Show attribute namespace.
+      tags:
+        - Attribute Namespaces
+    post:
+      description: >
+        This endpoint can be used for both, creating an attribute namespace and updating it:
+          * If the attribute namespace passed as parameter doesn't exist, it will create the attribute namespace.
+          * If the attribute namespace passed as parameter already exists, it will update the namespace attribute.
+
+        This operation is the same as the one defined with [PUT](#/Attributes/put_attribute__namespace___meta).
+      parameters:
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+      requestBody:
+        content:
+          application/xml; charset=utf-8:
+            schema:
+              $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1_meta/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+        description: >
+          Attribute namespace definition.
+
+
+          XML Schema used for body validation: [attribute_namespace_meta.xsd](../schema/attribute_namespace_meta.xsd)
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                empty_body:
+                  summary: Validation Failed (Empty Body)
+                  value:
+                    code: validation_failed
+                    summary: Document is empty, not allowed for attribute_namespace_meta
+                wrong_xml_element:
+                  summary: Validation Failed (Wrong XML Element)
+                  value:
+                    code: validation_failed
+                    summary: "attribute_namespace_meta validation error: 1:0: ERROR: Element 'foo': No matching global declaration available for the validation root."
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Validation Failed.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                namespace:
+                  summary: Not Found (Namespace)
+                  value:
+                    code: not_found
+                    summary: Couldn't find AttribNamespace
+                user:
+                  summary: Not Found (User)
+                  value:
+                    code: not_found
+                    summary: Couldn't find User with login = user_login_name
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Change attribute namespace. Create an attribute namespace if it doesn't exist.
+      tags:
+        - Attribute Namespaces
+    put:
+      description: >
+        This endpoint can be used for both, creating an attribute namespace and updating it:
+          * If the attribute namespace passed as parameter doesn't exist, it will create the attribute namespace.
+          * If the attribute namespace passed as parameter already exists, it will update the namespace attribute.
+
+        This operation is the same as the one defined with [POST](#/Attributes/post_attribute__namespace___meta).
+      parameters:
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+      requestBody:
+        content:
+          application/xml; charset=utf-8:
+            schema:
+              $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1_meta/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+        description: >
+          Attribute namespace definition.
+
+
+          XML Schema used for body validation: [attribute_namespace_meta.xsd](../schema/attribute_namespace_meta.xsd)
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                empty_body:
+                  summary: Validation Failed (Empty Body)
+                  value:
+                    code: validation_failed
+                    summary: Document is empty, not allowed for attribute_namespace_meta
+                wrong_xml_element:
+                  summary: Validation Failed (Wrong XML Element)
+                  value:
+                    code: validation_failed
+                    summary: "attribute_namespace_meta validation error: 1:0: ERROR: Element 'foo': No matching global declaration available for the validation root."
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Validation Failed.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                namespace:
+                  summary: Not Found (Namespace)
+                  value:
+                    code: not_found
+                    summary: Couldn't find AttribNamespace
+                user:
+                  summary: Not Found (User)
+                  value:
+                    code: not_found
+                    summary: Couldn't find User with login = user_login_name
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Change attribute namespace. Create an attribute namespace if it doesn't exist.
+      tags:
+        - Attribute Namespaces
+  "/attribute/{namespace}/{attribute_name}":
+    delete:
+      description: >
+        Delete an attribute and all its values in projects or packages.
+
+
+        This operation is the same as the one defined with [DELETE /attribute/{namespace}/{attribute_name}/_meta](#/Attributes/delete_attribute__namespace___attribute_name___meta)
+      parameters:
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+        - description: The name of the attribute
+          example: OwnerRootProjectTest
+          in: path
+          name: attribute_name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                namespace:
+                  summary: Not Found (Namespace)
+                  value:
+                    code: not_found
+                    summary: Couldn't find AttribNamespace
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Delete an attribute and all its values in projects or packages.
+      tags:
+        - Attributes
+  "/attribute/{namespace}/{attribute_name}/_meta":
+    delete:
+      description: >
+        Delete an attribute and all its values in projects or packages.
+
+
+        This operation is the same as the one defined with [DELETE /attribute/{namespace}/{attribute_name}](#/Attributes/delete_attribute__namespace___attribute_name_)
+      parameters:
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D/delete/parameters/1"
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                namespace:
+                  summary: Not Found (Namespace)
+                  value:
+                    code: not_found
+                    summary: Couldn't find AttribNamespace
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Delete an attribute and all its values in projects or packages.
+      tags:
+        - Attributes
+    get:
+      description: Shows attribute.
+      parameters:
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D/delete/parameters/1"
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                properties:
+                  allowed:
+                    properties:
+                      value:
+                        example:
+                          - DisableDevelTest
+                          - BugownerOnlyTest
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  count:
+                    example: 0
+                    type: integer
+                  description:
+                    example: An example description for an attribute.
+                    type: string
+                  modifiable_by:
+                    items:
+                      properties:
+                        user:
+                          example: user_login_name
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                  name:
+                    example: OBS_TEST
+                    type: string
+                    xml:
+                      attribute: true
+                  namespace:
+                    example: OwnerRootProjectTest
+                    type: string
+                    xml:
+                      attribute: true
+                type: object
+                xml:
+                  name: definition
+          description: OK. The request has succeeded.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                namespace:
+                  summary: Not Found (Namespace)
+                  value:
+                    code: not_found
+                    summary: Couldn't find AttribNamespace
+                unknown_attribute:
+                  summary: Unknown Attribute
+                  value:
+                    code: unknown_attribute
+                    summary: Unknown attribute 'OBS_TEST':'OwnerRootProjectTest'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Shows attribute.
+      tags:
+        - Attributes
+    post:
+      description: >
+        This endpoint can be used for both, creating an attribute and updating it:
+          * If the attribute passed as parameter doesn't exist, it will create the attribute.
+          * If the attribute passed as parameter already exists, it will update the attribute.
+
+        This operation is the same as the one defined with [PUT](#/Attributes/put_attribute__namespace___attribute_name___meta).
+      parameters:
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D/delete/parameters/1"
+      requestBody:
+        content:
+          application/xml; charset=utf-8:
+            schema:
+              $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D~1_meta/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+        description: Attribute definition.
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                empty_body:
+                  summary: Validation Failed (Empty Body)
+                  value:
+                    code: validation_failed
+                    summary: Document is empty, not allowed for attrib_type
+                illegal_request:
+                  summary: Illegal Request
+                  value:
+                    code: illegal_request
+                    summary: "Illegal request: PUT/POST /attribute/OBS_TEST/OwnerRootProjectTest/_meta: path does not match content"
+                wrong_xml_element:
+                  summary: Validation Failed (Wrong XML Attributes)
+                  value:
+                    code: validation_failed
+                    summary: "attrib_type validation error: 1:0: ERROR: Element definition failed to validate attributes"
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Validation Failed.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                namespace:
+                  summary: Not Found (Namespace)
+                  value:
+                    code: not_found
+                    summary: Couldn't find AttribNamespace
+                unknown_attribute:
+                  summary: Unknown Attribute
+                  value:
+                    code: unknown_attribute
+                    summary: Unknown attribute 'OBS_TEST':'OwnerRootProjectTest'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Change attribute data. Create an attribute if it doesn't exist.
+      tags:
+        - Attributes
+    put:
+      description: >
+        This endpoint can be used for both, creating an attribute and updating it:
+          * If the attribute passed as parameter doesn't exist, it will create the attribute.
+          * If the attribute passed as parameter already exists, it will update the attribute.
+
+        This operation is the same as the one defined with [POST](#/Attributes/post_attribute__namespace___attribute_name___meta).
+      parameters:
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D/get/parameters/0"
+        - $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D/delete/parameters/1"
+      requestBody:
+        content:
+          application/xml; charset=utf-8:
+            schema:
+              $ref: "#/paths/~1attribute~1%7Bnamespace%7D~1%7Battribute_name%7D~1_meta/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+        description: Attribute definition.
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                empty_body:
+                  summary: Validation Failed (Empty Body)
+                  value:
+                    code: validation_failed
+                    summary: Document is empty, not allowed for attrib_type
+                illegal_request:
+                  summary: Illegal Request
+                  value:
+                    code: illegal_request
+                    summary: "Illegal request: PUT/POST /attribute/OBS_TEST/OwnerRootProjectTest/_meta: path does not match content"
+                wrong_xml_element:
+                  summary: Validation Failed (Wrong XML Attributes)
+                  value:
+                    code: validation_failed
+                    summary: "attrib_type validation error: 1:0: ERROR: Element definition failed to validate attributes"
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Validation Failed.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                namespace:
+                  summary: Not Found (Namespace)
+                  value:
+                    code: not_found
+                    summary: Couldn't find AttribNamespace
+                unknown_attribute:
+                  summary: Unknown Attribute
+                  value:
+                    code: unknown_attribute
+                    summary: Unknown attribute 'OBS_TEST':'OwnerRootProjectTest'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Change attribute data. Create an attribute if it doesn't exist.
+      tags:
+        - Attributes
+  /configuration:
+    get:
+      description: >
+        Display the configuration of this Open Build Service instance.
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                properties:
+                  admin_email:
+                    example: unconfigured@openbuildservice.org
+                    type: string
+                  allow_user_to_create_home_project:
+                    example: on
+                    type: string
+                  anonymous:
+                    example: on
+                    type: string
+                  change_password:
+                    example: on
+                    type: string
+                  cleanup_empty_projects:
+                    example: on
+                    type: string
+                  default_access_disabled:
+                    example: off
+                    type: string
+                  description:
+                    example: The openSUSE Build Service is the public instance of the Open Build Service (OBS)
+                    type: string
+                  disable_publish_for_branches:
+                    example: on
+                    type: string
+                  disallow_group_creation:
+                    example: off
+                    type: string
+                  download_on_demand:
+                    example: on
+                    type: string
+                  enforce_project_keys:
+                    example: off
+                    type: string
+                  gravatar:
+                    example: on
+                    type: string
+                  hide_private_options:
+                    example: off
+                    type: string
+                  name:
+                    example: private
+                    type: string
+                  obs_url:
+                    example: https://unconfigured.openbuildservice.org
+                    type: string
+                  registration:
+                    example: allow
+                    type: string
+                  schedulers:
+                    properties:
+                      arch:
+                        example:
+                          - armv7l
+                          - i586
+                          - x86_64
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  title:
+                    example: Open Build Service
+                    type: string
+                  unlisted_projects_filter:
+                    example: ^home:.+
+                    type: string
+                  unlisted_projects_filter_description:
+                    example: home projects
+                    type: string
+                type: object
+                xml:
+                  name: configuration
+          description: >
+            OK. The request has succeeded.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: Display the configuration of this Open Build Service instance
+      tags:
+        - Configuration
+    put:
+      description: >
+        Update the configuration of this Open Build Service instance.
+
+
+        This is for admins only.
+      requestBody:
+        content:
+          application/xml; charset=utf-8:
+            schema:
+              $ref: "#/paths/~1configuration/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+        description: Configuration definition.
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                $ref: "#/paths/~1configuration/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeeded.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "403":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: no_permission_to_change
+                summary: The api has a different value for default_access_disabled configured in options.yml file. Remove it there first
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Forbidden.
+
+
+            In the example below, _default_access_disabled_ is one of the possible configuration options which is set in the options.yml file.
+      security:
+        - basic_authentication: []
+      summary: Update the configuration of this Open Build Service instance
+      tags:
+        - Configuration
+  /distributions:
+    get:
+      description: >
+        List all distributions that can be build against.
+
+        This will not list distributions that are available via [interconnect](https://openbuildservice.org/help/manuals/obs-user-guide/cha.obs.concepts.html#id-1.5.10.3.5).
+
+        Check /distributions/include_remotes for this.
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                distribution:
+                  - architecture:
+                      - i586
+                      - x86_64
+                    icon:
+                      - height: 8
+                        url: https://static.opensuse.org/distributions/logos/opensuse.png
+                        width: 8
+                      - height: 16
+                        url: https://static.opensuse.org/distributions/logos/opensuse.png
+                        width: 16
+                    id: 16626
+                    link: http://www.opensuse.org/
+                    name: openSUSE Tumbleweed
+                    project: openSUSE:Factory
+                    reponame: openSUSE_Tumbleweed
+                    repository: snapshot
+                    vendor: opensuse
+                    version: Tumbleweed
+                  - architecture: x86_64
+                    icon:
+                      - height: 8
+                        url: https://static.opensuse.org/distributions/logos/opensuse.png
+                        width: 8
+                      - height: 16
+                        url: https://static.opensuse.org/distributions/logos/opensuse.png
+                        width: 16
+                    id: 16629
+                    link: http://www.opensuse.org/
+                    name: openSUSE Leap 15.3
+                    project: openSUSE:Leap:15.3
+                    reponame: openSUSE_Leap_15.3
+                    repository: standard
+                    vendor: openSUSE
+                    version: "15.3"
+                  - architecture:
+                      - i586
+                      - x86_64
+                    icon:
+                      - height: 8
+                        url: https://static.opensuse.org/distributions/logos/fedora.png
+                        width: 8
+                      - height: 16
+                        url: https://static.opensuse.org/distributions/logos/fedora.png
+                        width: 16
+                    id: 16731
+                    link: http://www.fedoraproject.org/
+                    name: Fedora 33
+                    project: Fedora:33
+                    reponame: Fedora_33
+                    repository: standard
+                    vendor: Fedora
+                    version: "33"
+              schema:
+                $ref: "#/paths/~1distributions/put/requestBody/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeeded.
+
+
+            XML Schema used for body validation: [distributions.rng](../schema/distributions.rng)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: List all distributions.
+      tags:
+        - Distributions
+    put:
+      description: >
+        Create one or more distributions. Existing distributions will be deleted.
+
+
+        This is only for admins.
+      requestBody:
+        content:
+          application/xml; charset=utf-8:
+            schema:
+              properties:
+                distribution:
+                  items:
+                    properties:
+                      architecture:
+                        example:
+                          - i586
+                          - x86_64
+                        items:
+                          type: string
+                        type: array
+                      icon:
+                        example:
+                          - height: 8
+                            url: https://static.opensuse.org/distributions/logos/opensuse.png
+                            width: 8
+                          - height: 16
+                            url: https://static.opensuse.org/distributions/logos/opensuse.png
+                            width: 16
+                        items:
+                          properties:
+                            height:
+                              type: integer
+                              xml:
+                                attribute: true
+                            url:
+                              type: string
+                              xml:
+                                attribute: true
+                            width:
+                              type: integer
+                              xml:
+                                attribute: true
+                          type: object
+                        type: array
+                      id:
+                        example: 16626
+                        type: integer
+                        xml:
+                          attribute: true
+                      link:
+                        example: http://www.opensuse.org/
+                        type: string
+                      name:
+                        example: openSUSE Tumbleweed
+                        type: string
+                      project:
+                        example: openSUSE:Factory
+                        type: string
+                      reponame:
+                        example: openSUSE_Tumbleweed
+                        type: string
+                      repository:
+                        example: snapshot
+                        type: string
+                      vendor:
+                        example: opensuse
+                        type: string
+                        xml:
+                          attribute: true
+                      version:
+                        example: Tumbleweed
+                        type: string
+                        xml:
+                          attribute: true
+                    type: object
+                  type: array
+              type: object
+              xml:
+                name: distributions
+        description: Distributions definition
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: ok
+                summary: Ok
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The Request has succeded.
+
+
+            XML Schema used for body validation: [distributions.rng](../schema/distributions.rng)
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: validation_failed
+                summary: "distributions validation error: 40:0: ERROR: Expecting an element name, got nothing"
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Bad Request.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: Create distributions while deleting all existing distributions.
+      tags:
+        - Distributions
+  /distributions/include_remotes:
+    get:
+      description: >
+        List all distributions that can be build against, including the ones provided by the interconnect.
+      responses:
+        "200":
+          $ref: "#/paths/~1distributions/get/responses/200"
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: List all distributions.
+      tags:
+        - Distributions
+  "/distributions/{distribution_id}":
+    delete:
+      description: >
+        Delete a distribution.
+
+
+        This is only for admins.
+      parameters:
+        - $ref: "#/paths/~1distributions~1%7Bdistribution_id%7D/get/parameters/0"
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: ok
+                summary: Ok
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeded.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find Distribution with 'id'=0
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not found.
+      security:
+        - basic_authentication: []
+      summary: Delete a distribution.
+      tags:
+        - Distributions
+    get:
+      description: >
+        Show a distribution that can be build against.
+      parameters:
+        - description: The id of the distribution
+          example: 16626
+          in: path
+          name: distribution_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                $ref: "#/paths/~1distributions/put/requestBody/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeded.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find Distribution with 'id'=0
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not found.
+      security:
+        - basic_authentication: []
+      summary: Show a distribution.
+      tags:
+        - Distributions
+  /group:
+    get:
+      description: List available groups.
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                count: "2"
+                entry:
+                  - name: group-admin
+                  - name: group-test
+              schema:
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeeded.
+
+
+            XML Schema used for body validation: [directory.xsd](../schema/directory.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: List available groups.
+      tags:
+        - Groups
+  "/group/{group_title}":
+    delete:
+      description: Delete a group.
+      parameters:
+        - $ref: "#/paths/~1group~1%7Bgroup_title%7D/get/parameters/0"
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find Group 'group-testd'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Delete a group.
+      tags:
+        - Groups
+    get:
+      description: Read group data.
+      parameters:
+        - description: Group title
+          example: group-test
+          in: path
+          name: group_title
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                properties:
+                  maintainer:
+                    items:
+                      properties:
+                        userid:
+                          example: user-test
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                  person:
+                    items:
+                      properties:
+                        userid:
+                          example: user-test
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                    xml:
+                      wrapped: true
+                  title:
+                    example: group-test
+                    type: string
+                type: object
+          description: >
+            OK. The request has succeeded.
+
+
+            XML Schema used for body validation: [group.rng](../schema/group.rng)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find Group 'group-testd'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Read group data.
+      tags:
+        - Groups
+    post:
+      description: Modify group data.
+      parameters:
+        - $ref: "#/paths/~1group~1%7Bgroup_title%7D/get/parameters/0"
+        - description: >
+            Command to be executed. It takes one of these available values:
+
+            * `add_user`: add a user to a group. `userid` query parameter must be also used.
+
+            * `remove_user`: remove a user from a group. `userid` query parameter must be also used.
+
+            * `set_email`: set email adress of group. `email` query parameter must be also used.
+          in: query
+          name: cmd
+          schema:
+            enum:
+              - add_user
+              - remove_user
+              - set_email
+            type: string
+        - description: User login. Used with `cmd=add_user` or `cmd=remove_user`.
+          in: query
+          name: userid
+          schema:
+            type: string
+        - description: Group email. Used with `cmd=set_email`.
+          in: query
+          name: email
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: bad_request
+                summary: cmd must be set to add_user or remove_user
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Bad Request.
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                group_not_found:
+                  summary: Group Not Found
+                  value:
+                    code: not_found
+                    summary: Couldn't find Group 'group-testd'
+                user_not_found:
+                  summary: User Not Found
+                  value:
+                    code: not_found
+                    summary: Couldn't find User with login = user_test
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Modify group data.
+      tags:
+        - Groups
+    put:
+      description: Write group data.
+      parameters:
+        - $ref: "#/paths/~1group~1%7Bgroup_title%7D/get/parameters/0"
+      requestBody:
+        content:
+          application/xml; charset=utf-8:
+            schema:
+              $ref: "#/paths/~1group~1%7Bgroup_title%7D/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+        description: >
+          Group definition.
+
+
+          XML Schema used for body validation: [group.rng](../schema/group.rng)
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find Group 'group-testd'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found.
+      security:
+        - basic_authentication: []
+      summary: Write group data.
+      tags:
+        - Groups
+  /issue_trackers:
+    get:
+      description: Get the list of issue trackers.
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                items:
+                  $ref: "#/paths/~1issue_trackers/post/requestBody/content/application~1xml%3B%20charset%3Dutf-8/schema"
+                type: array
+                xml:
+                  name: issue-trackers
+                  wrapped: true
+          description: >
+            List of issue trackers.
+
+
+            XML Schema used for body validation: [issue_trackers.rng](../schema/issue_trackers.rng)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: Get the list of issue trackers.
+      tags:
+        - Issue Trackers
+    post:
+      description: Create an issue tracker.
+      requestBody:
+        content:
+          application/xml; charset=utf-8:
+            schema:
+              properties:
+                description:
+                  example: openSUSE Feature Database
+                  type: string
+                enable-fetch:
+                  example: "false"
+                  type: string
+                kind:
+                  example: fate
+                  type: string
+                label:
+                  example: fate#@@@
+                  type: string
+                name:
+                  example: fate
+                  type: string
+                regex:
+                  example: (?:fate|Fate|FATE)\s*#\s*(\d+)
+                  type: string
+                show-url:
+                  example: https://features.opensuse.org/@@@
+                  type: string
+                url:
+                  example: https://features.opensuse.org/
+                  type: string
+              type: object
+              xml:
+                name: issue-tracker
+        description: >
+          Issue tracker definition.
+
+
+          XML Schema used for body validation: [issue_tracker.rng](../schema/issue_tracker.rng)
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                empty_body:
+                  summary: Empty Body
+                  value:
+                    code: validation_failed
+                    summary: Document is empty, not allowed for issue_tracker
+                wrong_xml_element:
+                  summary: Wrong XML Element
+                  value:
+                    code: validation_failed
+                    summary: "issue_tracker validation error: 1:0: ERROR: Expecting element issue-tracker, got foo"
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Validation failed.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: Create an issue tracker.
+      tags:
+        - Issue Trackers
+  "/issue_trackers/{issue_tracker_name}":
+    delete:
+      description: Delete an issue tracker.
+      parameters:
+        - $ref: "#/paths/~1issue_trackers~1%7Bissue_tracker_name%7D/get/parameters/0"
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Unable to find issue tracker 'foo'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Not Found.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+      security:
+        - basic_authentication: []
+      summary: Delete an issue tracker.
+      tags:
+        - Issue Trackers
+    get:
+      description: Show an issue tracker.
+      parameters:
+        - description: Issue tracker name
+          example: fate
+          in: path
+          name: issue_tracker_name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                $ref: "#/paths/~1issue_trackers/post/requestBody/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Issue tracker definition.
+
+
+            XML Schema used for body validation: [issue_tracker.rng](../schema/issue_tracker.rng)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Unable to find issue tracker 'foo'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Not Found.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+      security:
+        - basic_authentication: []
+      summary: Show an issue tracker.
+      tags:
+        - Issue Trackers
+    put:
+      description: Update the issue tracker given as path parameter. If it is not found, create it.
+      parameters:
+        - $ref: "#/paths/~1issue_trackers~1%7Bissue_tracker_name%7D/get/parameters/0"
+      requestBody:
+        content:
+          application/xml; charset=utf-8:
+            schema:
+              $ref: "#/paths/~1issue_trackers/post/requestBody/content/application~1xml%3B%20charset%3Dutf-8/schema"
+        description: >
+          Issue tracker definition.
+
+
+          XML Schema used for body validation: [issue_tracker.rng](../schema/issue_tracker.rng)
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                empty_body:
+                  summary: Empty Body
+                  value:
+                    code: validation_failed
+                    summary: Document is empty, not allowed for issue_tracker
+                wrong_xml_element:
+                  summary: Wrong XML Element
+                  value:
+                    code: validation_failed
+                    summary: "issue_tracker validation error: 1:0: ERROR: Expecting element issue-tracker, got foo"
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Validation failed.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: Update or create an issue tracker.
+      tags:
+        - Issue Trackers
+  "/issue_trackers/{issue_tracker_name}/issues/{issue_name}":
+    get:
+      description: Show an issue of an issue tracker.
+      parameters:
+        - $ref: "#/paths/~1issue_trackers~1%7Bissue_tracker_name%7D/get/parameters/0"
+        - description: Issue name.
+          example: 12345
+          in: path
+          name: issue_name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                properties:
+                  created_at:
+                    example: 2021-01-18 19:17:51 UTC
+                    type: string
+                  label:
+                    example: fate#12345
+                    type: string
+                  name:
+                    example: 12345
+                    type: string
+                  tracker:
+                    example: fate
+                    type: string
+                  updated_at:
+                    example: 2021-01-18 19:17:51 UTC
+                    type: string
+                  url:
+                    example: https://features.opensuse.org/12345
+                    type: string
+                type: object
+                xml:
+                  name: issue
+          description: >
+            Issue definition.
+
+
+            XML Schema used for body validation: [issue.rng](../schema/issue.rng)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: issue_tracker_not_found
+                summary: "Error: Issue Tracker 'foo' not found."
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Not Found.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+      security:
+        - basic_authentication: []
+      summary: Show an issue of an issue tracker.
+      tags:
+        - Issue Trackers
+  /person:
+    get:
+      description: >
+        List all people.
+      parameters:
+        - description: A prefix to filter the people to look for
+          example: Adm
+          in: query
+          name: prefix
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                count: "9"
+                entry:
+                  - name: Admin
+                  - name: _nobody_
+                  - name: Iggy
+                  - name: user_1
+                  - name: repo-checker
+                  - name: reviewhero
+                  - name: user_2
+                  - name: user_3
+                  - name: Requestor
+              schema:
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeeded.
+
+            XML Schema used for body validation: [directory.xsd](../schema/directory.xsd)
+      summary: List all people.
+      tags:
+        - Person
+    post:
+      description: >
+        Allows executing command on the person endpoint.
+
+
+        As of now, the only command allowed is 'register'.
+      parameters:
+        - description: The command to execute
+          example: register
+          in: query
+          name: cmd
+          required: true
+          schema:
+            enum:
+              - register
+            type: string
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              properties:
+                email:
+                  example: janedoe@example.com
+                  type: string
+                login:
+                  example: jane
+                  type: string
+                note:
+                  example: Jane works in the Engineering team
+                  type: string
+                password:
+                  example: superpassword123
+                  type: string
+                realname:
+                  example: Jane Doe
+                  type: string
+                state:
+                  example: confirmed
+                  type: string
+              type: object
+              xml:
+                name: unregisteredperson
+        description: The data for the person to register.
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                Bad Request:
+                  value:
+                    code: err_register_save
+                    summary: "Could not save the registration, details: Login is the name of an already existing user and Password can't be blank."
+                Unknown Command:
+                  value:
+                    code: unknown_command
+                    summary: Allowed command is 'register'.
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Bad request.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+      summary: Executes a command on the person endpoint.
+      tags:
+        - Person
+  /person/register:
+    post:
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: "#/paths/~1person/post/requestBody/content/application~1xml/schema"
+        description: Data for the person to register.
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "403":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: permission_denied
+                summary: >
+                  User accounts can not be registered via OBS when in LDAP mode. Please refer
+
+                  to your LDAP server to create new users.
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Forbidden
+      security:
+        - basic_authentication: []
+      summary: Registers a new person
+      tags:
+        - Person
+  "/person/{login}":
+    get:
+      parameters:
+        - description: Person login.
+          example: Admin
+          in: path
+          name: login
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                email: root@localhost
+                globalrole: Admin
+                ignore_auth_services: false
+                login: Admin
+                realname: OBS Instance Superuser
+                state: confirmed
+                watchlist:
+                  - project:
+                      name: home:Admin
+              schema:
+                properties:
+                  email:
+                    example: unconfigured@openbuildservice.org
+                    type: string
+                  globalrole:
+                    type: string
+                  ignore_auth_services:
+                    type: boolean
+                  login:
+                    example: user_1
+                    type: string
+                  realname:
+                    example: User1
+                    type: string
+                  state:
+                    example: confirmed
+                    type: string
+                  watchlist:
+                    items:
+                      properties:
+                        project:
+                          properties:
+                            name:
+                              type: string
+                              xml:
+                                attribute: true
+                          type: object
+                      type: object
+                    type: array
+                    xml:
+                      name: watchlist
+                type: object
+                xml:
+                  name: person
+          description: >
+            OK. The request has succeeded.
+
+            XML Schema used for body validation: [user.rng](../schema/user.rng)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find User with login = <login>
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Not found.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+      security:
+        - basic_authentication: []
+      summary: Get details about a person
+      tags:
+        - Person
+    post:
+      parameters:
+        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+        - description: The command to execute against the provided person.
+          example: change_password
+          in: query
+          name: cmd
+          required: true
+          schema:
+            enum:
+              - change_password
+              - lock
+              - delete
+            type: string
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+        description: The password in plain text when the cmd param is 'change_password'.
+        required: false
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeeded.
+
+            XML Schema used for body validation: [api_response.xsd](../schema/api_response.xsd)
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                Bad Request:
+                  value:
+                    code: err_register_save
+                    summary: "Could not save the registration, details: Login is the name of an already existing user and Password can't be blank."
+                Unknown Command:
+                  value:
+                    code: unknown_command
+                    summary: Allowed commands are '<some command>'.
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Bad request.
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "403":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                update_user_not_authorized:
+                  value:
+                    code: update_user_not_authorized
+                    summary: You are not authorized to update this User.
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Forbidden.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+        "404":
+          $ref: "#/paths/~1person~1%7Blogin%7D/get/responses/404"
+      security:
+        - basic_authentication: []
+      summary: Perform changes on a registered person
+      tags:
+        - Person
+    put:
+      parameters:
+        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: "#/paths/~1person/post/requestBody/content/application~1xml/schema"
+        description: The new data for the person referred in the login parameter.
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                Subaccount chaining:
+                  value:
+                    code: subaccount_chaining
+                    summary: A subaccount can not be assigned to subaccount <login>
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Bad request.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "403":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                Change user info not permitted:
+                  value:
+                    code: change_userinfo_no_permission
+                    summary: no permission to change userinfo for user <login>
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Unauthorized.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: password_empty
+                summary: Requested non-existing user
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Not found.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+      security:
+        - basic_authentication: []
+      summary: Update person
+      tags:
+        - Person
+  "/person/{login}/group":
+    get:
+      description: List the groups the person belongs to.
+      parameters:
+        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                count: "2"
+                entry:
+                  - name: factory-maintainers
+                  - name: obs-developers
+              schema:
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeeded.
+
+            XML Schema used for body validation: [directory.xsd](../schema/directory.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find User with login = fake
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Not Found.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+      security:
+        - basic_authentication: []
+      summary: List the groups of a person
+      tags:
+        - Person
+  "/person/{login}/token":
+    get:
+      description: List the authentication tokens of a person.
+      parameters:
+        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                count: 2
+                entry:
+                  - id: 3
+                    kind: rss
+                    string: FK49K39DKK
+                  - id: 25
+                    kind: release
+                    package: ghcz
+                    project: devel:languages:haskell
+                    string: 4T04JGI691
+              schema:
+                properties:
+                  count:
+                    type: integer
+                    xml:
+                      attribute: true
+                  entry:
+                    items:
+                      properties:
+                        id:
+                          type: string
+                          xml:
+                            attribute: true
+                        kind:
+                          type: string
+                          xml:
+                            attribute: true
+                        package:
+                          type: string
+                          xml:
+                            attribute: true
+                        project:
+                          type: string
+                          xml:
+                            attribute: true
+                        string:
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type: array
+                type: object
+                xml:
+                  name: directory
+          description: >
+            OK. The request has succeeded.
+
+
+            XML Schema used for body validation: [tokenlist.rng](../schema/tokenlist.rng)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "403":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: view_user_not_authorized
+                summary: You are not authorized to view this User.
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Forbidden.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+      security:
+        - basic_authentication: []
+      summary: List the authentication tokens of a person.
+      tags:
+        - Person
+    post:
+      description: >
+        Create a new authentication token for a person.
+
+
+        The token may be limited to a specific package. In this case the query parameters
+
+        `project` and `package` should be provided.
+
+
+        With an empty request body, a token of the default kind 'runservice' is created.
+      parameters:
+        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+        - description: >
+            Project name. Should be provided, together with the package query parameter,
+
+            to limit the token to a specific package.
+          example: home:hans
+          in: query
+          name: project
+          schema:
+            type: string
+        - description: >
+            Package name. Should be provided, together with the project query parameter,
+
+            to limit the token to a specific package.
+          example: gchz
+          in: query
+          name: package
+          schema:
+            type: string
+        - description: >
+            Operation indicates the kind of token that is going to be created.
+
+
+            When operation is not specified, 'runservice' is the default value.
+          example: runservice
+          in: query
+          name: operation
+          schema:
+            enum:
+              - runservice
+              - rebuild
+              - release
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: ok
+                data:
+                  - i6iF4M5cn
+                  - 5
+                summary: Ok
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeeded.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+
+
+            **NOTE:** This is an example of a valid response. It should include the attribute 'name'
+
+            in every 'data' tag, which is missing in the example using the schema.
+
+            ```
+              <status code="ok">
+                <summary>Ok</summary>
+                <data name="token">i6iF4M5cn</data>
+                <data name="id">5</data>
+              </status>
+            ```
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "403":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: update_user_not_authorized
+                summary: You are not authorized to update this User.
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Forbidden.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+      security:
+        - basic_authentication: []
+      summary: Create a new authentication token for a person.
+      tags:
+        - Person
+  "/person/{login}/token/{id}":
+    delete:
+      description: Delete a token of the specified person.
+      parameters:
+        - $ref: "#/paths/~1person~1%7Blogin%7D/get/parameters/0"
+        - description: Id of the token to be removed.
+          example: 3
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: ok
+                summary: Ok
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK. The request has succeeded.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "403":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: update_user_not_authorized
+                summary: You are not authorized to update this User.
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Forbidden.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find Token with 'id'=33 [WHERE `tokens`.`user_id` = ?]
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            Not Found.
+
+
+            XML Schema used for body validation: [status.xsd](../schema/status.xsd)
+      summary: Delete a token of a person.
+      tags:
+        - Person
+  /request:
+    get:
+      description: Get a simple directory listing of all requests
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                entry:
+                  - name: 122
+                  - name: 123
+              schema:
+                $ref: "#/paths/~1architectures/get/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK
+
+
+            XML Schema used for body validation: [directory.xsd](../schema/directory.xsd)
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+      security:
+        - basic_authentication: []
+      summary: Get a simple directory listing of all requests
+      tags:
+        - Request
+    post:
+      description: Create a request
+      parameters:
+        - description: This endpoint will refuse the creation of a new request if this parameter is not set.
+          in: query
+          name: cmd
+          required: true
+          schema:
+            enum:
+              - create
+            type: string
+        - description: Ask the server to add revisions of the current sources to the request.
+          in: query
+          name: addrevision
+          schema:
+            enum:
+              - 1
+            type: string
+        - description: Enforce a new package instance in a project which has OBS:DelegateRequestTarget set
+          in: query
+          name: ignore_delegate
+          schema:
+            enum:
+              - 1
+            type: string
+        - description: Skip the build state check
+          in: query
+          name: ignore_build_state
+          schema:
+            enum:
+              - 1
+            type: string
+      requestBody:
+        content:
+          application/xml; charset=utf-8:
+            schema:
+              properties:
+                action:
+                  properties:
+                    options:
+                      properties:
+                        sourceupdate:
+                          example: cleanup
+                          type: string
+                      type: object
+                    source:
+                      properties:
+                        package:
+                          example: obs-server
+                          type: string
+                          xml:
+                            attribute: true
+                        project:
+                          example: home:foo-user
+                          type: string
+                          xml:
+                            attribute: true
+                        rev:
+                          example: 521
+                          type: integer
+                          xml:
+                            attribute: true
+                      type: object
+                    target:
+                      properties:
+                        package:
+                          example: obs-server
+                          type: string
+                          xml:
+                            attribute: true
+                        project:
+                          example: OBS:Unstable
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    type:
+                      example: submit
+                      type: string
+                      xml:
+                        attribute: true
+                  type: object
+                creator:
+                  example: foo-user
+                  type: string
+                  xml:
+                    attribute: true
+                description:
+                  example: A little version update
+                  type: string
+                history:
+                  items:
+                    properties:
+                      comment:
+                        example: Please review sources
+                        type: string
+                      description:
+                        example: Request created
+                        type: string
+                      when:
+                        example: 2021-01-15T13:39:43
+                        type: string
+                        xml:
+                          attribute: true
+                      who:
+                        example: foo
+                        type: string
+                        xml:
+                          attribute: true
+                    type: object
+                  type: array
+                id:
+                  example: 42
+                  type: integer
+                  xml:
+                    attribute: true
+                review:
+                  items:
+                    anyOf:
+                      - properties:
+                          by_user:
+                            example: obs-maintainer
+                            type: string
+                            xml:
+                              attribute: true
+                          state:
+                            example: accepted
+                            type: string
+                            xml:
+                              attribute: true
+                          when:
+                            example: 2021-01-15T15:49:32
+                            type: string
+                            xml:
+                              attribute: true
+                          who:
+                            example: obs-maintainer
+                            type: string
+                            xml:
+                              attribute: true
+                        type: object
+                      - properties:
+                          by_group:
+                            example: obs-group
+                            type: string
+                            xml:
+                              attribute: true
+                          state:
+                            example: accepted
+                            type: string
+                            xml:
+                              attribute: true
+                          when:
+                            example: 2021-01-15T15:49:32
+                            type: string
+                            xml:
+                              attribute: true
+                          who:
+                            example: obs-maintainer
+                            type: string
+                            xml:
+                              attribute: true
+                        type: object
+                      - properties:
+                          by_project:
+                            example: OBS:Unstable
+                            type: string
+                            xml:
+                              attribute: true
+                          state:
+                            example: accepted
+                            type: string
+                            xml:
+                              attribute: true
+                          when:
+                            example: 2021-01-15T15:49:32
+                            type: string
+                            xml:
+                              attribute: true
+                          who:
+                            example: obs-maintainer
+                            type: string
+                            xml:
+                              attribute: true
+                        type: object
+                      - properties:
+                          by_package:
+                            example: obs-server
+                            type: string
+                            xml:
+                              attribute: true
+                          state:
+                            example: accepted
+                            type: string
+                            xml:
+                              attribute: true
+                          when:
+                            example: 2021-01-15T15:49:32
+                            type: string
+                            xml:
+                              attribute: true
+                          who:
+                            example: obs-maintainer
+                            type: string
+                            xml:
+                              attribute: true
+                        type: object
+                  type: array
+                state:
+                  properties:
+                    comment:
+                      example: allright
+                      type: string
+                    name:
+                      example: accepted
+                      type: string
+                      xml:
+                        attribute: true
+                    when:
+                      example: 2021-01-15T13:39:43
+                      type: string
+                      xml:
+                        attribute: true
+                    who:
+                      example: bar-user
+                      type: string
+                      xml:
+                        attribute: true
+                  type: object
+              type: object
+              xml:
+                name: request
+        description: >
+          Request XML
+
+
+          **NOTE:** You cannot pass the request id in the xml. You can pass the history in the xml, but it will be simply ignored.
+        required: true
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                $ref: "#/paths/~1request/post/requestBody/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: >
+            OK.
+
+
+            XML Schema used for body validation: [request.rng](../schema/request.rng)
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: expand_error
+                summary: The source of package test-project/test-package for revision 2 is broken
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Bad Request
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "403":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: create_bs_request_not_authorized
+                summary: You are not authorized to create this Bs request.
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Forbidden
+      security:
+        - basic_authentication: []
+      summary: Create a request
+      tags:
+        - Request
+  "/request/{id}":
+    delete:
+      description: Delete a given request.
+      parameters:
+        - $ref: "#/paths/~1request~1%7Bid%7D/get/parameters/0"
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find request with id '10'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found
+      security:
+        - basic_authentication: []
+      summary: Delete a given request.
+      tags:
+        - Request
+    get:
+      description: Show details about a specified request.
+      parameters:
+        - description: Id of the choosen request.
+          example: 743
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        - $ref: "#/paths/~1request%3Fview%3Dcollection/get/parameters/6"
+        - $ref: "#/paths/~1request%3Fview%3Dcollection/get/parameters/7"
+      responses:
+        "200":
+          $ref: "#/paths/~1request/post/responses/200"
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find request with id '5'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found
+      security:
+        - basic_authentication: []
+      summary: Show details about a specified request.
+      tags:
+        - Request
+    post:
+      description: Apply certain actions on a specified request.
+      parameters:
+        - $ref: "#/paths/~1request~1%7Bid%7D/get/parameters/0"
+        - description: >
+            - `addreview`:
+              Add a review to a request. **NOTE:** You need to specify who has to address
+              the review by providing an additional paramter. Possible options are:
+              * by_user
+              * by_group
+              * by_project
+
+            - `assignreview`:
+              Accept a review for a given group and assign a new review to a specific user.
+              **NOTE:** You need to pass the group name in the `by_group` parameter
+              and the new reviewer in the `reviewer` parameter.
+
+            - `changestate`: Modify the state of a given request.
+              **NOTE:** You need to pass the new state throug the `newstate` parameter. Changing
+              from one state to another is in certain cases not allowed. You can still force
+              the operation by using the `force=1` parameter.
+
+            - `changereviewstate`:
+              Change the state of a review inside a given request.
+
+            - `setpriority`:
+              Change the priority of a given request. You have to pass the choosen priority through
+              the `priority` parameter. Possible values are:
+              * low
+              * moderate
+              * important
+              * critical
+
+            - `setincident`: Change the target incident for maintenance_incident actions
+              **NOTE:** You need to provide the incident number through the `incident`
+              parameter.
+
+            - `setacceptat`: Set or modify the accept_at time. Either specified by the `time`
+              parameter or by default set to now.
+
+            - `approve`: Pre-approve a request in the review state. It will turn into state `accepted`
+              after the last review.
+
+            - `cancelapproval`: Reset the approval of a request
+          examples:
+            addreview:
+              value: cmd=addreview&by_group=heroes
+            approve:
+              value: cmd=approve
+            assignreview:
+              value: cmd=assignreview&by_group=heroes&reviewer=foo
+            cancelapproval:
+              value: cmd=cancelapproval
+            changereviewstate:
+              value: cmd=changereviewstate&by_group=heroes&newstate=new&comment=reopened
+            changestate:
+              value: cmd=changestate&newstate=accepted
+            setacceptat:
+              value: cmd=setacceptat&time='2020-12-01%2000:00:00%20UTC'
+            setincident:
+              value: cmd=setincident&incident=12
+            setpriority:
+              value: cmd=setpriority&priority=low&comment=notsoimportant
+          explode: false
+          in: query
+          name: cmd
+          schema:
+            type: string
+          style: form
+        - description: Define the new state
+          in: query
+          name: newstate
+          schema:
+            type: string
+        - description: Define the new priority
+          in: query
+          name: priority
+          schema:
+            type: string
+        - description: Specify the user of a new review
+          in: query
+          name: by_user
+          schema:
+            type: string
+        - description: Specify the group of the new review
+          in: query
+          name: by_group
+          schema:
+            type: string
+        - description: Specify the project of the new review
+          in: query
+          name: by_project
+          schema:
+            type: string
+        - description: Specify the package of the new review
+          in: query
+          name: by_package
+          schema:
+            type: string
+        - description: Specify the incident number for `setincident`
+          in: query
+          name: incident
+          schema:
+            type: string
+        - description: Specify the time for `setacceptat`
+          in: query
+          name: time
+          schema:
+            type: string
+        - description: Add a comment to one of the actions
+          in: query
+          name: comment
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/paths/~1attribute~1%7Bnamespace%7D/delete/responses/200"
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: no_maintenance_release_target
+                summary: >
+                  Maintenance incident request contains release target project test_maintenance_project with
+
+                  invalid project kind "standard" (should be "maintenance_release") for package package01
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Bad Request
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                Not Found:
+                  value:
+                    code: not_found
+                    summary: Couldn't find request with id '120'
+                Request Not Modifiable:
+                  value:
+                    code: request_not_modifiable
+                    summary: request is not in review state
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found
+      security:
+        - basic_authentication: []
+      summary: Apply certain actions on a specified request.
+      tags:
+        - Request
+    put:
+      description: >
+        Modify a given request.
+
+
+        **NOTE:** Certain parts of a request can only be changed by admins.
+      parameters:
+        - $ref: "#/paths/~1request~1%7Bid%7D/get/parameters/0"
+      requestBody:
+        content:
+          application/xml; charset=utf-8:
+            schema:
+              $ref: "#/paths/~1request/post/requestBody/content/application~1xml%3B%20charset%3Dutf-8/schema"
+        description: >
+          Request XML
+
+
+          **NOTE:** You cannot pass the request id in the xml. You can pass the history in the xml, but it will be simply ignored.
+
+
+          XML Schema used for body validation: [request.rng](../schema/request.rng)
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1request/post/responses/200"
+        "400":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: request_save_error
+                summary: Auto accept time is in the past
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Bad Request
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find request with id '10'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found
+      security:
+        - basic_authentication: []
+      summary: Modify a given request.
+      tags:
+        - Request
+  "/request/{id}?cmd=diff":
+    post:
+      description: >
+        Get the diff for all packages affected by the request.
+      parameters:
+        - $ref: "#/paths/~1request~1%7Bid%7D/get/parameters/0"
+        - description: >
+            Diff relative to a given superseded request. State the id of the corresponding superseded request.
+          example: 10401
+          in: query
+          name: diff_to_superseded
+          schema:
+            type: string
+        - description: Set this parameter to xml in order to receive a structured diff instead of plain text.
+          in: query
+          name: view
+          schema:
+            enum:
+              - xml
+            type: string
+        - description: Include parsed issues
+          in: query
+          name: withissues
+          schema:
+            enum:
+              - true
+              - 1
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                properties:
+                  action:
+                    properties:
+                      options:
+                        properties:
+                          sourceupdate:
+                            example: cleanup
+                            type: string
+                        type: object
+                      source:
+                        properties:
+                          package:
+                            example: ruby
+                            type: string
+                            xml:
+                              attribute: true
+                          project:
+                            example: home:Iggy:branches:home:Admin
+                            type: string
+                            xml:
+                              attribute: true
+                          rev:
+                            example: 3
+                            type: string
+                            xml:
+                              attribute: true
+                        type: object
+                      sourcediff:
+                        properties:
+                          files:
+                            items:
+                              properties:
+                                file:
+                                  properties:
+                                    diff:
+                                      example: >
+                                        spec files:
+
+                                        -----------
+
+                                        --- test.spec
+
+                                        +++ test.spec
+
+                                        @@ -0,0 +1 @@
+
+                                        +# NEW COMMENT
+
+                                        \ No newline at end of file
+                                      type: string
+                                    new:
+                                      $ref: "#/paths/~1request~1%7Bid%7D%3Fcmd%3Ddiff/post/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema/properties/action/properties/sourcediff/properties/files/items/properties/file/properties/old"
+                                    old:
+                                      properties:
+                                        md5:
+                                          example: d4f573d2bf9a0e306f87dad7eee0cf56
+                                          type: string
+                                          xml:
+                                            attribute: true
+                                        name:
+                                          example: ruby.spec
+                                          type: string
+                                          xml:
+                                            attribute: true
+                                        size:
+                                          example: 70
+                                          type: string
+                                          xml:
+                                            attribute: true
+                                      type: object
+                                    state:
+                                      example: changed
+                                      type: string
+                                      xml:
+                                        attribute: true
+                                  type: object
+                              type: object
+                            type: array
+                          issues:
+                            items:
+                              properties:
+                                issue:
+                                  properties:
+                                    label:
+                                      example: boo#944302
+                                      type: string
+                                      xml:
+                                        attribute: true
+                                    name:
+                                      example: 922894
+                                      type: string
+                                      xml:
+                                        attribute: true
+                                    state:
+                                      example: added
+                                      type: string
+                                      xml:
+                                        attribute: true
+                                    tracker:
+                                      example: bnc
+                                      type: string
+                                      xml:
+                                        attribute: true
+                                    url:
+                                      example: https://bugzilla.opensuse.org/show_bug.cgi?id=944302
+                                      type: string
+                                      xml:
+                                        attribute: true
+                                  type: object
+                              type: object
+                            type: array
+                          key:
+                            example: 9dbe9eb1767c5e12c69839af893dc239
+                            type: string
+                            xml:
+                              attribute: true
+                          new:
+                            $ref: "#/paths/~1request~1%7Bid%7D%3Fcmd%3Ddiff/post/responses/200/content/application~1xml%3B%20charset%3Dutf-8/schema/properties/action/properties/sourcediff/properties/old"
+                          old:
+                            properties:
+                              package:
+                                example: ruby
+                                type: string
+                                xml:
+                                  attribute: true
+                              project:
+                                example: home:Iggy:branches:home:Admin
+                                type: string
+                                xml:
+                                  attribute: true
+                              rev:
+                                example: 3
+                                type: string
+                                xml:
+                                  attribute: true
+                              srcmd5:
+                                example: 59300f4ba65f53334b2e2a39f87ba3a0
+                                type: string
+                                xml:
+                                  attribute: true
+                            type: object
+                        type: object
+                      target:
+                        properties:
+                          package:
+                            example: ruby
+                            type: string
+                            xml:
+                              attribute: true
+                          project:
+                            example: home:Admin
+                            type: string
+                            xml:
+                              attribute: true
+                        type: object
+                      type:
+                        example: submit
+                        type: string
+                        xml:
+                          attribute: true
+                    type: object
+                  actions:
+                    example: 0
+                    type: string
+                    xml:
+                      attribute: true
+                  id:
+                    example: 12
+                    type: string
+                    xml:
+                      attribute: true
+                type: object
+                x-components:
+                  schemas:
+                    NewOldDestination:
+                      properties:
+                        package:
+                          example: ruby
+                          type: string
+                          xml:
+                            attribute: true
+                        project:
+                          example: home:Iggy:branches:home:Admin
+                          type: string
+                          xml:
+                            attribute: true
+                        rev:
+                          example: 3
+                          type: string
+                          xml:
+                            attribute: true
+                        srcmd5:
+                          example: 59300f4ba65f53334b2e2a39f87ba3a0
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    OldNewFile:
+                      properties:
+                        md5:
+                          example: d4f573d2bf9a0e306f87dad7eee0cf56
+                          type: string
+                          xml:
+                            attribute: true
+                        name:
+                          example: ruby.spec
+                          type: string
+                          xml:
+                            attribute: true
+                        size:
+                          example: 70
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                xml:
+                  name: diff
+            text/plain; charset=utf-8:
+              example: >
+                spec files:
+
+                -----------
+
+                --- test.spec
+
+                +++ test.spec
+
+                @@ -0,0 +1 @@
+
+                +# NEW COMMENT
+
+                \ No newline at end of file
+              schema:
+                type: string
+          description: OK
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              example:
+                code: not_found
+                summary: Couldn't find request with id '355'
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found
+      security:
+        - basic_authentication: []
+      summary: Get the diff for all packages affected by the request.
+      tags:
+        - Request
+  /request?view=collection:
+    get:
+      description: >
+        Get a collection of requests for a specified target. **NOTE:**
+
+        You need to set at least one of the following parameters in order
+
+        to use this endpoint:
+
+
+        * `user`
+
+        * `project`
+
+        * `package`
+
+        * `states`
+
+        * `types`
+
+        * `ids`
+      parameters:
+        - description: >
+            Filter the results of requests and open reviews for a certain user. If no other parameters are
+
+            applied, it will include requests where the user is maintainer of the target or the creator of
+
+            the request.
+          example: hans
+          in: query
+          name: user
+          schema:
+            type: string
+        - description: Limit the results of requests and open review requests to the specified target project.
+          example: home:hans
+          in: query
+          name: project
+          schema:
+            type: string
+        - description: Limit the results of requests and open review requests to the specified target package.
+          example: ruby
+          in: query
+          name: package
+          schema:
+            type: string
+        - description: Limit results to a given request state. Multiple states can be provided as a comma separated list.
+          example: new,review
+          in: query
+          name: states
+          schema:
+            type: string
+        - description: Limit the results to certain action types. Multiple types can be provided as a comma separated list.
+          example: add_role,submit
+          in: query
+          name: types
+          schema:
+            type: string
+        - description: Limit the results to a given role. Multiple roles can be provided as a comma separated list.
+          example: creator,maintainer,reviewer,source,target
+          in: query
+          name: roles
+          schema:
+            type: string
+        - description: Include the request history in the results.
+          example: 1
+          in: query
+          name: withhistory
+          schema:
+            type: string
+        - description: Includes both, request and review history in the results.
+          example: 1
+          in: query
+          name: withfullhistory
+          schema:
+            type: string
+        - description: Limit the results to the specified amount of requests.
+          example: 7
+          in: query
+          name: limit
+          schema:
+            type: integer
+        - description: Limit the result to specified request id's. Multiple id's can be provided as a comma separated list.
+          example: 15,19,23
+          in: query
+          name: ids
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/xml; charset=utf-8:
+              schema:
+                properties:
+                  matches:
+                    example: 7
+                    type: string
+                    xml:
+                      attribute: true
+                  request:
+                    items:
+                      $ref: "#/paths/~1request/post/requestBody/content/application~1xml%3B%20charset%3Dutf-8/schema"
+                    type: array
+                type: object
+                xml:
+                  name: collection
+          description: OK
+        "401":
+          $ref: "#/paths/~1architectures/get/responses/401"
+        "404":
+          content:
+            application/xml; charset=utf-8:
+              examples:
+                Not Found:
+                  value:
+                    code: not_found
+                    summary: Couldn't find User with login = foo
+                Require Filter:
+                  value:
+                    code: require_filter
+                    summary: This call requires at least one filter, either by user, project or package or states or types or reviewstates
+              schema:
+                $ref: "#/paths/~1architectures~1%7Barchitecture_name%7D/get/responses/404/content/application~1xml%3B%20charset%3Dutf-8/schema"
+          description: Not Found
+      security:
+        - basic_authentication: []
+      summary: Get a collection of requests for a specified target
+      tags:
+        - Request
+components:
+  securitySchemes:
+    basic_authentication:
+      scheme: basic
+      type: http
