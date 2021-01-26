@@ -13,7 +13,7 @@ info:
     url: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   termsOfService: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   title: Early Access
-  version: "2.6"
+  version: "2.7"
   x-apisguru-categories:
     - social
   x-logo:
@@ -180,6 +180,7 @@ paths:
           name: next_token
           required: false
           schema:
+            minLength: 1
             type: string
         - $ref: "#/components/parameters/TweetExpansionsParameter"
         - $ref: "#/components/parameters/TweetFieldsParameter"
@@ -287,6 +288,7 @@ paths:
           name: next_token
           required: false
           schema:
+            minLength: 1
             type: string
         - $ref: "#/components/parameters/TweetExpansionsParameter"
         - $ref: "#/components/parameters/TweetFieldsParameter"
@@ -620,7 +622,8 @@ paths:
           name: pagination_token
           required: false
           schema:
-            pattern: ^[a-zA-Z0-9]{16}$
+            maxLength: 16
+            minLength: 16
             type: string
       responses:
         "200":
@@ -659,7 +662,8 @@ paths:
           name: pagination_token
           required: false
           schema:
-            pattern: ^[a-zA-Z0-9]{16}$
+            maxLength: 16
+            minLength: 16
             type: string
       responses:
         "200":
@@ -804,7 +808,7 @@ components:
       name: pagination_token
       required: false
       schema:
-        pattern: "[a-zA-Z0-9]+"
+        minLength: 1
         type: string
     PlaceFieldsParameter:
       description: A comma separated list of Place fields to display.
