@@ -1335,6 +1335,26 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/SAMLOptionsInput'
                         - description: Specifies the SAML application configuration for the domain.
+                NodeToNodeEncryptionOptions:
+                  description: Specifies the node-to-node encryption options.
+                  type: object
+                  properties:
+                    Enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specify true to enable node-to-node encryption.
+                EncryptionAtRestOptions:
+                  description: Specifies the Encryption At Rest Options.
+                  type: object
+                  properties:
+                    Enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specifies the option to enable Encryption At Rest.
+                    KmsKeyId:
+                      allOf:
+                        - $ref: '#/components/schemas/KmsKeyId'
+                        - description: ' Specifies the KMS Key ID for Encryption At Rest options.'
   /2015-01-01/es/domain-info:
     post:
       operationId: DescribeElasticsearchDomains
@@ -5503,6 +5523,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdvancedSecurityOptionsInput'
             - description: Specifies advanced security options.
+        NodeToNodeEncryptionOptions:
+          allOf:
+            - $ref: '#/components/schemas/NodeToNodeEncryptionOptions'
+            - description: Specifies the NodeToNodeEncryptionOptions.
+        EncryptionAtRestOptions:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionAtRestOptions'
+            - description: Specifies the Encryption At Rest Options.
       description: Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.
     UpdatePackageRequest:
       type: object

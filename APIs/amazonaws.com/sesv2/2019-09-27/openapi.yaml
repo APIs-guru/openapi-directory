@@ -981,7 +981,7 @@ paths:
   /v2/email/identities:
     post:
       operationId: CreateEmailIdentity
-      description: '<p>Starts the process of verifying an email identity. An <i>identity</i> is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you''re the owner of the identity, and that you''ve given Amazon SES API v2 permission to send email from the identity.</p> <p>When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email. </p> <p>When you verify a domain without specifying the <code>DkimSigningAttributes</code> object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html">Easy DKIM</a>.</p> <p>Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the <code>CreateEmailIdentity</code> operation has to include the <code>DkimSigningAttributes</code> object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.</p>'
+      description: '<p>Starts the process of verifying an email identity. An <i>identity</i> is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you''re the owner of the identity, and that you''ve given Amazon SES API v2 permission to send email from the identity.</p> <p>When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email. </p> <p>When you verify a domain without specifying the <code>DkimSigningAttributes</code> object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html">Easy DKIM</a>.</p> <p>Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the <code>CreateEmailIdentity</code> operation has to include the <code>DkimSigningAttributes</code> object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.</p> <p>When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. For some DNS providers, it can take 72 hours or more to complete the domain verification process.</p> <p>Additionally, you can associate an existing configuration set with the email identity that you''re verifying.</p>'
       responses:
         '200':
           description: Success
@@ -1019,6 +1019,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
       parameters: []
       requestBody:
         required: true
@@ -1050,6 +1056,9 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/PrivateKey'
                         - description: '<p>A private key that''s used to generate a DKIM signature.</p> <p>The private key must use 1024-bit RSA encryption, and must be encoded using base64 encoding.</p>'
+                ConfigurationSetName:
+                  description: '<p>The name of a configuration set.</p> <p> <i>Configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3932,6 +3941,61 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v2/email/identities/{EmailIdentity}/configuration-set':
+    put:
+      operationId: PutEmailIdentityConfigurationSetAttributes
+      description: Used to associate a configuration set with an email identity.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutEmailIdentityConfigurationSetAttributesResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: EmailIdentity
+          in: path
+          required: true
+          description: The email address or domain that you want to associate with a configuration set.
+          schema:
+            type: string
+            minLength: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ConfigurationSetName:
+                  description: '<p>The name of a configuration set.</p> <p> <i>Configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v2/email/identities/{EmailIdentity}/dkim':
     put:
       operationId: PutEmailIdentityDkimAttributes
@@ -5391,6 +5455,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: An array of objects that define the tags (keys and values) that are associated with the email identity.
+        ConfigurationSetName:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationSetName'
+            - description: The configuration set used by default when sending from this identity.
       description: Details about an email identity.
     GetEmailIdentityPoliciesResponse:
       type: object
@@ -5703,6 +5771,10 @@ components:
             - $ref: '#/components/schemas/InboxPlacementTrackingOption'
             - description: An object that contains information about the inbox placement data settings for the domain.
       description: 'An object that contains information about the Deliverability dashboard subscription for a verified domain that you use to send email and currently has an active Deliverability dashboard subscription. If a Deliverability dashboard subscription is active for a domain, you gain access to reputation, inbox placement, and other metrics for the domain.'
+    PutEmailIdentityConfigurationSetAttributesResponse:
+      type: object
+      properties: {}
+      description: 'If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.'
     PutEmailIdentityDkimAttributesResponse:
       type: object
       properties: {}
@@ -6516,6 +6588,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DkimSigningAttributes'
             - description: '<p>If your request includes this object, Amazon SES configures the identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, as opposed to the default method, <a href="https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html">Easy DKIM</a>.</p> <p>You can only specify this object if the email identity is a domain, as opposed to an address.</p>'
+        ConfigurationSetName:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationSetName'
+            - description: 'The configuration set to use by default when sending from this identity. Note that any configuration set defined in the email sending request takes precedence. '
       description: A request to begin the verification process for an email identity (an email address or domain).
     IdentityType:
       type: string
@@ -7639,6 +7715,15 @@ components:
             - $ref: '#/components/schemas/DomainDeliverabilityTrackingOptions'
             - description: 'An array of objects, one for each verified domain that you use to send email and enabled the Deliverability dashboard for.'
       description: '<p>Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon SES API v2. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon SES and other AWS services. For more information about the features and cost of a Deliverability dashboard subscription, see <a href="http://aws.amazon.com/pinpoint/pricing/">Amazon Pinpoint Pricing</a>.</p>'
+    PutEmailIdentityConfigurationSetAttributesRequest:
+      type: object
+      title: PutEmailIdentityConfigurationSetAttributesRequest
+      properties:
+        ConfigurationSetName:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationSetName'
+            - description: The configuration set that you want to associate with an email identity.
+      description: A request to associate a configuration set with an email identity.
     PutEmailIdentityDkimAttributesRequest:
       type: object
       title: PutEmailIdentityDkimAttributesRequest

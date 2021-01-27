@@ -1184,6 +1184,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - Uri
               properties:
                 Uri:
                   description: The URI of the S3 bucket or any other type of data source.
@@ -1733,6 +1735,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - Uri
               properties:
                 Uri:
                   description: The URI of the S3 bucket or any other type of data source.
@@ -3459,6 +3463,8 @@ components:
       type: string
     DeleteIntegrationRequest:
       type: object
+      required:
+        - Uri
       title: DeleteIntegrationRequest
       properties:
         Uri:
@@ -3596,6 +3602,8 @@ components:
       properties: {}
     GetIntegrationRequest:
       type: object
+      required:
+        - Uri
       title: GetIntegrationRequest
       properties:
         Uri:
