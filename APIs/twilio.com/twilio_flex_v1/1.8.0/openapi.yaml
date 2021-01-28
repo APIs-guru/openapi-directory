@@ -1,0 +1,1013 @@
+openapi: 3.0.1
+servers:
+  - url: https://api.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Flex
+  version: 1.8.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://static1.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_flex_v1.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_flex_v1
+paths:
+  /v1/Channels:
+    description: Flex chat channels
+    get:
+      description: ""
+      operationId: ListChannel
+      parameters:
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  flex_chat_channels:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.channel"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: ""
+      operationId: CreateChannel
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ChatFriendlyName:
+                  description: The chat channel's friendly name.
+                  type: string
+                ChatUniqueName:
+                  description: The chat channel's unique name.
+                  type: string
+                ChatUserFriendlyName:
+                  description: The chat participant's friendly name.
+                  type: string
+                FlexFlowSid:
+                  description: The SID of the Flex Flow.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^FO[0-9a-fA-F]{32}$
+                  type: string
+                Identity:
+                  description: The `identity` value that uniquely identifies the new resource's chat User.
+                  type: string
+                LongLived:
+                  description: Whether to create the channel as long-lived.
+                  type: boolean
+                PreEngagementData:
+                  description: The pre-engagement data.
+                  type: string
+                Target:
+                  description: The Target Contact Identity, for example the phone number of an SMS.
+                  type: string
+                TaskAttributes:
+                  description: The Task attributes to be added for the TaskRouter Task.
+                  type: string
+                TaskSid:
+                  description: The SID of the TaskRouter Task. Only valid when integration type is `task`. `null` for integration types `studio` & `external`
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^WT[0-9a-fA-F]{32}$
+                  type: string
+              required:
+                - FlexFlowSid
+                - Identity
+                - ChatUserFriendlyName
+                - ChatFriendlyName
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.channel"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-default-output-properties:
+      - sid
+      - flex_flow_sid
+      - user_sid
+      - task_sid
+    x-path-type: list
+  "/v1/Channels/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteChannel
+      parameters:
+        - description: The SID of the Flex chat channel resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CH[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    description: Flex chat channels
+    get:
+      description: ""
+      operationId: FetchChannel
+      parameters:
+        - description: The SID of the Flex chat channel resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CH[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.channel"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-default-output-properties:
+      - sid
+      - flex_flow_sid
+      - user_sid
+      - task_sid
+    x-path-type: instance
+  /v1/Configuration:
+    description: Configuration for a Flex instance
+    get:
+      description: ""
+      operationId: FetchConfiguration
+      parameters:
+        - description: The Pinned UI version of the Configuration resource to fetch.
+          in: query
+          name: UiVersion
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.configuration"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: ""
+      operationId: UpdateConfiguration
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties: {}
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.configuration"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-default-output-properties:
+      - status
+      - ui_language
+      - ui_version
+      - service_version
+    x-path-type: instance
+  /v1/FlexFlows:
+    description: Flex Flow
+    get:
+      description: ""
+      operationId: ListFlexFlow
+      parameters:
+        - description: The `friendly_name` of the Flex Flow resources to read.
+          in: query
+          name: FriendlyName
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  flex_flows:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.flex_flow"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: ""
+      operationId: CreateFlexFlow
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ChannelType:
+                  description: "The channel type. Can be: `web`, `facebook`, `sms`, `whatsapp`, `line` or `custom`."
+                  enum:
+                    - web
+                    - sms
+                    - facebook
+                    - whatsapp
+                    - line
+                    - custom
+                  type: string
+                ChatServiceSid:
+                  description: The SID of the chat service.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^IS[0-9a-fA-F]{32}$
+                  type: string
+                ContactIdentity:
+                  description: The channel contact's Identity.
+                  type: string
+                Enabled:
+                  description: Whether the new Flex Flow is enabled.
+                  type: boolean
+                FriendlyName:
+                  description: A descriptive string that you create to describe the Flex Flow resource.
+                  type: string
+                Integration.Channel:
+                  description: The Task Channel for the TaskRouter Task that will be created. Applicable and required when integrationType is `task`. Set to `sms` for SMS, and to `chat` otherwise. The default value is `default`
+                  type: string
+                Integration.CreationOnMessage:
+                  description: In the context of outbound messaging, defines whether to create a Task immediately (and therefore reserve the conversation to current agent), or delay Task creation until the customer sends the first response. Set to false to create immediately, true to delay Task creation. This setting is only applicable for outbound messaging.
+                  type: boolean
+                Integration.FlowSid:
+                  description: The SID of the Studio Flow. Required when `integrationType` is `studio`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^FW[0-9a-fA-F]{32}$
+                  type: string
+                Integration.Priority:
+                  description: The Task priority of a new Task. The default priority is 0. Optional when `integrationType` is `task`, not applicable otherwise.
+                  type: integer
+                Integration.RetryCount:
+                  description: The number of times to retry the webhook if the first attempt fails. Can be an integer between 0 and 3 (included), default is 0. Optional when integrationType is `external`, not applicable otherwise.
+                  type: integer
+                Integration.Timeout:
+                  description: The Task timeout in seconds for a new Task. Default is 86,400 seconds (24 hours). Optional when `integrationType` is `task`, not applicable otherwise.
+                  type: integer
+                Integration.Url:
+                  description: The URL of the external webhook. Required when `integrationType` is `external`.
+                  format: uri
+                  type: string
+                Integration.WorkflowSid:
+                  description: The Workflow SID for a new Task. Required when `integrationType` is `task`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^WW[0-9a-fA-F]{32}$
+                  type: string
+                Integration.WorkspaceSid:
+                  description: The Workspace SID for a new Task. Required when `integrationType` is `task`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^WS[0-9a-fA-F]{32}$
+                  type: string
+                IntegrationType:
+                  description: "The integration type. Can be: `studio`, `external`, or `task`."
+                  enum:
+                    - studio
+                    - external
+                    - task
+                  type: string
+                JanitorEnabled:
+                  description: When enabled, the Messaging Channel Janitor will remove active Proxy sessions if the associated Task is deleted outside of the Flex UI. Defaults to `false`.
+                  type: boolean
+                LongLived:
+                  description: When enabled, Flex will keep the chat channel active so that it may be used for subsequent interactions with a contact identity. Defaults to `false`.
+                  type: boolean
+              required:
+                - FriendlyName
+                - ChatServiceSid
+                - ChannelType
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.flex_flow"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-default-output-properties:
+      - sid
+      - friendly_name
+      - channel_type
+      - integration_type
+    x-path-type: list
+  "/v1/FlexFlows/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteFlexFlow
+      parameters:
+        - description: The SID of the Flex Flow resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^FO[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    description: Flex Flow
+    get:
+      description: ""
+      operationId: FetchFlexFlow
+      parameters:
+        - description: The SID of the Flex Flow resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^FO[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.flex_flow"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: ""
+      operationId: UpdateFlexFlow
+      parameters:
+        - description: The SID of the Flex Flow resource to update.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^FO[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ChannelType:
+                  description: "The channel type. Can be: `web`, `facebook`, `sms`, `whatsapp`, `line` or `custom`."
+                  enum:
+                    - web
+                    - sms
+                    - facebook
+                    - whatsapp
+                    - line
+                    - custom
+                  type: string
+                ChatServiceSid:
+                  description: The SID of the chat service.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^IS[0-9a-fA-F]{32}$
+                  type: string
+                ContactIdentity:
+                  description: The channel contact's Identity.
+                  type: string
+                Enabled:
+                  description: Whether the new Flex Flow is enabled.
+                  type: boolean
+                FriendlyName:
+                  description: A descriptive string that you create to describe the Flex Flow resource.
+                  type: string
+                Integration.Channel:
+                  description: The Task Channel for the TaskRouter Task that will be created. Applicable and required when integrationType is `task`. Set to `sms` for SMS, and to `chat` otherwise. The default value is `default`
+                  type: string
+                Integration.CreationOnMessage:
+                  description: In the context of outbound messaging, defines whether to create a Task immediately (and therefore reserve the conversation to current agent), or delay Task creation until the customer sends the first response. Set to false to create immediately, true to delay Task creation. This setting is only applicable for outbound messaging.
+                  type: boolean
+                Integration.FlowSid:
+                  description: The SID of the Studio Flow. Required when `integrationType` is `studio`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^FW[0-9a-fA-F]{32}$
+                  type: string
+                Integration.Priority:
+                  description: The Task priority of a new Task. The default priority is 0. Optional when `integrationType` is `task`, not applicable otherwise.
+                  type: integer
+                Integration.RetryCount:
+                  description: The number of times to retry the webhook if the first attempt fails. Can be an integer between 0 and 3 (included), default is 0. Optional when integrationType is `external`, not applicable otherwise.
+                  type: integer
+                Integration.Timeout:
+                  description: The Task timeout in seconds for a new Task. Default is 86,400 seconds (24 hours). Optional when `integrationType` is `task`, not applicable otherwise.
+                  type: integer
+                Integration.Url:
+                  description: The URL of the external webhook. Required when `integrationType` is `external`.
+                  format: uri
+                  type: string
+                Integration.WorkflowSid:
+                  description: The Workflow SID for a new Task. Required when `integrationType` is `task`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^WW[0-9a-fA-F]{32}$
+                  type: string
+                Integration.WorkspaceSid:
+                  description: The Workspace SID for a new Task. Required when `integrationType` is `task`.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^WS[0-9a-fA-F]{32}$
+                  type: string
+                IntegrationType:
+                  description: "The integration type. Can be: `studio`, `external`, or `task`."
+                  enum:
+                    - studio
+                    - external
+                    - task
+                  type: string
+                JanitorEnabled:
+                  description: When enabled, the Messaging Channel Janitor will remove active Proxy sessions if the associated Task is deleted outside of the Flex UI. Defaults to `false`.
+                  type: boolean
+                LongLived:
+                  description: When enabled, Flex will keep the chat channel active so that it may be used for subsequent interactions with a contact identity. Defaults to `false`.
+                  type: boolean
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.flex_flow"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-default-output-properties:
+      - sid
+      - friendly_name
+      - channel_type
+      - integration_type
+    x-path-type: instance
+  /v1/WebChannels:
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: ListWebChannel
+      parameters:
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  flex_chat_channels:
+                    items:
+                      $ref: "#/components/schemas/flex.v1.web_channel"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: ""
+      operationId: CreateWebChannel
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ChatFriendlyName:
+                  description: The chat channel's friendly name.
+                  type: string
+                ChatUniqueName:
+                  description: The chat channel's unique name.
+                  type: string
+                CustomerFriendlyName:
+                  description: The chat participant's friendly name.
+                  type: string
+                FlexFlowSid:
+                  description: The SID of the Flex Flow.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^FO[0-9a-fA-F]{32}$
+                  type: string
+                Identity:
+                  description: The chat identity.
+                  type: string
+                PreEngagementData:
+                  description: The pre-engagement data.
+                  type: string
+              required:
+                - FlexFlowSid
+                - Identity
+                - CustomerFriendlyName
+                - ChatFriendlyName
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.web_channel"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-default-output-properties:
+      - sid
+      - flex_flow_sid
+    x-path-type: list
+  "/v1/WebChannels/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteWebChannel
+      parameters:
+        - description: The SID of the WebChannel resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CH[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: FetchWebChannel
+      parameters:
+        - description: The SID of the WebChannel resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CH[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.web_channel"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: ""
+      operationId: UpdateWebChannel
+      parameters:
+        - description: The SID of the WebChannel resource to update.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CH[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ChatStatus:
+                  description: The chat status. Can only be `inactive`.
+                  enum:
+                    - inactive
+                  type: string
+                PostEngagementData:
+                  description: The post-engagement data.
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/flex.v1.web_channel"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://flex-api.twilio.com
+    x-default-output-properties:
+      - sid
+      - flex_flow_sid
+    x-path-type: instance
+components:
+  schemas:
+    flex.v1.channel:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        flex_flow_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^FO[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^CH[0-9a-fA-F]{32}$
+          type: string
+        task_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^WT[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+        user_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^US[0-9a-fA-F]{32}$
+          type: string
+      type: object
+    flex.v1.configuration:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        attributes:
+          type: object
+        call_recording_enabled:
+          type: boolean
+        call_recording_webhook_url:
+          format: uri
+          type: string
+        chat_service_instance_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        crm_attributes:
+          type: object
+        crm_callback_url:
+          format: uri
+          type: string
+        crm_enabled:
+          type: boolean
+        crm_fallback_url:
+          format: uri
+          type: string
+        crm_type:
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        flex_service_instance_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        integrations:
+          items:
+            type: object
+          type: array
+        messaging_service_instance_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^MG[0-9a-fA-F]{32}$
+          type: string
+        outbound_call_flows:
+          type: object
+        plugin_service_attributes:
+          type: object
+        plugin_service_enabled:
+          type: boolean
+        public_attributes:
+          type: object
+        queue_stats_configuration:
+          type: object
+        runtime_domain:
+          format: uri
+          type: string
+        serverless_service_sids:
+          items:
+            maxLength: 34
+            minLength: 34
+            pattern: ^ZS[0-9a-fA-F]{32}$
+            type: string
+          type: array
+        service_version:
+          type: string
+        status:
+          enum:
+            - ok
+            - inprogress
+            - notstarted
+          type: string
+        taskrouter_offline_activity_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^WA[0-9a-fA-F]{32}$
+          type: string
+        taskrouter_skills:
+          items:
+            type: object
+          type: array
+        taskrouter_target_taskqueue_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^WQ[0-9a-fA-F]{32}$
+          type: string
+        taskrouter_target_workflow_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^WW[0-9a-fA-F]{32}$
+          type: string
+        taskrouter_taskqueues:
+          items:
+            type: object
+          type: array
+        taskrouter_worker_attributes:
+          type: object
+        taskrouter_worker_channels:
+          type: object
+        taskrouter_workspace_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^WS[0-9a-fA-F]{32}$
+          type: string
+        ui_attributes:
+          type: object
+        ui_dependencies:
+          type: object
+        ui_language:
+          type: string
+        ui_version:
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    flex.v1.flex_flow:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        channel_type:
+          enum:
+            - web
+            - sms
+            - facebook
+            - whatsapp
+            - line
+            - custom
+          type: string
+        chat_service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        contact_identity:
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        enabled:
+          type: boolean
+        friendly_name:
+          type: string
+        integration:
+          type: object
+        integration_type:
+          enum:
+            - studio
+            - external
+            - task
+          type: string
+        janitor_enabled:
+          type: boolean
+        long_lived:
+          type: boolean
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^FO[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    flex.v1.web_channel:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        flex_flow_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^FO[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^CH[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: This product is Generally Available.
+    name: GA

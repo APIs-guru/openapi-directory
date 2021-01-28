@@ -1,0 +1,878 @@
+openapi: 3.0.1
+servers:
+  - url: https://api.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Insights
+  version: 1.8.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://static1.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_insights_v1.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_insights_v1
+paths:
+  /v1/Video/Rooms:
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: ListVideoRoomSummary
+      parameters:
+        - description: ""
+          in: query
+          name: RoomType
+          schema:
+            items:
+              enum:
+                - go
+                - peer_to_peer
+                - group
+                - group_small
+              type: string
+            type: array
+        - description: ""
+          in: query
+          name: Codec
+          schema:
+            items:
+              enum:
+                - VP8
+                - H264
+                - VP9
+              type: string
+            type: array
+        - description: ""
+          in: query
+          name: RoomName
+          schema:
+            type: string
+        - description: ""
+          in: query
+          name: CreatedAfter
+          schema:
+            format: date-time
+            type: string
+        - description: ""
+          in: query
+          name: CreatedBefore
+          schema:
+            format: date-time
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  rooms:
+                    items:
+                      $ref: "#/components/schemas/insights.v1.video_room_summary"
+                    type: array
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://insights.twilio.com
+    x-default-output-properties:
+      - room_sid
+      - create_time
+    x-path-type: list
+  "/v1/Video/Rooms/{RoomSid}":
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: FetchVideoRoomSummary
+      parameters:
+        - description: ""
+          in: path
+          name: RoomSid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/insights.v1.video_room_summary"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://insights.twilio.com
+    x-default-output-properties:
+      - room_sid
+      - create_time
+    x-path-type: instance
+  "/v1/Video/Rooms/{RoomSid}/Participants":
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: ListVideoParticipantSummary
+      parameters:
+        - description: ""
+          in: path
+          name: RoomSid
+          required: true
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  participants:
+                    items:
+                      $ref: "#/components/schemas/insights.v1.video_room_summary.video_participant_summary"
+                    type: array
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://insights.twilio.com
+    x-default-output-properties:
+      - participant_sid
+    x-path-type: list
+  "/v1/Video/Rooms/{RoomSid}/Participants/{ParticipantSid}":
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: FetchVideoParticipantSummary
+      parameters:
+        - description: ""
+          in: path
+          name: RoomSid
+          required: true
+          schema:
+            type: string
+        - description: ""
+          in: path
+          name: ParticipantSid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/insights.v1.video_room_summary.video_participant_summary"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://insights.twilio.com
+    x-default-output-properties:
+      - participant_sid
+    x-path-type: instance
+  "/v1/Voice/{CallSid}/Events":
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: ListEvent
+      parameters:
+        - description: ""
+          in: path
+          name: CallSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CA[0-9a-fA-F]{32}$
+            type: string
+        - description: ""
+          in: query
+          name: Edge
+          schema:
+            enum:
+              - unknown_edge
+              - carrier_edge
+              - sip_edge
+              - sdk_edge
+              - client_edge
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  events:
+                    items:
+                      $ref: "#/components/schemas/insights.v1.call.event"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://insights.twilio.com
+    x-default-output-properties:
+      - timestamp
+      - call_sid
+      - account_sid
+      - edge
+      - name
+    x-path-type: list
+  "/v1/Voice/{CallSid}/Metrics":
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: ListMetric
+      parameters:
+        - description: ""
+          in: path
+          name: CallSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CA[0-9a-fA-F]{32}$
+            type: string
+        - description: ""
+          in: query
+          name: Edge
+          schema:
+            enum:
+              - unknown_edge
+              - carrier_edge
+              - sip_edge
+              - sdk_edge
+              - client_edge
+            type: string
+        - description: ""
+          in: query
+          name: Direction
+          schema:
+            enum:
+              - unknown
+              - inbound
+              - outbound
+              - both
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  metrics:
+                    items:
+                      $ref: "#/components/schemas/insights.v1.call.metric"
+                    type: array
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://insights.twilio.com
+    x-default-output-properties:
+      - timestamp
+      - call_sid
+      - account_sid
+      - edge
+      - direction
+    x-path-type: list
+  "/v1/Voice/{CallSid}/Summary":
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: FetchSummary
+      parameters:
+        - description: ""
+          in: path
+          name: CallSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CA[0-9a-fA-F]{32}$
+            type: string
+        - description: ""
+          in: query
+          name: ProcessingState
+          schema:
+            enum:
+              - complete
+              - partial
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/insights.v1.call.summary"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://insights.twilio.com
+    x-default-output-properties:
+      - call_type
+      - call_state
+      - processing_state
+      - duration
+    x-path-type: instance
+  "/v1/Voice/{Sid}":
+    description: "TODO: Resource-level docs"
+    get:
+      description: ""
+      operationId: FetchCall
+      parameters:
+        - description: ""
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^CA[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/insights.v1.call"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Preview
+    servers:
+      - url: https://insights.twilio.com
+    x-default-output-properties: []
+    x-path-type: instance
+components:
+  schemas:
+    insights.v1.call:
+      properties:
+        links:
+          type: object
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^CA[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    insights.v1.call.event:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        call_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^CA[0-9a-fA-F]{32}$
+          type: string
+        carrier_edge:
+          type: object
+        client_edge:
+          type: object
+        edge:
+          enum:
+            - unknown_edge
+            - carrier_edge
+            - sip_edge
+            - sdk_edge
+            - client_edge
+          type: string
+        group:
+          type: string
+        level:
+          enum:
+            - UNKNOWN
+            - DEBUG
+            - INFO
+            - WARNING
+            - ERROR
+          type: string
+        name:
+          type: string
+        sdk_edge:
+          type: object
+        sip_edge:
+          type: object
+        timestamp:
+          type: string
+      type: object
+    insights.v1.call.metric:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        call_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^CA[0-9a-fA-F]{32}$
+          type: string
+        carrier_edge:
+          type: object
+        client_edge:
+          type: object
+        direction:
+          enum:
+            - unknown
+            - inbound
+            - outbound
+            - both
+          type: string
+        edge:
+          enum:
+            - unknown_edge
+            - carrier_edge
+            - sip_edge
+            - sdk_edge
+            - client_edge
+          type: string
+        sdk_edge:
+          type: object
+        sip_edge:
+          type: object
+        timestamp:
+          type: string
+      type: object
+    insights.v1.call.summary:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        attributes:
+          type: object
+        call_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^CA[0-9a-fA-F]{32}$
+          type: string
+        call_state:
+          enum:
+            - ringing
+            - completed
+            - busy
+            - fail
+            - noanswer
+            - canceled
+            - answered
+            - undialed
+          type: string
+        call_type:
+          enum:
+            - carrier
+            - sip
+            - trunking
+            - client
+          type: string
+        carrier_edge:
+          type: object
+        client_edge:
+          type: object
+        connect_duration:
+          nullable: true
+          type: integer
+        created_time:
+          format: date-time
+          type: string
+        duration:
+          nullable: true
+          type: integer
+        end_time:
+          format: date-time
+          type: string
+        from:
+          type: object
+        processing_state:
+          enum:
+            - complete
+            - partial
+          type: string
+        properties:
+          type: object
+        sdk_edge:
+          type: object
+        sip_edge:
+          type: object
+        start_time:
+          format: date-time
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+        to:
+          type: object
+        trust:
+          type: object
+        url:
+          format: uri
+          type: string
+      type: object
+    insights.v1.video_room_summary:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        codecs:
+          items:
+            enum:
+              - VP8
+              - H264
+              - VP9
+            type: string
+          type: array
+        concurrent_participants:
+          nullable: true
+          type: integer
+        create_time:
+          format: date-time
+          type: string
+        created_method:
+          enum:
+            - sdk
+            - ad_hoc
+            - api
+          type: string
+        duration_sec:
+          type: integer
+        edge_location:
+          enum:
+            - ashburn
+            - dublin
+            - frankfurt
+            - singapore
+            - sydney
+            - sao_paulo
+            - roaming
+            - umatilla
+            - tokyo
+          type: string
+        end_reason:
+          enum:
+            - room_ended_via_api
+            - timeout
+          type: string
+        end_time:
+          format: date-time
+          type: string
+        links:
+          type: object
+        max_concurrent_participants:
+          nullable: true
+          type: integer
+        max_participants:
+          nullable: true
+          type: integer
+        media_region:
+          enum:
+            - us1
+            - us2
+            - au1
+            - br1
+            - ie1
+            - jp1
+            - sg1
+            - in1
+            - de1
+            - gll
+          type: string
+        processing_state:
+          enum:
+            - complete
+            - in_progress
+          type: string
+        recording_enabled:
+          type: boolean
+        room_name:
+          type: string
+        room_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^RM[0-9a-fA-F]{32}$
+          type: string
+        room_status:
+          enum:
+            - in_progress
+            - completed
+          type: string
+        room_type:
+          enum:
+            - go
+            - peer_to_peer
+            - group
+            - group_small
+          type: string
+        status_callback:
+          format: uri
+          type: string
+        status_callback_method:
+          enum:
+            - head
+            - get
+            - post
+            - patch
+            - put
+            - delete
+            - HEAD
+            - GET
+            - POST
+            - PATCH
+            - PUT
+            - DELETE
+          type: string
+        total_participant_duration_sec:
+          type: integer
+        total_recording_duration_sec:
+          type: integer
+        unique_participant_identities:
+          nullable: true
+          type: integer
+        unique_participants:
+          nullable: true
+          type: integer
+        url:
+          format: uri
+          type: string
+      type: object
+    insights.v1.video_room_summary.video_participant_summary:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        codecs:
+          items:
+            enum:
+              - VP8
+              - H264
+              - VP9
+            type: string
+          type: array
+        duration_sec:
+          type: integer
+        edge_location:
+          enum:
+            - ashburn
+            - dublin
+            - frankfurt
+            - singapore
+            - sydney
+            - sao_paulo
+            - roaming
+            - umatilla
+            - tokyo
+          type: string
+        end_reason:
+          type: string
+        error_code:
+          nullable: true
+          type: integer
+        error_code_url:
+          type: string
+        join_time:
+          format: date-time
+          type: string
+        leave_time:
+          format: date-time
+          type: string
+        media_region:
+          enum:
+            - us1
+            - us2
+            - au1
+            - br1
+            - ie1
+            - jp1
+            - sg1
+            - in1
+            - de1
+            - gll
+          type: string
+        participant_identity:
+          type: string
+        participant_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^PA[0-9a-fA-F]{32}$
+          type: string
+        properties:
+          type: object
+        publisher_info:
+          type: object
+        room_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^RM[0-9a-fA-F]{32}$
+          type: string
+        status:
+          enum:
+            - in_progress
+            - completed
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: This product is Generally Available.
+    name: GA
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
+    name: Beta
+  - description: PLEASE NOTE that this is a Preview product that is subject to change. Use it with caution. If you currently do not have developer preview access, please contact help@twilio.com.
+    name: Preview

@@ -1,0 +1,2704 @@
+openapi: 3.0.1
+servers:
+  - url: https://api.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Verify
+  version: 1.8.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://static1.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_verify_v2.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_verify_v2
+paths:
+  "/v2/Forms/{FormType}":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch the forms for a specific Form Type.
+      operationId: FetchForm
+      parameters:
+        - description: The Type of this Form. Currently only `form-push` is supported.
+          in: path
+          name: FormType
+          required: true
+          schema:
+            enum:
+              - form-push
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.form"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - form_type
+    x-path-type: instance
+  /v2/Services:
+    description: "TODO: Resource-level docs"
+    get:
+      description: Retrieve a list of all Verification Services for an account.
+      operationId: ListService
+      parameters:
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  services:
+                    items:
+                      $ref: "#/components/schemas/verify.v2.service"
+                    type: array
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Create a new Verification Service.
+      operationId: CreateService
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CodeLength:
+                  description: The length of the verification code to generate. Must be an integer value between 4 and 10, inclusive.
+                  type: integer
+                CustomCodeEnabled:
+                  description: Whether to allow sending verifications with a custom code instead of a randomly generated one. Not available for all customers.
+                  type: boolean
+                DoNotShareWarningEnabled:
+                  description: "Whether to add a security warning at the end of an SMS verification body. Disabled by default and applies only to SMS. Example SMS body: `Your AppName verification code is: 1234. Don’t share this code with anyone; our employees will never ask for the code`"
+                  type: boolean
+                DtmfInputRequired:
+                  description: Whether to ask the user to press a number before delivering the verify code in a phone call.
+                  type: boolean
+                FriendlyName:
+                  description: A descriptive string that you create to describe the verification service. It can be up to 30 characters long. **This value should not contain PII.**
+                  type: string
+                LookupEnabled:
+                  description: Whether to perform a lookup with each verification started and return info about the phone number.
+                  type: boolean
+                Psd2Enabled:
+                  description: Whether to pass PSD2 transaction parameters when starting a verification.
+                  type: boolean
+                Push.ApnCredentialSid:
+                  description: Optional configuration for the Push factors. Set the APN Credential for this service. This will allow to send push notifications to iOS devices. See [Credential Resource](https://www.twilio.com/docs/notify/api/credential-resource)
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^CR[0-9a-fA-F]{32}$
+                  type: string
+                Push.FcmCredentialSid:
+                  description: Optional configuration for the Push factors. Set the FCM Credential for this service. This will allow to send push notifications to Android devices. See [Credential Resource](https://www.twilio.com/docs/notify/api/credential-resource)
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^CR[0-9a-fA-F]{32}$
+                  type: string
+                Push.IncludeDate:
+                  description: "Optional configuration for the Push factors. If true, include the date in the Challenge's reponse. Otherwise, the date is omitted from the response. See [Challenge](https://www.twilio.com/docs/verify/api/challenge) resource’s details parameter for more info. Default: true"
+                  type: boolean
+                SkipSmsToLandlines:
+                  description: Whether to skip sending SMS verifications to landlines. Requires `lookup_enabled`.
+                  type: boolean
+                TtsName:
+                  description: The name of an alternative text-to-speech service to use in phone calls. Applies only to TTS languages.
+                  type: string
+              required:
+                - FriendlyName
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - friendly_name
+      - date_created
+    x-path-type: list
+  "/v2/Services/{ServiceSid}/AccessTokens":
+    description: "TODO: Resource-level docs"
+    post:
+      description: Create a new enrollment Access Token for the Entity
+      operationId: CreateAccessToken
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                FactorType:
+                  description: The Type of this Factor. Eg. `push`
+                  enum:
+                    - push
+                  type: string
+                Identity:
+                  description: The unique external identifier for the Entity of the Service. This identifier should be immutable, not PII, and generated by your external system, such as your user's UUID, GUID, or SID.
+                  type: string
+              required:
+                - Identity
+                - FactorType
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.access_token"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - token
+    x-path-type: list
+  "/v2/Services/{ServiceSid}/Entities":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Retrieve a list of all Entities for a Service.
+      operationId: ListEntity
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  entities:
+                    items:
+                      $ref: "#/components/schemas/verify.v2.service.entity"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: Create a new Entity for the Service
+      operationId: CreateEntity
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Identity:
+                  description: The unique external identifier for the Entity of the Service. This identifier should be immutable, not PII, length between 8 and 64 characters, and generated by your external system, such as your user's UUID, GUID, or SID.
+                  type: string
+              required:
+                - Identity
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.entity"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - identity
+      - date_created
+    x-path-type: list
+  "/v2/Services/{ServiceSid}/Entities/{Identity}":
+    delete:
+      description: Delete a specific Entity.
+      operationId: DeleteEntity
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The unique external identifier for the Entity of the Service
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a specific Entity.
+      operationId: FetchEntity
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The unique external identifier for the Entity of the Service
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.entity"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - identity
+      - date_created
+    x-path-type: instance
+  "/v2/Services/{ServiceSid}/Entities/{Identity}/Challenges":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Retrieve a list of all Challenges for a Factor.
+      operationId: ListChallenge
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: Customer unique identity for the Entity owner of the Challenge
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+        - description: The unique SID identifier of the Factor.
+          in: query
+          name: FactorSid
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^YF[0-9a-fA-F]{32}$
+            type: string
+        - description: The Status of the Challenges to fetch. One of `pending`, `expired`, `approved` or `denied`.
+          in: query
+          name: Status
+          schema:
+            enum:
+              - pending
+              - expired
+              - approved
+              - denied
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  challenges:
+                    items:
+                      $ref: "#/components/schemas/verify.v2.service.entity.challenge"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: Create a new Challenge for the Factor
+      operationId: CreateChallenge
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The unique external identifier for the Entity of the Service. This identifier should be immutable, not PII, and generated by your external system, such as your user's UUID, GUID, or SID.
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Details.Fields:
+                  description: A list of objects that describe the Fields included in the Challenge. Each object contains the label and value of the field. Used when `factor_type` is `push`.
+                  items:
+                    type: object
+                  type: array
+                Details.Message:
+                  description: Shown to the user when the push notification arrives. Required when `factor_type` is `push`
+                  type: string
+                ExpirationDate:
+                  description: The date-time when this Challenge expires, given in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. The default value is five (5) minutes after Challenge creation. The max value is sixty (60) minutes after creation.
+                  format: date-time
+                  type: string
+                FactorSid:
+                  description: The unique SID identifier of the Factor.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^YF[0-9a-fA-F]{32}$
+                  type: string
+                HiddenDetails:
+                  description: 'Details provided to give context about the Challenge. Not shown to the end user. It must be a stringified JSON with only strings values eg. `{"ip": "172.168.1.234"}`'
+                  type: object
+              required:
+                - FactorSid
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.entity.challenge"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - factor_type
+      - status
+      - responded_reason
+      - date_created
+    x-path-type: list
+  "/v2/Services/{ServiceSid}/Entities/{Identity}/Challenges/{Sid}":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a specific Challenge.
+      operationId: FetchChallenge
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The unique external identifier for the Entity of the Service. This identifier should be immutable, not PII, and generated by your external system, such as your user's UUID, GUID, or SID.
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+        - description: A 34 character string that uniquely identifies this Challenge.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^YC[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.entity.challenge"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: Verify a specific Challenge.
+      operationId: UpdateChallenge
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: Customer unique identity for the Entity owner of the Challenge
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+        - description: A 34 character string that uniquely identifies this Challenge.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^YC[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AuthPayload:
+                  description: The optional payload needed to verify the Challenge. E.g., a TOTP would use the numeric code.
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.entity.challenge"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - factor_type
+      - status
+      - responded_reason
+      - date_created
+    x-path-type: instance
+  "/v2/Services/{ServiceSid}/Entities/{Identity}/Factors":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Retrieve a list of all Factors for an Entity.
+      operationId: ListFactor
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: Customer unique identity for the Entity owner of the Factor
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  factors:
+                    items:
+                      $ref: "#/components/schemas/verify.v2.service.entity.factor"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: Create a new Factor for the Entity
+      operationId: CreateFactor
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: Customer unique identity for the Entity owner of the Factor
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Binding.Alg:
+                  description: "The algorithm used when `factor_type` is `push`. Algorithm supported: `ES256`"
+                  type: string
+                Binding.PublicKey:
+                  description: The Ecdsa public key in PKIX, ASN.1 DER format encoded in Base64
+                  type: string
+                Config.AppId:
+                  description: The ID that uniquely identifies your app in the Google or Apple store, such as `com.example.myapp`. Required when `factor_type` is `push`
+                  type: string
+                Config.NotificationPlatform:
+                  description: The transport technology used to generate the Notification Token. Can be `apn` or `fcm`. Required when `factor_type` is `push`
+                  enum:
+                    - apn
+                    - fcm
+                  type: string
+                Config.NotificationToken:
+                  description: For APN, the device token. For FCM the registration token. It used to send the push notifications. Required when `factor_type` is `push`
+                  type: string
+                Config.SdkVersion:
+                  description: The Verify Push SDK version used to configure the factor
+                  type: string
+                FactorType:
+                  description: The Type of this Factor. Currently only `push` is supported
+                  enum:
+                    - push
+                  type: string
+                FriendlyName:
+                  description: The friendly name of this Factor
+                  type: string
+              required:
+                - FriendlyName
+                - FactorType
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.entity.factor"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - friendly_name
+      - status
+      - factor_type
+    x-path-type: list
+  "/v2/Services/{ServiceSid}/Entities/{Identity}/Factors/{Sid}":
+    delete:
+      description: Delete a specific Factor.
+      operationId: DeleteFactor
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: Customer unique identity for the Entity owner of the Factor
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+        - description: A 34 character string that uniquely identifies this Factor.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^YF[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a specific Factor.
+      operationId: FetchFactor
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: Customer unique identity for the Entity owner of the Factor
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+        - description: A 34 character string that uniquely identifies this Factor.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^YF[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.entity.factor"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: Update a specific Factor. This endpoint can be used to Verify a Factor if passed an `AuthPayload` param.
+      operationId: UpdateFactor
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: Customer unique identity for the Entity owner of the Factor
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+        - description: A 34 character string that uniquely identifies this Factor.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^YF[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AuthPayload:
+                  description: The optional payload needed to verify the Factor for the first time. E.g. for a TOTP, the numeric code.
+                  type: string
+                Config.NotificationToken:
+                  description: For APN, the device token. For FCM the registration token. It used to send the push notifications. Required when `factor_type` is `push`
+                  type: string
+                Config.SdkVersion:
+                  description: The Verify Push SDK version used to configure the factor
+                  type: string
+                FriendlyName:
+                  description: The new friendly name of this Factor
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.entity.factor"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - friendly_name
+      - status
+      - factor_type
+    x-path-type: instance
+  "/v2/Services/{ServiceSid}/MessagingConfigurations":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Retrieve a list of all Messaging Configurations for a Service.
+      operationId: ListMessagingConfiguration
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) that the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  messaging_configurations:
+                    items:
+                      $ref: "#/components/schemas/verify.v2.service.messaging_configuration"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Create a new MessagingConfiguration for a service.
+      operationId: CreateMessagingConfiguration
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) that the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Country:
+                  description: The [ISO-3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code of the country this configuration will be applied to. If this is a global configuration, Country will take the value `all`.
+                  type: string
+                MessagingServiceSid:
+                  description: The SID of the [Messaging Service](https://www.twilio.com/docs/sms/services/api) to be used to send SMS to the country of this configuration.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^MG[0-9a-fA-F]{32}$
+                  type: string
+              required:
+                - Country
+                - MessagingServiceSid
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.messaging_configuration"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - account_sid
+      - service_sid
+      - country
+      - messaging_service_sid
+      - date_created
+      - date_updated
+    x-path-type: list
+  "/v2/Services/{ServiceSid}/MessagingConfigurations/{Country}":
+    delete:
+      description: Delete a specific MessagingConfiguration.
+      operationId: DeleteMessagingConfiguration
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) that the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The [ISO-3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code of the country this configuration will be applied to. If this is a global configuration, Country will take the value `all`.
+          in: path
+          name: Country
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a specific MessagingConfiguration.
+      operationId: FetchMessagingConfiguration
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) that the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The [ISO-3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code of the country this configuration will be applied to. If this is a global configuration, Country will take the value `all`.
+          in: path
+          name: Country
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.messaging_configuration"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Update a specific MessagingConfiguration
+      operationId: UpdateMessagingConfiguration
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) that the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The [ISO-3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code of the country this configuration will be applied to. If this is a global configuration, Country will take the value `all`.
+          in: path
+          name: Country
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                MessagingServiceSid:
+                  description: The SID of the [Messaging Service](https://www.twilio.com/docs/sms/services/api) to be used to send SMS to the country of this configuration.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^MG[0-9a-fA-F]{32}$
+                  type: string
+              required:
+                - MessagingServiceSid
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.messaging_configuration"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - account_sid
+      - service_sid
+      - country
+      - messaging_service_sid
+      - date_created
+      - date_updated
+    x-path-type: instance
+  "/v2/Services/{ServiceSid}/RateLimits":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Retrieve a list of all Rate Limits for a service.
+      operationId: ListRateLimit
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  rate_limits:
+                    items:
+                      $ref: "#/components/schemas/verify.v2.service.rate_limit"
+                    type: array
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Create a new Rate Limit for a Service
+      operationId: CreateRateLimit
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Description:
+                  description: Description of this Rate Limit
+                  type: string
+                UniqueName:
+                  description: Provides a unique and addressable name to be assigned to this Rate Limit, assigned by the developer, to be optionally used in addition to SID. **This value should not contain PII.**
+                  type: string
+              required:
+                - UniqueName
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.rate_limit"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - service_sid
+      - account_sid
+      - unique_name
+      - description
+      - date_created
+      - date_updated
+    x-path-type: list
+  "/v2/Services/{ServiceSid}/RateLimits/{RateLimitSid}/Buckets":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Retrieve a list of all Buckets for a Rate Limit.
+      operationId: ListBucket
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Rate Limit resource.
+          in: path
+          name: RateLimitSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^RK[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  buckets:
+                    items:
+                      $ref: "#/components/schemas/verify.v2.service.rate_limit.bucket"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Create a new Bucket for a Rate Limit
+      operationId: CreateBucket
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Rate Limit resource.
+          in: path
+          name: RateLimitSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^RK[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Interval:
+                  description: Number of seconds that the rate limit will be enforced over.
+                  type: integer
+                Max:
+                  description: Maximum number of requests permitted in during the interval.
+                  type: integer
+              required:
+                - Max
+                - Interval
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.rate_limit.bucket"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - service_sid
+      - rate_limit_sid
+      - account_sid
+      - max
+      - interval
+      - date_created
+      - date_updated
+    x-path-type: list
+  "/v2/Services/{ServiceSid}/RateLimits/{RateLimitSid}/Buckets/{Sid}":
+    delete:
+      description: Delete a specific Bucket.
+      operationId: DeleteBucket
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Rate Limit resource.
+          in: path
+          name: RateLimitSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^RK[0-9a-fA-F]{32}$
+            type: string
+        - description: A 34 character string that uniquely identifies this Bucket.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^BL[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a specific Bucket.
+      operationId: FetchBucket
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Rate Limit resource.
+          in: path
+          name: RateLimitSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^RK[0-9a-fA-F]{32}$
+            type: string
+        - description: A 34 character string that uniquely identifies this Bucket.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^BL[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.rate_limit.bucket"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Update a specific Bucket.
+      operationId: UpdateBucket
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Rate Limit resource.
+          in: path
+          name: RateLimitSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^RK[0-9a-fA-F]{32}$
+            type: string
+        - description: A 34 character string that uniquely identifies this Bucket.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^BL[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Interval:
+                  description: Number of seconds that the rate limit will be enforced over.
+                  type: integer
+                Max:
+                  description: Maximum number of requests permitted in during the interval.
+                  type: integer
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.rate_limit.bucket"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - service_sid
+      - rate_limit_sid
+      - account_sid
+      - max
+      - interval
+      - date_created
+      - date_updated
+    x-path-type: instance
+  "/v2/Services/{ServiceSid}/RateLimits/{Sid}":
+    delete:
+      description: Delete a specific Rate Limit.
+      operationId: DeleteRateLimit
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Rate Limit resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^RK[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a specific Rate Limit.
+      operationId: FetchRateLimit
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Rate Limit resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^RK[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.rate_limit"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Update a specific Rate Limit.
+      operationId: UpdateRateLimit
+      parameters:
+        - description: The SID of the [Service](https://www.twilio.com/docs/verify/api/service) the resource is associated with.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Rate Limit resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^RK[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Description:
+                  description: Description of this Rate Limit
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.rate_limit"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - service_sid
+      - account_sid
+      - unique_name
+      - description
+      - date_created
+      - date_updated
+    x-path-type: instance
+  "/v2/Services/{ServiceSid}/VerificationCheck":
+    description: "TODO: Resource-level docs"
+    post:
+      description: challenge a specific Verification Check.
+      operationId: CreateVerificationCheck
+      parameters:
+        - description: The SID of the verification [Service](https://www.twilio.com/docs/verify/api/service) to create the resource under.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Amount:
+                  description: The amount of the associated PSD2 compliant transaction. Requires the PSD2 Service flag enabled.
+                  type: string
+                Code:
+                  description: The 4-10 character string being verified.
+                  type: string
+                Payee:
+                  description: The payee of the associated PSD2 compliant transaction. Requires the PSD2 Service flag enabled.
+                  type: string
+                To:
+                  description: The phone number or [email](https://www.twilio.com/docs/verify/email) to verify. Either this parameter or the `verification_sid` must be specified. Phone numbers must be in [E.164 format](https://www.twilio.com/docs/glossary/what-e164).
+                  type: string
+                VerificationSid:
+                  description: A SID that uniquely identifies the Verification Check. Either this parameter or the `to` phone number/[email](https://www.twilio.com/docs/verify/email) must be specified.
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^VE[0-9a-fA-F]{32}$
+                  type: string
+              required:
+                - Code
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.verification_check"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - to
+      - channel
+      - status
+      - valid
+      - date_created
+    x-path-type: list
+  "/v2/Services/{ServiceSid}/Verifications":
+    description: "TODO: Resource-level docs"
+    post:
+      description: Create a new Verification using a Service
+      operationId: CreateVerification
+      parameters:
+        - description: The SID of the verification [Service](https://www.twilio.com/docs/verify/api/service) to create the resource under.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Amount:
+                  description: The amount of the associated PSD2 compliant transaction. Requires the PSD2 Service flag enabled.
+                  type: string
+                AppHash:
+                  description: "Your [App Hash](https://developers.google.com/identity/sms-retriever/verify#computing_your_apps_hash_string) to be appended at the end of your verification SMS body. Applies only to SMS. Example SMS body: `<#> Your AppName verification code is: 1234 He42w354ol9`."
+                  type: string
+                Channel:
+                  description: "The verification method to use. Can be: [`email`](https://www.twilio.com/docs/verify/email), `sms` or `call`."
+                  type: string
+                ChannelConfiguration:
+                  description: "[`email`](https://www.twilio.com/docs/verify/email) channel configuration in json format. Must include 'from' and 'from_name'."
+                  type: object
+                CustomCode:
+                  description: A pre-generated code to use for verification. The code can be between 4 and 10 characters, inclusive.
+                  type: string
+                CustomFriendlyName:
+                  description: A custom user defined friendly name that overwrites the existing one in the verification message
+                  type: string
+                CustomMessage:
+                  description: The text of a custom message to use for the verification.
+                  type: string
+                Locale:
+                  description: "The locale to use for the verification SMS or call. Can be: `af`, `ar`, `ca`, `cs`, `da`, `de`, `el`, `en`, `en-GB`, `es`, `fi`, `fr`, `he`, `hi`, `hr`, `hu`, `id`, `it`, `ja`, `ko`, `ms`, `nb`, `nl`, `pl`, `pt`, `pr-BR`, `ro`, `ru`, `sv`, `th`, `tl`, `tr`, `vi`, `zh`, `zh-CN`, or `zh-HK.`"
+                  type: string
+                Payee:
+                  description: The payee of the associated PSD2 compliant transaction. Requires the PSD2 Service flag enabled.
+                  type: string
+                RateLimits:
+                  description: The custom key-value pairs of Programmable Rate Limits. Keys correspond to `unique_name` fields defined when [creating your Rate Limit](https://www.twilio.com/docs/verify/api/service-rate-limits). Associated value pairs represent values in the request that you are rate limiting on. You may include multiple Rate Limit values in each request.
+                  type: object
+                SendDigits:
+                  description: The digits to send after a phone call is answered, for example, to dial an extension. For more information, see the Programmable Voice documentation of [sendDigits](https://www.twilio.com/docs/voice/twiml/number#attributes-sendDigits).
+                  type: string
+                To:
+                  description: The phone number or [email](https://www.twilio.com/docs/verify/email) to verify. Phone numbers must be in [E.164 format](https://www.twilio.com/docs/glossary/what-e164).
+                  type: string
+              required:
+                - To
+                - Channel
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.verification"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - to
+      - channel
+      - status
+      - valid
+      - date_created
+    x-path-type: list
+  "/v2/Services/{ServiceSid}/Verifications/{Sid}":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a specific Verification
+      operationId: FetchVerification
+      parameters:
+        - description: The SID of the verification [Service](https://www.twilio.com/docs/verify/api/service) to fetch the resource from.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Verification resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.verification"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Update a Verification status
+      operationId: UpdateVerification
+      parameters:
+        - description: The SID of the verification [Service](https://www.twilio.com/docs/verify/api/service) to update the resource from.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Verification resource to update.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Status:
+                  description: "The new status of the resource. Can be: `canceled` or `approved`."
+                  enum:
+                    - canceled
+                    - approved
+                  type: string
+              required:
+                - Status
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.verification"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - to
+      - channel
+      - status
+      - valid
+      - date_created
+    x-path-type: instance
+  "/v2/Services/{ServiceSid}/Webhooks":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Retrieve a list of all Webhooks for a Service.
+      operationId: ListWebhook
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  webhooks:
+                    items:
+                      $ref: "#/components/schemas/verify.v2.service.webhook"
+                    type: array
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: Create a new Webhook for the Service
+      operationId: CreateWebhook
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                EventTypes:
+                  description: "The array of events that this Webhook is subscribed to. Possible event types: `*, factor.deleted, factor.created, factor.verified, challenge.approved, challenge.denied`"
+                  items:
+                    type: string
+                  type: array
+                FriendlyName:
+                  description: The string that you assigned to describe the webhook. **This value should not contain PII.**
+                  type: string
+                Status:
+                  description: "The webhook status. Default value is `enabled`. One of: `enabled` or `disabled`"
+                  enum:
+                    - enabled
+                    - disabled
+                  type: string
+                WebhookUrl:
+                  description: The URL associated with this Webhook.
+                  type: string
+              required:
+                - FriendlyName
+                - EventTypes
+                - WebhookUrl
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.webhook"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - service_sid
+      - friendly_name
+      - event_types
+      - webhook_url
+      - webhook_method
+      - status
+      - date_created
+    x-path-type: list
+  "/v2/Services/{ServiceSid}/Webhooks/{Sid}":
+    delete:
+      description: Delete a specific Webhook.
+      operationId: DeleteWebhook
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Webhook resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^YW[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a specific Webhook.
+      operationId: FetchWebhook
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Webhook resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^YW[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.webhook"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateWebhook
+      parameters:
+        - description: The unique SID identifier of the Service.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+        - description: The Twilio-provided string that uniquely identifies the Webhook resource to update.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^YW[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                EventTypes:
+                  description: "The array of events that this Webhook is subscribed to. Possible event types: `*, factor.deleted, factor.created, factor.verified, challenge.approved, challenge.denied`"
+                  items:
+                    type: string
+                  type: array
+                FriendlyName:
+                  description: The string that you assigned to describe the webhook. **This value should not contain PII.**
+                  type: string
+                Status:
+                  description: "The webhook status. Default value is `enabled`. One of: `enabled` or `disabled`"
+                  enum:
+                    - enabled
+                    - disabled
+                  type: string
+                WebhookUrl:
+                  description: The URL associated with this Webhook.
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service.webhook"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - service_sid
+      - friendly_name
+      - event_types
+      - webhook_url
+      - webhook_method
+      - status
+      - date_created
+    x-path-type: instance
+  "/v2/Services/{Sid}":
+    delete:
+      description: Delete a specific Verification Service Instance.
+      operationId: DeleteService
+      parameters:
+        - description: The Twilio-provided string that uniquely identifies the Verification Service resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch specific Verification Service Instance.
+      operationId: FetchService
+      parameters:
+        - description: The Twilio-provided string that uniquely identifies the Verification Service resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    post:
+      description: Update a specific Verification Service.
+      operationId: UpdateService
+      parameters:
+        - description: The Twilio-provided string that uniquely identifies the Service resource to update.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^VA[0-9a-fA-F]{32}$
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CodeLength:
+                  description: The length of the verification code to generate. Must be an integer value between 4 and 10, inclusive.
+                  type: integer
+                CustomCodeEnabled:
+                  description: Whether to allow sending verifications with a custom code instead of a randomly generated one. Not available for all customers.
+                  type: boolean
+                DoNotShareWarningEnabled:
+                  description: Whether to add a privacy warning at the end of an SMS. **Disabled by default and applies only for SMS.**
+                  type: boolean
+                DtmfInputRequired:
+                  description: Whether to ask the user to press a number before delivering the verify code in a phone call.
+                  type: boolean
+                FriendlyName:
+                  description: A descriptive string that you create to describe the verification service. It can be up to 30 characters long. **This value should not contain PII.**
+                  type: string
+                LookupEnabled:
+                  description: Whether to perform a lookup with each verification started and return info about the phone number.
+                  type: boolean
+                Psd2Enabled:
+                  description: Whether to pass PSD2 transaction parameters when starting a verification.
+                  type: boolean
+                Push.ApnCredentialSid:
+                  description: Optional configuration for the Push factors. Set the APN Credential for this service. This will allow to send push notifications to iOS devices. See [Credential Resource](https://www.twilio.com/docs/notify/api/credential-resource)
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^CR[0-9a-fA-F]{32}$
+                  type: string
+                Push.FcmCredentialSid:
+                  description: Optional configuration for the Push factors. Set the FCM Credential for this service. This will allow to send push notifications to Android devices. See [Credential Resource](https://www.twilio.com/docs/notify/api/credential-resource)
+                  maxLength: 34
+                  minLength: 34
+                  pattern: ^CR[0-9a-fA-F]{32}$
+                  type: string
+                Push.IncludeDate:
+                  description: "Optional configuration for the Push factors. If true, include the date in the Challenge's reponse. Otherwise, the date is omitted from the response. See [Challenge](https://www.twilio.com/docs/verify/api/challenge) resource’s details parameter for more info. Default: true"
+                  type: boolean
+                SkipSmsToLandlines:
+                  description: Whether to skip sending SMS verifications to landlines. Requires `lookup_enabled`.
+                  type: boolean
+                TtsName:
+                  description: The name of an alternative text-to-speech service to use in phone calls. Applies only to TTS languages.
+                  type: string
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/verify.v2.service"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://verify.twilio.com
+    x-default-output-properties:
+      - sid
+      - friendly_name
+      - date_created
+    x-path-type: instance
+components:
+  schemas:
+    verify.v2.form:
+      properties:
+        form_meta:
+          type: object
+        form_type:
+          enum:
+            - form-push
+          type: string
+        forms:
+          type: object
+        url:
+          format: uri
+          type: string
+      type: object
+    verify.v2.service:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        code_length:
+          type: integer
+        custom_code_enabled:
+          type: boolean
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        do_not_share_warning_enabled:
+          type: boolean
+        dtmf_input_required:
+          type: boolean
+        friendly_name:
+          type: string
+        links:
+          type: object
+        lookup_enabled:
+          type: boolean
+        psd2_enabled:
+          type: boolean
+        push:
+          type: object
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          type: string
+        skip_sms_to_landlines:
+          type: boolean
+        tts_name:
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    verify.v2.service.access_token:
+      properties:
+        token:
+          type: string
+      type: object
+    verify.v2.service.entity:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        identity:
+          type: string
+        links:
+          type: object
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^YE[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    verify.v2.service.entity.challenge:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_responded:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        details:
+          type: object
+        entity_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^YE[0-9a-fA-F]{32}$
+          type: string
+        expiration_date:
+          format: date-time
+          type: string
+        factor_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^YF[0-9a-fA-F]{32}$
+          type: string
+        factor_type:
+          enum:
+            - push
+          type: string
+        hidden_details:
+          type: object
+        identity:
+          type: string
+        responded_reason:
+          enum:
+            - none
+            - not_needed
+            - not_requested
+          type: string
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^YC[0-9a-fA-F]{32}$
+          type: string
+        status:
+          enum:
+            - pending
+            - expired
+            - approved
+            - denied
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    verify.v2.service.entity.factor:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        config:
+          type: object
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        entity_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^YE[0-9a-fA-F]{32}$
+          type: string
+        factor_type:
+          enum:
+            - push
+          type: string
+        friendly_name:
+          type: string
+        identity:
+          type: string
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^YF[0-9a-fA-F]{32}$
+          type: string
+        status:
+          enum:
+            - unverified
+            - verified
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    verify.v2.service.messaging_configuration:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        country:
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        messaging_service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^MG[0-9a-fA-F]{32}$
+          type: string
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    verify.v2.service.rate_limit:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        description:
+          type: string
+        links:
+          type: object
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^RK[0-9a-fA-F]{32}$
+          type: string
+        unique_name:
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    verify.v2.service.rate_limit.bucket:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        interval:
+          type: integer
+        max:
+          type: integer
+        rate_limit_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^RK[0-9a-fA-F]{32}$
+          type: string
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^BL[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    verify.v2.service.verification:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        amount:
+          type: string
+        channel:
+          enum:
+            - sms
+            - call
+            - email
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        lookup:
+          type: object
+        payee:
+          type: string
+        send_code_attempts:
+          items:
+            type: object
+          type: array
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VE[0-9a-fA-F]{32}$
+          type: string
+        status:
+          type: string
+        to:
+          type: string
+        url:
+          format: uri
+          type: string
+        valid:
+          type: boolean
+      type: object
+    verify.v2.service.verification_check:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        amount:
+          type: string
+        channel:
+          enum:
+            - sms
+            - call
+            - email
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        payee:
+          type: string
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VE[0-9a-fA-F]{32}$
+          type: string
+        status:
+          type: string
+        to:
+          type: string
+        valid:
+          type: boolean
+      type: object
+    verify.v2.service.webhook:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        event_types:
+          items:
+            type: string
+          type: array
+        friendly_name:
+          type: string
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^VA[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^YW[0-9a-fA-F]{32}$
+          type: string
+        status:
+          enum:
+            - enabled
+            - disabled
+          type: string
+        url:
+          format: uri
+          type: string
+        webhook_method:
+          enum:
+            - GET
+            - POST
+          type: string
+        webhook_url:
+          format: uri
+          type: string
+      type: object
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: This product is Generally Available.
+    name: GA
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
+    name: Beta

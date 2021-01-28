@@ -1,0 +1,2558 @@
+openapi: 3.0.1
+servers:
+  - url: https://api.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Sync
+  version: 1.8.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://static1.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_sync_v1.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_sync_v1
+paths:
+  /v1/Services:
+    description: Containers for sync objects
+    get:
+      description: ""
+      operationId: ListService
+      parameters:
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  services:
+                    items:
+                      $ref: "#/components/schemas/sync.v1.service"
+                    type: array
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateService
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AclEnabled:
+                  description: Whether token identities in the Service must be granted access to Sync objects by using the [Permissions](https://www.twilio.com/docs/sync/api/sync-permissions) resource.
+                  type: boolean
+                FriendlyName:
+                  description: A string that you assign to describe the resource.
+                  type: string
+                ReachabilityDebouncingEnabled:
+                  description: Whether every `endpoint_disconnected` event should occur after a configurable delay. The default is `false`, where the `endpoint_disconnected` event occurs immediately after disconnection. When `true`, intervening reconnections can prevent the `endpoint_disconnected` event.
+                  type: boolean
+                ReachabilityDebouncingWindow:
+                  description: The reachability event delay in milliseconds if `reachability_debouncing_enabled` = `true`.  Must be between 1,000 and 30,000 and defaults to 5,000. This is the number of milliseconds after the last running client disconnects, and a Sync identity is declared offline, before the `webhook_url` is called if all endpoints remain offline. A reconnection from the same identity by any endpoint during this interval prevents the call to `webhook_url`.
+                  type: integer
+                ReachabilityWebhooksEnabled:
+                  description: Whether the service instance should call `webhook_url` when client endpoints connect to Sync. The default is `false`.
+                  type: boolean
+                WebhookUrl:
+                  description: The URL we should call when Sync objects are manipulated.
+                  format: uri
+                  type: string
+                WebhooksFromRestEnabled:
+                  description: Whether the Service instance should call `webhook_url` when the REST API is used to update Sync objects. The default is `false`.
+                  type: boolean
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - sid
+      - unique_name
+      - friendly_name
+    x-path-type: list
+  "/v1/Services/{ServiceSid}/Documents":
+    description: Sync Document objects
+    get:
+      description: ""
+      operationId: ListDocument
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Document resources to read.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  documents:
+                    items:
+                      $ref: "#/components/schemas/sync.v1.service.document"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateDocument
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) to create the new Document resource in.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Data:
+                  description: A JSON string that represents an arbitrary, schema-less object that the Sync Document stores. Can be up to 16 KiB in length.
+                  type: object
+                Ttl:
+                  description: How long, in seconds, before the Sync Document expires and is deleted (the Sync Document's time-to-live). Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Sync Document does not expire. The Sync Document will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                UniqueName:
+                  description: An application-defined string that uniquely identifies the Sync Document
+                  type: string
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.document"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - sid
+      - unique_name
+      - revision
+    x-path-type: list
+  "/v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions":
+    description: Sync document permissions
+    get:
+      description: Retrieve a list of all Permissions applying to a Sync Document.
+      operationId: ListDocumentPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Document Permission resources to read.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Document with the Document Permission resources to read. Can be the Document resource's `sid` or its `unique_name`.
+          in: path
+          name: DocumentSid
+          required: true
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  permissions:
+                    items:
+                      $ref: "#/components/schemas/sync.v1.service.document.document_permission"
+                    type: array
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - identity
+      - read
+      - write
+      - manage
+    x-path-type: list
+  "/v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions/{Identity}":
+    delete:
+      description: Delete a specific Sync Document Permission.
+      operationId: DeleteDocumentPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Document Permission resource to delete.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Document with the Document Permission resource to delete. Can be the Document resource's `sid` or its `unique_name`.
+          in: path
+          name: DocumentSid
+          required: true
+          schema:
+            type: string
+        - description: The application-defined string that uniquely identifies the User's Document Permission resource to delete.
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: Sync document permissions
+    get:
+      description: Fetch a specific Sync Document Permission.
+      operationId: FetchDocumentPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Document Permission resource to fetch.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Document with the Document Permission resource to fetch. Can be the Document resource's `sid` or its `unique_name`.
+          in: path
+          name: DocumentSid
+          required: true
+          schema:
+            type: string
+        - description: The application-defined string that uniquely identifies the User's Document Permission resource to fetch.
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.document.document_permission"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: Update an identity's access to a specific Sync Document.
+      operationId: UpdateDocumentPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Document Permission resource to update.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Document with the Document Permission resource to update. Can be the Document resource's `sid` or its `unique_name`.
+          in: path
+          name: DocumentSid
+          required: true
+          schema:
+            type: string
+        - description: The application-defined string that uniquely identifies the User's Document Permission resource to update.
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Manage:
+                  description: Whether the identity can delete the Sync Document. Default value is `false`.
+                  type: boolean
+                Read:
+                  description: Whether the identity can read the Sync Document. Default value is `false`.
+                  type: boolean
+                Write:
+                  description: Whether the identity can update the Sync Document. Default value is `false`.
+                  type: boolean
+              required:
+                - Read
+                - Write
+                - Manage
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.document.document_permission"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - identity
+      - read
+      - write
+      - manage
+    x-path-type: instance
+  "/v1/Services/{ServiceSid}/Documents/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteDocument
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Document resource to delete.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Document resource to delete. Can be the Document resource's `sid` or its `unique_name`.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+        - description: The If-Match HTTP request header
+          in: header
+          name: If-Match
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: Sync Document objects
+    get:
+      description: ""
+      operationId: FetchDocument
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Document resource to fetch.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Document resource to fetch. Can be the Document resource's `sid` or its `unique_name`.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.document"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateDocument
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Document resource to update.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Document resource to update. Can be the Document resource's `sid` or its `unique_name`.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+        - description: The If-Match HTTP request header
+          in: header
+          name: If-Match
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Data:
+                  description: A JSON string that represents an arbitrary, schema-less object that the Sync Document stores. Can be up to 16 KiB in length.
+                  type: object
+                Ttl:
+                  description: How long, in seconds, before the Sync Document expires and is deleted (time-to-live). Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Document resource does not expire. The Document resource will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.document"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - sid
+      - unique_name
+      - revision
+    x-path-type: instance
+  "/v1/Services/{ServiceSid}/Lists":
+    description: Sync list objects
+    get:
+      description: ""
+      operationId: ListSyncList
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync List resources to read.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  lists:
+                    items:
+                      $ref: "#/components/schemas/sync.v1.service.sync_list"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateSyncList
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) to create the new Sync List in.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CollectionTtl:
+                  description: How long, in seconds, before the Sync List expires (time-to-live) and is deleted.  Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Sync List does not expire. The Sync List will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Ttl:
+                  description: Alias for collection_ttl. If both are provided, this value is ignored.
+                  type: integer
+                UniqueName:
+                  description: An application-defined string that uniquely identifies the resource. This value must be unique within its Service and it can be up to 320 characters long. The `unique_name` value can be used as an alternative to the `sid` in the URL path to address the resource.
+                  type: string
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_list"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - sid
+      - unique_name
+      - revision
+    x-path-type: list
+  "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items":
+    description: Items in a sync list
+    get:
+      description: ""
+      operationId: ListSyncListItem
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the List Item resources to read.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List with the List Items to read. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: ListSid
+          required: true
+          schema:
+            type: string
+        - description: "How to order the List Items returned by their `index` value. Can be: `asc` (ascending) or `desc` (descending) and the default is ascending."
+          in: query
+          name: Order
+          schema:
+            enum:
+              - asc
+              - desc
+            type: string
+        - description: The `index` of the first Sync List Item resource to read. See also `bounds`.
+          in: query
+          name: From
+          schema:
+            type: string
+        - description: "Whether to include the List Item referenced by the `from` parameter. Can be: `inclusive` to include the List Item referenced by the `from` parameter or `exclusive` to start with the next List Item. The default value is `inclusive`."
+          in: query
+          name: Bounds
+          schema:
+            enum:
+              - inclusive
+              - exclusive
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  items:
+                    items:
+                      $ref: "#/components/schemas/sync.v1.service.sync_list.sync_list_item"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateSyncListItem
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) to create the new List Item in.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List to add the new List Item to. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: ListSid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CollectionTtl:
+                  description: How long, in seconds, before the List Item's parent Sync List expires (time-to-live) and is deleted.  Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the parent Sync List does not expire. The Sync List will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Data:
+                  description: A JSON string that represents an arbitrary, schema-less object that the List Item stores. Can be up to 16 KiB in length.
+                  type: object
+                ItemTtl:
+                  description: How long, in seconds, before the List Item expires (time-to-live) and is deleted.  Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the List Item does not expire. The List Item will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Ttl:
+                  description: An alias for `item_ttl`. If both parameters are provided, this value is ignored.
+                  type: integer
+              required:
+                - Data
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_list.sync_list_item"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - index
+      - revision
+      - created_by
+    x-path-type: list
+  "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items/{Index}":
+    delete:
+      description: ""
+      operationId: DeleteSyncListItem
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync List Item resource to delete.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List with the Sync List Item resource to delete. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: ListSid
+          required: true
+          schema:
+            type: string
+        - description: The index of the Sync List Item resource to delete.
+          in: path
+          name: Index
+          required: true
+          schema:
+            type: integer
+        - description: The If-Match HTTP request header
+          in: header
+          name: If-Match
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: Items in a sync list
+    get:
+      description: ""
+      operationId: FetchSyncListItem
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync List Item resource to fetch.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List with the Sync List Item resource to fetch. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: ListSid
+          required: true
+          schema:
+            type: string
+        - description: The index of the Sync List Item resource to fetch.
+          in: path
+          name: Index
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_list.sync_list_item"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateSyncListItem
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync List Item resource to update.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List with the Sync List Item resource to update. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: ListSid
+          required: true
+          schema:
+            type: string
+        - description: The index of the Sync List Item resource to update.
+          in: path
+          name: Index
+          required: true
+          schema:
+            type: integer
+        - description: The If-Match HTTP request header
+          in: header
+          name: If-Match
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CollectionTtl:
+                  description: How long, in seconds, before the List Item's parent Sync List expires (time-to-live) and is deleted.  Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the parent Sync List does not expire. The Sync List will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Data:
+                  description: A JSON string that represents an arbitrary, schema-less object that the List Item stores. Can be up to 16 KiB in length.
+                  type: object
+                ItemTtl:
+                  description: How long, in seconds, before the List Item expires (time-to-live) and is deleted.  Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the List Item does not expire. The List Item will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Ttl:
+                  description: An alias for `item_ttl`. If both parameters are provided, this value is ignored.
+                  type: integer
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_list.sync_list_item"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - index
+      - revision
+      - created_by
+    x-path-type: instance
+  "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions":
+    description: Permissions for Sync list items
+    get:
+      description: Retrieve a list of all Permissions applying to a Sync List.
+      operationId: ListSyncListPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync List Permission resources to read.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List with the Sync List Permission resources to read. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: ListSid
+          required: true
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  permissions:
+                    items:
+                      $ref: "#/components/schemas/sync.v1.service.sync_list.sync_list_permission"
+                    type: array
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - identity
+      - read
+      - write
+      - manage
+    x-path-type: list
+  "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions/{Identity}":
+    delete:
+      description: Delete a specific Sync List Permission.
+      operationId: DeleteSyncListPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync List Permission resource to delete.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List with the Sync List Permission resource to delete. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: ListSid
+          required: true
+          schema:
+            type: string
+        - description: The application-defined string that uniquely identifies the User's Sync List Permission resource to delete.
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: Permissions for Sync list items
+    get:
+      description: Fetch a specific Sync List Permission.
+      operationId: FetchSyncListPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync List Permission resource to fetch.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List with the Sync List Permission resource to fetch. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: ListSid
+          required: true
+          schema:
+            type: string
+        - description: The application-defined string that uniquely identifies the User's Sync List Permission resource to fetch.
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_list.sync_list_permission"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: Update an identity's access to a specific Sync List.
+      operationId: UpdateSyncListPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync List Permission resource to update.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List with the Sync List Permission resource to update. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: ListSid
+          required: true
+          schema:
+            type: string
+        - description: The application-defined string that uniquely identifies the User's Sync List Permission resource to update.
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Manage:
+                  description: Whether the identity can delete the Sync List. Default value is `false`.
+                  type: boolean
+                Read:
+                  description: Whether the identity can read the Sync List and its Items. Default value is `false`.
+                  type: boolean
+                Write:
+                  description: Whether the identity can create, update, and delete Items in the Sync List. Default value is `false`.
+                  type: boolean
+              required:
+                - Read
+                - Write
+                - Manage
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_list.sync_list_permission"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - identity
+      - read
+      - write
+      - manage
+    x-path-type: instance
+  "/v1/Services/{ServiceSid}/Lists/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteSyncList
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync List resource to delete.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List resource to delete. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: Sync list objects
+    get:
+      description: ""
+      operationId: FetchSyncList
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync List resource to fetch.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List resource to fetch. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_list"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateSyncList
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync List resource to update.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync List resource to update. Can be the Sync List resource's `sid` or its `unique_name`.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CollectionTtl:
+                  description: How long, in seconds, before the Sync List expires (time-to-live) and is deleted. Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Sync List does not expire. The Sync List will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Ttl:
+                  description: An alias for `collection_ttl`. If both are provided, this value is ignored.
+                  type: integer
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_list"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - sid
+      - unique_name
+      - revision
+    x-path-type: instance
+  "/v1/Services/{ServiceSid}/Maps":
+    description: Sync map objects
+    get:
+      description: ""
+      operationId: ListSyncMap
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Map resources to read.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  maps:
+                    items:
+                      $ref: "#/components/schemas/sync.v1.service.sync_map"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateSyncMap
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) to create the Sync Map in.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CollectionTtl:
+                  description: How long, in seconds, before the Sync Map expires (time-to-live) and is deleted. Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Sync Map does not expire. The Sync Map will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Ttl:
+                  description: An alias for `collection_ttl`. If both parameters are provided, this value is ignored.
+                  type: integer
+                UniqueName:
+                  description: An application-defined string that uniquely identifies the resource. It can be used as an alternative to the `sid` in the URL path to address the resource.
+                  type: string
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_map"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - sid
+      - unique_name
+      - revision
+    x-path-type: list
+  "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items":
+    description: Keys in a sync map
+    get:
+      description: ""
+      operationId: ListSyncMapItem
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Map Item resources to read.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map with the Sync Map Item resource to fetch. Can be the Sync Map resource's `sid` or its `unique_name`.
+          in: path
+          name: MapSid
+          required: true
+          schema:
+            type: string
+        - description: "How to order the Map Items returned by their `key` value. Can be: `asc` (ascending) or `desc` (descending) and the default is ascending. Map Items are [ordered lexicographically](https://en.wikipedia.org/wiki/Lexicographical_order) by Item key."
+          in: query
+          name: Order
+          schema:
+            enum:
+              - asc
+              - desc
+            type: string
+        - description: The `key` of the first Sync Map Item resource to read. See also `bounds`.
+          in: query
+          name: From
+          schema:
+            type: string
+        - description: "Whether to include the Map Item referenced by the `from` parameter. Can be: `inclusive` to include the Map Item referenced by the `from` parameter or `exclusive` to start with the next Map Item. The default value is `inclusive`."
+          in: query
+          name: Bounds
+          schema:
+            enum:
+              - inclusive
+              - exclusive
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  items:
+                    items:
+                      $ref: "#/components/schemas/sync.v1.service.sync_map.sync_map_item"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: CreateSyncMapItem
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) to create the Map Item in.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map to add the new Map Item to. Can be the Sync Map resource's `sid` or its `unique_name`.
+          in: path
+          name: MapSid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CollectionTtl:
+                  description: How long, in seconds, before the Map Item's parent Sync Map expires (time-to-live) and is deleted.  Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the parent Sync Map does not expire. The Sync Map will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Data:
+                  description: A JSON string that represents an arbitrary, schema-less object that the Map Item stores. Can be up to 16 KiB in length.
+                  type: object
+                ItemTtl:
+                  description: How long, in seconds, before the Map Item expires (time-to-live) and is deleted.  Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Map Item does not expire.  The Map Item will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Key:
+                  description: The unique, user-defined key for the Map Item. Can be up to 320 characters long.
+                  type: string
+                Ttl:
+                  description: An alias for `item_ttl`. If both parameters are provided, this value is ignored.
+                  type: integer
+              required:
+                - Key
+                - Data
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_map.sync_map_item"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - key
+      - revision
+      - created_by
+    x-path-type: list
+  "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items/{Key}":
+    delete:
+      description: ""
+      operationId: DeleteSyncMapItem
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Map Item resource to delete.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map with the Sync Map Item resource to delete. Can be the Sync Map resource's `sid` or its `unique_name`.
+          in: path
+          name: MapSid
+          required: true
+          schema:
+            type: string
+        - description: The `key` value of the Sync Map Item resource to delete.
+          in: path
+          name: Key
+          required: true
+          schema:
+            type: string
+        - description: The If-Match HTTP request header
+          in: header
+          name: If-Match
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: Keys in a sync map
+    get:
+      description: ""
+      operationId: FetchSyncMapItem
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Map Item resource to fetch.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map with the Sync Map Item resource to fetch. Can be the Sync Map resource's `sid` or its `unique_name`.
+          in: path
+          name: MapSid
+          required: true
+          schema:
+            type: string
+        - description: The `key` value of the Sync Map Item resource to fetch.
+          in: path
+          name: Key
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_map.sync_map_item"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateSyncMapItem
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Map Item resource to update.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map with the Sync Map Item resource to update. Can be the Sync Map resource's `sid` or its `unique_name`.
+          in: path
+          name: MapSid
+          required: true
+          schema:
+            type: string
+        - description: "The `key` value of the Sync Map Item resource to update. "
+          in: path
+          name: Key
+          required: true
+          schema:
+            type: string
+        - description: The If-Match HTTP request header
+          in: header
+          name: If-Match
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CollectionTtl:
+                  description: How long, in seconds, before the Map Item's parent Sync Map expires (time-to-live) and is deleted.  Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the parent Sync Map does not expire. This parameter can only be used when the Map Item's `data` or `ttl` is updated in the same request. The Sync Map will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Data:
+                  description: A JSON string that represents an arbitrary, schema-less object that the Map Item stores. Can be up to 16 KiB in length.
+                  type: object
+                ItemTtl:
+                  description: How long, in seconds, before the Map Item expires (time-to-live) and is deleted.  Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Map Item does not expire. The Map Item will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Ttl:
+                  description: An alias for `item_ttl`. If both parameters are provided, this value is ignored.
+                  type: integer
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_map.sync_map_item"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - key
+      - revision
+      - created_by
+    x-path-type: instance
+  "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Retrieve a list of all Permissions applying to a Sync Map.
+      operationId: ListSyncMapPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Map Permission resources to read. Can be the Service's `sid` value or `default`.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map with the Permission resources to read. Can be the Sync Map resource's `sid` or its `unique_name`.
+          in: path
+          name: MapSid
+          required: true
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  permissions:
+                    items:
+                      $ref: "#/components/schemas/sync.v1.service.sync_map.sync_map_permission"
+                    type: array
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - identity
+      - read
+      - write
+      - manage
+    x-path-type: list
+  "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions/{Identity}":
+    delete:
+      description: Delete a specific Sync Map Permission.
+      operationId: DeleteSyncMapPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Map Permission resource to delete. Can be the Service's `sid` value or `default`.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map with the Sync Map Permission resource to delete. Can be the Sync Map resource's `sid` or its `unique_name`.
+          in: path
+          name: MapSid
+          required: true
+          schema:
+            type: string
+        - description: The application-defined string that uniquely identifies the User's Sync Map Permission resource to delete.
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a specific Sync Map Permission.
+      operationId: FetchSyncMapPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Map Permission resource to fetch. Can be the Service's `sid` value or `default`.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map with the Sync Map Permission resource to fetch. Can be the Sync Map resource's `sid` or its `unique_name`.
+          in: path
+          name: MapSid
+          required: true
+          schema:
+            type: string
+        - description: The application-defined string that uniquely identifies the User's Sync Map Permission resource to fetch.
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_map.sync_map_permission"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: Update an identity's access to a specific Sync Map.
+      operationId: UpdateSyncMapPermission
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Map Permission resource to update. Can be the Service's `sid` value or `default`.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map with the Sync Map Permission resource to update. Can be the Sync Map resource's `sid` or its `unique_name`.
+          in: path
+          name: MapSid
+          required: true
+          schema:
+            type: string
+        - description: The application-defined string that uniquely identifies the User's Sync Map Permission resource to update.
+          in: path
+          name: Identity
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Manage:
+                  description: Whether the identity can delete the Sync Map. Default value is `false`.
+                  type: boolean
+                Read:
+                  description: Whether the identity can read the Sync Map and its Items. Default value is `false`.
+                  type: boolean
+                Write:
+                  description: Whether the identity can create, update, and delete Items in the Sync Map. Default value is `false`.
+                  type: boolean
+              required:
+                - Read
+                - Write
+                - Manage
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_map.sync_map_permission"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - identity
+      - read
+      - write
+      - manage
+    x-path-type: instance
+  "/v1/Services/{ServiceSid}/Maps/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteSyncMap
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Map resource to delete.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map resource to delete. Can be the Sync Map's `sid` or its `unique_name`.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: Sync map objects
+    get:
+      description: ""
+      operationId: FetchSyncMap
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Map resource to fetch.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map resource to fetch. Can be the Sync Map's `sid` or its `unique_name`.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_map"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateSyncMap
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Map resource to update.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Map resource to update. Can be the Sync Map's `sid` or its `unique_name`.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                CollectionTtl:
+                  description: How long, in seconds, before the Sync Map expires (time-to-live) and is deleted. Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Sync Map does not expire. The Sync Map will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                Ttl:
+                  description: An alias for `collection_ttl`. If both parameters are provided, this value is ignored.
+                  type: integer
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_map"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - sid
+      - unique_name
+      - revision
+    x-path-type: instance
+  "/v1/Services/{ServiceSid}/Streams":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Retrieve a list of all Streams in a Service Instance.
+      operationId: ListSyncStream
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Stream resources to read.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                  streams:
+                    items:
+                      $ref: "#/components/schemas/sync.v1.service.sync_stream"
+                    type: array
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: Create a new Stream.
+      operationId: CreateSyncStream
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) to create the new Stream in.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Ttl:
+                  description: How long, in seconds, before the Stream expires and is deleted (time-to-live). Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Stream does not expire. The Stream will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+                UniqueName:
+                  description: An application-defined string that uniquely identifies the resource. This value must be unique within its Service and it can be up to 320 characters long. The `unique_name` value can be used as an alternative to the `sid` in the URL path to address the resource.
+                  type: string
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_stream"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - sid
+      - unique_name
+      - created_by
+    x-path-type: list
+  "/v1/Services/{ServiceSid}/Streams/{Sid}":
+    delete:
+      description: Delete a specific Stream.
+      operationId: DeleteSyncStream
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Stream resource to delete.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Stream resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch a specific Stream.
+      operationId: FetchSyncStream
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Stream resource to fetch.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Stream resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_stream"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: Update a specific Stream.
+      operationId: UpdateSyncStream
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) with the Sync Stream resource to update.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Stream resource to update.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Ttl:
+                  description: How long, in seconds, before the Stream expires and is deleted (time-to-live). Can be an integer from 0 to 31,536,000 (1 year). The default value is `0`, which means the Stream does not expire. The Stream will be deleted automatically after it expires, but there can be a delay between the expiration time and the resources's deletion.
+                  type: integer
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_stream"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - sid
+      - unique_name
+      - created_by
+    x-path-type: instance
+  "/v1/Services/{ServiceSid}/Streams/{StreamSid}/Messages":
+    description: "TODO: Resource-level docs"
+    post:
+      description: Create a new Stream Message.
+      operationId: CreateStreamMessage
+      parameters:
+        - description: The SID of the [Sync Service](https://www.twilio.com/docs/sync/api/service) to create the new Stream Message in.
+          in: path
+          name: ServiceSid
+          required: true
+          schema:
+            type: string
+        - description: The SID of the Sync Stream to create the new Stream Message resource for.
+          in: path
+          name: StreamSid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                Data:
+                  description: A JSON string that represents an arbitrary, schema-less object that makes up the Stream Message body. Can be up to 4 KiB in length.
+                  type: object
+              required:
+                - Data
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service.sync_stream.stream_message"
+          description: Created
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - sid
+    x-path-type: list
+  "/v1/Services/{Sid}":
+    delete:
+      description: ""
+      operationId: DeleteService
+      parameters:
+        - description: The SID of the Service resource to delete.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    description: Containers for sync objects
+    get:
+      description: ""
+      operationId: FetchService
+      parameters:
+        - description: The SID of the Service resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    post:
+      description: ""
+      operationId: UpdateService
+      parameters:
+        - description: The SID of the Service resource to update.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                AclEnabled:
+                  description: Whether token identities in the Service must be granted access to Sync objects by using the [Permissions](https://www.twilio.com/docs/sync/api/sync-permissions) resource.
+                  type: boolean
+                FriendlyName:
+                  description: A string that you assign to describe the resource.
+                  type: string
+                ReachabilityDebouncingEnabled:
+                  description: Whether every `endpoint_disconnected` event should occur after a configurable delay. The default is `false`, where the `endpoint_disconnected` event occurs immediately after disconnection. When `true`, intervening reconnections can prevent the `endpoint_disconnected` event.
+                  type: boolean
+                ReachabilityDebouncingWindow:
+                  description: The reachability event delay in milliseconds if `reachability_debouncing_enabled` = `true`.  Must be between 1,000 and 30,000 and defaults to 5,000. This is the number of milliseconds after the last running client disconnects, and a Sync identity is declared offline, before the webhook is called if all endpoints remain offline. A reconnection from the same identity by any endpoint during this interval prevents the webhook from being called.
+                  type: integer
+                ReachabilityWebhooksEnabled:
+                  description: Whether the service instance should call `webhook_url` when client endpoints connect to Sync. The default is `false`.
+                  type: boolean
+                WebhookUrl:
+                  description: The URL we should call when Sync objects are manipulated.
+                  format: uri
+                  type: string
+                WebhooksFromRestEnabled:
+                  description: Whether the Service instance should call `webhook_url` when the REST API is used to update Sync objects. The default is `false`.
+                  type: boolean
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/sync.v1.service"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://sync.twilio.com
+    x-default-output-properties:
+      - sid
+      - unique_name
+      - friendly_name
+    x-path-type: instance
+components:
+  schemas:
+    sync.v1.service:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        acl_enabled:
+          type: boolean
+        date_created:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        friendly_name:
+          type: string
+        links:
+          type: object
+        reachability_debouncing_enabled:
+          type: boolean
+        reachability_debouncing_window:
+          type: integer
+        reachability_webhooks_enabled:
+          type: boolean
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        unique_name:
+          type: string
+        url:
+          format: uri
+          type: string
+        webhook_url:
+          format: uri
+          type: string
+        webhooks_from_rest_enabled:
+          type: boolean
+      type: object
+    sync.v1.service.document:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        created_by:
+          type: string
+        data:
+          type: object
+        date_created:
+          format: date-time
+          type: string
+        date_expires:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        links:
+          type: object
+        revision:
+          type: string
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^ET[0-9a-fA-F]{32}$
+          type: string
+        unique_name:
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    sync.v1.service.document.document_permission:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        document_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^ET[0-9a-fA-F]{32}$
+          type: string
+        identity:
+          type: string
+        manage:
+          type: boolean
+        read:
+          type: boolean
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+        write:
+          type: boolean
+      type: object
+    sync.v1.service.sync_list:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        created_by:
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_expires:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        links:
+          type: object
+        revision:
+          type: string
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^ES[0-9a-fA-F]{32}$
+          type: string
+        unique_name:
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    sync.v1.service.sync_list.sync_list_item:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        created_by:
+          type: string
+        data:
+          type: object
+        date_created:
+          format: date-time
+          type: string
+        date_expires:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        index:
+          type: integer
+        list_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^ES[0-9a-fA-F]{32}$
+          type: string
+        revision:
+          type: string
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    sync.v1.service.sync_list.sync_list_permission:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        identity:
+          type: string
+        list_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^ES[0-9a-fA-F]{32}$
+          type: string
+        manage:
+          type: boolean
+        read:
+          type: boolean
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+        write:
+          type: boolean
+      type: object
+    sync.v1.service.sync_map:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        created_by:
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_expires:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        links:
+          type: object
+        revision:
+          type: string
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^MP[0-9a-fA-F]{32}$
+          type: string
+        unique_name:
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    sync.v1.service.sync_map.sync_map_item:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        created_by:
+          type: string
+        data:
+          type: object
+        date_created:
+          format: date-time
+          type: string
+        date_expires:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        key:
+          type: string
+        map_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^MP[0-9a-fA-F]{32}$
+          type: string
+        revision:
+          type: string
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    sync.v1.service.sync_map.sync_map_permission:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        identity:
+          type: string
+        manage:
+          type: boolean
+        map_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^MP[0-9a-fA-F]{32}$
+          type: string
+        read:
+          type: boolean
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        url:
+          format: uri
+          type: string
+        write:
+          type: boolean
+      type: object
+    sync.v1.service.sync_stream:
+      properties:
+        account_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^AC[0-9a-fA-F]{32}$
+          type: string
+        created_by:
+          type: string
+        date_created:
+          format: date-time
+          type: string
+        date_expires:
+          format: date-time
+          type: string
+        date_updated:
+          format: date-time
+          type: string
+        links:
+          type: object
+        service_sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^IS[0-9a-fA-F]{32}$
+          type: string
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^TO[0-9a-fA-F]{32}$
+          type: string
+        unique_name:
+          type: string
+        url:
+          format: uri
+          type: string
+      type: object
+    sync.v1.service.sync_stream.stream_message:
+      properties:
+        data:
+          type: object
+        sid:
+          maxLength: 34
+          minLength: 34
+          pattern: ^TZ[0-9a-fA-F]{32}$
+          type: string
+      type: object
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
+    name: Beta
