@@ -999,6 +999,36 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
+                vpc:
+                  description: |
+                    The properties for a private VPC Output
+                    When this property is specified, the output egress addresses will be created in a user specified VPC
+                  type: object
+                  properties:
+                    PublicAddressAllocationIds:
+                      allOf:
+                        - $ref: '#/components/schemas/__listOf__string'
+                        - xml:
+                            name: publicAddressAllocationIds
+                          description: |
+                            List of public address allocation ids to associate with ENIs that will be created in Output VPC.
+                            Must specify one for SINGLE_PIPELINE, two for STANDARD channels
+                    SecurityGroupIds:
+                      allOf:
+                        - $ref: '#/components/schemas/__listOf__string'
+                        - xml:
+                            name: securityGroupIds
+                          description: |
+                            A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.
+                            If none are specified then the VPC default security group will be used
+                    SubnetIds:
+                      allOf:
+                        - $ref: '#/components/schemas/__listOf__string'
+                        - xml:
+                            name: subnetIds
+                          description: |
+                            A list of VPC subnet IDs from the same VPC.
+                            If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5657,6 +5687,12 @@ components:
             - xml:
                 name: tags
               description: A collection of key-value pairs.
+        Vpc:
+          allOf:
+            - $ref: '#/components/schemas/VpcOutputSettings'
+            - xml:
+                name: vpc
+              description: Settings for VPC output
       description: Placeholder documentation for DeleteChannelResponse
     DeleteInputResponse:
       type: object
@@ -5980,6 +6016,12 @@ components:
             - xml:
                 name: tags
               description: A collection of key-value pairs.
+        Vpc:
+          allOf:
+            - $ref: '#/components/schemas/VpcOutputSettings'
+            - xml:
+                name: vpc
+              description: Settings for VPC output
       description: Placeholder documentation for DescribeChannelResponse
     DescribeInputResponse:
       type: object
@@ -6760,6 +6802,12 @@ components:
             - xml:
                 name: tags
               description: A collection of key-value pairs.
+        Vpc:
+          allOf:
+            - $ref: '#/components/schemas/VpcOutputSettings'
+            - xml:
+                name: vpc
+              description: Settings for VPC output
       description: Placeholder documentation for StartChannelResponse
     StartMultiplexResponse:
       type: object
@@ -6925,6 +6973,12 @@ components:
             - xml:
                 name: tags
               description: A collection of key-value pairs.
+        Vpc:
+          allOf:
+            - $ref: '#/components/schemas/VpcOutputSettings'
+            - xml:
+                name: vpc
+              description: Settings for VPC output
       description: Placeholder documentation for StopChannelResponse
     StopMultiplexResponse:
       type: object
@@ -9483,6 +9537,38 @@ components:
       description: Placeholder documentation for Tags
       additionalProperties:
         $ref: '#/components/schemas/__string'
+    VpcOutputSettings:
+      type: object
+      required:
+        - SubnetIds
+      properties:
+        PublicAddressAllocationIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: publicAddressAllocationIds
+              description: |
+                List of public address allocation ids to associate with ENIs that will be created in Output VPC.
+                Must specify one for SINGLE_PIPELINE, two for STANDARD channels
+        SecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: securityGroupIds
+              description: |
+                A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.
+                If none are specified then the VPC default security group will be used
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: subnetIds
+              description: |
+                A list of VPC subnet IDs from the same VPC.
+                If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
+      description: |
+        The properties for a private VPC Output
+        When this property is specified, the output egress addresses will be created in a user specified VPC
     Channel:
       type: object
       properties:
@@ -9583,6 +9669,12 @@ components:
             - xml:
                 name: tags
               description: A collection of key-value pairs.
+        Vpc:
+          allOf:
+            - $ref: '#/components/schemas/VpcOutputSettings'
+            - xml:
+                name: vpc
+              description: Settings for VPC output
       description: Placeholder documentation for Channel
     ChannelEgressEndpoint:
       type: object
@@ -9683,6 +9775,12 @@ components:
             - xml:
                 name: tags
               description: A collection of key-value pairs.
+        Vpc:
+          allOf:
+            - $ref: '#/components/schemas/VpcOutputSettings'
+            - xml:
+                name: vpc
+              description: Settings for VPC output
       description: Placeholder documentation for ChannelSummary
     ColorSpacePassthroughSettings:
       type: object
@@ -9765,6 +9863,12 @@ components:
             - xml:
                 name: tags
               description: A collection of key-value pairs.
+        Vpc:
+          allOf:
+            - $ref: '#/components/schemas/VpcOutputSettings'
+            - xml:
+                name: vpc
+              description: Settings for VPC output
       description: A request to create a channel
     __listOfInputDestinationRequest:
       type: array
