@@ -76,6 +76,7 @@ Existing integrations
  - [Paw](https://paw.cloud/) - The most powerful HTTP client for Mac - You can import definitions and directly play with the APIs, [see how](https://paw.cloud/docs/examples/search-apis)
  - [Bitscoop](https://bitscoop.com/) - A better way to create and maintain integrations
  - [WinSwag](https://github.com/SvenEV/WinSwag) - A UWP app for loading Swagger definitions and exploring REST APIs
+ - [ReadMe.io](https://preview.readme.io) - Beautiful, personalized, interactive developer hubs.
  - [OpenAPI-Directory-JS](https://github.com/httptoolkit/openapi-directory-js) - The OpenAPI directory precompiled & indexed for JS usage & searching.
 
 Also used as test suite in the following projects:
