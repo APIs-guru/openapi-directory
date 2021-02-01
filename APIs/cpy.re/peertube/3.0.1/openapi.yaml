@@ -88,7 +88,6 @@ info:
       version: "3.0"
   x-providerName: cpy.re
   x-serviceName: peertube
-  x-preferred: null
 externalDocs:
   url: https://docs.joinpeertube.org/api-rest-reference.html
 tags:
@@ -3790,6 +3789,7 @@ components:
           - -views
           - -likes
           - -trending
+          - -hot
         type: string
   schemas:
     Abuse:

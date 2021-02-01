@@ -20,7 +20,6 @@ info:
       url: http://www.europeana.eu/api/api-docs
       version: "2.0"
   x-providerName: europeana.eu
-  x-preferred: null
 tags:
   - description: Object Controller
     name: Record
@@ -902,7 +901,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.json":
     get:
       deprecated: false
-      operationId: getSingleRecordJson
+      operationId: getSingleRecordJson_3
       parameters:
         - description: callback
           in: query
@@ -949,7 +948,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.jsonld":
     get:
       deprecated: false
-      operationId: getSingleRecordJsonLD_3
+      operationId: getSingleRecordJsonLD
       parameters:
         - description: callback
           in: query
@@ -1069,7 +1068,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.ttl":
     get:
       deprecated: false
-      operationId: getSingleRecordTurtle_3
+      operationId: getSingleRecordTurtle
       parameters:
         - description: collectionId
           in: path

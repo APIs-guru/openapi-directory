@@ -18,7 +18,6 @@ info:
       version: "2.0"
   x-providerName: wmata.com
   x-serviceName: rail-station
-  x-preferred: null
 securityDefinitions:
   apiKeyHeader:
     in: header
@@ -1077,253 +1076,211 @@ paths:
       summary: XML - Station Entrances
   /StationInfo:
     get:
-      description: "<h4 class=\"text-primary\">Description</h4>\r
+      description: >-
+        <h4 class="text-primary">Description</h4>
 
-        \r
 
-        <p>Returns station location and address information based on a given\r
+        <p>Returns station location and address information based on a given
 
-        StationCode.</p>\r
+        StationCode.</p>
 
-        \r
 
-        <h4 class=\"text-primary\">Response Elements</h4>\r
+        <h4 class="text-primary">Response Elements</h4>
 
-        \r
 
-        <table class=\"table table-condensed table-hover\">\r
+        <table class="table table-condensed table-hover">
 
-        <thead>\r
+        <thead>
 
-        <tr>\r
+        <tr>
 
-        <th class=\"col-md-3\">Element</th>\r
+        <th class="col-md-3">Element</th>
 
-        \r
 
-        <th>Description</th>\r
+        <th>Description</th>
 
-        </tr>\r
+        </tr>
 
-        </thead>\r
+        </thead>
 
-        \r
 
-        <tbody>\r
+        <tbody>
 
-        <tr>\r
+        <tr>
 
-        <td>Address</td>\r
+        <td>Address</td>
 
-        \r
 
-        <td>\r
+        <td>
 
-        Structure describing <a href=\"#Address\">address</a> information.\r
+        Structure describing <a href="#Address">address</a> information.
 
-        </td>\r
+        </td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>Code</td>\r
+        <td>Code</td>
 
-        \r
 
-        <td>Station code. Repeated from input.</td>\r
+        <td>Station code. Repeated from input.</td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>Lat</td>\r
+        <td>Lat</td>
 
-        \r
 
-        <td>Latitude.</td>\r
+        <td>Latitude.</td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>LineCode1</td>\r
+        <td>LineCode1</td>
 
-        \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
+        <td>Two-letter abbreviation for one line (e.g.: RD, BL, YL, OR, GR, or SV) served by this station. If the station has an additional platform, the lines served by the other platform are listed in the LineCodeX values for the record associated with the StationCode found in StationTogether1.</td>
 
-        or SV) served by this station.</td>\r
+        </tr>
 
-        </tr>\r
 
-        \r
+        <tr>
 
-        <tr>\r
+        <td>LineCode2</td>
 
-        <td>LineCode2</td>\r
 
-        \r
+        <td>Additional line served by this station, if applicable.</td>
 
-        <td>Additional line served by this station. This is often the case\r
+        </tr>
 
-        when stations have multiple platforms (e.g.: Gallery Place, Fort\r
 
-        Totten, L'Enfant Plaza, and Metro Center).</td>\r
+        <tr>
 
-        </tr>\r
+        <td>LineCode3</td>
 
-        \r
 
-        <tr>\r
+        <td>Additional line served by this station, if applicable.</td>
 
-        <td>LineCode3</td>\r
+        </tr>
 
-        \r
 
-        <td>Similar to function as LineCodeX.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>LineCode4</td>
 
-        \r
 
-        <tr>\r
+        <td>Additional line served by this station, if applicable. Currently not in use.</td>
 
-        <td>LineCode4</td>\r
+        </tr>
 
-        \r
 
-        <td>Similar to function as LineCodeX. Currently not in use.</td>\r
+        <td>Lon</td>
 
-        </tr>\r
 
-        \r
+        <td>Longitude.</td>
 
-        <tr>\r
+        </tr>
 
-        <td>Lon</td>\r
 
-        \r
+        <tr>
 
-        <td>Longitude.</td>\r
+        <td>Name</td>
 
-        </tr>\r
 
-        \r
+        <td>Station name.</td>
 
-        <tr>\r
+        </tr>
 
-        <td>Name</td>\r
 
-        \r
+        <tr>
 
-        <td>Station name.</td>\r
+        <td>StationTogether1</td>
 
-        </tr>\r
 
-        \r
+        <td>For stations with multiple platforms (e.g.: Gallery Place, Fort
 
-        <tr>\r
+        Totten, L'Enfant Plaza, and Metro Center), the additional
 
-        <td>StationTogether1</td>\r
+        StationCode will be listed here.</td>
 
-        \r
+        </tr>
 
-        <td>For stations with multiple platforms (e.g.: Gallery Place, Fort\r
 
-        Totten, L'Enfant Plaza, and Metro Center), the additional\r
+        <tr>
 
-        StationCode will be listed here.</td>\r
+        <td>StationTogether2</td>
 
-        </tr>\r
 
-        \r
+        <td>Similar in function to StationTogether2. Currently not in
 
-        <tr>\r
+        use.</td>
 
-        <td>StationTogether2</td>\r
+        </tr>
 
-        \r
 
-        <td>Similar in function to StationTogether2. Currently not in\r
+        <tr>
 
-        use.</td>\r
+        <td colspan="2">
 
-        </tr>\r
+        <div class="text-primary" style="margin-top: 1em">
 
-        \r
+        <a name="Address">Address Elements</a>
 
-        <tr>\r
+        </div>
 
-        <td colspan=\"2\">\r
+        </td>
 
-        <div class=\"text-primary\" style=\"margin-top: 1em\">\r
+        </tr>
 
-        <a name=\"Address\">Address Elements</a>\r
 
-        </div>\r
+        <tr>
 
-        </td>\r
+        <td>City</td>
 
-        </tr>\r
 
-        \r
+        <td>City.</td>
 
-        <tr>\r
+        </tr>
 
-        <td>City</td>\r
 
-        \r
+        <tr>
 
-        <td>City.</td>\r
+        <td>State</td>
 
-        </tr>\r
 
-        \r
+        <td>State (abbreviated).</td>
 
-        <tr>\r
+        </tr>
 
-        <td>State</td>\r
 
-        \r
+        <tr>
 
-        <td>State (abbreviated).</td>\r
+        <td>Street</td>
 
-        </tr>\r
 
-        \r
+        <td>Street address (for GPS use).</td>
 
-        <tr>\r
+        </tr>
 
-        <td>Street</td>\r
 
-        \r
+        <tr>
 
-        <td>Street address (for GPS use).</td>\r
+        <td>Zip</td>
 
-        </tr>\r
 
-        \r
+        <td>Zip code.</td>
 
-        <tr>\r
+        </tr>
 
-        <td>Zip</td>\r
+        </tbody>
 
-        \r
-
-        <td>Zip code.</td>\r
-
-        </tr>\r
-
-        </tbody>\r
-
-        </table>"
+        </table>
       operationId: 5476364f031f5909e4fe3318
       parameters:
         - default: A01
@@ -2079,289 +2036,246 @@ paths:
       summary: XML - Station Timings
   /Stations:
     get:
-      description: "<h4 class=\"text-primary\">Description</h4>\r
+      description: >-
+        <h4 class="text-primary">Description</h4>
 
-        \r
 
-        <p>Returns a list of station location and address information based on a given\r
+        <p>Returns a list of station location and address information based on a given
 
-        LineCode. Omit the LineCode to return all stations. The response is an array of\r
+        LineCode. Omit the LineCode to return all stations. The response is an array of
 
-        objects identical to those returned in the Station Information method.</p>\r
+        objects identical to those returned in the Station Information method.</p>
 
-        \r
 
-        <h4 class=\"text-primary\">Response Elements</h4>\r
+        <h4 class="text-primary">Response Elements</h4>
 
-        \r
 
-        <table class=\"table table-condensed table-hover\">\r
+        <table class="table table-condensed table-hover">
 
-        <thead>\r
+        <thead>
 
-        <tr>\r
+        <tr>
 
-        <th class=\"col-md-3\">Element</th>\r
+        <th class="col-md-3">Element</th>
 
-        \r
 
-        <th>Description</th>\r
+        <th>Description</th>
 
-        </tr>\r
+        </tr>
 
-        </thead>\r
+        </thead>
 
-        \r
 
-        <tbody>\r
+        <tbody>
 
-        <tr>\r
+        <tr>
 
-        <td>Stations</td>\r
+        <td>Stations</td>
 
-        \r
 
-        <td>\r
+        <td>
 
-        Array containing station information (<a href=\r
+        Array containing station information (<a href=
 
-        \"#Station\">Station</a>).\r
+        "#Station">Station</a>).
 
-        </td>\r
+        </td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td colspan=\"2\">\r
+        <td colspan="2">
 
-        <div class=\"text-primary\" style=\"margin-top: 1em\">\r
+        <div class="text-primary" style="margin-top: 1em">
 
-        <a id=\"Station\" name=\"Station\">Station Elements</a>\r
+        <a id="Station" name="Station">Station Elements</a>
 
-        </div>\r
+        </div>
 
-        </td>\r
+        </td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>Address</td>\r
+        <td>Address</td>
 
-        \r
 
-        <td>\r
+        <td>
 
-        Structure describing <a href=\"#Address\">address</a> information.\r
+        Structure describing <a href="#Address">address</a> information.
 
-        </td>\r
+        </td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>Code</td>\r
+        <td>Code</td>
 
-        \r
 
-        <td>Station code. Repeated from input.</td>\r
+        <td>Station code. Repeated from input.</td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>Lat</td>\r
+        <td>Lat</td>
 
-        \r
 
-        <td>Latitude.</td>\r
+        <td>Latitude.</td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>LineCode1</td>\r
+        <td>LineCode1</td>
 
-        \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
+        <td>Two-letter abbreviation for one line (e.g.: RD, BL, YL, OR, GR, or SV) served by this station. If the station has an additional platform, the lines served by the other platform are listed in the LineCodeX values for the record associated with the StationCode found in StationTogether1.</td>
 
-        or SV) served by this station.</td>\r
+        </tr>
 
-        </tr>\r
 
-        \r
+        <tr>
 
-        <tr>\r
+        <td>LineCode2</td>
 
-        <td>LineCode2</td>\r
 
-        \r
+        <td>Additional line served by this station, if applicable.</td>
 
-        <td>Additional line served by this station. This is often the case\r
+        </tr>
 
-        when stations have multiple platforms (e.g.: Gallery Place, Fort\r
 
-        Totten, L'Enfant Plaza, and Metro Center).</td>\r
+        <tr>
 
-        </tr>\r
+        <td>LineCode3</td>
 
-        \r
 
-        <tr>\r
+        <td>Additional line served by this station, if applicable.</td>
 
-        <td>LineCode3</td>\r
+        </tr>
 
-        \r
 
-        <td>Similar to function as LineCodeX.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>LineCode4</td>
 
-        \r
 
-        <tr>\r
+        <td>Additional line served by this station, if applicable. Currently not in use.</td>
 
-        <td>LineCode4</td>\r
+        </tr>
 
-        \r
 
-        <td>Similar to function as LineCodeX. Currently not in use.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Lon</td>
 
-        \r
 
-        <tr>\r
+        <td>Longitude.</td>
 
-        <td>Lon</td>\r
+        </tr>
 
-        \r
 
-        <td>Longitude.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Name</td>
 
-        \r
 
-        <tr>\r
+        <td>Station name.</td>
 
-        <td>Name</td>\r
+        </tr>
 
-        \r
 
-        <td>Station name.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>StationTogether1</td>
 
-        \r
 
-        <tr>\r
+        <td>For stations with multiple platforms (e.g.: Gallery Place, Fort
 
-        <td>StationTogether1</td>\r
+        Totten, L'Enfant Plaza, and Metro Center), the additional
 
-        \r
+        StationCode will be listed here.</td>
 
-        <td>For stations with multiple platforms (e.g.: Gallery Place, Fort\r
+        </tr>
 
-        Totten, L'Enfant Plaza, and Metro Center), the additional\r
 
-        StationCode will be listed here.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>StationTogether2</td>
 
-        \r
 
-        <tr>\r
+        <td>Similar in function to StationTogether2. Currently not in
 
-        <td>StationTogether2</td>\r
+        use.</td>
 
-        \r
+        </tr>
 
-        <td>Similar in function to StationTogether2. Currently not in\r
 
-        use.</td>\r
+        <tr>
 
-        </tr>\r
+        <td colspan="2">
 
-        \r
+        <div class="text-primary" style="margin-top: 1em">
 
-        <tr>\r
+        <a id="Address" name="Address">Address Elements</a>
 
-        <td colspan=\"2\">\r
+        </div>
 
-        <div class=\"text-primary\" style=\"margin-top: 1em\">\r
+        </td>
 
-        <a id=\"Address\" name=\"Address\">Address Elements</a>\r
+        </tr>
 
-        </div>\r
 
-        </td>\r
+        <tr>
 
-        </tr>\r
+        <td>City</td>
 
-        \r
 
-        <tr>\r
+        <td>City.</td>
 
-        <td>City</td>\r
+        </tr>
 
-        \r
 
-        <td>City.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>State</td>
 
-        \r
 
-        <tr>\r
+        <td>State (abbreviated).</td>
 
-        <td>State</td>\r
+        </tr>
 
-        \r
 
-        <td>State (abbreviated).</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Street</td>
 
-        \r
 
-        <tr>\r
+        <td>Street address (for GPS use).</td>
 
-        <td>Street</td>\r
+        </tr>
 
-        \r
 
-        <td>Street address (for GPS use).</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Zip</td>
 
-        \r
 
-        <tr>\r
+        <td>Zip code.</td>
 
-        <td>Zip</td>\r
+        </tr>
 
-        \r
+        </tbody>
 
-        <td>Zip code.</td>\r
-
-        </tr>\r
-
-        </tbody>\r
-
-        </table>"
+        </table>
       operationId: 5476364f031f5909e4fe3319
       parameters:
         - description: >-
@@ -3846,253 +3760,213 @@ paths:
       summary: JSON - Station Entrances
   /json/jStationInfo:
     get:
-      description: "<h4 class=\"text-primary\">Description</h4>\r
+      description: >-
+        <h4 class="text-primary">Description</h4>
 
-        \r
 
-        <p>Returns station location and address information based on a given\r
+        <p>Returns station location and address information based on a given
 
-        StationCode.</p>\r
+        StationCode.</p>
 
-        \r
 
-        <h4 class=\"text-primary\">Response Elements</h4>\r
+        <h4 class="text-primary">Response Elements</h4>
 
-        \r
 
-        <table class=\"table table-condensed table-hover\">\r
+        <table class="table table-condensed table-hover">
 
-        <thead>\r
+        <thead>
 
-        <tr>\r
+        <tr>
 
-        <th class=\"col-md-3\">Element</th>\r
+        <th class="col-md-3">Element</th>
 
-        \r
 
-        <th>Description</th>\r
+        <th>Description</th>
 
-        </tr>\r
+        </tr>
 
-        </thead>\r
+        </thead>
 
-        \r
 
-        <tbody>\r
+        <tbody>
 
-        <tr>\r
+        <tr>
 
-        <td>Address</td>\r
+        <td>Address</td>
 
-        \r
 
-        <td>\r
+        <td>
 
-        Structure describing <a href=\"#Address\">address</a> information.\r
+        Structure describing <a href="#Address">address</a> information.
 
-        </td>\r
+        </td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>Code</td>\r
+        <td>Code</td>
 
-        \r
 
-        <td>Station code. Repeated from input.</td>\r
+        <td>Station code. Repeated from input.</td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>Lat</td>\r
+        <td>Lat</td>
 
-        \r
 
-        <td>Latitude.</td>\r
+        <td>Latitude.</td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>LineCode1</td>\r
+        <td>LineCode1</td>
 
-        \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
+        <td>Two-letter abbreviation for one line (e.g.: RD, BL, YL, OR, GR, or SV) served by this station. If the station has an additional platform, the lines served by the other platform are listed in the LineCodeX values for the record associated with the StationCode found in StationTogether1.</td>
 
-        or SV) served by this station.</td>\r
+        </tr>
 
-        </tr>\r
 
-        \r
+        <tr>
 
-        <tr>\r
+        <td>LineCode2</td>
 
-        <td>LineCode2</td>\r
 
-        \r
+        <td>Additional line served by this station, if applicable.</td>
 
-        <td>Additional line served by this station. This is often the case\r
+        </tr>
 
-        when stations have multiple platforms (e.g.: Gallery Place, Fort\r
 
-        Totten, L'Enfant Plaza, and Metro Center).</td>\r
+        <tr>
 
-        </tr>\r
+        <td>LineCode3</td>
 
-        \r
 
-        <tr>\r
+        <td>Additional line served by this station, if applicable.</td>
 
-        <td>LineCode3</td>\r
+        </tr>
 
-        \r
 
-        <td>Similar to function as LineCodeX.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>LineCode4</td>
 
-        \r
 
-        <tr>\r
+        <td>Additional line served by this station, if applicable. Currently not in use.</td>
 
-        <td>LineCode4</td>\r
+        </tr>
 
-        \r
 
-        <td>Similar to function as LineCodeX. Currently not in use.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Lon</td>
 
-        \r
 
-        <tr>\r
+        <td>Longitude.</td>
 
-        <td>Lon</td>\r
+        </tr>
 
-        \r
 
-        <td>Longitude.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Name</td>
 
-        \r
 
-        <tr>\r
+        <td>Station name.</td>
 
-        <td>Name</td>\r
+        </tr>
 
-        \r
 
-        <td>Station name.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>StationTogether1</td>
 
-        \r
 
-        <tr>\r
+        <td>For stations with multiple platforms (e.g.: Gallery Place, Fort
 
-        <td>StationTogether1</td>\r
+        Totten, L'Enfant Plaza, and Metro Center), the additional
 
-        \r
+        StationCode will be listed here.</td>
 
-        <td>For stations with multiple platforms (e.g.: Gallery Place, Fort\r
+        </tr>
 
-        Totten, L'Enfant Plaza, and Metro Center), the additional\r
 
-        StationCode will be listed here.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>StationTogether2</td>
 
-        \r
 
-        <tr>\r
+        <td>Similar in function to StationTogether2. Currently not in
 
-        <td>StationTogether2</td>\r
+        use.</td>
 
-        \r
+        </tr>
 
-        <td>Similar in function to StationTogether2. Currently not in\r
 
-        use.</td>\r
+        <tr>
 
-        </tr>\r
+        <td colspan="2">
 
-        \r
+        <div class="text-primary" style="margin-top: 1em">
 
-        <tr>\r
+        <a name="Address">Address Elements</a>
 
-        <td colspan=\"2\">\r
+        </div>
 
-        <div class=\"text-primary\" style=\"margin-top: 1em\">\r
+        </td>
 
-        <a name=\"Address\">Address Elements</a>\r
+        </tr>
 
-        </div>\r
 
-        </td>\r
+        <tr>
 
-        </tr>\r
+        <td>City</td>
 
-        \r
 
-        <tr>\r
+        <td>City.</td>
 
-        <td>City</td>\r
+        </tr>
 
-        \r
 
-        <td>City.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>State</td>
 
-        \r
 
-        <tr>\r
+        <td>State (abbreviated).</td>
 
-        <td>State</td>\r
+        </tr>
 
-        \r
 
-        <td>State (abbreviated).</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Street</td>
 
-        \r
 
-        <tr>\r
+        <td>Street address (for GPS use).</td>
 
-        <td>Street</td>\r
+        </tr>
 
-        \r
 
-        <td>Street address (for GPS use).</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Zip</td>
 
-        \r
 
-        <tr>\r
+        <td>Zip code.</td>
 
-        <td>Zip</td>\r
+        </tr>
 
-        \r
+        </tbody>
 
-        <td>Zip code.</td>\r
-
-        </tr>\r
-
-        </tbody>\r
-
-        </table>"
+        </table>
       operationId: 5476364f031f5909e4fe3310
       parameters:
         - default: A01
@@ -4778,289 +4652,246 @@ paths:
       summary: JSON - Station Timings
   /json/jStations:
     get:
-      description: "<h4 class=\"text-primary\">Description</h4>\r
+      description: >-
+        <h4 class="text-primary">Description</h4>
 
-        \r
 
-        <p>Returns a list of station location and address information based on a given\r
+        <p>Returns a list of station location and address information based on a given
 
-        LineCode. Omit the LineCode to return all stations. The response is an array of\r
+        LineCode. Omit the LineCode to return all stations. The response is an array of
 
-        objects identical to those returned in the Station Information method.</p>\r
+        objects identical to those returned in the Station Information method.</p>
 
-        \r
 
-        <h4 class=\"text-primary\">Response Elements</h4>\r
+        <h4 class="text-primary">Response Elements</h4>
 
-        \r
 
-        <table class=\"table table-condensed table-hover\">\r
+        <table class="table table-condensed table-hover">
 
-        <thead>\r
+        <thead>
 
-        <tr>\r
+        <tr>
 
-        <th class=\"col-md-3\">Element</th>\r
+        <th class="col-md-3">Element</th>
 
-        \r
 
-        <th>Description</th>\r
+        <th>Description</th>
 
-        </tr>\r
+        </tr>
 
-        </thead>\r
+        </thead>
 
-        \r
 
-        <tbody>\r
+        <tbody>
 
-        <tr>\r
+        <tr>
 
-        <td>Stations</td>\r
+        <td>Stations</td>
 
-        \r
 
-        <td>\r
+        <td>
 
-        Array containing station information (<a href=\r
+        Array containing station information (<a href=
 
-        \"#Station\">Station</a>).\r
+        "#Station">Station</a>).
 
-        </td>\r
+        </td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td colspan=\"2\">\r
+        <td colspan="2">
 
-        <div class=\"text-primary\" style=\"margin-top: 1em\">\r
+        <div class="text-primary" style="margin-top: 1em">
 
-        <a id=\"Station\" name=\"Station\">Station Elements</a>\r
+        <a id="Station" name="Station">Station Elements</a>
 
-        </div>\r
+        </div>
 
-        </td>\r
+        </td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>Address</td>\r
+        <td>Address</td>
 
-        \r
 
-        <td>\r
+        <td>
 
-        Structure describing <a href=\"#Address\">address</a> information.\r
+        Structure describing <a href="#Address">address</a> information.
 
-        </td>\r
+        </td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>Code</td>\r
+        <td>Code</td>
 
-        \r
 
-        <td>Station code. Repeated from input.</td>\r
+        <td>Station code. Repeated from input.</td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>Lat</td>\r
+        <td>Lat</td>
 
-        \r
 
-        <td>Latitude.</td>\r
+        <td>Latitude.</td>
 
-        </tr>\r
+        </tr>
 
-        \r
 
-        <tr>\r
+        <tr>
 
-        <td>LineCode1</td>\r
+        <td>LineCode1</td>
 
-        \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
+        <td>Two-letter abbreviation for one line (e.g.: RD, BL, YL, OR, GR, or SV) served by this station. If the station has an additional platform, the lines served by the other platform are listed in the LineCodeX values for the record associated with the StationCode found in StationTogether1.</td>
 
-        or SV) served by this station.</td>\r
+        </tr>
 
-        </tr>\r
 
-        \r
+        <tr>
 
-        <tr>\r
+        <td>LineCode2</td>
 
-        <td>LineCode2</td>\r
 
-        \r
+        <td>Additional line served by this station, if applicable.</td>
 
-        <td>Additional line served by this station. This is often the case\r
+        </tr>
 
-        when stations have multiple platforms (e.g.: Gallery Place, Fort\r
 
-        Totten, L'Enfant Plaza, and Metro Center).</td>\r
+        <tr>
 
-        </tr>\r
+        <td>LineCode3</td>
 
-        \r
 
-        <tr>\r
+        <td>Additional line served by this station, if applicable.</td>
 
-        <td>LineCode3</td>\r
+        </tr>
 
-        \r
 
-        <td>Similar to function as LineCodeX.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>LineCode4</td>
 
-        \r
 
-        <tr>\r
+        <td>Additional line served by this station, if applicable. Currently not in use.</td>
 
-        <td>LineCode4</td>\r
+        </tr>
 
-        \r
 
-        <td>Similar to function as LineCodeX. Currently not in use.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Lon</td>
 
-        \r
 
-        <tr>\r
+        <td>Longitude.</td>
 
-        <td>Lon</td>\r
+        </tr>
 
-        \r
 
-        <td>Longitude.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Name</td>
 
-        \r
 
-        <tr>\r
+        <td>Station name.</td>
 
-        <td>Name</td>\r
+        </tr>
 
-        \r
 
-        <td>Station name.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>StationTogether1</td>
 
-        \r
 
-        <tr>\r
+        <td>For stations with multiple platforms (e.g.: Gallery Place, Fort
 
-        <td>StationTogether1</td>\r
+        Totten, L'Enfant Plaza, and Metro Center), the additional
 
-        \r
+        StationCode will be listed here.</td>
 
-        <td>For stations with multiple platforms (e.g.: Gallery Place, Fort\r
+        </tr>
 
-        Totten, L'Enfant Plaza, and Metro Center), the additional\r
 
-        StationCode will be listed here.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>StationTogether2</td>
 
-        \r
 
-        <tr>\r
+        <td>Similar in function to StationTogether2. Currently not in
 
-        <td>StationTogether2</td>\r
+        use.</td>
 
-        \r
+        </tr>
 
-        <td>Similar in function to StationTogether2. Currently not in\r
 
-        use.</td>\r
+        <tr>
 
-        </tr>\r
+        <td colspan="2">
 
-        \r
+        <div class="text-primary" style="margin-top: 1em">
 
-        <tr>\r
+        <a id="Address" name="Address">Address Elements</a>
 
-        <td colspan=\"2\">\r
+        </div>
 
-        <div class=\"text-primary\" style=\"margin-top: 1em\">\r
+        </td>
 
-        <a id=\"Address\" name=\"Address\">Address Elements</a>\r
+        </tr>
 
-        </div>\r
 
-        </td>\r
+        <tr>
 
-        </tr>\r
+        <td>City</td>
 
-        \r
 
-        <tr>\r
+        <td>City.</td>
 
-        <td>City</td>\r
+        </tr>
 
-        \r
 
-        <td>City.</td>\r
+        <tr>
 
-        </tr>\r
+        <td>State</td>
 
-        \r
 
-        <tr>\r
+        <td>State (abbreviated).</td>
 
-        <td>State</td>\r
+        </tr>
 
-        \r
 
-        <td>State (abbreviated).</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Street</td>
 
-        \r
 
-        <tr>\r
+        <td>Street address (for GPS use).</td>
 
-        <td>Street</td>\r
+        </tr>
 
-        \r
 
-        <td>Street address (for GPS use).</td>\r
+        <tr>
 
-        </tr>\r
+        <td>Zip</td>
 
-        \r
 
-        <tr>\r
+        <td>Zip code.</td>
 
-        <td>Zip</td>\r
+        </tr>
 
-        \r
+        </tbody>
 
-        <td>Zip code.</td>\r
-
-        </tr>\r
-
-        </tbody>\r
-
-        </table>"
+        </table>
       operationId: 5476364f031f5909e4fe3311
       parameters:
         - description: >-

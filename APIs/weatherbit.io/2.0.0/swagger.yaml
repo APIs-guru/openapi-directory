@@ -19,7 +19,6 @@ info:
       url: https://www.weatherbit.io/static/swagger.json
       version: "2.0"
   x-providerName: weatherbit.io
-  x-preferred: null
 produces:
   - application/json
 paths:
@@ -1346,6 +1345,14 @@ paths:
           name: city
           required: true
           type: string
+        - description: Include 1 hour - minutely forecast in the response
+          enum:
+            - minutely
+          format: string
+          in: query
+          name: include
+          required: false
+          type: string
         - description: Full name of state.
           format: string
           in: query
@@ -1458,6 +1465,14 @@ paths:
           name: units
           required: false
           type: string
+        - description: Include 1 hour - minutely forecast in the response
+          enum:
+            - minutely
+          format: string
+          in: query
+          name: include
+          required: false
+          type: string
         - description: Marine stations only (buoys, oil platforms, etc)
           enum:
             - t
@@ -1546,6 +1561,14 @@ paths:
           name: lon
           required: true
           type: number
+        - description: Include 1 hour - minutely forecast in the response
+          enum:
+            - minutely
+          format: string
+          in: query
+          name: include
+          required: false
+          type: string
         - description: Marine stations only (buoys, oil platforms, etc)
           enum:
             - t
@@ -1643,6 +1666,14 @@ paths:
           name: country
           required: false
           type: string
+        - description: Include 1 hour - minutely forecast in the response
+          enum:
+            - minutely
+          format: string
+          in: query
+          name: include
+          required: false
+          type: string
         - description: Marine stations only (buoys, oil platforms, etc)
           enum:
             - t
@@ -1733,6 +1764,14 @@ paths:
           in: path
           name: station
           required: true
+          type: string
+        - description: Include 1 hour - minutely forecast in the response
+          enum:
+            - minutely
+          format: string
+          in: query
+          name: include
+          required: false
           type: string
         - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:

@@ -74,6 +74,10 @@ paths:
                   title:
                     example: Open Build Service API
                     type: string
+                required:
+                  - title
+                  - description
+                  - revision
                 type: object
           description: >
             OK. The request has succeeded.
@@ -1268,6 +1272,8 @@ paths:
                     example: group-test
                     type: string
                 type: object
+                xml:
+                  name: group
           description: >
             OK. The request has succeeded.
 

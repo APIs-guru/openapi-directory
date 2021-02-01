@@ -15,7 +15,6 @@ info:
       url: https://app.api2crm.com/swagger/spec/data2crm_api.json
       version: "2.0"
   x-providerName: data2crm.com
-  x-preferred: null
 externalDocs:
   url: http://www.data2crm.com/api/
 responses:
@@ -145,6 +144,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -321,6 +325,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -551,6 +560,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -622,6 +636,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -736,6 +755,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -1101,6 +1125,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -1275,6 +1304,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -1505,6 +1539,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -1576,6 +1615,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -1690,6 +1734,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -1844,6 +1893,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -2020,6 +2074,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -2250,6 +2309,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -2321,6 +2385,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -2435,6 +2504,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -2589,6 +2663,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -2765,6 +2844,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -2995,6 +3079,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -3066,6 +3155,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -3180,6 +3274,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -3334,6 +3433,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -3510,6 +3614,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -3740,6 +3849,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -3811,6 +3925,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -3925,6 +4044,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -4079,6 +4203,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -4255,6 +4384,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -4485,6 +4619,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -4556,6 +4695,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -4670,6 +4814,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -4824,6 +4973,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -5000,6 +5154,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -5230,6 +5389,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -5301,6 +5465,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -5415,6 +5584,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -5733,6 +5907,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -5931,6 +6110,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -6181,6 +6365,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -6257,6 +6446,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -6381,6 +6575,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -7024,6 +7223,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -7198,6 +7402,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -7428,6 +7637,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -7499,6 +7713,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -7613,6 +7832,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -7767,6 +7991,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -7943,6 +8172,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -8173,6 +8407,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -8244,6 +8483,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -8358,6 +8602,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -8512,6 +8761,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -8688,6 +8942,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -8918,6 +9177,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -8989,6 +9253,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -9103,6 +9372,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -9257,6 +9531,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -9433,6 +9712,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -9663,6 +9947,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -9734,6 +10023,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -9848,6 +10142,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -10002,6 +10301,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -10178,6 +10482,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -10408,6 +10717,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -10479,6 +10793,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -10593,6 +10912,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -10747,6 +11071,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -10923,6 +11252,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -11153,6 +11487,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -11224,6 +11563,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -11338,6 +11682,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -11492,6 +11841,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -11668,6 +12022,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -11898,6 +12257,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -11969,6 +12333,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -12083,6 +12452,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -12237,6 +12611,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -12413,6 +12792,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -12643,6 +13027,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -12714,6 +13103,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -12828,6 +13222,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -12982,6 +13381,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -13158,6 +13562,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -13388,6 +13797,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -13459,6 +13873,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -13573,6 +13992,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -13813,6 +14237,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -13987,6 +14416,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -14217,6 +14651,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -14288,6 +14727,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -14402,6 +14846,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -14556,6 +15005,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -14732,6 +15186,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -14962,6 +15421,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -15033,6 +15497,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -15147,6 +15616,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -15301,6 +15775,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -15477,6 +15956,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -15707,6 +16191,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -15778,6 +16267,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -15892,6 +16386,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -16046,6 +16545,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -16222,6 +16726,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -16452,6 +16961,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -16523,6 +17037,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -16637,6 +17156,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -16791,6 +17315,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -16967,6 +17496,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -17197,6 +17731,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -17268,6 +17807,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -17382,6 +17926,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -17536,6 +18085,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -17712,6 +18266,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -17942,6 +18501,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -18013,6 +18577,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -18127,6 +18696,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -18281,6 +18855,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -18457,6 +19036,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -18687,6 +19271,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -18758,6 +19347,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -18872,6 +19466,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -19069,6 +19668,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -19243,6 +19847,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -19473,6 +20082,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -19544,6 +20158,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -19658,6 +20277,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -19812,6 +20436,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -19988,6 +20617,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -20218,6 +20852,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -20289,6 +20928,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -20403,6 +21047,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -20557,6 +21206,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -20733,6 +21387,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -20963,6 +21622,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -21034,6 +21698,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -21148,6 +21817,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -21302,6 +21976,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -21478,6 +22157,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -21708,6 +22392,11 @@ paths:
           name: X-API2CRM-DATA-STRATEGY
           required: false
           type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
+          required: false
+          type: string
         - description: Data Is Actual
           enum:
             - "true"
@@ -21779,6 +22468,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual
@@ -21893,6 +22587,11 @@ paths:
             - simple
           in: header
           name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Coherent Entities
+          in: header
+          name: X-API2CRM-DATA-COHERENT-ENTITIES
           required: false
           type: string
         - description: Data Is Actual

@@ -17,7 +17,6 @@ info:
       version: "2.0"
   x-providerName: sportsdata.io
   x-serviceName: soccer-v3-scores
-  x-preferred: null
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
@@ -1239,6 +1238,9 @@ components:
         Name:
           nullable: true
           type: string
+        Order:
+          nullable: true
+          type: integer
         Points:
           nullable: true
           type: integer
@@ -1258,9 +1260,6 @@ components:
           nullable: false
           type: integer
         Wins:
-          nullable: true
-          type: integer
-        "[Order]":
           nullable: true
           type: integer
     Team:
@@ -1307,6 +1306,9 @@ components:
         GlobalTeamId:
           nullable: false
           type: integer
+        Key:
+          nullable: true
+          type: string
         Name:
           nullable: true
           type: string
@@ -1344,9 +1346,6 @@ components:
           nullable: true
           type: string
         Zip:
-          nullable: true
-          type: string
-        "[Key]":
           nullable: true
           type: string
     TeamDetail:
@@ -1393,6 +1392,9 @@ components:
         GlobalTeamId:
           nullable: false
           type: integer
+        Key:
+          nullable: true
+          type: string
         Name:
           nullable: true
           type: string
@@ -1434,9 +1436,6 @@ components:
           nullable: true
           type: string
         Zip:
-          nullable: true
-          type: string
-        "[Key]":
           nullable: true
           type: string
     TeamGame:
@@ -1805,6 +1804,9 @@ components:
         Nickname2:
           nullable: true
           type: string
+        Open:
+          nullable: false
+          type: boolean
         Opened:
           nullable: true
           type: integer
@@ -1817,9 +1819,6 @@ components:
         Zip:
           nullable: true
           type: string
-        "[Open]":
-          nullable: false
-          type: boolean
   securitySchemes:
     apiKeyHeader:
       in: header

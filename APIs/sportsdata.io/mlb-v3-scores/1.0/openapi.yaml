@@ -18,7 +18,6 @@ info:
       version: "2.0"
   x-providerName: sportsdata.io
   x-serviceName: mlb-v3-scores
-  x-preferred: null
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
@@ -1164,6 +1163,9 @@ components:
         GlobalTeamID:
           nullable: false
           type: integer
+        Key:
+          nullable: true
+          type: string
         League:
           nullable: true
           type: string
@@ -1192,9 +1194,6 @@ components:
           nullable: true
           type: string
         WikipediaWordMarkUrl:
-          nullable: true
-          type: string
-        "[Key]":
           nullable: true
           type: string
     TeamGame:

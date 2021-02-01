@@ -15,11 +15,10 @@ info:
       version: "3.0"
   x-providerName: nexmo.com
   x-serviceName: subaccounts
-  x-preferred: null
 tags:
   - description: This section shows how you can create, retrieve and modify subaccounts of a primary account.
     name: Subaccount Management
-  - description: This section shows how you execute credit and balance transfers, as well as viewing past transactions.
+  - description: This section shows how you execute credit, balance and number transfers, as well as viewing past transactions.
     name: Transfers
 paths:
   "/{api_key}/balance-transfers":
@@ -66,7 +65,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
         "404":
-          $ref: "#/components/responses/NotFoundError"
+          $ref: "#/components/responses/AccountIdNotFoundError"
       security:
         - basicAuth: []
       summary: Retrieve list of balance transfers
@@ -101,7 +100,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
         "404":
-          $ref: "#/components/responses/NotFoundError"
+          $ref: "#/components/responses/AccountIdNotFoundError"
         "422":
           $ref: "#/components/responses/UnprocessableEntityError"
       security:
@@ -153,7 +152,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
         "404":
-          $ref: "#/components/responses/NotFoundError"
+          $ref: "#/components/responses/AccountIdNotFoundError"
       security:
         - basicAuth: []
       summary: Retrieve list of credit transfers
@@ -188,7 +187,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
         "404":
-          $ref: "#/components/responses/NotFoundError"
+          $ref: "#/components/responses/AccountIdNotFoundError"
         "422":
           $ref: "#/components/responses/UnprocessableEntityError"
       security:
@@ -220,7 +219,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
         "404":
-          $ref: "#/components/responses/NotFoundError"
+          $ref: "#/components/responses/AccountIdNotFoundError"
       security:
         - basicAuth: []
       summary: Retrieve list of subaccounts
@@ -255,7 +254,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
         "404":
-          $ref: "#/components/responses/NotFoundError"
+          $ref: "#/components/responses/AccountIdNotFoundError"
         "422":
           $ref: "#/components/responses/UnprocessableEntityError"
       security:
@@ -293,7 +292,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
         "404":
-          $ref: "#/components/responses/NotFoundError"
+          $ref: "#/components/responses/AccountIdNotFoundError"
       security:
         - basicAuth: []
       summary: Retrieve a subaccount
@@ -334,7 +333,7 @@ paths:
         "403":
           $ref: "#/components/responses/ForbiddenError"
         "404":
-          $ref: "#/components/responses/NotFoundError"
+          $ref: "#/components/responses/AccountIdNotFoundError"
         "422":
           $ref: "#/components/responses/UnprocessableEntityError"
       security:
@@ -342,24 +341,77 @@ paths:
       summary: Modify a subaccount
       tags:
         - Subaccount Management
+  "/{api_key}/transfer-number":
+    post:
+      description: >
+        Transfer number from one account to another.
+      operationId: transferNumber
+      parameters:
+        - description: ID of the primary account.
+          in: path
+          name: api_key
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferNumberRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransferNumberResponse"
+          description: Number transfer response
+        "401":
+          $ref: "#/components/responses/UnauthorizedError"
+        "403":
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/UnprovisionedErrorResponse"
+                  - $ref: "#/components/schemas/InvalidNumberTransferErrorResponse"
+          description: Action is forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/responses/AccountIdNotFoundError/content/application~1json/schema"
+                  - $ref: "#/components/schemas/ShortcodeNotFound"
+          description: Action is forbidden
+        "409":
+          $ref: "#/components/responses/NumberTransferConflictResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityError"
+      security:
+        - basicAuth: []
+      summary: Transfer number
+      tags:
+        - Transfers
 components:
   responses:
-    ForbiddenError:
+    AccountIdNotFoundError:
       content:
         application/json:
           schema:
+            description: Invalid API Key
             properties:
               detail:
-                example: Account acc6111f is not provisioned to access Subaccount Provisioning API
+                example: API key 'acc6111f' does not exist, or you do not have access
                 type: string
               instance:
                 example: 158b8f199c45014ab7b08bfe9cc1c12c
                 type: string
               title:
-                example: Authorisation error
+                example: Invalid API Key
                 type: string
               type:
-                example: https://developer.nexmo.com/api-errors#unprovisioned
+                example: https://developer.nexmo.com/api-errors#invalid-api-key
                 type: string
             required:
               - type
@@ -367,6 +419,12 @@ components:
               - detail
               - instance
             type: object
+      description: The account ID provided does not exist in our system or you do not have access
+    ForbiddenError:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UnprovisionedErrorResponse"
       description: Action is forbidden
     InternalError:
       content:
@@ -392,22 +450,22 @@ components:
               - instance
             type: object
       description: An internal error has occurred
-    NotFoundError:
+    NumberTransferConflictResponse:
       content:
         application/json:
           schema:
             properties:
               detail:
-                example: API key 'acc6111f' does not exist, or you do not have access
+                example: Could not transfer number {number} from account {from} to {to} - ShortCode is already owned by requesting account
                 type: string
               instance:
                 example: 158b8f199c45014ab7b08bfe9cc1c12c
                 type: string
               title:
-                example: Invalid API Key
+                example: Transfer Conflict
                 type: string
               type:
-                example: https://developer.nexmo.com/api-errors#invalid-api-key
+                example: https://developer.nexmo.com/api-errors/subaccounts#transfer-conflict
                 type: string
             required:
               - type
@@ -415,7 +473,7 @@ components:
               - detail
               - instance
             type: object
-      description: The account ID provided does not exist in our system or you do not have access
+      description: Conflict
     UnauthorizedError:
       content:
         application/json:
@@ -466,7 +524,7 @@ components:
                 example: Bad Request
                 type: string
               type:
-                example: https://developer.nexmo.com/api-errors/account/subaccounts#validation
+                example: https://developer.nexmo.com/api-errors/subaccounts#validation
                 type: string
             required:
               - type
@@ -477,6 +535,27 @@ components:
             type: object
       description: Validation Error
   schemas:
+    InvalidNumberTransferErrorResponse:
+      description: Invalid Transfer
+      properties:
+        detail:
+          example: Failed to perform transfer number {number} from account {from} to {to} - The relationship between these two accounts does not allow for number transfer
+          type: string
+        instance:
+          example: 158b8f199c45014ab7b08bfe9cc1c12c
+          type: string
+        title:
+          example: Invalid Number Transfer
+          type: string
+        type:
+          example: https://developer.nexmo.com/api-errors/subaccounts#invalid-number-transfer
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
     ListBalanceTransfersResponse:
       properties:
         _embedded:
@@ -521,6 +600,27 @@ components:
           type: boolean
       required:
         - name
+      type: object
+    ShortcodeNotFound:
+      description: Shortcode Not Found
+      properties:
+        detail:
+          example: Could not transfer number {number} from account {from} to {to} - ShortCode not found
+          type: string
+        instance:
+          example: 158b8f199c45014ab7b08bfe9cc1c12c
+          type: string
+        title:
+          example: Invalid Number Transfer
+          type: string
+        type:
+          example: https://developer.nexmo.com/api-errors/subaccounts#missing-number-transfer
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
       type: object
     SubaccountCreateResponse:
       allOf:
@@ -646,6 +746,60 @@ components:
           description: Account the credit is transferred to
           example: ad6dc56f
           type: string
+    TransferNumberRequest:
+      properties:
+        country:
+          example: GB
+          type: string
+        from:
+          example: 7c9738e6
+          type: string
+        number:
+          example: "23507703696"
+          type: number
+        to:
+          example: ad6dc56f
+          type: string
+      type: object
+    TransferNumberResponse:
+      properties:
+        country:
+          description: The two character country code in ISO 3166-1 alpha-2 format
+          example: GB
+          type: string
+        from:
+          description: Account the number is transferred from
+          example: 7c9738e6
+          type: string
+        number:
+          description: Number transfered
+          example: "235077036"
+          type: string
+        to:
+          description: Account the number is transferred to
+          example: ad6dc56f
+          type: string
+    UnprovisionedErrorResponse:
+      description: Unprovisioned
+      properties:
+        detail:
+          example: Account acc6111f is not provisioned to access Subaccount Provisioning API
+          type: string
+        instance:
+          example: 158b8f199c45014ab7b08bfe9cc1c12c
+          type: string
+        title:
+          example: Authorisation error
+          type: string
+        type:
+          example: https://developer.nexmo.com/api-errors#unprovisioned
+          type: string
+      required:
+        - type
+        - title
+        - detail
+        - instance
+      type: object
   securitySchemes:
     basicAuth:
       scheme: basic

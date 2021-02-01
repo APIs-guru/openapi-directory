@@ -18,7 +18,6 @@ info:
       version: "2.0"
   x-providerName: sportsdata.io
   x-serviceName: lol-v3-scores
-  x-preferred: null
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
@@ -844,6 +843,9 @@ components:
         Name:
           nullable: true
           type: string
+        Order:
+          nullable: true
+          type: integer
         Points:
           nullable: false
           type: integer
@@ -867,9 +869,6 @@ components:
           type: integer
         Wins:
           nullable: false
-          type: integer
-        "[Order]":
-          nullable: true
           type: integer
     Team:
       properties:
@@ -895,6 +894,9 @@ components:
           nullable: true
           type: string
         Instagram:
+          nullable: true
+          type: string
+        Key:
           nullable: true
           type: string
         Name:
@@ -930,9 +932,6 @@ components:
         YouTube:
           nullable: true
           type: string
-        "[Key]":
-          nullable: true
-          type: string
     TeamDetail:
       properties:
         Active:
@@ -957,6 +956,9 @@ components:
           nullable: true
           type: string
         Instagram:
+          nullable: true
+          type: string
+        Key:
           nullable: true
           type: string
         Name:
@@ -996,9 +998,6 @@ components:
         YouTube:
           nullable: true
           type: string
-        "[Key]":
-          nullable: true
-          type: string
     Venue:
       properties:
         Address:
@@ -1028,6 +1027,9 @@ components:
         Nickname2:
           nullable: true
           type: string
+        Open:
+          nullable: false
+          type: boolean
         Opened:
           nullable: true
           type: integer
@@ -1037,9 +1039,6 @@ components:
         Zip:
           nullable: true
           type: string
-        "[Open]":
-          nullable: false
-          type: boolean
   securitySchemes:
     apiKeyHeader:
       in: header

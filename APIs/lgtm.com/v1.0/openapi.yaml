@@ -24,7 +24,6 @@ info:
       url: https://lgtm.com/api/v1.0/openapi
       version: "3.0"
   x-providerName: lgtm.com
-  x-preferred: null
 tags:
   - description: >
       The `/` endpoints are used to get information about the API:
@@ -763,6 +762,36 @@ paths:
         - Projects
       x-auth-mode: BINARY
   "/projects/{project-id}":
+    delete:
+      description: >
+        Delete a project with a particular numeric project identifier.
+
+        In addition to access to the project, administrative access to LGTM or the LGTM Enterprise instance is required to delete projects.
+      operationId: deleteProject
+      parameters:
+        - description: The numeric project identifier
+          explode: false
+          in: path
+          name: project-id
+          required: true
+          schema:
+            format: int64
+            minimum: 1
+            type: integer
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/project-details"
+          description: Success. Details of the deleted project returned.
+      security:
+        - access-token: []
+      summary: Delete project by numeric identifier
+      tags:
+        - Projects
+      x-auth-mode: BINARY
     get:
       description: >
         Get the latest summary for a specific project using the numeric project identifier.
@@ -851,6 +880,45 @@ paths:
       security:
         - access-token: []
       summary: Get configuration for a project identified by numeric identifier
+      tags:
+        - Projects
+      x-auth-mode: BINARY
+    put:
+      description: Set the administrator configuration for a specific project using the numeric project identifier.
+      operationId: setProjectConfig
+      parameters:
+        - description: The numeric project identifier
+          explode: false
+          in: path
+          name: project-id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+      requestBody:
+        content:
+          application/x-yaml:
+            examples:
+              snapshotPart:
+                $ref: "#/components/examples/projectConfiguration"
+            schema:
+              type: string
+        description: >
+          The project configuration to set. Note that this only sets the administrator project configuration. It can be overridden by the repository configuration.
+
+          In addition to access to the project, administrative access to LGTM or the LGTM Enterprise instance is required to set administrator project configurations.
+        required: true
+      responses:
+        "200":
+          content:
+            application/x-yaml:
+              schema:
+                type: object
+          description: Success. The new effective project configuration is returned.
+      security:
+        - access-token: []
+      summary: Set the administrator configuration for a project identified by numeric identifier
       tags:
         - Projects
       x-auth-mode: BINARY
@@ -1586,6 +1654,13 @@ components:
             metric-id: active-users
           - description: Projects with Java analysis
             metric-id: java-projects
+    projectConfiguration:
+      description: The contents of the LGTM project configuration YAML.
+      summary: An LGTM project configuration.
+      value: >-
+        path_classifiers:
+          test:
+            - test
     queryjobsRequestExample:
       description: An operation entry tracking a query job task.
       summary: Response to a request to run a query.

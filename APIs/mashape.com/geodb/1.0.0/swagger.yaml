@@ -22,7 +22,6 @@ info:
       version: "2.0"
   x-providerName: mashape.com
   x-serviceName: geodb
-  x-preferred: null
 produces:
   - application/json
 securityDefinitions:
@@ -1122,6 +1121,9 @@ definitions:
       numRegions: 56
       wikiDataId: Q30
     properties:
+      capital:
+        description: The country's capital city
+        type: string
       code:
         description: The ISO-3166 country code
         type: string
@@ -1134,7 +1136,7 @@ definitions:
         description: The country flag image
         type: string
       name:
-        description: The country name (varies by languageCode)
+        description: The country name
         type: string
       numRegions:
         description: The number of regions in this country
@@ -1181,7 +1183,7 @@ definitions:
           type: string
         type: array
       name:
-        description: The country name (varies by languageCode)
+        description: The country name
         type: string
       wikiDataId:
         description: The country WikiData id
@@ -1654,7 +1656,7 @@ definitions:
       wikiDataId: Q60
     properties:
       country:
-        description: The country name (varies by languageCode)
+        description: The country name
         type: string
       countryCode:
         description: The ISO-3166 country code
@@ -1686,7 +1688,7 @@ definitions:
         format: int32
         type: integer
       region:
-        description: The region name (varies by languageCode)
+        description: The region name
         type: string
       regionCode:
         description: The ISO or FIPS region code
@@ -1742,7 +1744,7 @@ definitions:
       wikiDataId: Q60
     properties:
       country:
-        description: The country name (varies by languageCode)
+        description: The country name
         type: string
       countryCode:
         description: The ISO-3166 country code
@@ -1764,10 +1766,10 @@ definitions:
         format: double
         type: number
       name:
-        description: The place name (varies by languageCode)
+        description: The place name
         type: string
       region:
-        description: The region name (varies by languageCode)
+        description: The region name
         type: string
       regionCode:
         description: The ISO or FIPS region code
@@ -1873,7 +1875,7 @@ definitions:
       wikiDataId: Q99
     properties:
       capital:
-        description: The region's capital city (varies by languageCode)
+        description: The region's capital city
         type: string
       countryCode:
         description: An ISO-3166 country code
@@ -1885,7 +1887,7 @@ definitions:
         description: The ISO region code
         type: string
       name:
-        description: The region name (varies by languageCode)
+        description: The region name
         type: string
       numCities:
         description: The number of cities in this region
@@ -1933,7 +1935,7 @@ definitions:
         description: The ISO region code
         type: string
       name:
-        description: The region name (varies by languageCode)
+        description: The region name
         type: string
       wikiDataId:
         description: The region WikiData id

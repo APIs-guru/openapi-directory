@@ -110,7 +110,6 @@ info:
       url: https://uk.api.just-eat.io/docs/openapi.json
       version: "3.0"
   x-providerName: just-eat.co.uk
-  x-preferred: null
 paths:
   /acceptance-requested:
     post:
@@ -3751,561 +3750,6 @@ paths:
         - Restaurants
         - publicly-accessible
       x-status: Stable
-  "/restaurants/{tenant}/{restaurantId}/offer-campaigns":
-    get:
-      description: Get Offer Campaigns available for the restaurant
-      operationId: GetCampaigns
-      parameters:
-        - description: A valid country code, e.g. "uk".
-          in: path
-          name: tenant
-          required: true
-          schema:
-            type: string
-        - description: The unique-per-tenant restaurantId.
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OfferCampaignsResponse"
-          description: Success
-          headers:
-            cache-control:
-              description: Information about how the response can be cached.
-              schema:
-                type: string
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Unauthorized. The client did not provide an authentication header or the header was invalid.
-                    errorCode: ERR401
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Unauthorized. The client did not provide an authentication header or the header was invalid
-        "422":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Unprocessable. The number of offer campaigns to return exceeds maximum permitted of 50
-                    errorCode: ERR401
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Unprocessable. The number of offer campaigns to return exceeds maximum permitted
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500ErrorSchema"
-          description: Internal Server Error
-      summary: Get Offer Campaigns
-      tags:
-        - Restaurants
-        - publicly-accessible
-        - RestaurantOffers
-  "/restaurants/{tenant}/{restaurantId}/offer-campaigns/{campaignId}/subscribe":
-    post:
-      description: Subscribe restaurant to Campaign.
-      operationId: Subscribe
-      parameters:
-        - description: A valid country code, e.g. "uk".
-          in: path
-          name: tenant
-          required: true
-          schema:
-            type: string
-        - description: The unique-per-tenant restaurantId.
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Id of the campaign
-          in: path
-          name: campaignId
-          required: true
-          schema:
-            type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Success
-        "400":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Bad Request
-                    errorCode: ERR400
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Unauthorized. The client did not provide an authentication header or the header was invalid
-                    errorCode: ERR401
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Unauthorized. The client did not provide an authentication header or the header was invalid
-        "404":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Offer Campaign not found
-                    errorCode: ERR404
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Not found
-        "405":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Campaign is disabled in this region
-                    errorCode: ERR405
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Campaign is disabled in this region
-        "409":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Subscription already exists
-                    errorCode: ERR409
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Subscription already exists
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500ErrorSchema"
-          description: Internal Server Error
-      summary: Subscribe to the campaign
-      tags:
-        - Restaurants
-        - publicly-accessible
-        - RestaurantOffers
-  "/restaurants/{tenant}/{restaurantId}/offer-campaigns/{campaignId}/unsubscribe":
-    post:
-      description: Unsubscribe restaurant from Campaign.
-      operationId: Unsubscribe
-      parameters:
-        - description: A valid country code, e.g. "uk".
-          in: path
-          name: tenant
-          required: true
-          schema:
-            type: string
-        - description: The unique-per-tenant restaurantId.
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Id of the campaign
-          in: path
-          name: campaignId
-          required: true
-          schema:
-            type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Success
-        "400":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Bad Request
-                    errorCode: ERR400
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Unauthorized. The client did not provide an authentication header or the header was invalid
-                    errorCode: ERR401
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Unauthorized. The client did not provide an authentication header or the header was invalid
-        "404":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Offer Campaign not found
-                    errorCode: ERR404
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Not found
-        "405":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Campaign is disabled in this region
-                    errorCode: ERR405
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Campaign is disabled in this region
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500ErrorSchema"
-          description: Internal Server Error
-      summary: Unsubscribe from the campaign
-      tags:
-        - Restaurants
-        - publicly-accessible
-        - RestaurantOffers
-  "/restaurants/{tenant}/{restaurantId}/offer-templates":
-    get:
-      description: Get list of all available offer templates for the restaurant
-      operationId: GetAllOfferTemplates
-      parameters:
-        - description: A valid country code, e.g. "uk".
-          in: path
-          name: tenant
-          required: true
-          schema:
-            type: string
-        - description: The unique-per-tenant restaurantId.
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OfferTemplatesResponse"
-          description: Success
-          headers:
-            cache-control:
-              description: Information about how the response can be cached.
-              schema:
-                type: string
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Unauthorized. The client did not provide an authentication header or the header was invalid
-                    errorCode: ERR401
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Unauthorized. The client did not provide an authentication header or the header was invalid
-        "422":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Unprocessable. The number of offer templates to return exceeds maximum permitted of 50
-                    errorCode: ERR401
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Unprocessable. The number of offer templates to return exceeds maximum permitted
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500ErrorSchema"
-          description: Internal Server Error
-      summary: Get list of templates
-      tags:
-        - Restaurants
-        - publicly-accessible
-        - RestaurantOffers
-  "/restaurants/{tenant}/{restaurantId}/offers":
-    get:
-      description: Get list of offers running for the restaurant
-      operationId: GetOffers
-      parameters:
-        - description: A valid country code, e.g. "uk".
-          in: path
-          name: tenant
-          required: true
-          schema:
-            type: string
-        - description: The unique-per-tenant restaurantId.
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OffersResponse"
-          description: Success
-          headers:
-            cache-control:
-              description: Information about how the response can be cached.
-              schema:
-                type: string
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Unauthorized. The client did not provide an authentication header or the header was invalid
-                    errorCode: ERR401
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Unauthorized. The client did not provide an authentication header or the header was invalid
-        "422":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Unprocessable. The number of offers to return exceeds maximum permitted of 50
-                    errorCode: ERR401
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Unprocessable. The number of offers to return exceeds maximum permitted
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500ErrorSchema"
-          description: Internal Server Error
-      summary: Get list of offers
-      tags:
-        - Restaurants
-        - publicly-accessible
-        - RestaurantOffers
-    post:
-      description: Creates an offer for a restaurant. Each day represents an offer slot, and a restaurant has a maximum of 35 offer slots available. E.g. If I create an Offer for Monday and Tuesday, then that will use 2 offer slots. If all 35 offer slots have been used, then an offer will need to be deleted to free up offer slots.
-      operationId: CreateOffers
-      parameters:
-        - description: A valid country code, e.g. "uk".
-          in: path
-          name: tenant
-          required: true
-          schema:
-            type: string
-        - description: The unique-per-tenant restaurantId.
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateOffersRequest"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Offer"
-          description: Created
-          headers:
-            cache-control:
-              description: Information about how the response can be cached.
-              schema:
-                type: string
-            location:
-              description: The URI of the offer created.
-              schema:
-                type: string
-        "400":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Bad Request
-                    errorCode: ERR400
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Unauthorized. The client did not provide an authentication header or the header was invalid
-                    errorCode: ERR401
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Unauthorized. The client did not provide an authentication header or the header was invalid
-        "409":
-          content:
-            application/json:
-              example:
-                - errors:
-                    - description: Conflict (You can only have 35 items.  If you receive this error code, you can delete an existing offer in order to create a new one)
-                      errorCode: ERR409
-                  faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                  traceId: H3TKh4QSJUSwVBCBqEtkKw==
-                - errors:
-                    - description: Offer already exists
-                      errorCode: ERR409
-                  faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                  traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Conflict
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500ErrorSchema"
-          description: Internal Server Error
-      summary: Create an offer
-      tags:
-        - Restaurants
-        - publicly-accessible
-        - RestaurantOffers
-  "/restaurants/{tenant}/{restaurantId}/offers/{id}":
-    delete:
-      description: Delete offer by id for the restaurant
-      operationId: DeleteOfferGroup
-      parameters:
-        - description: A valid country code, e.g. "uk".
-          in: path
-          name: tenant
-          required: true
-          schema:
-            type: string
-        - description: The unique-per-tenant restaurantId.
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Internal id of the offer
-          in: path
-          name: id
-          required: true
-          schema:
-            type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
-          in: header
-          name: Authorization
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Success
-        "401":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Unauthorized. The client did not provide an authentication header or the header was invalid
-                    errorCode: ERR401
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Unauthorized. The client did not provide an authentication header or the header was invalid
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500ErrorSchema"
-          description: Internal Server Error
-      summary: Delete offer by id
-      tags:
-        - Restaurants
-        - publicly-accessible
-        - RestaurantOffers
   "/restaurants/{tenant}/{restaurantId}/ordertimes":
     get:
       description: Get list of the delivery and collection lead times supplied by the restaurant
@@ -5394,21 +4838,33 @@ components:
       additionalProperties: false
       discriminator:
         mapping:
-          NextOrder: "#/components/schemas/NextOrder"
           Percent: "#/components/schemas/Percent"
         propertyName: $type
       properties:
         $type:
+          description: Contains the offer data type name
           type: string
         offerId:
           description: Unique Identifier for Offer
-          nullable: true
+          nullable: false
           type: string
       required:
         - $type
+        - offerId
       type: object
     ActiveConsumerOffersByRestaurant:
       additionalProperties: false
+      example:
+        offers:
+          - $type: Percent
+            amount: 20
+            offerId: 12345sd
+            qualifyingValue: 15000
+          - $type: Percent
+            amount: 15
+            offerId: 45sd345
+            qualifyingValue: 35000
+        restaurantId: 1234sd
       properties:
         offers:
           description: A Collection of Active Offers for RestaurantId
@@ -5418,11 +4874,18 @@ components:
           type: array
         restaurantId:
           description: The RestaurantId applicable to the Offer
+          example: 1234567ds
           nullable: true
           type: string
       type: object
     ActiveConsumerOffersRequest:
       additionalProperties: false
+      example:
+        applicableDateTimeUtc: 2021-01-20T19:35:13.643Z
+        consumerId: "1050450174"
+        restaurantIds:
+          - "12879"
+          - "450174"
       properties:
         applicableDateTimeUtc:
           description: >-
@@ -5810,6 +5273,52 @@ components:
             $ref: "#/components/schemas/Time"
           type: array
       type: object
+    AvailableFulfilmentTimes409Error:
+      description: An HTTP 409 error response
+      properties:
+        fault:
+          additionalProperties: false
+          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          nullable: false
+          properties:
+            errors:
+              description: List of errors that may assist you in resolving the issues
+              items:
+                additionalProperties: false
+                description: Details about the error that may assist you in resolving the issue
+                nullable: false
+                properties:
+                  description:
+                    description: Specific details about the error that may assist you in resolving the issue
+                    nullable: false
+                    type: string
+                  errorCode:
+                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                    enum:
+                      - FULFILMENT_TIME_BANDS_INVALID
+                      - FULFILMENT_TIME_BANDS_NOT_FOUND
+                    nullable: false
+                    type: string
+                required:
+                  - description
+                  - errorCode
+                type: object
+              nullable: false
+              type: array
+            faultId:
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              nullable: false
+              type: string
+            traceId:
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              nullable: false
+              type: string
+          required:
+            - faultId
+            - traceId
+            - errors
+          type: object
+      type: object
     BadItem:
       additionalProperties: false
       properties:
@@ -5925,19 +5434,6 @@ components:
             faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
             message: Unable to process the request.
           type: object
-    BasketDiscountOfferEffect:
-      allOf:
-        - $ref: "#/components/schemas/OfferEffect"
-        - additionalProperties: false
-          properties:
-            discountAmount:
-              description: The discount amount in smallest unit of relevant currency applied to order.
-              format: integer
-              type: number
-          type: object
-      example:
-        $type: BasketDiscountOfferEffect
-        discountAmount: 1001
     BasketErrorResponse:
       description: The error object returned when an operation fails
       properties:
@@ -5994,11 +5490,6 @@ components:
           format: decimal
           type: number
       type: object
-    BasketItemStateType:
-      enum:
-        - JustAdded
-        - Existing
-      type: string
     BasketLocation:
       properties:
         GeoLocation:
@@ -6523,6 +6014,97 @@ components:
         - CHECKED_IN
         - NOT_CHECKED_IN
       type: string
+    Checkout404Error:
+      description: An HTTP 404 error response
+      properties:
+        fault:
+          additionalProperties: false
+          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          nullable: false
+          properties:
+            errors:
+              description: List of errors that may assist you in resolving the issues
+              items:
+                additionalProperties: false
+                description: Details about the error that may assist you in resolving the issue
+                nullable: false
+                properties:
+                  description:
+                    description: Specific details about the error that may assist you in resolving the issue
+                    nullable: false
+                    type: string
+                  errorCode:
+                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                    enum:
+                      - TENANT_NOT_SUPPORTED
+                      - CHECKOUT_NOT_FOUND
+                    nullable: false
+                    type: string
+                required:
+                  - description
+                  - errorCode
+                type: object
+              nullable: false
+              type: array
+            faultId:
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              nullable: false
+              type: string
+            traceId:
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              nullable: false
+              type: string
+          required:
+            - faultId
+            - traceId
+            - errors
+          type: object
+      type: object
+    Checkout409Error:
+      description: An HTTP 409 error response
+      properties:
+        fault:
+          additionalProperties: false
+          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          nullable: false
+          properties:
+            errors:
+              description: List of errors that may assist you in resolving the issues
+              items:
+                additionalProperties: false
+                description: Details about the error that may assist you in resolving the issue
+                nullable: false
+                properties:
+                  description:
+                    description: Specific details about the error that may assist you in resolving the issue
+                    nullable: false
+                    type: string
+                  errorCode:
+                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                    enum:
+                      - CHECKOUT_INVALID
+                    nullable: false
+                    type: string
+                required:
+                  - description
+                  - errorCode
+                type: object
+              nullable: false
+              type: array
+            faultId:
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              nullable: false
+              type: string
+            traceId:
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              nullable: false
+              type: string
+          required:
+            - faultId
+            - traceId
+            - errors
+          type: object
+      type: object
     CheckoutAction:
       description: Action data needed to make payment for payment method in use. This data is dependant on the Payment Service Provider and payment method. When used for checkout where fraud-check is required, device-id, payer email and payer identifier should be provided.
       properties:
@@ -6543,6 +6125,89 @@ components:
       required:
         - type
         - data
+      type: object
+    CheckoutDefaultError:
+      description: A default HTTP error response
+      properties:
+        fault:
+          additionalProperties: false
+          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          nullable: false
+          properties:
+            errors:
+              description: List of errors that may assist you in resolving the issues
+              items:
+                additionalProperties: false
+                nullable: false
+                properties:
+                  description:
+                    description: Specific details about the error that may assist you in resolving the issue
+                    nullable: false
+                    type: string
+                required:
+                  - description
+                type: object
+              nullable: false
+              type: array
+            faultId:
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              nullable: false
+              type: string
+            traceId:
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              nullable: false
+              type: string
+          required:
+            - faultId
+            - traceId
+            - errors
+          type: object
+      type: object
+    CheckoutGet400Error:
+      description: An HTTP 400 error response
+      properties:
+        fault:
+          additionalProperties: false
+          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          nullable: false
+          properties:
+            errors:
+              description: List of errors that may assist you in resolving the issues
+              items:
+                additionalProperties: false
+                description: Details about the error that may assist you in resolving the issue
+                nullable: false
+                properties:
+                  description:
+                    description: Specific details about the error that may assist you in resolving the issue
+                    nullable: false
+                    type: string
+                  errorCode:
+                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                    enum:
+                      - TENANT_INVALID
+                      - CHECKOUT_ID_INVALID
+                    nullable: false
+                    type: string
+                required:
+                  - description
+                  - errorCode
+                type: object
+              nullable: false
+              type: array
+            faultId:
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              nullable: false
+              type: string
+            traceId:
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              nullable: false
+              type: string
+          required:
+            - faultId
+            - traceId
+            - errors
+          type: object
       type: object
     CheckoutGetResponse:
       properties:
@@ -6622,32 +6287,6 @@ components:
           minItems: 0
           nullable: false
           type: array
-        notes:
-          description: Notes that the customer wants to submit as part of their order
-          items:
-            description: Note that the customer wants to submit as part of their order
-            nullable: false
-            properties:
-              note:
-                description: The note previously submitted by the customer
-                maxLength: 250
-                minLength: 0
-                nullable: false
-                type: string
-              type:
-                description: The type of note
-                enum:
-                  - delivery
-                nullable: false
-                type: string
-            required:
-              - type
-              - note
-            type: object
-          maxItems: 1
-          minItems: 0
-          nullable: false
-          type: array
         restaurant:
           description: The restaurant associated with the checkout
           nullable: false
@@ -6682,12 +6321,10 @@ components:
           AGE_VERIFICATION_FAILED: "#/components/schemas/CheckoutIssue_AgeVerificationFailed"
           AVAILABILITY_UNAVAILABLE: "#/components/schemas/CheckoutIssue_AvailabilityUnavailable"
           DATE_OF_BIRTH_REQUIRED: "#/components/schemas/CheckoutIssue_DateOfBirthRequired"
-          FIRST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_FirstNameRequired"
           FULFILMENT_TIME_REQUIRED: "#/components/schemas/CheckoutIssue_FulfilmentTimeRequired"
           FULFILMENT_TIME_UNAVAILABLE: "#/components/schemas/CheckoutIssue_FulfilmentTimeUnavailable"
           GEOLOCATION_REQUIRED: "#/components/schemas/CheckoutIssue_GeolocationRequired"
           ITEMS_UNORDERABLE: "#/components/schemas/CheckoutIssue_ItemsUnorderable"
-          LAST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_LastNameRequired"
           LOCATION_UNDELIVERABLE: "#/components/schemas/CheckoutIssue_LocationUndeliverable"
           MINIMUM_ORDER_VALUE_NOT_MET: "#/components/schemas/CheckoutIssue_MinimumOrderValueNotMet"
           PHONE_NUMBER_REQUIRED: "#/components/schemas/CheckoutIssue_PhoneNumberRequired"
@@ -6705,8 +6342,6 @@ components:
             - FULFILMENT_TIME_UNAVAILABLE
             - LOCATION_UNDELIVERABLE
             - AGE_VERIFICATION_FAILED
-            - FIRST_NAME_REQUIRED
-            - LAST_NAME_REQUIRED
             - PHONE_NUMBER_REQUIRED
             - DATE_OF_BIRTH_REQUIRED
             - FULFILMENT_TIME_REQUIRED
@@ -6742,12 +6377,6 @@ components:
         - additionalProperties: false
           description: Indicates that the customer's date of birth is required to fulfil an order.
           type: object
-    CheckoutIssue_FirstNameRequired:
-      allOf:
-        - $ref: "#/components/schemas/CheckoutIssue"
-        - additionalProperties: false
-          description: Indicates that the fulfilment geolocation is required to fulfil an order.
-          type: object
     CheckoutIssue_FulfilmentTimeRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
@@ -6764,19 +6393,13 @@ components:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: The order cannot proceed because the customer has failed the required age verification check.
+          description: Indicates that the fulfilment geolocation is required to fulfil an order.
           type: object
     CheckoutIssue_ItemsUnorderable:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
           description: The collection of items are not orderable in their current state. The customer will need to amend their collection of items.
-          type: object
-    CheckoutIssue_LastNameRequired:
-      allOf:
-        - $ref: "#/components/schemas/CheckoutIssue"
-        - additionalProperties: false
-          description: Indicates that the customer's last name is required to fulfil an order.
           type: object
     CheckoutIssue_LocationUndeliverable:
       allOf:
@@ -6875,24 +6498,29 @@ components:
           x-api-version-from: 2019-04
       type: object
     CheckoutUpdate400Error:
-      description: A HTTP 4xx error response
+      description: An HTTP 400 error response
       properties:
         fault:
+          additionalProperties: false
           description: A list of values that helps identify this response back to logs, so we can easily find faults
+          nullable: false
           properties:
             errors:
               description: List of errors that may assist you in resolving the issues
               items:
+                additionalProperties: false
                 description: Details about the error that may assist you in resolving the issue
+                nullable: false
                 properties:
                   description:
                     description: Specific details about the error that may assist you in resolving the issue
+                    nullable: false
                     type: string
                   errorCode:
                     description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
                     enum:
-                      - FIRST_NAME_INVALID
-                      - LAST_NAME_INVALID
+                      - TENANT_INVALID
+                      - CHECKOUT_ID_INVALID
                       - PHONE_NUMBER_INVALID
                       - DATE_OF_BIRTH_INVALID
                       - FULFILMENT_TIME_INVALID
@@ -6900,17 +6528,26 @@ components:
                       - POSTAL_CODE_INVALID
                       - GEOLOCATION_INVALID
                       - DELIVERY_NOTE_INVALID
+                    nullable: false
                     type: string
+                required:
+                  - description
+                  - errorCode
                 type: object
+              nullable: false
               type: array
             faultId:
               description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              nullable: false
               type: string
             traceId:
               description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              nullable: false
               type: string
           required:
             - faultId
+            - traceId
+            - errors
           type: object
       type: object
     CheckoutUpdateRequest:
@@ -6921,14 +6558,6 @@ components:
           properties:
             dateOfBirth:
               description: Customer's date of birth (ISO 8601 Date)
-              nullable: true
-              type: string
-            firstName:
-              description: Customer's first name
-              nullable: true
-              type: string
-            lastName:
-              description: Customer's last name
               nullable: true
               type: string
             phoneNumber:
@@ -7530,18 +7159,12 @@ components:
       type: object
     ConsumerOffer:
       additionalProperties: false
-      example:
-        campaignId: CheekyTuesday
-        consumerSegment: All
-        discount: 1001
-        offerEffects:
-          - $type: ShowNotificationEffect
-            description: Get free drink with any burger
-          - $type: OrderDiscount
-            discountPercentage: 10
-        offerId: 12345sd
-        offerType: Percent
-        restaurantId: 1234sd
+      discriminator:
+        mapping:
+          Bogof: "#/components/schemas/ConsumerOffer_Bogof"
+          FreeItem: "#/components/schemas/ConsumerOffer_FreeItem"
+          Percent: "#/components/schemas/ConsumerOffer_Percent"
+        propertyName: offerType
       properties:
         campaignId:
           description: The unique identifier of the offer campaign.
@@ -7550,32 +7173,31 @@ components:
         consumerSegment:
           $ref: "#/components/schemas/ConsumerSegment"
           description: Consumer Segment to which offer applies
-          nullable: true
-        offerEffects:
-          description: A collection of offer effects
-          items:
-            $ref: "#/components/schemas/OfferEffect"
-          type: array
+          nullable: false
         offerId:
           description: The unique identifier of the offer.
+          nullable: false
           type: string
         offerType:
           $ref: "#/components/schemas/ConsumerOfferType"
           description: The type of the offer.
+          nullable: false
+        priority:
+          $ref: "#/components/schemas/ConsumerOffersPriority"
+          description: The offers priority dictates the order and combination approach when multiple offers are executed together.
+          nullable: false
         restaurantId:
           description: The unique identifier of the restaurant providing the offers.
-          nullable: true
+          nullable: false
           type: string
+      required:
+        - offerId
+        - restaurantId
+        - offerType
+        - consumerSegment
+        - priority
       title: ConsumerOffer
       type: object
-    ConsumerOfferEffectType:
-      enum:
-        - BasketDiscountOfferEffect
-        - ItemDiscountOfferEffect
-        - ShowNotificationOfferEffect
-        - ShowPromptOfferEffect
-        - SpendMoreOfferEffect
-      type: string
     ConsumerOfferNotification:
       example:
         campaignId: CheekyTuesday
@@ -7611,12 +7233,110 @@ components:
           type: string
       title: ConsumerOfferNotification
       type: object
+    ConsumerOfferPrompt:
+      allOf:
+        - additionalProperties: false
+          properties:
+            description:
+              description: The description of offer to show in prompt for customer
+              type: string
+            header:
+              description: The header to show in prompt for customer
+              nullable: true
+              type: string
+            title:
+              description: The title to show in prompt for customer
+              type: string
+          type: object
+      example:
+        description: We�ll apply the discount at checkout
+        header: Free item
+        title: Nice! You get this free with your order
     ConsumerOfferType:
       enum:
         - Percent
-        - ItemDiscount
-        - DeliveryDiscount
+        - FreeItem
+        - Bogof
       type: string
+    ConsumerOffer_Bogof:
+      allOf:
+        - $ref: "#/components/schemas/ConsumerOffer"
+        - additionalProperties: false
+          properties:
+            products:
+              description: >-
+                One of those products needed to be included in the collection of products to make offer applicable.
+
+                The second occurrence of such product gets 100% discount
+              items:
+                $ref: "#/components/schemas/ConsumerOffersProduct"
+              minItems: 1
+              nullable: false
+              type: array
+            prompt:
+              $ref: "#/components/schemas/ConsumerOfferPrompt"
+              description: A prompt displayed to consumer
+              nullable: false
+          required:
+            - products
+            - prompt
+          type: object
+      example:
+        campaignId: freeIceCream
+        consumerSegment: All
+        offerId: 12345sd
+        offerType: Bogof
+        products:
+          - id: iceCreamA
+          - id: iceCreamB
+          - id: iceCreamC
+        prompt:
+          description: Ice Cream for free when you order Ice Cream
+          title: Nice! You get this free with your order
+        restaurantId: 1234sd
+    ConsumerOffer_FreeItem:
+      allOf:
+        - $ref: "#/components/schemas/ConsumerOffer"
+        - additionalProperties: false
+          properties:
+            freeProduct:
+              $ref: "#/components/schemas/ConsumerOffersProduct"
+              description: The product that gets 100% discount applied
+              nullable: false
+            prompt:
+              $ref: "#/components/schemas/ConsumerOfferPrompt"
+              description: A prompt displayed to consumer
+              nullable: false
+            qualifyingProducts:
+              description: One of those products needed to be included in the collection of products to make offer applicable
+              items:
+                $ref: "#/components/schemas/ConsumerOffersProduct"
+              minItems: 1
+              nullable: false
+              type: array
+          required:
+            - qualifyingProducts
+            - freeProduct
+            - prompt
+          type: object
+    ConsumerOffer_Percent:
+      allOf:
+        - $ref: "#/components/schemas/ConsumerOffer"
+        - additionalProperties: false
+          properties:
+            amount:
+              description: The percentage value discount
+              format: decimal
+              nullable: false
+              type: number
+            qualifyingValue:
+              description: The minimum order value required to be eligible for the Offer in smallest unit of relevant currency.
+              format: integer
+              nullable: true
+              type: number
+          required:
+            - amount
+          type: object
     ConsumerOffersBasket:
       additionalProperties: false
       properties:
@@ -7632,28 +7352,9 @@ components:
       additionalProperties: false
       example:
         id: 1234c
-        itemState: JustAdded
-        name: Big Burger
-        price: 1222
+        productId: BRGR123
         quantity: 1
-        sku: BRGR123
       properties:
-        id:
-          description: The Id of basket item.
-          nullable: true
-          type: string
-        itemState:
-          $ref: "#/components/schemas/BasketItemStateType"
-          description: Describes the state of the item in respect of previous basket state.
-        name:
-          description: The name of basket item.
-          nullable: true
-          type: string
-        price:
-          description: The price of basket item in smallest unit of relevant currency.
-          format: integer
-          nullable: true
-          type: number
         productId:
           description: The ProductId of basket item.
           nullable: true
@@ -7670,7 +7371,8 @@ components:
       example:
         applicableDateTimeUtc: 2020-04-20T16:20:00.000Z
         restaurantIds:
-          - 1234cc,123456aa
+          - 1234cc
+          - 123456aa
           - 12335bb
       properties:
         applicableDateTimeUtc:
@@ -7680,6 +7382,7 @@ components:
             Enables offers to be returned that have become
 
             inactive after the order was added to a consumer's basket.
+          example: 2021-01-20T19:35:13.643Z
           format: date-time
           nullable: true
           type: string
@@ -7704,18 +7407,61 @@ components:
           type: array
       title: ConsumerOffersNotificationsResponse
       type: object
+    ConsumerOffersPriority:
+      additionalProperties: false
+      example:
+        type: Stackable
+        value: 1
+      properties:
+        type:
+          description: >-
+            All offers are evaluated based on type and priority value in descending order.
+
+            Universal offers are always executed. Exclusive offers are evaluated after Universal offers, the first Exclusive offer triggered will return effects
+
+            If an Exclusive offer is triggered, the Stackable offers will be skipped.
+          enum:
+            - Exclusive
+            - Stackable
+            - Universal
+          type: string
+        value:
+          description: The offers are evaluated based on priority in descending order. The first triggered will return effects
+          format: integer
+          type: number
+      required:
+        - value
+        - type
+      title: ConsumerOffersPriority
+      type: object
+    ConsumerOffersProduct:
+      additionalProperties: false
+      example:
+        id: 6 Chicken Nuggets
+        preferableModifierIds:
+          - ketchupModifierId
+      properties:
+        id:
+          description: The unique identifier of the product.
+          type: string
+        preferableModifierIds:
+          description: The collection of preselected modifiers for the item.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+        - id
+      title: ConsumerOffersProduct
+      type: object
     ConsumerOffersRequest:
       additionalProperties: false
       example:
         applicableDateTimeUtc: 2020-04-20T16:20:00.000Z
         consumerOfferBasket:
           basketItems:
-            - id: 1234c
-              itemState: JustAdded
-              name: Big Burger
-              price: 1222
+            - productId: BRGR123
               quantity: 1
-              sku: BRGR123
         restaurantId: asd12345
       properties:
         applicableDateTimeUtc:
@@ -7723,6 +7469,7 @@ components:
             Overrides the current time for determining whether offers are active.
 
             Enables offers to be returned that for the time in future (e.g. Pre-order)
+          example: 2021-01-20T19:35:13.643Z
           format: date-time
           type: string
         consumerId:
@@ -7744,9 +7491,45 @@ components:
       type: object
     ConsumerOffersResponse:
       description: Holder of consumer offers
+      example:
+        offers:
+          - amount: 20
+            campaignId: CheekyTuesday
+            consumerSegment: All
+            offerId: 12345sd
+            offerType: Percent
+            qualifyingValue: 15000
+            restaurantId: 1234sd
+          - consumerSegment: All
+            freeProduct:
+              id: 6 Chicken Nuggets
+              preferableModifierIds:
+                - ketchupModifierId
+            offerId: 345sd
+            offerType: FreeItem
+            prompt:
+              description: 6 Nuggets for free when you order Big Mac
+              title: Nice! You get this free with your order
+            qualifyingProducts:
+              - id: BigMacId
+              - id: DoubleBigMacId
+              - id: BigMacMenuId
+            restaurantId: 1234sd
+          - campaignId: freeIceCream
+            consumerSegment: All
+            offerId: 345345sd
+            offerType: Bogof
+            products:
+              - id: CookieDoughId
+              - id: FishFoodId
+              - id: ChocFudgeBrownieId
+            prompt:
+              description: Get 2 for 1 on Any IceCream Company's 465ml
+              title: Nice! You get this free with your order
+            restaurantId: 1234sd
       properties:
         offers:
-          description: Provide consumer offers with exact effect (e.g. Discount) and discount amount, based on provided restaurantId and basket content.
+          description: Provide applicable consumer offers based on provided restaurantId and basket content.
           items:
             $ref: "#/components/schemas/ConsumerOffer"
           type: array
@@ -10151,18 +9934,6 @@ components:
           $ref: "#/components/schemas/VoucherType"
           description: The type of discount
       type: object
-    DiscountedItem:
-      additionalProperties: false
-      properties:
-        discountPercentage:
-          description: The discount percentage applied.
-          format: integer
-          type: number
-        productId:
-          description: The unique identifier of the discounted product item.
-          type: string
-      title: DiscountedItem
-      type: object
     DiscoveryResponse:
       example:
         searchResults:
@@ -11065,24 +10836,6 @@ components:
           type: string
       title: ItemDiscount
       type: object
-    ItemDiscountOfferEffect:
-      allOf:
-        - $ref: "#/components/schemas/OfferEffect"
-        - additionalProperties: false
-          properties:
-            discountedItems:
-              description: A collection of discounted items to choose one
-              items:
-                $ref: "#/components/schemas/DiscountedItem"
-              type: array
-          type: object
-      example:
-        $type: ItemDiscountOfferEffect
-        discountedItems:
-          - discountPercentage: 100
-            productId: lemonade123
-          - discountPercentage: 50
-            productId: lemonade135
     ItemDiscountPrompt:
       additionalProperties: false
       example:
@@ -13187,27 +12940,6 @@ components:
           type: array
           uniqueItems: false
       type: object
-    NextOrder:
-      allOf:
-        - $ref: "#/components/schemas/ActiveConsumerOffer"
-        - additionalProperties: false
-          properties:
-            amount:
-              description: The percentage value discount
-              format: decimal
-              type: number
-            earned:
-              description: Has the consumer Earned (become eligible to claim) the NextOrder Offer
-              type: boolean
-            maxQualifyingValue:
-              description: The maximum order value required to be eligible for the offer
-              format: decimal
-              type: number
-            qualifyingValue:
-              description: The minimum order value required to be eligible for the Offer
-              format: decimal
-              type: number
-          type: object
     NotFoundMarketingResponse:
       allOf:
         - $ref: "#/components/schemas/MarketingErrorResponse"
@@ -13227,7 +12959,7 @@ components:
           value: 7.5
         caffeine:
           unit: mg
-          value: null
+          value: 10
         calories:
           unit: kcal
           value: 42
@@ -13543,33 +13275,6 @@ components:
             - DonationCampaign
           type: string
       type: object
-    OfferCampaignsResponse:
-      additionalProperties: false
-      properties:
-        offerCampaigns:
-          description: A Collection of Offer Campaigns
-          items:
-            $ref: "#/components/schemas/OfferCampaign"
-          type: array
-      type: object
-    OfferEffect:
-      additionalProperties: false
-      discriminator:
-        mapping:
-          BasketDiscountOfferEffect: "#/components/schemas/BasketDiscountOfferEffect"
-          ItemDiscountOfferEffect: "#/components/schemas/ItemDiscountOfferEffect"
-          ShowNotificationOfferEffect: "#/components/schemas/ShowNotificationOfferEffect"
-          ShowPromptOfferEffect: "#/components/schemas/ShowPromptOfferEffect"
-          SpendMoreOfferEffect: "#/components/schemas/SpendMoreOfferEffect"
-        propertyName: $type
-      properties:
-        $type:
-          $ref: "#/components/schemas/ConsumerOfferEffectType"
-          description: The effect of the offer.
-      required:
-        - $type
-      title: OfferEffect
-      type: object
     OfferTemplate:
       example:
         consumerSegment: All
@@ -13617,24 +13322,6 @@ components:
           enum:
             - Percent
           type: string
-      type: object
-    OfferTemplatesResponse:
-      additionalProperties: false
-      properties:
-        offerTemplates:
-          description: A Collection of Offer Templates
-          items:
-            $ref: "#/components/schemas/OfferTemplate"
-          type: array
-      type: object
-    OffersResponse:
-      additionalProperties: false
-      properties:
-        offers:
-          description: A Collection of Offers
-          items:
-            $ref: "#/components/schemas/Offer"
-          type: array
       type: object
     OfflineItemsRequest:
       example:
@@ -15060,27 +14747,6 @@ components:
           type: string
         suggestedTerm:
           description: Suggested search term
-          type: string
-      type: object
-    ProblemDetails:
-      additionalProperties:
-        nullable: true
-      properties:
-        detail:
-          nullable: true
-          type: string
-        instance:
-          nullable: true
-          type: string
-        status:
-          format: int32
-          nullable: true
-          type: integer
-        title:
-          nullable: true
-          type: string
-        type:
-          nullable: true
           type: string
       type: object
     Product:
@@ -17446,67 +17112,6 @@ components:
         - ALCOHOL_ELIGIBLE
         - UNKNOWN
       type: string
-    ShowNotificationOfferEffect:
-      allOf:
-        - $ref: "#/components/schemas/OfferEffect"
-        - additionalProperties: false
-          properties:
-            description:
-              description: Description of the offer effect
-              type: string
-          type: object
-      example:
-        $type: ShowNotificationOfferEffect
-        description: Get free drink with any burger
-    ShowPromptOfferEffect:
-      allOf:
-        - $ref: "#/components/schemas/OfferEffect"
-        - additionalProperties: false
-          properties:
-            description:
-              description: The description of offer to show in prompt for customer
-              type: string
-            header:
-              description: The header to show in prompt for customer
-              type: string
-            offerEffect:
-              $ref: "#/components/schemas/OfferEffect"
-              description: Offer effect that will be applied if prompt accepted
-            title:
-              description: The title to show in prompt for customer
-              type: string
-          type: object
-      example:
-        $type: ShowPromptOfferEffect
-        description: Get free drink with burger
-        header: Free item offer
-        offerEffect:
-          - discountedItems:
-              - discountPercentage: 100
-                productId: lemonade1112
-        title: Get free item
-    SpendMoreOfferEffect:
-      allOf:
-        - $ref: "#/components/schemas/ShowNotificationOfferEffect"
-        - additionalProperties: false
-          properties:
-            amountToSpend:
-              description: >-
-                The amount of money, in the smallest unit of relevant currency applied to order,
-
-                to be spent to get the offer.
-              format: integer
-              type: number
-            discountPercentage:
-              description: The discount percentage applied.
-              format: integer
-              type: number
-          type: object
-      example:
-        $type: SpendMoreOfferEffect
-        amountToSpend: 101
-        description: Spend 1.01$ more to get 20%
-        discountPercentage: 20
     Storage:
       example:
         stgInstruction: Example
@@ -17629,6 +17234,42 @@ components:
             - TempOffline
             - ClosedToday
           nullable: true
+          type: string
+      type: object
+    Takeaway4XXErrorResponse:
+      description: A HTTP 4xx error response
+      properties:
+        description:
+          description: A description of the error.
+          type: string
+        errorCode:
+          description: A value that helps identify this response back to logs, so we can easily find this specific fault.
+          type: string
+        validationErrors:
+          description: Validation error messages for each field.
+          items:
+            additionalProperties:
+              properties:
+                errors:
+                  items:
+                    description: Error explanation.
+                    type: string
+                  type: array
+                field:
+                  description: Field name that contains error.
+                  type: string
+              type: object
+            type: object
+          type: array
+      type: object
+    Takeaway500ErrorResponse:
+      description: A HTTP 500 error response
+      properties:
+        description:
+          description: A description of the error.
+          type: string
+        errorCode:
+          description: A value that helps identify this response back to logs, so we can easily find this specific fault.
           type: string
       type: object
     TextAndActionsStep:
@@ -18468,20 +18109,6 @@ components:
           description: Severity of a validation rule. Will always be 0 (Error).
           type: number
       type: object
-    ValidationProblemDetails:
-      allOf:
-        - $ref: "#/components/schemas/ProblemDetails"
-        - additionalProperties:
-            nullable: true
-          properties:
-            errors:
-              additionalProperties:
-                items:
-                  type: string
-                type: array
-              nullable: true
-              type: object
-          type: object
     Validity:
       additionalProperties: false
       properties:
@@ -21954,6 +21581,10 @@ components:
             - Fleet Place House
             - Fleet Place
           postalCode: EC4M 7RF
+        applicationMetadata:
+          applicationType: NonStandard
+          occupancyType: MultipleBusinessMultipleOwnership
+          premiseType: Van
         applicationState: OpenApplication
         bankDetails:
           accountHolderName: John Doe
@@ -21993,6 +21624,47 @@ components:
               type: array
             postalCode:
               description: The post code the restaurant is located
+              type: string
+          type: object
+        applicationMetadata:
+          description: Extra information about the restaurant, like the premises and ownership status
+          nullable: true
+          properties:
+            applicationType:
+              description: The type of sign up application i.e. Standard, Non-Standard.
+              enum:
+                - Unknown
+                - Standard
+                - NonStandard
+              nullable: true
+              type: string
+            occupancyType:
+              description: The nature of occupancy that restaurant is using e.g Single, Multiple businesses under one ownership, Multiple businesses under multiple ownership etc...
+              enum:
+                - Unknown
+                - Single
+                - MultipleBusinessSingleOwnership
+                - MultipleBusinessMultipleOwnership
+                - Other
+              nullable: true
+              type: string
+            premiseType:
+              description: The type of premises that restaurant is using e.g Pub, Hotel, Stall etc...
+              enum:
+                - Unknown
+                - HighStreet
+                - GhostKitchen
+                - Residential
+                - PubOrHotelSameName
+                - PubOrHotelDifferentName
+                - PubOrHotelLeased
+                - PubOrHotelUnknown
+                - Unit
+                - Stall
+                - ShoppingCentre
+                - Van
+                - Other
+              nullable: true
               type: string
           type: object
         applicationState:

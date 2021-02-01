@@ -18,7 +18,6 @@ info:
       url: https://api.youneedabudget.com/papi/spec-v1-swagger.json
       version: "2.0"
   x-providerName: youneedabudget.com
-  x-preferred: null
 securityDefinitions:
   bearer:
     in: header
@@ -1389,6 +1388,18 @@ definitions:
         description: The month a goal was created
         format: date
         type: string
+      goal_months_to_budget:
+        description: The number of months, including the current month, left in the current goal period.
+        format: int32
+        type: integer
+      goal_overall_funded:
+        description: The total amount funded towards the goal within the current goal period.
+        format: int64
+        type: integer
+      goal_overall_left:
+        description: The amount of funding still needed to complete the goal within the current goal period.
+        format: int64
+        type: integer
       goal_percentage_complete:
         description: The percentage completion of the goal
         format: int32
@@ -1398,7 +1409,7 @@ definitions:
         format: int64
         type: integer
       goal_target_month:
-        description: The target month for the goal to be completed.  Only some goal types specify this date.
+        description: The original target month for the goal to be completed.  Only some goal types specify this date.
         format: date
         type: string
       goal_type:
@@ -1410,6 +1421,10 @@ definitions:
           - NEED
           - null
         type: string
+      goal_under_funded:
+        description: The amount of funding still needed in the current month to stay on track towards completing the goal within the current goal period.
+        format: int64
+        type: integer
       hidden:
         description: Whether or not the category is hidden
         type: boolean

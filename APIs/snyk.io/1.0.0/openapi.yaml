@@ -309,7 +309,6 @@ info:
       url: https://snyk.docs.apiary.io/api-description-document
       version: "2.0"
   x-providerName: snyk.io
-  x-preferred: null
 tags:
   - name: General
   - name: Users
@@ -1680,7 +1679,7 @@ paths:
   "/org/{orgId}/integrations/{integrationId}/authentication/switch-token":
     post:
       description: >-
-        Switch the existing broker token with the provisioned token for this integration and any other in the same group. 
+        Switch the existing broker token with the provisioned token for this integration and any other in the same group.
 
         Only perform this action when you have a Broker client running with the provisioned token.
 
@@ -1733,6 +1732,16 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                destinationOrgPublicId: 9a3e5d90-b782-468a-a042-9a2073736f0b1
+              properties:
+                destinationOrgPublicId:
+                  type: string
+              type: object
       responses:
         "200":
           content:

@@ -18,7 +18,6 @@ info:
       version: "2.0"
   x-providerName: postmarkapp.com
   x-serviceName: server
-  x-preferred: null
 consumes:
   - application/json
 produces:
@@ -115,29 +114,6 @@ paths:
         "500":
           $ref: "#/responses/500"
       summary: Get bounces
-      tags:
-        - Bounces API
-  /bounces/tags:
-    get:
-      operationId: getBouncedTags
-      parameters:
-        - description: The token associated with the Server on which this request will operate.
-          in: header
-          name: X-Postmark-Server-Token
-          required: true
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              type: string
-            type: array
-        "422":
-          $ref: "#/responses/422"
-        "500":
-          $ref: "#/responses/500"
-      summary: Get bounced tags
       tags:
         - Bounces API
   "/bounces/{bounceid}":

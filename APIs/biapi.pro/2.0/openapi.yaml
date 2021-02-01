@@ -1867,13 +1867,13 @@ info:
       url: https://budgea.biapi.pro/2.0/doc/
       version: "2.0"
   x-providerName: biapi.pro
-  x-preferred: null
 tags:
   - name: Administration
   - name: Authentication
   - name: Banks
   - name: Connections
   - name: Documents
+  - name: OCR
   - name: OIDC
   - name: PFM
   - name: Payments
@@ -3445,7 +3445,7 @@ paths:
         - Banks
         - Providers
     post:
-      description: This will make it so the specified source will be able to be synchronized.<br><br>
+      description: This endpoint is used to enable a source or force a synchronization on it.<br><br>
       parameters:
         - description: ""
           in: path
@@ -3459,11 +3459,19 @@ paths:
           required: true
           schema:
             type: integer
+        - description: do the synchronization in background (to use with the sysynchronizenc parameter)
+          in: query
+          name: background
+          required: false
+          schema:
+            type: boolean
         - in: query
           name: expand
           required: false
           schema:
             type: string
+      requestBody:
+        $ref: "#/components/requestBodies/postConnections_idConnection_sources_idSource_"
       responses:
         "200":
           content:
@@ -3471,13 +3479,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/ConnectionSource"
           description: Successful POST on ConnectionSource resource
-      summary: Enable connection source
+      summary: '"'
       tags:
         - Connections
         - Banks
         - Providers
     put:
-      description: This will make it so the specified source will be able to be synchronized.<br><br>
+      description: This endpoint is used to enable a source or force a synchronization on it.<br><br>
       parameters:
         - description: ""
           in: path
@@ -3491,11 +3499,19 @@ paths:
           required: true
           schema:
             type: integer
+        - description: do the synchronization in background (to use with the synchronize parameter)
+          in: query
+          name: background
+          required: false
+          schema:
+            type: boolean
         - in: query
           name: expand
           required: false
           schema:
             type: string
+      requestBody:
+        $ref: "#/components/requestBodies/putConnections_idConnection_sources_idSource_"
       responses:
         "200":
           content:
@@ -3503,7 +3519,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ConnectionSource"
           description: Successful PUT on ConnectionSource resource
-      summary: Enable connection source
+      summary: Update connection source
       tags:
         - Connections
         - Banks
@@ -4116,8 +4132,7 @@ paths:
                   type: string
                 disabled:
                   description: to enable or disable connector source
-                  format: date-time
-                  type: string
+                  type: boolean
                 unavailable:
                   description: to enable or disable the source (can only be edited by BI employees)
                   format: date-time
@@ -6990,7 +7005,7 @@ paths:
         - Banks
         - Providers
     post:
-      description: This will make it so the specified source will be able to be synchronized.<br><br>
+      description: This endpoint is used to enable a source or force a synchronization on it.<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -7010,11 +7025,19 @@ paths:
           required: true
           schema:
             type: integer
+        - description: do the synchronization in background (to use with the sysynchronizenc parameter)
+          in: query
+          name: background
+          required: false
+          schema:
+            type: boolean
         - in: query
           name: expand
           required: false
           schema:
             type: string
+      requestBody:
+        $ref: "#/components/requestBodies/postConnections_idConnection_sources_idSource_"
       responses:
         "200":
           content:
@@ -7022,13 +7045,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/ConnectionSource"
           description: Successful POST on ConnectionSource resource
-      summary: Enable connection source
+      summary: '"'
       tags:
         - Connections
         - Banks
         - Providers
     put:
-      description: This will make it so the specified source will be able to be synchronized.<br><br>
+      description: This endpoint is used to enable a source or force a synchronization on it.<br><br>
       parameters:
         - description: "Hint: you can use 'me' or 'all'"
           in: path
@@ -7048,11 +7071,19 @@ paths:
           required: true
           schema:
             type: integer
+        - description: do the synchronization in background (to use with the synchronize parameter)
+          in: query
+          name: background
+          required: false
+          schema:
+            type: boolean
         - in: query
           name: expand
           required: false
           schema:
             type: string
+      requestBody:
+        $ref: "#/components/requestBodies/putConnections_idConnection_sources_idSource_"
       responses:
         "200":
           content:
@@ -7060,7 +7091,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ConnectionSource"
           description: Successful PUT on ConnectionSource resource
-      summary: Enable connection source
+      summary: Update connection source
       tags:
         - Connections
         - Banks
@@ -8216,6 +8247,18 @@ paths:
         - Administration
 components:
   requestBodies:
+    postConnections_idConnection_sources_idSource_:
+      content:
+        multipart/form-data:
+          schema:
+            properties:
+              disabled:
+                description: to enable or disable connector source
+                type: boolean
+              synchronize:
+                description: whether to force a synchronization on the source if it's not disabled
+                type: boolean
+            type: object
     postWebhooks_idWebhook_:
       content:
         multipart/form-data:
@@ -8239,6 +8282,21 @@ components:
               url:
                 description: The webhook callback url
                 type: string
+            type: object
+    putConnections_idConnection_sources_idSource_:
+      content:
+        multipart/form-data:
+          schema:
+            properties:
+              disabled:
+                description: to enable or disable connector source
+                type: boolean
+              force:
+                description: whether to force the synchronization on the source if it's in error
+                type: boolean
+              synchronize:
+                description: whether to force a synchronization on the source if it's not disabled
+                type: boolean
             type: object
   schemas:
     Access:
@@ -8270,8 +8328,8 @@ components:
         coming: 0
         company_name: ""
         currency: ""
-        deleted: 2021-01-22 15:19:15.660489
-        disabled: 2021-01-22 15:19:15.660551
+        deleted: 2021-01-29 14:37:34.445427
+        disabled: 2021-01-29 14:37:34.445478
         display: true
         error: ""
         iban: ""
@@ -8281,10 +8339,10 @@ components:
         id_source: 0
         id_type: 0
         id_user: 0
-        last_update: 2021-01-22 15:19:15.660442
+        last_update: 2021-01-29 14:37:34.445383
         name: ""
         number: ""
-        opening_date: 2021-01-22
+        opening_date: 2021-01-29
         original_name: ""
         ownership: ""
         usage: ""
@@ -8592,7 +8650,7 @@ components:
       type: object
     Certificate:
       example:
-        created: 2021-01-22 15:19:15.572979
+        created: 2021-01-29 14:37:34.369209
         id: 0
         id_private_key_file: 0
         id_public_key_file: 0
@@ -8690,20 +8748,20 @@ components:
     Connection:
       example:
         active: true
-        created: <function datetime.now at 0x7f7342751c80>
+        created: <function datetime.now at 0x7f94b658cc80>
         id: 0
         id_connector: 0
         id_user: 0
-        last_push: 2021-01-22 15:19:15.545573
-        last_update: 2021-01-22 15:19:15.545415
-        next_try: 2021-01-22 15:19:15.545627
+        last_push: 2021-01-29 14:37:34.344225
+        last_update: 2021-01-29 14:37:34.344070
+        next_try: 2021-01-29 14:37:34.344278
       properties:
         active:
           default: true
           description: This connection is active and will be automatically synced
           type: boolean
         created:
-          default: <function datetime.now at 0x7f7342751c80>
+          default: <function datetime.now at 0x7f94b658cc80>
           description: Creation date
           format: date-time
           type: string
@@ -8745,9 +8803,9 @@ components:
         id_user: 0
         login: ""
         nb_accounts: 0
-        next_try: 2021-01-22 15:19:15.665384
+        next_try: 2021-01-29 14:37:34.449492
         session_folder_id: ""
-        start: 2021-01-22 15:19:15.666313
+        start: 2021-01-29 14:37:34.450498
         statut: 0
         timestamp: CURRENT_TIMESTAMP
         worker: ""
@@ -8814,16 +8872,16 @@ components:
       type: object
     ConnectionSource:
       example:
-        access_expire: 2021-01-22 15:19:15.638088
-        created: <function datetime.now at 0x7f7342702ae8>
-        disabled: 2021-01-22 15:19:15.637920
-        expire: 2021-01-22 15:19:15.638132
+        access_expire: 2021-01-29 14:37:34.427881
+        created: <function datetime.now at 0x7f94b653fb70>
+        disabled: 2021-01-29 14:37:34.427725
+        expire: 2021-01-29 14:37:34.427923
         id: 0
         id_connection: 0
         id_connector_source: 0
-        last_update: 2021-01-22 15:19:15.637864
+        last_update: 2021-01-29 14:37:34.427680
         name: ""
-        next_try: 2021-01-22 15:19:15.638288
+        next_try: 2021-01-29 14:37:34.428061
         state: ""
       properties:
         access_expire:
@@ -8831,7 +8889,7 @@ components:
           format: date-time
           type: string
         created:
-          default: <function datetime.now at 0x7f7342702ae8>
+          default: <function datetime.now at 0x7f94b653fb70>
           description: Creation date of the connection source
           format: date-time
           type: string
@@ -8986,7 +9044,7 @@ components:
     ConnectorSource:
       example:
         auth_mechanism: ""
-        disabled: 2021-01-22 15:19:15.546475
+        disabled: 2021-01-29 14:37:34.345167
         fallback: ""
         id: 0
         id_connector: 0
@@ -9066,7 +9124,7 @@ components:
     Currency:
       example:
         crypto: false
-        datetime: 2021-01-22 15:19:15.551614
+        datetime: 2021-01-29 14:37:34.350159
         id: ""
         marketcap: 0
         precision: 2
@@ -9143,8 +9201,8 @@ components:
     Document:
       example:
         currency: ""
-        date: 2021-01-22 15:19:15.581153
-        duedate: 2021-01-22
+        date: 2021-01-29 14:37:34.377080
+        duedate: 2021-01-29
         has_file_on_website: true
         id: 0
         id_category: 0
@@ -9155,7 +9213,7 @@ components:
         id_user: 0
         income: true
         issuer: ""
-        last_update: 2021-01-22 15:19:15.582260
+        last_update: 2021-01-29 14:37:34.377971
         name: ""
         number: ""
         readonly: true
@@ -9382,7 +9440,7 @@ components:
       example:
         code: ""
         code_type: ""
-        deleted: 2021-01-22 15:19:15.633812
+        deleted: 2021-01-29 14:37:34.424317
         description: ""
         diff: 0
         diff_percent: 0
@@ -9390,7 +9448,7 @@ components:
         id_account: 0
         id_security: 0
         label: ""
-        last_update: 2021-01-22 15:19:15.633766
+        last_update: 2021-01-29 14:37:34.424273
         original_currency: ""
         original_diff: 0
         original_unitprice: 0
@@ -9398,13 +9456,13 @@ components:
         original_valuation: 0
         portfolio_share: 0
         prev_diff: 0
-        prev_vdate: 2021-01-22
+        prev_vdate: 2021-01-29
         quantity: 0
         source: ""
         unitprice: 0
         unitvalue: 0
         valuation: 0
-        vdate: 2021-01-22
+        vdate: 2021-01-29
       properties:
         code:
           description: Investment code
@@ -9515,7 +9573,7 @@ components:
         original_currency: ""
         original_unitvalue: 0
         unitvalue: 0
-        vdate: 2021-01-22
+        vdate: 2021-01-29
       properties:
         id:
           description: ID of the value
@@ -9591,14 +9649,14 @@ components:
       example:
         amount: 0
         code: ""
-        created: 2021-01-22 15:19:15.630895
-        date: 2021-01-22
-        deleted: 2021-01-22 15:19:15.630939
-        execution_date: 2021-01-22
+        created: 2021-01-29 14:37:34.421468
+        date: 2021-01-29
+        deleted: 2021-01-29 14:37:34.421512
+        execution_date: 2021-01-29
         id: 0
         id_account: 0
         label: ""
-        last_update: 2021-01-22 15:19:15.630835
+        last_update: 2021-01-29 14:37:34.421411
         ordervalue: 0
         payment_method: ""
         quantity: 0
@@ -9606,7 +9664,7 @@ components:
         stock_market: ""
         unitprice: 0
         unitvalue: 0
-        validity_date: 2021-01-22
+        validity_date: 2021-01-29
         webid: ""
       properties:
         amount:
@@ -9708,7 +9766,7 @@ components:
         error_code: ""
         error_description: ""
         id: 0
-        register_date: 2021-01-22 15:19:15.563100
+        register_date: 2021-01-29 14:37:34.360079
         state: ""
         validate_uri: ""
       properties:
@@ -9774,14 +9832,14 @@ components:
       type: object
     Pocket:
       example:
-        availability_date: 2021-01-22
+        availability_date: 2021-01-29
         condition: inconnu
-        deleted: 2021-01-22 15:19:15.600865
+        deleted: 2021-01-29 14:37:34.395111
         id: 0
         id_account: 0
         id_investment: 0
         label: ""
-        last_update: 2021-01-22 15:19:15.600809
+        last_update: 2021-01-29 14:37:34.395062
         quantity: 0
         value: 0
       properties:
@@ -9938,18 +9996,18 @@ components:
         bank_name: ""
         category: ""
         currency: ""
-        deleted: 2021-01-22 15:19:15.634949
-        enabled_at: 2021-01-22 15:19:15.635046
+        deleted: 2021-01-29 14:37:34.425283
+        enabled_at: 2021-01-29 14:37:34.425371
         error: ""
-        expire: 2021-01-22 15:19:15.635004
+        expire: 2021-01-29 14:37:34.425328
         iban: ""
         id: 0
         id_account: 0
         id_target_account: 0
         label: ""
-        last_update: 2021-01-22 15:19:15.634850
+        last_update: 2021-01-29 14:37:34.425200
         state: ""
-        time_scraped: 2021-01-22 15:19:15.634897
+        time_scraped: 2021-01-29 14:37:34.425243
         webid: ""
       properties:
         add_verified:
@@ -10062,7 +10120,7 @@ components:
         code: ""
         id: 0
         id_type: 0
-        last_update: 2021-01-22 15:19:15.561808
+        last_update: 2021-01-29 14:37:34.358908
         name: ""
       properties:
         code:
@@ -10087,19 +10145,19 @@ components:
       type: object
     Subscription:
       example:
-        deleted: 2021-01-22 15:19:15.654169
-        disabled: 2021-01-22 15:19:15.654240
+        deleted: 2021-01-29 14:37:34.440668
+        disabled: 2021-01-29 14:37:34.440716
         error: ""
         id: 0
         id_connection: 0
         id_source: 0
         id_user: 0
         label: ""
-        last_update: 2021-01-22 15:19:15.654110
+        last_update: 2021-01-29 14:37:34.440616
         number: ""
-        renewdate: 2021-01-22
+        renewdate: 2021-01-29
         subscriber: ""
-        validity: 2021-01-22
+        validity: 2021-01-29
       properties:
         deleted:
           description: This subscription is not found on the website anymore
@@ -10194,8 +10252,8 @@ components:
       type: object
     TermsOfService:
       example:
-        created: 2021-01-22 15:19:15.535511
-        deleted: 2021-01-22 15:19:15.535561
+        created: 2021-01-29 14:37:34.333459
+        deleted: 2021-01-29 14:37:34.333512
         id: 0
         version: ""
       properties:
@@ -10217,8 +10275,8 @@ components:
     Transaction:
       example:
         active: true
-        application_date: 2021-01-22
-        bdate: 2021-01-22
+        application_date: 2021-01-29
+        bdate: 2021-01-29
         card: ""
         coming: false
         comment: ""
@@ -10226,23 +10284,23 @@ components:
         commission_currency: ""
         counterparty: ""
         country: ""
-        date: 2021-01-22
-        date_scraped: 2021-01-22 15:19:15.596589
-        deleted: 2021-01-22 15:19:15.597913
+        date: 2021-01-29
+        date_scraped: 2021-01-29 14:37:34.391616
+        deleted: 2021-01-29 14:37:34.392681
         gross_value: 0
         id: 0
         id_account: 0
         id_category: 0
         id_cluster: 0
-        last_update: 2021-01-22 15:19:15.597869
+        last_update: 2021-01-29 14:37:34.392638
         nature: inconnu
         original_currency: ""
         original_gross_value: 0
         original_value: 0
-        rdate: 2021-01-22
+        rdate: 2021-01-29
         state: new
         value: 0
-        vdate: 2021-01-22
+        vdate: 2021-01-29
         webid: ""
         wording: ""
       properties:
@@ -10405,7 +10463,7 @@ components:
         id_category: 0
         mean_amount: 0
         median_increment: 0
-        next_date: 2021-01-22
+        next_date: 2021-01-29
         wording: ""
       properties:
         created_by:
@@ -10447,7 +10505,7 @@ components:
         beneficiary_type: recipient
         currency: ""
         error: ""
-        exec_date: 2021-01-22
+        exec_date: 2021-01-29
         fees: 0
         id: 0
         id_account: 0
@@ -10456,7 +10514,7 @@ components:
         id_user: 0
         label: ""
         recipient_iban: ""
-        register_date: 2021-01-22 15:19:15.602644
+        register_date: 2021-01-29 14:37:34.396464
         state: ""
         validate_mechanism: ""
         webid: ""
@@ -10680,14 +10738,14 @@ components:
       type: object
     Webhook:
       example:
-        created: 2021-01-22 15:19:15.555203
-        deleted: 2021-01-22 15:19:15.555305
+        created: 2021-01-29 14:37:34.353633
+        deleted: 2021-01-29 14:37:34.353734
         id: 0
         id_auth: 0
         id_event: 0
         id_service: 0
         id_user: 0
-        updated: 2021-01-22 15:19:15.555261
+        updated: 2021-01-29 14:37:34.353690
         url: ""
       properties:
         add_to_data:
@@ -10733,14 +10791,14 @@ components:
       type: object
     WebhookData:
       example:
-        created: 2021-01-22 15:19:15.557607
+        created: 2021-01-29 14:37:34.355524
         id: 0
         id_resource: 0
         id_service: 0
         id_user: 0
         id_webhook: 0
         mimetype: ""
-        success: 2021-01-22 15:19:15.557661
+        success: 2021-01-29 14:37:34.355577
       properties:
         created:
           description: Timestamp when the hook data was generated
@@ -10781,10 +10839,10 @@ components:
         id_service: 0
         id_user: 0
         id_webhook_data: 0
-        next_try: 2021-01-22 15:19:15.558828
+        next_try: 2021-01-29 14:37:34.356428
         response_code: 0
-        response_date: 2021-01-22 15:19:15.558340
-        timestamp: 2021-01-22 15:19:15.558271
+        response_date: 2021-01-29 14:37:34.356069
+        timestamp: 2021-01-29 14:37:34.356023
       properties:
         id:
           description: ID of the log
@@ -10824,6 +10882,7 @@ x-query-services:
   - banks
   - connections
   - documents
+  - ocr
   - oidc
   - payments
   - pfm

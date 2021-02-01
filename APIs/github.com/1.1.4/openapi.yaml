@@ -22,7 +22,6 @@ info:
       url: https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json
       version: "3.0"
   x-providerName: github.com
-  x-preferred: null
 externalDocs:
   description: GitHub v3 REST API
   url: https://docs.github.com/rest/
@@ -2834,7 +2833,7 @@ paths:
   "/enterprises/{enterprise}/audit-log":
     get:
       description: >-
-        **Note:** The audit log REST API is currently in beta and is subject to change. To join the beta, talk to your services or sales contact at GitHub.
+        **Note:** The audit log REST API is currently in beta and is subject to change.
 
 
         Gets the audit log for an enterprise. To use this endpoint, you must be an enterprise admin, and you must use an access token with the `admin:enterprise` scope.
@@ -2848,6 +2847,7 @@ paths:
         - $ref: "#/components/parameters/audit-log-include"
         - $ref: "#/components/parameters/audit-log-after"
         - $ref: "#/components/parameters/audit-log-before"
+        - $ref: "#/components/parameters/audit-log-order"
         - $ref: "#/components/parameters/per_page"
       responses:
         "200":
@@ -5128,11 +5128,16 @@ paths:
 
                     \* `true` - all organization members can create GitHub Pages sites.  
 
-                    \* `false` - no organization members can create GitHub Pages sites. Existing published sites will not be impacted.  
-
-                    Default: `true`. 
+                    \* `false` - no organization members can create GitHub Pages sites. Existing published sites will not be impacted.
                   type: boolean
                 members_can_create_private_pages:
+                  default: true
+                  description: >-
+                    Toggles whether organization members can create private GitHub Pages sites. Can be one of:  
+
+                    \* `true` - all organization members can create private GitHub Pages sites.  
+
+                    \* `false` - no organization members can create private GitHub Pages sites. Existing published sites will not be impacted.
                   type: boolean
                 members_can_create_private_repositories:
                   description: >-
@@ -5145,6 +5150,13 @@ paths:
                     Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation.
                   type: boolean
                 members_can_create_public_pages:
+                  default: true
+                  description: >-
+                    Toggles whether organization members can create public GitHub Pages sites. Can be one of:  
+
+                    \* `true` - all organization members can create public GitHub Pages sites.  
+
+                    \* `false` - no organization members can create public GitHub Pages sites. Existing published sites will not be impacted.
                   type: boolean
                 members_can_create_public_repositories:
                   description: >-
@@ -6721,7 +6733,7 @@ paths:
   "/orgs/{org}/audit-log":
     get:
       description: >-
-        **Note:** The audit log REST API is currently in beta and is subject to change. To join the beta, talk to your services or sales contact at GitHub.
+        **Note:** The audit log REST API is currently in beta and is subject to change.
 
 
         Gets the audit log for an organization. For more information, see "[Reviewing the audit log for your organization](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization)."
@@ -6738,6 +6750,7 @@ paths:
         - $ref: "#/components/parameters/audit-log-include"
         - $ref: "#/components/parameters/audit-log-after"
         - $ref: "#/components/parameters/audit-log-before"
+        - $ref: "#/components/parameters/audit-log-order"
         - $ref: "#/components/parameters/per_page"
       responses:
         "200":
@@ -27580,7 +27593,7 @@ paths:
               properties:
                 context:
                   default: default
-                  description: A string label to differentiate this status from the status of other systems.
+                  description: A string label to differentiate this status from the status of other systems. This field is case-insensitive.
                   type: string
                 description:
                   description: A short description of the status.
@@ -52042,6 +52055,20 @@ components:
           - git
           - all
         type: string
+    audit-log-order:
+      description: >-
+        The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+
+
+        The default is `desc`.
+      in: query
+      name: order
+      required: false
+      schema:
+        enum:
+          - desc
+          - asc
+        type: string
     audit-log-phrase:
       description: A search phrase. For more information, see [Searching the audit log](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/reviewing-the-audit-log-for-your-organization#searching-the-audit-log).
       in: query
@@ -55718,10 +55745,12 @@ components:
         authorized_credential_note:
           description: The note given to the token. This will only be present when the credential is a token.
           example: my token
+          nullable: true
           type: string
         authorized_credential_title:
           description: The title given to the ssh key. This will only be present when the credential is an ssh key.
           example: my ssh key
+          nullable: true
           type: string
         credential_accessed_at:
           description: Date when the credential was last accessed. May be null if it was never accessed

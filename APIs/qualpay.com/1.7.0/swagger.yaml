@@ -19,7 +19,6 @@ info:
       url: https://api-test.qualpay.com/pg/doc
       version: "2.0"
   x-providerName: qualpay.com
-  x-preferred: null
 securityDefinitions:
   basicAuth:
     type: basic
@@ -1842,6 +1841,10 @@ definitions:
         description: "<strong>Format: </strong>Variable length, up to 4 N<br><strong>Description: </strong>CVV2 or CID value from the signature panel on the back of the cardholder's card. If present during a request that requires authorization, the value will be sent to the issuer for validation."
         example: "152"
         type: string
+      dda_number:
+        description: "<strong>Format: </strong>Variable length, up to 17 N<br><strong>Description: </strong>Owner's account number at the bank. Applicable for ACH payments.<br><strong>Conditional Requirement: </strong>Refer to <a href=\"/developer/api/reference#card-source-conditional-requirements\"target=\"_blank\">Card or Bank Account Data Sources and Conditional Requirements</a>"
+        example: "3456776866"
+        type: string
       developer_id:
         description: >
           <strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
@@ -1903,6 +1906,14 @@ definitions:
         description: '<br><strong>Default: </strong>false<br><strong>Description: </strong>In an authorization, credit, force, sale, or verify request the merchant can set tokenize to "true" and the payment gateway will store the cardholder data in the Card Vault and provide a card_id in the response. If the card_number or card_id in the request is already in the Card Vault, this flag instructs the payment gateway to update the associated data (e.g. avs_address, avs_zip, exp_date) if present.'
         example: true
         type: boolean
+      tr_number:
+        description: '<strong>Format: </strong>Fixed length, 9 N<br><strong>Description: </strong>Bank transit/routing number. Applicable for ACH payments.<br><strong>Conditional Requirement: </strong>Refer to <a href="/developer/api/reference#card-source-conditional-requirements"target="_blank">Card or Bank Account Data Sources and Conditional Requirements</a>'
+        example: "011111111"
+        type: string
+      type_id:
+        description: "<strong>Format: </strong>Fixed length, 1 AN<br><strong>Default: </strong>C<br><strong>Description: </strong>Bank Account Type. Applicable for ACH payments. Possible values are: <ul><li>C = Personal checking account</li><li>S = Personal savings account</li><li>K = Business checking account</li><li>V = Business savings account</li></ul>"
+        example: S
+        type: string
       user_id:
         description: INTERNAL USE ONLY.
         format: int64

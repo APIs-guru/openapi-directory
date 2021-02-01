@@ -21,7 +21,6 @@ info:
       url: https://try.gitea.io/swagger.v1.json
       version: "2.0"
   x-providerName: gitea.io
-  x-preferred: null
 consumes:
   - application/json
   - text/plain
@@ -8680,6 +8679,10 @@ definitions:
         description: new_branch (optional) will make a new branch from `branch` before creating the file
         type: string
         x-go-name: NewBranchName
+      signoff:
+        description: Add a Signed-off-by trailer by the committer at the end of the commit log message.
+        type: boolean
+        x-go-name: Signoff
     required:
       - content
     type: object
@@ -9222,6 +9225,10 @@ definitions:
         description: sha is the SHA for the file that already exists
         type: string
         x-go-name: SHA
+      signoff:
+        description: Add a Signed-off-by trailer by the committer at the end of the commit log message.
+        type: boolean
+        x-go-name: Signoff
     required:
       - sha
     type: object
@@ -10353,7 +10360,7 @@ definitions:
       - Do
     type: object
     x-go-name: MergePullRequestForm
-    x-go-package: code.gitea.io/gitea/modules/auth
+    x-go-package: code.gitea.io/gitea/modules/forms
   MigrateRepoForm:
     description: >-
       MigrateRepoForm form for migrating repository
@@ -10416,7 +10423,7 @@ definitions:
       - uid
       - repo_name
     type: object
-    x-go-package: code.gitea.io/gitea/modules/auth
+    x-go-package: code.gitea.io/gitea/modules/forms
   MigrateRepoOptions:
     description: >-
       MigrateRepoOptions options for migrating repository's
@@ -11523,6 +11530,10 @@ definitions:
         description: sha is the SHA for the file that already exists
         type: string
         x-go-name: SHA
+      signoff:
+        description: Add a Signed-off-by trailer by the committer at the end of the commit log message.
+        type: boolean
+        x-go-name: Signoff
     required:
       - sha
       - content

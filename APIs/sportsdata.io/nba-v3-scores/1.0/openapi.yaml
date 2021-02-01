@@ -17,7 +17,6 @@ info:
       version: "2.0"
   x-providerName: sportsdata.io
   x-serviceName: nba-v3-scores
-  x-preferred: null
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
@@ -1158,6 +1157,9 @@ components:
         GlobalTeamID:
           nullable: false
           type: integer
+        Key:
+          nullable: true
+          type: string
         LeagueID:
           nullable: true
           type: integer
@@ -1189,9 +1191,6 @@ components:
           nullable: true
           type: string
         WikipediaWordMarkUrl:
-          nullable: true
-          type: string
-        "[Key]":
           nullable: true
           type: string
     TeamGame:

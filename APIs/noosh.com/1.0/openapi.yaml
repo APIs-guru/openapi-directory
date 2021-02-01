@@ -16,7 +16,6 @@ info:
       url: https://api.noosh.com/api/swagger.json
       version: "3.0"
   x-providerName: noosh.com
-  x-preferred: null
 tags:
   - name: Contact
   - name: Country
@@ -4193,6 +4192,128 @@ paths:
                 $ref: "#/components/schemas/HTTPStatusVO"
           description: Internal server error
       summary: Get a specific Project
+      tags:
+        - Project
+    patch:
+      description: Patch a specific Project
+      operationId: patchProject
+      parameters:
+        - in: path
+          name: workgroup_id
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectPatchPO"
+          application/x-json-smile:
+            schema:
+              $ref: "#/components/schemas/ProjectPatchPO"
+          application/x-yaml:
+            schema:
+              $ref: "#/components/schemas/ProjectPatchPO"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/ProjectPatchPO"
+          text/csv:
+            schema:
+              $ref: "#/components/schemas/ProjectPatchPO"
+          text/x-yaml:
+            schema:
+              $ref: "#/components/schemas/ProjectPatchPO"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/ProjectPatchPO"
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/x-json-smile:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/x-yaml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            text/csv:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            text/x-yaml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+          description: Successful patch
+        "422":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/x-json-smile:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/x-yaml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            text/csv:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            text/x-yaml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+          description: Invalid data
+        "500":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/x-json-smile:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/x-yaml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            text/csv:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            text/x-yaml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/HTTPStatusVO"
+          description: Internal server error
+      summary: Patch a specific Project
       tags:
         - Project
     put:
@@ -13057,6 +13178,67 @@ components:
           description: ""
           example: sample project_number
           type: string
+    ProjectPatchPO:
+      description: "Java type: com.noosh.domain.nooshapi.persist.po.ProjectPatchPO"
+      properties:
+        client_user_id:
+          description: ""
+          example: "1"
+          format: int64
+          type: integer
+        client_workgroup_id:
+          description: ""
+          example: "1"
+          format: int64
+          type: integer
+        comments:
+          description: ""
+          example: sample comments
+          type: string
+        completion_date:
+          description: ""
+          format: date
+          type: string
+        custom_fields:
+          description: ""
+          items:
+            $ref: "#/components/schemas/CustomFieldPersistVO"
+          type: array
+        deactivation_reason_id:
+          description: ""
+          example: "1"
+          format: int64
+          type: integer
+        is_active:
+          description: ""
+          example: "false"
+          type: boolean
+        is_hot:
+          description: ""
+          example: "false"
+          type: boolean
+        project_category_id:
+          description: ""
+          example: "1"
+          format: int64
+          type: integer
+        project_description:
+          description: ""
+          example: sample project_description
+          type: string
+        project_name:
+          description: ""
+          example: sample project_name
+          type: string
+        project_number:
+          description: ""
+          example: sample project_number
+          type: string
+        project_status_id:
+          description: ""
+          example: "1"
+          format: int64
+          type: integer
     ProjectPersistVO:
       description: "Java type: com.noosh.domain.nooshapi.persist.vo.ProjectPersistVO"
       properties:

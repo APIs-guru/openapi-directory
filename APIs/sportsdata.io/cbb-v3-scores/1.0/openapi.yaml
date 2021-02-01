@@ -17,7 +17,6 @@ info:
       version: "2.0"
   x-providerName: sportsdata.io
   x-serviceName: cbb-v3-scores
-  x-preferred: null
 security:
   - apiKeyHeader: []
   - apiKeyQuery: []
@@ -301,6 +300,45 @@ paths:
                 type: array
           description: ""
       summary: Team Game Stats by Date
+  "/{format}/TeamSchedule/{season}/{team}":
+    get:
+      operationId: TeamSchedule
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc."
+          in: path
+          name: season
+          required: true
+          schema:
+            type: string
+        - description: >-
+            The abbreviation of the requested team.
+
+            Examples: <code>SF</code>, <code>NYY</code>.
+          in: path
+          name: team
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Game"
+                type: array
+          description: ""
+      summary: Team Schedule
   "/{format}/TeamSeasonStats/{season}":
     get:
       operationId: TeamSeasonStats
@@ -697,6 +735,9 @@ components:
         GlobalTeamID:
           nullable: false
           type: integer
+        Key:
+          nullable: true
+          type: string
         Losses:
           nullable: true
           type: integer
@@ -720,9 +761,6 @@ components:
         Wins:
           nullable: true
           type: integer
-        "[Key]":
-          nullable: true
-          type: string
     TeamGame:
       properties:
         Assists:

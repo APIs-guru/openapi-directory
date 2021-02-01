@@ -16,7 +16,6 @@ info:
       url: https://secure.agco-ats.com:443/swagger/docs/v1
       version: "3.0"
   x-providerName: agco-ats.com
-  x-preferred: null
 paths:
   /api/v2/AftermarketServices/Certificates:
     get:
@@ -8211,6 +8210,183 @@ paths:
       summary: Update a string value or a state for a string translation.
       tags:
         - StringTranslations
+  /api/v2/TranslationKeys:
+    get:
+      deprecated: false
+      description: ""
+      operationId: TranslationKeys_Get
+      parameters:
+        - description: ""
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: ""
+          in: query
+          name: offset
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: Can filter by keyNames, a comma deliminated list.
+          in: query
+          name: keyNames
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API.IPagedResponse_OASSupport.Shared.Models.TranslationKey_"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/API.IPagedResponse_OASSupport.Shared.Models.TranslationKey_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/API.IPagedResponse_OASSupport.Shared.Models.TranslationKey_"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/API.IPagedResponse_OASSupport.Shared.Models.TranslationKey_"
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+          description: API Error Response
+      summary: Get a paged response of TranslationKeys.
+      tags:
+        - TranslationKeys
+    post:
+      deprecated: false
+      description: No Documentation Found.
+      operationId: TranslationKeys_CreateTranslationKey
+      requestBody:
+        $ref: "#/components/requestBodies/OASSupport.Shared.Models.TranslationKey"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                format: int32
+                type: integer
+            application/xml:
+              schema:
+                format: int32
+                type: integer
+            text/json:
+              schema:
+                format: int32
+                type: integer
+            text/xml:
+              schema:
+                format: int32
+                type: integer
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+          description: API Error Response
+      summary: Create a translationKey object.
+      tags:
+        - TranslationKeys
+  "/api/v2/TranslationKeys/{ID}":
+    get:
+      deprecated: false
+      description: No Documentation Found.
+      operationId: TranslationKeys_GetTranslationKey
+      parameters:
+        - description: ""
+          in: path
+          name: ID
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OASSupport.Shared.Models.TranslationKey"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/OASSupport.Shared.Models.TranslationKey"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/OASSupport.Shared.Models.TranslationKey"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/OASSupport.Shared.Models.TranslationKey"
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+          description: API Error Response
+      summary: Get TranslationKey by ID
+      tags:
+        - TranslationKeys
+    put:
+      deprecated: false
+      description: No Documentation Found.
+      operationId: TranslationKeys_UpdateTranslationKey
+      parameters:
+        - description: ""
+          in: path
+          name: ID
+          required: true
+          schema:
+            format: int32
+            type: integer
+      requestBody:
+        $ref: "#/components/requestBodies/OASSupport.Shared.Models.TranslationKey"
+      responses:
+        "204":
+          description: No Content
+        default:
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/API.Models.ApiError"
+          description: API Error Response
+      summary: Update the StringID of the translationKey object.
+      tags:
+        - TranslationKeys
   /api/v2/TranslationRequests:
     get:
       deprecated: false
@@ -12822,6 +12998,24 @@ components:
               $ref: "#/components/schemas/GlobalResources.Shared.Models.TranslationSetAttribute"
             type: array
       required: true
+    OASSupport.Shared.Models.TranslationKey:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/OASSupport.Shared.Models.TranslationKey"
+        application/x-www-form-urlencoded:
+          schema:
+            $ref: "#/components/schemas/OASSupport.Shared.Models.TranslationKey"
+        application/xml:
+          schema:
+            $ref: "#/components/schemas/OASSupport.Shared.Models.TranslationKey"
+        text/json:
+          schema:
+            $ref: "#/components/schemas/OASSupport.Shared.Models.TranslationKey"
+        text/xml:
+          schema:
+            $ref: "#/components/schemas/OASSupport.Shared.Models.TranslationKey"
+      required: true
     UpdateSystem.Models.UpdateGroupSubscriptionArray:
       content:
         application/json:
@@ -13077,6 +13271,16 @@ components:
         Entities:
           items:
             $ref: "#/components/schemas/GlobalResources.Shared.Models.TranslationSet"
+          readOnly: true
+          type: array
+        Metadata:
+          $ref: "#/components/schemas/API.PagedResponseMetadata"
+      type: object
+    API.IPagedResponse_OASSupport.Shared.Models.TranslationKey_:
+      properties:
+        Entities:
+          items:
+            $ref: "#/components/schemas/OASSupport.Shared.Models.TranslationKey"
           readOnly: true
           type: array
         Metadata:
@@ -15346,6 +15550,23 @@ components:
         - TranslationSetId
         - StringID
         - LanguageID
+      type: object
+    OASSupport.Shared.Models.TranslationKey:
+      description: A translation key to map the relationship of keyNames, usually for ODX, and string Ids
+      properties:
+        ID:
+          description: The identifier for the translationKey. Read Only.
+          format: int32
+          type: integer
+        KeyName:
+          description: The key name of the item. One example is tkODX_HWIKM14R01
+          type: string
+        StringID:
+          description: Foreign key to StringDefinitionID
+          type: string
+      required:
+        - KeyName
+        - StringID
       type: object
     System.Object:
       properties: {}

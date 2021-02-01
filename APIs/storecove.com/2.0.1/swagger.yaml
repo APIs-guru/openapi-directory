@@ -19,7 +19,6 @@ info:
       url: https://www.storecove.com/api/v2/openapi.json
       version: "2.0"
   x-providerName: storecove.com
-  x-preferred: null
 consumes:
   - application/json
 produces:
@@ -67,6 +66,33 @@ paths:
               $ref: "#/definitions/ErrorModel"
             type: array
       summary: Submit a new invoice
+      tags:
+        - InvoiceSubmissions
+  /invoice_submissions/:guid/evidence:
+    get:
+      consumes:
+        - application/json
+      description: Get evidence for an InvoiceSubmission by GUID with corresponding status
+      operationId: show_invoice_submission_evidence
+      parameters:
+        - description: InvoiceSubmission GUID
+          format: uuid
+          in: path
+          name: guid
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/InvoiceSubmissionEvidence"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: Get InvoiceSubmission Evidence
       tags:
         - InvoiceSubmissions
   /invoice_submissions/preflight:
@@ -282,6 +308,72 @@ paths:
       summary: Delete Administration
       tags:
         - Administrations
+    get:
+      description: Get an Administration
+      operationId: get_administration
+      parameters:
+        - description: The id of the LegalEntity the Administration belongs to
+          format: int64
+          in: path
+          name: legal_entity_id
+          required: true
+          type: integer
+        - description: The id of the Administration
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Administration"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: Get Administration
+      tags:
+        - Administrations
+    patch:
+      description: Update an Administration
+      operationId: update_administration
+      parameters:
+        - description: The id of the LegalEntity the Administration belongs to
+          format: int64
+          in: path
+          name: legal_entity_id
+          required: true
+          type: integer
+        - description: The id of the Administration to be updated
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Administration to update
+          in: body
+          name: administration
+          required: true
+          schema:
+            $ref: "#/definitions/AdministrationUpdate"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Administration"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: Update Administration
+      tags:
+        - Administrations
   "/legal_entities/{legal_entity_id}/peppol_identifiers":
     post:
       consumes:
@@ -474,6 +566,12 @@ definitions:
         type: string
       party:
         $ref: "#/definitions/Party"
+      publicIdentifiers:
+        description: A list of legal and tax identifiers for this customer.
+        items:
+          $ref: "#/definitions/PublicIdentifier"
+        title: Public identifiers
+        type: array
     required:
       - party
     title: Customer
@@ -553,14 +651,12 @@ definitions:
         title: Legal etity
         type: integer
       package_version:
-        default: peppol_bis_v3
         description: The version of the package.
         enum:
           - peppol_bis_v3
         title: Package version
         type: string
       packaging:
-        default: ubl
         description: How to package the purchase invoice.
         enum:
           - ubl
@@ -612,14 +708,12 @@ definitions:
         title: Email
         type: string
       package_version:
-        default: peppol_bis_v3
         description: The version of the package.
         enum:
           - peppol_bis_v3
         title: Package version
         type: string
       packaging:
-        default: ubl
         description: How to package the purchase invoice.
         enum:
           - ubl
@@ -1175,6 +1269,12 @@ definitions:
         title: Quantity
         type: number
     type: object
+  EIdentifiers:
+    description: A list of electronic routing identifiers. These are the identifiers used on the Peppol network or for other destinations.
+    items:
+      $ref: "#/definitions/RoutingIdentifier"
+    title: Electronic identifiers
+    type: array
   ErrorModel:
     properties:
       details:
@@ -1275,13 +1375,19 @@ definitions:
         description: A reference to an order for this invoice, assigned by the buyer. Note that this often is a key field, since many receivers of invoices will use this field to automatically match the invoice to an order they placed. Many receivers refuse invoices that cannot be automatically matched, in particular government agencies. So it is highly recommended to fill this field whenever possible.
         title: Order reference
         type: string
+      paymentMeansArray:
+        description: An array of payment means (ways to pay the invoice).
+        items:
+          $ref: "#/definitions/PaymentMeans"
+        title: Payment Means Array
+        type: array
       paymentMeansBic:
-        description: The BIC (Swift) of the bank where the amount payable should be transferred to
+        description: DEPRECATED. Use paymentMeansArray. The BIC (Swift) of the bank where the amount payable should be transferred to
         pattern: ^[A-Z]{6}[2-9A-Z][0-9A-NP-Z]([A-Z0-9]{3}|X{3})?$
         title: BIC
         type: string
       paymentMeansCode:
-        description: How the invoice has been / will be paid. Use only online_payment_service (payment will be made or has been made by an online payment service), bank_card (e.g. debit card, credit card), direct_debit (the amount has been / will be taken out of the client's bank account), standing_agreement (an unspecified payment means known to both buyer and seller) or credit_transfer (the buyer will do / has done a bank transfer). The numeric codes are for legacy purposes, they should not be used.
+        description: DEPRECATED. Use paymentMeansArray. How the invoice has been / will be paid. Use only online_payment_service (payment will be made or has been made by an online payment service), bank_card (e.g. debit card, credit card), direct_debit (the amount has been / will be taken out of the client's bank account), standing_agreement (an unspecified payment means known to both buyer and seller) or credit_transfer (the buyer will do / has done a bank transfer). The numeric codes are for legacy purposes, they should not be used.
         enum:
           - online_payment_service
           - bank_card
@@ -1303,7 +1409,7 @@ definitions:
         title: Payment Means Code
         type: string
       paymentMeansIban:
-        description: The IBAN the amount payable should be transferred to
+        description: DEPRECATED. Use paymentMeansArray. The IBAN the amount payable should be transferred to
         title: IBAN
         type: string
       paymentMeansPaymentId:
@@ -4013,6 +4119,8 @@ definitions:
         $ref: "#/definitions/InvoiceData"
       invoiceRecipient:
         $ref: "#/definitions/InvoiceRecipient"
+        description: DEPRECATED. Use the routing and accountingCustomerParty.publicIdentifiers properties.
+        title: Invoice recipient
       legalEntityId:
         description: The id of the LegalEntity this invoice should be sent for.
         title: The LegalEntity id
@@ -4027,12 +4135,66 @@ definitions:
           - direct
         title: Mode
         type: string
+      routing:
+        $ref: "#/definitions/Routing"
+        description: Specifies where the invoice is to be sent. Can be electronic identifiers or email addresses.
+        title: Routing destinations
       supplierId:
         description: DEPRECATED.
         title: Supplier id
         type: integer
     title: Invoice submission
     type: object
+  InvoiceSubmissionActionEvidence:
+    properties:
+      receiver_response:
+        description: The response the receiver sent.
+        title: Receiver Response
+        type: string
+      transmission_datetime:
+        description: The DateTime of the transmission, as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z.
+        title: Transmission DateTime
+        type: string
+      transmission_result:
+        description: The result of this transmission.
+        enum:
+          - unknown
+          - accepted
+          - rejected
+          - send_error
+          - internal_error
+        title: Transmission Result
+        type: string
+      transmission_type:
+        description: How the document was transmitted.
+        enum:
+          - email
+          - edi
+          - as2
+          - peppol
+          - sandbox
+        title: Transmission Type
+        type: string
+      transmitted_document:
+        description: The document that was transmitted.
+        title: Transmitted Document
+        type: string
+  InvoiceSubmissionEvidence:
+    properties:
+      actions:
+        description: An array of actions taken to deliver the document.
+        items:
+          $ref: "#/definitions/InvoiceSubmissionActionEvidence"
+        title: Actions
+        type: array
+      guid:
+        description: The guid for the InvoiceSubmission.
+        title: GUID
+        type: string
+      status:
+        description: The overall status for this InvoiceSubmission.
+        title: Status
+        type: string
   InvoiceSubmissionResult:
     description: The result of an invoice submission
     properties:
@@ -4178,6 +4340,56 @@ definitions:
       - address
     title: Party
     type: object
+  PaymentMeans:
+    description: A PaymentMeans is a way to pay the invoice.
+    properties:
+      account:
+        description: The account number.
+        title: Account number
+        type: string
+      branche_code:
+        description: The bank branch code. Not required for IBAN numbers. Often referred to as Swift or Bic code.
+        title: Branch code
+        type: string
+      code:
+        description: >
+          How the invoice has been / will be paid. The code determines which type of PaymentMeans is used and which fields are mandatory.
+
+          ++++
+
+          <ul><li>online_payment_service, bank_card: Provide the last four digits of the card and optionally the account holder and network.</li><li>standing_agreement, credit_transfer: Provide the account number and optionally the account holder and branche_code.</li><li>direct_debit: SEPA direct debit. Provide the account number and optionally the mandate.</li><li>se_bankgiro, se_plusgiro: Swedish Bankgiro or Plusgiro. Provide account number and optionally the account holder.</li><li>aunz_npp: New Payments Platform. Provide account number and optionally the account holder.</li><li>sg_giro: Singapore GIRO-system (direct debit). Do not provide any fields.</li><li>sg_card: Singapore CreditCard payment. Do not provide any fields.</li><li>sg_paynow: Singapore PayNow Corporate. Provide the UEN in the account field.</li></ul>
+
+          ++++
+        enum:
+          - online_payment_service
+          - bank_card
+          - standing_agreement
+          - credit_transfer
+          - direct_debit
+          - se_bankgiro
+          - se_plusgiro
+          - aunz_npp
+          - sg_giro
+          - sg_card
+          - sg_paynow
+        title: Code
+        type: string
+      holder:
+        description: The name of the account holder.
+        title: Account holder
+        type: string
+      mandate:
+        description: The direct debit mandate code.
+        title: Mandate
+        type: string
+      network:
+        description: The name of the card network, e.g. VISA.
+        title: Network
+        type: string
+    required:
+      - code
+    title: PaymentMeans
+    type: object
   PeppolIdentifier:
     properties:
       identifier:
@@ -4253,7 +4465,7 @@ definitions:
     title: Public identifier
     type: object
   PublicIdentifiers:
-    description: A list of public identifiers that uniquely identifiy this customer.
+    description: A list of public identifiers that uniquely identify this customer.
     items:
       $ref: "#/definitions/PublicIdentifier"
     title: Public identifiers
@@ -4356,9 +4568,9 @@ definitions:
                 description: The name of the deliveyr party.
                 title: Name
                 type: string
-            title: Party
+            title: PurchaseInvoice Party
             type: object
-        title: Delivery
+        title: PurchaseInvoice Delivery
         type: object
       document:
         description: DEPRECTATED. Use the new atatchments array.
@@ -4731,7 +4943,7 @@ definitions:
             description: The tax type.
             title: Type
             type: string
-        title: Tax
+        title: PurchaseInvoiceTaxElement
         type: object
   PurchaseInvoiceTaxSubtotal:
     properties:
@@ -4792,6 +5004,39 @@ definitions:
         type: string
     title: VAT - DEPRECATED
     type: object
+  Routing:
+    description: The different ways to send the invoice to the recipient. The publicIdentifiers are used to send via the Peppol network, if the recipient is not registered on the Peppol network, the invoice will be sent to the email addresses in the emails property. This property is only mandatory when sending the invoice data using the <<_openapi_invoice>> property, not when sending using the <<_openapi_invoicedata>> property, in which case this information will be extracted from the <<_openapi_invoicedata>> object. If you do specify an <<_openapi_invoicerecipient>> object and an <<_openapi_invoicedata>> object, the data from the two will be merged.
+    properties:
+      eIdentifiers:
+        $ref: "#/definitions/EIdentifiers"
+        description: The electronic identifiers for this invoice recipient. These are the identifiers used on the Peppol network.
+        title: Electronic Identifiers
+      emails:
+        description: The email addresses the invoice should be sent to if none of the other identifiers can be used
+        items:
+          description: The email address the invoice should be sent to
+          format: email
+          title: Email
+          type: string
+        title: Fallback email
+        type: array
+    title: Recipient ids
+    type: object
+  RoutingIdentifier:
+    description: An electronic routing identifier.
+    properties:
+      id:
+        description: The actual identifier.
+        minLength: 1
+        title: Identifier
+        type: string
+      scheme:
+        description: The scheme of the identifier. See <<_peppol_schemes_list>> for a list.
+        minLength: 3
+        title: Scheme
+        type: string
+    title: Routing Identifier
+    type: object
   SupplierParty:
     description: A party that can send invoices
     properties:
@@ -4846,8 +5091,8 @@ definitions:
       country:
         $ref: "#/definitions/Country"
       percentage:
-        description: The percentage VAT. This should be a valid VAT percentage in the country at the time of the issueDate of this invoice. Mandatory if taxSystem == 'tax_line_percentages'
-        title: Percentage VAT
+        description: The percentage Tax. This should be a valid Tax percentage in the country at the time of the issueDate of this invoice. Mandatory if taxSystem == 'tax_line_percentages'
+        title: Percentage Tax
         type: number
     required:
       - country

@@ -249,7 +249,6 @@ info:
       url: https://docs.graphhopper.com/openapi.json
       version: "3.0"
   x-providerName: graphhopper.com
-  x-preferred: null
 security:
   - api_key: []
 tags:
@@ -751,6 +750,12 @@ paths:
 
             This provider returns results of our internal geocoding engine, as described above.
 
+            In addition to the above documented parameters the following parameters are possible:
+
+            * `bbox` - the expected format is `minLon,minLat,maxLon,maxLat`
+
+            * `osm_tag` - you can filter `key:value` or exclude places with certain OpenStreetMap tags `!key:value`. E.g. `osm_tag=tourism:museum` or just the key `osm_tag=tourism`. To exclude multiple tags you add multiple `osm_tag` parameters.
+
 
             #### Nominatim (`provider=nominatim`)
 
@@ -761,11 +766,9 @@ paths:
             In addition to the above documented parameters Nominatim allows to use the following parameters, which can be used as documented [here](https://github.com/openstreetmap/Nominatim/blob/master/docs/api/Search.md#parameters):
 
 
-            * viewbox
+            * `viewbox` - the expected format is `minLon,minLat,maxLon,maxLat`
 
-            * viewboxlbrt
-
-            * bounded
+            * `bounded` - If 1 and a viewbox is given, restrict the result to items contained within that viewbox. Default is 0.
 
 
             #### Gisgraphy (`provider=gisgraphy`)
@@ -783,9 +786,9 @@ paths:
             In addition to the above documented parameters Gisgraphy allows to use the following parameters, which can be used as documented [here](https://www.gisgraphy.com/documentation/user-guide.php#geocodingservice):
 
 
-            * radius
+            * `radius` - radius in meters
 
-            * country
+            * `country` - restrict search for the specified country. The value must be the ISO 3166 Alpha 2 code of the country.
 
 
             #### NetToolKit (`provider=nettoolkit`)
@@ -794,7 +797,7 @@ paths:
             This provider returns results from the NetToolKit provider which is specialized for US addresses and provides a wrapper around Nominatim for other addresses. You can try it [here](https://www.nettoolkit.com/geo/demo).
 
 
-            The following additional NetToolKit parameters are supported (read [here](https://www.nettoolkit.com/docs/geo) for more details):
+            The following additional NetToolKit parameters are supported (read [here](https://www.nettoolkit.com/docs/geo/geocoding) for more details):
 
             - `source`: User can choose which source provider to geocode the address, this value is "NetToolKit" by default
 
@@ -813,9 +816,9 @@ paths:
             In addition to the above documented parameters OpenCage Data allows to use the following parameters, which can be used as documented [here](https://geocoder.opencagedata.com/api#forward-opt):
 
 
-            * countrycode
+            * countrycode - The country code is a two letter code as defined by the ISO 3166-1 Alpha 2 standard. E.g. gb for the United Kingdom, fr for France, us for United States. 
 
-            * bounds            
+            * bounds - the expected format is `minLon,minLat,maxLon,maxLat`
           in: query
           name: provider
           schema:

@@ -14,7 +14,6 @@ info:
       url: https://api.elmah.io/swagger/docs/v3
       version: "3.0"
   x-providerName: elmah.io
-  x-preferred: null
 security:
   - api_key: []
 paths:
@@ -781,6 +780,12 @@ components:
         result:
           description: The result of this heartbeat. Can be "Healthy, "Degraded", or "Unhealthy". Defaults to "Healthy"
           type: string
+        took:
+          description: "Optional long for specifying how many milliseconds it took to execute the task resulting in this heartbeat. This can be used to get a better overview\r
+
+            of how long a scheduled task or service is running or to figure out if the grace period should be increased."
+          format: int64
+          type: integer
         version:
           description: "Optional string to identify which version of your application logged this message. If not specified, any errors, warnings, or information messages will get\r
 

@@ -45,7 +45,7 @@ paths:
 
             Multiple search terms are combined with an AND by default.  
 
-            Examples: `"moustache"`, `"cats AND dogs"`,  `"-paperspast"`, `"ted*"`
+            Examples: `"moustache"`, `"Wanganui OR Whanganui"`,  `"-paperspast"`, `"ted*"`
           in: query
           name: text
           schema:
@@ -251,6 +251,7 @@ paths:
             Used to control the order of the results in conjunction with the *direction* field.
               - *syndication_date* - is the creation date of the record within DigitalNZ, ie. when DigitalNZ first harvested the record.
               - *date* - is the date metadata (if present) associated with the record.  
+
 
                 
             To sort the search results with newest records at the top use: "&sort=syndication_date&direction=desc"

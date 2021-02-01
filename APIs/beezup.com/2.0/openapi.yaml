@@ -104,7 +104,6 @@ info:
       url: https://api-docs.beezup.com/swagger.json
       version: "3.0"
   x-providerName: beezup.com
-  x-preferred: null
 externalDocs:
   description: Find the documentation for BeezUP's API here
   url: https://api-docs.beezup.com/
@@ -724,10 +723,9 @@ paths:
           description: Requested Order could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "[PLANNED] Get an Order's harvest and change history"
+      summary: Get an Order's harvest and change history
       tags:
         - Marketplaces - Orders V3 - Order
-      x-releaseStatus: PLANNED
   "/orders/v3/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/history/{orderChangeExecutionUUID}":
     get:
       deprecated: false
@@ -791,10 +789,9 @@ paths:
           description: Requested Order could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: "[PLANNED] Set an Order's merchant information"
+      summary: Set an Order's merchant information
       tags:
         - Marketplaces - Orders V3 - Order
-      x-releaseStatus: PLANNED
   "/orders/v3/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/{changeOrderType}":
     post:
       deprecated: false
