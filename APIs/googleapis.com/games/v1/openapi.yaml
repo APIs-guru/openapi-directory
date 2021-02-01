@@ -2656,6 +2656,10 @@ components:
     ResolveSnapshotHeadRequest:
       description: Request for ResolveSnapshotHead RPC.
       properties:
+        maxConflictsPerSnapshot:
+          description: The maximum number of SnapshotRevision resources for `conflictingRevisions` to return per SnapshotExtended resource in the response. For any response, the actual number of resources returned may be less than specified by `maxConflictsPerSnapshot`. The value provided should be greater or equal to 0. If no value is provided, the server will use a sensible default.
+          format: int32
+          type: integer
         resolutionPolicy:
           description: Required. The automatic resolution policy. All conflicts are resolved in chronological order, starting from the/ least recent. If the comparison metric is equal for the tentative head and the conflict, the head wins.
           enum:

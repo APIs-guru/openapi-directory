@@ -655,6 +655,21 @@ components:
             - ENABLE
             - DISABLE
           type: string
+        istioServiceIdentityAdmissionRules:
+          additionalProperties:
+            $ref: "#/components/schemas/AdmissionRule"
+          description: "Optional. Per-istio-service-identity admission rules. Istio service identity spec format: spiffe:///ns//sa/ or /ns//sa/ e.g. spiffe://example.com/ns/test-ns/sa/default"
+          type: object
+        kubernetesNamespaceAdmissionRules:
+          additionalProperties:
+            $ref: "#/components/schemas/AdmissionRule"
+          description: "Optional. Per-kubernetes-namespace admission rules. K8s namespace spec format: [a-z.-]+, e.g. 'some-namespace'"
+          type: object
+        kubernetesServiceAccountAdmissionRules:
+          additionalProperties:
+            $ref: "#/components/schemas/AdmissionRule"
+          description: "Optional. Per-kubernetes-service-account admission rules. Service account spec format: `namespace:serviceaccount`. e.g. 'test-ns:default'"
+          type: object
         name:
           description: Output only. The resource name, in the format `projects/*/policy`. There is at most one policy per project.
           readOnly: true

@@ -459,6 +459,11 @@ components:
           description: The deadline by which the worker must request an extension. The backend will allow for network transmission time and other delays, but the worker must attempt to transmit the extension request no later than the deadline.
           format: google-datetime
           type: string
+        features:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Feature configuration for the operation.
+          type: object
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.

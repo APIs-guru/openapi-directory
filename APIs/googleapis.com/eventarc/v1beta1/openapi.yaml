@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://eventarc.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: eventarc
-  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/eventarc
 tags:
@@ -834,10 +834,11 @@ components:
       description: Represents a Pub/Sub transport.
       properties:
         subscription:
-          description: The name of the Pub/Sub subscription created and managed by Eventarc system as a transport for the event delivery. The value must be in the form of `projects/{PROJECT_ID}/subscriptions/{SUBSCRIPTION_NAME}`.
+          description: "Output only. The name of the Pub/Sub subscription created and managed by Eventarc system as a transport for the event delivery. Format: `projects/{PROJECT_ID}/subscriptions/{SUBSCRIPTION_NAME}`."
+          readOnly: true
           type: string
         topic:
-          description: The name of the Pub/Sub topic created and managed by Eventarc system as a transport for the event delivery. The value must be in the form of `projects/{PROJECT_ID}/topics/{TOPIC_NAME}`.
+          description: "Optional. The name of the Pub/Sub topic created and managed by Eventarc system as a transport for the event delivery. Format: `projects/{PROJECT_ID}/topics/{TOPIC_NAME}`. You may set an existing topic for triggers of the type `google.cloud.pubsub.topic.v1.messagePublished` only. The topic you provide here will not be deleted by Eventarc at trigger deletion."
           type: string
       type: object
     SetIamPolicyRequest:
@@ -892,7 +893,7 @@ components:
       properties:
         pubsub:
           $ref: "#/components/schemas/Pubsub"
-          description: The Pub/Sub topic and subscription that maybe created by Eventarc as delivery intermediary.
+          description: The Pub/Sub topic and subscription used by Eventarc as delivery intermediary.
       type: object
     Trigger:
       description: A representation of the trigger resource.
@@ -922,7 +923,7 @@ components:
           type: string
         transport:
           $ref: "#/components/schemas/Transport"
-          description: Output only. In order to deliver messages, Eventarc may configure other GCP products as transport intermediary. This field returns a reference to that transport intermediary. This information can be used for debugging purposes.
+          description: Output only. In order to deliver messages, Eventarc may use other GCP products as transport intermediary. This field contains a reference to that transport intermediary. This information can be used for debugging purposes.
           readOnly: true
         updateTime:
           description: Output only. The last-modified time.

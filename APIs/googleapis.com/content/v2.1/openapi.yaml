@@ -4652,7 +4652,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/content/v2.1/{merchantId}/productstatuses/{productId}/repricingreports":
     get:
-      description: Lists the metrics report for a given Repricing product. Reports of the last 3 days may not be complete.
+      description: Lists the metrics report for a given Repricing product.
       operationId: content.productstatuses.repricingreports.list
       parameters:
         - description: Required. Id of the merchant who owns the Repricing rule.
@@ -4667,7 +4667,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Gets Repricing reports on and before this date in the merchant's timezone. You can only retrieve data up to 3 days ago (default) or earlier. Format is YYYY-MM-DD.
+        - description: Gets Repricing reports on and before this date in the merchant's timezone. You can only retrieve data up to 7 days ago (default) or earlier. Format is YYYY-MM-DD.
           in: query
           name: endDate
           schema:
@@ -4687,7 +4687,7 @@ paths:
           name: ruleId
           schema:
             type: string
-        - description: Gets Repricing reports on and after this date in the merchant's timezone, up to one year ago. Do not use a start date later than 3 days ago (default). Format is YYYY-MM-DD.
+        - description: Gets Repricing reports on and after this date in the merchant's timezone, up to one year ago. Do not use a start date later than 7 days ago (default). Format is YYYY-MM-DD.
           in: query
           name: startDate
           schema:
@@ -5171,7 +5171,7 @@ paths:
         - repricingrules
   "/content/v2.1/{merchantId}/repricingrules/{ruleId}/repricingreports":
     get:
-      description: Lists the metrics report for a given Repricing rule. Reports of the last 3 days may not be complete.
+      description: Lists the metrics report for a given Repricing rule.
       operationId: content.repricingrules.repricingreports.list
       parameters:
         - description: Required. Id of the merchant who owns the Repricing rule.
@@ -5186,7 +5186,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Gets Repricing reports on and before this date in the merchant's timezone. You can only retrieve data up to 3 days ago (default) or earlier. Format: YYYY-MM-DD."
+        - description: "Gets Repricing reports on and before this date in the merchant's timezone. You can only retrieve data up to 7 days ago (default) or earlier. Format: YYYY-MM-DD."
           in: query
           name: endDate
           schema:
@@ -5201,7 +5201,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: "Gets Repricing reports on and after this date in the merchant's timezone, up to one year ago. Do not use a start date later than 3 days ago (default). Format: YYYY-MM-DD."
+        - description: "Gets Repricing reports on and after this date in the merchant's timezone, up to one year ago. Do not use a start date later than 7 days ago (default). Format: YYYY-MM-DD."
           in: query
           name: startDate
           schema:

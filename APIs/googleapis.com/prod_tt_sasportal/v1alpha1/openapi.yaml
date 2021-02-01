@@ -48,7 +48,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: A pagination token returned from a previous call to ListCustomers method that indicates where this listing should continue from.
+        - description: A pagination token returned from a previous call to ListCustomers that indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -93,7 +93,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Generates a secret to be used with the ValidateInstaller method
+      description: Generates a secret to be used with the ValidateInstaller.
       operationId: prod_tt_sasportal.installer.generateSecret
       requestBody:
         content:
@@ -486,12 +486,17 @@ paths:
           required: true
           schema:
             type: string
+        - description: 'The filter expression. The filter should have the following format: "DIRECT_CHILDREN" or format: "direct_children". The filter is case insensitive. If empty, then no deployments are filtered.'
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: The maximum number of deployments to return in the response.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A pagination token returned from a previous call to ListDeployments method that indicates where this listing should continue from.
+        - description: A pagination token returned from a previous call to ListDeployments that indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -562,7 +567,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The filter expression. The filter should have one of the following formats: "sn=123454" or "display_name=MyDevice". sn corresponds to serial_number of the device. The filter is case insensitive.'
+        - description: 'The filter expression. The filter should have one of the following formats: "sn=123454" or "display_name=MyDevice". sn corresponds to serial number of the device. The filter is case insensitive.'
           in: query
           name: filter
           schema:
@@ -685,12 +690,17 @@ paths:
           required: true
           schema:
             type: string
+        - description: 'The filter expression. The filter should have the following format: "DIRECT_CHILDREN" or format: "direct_children". The filter is case insensitive. If empty, then no nodes are filtered.'
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: The maximum number of nodes to return in the response.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A pagination token returned from a previous call to ListNodes method that indicates where this listing should continue from.
+        - description: A pagination token returned from a previous call to ListNodes that indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -839,14 +849,14 @@ components:
           type: string
       type: object
     SasPortalCreateSignedDeviceRequest:
-      description: Request for CreateSignedDevice method.
+      description: Request for CreateSignedDevice.
       properties:
         encodedDevice:
-          description: Required. JSON Web Token signed using a CPI private key. Payload must be the JSON encoding of the [Device]. The user_id field must be set.
+          description: Required. JSON Web Token signed using a CPI private key. Payload must be the JSON encoding of the device. The user_id field must be set.
           format: byte
           type: string
         installerId:
-          description: Required. Unique installer id (cpiId) from the Certified Professional Installers database.
+          description: Required. Unique installer id (CPI ID) from the Certified Professional Installers database.
           type: string
       type: object
     SasPortalCustomer:
@@ -891,7 +901,7 @@ components:
           readOnly: true
           type: string
         sasUserIds:
-          description: User id used by the devices belonging to this deployment. Each deployment should be associated with one unique user_id.
+          description: User ID used by the devices belonging to this deployment. Each deployment should be associated with one unique user ID.
           items:
             type: string
           type: array
@@ -937,7 +947,7 @@ components:
       description: Information about the device's air interface.
       properties:
         radioTechnology:
-          description: This field specifies the radio access technology that is used for the CBSD. Conditional
+          description: Conditional. This field specifies the radio access technology that is used for the CBSD.
           enum:
             - RADIO_TECHNOLOGY_UNSPECIFIED
             - E_UTRA
@@ -950,7 +960,7 @@ components:
             - TARANA_WIRELESS
           type: string
         supportedSpec:
-          description: This field is related to the radioTechnology field and provides the air interface specification that the CBSD is compliant with at the time of registration. Optional
+          description: Optional. This field is related to the `radioTechnology` and provides the air interface specification that the CBSD is compliant with at the time of registration.
           type: string
       type: object
     SasPortalDeviceConfig:
@@ -973,7 +983,7 @@ components:
           $ref: "#/components/schemas/SasPortalInstallationParams"
           description: Installation parameters for the device.
         isSigned:
-          description: Output-only. Whether the configuration has been signed by a CPI.
+          description: Output only. Whether the configuration has been signed by a CPI.
           type: boolean
         measurementCapabilities:
           description: Measurement reporting capabilities of the device.
@@ -995,7 +1005,7 @@ components:
             - FINAL
           type: string
         updateTime:
-          description: Output-only. The last time the device configuration was edited.
+          description: Output only. The last time the device configuration was edited.
           format: google-datetime
           type: string
         userId:
@@ -1023,7 +1033,7 @@ components:
           description: Grant Id.
           type: string
         maxEirp:
-          description: Maximum Equivalent Isotropically Radiated Power (EIRP) permitted by the grant. The maximum EIRP is in units of dBm/MHz. The value of maxEirp represents the average (RMS) EIRP that would be measured by the procedure defined in FCC part 96.41(e)(3).
+          description: Maximum Equivalent Isotropically Radiated Power (EIRP) permitted by the grant. The maximum EIRP is in units of dBm/MHz. The value of `maxEirp` represents the average (RMS) EIRP that would be measured by the procedure defined in FCC part 96.41(e)(3).
           format: double
           type: number
         moveList:
@@ -1097,14 +1107,14 @@ components:
           type: number
       type: object
     SasPortalGenerateSecretRequest:
-      description: Request for GenerateSecret method] [spectrum.sas.portal.v1alpha1.DeviceManager.GenerateSecret].
+      description: Request for GenerateSecret.
       properties: {}
       type: object
     SasPortalGenerateSecretResponse:
-      description: Response for GenerateSecret method.
+      description: Response for GenerateSecret.
       properties:
         secret:
-          description: The secret generated by the string and used by [ValidateInstaller] method.
+          description: The secret generated by the string and used by ValidateInstaller.
           type: string
       type: object
     SasPortalGetPolicyRequest:
@@ -1144,7 +1154,7 @@ components:
           format: int32
           type: integer
         height:
-          description: Device antenna height in meters. When the heightType parameter value is "AGL", the antenna height should be given relative to ground level. When the heightType parameter value is "AMSL", it is given with respect to WGS84 datum.
+          description: Device antenna height in meters. When the `heightType` parameter value is "AGL", the antenna height should be given relative to ground level. When the `heightType` parameter value is "AMSL", it is given with respect to WGS84 datum.
           format: double
           type: number
         heightType:
@@ -1159,14 +1169,14 @@ components:
           format: double
           type: number
         indoorDeployment:
-          description: "Whether the device antenna is indoor or not. True: indoor. False: outdoor."
+          description: "Whether the device antenna is indoor or not. `true`: indoor. `false`: outdoor."
           type: boolean
         latitude:
           description: Latitude of the device antenna location in degrees relative to the WGS 84 datum. The allowed range is from -90.000000 to +90.000000. Positive values represent latitudes north of the equator; negative values south of the equator.
           format: double
           type: number
         longitude:
-          description: Longitude of the device antenna location. in degrees relative to the WGS 84 datum. The allowed range is from -180.000000 to +180.000000. Positive values represent longitudes east of the prime meridian; negative values west of the prime meridian.
+          description: Longitude of the device antenna location in degrees relative to the WGS 84 datum. The allowed range is from -180.000000 to +180.000000. Positive values represent longitudes east of the prime meridian; negative values west of the prime meridian.
           format: double
           type: number
         verticalAccuracy:
@@ -1183,11 +1193,11 @@ components:
             $ref: "#/components/schemas/SasPortalCustomer"
           type: array
         nextPageToken:
-          description: A pagination token returned from a previous call to ListCustomers method that indicates from where listing should continue. If the field is missing or empty, it means there are no more customers.
+          description: A pagination token returned from a previous call to ListCustomers that indicates from where listing should continue. If the field is missing or empty, it means there are no more customers.
           type: string
       type: object
     SasPortalListDeploymentsResponse:
-      description: Response for ListDeployments method.
+      description: Response for ListDeployments.
       properties:
         deployments:
           description: The deployments that match the request.
@@ -1195,11 +1205,11 @@ components:
             $ref: "#/components/schemas/SasPortalDeployment"
           type: array
         nextPageToken:
-          description: A pagination token returned from a previous call to ListDeployments method that indicates from where listing should continue. If the field is missing or empty, it means there is no more deployments.
+          description: A pagination token returned from a previous call to ListDeployments that indicates from where listing should continue. If the field is missing or empty, it means there is no more deployments.
           type: string
       type: object
     SasPortalListDevicesResponse:
-      description: Response for ListDevices method.
+      description: Response for ListDevices.
       properties:
         devices:
           description: The devices that match the request.
@@ -1207,14 +1217,14 @@ components:
             $ref: "#/components/schemas/SasPortalDevice"
           type: array
         nextPageToken:
-          description: A pagination token returned from a previous call to ListDevices method that indicates from where listing should continue. If the field is missing or empty, it means there is no more devices.
+          description: A pagination token returned from a previous call to ListDevices that indicates from where listing should continue. If the field is missing or empty, it means there is no more devices.
           type: string
       type: object
     SasPortalListNodesResponse:
-      description: Response for ListNodes method.
+      description: Response for ListNodes.
       properties:
         nextPageToken:
-          description: A pagination token returned from a previous call to ListNodes method that indicates from where listing should continue. If the field is missing or empty, it means there is no more nodes.
+          description: A pagination token returned from a previous call to ListNodes that indicates from where listing should continue. If the field is missing or empty, it means there is no more nodes.
           type: string
         nodes:
           description: The nodes that match the request.
@@ -1223,24 +1233,24 @@ components:
           type: array
       type: object
     SasPortalMoveDeploymentRequest:
-      description: Request for MoveDeployment method.
+      description: Request for MoveDeployment.
       properties:
         destination:
-          description: Required. The name of the new parent resource Node or Customer to reparent the deployment under.
+          description: Required. The name of the new parent resource node or customer to reparent the deployment under.
           type: string
       type: object
     SasPortalMoveDeviceRequest:
-      description: Request for MoveDevice method.
+      description: Request for MoveDevice.
       properties:
         destination:
-          description: Required. The name of the new parent resource (Node or Customer) to reparent the device under.
+          description: Required. The name of the new parent resource node [spectrum.sas.portal.v1alpha1.Node] or customer to reparent the device under.
           type: string
       type: object
     SasPortalMoveNodeRequest:
-      description: Request for MoveNode method.
+      description: Request for MoveNode.
       properties:
         destination:
-          description: Required. The name of the new parent resource node or Customer) to reparent the node under.
+          description: Required. The name of the new parent resource node or customer to reparent the node under.
           type: string
       type: object
     SasPortalNode:
@@ -1285,11 +1295,12 @@ components:
       description: Defines an access control policy to the resources.
       properties:
         assignments:
+          description: List of assignments
           items:
             $ref: "#/components/schemas/SasPortalAssignment"
           type: array
         etag:
-          description: "The [etag] is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the [etag] in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An [etag] is returned in the response to [GetPolicy], and systems are expected to put that etag in the request to [SetPolicy] to ensure that their change will be applied to the same version of the policy. If no [etag] is provided in the call to [SetPolicy], then the existing policy is overwritten blindly."
+          description: "The etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the etag in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An etag is returned in the response to GetPolicy, and systems are expected to put that etag in the request to SetPolicy to ensure that their change will be applied to the same version of the policy. If no etag is provided in the call to GetPolicy, then the existing policy is overwritten blindly."
           format: byte
           type: string
       type: object
@@ -1304,7 +1315,7 @@ components:
           type: string
       type: object
     SasPortalSignDeviceRequest:
-      description: Request for SignDevice method.
+      description: Request for SignDevice.
       properties:
         device:
           $ref: "#/components/schemas/SasPortalDevice"
@@ -1350,7 +1361,7 @@ components:
           type: array
       type: object
     SasPortalUpdateSignedDeviceRequest:
-      description: Request for UpdateSignedDevice method.
+      description: Request for UpdateSignedDevice.
       properties:
         encodedDevice:
           description: Required. The JSON Web Token signed using a CPI private key. Payload must be the JSON encoding of the device. The user_id field must be set.
@@ -1361,20 +1372,20 @@ components:
           type: string
       type: object
     SasPortalValidateInstallerRequest:
-      description: Request for ValidateInstaller method.
+      description: Request for ValidateInstaller.
       properties:
         encodedSecret:
           description: Required. JSON Web Token signed using a CPI private key. Payload must include a "secret" claim whose value is the secret.
           type: string
         installerId:
-          description: Required. Unique installer id (cpiId) from the Certified Professional Installers database.
+          description: Required. Unique installer id (CPI ID) from the Certified Professional Installers database.
           type: string
         secret:
-          description: Required. Secret returned by the GenerateSecret method.
+          description: Required. Secret returned by the GenerateSecret.
           type: string
       type: object
     SasPortalValidateInstallerResponse:
-      description: Response for ValidateInstaller method] [spectrum.sas.portal.v1alpha1.DeviceManager.ValidateInstaller].
+      description: Response for ValidateInstaller.
       properties: {}
       type: object
   securitySchemes:

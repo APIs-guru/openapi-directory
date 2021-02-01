@@ -687,7 +687,7 @@ components:
             $ref: "#/components/schemas/Asset"
           type: array
         nextPageToken:
-          description: Token to retrieve the next page of results. Set to empty if there are no remaining results.
+          description: Token to retrieve the next page of results. It expires 72 hours after the page token for the first page is generated. Set to empty if there are no remaining results.
           type: string
         readTime:
           description: Time the snapshot was taken.

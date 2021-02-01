@@ -2381,6 +2381,30 @@ components:
           $ref: "#/components/schemas/MembershipRole"
           description: The `MembershipRole`s to be updated. Only `MEMBER` `MembershipRoles` can currently be updated. May only contain a `MembershipRole` with `name` `MEMBER`.
       type: object
+    UserInvitation:
+      description: UserInvitation to join a Google Workspace organization.
+      properties:
+        mailsSentCount:
+          description: Number of invitation emails sent to the user.
+          format: int64
+          type: string
+        name:
+          description: Shall be of the form `customers/{customer}/userinvitations/{user_email_address}`
+          type: string
+        state:
+          description: State of the `UserInvitation`.
+          enum:
+            - STATE_UNSPECIFIED
+            - NOT_YET_SENT
+            - INVITED
+            - ACCEPTED
+            - DECLINED
+          type: string
+        updateTime:
+          description: Time when the `UserInvitation` was last updated.
+          format: google-datetime
+          type: string
+      type: object
     WipeDeviceRequest:
       description: Request message for wiping all data on the device.
       properties:

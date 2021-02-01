@@ -136,6 +136,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 50
+            minimum: 0
             type: integer
         - in: query
           name: mine
@@ -786,6 +788,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 50
+            minimum: 0
             type: integer
         - description: Return the ids of channels owned by the authenticated user.
           in: query
@@ -933,6 +937,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 100
+            minimum: 1
             type: integer
         - description: "Limits the returned comment threads to those with the specified moderation status. Not compatible with the 'id' filter. Valid values: published, heldForReview, likelySpam."
           in: query
@@ -1115,6 +1121,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 100
+            minimum: 1
             type: integer
         - description: The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
           in: query
@@ -1514,6 +1522,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 50
+            minimum: 0
             type: integer
         - in: query
           name: mine
@@ -2002,6 +2012,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 2000
+            minimum: 200
             type: integer
         - description: The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identify other pages that could be retrieved.
           in: query
@@ -2012,6 +2024,8 @@ paths:
           in: query
           name: profileImageSize
           schema:
+            maximum: 720
+            minimum: 16
             type: integer
       responses:
         "200":
@@ -2132,6 +2146,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 50
+            minimum: 0
             type: integer
         - description: The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
           in: query
@@ -2270,6 +2286,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 50
+            minimum: 0
             type: integer
         - in: query
           name: mine
@@ -2447,6 +2465,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 1000
+            minimum: 0
             type: integer
         - description: Parameter that specifies which channel members to return.
           in: query
@@ -2588,6 +2608,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 50
+            minimum: 0
             type: integer
         - description: "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
           in: query
@@ -2809,6 +2831,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 50
+            minimum: 0
             type: integer
         - description: Return the playlists owned by the authenticated user.
           in: query
@@ -3033,6 +3057,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 50
+            minimum: 0
             type: integer
         - description: "*Note:* This parameter is intended exclusively for YouTube content partners. The *onBehalfOfContentOwner* parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner."
           in: query
@@ -3295,6 +3321,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 50
+            minimum: 0
             type: integer
         - description: Flag for returning the subscriptions of the authenticated user.
           in: query
@@ -3438,6 +3466,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 50
+            minimum: 1
             type: integer
         - description: The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
           in: query
@@ -3914,16 +3944,22 @@ paths:
         - in: query
           name: maxHeight
           schema:
+            maximum: 8192
+            minimum: 72
             type: integer
         - description: The *maxResults* parameter specifies the maximum number of items that should be returned in the result set. *Note:* This parameter is supported for use in conjunction with the myRating and chart parameters, but it is not supported for use in conjunction with the id parameter.
           in: query
           name: maxResults
           schema:
+            maximum: 50
+            minimum: 1
             type: integer
         - description: Return the player with maximum height specified in
           in: query
           name: maxWidth
           schema:
+            maximum: 8192
+            minimum: 72
             type: integer
         - description: Return videos liked/disliked by the authenticated user. Does not support RateType.RATED_TYPE_NONE.
           in: query
@@ -5014,7 +5050,8 @@ components:
           description: The group ID associated with the activity. A group ID identifies user events that are associated with the same user and resource. For example, if a user rates a video and marks the same video as a favorite, the entries for those events would have the same group ID in the user's activity feed. In your user interface, you can avoid repetition by grouping events with the same groupId value.
           type: string
         publishedAt:
-          description: The date and time that the video was uploaded. The value is specified in ISO 8601 format.
+          description: The date and time that the video was uploaded.
+          format: date-time
           type: string
         thumbnails:
           $ref: "#/components/schemas/ThumbnailDetails"
@@ -5114,7 +5151,8 @@ components:
           description: The language of the caption track. The property value is a BCP-47 language tag.
           type: string
         lastUpdated:
-          description: The date and time when the caption track was last updated. The value is specified in ISO 8601 format.
+          description: The date and time when the caption track was last updated.
+          format: date-time
           type: string
         name:
           description: The name of the caption track. The name is intended to be visible to the user as an option during playback.
@@ -5293,7 +5331,8 @@ components:
           description: The ID of the content owner linked to the channel.
           type: string
         timeLinked:
-          description: The date and time of when the channel was linked to the content owner. The value is specified in ISO 8601 format.
+          description: The date and time when the channel was linked to the content owner.
+          format: date-time
           type: string
       type: object
     ChannelConversionPing:
@@ -5577,7 +5616,8 @@ components:
           $ref: "#/components/schemas/ChannelLocalization"
           description: Localized title and description, read-only.
         publishedAt:
-          description: The date and time that the channel was created. The value is specified in < a href="//www.w3.org/TR/NOTE-datetime">ISO 8601 format.
+          description: The date and time that the channel was created.
+          format: date-time
           type: string
         thumbnails:
           $ref: "#/components/schemas/ThumbnailDetails"
@@ -5741,7 +5781,8 @@ components:
           description: The unique id of the parent comment, only set for replies.
           type: string
         publishedAt:
-          description: The date and time when the comment was orignally published. The value is specified in ISO 8601 format.
+          description: The date and time when the comment was originally published.
+          format: date-time
           type: string
         textDisplay:
           description: The comment's text. The format is either plain text or HTML dependent on what has been requested. Even the plain text representation may differ from the text originally posted in that it may replace video links with video titles etc.
@@ -5750,7 +5791,8 @@ components:
           description: The comment's original raw text as initially posted or last updated. The original text will only be returned if it is accessible to the viewer, which is only guaranteed if the viewer is the comment's author.
           type: string
         updatedAt:
-          description: The date and time when was last updated . The value is specified in ISO 8601 format.
+          description: The date and time when the comment was last updated.
+          format: date-time
           type: string
         videoId:
           description: The ID of the video the comment refers to, if any.
@@ -7030,6 +7072,7 @@ components:
           type: string
         boundStreamLastUpdateTimeMs:
           description: The date and time that the live stream referenced by boundStreamId was last updated.
+          format: date-time
           type: string
         closedCaptionsType:
           enum:
@@ -7088,6 +7131,14 @@ components:
         startWithSlate:
           description: This setting indicates whether the broadcast should automatically begin with an in-stream slate when you update the broadcast's status to live. After updating the status, you then need to send a liveCuepoints.insert request that sets the cuepoint's eventState to end to remove the in-stream slate and make your broadcast stream visible to viewers.
           type: boolean
+        stereoLayout:
+          description: The 3D stereo layout of this broadcast. This defaults to mono.
+          enum:
+            - stereoLayoutUnspecified
+            - mono
+            - leftRight
+            - topBottom
+          type: string
       type: object
     LiveBroadcastListResponse:
       properties:
@@ -7125,10 +7176,12 @@ components:
       description: Basic broadcast information.
       properties:
         actualEndTime:
-          description: The date and time that the broadcast actually ended. This information is only available once the broadcast's state is complete. The value is specified in ISO 8601 format.
+          description: The date and time that the broadcast actually ended. This information is only available once the broadcast's state is complete.
+          format: date-time
           type: string
         actualStartTime:
-          description: The date and time that the broadcast actually started. This information is only available once the broadcast's state is live. The value is specified in ISO 8601 format.
+          description: The date and time that the broadcast actually started. This information is only available once the broadcast's state is live.
+          format: date-time
           type: string
         channelId:
           description: The ID that YouTube uses to uniquely identify the channel that is publishing the broadcast.
@@ -7143,13 +7196,16 @@ components:
           description: The id of the live chat for this broadcast.
           type: string
         publishedAt:
-          description: The date and time that the broadcast was added to YouTube's live broadcast schedule. The value is specified in ISO 8601 format.
+          description: The date and time that the broadcast was added to YouTube's live broadcast schedule.
+          format: date-time
           type: string
         scheduledEndTime:
-          description: The date and time that the broadcast is scheduled to end. The value is specified in ISO 8601 format.
+          description: The date and time that the broadcast is scheduled to start.
+          format: date-time
           type: string
         scheduledStartTime:
-          description: The date and time that the broadcast is scheduled to start. The value is specified in ISO 8601 format.
+          description: The date and time that the broadcast is scheduled to end.
+          format: date-time
           type: string
         thumbnails:
           $ref: "#/components/schemas/ThumbnailDetails"
@@ -7335,7 +7391,8 @@ components:
         nextPageToken:
           type: string
         offlineAt:
-          description: The date and time when the underlying stream went offline. The value is specified in ISO 8601 format.
+          description: The date and time when the underlying stream went offline.
+          format: date-time
           type: string
         pageInfo:
           $ref: "#/components/schemas/PageInfo"
@@ -7376,7 +7433,8 @@ components:
         messageRetractedDetails:
           $ref: "#/components/schemas/LiveChatMessageRetractedDetails"
         publishedAt:
-          description: The date and time when the message was orignally published. The value is specified in ISO 8601 format.
+          description: The date and time when the message was orignally published.
+          format: date-time
           type: string
         superChatDetails:
           $ref: "#/components/schemas/LiveChatSuperChatDetails"
@@ -7680,7 +7738,8 @@ components:
         isDefaultStream:
           type: boolean
         publishedAt:
-          description: The date and time that the stream was created. The value is specified in ISO 8601 format.
+          description: The date and time that the stream was created.
+          format: date-time
           type: string
         title:
           description: The stream's title. The value must be between 1 and 128 characters long.
@@ -7966,7 +8025,8 @@ components:
           description: The ID that YouTube uses to uniquely identify a video. To retrieve the video resource, set the id query parameter to this value in your API request.
           type: string
         videoPublishedAt:
-          description: The date and time that the video was published to YouTube. The value is specified in ISO 8601 format.
+          description: The date and time that the video was published to YouTube.
+          format: date-time
           type: string
       type: object
     PlaylistItemListResponse:
@@ -8020,7 +8080,8 @@ components:
           format: uint32
           type: integer
         publishedAt:
-          description: The date and time that the item was added to the playlist. The value is specified in ISO 8601 format.
+          description: The date and time that the item was added to the playlist.
+          format: date-time
           type: string
         resourceId:
           $ref: "#/components/schemas/ResourceId"
@@ -8110,7 +8171,8 @@ components:
           $ref: "#/components/schemas/PlaylistLocalization"
           description: Localized title and description, read-only.
         publishedAt:
-          description: The date and time that the playlist was created. The value is specified in ISO 8601 format.
+          description: The date and time that the playlist was created.
+          format: date-time
           type: string
         tags:
           description: Keyword tags associated with the playlist.
@@ -8237,7 +8299,8 @@ components:
             - completed
           type: string
         publishedAt:
-          description: The creation date and time of the resource that the search result identifies. The value is specified in ISO 8601 format.
+          description: The creation date and time of the resource that the search result identifies.
+          format: date-time
           type: string
         thumbnails:
           $ref: "#/components/schemas/ThumbnailDetails"
@@ -8332,7 +8395,8 @@ components:
           description: The subscription's details.
           type: string
         publishedAt:
-          description: The date and time that the subscription was created. The value is specified in ISO 8601 format.
+          description: The date and time that the subscription was created.
+          format: date-time
           type: string
         resourceId:
           $ref: "#/components/schemas/ResourceId"
@@ -8418,7 +8482,8 @@ components:
           description: The text contents of the comment left by the user.
           type: string
         createdAt:
-          description: The date and time when the event occurred. The value is specified in ISO 8601 format.
+          description: The date and time when the event occurred.
+          format: date-time
           type: string
         currency:
           description: The currency in which the purchase was made. ISO 4217.
@@ -8980,20 +9045,24 @@ components:
           description: The ID of the currently active live chat attached to this video. This field is filled only if the video is a currently live broadcast that has live chat. Once the broadcast transitions to complete this field will be removed and the live chat closed down. For persistent broadcasts that live chat id will no longer be tied to this video but rather to the new video being displayed at the persistent page.
           type: string
         actualEndTime:
-          description: The time that the broadcast actually ended. The value is specified in ISO 8601 format. This value will not be available until the broadcast is over.
+          description: The time that the broadcast actually ended. This value will not be available until the broadcast is over.
+          format: date-time
           type: string
         actualStartTime:
-          description: The time that the broadcast actually started. The value is specified in ISO 8601 format. This value will not be available until the broadcast begins.
+          description: The time that the broadcast actually started. This value will not be available until the broadcast begins.
+          format: date-time
           type: string
         concurrentViewers:
           description: The number of viewers currently watching the broadcast. The property and its value will be present if the broadcast has current viewers and the broadcast owner has not hidden the viewcount for the video. Note that YouTube stops tracking the number of concurrent viewers for a broadcast when the broadcast ends. So, this property would not identify the number of viewers watching an archived video of a live broadcast that already ended.
           format: uint64
           type: string
         scheduledEndTime:
-          description: The time that the broadcast is scheduled to end. The value is specified in ISO 8601 format. If the value is empty or the property is not present, then the broadcast is scheduled to continue indefinitely.
+          description: The time that the broadcast is scheduled to end. If the value is empty or the property is not present, then the broadcast is scheduled to contiue indefinitely.
+          format: date-time
           type: string
         scheduledStartTime:
-          description: The time that the broadcast is scheduled to begin. The value is specified in ISO 8601 format.
+          description: The time that the broadcast is scheduled to begin.
+          format: date-time
           type: string
       type: object
     VideoLocalization:
@@ -9130,7 +9199,8 @@ components:
           description: The text description of the location where the video was recorded.
           type: string
         recordingDate:
-          description: The date and time when the video was recorded. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sssZ) format.
+          description: The date and time when the video was recorded.
+          format: date-time
           type: string
       type: object
     VideoSnippet:
@@ -9166,7 +9236,8 @@ components:
           $ref: "#/components/schemas/VideoLocalization"
           description: Localized snippet selected with the hl parameter. If no such localization exists, this field is populated with the default snippet. (Read-only)
         publishedAt:
-          description: The date and time that the video was uploaded. The value is specified in ISO 8601 format.
+          description: The date and time when the video was uploaded.
+          format: date-time
           type: string
         tags:
           description: A list of keyword tags associated with the video. Tags may contain spaces.
@@ -9239,7 +9310,8 @@ components:
           description: This value indicates if the extended video statistics on the watch page can be viewed by everyone. Note that the view count, likes, etc will still be visible if this is disabled. @mutable youtube.videos.insert youtube.videos.update
           type: boolean
         publishAt:
-          description: The date and time when the video is scheduled to publish. It can be set only if the privacy status of the video is private. The value is specified in ISO 8601 format.
+          description: The date and time when the video is scheduled to publish. It can be set only if the privacy status of the video is private..
+          format: date-time
           type: string
         rejectionReason:
           description: This value explains why YouTube rejected an uploaded video. This property is only present if the uploadStatus property indicates that the upload was rejected.

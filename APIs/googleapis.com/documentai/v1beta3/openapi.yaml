@@ -407,6 +407,75 @@ components:
       description: Response message for the enable processor method. Intentionally empty proto for adding fields in future.
       properties: {}
       type: object
+    GoogleCloudDocumentaiUiv1beta3EvaluateProcessorVersionMetadata:
+      description: Metadata of the EvaluateProcessorVersion method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3EvaluateProcessorVersionResponse:
+      description: Metadata of the EvaluateProcessorVersion method.
+      properties:
+        evaluation:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3Evaluation"
+          description: The evaluation result.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3Evaluation:
+      description: An evaluation of a ProcessorVersion's performance.
+      properties:
+        allEntitiesMetrics:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationMultiConfidenceMetrics"
+          description: Metrics for all the entities in aggregate.
+        createTime:
+          description: The time that the evaluation was created.
+          format: google-datetime
+          type: string
+        entityMetrics:
+          additionalProperties:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationMultiConfidenceMetrics"
+          description: Metrics across confidence levels, for different entities.
+          type: object
+        name:
+          description: "The resource name of the evaluation. Format: projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}/evaluations/{evaluation}"
+          type: string
+      type: object
+    GoogleCloudDocumentaiUiv1beta3EvaluationConfidenceLevelMetrics:
+      description: Evaluations metrics, at a specific confidence level.
+      properties:
+        confidenceLevel:
+          description: The confidence level.
+          format: float
+          type: number
+        metrics:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationMetrics"
+          description: The metrics at the specific confidence level.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3EvaluationMetrics:
+      description: Evaluation metrics, either in aggregate or about a specific entity.
+      properties:
+        f1Score:
+          description: The calculated f1 score.
+          format: float
+          type: number
+        precision:
+          description: The calculated precision.
+          format: float
+          type: number
+        recall:
+          description: The calculated recall.
+          format: float
+          type: number
+      type: object
+    GoogleCloudDocumentaiUiv1beta3EvaluationMultiConfidenceMetrics:
+      description: Metrics across multiple confidence levels.
+      properties:
+        confidenceLevelMetrics:
+          description: Metrics across confidence levels.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationConfidenceLevelMetrics"
+          type: array
+      type: object
     GoogleCloudDocumentaiUiv1beta3ProcessorVersion:
       description: A processor version is an implementation of a processor. Each processor can have multiple versions, pre-trained by Google internally or up-trained by the customer. At a time, a processor can only have one default version version. So the processor's behavior (when processing documents) is defined by a default version.
       properties:

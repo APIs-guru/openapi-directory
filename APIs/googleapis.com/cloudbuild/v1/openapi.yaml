@@ -503,6 +503,54 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/projects/{projectId}/triggers/{trigger}:webhook":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: ReceiveTriggerWebhook [Experimental] is called when the API receives a webhook request targeted at a specific trigger.
+      operationId: cloudbuild.projects.triggers.webhook
+      parameters:
+        - description: Project in which the specified trigger lives
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Name of the trigger to run the payload against
+          in: path
+          name: trigger
+          required: true
+          schema:
+            type: string
+        - description: Secret token used for authorization if an OAuth token isn't provided.
+          in: query
+          name: secret
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HttpBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReceiveTriggerWebhookResponse"
+          description: Successful response
+      tags:
+        - projects
   "/v1/{name}":
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
@@ -847,6 +895,9 @@ components:
         artifacts:
           $ref: "#/components/schemas/Artifacts"
           description: Artifacts produced by the build that should be uploaded upon successful completion of all build steps.
+        availableSecrets:
+          $ref: "#/components/schemas/Secrets"
+          description: Secrets and secret environment variables.
         buildTriggerId:
           description: Output only. The ID of the `BuildTrigger` that triggered this build, if it was triggered automatically.
           readOnly: true
@@ -897,7 +948,7 @@ components:
           description: Output only. Results of the build.
           readOnly: true
         secrets:
-          description: Secrets to decrypt using Cloud Key Management Service.
+          description: "Secrets to decrypt using Cloud Key Management Service. Note: Secret Manager is the recommended technique for managing sensitive data with Cloud Build. Use `available_secrets` to configure builds to access secrets from Secret Manager. For instructions, see: https://cloud.google.com/cloud-build/docs/securing-builds/use-secrets"
           items:
             $ref: "#/components/schemas/Secret"
           type: array
@@ -1250,6 +1301,37 @@ components:
           format: byte
           type: string
       type: object
+    HttpBody:
+      description: "Message that represents an arbitrary HTTP body. It should only be used for payload formats that can't be represented as JSON, such as raw binary or an HTML page. This message can be used both in streaming and non-streaming API methods in the request as well as the response. It can be used as a top-level request field, which is convenient if one wants to extract parameters from either the URL or HTTP template into the request fields and also want access to the raw HTTP body. Example: message GetResourceRequest { // A unique request id. string request_id = 1; // The raw HTTP body is bound to this field. google.api.HttpBody http_body = 2; } service ResourceService { rpc GetResource(GetResourceRequest) returns (google.api.HttpBody); rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty); } Example with streaming methods: service CaldavService { rpc GetCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); rpc UpdateCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); } Use of this type only changes how the request and response bodies are handled, all other features will continue to work unchanged."
+      properties:
+        contentType:
+          description: The HTTP Content-Type header value specifying the content type of the body.
+          type: string
+        data:
+          description: The HTTP request/response body as raw binary.
+          format: byte
+          type: string
+        extensions:
+          description: Application specific response metadata. Must be set in the first response for streaming APIs.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+      type: object
+    InlineSecret:
+      description: Pairs a set of secret environment variables mapped to encrypted values with the Cloud KMS key to use to decrypt the value.
+      properties:
+        envMap:
+          additionalProperties:
+            format: byte
+            type: string
+          description: Map of environment variable name to its encrypted value. Secret environment variables must be unique across all of a build's secrets, and must be used by at least one build step. Values can be at most 64 KB in size. There can be at most 100 secret values across all of a build's secrets.
+          type: object
+        kmsKeyName:
+          description: "Resource name of Cloud KMS crypto key to decrypt the encrypted value. In format: projects/*/locations/*/keyRings/*/cryptoKeys/*"
+          type: string
+      type: object
     ListBuildTriggersResponse:
       description: Response containing existing `BuildTriggers`.
       properties:
@@ -1403,6 +1485,10 @@ components:
           description: Regexes matching tags to build. The syntax of the regular expressions accepted is the syntax accepted by RE2 and described at https://github.com/google/re2/wiki/Syntax
           type: string
       type: object
+    ReceiveTriggerWebhookResponse:
+      description: ReceiveTriggerWebhookResponse [Experimental] is the response object for the ReceiveTriggerWebhook method.
+      properties: {}
+      type: object
     RepoSource:
       description: Location of the source in a Google Cloud Source Repository.
       properties:
@@ -1501,7 +1587,7 @@ components:
           type: string
       type: object
     Secret:
-      description: Pairs a set of secret environment variables containing encrypted values with the Cloud KMS key to use to decrypt the value.
+      description: "Pairs a set of secret environment variables containing encrypted values with the Cloud KMS key to use to decrypt the value. Note: Use `kmsKeyName` with `available_secrets` instead of using `kmsKeyName` with `secret`. For instructions see: https://cloud.google.com/cloud-build/docs/securing-builds/use-encrypted-credentials."
       properties:
         kmsKeyName:
           description: Cloud KMS key name to use to decrypt these envs.
@@ -1512,6 +1598,30 @@ components:
             type: string
           description: Map of environment variable name to its encrypted value. Secret environment variables must be unique across all of a build's secrets, and must be used by at least one build step. Values can be at most 64 KB in size. There can be at most 100 secret values across all of a build's secrets.
           type: object
+      type: object
+    SecretManagerSecret:
+      description: Pairs a secret environment variable with a SecretVersion in Secret Manager.
+      properties:
+        env:
+          description: Environment variable name to associate with the secret. Secret environment variables must be unique across all of a build's secrets, and must be used by at least one build step.
+          type: string
+        versionName:
+          description: "Resource name of the SecretVersion. In format: projects/*/secrets/*/versions/*"
+          type: string
+      type: object
+    Secrets:
+      description: Secrets and secret environment variables.
+      properties:
+        inline:
+          description: Secrets encrypted with KMS key and the associated secret environment variable.
+          items:
+            $ref: "#/components/schemas/InlineSecret"
+          type: array
+        secretManager:
+          description: Secrets in Secret Manager and associated secret environment variable.
+          items:
+            $ref: "#/components/schemas/SecretManagerSecret"
+          type: array
       type: object
     SlackDelivery:
       description: "SlackDelivery is the delivery configuration for delivering Slack messages via webhooks. See Slack webhook documentation at: https://api.slack.com/messaging/webhooks."

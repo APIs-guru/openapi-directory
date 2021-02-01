@@ -1266,6 +1266,47 @@ components:
           description: Response does not include the possible roles of a member since the behavior of this rpc is not all-or-nothing unlike the other rpcs. So, it may not be possible to list all the roles definitively, due to possible lack of authorization in some of the paths.
           type: boolean
       type: object
+    DynamicGroupMetadata:
+      description: Dynamic group metadata like queries and status.
+      properties:
+        queries:
+          description: Memberships will be the union of all queries. Only one entry with USER resource is currently supported. Customers can create up to 100 dynamic groups.
+          items:
+            $ref: "#/components/schemas/DynamicGroupQuery"
+          type: array
+        status:
+          $ref: "#/components/schemas/DynamicGroupStatus"
+          description: Output only. Status of the dynamic group.
+          readOnly: true
+      type: object
+    DynamicGroupQuery:
+      description: Defines a query on a resource.
+      properties:
+        query:
+          description: "Query that determines the memberships of the dynamic group. Examples: All users with at least one `organizations.department` of engineering. `user.organizations.exists(org, org.department=='engineering')` All users with at least one location that has `area` of `foo` and `building_id` of `bar`. `user.locations.exists(loc, loc.area=='foo' && loc.building_id=='bar')`"
+          type: string
+        resourceType:
+          description: Resource type for the Dynamic Group Query
+          enum:
+            - RESOURCE_TYPE_UNSPECIFIED
+            - USER
+          type: string
+      type: object
+    DynamicGroupStatus:
+      description: The current status of a dynamic group along with timestamp.
+      properties:
+        status:
+          description: Status of the dynamic group.
+          enum:
+            - STATUS_UNSPECIFIED
+            - UP_TO_DATE
+            - UPDATING_MEMBERSHIPS
+          type: string
+        statusTime:
+          description: The latest time at which the dynamic group is guaranteed to be in the given status. If status is `UP_TO_DATE`, the latest time at which the dynamic group was confirmed to be up-to-date. If status is `UPDATING_MEMBERSHIPS`, the time at which dynamic group was created.
+          format: google-datetime
+          type: string
+      type: object
     EntityKey:
       description: A unique identifier for an entity in the Cloud Identity Groups API. An entity can represent either a group with an optional `namespace` or a user without a `namespace`. The combination of `id` and `namespace` must be unique; however, the same `id` can be used with different `namespace`s.
       properties:
@@ -1274,6 +1315,14 @@ components:
           type: string
         namespace:
           description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source_id}.
+          type: string
+      type: object
+    ExpiryDetail:
+      description: The `MembershipRole` expiry details.
+      properties:
+        expireTime:
+          description: The time at which the `MembershipRole` will expire.
+          format: google-datetime
           type: string
       type: object
     GetMembershipGraphResponse:
@@ -1751,6 +1800,9 @@ components:
         displayName:
           description: The display name of the `Group`.
           type: string
+        dynamicGroupMetadata:
+          $ref: "#/components/schemas/DynamicGroupMetadata"
+          description: Optional. Dynamic group metadata like queries and status.
         groupKey:
           $ref: "#/components/schemas/EntityKey"
           description: Required. Immutable. The `EntityKey` of the `Group`.
@@ -1917,6 +1969,9 @@ components:
     MembershipRole:
       description: A membership role within the Cloud Identity Groups API. A `MembershipRole` defines the privileges granted to a `Membership`.
       properties:
+        expiryDetail:
+          $ref: "#/components/schemas/ExpiryDetail"
+          description: The expiry details of the `MembershipRole`. Expiry details are only supported for `MEMBER` `MembershipRoles`. May be set if `name` is `MEMBER`. Must not be set if `name` is any other value.
         name:
           description: The name of the `MembershipRole`. Must be one of `OWNER`, `MANAGER`, `MEMBER`.
           type: string
@@ -1933,6 +1988,11 @@ components:
           description: The `name`s of the `MembershipRole`s to be removed. Adding or removing roles in the same request as updating roles is not supported. It is not possible to remove the `MEMBER` `MembershipRole`. If you wish to delete a `Membership`, call MembershipsService.DeleteMembership instead. Must not contain `MEMBER`. Must not be set if `update_roles_params` is set.
           items:
             type: string
+          type: array
+        updateRolesParams:
+          description: The `MembershipRole`s to be updated. Updating roles in the same request as adding or removing roles is not supported. Must not be set if either `add_roles` or `remove_roles` is set.
+          items:
+            $ref: "#/components/schemas/UpdateMembershipRolesParams"
           type: array
       type: object
     ModifyMembershipRolesResponse:
@@ -2024,6 +2084,41 @@ components:
       properties:
         role:
           description: 'TransitiveMembershipRole in string format. Currently supported TransitiveMembershipRoles: `"MEMBER"`, `"OWNER"`, and `"MANAGER"`.'
+          type: string
+      type: object
+    UpdateMembershipRolesParams:
+      description: The details of an update to a `MembershipRole`.
+      properties:
+        fieldMask:
+          description: The fully-qualified names of fields to update. May only contain the field `expiry_detail`.
+          format: google-fieldmask
+          type: string
+        membershipRole:
+          $ref: "#/components/schemas/MembershipRole"
+          description: The `MembershipRole`s to be updated. Only `MEMBER` `MembershipRole` can currently be updated.
+      type: object
+    UserInvitation:
+      description: UserInvitation to join a Google Workspace organization.
+      properties:
+        mailsSentCount:
+          description: Number of invitation emails sent to the user.
+          format: int64
+          type: string
+        name:
+          description: Shall be of the form `customers/{customer}/userinvitations/{user_email_address}`
+          type: string
+        state:
+          description: State of the `UserInvitation`.
+          enum:
+            - STATE_UNSPECIFIED
+            - NOT_YET_SENT
+            - INVITED
+            - ACCEPTED
+            - DECLINED
+          type: string
+        updateTime:
+          description: Time when the `UserInvitation` was last updated.
+          format: google-datetime
           type: string
       type: object
   securitySchemes:

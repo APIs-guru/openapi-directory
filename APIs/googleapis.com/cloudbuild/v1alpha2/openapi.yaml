@@ -365,6 +365,9 @@ components:
         artifacts:
           $ref: "#/components/schemas/Artifacts"
           description: Artifacts produced by the build that should be uploaded upon successful completion of all build steps.
+        availableSecrets:
+          $ref: "#/components/schemas/Secrets"
+          description: Secrets and secret environment variables.
         buildTriggerId:
           description: Output only. The ID of the `BuildTrigger` that triggered this build, if it was triggered automatically.
           readOnly: true
@@ -415,7 +418,7 @@ components:
           description: Output only. Results of the build.
           readOnly: true
         secrets:
-          description: Secrets to decrypt using Cloud Key Management Service.
+          description: "Secrets to decrypt using Cloud Key Management Service. Note: Secret Manager is the recommended technique for managing sensitive data with Cloud Build. Use `available_secrets` to configure builds to access secrets from Secret Manager. For instructions, see: https://cloud.google.com/cloud-build/docs/securing-builds/use-secrets"
           items:
             $ref: "#/components/schemas/Secret"
           type: array
@@ -681,6 +684,19 @@ components:
           format: byte
           type: string
       type: object
+    InlineSecret:
+      description: Pairs a set of secret environment variables mapped to encrypted values with the Cloud KMS key to use to decrypt the value.
+      properties:
+        envMap:
+          additionalProperties:
+            format: byte
+            type: string
+          description: Map of environment variable name to its encrypted value. Secret environment variables must be unique across all of a build's secrets, and must be used by at least one build step. Values can be at most 64 KB in size. There can be at most 100 secret values across all of a build's secrets.
+          type: object
+        kmsKeyName:
+          description: "Resource name of Cloud KMS crypto key to decrypt the encrypted value. In format: projects/*/locations/*/keyRings/*/cryptoKeys/*"
+          type: string
+      type: object
     ListWorkerPoolsResponse:
       description: Response containing existing `WorkerPools`.
       properties:
@@ -881,7 +897,7 @@ components:
           type: string
       type: object
     Secret:
-      description: Pairs a set of secret environment variables containing encrypted values with the Cloud KMS key to use to decrypt the value.
+      description: "Pairs a set of secret environment variables containing encrypted values with the Cloud KMS key to use to decrypt the value. Note: Use `kmsKeyName` with `available_secrets` instead of using `kmsKeyName` with `secret`. For instructions see: https://cloud.google.com/cloud-build/docs/securing-builds/use-encrypted-credentials."
       properties:
         kmsKeyName:
           description: Cloud KMS key name to use to decrypt these envs.
@@ -892,6 +908,30 @@ components:
             type: string
           description: Map of environment variable name to its encrypted value. Secret environment variables must be unique across all of a build's secrets, and must be used by at least one build step. Values can be at most 64 KB in size. There can be at most 100 secret values across all of a build's secrets.
           type: object
+      type: object
+    SecretManagerSecret:
+      description: Pairs a secret environment variable with a SecretVersion in Secret Manager.
+      properties:
+        env:
+          description: Environment variable name to associate with the secret. Secret environment variables must be unique across all of a build's secrets, and must be used by at least one build step.
+          type: string
+        versionName:
+          description: "Resource name of the SecretVersion. In format: projects/*/secrets/*/versions/*"
+          type: string
+      type: object
+    Secrets:
+      description: Secrets and secret environment variables.
+      properties:
+        inline:
+          description: Secrets encrypted with KMS key and the associated secret environment variable.
+          items:
+            $ref: "#/components/schemas/InlineSecret"
+          type: array
+        secretManager:
+          description: Secrets in Secret Manager and associated secret environment variable.
+          items:
+            $ref: "#/components/schemas/SecretManagerSecret"
+          type: array
       type: object
     SlackDelivery:
       description: "SlackDelivery is the delivery configuration for delivering Slack messages via webhooks. See Slack webhook documentation at: https://api.slack.com/messaging/webhooks."
