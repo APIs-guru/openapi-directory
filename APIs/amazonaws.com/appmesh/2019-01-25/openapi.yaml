@@ -4383,6 +4383,10 @@ components:
       required:
         - validation
       properties:
+        certificate:
+          allOf:
+            - $ref: '#/components/schemas/ClientTlsCertificate'
+            - description: A reference to an object that represents a client's TLS certificate.
         enforce:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -4396,6 +4400,16 @@ components:
             - $ref: '#/components/schemas/TlsValidationContext'
             - description: A reference to an object that represents a TLS validation context.
       description: A reference to an object that represents a Transport Layer Security (TLS) client policy.
+    ClientTlsCertificate:
+      type: object
+      properties:
+        file:
+          $ref: '#/components/schemas/ListenerTlsFileCertificate'
+        sds:
+          allOf:
+            - $ref: '#/components/schemas/ListenerTlsSdsCertificate'
+            - description: A reference to an object that represents a client's TLS Secret Discovery Service certificate.
+      description: An object that represents the client's certificate.
     PortSet:
       type: array
       items:
@@ -4405,11 +4419,40 @@ components:
       required:
         - trust
       properties:
+        subjectAlternativeNames:
+          allOf:
+            - $ref: '#/components/schemas/SubjectAlternativeNames'
+            - description: A reference to an object that represents the SANs for a Transport Layer Security (TLS) validation context.
         trust:
           allOf:
             - $ref: '#/components/schemas/TlsValidationContextTrust'
-            - description: A reference to an object that represents a TLS validation context trust.
-      description: An object that represents a Transport Layer Security (TLS) validation context.
+            - description: A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.
+      description: An object that represents how the proxy will validate its peer during Transport Layer Security (TLS) negotiation.
+    ListenerTlsFileCertificate:
+      type: object
+      required:
+        - certificateChain
+        - privateKey
+      properties:
+        certificateChain:
+          allOf:
+            - $ref: '#/components/schemas/FilePath'
+            - description: The certificate chain for the certificate.
+        privateKey:
+          allOf:
+            - $ref: '#/components/schemas/FilePath'
+            - description: The private key for a certificate stored on the file system of the virtual node that the proxy is running on.
+      description: 'An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
+    ListenerTlsSdsCertificate:
+      type: object
+      required:
+        - secretName
+      properties:
+        secretName:
+          allOf:
+            - $ref: '#/components/schemas/SdsSecretName'
+            - description: A reference to an object that represents the name of the secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+      description: 'An object that represents the listener''s Secret Discovery Service certificate. The proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html">TLS documentation</a> for more info.'
     String:
       type: string
     ResourceName:
@@ -5735,11 +5778,15 @@ components:
         certificate:
           allOf:
             - $ref: '#/components/schemas/ListenerTlsCertificate'
-            - description: A reference to an object that represents a listener's TLS certificate.
+            - description: A reference to an object that represents a listener's Transport Layer Security (TLS) certificate.
         mode:
           allOf:
             - $ref: '#/components/schemas/ListenerTlsMode'
             - description: <p>Specify one of the following modes.</p> <ul> <li> <p> <b/>STRICT – Listener only accepts connections with TLS enabled. </p> </li> <li> <p> <b/>PERMISSIVE – Listener accepts connections with or without TLS enabled.</p> </li> <li> <p> <b/>DISABLED – Listener only accepts connections without TLS. </p> </li> </ul>
+        validation:
+          allOf:
+            - $ref: '#/components/schemas/ListenerTlsValidationContext'
+            - description: A reference to an object that represents a listener's Transport Layer Security (TLS) validation context.
       description: An object that represents the Transport Layer Security (TLS) properties for a listener.
     Listener:
       type: object
@@ -5790,6 +5837,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ListenerTlsFileCertificate'
             - description: A reference to an object that represents a local file certificate.
+        sds:
+          allOf:
+            - $ref: '#/components/schemas/ListenerTlsSdsCertificate'
+            - description: A reference to an object that represents a listener's Secret Discovery Service certificate.
       description: An object that represents a listener's Transport Layer Security (TLS) certificate.
     ListenerTlsMode:
       type: string
@@ -5797,6 +5848,20 @@ components:
         - STRICT
         - PERMISSIVE
         - DISABLED
+    ListenerTlsValidationContext:
+      type: object
+      required:
+        - trust
+      properties:
+        subjectAlternativeNames:
+          allOf:
+            - $ref: '#/components/schemas/SubjectAlternativeNames'
+            - description: A reference to an object that represents the SANs for a listener's Transport Layer Security (TLS) validation context.
+        trust:
+          allOf:
+            - $ref: '#/components/schemas/ListenerTlsValidationContextTrust'
+            - description: A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.
+      description: An object that represents a listener's Transport Layer Security (TLS) validation context.
     ListenerTlsAcmCertificate:
       type: object
       required:
@@ -5807,21 +5872,48 @@ components:
             - $ref: '#/components/schemas/Arn'
             - description: 'The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
       description: An object that represents an AWS Certicate Manager (ACM) certificate.
-    ListenerTlsFileCertificate:
+    SdsSecretName:
+      type: string
+    SubjectAlternativeNames:
+      type: object
+      required:
+        - match
+      properties:
+        match:
+          allOf:
+            - $ref: '#/components/schemas/SubjectAlternativeNameMatchers'
+            - description: An object that represents the criteria for determining a SANs match.
+      description: An object that represents the subject alternative names secured by the certificate.
+    ListenerTlsValidationContextTrust:
+      type: object
+      properties:
+        file:
+          $ref: '#/components/schemas/TlsValidationContextFileTrust'
+        sds:
+          allOf:
+            - $ref: '#/components/schemas/TlsValidationContextSdsTrust'
+            - description: A reference to an object that represents a listener's Transport Layer Security (TLS) Secret Discovery Service validation context trust.
+      description: An object that represents a listener's Transport Layer Security (TLS) validation context trust.
+    TlsValidationContextFileTrust:
       type: object
       required:
         - certificateChain
-        - privateKey
       properties:
         certificateChain:
           allOf:
             - $ref: '#/components/schemas/FilePath'
-            - description: The certificate chain for the certificate.
-        privateKey:
+            - description: The certificate trust chain for a certificate stored on the file system of the virtual node that the proxy is running on.
+      description: An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
+    TlsValidationContextSdsTrust:
+      type: object
+      required:
+        - secretName
+      properties:
+        secretName:
           allOf:
-            - $ref: '#/components/schemas/FilePath'
-            - description: The private key for a certificate stored on the file system of the virtual node that the proxy is running on.
-      description: 'An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
+            - $ref: '#/components/schemas/SdsSecretName'
+            - description: A reference to an object that represents the name of the secret for a Transport Layer Security (TLS) Secret Discovery Service validation context trust.
+      description: 'An object that represents a Transport Layer Security (TLS) Secret Discovery Service validation context trust. The proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html">TLS documentation</a> for more info.'
     MaxConnections:
       type: integer
       minimum: 1
@@ -5962,6 +6054,24 @@ components:
         - ACTIVE
         - INACTIVE
         - DELETED
+    SubjectAlternativeName:
+      type: string
+      minLength: 1
+      maxLength: 254
+    SubjectAlternativeNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubjectAlternativeName'
+    SubjectAlternativeNameMatchers:
+      type: object
+      required:
+        - exact
+      properties:
+        exact:
+          allOf:
+            - $ref: '#/components/schemas/SubjectAlternativeNameList'
+            - description: The values sent must match the specified values exactly.
+      description: An object that represents the methods by which a subject alternative name on a peer Transport Layer Security (TLS) certificate can be matched.
     TagKeyList:
       type: array
       items:
@@ -6003,11 +6113,15 @@ components:
         acm:
           allOf:
             - $ref: '#/components/schemas/TlsValidationContextAcmTrust'
-            - description: A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
+            - description: A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
         file:
           allOf:
             - $ref: '#/components/schemas/TlsValidationContextFileTrust'
-            - description: An object that represents a TLS validation context trust for a local file.
+            - description: An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
+        sds:
+          allOf:
+            - $ref: '#/components/schemas/TlsValidationContextSdsTrust'
+            - description: A reference to an object that represents a Transport Layer Security (TLS) Secret Discovery Service validation context trust.
       description: An object that represents a Transport Layer Security (TLS) validation context trust.
     TlsValidationContextAcmTrust:
       type: object
@@ -6018,17 +6132,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CertificateAuthorityArns'
             - description: One or more ACM Amazon Resource Name (ARN)s.
-      description: An object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
-    TlsValidationContextFileTrust:
-      type: object
-      required:
-        - certificateChain
-      properties:
-        certificateChain:
-          allOf:
-            - $ref: '#/components/schemas/FilePath'
-            - description: The certificate trust chain for a certificate stored on the file system of the virtual node that the proxy is running on.
-      description: An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
+      description: An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
     UntagResourceInput:
       type: object
       required:
@@ -6178,6 +6282,10 @@ components:
       required:
         - validation
       properties:
+        certificate:
+          allOf:
+            - $ref: '#/components/schemas/VirtualGatewayClientTlsCertificate'
+            - description: A reference to an object that represents a virtual gateway's client's Transport Layer Security (TLS) certificate.
         enforce:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -6189,18 +6297,57 @@ components:
         validation:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayTlsValidationContext'
-            - description: A reference to an object that represents a TLS validation context.
+            - description: A reference to an object that represents a Transport Layer Security (TLS) validation context.
       description: An object that represents a Transport Layer Security (TLS) client policy.
+    VirtualGatewayClientTlsCertificate:
+      type: object
+      properties:
+        file:
+          $ref: '#/components/schemas/VirtualGatewayListenerTlsFileCertificate'
+        sds:
+          allOf:
+            - $ref: '#/components/schemas/VirtualGatewayListenerTlsSdsCertificate'
+            - description: A reference to an object that represents a virtual gateway's client's Secret Discovery Service certificate.
+      description: An object that represents the virtual gateway's client's Transport Layer Security (TLS) certificate.
     VirtualGatewayTlsValidationContext:
       type: object
       required:
         - trust
       properties:
+        subjectAlternativeNames:
+          allOf:
+            - $ref: '#/components/schemas/SubjectAlternativeNames'
+            - description: A reference to an object that represents the SANs for a virtual gateway's listener's Transport Layer Security (TLS) validation context.
         trust:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayTlsValidationContextTrust'
-            - description: A reference to an object that represents a TLS validation context trust.
+            - description: A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.
       description: An object that represents a Transport Layer Security (TLS) validation context.
+    VirtualGatewayListenerTlsFileCertificate:
+      type: object
+      required:
+        - certificateChain
+        - privateKey
+      properties:
+        certificateChain:
+          allOf:
+            - $ref: '#/components/schemas/FilePath'
+            - description: The certificate chain for the certificate.
+        privateKey:
+          allOf:
+            - $ref: '#/components/schemas/FilePath'
+            - description: The private key for a certificate stored on the file system of the mesh endpoint that the proxy is running on.
+      description: 'An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
+    VirtualGatewayListenerTlsSdsCertificate:
+      type: object
+      required:
+        - secretName
+      properties:
+        secretName:
+          allOf:
+            - $ref: '#/components/schemas/VirtualGatewaySdsSecretName'
+            - description: A reference to an object that represents the name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
+      description: 'An object that represents the virtual gateway''s listener''s Secret Discovery Service certificate.The proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html">TLS documentation</a> for more info. '
     VirtualGatewayGrpcConnectionPool:
       type: object
       required:
@@ -6391,6 +6538,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayListenerTlsMode'
             - description: <p>Specify one of the following modes.</p> <ul> <li> <p> <b/>STRICT – Listener only accepts connections with TLS enabled. </p> </li> <li> <p> <b/>PERMISSIVE – Listener accepts connections with or without TLS enabled.</p> </li> <li> <p> <b/>DISABLED – Listener only accepts connections without TLS. </p> </li> </ul>
+        validation:
+          allOf:
+            - $ref: '#/components/schemas/VirtualGatewayListenerTlsValidationContext'
+            - description: A reference to an object that represents a virtual gateway's listener's Transport Layer Security (TLS) validation context.
       description: An object that represents the Transport Layer Security (TLS) properties for a listener.
     VirtualGatewayListener:
       type: object
@@ -6425,6 +6576,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayListenerTlsFileCertificate'
             - description: A reference to an object that represents a local file certificate.
+        sds:
+          allOf:
+            - $ref: '#/components/schemas/VirtualGatewayListenerTlsSdsCertificate'
+            - description: A reference to an object that represents a virtual gateway's listener's Secret Discovery Service certificate.
       description: An object that represents a listener's Transport Layer Security (TLS) certificate.
     VirtualGatewayListenerTlsMode:
       type: string
@@ -6432,6 +6587,20 @@ components:
         - STRICT
         - PERMISSIVE
         - DISABLED
+    VirtualGatewayListenerTlsValidationContext:
+      type: object
+      required:
+        - trust
+      properties:
+        subjectAlternativeNames:
+          allOf:
+            - $ref: '#/components/schemas/SubjectAlternativeNames'
+            - description: A reference to an object that represents the SANs for a virtual gateway listener's Transport Layer Security (TLS) validation context.
+        trust:
+          allOf:
+            - $ref: '#/components/schemas/VirtualGatewayListenerTlsValidationContextTrust'
+            - description: A reference to where to retrieve the trust chain when validating a peer’s Transport Layer Security (TLS) certificate.
+      description: An object that represents a virtual gateway's listener's Transport Layer Security (TLS) validation context.
     VirtualGatewayListenerTlsAcmCertificate:
       type: object
       required:
@@ -6442,21 +6611,38 @@ components:
             - $ref: '#/components/schemas/Arn'
             - description: 'The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
       description: An object that represents an AWS Certicate Manager (ACM) certificate.
-    VirtualGatewayListenerTlsFileCertificate:
+    VirtualGatewaySdsSecretName:
+      type: string
+    VirtualGatewayListenerTlsValidationContextTrust:
+      type: object
+      properties:
+        file:
+          $ref: '#/components/schemas/VirtualGatewayTlsValidationContextFileTrust'
+        sds:
+          allOf:
+            - $ref: '#/components/schemas/VirtualGatewayTlsValidationContextSdsTrust'
+            - description: A reference to an object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service validation context trust.
+      description: An object that represents a virtual gateway's listener's Transport Layer Security (TLS) validation context trust.
+    VirtualGatewayTlsValidationContextFileTrust:
       type: object
       required:
         - certificateChain
-        - privateKey
       properties:
         certificateChain:
           allOf:
             - $ref: '#/components/schemas/FilePath'
-            - description: The certificate chain for the certificate.
-        privateKey:
+            - description: The certificate trust chain for a certificate stored on the file system of the virtual node that the proxy is running on.
+      description: An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
+    VirtualGatewayTlsValidationContextSdsTrust:
+      type: object
+      required:
+        - secretName
+      properties:
+        secretName:
           allOf:
-            - $ref: '#/components/schemas/FilePath'
-            - description: The private key for a certificate stored on the file system of the mesh endpoint that the proxy is running on.
-      description: 'An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites">Transport Layer Security (TLS)</a>.'
+            - $ref: '#/components/schemas/VirtualGatewaySdsSecretName'
+            - description: A reference to an object that represents the name of the secret for a virtual gateway's Transport Layer Security (TLS) Secret Discovery Service validation context trust.
+      description: 'An object that represents a virtual gateway''s listener''s Transport Layer Security (TLS) Secret Discovery Service validation context trust. The proxy must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href="https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html">TLS documentation</a> for more info.'
     VirtualGatewayStatusCode:
       type: string
       enum:
@@ -6469,11 +6655,15 @@ components:
         acm:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayTlsValidationContextAcmTrust'
-            - description: A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
+            - description: A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
         file:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayTlsValidationContextFileTrust'
-            - description: An object that represents a TLS validation context trust for a local file.
+            - description: An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
+        sds:
+          allOf:
+            - $ref: '#/components/schemas/VirtualGatewayTlsValidationContextSdsTrust'
+            - description: A reference to an object that represents a virtual gateway's Transport Layer Security (TLS) Secret Discovery Service validation context trust.
       description: An object that represents a Transport Layer Security (TLS) validation context trust.
     VirtualGatewayTlsValidationContextAcmTrust:
       type: object
@@ -6484,17 +6674,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayCertificateAuthorityArns'
             - description: One or more ACM Amazon Resource Name (ARN)s.
-      description: An object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
-    VirtualGatewayTlsValidationContextFileTrust:
-      type: object
-      required:
-        - certificateChain
-      properties:
-        certificateChain:
-          allOf:
-            - $ref: '#/components/schemas/FilePath'
-            - description: The certificate trust chain for a certificate stored on the file system of the virtual node that the proxy is running on.
-      description: An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
+      description: An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
     VirtualNodeGrpcConnectionPool:
       type: object
       required:

@@ -3,7 +3,7 @@ info:
   version: '2018-08-01'
   x-release: v4
   title: AWS RDS DataService
-  description: '<p><fullname>Amazon RDS Data Service</fullname> <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora Serverless DB cluster. To run these statements, you work with the Data Service API.</p> <p>For more information about the Data Service API, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>If you have questions or comments related to the Data API, send email to <a href="mailto:Rds-data-api-feedback@amazon.com">Rds-data-api-feedback@amazon.com</a>.</p> </note></p>'
+  description: '<p><fullname>Amazon RDS Data Service</fullname> <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora Serverless DB cluster. To run these statements, you work with the Data Service API.</p> <p>For more information about the Data Service API, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using the Data API for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p></p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -536,7 +536,7 @@ paths:
                         - $ref: '#/components/schemas/DecimalReturnType'
                         - description: '<p>A value that indicates how a field of <code>DECIMAL</code> type is represented in the response. The value of <code>STRING</code>, the default, specifies that it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code> specifies that it is converted to a Long value if its scale is 0, or to a Double value otherwise.</p> <important> <p>Conversion to Double or Long can result in roundoff errors due to precision loss. We recommend converting to String, especially when working with currency values.</p> </important>'
                 schema:
-                  description: The name of the database schema.
+                  description: '<p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn''t supported.</p> </note>'
                   type: string
                   minLength: 0
                   maxLength: 64
@@ -769,7 +769,7 @@ components:
         typeHint:
           allOf:
             - $ref: '#/components/schemas/TypeHint'
-            - description: '<p>A hint that specifies the correct object type for data type mapping.</p> <p> <b>Values:</b> </p> <ul> <li> <p> <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DECIMAL</code> type to the database.</p> </li> <li> <p> <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p> </li> </ul>'
+            - description: '<p>A hint that specifies the correct object type for data type mapping. Possible values are as follows:</p> <ul> <li> <p> <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p> </li> <li> <p> <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DECIMAL</code> type to the database.</p> </li> <li> <p> <code>JSON</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>JSON</code> type to the database.</p> </li> <li> <p> <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>UUID</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>UUID</code> type to the database. </p> </li> </ul>'
         value:
           allOf:
             - $ref: '#/components/schemas/Field'
@@ -778,8 +778,8 @@ components:
     DecimalReturnType:
       type: string
       enum:
-        - DOUBLE_OR_LONG
         - STRING
+        - DOUBLE_OR_LONG
     RollbackTransactionResponse:
       type: object
       properties:
@@ -1151,7 +1151,7 @@ components:
         schema:
           allOf:
             - $ref: '#/components/schemas/DbName'
-            - description: The name of the database schema.
+            - description: '<p>The name of the database schema.</p> <note> <p>Currently, the <code>schema</code> parameter isn''t supported.</p> </note>'
         secretArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -1279,10 +1279,12 @@ components:
     TypeHint:
       type: string
       enum:
-        - DATE
-        - DECIMAL
-        - TIME
+        - JSON
+        - UUID
         - TIMESTAMP
+        - DATE
+        - TIME
+        - DECIMAL
     SqlStatementResult:
       type: object
       properties:

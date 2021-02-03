@@ -749,6 +749,7 @@ paths:
                   type: string
                   enum:
                     - RuleName
+                    - MqttTopic
                 Expression:
                   description: The rule name or topic rule to send messages to.
                   type: string
@@ -2075,6 +2076,7 @@ paths:
                   type: string
                   enum:
                     - RuleName
+                    - MqttTopic
                 Expression:
                   description: The new rule name or topic rule to send messages to.
                   type: string
@@ -3391,7 +3393,7 @@ paths:
                 - PayloadData
               properties:
                 TransmitMode:
-                  description: 'The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode), <code>1</code> for AM (acknowledge mode), or <code>2</code> for (TM) transparent mode.'
+                  description: 'The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode) or <code>1</code> for AM (acknowledge mode).'
                   type: integer
                   minimum: 0
                   maximum: 1
@@ -4087,6 +4089,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IotCertificateId'
             - description: The ID of the certificate associated with the wireless gateway.
+        LoRaWANNetworkServerCertificateId:
+          allOf:
+            - $ref: '#/components/schemas/IotCertificateId'
+            - description: The ID of the certificate associated with the wireless gateway and used for LoRaWANNetworkServer endpoint.
     GetWirelessGatewayFirmwareInformationResponse:
       type: object
       properties:
@@ -4425,6 +4431,7 @@ components:
       type: string
       enum:
         - RuleName
+        - MqttTopic
     Expression:
       type: string
       maxLength: 2048
@@ -4971,7 +4978,7 @@ components:
         Fingerprint:
           allOf:
             - $ref: '#/components/schemas/Fingerprint'
-            - description: Fingerprint for Sidewalk application server private key.
+            - description: The fingerprint of the Sidewalk application server private key.
       description: Information about a Sidewalk account.
     WirelessGatewayServiceType:
       type: string
@@ -5384,7 +5391,7 @@ components:
         TransmitMode:
           allOf:
             - $ref: '#/components/schemas/TransmitMode'
-            - description: 'The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode), <code>1</code> for AM (acknowledge mode), or <code>2</code> for (TM) transparent mode.'
+            - description: 'The transmit mode to use to send data to the wireless device. Can be: <code>0</code> for UM (unacknowledge mode) or <code>1</code> for AM (acknowledge mode).'
         PayloadData:
           allOf:
             - $ref: '#/components/schemas/PayloadData'
