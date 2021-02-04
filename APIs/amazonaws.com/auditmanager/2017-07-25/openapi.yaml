@@ -2424,12 +2424,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetServicesInScopeResponse'
         '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
-        '481':
+        '482':
           description: InternalServerException
           content:
             application/json:

@@ -1504,6 +1504,54 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 512
+  '/jobs/{name}/jobRun/{runId}':
+    get:
+      operationId: DescribeJobRun
+      description: Represents one run of a DataBrew job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeJobRunResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the job being processed during this run.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 240
+        - name: runId
+          in: path
+          required: true
+          description: The unique identifier of the job run.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/recipes/{name}':
     get:
       operationId: DescribeRecipe
@@ -2901,6 +2949,65 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timeout'
             - description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+    DescribeJobRunResponse:
+      type: object
+      required:
+        - JobName
+      properties:
+        Attempt:
+          allOf:
+            - $ref: '#/components/schemas/Attempt'
+            - description: The number of times that DataBrew has attempted to run the job.
+        CompletedOn:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the job completed processing.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the dataset for the job to process.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/JobRunErrorMessage'
+            - description: A message indicating an error (if any) that was encountered when the job ran.
+        ExecutionTime:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionTime'
+            - description: 'The amount of time, in seconds, during which a job run consumed resources.'
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name of the job being processed during this run.
+        RunId:
+          allOf:
+            - $ref: '#/components/schemas/JobRunId'
+            - description: The unique identifier of the job run.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/JobRunState'
+            - description: The current state of the job run entity itself.
+        LogSubscription:
+          allOf:
+            - $ref: '#/components/schemas/LogSubscription'
+            - description: The current status of Amazon CloudWatch logging for the job run.
+        LogGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: 'The name of an Amazon CloudWatch log group, where the job writes diagnostic messages when it runs.'
+        Outputs:
+          allOf:
+            - $ref: '#/components/schemas/OutputList'
+            - description: One or more output artifacts from a job run.
+        RecipeReference:
+          $ref: '#/components/schemas/RecipeReference'
+        StartedBy:
+          allOf:
+            - $ref: '#/components/schemas/StartedBy'
+            - description: The Amazon Resource Name (ARN) of the user who initiated the job run.
+        StartedOn:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the job run began.
     DescribeProjectResponse:
       type: object
       required:
@@ -3739,7 +3846,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Delimiter'
             - description: A single character that specifies the delimiter used to create Csv job output.
-      description: Options that define how DataBrew will write a Csv file a.
+      description: Options that define how DataBrew will write a Csv file.
     DatabaseName:
       type: string
       minLength: 1
@@ -3846,6 +3953,34 @@ components:
       enum:
         - PROFILE
         - RECIPE
+    JobRunId:
+      type: string
+      minLength: 1
+      maxLength: 255
+    DescribeJobRunRequest:
+      type: object
+      title: DescribeJobRunRequest
+      properties: {}
+    JobRunErrorMessage:
+      type: string
+    ExecutionTime:
+      type: integer
+    JobRunState:
+      type: string
+      enum:
+        - STARTING
+        - RUNNING
+        - STOPPING
+        - STOPPED
+        - SUCCEEDED
+        - FAILED
+        - TIMEOUT
+    LogGroupName:
+      type: string
+      minLength: 1
+      maxLength: 512
+    StartedBy:
+      type: string
     DescribeProjectRequest:
       type: object
       title: DescribeProjectRequest
@@ -3890,8 +4025,6 @@ components:
         $ref: '#/components/schemas/SheetIndex'
       minItems: 1
       maxItems: 1
-    ExecutionTime:
-      type: integer
     Job:
       type: object
       required:
@@ -3982,28 +4115,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Job'
-    JobRunErrorMessage:
-      type: string
-    JobRunId:
-      type: string
-      minLength: 1
-      maxLength: 255
-    JobRunState:
-      type: string
-      enum:
-        - STARTING
-        - RUNNING
-        - STOPPING
-        - STOPPED
-        - SUCCEEDED
-        - FAILED
-        - TIMEOUT
-    LogGroupName:
-      type: string
-      minLength: 1
-      maxLength: 512
-    StartedBy:
-      type: string
     JobRun:
       type: object
       properties:

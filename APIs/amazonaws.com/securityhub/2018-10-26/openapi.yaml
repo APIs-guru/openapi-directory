@@ -2261,7 +2261,7 @@ paths:
   /products:
     get:
       operationId: DescribeProducts
-      description: Returns information about the available products that you can subscribe to and integrate with Security Hub in order to consolidate findings.
+      description: '<p>Returns information about product integrations in Security Hub.</p> <p>You can optionally provide an integration ARN. If you provide an integration ARN, then the results only include that integration.</p> <p>If you do not provide an integration ARN, then the results include all of the available product integrations. </p>'
       responses:
         '200':
           description: Success
@@ -2308,6 +2308,13 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
+        - name: ProductArn
+          in: query
+          required: false
+          description: The ARN of the integration to return.
+          schema:
+            type: string
+            pattern: .*\S.*
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4637,7 +4644,7 @@ components:
         Action:
           allOf:
             - $ref: '#/components/schemas/Action'
-            - description: Provides details about an action that was detected for the finding.
+            - description: Provides details about an action that affects or that was taken on a resource.
       description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>'
     BatchUpdateFindingsResponse:
       type: object
@@ -5224,7 +5231,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PortProbeAction'
             - description: 'Included if <code>ActionType</code> is <code>PORT_PROBE</code>. Provides details about the port probe that was detected. '
-      description: '<p>Provides details about one of the following actions that were detected for the finding:</p> <ul> <li> <p>A remote IP address issued an AWS API call</p> </li> <li> <p>A DNS request was received</p> </li> <li> <p>A remote IP address attempted to connect to an EC2 instance</p> </li> <li> <p>A remote IP address attempted a port probe on an EC2 instance</p> </li> </ul>'
+      description: '<p>Provides details about one of the following actions that affects or that was taken on a resource:</p> <ul> <li> <p>A remote IP address issued an AWS API call</p> </li> <li> <p>A DNS request was received</p> </li> <li> <p>A remote IP address attempted to connect to an EC2 instance</p> </li> <li> <p>A remote IP address attempted a port probe on an EC2 instance</p> </li> </ul>'
     ActionLocalIpDetails:
       type: object
       properties:

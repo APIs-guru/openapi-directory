@@ -3,7 +3,7 @@ info:
   version: '2016-10-06'
   x-release: v4
   title: AWS CodeBuild
-  description: '<fullname>AWS CodeBuild</fullname> <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the need to provision, manage, and scale your own build servers. It provides prepackaged build environments for the most popular programming languages and build tools, such as Apache Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests. You pay only for the build time you consume. For more information about AWS CodeBuild, see the <i> <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html">AWS CodeBuild User Guide</a>.</i> </p> <p>AWS CodeBuild supports these operations:</p> <ul> <li> <p> <code>BatchDeleteBuilds</code>: Deletes one or more builds.</p> </li> <li> <p> <code>BatchGetBuilds</code>: Gets information about one or more builds.</p> </li> <li> <p> <code>BatchGetProjects</code>: Gets information about one or more build projects. A <i>build project</i> defines how AWS CodeBuild runs a build. This includes information such as where to get the source code to build, the build environment to use, the build commands to run, and where to store the build output. A <i>build environment</i> is a representation of operating system, programming language runtime, and tools that AWS CodeBuild uses to run a build. You can add tags to build projects to help manage your resources and costs.</p> </li> <li> <p> <code>BatchGetReportGroups</code>: Returns an array of report groups. </p> </li> <li> <p> <code>BatchGetReports</code>: Returns an array of reports. </p> </li> <li> <p> <code>CreateProject</code>: Creates a build project.</p> </li> <li> <p> <code>CreateReportGroup</code>: Creates a report group. A report group contains a collection of reports. </p> </li> <li> <p> <code>CreateWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>DeleteProject</code>: Deletes a build project.</p> </li> <li> <p> <code>DeleteReport</code>: Deletes a report. </p> </li> <li> <p> <code>DeleteReportGroup</code>: Deletes a report group. </p> </li> <li> <p> <code>DeleteResourcePolicy</code>: Deletes a resource policy that is identified by its resource ARN. </p> </li> <li> <p> <code>DeleteSourceCredentials</code>: Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials.</p> </li> <li> <p> <code>DeleteWebhook</code>: For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.</p> </li> <li> <p> <code>DescribeTestCases</code>: Returns a list of details about test cases for a report. </p> </li> <li> <p> <code>GetResourcePolicy</code>: Gets a resource policy that is identified by its resource ARN. </p> </li> <li> <p> <code>ImportSourceCredentials</code>: Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository.</p> </li> <li> <p> <code>InvalidateProjectCache</code>: Resets the cache for a project.</p> </li> <li> <p> <code>ListBuilds</code>: Gets a list of build IDs, with each build ID representing a single build.</p> </li> <li> <p> <code>ListBuildsForProject</code>: Gets a list of build IDs for the specified build project, with each build ID representing a single build.</p> </li> <li> <p> <code>ListCuratedEnvironmentImages</code>: Gets information about Docker images that are managed by AWS CodeBuild.</p> </li> <li> <p> <code>ListProjects</code>: Gets a list of build project names, with each build project name representing a single build project.</p> </li> <li> <p> <code>ListReportGroups</code>: Gets a list ARNs for the report groups in the current AWS account. </p> </li> <li> <p> <code>ListReports</code>: Gets a list ARNs for the reports in the current AWS account. </p> </li> <li> <p> <code>ListReportsForReportGroup</code>: Returns a list of ARNs for the reports that belong to a <code>ReportGroup</code>. </p> </li> <li> <p> <code>ListSharedProjects</code>: Gets a list of ARNs associated with projects shared with the current AWS account or user.</p> </li> <li> <p> <code>ListSharedReportGroups</code>: Gets a list of ARNs associated with report groups shared with the current AWS account or user</p> </li> <li> <p> <code>ListSourceCredentials</code>: Returns a list of <code>SourceCredentialsInfo</code> objects. Each <code>SourceCredentialsInfo</code> object includes the authentication type, token ARN, and type of source provider for one set of credentials.</p> </li> <li> <p> <code>PutResourcePolicy</code>: Stores a resource policy for the ARN of a <code>Project</code> or <code>ReportGroup</code> object. </p> </li> <li> <p> <code>StartBuild</code>: Starts running a build.</p> </li> <li> <p> <code>StopBuild</code>: Attempts to stop running a build.</p> </li> <li> <p> <code>UpdateProject</code>: Changes the settings of an existing build project.</p> </li> <li> <p> <code>UpdateReportGroup</code>: Changes a report group.</p> </li> <li> <p> <code>UpdateWebhook</code>: Changes the settings of an existing webhook.</p> </li> </ul>'
+  description: '<fullname>AWS CodeBuild</fullname> <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the need to provision, manage, and scale your own build servers. It provides prepackaged build environments for the most popular programming languages and build tools, such as Apache Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests. You pay only for the build time you consume. For more information about AWS CodeBuild, see the <i> <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html">AWS CodeBuild User Guide</a>.</i> </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -909,7 +909,7 @@ paths:
   /#X-Amz-Target=CodeBuild_20161006.GetReportGroupTrend:
     post:
       operationId: GetReportGroupTrend
-      description: ''
+      description: Analyzes and accumulates test report values for the specified test reports.
       responses:
         '200':
           description: Success
@@ -1248,7 +1248,7 @@ paths:
   /#X-Amz-Target=CodeBuild_20161006.ListBuildsForProject:
     post:
       operationId: ListBuildsForProject
-      description: 'Gets a list of build IDs for the specified build project, with each build ID representing a single build.'
+      description: 'Gets a list of build identifiers for the specified build project, with each build identifier representing a single build.'
       responses:
         '200':
           description: Success
@@ -2840,9 +2840,13 @@ components:
       type: object
       properties:
         stats:
-          $ref: '#/components/schemas/ReportGroupTrendStats'
+          allOf:
+            - $ref: '#/components/schemas/ReportGroupTrendStats'
+            - description: Contains the accumulated trend data.
         rawData:
-          $ref: '#/components/schemas/ReportGroupTrendRawDataList'
+          allOf:
+            - $ref: '#/components/schemas/ReportGroupTrendRawDataList'
+            - description: An array that contains the raw data for each report.
     GetReportGroupTrendInput:
       type: object
       required:
@@ -2851,11 +2855,17 @@ components:
       title: GetReportGroupTrendInput
       properties:
         reportGroupArn:
-          $ref: '#/components/schemas/NonEmptyString'
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the report group that contains the reports to analyze.
         numOfReports:
-          $ref: '#/components/schemas/PageSize'
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: '<p>The number of reports to analyze. This operation always retrieves the most recent reports.</p> <p>If this parameter is omitted, the most recent 100 reports are analyzed.</p>'
         trendField:
-          $ref: '#/components/schemas/ReportGroupTrendFieldType'
+          allOf:
+            - $ref: '#/components/schemas/ReportGroupTrendFieldType'
+            - description: '<p>The test report value to accumulate. This must be one of the following values:</p> <dl> <dt>Test reports:</dt> <dd> <dl> <dt>DURATION</dt> <dd> <p>Accumulate the test run times for the specified reports.</p> </dd> <dt>PASS_RATE</dt> <dd> <p>Accumulate the percentage of tests that passed for the specified test reports.</p> </dd> <dt>TOTAL</dt> <dd> <p>Accumulate the total number of tests for the specified test reports.</p> </dd> </dl> </dd> </dl> <dl> <dt>Code coverage reports:</dt> <dd> <dl> <dt>BRANCH_COVERAGE</dt> <dd> <p>Accumulate the branch coverage percentages for the specified test reports.</p> </dd> <dt>BRANCHES_COVERED</dt> <dd> <p>Accumulate the branches covered values for the specified test reports.</p> </dd> <dt>BRANCHES_MISSED</dt> <dd> <p>Accumulate the branches missed values for the specified test reports.</p> </dd> <dt>LINE_COVERAGE</dt> <dd> <p>Accumulate the line coverage percentages for the specified test reports.</p> </dd> <dt>LINES_COVERED</dt> <dd> <p>Accumulate the lines covered values for the specified test reports.</p> </dd> <dt>LINES_MISSED</dt> <dd> <p>Accumulate the lines not covered values for the specified test reports.</p> </dd> </dl> </dd> </dl>'
     GetResourcePolicyOutput:
       type: object
       properties:
@@ -3034,7 +3044,7 @@ components:
         sortOrder:
           allOf:
             - $ref: '#/components/schemas/SortOrderType'
-            - description: '<p>The order to list build IDs. Valid values include:</p> <ul> <li> <p> <code>ASCENDING</code>: List the build IDs in ascending order by build ID.</p> </li> <li> <p> <code>DESCENDING</code>: List the build IDs in descending order by build ID.</p> </li> </ul>'
+            - description: '<p>The order to list results in. The results are sorted by build number, not the build identifier.</p> <p>Valid values include:</p> <ul> <li> <p> <code>ASCENDING</code>: List the build IDs in ascending order by build ID.</p> </li> <li> <p> <code>DESCENDING</code>: List the build IDs in descending order by build ID.</p> </li> </ul> <p>If the project has more than 100 builds, setting the sort order will result in an error. </p>'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3373,7 +3383,7 @@ components:
         reportBuildStatusOverride:
           allOf:
             - $ref: '#/components/schemas/WrapperBoolean'
-            - description: '<p> Set to true to report to your source provider the status of a build''s start and completion. If you use this option with a source provider other than GitHub, GitHub Enterprise, or Bitbucket, an invalidInputException is thrown. </p> <note> <p> The status of a build triggered by a webhook is always reported to your source provider. </p> </note>'
+            - description: '<p> Set to true to report to your source provider the status of a build''s start and completion. If you use this option with a source provider other than GitHub, GitHub Enterprise, or Bitbucket, an <code>invalidInputException</code> is thrown. </p> <p>To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html">Source provider access</a> in the <i>AWS CodeBuild User Guide</i>.</p> <note> <p> The status of a build triggered by a webhook is always reported to your source provider. </p> </note>'
         buildStatusConfigOverride:
           allOf:
             - $ref: '#/components/schemas/BuildStatusConfig'
@@ -3901,7 +3911,7 @@ components:
         reportBuildStatus:
           allOf:
             - $ref: '#/components/schemas/WrapperBoolean'
-            - description: '<p> Set to true to report the status of a build''s start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown. </p> <note> <p> The status of a build triggered by a webhook is always reported to your source provider. </p> </note>'
+            - description: '<p> Set to true to report the status of a build''s start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an <code>invalidInputException</code> is thrown. </p> <p>To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html">Source provider access</a> in the <i>AWS CodeBuild User Guide</i>.</p> <note> <p> The status of a build triggered by a webhook is always reported to your source provider. </p> </note>'
         buildStatusConfig:
           allOf:
             - $ref: '#/components/schemas/BuildStatusConfig'
@@ -4901,34 +4911,36 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The ARN of a <code>ReportGroup</code>. '
+            - description: 'The ARN of the <code>ReportGroup</code>. '
         name:
           allOf:
             - $ref: '#/components/schemas/ReportGroupName'
-            - description: ' The name of a <code>ReportGroup</code>. '
+            - description: 'The name of the <code>ReportGroup</code>. '
         type:
           allOf:
             - $ref: '#/components/schemas/ReportType'
-            - description: ' The type of the <code>ReportGroup</code>. The one valid value is <code>TEST</code>. '
+            - description: '<p>The type of the <code>ReportGroup</code>. This can be one of the following values:</p> <dl> <dt>CODE_COVERAGE</dt> <dd> <p>The report group contains code coverage reports.</p> </dd> <dt>TEST</dt> <dd> <p>The report group contains test reports.</p> </dd> </dl>'
         exportConfig:
           allOf:
             - $ref: '#/components/schemas/ReportExportConfig'
-            - description: ' Information about the destination where the raw data of this <code>ReportGroup</code> is exported. '
+            - description: 'Information about the destination where the raw data of this <code>ReportGroup</code> is exported. '
         created:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: ' The date and time this <code>ReportGroup</code> was created. '
+            - description: 'The date and time this <code>ReportGroup</code> was created. '
         lastModified:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: ' The date and time this <code>ReportGroup</code> was last modified. '
+            - description: 'The date and time this <code>ReportGroup</code> was last modified. '
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: <p> A list of tag key and value pairs associated with this report group. </p> <p>These tags are available for use by AWS services that support AWS CodeBuild report group tags.</p>
+            - description: <p>A list of tag key and value pairs associated with this report group. </p> <p>These tags are available for use by AWS services that support AWS CodeBuild report group tags.</p>
         status:
-          $ref: '#/components/schemas/ReportGroupStatusType'
-      description: ' A series of reports. Each report contains information about the results from running a series of test cases. You specify the test cases for a report group in the buildspec for a build project using one or more paths to the test case files. '
+          allOf:
+            - $ref: '#/components/schemas/ReportGroupStatusType'
+            - description: '<p>The status of the report group. This property is read-only.</p> <p>This can be one of the following values:</p> <dl> <dt>ACTIVE</dt> <dd> <p>The report group is active.</p> </dd> <dt>DELETING</dt> <dd> <p>The report group is in the process of being deleted.</p> </dd> </dl>'
+      description: 'A series of reports. Each report contains information about the results from running a series of test cases. You specify the test cases for a report group in the buildspec for a build project using one or more paths to the test case files. '
     FilterGroups:
       type: array
       items:
@@ -5172,11 +5184,18 @@ components:
       type: object
       properties:
         average:
-          $ref: '#/components/schemas/String'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Contains the average of all values analyzed.
         max:
-          $ref: '#/components/schemas/String'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Contains the maximum value analyzed.
         min:
-          $ref: '#/components/schemas/String'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Contains the minimum value analyzed.
+      description: 'Contains trend statistics for a set of reports. The actual values depend on the type of trend being collected. For more information, see .'
     ReportGroupTrendRawDataList:
       type: array
       items:
@@ -5491,9 +5510,14 @@ components:
       type: object
       properties:
         reportArn:
-          $ref: '#/components/schemas/NonEmptyString'
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the report.
         data:
-          $ref: '#/components/schemas/String'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value of the requested data field from the report.
+      description: 'Contains the unmodified data for the report. For more information, see .'
     ReportPackagingType:
       type: string
       enum:

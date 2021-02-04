@@ -505,6 +505,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/IAMUserIdentity'
                         - description: An IAM user identity.
+                    iamRole:
+                      allOf:
+                        - $ref: '#/components/schemas/IAMRoleIdentity'
+                        - description: An IAM role identity.
                 accessPolicyResource:
                   description: Contains an AWS IoT SiteWise Monitor resource ID for a portal or project.
                   type: object
@@ -1347,6 +1351,71 @@ paths:
             type: integer
             minimum: 1
             maximum: 250
+  '/portals/{portalId}/presigned-url':
+    post:
+      operationId: CreatePresignedPortalUrl
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePresignedPortalUrlResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: portalId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sessionDurationSeconds:
+                  description: ''
+                  type: integer
+                  minimum: 900
+                  maximum: 43200
+                state:
+                  description: ''
+                  type: string
+                  pattern: .+
+                  minLength: 0
+                  maxLength: 512
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /projects:
     post:
       operationId: CreateProject
@@ -1615,6 +1684,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/IAMUserIdentity'
                         - description: An IAM user identity.
+                    iamRole:
+                      allOf:
+                        - $ref: '#/components/schemas/IAMRoleIdentity'
+                        - description: An IAM role identity.
                 accessPolicyResource:
                   description: Contains an AWS IoT SiteWise Monitor resource ID for a portal or project.
                   type: object
@@ -4443,6 +4516,16 @@ components:
             - $ref: '#/components/schemas/ARN'
             - description: '<p>The ARN of the IAM user. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM ARNs</a> in the <i>IAM User Guide</i>.</p> <note> <p>If you delete the IAM user, access policies that contain this identity include an empty <code>arn</code>. You can delete the access policy for the IAM user that no longer exists.</p> </note>'
       description: Contains information about an AWS Identity and Access Management (IAM) user.
+    IAMRoleIdentity:
+      type: object
+      required:
+        - arn
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: 'The ARN of the IAM role. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.htmll#identifiers-arns">IAM ARNs</a> in the <i>IAM User Guide</i>.'
+      description: 'Contains information about an AWS Identity and Access Management (IAM) role. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM roles</a> in the <i>IAM User Guide</i>.'
     PortalResource:
       type: object
       required:
@@ -4647,6 +4730,13 @@ components:
       type: string
       enum:
         - PNG
+    CreatePresignedPortalUrlResponse:
+      type: object
+      required:
+        - presignedPortalUrl
+      properties:
+        presignedPortalUrl:
+          $ref: '#/components/schemas/Url'
     CreateProjectResponse:
       type: object
       required:
@@ -5522,6 +5612,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IAMUserIdentity'
             - description: An IAM user identity.
+        iamRole:
+          allOf:
+            - $ref: '#/components/schemas/IAMRoleIdentity'
+            - description: An IAM role identity.
       description: '<p>Contains an identity that can access an AWS IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can''t use AWS APIs to retrieve AWS SSO identity IDs. You can find the AWS SSO identity IDs in the URL of user and group pages in the <a href="https://console.aws.amazon.com/singlesignon">AWS SSO console</a>.</p> </note>'
     Resource:
       type: object
@@ -6609,6 +6703,23 @@ components:
       pattern: '^[!-~]*'
       minLength: 1
       maxLength: 64
+    SessionDurationSeconds:
+      type: integer
+      minimum: 900
+      maximum: 43200
+    state:
+      type: string
+      pattern: .+
+      minLength: 0
+      maxLength: 512
+    CreatePresignedPortalUrlRequest:
+      type: object
+      title: CreatePresignedPortalUrlRequest
+      properties:
+        sessionDurationSeconds:
+          $ref: '#/components/schemas/SessionDurationSeconds'
+        state:
+          $ref: '#/components/schemas/state'
     CreateProjectRequest:
       type: object
       required:
@@ -7033,7 +7144,7 @@ components:
     Measurement:
       type: object
       properties: {}
-      description: 'Contains an asset measurement property. This structure is empty. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements">Measurements</a> in the <i>AWS IoT SiteWise User Guide</i>.'
+      description: 'Contains an asset measurement property. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements">Measurements</a> in the <i>AWS IoT SiteWise User Guide</i>.'
     MetricWindow:
       type: object
       properties:

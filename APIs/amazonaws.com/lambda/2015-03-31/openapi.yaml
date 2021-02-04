@@ -827,7 +827,7 @@ paths:
                   minimum: -1
                   maximum: 10000
                 TumblingWindowInSeconds:
-                  description: (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+                  description: (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
                   type: integer
                   minimum: 0
                   maximum: 900
@@ -850,7 +850,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/SourceAccessConfiguration'
-                  minItems: 1
+                  minItems: 0
                   maxItems: 22
                 SelfManagedEventSource:
                   description: The Self-Managed Apache Kafka cluster for your event source.
@@ -1033,6 +1033,7 @@ paths:
                     - nodejs8.10
                     - nodejs10.x
                     - nodejs12.x
+                    - nodejs14.x
                     - java8
                     - java8.al2
                     - java11
@@ -1163,7 +1164,7 @@ paths:
                     $ref: '#/components/schemas/FileSystemConfig'
                   maxItems: 1
                 ImageConfig:
-                  description: 'Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container settings</a>. '
+                  description: 'Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms">Container settings</a>. '
                   type: object
                   properties:
                     EntryPoint:
@@ -1761,10 +1762,10 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/SourceAccessConfiguration'
-                  minItems: 1
+                  minItems: 0
                   maxItems: 22
                 TumblingWindowInSeconds:
-                  description: (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+                  description: (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
                   type: integer
                   minimum: 0
                   maximum: 900
@@ -3029,6 +3030,7 @@ paths:
                     - nodejs8.10
                     - nodejs10.x
                     - nodejs12.x
+                    - nodejs14.x
                     - java8
                     - java8.al2
                     - java11
@@ -3081,7 +3083,7 @@ paths:
                     $ref: '#/components/schemas/FileSystemConfig'
                   maxItems: 1
                 ImageConfig:
-                  description: 'Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container settings</a>. '
+                  description: 'Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms">Container settings</a>. '
                   type: object
                   properties:
                     EntryPoint:
@@ -3701,6 +3703,7 @@ paths:
               - nodejs8.10
               - nodejs10.x
               - nodejs12.x
+              - nodejs14.x
               - java8
               - java8.al2
               - java11
@@ -3886,6 +3889,7 @@ paths:
               - nodejs8.10
               - nodejs10.x
               - nodejs12.x
+              - nodejs14.x
               - java8
               - java8.al2
               - java11
@@ -4837,7 +4841,7 @@ components:
         TumblingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/TumblingWindowInSeconds'
-            - description: (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+            - description: (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
         FunctionResponseTypes:
           allOf:
             - $ref: '#/components/schemas/FunctionResponseTypeList'
@@ -4875,7 +4879,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/SourceAccessType'
-            - description: '<p>The type of authentication protocol or the VPC components for your event source. For example: <code>"Type":"SASL_SCRAM_512_AUTH"</code>.</p> <ul> <li> <p> <code>BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.</p> </li> <li> <p> <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Kafka cluster.</p> </li> <li> <p> <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_256_AUTH</code> - The ARN of your secret key used for SASL SCRAM-256 authentication of your Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_512_AUTH</code> - The ARN of your secret key used for SASL SCRAM-512 authentication of your Kafka brokers.</p> </li> </ul>'
+            - description: '<p>The type of authentication protocol or the VPC components for your event source. For example: <code>"Type":"SASL_SCRAM_512_AUTH"</code>.</p> <ul> <li> <p> <code>BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.</p> </li> <li> <p> <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Self-Managed Apache Kafka cluster.</p> </li> <li> <p> <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Self-Managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your Self-Managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.</p> </li> </ul>'
         URI:
           allOf:
             - $ref: '#/components/schemas/URI'
@@ -5731,6 +5735,7 @@ components:
         - nodejs8.10
         - nodejs10.x
         - nodejs12.x
+        - nodejs14.x
         - java8
         - java8.al2
         - java11
@@ -6187,7 +6192,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SourceAccessConfiguration'
-      minItems: 1
+      minItems: 0
       maxItems: 22
     SelfManagedEventSource:
       type: object
@@ -6260,7 +6265,7 @@ components:
         TumblingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/TumblingWindowInSeconds'
-            - description: (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+            - description: (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
         Topics:
           allOf:
             - $ref: '#/components/schemas/Topics'
@@ -6391,7 +6396,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkingDirectory'
             - description: Specifies the working directory.
-      description: 'Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container settings</a>. '
+      description: 'Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms">Container settings</a>. '
     CreateFunctionRequest:
       type: object
       required:
@@ -6475,7 +6480,7 @@ components:
         ImageConfig:
           allOf:
             - $ref: '#/components/schemas/ImageConfig'
-            - description: Configuration values that override the container image Dockerfile.
+            - description: ' <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container image configuration values</a> that override the values in the container image Dockerfile.'
         CodeSigningConfigArn:
           allOf:
             - $ref: '#/components/schemas/CodeSigningConfigArn'
@@ -7270,7 +7275,7 @@ components:
         TumblingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/TumblingWindowInSeconds'
-            - description: (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+            - description: (Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
         FunctionResponseTypes:
           allOf:
             - $ref: '#/components/schemas/FunctionResponseTypeList'
@@ -7374,7 +7379,7 @@ components:
         ImageConfig:
           allOf:
             - $ref: '#/components/schemas/ImageConfig'
-            - description: Configuration values that override the container image Dockerfile.
+            - description: ' <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container image configuration values</a> that override the values in the container image Dockerfile.'
     UpdateFunctionEventInvokeConfigRequest:
       type: object
       title: UpdateFunctionEventInvokeConfigRequest
