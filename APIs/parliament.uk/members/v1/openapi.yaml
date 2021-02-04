@@ -1,0 +1,2918 @@
+openapi: 3.0.0
+servers:
+  - url: https://members-api.parliament.uk
+info:
+  contact:
+    email: softwareengineering@parliament.uk
+    name: UK Parliament
+    url: ""
+  description: An API which retrieves Members data.
+  title: Members API
+  version: v1
+  x-apisguru-categories:
+    - open_data
+  x-origin:
+    - format: swagger
+      url: https://members-api.parliament.uk/swagger/v1/swagger.json
+      version: "2.0"
+  x-providerName: parliament.uk
+  x-serviceName: members
+paths:
+  "/api/Location/Browse/{locationType}/{locationName}":
+    get:
+      operationId: Browse
+      parameters:
+        - description: Location by type of location
+          in: path
+          name: locationType
+          required: true
+          schema:
+            enum:
+              - Country
+              - Region
+              - County
+              - Constituency
+            type: string
+        - description: Location by name specified
+          in: path
+          name: locationName
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_Location_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_Location_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_Location_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a list of locations, both parent and child
+      tags:
+        - Location
+  /api/Location/Constituency/Search:
+    get:
+      operationId: Search
+      parameters:
+        - description: Constituencies containing serach term in their name
+          in: query
+          name: searchText
+          required: false
+          schema:
+            type: string
+        - description: The number of records to skip from the first, default is 0
+          in: query
+          name: skip
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: The number of records to return, default is 20. Maximum is 20
+          in: query
+          name: take
+          required: false
+          schema:
+            default: 20
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Constituency_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Constituency_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Constituency_"
+          description: Success
+        "400":
+          description: Bad Request
+      summary: Returns a list of constituencies
+      tags:
+        - Location
+  "/api/Location/Constituency/{id}":
+    get:
+      operationId: GetConstituency
+      parameters:
+        - description: Constituency by ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_Constituency_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_Constituency_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_Constituency_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a constituency by ID
+      tags:
+        - Location
+  "/api/Location/Constituency/{id}/ElectionResult/Latest":
+    get:
+      operationId: GetLatestConstituencyResult
+      parameters:
+        - description: Latest election result by constituency id
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_ElectionResult_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_ElectionResult_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_ElectionResult_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns latest election result by constituency id
+      tags:
+        - Location
+  "/api/Location/Constituency/{id}/ElectionResult/{electionId}":
+    get:
+      operationId: GetConstituencyResult
+      parameters:
+        - description: Election result by constituency id
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: Election result by election id
+          in: path
+          name: electionId
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_ElectionResult_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_ElectionResult_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_ElectionResult_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns an election result by constituency and election id
+      tags:
+        - Location
+  "/api/Location/Constituency/{id}/ElectionResults":
+    get:
+      operationId: GetConstituencyResults
+      parameters:
+        - description: Elections results by constituency ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_ElectionResult_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_ElectionResult_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_List_ElectionResult_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a list of election results by constituency ID
+      tags:
+        - Location
+  "/api/Location/Constituency/{id}/Geometry":
+    get:
+      operationId: GetConstituencyGeometry
+      parameters:
+        - description: Geometry by constituency ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns geometry by constituency ID
+      tags:
+        - Location
+  "/api/Location/Constituency/{id}/Representations":
+    get:
+      operationId: GetConstituencyRepresentations
+      parameters:
+        - description: Representations by constituency ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_ConstituencyRepresentation_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_ConstituencyRepresentation_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_List_ConstituencyRepresentation_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a list of representations by constituency ID
+      tags:
+        - Location
+  "/api/Location/Constituency/{id}/Synopsis":
+    get:
+      operationId: GetConstituencySynopsis
+      parameters:
+        - description: Synopsis by constituency ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a synopsis by constituency ID
+      tags:
+        - Location
+  /api/LordsInterests/Register:
+    get:
+      operationId: GetRegister
+      parameters:
+        - description: Registered interests containing search term
+          in: query
+          name: searchTerm
+          required: false
+          schema:
+            type: string
+        - description: Page of results to return, default 0. Results per page 20.
+          in: query
+          name: page
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: Registered interests that have been deleted
+          in: query
+          name: includeDeleted
+          required: false
+          schema:
+            default: false
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_MembersInterests_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_MembersInterests_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_MembersInterests_"
+          description: Success
+        "400":
+          description: Bad Request
+      summary: Returns a list of registered interests
+      tags:
+        - LordsInterests
+  /api/LordsInterests/Staff:
+    get:
+      operationId: GetStaff
+      parameters:
+        - description: Staff containing search term
+          in: query
+          name: searchTerm
+          required: false
+          schema:
+            type: string
+        - description: Page of results to return, default 0. Results per page 20.
+          in: query
+          name: page
+          required: false
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_MembersStaff_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_MembersStaff_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_MembersStaff_"
+          description: Success
+        "400":
+          description: Bad Request
+      summary: Returns a list of staff
+      tags:
+        - LordsInterests
+  /api/Members/History:
+    get:
+      operationId: GetHistory
+      parameters:
+        - description: List of MemberIds to find
+          explode: true
+          in: query
+          name: ids
+          required: false
+          schema:
+            items:
+              format: int32
+              type: integer
+            type: array
+            uniqueItems: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_MemberHistory_"
+                type: array
+                uniqueItems: false
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_MemberHistory_"
+                type: array
+                uniqueItems: false
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_MemberHistory_"
+                type: array
+                uniqueItems: false
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return members by ID with list of their historical names, parties and memberships
+      tags:
+        - Members
+  /api/Members/Search:
+    get:
+      parameters:
+        - description: Members where name contains term specified
+          in: query
+          name: Name
+          required: false
+          schema:
+            type: string
+        - description: Members where postcode or geographical location matches the term specified
+          in: query
+          name: Location
+          required: false
+          schema:
+            type: string
+        - description: Members which have held the post specified
+          in: query
+          name: PostTitle
+          required: false
+          schema:
+            type: string
+        - description: Members which are currently affiliated with party with party ID
+          in: query
+          name: PartyId
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: Members where their most recent house is the house specified
+          in: query
+          name: House
+          required: false
+          schema:
+            enum:
+              - Commons
+              - Lords
+            type: string
+        - description: Members which currently hold the constituency with constituency id
+          in: query
+          name: ConstituencyId
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: Members with surname begining with letter(s) specified
+          in: query
+          name: NameStartsWith
+          required: false
+          schema:
+            type: string
+        - description: Members with the gender specified
+          in: query
+          name: Gender
+          required: false
+          schema:
+            type: string
+        - description: Members who started on or after the date given
+          in: query
+          name: MembershipStartedSince
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Members who left the House on or after the date given
+          in: query
+          name: MembershipEnded.MembershipEndedSince
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - explode: true
+          in: query
+          name: MembershipEnded.MembershipEndReasonIds
+          required: false
+          schema:
+            items:
+              format: int32
+              type: integer
+            type: array
+            uniqueItems: false
+        - description: Members who were active on or after the date specified
+          in: query
+          name: MembershipInDateRange.WasMemberOnOrAfter
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Members who were active on or before the date specified
+          in: query
+          name: MembershipInDateRange.WasMemberOnOrBefore
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: Members who were active in the house specifid
+          in: query
+          name: MembershipInDateRange.WasMemberOfHouse
+          required: false
+          schema:
+            enum:
+              - Commons
+              - Lords
+            type: string
+        - description: Members currently Eligible to sit in their House
+          in: query
+          name: IsEligible
+          required: false
+          schema:
+            type: boolean
+        - description: Members who are current or former members
+          in: query
+          name: IsCurrentMember
+          required: false
+          schema:
+            type: boolean
+        - description: Members with specified policy interest
+          in: query
+          name: PolicyInterestId
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - description: Members with specified experience
+          in: query
+          name: Experience
+          required: false
+          schema:
+            type: string
+        - description: The number of records to skip from the first, default is 0
+          in: query
+          name: skip
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: The number of records to return, default is 20. Maximum is 20
+          in: query
+          name: take
+          required: false
+          schema:
+            default: 20
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Member_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Member_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Member_"
+          description: Success
+        "400":
+          description: Bad Request
+      summary: Returns a list of current members of the Commons or Lords
+      tags:
+        - Members
+  /api/Members/SearchHistorical:
+    get:
+      operationId: SearchHistorical
+      parameters:
+        - description: Members with names containing the term specified
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: Members that were an active member of the Commons or Lords on the date specified
+          in: query
+          name: dateToSearchFor
+          required: false
+          schema:
+            format: date-time
+            type: string
+        - description: The number of records to skip from the first, default is 0
+          in: query
+          name: skip
+          required: false
+          schema:
+            default: 0
+            format: int32
+            type: integer
+        - description: The number of records to return, default is 20. Maximum is 20
+          in: query
+          name: take
+          required: false
+          schema:
+            default: 20
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Member_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Member_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Member_"
+          description: Success
+        "400":
+          description: Bad Request
+      summary: Returns a list of members of the Commons or Lords
+      tags:
+        - Members
+  "/api/Members/{id}":
+    get:
+      operationId: Get
+      parameters:
+        - description: Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: Member object will be populated with details from the date specified
+          in: query
+          name: detailsForDate
+          required: false
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_Member_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_Member_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_Member_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/Biography":
+    get:
+      operationId: GetBiography
+      parameters:
+        - description: Biography of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_MemberBiography_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_MemberBiography_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_MemberBiography_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return biography of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/Contact":
+    get:
+      operationId: GetContactInfo
+      parameters:
+        - description: Contact details of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_ContactInformation_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_ContactInformation_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_List_ContactInformation_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return list of contact details of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/ContributionSummary":
+    get:
+      operationId: GetContributionSummary
+      parameters:
+        - description: Contribution summary of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: page
+          required: false
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_DebateContribution_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_DebateContribution_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_DebateContribution_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return contribution summary of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/Edms":
+    get:
+      operationId: GetEdms
+      parameters:
+        - description: Early day motions of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: page
+          required: false
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_EarlyDayMotion_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_EarlyDayMotion_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_EarlyDayMotion_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return list of early day motions of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/Experience":
+    get:
+      operationId: GetExperiences
+      parameters:
+        - description: Experience of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_BiographyExperience_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_BiographyExperience_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_List_BiographyExperience_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return experience of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/Focus":
+    get:
+      operationId: GetFocus
+      parameters:
+        - description: Areas of focus of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_MemberFocus_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_MemberFocus_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_List_MemberFocus_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return list of areas of focus of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/LatestElectionResult":
+    get:
+      operationId: GetMembersLatestElectionResult
+      parameters:
+        - description: Latest election result of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_ElectionResult_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_ElectionResult_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_ElectionResult_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return latest election result of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/Portrait":
+    get:
+      operationId: GetPortrait
+      parameters:
+        - description: Portrait of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: cropType
+          required: false
+          schema:
+            default: 0
+            enum:
+              - FullSize
+              - OneOne
+              - ThreeTwo
+              - ThreeFour
+            type: string
+        - in: query
+          name: webVersion
+          required: false
+          schema:
+            default: true
+            type: boolean
+      responses:
+        "200":
+          description: Success
+        "204":
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return portrait of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/PortraitUrl":
+    get:
+      operationId: GetPortraitUrl
+      parameters:
+        - description: Portrait url of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return portrait url of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/RegisteredInterests":
+    get:
+      operationId: GetRegisteredInterests
+      parameters:
+        - description: Registered interests of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_RegisteredInterestCategory_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_RegisteredInterestCategory_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_List_RegisteredInterestCategory_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return list of registered interests of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/Staff":
+    get:
+      parameters:
+        - description: Staff of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_Staff_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_List_Staff_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_List_Staff_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return list of staff of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/Synopsis":
+    get:
+      operationId: GetSynopsis
+      parameters:
+        - description: Synopsis of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return synopsis of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/Thumbnail":
+    get:
+      operationId: GetThumbnail
+      parameters:
+        - description: Thumbnail of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return thumbnail of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/ThumbnailUrl":
+    get:
+      operationId: GetThumbnailUrl
+      parameters:
+        - description: Thumbnail url of Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/Item_String_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return thumbnail url of member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/Voting":
+    get:
+      operationId: GetVoting
+      parameters:
+        - description: Votes by Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: house
+          required: true
+          schema:
+            enum:
+              - Commons
+              - Lords
+            type: string
+        - in: query
+          name: page
+          required: false
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Vote_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Vote_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Vote_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return list of votes by member by ID
+      tags:
+        - Members
+  "/api/Members/{id}/WrittenQuestions":
+    get:
+      operationId: GetWrittenQuestions
+      parameters:
+        - description: Written questions by Member by ID specified
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: page
+          required: false
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_WrittenQuestion_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_WrittenQuestion_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_WrittenQuestion_"
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Return list of written questions by member by ID
+      tags:
+        - Members
+  "/api/Parties/GetActive/{house}":
+    get:
+      operationId: GetActive
+      parameters:
+        - description: Current parties by house
+          in: path
+          name: house
+          required: true
+          schema:
+            enum:
+              - Commons
+              - Lords
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Party_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Party_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_Party_"
+          description: Success
+        "400":
+          description: Bad Request
+      summary: Returns a list of current parties with at least one active member.
+      tags:
+        - Parties
+  "/api/Parties/LordsByType/{forDate}":
+    get:
+      operationId: LordsByType
+      parameters:
+        - description: Composition of the Lords for date specified.
+          in: path
+          name: forDate
+          required: true
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_LordsByType_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_LordsByType_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_LordsByType_"
+          description: Success
+        "400":
+          description: Bad Request
+      summary: Returns the composition of the House of Lords by peerage type.
+      tags:
+        - Parties
+  "/api/Parties/StateOfTheParties/{house}/{forDate}":
+    get:
+      operationId: StateOfTheParties
+      parameters:
+        - description: State of parties in Commons or Lords.
+          in: path
+          name: house
+          required: true
+          schema:
+            enum:
+              - Commons
+              - Lords
+            type: string
+        - description: State of parties for the date specified
+          in: path
+          name: forDate
+          required: true
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_PartySeatCount_"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_PartySeatCount_"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MembersServiceSearchResult_PartySeatCount_"
+          description: Success
+        "400":
+          description: Bad Request
+      summary: Returns current state of parties
+      tags:
+        - Parties
+  "/api/Posts/Departments/{type}":
+    get:
+      operationId: GetDepartments
+      parameters:
+        - description: Departments by type
+          in: path
+          name: type
+          required: true
+          schema:
+            enum:
+              - Government
+              - Opposition
+              - Spokesperson
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GovernmentDepartment"
+                type: array
+                uniqueItems: false
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GovernmentDepartment"
+                type: array
+                uniqueItems: false
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GovernmentDepartment"
+                type: array
+                uniqueItems: false
+          description: Success
+        "404":
+          description: Not Found
+      summary: Returns a list of departments.
+      tags:
+        - Posts
+  /api/Posts/GovernmentPosts:
+    get:
+      operationId: GetGovernmentPosts
+      parameters:
+        - description: Government posts by department ID
+          in: query
+          name: departmentId
+          required: false
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_GovernmentOppositionPost_"
+                type: array
+                uniqueItems: false
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_GovernmentOppositionPost_"
+                type: array
+                uniqueItems: false
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_GovernmentOppositionPost_"
+                type: array
+                uniqueItems: false
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a list of government posts.
+      tags:
+        - Posts
+  /api/Posts/OppositionPosts:
+    get:
+      operationId: GetOppositionPosts
+      parameters:
+        - description: Opposition posts by department ID
+          in: query
+          name: departmentId
+          required: false
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_GovernmentOppositionPost_"
+                type: array
+                uniqueItems: false
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_GovernmentOppositionPost_"
+                type: array
+                uniqueItems: false
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_GovernmentOppositionPost_"
+                type: array
+                uniqueItems: false
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a list of opposition posts.
+      tags:
+        - Posts
+  "/api/Posts/SpeakerAndDeputies/{forDate}":
+    get:
+      operationId: GetSpeakerAndDeputies
+      parameters:
+        - description: Speaker and deputy speakers for date specified
+          in: path
+          name: forDate
+          required: true
+          schema:
+            format: date-time
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_Member_"
+                type: array
+                uniqueItems: false
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_Member_"
+                type: array
+                uniqueItems: false
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_Member_"
+                type: array
+                uniqueItems: false
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a list containing the speaker and deputy speakers.
+      tags:
+        - Posts
+  /api/Posts/Spokespersons:
+    get:
+      operationId: GetSpokespersons
+      parameters:
+        - description: Spokespersons by party ID
+          in: query
+          name: partyId
+          required: false
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_GovernmentOppositionPost_"
+                type: array
+                uniqueItems: false
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_GovernmentOppositionPost_"
+                type: array
+                uniqueItems: false
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Item_GovernmentOppositionPost_"
+                type: array
+                uniqueItems: false
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns a list of spokespersons.
+      tags:
+        - Posts
+  /api/Reference/AnsweringBodies:
+    get:
+      operationId: GetAnsweringBodies
+      parameters:
+        - in: query
+          name: id
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: nameContains
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/AnsweringBody"
+                type: array
+                uniqueItems: false
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/AnsweringBody"
+                type: array
+                uniqueItems: false
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/AnsweringBody"
+                type: array
+                uniqueItems: false
+          description: Success
+        "400":
+          description: Bad Request
+      summary: Returns a list of answering bodies.
+      tags:
+        - Reference
+  /api/Reference/Departments:
+    get:
+      parameters:
+        - in: query
+          name: id
+          required: false
+          schema:
+            format: int32
+            type: integer
+        - in: query
+          name: nameContains
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GovernmentDepartment"
+                type: array
+                uniqueItems: false
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GovernmentDepartment"
+                type: array
+                uniqueItems: false
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GovernmentDepartment"
+                type: array
+                uniqueItems: false
+          description: Success
+        "400":
+          description: Bad Request
+      summary: Returns a list of departments.
+      tags:
+        - Reference
+  "/api/Reference/Departments/{id}/Logo":
+    get:
+      operationId: GetDepartmentLogo
+      parameters:
+        - description: Logo by department ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+      summary: Returns department logo.
+      tags:
+        - Reference
+  /api/Reference/PolicyInterests:
+    get:
+      operationId: GetPolicyInterestsList
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GenericReferenceData"
+                type: array
+                uniqueItems: false
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GenericReferenceData"
+                type: array
+                uniqueItems: false
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/GenericReferenceData"
+                type: array
+                uniqueItems: false
+          description: Success
+      summary: Returns a list of policy interest.
+      tags:
+        - Reference
+components:
+  schemas:
+    AnsweringBody:
+      properties:
+        department:
+          $ref: "#/components/schemas/GovernmentDepartment"
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+        shortName:
+          type: string
+        target:
+          type: string
+      type: object
+    BiographyExperience:
+      properties:
+        endMonth:
+          format: int32
+          type: integer
+        endYear:
+          format: int32
+          type: integer
+        id:
+          format: int32
+          type: integer
+        organisation:
+          type: string
+        startMonth:
+          format: int32
+          type: integer
+        startYear:
+          format: int32
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+        typeId:
+          format: int32
+          type: integer
+      type: object
+    BiographyItem:
+      properties:
+        additionalInfo:
+          type: string
+        additionalInfoLink:
+          type: string
+        endDate:
+          format: date-time
+          type: string
+        house:
+          enum:
+            - Commons
+            - Lords
+          type: string
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+        startDate:
+          format: date-time
+          type: string
+      type: object
+    Constituency:
+      properties:
+        currentRepresentation:
+          $ref: "#/components/schemas/ConstituencyRepresentation"
+        endDate:
+          format: date-time
+          type: string
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+        startDate:
+          format: date-time
+          type: string
+      type: object
+    ConstituencyRepresentation:
+      properties:
+        member:
+          $ref: "#/components/schemas/Item_Member_"
+        representation:
+          $ref: "#/components/schemas/HouseMembership"
+      type: object
+    ContactInformation:
+      properties:
+        email:
+          type: string
+        fax:
+          type: string
+        isPreferred:
+          type: boolean
+        isWebAddress:
+          type: boolean
+        line1:
+          type: string
+        line2:
+          type: string
+        line3:
+          type: string
+        line4:
+          type: string
+        line5:
+          type: string
+        notes:
+          type: string
+        phone:
+          type: string
+        postcode:
+          type: string
+        type:
+          type: string
+        typeDescription:
+          type: string
+        typeId:
+          format: int32
+          type: integer
+      type: object
+    DebateContribution:
+      properties:
+        answerCount:
+          format: int32
+          type: integer
+        debateId:
+          format: int32
+          type: integer
+        debateTitle:
+          type: string
+        debateWebsiteId:
+          type: string
+        firstTimecode:
+          format: date-time
+          type: string
+        house:
+          type: string
+        interventionCount:
+          format: int32
+          type: integer
+        pointsOfOrderCount:
+          format: int32
+          type: integer
+        questionCount:
+          format: int32
+          type: integer
+        section:
+          type: string
+        sittingDate:
+          format: date-time
+          type: string
+        speechCount:
+          format: int32
+          type: integer
+        statementsCount:
+          format: int32
+          type: integer
+        supplementaryQuestionCount:
+          format: int32
+          type: integer
+        totalContributions:
+          format: int32
+          type: integer
+      type: object
+    EarlyDayMotion:
+      properties:
+        dateTabled:
+          format: date-time
+          type: string
+        id:
+          format: int32
+          type: integer
+        isAmendment:
+          type: boolean
+        isPrayer:
+          type: boolean
+        number:
+          type: string
+        sponsorsCount:
+          format: int32
+          type: integer
+        title:
+          type: string
+      type: object
+    ElectionCandidate:
+      properties:
+        memberId:
+          format: int32
+          type: integer
+        name:
+          type: string
+        party:
+          $ref: "#/components/schemas/Party"
+        rankOrder:
+          format: int32
+          type: integer
+        resultChange:
+          type: string
+        voteShare:
+          format: double
+          type: number
+        votes:
+          format: int32
+          type: integer
+      type: object
+    ElectionResult:
+      properties:
+        candidates:
+          items:
+            $ref: "#/components/schemas/ElectionCandidate"
+          type: array
+          uniqueItems: false
+        constituencyName:
+          type: string
+        electionDate:
+          format: date-time
+          type: string
+        electionId:
+          format: int32
+          type: integer
+        electionTitle:
+          type: string
+        electorate:
+          format: int32
+          type: integer
+        isGeneralElection:
+          type: boolean
+        isNotional:
+          type: boolean
+        majority:
+          format: int32
+          type: integer
+        result:
+          type: string
+        turnout:
+          format: int32
+          type: integer
+        winningParty:
+          $ref: "#/components/schemas/Party"
+      type: object
+    GenericReferenceData:
+      properties:
+        description:
+          type: string
+        id:
+          format: int32
+          type: integer
+      type: object
+    GovernmentDepartment:
+      properties:
+        id:
+          format: int32
+          type: integer
+        imageUrl:
+          type: string
+        name:
+          type: string
+        url:
+          type: string
+      type: object
+    GovernmentOppositionPost:
+      properties:
+        createdWhen:
+          format: date-time
+          type: string
+        governmentDepartments:
+          items:
+            $ref: "#/components/schemas/GovernmentDepartment"
+          type: array
+          uniqueItems: false
+        hansardName:
+          type: string
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+        order:
+          format: int32
+          type: integer
+        postHolders:
+          items:
+            $ref: "#/components/schemas/GovernmentOppositionPostHolder"
+          type: array
+          uniqueItems: false
+        type:
+          enum:
+            - Government
+            - Opposition
+            - Spokesperson
+          type: string
+      type: object
+    GovernmentOppositionPostHolder:
+      properties:
+        endDate:
+          format: date-time
+          type: string
+        isPaid:
+          type: boolean
+        layingMinisterName:
+          type: string
+        member:
+          $ref: "#/components/schemas/Item_Member_"
+        startDate:
+          format: date-time
+          type: string
+      type: object
+    HouseMembership:
+      properties:
+        house:
+          enum:
+            - Commons
+            - Lords
+          type: string
+        membershipEndDate:
+          format: date-time
+          type: string
+        membershipEndReason:
+          type: string
+        membershipEndReasonId:
+          format: int32
+          type: integer
+        membershipEndReasonNotes:
+          type: string
+        membershipFrom:
+          type: string
+        membershipFromId:
+          format: int32
+          type: integer
+        membershipStartDate:
+          format: date-time
+          type: string
+        membershipStatus:
+          $ref: "#/components/schemas/HouseMembershipStatus"
+      type: object
+    HouseMembershipStatus:
+      properties:
+        statusDescription:
+          type: string
+        statusId:
+          format: int32
+          type: integer
+        statusIsActive:
+          type: boolean
+        statusNotes:
+          type: string
+        statusStartDate:
+          format: date-time
+          type: string
+      type: object
+    Item_Constituency_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/Constituency"
+      type: object
+    Item_DebateContribution_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/DebateContribution"
+      type: object
+    Item_EarlyDayMotion_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/EarlyDayMotion"
+      type: object
+    Item_ElectionResult_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/ElectionResult"
+      type: object
+    Item_GovernmentOppositionPost_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/GovernmentOppositionPost"
+      type: object
+    Item_List_BiographyExperience_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          items:
+            $ref: "#/components/schemas/BiographyExperience"
+          type: array
+          uniqueItems: false
+      type: object
+    Item_List_ConstituencyRepresentation_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          items:
+            $ref: "#/components/schemas/ConstituencyRepresentation"
+          type: array
+          uniqueItems: false
+      type: object
+    Item_List_ContactInformation_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          items:
+            $ref: "#/components/schemas/ContactInformation"
+          type: array
+          uniqueItems: false
+      type: object
+    Item_List_ElectionResult_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          items:
+            $ref: "#/components/schemas/ElectionResult"
+          type: array
+          uniqueItems: false
+      type: object
+    Item_List_MemberFocus_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          items:
+            $ref: "#/components/schemas/MemberFocus"
+          type: array
+          uniqueItems: false
+      type: object
+    Item_List_RegisteredInterestCategory_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          items:
+            $ref: "#/components/schemas/RegisteredInterestCategory"
+          type: array
+          uniqueItems: false
+      type: object
+    Item_List_Staff_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          items:
+            $ref: "#/components/schemas/Staff"
+          type: array
+          uniqueItems: false
+      type: object
+    Item_Location_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/Location"
+      type: object
+    Item_LordsByType_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/LordsByType"
+      type: object
+    Item_MemberBiography_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/MemberBiography"
+      type: object
+    Item_MemberHistory_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/MemberHistory"
+      type: object
+    Item_Member_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/Member"
+      type: object
+    Item_MembersInterests_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/MembersInterests"
+      type: object
+    Item_MembersStaff_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/MembersStaff"
+      type: object
+    Item_PartySeatCount_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/PartySeatCount"
+      type: object
+    Item_Party_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/Party"
+      type: object
+    Item_String_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          type: string
+      type: object
+    Item_Vote_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/Vote"
+      type: object
+    Item_WrittenQuestion_:
+      properties:
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        value:
+          $ref: "#/components/schemas/WrittenQuestion"
+      type: object
+    Link:
+      properties:
+        href:
+          type: string
+        method:
+          type: string
+        rel:
+          type: string
+      type: object
+    Location:
+      properties:
+        childContexts:
+          items:
+            $ref: "#/components/schemas/LocationContext"
+          type: array
+          uniqueItems: false
+        context:
+          $ref: "#/components/schemas/LocationContext"
+        parentContext:
+          $ref: "#/components/schemas/LocationContext"
+        stateOfTheParties:
+          items:
+            $ref: "#/components/schemas/PartySeatCount"
+          type: array
+          uniqueItems: false
+      type: object
+    LocationContext:
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+        type:
+          enum:
+            - Country
+            - Region
+            - County
+            - Constituency
+          type: string
+        typeName:
+          type: string
+      type: object
+    LordsByType:
+      properties:
+        bishop:
+          format: int32
+          type: integer
+        hereditary:
+          format: int32
+          type: integer
+        life:
+          format: int32
+          type: integer
+        party:
+          $ref: "#/components/schemas/Party"
+        total:
+          format: int32
+          type: integer
+      type: object
+    Member:
+      properties:
+        gender:
+          type: string
+        id:
+          format: int32
+          type: integer
+        latestHouseMembership:
+          $ref: "#/components/schemas/HouseMembership"
+        latestParty:
+          $ref: "#/components/schemas/Party"
+        nameAddressAs:
+          type: string
+        nameDisplayAs:
+          type: string
+        nameFullTitle:
+          type: string
+        nameListAs:
+          type: string
+        thumbnailUrl:
+          type: string
+      type: object
+    MemberBiography:
+      properties:
+        committeeMemberships:
+          items:
+            $ref: "#/components/schemas/BiographyItem"
+          type: array
+          uniqueItems: false
+        electionsContested:
+          items:
+            $ref: "#/components/schemas/BiographyItem"
+          type: array
+          uniqueItems: false
+        governmentPosts:
+          items:
+            $ref: "#/components/schemas/BiographyItem"
+          type: array
+          uniqueItems: false
+        houseMemberships:
+          items:
+            $ref: "#/components/schemas/BiographyItem"
+          type: array
+          uniqueItems: false
+        oppositionPosts:
+          items:
+            $ref: "#/components/schemas/BiographyItem"
+          type: array
+          uniqueItems: false
+        otherPosts:
+          items:
+            $ref: "#/components/schemas/BiographyItem"
+          type: array
+          uniqueItems: false
+        partyAffiliations:
+          items:
+            $ref: "#/components/schemas/BiographyItem"
+          type: array
+          uniqueItems: false
+        representations:
+          items:
+            $ref: "#/components/schemas/BiographyItem"
+          type: array
+          uniqueItems: false
+      type: object
+    MemberFocus:
+      properties:
+        category:
+          type: string
+        focus:
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+      type: object
+    MemberHistory:
+      properties:
+        houseMembershipHistory:
+          items:
+            $ref: "#/components/schemas/HouseMembership"
+          type: array
+          uniqueItems: false
+        id:
+          format: int32
+          type: integer
+        nameHistory:
+          items:
+            $ref: "#/components/schemas/MemberName"
+          type: array
+          uniqueItems: false
+        partyHistory:
+          items:
+            $ref: "#/components/schemas/MemberParty"
+          type: array
+          uniqueItems: false
+        thumbnailUrl:
+          type: string
+      type: object
+    MemberName:
+      properties:
+        endDate:
+          format: date-time
+          type: string
+        nameAddressAs:
+          type: string
+        nameDisplayAs:
+          type: string
+        nameFullTitle:
+          type: string
+        nameListAs:
+          type: string
+        startDate:
+          format: date-time
+          type: string
+      type: object
+    MemberParty:
+      properties:
+        endDate:
+          format: date-time
+          type: string
+        party:
+          $ref: "#/components/schemas/Party"
+        startDate:
+          format: date-time
+          type: string
+      type: object
+    MembersInterests:
+      properties:
+        interestCategories:
+          items:
+            $ref: "#/components/schemas/RegisteredInterestCategory"
+          type: array
+          uniqueItems: false
+        member:
+          $ref: "#/components/schemas/Member"
+      type: object
+    MembersServiceSearchResult_Constituency_:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Item_Constituency_"
+          type: array
+          uniqueItems: false
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        resultContext:
+          type: string
+        skip:
+          format: int32
+          type: integer
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    MembersServiceSearchResult_DebateContribution_:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Item_DebateContribution_"
+          type: array
+          uniqueItems: false
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        resultContext:
+          type: string
+        skip:
+          format: int32
+          type: integer
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    MembersServiceSearchResult_EarlyDayMotion_:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Item_EarlyDayMotion_"
+          type: array
+          uniqueItems: false
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        resultContext:
+          type: string
+        skip:
+          format: int32
+          type: integer
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    MembersServiceSearchResult_LordsByType_:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Item_LordsByType_"
+          type: array
+          uniqueItems: false
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        resultContext:
+          type: string
+        skip:
+          format: int32
+          type: integer
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    MembersServiceSearchResult_Member_:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Item_Member_"
+          type: array
+          uniqueItems: false
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        resultContext:
+          type: string
+        skip:
+          format: int32
+          type: integer
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    MembersServiceSearchResult_MembersInterests_:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Item_MembersInterests_"
+          type: array
+          uniqueItems: false
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        resultContext:
+          type: string
+        skip:
+          format: int32
+          type: integer
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    MembersServiceSearchResult_MembersStaff_:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Item_MembersStaff_"
+          type: array
+          uniqueItems: false
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        resultContext:
+          type: string
+        skip:
+          format: int32
+          type: integer
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    MembersServiceSearchResult_PartySeatCount_:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Item_PartySeatCount_"
+          type: array
+          uniqueItems: false
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        resultContext:
+          type: string
+        skip:
+          format: int32
+          type: integer
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    MembersServiceSearchResult_Party_:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Item_Party_"
+          type: array
+          uniqueItems: false
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        resultContext:
+          type: string
+        skip:
+          format: int32
+          type: integer
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    MembersServiceSearchResult_Vote_:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Item_Vote_"
+          type: array
+          uniqueItems: false
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        resultContext:
+          type: string
+        skip:
+          format: int32
+          type: integer
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    MembersServiceSearchResult_WrittenQuestion_:
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Item_WrittenQuestion_"
+          type: array
+          uniqueItems: false
+        links:
+          items:
+            $ref: "#/components/schemas/Link"
+          type: array
+          uniqueItems: false
+        resultContext:
+          type: string
+        skip:
+          format: int32
+          type: integer
+        take:
+          format: int32
+          type: integer
+        totalResults:
+          format: int32
+          type: integer
+      type: object
+    MembersStaff:
+      properties:
+        member:
+          $ref: "#/components/schemas/Member"
+        staff:
+          items:
+            $ref: "#/components/schemas/Staff"
+          type: array
+          uniqueItems: false
+      type: object
+    Party:
+      properties:
+        abbreviation:
+          type: string
+        backgroundColour:
+          type: string
+        foregroundColour:
+          type: string
+        governmentType:
+          enum:
+            - Government
+            - CoalitionGovernment
+            - ConfidenceAndSupply
+            - OfficialOpposition
+          type: string
+        id:
+          format: int32
+          type: integer
+        isIndependentParty:
+          readOnly: true
+          type: boolean
+        isLordsMainParty:
+          type: boolean
+        isLordsSpiritualParty:
+          type: boolean
+        name:
+          type: string
+      type: object
+    PartySeatCount:
+      properties:
+        female:
+          format: int32
+          type: integer
+        male:
+          format: int32
+          type: integer
+        nonBinary:
+          format: int32
+          type: integer
+        party:
+          $ref: "#/components/schemas/Party"
+        total:
+          format: int32
+          type: integer
+      type: object
+    RegisteredInterest:
+      properties:
+        createdWhen:
+          format: date-time
+          type: string
+        deletedWhen:
+          format: date-time
+          type: string
+        interest:
+          type: string
+        lastAmendedWhen:
+          format: date-time
+          type: string
+      type: object
+    RegisteredInterestCategory:
+      properties:
+        interests:
+          items:
+            $ref: "#/components/schemas/RegisteredInterest"
+          type: array
+          uniqueItems: false
+        name:
+          type: string
+        sortOrder:
+          format: int32
+          type: integer
+      type: object
+    Staff:
+      properties:
+        details:
+          type: string
+        forename:
+          type: string
+        surname:
+          type: string
+        title:
+          type: string
+      type: object
+    Vote:
+      properties:
+        actedAsTeller:
+          type: boolean
+        date:
+          format: date-time
+          type: string
+        divisionNumber:
+          format: int32
+          type: integer
+        house:
+          enum:
+            - Commons
+            - Lords
+          type: string
+        id:
+          format: int32
+          type: integer
+        inAffirmativeLobby:
+          type: boolean
+        numberAgainst:
+          format: int32
+          type: integer
+        numberInFavour:
+          format: int32
+          type: integer
+        title:
+          type: string
+      type: object
+    WrittenQuestion:
+      properties:
+        answerIsCorrection:
+          type: boolean
+        answerIsHolding:
+          type: boolean
+        answerText:
+          type: string
+        answeringBody:
+          $ref: "#/components/schemas/AnsweringBody"
+        answeringBodyId:
+          format: int32
+          type: integer
+        answeringMember:
+          $ref: "#/components/schemas/Member"
+        answeringMemberId:
+          format: int32
+          type: integer
+        askingMemberId:
+          format: int32
+          type: integer
+        attachmentCount:
+          format: int32
+          type: integer
+        correctingMember:
+          $ref: "#/components/schemas/Member"
+        correctingMemberId:
+          format: int32
+          type: integer
+        dateAnswered:
+          format: date-time
+          type: string
+        dateForAnswer:
+          format: date-time
+          type: string
+        dateTabled:
+          format: date-time
+          type: string
+        groupedQuestions:
+          items:
+            type: string
+          type: array
+          uniqueItems: false
+        heading:
+          type: string
+        house:
+          enum:
+            - Commons
+            - Lords
+          type: string
+        id:
+          format: int32
+          type: integer
+        isNamedDay:
+          type: boolean
+        isWithdrawn:
+          type: boolean
+        memberHasInterest:
+          type: boolean
+        questionText:
+          type: string
+        uin:
+          type: string
+      type: object
