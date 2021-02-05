@@ -187,6 +187,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ResourceTypeValuesList'
                         - description: '<p>The target resource type for snapshot and AMI lifecycle policies. Use <code>VOLUME </code>to create snapshots of individual volumes or use <code>INSTANCE</code> to create multi-volume snapshots from the volumes for an instance.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
+                    ResourceLocations:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceLocationList'
+                        - description: '<p>The location of the resources to backup. If the source resources are located in an AWS Region, specify <code>CLOUD</code>. If the source resources are located on an AWS Outpost in your account, specify <code>OUTPOST</code>. </p> <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.</p>'
                     TargetTags:
                       allOf:
                         - $ref: '#/components/schemas/TargetTagList'
@@ -630,6 +634,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ResourceTypeValuesList'
                         - description: '<p>The target resource type for snapshot and AMI lifecycle policies. Use <code>VOLUME </code>to create snapshots of individual volumes or use <code>INSTANCE</code> to create multi-volume snapshots from the volumes for an instance.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
+                    ResourceLocations:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceLocationList'
+                        - description: '<p>The location of the resources to backup. If the source resources are located in an AWS Region, specify <code>CLOUD</code>. If the source resources are located on an AWS Outpost in your account, specify <code>OUTPOST</code>. </p> <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.</p>'
                     TargetTags:
                       allOf:
                         - $ref: '#/components/schemas/TargetTagList'
@@ -727,6 +735,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ResourceTypeValues'
+      minItems: 1
+      maxItems: 1
+    ResourceLocationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceLocationValues'
       minItems: 1
       maxItems: 1
     TargetTagList:
@@ -915,6 +929,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceTypeValuesList'
             - description: '<p>The target resource type for snapshot and AMI lifecycle policies. Use <code>VOLUME </code>to create snapshots of individual volumes or use <code>INSTANCE</code> to create multi-volume snapshots from the volumes for an instance.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
+        ResourceLocations:
+          allOf:
+            - $ref: '#/components/schemas/ResourceLocationList'
+            - description: '<p>The location of the resources to backup. If the source resources are located in an AWS Region, specify <code>CLOUD</code>. If the source resources are located on an AWS Outpost in your account, specify <code>OUTPOST</code>. </p> <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.</p>'
         TargetTags:
           allOf:
             - $ref: '#/components/schemas/TargetTagList'
@@ -971,6 +989,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags to apply to the lifecycle policy during creation.
+    LocationValues:
+      type: string
+      enum:
+        - CLOUD
+        - OUTPOST_LOCAL
     Interval:
       type: integer
       minimum: 1
@@ -991,6 +1014,10 @@ components:
     CreateRule:
       type: object
       properties:
+        Location:
+          allOf:
+            - $ref: '#/components/schemas/LocationValues'
+            - description: '<p>Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify <code>CLOUD</code>. To create snapshots on the same Outpost as the source resource, specify <code>OUTPOST_LOCAL</code>. If you omit this parameter, <code>CLOUD</code> is used by default.</p> <p>If the policy targets resources in an AWS Region, then you must create snapshots in the same Region as the source resource. </p> <p>If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost.</p>'
         Interval:
           allOf:
             - $ref: '#/components/schemas/Interval'
@@ -1010,9 +1037,9 @@ components:
       description: '<p>Specifies when to create snapshots of EBS volumes.</p> <p>You must specify either a Cron expression or an interval, interval unit, and start time. You cannot specify both.</p>'
     Target:
       type: string
-      pattern: '^[\\w:\\-\\/\\*]+$'
+      pattern: '^[\w:\-\/\*]+$'
       minLength: 0
-      maxLength: 16
+      maxLength: 2048
     EncryptionConfiguration:
       type: object
       required:
@@ -1073,13 +1100,16 @@ components:
     CrossRegionCopyRule:
       type: object
       required:
-        - TargetRegion
         - Encrypted
       properties:
         TargetRegion:
           allOf:
             - $ref: '#/components/schemas/TargetRegion'
-            - description: The target Region.
+            - description: '<p>The target Region for the snapshot copies.</p> <p>If you specify a target Region, you must omit <b>Target</b>. You cannot specify a target Region and a target Outpost in the same rule.</p>'
+        Target:
+          allOf:
+            - $ref: '#/components/schemas/Target'
+            - description: '<p>The Amazon Resource Name (ARN) of the target AWS Outpost for the snapshot copies.</p> <p>If you specify an ARN, you must omit <b>TargetRegion</b>. You cannot specify a target Region and a target Outpost in the same rule.</p>'
         Encrypted:
           allOf:
             - $ref: '#/components/schemas/Encrypted'
@@ -1291,6 +1321,11 @@ components:
       properties: {}
     NoReboot:
       type: boolean
+    ResourceLocationValues:
+      type: string
+      enum:
+        - CLOUD
+        - OUTPOST
     RetainRule:
       type: object
       properties:
@@ -1364,7 +1399,7 @@ components:
         CrossRegionCopyRules:
           allOf:
             - $ref: '#/components/schemas/CrossRegionCopyRules'
-            - description: The rule for cross-Region snapshot copies.
+            - description: '<p>The rule for cross-Region snapshot copies.</p> <p>You can only specify cross-Region copy rules for policies that create snapshots in a Region. If the policy creates snapshots on an Outpost, then you cannot copy the snapshots to a Region or to an Outpost. If the policy creates snapshots in a Region, then snapshots can be copied to up to three Regions or Outposts.</p>'
         ShareRules:
           allOf:
             - $ref: '#/components/schemas/ShareRules'

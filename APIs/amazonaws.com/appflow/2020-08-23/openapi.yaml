@@ -697,7 +697,7 @@ paths:
               type: object
               properties:
                 connectorTypes:
-                  description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+                  description: '<p> The type of connector, such as Salesforce, Amplitude, and so on. </p> <note> <p> <i>Locke</i> refers to a new destination known as Amazon Connect Customer Profiles. At this time, we recommend that you do not use this destination. </p> </note>'
                   type: array
                   items:
                     $ref: '#/components/schemas/ConnectorType'
@@ -3552,7 +3552,7 @@ components:
         connectorTypes:
           allOf:
             - $ref: '#/components/schemas/ConnectorTypeList'
-            - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+            - description: '<p> The type of connector, such as Salesforce, Amplitude, and so on. </p> <note> <p> <i>Locke</i> refers to a new destination known as Amazon Connect Customer Profiles. At this time, we recommend that you do not use this destination. </p> </note>'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -3869,6 +3869,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: ' Specifies the time of the most recent update. '
+        dataPullStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' The timestamp that determines the first new or updated record to be transferred in the flow run. '
+        dataPullEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' The timestamp that indicates the last new or updated record to be transferred in the flow run. '
       description: ' Specifies information about the past flow run instances for a given flow. '
     FieldType:
       type: string
@@ -4216,6 +4224,10 @@ components:
         - WEEKLY
         - MONTHLY
         - ONCE
+    ScheduleOffset:
+      type: integer
+      minimum: 0
+      maximum: 36000
     Timezone:
       type: string
       pattern: .*
@@ -4244,7 +4256,11 @@ components:
         timezone:
           allOf:
             - $ref: '#/components/schemas/Timezone'
-            - description: ' Specifies the time zone used when referring to the date and time of a scheduled-triggered flow. '
+            - description: ' Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as <code>America/New_York</code>. '
+        scheduleOffset:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleOffset'
+            - description: ' Specifies the optional offset that is added to the time interval for a schedule-triggered flow. '
       description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
     ServiceNowSourceProperties:
       type: object

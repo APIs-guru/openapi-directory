@@ -1639,6 +1639,11 @@ paths:
                     $ref: '#/components/schemas/ColumnGroup'
                   minItems: 1
                   maxItems: 8
+                FieldFolders:
+                  description: The folder that contains fields and nested subfolders for your dataset.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/FieldFolder'
                 Permissions:
                   description: A list of resource permissions on the dataset.
                   type: array
@@ -1848,7 +1853,7 @@ paths:
                   minLength: 1
                   maxLength: 128
                 Type:
-                  description: 'The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.'
+                  description: '<p>The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.</p> <p> <code>AMAZON_ELASTICSEARCH</code> is for Amazon managed Elasticsearch Service.</p>'
                   type: string
                   enum:
                     - ADOBE_ANALYTICS
@@ -4446,6 +4451,11 @@ paths:
                     $ref: '#/components/schemas/ColumnGroup'
                   minItems: 1
                   maxItems: 8
+                FieldFolders:
+                  description: The folder that contains fields and nested subfolders for your dataset.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/FieldFolder'
                 RowLevelPermissionDataSet:
                   description: The row-level security configuration for the dataset.
                   type: object
@@ -9682,6 +9692,18 @@ components:
             - $ref: '#/components/schemas/GeoSpatialColumnGroup'
             - description: Geospatial column group that denotes a hierarchy.
       description: 'Groupings of columns that work together in certain Amazon QuickSight features. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
+    FieldFolder:
+      type: object
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/FieldFolderDescription'
+            - description: The description for a field folder.
+        columns:
+          allOf:
+            - $ref: '#/components/schemas/FolderColumnList'
+            - description: A folder has a list of columns. A column can only be in one folder.
+      description: A FieldFolder element is a folder that contains fields and nested subfolders.
     Namespace:
       type: string
       pattern: '^[a-zA-Z0-9._-]*$'
@@ -12718,6 +12740,10 @@ components:
       enum:
         - SPICE
         - DIRECT_QUERY
+    FieldFolderMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/FieldFolder'
     RowLevelPermissionDataSet:
       type: object
       required:
@@ -12770,6 +12796,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ColumnGroupList'
             - description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
+        FieldFolders:
+          allOf:
+            - $ref: '#/components/schemas/FieldFolderMap'
+            - description: The folder that contains fields and nested subfolders for your dataset.
         Permissions:
           allOf:
             - $ref: '#/components/schemas/ResourcePermissionList'
@@ -12945,7 +12975,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/DataSourceType'
-            - description: 'The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.'
+            - description: '<p>The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.</p> <p> <code>AMAZON_ELASTICSEARCH</code> is for Amazon managed Elasticsearch Service.</p>'
         DataSourceParameters:
           allOf:
             - $ref: '#/components/schemas/DataSourceParameters'
@@ -13550,6 +13580,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ColumnGroupList'
             - description: 'Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.'
+        FieldFolders:
+          allOf:
+            - $ref: '#/components/schemas/FieldFolderMap'
+            - description: The folder that contains fields and nested subfolders for your dataset.
         RowLevelPermissionDataSet:
           allOf:
             - $ref: '#/components/schemas/RowLevelPermissionDataSet'
@@ -14186,6 +14220,18 @@ components:
             - $ref: '#/components/schemas/string'
             - description: Error message.
       description: Error information for the SPICE ingestion of a dataset.
+    FieldFolderDescription:
+      type: string
+      maxLength: 500
+    FolderColumnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      maxItems: 5000
+    FieldFolderPath:
+      type: string
+      minLength: 1
+      maxLength: 1000
     FileFormat:
       type: string
       enum:
@@ -15369,6 +15415,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ColumnGroupList'
             - description: 'Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.'
+        FieldFolders:
+          allOf:
+            - $ref: '#/components/schemas/FieldFolderMap'
+            - description: The folder that contains fields and nested subfolders for your dataset.
         RowLevelPermissionDataSet:
           allOf:
             - $ref: '#/components/schemas/RowLevelPermissionDataSet'

@@ -522,7 +522,7 @@ paths:
   /#X-Amz-Target=AmazonAthena.GetDatabase:
     post:
       operationId: GetDatabase
-      description: Returns a database object for the specfied database and data catalog.
+      description: Returns a database object for the specified database and data catalog.
       responses:
         '200':
           description: Success
@@ -925,6 +925,51 @@ paths:
             type: string
             enum:
               - AmazonAthena.ListDatabases
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.ListEngineVersions:
+    post:
+      operationId: ListEngineVersions
+      description: 'Returns a list of engine versions that are available to choose from, including the Auto option.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEngineVersionsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListEngineVersionsInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.ListEngineVersions
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1631,7 +1676,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/DataCatalogType'
-            - description: 'The type of data catalog to create: <code>LAMBDA</code> for a federated catalog, <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an external hive metastore.'
+            - description: '<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog or <code>HIVE</code> for an external hive metastore.</p> <note> <p>Do not use the <code>GLUE</code> type. This refers to the <code>AwsDataCatalog</code> that already exists in your account, of which you can have only one. Specifying the <code>GLUE</code> type will result in an <code>INVALID_INPUT</code> error.</p> </note>'
         Description:
           allOf:
             - $ref: '#/components/schemas/DescriptionString'
@@ -1639,7 +1684,7 @@ components:
         Parameters:
           allOf:
             - $ref: '#/components/schemas/ParametersMap'
-            - description: '<p>Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type. </p> <ul> <li> <p>For the <code>HIVE</code> data catalog type, use the following syntax. The <code>metadata-function</code> parameter is required. <code>The sdk-version</code> parameter is optional and defaults to the currently supported version.</p> <p> <code>metadata-function=<i>lambda_arn</i>, sdk-version=<i>version_number</i> </code> </p> </li> <li> <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets of required parameters, but not both.</p> <ul> <li> <p>If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.</p> <p> <code>metadata-function=<i>lambda_arn</i>, record-function=<i>lambda_arn</i> </code> </p> </li> <li> <p> If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.</p> <p> <code>function=<i>lambda_arn</i> </code> </p> </li> </ul> </li> <li> <p>The <code>GLUE</code> type has no parameters.</p> </li> </ul>'
+            - description: '<p>Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type. </p> <ul> <li> <p>For the <code>HIVE</code> data catalog type, use the following syntax. The <code>metadata-function</code> parameter is required. <code>The sdk-version</code> parameter is optional and defaults to the currently supported version.</p> <p> <code>metadata-function=<i>lambda_arn</i>, sdk-version=<i>version_number</i> </code> </p> </li> <li> <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets of required parameters, but not both.</p> <ul> <li> <p>If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.</p> <p> <code>metadata-function=<i>lambda_arn</i>, record-function=<i>lambda_arn</i> </code> </p> </li> <li> <p> If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.</p> <p> <code>function=<i>lambda_arn</i> </code> </p> </li> </ul> </li> </ul>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -1750,7 +1795,7 @@ components:
         RecursiveDeleteOption:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
-            - description: The option to delete the workgroup and its contents even if the workgroup contains any named queries.
+            - description: The option to delete the workgroup and its contents even if the workgroup contains any named queries or query executions.
     GetDataCatalogOutput:
       type: object
       properties:
@@ -1954,6 +1999,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxDatabasesCount'
             - description: Specifies the maximum number of results to return.
+    ListEngineVersionsOutput:
+      type: object
+      properties:
+        EngineVersions:
+          allOf:
+            - $ref: '#/components/schemas/EngineVersionsList'
+            - description: A list of engine versions that are available to choose from.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
+    ListEngineVersionsInput:
+      type: object
+      title: ListEngineVersionsInput
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxEngineVersionsCount'
+            - description: The maximum number of engine versions to return in this request.
     ListNamedQueriesOutput:
       type: object
       properties:
@@ -2082,7 +2150,7 @@ components:
         WorkGroups:
           allOf:
             - $ref: '#/components/schemas/WorkGroupsList'
-            - description: 'The list of workgroups, including their names, descriptions, creation times, and states.'
+            - description: 'A list of <a>WorkGroupSummary</a> objects that include the names, descriptions, creation times, and states for each workgroup.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2199,7 +2267,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/DataCatalogType'
-            - description: 'Specifies the type of data catalog to update. Specify <code>LAMBDA</code> for a federated catalog, <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an external hive metastore.'
+            - description: '<p>Specifies the type of data catalog to update. Specify <code>LAMBDA</code> for a federated catalog or <code>HIVE</code> for an external hive metastore.</p> <note> <p>Do not use the <code>GLUE</code> type. This refers to the <code>AwsDataCatalog</code> that already exists in your account, of which you can have only one. Specifying the <code>GLUE</code> type will result in an <code>INVALID_INPUT</code> error.</p> </note>'
         Description:
           allOf:
             - $ref: '#/components/schemas/DescriptionString'
@@ -2207,7 +2275,7 @@ components:
         Parameters:
           allOf:
             - $ref: '#/components/schemas/ParametersMap'
-            - description: '<p>Specifies the Lambda function or functions to use for updating the data catalog. This is a mapping whose values depend on the catalog type. </p> <ul> <li> <p>For the <code>HIVE</code> data catalog type, use the following syntax. The <code>metadata-function</code> parameter is required. <code>The sdk-version</code> parameter is optional and defaults to the currently supported version.</p> <p> <code>metadata-function=<i>lambda_arn</i>, sdk-version=<i>version_number</i> </code> </p> </li> <li> <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets of required parameters, but not both.</p> <ul> <li> <p>If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.</p> <p> <code>metadata-function=<i>lambda_arn</i>, record-function=<i>lambda_arn</i> </code> </p> </li> <li> <p> If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.</p> <p> <code>function=<i>lambda_arn</i> </code> </p> </li> </ul> </li> <li> <p>The <code>GLUE</code> type has no parameters.</p> </li> </ul>'
+            - description: '<p>Specifies the Lambda function or functions to use for updating the data catalog. This is a mapping whose values depend on the catalog type. </p> <ul> <li> <p>For the <code>HIVE</code> data catalog type, use the following syntax. The <code>metadata-function</code> parameter is required. <code>The sdk-version</code> parameter is optional and defaults to the currently supported version.</p> <p> <code>metadata-function=<i>lambda_arn</i>, sdk-version=<i>version_number</i> </code> </p> </li> <li> <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets of required parameters, but not both.</p> <ul> <li> <p>If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.</p> <p> <code>metadata-function=<i>lambda_arn</i>, record-function=<i>lambda_arn</i> </code> </p> </li> <li> <p> If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.</p> <p> <code>function=<i>lambda_arn</i> </code> </p> </li> </ul> </li> </ul>'
     UpdateWorkGroupOutput:
       type: object
       properties: {}
@@ -2432,6 +2500,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
             - description: 'If set to <code>true</code>, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to <code>false</code>, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is <code>false</code>. For more information about Requester Pays buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html">Requester Pays Buckets</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/EngineVersion'
+            - description: The engine version that all queries running on the workgroup use. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.
       description: 'The configuration of the workgroup, which includes the location in Amazon S3 where query results are stored, the encryption option, if any, used for query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup and whether workgroup settings override query settings, and the data usage limits for the amount of data scanned per query or per workgroup. The workgroup settings override is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>. '
     WorkGroupDescriptionString:
       type: string
@@ -2454,11 +2526,11 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/DataCatalogType'
-            - description: 'The type of data catalog: <code>LAMBDA</code> for a federated catalog, <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an external hive metastore.'
+            - description: 'The type of data catalog: <code>LAMBDA</code> for a federated catalog or <code>HIVE</code> for an external hive metastore. <code>GLUE</code> refers to the <code>AwsDataCatalog</code> that already exists in your account, of which you can have only one.'
         Parameters:
           allOf:
             - $ref: '#/components/schemas/ParametersMap'
-            - description: '<p>Specifies the Lambda function or functions to use for the data catalog. This is a mapping whose values depend on the catalog type. </p> <ul> <li> <p>For the <code>HIVE</code> data catalog type, use the following syntax. The <code>metadata-function</code> parameter is required. <code>The sdk-version</code> parameter is optional and defaults to the currently supported version.</p> <p> <code>metadata-function=<i>lambda_arn</i>, sdk-version=<i>version_number</i> </code> </p> </li> <li> <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets of required parameters, but not both.</p> <ul> <li> <p>If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.</p> <p> <code>metadata-function=<i>lambda_arn</i>, record-function=<i>lambda_arn</i> </code> </p> </li> <li> <p> If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.</p> <p> <code>function=<i>lambda_arn</i> </code> </p> </li> </ul> </li> <li> <p>The <code>GLUE</code> type has no parameters.</p> </li> </ul>'
+            - description: '<p>Specifies the Lambda function or functions to use for the data catalog. This is a mapping whose values depend on the catalog type. </p> <ul> <li> <p>For the <code>HIVE</code> data catalog type, use the following syntax. The <code>metadata-function</code> parameter is required. <code>The sdk-version</code> parameter is optional and defaults to the currently supported version.</p> <p> <code>metadata-function=<i>lambda_arn</i>, sdk-version=<i>version_number</i> </code> </p> </li> <li> <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets of required parameters, but not both.</p> <ul> <li> <p>If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.</p> <p> <code>metadata-function=<i>lambda_arn</i>, record-function=<i>lambda_arn</i> </code> </p> </li> <li> <p> If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.</p> <p> <code>function=<i>lambda_arn</i> </code> </p> </li> </ul> </li> </ul>'
       description: Contains information about a data catalog in an AWS account.
     DataCatalogSummary:
       type: object
@@ -2531,6 +2603,24 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'For <code>SSE-KMS</code> and <code>CSE-KMS</code>, this is the KMS key ARN or ID.'
       description: 'If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.'
+    EngineVersion:
+      type: object
+      properties:
+        SelectedEngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: 'The engine version requested by the user. Possible values are determined by the output of <code>ListEngineVersions</code>, including Auto. The default is Auto.'
+        EffectiveEngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: 'Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a <code>CreateWorkGroup</code> or <code>UpdateWorkGroup</code> operation, the <code>EffectiveEngineVersion</code> field is ignored.'
+      description: The Athena engine version for running queries.
+    EngineVersionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EngineVersion'
+      minItems: 0
+      maxItems: 10
     ErrorCode:
       type: string
       description: 'The error code returned when the query execution failed to process, or when the processing request for the named query failed.'
@@ -2611,6 +2701,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkGroupName'
             - description: The name of the workgroup in which the query ran.
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/EngineVersion'
+            - description: The engine version that executed the query.
       description: Information about a single instance of a query execution.
     Token:
       type: string
@@ -2707,6 +2801,10 @@ components:
       type: integer
       minimum: 1
       maximum: 50
+    MaxEngineVersionsCount:
+      type: integer
+      minimum: 1
+      maximum: 10
     MaxNamedQueriesCount:
       type: integer
       minimum: 0
@@ -2962,6 +3060,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
             - description: 'If set to <code>true</code>, allows members assigned to a workgroup to specify Amazon S3 Requester Pays buckets in queries. If set to <code>false</code>, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. The default is <code>false</code>. For more information about Requester Pays buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html">Requester Pays Buckets</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/EngineVersion'
+            - description: 'The engine version requested when a workgroup is updated. After the update, all queries on the workgroup run on the requested engine version. If no value was previously set, the default is Auto. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.'
       description: 'The configuration information that will be updated for this workgroup, which includes the location in Amazon S3 where query results are stored, the encryption option, if any, used for query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup, whether the workgroup settings override the client-side settings, and the data usage limit for the amount of bytes scanned per query, if it is specified.'
     WorkGroupState:
       type: string
@@ -2987,6 +3089,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: The workgroup creation date and time.
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/EngineVersion'
+            - description: The engine version setting for all queries on the workgroup. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.
       description: 'The summary information for the workgroup, which includes its name, state, description, and the date and time it was created.'
 security:
   - hmac: []
