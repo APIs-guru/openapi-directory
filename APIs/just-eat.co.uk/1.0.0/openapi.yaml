@@ -4841,7 +4841,7 @@ components:
           Percent: "#/components/schemas/Percent"
         propertyName: $type
       properties:
-        $type:
+        Type:
           description: Contains the offer data type name
           type: string
         offerId:
@@ -4849,18 +4849,18 @@ components:
           nullable: false
           type: string
       required:
-        - $type
+        - Type
         - offerId
       type: object
     ActiveConsumerOffersByRestaurant:
       additionalProperties: false
       example:
         offers:
-          - $type: Percent
+          - Type: Percent
             amount: 20
             offerId: 12345sd
             qualifyingValue: 15000
-          - $type: Percent
+          - Type: Percent
             amount: 15
             offerId: 45sd345
             qualifyingValue: 35000
@@ -5319,6 +5319,43 @@ components:
             - errors
           type: object
       type: object
+    AvailableTimeSlotsResponse:
+      additionalProperties: false
+      example:
+        available:
+          - from: 12:00:00
+            to: 12:30:00
+          - from: 12:30:00
+            to: 13:00:00
+        overlappingOfferIds:
+          - "1"
+          - "2"
+      properties:
+        available:
+          description: The collection of available time slots in restaurant local time
+          items:
+            description: Pair of start and end time of available period to create offer
+            properties:
+              from:
+                description: The available offer start time
+                format: time
+                nullable: false
+                type: string
+              to:
+                description: The available offer end time
+                format: time
+                nullable: false
+                type: string
+            type: object
+          nullable: false
+          type: array
+        overlappingOfferIds:
+          description: The collection of overlapped offer ids for same date
+          items:
+            type: string
+          nullable: false
+          type: array
+      type: object
     BadItem:
       additionalProperties: false
       properties:
@@ -5578,6 +5615,19 @@ components:
           nullable: true
           type: object
         RestaurantOffers:
+          description: The list of restaurant offers
+          example:
+            - ConsumerSegment: NewToRestaurant
+              DiscountApplied: 8.37
+              DiscountValue: 20
+              OfferId: ftcOfferId75
+              OfferType: Percent
+            - ConsumerSegment: All
+              DiscountApplied: 28.37
+              DiscountCode: mgt36rtp8VoucherCode
+              DiscountValue: 0
+              OfferId: stampCardLoyaltyCampaignOfferId287
+              OfferType: StampCard
           items:
             $ref: "#/components/schemas/RestaurantOffer"
           type: array
@@ -6321,10 +6371,12 @@ components:
           AGE_VERIFICATION_FAILED: "#/components/schemas/CheckoutIssue_AgeVerificationFailed"
           AVAILABILITY_UNAVAILABLE: "#/components/schemas/CheckoutIssue_AvailabilityUnavailable"
           DATE_OF_BIRTH_REQUIRED: "#/components/schemas/CheckoutIssue_DateOfBirthRequired"
+          FIRST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_FirstNameRequired"
           FULFILMENT_TIME_REQUIRED: "#/components/schemas/CheckoutIssue_FulfilmentTimeRequired"
           FULFILMENT_TIME_UNAVAILABLE: "#/components/schemas/CheckoutIssue_FulfilmentTimeUnavailable"
           GEOLOCATION_REQUIRED: "#/components/schemas/CheckoutIssue_GeolocationRequired"
           ITEMS_UNORDERABLE: "#/components/schemas/CheckoutIssue_ItemsUnorderable"
+          LAST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_LastNameRequired"
           LOCATION_UNDELIVERABLE: "#/components/schemas/CheckoutIssue_LocationUndeliverable"
           MINIMUM_ORDER_VALUE_NOT_MET: "#/components/schemas/CheckoutIssue_MinimumOrderValueNotMet"
           PHONE_NUMBER_REQUIRED: "#/components/schemas/CheckoutIssue_PhoneNumberRequired"
@@ -6342,6 +6394,8 @@ components:
             - FULFILMENT_TIME_UNAVAILABLE
             - LOCATION_UNDELIVERABLE
             - AGE_VERIFICATION_FAILED
+            - FIRST_NAME_REQUIRED
+            - LAST_NAME_REQUIRED
             - PHONE_NUMBER_REQUIRED
             - DATE_OF_BIRTH_REQUIRED
             - FULFILMENT_TIME_REQUIRED
@@ -6377,6 +6431,12 @@ components:
         - additionalProperties: false
           description: Indicates that the customer's date of birth is required to fulfil an order.
           type: object
+    CheckoutIssue_FirstNameRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that the customer's first name is required to fulfil an order.
+          type: object
     CheckoutIssue_FulfilmentTimeRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
@@ -6400,6 +6460,12 @@ components:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
           description: The collection of items are not orderable in their current state. The customer will need to amend their collection of items.
+          type: object
+    CheckoutIssue_LastNameRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that the customer's last name is required to fulfil an order.
           type: object
     CheckoutIssue_LocationUndeliverable:
       allOf:
@@ -6521,6 +6587,8 @@ components:
                     enum:
                       - TENANT_INVALID
                       - CHECKOUT_ID_INVALID
+                      - FIRST_NAME_INVALID
+                      - LAST_NAME_INVALID
                       - PHONE_NUMBER_INVALID
                       - DATE_OF_BIRTH_INVALID
                       - FULFILMENT_TIME_INVALID
@@ -6558,6 +6626,14 @@ components:
           properties:
             dateOfBirth:
               description: Customer's date of birth (ISO 8601 Date)
+              nullable: true
+              type: string
+            firstName:
+              description: Customer's first name
+              nullable: true
+              type: string
+            lastName:
+              description: Customer's last name
               nullable: true
               type: string
             phoneNumber:
@@ -7164,6 +7240,7 @@ components:
           Bogof: "#/components/schemas/ConsumerOffer_Bogof"
           FreeItem: "#/components/schemas/ConsumerOffer_FreeItem"
           Percent: "#/components/schemas/ConsumerOffer_Percent"
+          StampCard: "#/components/schemas/ConsumerOffer_StampCard"
         propertyName: offerType
       properties:
         campaignId:
@@ -7206,7 +7283,6 @@ components:
         offerId: 12345c
         offerType: Percent
         restaurantId: 1234567ds
-        title: Best Offer
       properties:
         campaignId:
           description: The unique identifier of the offer campaign.
@@ -7215,22 +7291,28 @@ components:
         consumerSegment:
           $ref: "#/components/schemas/ConsumerSegment"
           description: Consumer Segment to which offer applies
-          nullable: true
+          nullable: false
         description:
           description: The description of the offer.
           nullable: true
           type: string
         offerId:
           description: The unique identifier of the offer.
+          nullable: false
           type: string
         offerType:
           $ref: "#/components/schemas/ConsumerOfferType"
           description: The type of the offer.
-          nullable: true
+          nullable: false
         restaurantId:
           description: The unique identifier of the restaurant providing the offers.
-          nullable: true
+          nullable: false
           type: string
+      required:
+        - offerId
+        - restaurantId
+        - offerType
+        - consumerSegment
       title: ConsumerOfferNotification
       type: object
     ConsumerOfferPrompt:
@@ -7252,11 +7334,28 @@ components:
         description: We�ll apply the discount at checkout
         header: Free item
         title: Nice! You get this free with your order
+    ConsumerOfferStampCardDiscount:
+      additionalProperties: false
+      properties:
+        discountCode:
+          description: The unique code of the discount, acts as a lock object at payment stage
+          nullable: false
+          type: string
+        discountValue:
+          description: The discount value in smallest unit of relevant currency.
+          format: integer
+          nullable: false
+          type: number
+      required:
+        - discountValue
+        - discountCode
+      type: object
     ConsumerOfferType:
       enum:
         - Percent
         - FreeItem
         - Bogof
+        - StampCard
       type: string
     ConsumerOffer_Bogof:
       allOf:
@@ -7336,6 +7435,19 @@ components:
               type: number
           required:
             - amount
+          type: object
+    ConsumerOffer_StampCard:
+      allOf:
+        - $ref: "#/components/schemas/ConsumerOffer"
+        - additionalProperties: false
+          properties:
+            discounts:
+              description: The list of completed stamp card discounts
+              items:
+                $ref: "#/components/schemas/ConsumerOfferStampCardDiscount"
+              type: array
+          required:
+            - discounts
           type: object
     ConsumerOffersBasket:
       additionalProperties: false
@@ -9066,10 +9178,15 @@ components:
         daysOfWeek:
           - Monday
           - Friday
+        endDate: 2019-09-03T00:00:00Z
+        endTime: 13:00:00
+        offerDescription: This is offer description
         offerTemplateId: 333
         qualifyingValue:
           currency: GBP
           value: 1000
+        startDate: 2019-08-06T00:00:00Z
+        startTime: 12:00:00
       properties:
         daysOfWeek:
           description: Days of week to run the offer
@@ -9085,21 +9202,82 @@ components:
             type: string
           type: array
           uniqueItems: true
+        endDate:
+          description: The date when offer ends
+          format: date
+          nullable: true
+          type: string
+        endTime:
+          description: Timestamp when offer ends during the day
+          format: time
+          nullable: true
+          type: string
+        freeProducts:
+          description: The product that gets 100% discount applied
+          items:
+            properties:
+              id:
+                description: The unique identifier of the product.
+                nullable: false
+                type: string
+              modifiers:
+                description: The collection of preselected modifiers for the item.
+                items:
+                  properties:
+                    modifierId:
+                      description: The unique identifier of the modifier.
+                      nullable: false
+                      type: string
+                    quantity:
+                      description: The required quantity of the modifier.
+                      format: int32
+                      nullable: false
+                      type: integer
+                  type: object
+                nullable: true
+                type: array
+            type: object
+          nullable: true
+          type: array
+        offerDescription:
+          description: The description of the offer.
+          nullable: true
+          type: string
         offerTemplateId:
           description: Internal id of offer template
           format: int32
+          nullable: false
           type: integer
+        qualifyingProductIds:
+          description: One of those products needed to be included in the collection of products to make offer applicable
+          items:
+            type: string
+          nullable: true
+          type: array
         qualifyingValue:
           description: Minimum qualifying value for offer to be applied
+          nullable: true
           properties:
             currency:
               description: Currency code in ISO 4217 format
+              nullable: false
               type: string
             value:
               description: Smallest unit of local currency
               format: int32
+              nullable: false
               type: integer
           type: object
+        startDate:
+          description: The date when offer starts
+          format: date
+          nullable: true
+          type: string
+        startTime:
+          description: Timestamp when offer starts during the day
+          format: time
+          nullable: true
+          type: string
       type: object
     CreateOrderDetails:
       properties:
@@ -13129,13 +13307,12 @@ components:
       properties:
         campaignId:
           description: Campaign id
+          nullable: true
           type: string
         consumerSegment:
+          $ref: "#/components/schemas/PartnerConsumerSegment"
           description: Consumer Segment to which offer applies
-          enum:
-            - All
-            - NewToRestaurant
-          type: string
+          nullable: false
         dayOfWeek:
           description: Day of week to run the offer
           enum:
@@ -13146,45 +13323,86 @@ components:
             - Thursday
             - Friday
             - Saturday
+          nullable: false
           type: string
         discountAmount:
           description: Amount of the discount
           format: double
+          nullable: false
           type: number
-        discountType:
-          description: Type of the discount applied
-          enum:
-            - Percent
-            - FixedAmount
-          type: string
         endTime:
           description: Timestamp when offer ends during the day
+          format: time
+          nullable: true
           type: string
+        freeProducts:
+          description: The product that gets 100% discount applied
+          items:
+            properties:
+              id:
+                description: The unique identifier of the product.
+                nullable: false
+                type: string
+              modifiers:
+                description: The collection of preselected modifiers for the item.
+                items:
+                  properties:
+                    modifierId:
+                      description: The unique identifier of the modifier.
+                      nullable: false
+                      type: string
+                    quantity:
+                      description: The required quantity of the modifier.
+                      format: int32
+                      nullable: false
+                      type: integer
+                  type: object
+                nullable: true
+                type: array
+            type: object
+          nullable: true
+          type: array
         id:
           description: Internal id of the offer
+          nullable: false
+          type: string
+        offerDescription:
+          description: The description of the offer.
+          nullable: true
           type: string
         offerType:
+          $ref: "#/components/schemas/PartnerOfferType"
           description: Type of the offer
-          enum:
-            - Percent
-          type: string
+          nullable: false
+        qualifyingProductIds:
+          description: One of those products needed to be included in the collection of products to make offer applicable
+          items:
+            type: string
+          nullable: true
+          type: array
         qualifyingValue:
           description: Minimum qualifying value for offer to be applied
+          nullable: true
           properties:
             currency:
               description: Currency code in ISO 4217 format
+              nullable: false
               type: string
             value:
               description: Smallest unit of local currency
               format: int32
+              nullable: false
               type: integer
           type: object
         startTime:
           description: Timestamp when offer starts during the day
+          format: time
+          nullable: true
           type: string
         validFrom:
           description: The date when offer starts
           format: date-time
+          nullable: false
           type: string
         validTo:
           description: The date when offer ends
@@ -13199,7 +13417,6 @@ components:
           - Monday
           - Friday
         discountAmount: 15
-        discountType: Percent
         enabled: true
         end: 2019-09-03T00:00:00.000Z
         id: "1"
@@ -13207,6 +13424,7 @@ components:
           currency: GBP
           value: 5000
         start: 2019-08-06T09:01:12.970Z
+        subscribed: true
         type: CheekyCampaign
       properties:
         active:
@@ -13225,21 +13443,17 @@ components:
               - Friday
               - Saturday
             type: string
+          nullable: false
           type: array
           uniqueItems: true
         discountAmount:
           description: Amount of the discount
           format: double
+          nullable: false
           type: number
-        discountType:
-          description: Type of the discount applied
-          enum:
-            - None
-            - Percent
-            - FixedAmount
-          type: string
         enabled:
           description: Is the offer campaign allowed to be active
+          nullable: false
           readOnly: false
           type: boolean
         end:
@@ -13253,13 +13467,16 @@ components:
           type: string
         qualifyingValue:
           description: qualifying value for a given offer template
+          nullable: false
           properties:
             currency:
               description: Currency code in ISO 4217 format
+              nullable: false
               type: string
             value:
               description: Smallest unit of local currency
               format: int32
+              nullable: false
               type: integer
           type: object
         start:
@@ -13268,18 +13485,24 @@ components:
           nullable: true
           readOnly: false
           type: string
+        subscribed:
+          description: Is restaurant subscribed to this campaign
+          nullable: false
+          readOnly: true
+          type: boolean
         type:
           description: Type of the offer campaign
           enum:
             - CheekyCampaign
             - DonationCampaign
+            - FastMovingGoodsCampaign
+          nullable: false
           type: string
       type: object
     OfferTemplate:
       example:
         consumerSegment: All
-        discountAmount: 15
-        discountType: Percent
+        discountValue: 15
         id: 333
         maxQualifyingValue:
           currency: GBP
@@ -13287,27 +13510,22 @@ components:
         offerType: Percent
       properties:
         consumerSegment:
+          $ref: "#/components/schemas/PartnerConsumerSegment"
           description: Consumer Segment that offer applies
-          enum:
-            - All
-            - NewToRestaurant
-          type: string
-        discountAmount:
+          nullable: false
+        discountValue:
           description: Amount of the discount
           format: double
+          nullable: false
           type: number
-        discountType:
-          description: Type of the discount applied
-          enum:
-            - Percent
-            - FixedAmount
-          type: string
         id:
           description: Internal id of the offer template
           format: int32
+          nullable: false
           type: integer
         maxQualifyingValue:
           description: Maximum qualifying value for a given offer template
+          nullable: false
           properties:
             currency:
               description: Currency code in ISO 4217 format
@@ -13318,10 +13536,9 @@ components:
               type: integer
           type: object
         offerType:
+          $ref: "#/components/schemas/PartnerOfferType"
           description: Type of the offer
-          enum:
-            - Percent
-          type: string
+          nullable: false
       type: object
     OfflineItemsRequest:
       example:
@@ -14572,6 +14789,11 @@ components:
               - 8547130-opt-1
             name: 14 inch
             type: variation
+    PartnerConsumerSegment:
+      enum:
+        - All
+        - NewToRestaurant
+      type: string
     PartnerInfo:
       additionalProperties: false
       properties:
@@ -14596,6 +14818,13 @@ components:
           nullable: true
           type: string
       type: object
+    PartnerOfferType:
+      enum:
+        - Percent
+        - FreeItem
+        - Bogof
+        - StampCard
+      type: string
     PasswordResetFlowResponse:
       example:
         email: example@just-eat.com
@@ -14965,6 +15194,352 @@ components:
             $ref: "#/components/schemas/ProductWithOfflineStatus"
           type: array
       type: object
+    PromotedPlacementActivePlacement:
+      additionalProperties: true
+      example:
+        availableActions:
+          - adjustBudget
+          - resume
+          - cancel
+        deliveryArea: NW6
+        purchaseDate: 2021-01-01T14:45:00Z
+        status:
+          pause:
+            code: paused
+            pauseDate: 2021-01-14T12:02:32Z
+            resumeDate: 2021-02-12T00:00:00Z
+        weeklyBudget:
+          maximumAllowable: 100000
+          minimumAllowable: 500
+          recommended: 13000
+          remaining: 5000
+          total: 13000
+      nullable: false
+      properties:
+        availableActions:
+          description: A list of the currently supported actions for this placement.
+          items:
+            enum:
+              - adjustBudget
+              - cancel
+              - pause
+              - resume
+              - undoCancel
+            type: string
+          type: array
+        deliveryArea:
+          description: The postcode or location that the placement applies to.
+          nullable: false
+          type: string
+        purchaseDate:
+          description: The UTC date and time at which this placement was purchased.
+          format: date-time
+          nullable: false
+          type: string
+        status:
+          description: Contains status information for different aspects of this placement. 'normal' status is assumed if no additional status information is available.
+          properties:
+            budget:
+              additionalProperties: true
+              description: The budget status of this placement.
+              nullable: false
+              properties:
+                code:
+                  description: The status code that describes this placement's current budget status.
+                  enum:
+                    - budgetLow
+                    - budgetExhausted
+                  nullable: false
+                  type: string
+              required:
+                - code
+            contract:
+              additionalProperties: true
+              description: The status of this placement's contract.
+              nullable: false
+              properties:
+                cancellableAfterDate:
+                  description: The UTC date and time after which this placement may be cancelled. Available if the status code is "inNonCancellablePeriod".
+                  format: date-time
+                  nullable: false
+                  type: string
+                code:
+                  description: The status code that describes this placement's contract status.
+                  enum:
+                    - inNonCancellablePeriod
+                    - cancelled
+                  nullable: false
+                  type: string
+                endDate:
+                  description: The UTC date and time at which this placement will end. Available if the status code is "cancelled".
+                  format: date-time
+                  nullable: false
+                  type: string
+              required:
+                - code
+              type: object
+            pause:
+              additionalProperties: true
+              description: The pause status of this placement.
+              nullable: false
+              properties:
+                code:
+                  description: The status code that describes this placement's pause status.
+                  enum:
+                    - paused
+                  nullable: false
+                  type: string
+                pauseDate:
+                  description: The UTC date and time at which this placement was paused as a result of a manual action. Available if the status code is "paused".
+                  format: date-time
+                  nullable: false
+                  type: string
+                resumeDate:
+                  description: The UTC date and time at which this placement is scheduled to be resumed. Available if the status code is "paused" and a resume date was specified.
+                  format: date-time
+                  nullable: false
+                  type: string
+              required:
+                - code
+          type: object
+        weeklyBudget:
+          description: Contains information about the weekly budget for this placement.
+          nullable: false
+          properties:
+            maximumAllowable:
+              description: The maximum allowable budget for this week in the smallest unit of local currency (e.g., pence). It will not be possible to set a budget that exceeds this amount.
+              format: int32
+              nullable: false
+              type: integer
+            minimumAllowable:
+              description: The minimum allowable budget for this week in the smallest unit of local currency (e.g., pence). It will not be possible to set a budget lower than this amount.
+              format: int32
+              nullable: false
+              type: integer
+            recommended:
+              description: The recommended budget for this week so that the budget does not run out in the smallest unit of local currency (e.g., pence).
+              format: int32
+              nullable: false
+              type: integer
+            remaining:
+              description: The remaining budget for this week in the smallest unit of local currency (e.g., pence).
+              format: int32
+              nullable: false
+              type: integer
+            total:
+              description: The total budget for this week in the smallest unit of local currency (e.g., pence).
+              format: int32
+              nullable: false
+              type: integer
+          required:
+            - remaining
+            - total
+            - maximumAllowable
+            - minimumAllowable
+            - recommended
+          type: object
+      required:
+        - deliveryArea
+        - purchaseDate
+        - weeklyBudget
+        - status
+      type: object
+    PromotedPlacementActivePlacementsForRestaurantResponse:
+      additionalProperties: true
+      example:
+        metadata:
+          currency: GBP
+          effectiveDate: 2021-01-14T17:30:00Z
+        placements:
+          - availableActions:
+              - adjustBudget
+              - resume
+              - cancel
+            deliveryArea: NW6
+            purchaseDate: 2021-01-01T14:45:00Z
+            status:
+              pause:
+                code: paused
+                pauseDate: 2021-01-14T12:02:32Z
+                resumeDate: 2021-02-12T00:00:00Z
+              placement:
+                code: cancelled
+                endDate: 2021-01-17T23:59:59Z
+            weeklyBudget:
+              maximumAllowable: 100000
+              minimumAllowable: 500
+              recommended: 13000
+              remaining: 5000
+              total: 13000
+          - availableActions:
+              - adjustBudget
+              - pause
+              - cancel
+            deliveryArea: NW5
+            purchaseDate: 2021-01-01T14:47:34Z
+            status:
+              budget:
+                code: budgetLow
+            weeklyBudget:
+              maximumAllowable: 110000
+              minimumAllowable: 500
+              recommended: 14000
+              remaining: 210
+              total: 13000
+          - availableActions:
+              - adjustBudget
+              - undoCancel
+            deliveryArea: NW4
+            purchaseDate: 2021-01-01T14:51:12Z
+            status:
+              placement:
+                code: cancelled
+                endDate: 2021-01-17T23:59:59Z
+            weeklyBudget:
+              maximumAllowable: 100000
+              minimumAllowable: 500
+              recommended: 14000
+              remaining: 3200
+              total: 13000
+          - availableActions:
+              - adjustBudget
+              - pause
+              - cancel
+            deliveryArea: NW3
+            status:
+              budget:
+                code: budgetExhausted
+            weeklyBudget:
+              maximumAllowable: 100000
+              minimumAllowable: 500
+              recommended: 14000
+              remaining: 0
+              total: 13000
+      properties:
+        contract:
+          description: Information about the contract for this restaurant.
+          properties:
+            nonCancellablePeriodEndDate:
+              description: The UTC time after which the non-cancellable period ends for this restaurant. If not specified, this restaurant has week-by-week rolling contracts.
+              format: date-date
+              type: string
+          type: object
+        metadata:
+          additionalProperties: true
+          description: Additional metadata that may assist the rendering of the response.
+          properties:
+            currency:
+              description: The currency used for the budget data in ISO 4217 format, e.g., GBP, EUR or AUD.
+              nullable: false
+              type: string
+            effectiveDate:
+              description: The UTC time at which the request was processed for relative time calculations.
+              format: date-time
+              nullable: false
+              type: string
+          type: object
+        placements:
+          description: List of promoted placements active for a given restaurant.
+          items:
+            $ref: "#/components/schemas/PromotedPlacementActivePlacement"
+          type: array
+      required:
+        - placements
+      type: object
+    PromotedPlacementAvailablePlacement:
+      additionalProperties: true
+      example:
+        deliveryArea: NW6
+        weeklyBudget:
+          maximumAllowable: 100000
+          minimumAllowable: 500
+          recommended: 13000
+      nullable: false
+      properties:
+        deliveryArea:
+          description: The postcode or location that is available for starting a placement.
+          nullable: false
+          type: string
+        weeklyBudget:
+          additionalProperties: true
+          description: Contains information about the required weekly budget for this placement location.
+          nullable: false
+          properties:
+            maximumAllowable:
+              description: The maximum allowable budget for this week in the smallest unit of local currency (e.g., pence). It will not be possible to set a budget that exceeds this amount.
+              format: int32
+              nullable: false
+              type: integer
+            minimumAllowable:
+              description: The minimum allowable budget for this week in the smallest unit of local currency (e.g., pence). It will not be possible to set a budget lower than this amount.
+              format: int32
+              nullable: false
+              type: integer
+            recommended:
+              description: The recommended budget for this week so that the budget does not run out in the smallest unit of local currency (e.g., pence).
+              format: int32
+              nullable: false
+              type: integer
+          required:
+            - maximumAllowable
+            - minimumAllowable
+            - recommended
+          type: object
+      required:
+        - deliveryArea
+        - weeklyBudget
+      type: object
+    PromotedPlacementAvailablePlacementsForRestaurantResponse:
+      additionalProperties: true
+      example:
+        metadata:
+          currency: GBP
+          effectiveDate: 2021-01-14T17:30:00Z
+        placements:
+          - deliveryArea: NW6
+            weeklyBudget:
+              minimumAllowable: 500
+              minimumRecommended: 1000
+              recommended: 13000
+          - deliveryArea: NW5
+            weeklyBudget:
+              minimumAllowable: 500
+              minimumRecommended: 1000
+              recommended: 14000
+          - deliveryArea: NW4
+            weeklyBudget:
+              minimumAllowable: 500
+              minimumRecommended: 1000
+              recommended: 14000
+          - deliveryArea: NW3
+            weeklyBudget:
+              minimumAllowable: 500
+              minimumRecommended: 1000
+              recommended: 14000
+      properties:
+        metadata:
+          additionalProperties: true
+          description: Additional metadata that may assist the rendering of the response.
+          properties:
+            currency:
+              description: The currency used for the budget data in ISO 4217 format, e.g., GBP, EUR or AUD.
+              nullable: false
+              type: string
+            effectiveDate:
+              description: The UTC time at which the request was processed for relative time calculations.
+              format: date-time
+              nullable: false
+              type: string
+            timeZone:
+              description: The restaurant's timezone in IANA format, e.g., Europe/London.
+              type: string
+          type: object
+        placements:
+          description: List of promoted placements available for purchase for a given restaurant.
+          items:
+            $ref: "#/components/schemas/PromotedPlacementAvailablePlacement"
+          type: array
+      type: object
     PromotedPlacementCandidateRestaurant:
       additionalProperties: true
       example:
@@ -15010,6 +15585,155 @@ components:
               description: The number of Promoted Placement positions available in this location when displaying the full list of restaurants.
               type: number
           type: object
+      type: object
+    PromotedPlacementPlacementInsights:
+      additionalProperties: true
+      example:
+        metadata:
+          currency: GBP
+        reports:
+          last-28-days:
+            data:
+              overall:
+                menuViews: 1236
+                newCustomers: 198
+                orderValue: 1137241
+                orders: 660
+              promotedPlacement:
+                menuViews: 922
+                newCustomers: 67
+                orderValue: 403212
+                orders: 250
+                placementSpend: 60630
+            period:
+              createdAt: 2021-01-22T08:06:14.278Z
+              endDate: 2021-01-21
+              startDate: 2020-12-25
+          last-7-days:
+            data:
+              overall:
+                menuViews: 309
+                newCustomers: 50
+                orderValue: 315910
+                orders: 165
+              promotedPlacement:
+                menuViews: 225
+                newCustomers: 17
+                orderValue: 96090
+                orders: 48
+                placementSpend: 14190
+            period:
+              createdAt: 2021-01-22T08:06:14.199Z
+              endDate: 2021-01-21
+              startDate: 2021-01-15
+      properties:
+        metadata:
+          additionalProperties: true
+          description: Additional metadata that may assist the rendering of the response.
+          properties:
+            currency:
+              description: The currency used in the reports in ISO 4217 format, e.g., GBP, EUR or AUD.
+              nullable: false
+              type: string
+          type: object
+        reports:
+          additionalProperties:
+            additionalProperties: true
+            description: A report for a given time period.
+            properties:
+              data:
+                additionalProperties: true
+                description: The placement insights data for this report period.
+                properties:
+                  overall:
+                    additionalProperties: true
+                    description: Total values for this period.
+                    properties:
+                      menuViews:
+                        description: The total number of menu views.
+                        format: int32
+                        type: integer
+                      newCustomers:
+                        description: The total number of new customers.
+                        format: int32
+                        type: integer
+                      orderValue:
+                        description: The total order value in the smallest unit of local currency (e.g., pence).
+                        format: int32
+                        type: integer
+                      orders:
+                        description: The total number of orders.
+                        format: int32
+                        type: integer
+                    required:
+                      - newCustomers
+                      - menuViews
+                      - orders
+                      - orderValue
+                    type: object
+                  promotedPlacement:
+                    additionalProperties: true
+                    description: Total values for promoted placement in this period.
+                    properties:
+                      menuViews:
+                        description: The total number of promoted menu views.
+                        format: int32
+                        type: integer
+                      newCustomers:
+                        description: The total number of new customers as a result of promoted placement.
+                        format: int32
+                        type: integer
+                      orderValue:
+                        description: The total order value resulting from promoted placement orders in the smallest unit of local currency (e.g., pence).
+                        format: int32
+                        type: integer
+                      orders:
+                        description: The total number of orders resulting from promoted placement menu views.
+                        format: int32
+                        type: integer
+                      placementSpend:
+                        description: The total amount spent on promoted placement in the smallest unit of local currency (e.g., pence).
+                        format: int32
+                        type: integer
+                    required:
+                      - newCustomers
+                      - menuViews
+                      - orders
+                      - orderValue
+                      - placementSpend
+                    type: object
+                type: object
+              period:
+                description: Describes the time period for this report.
+                properties:
+                  createdAt:
+                    description: The UTC time at which this report was generated.
+                    format: date-time
+                    nullable: false
+                    type: string
+                  endDate:
+                    description: The end date of this report period.
+                    format: date
+                    nullable: false
+                    type: string
+                  startDate:
+                    description: The start date of this report period.
+                    format: date
+                    nullable: false
+                    type: string
+                required:
+                  - createdAt
+                  - startDate
+                  - endDate
+                type: object
+            required:
+              - period
+              - data
+            type: object
+          description: Reports keyed by the name of specific time periods.
+          type: object
+      required:
+        - reports
       type: object
     Prompts:
       properties:
@@ -15522,14 +16246,38 @@ components:
       type: object
     RestaurantOffer:
       properties:
-        DiscountApplied:
-          format: decimal
-          type: number
-        DiscountValue:
-          format: decimal
-          type: number
-        OfferType:
+        ConsumerSegment:
+          description: Consumer Segment to which offer applies
+          example: NewToRestaurant
+          nullable: false
           type: string
+        DiscountApplied:
+          description: The money value discount
+          format: decimal
+          nullable: false
+          type: number
+        DiscountCode:
+          description: The unique code of the discount, acts as a lock object at payment stage
+          nullable: true
+          type: string
+        DiscountValue:
+          description: The percentage value discount. Returned 0 when offer is not of Percent type
+          format: decimal
+          nullable: false
+          type: number
+        OfferId:
+          description: The unique identifier of the offer
+          nullable: false
+          type: string
+        OfferType:
+          description: The type of the offer
+          nullable: false
+          type: string
+      required:
+        - OfferId
+        - OfferType
+        - ConsumerSegment
+        - DiscountApplied
       type: object
     RestaurantOfflineStatus:
       example:
@@ -17941,6 +18689,20 @@ components:
         - dateTime
         - asap
         - menuId
+      type: object
+    UpdatePasswordResetFlowResponse:
+      example:
+        accessCode: 8It2lEaJjG82nJtxO00Iab0CoF0=
+        expiry: 2021-01-20T19:35:13.643Z
+      properties:
+        accessCode:
+          description: The One Time Access Code (OTAC).
+          type: string
+        expiry:
+          description: The expiry of the OTAC.
+          example: 2021-01-20T19:35:13.643Z
+          format: date-time
+          type: string
       type: object
     UpdateProduct:
       properties:

@@ -30,6 +30,8 @@ paths:
                 $ref: "#/components/examples/objectExample4"
               objectExample5:
                 $ref: "#/components/examples/objectExample5"
+              objectExample6:
+                $ref: "#/components/examples/objectExample6"
             schema:
               $ref: "#/components/schemas/screenshot-payload"
         description: start screenshot test payload.
@@ -92,6 +94,28 @@ paths:
       summary: Fetch all available device combinations.
       tags:
         - Get Devices
+  /locations:
+    get:
+      description: Fetch list of available Geolocations
+      operationId: Locations
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/locations"
+          description: successful operation
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDenied"
+          description: Access denied. Auth error.
+      security:
+        - basicAuth: []
+      summary: Fetch Locations
+      tags:
+        - Get Locations
   /os-browsers:
     get:
       description: Fetch all os browsers combinations available on lambdatest platform.
@@ -492,6 +516,35 @@ components:
         profile_id: lambda-login
         url: https://www.lambdatest.com
         win_res: 1366X768
+    objectExample6:
+      summary: Screenshot Test with Geolocation
+      value:
+        configs:
+          macos mojave:
+            chrome:
+              - "76"
+              - "75"
+            firefox:
+              - "67"
+              - "66"
+          windows 10:
+            chrome:
+              - "76"
+              - "75"
+            firefox:
+              - "67"
+              - "66"
+            ie:
+              - "11"
+            opera:
+              - "58"
+              - "57"
+        country_code: US
+        defer_time: 5
+        email: true
+        mac_res: 1024x768
+        url: https://www.lambdatest.com
+        win_res: 1366X768
   schemas:
     AccessDenied:
       properties:
@@ -561,6 +614,20 @@ components:
             - iphone xs max
           items:
             type: string
+          type: array
+      type: object
+    locations:
+      properties:
+        locations:
+          items:
+            properties:
+              code:
+                example: US
+                type: string
+              name:
+                example: United States
+                type: string
+            type: object
           type: array
       type: object
     os-browsers:

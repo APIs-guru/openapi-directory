@@ -1540,6 +1540,11 @@ definitions:
         description: The price per item (may be fractional)
         title: Item price
         type: number
+      lineId:
+        description: The id for this invoice line.
+        minLength: 1
+        title: Invoice Line ID
+        type: string
       name:
         description: A short name for this invoice line. If not provided, it will be taken from description and description will be set to an emtpy string.
         minLength: 1
@@ -4823,10 +4828,6 @@ definitions:
         type: string
       branch_code:
         description: The code identifying the bank branch. May contain a BIC/SWIFT or something appropriate for the payment method, such as "NPP" for type NppPaymentMean.
-        enum:
-          - NPP
-          - SE:BANKGIRO
-          - SE:PLUSGIRO
         title: Branch code
       holder:
         description: The account holder name to which to transfer.
@@ -4853,6 +4854,9 @@ definitions:
           - NppPaymentMean
           - SeBankgiroPaymentMean
           - SePlusGiroPaymentMean
+          - SgCardPaymentMean
+          - SgGiroPaymentMean
+          - SgPaynowPaymentMean
         title: Type
   PurchaseInvoiceSender:
     properties:

@@ -11,7 +11,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://portfoliooptimizer.io/terms-of-service
   title: Portfolio Optimizer
-  version: 1.0.7
+  version: 1.0.8
   x-apisguru-categories:
     - financial
   x-logo:
@@ -842,6 +842,137 @@ paths:
       tags:
         - Assets Volatilities
       x-codegen-request-body-name: body
+  /portfolio/analysis/contributions/return:
+    post:
+      description: Performs a return contribution analysis of one or several portfolio(s).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsGroups:
+                    - - 1
+                      - 2
+                    - - 3
+                  assetsReturns:
+                    - 0.01
+                    - -0.01
+                    - 0.025
+                  assetsWeights:
+                    - - 0.5
+                      - 0.25
+                      - 0.25
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsGroups:
+                  items:
+                    items:
+                      type: integer
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsWeights:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioGroupsReturnContributions:
+                          - 0.0025
+                          - 0.00625
+                        portfolioReturnContributions:
+                          - 0.005
+                          - -0.0025
+                          - 0.00625
+          description: OK
+      summary: Portfolio Return Contributions
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/analysis/contributions/risk:
+    post:
+      description: Performs a risk contribution analysis of one or several portfolio(s).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsCovarianceMatrix:
+                    - - 0.0001
+                      - 0
+                      - 0
+                    - - 0
+                      - 0.0001
+                      - 0
+                    - - 0
+                      - 0
+                      - 0.04
+                  assetsWeights:
+                    - - 0.5
+                      - 0.25
+                      - 0.25
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsGroups:
+                  items:
+                    items:
+                      type: integer
+                    type: array
+                  type: array
+                assetsWeights:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioRiskContributions:
+                          - 0.0004969039949999533
+                          - 0.00012422599874998834
+                          - 0.049690399499995326
+          description: OK
+      summary: Portfolio Risk Contributions
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
   /portfolio/analysis/drawdowns:
     post:
       description: Computes the drawdown function - also called the underwater equity curve -, as well as the worst 10 drawdowns of one or several portfolio(s).
@@ -917,7 +1048,7 @@ paths:
                   assetsReturns:
                     - 0.01
                     - 0.05
-                  portfoliosAssetsWeights:
+                  assetsWeights:
                     - - 1
                       - 0
                     - - 0
@@ -947,7 +1078,7 @@ paths:
                       type: number
                     type: array
                   type: array
-                portfoliosAssetsWeights:
+                assetsWeights:
                   items:
                     items:
                       type: number
@@ -1171,6 +1302,15 @@ paths:
               Example (groups weights):
                 value:
                   assets: 4
+                  assetsGroupsWeights:
+                    assetsGroups:
+                      - - 1
+                        - 2
+                      - - 3
+                        - 4
+                    weights:
+                      - 0.4
+                      - 0.4
                   assetsPrices:
                     - 10
                     - 25
@@ -1181,15 +1321,6 @@ paths:
                     - null
                     - null
                     - null
-                  groupsWeights:
-                    groups:
-                      - - 1
-                        - 2
-                      - - 3
-                        - 4
-                    weights:
-                      - 0.4
-                      - 0.4
                   portfolioValue: 10000
               Example (no groups weights):
                 value:
@@ -1207,6 +1338,19 @@ paths:
               properties:
                 assets:
                   type: integer
+                assetsGroupsWeights:
+                  properties:
+                    assetsGroups:
+                      items:
+                        items:
+                          type: integer
+                        type: array
+                      type: array
+                    weights:
+                      items:
+                        type: number
+                      type: array
+                  type: object
                 assetsPrices:
                   items:
                     type: number
@@ -1219,22 +1363,9 @@ paths:
                   items:
                     type: number
                   type: array
-                groupsWeights:
+                maximumAssetsGroupsWeights:
                   properties:
-                    groups:
-                      items:
-                        items:
-                          type: integer
-                        type: array
-                      type: array
-                    weights:
-                      items:
-                        type: number
-                      type: array
-                  type: object
-                maximumGroupsWeights:
-                  properties:
-                    groups:
+                    assetsGroups:
                       items:
                         items:
                           type: integer

@@ -1,6 +1,4 @@
 openapi: 3.0.2
-servers:
-  - url: http://apicurio.local
 info:
   contact:
     email: apicurio@lists.jboss.org
@@ -49,6 +47,7 @@ info:
       version: "3.0"
   x-providerName: apicurio.local
   x-serviceName: registry
+  x-preferred: false
 tags:
   - description: >-
       The primary way to interact with the Apicurio Registry API is to add, update, 

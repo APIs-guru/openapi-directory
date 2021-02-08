@@ -523,7 +523,7 @@ paths:
 
             List<RevAiJob> jobsStartingAfter = apiClient.getListOfJobs(jobId);
     post:
-      description: Starts an asynchronous job to transcribe speech-to-text for a media file. Media files can be specified in two ways, either by including a public url to the media in the transcription job `options` or by uploading a local file as part of a multipart/form request. **Note:** Media files longer than 17 hours are not supported.
+      description: Starts an asynchronous job to transcribe speech-to-text for a media file. Media files can be specified in two ways, either by including a public url to the media in the transcription job `options` or by uploading a local file as part of a multipart/form request.
       operationId: SubmitTranscriptionJob
       requestBody:
         content:
@@ -534,7 +534,7 @@ paths:
             schema:
               properties:
                 media:
-                  description: Limited to files less than 2GB in size. If the file is larger than 2GB, submit a transcription job using `media_url`
+                  description: Limited to files less than 2GB in size. If the file is larger than 2GB, submit a transcription job using `media_url`. **Note:** Media files longer than 17 hours are not supported for English transcription, and media files longer than 12 hours are not supported for non-English transcription. For non-English jobs, expected turnaround time can be up to 6 hours.
                   format: binary
                   type: string
                 options:
@@ -1772,7 +1772,7 @@ components:
             language:
               description: User-supplied language to transcribe the audio into.
             media_url:
-              description: Media url provided by the job submission. Null if the job was provided using a local file
+              description: Media url provided by the job submission. Null if the job was provided using a local file.
             metadata:
               description: Optional metadata that was provided during job submission
             name:
@@ -1815,7 +1815,7 @@ components:
       allOf:
         - properties:
             media_url:
-              description: Direct download media url. Ignored if submitting job from file
+              description: Direct download media url. Ignored if submitting job from file. **Note:** Media files longer than 17 hours are not supported for English transcription, and media files longer than 12 hours are not supported for non-English transcription. For non-English jobs, expected turnaround time can be up to 6 hours.
               example: https://www.rev.ai/FTC_Sample_1.mp3
               maxLength: 2048
               type: string
@@ -1845,10 +1845,10 @@ components:
                 Enabling this option will filter for approx. 600 profanities, which cover most use cases. If a transcribed word matches a word on this list, then all the characters of that word will be replaced by asterisks except for the first and last character.
             language:
               description: >
-                **This feature is in beta.** You can provide a language parameter for transcribing audio in Spanish, Portuguese, French and German. Language parameter is provided as a [ISO 639-1 2-letter language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
+                You can provide a language parameter for transcribing audio in Spanish, Portuguese, French and German. Language parameter is provided as a [ISO 639-1 2-letter language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
 
 
-                Only 1 language can be selected per audio, i.e. no multiple languages in one transcription job. Additionally, the following parameters may **not** be used with non-English languages: `skip_punctuation`, `remove_disfluencies`, `filter_profanity`, `speaker_channels_count`, `custom_vocabulary_id`, `custom_vocabularies`.
+                Only 1 language can be selected per audio, i.e. no multiple languages in one transcription job. Additionally, the following parameters may **not** be used with non-English languages: `skip_punctuation`, `remove_disfluencies`, `filter_profanity`, `speaker_channels_count`, `custom_vocabulary_id`.
             metadata:
               description: Optional metadata that was provided during submission
             remove_disfluencies:

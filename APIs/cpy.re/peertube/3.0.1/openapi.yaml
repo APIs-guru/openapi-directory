@@ -3938,6 +3938,11 @@ components:
           type: string
     AddUser:
       properties:
+        adminFlags:
+          $ref: "#/components/schemas/UserAdminFlags"
+        channelName:
+          description: The user default channel username
+          type: string
         email:
           description: The user email
           format: email
@@ -4847,12 +4852,22 @@ components:
         - autoPlayVideo
     UpdateUser:
       properties:
+        adminFlags:
+          $ref: "#/components/schemas/UserAdminFlags"
         email:
           description: The updated email of the user
           format: email
           type: string
+        emailVerified:
+          description: Set the email as verified
+          type: boolean
         id:
           description: The user id
+          type: string
+        pluginAuth:
+          description: The auth plugin to use to authenticate the user
+          example: peertube-plugin-auth-saml2
+          nullable: true
           type: string
         role:
           $ref: "#/components/schemas/UserRole"
@@ -4864,10 +4879,6 @@ components:
           type: integer
       required:
         - id
-        - email
-        - videoQuota
-        - videoQuotaDaily
-        - role
     User:
       properties:
         abusesAcceptedCount:
@@ -4903,6 +4914,9 @@ components:
           type: boolean
         nsfwPolicy:
           $ref: "#/components/schemas/NSFWPolicy"
+        pluginAuth:
+          description: Auth plugin to use to authenticate the user
+          type: string
         role:
           $ref: "#/components/schemas/UserRole"
         roleLabel:
@@ -4936,6 +4950,13 @@ components:
         webtorrentEnabled:
           description: Enable P2P in the player
           type: boolean
+    UserAdminFlags:
+      description: Admin flags for the user (None = `0`, Bypass video blacklist = `1`)
+      enum:
+        - 0
+        - 1
+      example: 1
+      type: integer
     UserRole:
       description: The user role (Admin = `0`, Moderator = `1`, User = `2`)
       enum:

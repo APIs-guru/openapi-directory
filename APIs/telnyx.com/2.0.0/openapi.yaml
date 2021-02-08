@@ -20614,13 +20614,13 @@ components:
          </ul>
          Transitioning between the provisioning and provisioned states may take some time.
       properties:
-        code:
+        error_code:
           default: null
           description: This attribute is an <a href="https://developers.telnyx.com/docs/api/v2/overview#errors">error code</a> related to the failure reason.
           example: null
           readOnly: true
           type: string
-        description:
+        error_description:
           default: null
           description: This attribute provides a human-readable explanation of why a failure happened.
           example: null

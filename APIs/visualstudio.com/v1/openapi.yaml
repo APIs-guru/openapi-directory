@@ -3,7 +3,7 @@ servers:
   - url: https://online.visualstudio.com
   - url: https://online.visualstudio.com
 info:
-  description: Public APIs for managing VS Online Environments
+  description: Public APIs for managing VS Codespaces
   title: VSOnline
   version: v1
   x-apisguru-categories:
@@ -150,6 +150,11 @@ paths:
       tags:
         - Environments
     post:
+      parameters:
+        - in: query
+          name: access
+          schema:
+            type: boolean
       requestBody:
         content:
           application/*+json:
@@ -2656,6 +2661,9 @@ components:
     CloudEnvironmentResult:
       additionalProperties: false
       properties:
+        accessToken:
+          nullable: true
+          type: string
         active:
           format: date-time
           type: string

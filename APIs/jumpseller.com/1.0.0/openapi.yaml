@@ -2216,7 +2216,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/ProductCustomField"
+            $ref: "#/definitions/AddProductCustomField"
       responses:
         "200":
           description: OK
@@ -2226,7 +2226,7 @@ paths:
           description: Product Not Found.
           schema:
             $ref: "#/definitions/NotFound"
-      summary: Create a new Product Custom Field.
+      summary: Add an existing Custom Field to a Product .
       tags:
         - Product Custom Fields
   "/products/{id}/fields/count.json":
@@ -3134,6 +3134,21 @@ paths:
       tags:
         - Taxes
 definitions:
+  AddProductCustomField:
+    properties:
+      field:
+        $ref: "#/definitions/AddProductCustomFieldFields"
+    type: object
+  AddProductCustomFieldFields:
+    properties:
+      id:
+        description: Unique identifier of the ProductCustomField (custom_field_id)
+        format: int32
+        type: integer
+      value:
+        description: The value for the ProductCustomField
+        type: string
+    type: object
   App:
     properties:
       apps:
@@ -4132,10 +4147,20 @@ definitions:
     type: object
   ProductCustomFieldFields:
     properties:
-      id:
+      custom_field_id:
         description: Unique identifier of the ProductCustomField
         format: int32
         type: integer
+      id:
+        description: Unique identifier of the ProductCustomField value
+        format: int32
+        type: integer
+      label:
+        description: The label for the ProductCustomField
+        type: string
+      type:
+        description: The type of the ProductCustomField
+        type: string
       value:
         description: The value for the ProductCustomField
         type: string

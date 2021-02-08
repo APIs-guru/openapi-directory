@@ -2506,7 +2506,7 @@ paths:
         subcategory: actions
     put:
       description: >-
-        Replaces the list of self-hosted runners that that are part of an enterprise runner group.
+        Replaces the list of self-hosted runners that are part of an enterprise runner group.
 
 
         You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
@@ -4250,6 +4250,10 @@ paths:
               type: object
       responses:
         "200":
+          content:
+            text/html:
+              schema:
+                type: string
           description: response
           headers:
             Content-Length:
@@ -29160,7 +29164,7 @@ paths:
             `?filter=userName%20eq%20\"Octocat\"`.
 
 
-            To filter results for for the identity with the email `octocat@github.com`, you would use this query:
+            To filter results for the identity with the email `octocat@github.com`, you would use this query:
 
 
             `?filter=emails%20eq%20\"octocat@github.com\"`.
@@ -33204,7 +33208,7 @@ paths:
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/interactions#remove-interaction-restrictions-from-your-public-repositories
-      operationId: interactions/remove-restrictions-for-your-public-repos
+      operationId: interactions/remove-restrictions-for-authenticated-user
       responses:
         "204":
           description: Empty response
@@ -33222,7 +33226,7 @@ paths:
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/interactions#get-interaction-restrictions-for-your-public-repositories
-      operationId: interactions/get-restrictions-for-your-public-repos
+      operationId: interactions/get-restrictions-for-authenticated-user
       responses:
         "200":
           content:
@@ -33247,7 +33251,7 @@ paths:
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/interactions#set-interaction-restrictions-for-your-public-repositories
-      operationId: interactions/set-restrictions-for-your-public-repos
+      operationId: interactions/set-restrictions-for-authenticated-user
       requestBody:
         content:
           application/json:
@@ -46054,6 +46058,7 @@ components:
             type: User
             url: https://api.github.com/users/hubot
         author_association: OWNER
+        auto_merge: null
         base:
           label: octocat:master
           ref: master
@@ -46926,6 +46931,7 @@ components:
             type: User
             url: https://api.github.com/users/hubot
         author_association: OWNER
+        auto_merge: null
         base:
           label: octocat:master
           ref: master
@@ -47435,6 +47441,7 @@ components:
               type: User
               url: https://api.github.com/users/hubot
           author_association: OWNER
+          auto_merge: null
           base:
             label: octocat:master
             ref: master
@@ -53462,6 +53469,32 @@ components:
         - updated_at
       title: Authorization
       type: object
+    auto_merge:
+      description: The status of auto merging a pull request.
+      nullable: true
+      properties:
+        commit_message:
+          description: Commit message for the merge commit.
+          type: string
+        commit_title:
+          description: Title for the merge commit message.
+          type: string
+        enabled_by:
+          $ref: "#/components/schemas/simple-user"
+        merge_method:
+          description: The merge method to use.
+          enum:
+            - merge
+            - squash
+            - rebase
+          type: string
+      required:
+        - enabled_by
+        - merge_method
+        - commit_title
+        - commit_message
+      title: Auto merge
+      type: object
     base-gist:
       description: Base Gist
       properties:
@@ -56058,30 +56091,28 @@ components:
       type: object
     email:
       description: Email
-      oneOf:
-        - properties:
-            email:
-              example: octocat@github.com
-              format: email
-              type: string
-            primary:
-              example: true
-              type: boolean
-            verified:
-              example: true
-              type: boolean
-            visibility:
-              example: public
-              nullable: true
-              type: string
-          required:
-            - email
-            - primary
-            - verified
-            - visibility
-          type: object
-        - type: string
+      properties:
+        email:
+          example: octocat@github.com
+          format: email
+          type: string
+        primary:
+          example: true
+          type: boolean
+        verified:
+          example: true
+          type: boolean
+        visibility:
+          example: public
+          nullable: true
+          type: string
+      required:
+        - email
+        - primary
+        - verified
+        - visibility
       title: Email
+      type: object
     enabled-organizations:
       description: "The policy that controls the organizations in the enterprise that are allowed to run GitHub Actions. Can be one of: `all`, `none`, or `selected`."
       enum:
@@ -61189,6 +61220,8 @@ components:
           type: array
         author_association:
           $ref: "#/components/schemas/author_association"
+        auto_merge:
+          $ref: "#/components/schemas/auto_merge"
         base:
           properties:
             label:
@@ -62254,6 +62287,7 @@ components:
         - url
         - user
         - author_association
+        - auto_merge
         - additions
         - changed_files
         - comments
@@ -62653,6 +62687,8 @@ components:
           type: array
         author_association:
           $ref: "#/components/schemas/author_association"
+        auto_merge:
+          $ref: "#/components/schemas/auto_merge"
         base:
           properties:
             label:
@@ -62850,6 +62886,7 @@ components:
         - url
         - user
         - author_association
+        - auto_merge
       title: Pull Request Simple
       type: object
     rate-limit:

@@ -536,6 +536,49 @@ paths:
           $ref: "#/components/responses/GeneralError"
       tags:
         - Marketplaces - Orders V3 - Global
+  "/orders/v3/{marketplaceTechnicalCode}/{accountId}/harvest":
+    post:
+      deprecated: false
+      operationId: HarvestAccount
+      parameters:
+        - $ref: "#/components/parameters/marketplaceTechnicalCodeParameter"
+        - $ref: "#/components/parameters/accountIdParameter"
+      responses:
+        "202":
+          description: Successfully sent Order harvest request
+          headers:
+            Retry-After:
+              description: Indicates the duration in seconds to wait to be able to make this request again
+              schema:
+                type: integer
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: Requested Account could not be found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: Failed to send harvest request because allowed rate limits have been exceeded
+          headers:
+            Retry-After:
+              description: Indicates the duration in seconds to wait to be able to make this request again
+              schema:
+                type: integer
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: "[PLANNED] Send harvest request for an Account"
+      tags:
+        - Marketplaces - Orders V3 - Order
+      x-releaseStatus: PLANNED
+      x-validation:
+        - statusCode: "401"
+          validatorName: userAuthorized
+        - statusCode: "404"
+          validatorName: accountExists
   "/orders/v3/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}":
     get:
       deprecated: false
@@ -5872,7 +5915,7 @@ paths:
         - Marketplaces - Orders - Exports
   /v2/user/marketplaces/orders/harvest:
     post:
-      deprecated: false
+      deprecated: true
       operationId: HarvestAll
       parameters:
         - description: The StoreId to filter by
@@ -5910,9 +5953,10 @@ paths:
                 type: integer
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Send harvest request to all your marketplaces
+      summary: "[DEPRECATED] Send harvest request to all your marketplaces"
       tags:
         - Marketplaces - Orders - Global
+      x-releaseStatus: DEPRECATED
   /v2/user/marketplaces/orders/invoices/getPdfInvoice:
     post:
       operationId: GetOrderInvoicePdf
@@ -6120,8 +6164,10 @@ paths:
         - OM Invoice - API - Generation
   /v2/user/marketplaces/orders/list/full:
     post:
-      deprecated: false
+      deprecated: true
       description: >
+        DEPRECATED - Use /orders/v3 instead
+
         The purpose of this operation is to reduce the amount of request to the API.\
 
         \
@@ -6155,12 +6201,14 @@ paths:
           description: Could not process request for given parameters values. Please check error message for more details.
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get a paginated list of all Orders with all Order and Order Item(s) properties
+      summary: "[DEPRECATED] Get a paginated list of all Orders with all Order and Order Item(s) properties"
       tags:
         - Marketplaces - Orders - List
+      x-releaseStatus: DEPRECATED
   /v2/user/marketplaces/orders/list/light:
     post:
-      deprecated: false
+      deprecated: true
+      description: Use /orders/v3 instead
       operationId: GetOrderListLight
       requestBody:
         $ref: "#/components/requestBodies/orderListRequest"
@@ -6179,12 +6227,14 @@ paths:
           description: Could not process request for given parameters values. Please check error message for more details.
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get a paginated list of all Orders without details
+      summary: "[DEPRECATED] Get a paginated list of all Orders without details"
       tags:
         - Marketplaces - Orders - List
+      x-releaseStatus: DEPRECATED
   /v2/user/marketplaces/orders/status:
     get:
-      deprecated: false
+      deprecated: true
+      description: Use /orders/v3
       operationId: GetMarketplaceAccountsSynchronization
       parameters:
         - description: The StoreId to filter by
@@ -6213,9 +6263,10 @@ paths:
           description: Requested Store could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get current synchronization status between your marketplaces and BeezUP accounts
+      summary: "[DEPRECATED] Get current synchronization status between your marketplaces and BeezUP accounts"
       tags:
         - Marketplaces - Orders - Global
+      x-releaseStatus: DEPRECATED
       x-tagGroups: Martketplaces Orders
   /v2/user/marketplaces/orders/subscriptions/:
     get:
@@ -6419,7 +6470,8 @@ paths:
         - Marketplaces - Orders - Subscriptions - Subscriptions
   "/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}":
     get:
-      deprecated: false
+      deprecated: true
+      description: DEPRECATED - Use /orders/v3 instead
       operationId: GetOrder
       parameters:
         - $ref: "#/components/parameters/marketplaceTechnicalCodeParameter"
@@ -6459,12 +6511,15 @@ paths:
           description: Requested Order could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get full Order and Order Item(s) properties
+      summary: "[DEPRECATED] DEPRECATED - Get full Order and Order Item(s) properties"
       tags:
         - Marketplaces - Orders - Order
+      x-releaseStatus: DEPRECATED
     head:
-      deprecated: false
+      deprecated: true
       description: >
+        DEPRECATED - Use /orders/v3 instead
+
         The purpose of this operation is to reduce the bandwith usage by getting just the meta information about the order (ETag, Last-Modified) with the body.
 
         This could be useful
@@ -6503,9 +6558,10 @@ paths:
           description: Requested Order could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get the meta information about the order (ETag, Last-Modified)
+      summary: "[DEPRECATED] DEPRECATED - Get the meta information about the order (ETag, Last-Modified)"
       tags:
         - Marketplaces - Orders - Order
+      x-releaseStatus: DEPRECATED
   "/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/clearMerchantOrderInfo":
     post:
       deprecated: false
@@ -6536,7 +6592,7 @@ paths:
         - Marketplaces - Orders - Order
   "/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/harvest":
     post:
-      deprecated: false
+      deprecated: true
       operationId: HarvestOrder
       parameters:
         - $ref: "#/components/parameters/marketplaceTechnicalCodeParameter"
@@ -6569,12 +6625,13 @@ paths:
                 type: integer
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Send harvest request for a single Order
+      summary: "[DEPRECATED] Send harvest request for a single Order"
       tags:
         - Marketplaces - Orders - Order
+      x-releaseStatus: DEPRECATED
   "/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/history":
     get:
-      deprecated: false
+      deprecated: true
       operationId: GetOrderHistory
       parameters:
         - $ref: "#/components/parameters/marketplaceTechnicalCodeParameter"
@@ -6598,12 +6655,13 @@ paths:
           description: Requested Order could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Get an Order's harvest and change history
+      summary: "[DEPRECATED] Get an Order's harvest and change history"
       tags:
         - Marketplaces - Orders - Order
+      x-releaseStatus: DEPRECATED
   "/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/setMerchantOrderInfo":
     post:
-      deprecated: false
+      deprecated: true
       operationId: SetMerchantOrderInfo
       parameters:
         - $ref: "#/components/parameters/marketplaceTechnicalCodeParameter"
@@ -6628,12 +6686,13 @@ paths:
           description: Requested Order could not be found
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Set an Order's merchant information
+      summary: "[DEPRECATED] Set an Order's merchant information"
       tags:
         - Marketplaces - Orders - Order
+      x-releaseStatus: DEPRECATED
   "/v2/user/marketplaces/orders/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/{changeOrderType}":
     post:
-      deprecated: false
+      deprecated: true
       operationId: ChangeOrder
       parameters:
         - $ref: "#/components/parameters/marketplaceTechnicalCodeParameter"
@@ -6678,9 +6737,10 @@ paths:
           $ref: "#/components/responses/412_PreConditionFailed"
         default:
           $ref: "#/components/responses/GeneralError"
-      summary: Change your marketplace Order Information (accept, ship, etc.)
+      summary: "[DEPRECATED] Change your marketplace Order Information (accept, ship, etc.)"
       tags:
         - Marketplaces - Orders - Order
+      x-releaseStatus: DEPRECATED
 components:
   parameters:
     acceptEncodingRequiredParameter:

@@ -164,7 +164,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: This parameter is deprecated for this method. Please, use this parameter in method account.config.update
+        - description: DB tables prefix
           in: query
           name: db_tables_prefix
           required: false
@@ -176,13 +176,62 @@ paths:
           required: false
           schema:
             type: string
+        - description: Amazon SP API app client id
+          in: query
+          name: amazon_sp_client_id
+          required: false
+          schema:
+            type: string
+        - description: Amazon SP API app client secret
+          in: query
+          name: amazon_sp_client_secret
+          required: false
+          schema:
+            type: string
+        - description: Amazon AWS user access key ID
+          in: query
+          name: amazon_sp_aws_user_key_id
+          required: false
+          schema:
+            type: string
+        - description: Amazon AWS user secret access key
+          in: query
+          name: amazon_sp_aws_user_secret
+          required: false
+          schema:
+            type: string
+        - description: Amazon AWS Region
+          in: query
+          name: amazon_sp_aws_region
+          required: false
+          schema:
+            type: string
+        - description: Amazon AWS Role ARN
+          in: query
+          name: amazon_sp_aws_role_arn
+          required: false
+          schema:
+            type: string
+        - description: Amazon SP API OAuth refresh token
+          in: query
+          name: amazon_sp_refresh_token
+          required: false
+          schema:
+            type: string
+        - description: Amazon SP API environment
+          in: query
+          name: amazon_sp_api_environment
+          required: false
+          schema:
+            default: production
+            type: string
         - description: MWS Auth Token. Access token authorizing the app to access resources on behalf of a user
           in: query
           name: amazon_access_token
           required: false
           schema:
             type: string
-        - description: Amazon Seller ID
+        - description: Amazon Seller ID (Merchant token)
           in: query
           name: amazon_seller_id
           required: false
@@ -2294,6 +2343,7 @@ paths:
             enum:
               - 3DCartApi
               - AceShop
+              - AmazonSP
               - Amazon
               - AspDotNetStorefront
               - BigcommerceApi
@@ -2380,7 +2430,7 @@ paths:
           schema:
             default: true
             type: boolean
-        - description: This parameter is deprecated for this method. Please, use this parameter in method account.config.update
+        - description: DB tables prefix
           in: query
           name: db_tables_prefix
           required: false
@@ -2772,6 +2822,14 @@ paths:
     delete:
       description: Remove store from API2Cart
       operationId: CartDelete
+      parameters:
+        - description: Identifies if there is a necessity to delete bridge
+          in: query
+          name: delete_bridge
+          required: false
+          schema:
+            default: true
+            type: boolean
       responses:
         "200":
           content:
@@ -9343,7 +9401,36 @@ components:
           description: Amazon Secret Key
           type: string
         amazon_seller_id:
-          description: Amazon Seller ID
+          description: Amazon Seller ID (Merchant token)
+          type: string
+        amazon_sp_api_environment:
+          default: production
+          description: Amazon SP API environment
+          type: string
+        amazon_sp_aws_region:
+          description: Amazon AWS Region
+          enum:
+            - eu-west-1
+            - us-east-1
+            - us-west-2
+          type: string
+        amazon_sp_aws_role_arn:
+          description: Amazon AWS Role ARN
+          type: string
+        amazon_sp_aws_user_key_id:
+          description: Amazon AWS user access key ID
+          type: string
+        amazon_sp_aws_user_secret:
+          description: Amazon AWS user secret access key
+          type: string
+        amazon_sp_client_id:
+          description: Amazon SP API app client id
+          type: string
+        amazon_sp_client_secret:
+          description: Amazon SP API app client secret
+          type: string
+        amazon_sp_refresh_token:
+          description: Amazon SP API OAuth refresh token
           type: string
         aspdotnetstorefront_api_pass:
           description: AspDotNetStorefront API Password
@@ -9377,6 +9464,7 @@ components:
           enum:
             - 3DCartApi
             - AceShop
+            - AmazonSP
             - Amazon
             - AspDotNetStorefront
             - BigcommerceApi
@@ -9426,7 +9514,7 @@ components:
           description: CommerceHQ api secret
           type: string
         db_tables_prefix:
-          description: This parameter is deprecated for this method. Please, use this parameter in method account.config.update
+          description: DB tables prefix
           type: string
         demandware_api_password:
           description: Demandware api password
@@ -9590,6 +9678,13 @@ components:
       required:
         - cart_id
         - store_url
+        - amazon_sp_client_id
+        - amazon_sp_client_secret
+        - amazon_sp_aws_user_key_id
+        - amazon_sp_aws_user_secret
+        - amazon_sp_aws_region
+        - amazon_sp_aws_role_arn
+        - amazon_sp_refresh_token
       type: object
     BaseCustomer:
       properties:

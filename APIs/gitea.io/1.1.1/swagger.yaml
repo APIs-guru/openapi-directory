@@ -2204,6 +2204,14 @@ paths:
           name: repo
           required: true
           type: string
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: page size of results
+          in: query
+          name: limit
+          type: integer
       produces:
         - application/json
       responses:
@@ -5893,7 +5901,7 @@ paths:
         - repository
   "/repos/{owner}/{repo}/releases/tags/{tag}":
     delete:
-      operationId: repoDeleteReleaseTag
+      operationId: repoDeleteReleaseByTag
       parameters:
         - description: owner of the repo
           in: path
@@ -5905,7 +5913,7 @@ paths:
           name: repo
           required: true
           type: string
-        - description: name of the tag to delete
+        - description: tag name of the release to delete
           in: path
           name: tag
           required: true
@@ -5915,13 +5923,11 @@ paths:
           $ref: "#/responses/empty"
         "404":
           $ref: "#/responses/notFound"
-        "409":
-          $ref: "#/responses/conflict"
-      summary: Delete a release tag
+      summary: Delete a release by tag name
       tags:
         - repository
     get:
-      operationId: repoGetReleaseTag
+      operationId: repoGetReleaseByTag
       parameters:
         - description: owner of the repo
           in: path
@@ -5933,7 +5939,7 @@ paths:
           name: repo
           required: true
           type: string
-        - description: tagname of the release to get
+        - description: tag name of the release to get
           in: path
           name: tag
           required: true
@@ -6475,6 +6481,150 @@ paths:
         "200":
           $ref: "#/responses/TagList"
       summary: List a repository's tags
+      tags:
+        - repository
+  "/repos/{owner}/{repo}/tags/{tag}":
+    delete:
+      operationId: repoDeleteTag
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: name of tag to delete
+          in: path
+          name: tag
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "204":
+          $ref: "#/responses/empty"
+        "404":
+          $ref: "#/responses/notFound"
+        "409":
+          $ref: "#/responses/conflict"
+      summary: Delete a repository's tag by name
+      tags:
+        - repository
+  "/repos/{owner}/{repo}/teams":
+    get:
+      operationId: repoListTeams
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: "#/responses/TeamList"
+      summary: List a repository's teams
+      tags:
+        - repository
+  "/repos/{owner}/{repo}/teams/{team}":
+    delete:
+      operationId: repoDeleteTeam
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: team name
+          in: path
+          name: team
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "204":
+          $ref: "#/responses/empty"
+        "405":
+          $ref: "#/responses/error"
+        "422":
+          $ref: "#/responses/validationError"
+      summary: Delete a team from a repository
+      tags:
+        - repository
+    get:
+      operationId: repoCheckTeam
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: team name
+          in: path
+          name: team
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: "#/responses/Team"
+        "404":
+          $ref: "#/responses/notFound"
+        "405":
+          $ref: "#/responses/error"
+      summary: Check if a team is assigned to a repository
+      tags:
+        - repository
+    put:
+      operationId: repoAddTeam
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: team name
+          in: path
+          name: team
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "204":
+          $ref: "#/responses/empty"
+        "405":
+          $ref: "#/responses/error"
+        "422":
+          $ref: "#/responses/validationError"
+      summary: Add a team to a repository
       tags:
         - repository
   "/repos/{owner}/{repo}/times":
@@ -8388,6 +8538,11 @@ definitions:
         format: date-time
         type: string
         x-go-name: Created
+      files:
+        items:
+          $ref: "#/definitions/CommitAffectedFiles"
+        type: array
+        x-go-name: Files
       html_url:
         type: string
         x-go-name: HTMLURL
@@ -8403,6 +8558,14 @@ definitions:
         type: string
         x-go-name: URL
     title: Commit contains information generated from a Git commit.
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  CommitAffectedFiles:
+    description: CommitAffectedFiles store information about files affected by the commit
+    properties:
+      filename:
+        type: string
+        x-go-name: Filename
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   CommitDateOptions:

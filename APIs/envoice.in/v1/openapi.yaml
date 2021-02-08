@@ -4276,6 +4276,11 @@ components:
           items:
             $ref: "#/components/schemas/ProductAttachmentApiModel"
           type: array
+        ButtonCallToAction:
+          description: "Default button call to action\r
+
+            Ex: Buy now, subscribe, ..."
+          type: string
         Coupons:
           description: List of product coupons
           items:
@@ -4293,6 +4298,9 @@ components:
           items:
             $ref: "#/components/schemas/ProductDiscountApiModel"
           type: array
+        IsFeatured:
+          description: Indicate that the product is set as featured
+          type: boolean
         Items:
           description: List of product items
           items:
@@ -4339,6 +4347,11 @@ components:
         AfterPaymentDescription:
           description: After payment description
           type: string
+        ButtonCallToAction:
+          description: "Default button call to action\r
+
+            Ex: Buy now, subscribe, ..."
+          type: string
         Currency:
           $ref: "#/components/schemas/CurrencyDetailsApiModel"
         CurrencyId:
@@ -4352,6 +4365,9 @@ components:
           description: Product id
           format: int32
           type: integer
+        IsFeatured:
+          description: Indicate that the product is set as featured
+          type: boolean
         Name:
           description: Product alias
           type: string
@@ -4424,6 +4440,11 @@ components:
           items:
             $ref: "#/components/schemas/ProductAttachmentApiModel"
           type: array
+        ButtonCallToAction:
+          description: "Default button call to action\r
+
+            Ex: Buy now, subscribe, ..."
+          type: string
         Coupons:
           description: List of product coupons
           items:
@@ -4447,6 +4468,9 @@ components:
           description: Product id
           format: int32
           type: integer
+        IsFeatured:
+          description: Indicate that the product is set as featured
+          type: boolean
         Items:
           description: List of product items
           items:
@@ -4551,6 +4575,11 @@ components:
           items:
             $ref: "#/components/schemas/ProductAttachmentApiModel"
           type: array
+        ButtonCallToAction:
+          description: "Default button call to action\r
+
+            Ex: Buy now, subscribe, ..."
+          type: string
         Coupons:
           description: List of product coupons
           items:
@@ -4572,6 +4601,9 @@ components:
           description: Product id
           format: int32
           type: integer
+        IsFeatured:
+          description: Indicate that the product is set as featured
+          type: boolean
         Items:
           description: List of product items
           items:
@@ -4640,6 +4672,9 @@ components:
       type: object
     SendInvoiceToClientApiModel:
       properties:
+        AttachPdf:
+          description: Should attach pdf file
+          type: boolean
         Id:
           description: Id of the invoice
           format: int32

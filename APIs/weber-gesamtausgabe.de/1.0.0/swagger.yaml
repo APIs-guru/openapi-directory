@@ -119,6 +119,17 @@ paths:
                 description: The WeGA document type
                 type: string
             type: object
+        "403":
+          description: The creation of new IDs is only available in the development environment
+          schema:
+            properties:
+              code:
+                default: 403
+                format: int32
+                type: integer
+              message:
+                type: string
+            type: object
         default:
           description: Unexpected error
           schema:
@@ -133,7 +144,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: A single object with status information
+          description: Healthy – A single object with status information
           schema:
             properties:
               deployment:
@@ -141,10 +152,27 @@ paths:
                 format: date-time
                 type: string
               status:
+                default: healthy
                 description: Status (healthy|unhealthy) of the currently running WeGA-WebApp
-                enum:
-                  - healthy
-                  - unhealthy
+                type: string
+              svnRevision:
+                description: The Subversion revision of the currently installed WeGA-data
+                type: integer
+              version:
+                pattern: ^\d+\.\d+\.\d+$
+                type: string
+            type: object
+        "500":
+          description: Unhealthy – A single object with status information
+          schema:
+            properties:
+              deployment:
+                description: The datetime of the deployment of the WeGA-WebApp
+                format: date-time
+                type: string
+              status:
+                default: unhealthy
+                description: Status (healthy|unhealthy) of the currently running WeGA-WebApp
                 type: string
               svnRevision:
                 description: The Subversion revision of the currently installed WeGA-data

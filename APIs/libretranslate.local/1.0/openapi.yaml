@@ -1,6 +1,4 @@
 openapi: 3.0.0
-servers:
-  - url: http://libretranslate.local
 info:
   title: LibreTranslate
   version: "1.0"
@@ -99,6 +97,9 @@ components:
       properties:
         charLimit:
           description: Character input limit for this language (-1 indicates no limit)
+          type: integer
+        frontendTimeout:
+          description: Frontend translation timeout
           type: integer
         language:
           properties:

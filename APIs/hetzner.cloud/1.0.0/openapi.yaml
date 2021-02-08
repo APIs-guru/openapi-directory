@@ -957,7 +957,7 @@ paths:
                         id:
                           description: ID of the Certificate
                           example: 897
-                          type: number
+                          type: integer
                         labels:
                           description: User-defined labels (key-value pairs)
                           properties: {}
@@ -981,7 +981,7 @@ paths:
                               id:
                                 description: ID of resource referenced
                                 example: 42
-                                type: number
+                                type: integer
                               type:
                                 description: Type of resource referenced
                                 example: server
@@ -1046,7 +1046,7 @@ paths:
                 - name
                 - certificate
                 - private_key
-              title: CreateCertificate
+              title: CreateCertificateRequest
               type: object
       responses:
         "201":
@@ -1083,7 +1083,7 @@ paths:
                       id:
                         description: ID of the Certificate
                         example: 897
-                        type: number
+                        type: integer
                       labels:
                         description: User-defined labels (key-value pairs)
                         properties: {}
@@ -1107,7 +1107,7 @@ paths:
                             id:
                               description: ID of resource referenced
                               example: 42
-                              type: number
+                              type: integer
                             type:
                               description: Type of resource referenced
                               example: server
@@ -1198,7 +1198,7 @@ paths:
                       id:
                         description: ID of the Certificate
                         example: 897
-                        type: number
+                        type: integer
                       labels:
                         description: User-defined labels (key-value pairs)
                         properties: {}
@@ -1222,7 +1222,7 @@ paths:
                             id:
                               description: ID of resource referenced
                               example: 42
-                              type: number
+                              type: integer
                             type:
                               description: Type of resource referenced
                               example: server
@@ -1284,7 +1284,7 @@ paths:
                   description: New Certificate name
                   example: my website cert
                   type: string
-              title: UpdateCertificate
+              title: UpdateCertificateRequest
               type: object
       responses:
         "200":
@@ -1342,7 +1342,7 @@ paths:
                       id:
                         description: ID of the Certificate
                         example: 897
-                        type: number
+                        type: integer
                       labels:
                         description: User-defined labels (key-value pairs)
                         properties: {}
@@ -1366,7 +1366,7 @@ paths:
                             id:
                               description: ID of resource referenced
                               example: 42
-                              type: number
+                              type: integer
                             type:
                               description: Type of resource referenced
                               example: server
@@ -1738,7 +1738,7 @@ paths:
                             id:
                               description: ID of the Location
                               example: 1
-                              type: number
+                              type: integer
                             latitude:
                               description: Latitude of the city closest to the Location
                               example: 50.47612
@@ -1768,7 +1768,7 @@ paths:
                         id:
                           description: ID of the Floating IP
                           example: 4711
-                          type: number
+                          type: integer
                         ip:
                           description: IP address of the Floating IP
                           example: 131.232.99.1
@@ -1795,7 +1795,7 @@ paths:
                           description: ID of the Server the Floating IP is assigned to, null if it is not assigned at all
                           example: 42
                           nullable: true
-                          type: number
+                          type: integer
                         type:
                           description: Type of the Floating IP
                           enum:
@@ -1850,7 +1850,7 @@ paths:
                 server:
                   description: Server to assign the Floating IP to
                   example: 42
-                  type: number
+                  type: integer
                 type:
                   description: Floating IP type
                   enum:
@@ -1859,6 +1859,7 @@ paths:
                   type: string
               required:
                 - type
+              title: CreateFloatingIPRequest
               type: object
         description: The `type` argument is required while `home_location` and `server` are mutually exclusive.
       responses:
@@ -2029,7 +2030,7 @@ paths:
                           id:
                             description: ID of the Location
                             example: 1
-                            type: number
+                            type: integer
                           latitude:
                             description: Latitude of the city closest to the Location
                             example: 50.47612
@@ -2059,7 +2060,7 @@ paths:
                       id:
                         description: ID of the Floating IP
                         example: 4711
-                        type: number
+                        type: integer
                       ip:
                         description: IP address of the Floating IP
                         example: 131.232.99.1
@@ -2086,7 +2087,7 @@ paths:
                         description: ID of the Server the Floating IP is assigned to, null if it is not assigned at all
                         example: 42
                         nullable: true
-                        type: number
+                        type: integer
                       type:
                         description: Type of the Floating IP
                         enum:
@@ -2195,7 +2196,7 @@ paths:
                           id:
                             description: ID of the Location
                             example: 1
-                            type: number
+                            type: integer
                           latitude:
                             description: Latitude of the city closest to the Location
                             example: 50.47612
@@ -2225,7 +2226,7 @@ paths:
                       id:
                         description: ID of the Floating IP
                         example: 4711
-                        type: number
+                        type: integer
                       ip:
                         description: IP address of the Floating IP
                         example: 131.232.99.1
@@ -2252,7 +2253,7 @@ paths:
                         description: ID of the Server the Floating IP is assigned to, null if it is not assigned at all
                         example: 42
                         nullable: true
-                        type: number
+                        type: integer
                       type:
                         description: Type of the Floating IP
                         enum:
@@ -2311,6 +2312,7 @@ paths:
                   description: New unique name to set
                   example: Web Frontend
                   type: string
+              title: UpdateFloatingIPRequest
               type: object
       responses:
         "200":
@@ -2394,7 +2396,7 @@ paths:
                           id:
                             description: ID of the Location
                             example: 1
-                            type: number
+                            type: integer
                           latitude:
                             description: Latitude of the city closest to the Location
                             example: 50.47612
@@ -2424,7 +2426,7 @@ paths:
                       id:
                         description: ID of the Floating IP
                         example: 4711
-                        type: number
+                        type: integer
                       ip:
                         description: IP address of the Floating IP
                         example: 131.232.99.1
@@ -2451,7 +2453,7 @@ paths:
                         description: ID of the Server the Floating IP is assigned to, null if it is not assigned at all
                         example: 42
                         nullable: true
-                        type: number
+                        type: integer
                       type:
                         description: Type of the Floating IP
                         enum:
@@ -3633,6 +3635,7 @@ paths:
                   enum:
                     - snapshot
                   type: string
+              title: UpdateImageRequest
               type: object
       responses:
         "200":
@@ -4577,15 +4580,15 @@ paths:
                         id:
                           description: ID of the Load Balancer
                           example: 4711
-                          type: number
+                          type: integer
                         included_traffic:
                           description: Free Traffic for the current billing period in bytes
                           example: 10000
-                          type: number
+                          type: integer
                         ingoing_traffic:
                           description: Inbound Traffic for the current billing period in bytes
                           nullable: true
-                          type: number
+                          type: integer
                         labels:
                           description: User-defined labels (key-value pairs)
                           properties: {}
@@ -4731,7 +4734,7 @@ paths:
                         outgoing_traffic:
                           description: Outbound Traffic for the current billing period in bytes
                           nullable: true
-                          type: number
+                          type: integer
                         private_net:
                           description: Private networks information
                           items:
@@ -4741,7 +4744,7 @@ paths:
                                 type: string
                               network:
                                 example: 4711
-                                type: number
+                                type: integer
                             type: object
                           type: array
                         protection:
@@ -4790,7 +4793,7 @@ paths:
                               destination_port:
                                 description: Port the Load Balancer will balance to
                                 example: 80
-                                type: number
+                                type: integer
                               health_check:
                                 allOf:
                                   - additionalProperties: false
@@ -4831,11 +4834,11 @@ paths:
                                       interval:
                                         description: Time interval in seconds health checks are performed
                                         example: 15
-                                        type: number
+                                        type: integer
                                       port:
                                         description: Port the health check will be performed on
                                         example: 4711
-                                        type: number
+                                        type: integer
                                       protocol:
                                         description: Type of the health check
                                         enum:
@@ -4846,11 +4849,11 @@ paths:
                                       retries:
                                         description: Unsuccessful retries needed until a target is considered unhealthy
                                         example: 3
-                                        type: number
+                                        type: integer
                                       timeout:
                                         description: Time in seconds after an attempt is considered a timeout
                                         example: 10
-                                        type: number
+                                        type: integer
                                     required:
                                       - protocol
                                       - port
@@ -4867,12 +4870,12 @@ paths:
                                     example:
                                       - 897
                                     items:
-                                      type: number
+                                      type: integer
                                     type: array
                                   cookie_lifetime:
                                     description: Lifetime of the cookie used for sticky sessions
                                     example: 300
-                                    type: number
+                                    type: integer
                                   cookie_name:
                                     description: Name of the cookie used for sticky sessions
                                     example: HCLBSTICKY
@@ -4892,7 +4895,7 @@ paths:
                               listen_port:
                                 description: Port the Load Balancer listens on
                                 example: 443
-                                type: number
+                                type: integer
                               protocol:
                                 description: Protocol of the Load Balancer
                                 enum:
@@ -4923,7 +4926,7 @@ paths:
                                   properties:
                                     listen_port:
                                       example: 443
-                                      type: number
+                                      type: integer
                                     status:
                                       example: healthy
                                       type: string
@@ -4955,7 +4958,7 @@ paths:
                                   id:
                                     description: ID of the Server
                                     example: 80
-                                    type: number
+                                    type: integer
                                 required:
                                   - id
                                 type: object
@@ -4968,7 +4971,7 @@ paths:
                                         properties:
                                           listen_port:
                                             example: 443
-                                            type: number
+                                            type: integer
                                           status:
                                             example: healthy
                                             type: string
@@ -4979,7 +4982,7 @@ paths:
                                         id:
                                           description: ID of the Server
                                           example: 85
-                                          type: number
+                                          type: integer
                                       required:
                                         - id
                                       type: object
@@ -5059,16 +5062,6 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
-                - properties:
-                    network_zone:
-                      description: Name of network zone
-                      example: eu-central
-                      type: string
-                - properties:
-                    location:
-                      description: ID or name of Location to create Load Balancer in
-                      type: string
               properties:
                 algorithm:
                   description: Algorithm of the Load Balancer
@@ -5094,6 +5087,9 @@ paths:
                   description: ID or name of the Load Balancer type this Load Balancer should be created with
                   example: lb11
                   type: string
+                location:
+                  description: ID or name of Location to create Load Balancer in
+                  type: string
                 name:
                   description: Name of the Load Balancer
                   example: Web Frontend
@@ -5102,6 +5098,10 @@ paths:
                   description: ID of the network the Load Balancer should be attached to on creation
                   example: 123
                   type: number
+                network_zone:
+                  description: Name of network zone
+                  example: eu-central
+                  type: string
                 public_interface:
                   description: Enable or disable the public interface of the Load Balancer
                   example: true
@@ -5113,7 +5113,7 @@ paths:
                       destination_port:
                         description: Port the Load Balancer will balance to
                         example: 80
-                        type: number
+                        type: integer
                       health_check:
                         allOf:
                           - additionalProperties: false
@@ -5154,11 +5154,11 @@ paths:
                               interval:
                                 description: Time interval in seconds health checks are performed
                                 example: 15
-                                type: number
+                                type: integer
                               port:
                                 description: Port the health check will be performed on
                                 example: 4711
-                                type: number
+                                type: integer
                               protocol:
                                 description: Type of the health check
                                 enum:
@@ -5169,11 +5169,11 @@ paths:
                               retries:
                                 description: Unsuccessful retries needed until a target is considered unhealthy
                                 example: 3
-                                type: number
+                                type: integer
                               timeout:
                                 description: Time in seconds after an attempt is considered a timeout
                                 example: 10
-                                type: number
+                                type: integer
                             required:
                               - protocol
                               - port
@@ -5190,12 +5190,12 @@ paths:
                             example:
                               - 897
                             items:
-                              type: number
+                              type: integer
                             type: array
                           cookie_lifetime:
                             description: Lifetime of the cookie used for sticky sessions
                             example: 300
-                            type: number
+                            type: integer
                           cookie_name:
                             description: Name of the cookie used for sticky sessions
                             example: HCLBSTICKY
@@ -5215,7 +5215,7 @@ paths:
                       listen_port:
                         description: Port the Load Balancer listens on
                         example: 443
-                        type: number
+                        type: integer
                       protocol:
                         description: Protocol of the Load Balancer
                         enum:
@@ -5246,7 +5246,7 @@ paths:
                           properties:
                             listen_port:
                               example: 443
-                              type: number
+                              type: integer
                             status:
                               example: healthy
                               type: string
@@ -5278,7 +5278,7 @@ paths:
                           id:
                             description: ID of the Server
                             example: 80
-                            type: number
+                            type: integer
                         required:
                           - id
                         type: object
@@ -5291,7 +5291,7 @@ paths:
                                 properties:
                                   listen_port:
                                     example: 443
-                                    type: number
+                                    type: integer
                                   status:
                                     example: healthy
                                     type: string
@@ -5302,7 +5302,7 @@ paths:
                                 id:
                                   description: ID of the Server
                                   example: 85
-                                  type: number
+                                  type: integer
                               required:
                                 - id
                               type: object
@@ -5332,6 +5332,7 @@ paths:
                 - name
                 - load_balancer_type
                 - algorithm
+              title: CreateLoadBalancerRequest
               type: object
       responses:
         "201":
@@ -5537,15 +5538,15 @@ paths:
                       id:
                         description: ID of the Load Balancer
                         example: 4711
-                        type: number
+                        type: integer
                       included_traffic:
                         description: Free Traffic for the current billing period in bytes
                         example: 10000
-                        type: number
+                        type: integer
                       ingoing_traffic:
                         description: Inbound Traffic for the current billing period in bytes
                         nullable: true
-                        type: number
+                        type: integer
                       labels:
                         description: User-defined labels (key-value pairs)
                         properties: {}
@@ -5691,7 +5692,7 @@ paths:
                       outgoing_traffic:
                         description: Outbound Traffic for the current billing period in bytes
                         nullable: true
-                        type: number
+                        type: integer
                       private_net:
                         description: Private networks information
                         items:
@@ -5701,7 +5702,7 @@ paths:
                               type: string
                             network:
                               example: 4711
-                              type: number
+                              type: integer
                           type: object
                         type: array
                       protection:
@@ -5750,7 +5751,7 @@ paths:
                             destination_port:
                               description: Port the Load Balancer will balance to
                               example: 80
-                              type: number
+                              type: integer
                             health_check:
                               allOf:
                                 - additionalProperties: false
@@ -5791,11 +5792,11 @@ paths:
                                     interval:
                                       description: Time interval in seconds health checks are performed
                                       example: 15
-                                      type: number
+                                      type: integer
                                     port:
                                       description: Port the health check will be performed on
                                       example: 4711
-                                      type: number
+                                      type: integer
                                     protocol:
                                       description: Type of the health check
                                       enum:
@@ -5806,11 +5807,11 @@ paths:
                                     retries:
                                       description: Unsuccessful retries needed until a target is considered unhealthy
                                       example: 3
-                                      type: number
+                                      type: integer
                                     timeout:
                                       description: Time in seconds after an attempt is considered a timeout
                                       example: 10
-                                      type: number
+                                      type: integer
                                   required:
                                     - protocol
                                     - port
@@ -5827,12 +5828,12 @@ paths:
                                   example:
                                     - 897
                                   items:
-                                    type: number
+                                    type: integer
                                   type: array
                                 cookie_lifetime:
                                   description: Lifetime of the cookie used for sticky sessions
                                   example: 300
-                                  type: number
+                                  type: integer
                                 cookie_name:
                                   description: Name of the cookie used for sticky sessions
                                   example: HCLBSTICKY
@@ -5852,7 +5853,7 @@ paths:
                             listen_port:
                               description: Port the Load Balancer listens on
                               example: 443
-                              type: number
+                              type: integer
                             protocol:
                               description: Protocol of the Load Balancer
                               enum:
@@ -5883,7 +5884,7 @@ paths:
                                 properties:
                                   listen_port:
                                     example: 443
-                                    type: number
+                                    type: integer
                                   status:
                                     example: healthy
                                     type: string
@@ -5915,7 +5916,7 @@ paths:
                                 id:
                                   description: ID of the Server
                                   example: 80
-                                  type: number
+                                  type: integer
                               required:
                                 - id
                               type: object
@@ -5928,7 +5929,7 @@ paths:
                                       properties:
                                         listen_port:
                                           example: 443
-                                          type: number
+                                          type: integer
                                         status:
                                           example: healthy
                                           type: string
@@ -5939,7 +5940,7 @@ paths:
                                       id:
                                         description: ID of the Server
                                         example: 85
-                                        type: number
+                                        type: integer
                                     required:
                                       - id
                                     type: object
@@ -6042,15 +6043,15 @@ paths:
                       id:
                         description: ID of the Load Balancer
                         example: 4711
-                        type: number
+                        type: integer
                       included_traffic:
                         description: Free Traffic for the current billing period in bytes
                         example: 10000
-                        type: number
+                        type: integer
                       ingoing_traffic:
                         description: Inbound Traffic for the current billing period in bytes
                         nullable: true
-                        type: number
+                        type: integer
                       labels:
                         description: User-defined labels (key-value pairs)
                         properties: {}
@@ -6196,7 +6197,7 @@ paths:
                       outgoing_traffic:
                         description: Outbound Traffic for the current billing period in bytes
                         nullable: true
-                        type: number
+                        type: integer
                       private_net:
                         description: Private networks information
                         items:
@@ -6206,7 +6207,7 @@ paths:
                               type: string
                             network:
                               example: 4711
-                              type: number
+                              type: integer
                           type: object
                         type: array
                       protection:
@@ -6255,7 +6256,7 @@ paths:
                             destination_port:
                               description: Port the Load Balancer will balance to
                               example: 80
-                              type: number
+                              type: integer
                             health_check:
                               allOf:
                                 - additionalProperties: false
@@ -6296,11 +6297,11 @@ paths:
                                     interval:
                                       description: Time interval in seconds health checks are performed
                                       example: 15
-                                      type: number
+                                      type: integer
                                     port:
                                       description: Port the health check will be performed on
                                       example: 4711
-                                      type: number
+                                      type: integer
                                     protocol:
                                       description: Type of the health check
                                       enum:
@@ -6311,11 +6312,11 @@ paths:
                                     retries:
                                       description: Unsuccessful retries needed until a target is considered unhealthy
                                       example: 3
-                                      type: number
+                                      type: integer
                                     timeout:
                                       description: Time in seconds after an attempt is considered a timeout
                                       example: 10
-                                      type: number
+                                      type: integer
                                   required:
                                     - protocol
                                     - port
@@ -6332,12 +6333,12 @@ paths:
                                   example:
                                     - 897
                                   items:
-                                    type: number
+                                    type: integer
                                   type: array
                                 cookie_lifetime:
                                   description: Lifetime of the cookie used for sticky sessions
                                   example: 300
-                                  type: number
+                                  type: integer
                                 cookie_name:
                                   description: Name of the cookie used for sticky sessions
                                   example: HCLBSTICKY
@@ -6357,7 +6358,7 @@ paths:
                             listen_port:
                               description: Port the Load Balancer listens on
                               example: 443
-                              type: number
+                              type: integer
                             protocol:
                               description: Protocol of the Load Balancer
                               enum:
@@ -6388,7 +6389,7 @@ paths:
                                 properties:
                                   listen_port:
                                     example: 443
-                                    type: number
+                                    type: integer
                                   status:
                                     example: healthy
                                     type: string
@@ -6420,7 +6421,7 @@ paths:
                                 id:
                                   description: ID of the Server
                                   example: 80
-                                  type: number
+                                  type: integer
                               required:
                                 - id
                               type: object
@@ -6433,7 +6434,7 @@ paths:
                                       properties:
                                         listen_port:
                                           example: 443
-                                          type: number
+                                          type: integer
                                         status:
                                           example: healthy
                                           type: string
@@ -6444,7 +6445,7 @@ paths:
                                       id:
                                         description: ID of the Server
                                         example: 85
-                                        type: number
+                                        type: integer
                                     required:
                                       - id
                                     type: object
@@ -6648,15 +6649,15 @@ paths:
                       id:
                         description: ID of the Load Balancer
                         example: 4711
-                        type: number
+                        type: integer
                       included_traffic:
                         description: Free Traffic for the current billing period in bytes
                         example: 10000
-                        type: number
+                        type: integer
                       ingoing_traffic:
                         description: Inbound Traffic for the current billing period in bytes
                         nullable: true
-                        type: number
+                        type: integer
                       labels:
                         description: User-defined labels (key-value pairs)
                         properties: {}
@@ -6802,7 +6803,7 @@ paths:
                       outgoing_traffic:
                         description: Outbound Traffic for the current billing period in bytes
                         nullable: true
-                        type: number
+                        type: integer
                       private_net:
                         description: Private networks information
                         items:
@@ -6812,7 +6813,7 @@ paths:
                               type: string
                             network:
                               example: 4711
-                              type: number
+                              type: integer
                           type: object
                         type: array
                       protection:
@@ -6861,7 +6862,7 @@ paths:
                             destination_port:
                               description: Port the Load Balancer will balance to
                               example: 80
-                              type: number
+                              type: integer
                             health_check:
                               allOf:
                                 - additionalProperties: false
@@ -6902,11 +6903,11 @@ paths:
                                     interval:
                                       description: Time interval in seconds health checks are performed
                                       example: 15
-                                      type: number
+                                      type: integer
                                     port:
                                       description: Port the health check will be performed on
                                       example: 4711
-                                      type: number
+                                      type: integer
                                     protocol:
                                       description: Type of the health check
                                       enum:
@@ -6917,11 +6918,11 @@ paths:
                                     retries:
                                       description: Unsuccessful retries needed until a target is considered unhealthy
                                       example: 3
-                                      type: number
+                                      type: integer
                                     timeout:
                                       description: Time in seconds after an attempt is considered a timeout
                                       example: 10
-                                      type: number
+                                      type: integer
                                   required:
                                     - protocol
                                     - port
@@ -6938,12 +6939,12 @@ paths:
                                   example:
                                     - 897
                                   items:
-                                    type: number
+                                    type: integer
                                   type: array
                                 cookie_lifetime:
                                   description: Lifetime of the cookie used for sticky sessions
                                   example: 300
-                                  type: number
+                                  type: integer
                                 cookie_name:
                                   description: Name of the cookie used for sticky sessions
                                   example: HCLBSTICKY
@@ -6963,7 +6964,7 @@ paths:
                             listen_port:
                               description: Port the Load Balancer listens on
                               example: 443
-                              type: number
+                              type: integer
                             protocol:
                               description: Protocol of the Load Balancer
                               enum:
@@ -6994,7 +6995,7 @@ paths:
                                 properties:
                                   listen_port:
                                     example: 443
-                                    type: number
+                                    type: integer
                                   status:
                                     example: healthy
                                     type: string
@@ -7026,7 +7027,7 @@ paths:
                                 id:
                                   description: ID of the Server
                                   example: 80
-                                  type: number
+                                  type: integer
                               required:
                                 - id
                               type: object
@@ -7039,7 +7040,7 @@ paths:
                                       properties:
                                         listen_port:
                                           example: 443
-                                          type: number
+                                          type: integer
                                         status:
                                           example: healthy
                                           type: string
@@ -7050,7 +7051,7 @@ paths:
                                       id:
                                         description: ID of the Server
                                         example: 85
-                                        type: number
+                                        type: integer
                                     required:
                                       - id
                                     type: object
@@ -7280,7 +7281,7 @@ paths:
                 destination_port:
                   description: Port the Load Balancer will balance to
                   example: 80
-                  type: number
+                  type: integer
                 health_check:
                   allOf:
                     - additionalProperties: false
@@ -7321,11 +7322,11 @@ paths:
                         interval:
                           description: Time interval in seconds health checks are performed
                           example: 15
-                          type: number
+                          type: integer
                         port:
                           description: Port the health check will be performed on
                           example: 4711
-                          type: number
+                          type: integer
                         protocol:
                           description: Type of the health check
                           enum:
@@ -7336,11 +7337,11 @@ paths:
                         retries:
                           description: Unsuccessful retries needed until a target is considered unhealthy
                           example: 3
-                          type: number
+                          type: integer
                         timeout:
                           description: Time in seconds after an attempt is considered a timeout
                           example: 10
-                          type: number
+                          type: integer
                       required:
                         - protocol
                         - port
@@ -7357,12 +7358,12 @@ paths:
                       example:
                         - 897
                       items:
-                        type: number
+                        type: integer
                       type: array
                     cookie_lifetime:
                       description: Lifetime of the cookie used for sticky sessions
                       example: 300
-                      type: number
+                      type: integer
                     cookie_name:
                       description: Name of the cookie used for sticky sessions
                       example: HCLBSTICKY
@@ -7382,7 +7383,7 @@ paths:
                 listen_port:
                   description: Port the Load Balancer listens on
                   example: 443
-                  type: number
+                  type: integer
                 protocol:
                   description: Protocol of the Load Balancer
                   enum:
@@ -8891,7 +8892,7 @@ paths:
                 destination_port:
                   description: Port the Load Balancer will balance to
                   example: 80
-                  type: number
+                  type: integer
                 health_check:
                   allOf:
                     - additionalProperties: false
@@ -8932,11 +8933,11 @@ paths:
                         interval:
                           description: Time interval in seconds health checks are performed
                           example: 15
-                          type: number
+                          type: integer
                         port:
                           description: Port the health check will be performed on
                           example: 4711
-                          type: number
+                          type: integer
                         protocol:
                           description: Type of the health check
                           enum:
@@ -8947,11 +8948,11 @@ paths:
                         retries:
                           description: Unsuccessful retries needed until a target is considered unhealthy
                           example: 3
-                          type: number
+                          type: integer
                         timeout:
                           description: Time in seconds after an attempt is considered a timeout
                           example: 10
-                          type: number
+                          type: integer
                       required:
                         - protocol
                         - port
@@ -8968,12 +8969,12 @@ paths:
                       example:
                         - 897
                       items:
-                        type: number
+                        type: integer
                       type: array
                     cookie_lifetime:
                       description: Lifetime of the cookie used for sticky sessions
                       example: 300
-                      type: number
+                      type: integer
                     cookie_name:
                       description: Name of the cookie used for sticky sessions
                       example: HCLBSTICKY
@@ -8993,7 +8994,7 @@ paths:
                 listen_port:
                   description: Port the Load Balancer listens on
                   example: 443
-                  type: number
+                  type: integer
                 protocol:
                   description: Protocol of the Load Balancer
                   enum:
@@ -9525,7 +9526,7 @@ paths:
                         id:
                           description: ID of the Network
                           example: 4711
-                          type: number
+                          type: integer
                         ip_range:
                           description: IPv4 prefix of the whole Network
                           example: 10.0.0.0/16
@@ -9539,7 +9540,7 @@ paths:
                           example:
                             - 42
                           items:
-                            type: number
+                            type: integer
                           type: array
                         name:
                           description: Name of the Network
@@ -9577,7 +9578,7 @@ paths:
                           example:
                             - 42
                           items:
-                            type: number
+                            type: integer
                           type: array
                         subnets:
                           description: Array subnets allocated in this Network
@@ -9701,6 +9702,7 @@ paths:
               required:
                 - name
                 - ip_range
+              title: CreateNetworkRequest
               type: object
       responses:
         "201":
@@ -9717,7 +9719,7 @@ paths:
                       id:
                         description: ID of the Network
                         example: 4711
-                        type: number
+                        type: integer
                       ip_range:
                         description: IPv4 prefix of the whole Network
                         example: 10.0.0.0/16
@@ -9731,7 +9733,7 @@ paths:
                         example:
                           - 42
                         items:
-                          type: number
+                          type: integer
                         type: array
                       name:
                         description: Name of the Network
@@ -9769,7 +9771,7 @@ paths:
                         example:
                           - 42
                         items:
-                          type: number
+                          type: integer
                         type: array
                       subnets:
                         description: Array subnets allocated in this Network
@@ -9860,7 +9862,7 @@ paths:
                       id:
                         description: ID of the Network
                         example: 4711
-                        type: number
+                        type: integer
                       ip_range:
                         description: IPv4 prefix of the whole Network
                         example: 10.0.0.0/16
@@ -9874,7 +9876,7 @@ paths:
                         example:
                           - 42
                         items:
-                          type: number
+                          type: integer
                         type: array
                       name:
                         description: Name of the Network
@@ -9912,7 +9914,7 @@ paths:
                         example:
                           - 42
                         items:
-                          type: number
+                          type: integer
                         type: array
                       subnets:
                         description: Array subnets allocated in this Network
@@ -9991,6 +9993,7 @@ paths:
                   description: New network name
                   example: new-name
                   type: string
+              title: UpdateNetworkRequest
               type: object
       responses:
         "200":
@@ -10029,7 +10032,7 @@ paths:
                       id:
                         description: ID of the Network
                         example: 4711
-                        type: number
+                        type: integer
                       ip_range:
                         description: IPv4 prefix of the whole Network
                         example: 10.0.0.0/16
@@ -10043,7 +10046,7 @@ paths:
                         example:
                           - 42
                         items:
-                          type: number
+                          type: integer
                         type: array
                       name:
                         description: Name of the Network
@@ -10081,7 +10084,7 @@ paths:
                         example:
                           - 42
                         items:
-                          type: number
+                          type: integer
                         type: array
                       subnets:
                         description: Array subnets allocated in this Network
@@ -10309,6 +10312,7 @@ paths:
               required:
                 - destination
                 - gateway
+              title: AddDeleteRouteRequest
               type: object
       responses:
         "201":
@@ -10449,10 +10453,11 @@ paths:
                 vswitch_id:
                   description: ID of the robot vSwitch. Must be supplied if the subnet is of type vswitch.
                   example: 1000
-                  type: number
+                  type: integer
               required:
                 - type
                 - network_zone
+              title: AddSubnetRequest
               type: object
       responses:
         "201":
@@ -10587,6 +10592,7 @@ paths:
                   type: string
               required:
                 - ip_range
+              title: ChangeIPRangeRequest
               type: object
       responses:
         "201":
@@ -10713,6 +10719,7 @@ paths:
                   description: If true, prevents the Network from being deleted
                   example: true
                   type: boolean
+              title: ChangeProtectionRequest
               type: object
       responses:
         "201":
@@ -10846,6 +10853,7 @@ paths:
               required:
                 - destination
                 - gateway
+              title: AddDeleteRouteRequest
               type: object
       responses:
         "201":
@@ -10974,6 +10982,7 @@ paths:
                   type: string
               required:
                 - ip_range
+              title: DeleteSubnetRequest
               type: object
       responses:
         "201":
@@ -14858,9 +14867,10 @@ paths:
                 network:
                   description: ID of an existing network to attach the Server to
                   example: 4711
-                  type: number
+                  type: integer
               required:
                 - network
+              title: AttachToNetworkRequest
               type: object
       responses:
         "201":
@@ -14991,7 +15001,7 @@ paths:
                 network:
                   description: ID of an existing Network already attached to the Server
                   example: 4711
-                  type: number
+                  type: integer
               required:
                 - network
                 - alias_ips
@@ -15556,6 +15566,7 @@ paths:
                     - backup
                   example: snapshot
                   type: string
+              title: CreateImageRequest
               type: object
       responses:
         "201":
@@ -15817,9 +15828,10 @@ paths:
                 network:
                   description: ID of an existing network to detach the Server from
                   example: 4711
-                  type: number
+                  type: integer
               required:
                 - network
+              title: DetachFromNetworkRequest
               type: object
       responses:
         "201":
@@ -16418,7 +16430,7 @@ paths:
                   example:
                     - 2323
                   items:
-                    type: number
+                    type: integer
                   type: array
                 type:
                   description: "Type of rescue system to boot (default: `linux64`)"
@@ -16900,6 +16912,7 @@ paths:
                   type: string
               required:
                 - image
+              title: RebuildServerRequest
               type: object
         description: To select which Image to rebuild from you can either pass an ID or a name as the `image` argument. Passing a name only works for `system` Images since the other Image types do not have a name set.
       responses:
@@ -19117,9 +19130,10 @@ paths:
                 server:
                   description: ID of the Server the Volume will be attached to
                   example: 43
-                  type: number
+                  type: integer
               required:
                 - server
+              title: AttachVolumeRequest
               type: object
       responses:
         "201":

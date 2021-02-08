@@ -10,7 +10,7 @@ info:
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
 
-    > Date: 06 January, 2021
+    > Date: 03 February, 2021
 
     >
 
@@ -28,7 +28,7 @@ info:
 
     [Meraki Homepage](https://www.meraki.com)
   title: Meraki Dashboard API
-  version: 1.5.0
+  version: 1.6.0
   x-apisguru-categories:
     - iot
   x-logo:
@@ -74,6 +74,7 @@ tags:
   - name: applicationCategories
   - name: applicationUsage
   - name: bgp
+  - name: billing
   - name: bluetooth
   - name: bluetoothClients
   - name: brandingPolicies
@@ -99,6 +100,7 @@ tags:
   - name: desktopLogs
   - name: deviceCommandLogs
   - name: deviceProfiles
+  - name: deviceTypeGroupPolicies
   - name: dhcp
   - name: dhcpServerPolicy
   - name: dscpTaggingOptions
@@ -779,6 +781,8 @@ paths:
           description: Successful operation
           examples:
             application/json:
+              audioDetection:
+                enabled: false
               mqttBrokerId: "1234"
               mqttTopics:
                 - /merakimv/Q2AA-AAAA-1111/raw_detections
@@ -803,6 +807,8 @@ paths:
           name: updateDeviceCameraSense
           schema:
             example:
+              audioDetection:
+                enabled: false
               mqttBrokerId: "1234"
               senseEnabled: true
             properties:
@@ -821,6 +827,8 @@ paths:
           description: Successful operation
           examples:
             application/json:
+              audioDetection:
+                enabled: false
               mqttBrokerId: "1234"
               mqttTopics:
                 - /merakimv/Q2AA-AAAA-1111/raw_detections
@@ -3333,6 +3341,9 @@ paths:
                 type: string
               name:
                 description: The name of the network
+                type: string
+              notes:
+                description: Add any notes or additional information about this network here.
                 type: string
               tags:
                 description: A list of tags to be applied to the network
@@ -11874,7 +11885,7 @@ paths:
         - configure
         - merakiAuthUsers
     post:
-      description: Create a user configured with Meraki Authentication for a network (currently supports 802.1X, splash guest, and client VPN users, and currently, organizations have a 50,000 user cap)
+      description: Authorize a user configured with Meraki Authentication for a network (currently supports 802.1X, splash guest, and client VPN users, and currently, organizations have a 50,000 user cap)
       operationId: createNetworkMerakiAuthUser
       parameters:
         - in: path
@@ -11944,14 +11955,14 @@ paths:
               name: Miles Meraki
           schema:
             type: object
-      summary: Create a user configured with Meraki Authentication for a network (currently supports 802.1X, splash guest, and client VPN users, and currently, organizations have a 50,000 user cap)
+      summary: Authorize a user configured with Meraki Authentication for a network (currently supports 802.1X, splash guest, and client VPN users, and currently, organizations have a 50,000 user cap)
       tags:
         - networks
         - configure
         - merakiAuthUsers
   "/networks/{networkId}/merakiAuthUsers/{merakiAuthUserId}":
     delete:
-      description: Delete a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
+      description: Deauthorize a user. To reauthorize a user after deauthorizing them, POST to this endpoint. (Currently, 802.1X RADIUS, splash guest, and client VPN users can be deauthorized.)
       operationId: deleteNetworkMerakiAuthUser
       parameters:
         - in: path
@@ -11965,7 +11976,7 @@ paths:
       responses:
         "204":
           description: Successful operation
-      summary: Delete a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
+      summary: Deauthorize a user
       tags:
         - networks
         - configure
@@ -12006,7 +12017,7 @@ paths:
         - configure
         - merakiAuthUsers
     put:
-      description: Update a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
+      description: Update a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be updated)
       operationId: updateNetworkMerakiAuthUser
       parameters:
         - in: path
@@ -12065,7 +12076,7 @@ paths:
               name: Miles Meraki
           schema:
             type: object
-      summary: Update a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
+      summary: Update a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be updated)
       tags:
         - networks
         - configure
@@ -14626,6 +14637,7 @@ paths:
                     port: 22
                     secret: password1
                 radiusCoaSupportEnabled: false
+                radiusGroupAttribute: "11"
                 radiusServers:
                   - host: 1.2.3.4
                     port: 22
@@ -14665,6 +14677,7 @@ paths:
                   port: 22
                   secret: password1
               radiusCoaSupportEnabled: false
+              radiusGroupAttribute: "11"
               radiusServers:
                 - host: 1.2.3.4
                   port: 22
@@ -14723,6 +14736,9 @@ paths:
               radiusCoaSupportEnabled:
                 description: Change of authentication for RADIUS re-authentication and disconnection
                 type: boolean
+              radiusGroupAttribute:
+                description: Acceptable values are `""` for None, or `"11"` for Group Policies ACL
+                type: string
               radiusServers:
                 description: List of RADIUS servers to require connecting devices to authenticate against before granting network access
                 items:
@@ -14782,6 +14798,7 @@ paths:
                   port: 22
                   secret: password1
               radiusCoaSupportEnabled: false
+              radiusGroupAttribute: "11"
               radiusServers:
                 - host: 1.2.3.4
                   port: 22
@@ -14847,6 +14864,7 @@ paths:
                   port: 22
                   secret: password1
               radiusCoaSupportEnabled: false
+              radiusGroupAttribute: "11"
               radiusServers:
                 - host: 1.2.3.4
                   port: 22
@@ -14889,6 +14907,7 @@ paths:
                   port: 22
                   secret: password1
               radiusCoaSupportEnabled: false
+              radiusGroupAttribute: "11"
               radiusServers:
                 - host: 1.2.3.4
                   port: 22
@@ -14947,6 +14966,9 @@ paths:
               radiusCoaSupportEnabled:
                 description: Change of authentication for RADIUS re-authentication and disconnection
                 type: boolean
+              radiusGroupAttribute:
+                description: Can be either `""`, which means `None` on Dashboard, or `"11"`, which means `Filter-Id` on Dashboard and will use Group Policy ACLs when supported (firmware 14+)
+                type: string
               radiusServers:
                 description: List of RADIUS servers to require connecting devices to authenticate against before granting network access
                 items:
@@ -14998,6 +15020,7 @@ paths:
                   port: 22
                   secret: password1
               radiusCoaSupportEnabled: false
+              radiusGroupAttribute: "11"
               radiusServers:
                 - host: 1.2.3.4
                   port: 22
@@ -18733,6 +18756,115 @@ paths:
         - wireless
         - configure
         - alternateManagementInterface
+  "/networks/{networkId}/wireless/billing":
+    get:
+      description: Return the billing settings of this network
+      operationId: getNetworkWirelessBilling
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              currency: USD
+              plans:
+                - bandwidthLimits:
+                    limitDown: 1000
+                    limitUp: 1000
+                  id: "1"
+                  price: "5"
+                  timeLimit: 1 hour
+          schema:
+            type: object
+      summary: Return the billing settings of this network
+      tags:
+        - wireless
+        - configure
+        - billing
+    put:
+      description: Update the billing settings
+      operationId: updateNetworkWirelessBilling
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: body
+          name: updateNetworkWirelessBilling
+          schema:
+            example:
+              currency: USD
+              plans:
+                - bandwidthLimits:
+                    limitDown: 1000
+                    limitUp: 1000
+                  id: "1"
+                  price: "5"
+                  timeLimit: 1 hour
+            properties:
+              currency:
+                description: The currency code of this node group's billing plans
+                type: string
+              plans:
+                description: Array of billing plans in the node group. (Can configure a maximum of 5)
+                items:
+                  properties:
+                    bandwidthLimits:
+                      description: The uplink bandwidth settings for the pricing plan.
+                      properties:
+                        limitDown:
+                          description: The maximum download limit (integer, in Kbps). null indicates no limit
+                          type: integer
+                        limitUp:
+                          description: The maximum upload limit (integer, in Kbps). null indicates no limit
+                          type: integer
+                      type: object
+                    id:
+                      description: The id of the pricing plan to update.
+                      type: string
+                    price:
+                      description: The price of the billing plan.
+                      format: float
+                      type: number
+                    timeLimit:
+                      description: The time limit of the pricing plan in minutes. Can be '1 hour', '1 day', '1 week', or '30 days'.
+                      enum:
+                        - 1 hour
+                        - 1 day
+                        - 1 week
+                        - 30 days
+                      type: string
+                  required:
+                    - price
+                    - bandwidthLimits
+                    - timeLimit
+                  type: object
+                type: array
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              currency: USD
+              plans:
+                - bandwidthLimits:
+                    limitDown: 1000
+                    limitUp: 1000
+                  id: "1"
+                  price: "5"
+                  timeLimit: 1 hour
+          schema:
+            type: object
+      summary: Update the billing settings
+      tags:
+        - wireless
+        - configure
+        - billing
   "/networks/{networkId}/wireless/bluetooth/settings":
     get:
       description: Return the Bluetooth settings for a network. <a href="https://documentation.meraki.com/MR/Bluetooth/Bluetooth_Low_Energy_(BLE)">Bluetooth settings</a> must be enabled on the network.
@@ -20916,6 +21048,37 @@ paths:
               enabled: true
               name: My SSID
             properties:
+              activeDirectory:
+                description: The current setting for Active Directory. Only valid if splashPage is 'Password-protected with Active Directory'
+                properties:
+                  credentials:
+                    description: (Optional) The credentials of the user account to be used by the AP to bind to your Active Directory server. The Active Directory account should have permissions on all your Active Directory servers. Only valid if the splashPage is 'Password-protected with Active Directory'.
+                    properties:
+                      logonName:
+                        description: The logon name of the Active Directory account.
+                        type: string
+                      password:
+                        description: The password to the Active Directory user account.
+                        type: string
+                    type: object
+                  servers:
+                    description: The Active Directory servers to be used for authentication.
+                    items:
+                      properties:
+                        host:
+                          description: IP address of your Active Directory server.
+                          type: string
+                        port:
+                          description: (Optional) UDP port the Active Directory server listens on. By default, uses port 3268.
+                          type: integer
+                      required:
+                        - host
+                      type: object
+                    type: array
+                type: object
+              adaptivePolicyGroupId:
+                description: Adaptive policy group ID this SSID is assigned to.
+                type: string
               apTagsAndVlanIds:
                 description: The list of tags and VLAN IDs used for VLAN tagging. This param is only valid when the ipAssignmentMode is 'Bridge mode' or 'Layer 3 roaming'
                 items:
@@ -20931,13 +21094,14 @@ paths:
                   type: object
                 type: array
               authMode:
-                description: The association control method for the SSID ('open', 'psk', 'open-with-radius', '8021x-meraki', '8021x-radius', 'ipsk-with-radius' or 'ipsk-without-radius')
+                description: The association control method for the SSID ('open', 'psk', 'open-with-radius', '8021x-meraki', '8021x-radius', '8021x-google', 'ipsk-with-radius' or 'ipsk-without-radius')
                 enum:
                   - open
                   - psk
                   - open-with-radius
                   - 8021x-meraki
                   - 8021x-radius
+                  - 8021x-google
                   - ipsk-with-radius
                   - ipsk-without-radius
                 type: string
@@ -20999,6 +21163,35 @@ paths:
               lanIsolationEnabled:
                 description: Boolean indicating whether Layer 2 LAN isolation should be enabled or disabled. Only configurable when ipAssignmentMode is 'Bridge mode'.
                 type: boolean
+              ldap:
+                description: The current setting for LDAP. Only valid if splashPage is 'Password-protected with LDAP'.
+                properties:
+                  credentials:
+                    description: (Optional) The credentials of the user account to be used by the AP to bind to your LDAP server. The LDAP account should have permissions on all your LDAP servers.
+                    properties:
+                      distinguishedName:
+                        description: "The distinguished name of the LDAP user account (example: cn=user,dc=meraki,dc=com)."
+                        type: string
+                      password:
+                        description: The password of the LDAP user account.
+                        type: string
+                    type: object
+                  servers:
+                    description: The LDAP servers to be used for authentication.
+                    items:
+                      properties:
+                        host:
+                          description: IP address of your LDAP server.
+                          type: string
+                        port:
+                          description: UDP port the LDAP server listens on.
+                          type: integer
+                      required:
+                        - host
+                        - port
+                      type: object
+                    type: array
+                type: object
               mandatoryDhcpEnabled:
                 description: If true, Mandatory DHCP will enforce that clients connecting to this SSID must use the IP address assigned by the DHCP server. Clients who use a static IP address won’t be able to associate.
                 type: boolean
@@ -21027,6 +21220,9 @@ paths:
               radiusAccountingEnabled:
                 description: Whether or not RADIUS accounting is enabled. This param is only valid if the authMode is 'open-with-radius', '8021x-radius' or 'ipsk-with-radius'
                 type: boolean
+              radiusAccountingInterimInterval:
+                description: The interval (in seconds) in which accounting information is updated and sent to the RADIUS accounting server.
+                type: integer
               radiusAccountingServers:
                 description: The RADIUS accounting 802.1X servers to be used for authentication. This param is only valid if the authMode is 'open-with-radius', '8021x-radius' or 'ipsk-with-radius' and radiusAccountingEnabled is 'true'
                 items:
@@ -21052,6 +21248,12 @@ paths:
                   - Airespace-ACL-Name
                   - Aruba-User-Role
                 type: string
+              radiusAuthenticationNasId:
+                description: The template of the NAS identifier to be used for RADIUS authentication (ex. $NODE_MAC$:$VAP_NUM$).
+                type: string
+              radiusCalledStationId:
+                description: The template of the called station identifier to be used for RADIUS (ex. $NODE_MAC$:$VAP_NUM$).
+                type: string
               radiusCoaEnabled:
                 description: If true, Meraki devices will act as a RADIUS Dynamic Authorization Server and will respond to RADIUS Change-of-Authorization and Disconnect messages sent by the RADIUS server.
                 type: boolean
@@ -21061,6 +21263,9 @@ paths:
                   - Deny access
                   - Allow access
                 type: string
+              radiusFallbackEnabled:
+                description: Whether or not higher priority RADIUS servers should be retried after 60 seconds.
+                type: boolean
               radiusGuestVlanEnabled:
                 description: Whether or not RADIUS Guest VLAN is enabled. This param is only valid if the authMode is 'open-with-radius' and addressing mode is not set to 'isolated' or 'nat' mode
                 type: boolean
@@ -21079,6 +21284,12 @@ paths:
               radiusProxyEnabled:
                 description: If true, Meraki devices will proxy RADIUS messages through the Meraki cloud to the configured RADIUS auth and accounting servers.
                 type: boolean
+              radiusServerAttemptsLimit:
+                description: The maximum number of transmit attempts after which a RADIUS server is failed over (must be between 1-5).
+                type: integer
+              radiusServerTimeout:
+                description: The amount of time for which a RADIUS client waits for a reply from the RADIUS server (must be between 1-10 seconds).
+                type: integer
               radiusServers:
                 description: The RADIUS 802.1X servers to be used for authentication. This param is only valid if the authMode is 'open-with-radius', '8021x-radius' or 'ipsk-with-radius'
                 items:
@@ -21095,6 +21306,14 @@ paths:
                   required:
                     - host
                   type: object
+                type: array
+              radiusTestingEnabled:
+                description: If true, Meraki devices will periodically send Access-Request messages to configured RADIUS servers using identity 'meraki_8021x_test' to ensure that the RADIUS servers are reachable.
+                type: boolean
+              splashGuestSponsorDomains:
+                description: Array of valid sponsor email domains for sponsored guest splash type.
+                items:
+                  type: string
                 type: array
               splashPage:
                 description: The type of splash page for the SSID ('None', 'Click-through splash page', 'Billing', 'Password-protected with Meraki RADIUS', 'Password-protected with custom RADIUS', 'Password-protected with Active Directory', 'Password-protected with LDAP', 'SMS authentication', 'Systems Manager Sentry', 'Facebook Wi-Fi', 'Google OAuth', 'Sponsored guest' or 'Cisco ISE'). This attribute is not supported for template children.
@@ -21186,6 +21405,121 @@ paths:
         - wireless
         - configure
         - ssids
+  "/networks/{networkId}/wireless/ssids/{number}/deviceTypeGroupPolicies":
+    get:
+      description: List the device type group policies for the SSID
+      operationId: getNetworkWirelessSsidDeviceTypeGroupPolicies
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: number
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              deviceTypePolicies:
+                - devicePolicy: Allowed
+                  deviceType: Android
+                - devicePolicy: Group policy
+                  deviceType: iPhone
+                  groupPolicyId: 101
+              enabled: true
+          schema:
+            type: object
+      summary: List the device type group policies for the SSID
+      tags:
+        - wireless
+        - configure
+        - ssids
+        - deviceTypeGroupPolicies
+    put:
+      description: Update the device type group policies for the SSID
+      operationId: updateNetworkWirelessSsidDeviceTypeGroupPolicies
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: number
+          required: true
+          type: string
+        - in: body
+          name: updateNetworkWirelessSsidDeviceTypeGroupPolicies
+          schema:
+            example:
+              deviceTypePolicies:
+                - devicePolicy: Allowed
+                  deviceType: Android
+                - devicePolicy: Group policy
+                  deviceType: iPhone
+                  groupPolicyId: 101
+              enabled: true
+            properties:
+              deviceTypePolicies:
+                description: List of device type policies.
+                items:
+                  properties:
+                    devicePolicy:
+                      description: The device policy. Can be one of 'Allowed', 'Blocked' or 'Group policy'
+                      enum:
+                        - Allowed
+                        - Blocked
+                        - Group policy
+                      type: string
+                    deviceType:
+                      description: The device type. Can be one of 'Android', 'BlackBerry', 'Chrome OS', 'iPad', 'iPhone', 'iPod', 'Mac OS X', 'Windows', 'Windows Phone', 'B&N Nook' or 'Other OS'
+                      enum:
+                        - Android
+                        - BlackBerry
+                        - Chrome OS
+                        - iPad
+                        - iPhone
+                        - iPod
+                        - Mac OS X
+                        - Windows
+                        - Windows Phone
+                        - B&N Nook
+                        - Other OS
+                      type: string
+                    groupPolicyId:
+                      description: ID of the group policy object.
+                      type: integer
+                  required:
+                    - deviceType
+                    - devicePolicy
+                  type: object
+                type: array
+              enabled:
+                description: If true, the SSID device type group policies are enabled.
+                type: boolean
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              deviceTypePolicies:
+                - devicePolicy: Allowed
+                  deviceType: Android
+                - devicePolicy: Group policy
+                  deviceType: iPhone
+                  groupPolicyId: 101
+              enabled: true
+          schema:
+            type: object
+      summary: Update the device type group policies for the SSID
+      tags:
+        - wireless
+        - configure
+        - ssids
+        - deviceTypeGroupPolicies
   "/networks/{networkId}/wireless/ssids/{number}/firewall/l3FirewallRules":
     get:
       description: Return the L3 firewall rules for an SSID on an MR network
@@ -21713,6 +22047,49 @@ paths:
               useSplashUrl: true
               welcomeMessage: Welcome!
             properties:
+              allowSimultaneousLogins:
+                description: Whether or not to allow simultaneous logins from different devices.
+                type: boolean
+              billing:
+                description: Details associated with billing splash.
+                properties:
+                  freeAccess:
+                    description: Details associated with a free access plan with limits.
+                    properties:
+                      durationInMinutes:
+                        description: How long a device can use a network for free.
+                        type: integer
+                      enabled:
+                        description: Whether or not free access is enabled.
+                        type: boolean
+                    type: object
+                  prepaidAccessFastLoginEnabled:
+                    description: Whether or not billing uses the fast login prepaid access option.
+                    type: boolean
+                  replyToEmailAddress:
+                    description: The email address that receives replies from clients.
+                    type: string
+                type: object
+              blockAllTrafficBeforeSignOn:
+                description: How restricted allowing traffic should be. If true, all traffic types are blocked until the splash page is acknowledged. If false, all non-HTTP traffic is allowed before the splash page is acknowledged.
+                type: boolean
+              controllerDisconnectionBehavior:
+                description: How login attempts should be handled when the controller is unreachable. Can be either 'open', 'restricted', or 'default'.
+                enum:
+                  - open
+                  - restricted
+                  - default
+                type: string
+              guestSponsorship:
+                description: Details associated with guest sponsored splash.
+                properties:
+                  durationInMinutes:
+                    description: Duration in minutes of sponsored guest authorization. Must be between 1 and 60480 (6 weeks)
+                    type: integer
+                  guestCanRequestTimeframe:
+                    description: Whether or not guests can specify how much time they are requesting.
+                    type: boolean
+                type: object
               redirectUrl:
                 description: The custom redirect URL where the users will go after the splash page.
                 type: string
@@ -26103,6 +26480,9 @@ paths:
               name:
                 description: The name of the new network
                 type: string
+              notes:
+                description: Add any notes or additional information about this network here.
+                type: string
               productTypes:
                 description: The product type(s) of the new network. Valid types are wireless, appliance, switch, systemsManager, camera, cellularGateway, environmental. If more than one type is included, the network will be a combined network.
                 items:
@@ -27236,6 +27616,10 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/appliance/vpn/bgp
     summary: Update a Hub BGP Configuration
+  - group: Billing
+    operation: update
+    resource: /networks/{networkId}/wireless/billing
+    summary: Update the billing settings
   - group: Bluetooth device setting
     operation: update
     resource: /devices/{serial}/wireless/bluetooth/settings
@@ -27427,15 +27811,15 @@ x-batchable-actions:
   - group: Meraki auth user
     operation: create
     resource: /networks/{networkId}/merakiAuthUsers
-    summary: Create a user configured with Meraki Authentication for a network (currently supports 802.1X, splash guest, and client VPN users, and currently, organizations have a 50,000 user cap)
+    summary: Authorize a user configured with Meraki Authentication for a network (currently supports 802.1X, splash guest, and client VPN users, and currently, organizations have a 50,000 user cap)
   - group: Meraki auth user
     operation: destroy
     resource: /networks/{networkId}/merakiAuthUsers/{merakiAuthUserId}
-    summary: Delete a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
+    summary: Deauthorize a user. To reauthorize a user after deauthorizing them, POST to this endpoint. (Currently, 802.1X RADIUS, splash guest, and client VPN users can be deauthorized.)
   - group: Meraki auth user
     operation: update
     resource: /networks/{networkId}/merakiAuthUsers/{merakiAuthUserId}
-    summary: Update a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
+    summary: Update a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be updated)
   - group: Monitored media server
     operation: create
     resource: /organizations/{organizationId}/insight/monitoredMediaServers
@@ -27592,6 +27976,10 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/wireless/ssids/{number}
     summary: Update the attributes of an MR SSID
+  - group: Ssid device type group policies
+    operation: update
+    resource: /networks/{networkId}/wireless/ssids/{number}/deviceTypeGroupPolicies
+    summary: Update the device type group policies for the SSID
   - group: Ssid splash settings
     operation: update
     resource: /networks/{networkId}/wireless/ssids/{number}/splash/settings

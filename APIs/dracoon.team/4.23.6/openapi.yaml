@@ -4,9 +4,9 @@ servers:
 info:
   contact:
     x-twitter: dracoongmbh
-  description: "REST Web Services for DRACOON<br>built at: 2020-11-17 08:47:09<br><br>This page provides an overview of all available and documented DRACOON APIs, which are grouped by tags.<br>Each tag provides a collection of APIs that are intended for a specific area of the DRACOON.<br><br><a title='Developer Information' href='https://developer.dracoon.com'>Developer Information</a>&emsp;&emsp;<a title='Get SDKs on GitHub' href='https://github.com/dracoon'>Get SDKs on GitHub</a><br><br><a title='Terms of service' href='https://www.dracoon.com/terms/general-terms-and-conditions/'>Terms of service</a>"
+  description: "REST Web Services for DRACOON<br>built at: 2021-01-27 15:56:58<br><br>This page provides an overview of all available and documented DRACOON APIs, which are grouped by tags.<br>Each tag provides a collection of APIs that are intended for a specific area of the DRACOON.<br><br><a title='Developer Information' href='https://developer.dracoon.com'>Developer Information</a>&emsp;&emsp;<a title='Get SDKs on GitHub' href='https://github.com/dracoon'>Get SDKs on GitHub</a><br><br><a title='Terms of service' href='https://www.dracoon.com/terms/general-terms-and-conditions/'>Terms of service</a>"
   title: DRACOON API
-  version: 4.23.4
+  version: 4.23.6
   x-apisguru-categories:
     - cloud
   x-logo:
@@ -21,44 +21,44 @@ security:
 tags:
   - description: System settings (mail server, logging, branding, default values etc.)
     name: system-settings-config
-  - description: File system objects (rooms, folders, files)
-    name: nodes
+  - description: File download without authentication headers
+    name: downloads
+  - description: Client resources
+    name: resources
+  - description: Configuration
+    name: config
+  - description: System settings (storage)
+    name: system-storage-config
   - description: Provisioning
     name: provisioning
+  - description: File system objects (rooms, folders, files)
+    name: nodes
+  - description: System events log
+    name: eventlog
+  - description: System events log
+    name: syslog
   - description: User operations
     name: user
-  - description: Role user management
-    name: roles
-  - description: File upload without authentication headers
-    name: uploads
-  - description: User management
-    name: users
+  - description: Upload and Download Shares
+    name: shares
   - description: System settings (authentication methods)
     name: system-auth-config
+  - description: User management
+    name: users
+  - description: File upload without authentication headers
+    name: uploads
   - description: System settings (policies)
     name: system-policies-config
   - description: Authentication
     name: auth
-  - description: File download without authentication headers
-    name: downloads
+  - description: Role user management
+    name: roles
   - description: Customer settings
     name: settings
-  - description: Upload and Download Shares
-    name: shares
-  - description: System events log
-    name: syslog
-  - description: System events log
-    name: eventlog
   - description: User groups
     name: groups
-  - description: Configuration
-    name: config
   - description: Public API (upload / download shares, software information)
     name: public
-  - description: System settings (storage)
-    name: system-storage-config
-  - description: Client resources
-    name: resources
 paths:
   /v4/auth/login:
     post:
@@ -13219,10 +13219,10 @@ paths:
 
         The returned list is ordered by priority (emergency passwords / rescue keys are returned first).  
 
-        There might be more entries even if a total of **1024** is returned.
+        A total of greater than limit indicates that there might be more entries.
       operationId: requestMissingFileKeys
       parameters:
-        - description: Range offset
+        - description: Range offset. Set to 0, this API does not support paging
           in: query
           name: offset
           required: false
@@ -13233,9 +13233,7 @@ paths:
             Range limit.
 
 
-            Maximum 500.
-
-             For more results please use paging (`offset` + `limit`).
+            Maximum 100.
           in: query
           name: limit
           required: false
