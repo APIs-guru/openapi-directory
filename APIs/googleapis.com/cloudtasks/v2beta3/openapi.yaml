@@ -385,7 +385,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Optional. Read mask is used for a more granular control on the queues that the API returns. If the mask is not present all fields will be returned except [Queue.stats], if the mask is set to "*" all fields including [Queue.stats] will be returned, otherwise only the fields explicitly specified in the mask will be returned.
+        - description: Optional. Read mask is used for a more granular control over what the API returns. If the mask is not present all fields will be returned except [Queue.stats]. [Queue.stats] will be returned only if it was explicitly specified in the mask.
           in: query
           name: readMask
           schema:

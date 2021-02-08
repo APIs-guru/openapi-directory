@@ -423,6 +423,13 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
+    EncryptionConfig:
+      description: The encryption options for the Cloud Composer environment and its dependencies.
+      properties:
+        kmsKeyName:
+          description: Optional. Customer-managed Encryption Key available through Google's Key Management Service. Cannot be updated. If not specified, Google-managed key will be used.
+          type: string
+      type: object
     Environment:
       description: An environment for running orchestration tasks.
       properties:
@@ -471,6 +478,9 @@ components:
         databaseConfig:
           $ref: "#/components/schemas/DatabaseConfig"
           description: Optional. The configuration settings for Cloud SQL instance used internally by Apache Airflow software.
+        encryptionConfig:
+          $ref: "#/components/schemas/EncryptionConfig"
+          description: Optional. The encryption options for the Cloud Composer environment and its dependencies. Cannot be updated.
         gkeCluster:
           description: Output only. The Kubernetes Engine cluster used to run this environment.
           type: string
@@ -590,7 +600,7 @@ components:
           description: "Optional. The Compute Engine [machine type](/compute/docs/machine-types) used for cluster instances, specified as a [relative resource name](/apis/design/resource_names#relative_resource_name). For example: \"projects/{projectId}/zones/{zoneId}/machineTypes/{machineTypeId}\". The `machineType` must belong to the enclosing environment's project and location. If both this field and `nodeConfig.location` are specified, this `machineType` must belong to the `nodeConfig.location`; if both are unspecified, the service will pick a zone in the Compute Engine region corresponding to the Cloud Composer location, and propagate that choice to both fields. If exactly one of this field and `nodeConfig.location` is specified, the location information from the specified field will be propagated to the unspecified field. The `machineTypeId` must not be a [shared-core machine type](/compute/docs/machine-types#sharedcore). If this field is unspecified, the `machineTypeId` defaults to \"n1-standard-1\"."
           type: string
         network:
-          description: "Optional. The Compute Engine network to be used for machine communications, specified as a [relative resource name](/apis/design/resource_names#relative_resource_name). For example: \"projects/{projectId}/global/networks/{networkId}\". [Shared VPC](/vpc/docs/shared-vpc) is not currently supported. The network must belong to the environment's project. If unspecified, the \"default\" network ID in the environment's project is used. If a [Custom Subnet Network](/vpc/docs/vpc#vpc_networks_and_subnets) is provided, `nodeConfig.subnetwork` must also be provided."
+          description: "Optional. The Compute Engine network to be used for machine communications, specified as a [relative resource name](/apis/design/resource_names#relative_resource_name). For example: \"projects/{projectId}/global/networks/{networkId}\". If unspecified, the \"default\" network ID in the environment's project is used. If a [Custom Subnet Network](/vpc/docs/vpc#vpc_networks_and_subnets) is provided, `nodeConfig.subnetwork` must also be provided. For [Shared VPC](/vpc/docs/shared-vpc) subnetwork requirements, see `nodeConfig.subnetwork`."
           type: string
         oauthScopes:
           description: Optional. The set of Google API scopes to be made available on all node VMs. If `oauth_scopes` is empty, defaults to ["https://www.googleapis.com/auth/cloud-platform"]. Cannot be updated.

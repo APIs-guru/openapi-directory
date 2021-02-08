@@ -2741,6 +2741,15 @@ components:
         etag:
           description: ETag of the resource.
           type: string
+        eventType:
+          default: default
+          description: >-
+            Specific type of the event. Read-only. Possible values are:  
+
+            - "default" - A regular event or not further specified. 
+
+            - "outOfOffice" - An out-of-office event.
+          type: string
         extendedProperties:
           description: Extended properties of the event.
           properties:

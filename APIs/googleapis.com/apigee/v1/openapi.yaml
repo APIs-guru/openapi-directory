@@ -4717,6 +4717,15 @@ components:
         properties:
           $ref: "#/components/schemas/GoogleCloudApigeeV1Properties"
           description: Optional. Key-value pairs that may be used for customizing the environment.
+        state:
+          description: Output only. State of the environment. Values other than ACTIVE means the resource is not ready to use.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - DELETING
+          readOnly: true
+          type: string
       type: object
     GoogleCloudApigeeV1EnvironmentConfig:
       properties:
@@ -4811,6 +4820,15 @@ components:
           type: string
         name:
           description: ID of the environment group.
+          type: string
+        state:
+          description: Output only. State of the environment group. Values other than ACTIVE means the resource is not ready to use.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - DELETING
+          readOnly: true
           type: string
       type: object
     GoogleCloudApigeeV1EnvironmentGroupAttachment:
@@ -5486,6 +5504,14 @@ components:
         authorizedNetwork:
           description: 'Compute Engine network used for Service Networking to be peered with Apigee runtime instances. See [Getting started with the Service Networking API](https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started). Valid only when [RuntimeType] is set to CLOUD. The value can be updated only when there are no runtime instances. For example: "default". **Note:** Not supported for Apigee hybrid.'
           type: string
+        billingType:
+          description: Output only. Billing type of the Apigee organization. See [Apigee pricing](https://cloud.google.com/apigee/pricing).
+          enum:
+            - BILLING_TYPE_UNSPECIFIED
+            - SUBSCRIPTION
+            - EVALUATION
+          readOnly: true
+          type: string
         caCertificate:
           description: Output only. Base64-encoded public certificate for the root CA of the Apigee organization. Valid only when [RuntimeType] is CLOUD.
           format: byte
@@ -5535,8 +5561,17 @@ components:
             - CLOUD
             - HYBRID
           type: string
+        state:
+          description: Output only. State of the organization. Values other than ACTIVE means the resource is not ready to use.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - DELETING
+          readOnly: true
+          type: string
         subscriptionType:
-          description: Output only. Subscription type of the Apigee organization. Valid values include trial (free, limited, and for evaluation purposes only) or paid (full subscription has been purchased). See [Apigee pricing](https://cloud.google.com/apigee/pricing/).
+          description: "Output only. DEPRECATED: This will eventually be replaced by BillingType. Subscription type of the Apigee organization. Valid values include trial (free, limited, and for evaluation purposes only) or paid (full subscription has been purchased). See [Apigee pricing](https://cloud.google.com/apigee/pricing/)."
           enum:
             - SUBSCRIPTION_TYPE_UNSPECIFIED
             - PAID

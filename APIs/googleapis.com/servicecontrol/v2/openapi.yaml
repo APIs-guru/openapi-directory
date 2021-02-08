@@ -368,7 +368,7 @@ components:
           description: The required IAM permission.
           type: string
         resource:
-          description: "The resource being accessed, as a REST-style string. For example: bigquery.googleapis.com/projects/PROJECTID/datasets/DATASETID"
+          description: "The resource being accessed, as a REST-style or cloud resource string. For example: bigquery.googleapis.com/projects/PROJECTID/datasets/DATASETID or projects/PROJECTID/datasets/DATASETID"
           type: string
         resourceAttributes:
           $ref: "#/components/schemas/Resource"
@@ -380,6 +380,9 @@ components:
         attributes:
           $ref: "#/components/schemas/AttributeContext"
           description: Describes attributes about the operation being executed by the service.
+        flags:
+          description: Optional. Contains a comma-separated list of flags.
+          type: string
         resources:
           description: Describes the resources and the policies applied to each resource.
           items:

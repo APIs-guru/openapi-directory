@@ -2378,7 +2378,7 @@ components:
           description: Determines whether messages with no header are allowed.
           type: boolean
         segmentTerminator:
-          description: Byte(s) to use as the segment terminator. If this is unset, '\r' is used as segment terminator.
+          description: Byte(s) to use as the segment terminator. If this is unset, '\r' is used as segment terminator, matching the HL7 version 2 specification.
           format: byte
           type: string
       type: object

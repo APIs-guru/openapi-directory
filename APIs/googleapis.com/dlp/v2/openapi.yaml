@@ -1386,11 +1386,11 @@ components:
       description: Options defining a file or a set of files within a Google Cloud Storage bucket.
       properties:
         bytesLimitPerFile:
-          description: Max number of bytes to scan from a file. If a scanned file's size is bigger than this value then the rest of the bytes are omitted. Only one of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
+          description: Max number of bytes to scan from a file. If a scanned file's size is bigger than this value then the rest of the bytes are omitted. Only one of bytes_limit_per_file and bytes_limit_per_file_percent can be specified. Cannot be set if de-identification is requested.
           format: int64
           type: string
         bytesLimitPerFilePercent:
-          description: Max percentage of bytes to scan from a file. The rest are omitted. The number of bytes scanned is rounded down. Must be between 0 and 100, inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
+          description: Max percentage of bytes to scan from a file. The rest are omitted. The number of bytes scanned is rounded down. Must be between 0 and 100, inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one of bytes_limit_per_file and bytes_limit_per_file_percent can be specified. Cannot be set if de-identification is requested.
           format: int32
           type: integer
         fileSet:
@@ -2153,7 +2153,7 @@ components:
           type: string
       type: object
     GooglePrivacyDlpV2FindingLimits:
-      description: Configuration to control the number of findings returned.
+      description: Configuration to control the number of findings returned. Cannot be set if de-identification is requested.
       properties:
         maxFindingsPerInfoType:
           description: Configuration of findings limit given for specified infoTypes.
@@ -3390,7 +3390,7 @@ components:
           description: Location to store findings outside of DLP.
       type: object
     GooglePrivacyDlpV2Schedule:
-      description: Schedule for triggeredJobs.
+      description: Schedule for inspect job triggers.
       properties:
         recurrencePeriodDuration:
           description: "With this option a job is started a regular periodic basis. For example: every day (86400 seconds). A scheduled start time will be skipped if the previous execution has not ended when its scheduled time occurs. This value must be set to a time duration greater than or equal to 1 day and can be no longer than 60 days."

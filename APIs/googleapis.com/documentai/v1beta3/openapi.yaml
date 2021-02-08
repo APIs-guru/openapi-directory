@@ -476,6 +476,19 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationConfidenceLevelMetrics"
           type: array
       type: object
+    GoogleCloudDocumentaiUiv1beta3EvaluationReference:
+      description: Gives a short summary of an evaluation, and links to the evaluation itself.
+      properties:
+        aggregateMetrics:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationMetrics"
+          description: An aggregate of the statistics for the evaluation.
+        evaluation:
+          description: The resource name of the evaluation.
+          type: string
+        operation:
+          description: The resource name of the Long Running Operation for the evaluation.
+          type: string
+      type: object
     GoogleCloudDocumentaiUiv1beta3ProcessorVersion:
       description: A processor version is an implementation of a processor. Each processor can have multiple versions, pre-trained by Google internally or up-trained by the customer. At a time, a processor can only have one default version version. So the processor's behavior (when processing documents) is defined by a default version.
       properties:
@@ -486,6 +499,9 @@ components:
         displayName:
           description: The display name of the processor version.
           type: string
+        latestEvaluation:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationReference"
+          description: The most recently invoked evaluation for the processor version.
         name:
           description: "The resource name of the processor version. Format: projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}"
           type: string
@@ -2336,11 +2352,17 @@ components:
     GoogleCloudDocumentaiV1beta3BatchProcessRequest:
       description: Request message for batch process document method.
       properties:
+        documentOutputConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentOutputConfig"
+          description: The overall output config for batch process.
         inputConfigs:
           description: The input config for each single document in the batch process.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3BatchProcessRequestBatchInputConfig"
           type: array
+        inputDocuments:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3BatchProcessRequestBatchInputConfig"
+          description: The input documents for batch process.
         outputConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3BatchProcessRequestBatchOutputConfig"
           description: The overall output config for batch process.
@@ -2536,6 +2558,20 @@ components:
           type: string
         subjectId:
           description: Subject entity id.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3DocumentOutputConfig:
+      description: Config that controls the output of documents. All documents will be written as a JSON file.
+      properties:
+        gcsOutputConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentOutputConfigGcsOutputConfig"
+          description: Output config to write the results to Cloud Storage.
+      type: object
+    GoogleCloudDocumentaiV1beta3DocumentOutputConfigGcsOutputConfig:
+      description: The configuration used when outputting documents.
+      properties:
+        gcsUri:
+          description: The Cloud Storage uri (a directory) of the output.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta3DocumentPage:
@@ -3108,6 +3144,12 @@ components:
         document:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3Document"
           description: The document payload, the [content] and [mime_type] fields must be set.
+        inlineDocument:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3Document"
+          description: An inline document proto.
+        rawDocument:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3RawDocument"
+          description: A raw document content (bytes).
         skipHumanReview:
           description: Whether Human Review feature should be skipped for this request. Default to false.
           type: boolean
@@ -3124,6 +3166,17 @@ components:
         humanReviewStatus:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3HumanReviewStatus"
           description: The status of human review on the processed document.
+      type: object
+    GoogleCloudDocumentaiV1beta3RawDocument:
+      description: Payload message of raw document content (bytes).
+      properties:
+        content:
+          description: Inline document content.
+          format: byte
+          type: string
+        mimeType:
+          description: An IANA MIME type (RFC6838) indicating the nature and format of the [content].
+          type: string
       type: object
     GoogleCloudDocumentaiV1beta3ReviewDocumentOperationMetadata:
       description: The long running operation metadata for review document method.
@@ -3159,6 +3212,9 @@ components:
         document:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3Document"
           description: The document that needs human review.
+        inlineDocument:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3Document"
+          description: An inline document proto.
       type: object
     GoogleCloudDocumentaiV1beta3ReviewDocumentResponse:
       description: Response message for review document method.

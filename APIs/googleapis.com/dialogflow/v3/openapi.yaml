@@ -538,6 +538,98 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
+  "/v3/{name}:start":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts the specified Experiment. This rpc only changes the state of experiment from PENDING to RUNNING.
+      operationId: dialogflow.projects.locations.agents.environments.experiments.start
+      parameters:
+        - description: "Required. Resource name of the experiment to start. Format: `projects//locations//agents//environments//experiments/`."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3StartExperimentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Experiment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v3/{name}:stop":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Stops the specified Experiment. This rpc only changes the state of experiment from RUNNING to DONE.
+      operationId: dialogflow.projects.locations.agents.environments.experiments.stop
+      parameters:
+        - description: "Required. Resource name of the experiment to stop. Format: `projects//locations//agents//environments//experiments/`."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3StopExperimentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Experiment"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
   "/v3/{name}:train":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -875,6 +967,90 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v3/{parent}/experiments":
+    get:
+      description: Returns the list of all experiments in the specified Environment.
+      operationId: dialogflow.projects.locations.agents.environments.experiments.list
+      parameters:
+        - description: "Required. The Environment to list all environments for. Format: `projects//locations//agents//environments/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return in a single page. By default 20 and at most 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ListExperimentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates an Experiment in the specified Environment.
+      operationId: dialogflow.projects.locations.agents.environments.experiments.create
+      parameters:
+        - description: "Required. The Agent to create an Environment for. Format: `projects//locations//agents//environments/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Experiment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Experiment"
           description: Successful response
       security:
         - Oauth2:
@@ -2339,6 +2515,9 @@ components:
         name:
           description: "The unique identifier of the entity type. Required for EntityTypes.UpdateEntityType. Format: `projects//locations//agents//entityTypes/`."
           type: string
+        redact:
+          description: Indicates whether parameters of the entity type should be redacted in log. If redaction is enabled, page parameters and intent parameters referring to the entity type will be replaced by parameter name when logging.
+          type: boolean
       type: object
     GoogleCloudDialogflowCxV3EntityTypeEntity:
       description: An **entity entry** for an associated entity type.
@@ -2414,6 +2593,150 @@ components:
       properties:
         event:
           description: Name of the event.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3Experiment:
+      description: Represents an experiment in an environment.
+      properties:
+        createTime:
+          description: Creation time of this experiment.
+          format: google-datetime
+          type: string
+        definition:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ExperimentDefinition"
+          description: The definition of the experiment.
+        description:
+          description: The human-readable description of the experiment.
+          type: string
+        displayName:
+          description: Required. The human-readable name of the experiment (unique in an environment). Limit of 64 characters.
+          type: string
+        endTime:
+          description: End time of this experiment.
+          format: google-datetime
+          type: string
+        experimentLength:
+          description: Maximum number of days to run the experiment.
+          format: google-duration
+          type: string
+        lastUpdateTime:
+          description: Last update time of this experiment.
+          format: google-datetime
+          type: string
+        name:
+          description: "The name of the experiment. Format: projects//locations//agents//environments//experiments/.."
+          type: string
+        result:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ExperimentResult"
+          description: Inference result of the experiment.
+        startTime:
+          description: Start time of this experiment.
+          format: google-datetime
+          type: string
+        state:
+          description: "The current state of the experiment. Transition triggered by Expriments.StartExperiment: PENDING->RUNNING. Transition triggered by Expriments.CancelExperiment: PENDING->CANCELLED or RUNNING->CANCELLED."
+          enum:
+            - STATE_UNSPECIFIED
+            - DRAFT
+            - RUNNING
+            - DONE
+          type: string
+        variantsHistory:
+          description: The history of updates to the experiment variants.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3VariantsHistory"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3ExperimentDefinition:
+      description: Definition of the experiment.
+      properties:
+        condition:
+          description: The condition defines which subset of sessions are selected for this experiment. If not specified, all sessions are eligible. E.g. "query_input.language_code=en" See the [conditions reference](https://cloud.google.com/dialogflow/cx/docs/reference/condition).
+          type: string
+        versionVariants:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3VersionVariants"
+          description: The flow versions as the variants of this experiment.
+      type: object
+    GoogleCloudDialogflowCxV3ExperimentResult:
+      description: The inference result which includes an objective metric to optimize and the confidence interval.
+      properties:
+        lastUpdateTime:
+          description: The last time the experiment's stats data was updated. Will have default value if stats have never been computed for this experiment.
+          format: google-datetime
+          type: string
+        versionMetrics:
+          description: Version variants and metrics.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ExperimentResultVersionMetrics"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3ExperimentResultConfidenceInterval:
+      description: A confidence interval is a range of possible values for the experiment objective you are trying to measure.
+      properties:
+        confidenceLevel:
+          description: The confidence level used to construct the interval, i.e. there is X% chance that the true value is within this interval.
+          format: double
+          type: number
+        lowerBound:
+          description: Lower bound of the interval.
+          format: double
+          type: number
+        ratio:
+          description: The percent change between an experiment metric's value and the value for its control.
+          format: double
+          type: number
+        upperBound:
+          description: Upper bound of the interval.
+          format: double
+          type: number
+      type: object
+    GoogleCloudDialogflowCxV3ExperimentResultMetric:
+      description: Metric and corresponding confidence intervals.
+      properties:
+        confidenceInterval:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ExperimentResultConfidenceInterval"
+          description: The probability that the treatment is better than all other treatments in the experiment
+        count:
+          description: Count value of a metric.
+          format: double
+          type: number
+        countType:
+          description: Count-based metric type. Only one of type or count_type is specified in each Metric.
+          enum:
+            - COUNT_TYPE_UNSPECIFIED
+            - TOTAL_NO_MATCH_COUNT
+            - TOTAL_TURN_COUNT
+            - AVERAGE_TURN_COUNT
+          type: string
+        ratio:
+          description: Ratio value of a metric.
+          format: double
+          type: number
+        type:
+          description: Ratio-based metric type. Only one of type or count_type is specified in each Metric.
+          enum:
+            - METRIC_UNSPECIFIED
+            - CONTAINED_SESSION_NO_CALLBACK_RATE
+            - LIVE_AGENT_HANDOFF_RATE
+            - CALLBACK_SESSION_RATE
+            - ABANDONED_SESSION_RATE
+            - SESSION_END_RATE
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3ExperimentResultVersionMetrics:
+      description: Version variant and associated metrics.
+      properties:
+        metrics:
+          description: The metrics and corresponding confidence intervals in the inference result.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ExperimentResultMetric"
+          type: array
+        sessionCount:
+          description: Number of sessions that were allocated to this version.
+          format: int32
+          type: integer
+        version:
+          description: "The name of the flow Version. Format: `projects//locations//agents//flows//versions/`."
           type: string
       type: object
     GoogleCloudDialogflowCxV3ExportAgentRequest:
@@ -2535,7 +2858,7 @@ components:
           description: Indicates whether the parameter represents a list of values.
           type: boolean
         redact:
-          description: "Indicates whether the parameter content should be redacted in text and audio. If the flag is set to true, the parameter content will be replaced by parameter name in both request and response. Note: the parameter content is subject to redaction if either parameter level redaction or entity type level redaction is enabled."
+          description: "Indicates whether the parameter content should be redacted in log. If redaction is enabled, the parameter content will be replaced by parameter name during logging. Note: the parameter content is subject to redaction if either parameter level redaction or entity type level redaction is enabled."
           type: boolean
         required:
           description: Indicates whether the parameter is required. Optional parameters will not trigger prompts; however, they are filled if the user specifies them. Required parameters must be filled before form filling concludes.
@@ -2826,7 +3149,7 @@ components:
           description: Indicates whether the parameter represents a list of values.
           type: boolean
         redact:
-          description: "Indicates whether the parameter content should be redacted in text and audio. If the flag is set to true, the parameter content will be replaced by parameter name in both request and response. Note: the parameter content is subject to redaction if either parameter level redaction or entity type level redaction is enabled."
+          description: "Indicates whether the parameter content should be redacted in log. If redaction is enabled, the parameter content will be replaced by parameter name during logging. Note: the parameter content is subject to redaction if either parameter level redaction or entity type level redaction is enabled."
           type: boolean
       type: object
     GoogleCloudDialogflowCxV3IntentTrainingPhrase:
@@ -2886,6 +3209,18 @@ components:
           description: The list of environments. There will be a maximum number of items returned based on the page_size field in the request. The list may in some cases be empty or contain fewer entries than page_size even if this isn't the last page.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Environment"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3ListExperimentsResponse:
+      description: The response message for Experiments.ListExperiments.
+      properties:
+        experiments:
+          description: The list of experiments. There will be a maximum number of items returned based on the page_size field in the request. The list may in some cases be empty or contain fewer entries than page_size even if this isn't the last page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Experiment"
           type: array
         nextPageToken:
           description: Token to retrieve the next page of results, or empty if there are no more results in the list.
@@ -3166,7 +3501,7 @@ components:
             type: string
           type: array
         transitionRoutes:
-          description: "A list of transitions for the transition rules of this page. They route the conversation to another page in the same flow, or another flow. When we are in a certain page, the TransitionRoutes are evalauted in the following order: * TransitionRoutes defined in the page with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in flow with intent specified. * TransitionRoutes defined in the page with only condition specified. * TransitionRoutes defined in the transition route groups with only condition specified."
+          description: "A list of transitions for the transition rules of this page. They route the conversation to another page in the same flow, or another flow. When we are in a certain page, the TransitionRoutes are evalauted in the following order: * TransitionRoutes defined in the page with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in flow with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in the page with only condition specified. * TransitionRoutes defined in the transition route groups with only condition specified."
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TransitionRoute"
           type: array
@@ -3581,6 +3916,14 @@ components:
           description: Whether to use speech adaptation for speech recognition.
           type: boolean
       type: object
+    GoogleCloudDialogflowCxV3StartExperimentRequest:
+      description: The request message for Experiments.StartExperiment.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowCxV3StopExperimentRequest:
+      description: The request message for Experiments.StopExperiment.
+      properties: {}
+      type: object
     GoogleCloudDialogflowCxV3SynthesizeSpeechConfig:
       description: Configuration of how speech should be synthesized.
       properties:
@@ -3658,7 +4001,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ConversationTurn"
           type: array
         environment:
-          description: Optional. Environment where the test was run. If not set, it indicates the draft environment.
+          description: Environment where the test was run. If not set, it indicates the draft environment.
           type: string
         name:
           description: "The resource name for the test case result. Format: `projects//locations//agents//testCases/ /results/`."
@@ -3876,6 +4219,17 @@ components:
             - ERROR
           type: string
       type: object
+    GoogleCloudDialogflowCxV3VariantsHistory:
+      description: The history of variants update.
+      properties:
+        updateTime:
+          description: Update time of the variants.
+          format: google-datetime
+          type: string
+        versionVariants:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3VersionVariants"
+          description: The flow versions as the variants.
+      type: object
     GoogleCloudDialogflowCxV3Version:
       description: Represents a version of a flow.
       properties:
@@ -3905,6 +4259,29 @@ components:
             - SUCCEEDED
             - FAILED
           readOnly: true
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3VersionVariants:
+      description: A list of flow version variants.
+      properties:
+        variants:
+          description: A list of flow version variants.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3VersionVariantsVariant"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3VersionVariantsVariant:
+      description: A single flow version with specified traffic allocation.
+      properties:
+        isControlGroup:
+          description: Whether the variant is for the control group.
+          type: boolean
+        trafficAllocation:
+          description: Percentage of the traffic which should be routed to this version of flow. Traffic allocation for a single flow must sum up to 1.0.
+          format: float
+          type: number
+        version:
+          description: "The name of the flow version. Format: `projects//locations//agents//flows//versions/`."
           type: string
       type: object
     GoogleCloudDialogflowCxV3VoiceSelectionParams:
@@ -3999,6 +4376,13 @@ components:
     GoogleCloudDialogflowCxV3WebhookRequestIntentInfo:
       description: Represents intent information communicated to the webhook.
       properties:
+        confidence:
+          description: The confidence of the matched intent. Values range from 0.0 (completely uncertain) to 1.0 (completely certain).
+          format: float
+          type: number
+        displayName:
+          description: Always present. The display name of the last matched intent.
+          type: string
         lastMatchedIntent:
           description: "Always present. The unique identifier of the last matched intent. Format: `projects//locations//agents//intents/`."
           type: string
@@ -4256,7 +4640,7 @@ components:
           description: Indicates whether the parameter represents a list of values.
           type: boolean
         redact:
-          description: "Indicates whether the parameter content should be redacted in text and audio. If the flag is set to true, the parameter content will be replaced by parameter name in both request and response. Note: the parameter content is subject to redaction if either parameter level redaction or entity type level redaction is enabled."
+          description: "Indicates whether the parameter content should be redacted in log. If redaction is enabled, the parameter content will be replaced by parameter name during logging. Note: the parameter content is subject to redaction if either parameter level redaction or entity type level redaction is enabled."
           type: boolean
         required:
           description: Indicates whether the parameter is required. Optional parameters will not trigger prompts; however, they are filled if the user specifies them. Required parameters must be filled before form filling concludes.
@@ -4483,7 +4867,7 @@ components:
           description: Indicates whether the parameter represents a list of values.
           type: boolean
         redact:
-          description: "Indicates whether the parameter content should be redacted in text and audio. If the flag is set to true, the parameter content will be replaced by parameter name in both request and response. Note: the parameter content is subject to redaction if either parameter level redaction or entity type level redaction is enabled."
+          description: "Indicates whether the parameter content should be redacted in log. If redaction is enabled, the parameter content will be replaced by parameter name during logging. Note: the parameter content is subject to redaction if either parameter level redaction or entity type level redaction is enabled."
           type: boolean
       type: object
     GoogleCloudDialogflowCxV3beta1IntentTrainingPhrase:
@@ -4538,7 +4922,7 @@ components:
             type: string
           type: array
         transitionRoutes:
-          description: "A list of transitions for the transition rules of this page. They route the conversation to another page in the same flow, or another flow. When we are in a certain page, the TransitionRoutes are evalauted in the following order: * TransitionRoutes defined in the page with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in flow with intent specified. * TransitionRoutes defined in the page with only condition specified. * TransitionRoutes defined in the transition route groups with only condition specified."
+          description: "A list of transitions for the transition rules of this page. They route the conversation to another page in the same flow, or another flow. When we are in a certain page, the TransitionRoutes are evalauted in the following order: * TransitionRoutes defined in the page with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in flow with intent specified. * TransitionRoutes defined in the transition route groups with intent specified. * TransitionRoutes defined in the page with only condition specified. * TransitionRoutes defined in the transition route groups with only condition specified."
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TransitionRoute"
           type: array
@@ -4805,7 +5189,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ConversationTurn"
           type: array
         environment:
-          description: Optional. Environment where the test was run. If not set, it indicates the draft environment.
+          description: Environment where the test was run. If not set, it indicates the draft environment.
           type: string
         name:
           description: "The resource name for the test case result. Format: `projects//locations//agents//testCases/ /results/`."
@@ -4940,6 +5324,13 @@ components:
     GoogleCloudDialogflowCxV3beta1WebhookRequestIntentInfo:
       description: Represents intent information communicated to the webhook.
       properties:
+        confidence:
+          description: The confidence of the matched intent. Values range from 0.0 (completely uncertain) to 1.0 (completely certain).
+          format: float
+          type: number
+        displayName:
+          description: Always present. The display name of the last matched intent.
+          type: string
         lastMatchedIntent:
           description: "Always present. The unique identifier of the last matched intent. Format: `projects//locations//agents//intents/`."
           type: string

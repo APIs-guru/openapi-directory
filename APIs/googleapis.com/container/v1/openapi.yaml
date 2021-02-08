@@ -3169,6 +3169,9 @@ components:
           items:
             $ref: "#/components/schemas/NodePool"
           type: array
+        notificationConfig:
+          $ref: "#/components/schemas/NotificationConfig"
+          description: Notification configuration of the cluster.
         privateClusterConfig:
           $ref: "#/components/schemas/PrivateClusterConfig"
           description: Configuration for private cluster.
@@ -3292,6 +3295,9 @@ components:
         desiredNodeVersion:
           description: 'The Kubernetes version to change the nodes to (typically an upgrade). Users may specify either explicit versions offered by Kubernetes Engine or version aliases, which have the following behavior: - "latest": picks the highest valid Kubernetes version - "1.X": picks the highest valid patch+gke.N patch in the 1.X version - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version - "1.X.Y-gke.N": picks an explicit Kubernetes version - "-": picks the Kubernetes master version'
           type: string
+        desiredNotificationConfig:
+          $ref: "#/components/schemas/NotificationConfig"
+          description: The desired notification configuration.
         desiredPrivateClusterConfig:
           $ref: "#/components/schemas/PrivateClusterConfig"
           description: The desired private cluster configuration.
@@ -3976,6 +3982,13 @@ components:
           description: Value for taint.
           type: string
       type: object
+    NotificationConfig:
+      description: NotificationConfig is the configuration of notifications.
+      properties:
+        pubsub:
+          $ref: "#/components/schemas/PubSub"
+          description: Notification config for Pub/Sub.
+      type: object
     Operation:
       description: This operation resource represents operations that may have happened or are happening on the cluster. All fields are output only.
       properties:
@@ -4109,6 +4122,16 @@ components:
         enabled:
           description: Whenever master is accessible globally or not.
           type: boolean
+      type: object
+    PubSub:
+      description: Pub/Sub specific notification config.
+      properties:
+        enabled:
+          description: Enable notifications for Pub/Sub.
+          type: boolean
+        topic:
+          description: The desired Pub/Sub topic to which notifications will be sent by GKE. Format is `projects/{project}/topics/{topic}`.
+          type: string
       type: object
     RecurringTimeWindow:
       description: Represents an arbitrary window of time that recurs.

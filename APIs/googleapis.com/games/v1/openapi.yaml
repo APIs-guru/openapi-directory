@@ -2775,7 +2775,8 @@ components:
           format: int32
           type: integer
         mimeType:
-          description: The MIME type of the image.
+          description: Output only. The MIME type of the image.
+          readOnly: true
           type: string
         resourceId:
           description: The ID of the image resource. It's guaranteed that if two IDs are equal then the contents are equal as well. It's not guaranteed that two identical blobs coming from separate uploads have the same ID. The resource ID can only be used within the application, user and resource type it was originally returned for. For example, it's not possible to use SnapshotDataResource's resource ID as the resource_id of a SnapshotCoverImageResource, even if the blob is a valid image file.

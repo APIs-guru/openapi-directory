@@ -36,6 +36,47 @@ tags:
   - name: signupUrls
 paths:
   /v1/enterprises:
+    get:
+      description: This feature is not generally available yet. Lists enterprises that are managed by an EMM. Only partial views are returned.
+      operationId: androidmanagement.enterprises.list
+      parameters:
+        - description: This feature is not generally available yet. The requested page size. The actual page size may be fixed to a min or max value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: This feature is not generally available yet. A token identifying a page of results returned by the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Required. This feature is not generally available yet. The ID of the Cloud project of the EMM the enterprises belongs to.
+          in: query
+          name: projectId
+          schema:
+            type: string
+        - description: This feature is not generally available yet. View that specify that partial response should be returned.
+          in: query
+          name: view
+          schema:
+            enum:
+              - ENTERPRISE_VIEW_UNSPECIFIED
+              - BASIC
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEnterprisesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidmanagement
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidmanagement
+      tags:
+        - enterprises
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -52,6 +93,11 @@ paths:
       description: Creates an enterprise. This is the last step in the enterprise signup flow.
       operationId: androidmanagement.enterprises.create
       parameters:
+        - description: This feature is not generally available yet. Whether the managed Google Play Agreement is presented and agreed.
+          in: query
+          name: agreementAccepted
+          schema:
+            type: boolean
         - description: The enterprise token appended to the callback URL.
           in: query
           name: enterpriseToken
@@ -779,7 +825,7 @@ components:
             type: string
           type: array
         autoUpdateMode:
-          description: This feature is not generally available.
+          description: This feature is not generally available yet.
           enum:
             - AUTO_UPDATE_MODE_UNSPECIFIED
             - AUTO_UPDATE_DEFAULT
@@ -1017,6 +1063,31 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ContactInfo:
+      description: Contact details for LaForge enterprises.
+      properties:
+        contactEmail:
+          description: Email address for a point of contact, which will be used to send important announcements related to managed Google Play.
+          type: string
+        dataProtectionOfficerEmail:
+          description: The email of the data protection officer. The email is validated but not verified.
+          type: string
+        dataProtectionOfficerName:
+          description: The name of the data protection officer.
+          type: string
+        dataProtectionOfficerPhone:
+          description: The phone number of the data protection officer The phone number is validated but not verified.
+          type: string
+        euRepresentativeEmail:
+          description: The email of the EU representative. The email is validated but not verified.
+          type: string
+        euRepresentativeName:
+          description: The name of the EU representative.
+          type: string
+        euRepresentativePhone:
+          description: The phone number of the EU representative. The phone number is validated but not verified.
+          type: string
       type: object
     Date:
       description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: A full date, with non-zero year, month, and day values A month and day value, with a zero year, such as an anniversary A year on its own, with zero month and day values A year and month value, with a zero day, such as a credit card expiration dateRelated types are google.type.TimeOfDay and google.protobuf.Timestamp."
@@ -1301,6 +1372,9 @@ components:
         appAutoApprovalEnabled:
           description: Deprecated and unused.
           type: boolean
+        contactInfo:
+          $ref: "#/components/schemas/ContactInfo"
+          description: This feature is not generally available yet. The enterprise contact info of an EMM owned enterprise
         enabledNotificationTypes:
           description: The types of Google Pub/Sub notifications enabled for the enterprise.
           items:
@@ -1559,6 +1633,18 @@ components:
           type: array
         nextPageToken:
           description: If there are more results, a token to retrieve next page of results.
+          type: string
+      type: object
+    ListEnterprisesResponse:
+      description: This feature is not generally available yet. Response to a request to list enterprises.
+      properties:
+        enterprises:
+          description: This feature is not generally available yet. The list of enterprises.
+          items:
+            $ref: "#/components/schemas/Enterprise"
+          type: array
+        nextPageToken:
+          description: This feature is not generally available yet. If there are more results, a token to retrieve next page of results.
           type: string
       type: object
     ListOperationsResponse:

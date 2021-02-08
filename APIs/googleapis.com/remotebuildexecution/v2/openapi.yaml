@@ -27,7 +27,7 @@ info:
       format: google
       url: https://remotebuildexecution.googleapis.com/$discovery/rest?version=v2
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: remotebuildexecution
 externalDocs:
@@ -1202,6 +1202,10 @@ components:
     GoogleDevtoolsRemotebuildbotCommandDurations:
       description: CommandDuration contains the various duration metrics tracked when a bot performs a command.
       properties:
+        cmWaitForAssignment:
+          description: The time spent waiting for Container Manager to assign an asynchronous container for execution.
+          format: google-duration
+          type: string
         dockerPrep:
           description: The time spent preparing the command to be run in a Docker container (includes pulling the Docker image, if necessary).
           format: google-duration
@@ -1268,6 +1272,9 @@ components:
           description: The number of warnings reported.
           format: uint64
           type: string
+        usedAsyncContainer:
+          description: Indicates whether an asynchronous container was used for execution.
+          type: boolean
       type: object
     GoogleDevtoolsRemotebuildbotCommandStatus:
       description: The internal status of the command result.
@@ -1314,6 +1321,7 @@ components:
             - DOCKER_CREATE_PROCESS_FILE_NOT_FOUND
             - DOCKER_CREATE_COMPUTE_SYSTEM_INCORRECT_PARAMETER_ERROR
             - DOCKER_TOO_MANY_SYMBOLIC_LINK_LEVELS
+            - LOCAL_CONTAINER_MANAGER_NOT_RUNNING
           type: string
         message:
           description: The error message.

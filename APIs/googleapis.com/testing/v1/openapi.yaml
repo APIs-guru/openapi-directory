@@ -659,6 +659,11 @@ components:
           description: Specifies the API Level on which the application is designed to run.
           format: int32
           type: integer
+        usesPermission:
+          description: Permissions declared to be used by the application
+          items:
+            type: string
+          type: array
       type: object
     AppBundle:
       description: An Android App Bundle file format, containing a BundleConfig.pb file, a base module directory, zero or more dynamic feature module directories. See https://developer.android.com/guide/app-bundle/build for guidance on building App Bundles.

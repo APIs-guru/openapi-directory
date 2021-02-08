@@ -34,6 +34,7 @@ externalDocs:
   url: https://cloud.google.com/binary-authorization/
 tags:
   - name: projects
+  - name: systempolicy
 paths:
   "/v1/{attestor}:validateAttestationOccurrence":
     parameters:
@@ -103,10 +104,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets an attestor. Returns NOT_FOUND if the attestor does not exist.
-      operationId: binaryauthorization.projects.attestors.get
+      description: Gets the current system policy in the specified location.
+      operationId: binaryauthorization.systempolicy.getPolicy
       parameters:
-        - description: Required. The name of the attestor to retrieve, in the format `projects/*/attestors/*`.
+        - description: Required. The resource name, in the format `locations/*/policy`. Note that the system policy is not associated with a project.
           in: path
           name: name
           required: true
@@ -117,7 +118,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Attestor"
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
@@ -125,7 +126,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - systempolicy
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -1205,7 +1205,7 @@ components:
             $ref: "#/components/schemas/SasPortalDeployment"
           type: array
         nextPageToken:
-          description: A pagination token returned from a previous call to ListDeployments that indicates from where listing should continue. If the field is missing or empty, it means there is no more deployments.
+          description: A pagination token returned from a previous call to ListDeployments that indicates from where listing should continue. If the field is missing or empty, it means there are no more deployments.
           type: string
       type: object
     SasPortalListDevicesResponse:
@@ -1243,7 +1243,7 @@ components:
       description: Request for MoveDevice.
       properties:
         destination:
-          description: Required. The name of the new parent resource node [spectrum.sas.portal.v1alpha1.Node] or customer to reparent the device under.
+          description: Required. The name of the new parent resource node or customer to reparent the device under.
           type: string
       type: object
     SasPortalMoveNodeRequest:

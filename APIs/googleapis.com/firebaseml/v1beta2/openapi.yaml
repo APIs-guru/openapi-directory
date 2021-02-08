@@ -130,6 +130,38 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta2/{name}:download":
+    get:
+      description: Gets Download information for a model. This is meant for downloading model resources onto devices. It gives very limited information about the model.
+      operationId: firebaseml.projects.models.download
+      parameters:
+        - description: Required. The name of the model to download. The name must have the form `projects/{project}/models/{model}`
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DownloadModelResponse"
+          description: Successful response
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta2/{parent}/models":
     get:
       description: Lists the models
@@ -287,6 +319,31 @@ components:
       schema:
         type: string
   schemas:
+    DownloadModelResponse:
+      description: The response for downloading a model to device.
+      properties:
+        downloadUri:
+          description: Output only. A download URI for the model/zip file.
+          readOnly: true
+          type: string
+        expireTime:
+          description: Output only. The time that the download URI link expires. If the link has expired, the REST call must be repeated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        modelFormat:
+          description: Output only. The format of the model being downloaded.
+          enum:
+            - MODEL_FORMAT_UNSPECIFIED
+            - TFLITE
+          readOnly: true
+          type: string
+        sizeBytes:
+          description: Output only. The size of the file(s), if this information is available.
+          format: int64
+          readOnly: true
+          type: string
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
