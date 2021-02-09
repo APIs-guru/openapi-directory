@@ -1351,71 +1351,6 @@ paths:
             type: integer
             minimum: 1
             maximum: 250
-  '/portals/{portalId}/presigned-url':
-    post:
-      operationId: CreatePresignedPortalUrl
-      description: ''
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreatePresignedPortalUrlResponse'
-        '480':
-          description: InvalidRequestException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestException'
-        '481':
-          description: InternalFailureException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalFailureException'
-        '482':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-      parameters:
-        - name: portalId
-          in: path
-          required: true
-          description: ''
-          schema:
-            type: string
-            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-            minLength: 36
-            maxLength: 36
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                sessionDurationSeconds:
-                  description: ''
-                  type: integer
-                  minimum: 900
-                  maximum: 43200
-                state:
-                  description: ''
-                  type: string
-                  pattern: .+
-                  minLength: 0
-                  maxLength: 512
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /projects:
     post:
       operationId: CreateProject
@@ -4730,13 +4665,6 @@ components:
       type: string
       enum:
         - PNG
-    CreatePresignedPortalUrlResponse:
-      type: object
-      required:
-        - presignedPortalUrl
-      properties:
-        presignedPortalUrl:
-          $ref: '#/components/schemas/Url'
     CreateProjectResponse:
       type: object
       required:
@@ -6703,23 +6631,6 @@ components:
       pattern: '^[!-~]*'
       minLength: 1
       maxLength: 64
-    SessionDurationSeconds:
-      type: integer
-      minimum: 900
-      maximum: 43200
-    state:
-      type: string
-      pattern: .+
-      minLength: 0
-      maxLength: 512
-    CreatePresignedPortalUrlRequest:
-      type: object
-      title: CreatePresignedPortalUrlRequest
-      properties:
-        sessionDurationSeconds:
-          $ref: '#/components/schemas/SessionDurationSeconds'
-        state:
-          $ref: '#/components/schemas/state'
     CreateProjectRequest:
       type: object
       required:

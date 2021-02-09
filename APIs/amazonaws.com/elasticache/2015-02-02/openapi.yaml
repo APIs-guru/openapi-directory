@@ -1117,7 +1117,7 @@ paths:
         - name: PreferredMaintenanceWindow
           in: query
           required: false
-          description: '<p>Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <p>Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.</p> <p>Valid values for <code>ddd</code> are:</p> <ul> <li> <p> <code>sun</code> </p> </li> <li> <p> <code>mon</code> </p> </li> <li> <p> <code>tue</code> </p> </li> <li> <p> <code>wed</code> </p> </li> <li> <p> <code>thu</code> </p> </li> <li> <p> <code>fri</code> </p> </li> <li> <p> <code>sat</code> </p> </li> </ul> <p>Example: <code>sun:23:00-mon:01:30</code> </p>'
+          description: 'Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:'
           schema:
             type: string
         - name: Port
@@ -2094,7 +2094,7 @@ paths:
         - name: Engine
           in: query
           required: false
-          description: The name of the cache engine to be used for the clusters in this replication group.
+          description: The name of the cache engine to be used for the clusters in this replication group. Must be Redis.
           schema:
             type: string
         - name: EngineVersion
@@ -3720,7 +3720,7 @@ paths:
     get:
       x-aws-operation-name: DeleteCacheSubnetGroup
       operationId: GET_DeleteCacheSubnetGroup
-      description: <p>Deletes a cache subnet group.</p> <note> <p>You cannot delete a cache subnet group if it is associated with any clusters.</p> </note>
+      description: <p>Deletes a cache subnet group.</p> <note> <p>You cannot delete a default cache subnet group or one that is associated with any clusters.</p> </note>
       responses:
         '200':
           description: Success
@@ -3768,7 +3768,7 @@ paths:
     post:
       x-aws-operation-name: DeleteCacheSubnetGroup
       operationId: POST_DeleteCacheSubnetGroup
-      description: <p>Deletes a cache subnet group.</p> <note> <p>You cannot delete a cache subnet group if it is associated with any clusters.</p> </note>
+      description: <p>Deletes a cache subnet group.</p> <note> <p>You cannot delete a default cache subnet group or one that is associated with any clusters.</p> </note>
       responses:
         '200':
           description: Success
@@ -8883,7 +8883,7 @@ paths:
     get:
       x-aws-operation-name: ModifyReplicationGroupShardConfiguration
       operationId: GET_ModifyReplicationGroupShardConfiguration
-      description: 'Modifies a replication group''s shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among exisiting shards.'
+      description: 'Modifies a replication group''s shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among existing shards.'
       responses:
         '200':
           description: Success
@@ -9028,7 +9028,7 @@ paths:
     post:
       x-aws-operation-name: ModifyReplicationGroupShardConfiguration
       operationId: POST_ModifyReplicationGroupShardConfiguration
-      description: 'Modifies a replication group''s shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among exisiting shards.'
+      description: 'Modifies a replication group''s shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among existing shards.'
       responses:
         '200':
           description: Success
@@ -12350,7 +12350,7 @@ components:
         PreferredMaintenanceWindow:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <p>Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.</p> <p>Valid values for <code>ddd</code> are:</p> <ul> <li> <p> <code>sun</code> </p> </li> <li> <p> <code>mon</code> </p> </li> <li> <p> <code>tue</code> </p> </li> <li> <p> <code>wed</code> </p> </li> <li> <p> <code>thu</code> </p> </li> <li> <p> <code>fri</code> </p> </li> <li> <p> <code>sat</code> </p> </li> </ul> <p>Example: <code>sun:23:00-mon:01:30</code> </p>'
+            - description: 'Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:'
         Port:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -12598,7 +12598,7 @@ components:
         Engine:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the cache engine to be used for the clusters in this replication group.
+            - description: The name of the cache engine to be used for the clusters in this replication group. Must be Redis.
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'

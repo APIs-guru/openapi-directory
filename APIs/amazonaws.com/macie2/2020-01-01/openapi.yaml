@@ -3251,7 +3251,7 @@ paths:
               type: object
               properties:
                 filterBy:
-                  description: 'An array of objects, one for each condition to use to filter the query results. If the array contains more than one object, Amazon Macie uses an AND operator to join the conditions specified by the objects.'
+                  description: 'An array of objects, one for each condition to use to filter the query results. If you specify more than one condition, Amazon Macie uses an AND operator to join the conditions.'
                   type: array
                   items:
                     $ref: '#/components/schemas/UsageStatisticsFilter'
@@ -3262,7 +3262,7 @@ paths:
                   description: The nextToken string that specifies which page of results to return in a paginated response.
                   type: string
                 sortBy:
-                  description: Specifies criteria for sorting the results of a query for account quotas and usage data.
+                  description: Specifies criteria for sorting the results of a query for Amazon Macie account quotas and usage data.
                   type: object
                   properties:
                     key:
@@ -3273,6 +3273,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/OrderBy'
                         - description: 'The sort order to apply to the results, based on the value for the field specified by the key property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.'
+                timeRange:
+                  description: 'An inclusive time period that Amazon Macie usage data applies to. Possible values are:'
+                  type: string
+                  enum:
+                    - MONTH_TO_DATE
+                    - PAST_30_DAYS
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3334,7 +3340,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConflictException'
-      parameters: []
+      parameters:
+        - name: timeRange
+          in: query
+          required: false
+          description: 'The time period to retrieve the data for. Valid values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days. If you don’t specify a value for this parameter, Amazon Macie provides aggregated usage data for the preceding 30 days.'
+          schema:
+            type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4278,7 +4290,7 @@ components:
         bucketCountByEncryptionType:
           allOf:
             - $ref: '#/components/schemas/BucketCountByEncryptionType'
-            - description: 'The total number of buckets, grouped by server-side encryption type. This object also reports the total number of buckets that don''t encrypt objects by default.'
+            - description: 'The total number of buckets, grouped by default server-side encryption type. This object also reports the total number of buckets that don''t encrypt new objects by default.'
         bucketCountBySharedAccessType:
           allOf:
             - $ref: '#/components/schemas/BucketCountBySharedAccessType'
@@ -4507,6 +4519,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__listOfUsageRecord'
             - description: An array of objects that contains the results of the query. Each object contains the data for an account that meets the filter criteria specified in the request.
+        timeRange:
+          allOf:
+            - $ref: '#/components/schemas/TimeRange'
+            - description: 'The inclusive time period that the usage data applies to. Possible values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days.'
     UsageStatisticsFilter:
       type: object
       properties:
@@ -4522,7 +4538,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
             - description: '<p>An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported field are:</p> <ul><li><p>accountId - The unique identifier for an AWS account.</p></li></ul> <ul><li><p>freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account.</p></li></ul> <ul><li><p>serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota.</p></li></ul> <ul><li><p>total - A string that represents the current, estimated month-to-date cost for an account.</p></li></ul>'
-      description: Specifies a condition for filtering the results of a query for account quotas and usage data.
+      description: Specifies a condition for filtering the results of a query for the quotas and usage data that applies to one or more Amazon Macie accounts.
     UsageStatisticsSortKey:
       type: string
       enum:
@@ -4530,10 +4546,14 @@ components:
         - total
         - serviceLimitValue
         - freeTrialStartDate
-      description: 'The field to use to sort the results of a query for account quotas and usage data. Valid values are:'
+      description: 'The field to use to sort the results of a query for Amazon Macie account quotas and usage data. Valid values are:'
     GetUsageTotalsResponse:
       type: object
       properties:
+        timeRange:
+          allOf:
+            - $ref: '#/components/schemas/TimeRange'
+            - description: 'The inclusive time period that the usage data applies to. Possible values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days.'
         usageTotals:
           allOf:
             - $ref: '#/components/schemas/__listOfUsageTotal'
@@ -4766,8 +4786,8 @@ components:
         blockPublicAccess:
           allOf:
             - $ref: '#/components/schemas/BlockPublicAccess'
-            - description: The block public access settings for the bucket.
-      description: Provides information about account-level permissions settings that apply to an S3 bucket.
+            - description: The block public access settings for the AWS account that owns the bucket.
+      description: Provides information about the account-level permissions settings that apply to an S3 bucket.
     AdminStatus:
       type: string
       enum:
@@ -4937,16 +4957,16 @@ components:
         kmsManaged:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: ' <p>The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) by default to encrypt objects. These buckets use AWS managed AWS KMS (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.</p>'
+            - description: ' <p>The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt new objects by default. These buckets use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).</p>'
         s3Managed:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of buckets that use an Amazon S3 managed key by default to encrypt objects. These buckets use Amazon S3 managed (SSE-S3) encryption.
+            - description: The total number of buckets that use an Amazon S3 managed key to encrypt new objects by default. These buckets use Amazon S3 managed encryption (SSE-S3).
         unencrypted:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of buckets that don't encrypt objects by default. Default encryption is disabled for these buckets.
-      description: Provides information about the number of S3 buckets that use certain types of server-side encryption or don't encrypt objects by default.
+            - description: The total number of buckets that don't encrypt new objects by default. Default encryption is disabled for these buckets.
+      description: Provides information about the number of S3 buckets that use certain types of server-side encryption by default or don't encrypt new objects by default.
     BucketCountBySharedAccessType:
       type: object
       properties:
@@ -5026,15 +5046,15 @@ components:
         customerManaged:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of objects that are encrypted using a customer-managed key. The objects use customer-provided server-side (SSE-C) encryption.
+            - description: The total number of objects that are encrypted using a customer-managed key. The objects use customer-provided server-side encryption (SSE-C).
         kmsManaged:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.
+            - description: The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).
         s3Managed:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of objects that are encrypted using an Amazon S3 managed key. The objects use Amazon S3 managed (SSE-S3) encryption.
+            - description: The total number of objects that are encrypted using an Amazon S3 managed key. The objects use Amazon S3 managed encryption (SSE-S3).
         unencrypted:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -5068,6 +5088,18 @@ components:
             - $ref: '#/components/schemas/__listOf__string'
             - description: 'An array of AWS account IDs, one for each AWS account that the bucket is configured to replicate one or more objects to.'
       description: 'Provides information about settings that define whether one or more objects in an S3 bucket are replicated to S3 buckets for other AWS accounts and, if so, which accounts.'
+    BucketServerSideEncryption:
+      type: object
+      properties:
+        kmsMasterKeyId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key Management Service (AWS KMS) customer master key (CMK) that's used by default to encrypt objects that are added to the bucket. This value is null if the bucket uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't encrypt new objects by default.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: '<p>The type of server-side encryption that''s used by default when storing new objects in the bucket. Possible values are:</p> <ul><li><p>AES256 - New objects are encrypted with an Amazon S3 managed key and use Amazon S3 managed encryption (SSE-S3).</p></li> <li><p>aws:kms - New objects are encrypted with an AWS KMS CMK, specified by the kmsMasterKeyId property, and use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).</p></li> <li><p>NONE - New objects aren''t encrypted by default. Default encryption is disabled for the bucket.</p></li></ul>'
+      description: 'Provides information about the default server-side encryption settings for an S3 bucket. For detailed information about these settings, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html">Setting default server-side encryption behavior for Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
     SharedAccess:
       type: string
       enum:
@@ -5141,7 +5173,7 @@ components:
         publicAccess:
           allOf:
             - $ref: '#/components/schemas/BucketPublicAccess'
-            - description: 'Specifies whether the bucket is publicly accessible. If this value is true, an access control list (ACL), bucket policy, or block public access settings allow the bucket to be accessed by the general public.'
+            - description: 'Specifies whether the bucket is publicly accessible due to the combination of permissions settings that apply to the bucket, and provides information about those settings.'
         region:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5150,6 +5182,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReplicationDetails'
             - description: 'Specifies whether the bucket is configured to replicate one or more objects to buckets for other AWS accounts and, if so, which accounts.'
+        serverSideEncryption:
+          allOf:
+            - $ref: '#/components/schemas/BucketServerSideEncryption'
+            - description: 'Specifies whether the bucket encrypts new objects by default and, if so, the type of server-side encryption that''s used.'
         sharedAccess:
           allOf:
             - $ref: '#/components/schemas/SharedAccess'
@@ -5197,6 +5233,12 @@ components:
         - PUBLIC
         - NOT_PUBLIC
         - UNKNOWN
+    Type:
+      type: string
+      enum:
+        - NONE
+        - AES256
+        - 'aws:kms'
     BucketSortCriteria:
       type: object
       properties:
@@ -5579,7 +5621,7 @@ components:
       type: string
       enum:
         - USD
-      description: 'The type of currency that data for a usage metric is reported in. Possible values are:'
+      description: 'The type of currency that the data for an Amazon Macie usage metric is reported in. Possible values are:'
     CustomDataIdentifierSummary:
       type: object
       properties:
@@ -6290,7 +6332,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/OrderBy'
             - description: 'The sort order to apply to the results, based on the value for the field specified by the key property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.'
-      description: Specifies criteria for sorting the results of a query for account quotas and usage data.
+      description: Specifies criteria for sorting the results of a query for Amazon Macie account quotas and usage data.
+    TimeRange:
+      type: string
+      enum:
+        - MONTH_TO_DATE
+        - PAST_30_DAYS
+      description: 'An inclusive time period that Amazon Macie usage data applies to. Possible values are:'
     GetUsageStatisticsRequest:
       type: object
       title: GetUsageStatisticsRequest
@@ -6298,7 +6346,7 @@ components:
         filterBy:
           allOf:
             - $ref: '#/components/schemas/__listOfUsageStatisticsFilter'
-            - description: 'An array of objects, one for each condition to use to filter the query results. If the array contains more than one object, Amazon Macie uses an AND operator to join the conditions specified by the objects.'
+            - description: 'An array of objects, one for each condition to use to filter the query results. If you specify more than one condition, Amazon Macie uses an AND operator to join the conditions.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -6311,6 +6359,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/UsageStatisticsSortBy'
             - description: The criteria to use to sort the query results.
+        timeRange:
+          allOf:
+            - $ref: '#/components/schemas/TimeRange'
+            - description: 'The inclusive time period to query usage data for. Valid values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days. If you don''t specify a value, Amazon Macie provides usage data for the preceding 30 days.'
     __listOfUsageRecord:
       type: array
       items:
@@ -6993,7 +7045,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/__long'
             - description: The value for the metric specified by the UsageByAccount.type field in the response.
-      description: Specifies a current quota for an account.
+      description: Specifies a current quota for an Amazon Macie account.
     SessionContextAttributes:
       type: object
       properties:
@@ -7186,7 +7238,7 @@ components:
       enum:
         - DATA_INVENTORY_EVALUATION
         - SENSITIVE_DATA_DISCOVERY
-      description: 'The name of a usage metric for an account. Possible values are:'
+      description: 'The name of an Amazon Macie usage metric for an account. Possible values are:'
     UsageByAccount:
       type: object
       properties:
@@ -7205,8 +7257,8 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/UsageType'
-            - description: 'The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing sensitive data.'
-      description: Provides data for a specific usage metric and the corresponding quota for an account. The value for the metric is an aggregated value that reports usage during the past 30 days.
+            - description: 'The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing S3 objects to detect sensitive data.'
+      description: Provides data for a specific usage metric and the corresponding quota for an Amazon Macie account.
     __listOfUsageByAccount:
       type: array
       items:
@@ -7226,7 +7278,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/__listOfUsageByAccount'
             - description: An array of objects that contains usage data and quotas for the account. Each object contains the data for a specific usage metric and the corresponding quota.
-      description: Provides quota and aggregated usage data for an account.
+      description: Provides quota and aggregated usage data for an Amazon Macie account.
     UsageStatisticsFilterComparator:
       type: string
       enum:
@@ -7237,7 +7289,7 @@ components:
         - EQ
         - NE
         - CONTAINS
-      description: 'The operator to use in a condition that filters the results of a query for account quotas and usage data. Valid values are:'
+      description: 'The operator to use in a condition that filters the results of a query for Amazon Macie account quotas and usage data. Valid values are:'
     UsageStatisticsFilterKey:
       type: string
       enum:
@@ -7245,7 +7297,7 @@ components:
         - serviceLimit
         - freeTrialStartDate
         - total
-      description: 'The field to use in a condition that filters the results of a query for account quotas and usage data. Valid values are:'
+      description: 'The field to use in a condition that filters the results of a query for Amazon Macie account quotas and usage data. Valid values are:'
     UsageTotal:
       type: object
       properties:
@@ -7260,8 +7312,8 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/UsageType'
-            - description: 'The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing sensitive data.'
-      description: Provides aggregated data for a usage metric. The value for the metric reports usage data for an account during the past 30 days.
+            - description: 'The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing S3 objects to detect sensitive data.'
+      description: 'Provides aggregated data for an Amazon Macie usage metric. The value for the metric reports estimated usage data for an account for the preceding 30 days or the current calendar month to date, depending on the time period (timeRange) specified in the request.'
     UserIdentityRoot:
       type: object
       properties:

@@ -343,7 +343,7 @@ paths:
       operationId: DeleteChannel
       description: Deletes the specified channel and its associated stream keys.
       responses:
-        '200':
+        '204':
           description: Success
         '480':
           description: ValidationException
@@ -463,7 +463,7 @@ paths:
       operationId: DeleteStreamKey
       description: 'Deletes the stream key for the specified ARN, so it can no longer be used to stream.'
       responses:
-        '200':
+        '204':
           description: Success
         '480':
           description: ValidationException
@@ -829,6 +829,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       parameters:
         - name: maxResults
           in: query
