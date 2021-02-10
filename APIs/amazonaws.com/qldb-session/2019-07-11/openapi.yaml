@@ -155,6 +155,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: CapacityExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CapacityExceededException'
       requestBody:
         required: true
         content:
@@ -301,6 +307,7 @@ components:
     OccConflictException: {}
     RateExceededException: {}
     LimitExceededException: {}
+    CapacityExceededException: {}
     AbortTransactionRequest:
       type: object
       properties: {}
@@ -311,7 +318,7 @@ components:
         ProcessingTimeMilliseconds:
           allOf:
             - $ref: '#/components/schemas/ProcessingTimeMilliseconds'
-            - description: 'The amount of time that was taken for the command to finish processing, measured in milliseconds.'
+            - description: 'The amount of time that QLDB spent on processing the command, measured in milliseconds.'
       description: Contains server-side performance information for a command. Amazon QLDB captures timing information between the times when it receives the request and when it sends the corresponding response.
     AbortTransactionResult:
       type: object
@@ -349,11 +356,11 @@ components:
         ReadIOs:
           allOf:
             - $ref: '#/components/schemas/ReadIOs'
-            - description: The number of read I/O requests that the command performed.
+            - description: The number of read I/O requests that the command made.
         WriteIOs:
           allOf:
             - $ref: '#/components/schemas/WriteIOs'
-            - description: The number of write I/O requests that the command performed.
+            - description: The number of write I/O requests that the command made.
       description: Contains I/O usage metrics for a command that was invoked.
     CommitTransactionResult:
       type: object

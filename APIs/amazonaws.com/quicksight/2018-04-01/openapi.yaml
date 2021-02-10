@@ -745,7 +745,6 @@ paths:
                 Name:
                   description: 'A descriptive name for the analysis that you''re creating. This name displays for the analysis in the QuickSight console. '
                   type: string
-                  pattern: '[\u0020-\u00FF]+'
                   minLength: 1
                   maxLength: 2048
                 Parameters:
@@ -1029,7 +1028,6 @@ paths:
                 Name:
                   description: A descriptive name for the analysis that you're updating. This name displays for the analysis in the QuickSight console.
                   type: string
-                  pattern: '[\u0020-\u00FF]+'
                   minLength: 1
                   maxLength: 2048
                 Parameters:
@@ -1148,7 +1146,6 @@ paths:
                 Name:
                   description: The display name of the dashboard.
                   type: string
-                  pattern: '[\u0020-\u00FF]+'
                   minLength: 1
                   maxLength: 2048
                 Parameters:
@@ -1462,7 +1459,6 @@ paths:
                 Name:
                   description: The display name of the dashboard.
                   type: string
-                  pattern: '[\u0020-\u00FF]+'
                   minLength: 1
                   maxLength: 2048
                 SourceEntity:
@@ -1853,7 +1849,7 @@ paths:
                   minLength: 1
                   maxLength: 128
                 Type:
-                  description: '<p>The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.</p> <p> <code>AMAZON_ELASTICSEARCH</code> is for Amazon managed Elasticsearch Service.</p>'
+                  description: 'The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.'
                   type: string
                   enum:
                     - ADOBE_ANALYTICS
@@ -2793,7 +2789,6 @@ paths:
                 Name:
                   description: A display name for the template.
                   type: string
-                  pattern: '[\u0020-\u00FF]+'
                   minLength: 1
                   maxLength: 2048
                 Permissions:
@@ -3112,7 +3107,6 @@ paths:
                 Name:
                   description: The name for the template.
                   type: string
-                  pattern: '[\u0020-\u00FF]+'
                   minLength: 1
                   maxLength: 2048
   '/accounts/{AwsAccountId}/templates/{TemplateId}/aliases/{AliasName}':
@@ -8504,6 +8498,18 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -8599,6 +8605,18 @@ paths:
               - QUICKSIGHT
               - CUSTOM
               - ALL
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -9095,6 +9113,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/AnalysisSearchFilter'
+                  minItems: 1
                   maxItems: 1
                 NextToken:
                   description: A pagination token that can be used in a subsequent request.
@@ -9195,6 +9214,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/DashboardSearchFilter'
+                  minItems: 1
                   maxItems: 1
                 NextToken:
                   description: 'The token for the next set of results, or null if there are no more results.'
@@ -12114,7 +12134,6 @@ components:
       maxLength: 64
     AnalysisName:
       type: string
-      pattern: '[\u0020-\u00FF]+'
       minLength: 1
       maxLength: 2048
     ResourceStatus:
@@ -12229,6 +12248,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AnalysisSearchFilter'
+      minItems: 1
       maxItems: 1
     AnalysisSourceEntity:
       type: object
@@ -12647,7 +12667,6 @@ components:
       description: A transform operation that creates calculated columns. Columns created in one such operation form a lexical closure.
     DashboardName:
       type: string
-      pattern: '[\u0020-\u00FF]+'
       minLength: 1
       maxLength: 2048
     DashboardSourceEntity:
@@ -12975,7 +12994,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/DataSourceType'
-            - description: '<p>The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.</p> <p> <code>AMAZON_ELASTICSEARCH</code> is for Amazon managed Elasticsearch Service.</p>'
+            - description: 'The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.'
         DataSourceParameters:
           allOf:
             - $ref: '#/components/schemas/DataSourceParameters'
@@ -13166,7 +13185,6 @@ components:
       description: The template alias.
     TemplateName:
       type: string
-      pattern: '[\u0020-\u00FF]+'
       minLength: 1
       maxLength: 2048
     TemplateSourceEntity:
@@ -13451,6 +13469,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DashboardSearchFilter'
+      minItems: 1
       maxItems: 1
     DashboardSummary:
       type: object
