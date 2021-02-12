@@ -118,7 +118,7 @@ paths:
   '/recipes/{name}/batchDeleteRecipeVersion':
     post:
       operationId: BatchDeleteRecipeVersion
-      description: '<p>Deletes one or more versions of a recipe at a time.</p> <p>The entire request will be rejected if:</p> <ul> <li> <p>The recipe does not exist.</p> </li> <li> <p>There is an invalid version identifier in the list of versions.</p> </li> <li> <p>The verision list is empty.</p> </li> <li> <p>The version list size exceeds 50.</p> </li> <li> <p>The verison list contains duplicate entries.</p> </li> </ul> <p>The request will complete successfully, but with partial failures, if:</p> <ul> <li> <p>A version does not exist.</p> </li> <li> <p>A version is being used by a job.</p> </li> <li> <p>You specify <code>LATEST_WORKING</code>, but it''s being used by a project.</p> </li> <li> <p>The version fails to be deleted.</p> </li> </ul> <p>The <code>LATEST_WORKING</code> version will only be deleted if the recipe has no other versions. If you try to delete <code>LATEST_WORKING</code> while other versions exist (or if they can''t be deleted), then <code>LATEST_WORKING</code> will be listed as partial failure in the response.</p>'
+      description: '<p>Deletes one or more versions of a recipe at a time.</p> <p>The entire request will be rejected if:</p> <ul> <li> <p>The recipe does not exist.</p> </li> <li> <p>There is an invalid version identifier in the list of versions.</p> </li> <li> <p>The version list is empty.</p> </li> <li> <p>The version list size exceeds 50.</p> </li> <li> <p>The version list contains duplicate entries.</p> </li> </ul> <p>The request will complete successfully, but with partial failures, if:</p> <ul> <li> <p>A version does not exist.</p> </li> <li> <p>A version is being used by a job.</p> </li> <li> <p>You specify <code>LATEST_WORKING</code>, but it''s being used by a project.</p> </li> <li> <p>The version fails to be deleted.</p> </li> </ul> <p>The <code>LATEST_WORKING</code> version will only be deleted if the recipe has no other versions. If you try to delete <code>LATEST_WORKING</code> while other versions exist (or if they can''t be deleted), then <code>LATEST_WORKING</code> will be listed as partial failure in the response.</p>'
       responses:
         '200':
           description: Success
@@ -381,7 +381,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 EncryptionMode:
-                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - para&gt;<code>SSE-KMS</code> - server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
                   type: string
                   enum:
                     - SSE-KMS
@@ -432,6 +432,18 @@ paths:
                   description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
                   type: integer
                   minimum: 0
+                JobSample:
+                  description: 'Sample configuration for Profile Jobs only. Determines the number of rows on which the Profile job will be executed. If a JobSample value is not provided for profile jobs, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
+                  type: object
+                  properties:
+                    Mode:
+                      allOf:
+                        - $ref: '#/components/schemas/SampleMode'
+                        - description: '<p>Determines whether the profile job will be executed on the entire dataset or on a specified number of rows. Must be one of the following:</p> <ul> <li> <p>FULL_DATASET: Profile job will be executed on the entire dataset.</p> </li> <li> <p>CUSTOM_ROWS: Profile job will be executed on the number of rows specified in the Size parameter.</p> </li> </ul>'
+                    Size:
+                      allOf:
+                        - $ref: '#/components/schemas/JobSize'
+                        - description: <p>Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will be executed on the the specified number of rows. The maximum value for size is Long.MAX_VALUE.</p> <p>Long.MAX_VALUE = 9223372036854775807</p>
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -766,7 +778,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 EncryptionMode:
-                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
                   type: string
                   enum:
                     - SSE-KMS
@@ -2369,7 +2381,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 EncryptionMode:
-                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
                   type: string
                   enum:
                     - SSE-KMS
@@ -2408,6 +2420,18 @@ paths:
                   description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
                   type: integer
                   minimum: 0
+                JobSample:
+                  description: 'Sample configuration for Profile Jobs only. Determines the number of rows on which the Profile job will be executed. If a JobSample value is not provided for profile jobs, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
+                  type: object
+                  properties:
+                    Mode:
+                      allOf:
+                        - $ref: '#/components/schemas/SampleMode'
+                        - description: '<p>Determines whether the profile job will be executed on the entire dataset or on a specified number of rows. Must be one of the following:</p> <ul> <li> <p>FULL_DATASET: Profile job will be executed on the entire dataset.</p> </li> <li> <p>CUSTOM_ROWS: Profile job will be executed on the number of rows specified in the Size parameter.</p> </li> </ul>'
+                    Size:
+                      allOf:
+                        - $ref: '#/components/schemas/JobSize'
+                        - description: <p>Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will be executed on the the specified number of rows. The maximum value for size is Long.MAX_VALUE.</p> <p>Long.MAX_VALUE = 9223372036854775807</p>
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2470,7 +2494,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 EncryptionMode:
-                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
                   type: string
                   enum:
                     - SSE-KMS
@@ -2679,6 +2703,13 @@ components:
       type: string
       minLength: 1
       maxLength: 1280
+    SampleMode:
+      type: string
+      enum:
+        - FULL_DATASET
+        - CUSTOM_ROWS
+    JobSize:
+      type: integer
     CreateProjectResponse:
       type: object
       required:
@@ -2894,7 +2925,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         Name:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -2949,6 +2980,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timeout'
             - description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+        JobSample:
+          allOf:
+            - $ref: '#/components/schemas/JobSample'
+            - description: Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed.
     DescribeJobRunResponse:
       type: object
       required:
@@ -2973,7 +3008,7 @@ components:
         ExecutionTime:
           allOf:
             - $ref: '#/components/schemas/ExecutionTime'
-            - description: 'The amount of time, in seconds, during which a job run consumed resources.'
+            - description: 'The amount of time, in seconds, during which the job run consumed resources.'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -3003,11 +3038,15 @@ components:
         StartedBy:
           allOf:
             - $ref: '#/components/schemas/StartedBy'
-            - description: The Amazon Resource Name (ARN) of the user who initiated the job run.
+            - description: The Amazon Resource Name (ARN) of the user who started the job run.
         StartedOn:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: The date and time when the job run began.
+        JobSample:
+          allOf:
+            - $ref: '#/components/schemas/JobSample'
+            - description: 'Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
     DescribeProjectResponse:
       type: object
       required:
@@ -3590,6 +3629,18 @@ components:
     Timeout:
       type: integer
       minimum: 0
+    JobSample:
+      type: object
+      properties:
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/SampleMode'
+            - description: '<p>Determines whether the profile job will be executed on the entire dataset or on a specified number of rows. Must be one of the following:</p> <ul> <li> <p>FULL_DATASET: Profile job will be executed on the entire dataset.</p> </li> <li> <p>CUSTOM_ROWS: Profile job will be executed on the number of rows specified in the Size parameter.</p> </li> </ul>'
+        Size:
+          allOf:
+            - $ref: '#/components/schemas/JobSize'
+            - description: <p>Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will be executed on the the specified number of rows. The maximum value for size is Long.MAX_VALUE.</p> <p>Long.MAX_VALUE = 9223372036854775807</p>
+      description: 'Sample configuration for Profile Jobs only. Determines the number of rows on which the Profile job will be executed. If a JobSample value is not provided for profile jobs, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
     CreateProfileJobRequest:
       type: object
       required:
@@ -3610,7 +3661,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - para&gt;<code>SSE-KMS</code> - server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         Name:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -3641,6 +3692,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timeout'
             - description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+        JobSample:
+          allOf:
+            - $ref: '#/components/schemas/JobSample'
+            - description: 'Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
     ProjectName:
       type: string
       minLength: 1
@@ -3728,7 +3783,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         Name:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -4110,6 +4165,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: Metadata tags that have been applied to the job.
+        JobSample:
+          allOf:
+            - $ref: '#/components/schemas/JobSample'
+            - description: 'Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
       description: Represents all of the attributes of a DataBrew job.
     JobList:
       type: array
@@ -4174,6 +4233,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: 'The date and time when the job run began. '
+        JobSample:
+          allOf:
+            - $ref: '#/components/schemas/JobSample'
+            - description: 'Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
       description: Represents one run of a DataBrew job.
     JobRunList:
       type: array
@@ -4261,7 +4324,7 @@ components:
     ParameterValue:
       type: string
       minLength: 1
-      maxLength: 8192
+      maxLength: 12288
     ParameterMap:
       type: object
       additionalProperties:
@@ -4577,7 +4640,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         LogSubscription:
           allOf:
             - $ref: '#/components/schemas/LogSubscription'
@@ -4600,6 +4663,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timeout'
             - description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+        JobSample:
+          allOf:
+            - $ref: '#/components/schemas/JobSample'
+            - description: 'Sample configuration for Profile Jobs only. Determines the number of rows on which the Profile job will be executed. If a JobSample value is not provided for profile jobs, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
     UpdateProjectRequest:
       type: object
       required:
@@ -4626,7 +4693,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         LogSubscription:
           allOf:
             - $ref: '#/components/schemas/LogSubscription'
