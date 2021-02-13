@@ -3,7 +3,7 @@ info:
   version: '2018-03-22'
   x-release: v4
   title: Amazon Personalize Events
-  description: 'Amazon Personalize can consume real-time user event data, such as <i>stream</i> or <i>click</i> data, and use it for model training either alone or combined with historical data. For more information see <a>recording-events</a>.'
+  description: 'Amazon Personalize can consume real-time user event data, such as <i>stream</i> or <i>click</i> data, and use it for model training either alone or combined with historical data. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html">Recording Events</a>.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -117,7 +117,7 @@ paths:
   /events:
     post:
       operationId: PutEvents
-      description: Records user interaction event data. For more information see <a>event-record-api</a>.
+      description: 'Records user interaction event data. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html">Recording Events</a>.'
       responses:
         '200':
           description: Success
@@ -150,7 +150,7 @@ paths:
                   minLength: 1
                   maxLength: 256
                 sessionId:
-                  description: The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information see <a>event-record-api</a>.
+                  description: 'The session ID associated with the user''s visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html">Recording Events</a>.'
                   type: string
                   minLength: 1
                   maxLength: 256
@@ -172,7 +172,7 @@ paths:
   /items:
     post:
       operationId: PutItems
-      description: Adds one or more items to an Items dataset. For more information see <a>importing-items</a>.
+      description: 'Adds one or more items to an Items dataset. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html">Importing Items Incrementally</a>. '
       responses:
         '200':
           description: Success
@@ -188,6 +188,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
       parameters: []
       requestBody:
         required: true
@@ -200,7 +206,7 @@ paths:
                 - items
               properties:
                 datasetArn:
-                  description: The Amazon Resource Number (ARN) of the Items dataset you are adding the item or items to.
+                  description: The Amazon Resource Name (ARN) of the Items dataset you are adding the item or items to.
                   type: string
                   pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
                   maxLength: 256
@@ -222,7 +228,7 @@ paths:
   /users:
     post:
       operationId: PutUsers
-      description: Adds one or more users to a Users dataset. For more information see <a>importing-users</a>.
+      description: 'Adds one or more users to a Users dataset. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html">Importing Users Incrementally</a>.'
       responses:
         '200':
           description: Success
@@ -238,6 +244,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
       parameters: []
       requestBody:
         required: true
@@ -250,7 +262,7 @@ paths:
                 - users
               properties:
                 datasetArn:
-                  description: The Amazon Resource Number (ARN) of the Users dataset you are adding the user or users to.
+                  description: The Amazon Resource Name (ARN) of the Users dataset you are adding the user or users to.
                   type: string
                   pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
                   maxLength: 256
@@ -373,9 +385,10 @@ components:
         properties:
           allOf:
             - $ref: '#/components/schemas/ItemProperties'
-            - description: '<p>A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example, </p> <p> <code>{"numberOfRatings": "12"}</code> </p> <p>The keys use camel case names that match the fields in the Items schema. In the above example, the <code>numberOfRatings</code> would match the ''NUMBER_OF_RATINGS'' field defined in the Items schema.</p>'
-      description: Represents item metadata added to an Items dataset using the <code>PutItems</code> API.
+            - description: '<p>A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example, <code>{"numberOfRatings": "12"}</code>.</p> <p>The keys use camel case names that match the fields in the schema for the Items dataset. In the previous example, the <code>numberOfRatings</code> matches the ''NUMBER_OF_RATINGS'' field defined in the Items schema. For categorical string data, to include multiple categories for a single item, separate each category with a pipe separator (<code>|</code>). For example, <code>\"Horror|Action\"</code>.</p>'
+      description: 'Represents item metadata added to an Items dataset using the <code>PutItems</code> API. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/importing-items.html">Importing Items Incrementally</a>. '
     ResourceNotFoundException: {}
+    ResourceInUseException: {}
     User:
       type: object
       required:
@@ -388,8 +401,8 @@ components:
         properties:
           allOf:
             - $ref: '#/components/schemas/UserProperties'
-            - description: '<p>A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example, </p> <p> <code>{"numberOfVideosWatched": "45"}</code> </p> <p>The keys use camel case names that match the fields in the Users schema. In the above example, the <code>numberOfVideosWatched</code> would match the ''NUMBER_OF_VIDEOS_WATCHED'' field defined in the Users schema.</p>'
-      description: Represents user metadata added to a Users dataset using the <code>PutUsers</code> API.
+            - description: '<p>A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example, <code>{"numberOfVideosWatched": "45"}</code>.</p> <p>The keys use camel case names that match the fields in the schema for the Users dataset. In the previous example, the <code>numberOfVideosWatched</code> matches the ''NUMBER_OF_VIDEOS_WATCHED'' field defined in the Users schema. For categorical string data, to include multiple categories for a single user, separate each category with a pipe separator (<code>|</code>). For example, <code>\"Member|Frequent shopper\"</code>.</p>'
+      description: 'Represents user metadata added to a Users dataset using the <code>PutUsers</code> API. For more information see <a href="https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html">Importing Users Incrementally</a>.'
     Arn:
       type: string
       pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
@@ -431,7 +444,7 @@ components:
     ItemProperties:
       type: string
       minLength: 1
-      maxLength: 1024
+      maxLength: 4096
     ItemList:
       type: array
       items:
@@ -461,7 +474,7 @@ components:
         sessionId:
           allOf:
             - $ref: '#/components/schemas/StringType'
-            - description: The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information see <a>event-record-api</a>.
+            - description: 'The session ID associated with the user''s visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/recording-events.html">Recording Events</a>.'
         eventList:
           allOf:
             - $ref: '#/components/schemas/EventList'
@@ -476,7 +489,7 @@ components:
         datasetArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Number (ARN) of the Items dataset you are adding the item or items to.
+            - description: The Amazon Resource Name (ARN) of the Items dataset you are adding the item or items to.
         items:
           allOf:
             - $ref: '#/components/schemas/ItemList'
@@ -497,7 +510,7 @@ components:
         datasetArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Number (ARN) of the Users dataset you are adding the user or users to.
+            - description: The Amazon Resource Name (ARN) of the Users dataset you are adding the user or users to.
         users:
           allOf:
             - $ref: '#/components/schemas/UserList'
@@ -505,6 +518,6 @@ components:
     UserProperties:
       type: string
       minLength: 1
-      maxLength: 1024
+      maxLength: 4096
 security:
   - hmac: []

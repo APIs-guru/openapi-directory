@@ -750,6 +750,22 @@ paths:
                 functionVersion:
                   description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
                   type: string
+                syncConfig:
+                  description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
+                  type: object
+                  properties:
+                    conflictHandler:
+                      allOf:
+                        - $ref: '#/components/schemas/ConflictHandlerType'
+                        - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
+                    conflictDetection:
+                      allOf:
+                        - $ref: '#/components/schemas/ConflictDetectionType'
+                        - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
+                    lambdaConflictHandlerConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/LambdaConflictHandlerConfig'
+                        - description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1871,6 +1887,22 @@ paths:
                 functionVersion:
                   description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
                   type: string
+                syncConfig:
+                  description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
+                  type: object
+                  properties:
+                    conflictHandler:
+                      allOf:
+                        - $ref: '#/components/schemas/ConflictHandlerType'
+                        - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
+                    conflictDetection:
+                      allOf:
+                        - $ref: '#/components/schemas/ConflictDetectionType'
+                        - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
+                    lambdaConflictHandlerConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/LambdaConflictHandlerConfig'
+                        - description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
   '/v1/apis/{apiId}':
     delete:
       operationId: DeleteGraphqlApi
@@ -3418,6 +3450,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/FunctionConfiguration'
             - description: The <code>Function</code> object.
+    ConflictHandlerType:
+      type: string
+      enum:
+        - OPTIMISTIC_CONCURRENCY
+        - LAMBDA
+        - AUTOMERGE
+        - NONE
+    ConflictDetectionType:
+      type: string
+      enum:
+        - VERSION
+        - NONE
+    LambdaConflictHandlerConfig:
+      type: object
+      properties:
+        lambdaConflictHandlerArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Arn for the Lambda function to use as the Conflict Handler.
+      description: The <code>LambdaConflictHandlerConfig</code> object when configuring LAMBDA as the Conflict Handler.
     CreateGraphqlApiResponse:
       type: object
       properties:
@@ -3470,26 +3522,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/String'
-    ConflictHandlerType:
-      type: string
-      enum:
-        - OPTIMISTIC_CONCURRENCY
-        - LAMBDA
-        - AUTOMERGE
-        - NONE
-    ConflictDetectionType:
-      type: string
-      enum:
-        - VERSION
-        - NONE
-    LambdaConflictHandlerConfig:
-      type: object
-      properties:
-        lambdaConflictHandlerArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The Arn for the Lambda function to use as the Conflict Handler.
-      description: The <code>LambdaConflictHandlerConfig</code> object when configuring LAMBDA as the Conflict Handler.
     CachingKeys:
       type: array
       items:
@@ -4132,6 +4164,22 @@ components:
       type: string
       minLength: 1
       maxLength: 65536
+    SyncConfig:
+      type: object
+      properties:
+        conflictHandler:
+          allOf:
+            - $ref: '#/components/schemas/ConflictHandlerType'
+            - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
+        conflictDetection:
+          allOf:
+            - $ref: '#/components/schemas/ConflictDetectionType'
+            - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
+        lambdaConflictHandlerConfig:
+          allOf:
+            - $ref: '#/components/schemas/LambdaConflictHandlerConfig'
+            - description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
+      description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
     CreateFunctionRequest:
       type: object
       required:
@@ -4164,6 +4212,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
+        syncConfig:
+          $ref: '#/components/schemas/SyncConfig'
     FunctionConfiguration:
       type: object
       properties:
@@ -4199,6 +4249,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The version of the request mapping template. Currently only the 2018-05-29 version of the template is supported.
+        syncConfig:
+          $ref: '#/components/schemas/SyncConfig'
       description: A function is a reusable entity. Multiple functions can be used to compose the resolver logic.
     LogConfig:
       type: object
@@ -4354,22 +4406,6 @@ components:
             - $ref: '#/components/schemas/FunctionsIds'
             - description: A list of <code>Function</code> objects.
       description: The pipeline configuration for a resolver of kind <code>PIPELINE</code>.
-    SyncConfig:
-      type: object
-      properties:
-        conflictHandler:
-          allOf:
-            - $ref: '#/components/schemas/ConflictHandlerType'
-            - description: '<p>The Conflict Resolution strategy to perform in the event of a conflict.</p> <ul> <li> <p> <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by rejecting mutations when versions do not match the latest version at the server.</p> </li> <li> <p> <b>AUTOMERGE</b>: Resolve conflicts with the Automerge conflict resolution strategy.</p> </li> <li> <p> <b>LAMBDA</b>: Resolve conflicts with a Lambda function supplied in the LambdaConflictHandlerConfig.</p> </li> </ul>'
-        conflictDetection:
-          allOf:
-            - $ref: '#/components/schemas/ConflictDetectionType'
-            - description: '<p>The Conflict Detection strategy to use.</p> <ul> <li> <p> <b>VERSION</b>: Detect conflicts based on object versions for this resolver.</p> </li> <li> <p> <b>NONE</b>: Do not detect conflicts when executing this resolver.</p> </li> </ul>'
-        lambdaConflictHandlerConfig:
-          allOf:
-            - $ref: '#/components/schemas/LambdaConflictHandlerConfig'
-            - description: The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict Handler.
-      description: <p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>
     CreateResolverRequest:
       type: object
       required:
@@ -4780,6 +4816,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. '
+        syncConfig:
+          $ref: '#/components/schemas/SyncConfig'
     UpdateGraphqlApiRequest:
       type: object
       required:

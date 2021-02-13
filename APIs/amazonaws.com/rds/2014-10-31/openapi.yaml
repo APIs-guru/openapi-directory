@@ -23059,7 +23059,11 @@ components:
         Engine:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Specifies the name of the database engine.
+            - description: Specifies the name of the database engine for this DB cluster snapshot.
+        EngineMode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provides the engine mode of the database engine for this DB cluster snapshot.
         AllocatedStorage:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -23083,7 +23087,7 @@ components:
         MasterUsername:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Provides the master username for the DB cluster snapshot.
+            - description: Provides the master username for this DB cluster snapshot.
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -29894,7 +29898,19 @@ components:
         IsMajorVersionUpgrade:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: A value that indicates whether a database engine is upgraded to a major version.
+            - description: A value that indicates whether upgrading to the target version requires upgrading the major version of the database engine.
+        SupportedEngineModes:
+          allOf:
+            - $ref: '#/components/schemas/EngineModeList'
+            - description: A list of the supported DB engine modes for the target engine version.
+        SupportsParallelQuery:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: A value that indicates whether you can use Aurora parallel query with the target engine version.
+        SupportsGlobalDatabases:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: A value that indicates whether you can use Aurora global databases with the target engine version.
       description: The version of the database engine that a DB instance can be upgraded to.
     UserAuthConfigInfo:
       type: object
