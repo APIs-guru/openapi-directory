@@ -58,12 +58,12 @@ paths:
           $ref: "#/components/responses/402"
         "403":
           $ref: "#/components/responses/403"
-        "422":
-          $ref: "#/components/responses/422"
         "429":
           $ref: "#/components/responses/429"
         "500":
           $ref: "#/components/responses/500"
+        "502":
+          $ref: "#/components/responses/502"
         "504":
           $ref: "#/components/responses/504"
       summary: Page HTML by URL
@@ -104,12 +104,12 @@ paths:
           $ref: "#/components/responses/402"
         "403":
           $ref: "#/components/responses/403"
-        "422":
-          $ref: "#/components/responses/422"
         "429":
           $ref: "#/components/responses/429"
         "500":
           $ref: "#/components/responses/500"
+        "502":
+          $ref: "#/components/responses/502"
         "504":
           $ref: "#/components/responses/504"
       summary: Page HTML by URL with POST request to the target page
@@ -145,12 +145,12 @@ paths:
           $ref: "#/components/responses/402"
         "403":
           $ref: "#/components/responses/403"
-        "422":
-          $ref: "#/components/responses/422"
         "429":
           $ref: "#/components/responses/429"
         "500":
           $ref: "#/components/responses/500"
+        "502":
+          $ref: "#/components/responses/502"
         "504":
           $ref: "#/components/responses/504"
       summary: HTML of a selected page area by URL and CSS selector
@@ -187,12 +187,12 @@ paths:
           $ref: "#/components/responses/402"
         "403":
           $ref: "#/components/responses/403"
-        "422":
-          $ref: "#/components/responses/422"
         "429":
           $ref: "#/components/responses/429"
         "500":
           $ref: "#/components/responses/500"
+        "502":
+          $ref: "#/components/responses/502"
         "504":
           $ref: "#/components/responses/504"
       summary: HTML of a selected page areas by URL and CSS selector, with POST request to the target page
@@ -233,12 +233,12 @@ paths:
           $ref: "#/components/responses/402"
         "403":
           $ref: "#/components/responses/403"
-        "422":
-          $ref: "#/components/responses/422"
         "429":
           $ref: "#/components/responses/429"
         "500":
           $ref: "#/components/responses/500"
+        "502":
+          $ref: "#/components/responses/502"
         "504":
           $ref: "#/components/responses/504"
       summary: HTML of multiple page areas by URL and CSS selectors
@@ -280,12 +280,12 @@ paths:
           $ref: "#/components/responses/402"
         "403":
           $ref: "#/components/responses/403"
-        "422":
-          $ref: "#/components/responses/422"
         "429":
           $ref: "#/components/responses/429"
         "500":
           $ref: "#/components/responses/500"
+        "502":
+          $ref: "#/components/responses/502"
         "504":
           $ref: "#/components/responses/504"
       summary: HTML of multiple page areas by URL and CSS selectors, with POST request to the target page
@@ -402,15 +402,6 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
       description: Wrong API key
-    "422":
-      content:
-        application/json:
-          example:
-            status_code: 500
-            status_message: Some website error
-          schema:
-            $ref: "#/components/schemas/PageError"
-      description: Non-2xx and non-404 HTTP status code on the target page
     "429":
       content:
         application/json:
@@ -427,6 +418,15 @@ components:
           schema:
             $ref: "#/components/schemas/Error"
       description: Unexpected error, try again or contact support@webscraping.ai
+    "502":
+      content:
+        application/json:
+          example:
+            status_code: 500
+            status_message: Some website error
+          schema:
+            $ref: "#/components/schemas/PageError"
+      description: Non-2xx and non-404 HTTP status code on the target page
     "504":
       content:
         application/json:

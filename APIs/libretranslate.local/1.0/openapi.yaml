@@ -10,6 +10,43 @@ info:
       version: "2.0"
   x-providerName: libretranslate.local
 paths:
+  /detect:
+    post:
+      description: ""
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              example: Hello world!
+              type: string
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/detections"
+          description: Detections
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/error-response"
+          description: Invalid request
+        "429":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/error-slow-down"
+          description: Slow down
+        "500":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/error-response"
+          description: Detection error
+      summary: Detect the language of a single text
+      tags:
+        - translate
   /frontend/settings:
     get:
       description: ""
@@ -81,6 +118,22 @@ paths:
         - translate
 components:
   schemas:
+    detections:
+      items:
+        properties:
+          confidence:
+            description: Confidence value
+            example: 0.6
+            format: float
+            maximum: 1
+            minimum: 0
+            type: number
+          language:
+            description: Language code
+            example: en
+            type: string
+        type: object
+      type: array
     error-response:
       properties:
         error:

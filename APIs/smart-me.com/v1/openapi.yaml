@@ -649,6 +649,23 @@ paths:
     get:
       deprecated: false
       operationId: FolderMenu_Get
+      parameters:
+        - description: "(optional) Filter for the folders and meters: \r
+
+            \            all: load everything\r
+
+            \            assigned: load only folders and meters that are assigend to a folder\r
+
+            \            unassigend: load only meters that are not assigend to a folder\r
+
+            \            user: load only folder and all users assigned to this folders\r
+
+            \            subuserlist: load all subusers as a list"
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -980,6 +997,80 @@ paths:
       summary: Gets the configuration of a smart-me device.
       tags:
         - SmartMeDeviceConfiguration
+  /api/SubUser:
+    post:
+      deprecated: false
+      operationId: SubUser_Post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubUserData"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/SubUserData"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/SubUserData"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/SubUserData"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/SubUserData"
+        required: true
+      responses:
+        "204":
+          description: No Content
+      summary: "Creates or updates a subuser.\r
+
+        \            To create a new user set no ID (empty)"
+      tags:
+        - SubUser
+  "/api/SubUser/{id}":
+    delete:
+      deprecated: false
+      operationId: SubUser_Delete
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+      summary: Delete a subuser
+      tags:
+        - SubUser
+    get:
+      deprecated: false
+      operationId: SubUser_Get
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubUserData"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/SubUserData"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/SubUserData"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/SubUserData"
+          description: OK
+      summary: Get a sub user. The user must be assigend to the user that makes this call.
+      tags:
+        - SubUser
   /api/User:
     get:
       deprecated: false
@@ -1485,6 +1576,173 @@ paths:
       summary: Gets all Virtual Tariffs for a property (folder)
       tags:
         - VirtualTariffsForProperty
+  /api/folder/assign:
+    post:
+      deprecated: false
+      operationId: FolderAssign_Post
+      parameters:
+        - description: The ID of the meter or folder that should be assign
+          in: query
+          name: source
+          required: true
+          schema:
+            type: string
+        - description: The ID of the meter or folder that should be the parent
+          in: query
+          name: target
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+      summary: Assign a folder (source) or meter to another folder (target). Can be used to create a folder structure.
+      tags:
+        - FolderAssign
+  "/api/folder/settings/{id}":
+    delete:
+      deprecated: false
+      operationId: FolderSettings_Delete
+      parameters:
+        - description: The ID of the folder
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+      summary: Deletes a folder
+      tags:
+        - FolderSettings
+    get:
+      deprecated: false
+      operationId: FolderSettings_Get
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FolderSettings"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/FolderSettings"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/FolderSettings"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/FolderSettings"
+          description: OK
+      summary: Gets the settings of a folder or meter
+      tags:
+        - FolderSettings
+    post:
+      deprecated: false
+      operationId: FolderSettings_Post
+      parameters:
+        - description: The ID of the folder or meter to edit. Use and empty ID to add a new folder
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FolderSettings"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/FolderSettings"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/FolderSettings"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/FolderSettings"
+          text/xml:
+            schema:
+              $ref: "#/components/schemas/FolderSettings"
+        description: The folder or meter data
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FolderMenuItem"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/FolderMenuItem"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/FolderMenuItem"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/FolderMenuItem"
+          description: OK
+      summary: Add or edit a folder or a meter. To add a new folder use and empty ID
+      tags:
+        - FolderSettings
+  /api/folder/user/assign:
+    delete:
+      deprecated: false
+      operationId: UserToFolderAssign_Delete
+      parameters:
+        - description: The ID of the user that should be de-assign
+          in: query
+          name: source
+          required: true
+          schema:
+            type: string
+        - description: The ID of the folder
+          in: query
+          name: target
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+      summary: Deletes a user to folder assignement
+      tags:
+        - UserToFolderAssign
+    post:
+      deprecated: false
+      operationId: UserToFolderAssign_Post
+      parameters:
+        - description: The ID of the user that should be assign
+          in: query
+          name: source
+          required: true
+          schema:
+            type: string
+        - description: The ID of the folder that should be the parent
+          in: query
+          name: target
+          required: true
+          schema:
+            type: string
+        - description: The ID of the old folder (in case of a drag and drop to a new folder)
+          in: query
+          name: oldFolder
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No Content
+      summary: Assign a user to a folder
+      tags:
+        - UserToFolderAssign
   /api/oauth/authorize:
     get:
       deprecated: false
@@ -2409,6 +2667,9 @@ components:
             - Trash
             - GridPhotovoltaicPowerSystem
           type: string
+        Icon:
+          description: The path to the Icon of this folder
+          type: string
         Id:
           description: The id of the folder menu item
           type: string
@@ -2419,6 +2680,71 @@ components:
           type: string
         Name:
           description: The Name of the item
+          type: string
+        UserId:
+          description: The ID of the user of this folder (only for foldertype user)
+          type: string
+      type: object
+    FolderSettings:
+      description: Container for the folder settings
+      properties:
+        Description:
+          description: The Description of the folder or meter
+          type: string
+        Enable:
+          description: Flag if the meter is enabled (folder not supported yet)
+          type: boolean
+        FolderType:
+          description: The Type of the folder
+          enum:
+            - Folder
+            - Location
+            - Factory
+            - House
+            - Office
+            - Machine
+            - VirtualMeter
+            - ElecticityFolder
+            - WaterFolder
+            - HeatFolder
+            - GasFolder
+            - TemperatureFolder
+            - Sun
+            - Light
+            - Ice
+            - Sofa
+            - Food
+            - Coffee
+            - Car
+            - ChargingStation
+            - Meter
+            - User
+            - Trash
+            - GridPhotovoltaicPowerSystem
+          type: string
+        Name:
+          description: The Name of the folder or meter
+          type: string
+        ParentFolderId:
+          description: The parent folder ID of this item
+          type: string
+        SerialNumber:
+          description: The serial number (meter only)
+          format: int64
+          type: integer
+        UseableForVirtualBillingMeters:
+          description: Flag if the meter is usable for virtual billing meters (e.g. washroom)
+          type: boolean
+        ValueCorrection:
+          description: The value correction on this meter
+          format: double
+          type: number
+        ValueCorrectionParentFolder:
+          description: The value correction on all parent folders. but not on the meter itself
+          format: double
+          type: number
+        VisualizationName:
+          description: The name of the visualization of the folder
           type: string
       type: object
     InputConfigurationContainer:
@@ -2596,6 +2922,10 @@ components:
             - StartedWaitForCar
             - Charging
           readOnly: true
+          type: string
+        ValueDate:
+          description: The date of this values
+          format: date-time
           type: string
       type: object
     PicoChargingHistoryData:
@@ -2795,6 +3125,36 @@ components:
           type: string
         WiFiVersion:
           description: The version of the wifi module
+          type: string
+      type: object
+    SubUserData:
+      description: Container data for the sub user
+      properties:
+        AccessEndDate:
+          description: The end date. until this date the user has access
+          format: date-time
+          type: string
+        AccessTimeStartDate:
+          description: The start date. From this date the user has access
+          format: date-time
+          type: string
+        Email:
+          description: The Email adress
+          type: string
+        Id:
+          description: The ID of the user
+          type: string
+        NewPassword:
+          description: If set this is used a new password
+          type: string
+        PermissionLevel:
+          description: The permission level of the user
+          enum:
+            - SelectedFolderAndSubfoldersMeters
+            - SelectedFolderOnly
+          type: string
+        Username:
+          description: The username
           type: string
       type: object
     SwitchConfigurationContainer:

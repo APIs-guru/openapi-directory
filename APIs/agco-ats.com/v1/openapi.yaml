@@ -7823,6 +7823,12 @@ paths:
           required: false
           schema:
             type: string
+        - description: Optional. If false, all translations for returned String Definitions are included. Must be used with 'stringText' provided and 'includeTranslations' = true.
+          in: query
+          name: matchingTranslationsOnly
+          required: false
+          schema:
+            type: boolean
       responses:
         "200":
           content:

@@ -5232,7 +5232,7 @@ components:
                 type: number
               exit_number:
                 description: >
-                  Only available for USE_ROUNDABOUT instructions. The count of exits at which the route leaves the roundabout.
+                  Only available for roundabout instructions (sign is 6). The count of exits at which the route leaves the roundabout.
                 format: int32
                 type: integer
               interval:
@@ -5303,7 +5303,7 @@ components:
                 type: integer
               turn_angle:
                 description: >
-                  Only available for USE_ROUNDABOUT instructions. The radian of the route within the roundabout `0 < r < 2*PI` for clockwise and
+                  Only available for roundabout instructions (sign is 6). The radian of the route within the roundabout `0 < r < 2*PI` for clockwise and
 
                   `-2*PI < r < 0` for counterclockwise turns.
                 format: double
@@ -5848,6 +5848,11 @@ components:
           type: integer
         max_jobs:
           description: Specifies the maximum number of jobs a vehicle can load.
+          example: 12
+          format: int32
+          type: integer
+        min_jobs:
+          description: Specifies the minimum number of jobs a vehicle should load. This is a soft constraint, i.e. if it is not possible to fulfill “min_jobs”, we will still try to get as close as possible to this constraint.
           example: 12
           format: int32
           type: integer

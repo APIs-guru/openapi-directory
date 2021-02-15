@@ -8273,6 +8273,9 @@ definitions:
           - CALLFIRE
           - TESLA
         type: string
+      session:
+        $ref: "#/definitions/OAuthSession"
+        description: "~"
       sessionId:
         description: "~"
         type: string
@@ -10002,6 +10005,68 @@ definitions:
         type: integer
       zipcode:
         description: A five-digit Zip code of requested numbers
+        type: string
+    type: object
+  OAuthSession:
+    description: "~"
+    properties:
+      accountId:
+        description: "~"
+        type: string
+      actor:
+        $ref: "#/definitions/OAuthSession"
+        description: "~"
+      brand:
+        description: "~"
+        enum:
+          - EZTEXTING
+          - CLUBTEXTING
+          - GROUPTEXTING
+          - TELLMYCELL
+          - EZ
+          - CALLFIRE
+          - TESLA
+        type: string
+      clientId:
+        description: "~"
+        type: string
+      expires:
+        description: "~"
+        format: date-time
+        type: string
+      grantType:
+        description: "~"
+        enum:
+          - AUTHORIZATION_CODE
+          - PASSWORD
+          - REFRESH_TOKEN
+          - CLIENT_CREDENTIALS
+          - JWT_BEARER
+          - IMPERSONATE
+          - EXCHANGE
+        type: string
+      id:
+        description: "~"
+        type: string
+      ipAddress:
+        description: "~"
+        type: string
+      issued:
+        description: "~"
+        format: date-time
+        type: string
+      scope:
+        description: "~"
+        type: string
+      sid:
+        description: "~"
+        format: int64
+        type: integer
+      userId:
+        description: "~"
+        type: string
+      username:
+        description: "~"
         type: string
     type: object
   Page:

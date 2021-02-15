@@ -146,6 +146,33 @@ paths:
       tags:
         - GreenPowerIndex (GrünstromIndex)
         - Dispatch (Green Energy Distribution API)
+  /gsi/marketdata:
+    get:
+      description: >
+        Compatible to awattar (https://api.awattar.de/v1/marketdata) API interface but data comes from GreenPowerIndex instead of EPEXSpot.
+      operationId: gsiMarketdata
+      parameters:
+        - description: Zipcode (Postleitzahl) of a city in Germany.
+          in: query
+          name: zip
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    description: Energyprice for the upcomming hours
+                    items:
+                      $ref: "#/components/schemas/MarketData"
+                    type: array
+                type: object
+          description: Success
+      summary: Marketdata
+      tags:
+        - GreenPowerIndex (GrünstromIndex)
   /gsi/prediction:
     get:
       description: >
@@ -514,6 +541,21 @@ components:
           example: 43
           type: integer
         timeStamp:
+          description: Timestamp in Standard Milliseconds
+          example: 1609293600000
+          type: integer
+      type: object
+    MarketData:
+      properties:
+        end_timestamp:
+          description: Timestamp in Standard Milliseconds
+          example: 1609293600000
+          type: integer
+        marketprice:
+          description: Actual Marketprice for regional green power in EUR per MWh
+          example: 43
+          type: number
+        start_timestamp:
           description: Timestamp in Standard Milliseconds
           example: 1609293600000
           type: integer

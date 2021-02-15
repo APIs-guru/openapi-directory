@@ -4829,6 +4829,7 @@ definitions:
       branch_code:
         description: The code identifying the bank branch. May contain a BIC/SWIFT or something appropriate for the payment method, such as "NPP" for type NppPaymentMean.
         title: Branch code
+        type: string
       holder:
         description: The account holder name to which to transfer.
         title: Account Holder

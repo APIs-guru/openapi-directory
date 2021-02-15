@@ -1,4 +1,6 @@
 openapi: 3.0.2
+servers:
+  - url: https://u50g7n0cbj.execute-api.us-east-1.amazonaws.com/
 info:
   description: API for OpenAQ LCS
   title: OpenAQ
@@ -1530,7 +1532,7 @@ paths:
                 type: string
               - format: date
                 type: string
-            default: 2021-02-08T17:05:00+00:00
+            default: 2021-02-15T13:22:00+00:00
             title: Date To
         - description: Change the number of results returned.
           in: query
@@ -1971,7 +1973,7 @@ paths:
                 type: string
               - format: date
                 type: string
-            default: 2021-02-08T17:05:00+00:00
+            default: 2021-02-15T13:22:00+00:00
             title: Date To
         - in: query
           name: parameter_id
@@ -4002,7 +4004,7 @@ paths:
                 type: string
               - format: date
                 type: string
-            default: 2021-02-08T17:05:00+00:00
+            default: 2021-02-15T13:22:00+00:00
             title: Date To
         - description: Change the number of results returned.
           in: query

@@ -10,7 +10,7 @@ info:
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
 
-    > Date: 09 February, 2021
+    > Date: 15 February, 2021
 
     >
 
@@ -30,6 +30,7 @@ info:
   title: Meraki Dashboard API
   version: 0.0.0-streaming
   x-apisguru-categories:
+    - iot
     - enterprise
   x-logo:
     url: https://n140.meraki.com/images/cisco-meraki.png
@@ -38,6 +39,7 @@ info:
       url: https://api.meraki.com/api/v0/openapiSpec
       version: "2.0"
   x-providerName: meraki.com
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -11144,7 +11146,7 @@ paths:
                   type: object
                 type: array
               authMode:
-                description: The association control method for the SSID ('open', 'psk', 'open-with-radius', '8021x-meraki', '8021x-radius', '8021x-google', 'ipsk-with-radius' or 'ipsk-without-radius')
+                description: The association control method for the SSID ('open', 'psk', 'open-with-radius', '8021x-meraki', '8021x-radius', '8021x-google', '8021x-localradius', 'ipsk-with-radius' or 'ipsk-without-radius')
                 enum:
                   - open
                   - psk
@@ -11152,6 +11154,7 @@ paths:
                   - 8021x-meraki
                   - 8021x-radius
                   - 8021x-google
+                  - 8021x-localradius
                   - ipsk-with-radius
                   - ipsk-without-radius
                 type: string

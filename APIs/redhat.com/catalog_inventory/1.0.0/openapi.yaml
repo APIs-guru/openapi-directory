@@ -960,6 +960,24 @@ paths:
       summary: Show an existing Source
       tags:
         - Source
+  "/sources/{id}/refresh":
+    patch:
+      description: Refresh a source object
+      operationId: refreshSource
+      parameters:
+        - $ref: "#/components/parameters/ID"
+      responses:
+        "204":
+          description: Updated, no content
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+        "429":
+          description: Too many requests
+      summary: " Refresh an existing Source"
+      tags:
+        - Source
   "/sources/{id}/service_instance_nodes":
     get:
       description: Returns an array of ServiceInstanceNode objects
@@ -2046,6 +2064,10 @@ components:
           format: date-time
           readOnly: true
           type: string
+        last_refresh_message:
+          readOnly: true
+          title: LastRefreshMessage
+          type: string
         last_successful_refresh_at:
           format: date-time
           readOnly: true
@@ -2069,6 +2091,10 @@ components:
           readOnly: true
           type: string
         refresh_state:
+          type: string
+        refresh_task_id:
+          format: uuid
+          readOnly: true
           type: string
         uid:
           readOnly: true

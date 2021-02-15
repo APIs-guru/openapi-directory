@@ -1,7 +1,6 @@
 swagger: "2.0"
 schemes:
   - https
-host: developer.opto22.com
 basePath: /api/v1
 info:
   contact:
@@ -66,7 +65,7 @@ info:
     ### Note on packet sizes:
 
     When doing POSTs or GETs, the JSON payload in the body should not exceed 3k (3072 bytes).
-  title: PAC Control
+  title: PAC Control REST API
   version: R1.0a
   x-apisguru-categories:
     - iot

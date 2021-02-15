@@ -2856,6 +2856,11 @@ components:
       value:
         details: A cannot be B when C is D
         name: IncompatibleParametersError
+    InvalidChannelPropertiesError:
+      summary: "A channel can only have one of these properties set as true: groupDiscussion, isBroadcastOnly or privateSupport"
+      value:
+        details: "A channel can only have one of these properties set as true: groupDiscussion, isBroadcastOnly or privateSupport"
+        name: InvalidChannelPropertiesError
     InvalidContentError:
       summary: You need to specify content_id or rootContentId.
       value:
@@ -2976,6 +2981,11 @@ components:
       value:
         details: The user A has not been awarded a badge in the offering B.
         name: UserDoesNotHaveBadgeError
+    UserNotInChannelError:
+      summary: Specified user is not in the channel.
+      value:
+        details: The user john.doe@test.te is not a learner in the channel -MEF8kFyURUr6_CZ4IXD.
+        name: UserNotInChannelError
     UserNotInOfferingError:
       summary: Specified user is not in the offering.
       value:
@@ -3469,19 +3479,7 @@ components:
       type: object
     ChannelRequired:
       properties:
-        group:
-          properties:
-            autoAssign:
-              default: false
-              type: boolean
-          type: object
-        groupDiscussion:
-          default: false
-          type: boolean
         isBroadcastOnly:
-          default: false
-          type: boolean
-        privateSupport:
           default: false
           type: boolean
         title:
@@ -3492,25 +3490,9 @@ components:
       type: object
     ChannelResponse:
       properties:
-        group:
-          properties:
-            autoAssign:
-              default: false
-              type: boolean
-          type: object
-        groupDiscussion:
-          default: false
-          type: boolean
         id:
           type: string
         isBroadcastOnly:
-          default: false
-          type: boolean
-        learners:
-          items:
-            type: string
-          type: array
-        privateSupport:
           default: false
           type: boolean
         title:

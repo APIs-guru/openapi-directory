@@ -3223,7 +3223,7 @@ paths:
         - Restaurant Claims
         - publicly-accessible
       x-status: Draft
-  "/restaurants/{tenant}/{restaurantId}/customerclaims/orderclaims/{id}":
+  "/restaurants/{tenant}/{restaurantId}/customerclaims/{id}":
     get:
       description: Get information about a order claim
       parameters:
@@ -3288,7 +3288,7 @@ paths:
         - Restaurant Claims
         - publicly-accessible
       x-status: Draft
-  "/restaurants/{tenant}/{restaurantId}/customerclaims/orderclaims/{id}/restaurantresponse":
+  "/restaurants/{tenant}/{restaurantId}/customerclaims/{id}/restaurantresponse":
     post:
       description: Submit a restaurant response for the claim, where the restaurant can tell us if they accept or reject the claim
       parameters:
@@ -3331,7 +3331,12 @@ paths:
             application/json:
               example:
                 errors:
-                  - description: Bad Request. Decision value is incorrect
+                  - description: Bad Request. Incorrect decision
+                    errorCode: IncorrectDecision
+                  - description: Bad Request. Missing decision
+                    errorCode: MissingDecision
+                  - description: Bad Request. The request you are sending is missing some items for the claim you are trying to resolve
+                    errorCode: MissingItems
                 faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
                 traceId: H3TKh4QSJUSwVBCBqEtkKw==
               schema:
@@ -3350,9 +3355,27 @@ paths:
         "409":
           content:
             application/json:
+              example:
+                errors:
+                  - description: The claim you are attempting to resolve is has been resolved
+                    errorCode: AlreadyResolved
+                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
               schema:
                 $ref: "#/components/schemas/4XXErrorSchema"
-          description: Conflict. The claim you are attempting to update is older than the current claim. Fetch the last copy of the entity and try the request again.
+          description: Conflict. The claim you are attempting to resolve is has been resolved
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: The claim you are attempting to update does not contain the items from the request
+                    errorCode: WrongItems
+                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Unprocessable. The claim you are attempting to update does not contain the items from the request
         "500":
           $ref: "#/components/responses/500ErrorResponse"
       security:
@@ -3362,7 +3385,7 @@ paths:
         - Restaurant Claims
         - publicly-accessible
       x-status: Draft
-  "/restaurants/{tenant}/{restaurantId}/customerclaims/orderclaims/{id}/restaurantresponse/justification":
+  "/restaurants/{tenant}/{restaurantId}/customerclaims/{id}/restaurantresponse/justification":
     put:
       description: Add reason and optional comments in case of rejection of order claim
       parameters:
@@ -3399,219 +3422,6 @@ paths:
         description: Payload containing the reason of rejection and optional comments
       responses:
         "204":
-          description: Request succeeded. Justification was successfully submitted
-        "400":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Bad Request. Reason doesn't match any of the predefined values
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Bad Request. Returned if the request is invalid e.g. reason doesn't match any of the predefined values
-        "401":
-          $ref: "#/components/responses/401UnauthorizedResponse"
-        "403":
-          $ref: "#/components/responses/403ForbiddenResponse"
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Not Found. Claim could not be found
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Conflict. The claim you are attempting to update is older than the current claim. Fetch the last copy of the entity and try the request again.
-        "500":
-          $ref: "#/components/responses/500ErrorResponse"
-      security:
-        - Bearer: []
-      summary: Add reason and comments to the response
-      tags:
-        - Restaurant Claims
-        - publicly-accessible
-      x-status: Draft
-  "/restaurants/{tenant}/{restaurantId}/customerclaims/orderitemsclaims/{id}":
-    get:
-      description: Get information about a order items claim
-      parameters:
-        - description: Two letter code indicating the tenant
-          in: path
-          name: tenant
-          required: true
-          schema:
-            type: string
-        - description: Just Eat restaurant identifier
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Claim identifier
-          in: path
-          name: id
-          required: true
-          schema:
-            type: string
-        - description: Indicates what type of response client understands and is also used for content type negotiation (if version is specified), otherwise tells the server to return the latest version
-          example: application/json;v=1
-          in: header
-          name: Accept
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OrderItemsClaim"
-          description: Request succeeded
-          headers:
-            Content-Type:
-              description: Content type of document including version
-              example: application/json;v=1
-              schema:
-                type: string
-            cache-control:
-              description: Information about how the response can be cached.
-              schema:
-                type: string
-        "401":
-          $ref: "#/components/responses/401UnauthorizedResponse"
-        "403":
-          $ref: "#/components/responses/403ForbiddenResponse"
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Not Found. Claim could not be found
-        "500":
-          $ref: "#/components/responses/500ErrorResponse"
-      security:
-        - Bearer: []
-      summary: Get order items claim
-      tags:
-        - Restaurant Claims
-        - publicly-accessible
-      x-status: Draft
-  "/restaurants/{tenant}/{restaurantId}/customerclaims/orderitemsclaims/{id}/restaurantresponse":
-    post:
-      description: Submit a restaurant response for the claim
-      parameters:
-        - description: Two letter code indicating the tenant
-          in: path
-          name: tenant
-          required: true
-          schema:
-            type: string
-        - description: Just Eat restaurant identifier
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Claim identifier
-          in: path
-          name: id
-          required: true
-          schema:
-            type: string
-        - description: Indicates the representation of the request body the client is sending (including version)
-          example: application/json;v=1
-          in: header
-          name: Content-Type
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/OrderItemsClaimRestaurantResponse"
-        description: Payload containing the response of the restaurant on the order items claim
-      responses:
-        "201":
-          description: Request succeeded. Your response to the claim has been submitted
-        "400":
-          content:
-            application/json:
-              example:
-                errors:
-                  - description: Bad Request. No items were specified
-                faultId: 25bbe062-c53d-4fbc-9d6c-3df6127b94fd
-                traceId: H3TKh4QSJUSwVBCBqEtkKw==
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Bad Request. Returned if the request is invalid e.g. no items were specified
-        "401":
-          $ref: "#/components/responses/401UnauthorizedResponse"
-        "403":
-          $ref: "#/components/responses/403ForbiddenResponse"
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Not Found. Claim could not be found
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/4XXErrorSchema"
-          description: Conflict. The claim you are attempting to update is older than the current claim. Fetch the last copy of the entity and try the request again.
-        "500":
-          $ref: "#/components/responses/500ErrorResponse"
-      security:
-        - Bearer: []
-      summary: Submit a restaurant response for the claim
-      tags:
-        - Restaurant Claims
-        - publicly-accessible
-      x-status: Draft
-  "/restaurants/{tenant}/{restaurantId}/customerclaims/orderitemsclaims/{id}/restaurantresponse/justification":
-    put:
-      description: Add reason and comments to the response
-      parameters:
-        - description: Two letter code indicating the tenant
-          in: path
-          name: tenant
-          required: true
-          schema:
-            type: string
-        - description: Just Eat restaurant identifier
-          in: path
-          name: restaurantId
-          required: true
-          schema:
-            type: string
-        - description: Claim identifier
-          in: path
-          name: id
-          required: true
-          schema:
-            type: string
-        - description: Indicates the representation of the request body the client is sending (including version)
-          example: application/json;v=1
-          in: header
-          name: Content-Type
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Justification"
-        description: Payload containing the reason of rejection and optional comments
-      responses:
-        "200":
           description: Request succeeded. Justification was successfully submitted
         "400":
           content:
@@ -5124,33 +4934,68 @@ components:
           nullable: false
           type: string
       type: object
+    AppType:
+      description: Application type
+      enum:
+        - Orderpad
+        - OrdertrackerDroid
+        - OrdertrackerTouch
+        - Orderbox
+        - OrderDeliveryService
+        - OrderpadDroid
+        - OrderpadTouch
+        - None
+      type: string
+    ApproveCancellationQuery:
+      additionalProperties: false
+      properties:
+        fee:
+          description: Approved fee
+          format: decimal
+          nullable: true
+          type: number
+        notes:
+          description: Notes about this cancellation
+          nullable: true
+          type: string
+      type: object
     AttemptedDeliveryQuery:
       additionalProperties: false
       properties:
-        RequestType:
+        requestType:
           description: Type of attempted delivery request
           enum:
             - problem_with_address
             - no_answer
           nullable: true
           type: string
-        Resolution:
+        resolution:
           $ref: "#/components/schemas/AttemptedDeliveryResolution"
           description: The restaurants resolution to the query
           nullable: true
-        Response:
+        response:
           $ref: "#/components/schemas/AttemptedDeliveryResponse"
           description: The customers reponse to the query
           nullable: true
-        TimeStamp:
-          description: DateTime that the query was created
+        timeStamp:
+          description: DateTime that the query was created in ISO 8601 format
           format: date-time
+          type: string
+      type: object
+    AttemptedDeliveryRequest:
+      additionalProperties: false
+      properties:
+        reasonCode:
+          description: Reason for requesting attempted delivery
+          enum:
+            - problem_with_address
+            - no_answer
           type: string
       type: object
     AttemptedDeliveryResolution:
       additionalProperties: false
       properties:
-        CancellationReason:
+        cancellationReason:
           description: Reason for cancelling order
           enum:
             - new_address_not_within_area
@@ -5160,33 +5005,62 @@ components:
             - customer_doesnt_want_anymore
           nullable: true
           type: string
-        HasBeenMarkedAsOnItsWay:
+        hasBeenMarkedAsOnItsWay:
           description: Flag to indicate whether redelivery is on it's way
           type: boolean
-        RedeliveryStatus:
+        redeliveryStatus:
           description: Status of the redelivery request
           enum:
             - driver_at_address
             - repreparing
           nullable: true
           type: string
-        RedeliveryTime:
-          description: Estimated redelivery time
+        redeliveryTime:
+          description: Estimated redelivery time in ISO 8601 format
           format: date-time
+          nullable: true
+          type: string
+      type: object
+    AttemptedDeliveryResolutionCancellationRequest:
+      additionalProperties: false
+      properties:
+        reasonCode:
+          description: The reason the order has been cancelled
+          enum:
+            - new_address_not_within_area
+            - unable_to_reprepare
+            - driver_not_available
+            - area_unsafe
+            - customer_doesnt_want_anymore
+          type: string
+      type: object
+    AttemptedDeliveryResolutionRedeliveryRequest:
+      additionalProperties: false
+      properties:
+        newDueDate:
+          description: New date and time in ISO 8601 format the order is due to be delivered
+          format: date-time
+          nullable: true
+          type: string
+        status:
+          description: New status of attempted delivery
+          enum:
+            - driver_at_address
+            - repreparing
           nullable: true
           type: string
       type: object
     AttemptedDeliveryResponse:
       additionalProperties: false
       properties:
-        IsViewed:
+        isViewed:
           description: Has the response been viewed
           type: boolean
-        Message:
+        message:
           description: Response message from customer
           nullable: true
           type: string
-        ResponseType:
+        responseType:
           description: Response code from the customer for attempted delivery
           enum:
             - response
@@ -5359,19 +5233,19 @@ components:
     BadItem:
       additionalProperties: false
       properties:
-        Name:
+        name:
           description: Name of the item
           nullable: true
           type: string
-        Quantity:
+        quantity:
           description: Quantity of bad items
           format: int32
           type: integer
-        TotalCost:
+        totalCost:
           description: Total cost of all bad items
           format: decimal
           type: number
-        UnitPrice:
+        unitPrice:
           description: Price of a single item in local currency
           format: decimal
           type: number
@@ -5379,24 +5253,24 @@ components:
     BadItemClaim:
       additionalProperties: false
       properties:
-        Id:
+        id:
           description: Id of the claim
           nullable: true
           type: string
-        Issues:
+        issues:
           description: Bad item issues
           items:
             $ref: "#/components/schemas/BadItemsGroupedByIssue"
           nullable: true
           type: array
-        RefundRefusedReasonCode:
+        refundRefusedReasonCode:
           description: If claim is refused, the reason for refusal
           nullable: true
           type: string
-        Status:
+        status:
           $ref: "#/components/schemas/BadItemClaimStatus"
           description: Current status of the claim
-        TotalCost:
+        totalCost:
           description: Total cost of the claim in local currency
           format: decimal
           type: number
@@ -5409,6 +5283,32 @@ components:
         - RefundAccepted
         - RefundRefused
       type: integer
+    BadItemClaimUpdate:
+      additionalProperties: false
+      properties:
+        comment:
+          description: Additional comment
+          nullable: true
+          type: string
+        newStatus:
+          $ref: "#/components/schemas/BadItemClaimStatus"
+          description: New status of claim
+        refundRejectedReasonCode:
+          description: If claim is refused, the reason for refusal
+          enum:
+            - AlreadyRefunded
+            - ItemReplaced
+            - PartialRefundRequired
+            - WasNotMissing
+            - WillRedeliver
+            - OrderWasHot
+            - OrderWasOnTime
+            - OrderWasPacked
+            - FoodWasIntact
+            - AddExtraItem
+            - Other
+          type: string
+      type: object
     BadItemIssueSelectionStep:
       allOf:
         - $ref: "#/components/schemas/FlowStepBase"
@@ -5444,7 +5344,7 @@ components:
     BadItemsGroupedByIssue:
       additionalProperties: false
       properties:
-        Issue:
+        issue:
           description: Bad item issue type
           enum:
             - Missing
@@ -5452,7 +5352,7 @@ components:
             - Damaged
           nullable: true
           type: string
-        Items:
+        items:
           description: Group of items which have the same issue type
           items:
             $ref: "#/components/schemas/BadItem"
@@ -5606,6 +5506,11 @@ components:
         MaximumAdditionalOrderItems:
           format: integer
           type: number
+        PaymentDirectives:
+          $ref: "#/components/schemas/PaymentDirectives"
+          description: The directives to payment component
+          example:
+            DisableCashPayment: true
         Products:
           items:
             $ref: "#/components/schemas/Product"
@@ -5713,7 +5618,7 @@ components:
     BringOnlineRequest:
       additionalProperties: false
       properties:
-        Comment:
+        comment:
           description: Any additional information
           nullable: true
           type: string
@@ -5811,23 +5716,23 @@ components:
     CancellationInfo:
       additionalProperties: false
       properties:
-        CanRequestCompensation:
+        canRequestCompensation:
           description: Can the restaurant claim compenesation for this cancellation
           type: boolean
-        HasRequestedCompensation:
+        hasRequestedCompensation:
           description: Has the restaurant claimed compenesation for this cancellation
           type: boolean
-        InitiatedBy:
+        initiatedBy:
           $ref: "#/components/schemas/CancellationInitiatedBy"
           description: Whether cancellation has been initiated by restaurant or consumer
-        Reason:
+        reason:
           $ref: "#/components/schemas/CancellationReason"
           description: Reason for cancellation
           nullable: true
-        RestaurantAware:
+        restaurantAware:
           description: Is restaurant already aware of the cancellation
           type: boolean
-        RestaurantTransaction:
+        restaurantTransaction:
           $ref: "#/components/schemas/CancellationRestaurantTransaction"
           description: Potential compensation or fee applied to the restaurant for the cancellation
           nullable: true
@@ -5840,10 +5745,53 @@ components:
         - Customer
         - System
       type: integer
+    CancellationQueryResponse:
+      additionalProperties: false
+      properties:
+        comments:
+          description: Additional comments
+          nullable: true
+          type: string
+        createdAt:
+          description: Cancellation query creation date and time in ISO 8601 format
+          format: date-time
+          type: string
+        orderId:
+          description: The id of the order
+          nullable: true
+          type: string
+        policyResult:
+          $ref: "#/components/schemas/PolicyResult"
+          description: Result of the policy run
+        reasonCode:
+          description: Reason for order cancellation
+          enum:
+            - rest_cancelled_customer_requested
+            - rest_cancelled_customer_absent
+            - rest_cancelled_out_of_stock
+            - rest_cancelled_drivers_unavailable
+            - rest_cancelled_fake_order
+            - rest_cancelled_too_busy
+            - rest_cancelled_other
+          nullable: true
+          type: string
+        resolution:
+          $ref: "#/components/schemas/CancellationResolution"
+          description: Resolution of this cancellation querry
+        state:
+          description: Cancellation query outcome
+          enum:
+            - New
+            - Offered
+            - Declined
+            - Approved
+          nullable: true
+          type: string
+      type: object
     CancellationReason:
       additionalProperties: false
       properties:
-        Code:
+        code:
           description: Reason for order cancellation
           enum:
             - rest_cancelled_out_of_stock
@@ -5861,23 +5809,57 @@ components:
             - deleted_rejected_by_restaurant
           nullable: true
           type: string
-        Description:
+        description:
           description: Any additional comments
+          nullable: true
+          type: string
+      type: object
+    CancellationResolution:
+      additionalProperties: false
+      properties:
+        at:
+          description: Creation date and time of the cancellation in ISO 8601 format
+          format: date-time
+          type: string
+        by:
+          description: Role of cancellation requester
+          enum:
+            - Agent
+            - Restaurant
+            - System
+          nullable: true
+          type: string
+        feeApplied:
+          description: Approved amount
+          format: decimal
+          type: number
+        notes:
+          description: Additional notes
+          nullable: true
+          type: string
+        state:
+          description: State of the cancellation resolution
+          enum:
+            - Approved
+          nullable: true
+          type: string
+        userName:
+          description: User name who created this cancellation
           nullable: true
           type: string
       type: object
     CancellationRestaurantTransaction:
       additionalProperties: false
       properties:
-        Amount:
+        amount:
           description: The total amount of the transaction
           format: decimal
           type: number
-        Percentage:
+        percentage:
           description: The percentage of the order value of the transaction
           format: decimal
           type: number
-        Type:
+        type:
           $ref: "#/components/schemas/CancellationRestaurantTransactionType"
           description: The type of cancellation transaction
       type: object
@@ -6773,7 +6755,6 @@ components:
             reference: productid%t5y6574596
             totalClaimed: 1900
             unitPrice: 2000
-        claimType: OrderItemsClaim
         currency: GBP
         expirationDate: 2020-05-22T14:22:11.1053368+00:00
         friendlyOrderReference: "451226580"
@@ -6796,7 +6777,6 @@ components:
         totalClaimed: 3800
       oneOf:
         - $ref: "#/components/schemas/OrderClaim"
-        - $ref: "#/components/schemas/OrderItemsClaim"
       type: object
     ClaimResolution:
       description: Representation of the decision made about a claim
@@ -6846,7 +6826,6 @@ components:
             reference: productid%t5y6574596
             totalClaimed: 1900
             unitPrice: 2000
-        claimType: OrderItemsClaim
         currency: GBP
         expirationDate: 2020-05-22T14:22:11.1053368+00:00
         friendlyOrderReference: "451226580"
@@ -6875,8 +6854,7 @@ components:
       description: Response containing claims for a restaurant which match the given filter
       example:
         claims:
-          - claimType: OrderClaim
-            currency: GBP
+          - currency: GBP
             expirationDate: 2020-05-22T14:22:11.1053368+00:00
             friendlyOrderReference: "954226580"
             id: z2749442-a62a-abcd-8623-04202878e034
@@ -6910,7 +6888,6 @@ components:
                 reference: productid%t5y6574596
                 totalClaimed: 1900
                 unitPrice: 2000
-            claimType: OrderItemsClaim
             currency: GBP
             expirationDate: 2020-05-22T14:22:11.1053368+00:00
             friendlyOrderReference: "451226580"
@@ -6931,7 +6908,6 @@ components:
                 reference: productid%4t56574596
                 totalClaimed: 1900
                 unitPrice: 2000
-            claimType: OrderItemsClaim
             currency: GBP
             expirationDate: 2020-05-22T14:22:11.1053368+00:00
             friendlyOrderReference: "151226580"
@@ -6962,7 +6938,6 @@ components:
                 reference: productid%4t56574596
                 totalClaimed: 1900
                 unitPrice: 2000
-            claimType: OrderItemsClaim
             currency: GBP
             expirationDate: 2020-05-22T14:22:11.1053368+00:00
             friendlyOrderReference: "951226580"
@@ -6999,7 +6974,6 @@ components:
                 reference: productid%4t56574593
                 totalClaimed: 2900
                 unitPrice: 3000
-            claimType: OrderItemsClaim
             currency: GBP
             expirationDate: 2020-05-22T14:22:11.1053368+00:00
             friendlyOrderReference: "951226588"
@@ -7083,6 +7057,30 @@ components:
     CommunicationTypes:
       enum:
         - marketing
+      type: string
+    CompensationReason:
+      additionalProperties: false
+      properties:
+        code:
+          $ref: "#/components/schemas/CompensationReasonCode"
+          description: Compensation reason code
+        comments:
+          description: Additional comments
+          nullable: true
+          type: string
+        description:
+          description: Additional description
+          nullable: true
+          type: string
+      type: object
+    CompensationReasonCode:
+      description: Compensation reason code
+      enum:
+        - Unknown
+        - NotSet
+        - BeingPrepared
+        - OnItsWay
+        - Delivered
       type: string
     ConflictMarketingResponse:
       allOf:
@@ -8966,6 +8964,26 @@ components:
             ReasonCode: ProblemWithAddress|NoAnswer
           type: string
       type: object
+    CreateCancellationQuery:
+      additionalProperties: false
+      properties:
+        comments:
+          description: Additional comments
+          nullable: true
+          type: string
+        reasonCode:
+          description: Reason for order cancellation
+          enum:
+            - rest_cancelled_customer_requested
+            - rest_cancelled_customer_absent
+            - rest_cancelled_out_of_stock
+            - rest_cancelled_drivers_unavailable
+            - rest_cancelled_fake_order
+            - rest_cancelled_too_busy
+            - rest_cancelled_other
+          nullable: true
+          type: string
+      type: object
     CreateDeal:
       properties:
         Date:
@@ -9362,21 +9380,18 @@ components:
       description: Request containing support ticket information
       example:
         message: Change weekly budget
-        requestTypes:
-          - top_placement
-          - interest
+        subject: Top Placement - Interest
+        type: top_placement__interest
       properties:
         message:
           description: The message with the support details
           type: string
-        requestTypes:
-          description: List of types ticket belongs to
-          items:
-            description: Type the ticket belongs to
-            type: string
-          maxLength: 3
-          minLength: 1
-          type: array
+        subject:
+          description: Subject of the ticket
+          type: string
+        type:
+          description: Type the ticket belongs to
+          type: string
       type: object
     CreateTicketModel:
       description: Information needed to create a ticket on the Just Eat Zendesk instance for a Scoober delivery support incident
@@ -9971,32 +9986,32 @@ components:
     DeliveryDriverInfo:
       additionalProperties: false
       properties:
-        ArrivalTimeAtRestaurant:
+        arrivalTimeAtRestaurant:
           description: The ISO-8601 datetime arrival time of the driver
           format: date-time
           nullable: true
           type: string
-        DeliveryState:
+        deliveryState:
           description: Current state of the delivery
           enum:
             - Accepted
             - TransmissionFailed
           nullable: true
           type: string
-        DriverContactNumber:
+        driverContactNumber:
           description: The driver's contact telephone number
           nullable: true
           type: string
-        DriverName:
+        driverName:
           description: The driver's full name
           nullable: true
           type: string
-        DynamicArrivalEstimate:
+        dynamicArrivalEstimate:
           description: The ISO-8601 datetime dynamic estimated arrival of the driver
           format: date-time
           nullable: true
           type: string
-        EstimatedArrivalTime:
+        estimatedArrivalTime:
           description: The ISO-8601 datetime estimated arrival of the driver
           format: date-time
           nullable: true
@@ -10173,6 +10188,14 @@ components:
         - PAUSE_ORDERS
         - CANCELLATION
       type: string
+    DueTimeChange:
+      additionalProperties: false
+      properties:
+        newTimeDue:
+          description: New DateTime of the order due in ISO 8601 format
+          format: date-time
+          type: string
+      type: object
     EposState:
       description: Current state of sending Order to EPOS system
       enum:
@@ -10555,25 +10578,25 @@ components:
     GeoLocation:
       additionalProperties: false
       properties:
-        Accuracy:
+        accuracy:
           description: How accurate the location is
           format: double
           type: number
-        Heading:
+        heading:
           description: The direction of travel
           format: double
           type: number
-        Latitude:
+        latitude:
           description: The latitude component of the location
           format: double
           nullable: true
           type: number
-        Longitude:
+        longitude:
           description: The longitude component of the location
           format: double
           nullable: true
           type: number
-        Speed:
+        speed:
           description: The speed of travel
           format: double
           type: number
@@ -10740,22 +10763,18 @@ components:
     GetSupportRequestTypesResponse:
       description: Array of types request belongs to
       example:
-        - id: "1"
-          name: top placement
+        - name: Top Placement
           subtype:
-            - id: "11"
-              name: interest
+            - name: Interest
               subtype: []
-              value: top_placement_interest
-            - id: "12"
-              name: issue
+              value: top_placement__interest
+            - name: Issue
               subtype: []
-              value: top_placement_issue
+              value: top_placement__issue
           value: top_placement
-        - id: "2"
-          name: menu updates
-          subtype: []
-          value: menu_updates
+        - name: Menu update
+          subtypes: []
+          value: menu_update
       items:
         $ref: "#/components/schemas/SupportRequestType"
       minLength: 1
@@ -10764,28 +10783,24 @@ components:
       description: Response representing support requests from restaurant
       example:
         paging:
-          cursors:
-            after: NDMyNzQyODI3OTQw
+          count: 35
         requests:
           - id: "5646645"
             status: open
+            subject: Top Placement
             submittedDate: 2020-01-01T09:30:00.000Z
-            type: top_placement
           - id: "235253"
             status: closed
+            subject: Change Logo Request
             submittedDate: 2020-01-01T09:30:00.000Z
-            type: top_placement
       properties:
         paging:
           description: Consists of pagination information
           properties:
-            cursors:
-              description: Consists of cursors markers used in pagination
-              properties:
-                after:
-                  description: The value should be used in the query parameter named after. It is used as a cursor of the last returned record in the previous request, from which next offset going to be fetched. A missing or empty value indicates that the end of the result set has been reached
-                  type: string
-              type: object
+            count:
+              description: The total number of results
+              format: int64
+              type: integer
           type: object
         requests:
           description: List of restaurant support requests
@@ -11161,6 +11176,7 @@ components:
       example:
         comments: The food was packed properly
         reason: Other
+      nullable: true
       properties:
         comments:
           description: Comment from the restaurant owner in case they rejected at least one of the items and want to type their own rejection reason
@@ -11185,47 +11201,69 @@ components:
     LateOrderCompensationOption:
       additionalProperties: false
       properties:
-        Amount:
+        amount:
           description: Cost of the option in local currency
           format: decimal
           type: number
-        IsRecommended:
+        isRecommended:
           description: Whether this option is the recommended option
           type: boolean
       type: object
     LateOrderCompensationQuery:
       additionalProperties: false
       properties:
-        CompensationOptions:
+        compensationOptions:
           description: List of possible options for compensation
           items:
             $ref: "#/components/schemas/LateOrderCompensationOption"
           nullable: true
           type: array
-        IsViewed:
+        isViewed:
           description: Has this compensation query been viewed
           type: boolean
-        QueryId:
+        queryId:
           description: The ID of the late order compensation query
           nullable: true
           type: string
-        Response:
+        response:
           $ref: "#/components/schemas/LateOrderCompensationResponse"
           description: The restaurants response to the late order compensation query
           nullable: true
       type: object
+    LateOrderCompensationResolutionRequest:
+      additionalProperties: false
+      properties:
+        acceptedAmount:
+          description: Accepted compensation amount
+          format: double
+          nullable: true
+          type: number
+        isAccepted:
+          description: Is compensation accepted
+          type: boolean
+        rejectedReasonCode:
+          description: Reason code for rejection
+          enum:
+            - ExtraItem
+            - StuckInTraffic
+            - BusierThanExpected
+            - BadWeather
+            - UnexpectedProblems
+          nullable: true
+          type: string
+      type: object
     LateOrderCompensationResponse:
       additionalProperties: false
       properties:
-        AcceptedAmount:
+        acceptedAmount:
           description: The amount of compensation if accepted
           format: decimal
           nullable: true
           type: number
-        IsAccepted:
+        isAccepted:
           description: Has the late order compensation request been accepted
           type: boolean
-        RejectedReasonCode:
+        rejectedReasonCode:
           description: The rejection reason if not accepted
           enum:
             - ExtraItem
@@ -11274,12 +11312,30 @@ components:
     LateOrderInfo:
       additionalProperties: false
       properties:
-        IsLateOrder:
+        isLateOrder:
           description: Is there a late order request
           type: boolean
-        LateOrderProcessed:
+        lateOrderProcessed:
           description: Has the late order request been processed by the restaurant
           type: boolean
+      type: object
+    LateOrderRequest:
+      additionalProperties: false
+      properties:
+        additionalMinutesToAdd:
+          description: Amount of minutes added
+          format: int32
+          nullable: true
+          type: integer
+        lateOrderStatus:
+          description: Reason to adding minutes
+          enum:
+            - None,
+            - Preparing,
+            - OnItsWay,
+            - Delivered
+          nullable: true
+          type: string
       type: object
     LateOrderRestaurantResponse:
       properties:
@@ -12265,6 +12321,27 @@ components:
           description: A unique identifier at tenant level for a given restaurant.
           type: string
       type: object
+    MenuCategory:
+      additionalProperties: false
+      properties:
+        description:
+          description: Description of category
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          description: Name of category
+          nullable: true
+          readOnly: true
+          type: string
+        productGroups:
+          description: Product group
+          items:
+            $ref: "#/components/schemas/ProductGroup"
+          nullable: true
+          readOnly: true
+          type: array
+      type: object
     MenuDealGroup:
       allOf:
         - $ref: "#/components/schemas/MenuDealGroupBase"
@@ -12939,22 +13016,62 @@ components:
       required:
         - themes
       type: object
+    MergedMenuCard:
+      additionalProperties: false
+      properties:
+        categories:
+          additionalProperties:
+            $ref: "#/components/schemas/MenuCategory"
+          description: Menu items of the restaurant with offline/online statuses grouped by category
+          nullable: true
+          type: object
+      type: object
+    MergedMenuResponse:
+      additionalProperties: false
+      properties:
+        menuCard:
+          $ref: "#/components/schemas/MergedMenuCard"
+          description: Menu items of the restaurant with offline/online statuses grouped by category
+      type: object
+    MergedProduct:
+      additionalProperties: false
+      properties:
+        id:
+          description: The id of the product
+          nullable: true
+          type: string
+        ids:
+          deprecated: true
+          description: Depricated, not in use
+          items:
+            format: int32
+            type: integer
+          nullable: true
+          type: array
+        isOffline:
+          description: Is this product offline?
+          type: boolean
+        name:
+          description: Product name
+          nullable: true
+          type: string
+      type: object
     MissingItem:
       additionalProperties: false
       properties:
-        ItemReference:
+        itemReference:
           description: Product reference of missing item
           nullable: true
           type: string
-        Name:
+        name:
           description: Name of the missing item
           nullable: true
           type: string
-        Quantity:
+        quantity:
           description: Number of items missing
           format: int32
           type: integer
-        RefundAmount:
+        refundAmount:
           description: Total cost of missing item
           format: decimal
           type: number
@@ -12962,28 +13079,28 @@ components:
     MissingItemClaim:
       additionalProperties: false
       properties:
-        Id:
+        id:
           description: Id of the missing item claim
           nullable: true
           type: string
-        MissingItems:
+        missingItems:
           description: Items that are missing
           items:
             $ref: "#/components/schemas/MissingItem"
           nullable: true
           type: array
-        RefundRefusedReasonCode:
+        refundRefusedReasonCode:
           description: Reason for refusing if status is refused
           nullable: true
           type: string
-        Status:
+        status:
           $ref: "#/components/schemas/MissingItemClaimStatus"
           description: Current status of the missing item claim
-        TotalAmount:
+        totalAmount:
           description: Total cost of the claim
           format: decimal
           type: number
-        TotalNumberItems:
+        totalNumberItems:
           description: Total quantity of items in the claim
           format: int32
           type: integer
@@ -13599,6 +13716,16 @@ components:
         ProductId:
           type: string
       type: object
+    OfflineProductsResponse:
+      additionalProperties: false
+      properties:
+        offlineProducts:
+          description: Array of men items which are offline currently
+          items:
+            $ref: "#/components/schemas/OrderpadOfflineProduct"
+          nullable: true
+          type: array
+      type: object
     OfflineRestaurantsRequestModel:
       additionalProperties: false
       example:
@@ -13676,11 +13803,11 @@ components:
     OptimizelyData:
       additionalProperties: false
       properties:
-        CdnUrl:
+        cdnUrl:
           description: Location of the Optimizely data file
           nullable: true
           type: string
-        DataFileRevision:
+        dataFileRevision:
           description: The index of the Optimizely revision
           format: int32
           type: integer
@@ -13793,32 +13920,54 @@ components:
     OrderClaim:
       description: Claim information
       example:
-        claimType: OrderClaim
+        affectedItems:
+          - additionalContext: Potato skin was damaged
+            decision: Rejected
+            id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
+            name: Potato skin
+            quantity: 1
+            reference: productid%4t56574596
+            totalClaimed: 1900
+            unitPrice: 2000
+          - additionalContext: Pizza was damaged too
+            decision: Accepted
+            id: 123iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
+            name: Pizza
+            quantity: 1
+            reference: productid%t5y6574596
+            totalClaimed: 1900
+            unitPrice: 2000
         currency: GBP
         expirationDate: 2020-05-22T14:22:11.1053368+00:00
-        friendlyOrderReference: "151226580"
-        id: 1f749442-a62a-abcd-8623-04202878e034
-        issueType: LateOrder
-        orderId: a23tqoxdoeupdx9w8evorw
+        friendlyOrderReference: "451226580"
+        id: 2f749442-a62a-abcd-8623-04202878e034
+        issueType: Damaged
+        orderId: r23tqoxdoeupdx9w8evorw
         resolution:
-          decision: Rejected
+          decision: PartiallyAccepted
           resolvedChannel: PartnerCentre
           resolvedDate: 2020-05-28T06:40:48.1053368+00:00
-          totalClaimedAccepted: 0
+          totalClaimedAccepted: 1900
         restaurantResponse:
-          decision: Rejected
+          decision: PartiallyAccepted
+          items:
+            - decision: Rejected
+              id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
+            - decision: Accepted
+              id: 123iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
           justification:
-            comments: Not our fault at all
+            comments: The food was packed properly
             reason: Other
         state: Closed
         submittedDate: 2020-05-20T14:22:11.1053368+00:00
-        totalClaimed: 1900
+        totalClaimed: 3800
       properties:
-        claimType:
-          description: Indicates that the claim concerns the order
-          enum:
-            - OrderClaim
-          type: string
+        affectedItems:
+          description: Information about the claimed items
+          items:
+            $ref: "#/components/schemas/Item"
+          nullable: true
+          type: array
         currency:
           description: Name of currency in ISO 4217 format
           type: string
@@ -13835,6 +13984,9 @@ components:
         issueType:
           description: Type of claim
           enum:
+            - Missing
+            - Damaged
+            - Cold
             - LateOrder
             - FoodNotArrived
           type: string
@@ -13870,7 +14022,12 @@ components:
     OrderClaimRestaurantResponse:
       description: Restaurant response for the claim
       example:
-        decision: Rejected
+        decision: PartiallyAccepted
+        items:
+          - decision: Accepted
+            id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
+          - decision: Rejected
+            id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc3
         justification:
           comments: The food was packed properly
           reason: Other
@@ -13880,11 +14037,17 @@ components:
           enum:
             - Accepted
             - Rejected
+            - PartiallyAccepted
           type: string
+        items:
+          description: Decisions on the items of a claim
+          items:
+            $ref: "#/components/schemas/ItemDecision"
+          nullable: true
+          type: array
         justification:
           $ref: "#/components/schemas/Justification"
           description: Reasons why of the decision for the claim
-          nullable: true
       type: object
     OrderEligibleForRestaurantCompensation:
       example:
@@ -13913,18 +14076,18 @@ components:
     OrderHistoryItem:
       additionalProperties: false
       properties:
-        Detail:
+        detail:
           description: Additional information about status update
           nullable: true
           type: string
-        OccurredAt:
+        occurredAt:
           description: ISO 8601 Date/Time of status update
           format: date-time
           type: string
-        OrderState:
+        orderState:
           $ref: "#/components/schemas/ClientOrderState"
           description: State order was set to
-        UpdatedBy:
+        updatedBy:
           description: User who made the status update
           nullable: true
           type: string
@@ -13932,61 +14095,61 @@ components:
     OrderItem:
       additionalProperties: false
       properties:
-        BasketIds:
+        basketIds:
           description: Array of basket id's that make up the item. Can be multiple due to Zeus' grouping of items
           items:
             type: string
           nullable: true
           type: array
-        Comment:
+        comment:
           description: Additional comments
           nullable: true
           type: string
-        Id:
+        id:
           description: Basket Id of the order item
           nullable: true
           type: string
-        ItemReference:
+        itemReference:
           description: Item reference uniquely identifying a product on the menu but not basket instance of a product
           nullable: true
           type: string
-        MenuIdentifier:
+        menuIdentifier:
           description: Just Eat menu identifier
           nullable: true
           type: string
-        MenuNumber:
+        menuNumber:
           description: Just Eat menu number
           nullable: true
           type: string
-        Name:
+        name:
           description: Name of the item
           nullable: true
           type: string
-        OrderItemAccessories:
+        orderItemAccessories:
           description: Array of accessories for this item
           items:
             $ref: "#/components/schemas/OrderItemAccessory"
           nullable: true
           type: array
-        OrderItems:
+        orderItems:
           description: Array of sub items for this item
           items:
             $ref: "#/components/schemas/OrderItem"
           nullable: true
           type: array
-        ProductCategory:
+        productCategory:
           description: Just Eat product category
           nullable: true
           type: string
-        ProductTypeId:
+        productTypeId:
           description: Just Eat product type id
           format: int32
           type: integer
-        Quantity:
+        quantity:
           description: Quantity of the item
           format: int32
           type: integer
-        TotalPrice:
+        totalPrice:
           description: Total price of this item
           format: decimal
           type: number
@@ -13994,160 +14157,34 @@ components:
     OrderItemAccessory:
       additionalProperties: false
       properties:
-        AccessoryName:
+        accessoryName:
           description: Name of the accessory
           nullable: true
           type: string
-        GroupId:
+        groupId:
           description: Group id of the accessory
           format: int32
           type: integer
-        Id:
+        id:
           description: Id of the accessory
           nullable: true
           type: string
-        ItemReference:
+        itemReference:
           description: Item reference uniquely identifying a product on the menu but not basket instance of a product
           nullable: true
           type: string
-        Name:
+        name:
           description: Name of the accessory
           nullable: true
           type: string
-        Quantity:
+        quantity:
           description: Quantity of accessories
           format: int32
           type: integer
-        TotalPrice:
+        totalPrice:
           description: Total price of the accessory
           format: decimal
           type: number
-      type: object
-    OrderItemsClaim:
-      description: Claim information
-      example:
-        affectedItems:
-          - additionalContext: Potato skin was damaged
-            decision: Rejected
-            id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
-            name: Potato skin
-            quantity: 1
-            reference: productid%4t56574596
-            totalClaimed: 1900
-            unitPrice: 2000
-          - additionalContext: Pizza was damaged too
-            decision: Accepted
-            id: 123iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
-            name: Pizza
-            quantity: 1
-            reference: productid%t5y6574596
-            totalClaimed: 1900
-            unitPrice: 2000
-        claimType: OrderItemsClaim
-        currency: GBP
-        expirationDate: 2020-05-22T14:22:11.1053368+00:00
-        friendlyOrderReference: "451226580"
-        id: 2f749442-a62a-abcd-8623-04202878e034
-        issueType: Damaged
-        orderId: r23tqoxdoeupdx9w8evorw
-        resolution:
-          decision: PartiallyAccepted
-          resolvedChannel: PartnerCentre
-          resolvedDate: 2020-05-28T06:40:48.1053368+00:00
-          totalClaimedAccepted: 1900
-        restaurantResponse:
-          items:
-            - decision: Rejected
-              id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
-            - decision: Accepted
-              id: 123iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
-          justification:
-            comments: The food was packed properly
-            reason: Other
-        state: Closed
-        submittedDate: 2020-05-20T14:22:11.1053368+00:00
-        totalClaimed: 3800
-      properties:
-        affectedItems:
-          description: Information about the claimed items
-          items:
-            $ref: "#/components/schemas/Item"
-          type: array
-        claimType:
-          description: Indicates that the claim concerns the order items
-          enum:
-            - OrderItemsClaim
-          type: string
-        currency:
-          description: Name of currency in ISO 4217 format
-          type: string
-        expirationDate:
-          description: Date when the claim will be accepted automatically in case the owner of the restaurant ignores it
-          format: date-time
-          type: string
-        friendlyOrderReference:
-          description: Just Eat friendly order reference
-          type: string
-        id:
-          description: Claim identifier
-          type: string
-        issueType:
-          description: Type of claim
-          enum:
-            - Missing
-            - Damaged
-            - Cold
-          type: string
-        orderId:
-          description: Just Eat order identifier
-          type: string
-        resolution:
-          allOf:
-            - $ref: "#/components/schemas/ClaimResolution"
-          description: Representation of the claim resolution
-          nullable: true
-          type: object
-        restaurantResponse:
-          allOf:
-            - $ref: "#/components/schemas/OrderItemsClaimRestaurantResponse"
-          description: Restaurant response on the claim
-          nullable: true
-          type: object
-        state:
-          description: Indicates whether a decision about the claim was made
-          enum:
-            - Open
-            - Closed
-          type: string
-        submittedDate:
-          description: Date when the claim was submitted
-          format: date-time
-          type: string
-        totalClaimed:
-          description: Total claimed money in smallest unit of relevant currency
-          type: number
-      type: object
-    OrderItemsClaimRestaurantResponse:
-      description: Restaurant response for the claim
-      example:
-        items:
-          - decision: Accepted
-            id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
-          - decision: Rejected
-            id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc3
-        justification:
-          comments: The food was packed properly
-          reason: Other
-      properties:
-        items:
-          description: Decisions on the items of a claim
-          items:
-            $ref: "#/components/schemas/ItemDecision"
-          type: array
-        justification:
-          $ref: "#/components/schemas/Justification"
-          description: Reasons why of the decision for the claim
-          nullable: true
       type: object
     OrderNumberValidity:
       additionalProperties: false
@@ -14164,207 +14201,207 @@ components:
     OrderPadClientOrder:
       additionalProperties: false
       properties:
-        AcceptedAt:
+        acceptedAt:
           description: ISO 8601 Date/Time order was accepted by the restaurant
           format: date-time
           type: string
-        AcceptedFor:
+        acceptedFor:
           description: ISO 8601 Date/Time time due at the point of acceptance
           format: date-time
           type: string
-        AddressLines:
+        addressLines:
           description: Customer address
           items:
             type: string
           nullable: true
           type: array
-        AsSoonAsPossible:
+        asSoonAsPossible:
           description: Will be false if order was a preorder
           type: boolean
-        AttemptedDeliveryQuery:
+        attemptedDeliveryQuery:
           $ref: "#/components/schemas/AttemptedDeliveryQuery"
           description: Details of any attempted delivery query attached to the order
           nullable: true
-        BadItemClaims:
+        badItemClaims:
           description: A list of bad item claims attached to the order
           items:
             $ref: "#/components/schemas/BadItemClaim"
           nullable: true
           type: array
-        CancellationInfo:
+        cancellationInfo:
           $ref: "#/components/schemas/CancellationInfo"
           description: Details of any cancellation attached to the order
           nullable: true
-        CancelledAt:
+        cancelledAt:
           description: ISO 8601 Date/Time order was cancelled
           format: date-time
           type: string
-        City:
+        city:
           description: Customer city
           nullable: true
           type: string
-        CustomerId:
+        customerId:
           description: Platform customer id
           nullable: true
           type: string
-        CustomerNote:
+        customerNote:
           description: Customer added notes
           nullable: true
           type: string
-        DeliveredAt:
+        deliveredAt:
           description: ISO 8601 Date/Time order was delivered
           format: date-time
           nullable: true
           type: string
-        DeliveryDriverInfo:
+        deliveryDriverInfo:
           $ref: "#/components/schemas/DeliveryDriverInfo"
           description: Delivery driver information
           nullable: true
-        DeliveryDriverUsername:
+        deliveryDriverUsername:
           description: Delivery drivers user name (usually their phone number)
           nullable: true
           type: string
-        DeliveryNote:
+        deliveryNote:
           description: Delivery specific notes
           nullable: true
           type: string
-        EposState:
+        eposState:
           $ref: "#/components/schemas/EposState"
           description: Current state of sending the order to the restaurants EPOS system
-        EstimatedDeliveryTimeInSeconds:
+        estimatedDeliveryTimeInSeconds:
           description: How long until order will be delivered in seconds (RDS only)
           format: int32
           type: integer
-        EstimatedHandoverTimeInSeconds:
+        estimatedHandoverTimeInSeconds:
           description: How long until order needs to be handed over to driver in seconds (RDS only)
           format: int32
           type: integer
-        ExternalCustomerId:
+        externalCustomerId:
           description: Customer id restaurants can use to identify customer
           nullable: true
           type: string
-        Id:
+        id:
           description: Id used to identify the order in Zeus
           nullable: true
           type: string
-        IsPreorder:
+        isPreorder:
           description: Whether order is a preorder
           type: boolean
-        IsRdsOrder:
+        isRdsOrder:
           description: Will be true if delivery is being arranged by Just Eat
           type: boolean
-        LateOrderCompensationQuery:
+        lateOrderCompensationQuery:
           $ref: "#/components/schemas/LateOrderCompensationQuery"
           description: Details of any late order compensation query attached to the order
           nullable: true
-        LateOrderInfo:
+        lateOrderInfo:
           $ref: "#/components/schemas/LateOrderInfo"
           description: Details of any late order query attached to the order
           nullable: true
-        Location:
+        location:
           $ref: "#/components/schemas/GeoLocation"
           description: Geo location of the customers address
           nullable: true
-        MissingItemClaims:
+        missingItemClaims:
           description: A list of missing item claims attached to the order
           items:
             $ref: "#/components/schemas/MissingItemClaim"
           nullable: true
           type: array
-        ModernId:
+        modernId:
           description: Just Eat modern order id
           nullable: true
           type: string
-        Name:
+        name:
           description: Customer name
           nullable: true
           type: string
-        Notes:
+        notes:
           description: General order notes
           nullable: true
           type: string
-        OrderHistory:
+        orderHistory:
           description: Ordered history of status updates to the order and when they happened
           items:
             $ref: "#/components/schemas/OrderHistoryItem"
           nullable: true
           type: array
-        OrderItems:
+        orderItems:
           description: A list of order items
           items:
             $ref: "#/components/schemas/OrderItem"
           nullable: true
           type: array
-        OrderState:
+        orderState:
           $ref: "#/components/schemas/ClientOrderState"
           description: Current state of the order
-        OrderType:
+        orderType:
           $ref: "#/components/schemas/OrderType"
           description: Type of order (collection or delivery)
-        PaymentInfo:
+        paymentInfo:
           $ref: "#/components/schemas/PaymentInfo"
           description: Payment details for the order
           nullable: true
-        Phone:
+        phone:
           description: Customer phone number (will be phone masking number in markets when enabled)
           nullable: true
           type: string
-        PhoneMaskingCode:
+        phoneMaskingCode:
           description: Code to use when calling customer phone masking number about this order
           nullable: true
           type: string
-        Postcode:
+        postcode:
           description: Customer postcode
           nullable: true
           type: string
-        PreferredTimeDue:
+        preferredTimeDue:
           description: Current agreed delivery time of the order
           format: date-time
           type: string
-        PrepareOrderFor:
+        prepareOrderFor:
           description: ISO 8601 Date/Time when order should be prepared for
           format: date-time
           nullable: true
           type: string
-        PreviousOrders:
+        previousOrders:
           description: Number of previous Just Eat orders by the customer
           nullable: true
           type: string
-        PreviousOrdersToRestaurant:
+        previousOrdersToRestaurant:
           description: Number of previous orders by the customer to this restaurant
           nullable: true
           type: string
-        RdsPickupTime:
+        rdsPickupTime:
           description: ISO 8601 Date/Time when order will be picked up by RDS partner
           format: date-time
           nullable: true
           type: string
-        ReceivedAt:
+        receivedAt:
           description: ISO 8601 Date/Time order was paid
           format: date-time
           type: string
-        RestaurantId:
+        restaurantId:
           description: Restaurant Id of the order
           nullable: true
           type: string
-        RestaurantInformation:
+        restaurantInformation:
           $ref: "#/components/schemas/RestaurantInfo"
           description: Restaurant information for the order
           nullable: true
-        SourcePartner:
+        sourcePartner:
           $ref: "#/components/schemas/PartnerInfo"
           description: Information about the source of the order (Just Eat, Third Party etc.)
           nullable: true
-        StartOrderPreparationAt:
+        startOrderPreparationAt:
           description: ISO 8601 Date/Time for restaurant to start preparing the order
           format: date-time
           nullable: true
           type: string
-        TimeDue:
+        timeDue:
           description: Current agreed delivery time of the order
           format: date-time
           type: string
-        WithDriverAt:
+        withDriverAt:
           description: ISO 8601 Date/Time order was handed over to driver
           format: date-time
           nullable: true
@@ -14373,15 +14410,15 @@ components:
     OrderStateChange:
       additionalProperties: false
       properties:
-        NewState:
+        newState:
           $ref: "#/components/schemas/ClientOrderState"
           description: New order state
-        TimeAcceptedFor:
+        timeAcceptedFor:
           description: If accepting order what date time (with offset) are you accepting it for
           format: date-time
           type: string
       required:
-        - NewState
+        - newState
       type: object
     OrderTimeSuccessResponse:
       description: The response object for successful updates to order time.
@@ -14415,10 +14452,58 @@ components:
         - Delivery
         - Unknown
       type: integer
+    OrderpadMenuItem:
+      additionalProperties: false
+      properties:
+        id:
+          description: The id of the menu item
+          nullable: true
+          type: string
+        isOutOfStock:
+          description: Is this menu item out of stock
+          type: boolean
+        name:
+          description: Name of the menu item
+          nullable: true
+          type: string
+      type: object
+    OrderpadOfflineProduct:
+      additionalProperties: false
+      properties:
+        createdBy:
+          description: Application which requested operation e.g. Orderpad, RestaurantApp
+          nullable: true
+          type: string
+        createdOn:
+          description: Date and time in ISO 8601 format taken offline
+          format: date-time
+          type: string
+        nextAvailableAt:
+          description: Date and time in ISO 8601 format when item will be brought back online
+          format: date-time
+          nullable: true
+          type: string
+        productId:
+          description: The id of the menu item
+          nullable: true
+          type: string
+        restaurantId:
+          description: The Id of the restaurant
+          format: int32
+          type: integer
+      type: object
+    OrderpadSetupType:
+      description: Type of order pad set up
+      enum:
+        - Unknown
+        - SignUp
+        - Upgrade
+        - Swap
+      type: string
     OrdersData:
       additionalProperties: false
       properties:
-        UnreceivedOrders:
+        unreceivedOrders:
           description: List of all changed orders for a restaurant
           items:
             type: string
@@ -14797,23 +14882,23 @@ components:
     PartnerInfo:
       additionalProperties: false
       properties:
-        FriendlyOrderReference:
+        friendlyOrderReference:
           description: Friendly order reference
           nullable: true
           type: string
-        OrderReference:
+        orderReference:
           description: Reference that partner uses to identify the order
           nullable: true
           type: string
-        PartnerId:
+        partnerId:
           description: Partner id of the source
           nullable: true
           type: string
-        PartnerName:
+        partnerName:
           description: Partner name of the source
           nullable: true
           type: string
-        Source:
+        source:
           description: Where did the order originate (Just Eat, third party etc.)
           nullable: true
           type: string
@@ -14837,64 +14922,71 @@ components:
           description: Global identifier for consumer and tenant.
           type: string
       type: object
+    PaymentDirectives:
+      description: The directives for payment component
+      properties:
+        DisableCashPayment:
+          description: Indicates if cash payment option should be disabled
+          type: boolean
+      type: object
     PaymentInfo:
       additionalProperties: false
       properties:
-        AccountCreditAmount:
+        accountCreditAmount:
           description: Total amount paid for with account credit
           format: decimal
           type: number
-        CardAmount:
+        cardAmount:
           description: Amount paid by card
           format: decimal
           type: number
-        CardFee:
+        cardFee:
           description: Card fee for the order
           format: decimal
           type: number
-        CardNumberLast4Digits:
+        cardNumberLast4Digits:
           description: Last 4 digits of the payment card
           nullable: true
           type: string
-        Currency:
+        currency:
           description: Name of the currency used for the order
           nullable: true
           type: string
-        DeliveryCharge:
+        deliveryCharge:
           description: Amount of cost that comes from delivery
           format: decimal
           type: number
-        Discount:
+        discount:
           description: Total amount of discount
           format: decimal
           type: number
-        DiscountSource:
+        discountSource:
           description: Source of discount (i.e. Just Eat or restaurant funded)
           nullable: true
           type: string
-        FeeText:
+        feeText:
           description: Type of fee (spanner, card, servicecharge)
           nullable: true
           type: string
-        IsCashPayment:
+        isCashPayment:
           description: Is it a cash order
           type: boolean
-        LeftToPay:
+        leftToPay:
           description: Amount left for customer to pay in cash after all vouchers and discounts removed from total
           format: decimal
           type: number
-        Taxes:
+        taxes:
           additionalProperties:
             format: decimal
             type: number
           description: Tax information for the order
           nullable: true
           type: object
-        TotalPrice:
+        totalPrice:
           description: Total price of the order
           format: decimal
           type: number
-        VoucherAmount:
+        voucherAmount:
           description: Total amount paid for with a voucher
           format: decimal
           type: number
@@ -14917,6 +15009,77 @@ components:
               format: decimal
               type: number
           type: object
+    PolicyEligibility:
+      additionalProperties: false
+      properties:
+        code:
+          description: Policy rule name
+          enum:
+            - BlockBlacklistedRestaurants
+            - BlockCashCancellationBlacklistedRestaurants
+            - BlockCashOrders
+            - CashCancellationsAreWithinAllowedThreshold
+            - CashOrderInTheWindowAfterAcceptance
+            - MaxCancellationsPerCustomer
+            - MaxCancellationsPerRestaurant
+            - EvaluateMaxOrderValue
+            - NotInTheWindowAfterAcceptance
+            - OrderCancelledStatePolicy
+            - IsRestaurantCancellationCapable
+          nullable: true
+          type: string
+        passed:
+          description: Passed or not
+          type: boolean
+      type: object
+    PolicyFee:
+      additionalProperties: false
+      properties:
+        amount:
+          description: Amount to be returned in local currency
+          format: decimal
+          type: number
+        justificationCode:
+          description: Justification code
+          enum:
+            - CancellationOutsideWindow
+            - UnChargeableReason
+            - EmptyAcceptedAt
+            - CancellationInsideWindow
+          nullable: true
+          type: string
+        percentage:
+          description: Percentage to be returned
+          format: decimal
+          type: number
+      type: object
+    PolicyOutcome:
+      additionalProperties: false
+      properties:
+        decision:
+          description: Decision after policy run
+          enum:
+            - Offered
+            - Declined
+          nullable: true
+          type: string
+        fee:
+          $ref: "#/components/schemas/PolicyFee"
+          description: Fee details after the policy run
+      type: object
+    PolicyResult:
+      additionalProperties: false
+      properties:
+        eligibility:
+          description: Eligibility details
+          items:
+            $ref: "#/components/schemas/PolicyEligibility"
+          nullable: true
+          type: array
+        outcome:
+          $ref: "#/components/schemas/PolicyOutcome"
+          description: Result of the policy run
+      type: object
     PredictiveSearchRequest:
       example:
         location: BS1
@@ -15063,6 +15226,16 @@ components:
           description: Product or Addon
           nullable: false
           type: string
+      type: object
+    ProductGroup:
+      additionalProperties: false
+      properties:
+        products:
+          description: List of products
+          items:
+            $ref: "#/components/schemas/MergedProduct"
+          nullable: true
+          type: array
       type: object
     ProductRecommendationsResponse:
       description: Contains all recommendations for a product.
@@ -15789,15 +15962,56 @@ components:
     Properties:
       description: Geometry information for consumers location
       example:
-        errorMessage: Could not geocode address.
+        accuracyScore: 100
         geocodingProvider: Google
+        matchScore: 100
       properties:
-        errorMessage:
-          description: Any error returned by the geocoding provider.
-          nullable: true
-          type: string
+        accuracyScore:
+          default: 80
+          description: Just Eat Takeaway address accuracy score
+          format: integer
+          maximum: 100
+          minimum: 1
+          type: number
         geocodingProvider:
           description: the geocoding provider
+          type: string
+        matchScore:
+          default: 100
+          description: Just Eat Takeaway address match score
+          format: integer
+          maximum: 100
+          minimum: 1
+          type: number
+      type: object
+    PushNotificationRegistrationUpdate:
+      additionalProperties: false
+      properties:
+        appType:
+          $ref: "#/components/schemas/AppType"
+          description: Application type
+        pushNotificationToken:
+          description: Push notification token
+          nullable: true
+          type: string
+      type: object
+    PutProductBackOnTheMenuCommand:
+      additionalProperties: false
+      properties:
+        deletedBy:
+          description: Application which requested operation e.g. Orderpad, RestaurantApp
+          nullable: true
+          type: string
+        productIds:
+          description: List of product Ids to be brought back online
+          items:
+            type: string
+          nullable: true
+          type: array
+        requestedAt:
+          description: Request date and time in ISO 8601 format
+          format: date-time
+          nullable: true
           type: string
       type: object
     RedeemCommand:
@@ -15833,6 +16047,45 @@ components:
           enum:
             - DriverAtAddress
             - Repreparing
+          type: string
+      type: object
+    RegistrationRequest:
+      additionalProperties: false
+      properties:
+        appType:
+          $ref: "#/components/schemas/AppType"
+          description: Application type
+        password:
+          description: Password
+          nullable: true
+          type: string
+        pushNotificationId:
+          description: The id used in push notification registration
+          nullable: true
+          type: string
+        username:
+          description: Username
+          nullable: true
+          type: string
+      type: object
+    RegistrationResponse:
+      additionalProperties: false
+      properties:
+        appType:
+          description: Application type
+          nullable: true
+          type: string
+        restaurantId:
+          description: The Id of the restaurant
+          nullable: true
+          type: string
+        token:
+          description: Created uthentication token
+          nullable: true
+          type: string
+        userId:
+          description: The Id of the user
+          nullable: true
           type: string
       type: object
     RemovedIngredient:
@@ -15883,6 +16136,63 @@ components:
         restaurantComments:
           description: Restaurant comments in response on the customer review
           nullable: false
+          type: string
+      type: object
+    RestaurantConfiguration:
+      additionalProperties: false
+      properties:
+        addressCity:
+          description: Address city
+          nullable: true
+          type: string
+        addressLine1:
+          description: Address line 1
+          nullable: true
+          type: string
+        brandName:
+          description: Name of the brand this restaurant belongs to
+          nullable: true
+          type: string
+        financeDetails:
+          $ref: "#/components/schemas/RestaurantFinanceDetails"
+          description: Restaurant finance details
+        geoLocation:
+          $ref: "#/components/schemas/GeoLocation"
+          description: Geo location details
+        isDmsEnabled:
+          description: Is DMS enabled
+          type: boolean
+        isFlypayEposEnabled:
+          description: Is Flypay enabled
+          type: boolean
+        isRdsRestaurant:
+          description: Is it RDS restaurant
+          type: boolean
+        logoUrl:
+          description: Logo Url
+          nullable: true
+          type: string
+        name:
+          description: Name of the restaurant
+          nullable: true
+          type: string
+        phoneNumber:
+          description: Phone number
+          nullable: true
+          type: string
+        postalCode:
+          description: Post code of the restaurant
+          nullable: true
+          type: string
+        supportDetails:
+          $ref: "#/components/schemas/RestaurantSupportDetails"
+          description: Restaurant support details
+        tempOffline:
+          $ref: "#/components/schemas/RestaurantTempOffline"
+          description: Details of temp offline
+        website:
+          description: Web site address of the restaurant
+          nullable: true
           type: string
       type: object
     RestaurantDeliveryFees:
@@ -16125,39 +16435,50 @@ components:
           format: date-time
           type: string
       type: object
+    RestaurantFinanceDetails:
+      additionalProperties: false
+      properties:
+        paymentMode:
+          description: Current payment mode
+          enum:
+            - CardOnly
+            - CardAndCash
+          nullable: true
+          type: string
+      type: object
     RestaurantInfo:
       additionalProperties: false
       properties:
-        AddressCity:
+        addressCity:
           description: Restaurant address city
           nullable: true
           type: string
-        AddressLine1:
+        addressLine1:
           description: Restaurant address line 1
           nullable: true
           type: string
-        GeoLocation:
+        geoLocation:
           description: Restaurant geo location
           nullable: true
           oneOf:
             - $ref: "#/components/schemas/GeoLocation"
-        Name:
+        name:
           description: Restaurant name
           nullable: true
           type: string
-        PhoneNumber:
+        phoneNumber:
           description: Restaurant phone number
           nullable: true
           type: string
-        PostalCode:
+        postalCode:
           description: Restaurant name
           nullable: true
           type: string
-        VatRegistrationNumber:
+        vatRegistrationNumber:
           description: Restaurant VAT registration number
           nullable: true
           type: string
-        Website:
+        website:
           description: Restaurant website
           nullable: true
           type: string
@@ -16931,15 +17252,125 @@ components:
           description: A value indicated whether menu management teaser should be shown on restaurant edit menu page
           type: boolean
       type: object
+    RestaurantSmileyRatingsInspection:
+      properties:
+        inspectionDate:
+          description: Date of the inspection (dd-mm-yyyy). It can be nullable if no inspection was done in the restaurant.
+          nullable: true
+          type: string
+        rate:
+          description: Smiley Rating of this inspection (4 - lower, 1 - higher). It can be nullable if no inspection was done in the restaurant.
+          maximum: 4
+          minimum: 1
+          nullable: true
+          type: integer
+    RestaurantSmileyRatingsResponse:
+      additionalProperties: false
+      example:
+        inspections:
+          first:
+            inspectionDate: 02-01-2021
+            rate: 1
+          fourth:
+            ? inspectionDate
+            ? rate
+          second:
+            inspectionDate: 02-01-2021
+            rate: 1
+          third:
+            inspectionDate: 02-01-2021
+            rate: 2
+        isElite: false
+        restaurantSmileyId: "111111"
+        url: https://www.findsmiley.dk/111111
+      properties:
+        inspections:
+          description: Object with the last four inspections from most recent to older
+          properties:
+            first:
+              allOf:
+                - $ref: "#/components/schemas/RestaurantSmileyRatingsInspection"
+              description: First most recent inspection
+              nullable: false
+              type: object
+            fourth:
+              allOf:
+                - $ref: "#/components/schemas/RestaurantSmileyRatingsInspection"
+              description: Fourth most recent inspection
+              nullable: false
+              type: object
+            second:
+              allOf:
+                - $ref: "#/components/schemas/RestaurantSmileyRatingsInspection"
+              description: Second most recent inspection
+              nullable: false
+              type: object
+            third:
+              allOf:
+                - $ref: "#/components/schemas/RestaurantSmileyRatingsInspection"
+              description: Third most recent inspection
+              nullable: false
+              type: object
+          type: object
+        isElite:
+          description: Flag that ensures a restaurant is rated as Elite
+          nullable: false
+          type: boolean
+        restaurantSmileyId:
+          description: Restaurant Smiley Id
+          nullable: false
+          type: string
+        url:
+          description: Url for complete info of this restaurant at https://www.findsmiley.dk
+          nullable: false
+          type: string
+      type: object
+    RestaurantSupportDetails:
+      additionalProperties: false
+      properties:
+        phoneNumber:
+          description: Phone number of the restaurant
+          nullable: true
+          type: string
+      type: object
+    RestaurantTempOffline:
+      additionalProperties: false
+      properties:
+        categories:
+          description: List of current temp offline categories
+          items:
+            type: string
+          nullable: true
+          type: array
+        type:
+          description: Temp offline type
+          enum:
+            - CancellationOutsideWindow
+            - Unset
+            - TempOffline
+            - ClosedToday
+            - ClosedDueTo
+            - OnVacationOpens
+            - OnVacationClosed
+            - None
+            - ClosedDueToEvent
+            - ClosedDueToEmergency
+            - FailedJctConnection
+            - NoTrOverride
+            - IgnoredOrders
+            - ClosedByTempOfflineTool
+          nullable: true
+          type: string
+      type: object
     RestaurantUpdateResponse:
       additionalProperties: false
       properties:
-        OptimizelyData:
+        optimizelyData:
           description: Details of current Optimizely data file and location
           nullable: true
           oneOf:
             - $ref: "#/components/schemas/OptimizelyData"
-        OrdersData:
+        ordersData:
           description: Data containing all changed orders for a restaurant since last call
           nullable: true
           oneOf:
@@ -17633,6 +18064,36 @@ components:
             $ref: "#/components/schemas/SearchRestaurant"
           type: array
       type: object
+    SecretsResponse:
+      additionalProperties: false
+      properties:
+        secrets:
+          additionalProperties:
+            additionalProperties:
+              description: Secret value
+              type: string
+            description: Key of a single secret
+            type: object
+          description: Dictionary of secrets providers available
+          nullable: true
+          type: object
+      type: object
+    SendSmsRequest:
+      additionalProperties: false
+      properties:
+        message:
+          description: Message to send
+          nullable: true
+          type: string
+      type: object
+    SendSmsResponse:
+      additionalProperties: false
+      properties:
+        mobileNumberUsed:
+          description: Mobile number to which message were sent
+          nullable: true
+          type: string
+      type: object
     ServiceTimes:
       example:
         desiredServiceTimes:
@@ -17777,6 +18238,17 @@ components:
       x-enumNames:
         - Collection
         - Delivery
+    SetPaymentModeRequest:
+      additionalProperties: false
+      properties:
+        paymentMode:
+          description: New payment mode
+          enum:
+            - CardOnly
+            - CardAndCash
+          nullable: true
+          type: string
+      type: object
     SetProductsOfflineRequest:
       properties:
         NextAvailableAt:
@@ -17824,6 +18296,21 @@ components:
           description: Usage percentage for given state type
           format: double
           type: number
+      type: object
+    SetupOrderpadRequest:
+      additionalProperties: false
+      properties:
+        phoneNumber:
+          description: Callback phone number
+          nullable: true
+          type: string
+        postCode:
+          description: Set up postcode
+          nullable: true
+          type: string
+        setupType:
+          $ref: "#/components/schemas/OrderpadSetupType"
+          description: Orderpad set up type
       type: object
     Shift:
       description: The shift object associated with a courier on a courier sync payload update.
@@ -17932,12 +18419,13 @@ components:
             - pending
             - solved
             - hold
+            - deleted
+        subject:
+          description: Request subject
+          type: string
         submittedDate:
           description: Request placed date
           format: date-time
-          type: string
-        type:
-          description: Request type
           type: string
       type: object
     SupportRequestType:
@@ -17972,17 +18460,58 @@ components:
     TakeOfflineRequest:
       additionalProperties: false
       properties:
-        Comment:
+        comment:
           description: Any additional information
           nullable: true
           type: string
-        TempOfflineType:
+        tempOfflineType:
           description: Identifier of the reason for taking the restaurant offline
           enum:
             - TempOffline
             - ClosedToday
           nullable: true
           type: string
+      type: object
+    TakeProductOffTheMenuCommand:
+      additionalProperties: false
+      properties:
+        createdBy:
+          description: Application which requested operation e.g. Orderpad, RestaurantApp
+          nullable: true
+          type: string
+        productIds:
+          description: List of product Ids to be taken offline
+          items:
+            type: string
+          nullable: true
+          type: array
+        requestedAt:
+          description: Request date and time in ISO 8601 format
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    Takeaway400ErrorResponse:
+      description: A HTTP 400 error response
+      properties:
+        description:
+          description: A description of the error.
+          type: string
+        errorCode:
+          description: A value that helps identify this response back to logs, so we can easily find this specific fault.
+          type: string
+        validationErrors:
+          additionalProperties:
+            description: Field name that contains error.
+            properties:
+              errors:
+                description: Error explanation.
+                items:
+                  type: string
+                type: array
+            type: object
+          description: Validation error messages for each field.
+          type: object
       type: object
     Takeaway4XXErrorResponse:
       description: A HTTP 4xx error response
@@ -17993,22 +18522,6 @@ components:
         errorCode:
           description: A value that helps identify this response back to logs, so we can easily find this specific fault.
           type: string
-        validationErrors:
-          description: Validation error messages for each field.
-          items:
-            additionalProperties:
-              properties:
-                errors:
-                  items:
-                    description: Error explanation.
-                    type: string
-                  type: array
-                field:
-                  description: Field name that contains error.
-                  type: string
-              type: object
-            type: object
-          type: array
       type: object
     Takeaway500ErrorResponse:
       description: A HTTP 500 error response
@@ -23050,3 +23563,4 @@ x-tagGroups:
       - Restaurant Webhooks
       - Products
       - Logistics POS Restaurants
+      - Restaurant Smiley Rating

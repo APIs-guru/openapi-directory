@@ -1461,7 +1461,7 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Order"
-      summary: Create a new Order.
+      summary: Create a new Order. Orders created externally keep the given order product's values (bypassing internal promotion or product amounts)
       tags:
         - Orders
   "/orders/after/{id}.json":
@@ -3539,6 +3539,17 @@ definitions:
           - disabled
         type: string
     type: object
+  CustomerFieldsWithBillingAddressAndShippingAddressFields:
+    properties:
+      billing_address:
+        $ref: "#/definitions/BillingAddress"
+      id:
+        description: Unique identifier of the Customer
+        format: int32
+        type: integer
+      shipping_address:
+        $ref: "#/definitions/ShippingAddress"
+    type: object
   CustomerFieldsWithPassword:
     properties:
       billing_address:
@@ -3793,27 +3804,23 @@ definitions:
     type: object
   OrderCreateFields:
     properties:
-      additional_information:
-        description: Additional information for the given Order
-        type: string
       customer:
-        $ref: "#/definitions/CustomerFields"
+        $ref: "#/definitions/CustomerFieldsWithBillingAddressAndShippingAddressFields"
       products:
         items:
-          $ref: "#/definitions/OrderProduct"
+          $ref: "#/definitions/OrderProductOrderCreate"
         type: array
-      shipment_status:
-        description: Status of the Order Shipping
-        enum:
-          - requested
-          - in_transit
-          - delivered
-          - failed
-        type: string
       shipping_method_id:
-        description: Shipping method e.g. Royal Mail
+        description: Shipping method id
         format: int32
         type: integer
+      shipping_method_name:
+        description: Shipping method name e.g. Royal Mail
+        type: string
+      shipping_price:
+        description: Shipping method's price (applicable if shipping_method_name is provided instead of a shipping_method_id)
+        format: float
+        type: number
       status:
         description: Status of the Order
         enum:
@@ -3821,12 +3828,6 @@ definitions:
           - Canceled
           - Pending Payment
           - Paid
-        type: string
-      tracking_company:
-        description: Shipping Company used for the given Order
-        type: string
-      tracking_number:
-        description: Shipping Tracking Number used for the given Order
         type: string
   OrderEdit:
     properties:
@@ -4048,6 +4049,29 @@ definitions:
         description: Weight of the Order Product
         format: float
         type: number
+    type: object
+  OrderProductOrderCreate:
+    properties:
+      discount:
+        description: Discount of the Order Product
+        format: float
+        type: number
+      id:
+        description: Unique identifier of the original Product
+        format: int32
+        type: integer
+      price:
+        description: Price of the Order Product
+        format: float
+        type: number
+      qty:
+        description: Price of the Order Product
+        format: int32
+        type: integer
+      variant_id:
+        description: Unique identifier of the original Product Variant
+        format: int32
+        type: integer
     type: object
   OrderProductTax:
     properties:

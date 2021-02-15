@@ -1,6 +1,4 @@
 openapi: 3.0.1
-servers:
-  - url: https://sandbox-api.onsched.com
 info:
   description: "Build secure and scalable custom apps for Online Booking. Our flexible API provides many options for availability and booking.\r
 
@@ -164,6 +162,8 @@ paths:
     post:
       description: "This end point creates a new appointment in an Initial \"IN\" status. The exception is if completeBooking parameter set.<br /><br />\r
 
+        \r
+
         If you supply a valid customerId in the body, then the POST will create either a booking or reservation using the customer data.<br /><br />\r
 
         \r
@@ -174,6 +174,8 @@ paths:
 
         A valid resourceId is required if your calendar is a resource based calendar and you are booking single resource appointments. <br /><br />\r
 
+        \r
+
         Use consumer/v1/resources to retrieve a list of your resources or use a resourceId returned from the /availability endpoints. <br /><br />\r
 
         \r
@@ -182,11 +184,29 @@ paths:
 
         \r
 
-        The customerId is option. If supplied you can use the completeBooking option and skip the PUT /book step. <br /><br />\r
+        The locationId is optional. If the locationId is not passed, the system will default to the primary company location. <br /><br />\r
+
+        \r
+
+        ServiceId provided must be valid for the location being searched. A valid serviceId is one that is scoped to\r
+
+        \r
+
+        Primary Company Location or is associated with that business LocationId<br /><br />\r
+
+        \r
+
+        ResourceIds will be validated on the location being used. ResourceIds are only valid at the location on which they are defined.<br /><br />\r
+
+        \r
+
+        The customerId is optional. If supplied you can use the completeBooking option and skip the PUT /book step. <br /><br />\r
 
         \r
 
         The email, name and phone fields are only used with the completeBooking option. As with customerId you can\r
+
+        \r
 
         skip the PUT /book step. This endpoint completes the booking, and sends notifications.<br /><br />\r
 
@@ -196,19 +216,21 @@ paths:
 
         \r
 
-        BookedBy is an optional parameter. If it is not supplied the email address of the booked appointment is used or the ip address if no email address is \r
+        BookedBy is an optional parameter. If it is not supplied the email address of the booked appointment is used or the ip address if no email address is\r
+
+        \r
 
         used in the /appointment/book endpoint. Booked by is used in the Appointment Audit trail which can be viewed in the Admin Portal.<br /><br />\r
 
         \r
 
-        Location is optional. This is a string representing the location of the appointment. For example 1 Infinite Loop, Cupertino, CA 95014, USA\r
-
-        Note Location information can also be derrived via the Customer object if you pass in a CustomerId.<br /><br />\r
+        Location is optional. This is a string representing the location of the appointment.<br /><br /> \r
 
         \r
 
         Timezone name is optional. The Timezone name is in Iana format e.g. America/New_York. This is the timezone where the appointment was booked. Populating\r
+
+        \r
 
         this information can help later in situations where appointments are booked before a Daylight Savings change.<br /><br />\r
 
@@ -219,6 +241,8 @@ paths:
         \r
 
         TravelTimeMins and TravelAppointmentId are optional. These are important if you factor in Travel Time for resources to move between appointments.<br /><br />\r
+
+        \r
 
         This information is returned from the availability/times endpoint. <br /><br />\r
 

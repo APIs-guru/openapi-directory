@@ -1,6 +1,4 @@
 swagger: "2.0"
-servers:
-  - url: https://treaties-api.parliament.uk
 info:
   contact:
     email: softwareengineering@parliament.uk
@@ -416,9 +414,9 @@ definitions:
         type: string
       debateScheduled:
         enum:
-          - None
           - Chamber
           - DelegatedLegislationCommittee
+          - None
         type: string
       id:
         type: string
