@@ -114,7 +114,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: " Updates the specified metadata for the specified version. This method will fail with `FAILED_PRECONDITION` in the event of an invalid state transition. The only valid transition for a version is currently from a `CREATED` status to a `FINALIZED` status. Use [`DeleteVersion`](delete) to set the status of a version to `DELETED`."
+      description: Updates the specified metadata for the specified version. This method will fail with `FAILED_PRECONDITION` in the event of an invalid state transition. The only valid transition for a version is currently from a `CREATED` status to a `FINALIZED` status. Use [`DeleteVersion`](delete) to set the status of a version to `DELETED`.
       operationId: firebasehosting.sites.versions.patch
       parameters:
         - description: "The unique identifier for a version, in the format: sites/SITE_NAME /versions/VERSION_ID This name is provided in the response body when you call [`CreateVersion`](sites.versions/create)."
@@ -1166,7 +1166,7 @@ components:
           type: integer
       type: object
     Release:
-      description: " A `Release` is a particular [collection of configurations and files](sites.versions) that is set to be public at a particular time."
+      description: A `Release` is a particular [collection of configurations and files](sites.versions) that is set to be public at a particular time.
       properties:
         message:
           description: The deploy description when the release was created. The value can be up to 512 characters.

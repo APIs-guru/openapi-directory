@@ -7985,7 +7985,7 @@ components:
           type: string
       type: object
     PlaylistItemSnippet:
-      description: "Basic details about a playlist, including title, description and thumbnails. Basic details of a YouTube Playlist item provided by the author. Next ID: 13"
+      description: "Basic details about a playlist, including title, description and thumbnails. Basic details of a YouTube Playlist item provided by the author. Next ID: 15"
       properties:
         channelId:
           description: The ID that YouTube uses to uniquely identify the user that added the item to the playlist.
@@ -8015,6 +8015,12 @@ components:
           description: A map of thumbnail images associated with the playlist item. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.
         title:
           description: The item's title.
+          type: string
+        videoOwnerChannelId:
+          description: Channel id for the channel this video belongs to.
+          type: string
+        videoOwnerChannelTitle:
+          description: Channel title for the channel this video belongs to.
           type: string
       type: object
     PlaylistItemStatus:
@@ -8103,6 +8109,9 @@ components:
           items:
             type: string
           type: array
+        thumbnailVideoId:
+          description: "Note: if the playlist has a custom thumbnail, this field will not be populated. The video id selected by the user that will be used as the thumbnail of this playlist. This field defaults to the first publicly viewable video in the playlist, if: 1. The user has never selected a video to be the thumbnail of the playlist. 2. The user selects a video to be the thumbnail, and then removes that video from the playlist. 3. The user selects a non-owned video to be the thumbnail, but that video becomes private, or gets deleted."
+          type: string
         thumbnails:
           $ref: "#/components/schemas/ThumbnailDetails"
           description: A map of thumbnail images associated with the playlist. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.

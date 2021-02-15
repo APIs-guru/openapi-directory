@@ -6912,7 +6912,7 @@ components:
       description: The collection message.
       properties:
         customLabel0:
-          description: Label that you assign to a collection to help organize bidding and reporting in Shopping campaigns. Custom label
+          description: Label that you assign to a collection to help organize bidding and reporting in Shopping campaigns. [Custom label](https://support.google.com/merchants/answer/9674217)
           type: string
         customLabel1:
           description: Label that you assign to a collection to help organize bidding and reporting in Shopping campaigns.
@@ -6927,38 +6927,38 @@ components:
           description: Label that you assign to a collection to help organize bidding and reporting in Shopping campaigns.
           type: string
         featuredProduct:
-          description: This identifies one or more products associated with the collection. Used as a lookup to the corresponding product ID in your product feeds. Provide a maximum of 100 featuredProduct (for collections). Provide up to 10 featuredProduct (for Shoppable Images only) with ID and X and Y coordinates. featured_product attribute
+          description: This identifies one or more products associated with the collection. Used as a lookup to the corresponding product ID in your product feeds. Provide a maximum of 100 featuredProduct (for collections). Provide up to 10 featuredProduct (for Shoppable Images only) with ID and X and Y coordinates. [featured_product attribute](https://support.google.com/merchants/answer/9703736)
           items:
             $ref: "#/components/schemas/CollectionFeaturedProduct"
           type: array
         headline:
-          description: Your collection's name. headline attribute
+          description: Your collection's name. [headline attribute](https://support.google.com/merchants/answer/9673580)
           items:
             type: string
           type: array
         id:
-          description: Required. The REST ID of the collection. Content API methods that operate on collections take this as their collectionId parameter. The REST ID for a collection is of the form collectionId. id attribute
+          description: Required. The REST ID of the collection. Content API methods that operate on collections take this as their collectionId parameter. The REST ID for a collection is of the form collectionId. [id attribute](https://support.google.com/merchants/answer/9649290)
           type: string
         imageLink:
-          description: The URL of a collection’s image. image_link attribute
+          description: The URL of a collection’s image. [image_link attribute](https://support.google.com/merchants/answer/9703236)
           items:
             type: string
           type: array
         language:
-          description: The language of a collection and the language of any featured products linked to the collection. language attribute
+          description: The language of a collection and the language of any featured products linked to the collection. [language attribute](https://support.google.com/merchants/answer/9673781)
           type: string
         link:
-          description: A collection’s landing page. URL directly linking to your collection's page on your website. link attribute
+          description: A collection’s landing page. URL directly linking to your collection's page on your website. [link attribute](https://support.google.com/merchants/answer/9673983)
           type: string
         mobileLink:
-          description: A collection’s mobile-optimized landing page when you have a different URL for mobile and desktop traffic. mobile_link attribute
+          description: A collection’s mobile-optimized landing page when you have a different URL for mobile and desktop traffic. [mobile_link attribute](https://support.google.com/merchants/answer/9646123)
           type: string
         productCountry:
-          description: product_country attribute
+          description: "[product_country attribute](https://support.google.com/merchants/answer/9674155)"
           type: string
       type: object
     CollectionFeaturedProduct:
-      description: The message for FeaturedProduct. FeaturedProduct
+      description: The message for FeaturedProduct. [FeaturedProduct](https://support.google.com/merchants/answer/9703736)
       properties:
         offerId:
           description: The unique identifier for the product item.
@@ -9411,7 +9411,7 @@ components:
           $ref: "#/components/schemas/Price"
           description: The amount that is refunded. If this is not the first refund for the shipment, this should be the newly refunded amount.
         fullRefund:
-          description: If set to true, all shipping costs for the order will be refunded. If this is true, amount should not be provided and will be ignored.
+          description: If set to true, all shipping costs for the order will be refunded. If this is true, amount should not be provided and will be ignored. If set to false, submit the amount of the partial shipping refund, excluding the shipping tax. The shipping tax is calculated and handled on Google's side.
           type: boolean
       type: object
     OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo:
@@ -9606,7 +9606,7 @@ components:
           description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
           type: string
         quantity:
-          description: The quantity to return and refund.
+          description: The quantity to return and refund. Quantity is required.
           format: uint32
           type: integer
         reason:
@@ -11294,6 +11294,9 @@ components:
         returnPolicyId:
           description: Return policy ID generated by Google.
           type: string
+        returnShippingFee:
+          $ref: "#/components/schemas/Price"
+          description: The return shipping fee that will apply to non free return reasons.
         seasonalOverrides:
           description: An optional list of seasonal overrides.
           items:

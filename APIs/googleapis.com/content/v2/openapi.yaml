@@ -7244,7 +7244,7 @@ components:
           description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
           type: string
         quantity:
-          description: The quantity to return and refund.
+          description: The quantity to return and refund. Quantity is required.
           format: uint32
           type: integer
         reason:

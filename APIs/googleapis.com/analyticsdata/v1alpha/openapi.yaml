@@ -580,9 +580,6 @@ components:
         inListFilter:
           $ref: "#/components/schemas/InListFilter"
           description: A filter for in list values.
-        nullFilter:
-          description: A filter for null values. If True, a null dimension value is matched by this filter. Null filter is commonly used inside a NOT filter expression. For example, a NOT expression of a null filter removes rows when a dimension is null.
-          type: boolean
         numericFilter:
           $ref: "#/components/schemas/NumericFilter"
           description: A filter for numeric or date values.
@@ -790,7 +787,7 @@ components:
             type: string
           type: array
         limit:
-          description: The number of rows to return in this pivot. If unspecified, 10 rows are returned. If -1, all rows are returned.
+          description: "The number of rows to return in this pivot. If the `limit` parameter is unspecified, up to 10,000 rows are returned. The product of the `limit` for each `pivot` in a `RunPivotReportRequest` must not exceed 100,000. For example, a two pivot request with `limit: 1000` in each pivot will fail because the product is `1,000,000`."
           format: int64
           type: string
         metricAggregations:
@@ -832,7 +829,7 @@ components:
             $ref: "#/components/schemas/PivotDimensionHeader"
           type: array
         rowCount:
-          description: The cardinality of the pivot as if offset = 0 and limit = -1. The total number of rows for this pivot's fields regardless of how the parameters offset and limit are specified in the request.
+          description: The cardinality of the pivot. The total number of rows for this pivot's fields regardless of how the parameters `offset` and `limit` are specified in the request.
           format: int32
           type: integer
       type: object
@@ -999,7 +996,7 @@ components:
             $ref: "#/components/schemas/Dimension"
           type: array
         limit:
-          description: The number of rows to return. If unspecified, 10 rows are returned. If -1, all rows are returned.
+          description: The number of rows to return. If the `limit` parameter is unspecified, 10,000 rows are returned. The API returns a maximum of 100,000 rows per request, no matter how many you ask for.
           format: int64
           type: string
         metricAggregations:
@@ -1100,7 +1097,7 @@ components:
           description: If false or unspecified, each row with all metrics equal to 0 will not be returned. If true, these rows will be returned if they are not separately removed by a filter.
           type: boolean
         limit:
-          description: The number of rows to return. If unspecified, 10 rows are returned. If -1, all rows are returned. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+          description: The number of rows to return. If the `limit` parameter is unspecified, 10,000 rows are returned. The API returns a maximum of 100,000 rows per request, no matter how many you ask for.
           format: int64
           type: string
         metricAggregations:
@@ -1123,7 +1120,7 @@ components:
             $ref: "#/components/schemas/Metric"
           type: array
         offset:
-          description: The row count of the start row. The first row is counted as row 0. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
+          description: The row count of the start row. The first row is counted as row 0.
           format: int64
           type: string
         orderBys:

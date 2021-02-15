@@ -2404,6 +2404,9 @@ components:
         name:
           description: "[Output Only] Name of the operation."
           type: string
+        operationGroupId:
+          description: "[Output Only] An ID that represents a group of operations, such as when a group of operations results from a `bulkInsert` API request."
+          type: string
         operationType:
           description: "[Output Only] The type of operation, such as `insert`, `update`, or `delete`, and so on."
           type: string

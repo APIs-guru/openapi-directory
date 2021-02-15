@@ -324,156 +324,7 @@ components:
       description: Metadata of the EvaluateProcessorVersion method.
       properties:
         evaluation:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3Evaluation"
-          description: The evaluation result.
-      type: object
-    GoogleCloudDocumentaiUiv1beta3Evaluation:
-      description: An evaluation of a ProcessorVersion's performance.
-      properties:
-        allEntitiesMetrics:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationMultiConfidenceMetrics"
-          description: Metrics for all the entities in aggregate.
-        createTime:
-          description: The time that the evaluation was created.
-          format: google-datetime
-          type: string
-        entityMetrics:
-          additionalProperties:
-            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationMultiConfidenceMetrics"
-          description: Metrics across confidence levels, for different entities.
-          type: object
-        name:
-          description: "The resource name of the evaluation. Format: projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}/evaluations/{evaluation}"
-          type: string
-      type: object
-    GoogleCloudDocumentaiUiv1beta3EvaluationConfidenceLevelMetrics:
-      description: Evaluations metrics, at a specific confidence level.
-      properties:
-        confidenceLevel:
-          description: The confidence level.
-          format: float
-          type: number
-        metrics:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationMetrics"
-          description: The metrics at the specific confidence level.
-      type: object
-    GoogleCloudDocumentaiUiv1beta3EvaluationMetrics:
-      description: Evaluation metrics, either in aggregate or about a specific entity.
-      properties:
-        f1Score:
-          description: The calculated f1 score.
-          format: float
-          type: number
-        precision:
-          description: The calculated precision.
-          format: float
-          type: number
-        recall:
-          description: The calculated recall.
-          format: float
-          type: number
-      type: object
-    GoogleCloudDocumentaiUiv1beta3EvaluationMultiConfidenceMetrics:
-      description: Metrics across multiple confidence levels.
-      properties:
-        confidenceLevelMetrics:
-          description: Metrics across confidence levels.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationConfidenceLevelMetrics"
-          type: array
-      type: object
-    GoogleCloudDocumentaiUiv1beta3EvaluationReference:
-      description: Gives a short summary of an evaluation, and links to the evaluation itself.
-      properties:
-        aggregateMetrics:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationMetrics"
-          description: An aggregate of the statistics for the evaluation.
-        evaluation:
-          description: The resource name of the evaluation.
-          type: string
-        operation:
-          description: The resource name of the Long Running Operation for the evaluation.
-          type: string
-      type: object
-    GoogleCloudDocumentaiUiv1beta3ProcessorVersion:
-      description: A processor version is an implementation of a processor. Each processor can have multiple versions, pre-trained by Google internally or up-trained by the customer. At a time, a processor can only have one default version version. So the processor's behavior (when processing documents) is defined by a default version.
-      properties:
-        createTime:
-          description: The time the processor version was created.
-          format: google-datetime
-          type: string
-        displayName:
-          description: The display name of the processor version.
-          type: string
-        latestEvaluation:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3EvaluationReference"
-          description: The most recently invoked evaluation for the processor version.
-        name:
-          description: "The resource name of the processor version. Format: projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}"
-          type: string
-        schema:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3Schema"
-          description: The schema of the processor version. Describes the output.
-        state:
-          description: The state of the processor version.
-          enum:
-            - STATE_UNSPECIFIED
-            - DEPLOYED
-            - DEPLOYING
-            - UNDEPLOYED
-            - UNDEPLOYING
-            - CREATING
-            - DELETING
-            - FAILED
-          type: string
-      type: object
-    GoogleCloudDocumentaiUiv1beta3Schema:
-      description: The schema defines the output of the processed document by a processor.
-      properties:
-        description:
-          description: Description of the schema.
-          type: string
-        displayName:
-          description: Display name to show to users.
-          type: string
-        entityTypes:
-          description: Entity types of the schema.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3SchemaEntityType"
-          type: array
-      type: object
-    GoogleCloudDocumentaiUiv1beta3SchemaEntityType:
-      description: EntityType is the wrapper of a label of the corresponding model with detailed attributes and limitations for entity-based processors. Multiple types can also compose a dependency tree to represent nested types.
-      properties:
-        baseType:
-          description: Type of the entity. It can be either a value type (such as "text", "numeric", "date" and "address"), or an object type which may contain nested entities (such as "document" and "table").
-          type: string
-        description:
-          description: Description of the entity type.
-          type: string
-        occurrenceType:
-          description: Occurrence type limits the number of times an entity type appears in the document.
-          enum:
-            - OCCURRENCE_TYPE_UNSPECIFIED
-            - OPTIONAL_ONCE
-            - OPTIONAL_MULTIPLE
-            - REQUIRED_ONCE
-            - REQUIRED_MULTIPLE
-          type: string
-        properties:
-          description: Describing the nested structure of an entity. An EntityType may consist of several other EntityTypes. For example, in a document there can be an EntityType 'ID', which consists of EntityType 'name' and 'address', with corresponding attributes, such as TEXT for both types and ONCE for occurrence types.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3SchemaEntityType"
-          type: array
-        source:
-          description: Source of this entity type.
-          enum:
-            - SOURCE_UNSPECIFIED
-            - PREDEFINED
-            - USER_INPUT
-          type: string
-        type:
-          description: Name of the type. It must be unique within the set of same level types.
+          description: The resource name of the created evaluation.
           type: string
       type: object
     GoogleCloudDocumentaiUiv1beta3TrainProcessorVersionMetadata:
@@ -482,13 +333,33 @@ components:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
           description: The basic metadata of the long running operation.
+        testDatasetValidation:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3TrainProcessorVersionMetadataDatasetValidation"
+          description: The test dataset validation information.
+        trainingDatasetValidation:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3TrainProcessorVersionMetadataDatasetValidation"
+          description: The training dataset validation information.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3TrainProcessorVersionMetadataDatasetValidation:
+      description: The dataset validation information. This includes any and all errors with documents and the dataset.
+      properties:
+        datasetErrors:
+          description: Error information for the dataset as a whole. A maximum of 10 dataset errors will be returned. A single dataset error is terminal for training.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+        documentErrors:
+          description: Error information pertaining to specific documents. A maximum of 10 document errors will be returned. Any document with errors will not be used throughout training.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
       type: object
     GoogleCloudDocumentaiUiv1beta3TrainProcessorVersionResponse:
       description: The response for the TrainProcessorVersion method.
       properties:
         processorVersion:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3ProcessorVersion"
-          description: The processor version produced by training.
+          description: The resource name of the processor version produced by training.
+          type: string
       type: object
     GoogleCloudDocumentaiUiv1beta3UndeployProcessorVersionMetadata:
       description: The long running operation metadata for the undeploy processor version method.
@@ -595,7 +466,7 @@ components:
       description: The status of human review on a processed document.
       properties:
         humanReviewOperation:
-          description: The name of the operation triggered by the processed document. Non-empty only when the [state] is [HUMAN_REVIEW_IN_PROGRESS]. It has the same response type and metadata as the long running operation returned by [ReviewDocument] method.
+          description: The name of the operation triggered by the processed document. This field is populated only when the [state] is [HUMAN_REVIEW_IN_PROGRESS]. It has the same response type and metadata as the long running operation returned by [ReviewDocument] method.
           type: string
         state:
           description: The state of human review on the processing request.
@@ -2364,7 +2235,7 @@ components:
       description: The status of a each individual document in the batch process.
       properties:
         humanReviewOperation:
-          description: The name of the operation triggered by the processed document. If the human review process is not triggered, this field will be empty. It has the same response type and metadata as the long running operation returned by ReviewDocument method. .
+          description: The name of the operation triggered by the processed document. If the human review process is not triggered, this field will be empty. It has the same response type and metadata as the long running operation returned by ReviewDocument method.
           type: string
         humanReviewStatus:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3HumanReviewStatus"
@@ -2412,7 +2283,7 @@ components:
       description: The status of human review on a processed document.
       properties:
         humanReviewOperation:
-          description: The name of the operation triggered by the processed document. Non-empty only when the [state] is [HUMAN_REVIEW_IN_PROGRESS]. It has the same response type and metadata as the long running operation returned by [ReviewDocument] method.
+          description: The name of the operation triggered by the processed document. This field is populated only when the [state] is [HUMAN_REVIEW_IN_PROGRESS]. It has the same response type and metadata as the long running operation returned by [ReviewDocument] method.
           type: string
         state:
           description: The state of human review on the processing request.

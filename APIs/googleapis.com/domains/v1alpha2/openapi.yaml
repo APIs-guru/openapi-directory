@@ -911,7 +911,7 @@ components:
       description: Request for the `ConfigureContactSettings` method.
       properties:
         contactNotices:
-          description: The list of contact notices that the caller acknowledges. The notices required here depend on the values specified in `contact_settings`.
+          description: The list of contact notices that the caller acknowledges. The notices needed here depend on the values specified in `contact_settings`.
           items:
             enum:
               - CONTACT_NOTICE_UNSPECIFIED
@@ -1325,7 +1325,7 @@ components:
       description: Request for the `RegisterDomain` method.
       properties:
         contactNotices:
-          description: The list of contact notices that the caller acknowledges. The notices required here depend on the values specified in `registration.contact_settings`.
+          description: The list of contact notices that the caller acknowledges. The notices needed here depend on the values specified in `registration.contact_settings`.
           items:
             enum:
               - CONTACT_NOTICE_UNSPECIFIED

@@ -24,9 +24,9 @@ info:
     - format: google
       url: https://admin-remotebuildexecution.googleapis.com/$discovery/rest?version=v1alpha
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: remotebuildexecution
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/remote-build-execution/docs/
 tags:
@@ -810,6 +810,13 @@ components:
     GoogleDevtoolsRemotebuildbotCommandEvents:
       description: CommandEvents contains counters for the number of warnings and errors that occurred during the execution of a command.
       properties:
+        cmUsage:
+          description: Indicates if and how Container Manager is being used for task execution.
+          enum:
+            - NONE
+            - CONFIG_MATCH
+            - CONFIG_MISMATCH
+          type: string
         dockerCacheHit:
           description: Indicates whether we are using a cached Docker image (true) or had to pull the Docker image (false) for this command.
           type: boolean

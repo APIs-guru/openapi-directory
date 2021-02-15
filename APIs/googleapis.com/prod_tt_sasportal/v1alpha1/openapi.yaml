@@ -920,6 +920,11 @@ components:
         fccId:
           description: The FCC identifier of the device.
           type: string
+        grantRangeAllowlists:
+          description: Only ranges within the allowlists are available for new grants.
+          items:
+            $ref: "#/components/schemas/SasPortalFrequencyRange"
+          type: array
         grants:
           description: Output only. Grants held by the device.
           items:

@@ -994,6 +994,11 @@ components:
         replication:
           $ref: "#/components/schemas/Replication"
           description: Required. Immutable. The replication policy of the secret data attached to the Secret. The replication policy cannot be changed after the Secret has been created.
+        topics:
+          description: Optional. A list of up to 10 Pub/Sub topics to which messages are published when control plane operations are called on the secret or its versions.
+          items:
+            $ref: "#/components/schemas/Topic"
+          type: array
         ttl:
           description: Input only. The TTL for the Secret.
           format: google-duration
@@ -1065,6 +1070,13 @@ components:
           items:
             type: string
           type: array
+      type: object
+    Topic:
+      description: A Pub/Sub topic which SM will publish to when control plane events occur on this secret.
+      properties:
+        name:
+          description: "Required. The resource name of the Pub/Sub topic that will be published to, in the following format: `projects/*/topics/*`. For publication to succeed, the Secret Manager P4SA must have `pubsub.publisher` permissions on the topic."
+          type: string
       type: object
     UserManaged:
       description: A replication policy that replicates the Secret payload into the locations specified in Secret.replication.user_managed.replicas

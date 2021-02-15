@@ -2098,14 +2098,14 @@ components:
           description: The `MembershipRole`s to be updated. Only `MEMBER` `MembershipRole` can currently be updated.
       type: object
     UserInvitation:
-      description: UserInvitation to join a Google Workspace organization.
+      description: The `UserInvitation` resource represents an email sent to an unmanaged user account (an email address that shares the domain of the Google Workspace customer but is not managed by it yet), inviting them to join the customer’s domain. If the user accepts the `UserInvitation`, the account will become a managed account.
       properties:
         mailsSentCount:
           description: Number of invitation emails sent to the user.
           format: int64
           type: string
         name:
-          description: Shall be of the form `customers/{customer}/userinvitations/{user_email_address}`
+          description: Shall be of the form `customers/{customer}/userinvitations/{user_email_address}`.
           type: string
         state:
           description: State of the `UserInvitation`.

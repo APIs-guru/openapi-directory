@@ -494,7 +494,7 @@ components:
           format: int64
           type: string
         time:
-          description: The timestamp when the `destination` service receives the first byte of the request.
+          description: The timestamp when the `destination` service receives the last byte of the request.
           format: google-datetime
           type: string
       type: object
@@ -594,6 +594,10 @@ components:
     Response:
       description: This message defines attributes for a typical network response. It generally models semantics of an HTTP response.
       properties:
+        backendLatency:
+          description: The length of time it takes the backend service to fully respond to a request. Measured from when the destination service starts to send the request to the backend until when the destination service receives the complete response from the backend.
+          format: google-duration
+          type: string
         code:
           description: The HTTP response status code, such as `200` and `404`.
           format: int64
@@ -608,7 +612,7 @@ components:
           format: int64
           type: string
         time:
-          description: The timestamp when the `destination` service generates the first byte of the response.
+          description: The timestamp when the `destination` service sends the last byte of the response.
           format: google-datetime
           type: string
       type: object
