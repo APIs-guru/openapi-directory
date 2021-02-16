@@ -1882,6 +1882,84 @@ paths:
             type: string
           description: Pagination token
           required: false
+  '/prod/inputs/{inputId}/partners':
+    post:
+      operationId: CreatePartnerInput
+      description: Create a partner input
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePartnerInputResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '484':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: inputId
+          in: path
+          required: true
+          description: Unique ID of the input.
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requestId:
+                  description: Placeholder documentation for __string
+                  type: string
+                tags:
+                  description: Placeholder documentation for Tags
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/prod/tags/{resource-arn}':
     post:
       operationId: CreateTags
@@ -5588,6 +5666,15 @@ components:
                 Statmux rate control settings.
                 When this field is defined, ConstantBitrate must be undefined.
       description: The video configuration for each program in a multiplex.
+    CreatePartnerInputResponse:
+      type: object
+      properties:
+        Input:
+          allOf:
+            - $ref: '#/components/schemas/Input'
+            - xml:
+                name: input
+      description: Placeholder documentation for CreatePartnerInputResponse
     DeleteChannelResponse:
       type: object
       properties:
@@ -6065,6 +6152,12 @@ components:
             - xml:
                 name: inputDevices
               description: Settings for the input devices.
+        InputPartnerIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: inputPartnerIds
+              description: A list of IDs for all Inputs which are partners of this one.
         InputSourceType:
           allOf:
             - $ref: '#/components/schemas/InputSourceType'
@@ -10048,6 +10141,12 @@ components:
             - xml:
                 name: inputDevices
               description: Settings for the input devices.
+        InputPartnerIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: inputPartnerIds
+              description: A list of IDs for all Inputs which are partners of this one.
         InputSourceType:
           allOf:
             - $ref: '#/components/schemas/InputSourceType'
@@ -10395,6 +10494,25 @@ components:
                 name: tags
               description: A collection of key-value pairs.
       description: The multiplex object.
+    CreatePartnerInputRequest:
+      type: object
+      title: CreatePartnerInputRequest
+      properties:
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: requestId
+              description: |
+                Unique identifier of the request to ensure the request is handled
+                exactly once in case of retries.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+              description: A collection of key-value pairs.
+      description: A request to create a partner input
     CreateTagsRequest:
       type: object
       title: CreateTagsRequest

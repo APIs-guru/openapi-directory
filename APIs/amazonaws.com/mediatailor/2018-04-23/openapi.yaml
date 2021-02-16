@@ -321,6 +321,11 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - description: 'A content delivery network (CDN) to cache content segments, so that content requests don’t always have to go to the origin server. First, create a rule in your CDN for the content segment origin server. Then specify the rule''s name in this ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for content segments.'
+                ConfigurationAliases:
+                  description: Predefined aliases for dynamic variables.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__mapOf__string'
                 DashConfiguration:
                   description: 'The configuration for DASH PUT operations. '
                   type: object
@@ -490,6 +495,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CdnConfiguration'
             - description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+        ConfigurationAliases:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationAliasesResponse'
+            - description: Predefined aliases for dynamic variables.
         DashConfiguration:
           allOf:
             - $ref: '#/components/schemas/DashConfiguration'
@@ -590,6 +599,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CdnConfiguration'
             - description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+        ConfigurationAliases:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationAliasesResponse'
+            - description: Predefined aliases for dynamic variables.
         DashConfiguration:
           allOf:
             - $ref: '#/components/schemas/DashConfiguration'
@@ -651,6 +664,10 @@ components:
       type: string
     __string:
       type: string
+    __mapOf__string:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/__string'
     OriginManifestType:
       enum:
         - SINGLE_PERIOD
@@ -704,6 +721,16 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: 'A content delivery network (CDN) to cache content segments, so that content requests don’t always have to go to the origin server. First, create a rule in your CDN for the content segment origin server. Then specify the rule''s name in this ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for content segments.'
       description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+    ConfigurationAliasesRequest:
+      type: object
+      description: Predefined aliases for dynamic variables.
+      additionalProperties:
+        $ref: '#/components/schemas/__mapOf__string'
+    ConfigurationAliasesResponse:
+      type: object
+      description: Predefined aliases for dynamic variables.
+      additionalProperties:
+        $ref: '#/components/schemas/__mapOf__string'
     DashConfiguration:
       type: object
       properties:
@@ -769,10 +796,6 @@ components:
     __integerMin1:
       type: integer
       minimum: 1
-    __mapOf__string:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/__string'
     __integerMin1Max100:
       type: integer
       minimum: 1
@@ -808,6 +831,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CdnConfiguration'
             - description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+        ConfigurationAliases:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationAliasesResponse'
+            - description: Predefined aliases for dynamic variables.
         DashConfiguration:
           allOf:
             - $ref: '#/components/schemas/DashConfiguration'
@@ -879,6 +906,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CdnConfiguration'
             - description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
+        ConfigurationAliases:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationAliasesRequest'
+            - description: Predefined aliases for dynamic variables.
         DashConfiguration:
           allOf:
             - $ref: '#/components/schemas/DashConfigurationForPut'

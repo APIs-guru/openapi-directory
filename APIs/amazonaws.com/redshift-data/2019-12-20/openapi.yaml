@@ -3,7 +3,7 @@ info:
   version: '2019-12-20'
   x-release: v4
   title: Redshift Data API Service
-  description: 'You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You can run individual SQL statements, which are committed if the statement succeeds. '
+  description: '<p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You can run individual SQL statements, which are committed if the statement succeeds. </p> <p>For more information about the Amazon Redshift Data API, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html">Using the Amazon Redshift Data API</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -291,6 +291,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExecuteStatementException'
+        '482':
+          description: ActiveStatementsExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActiveStatementsExceededException'
       requestBody:
         required: true
         content:
@@ -698,6 +704,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The error message from the cluster if the SQL statement encountered an error while running. '
+        HasResultSet:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A value that indicates whether the statement has a result set. The result set can be empty. '
         Id:
           allOf:
             - $ref: '#/components/schemas/UUID'
@@ -861,6 +871,7 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: 'A value that indicates whether to send an event to the Amazon EventBridge event bus after the SQL statement runs. '
     ExecuteStatementException: {}
+    ActiveStatementsExceededException: {}
     GetStatementResultResponse:
       type: object
       required:
@@ -1008,6 +1019,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. '
+        RoleLevel:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A value that filters which statements to return in the response. If true, all statements run by the caller''s IAM role are returned. If false, only statements run by the caller''s IAM role in the current IAM session are returned. The default is true. '
         StatementName:
           allOf:
             - $ref: '#/components/schemas/StatementNameString'
@@ -1165,17 +1180,19 @@ components:
     StatusString:
       type: string
       enum:
-        - ABORTED
-        - ALL
-        - FAILED
-        - FINISHED
+        - SUBMITTED
         - PICKED
         - STARTED
-        - SUBMITTED
+        - FINISHED
+        - ABORTED
+        - FAILED
+        - ALL
     Location:
       type: string
     PageSize:
       type: integer
+      minimum: 0
+      maximum: 1000
     StatementNameString:
       type: string
       minLength: 0

@@ -711,7 +711,7 @@ paths:
   /#X-Amz-Target=Lightsail_20161128.CreateCertificate:
     post:
       operationId: CreateCertificate
-      description: '<p>Creates an SSL/TLS certificate for a Amazon Lightsail content delivery network (CDN) distribution.</p> <p>After the certificate is created, use the <code>AttachCertificateToDistribution</code> action to attach the certificate to your distribution.</p> <important> <p>Only certificates created in the <code>us-east-1</code> AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the <code>us-east-1</code> Region.</p> </important>'
+      description: '<p>Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network (CDN) distribution and a container service.</p> <p>After the certificate is valid, use the <code>AttachCertificateToDistribution</code> action to use the certificate and its domains with your distribution. Or use the <code>UpdateContainerService</code> action to use the certificate and its domains with your container service.</p> <important> <p>Only certificates created in the <code>us-east-1</code> AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the <code>us-east-1</code> Region.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1926,7 +1926,7 @@ paths:
   /#X-Amz-Target=Lightsail_20161128.CreateLoadBalancerTlsCertificate:
     post:
       operationId: CreateLoadBalancerTlsCertificate
-      description: '<p>Creates a Lightsail load balancer TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>The <code>CreateLoadBalancerTlsCertificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Creates an SSL/TLS certificate for an Amazon Lightsail load balancer.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>The <code>CreateLoadBalancerTlsCertificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -8967,7 +8967,7 @@ paths:
   /#X-Amz-Target=Lightsail_20161128.RegisterContainerImage:
     post:
       operationId: RegisterContainerImage
-      description: '<p>Registers a container image to your Amazon Lightsail container service.</p> <note> <p>This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see <a href="amazon-lightsail-pushing-container-images">Pushing and managing container images on your Amazon Lightsail container services</a> in the <i>Lightsail Dev Guide</i>.</p> </note>'
+      description: '<p>Registers a container image to your Amazon Lightsail container service.</p> <note> <p>This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images">Pushing and managing container images on your Amazon Lightsail container services</a> in the <i>Lightsail Dev Guide</i>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -9243,7 +9243,7 @@ paths:
   /#X-Amz-Target=Lightsail_20161128.SetIpAddressType:
     post:
       operationId: SetIpAddressType
-      description: '<p>Sets the IP address type for a Amazon Lightsail resource.</p> <p>Use this action to enable dual-stack for a resource, which enables IPv4 and IPv6 for the specified resource. Alternately, you can use this action to disable dual-stack, and enable IPv4 only.</p>'
+      description: '<p>Sets the IP address type for an Amazon Lightsail resource.</p> <p>Use this action to enable dual-stack for a resource, which enables IPv4 and IPv6 for the specified resource. Alternately, you can use this action to disable dual-stack, and enable IPv4 only.</p>'
       responses:
         '200':
           description: Success
@@ -11303,7 +11303,7 @@ components:
         relationalDatabaseName:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
-            - description: '<p>The name to use for your new database.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p> </li> <li> <p>The first and last character must be a letter or number.</p> </li> </ul>'
+            - description: '<p>The name to use for your new Lightsail database resource.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p> </li> <li> <p>The first and last character must be a letter or number.</p> </li> </ul>'
         availabilityZone:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -15176,23 +15176,23 @@ components:
         healthyThreshold:
           allOf:
             - $ref: '#/components/schemas/integer'
-            - description: The number of consecutive health checks successes required before moving the container to the <code>Healthy</code> state.
+            - description: The number of consecutive health checks successes required before moving the container to the <code>Healthy</code> state. The default value is <code>2</code>.
         unhealthyThreshold:
           allOf:
             - $ref: '#/components/schemas/integer'
-            - description: The number of consecutive health check failures required before moving the container to the <code>Unhealthy</code> state.
+            - description: The number of consecutive health check failures required before moving the container to the <code>Unhealthy</code> state. The default value is <code>2</code>.
         timeoutSeconds:
           allOf:
             - $ref: '#/components/schemas/integer'
-            - description: 'The amount of time, in seconds, during which no response means a failed health check. You may specify between 2 and 60 seconds.'
+            - description: 'The amount of time, in seconds, during which no response means a failed health check. You can specify between 2 and 60 seconds. The default value is <code>2</code>.'
         intervalSeconds:
           allOf:
             - $ref: '#/components/schemas/integer'
-            - description: 'The approximate interval, in seconds, between health checks of an individual container. You may specify between 5 and 300 seconds.'
+            - description: 'The approximate interval, in seconds, between health checks of an individual container. You can specify between 5 and 300 seconds. The default value is <code>5</code>.'
         path:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: The path on the container on which to perform the health check.
+            - description: The path on the container on which to perform the health check. The default value is <code>/</code>.
         successCodes:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -17000,7 +17000,7 @@ components:
         failureReason:
           allOf:
             - $ref: '#/components/schemas/LoadBalancerTlsCertificateFailureReason'
-            - description: '<p>The validation failure reason, if any, of the certificate.</p> <p>The following failure reasons are possible:</p> <ul> <li> <p> <b> <code>NO_AVAILABLE_CONTACTS</code> </b> - This failure applies to email validation, which is not available for Lightsail certificates.</p> </li> <li> <p> <b> <code>ADDITIONAL_VERIFICATION_REQUIRED</code> </b> - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a> to contact AWS Support.</p> <note> <p>You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.</p> </note> </li> <li> <p> <b> <code>DOMAIN_NOT_ALLOWED</code> </b> - One or more of the domain names in the certificate request was reported as an unsafe domain by <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a>. To correct the problem, search for your domain name on the <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a> website. If your domain is reported as suspicious, see <a href="https://www.google.com/webmasters/hacked/?hl=en">Google Help for Hacked Websites</a> to learn what you can do.</p> <p>If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate.</p> <p>If you see this error and your domain is not included in the VirusTotal list, visit the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a> and create a case.</p> </li> <li> <p> <b> <code>INVALID_PUBLIC_DOMAIN</code> </b> - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for <code>example.invalidpublicdomain</code> because <code>invalidpublicdomain</code> is not a valid top-level domain.</p> </li> <li> <p> <b> <code>OTHER</code> </b> - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request. </p> </li> </ul>'
+            - description: '<p>The validation failure reason, if any, of the certificate.</p> <p>The following failure reasons are possible:</p> <ul> <li> <p> <b> <code>NO_AVAILABLE_CONTACTS</code> </b> - This failure applies to email validation, which is not available for Lightsail certificates.</p> </li> <li> <p> <b> <code>ADDITIONAL_VERIFICATION_REQUIRED</code> </b> - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a> to contact AWS Support.</p> <note> <p>You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.</p> </note> </li> <li> <p> <b> <code>DOMAIN_NOT_ALLOWED</code> </b> - One or more of the domain names in the certificate request was reported as an unsafe domain by <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a>. To correct the problem, search for your domain name on the <a href="https://www.virustotal.com/gui/home/url">VirusTotal</a> website. If your domain is reported as suspicious, see <a href="https://developers.google.com/web/fundamentals/security/hacked">Google Help for Hacked Websites</a> to learn what you can do.</p> <p>If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate.</p> <p>If you see this error and your domain is not included in the VirusTotal list, visit the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a> and create a case.</p> </li> <li> <p> <b> <code>INVALID_PUBLIC_DOMAIN</code> </b> - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for <code>example.invalidpublicdomain</code> because <code>invalidpublicdomain</code> is not a valid top-level domain.</p> </li> <li> <p> <b> <code>OTHER</code> </b> - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request. </p> </li> </ul>'
         issuedAt:
           allOf:
             - $ref: '#/components/schemas/IsoDate'
