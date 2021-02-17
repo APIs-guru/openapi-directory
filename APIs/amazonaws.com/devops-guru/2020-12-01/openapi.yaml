@@ -411,6 +411,135 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /feedback:
+    post:
+      operationId: DescribeFeedback
+      description: ' Returns the most recent feedback submitted in the current AWS account and Region. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFeedbackResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                InsightId:
+                  description: ' The ID of the insight for which the feedback was provided. '
+                  type: string
+                  pattern: '^[\w-]*$'
+                  minLength: 1
+                  maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutFeedback
+      description: ' Collects customer feedback about the specified insight. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutFeedbackResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                InsightFeedback:
+                  description: ' Information about insight feedback received from a customer. '
+                  type: object
+                  properties:
+                    Id:
+                      allOf:
+                        - $ref: '#/components/schemas/InsightId'
+                        - description: ' The insight feedback ID. '
+                    Feedback:
+                      allOf:
+                        - $ref: '#/components/schemas/InsightFeedbackOption'
+                        - description: ' The feedback provided by the customer. '
   '/insights/{Id}':
     get:
       operationId: DescribeInsight
@@ -1076,81 +1205,6 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  /feedback:
-    put:
-      operationId: PutFeedback
-      description: ' Collects customer feedback about the specified insight. '
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PutFeedbackResponse'
-        '480':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '484':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '485':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-      parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                InsightFeedback:
-                  description: ' Information about insight feedback received from a customer. '
-                  type: object
-                  properties:
-                    Id:
-                      allOf:
-                        - $ref: '#/components/schemas/InsightId'
-                        - description: ' The insight feedback ID. '
-                    Feedback:
-                      allOf:
-                        - $ref: '#/components/schemas/InsightFeedbackOption'
-                        - description: ' The feedback provided by the customer. '
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/channels/{Id}':
     delete:
       operationId: RemoveNotificationChannel
@@ -1529,6 +1583,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReactiveAnomaly'
             - description: ' An <code>ProactiveAnomaly</code> object that represents the requested anomaly. '
+    DescribeFeedbackResponse:
+      type: object
+      properties:
+        InsightFeedback:
+          $ref: '#/components/schemas/InsightFeedback'
     DescribeInsightResponse:
       type: object
       properties:
@@ -2098,6 +2157,26 @@ components:
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
       description: Details about a reactive anomaly. This object is returned by <code>ListAnomalies</code>.
+    DescribeFeedbackRequest:
+      type: object
+      title: DescribeFeedbackRequest
+      properties:
+        InsightId:
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: ' The ID of the insight for which the feedback was provided. '
+    InsightFeedback:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: ' The insight feedback ID. '
+        Feedback:
+          allOf:
+            - $ref: '#/components/schemas/InsightFeedbackOption'
+            - description: ' The feedback provided by the customer. '
+      description: ' Information about insight feedback received from a customer. '
     DescribeInsightRequest:
       type: object
       title: DescribeInsightRequest
@@ -2288,18 +2367,6 @@ components:
             - $ref: '#/components/schemas/CloudFormationCollectionFilter'
             - description: ' Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
       description: ' Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru. '
-    InsightFeedback:
-      type: object
-      properties:
-        Id:
-          allOf:
-            - $ref: '#/components/schemas/InsightId'
-            - description: ' The insight feedback ID. '
-        Feedback:
-          allOf:
-            - $ref: '#/components/schemas/InsightFeedbackOption'
-            - description: ' The feedback provided by the customer. '
-      description: ' Information about insight feedback received from a customer. '
     InsightName:
       type: string
       pattern: '^[\s\S]*$'
