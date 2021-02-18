@@ -314,7 +314,7 @@ paths:
                         - $ref: '#/components/schemas/S3Location'
                         - description: The S3 location for the output.
                 KmsKeyId:
-                  description: 'The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for encypting the model. If this parameter is not specified, the model is encrypted by a key that AWS owns and manages.'
+                  description: 'The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.'
                   type: string
                   pattern: '^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$'
                   minLength: 1
@@ -582,7 +582,7 @@ paths:
   '/2020-11-20/projects/{projectName}/datasets/{datasetType}':
     delete:
       operationId: DeleteDataset
-      description: '<p>Deletes an existing Amazon Lookout for Vision <code>dataset</code>. </p> <p>If your the project has a single dataset, you must create a new dataset before you can create a model.</p> <p>If you project has a training dataset and a test dataset consider the following. </p> <ul> <li> <p>If you delete the test dataset, your project reverts to a single dataset project. If you then train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset.</p> </li> <li> <p>If you delete the training dataset, you must create a training dataset before you can create a model.</p> </li> </ul> <p>It might take a while to delete the dataset. To check the current status, check the <code>Status</code> field in the response from a call to <a>DescribeDataset</a>. </p> <p>This operation requires permissions to perform the <code>lookoutvision:DeleteDataset</code> operation.</p>'
+      description: '<p>Deletes an existing Amazon Lookout for Vision <code>dataset</code>. </p> <p>If your the project has a single dataset, you must create a new dataset before you can create a model.</p> <p>If you project has a training dataset and a test dataset consider the following. </p> <ul> <li> <p>If you delete the test dataset, your project reverts to a single dataset project. If you then train the model, Amazon Lookout for Vision internally splits the remaining dataset into a training and test dataset.</p> </li> <li> <p>If you delete the training dataset, you must create a training dataset before you can create a model.</p> </li> </ul> <p>This operation requires permissions to perform the <code>lookoutvision:DeleteDataset</code> operation.</p>'
       responses:
         '202':
           description: Success
@@ -730,7 +730,7 @@ paths:
   '/2020-11-20/projects/{projectName}/models/{modelVersion}':
     delete:
       operationId: DeleteModel
-      description: '<p>Deletes an Amazon Lookout for Vision model. You can''t delete a running model. To stop a running model, use the <a>StopModel</a> operation.</p> <p>This operation requires permissions to perform the <code>lookoutvision:DeleteModel</code> operation.</p>'
+      description: '<p>Deletes an Amazon Lookout for Vision model. You can''t delete a running model. To stop a running model, use the <a>StopModel</a> operation.</p> <p>It might take a few seconds to delete a model. To determine if a model has been deleted, call <a>ListProjects</a> and check if the version of the model (<code>ModelVersion</code>) is in the <code>Models</code> array. </p> <p>This operation requires permissions to perform the <code>lookoutvision:DeleteModel</code> operation.</p>'
       responses:
         '202':
           description: Success
@@ -1005,7 +1005,7 @@ paths:
             pattern: '[a-zA-Z0-9][a-zA-Z0-9_\-]*'
             minLength: 1
             maxLength: 255
-  '/2020-11-20/projects/{projectName}/models/{modelVersion}/detect#content-type':
+  '/2020-11-20/projects/{projectName}/models/{modelVersion}/detect#Content-Type':
     post:
       operationId: DetectAnomalies
       description: '<p>Detects anomalies in an image that you supply. </p> <p>The response from <code>DetectAnomalies</code> includes a boolean prediction that the image contains one or more anomalies and a confidence value for the prediction.</p> <note> <p>Before calling <code>DetectAnomalies</code>, you must first start your model with the <a>StartModel</a> operation. You are charged for the amount of time, in minutes, that a model runs and for the number of anomaly detection units that your model uses. If you are not using a model, use the <a>StopModel</a> operation to stop your model. </p> </note> <p>This operation requires permissions to perform the <code>lookoutvision:DetectAnomalies</code> operation.</p>'
@@ -1071,7 +1071,7 @@ paths:
             pattern: '([1-9][0-9]*|latest)'
             minLength: 1
             maxLength: 10
-        - name: content-type
+        - name: Content-Type
           in: header
           required: true
           description: 'The type of the image passed in <code>Body</code>. Valid values are <code>image/png</code> (PNG format images) and <code>image/jpeg</code> (JPG format images). '
@@ -1472,7 +1472,7 @@ paths:
   '/2020-11-20/projects/{projectName}/models/{modelVersion}/start':
     post:
       operationId: StartModel
-      description: '<p>Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use <a>DescribeModel</a>.</p> <p>Once the model is running, you can detect custom labels in new images by calling <a>DetectAnomalies</a>.</p> <note> <p>You are charged for the amount of time that the model is running. To stop a running model, call <a>StopModel</a>.</p> </note> <p>This operation requires permissions to perform the <code>lookoutvision:StartModel</code> operation.</p>'
+      description: '<p>Starts the running of the version of an Amazon Lookout for Vision model. Starting a model takes a while to complete. To check the current state of the model, use <a>DescribeModel</a>.</p> <p>A model is ready to use when its status is <code>HOSTED</code>.</p> <p>Once the model is running, you can detect custom labels in new images by calling <a>DetectAnomalies</a>.</p> <note> <p>You are charged for the amount of time that the model is running. To stop a running model, call <a>StopModel</a>.</p> </note> <p>This operation requires permissions to perform the <code>lookoutvision:StartModel</code> operation.</p>'
       responses:
         '202':
           description: Success
@@ -1574,7 +1574,7 @@ paths:
   '/2020-11-20/projects/{projectName}/models/{modelVersion}/stop':
     post:
       operationId: StopModel
-      description: '<p>Stops a running model. The operation might take a while to complete. To check the current status, call <a>DescribeModel</a>. </p> <p>This operation requires permissions to perform the <code>lookoutvision:StopModel</code> operation.</p>'
+      description: '<p>Stops the hosting of a running model. The operation might take a while to complete. To check the current status, call <a>DescribeModel</a>. </p> <p>After the model hosting stops, the <code>Status</code> of the model is <code>TRAINED</code>.</p> <p>This operation requires permissions to perform the <code>lookoutvision:StopModel</code> operation.</p>'
       responses:
         '202':
           description: Success
@@ -1817,12 +1817,12 @@ components:
         Bucket:
           allOf:
             - $ref: '#/components/schemas/S3BucketName'
-            - description: The S3 bucket that contain the manifest file.
+            - description: The S3 bucket that contains the training output.
         Prefix:
           allOf:
             - $ref: '#/components/schemas/S3KeyPrefix'
-            - description: The path and name of the manifest file with the S3 bucket.
-      description: Information about the location of a manifest file.
+            - description: 'The path of the folder, within the S3 bucket, that contains the training output.'
+      description: Information about the location training output.
     Tag:
       type: object
       required:
@@ -2074,7 +2074,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: 'The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for encypting the model. If this parameter is not specified, the model is encrypted by a key that AWS owns and manages.'
+            - description: 'The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -2501,10 +2501,11 @@ components:
     ModelHostingStatus:
       type: string
       enum:
-        - RUNNING
-        - STARTING
-        - STOPPED
-        - FAILED
+        - STARTING_HOSTING
+        - HOSTED
+        - HOSTING_FAILED
+        - STOPPING_HOSTING
+        - SYSTEM_UPDATING
     S3KeyPrefix:
       type: string
       pattern: '^([a-zA-Z0-9!_.*''()-][/a-zA-Z0-9!_.*''()-]*)?$'
