@@ -359,7 +359,7 @@ paths:
         - name: TemplateURL
           in: query
           required: false
-          description: '<p>The location of the file that contains the revised template. The URL must point to a template (max size: 460,800 bytes) that is located in an S3 bucket. AWS CloudFormation generates the change set by comparing this template with the stack that you specified.</p> <p>Conditional: You must specify only <code>TemplateBody</code> or <code>TemplateURL</code>.</p>'
+          description: '<p>The location of the file that contains the revised template. The URL must point to a template (max size: 460,800 bytes) that is located in an S3 bucket or a Systems Manager document. AWS CloudFormation generates the change set by comparing this template with the stack that you specified.</p> <p>Conditional: You must specify only <code>TemplateBody</code> or <code>TemplateURL</code>.</p>'
           schema:
             type: string
             minLength: 1
@@ -610,7 +610,7 @@ paths:
         - name: TemplateURL
           in: query
           required: false
-          description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, go to the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>'
+          description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>'
           schema:
             type: string
             minLength: 1
@@ -870,7 +870,7 @@ paths:
         - name: Accounts
           in: query
           required: false
-          description: '<p>[<code>Self-managed</code> permissions] The names of one or more AWS accounts that you want to create stack instances in the specified Region(s) for.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+          description: '<p>[Self-managed permissions] The names of one or more AWS accounts that you want to create stack instances in the specified Region(s) for.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
           schema:
             type: array
             items:
@@ -878,7 +878,7 @@ paths:
         - name: DeploymentTargets
           in: query
           required: false
-          description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts for which to create stack instances in the specified Regions.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+          description: '<p>[Service-managed permissions] The AWS Organizations accounts for which to create stack instances in the specified Regions.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
           schema:
             type: object
             properties:
@@ -890,7 +890,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
                   - description: The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
-            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
+            description: '<p>[Service-managed permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
         - name: Regions
           in: query
           required: true
@@ -944,6 +944,15 @@ paths:
             pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
             minLength: 1
             maxLength: 128
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -1088,7 +1097,7 @@ paths:
         - name: TemplateURL
           in: query
           required: false
-          description: '<p>The location of the file that contains the template body. The URL must point to a template (maximum size: 460,800 bytes) that''s located in an Amazon S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.</p>'
+          description: '<p>The location of the file that contains the template body. The URL must point to a template (maximum size: 460,800 bytes) that''s located in an Amazon S3 bucket or a Systems Manager document. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.</p>'
           schema:
             type: string
             minLength: 1
@@ -1159,7 +1168,16 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/RetainStacksOnAccountRemovalNullable'
                   - description: 'If set to <code>true</code>, stack resources are retained when an account is removed from a target organization or OU. If set to <code>false</code>, stack resources are deleted. Specify only if <code>Enabled</code> is set to <code>True</code>.'
-            description: '[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).'
+            description: '[Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).'
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>To create a stack set with service-managed permissions while signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>To create a stack set with service-managed permissions while signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated admin in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul> <p>Stack sets with service-managed permissions are created in the management account, including stack sets that are created by delegated administrators.</p>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: ClientRequestToken
           in: query
           required: false
@@ -1488,7 +1506,7 @@ paths:
         - name: Accounts
           in: query
           required: false
-          description: '<p>[<code>Self-managed</code> permissions] The names of the AWS accounts that you want to delete stack instances for.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+          description: '<p>[Self-managed permissions] The names of the AWS accounts that you want to delete stack instances for.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
           schema:
             type: array
             items:
@@ -1496,7 +1514,7 @@ paths:
         - name: DeploymentTargets
           in: query
           required: false
-          description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts from which to delete stack instances.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+          description: '<p>[Service-managed permissions] The AWS Organizations accounts from which to delete stack instances.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
           schema:
             type: object
             properties:
@@ -1508,7 +1526,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
                   - description: The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
-            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
+            description: '<p>[Service-managed permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
         - name: Regions
           in: query
           required: true
@@ -1560,6 +1578,15 @@ paths:
             pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
             minLength: 1
             maxLength: 128
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -1674,6 +1701,15 @@ paths:
           description: The name or unique ID of the stack set that you're deleting. You can obtain this value by running <a>ListStackSets</a>.
           schema:
             type: string
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -1743,7 +1779,7 @@ paths:
     get:
       x-aws-operation-name: DeregisterType
       operationId: GET_DeregisterType
-      description: '<p>Removes a type or type version from active use in the CloudFormation registry. If a type or type version is deregistered, it cannot be used in CloudFormation operations.</p> <p>To deregister a type, you must individually deregister all registered versions of that type. If a type has only a single registered version, deregistering that version results in the type itself being deregistered. </p> <p>You cannot deregister the default version of a type, unless it is the only registered version of that type, in which case the type itself is deregistered as well. </p>'
+      description: '<p>Marks an extension or extension version as <code>DEPRECATED</code> in the CloudFormation registry, removing it from active use. Deprecated extensions or extension versions cannot be used in CloudFormation operations.</p> <p>To deregister an entire extension, you must individually deregister all active versions of that extension. If an extension has only a single active version, deregistering that version results in the extension itself being deregistered and marked as deprecated in the registry. </p> <p>You cannot deregister the default version of an extension if there are other active version of that extension. If you do deregister the default version of an extension, the textensionype itself is deregistered as well and marked as deprecated. </p> <p>To view the deprecation status of an extension or extension version, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html">DescribeType</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1767,7 +1803,7 @@ paths:
         - name: Arn
           in: query
           required: false
-          description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The Amazon Resource Name (ARN) of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+'
@@ -1775,7 +1811,7 @@ paths:
         - name: Type
           in: query
           required: false
-          description: '<p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The kind of extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             enum:
@@ -1784,7 +1820,7 @@ paths:
         - name: TypeName
           in: query
           required: false
-          description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The name of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
@@ -1793,7 +1829,7 @@ paths:
         - name: VersionId
           in: query
           required: false
-          description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+          description: The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.
           schema:
             type: string
             pattern: '[A-Za-z0-9-]+'
@@ -1824,7 +1860,7 @@ paths:
     post:
       x-aws-operation-name: DeregisterType
       operationId: POST_DeregisterType
-      description: '<p>Removes a type or type version from active use in the CloudFormation registry. If a type or type version is deregistered, it cannot be used in CloudFormation operations.</p> <p>To deregister a type, you must individually deregister all registered versions of that type. If a type has only a single registered version, deregistering that version results in the type itself being deregistered. </p> <p>You cannot deregister the default version of a type, unless it is the only registered version of that type, in which case the type itself is deregistered as well. </p>'
+      description: '<p>Marks an extension or extension version as <code>DEPRECATED</code> in the CloudFormation registry, removing it from active use. Deprecated extensions or extension versions cannot be used in CloudFormation operations.</p> <p>To deregister an entire extension, you must individually deregister all active versions of that extension. If an extension has only a single active version, deregistering that version results in the extension itself being deregistered and marked as deprecated in the registry. </p> <p>You cannot deregister the default version of an extension if there are other active version of that extension. If you do deregister the default version of an extension, the textensionype itself is deregistered as well and marked as deprecated. </p> <p>To view the deprecation status of an extension or extension version, use <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html">DescribeType</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2252,6 +2288,15 @@ paths:
           schema:
             type: string
             pattern: '^[a-zA-Z0-9-]{1,128}$'
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -2616,6 +2661,15 @@ paths:
           description: The name or unique ID of the stack set whose description you want.
           schema:
             type: string
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -2715,6 +2769,15 @@ paths:
             pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
             minLength: 1
             maxLength: 128
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -2870,7 +2933,7 @@ paths:
     get:
       x-aws-operation-name: DescribeType
       operationId: GET_DescribeType
-      description: '<p>Returns detailed information about a type that has been registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
+      description: '<p>Returns detailed information about an extension that has been registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific extension version. Otherwise, it returns information about the default extension version.</p>'
       responses:
         '200':
           description: Success
@@ -2894,7 +2957,7 @@ paths:
         - name: Type
           in: query
           required: false
-          description: '<p>The kind of type. </p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The kind of extension. </p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             enum:
@@ -2903,7 +2966,7 @@ paths:
         - name: TypeName
           in: query
           required: false
-          description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The name of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
@@ -2912,7 +2975,7 @@ paths:
         - name: Arn
           in: query
           required: false
-          description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The Amazon Resource Name (ARN) of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+'
@@ -2920,7 +2983,7 @@ paths:
         - name: VersionId
           in: query
           required: false
-          description: '<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
+          description: '<p>The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific extension version. Otherwise, it returns information about the default extension version.</p>'
           schema:
             type: string
             pattern: '[A-Za-z0-9-]+'
@@ -2951,7 +3014,7 @@ paths:
     post:
       x-aws-operation-name: DescribeType
       operationId: POST_DescribeType
-      description: '<p>Returns detailed information about a type that has been registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
+      description: '<p>Returns detailed information about an extension that has been registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific extension version. Otherwise, it returns information about the default extension version.</p>'
       responses:
         '200':
           description: Success
@@ -2995,7 +3058,7 @@ paths:
     get:
       x-aws-operation-name: DescribeTypeRegistration
       operationId: GET_DescribeTypeRegistration
-      description: '<p>Returns information about a type''s registration, including its current status and type and version identifiers.</p> <p>When you initiate a registration request using <code> <a>RegisterType</a> </code>, you can then use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of that registration request.</p> <p>Once the registration request has completed, use <code> <a>DescribeType</a> </code> to return detailed informaiton about a type.</p>'
+      description: '<p>Returns information about an extension''s registration, including its current status and type and version identifiers.</p> <p>When you initiate a registration request using <code> <a>RegisterType</a> </code>, you can then use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of that registration request.</p> <p>Once the registration request has completed, use <code> <a>DescribeType</a> </code> to return detailed information about an extension.</p>'
       responses:
         '200':
           description: Success
@@ -3044,7 +3107,7 @@ paths:
     post:
       x-aws-operation-name: DescribeTypeRegistration
       operationId: POST_DescribeTypeRegistration
-      description: '<p>Returns information about a type''s registration, including its current status and type and version identifiers.</p> <p>When you initiate a registration request using <code> <a>RegisterType</a> </code>, you can then use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of that registration request.</p> <p>Once the registration request has completed, use <code> <a>DescribeType</a> </code> to return detailed informaiton about a type.</p>'
+      description: '<p>Returns information about an extension''s registration, including its current status and type and version identifiers.</p> <p>When you initiate a registration request using <code> <a>RegisterType</a> </code>, you can then use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of that registration request.</p> <p>Once the registration request has completed, use <code> <a>DescribeType</a> </code> to return detailed information about an extension.</p>'
       responses:
         '200':
           description: Success
@@ -3246,7 +3309,7 @@ paths:
     get:
       x-aws-operation-name: DetectStackSetDrift
       operationId: GET_DetectStackSetDrift
-      description: '<p>Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">How CloudFormation Performs Drift Detection on a Stack Set</a>.</p> <p> <code>DetectStackSetDrift</code> returns the <code>OperationId</code> of the stack set drift detection operation. Use this operation id with <code> <a>DescribeStackSetOperation</a> </code> to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, as well as the number of resources included in each stack.</p> <p>Once the operation has completed, use the following actions to return drift information:</p> <ul> <li> <p>Use <code> <a>DescribeStackSet</a> </code> to return detailed informaiton about the stack set, including detailed information about the last <i>completed</i> drift operation performed on the stack set. (Information about drift operations that are in progress is not included.)</p> </li> <li> <p>Use <code> <a>ListStackInstances</a> </code> to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.</p> </li> <li> <p>Use <code> <a>DescribeStackInstance</a> </code> to return detailed information about a specific stack instance, including its drift status and last drift time checked.</p> </li> </ul> <p>For more information on performing a drift detection operation on a stack set, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">Detecting Unmanaged Changes in Stack Sets</a>. </p> <p>You can only run a single drift detection operation on a given stack set at one time. </p> <p>To stop a drift detection stack set operation, use <code> <a>StopStackSetOperation</a> </code>.</p>'
+      description: '<p>Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">How CloudFormation Performs Drift Detection on a Stack Set</a>.</p> <p> <code>DetectStackSetDrift</code> returns the <code>OperationId</code> of the stack set drift detection operation. Use this operation id with <code> <a>DescribeStackSetOperation</a> </code> to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, as well as the number of resources included in each stack.</p> <p>Once the operation has completed, use the following actions to return drift information:</p> <ul> <li> <p>Use <code> <a>DescribeStackSet</a> </code> to return detailed information about the stack set, including detailed information about the last <i>completed</i> drift operation performed on the stack set. (Information about drift operations that are in progress is not included.)</p> </li> <li> <p>Use <code> <a>ListStackInstances</a> </code> to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.</p> </li> <li> <p>Use <code> <a>DescribeStackInstance</a> </code> to return detailed information about a specific stack instance, including its drift status and last drift time checked.</p> </li> </ul> <p>For more information on performing a drift detection operation on a stack set, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">Detecting Unmanaged Changes in Stack Sets</a>. </p> <p>You can only run a single drift detection operation on a given stack set at one time. </p> <p>To stop a drift detection stack set operation, use <code> <a>StopStackSetOperation</a> </code>.</p>'
       responses:
         '200':
           description: Success
@@ -3317,6 +3380,15 @@ paths:
             pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
             minLength: 1
             maxLength: 128
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -3342,7 +3414,7 @@ paths:
     post:
       x-aws-operation-name: DetectStackSetDrift
       operationId: POST_DetectStackSetDrift
-      description: '<p>Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">How CloudFormation Performs Drift Detection on a Stack Set</a>.</p> <p> <code>DetectStackSetDrift</code> returns the <code>OperationId</code> of the stack set drift detection operation. Use this operation id with <code> <a>DescribeStackSetOperation</a> </code> to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, as well as the number of resources included in each stack.</p> <p>Once the operation has completed, use the following actions to return drift information:</p> <ul> <li> <p>Use <code> <a>DescribeStackSet</a> </code> to return detailed informaiton about the stack set, including detailed information about the last <i>completed</i> drift operation performed on the stack set. (Information about drift operations that are in progress is not included.)</p> </li> <li> <p>Use <code> <a>ListStackInstances</a> </code> to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.</p> </li> <li> <p>Use <code> <a>DescribeStackInstance</a> </code> to return detailed information about a specific stack instance, including its drift status and last drift time checked.</p> </li> </ul> <p>For more information on performing a drift detection operation on a stack set, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">Detecting Unmanaged Changes in Stack Sets</a>. </p> <p>You can only run a single drift detection operation on a given stack set at one time. </p> <p>To stop a drift detection stack set operation, use <code> <a>StopStackSetOperation</a> </code>.</p>'
+      description: '<p>Detect drift on a stack set. When CloudFormation performs drift detection on a stack set, it performs drift detection on the stack associated with each stack instance in the stack set. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">How CloudFormation Performs Drift Detection on a Stack Set</a>.</p> <p> <code>DetectStackSetDrift</code> returns the <code>OperationId</code> of the stack set drift detection operation. Use this operation id with <code> <a>DescribeStackSetOperation</a> </code> to monitor the progress of the drift detection operation. The drift detection operation may take some time, depending on the number of stack instances included in the stack set, as well as the number of resources included in each stack.</p> <p>Once the operation has completed, use the following actions to return drift information:</p> <ul> <li> <p>Use <code> <a>DescribeStackSet</a> </code> to return detailed information about the stack set, including detailed information about the last <i>completed</i> drift operation performed on the stack set. (Information about drift operations that are in progress is not included.)</p> </li> <li> <p>Use <code> <a>ListStackInstances</a> </code> to return a list of stack instances belonging to the stack set, including the drift status and last drift time checked of each instance.</p> </li> <li> <p>Use <code> <a>DescribeStackInstance</a> </code> to return detailed information about a specific stack instance, including its drift status and last drift time checked.</p> </li> </ul> <p>For more information on performing a drift detection operation on a stack set, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html">Detecting Unmanaged Changes in Stack Sets</a>. </p> <p>You can only run a single drift detection operation on a given stack set at one time. </p> <p>To stop a drift detection stack set operation, use <code> <a>StopStackSetOperation</a> </code>.</p>'
       responses:
         '200':
           description: Success
@@ -3411,7 +3483,7 @@ paths:
         - name: TemplateURL
           in: query
           required: false
-          description: '<p>Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>'
+          description: '<p>Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>'
           schema:
             type: string
             minLength: 1
@@ -3820,7 +3892,7 @@ paths:
         - name: TemplateURL
           in: query
           required: false
-          description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information about templates, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
+          description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information about templates, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
           schema:
             type: string
             minLength: 1
@@ -4217,6 +4289,15 @@ paths:
           schema:
             type: string
             pattern: '^[a-zA-Z0-9-]{1,128}$'
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -4430,6 +4511,15 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -4548,6 +4638,15 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -4623,7 +4722,7 @@ paths:
     get:
       x-aws-operation-name: ListStackSets
       operationId: GET_ListStackSets
-      description: Returns summary information about stack sets that are associated with the user.
+      description: '<p>Returns summary information about stack sets that are associated with the user.</p> <ul> <li> <p>[Self-managed permissions] If you set the <code>CallAs</code> parameter to <code>SELF</code> while signed in to your AWS account, <code>ListStackSets</code> returns all self-managed stack sets in your AWS account.</p> </li> <li> <p>[Service-managed permissions] If you set the <code>CallAs</code> parameter to <code>SELF</code> while signed in to the organization''s management account, <code>ListStackSets</code> returns all stack sets in the management account.</p> </li> <li> <p>[Service-managed permissions] If you set the <code>CallAs</code> parameter to <code>DELEGATED_ADMIN</code> while signed in to your member account, <code>ListStackSets</code> returns all stack sets with service-managed permissions in the management account.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -4657,6 +4756,15 @@ paths:
             enum:
               - ACTIVE
               - DELETED
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -4682,7 +4790,7 @@ paths:
     post:
       x-aws-operation-name: ListStackSets
       operationId: POST_ListStackSets
-      description: Returns summary information about stack sets that are associated with the user.
+      description: '<p>Returns summary information about stack sets that are associated with the user.</p> <ul> <li> <p>[Self-managed permissions] If you set the <code>CallAs</code> parameter to <code>SELF</code> while signed in to your AWS account, <code>ListStackSets</code> returns all self-managed stack sets in your AWS account.</p> </li> <li> <p>[Service-managed permissions] If you set the <code>CallAs</code> parameter to <code>SELF</code> while signed in to the organization''s management account, <code>ListStackSets</code> returns all stack sets in the management account.</p> </li> <li> <p>[Service-managed permissions] If you set the <code>CallAs</code> parameter to <code>DELEGATED_ADMIN</code> while signed in to your member account, <code>ListStackSets</code> returns all stack sets with service-managed permissions in the management account.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -4814,7 +4922,7 @@ paths:
     get:
       x-aws-operation-name: ListTypeRegistrations
       operationId: GET_ListTypeRegistrations
-      description: Returns a list of registration tokens for the specified type(s).
+      description: Returns a list of registration tokens for the specified extension(s).
       responses:
         '200':
           description: Success
@@ -4832,7 +4940,7 @@ paths:
         - name: Type
           in: query
           required: false
-          description: '<p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The kind of extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             enum:
@@ -4841,7 +4949,7 @@ paths:
         - name: TypeName
           in: query
           required: false
-          description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The name of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
@@ -4850,7 +4958,7 @@ paths:
         - name: TypeArn
           in: query
           required: false
-          description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The Amazon Resource Name (ARN) of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+'
@@ -4858,7 +4966,7 @@ paths:
         - name: RegistrationStatusFilter
           in: query
           required: false
-          description: <p>The current status of the type registration request.</p> <p>The default is <code>IN_PROGRESS</code>.</p>
+          description: <p>The current status of the extension registration request.</p> <p>The default is <code>IN_PROGRESS</code>.</p>
           schema:
             type: string
             enum:
@@ -4906,7 +5014,7 @@ paths:
     post:
       x-aws-operation-name: ListTypeRegistrations
       operationId: POST_ListTypeRegistrations
-      description: Returns a list of registration tokens for the specified type(s).
+      description: Returns a list of registration tokens for the specified extension(s).
       responses:
         '200':
           description: Success
@@ -4956,7 +5064,7 @@ paths:
     get:
       x-aws-operation-name: ListTypeVersions
       operationId: GET_ListTypeVersions
-      description: Returns summary information about the versions of a type.
+      description: Returns summary information about the versions of an extension.
       responses:
         '200':
           description: Success
@@ -4974,7 +5082,7 @@ paths:
         - name: Type
           in: query
           required: false
-          description: '<p>The kind of the type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The kind of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             enum:
@@ -4983,7 +5091,7 @@ paths:
         - name: TypeName
           in: query
           required: false
-          description: '<p>The name of the type for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The name of the extension for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
@@ -4992,7 +5100,7 @@ paths:
         - name: Arn
           in: query
           required: false
-          description: '<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The Amazon Resource Name (ARN) of the extension for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+'
@@ -5016,7 +5124,7 @@ paths:
         - name: DeprecatedStatus
           in: query
           required: false
-          description: '<p>The deprecation status of the type versions that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The type version has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul> <p>The default is <code>LIVE</code>.</p>'
+          description: '<p>The deprecation status of the extension versions that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The extension version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The extension version has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul> <p>The default is <code>LIVE</code>.</p>'
           schema:
             type: string
             enum:
@@ -5047,7 +5155,7 @@ paths:
     post:
       x-aws-operation-name: ListTypeVersions
       operationId: POST_ListTypeVersions
-      description: Returns summary information about the versions of a type.
+      description: Returns summary information about the versions of an extension.
       responses:
         '200':
           description: Success
@@ -5097,7 +5205,7 @@ paths:
     get:
       x-aws-operation-name: ListTypes
       operationId: GET_ListTypes
-      description: Returns summary information about types that have been registered with CloudFormation.
+      description: Returns summary information about extension that have been registered with CloudFormation.
       responses:
         '200':
           description: Success
@@ -5115,7 +5223,7 @@ paths:
         - name: Visibility
           in: query
           required: false
-          description: '<p>The scope at which the type is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p> </li> </ul> <p>The default is <code>PRIVATE</code>.</p>'
+          description: '<p>The scope at which the extension is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The extension is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any extension you create as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The extension is publically visible and usable within any Amazon account.</p> </li> </ul> <p>The default is <code>PRIVATE</code>.</p>'
           schema:
             type: string
             enum:
@@ -5124,7 +5232,7 @@ paths:
         - name: ProvisioningType
           in: query
           required: false
-          description: '<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The type includes an update handler to process updates to the type during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The type does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p> </li> </ul>'
+          description: '<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The extension includes an update handler to process updates to the extension during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The extension does not include an update handler, so the extension cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The extension does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p> </li> </ul>'
           schema:
             type: string
             enum:
@@ -5134,7 +5242,7 @@ paths:
         - name: DeprecatedStatus
           in: query
           required: false
-          description: '<p>The deprecation status of the types that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type is registered for use in CloudFormation operations.</p> </li> <li> <p> <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
+          description: '<p>The deprecation status of the extension that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The extension is registered for use in CloudFormation operations.</p> </li> <li> <p> <code>DEPRECATED</code>: The extension has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
           schema:
             type: string
             enum:
@@ -5190,7 +5298,7 @@ paths:
     post:
       x-aws-operation-name: ListTypes
       operationId: POST_ListTypes
-      description: Returns summary information about types that have been registered with CloudFormation.
+      description: Returns summary information about extension that have been registered with CloudFormation.
       responses:
         '200':
           description: Success
@@ -5405,7 +5513,7 @@ paths:
     get:
       x-aws-operation-name: RegisterType
       operationId: GET_RegisterType
-      description: '<p>Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the resource schema</p> </li> <li> <p>Determining which handlers have been specified for the resource</p> </li> <li> <p>Making the resource type available for use in your account</p> </li> </ul> <p>For more information on how to develop types and ready them for registeration, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>You can have a maximum of 50 resource type versions registered at a time. This maximum is per account and per region. Use <a href="AWSCloudFormation/latest/APIReference/API_DeregisterType.html">DeregisterType</a> to deregister specific resource type versions if necessary.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>'
+      description: '<p>Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the extension schema</p> </li> <li> <p>Determining which handlers, if any, have been specified for the extension</p> </li> <li> <p>Making the extension available for use in your account</p> </li> </ul> <p>For more information on how to develop extensions and ready them for registeration, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use <a href="AWSCloudFormation/latest/APIReference/API_DeregisterType.html">DeregisterType</a> to deregister specific extension versions if necessary.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>'
       responses:
         '200':
           description: Success
@@ -5423,7 +5531,7 @@ paths:
         - name: Type
           in: query
           required: false
-          description: '<p>The kind of type.</p> <p>Currently, the only valid value is <code>RESOURCE</code>.</p>'
+          description: The kind of extension.
           schema:
             type: string
             enum:
@@ -5432,7 +5540,7 @@ paths:
         - name: TypeName
           in: query
           required: true
-          description: '<p>The name of the type being registered.</p> <p>We recommend that type names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p> <note> <p>The following organization namespaces are reserved and cannot be used in your resource type names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p> <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p> <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul> </note>'
+          description: '<p>The name of the extension being registered.</p> <p>We recommend that extension names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p> <note> <p>The following organization namespaces are reserved and cannot be used in your extension names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p> <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p> <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul> </note>'
           schema:
             type: string
             pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
@@ -5441,7 +5549,7 @@ paths:
         - name: SchemaHandlerPackage
           in: query
           required: true
-          description: '<p>A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.</p> <p>For information on generating a schema handler package for the type you want to register, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p> <note> <p>The user registering the resource provider type must be able to access the the schema handler package in the S3 bucket. That is, the user needs to have <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> permissions for the schema handler package. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html">Actions, Resources, and Condition Keys for Amazon S3</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> </note>'
+          description: '<p>A url to the S3 bucket containing the extension project package that contains the neccessary files for the extension you want to register.</p> <p>For information on generating a schema handler package for the extension you want to register, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p> <note> <p>The user registering the extension must be able to access the package in the S3 bucket. That is, the user needs to have <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> permissions for the schema handler package. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html">Actions, Resources, and Condition Keys for Amazon S3</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> </note>'
           schema:
             type: string
             minLength: 1
@@ -5449,7 +5557,7 @@ paths:
         - name: LoggingConfig
           in: query
           required: false
-          description: Specifies logging configuration information for a type.
+          description: Specifies logging configuration information for an extension.
           schema:
             type: object
             required:
@@ -5468,7 +5576,7 @@ paths:
         - name: ExecutionRoleArn
           in: query
           required: false
-          description: 'The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the resource provider. If your resource type calls AWS APIs in any of its handlers, you must create an <i> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the resource provider handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the resource provider handler, thereby supplying your resource provider with the appropriate credentials.'
+          description: 'The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension. If your extension calls AWS APIs in any of its handlers, you must create an <i> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the extension handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the extension handler, thereby supplying your extension with the appropriate credentials.'
           schema:
             type: string
             pattern: 'arn:.+:iam::[0-9]{12}:role/.+'
@@ -5477,7 +5585,7 @@ paths:
         - name: ClientRequestToken
           in: query
           required: false
-          description: 'A unique identifier that acts as an idempotency key for this registration request. Specifying a client request token prevents CloudFormation from generating more than one version of a type from the same registeration request, even if the request is submitted multiple times. '
+          description: 'A unique identifier that acts as an idempotency key for this registration request. Specifying a client request token prevents CloudFormation from generating more than one version of an extension from the same registeration request, even if the request is submitted multiple times. '
           schema:
             type: string
             pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
@@ -5508,7 +5616,7 @@ paths:
     post:
       x-aws-operation-name: RegisterType
       operationId: POST_RegisterType
-      description: '<p>Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the resource schema</p> </li> <li> <p>Determining which handlers have been specified for the resource</p> </li> <li> <p>Making the resource type available for use in your account</p> </li> </ul> <p>For more information on how to develop types and ready them for registeration, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>You can have a maximum of 50 resource type versions registered at a time. This maximum is per account and per region. Use <a href="AWSCloudFormation/latest/APIReference/API_DeregisterType.html">DeregisterType</a> to deregister specific resource type versions if necessary.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>'
+      description: '<p>Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the extension schema</p> </li> <li> <p>Determining which handlers, if any, have been specified for the extension</p> </li> <li> <p>Making the extension available for use in your account</p> </li> </ul> <p>For more information on how to develop extensions and ready them for registeration, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use <a href="AWSCloudFormation/latest/APIReference/API_DeregisterType.html">DeregisterType</a> to deregister specific extension versions if necessary.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>'
       responses:
         '200':
           description: Success
@@ -5626,7 +5734,7 @@ paths:
     get:
       x-aws-operation-name: SetTypeDefaultVersion
       operationId: GET_SetTypeDefaultVersion
-      description: Specify the default version of a type. The default version of a type will be used in CloudFormation operations.
+      description: Specify the default version of an extension. The default version of an extension will be used in CloudFormation operations.
       responses:
         '200':
           description: Success
@@ -5650,7 +5758,7 @@ paths:
         - name: Arn
           in: query
           required: false
-          description: '<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The Amazon Resource Name (ARN) of the extension for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             pattern: 'arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+'
@@ -5658,7 +5766,7 @@ paths:
         - name: Type
           in: query
           required: false
-          description: '<p>The kind of type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The kind of extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             enum:
@@ -5667,7 +5775,7 @@ paths:
         - name: TypeName
           in: query
           required: false
-          description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+          description: '<p>The name of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
             pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
@@ -5676,7 +5784,7 @@ paths:
         - name: VersionId
           in: query
           required: false
-          description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+          description: The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.
           schema:
             type: string
             pattern: '[A-Za-z0-9-]+'
@@ -5707,7 +5815,7 @@ paths:
     post:
       x-aws-operation-name: SetTypeDefaultVersion
       operationId: POST_SetTypeDefaultVersion
-      description: Specify the default version of a type. The default version of a type will be used in CloudFormation operations.
+      description: Specify the default version of an extension. The default version of an extension will be used in CloudFormation operations.
       responses:
         '200':
           description: Success
@@ -5882,6 +5990,15 @@ paths:
             pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
             minLength: 1
             maxLength: 128
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -5994,7 +6111,7 @@ paths:
         - name: TemplateURL
           in: query
           required: false
-          description: '<p>Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code>, <code>TemplateURL</code>, or set the <code>UsePreviousTemplate</code> to <code>true</code>.</p>'
+          description: '<p>Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code>, <code>TemplateURL</code>, or set the <code>UsePreviousTemplate</code> to <code>true</code>.</p>'
           schema:
             type: string
             minLength: 1
@@ -6236,7 +6353,7 @@ paths:
         - name: Accounts
           in: query
           required: false
-          description: '<p>[<code>Self-managed</code> permissions] The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and Regions.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+          description: '<p>[Self-managed permissions] The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and Regions.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
           schema:
             type: array
             items:
@@ -6244,7 +6361,7 @@ paths:
         - name: DeploymentTargets
           in: query
           required: false
-          description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts for which you want to update parameter values for stack instances. If your update targets OUs, the overridden parameter values only apply to the accounts that are currently in the target OUs and their child OUs. Accounts added to the target OUs and their child OUs in the future won''t use the overridden values.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+          description: '<p>[Service-managed permissions] The AWS Organizations accounts for which you want to update parameter values for stack instances. If your update targets OUs, the overridden parameter values only apply to the accounts that are currently in the target OUs and their child OUs. Accounts added to the target OUs and their child OUs in the future won''t use the overridden values.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
           schema:
             type: object
             properties:
@@ -6256,7 +6373,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
                   - description: The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
-            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
+            description: '<p>[Service-managed permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
         - name: Regions
           in: query
           required: true
@@ -6310,6 +6427,15 @@ paths:
             pattern: '[a-zA-Z0-9][-a-zA-Z0-9]*'
             minLength: 1
             maxLength: 128
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -6472,7 +6598,7 @@ paths:
         - name: TemplateURL
           in: query
           required: false
-          description: '<p>The location of the file that contains the template body. The URL must point to a template (maximum size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code> or <code>TemplateURL</code>—or set <code>UsePreviousTemplate</code> to true. </p>'
+          description: '<p>The location of the file that contains the template body. The URL must point to a template (maximum size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code> or <code>TemplateURL</code>—or set <code>UsePreviousTemplate</code> to true. </p>'
           schema:
             type: string
             minLength: 1
@@ -6556,7 +6682,7 @@ paths:
         - name: DeploymentTargets
           in: query
           required: false
-          description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts in which to update associated stack instances.</p> <p>To update all the stack instances associated with this stack set, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p> <p>If the stack set update includes changes to the template (that is, if <code>TemplateBody</code> or <code>TemplateURL</code> is specified), or the <code>Parameters</code>, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status.</p>'
+          description: '<p>[Service-managed permissions] The AWS Organizations accounts in which to update associated stack instances.</p> <p>To update all the stack instances associated with this stack set, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p> <p>If the stack set update includes changes to the template (that is, if <code>TemplateBody</code> or <code>TemplateURL</code> is specified), or the <code>Parameters</code>, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status.</p>'
           schema:
             type: object
             properties:
@@ -6568,7 +6694,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
                   - description: The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
-            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
+            description: '<p>[Service-managed permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
         - name: PermissionModel
           in: query
           required: false
@@ -6581,7 +6707,7 @@ paths:
         - name: AutoDeployment
           in: query
           required: false
-          description: '<p>[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p> <p>If you specify <code>AutoDeployment</code>, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p>'
+          description: '<p>[Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p> <p>If you specify <code>AutoDeployment</code>, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p>'
           schema:
             type: object
             properties:
@@ -6593,7 +6719,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/RetainStacksOnAccountRemovalNullable'
                   - description: 'If set to <code>true</code>, stack resources are retained when an account is removed from a target organization or OU. If set to <code>false</code>, stack resources are deleted. Specify only if <code>Enabled</code> is set to <code>True</code>.'
-            description: '[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).'
+            description: '[Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).'
         - name: OperationId
           in: query
           required: false
@@ -6606,7 +6732,7 @@ paths:
         - name: Accounts
           in: query
           required: false
-          description: '<p>[<code>Self-managed</code> permissions] The accounts in which to update associated stack instances. If you specify accounts, you must also specify the Regions in which to update stack set instances.</p> <p>To update <i>all</i> the stack instances associated with this stack set, do not specify the <code>Accounts</code> or <code>Regions</code> properties.</p> <p>If the stack set update includes changes to the template (that is, if the <code>TemplateBody</code> or <code>TemplateURL</code> properties are specified), or the <code>Parameters</code> property, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status. </p>'
+          description: '<p>[Self-managed permissions] The accounts in which to update associated stack instances. If you specify accounts, you must also specify the Regions in which to update stack set instances.</p> <p>To update <i>all</i> the stack instances associated with this stack set, do not specify the <code>Accounts</code> or <code>Regions</code> properties.</p> <p>If the stack set update includes changes to the template (that is, if the <code>TemplateBody</code> or <code>TemplateURL</code> properties are specified), or the <code>Parameters</code> property, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status. </p>'
           schema:
             type: array
             items:
@@ -6619,6 +6745,15 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/Region'
+        - name: CallAs
+          in: query
+          required: false
+          description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - SELF
+              - DELEGATED_ADMIN
         - name: Action
           in: query
           required: true
@@ -6811,7 +6946,7 @@ paths:
         - name: TemplateURL
           in: query
           required: false
-          description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>'
+          description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>'
           schema:
             type: string
             minLength: 1
@@ -7326,86 +7461,86 @@ components:
         Arn:
           allOf:
             - $ref: '#/components/schemas/TypeArn'
-            - description: The Amazon Resource Name (ARN) of the type.
+            - description: The Amazon Resource Name (ARN) of the extension.
         Type:
           allOf:
             - $ref: '#/components/schemas/RegistryType'
-            - description: <p>The kind of type. </p> <p>Currently the only valid value is <code>RESOURCE</code>.</p>
+            - description: 'The kind of extension. '
         TypeName:
           allOf:
             - $ref: '#/components/schemas/TypeName'
-            - description: The name of the registered type.
+            - description: The name of the registered extension.
         DefaultVersionId:
           allOf:
             - $ref: '#/components/schemas/TypeVersionId'
-            - description: '<p>The ID of the default version of the type. The default version is used when the type version is not specified.</p> <p>To set the default version of a type, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>'
+            - description: '<p>The ID of the default version of the extension. The default version is used when the extension version is not specified.</p> <p>To set the default version of an extension, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>'
         IsDefaultVersion:
           allOf:
             - $ref: '#/components/schemas/IsDefaultVersion'
-            - description: Whether the specified type version is set as the default version.
+            - description: Whether the specified extension version is set as the default version.
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
-            - description: The description of the registered type.
+            - description: The description of the registered extension.
         Schema:
           allOf:
             - $ref: '#/components/schemas/TypeSchema'
-            - description: '<p>The schema that defines the type.</p> <p>For more information on type schemas, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html">Resource Provider Schema</a> in the <i>CloudFormation CLI User Guide</i>.</p>'
+            - description: '<p>The schema that defines the extension.</p> <p>For more information on extension schemas, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html">Resource Provider Schema</a> in the <i>CloudFormation CLI User Guide</i>.</p>'
         ProvisioningType:
           allOf:
             - $ref: '#/components/schemas/ProvisioningType'
-            - description: '<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The type includes an update handler to process updates to the type during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The type does not include all of the following handlers, and therefore cannot actually be provisioned.</p> <ul> <li> <p>create</p> </li> <li> <p>read</p> </li> <li> <p>delete</p> </li> </ul> </li> </ul>'
+            - description: '<p>The provisioning behavior of the extension. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The extension includes an update handler to process updates to the extension during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The extension does not include an update handler, so the extension cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The extension does not include all of the following handlers, and therefore cannot actually be provisioned.</p> <ul> <li> <p>create</p> </li> <li> <p>read</p> </li> <li> <p>delete</p> </li> </ul> </li> </ul>'
         DeprecatedStatus:
           allOf:
             - $ref: '#/components/schemas/DeprecatedStatus'
-            - description: '<p>The deprecation status of the type.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
+            - description: '<p>The deprecation status of the extension version.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The extension is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The extension has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
         LoggingConfig:
           allOf:
             - $ref: '#/components/schemas/LoggingConfig'
-            - description: Contains logging configuration information for a type.
+            - description: Contains logging configuration information for an extension.
         ExecutionRoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the IAM execution role used to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an <i> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.'
+            - description: 'The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. If your resource type calls AWS APIs in any of its handlers, you must create an <i> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your extension with the appropriate credentials.'
         Visibility:
           allOf:
             - $ref: '#/components/schemas/Visibility'
-            - description: '<p>The scope at which the type is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p> </li> </ul>'
+            - description: '<p>The scope at which the extension is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The extension is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The extension is publically visible and usable within any Amazon account.</p> </li> </ul>'
         SourceUrl:
           allOf:
             - $ref: '#/components/schemas/OptionalSecureUrl'
-            - description: The URL of the source code for the type.
+            - description: The URL of the source code for the extension.
         DocumentationUrl:
           allOf:
             - $ref: '#/components/schemas/OptionalSecureUrl'
-            - description: The URL of a page providing detailed documentation for this type.
+            - description: The URL of a page providing detailed documentation for this extension.
         LastUpdated:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: When the specified type version was registered.
+            - description: When the specified extension version was registered.
         TimeCreated:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: When the specified type version was registered.
+            - description: When the specified extension version was registered.
     DescribeTypeRegistrationOutput:
       type: object
       properties:
         ProgressStatus:
           allOf:
             - $ref: '#/components/schemas/RegistrationStatus'
-            - description: The current status of the type registration request.
+            - description: The current status of the extension registration request.
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
-            - description: The description of the type registration request.
+            - description: The description of the extension registration request.
         TypeArn:
           allOf:
             - $ref: '#/components/schemas/TypeArn'
-            - description: '<p>The Amazon Resource Name (ARN) of the type being registered.</p> <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of the extension being registered.</p> <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>'
         TypeVersionArn:
           allOf:
             - $ref: '#/components/schemas/TypeArn'
-            - description: '<p>The Amazon Resource Name (ARN) of this specific version of the type being registered.</p> <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of this specific version of the extension being registered.</p> <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>'
     DetectStackDriftOutput:
       type: object
       required:
@@ -7648,7 +7783,7 @@ components:
         RegistrationTokenList:
           allOf:
             - $ref: '#/components/schemas/RegistrationTokenList'
-            - description: <p> A list of type registration tokens.</p> <p>Use <code> <a>DescribeTypeRegistration</a> </code> to return detailed information about a type registration request.</p>
+            - description: <p> A list of extension registration tokens.</p> <p>Use <code> <a>DescribeTypeRegistration</a> </code> to return detailed information about a type registration request.</p>
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -7659,7 +7794,7 @@ components:
         TypeVersionSummaries:
           allOf:
             - $ref: '#/components/schemas/TypeVersionSummaries'
-            - description: A list of <code>TypeVersionSummary</code> structures that contain information about the specified type's versions.
+            - description: A list of <code>TypeVersionSummary</code> structures that contain information about the specified extension's versions.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -7670,7 +7805,7 @@ components:
         TypeSummaries:
           allOf:
             - $ref: '#/components/schemas/TypeSummaries'
-            - description: A list of <code>TypeSummary</code> structures that contain information about the specified types.
+            - description: A list of <code>TypeSummary</code> structures that contain information about the specified extensions.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -7686,7 +7821,7 @@ components:
         RegistrationToken:
           allOf:
             - $ref: '#/components/schemas/RegistrationToken'
-            - description: '<p>The identifier for this registration request.</p> <p>Use this registration token when calling <code> <a>DescribeTypeRegistration</a> </code>, which returns information about the status and IDs of the type registration. </p>'
+            - description: '<p>The identifier for this registration request.</p> <p>Use this registration token when calling <code> <a>DescribeTypeRegistration</a> </code>, which returns information about the status and IDs of the extension registration. </p>'
     RoleArn:
       type: string
       pattern: 'arn:.+:iam::[0-9]{12}:role/.+'
@@ -7815,13 +7950,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/RetainStacksOnAccountRemovalNullable'
             - description: 'If set to <code>true</code>, stack resources are retained when an account is removed from a target organization or OU. If set to <code>false</code>, stack resources are deleted. Specify only if <code>Enabled</code> is set to <code>True</code>.'
-      description: '[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).'
+      description: '[Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).'
     BoxedInteger:
       type: integer
     BoxedMaxResults:
       type: integer
       minimum: 1
       maximum: 100
+    CallAs:
+      type: string
+      enum:
+        - SELF
+        - DELEGATED_ADMIN
     StackName:
       type: string
     ClientRequestToken:
@@ -8138,7 +8278,7 @@ components:
         TemplateURL:
           allOf:
             - $ref: '#/components/schemas/TemplateURL'
-            - description: '<p>The location of the file that contains the revised template. The URL must point to a template (max size: 460,800 bytes) that is located in an S3 bucket. AWS CloudFormation generates the change set by comparing this template with the stack that you specified.</p> <p>Conditional: You must specify only <code>TemplateBody</code> or <code>TemplateURL</code>.</p>'
+            - description: '<p>The location of the file that contains the revised template. The URL must point to a template (max size: 460,800 bytes) that is located in an S3 bucket or a Systems Manager document. AWS CloudFormation generates the change set by comparing this template with the stack that you specified.</p> <p>Conditional: You must specify only <code>TemplateBody</code> or <code>TemplateURL</code>.</p>'
         UsePreviousTemplate:
           allOf:
             - $ref: '#/components/schemas/UsePreviousTemplate'
@@ -8234,7 +8374,7 @@ components:
         TemplateURL:
           allOf:
             - $ref: '#/components/schemas/TemplateURL'
-            - description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, go to the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>'
+            - description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the <code>TemplateBody</code> or the <code>TemplateURL</code> parameter, but not both.</p>'
         Parameters:
           allOf:
             - $ref: '#/components/schemas/Parameters'
@@ -8305,7 +8445,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/OrganizationalUnitIdList'
             - description: The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
-      description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
+      description: '<p>[Service-managed permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
     StackSetOperationPreferences:
       type: object
       properties:
@@ -8344,11 +8484,11 @@ components:
         Accounts:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: '<p>[<code>Self-managed</code> permissions] The names of one or more AWS accounts that you want to create stack instances in the specified Region(s) for.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+            - description: '<p>[Self-managed permissions] The names of one or more AWS accounts that you want to create stack instances in the specified Region(s) for.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
         DeploymentTargets:
           allOf:
             - $ref: '#/components/schemas/DeploymentTargets'
-            - description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts for which to create stack instances in the specified Regions.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+            - description: '<p>[Service-managed permissions] The AWS Organizations accounts for which to create stack instances in the specified Regions.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
         Regions:
           allOf:
             - $ref: '#/components/schemas/RegionList'
@@ -8365,6 +8505,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: '<p>The unique identifier for this stack set operation. </p> <p>The operation ID also functions as an idempotency token, to ensure that AWS CloudFormation performs the stack set operation only once, even if you retry the request multiple times. You might retry stack set operation requests to ensure that AWS CloudFormation successfully received them.</p> <p>If you don''t specify an operation ID, the SDK generates one automatically. </p> <p>Repeating this stack set operation with a new operation ID retries all stack instances whose status is <code>OUTDATED</code>. </p>'
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     ExecutionRoleName:
       type: string
       pattern: '[a-zA-Z_0-9+=,.@-]+'
@@ -8396,7 +8540,7 @@ components:
         TemplateURL:
           allOf:
             - $ref: '#/components/schemas/TemplateURL'
-            - description: '<p>The location of the file that contains the template body. The URL must point to a template (maximum size: 460,800 bytes) that''s located in an Amazon S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.</p>'
+            - description: '<p>The location of the file that contains the template body. The URL must point to a template (maximum size: 460,800 bytes) that''s located in an Amazon S3 bucket or a Systems Manager document. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.</p>'
         Parameters:
           allOf:
             - $ref: '#/components/schemas/Parameters'
@@ -8425,6 +8569,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoDeployment'
             - description: Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if <code>PermissionModel</code> is <code>SERVICE_MANAGED</code>.
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>To create a stack set with service-managed permissions while signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>To create a stack set with service-managed permissions while signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated admin in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul> <p>Stack sets with service-managed permissions are created in the management account, including stack sets that are created by delegated administrators.</p>'
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
@@ -8490,11 +8638,11 @@ components:
         Accounts:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: '<p>[<code>Self-managed</code> permissions] The names of the AWS accounts that you want to delete stack instances for.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+            - description: '<p>[Self-managed permissions] The names of the AWS accounts that you want to delete stack instances for.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
         DeploymentTargets:
           allOf:
             - $ref: '#/components/schemas/DeploymentTargets'
-            - description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts from which to delete stack instances.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+            - description: '<p>[Service-managed permissions] The AWS Organizations accounts from which to delete stack instances.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
         Regions:
           allOf:
             - $ref: '#/components/schemas/RegionList'
@@ -8511,6 +8659,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: '<p>The unique identifier for this stack set operation. </p> <p>If you don''t specify an operation ID, the SDK generates one automatically. </p> <p>The operation ID also functions as an idempotency token, to ensure that AWS CloudFormation performs the stack set operation only once, even if you retry the request multiple times. You can retry stack set operation requests to ensure that AWS CloudFormation successfully received them.</p> <p>Repeating this stack set operation with a new operation ID retries all stack instances whose status is <code>OUTDATED</code>. </p>'
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     DeleteStackSetInput:
       type: object
       required:
@@ -8521,6 +8673,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StackSetName'
             - description: The name or unique ID of the stack set that you're deleting. You can obtain this value by running <a>ListStackSets</a>.
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     DeletionTime:
       type: string
       format: date-time
@@ -8555,19 +8711,19 @@ components:
         Arn:
           allOf:
             - $ref: '#/components/schemas/PrivateTypeArn'
-            - description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         Type:
           allOf:
             - $ref: '#/components/schemas/RegistryType'
-            - description: '<p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The kind of extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         TypeName:
           allOf:
             - $ref: '#/components/schemas/TypeName'
-            - description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The name of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         VersionId:
           allOf:
             - $ref: '#/components/schemas/TypeVersionId'
-            - description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+            - description: The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.
     NextToken:
       type: string
       minLength: 1
@@ -8669,6 +8825,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Region'
             - description: The name of a Region that's associated with this stack instance.
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     StackInstance:
       type: object
       properties:
@@ -8683,7 +8843,7 @@ components:
         Account:
           allOf:
             - $ref: '#/components/schemas/Account'
-            - description: '[<code>Self-managed</code> permissions] The name of the AWS account that the stack instance is associated with.'
+            - description: '[Self-managed permissions] The name of the AWS account that the stack instance is associated with.'
         StackId:
           allOf:
             - $ref: '#/components/schemas/StackId'
@@ -8707,7 +8867,7 @@ components:
         OrganizationalUnitId:
           allOf:
             - $ref: '#/components/schemas/OrganizationalUnitId'
-            - description: '[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html">DeploymentTargets</a>.'
+            - description: '[Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html">DeploymentTargets</a>.'
         DriftStatus:
           allOf:
             - $ref: '#/components/schemas/StackDriftStatus'
@@ -8855,6 +9015,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StackSetName'
             - description: The name or unique ID of the stack set whose description you want.
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     DescribeStackSetOperationInput:
       type: object
       required:
@@ -8870,6 +9034,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: 'The unique ID of the stack set operation. '
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     StackSetOperation:
       type: object
       properties:
@@ -8888,7 +9056,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/StackSetOperationStatus'
-            - description: '<p>The status of the operation. </p> <ul> <li> <p> <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that you''ve set for an operation is applied for each Region during stack create and update operations. If the number of failed stacks within a Region exceeds the failure tolerance, the status of the operation in the Region is set to <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in any remaining Regions.</p> </li> <li> <p> <code>QUEUED</code>: [<code>Service-managed</code> permissions] For automatic deployments that require a sequence of operations, the operation is queued to be performed. For more information, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes">stack set operation status codes</a> in the AWS CloudFormation User Guide.</p> </li> <li> <p> <code>RUNNING</code>: The operation is currently being performed.</p> </li> <li> <p> <code>STOPPED</code>: The user has cancelled the operation.</p> </li> <li> <p> <code>STOPPING</code>: The operation is in the process of stopping, at user request. </p> </li> <li> <p> <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.</p> </li> </ul>'
+            - description: '<p>The status of the operation. </p> <ul> <li> <p> <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that you''ve set for an operation is applied for each Region during stack create and update operations. If the number of failed stacks within a Region exceeds the failure tolerance, the status of the operation in the Region is set to <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in any remaining Regions.</p> </li> <li> <p> <code>QUEUED</code>: [Service-managed permissions] For automatic deployments that require a sequence of operations, the operation is queued to be performed. For more information, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes">stack set operation status codes</a> in the AWS CloudFormation User Guide.</p> </li> <li> <p> <code>RUNNING</code>: The operation is currently being performed.</p> </li> <li> <p> <code>STOPPED</code>: The user has cancelled the operation.</p> </li> <li> <p> <code>STOPPING</code>: The operation is in the process of stopping, at user request. </p> </li> <li> <p> <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.</p> </li> </ul>'
         OperationPreferences:
           allOf:
             - $ref: '#/components/schemas/StackSetOperationPreferences'
@@ -8916,7 +9084,7 @@ components:
         DeploymentTargets:
           allOf:
             - $ref: '#/components/schemas/DeploymentTargets'
-            - description: '[<code>Service-managed</code> permissions] The AWS Organizations accounts affected by the stack operation.'
+            - description: '[Service-managed permissions] The AWS Organizations accounts affected by the stack operation.'
         StackSetDriftDetectionDetails:
           allOf:
             - $ref: '#/components/schemas/StackSetDriftDetectionDetails'
@@ -8976,7 +9144,7 @@ components:
         AutoDeployment:
           allOf:
             - $ref: '#/components/schemas/AutoDeployment'
-            - description: '[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).'
+            - description: '[Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).'
         PermissionModel:
           allOf:
             - $ref: '#/components/schemas/PermissionModels'
@@ -8984,7 +9152,7 @@ components:
         OrganizationalUnitIds:
           allOf:
             - $ref: '#/components/schemas/OrganizationalUnitIdList'
-            - description: '[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html">DeploymentTargets</a>.'
+            - description: '[Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html">DeploymentTargets</a>.'
       description: 'A structure that contains information about a stack set. A stack set enables you to provision stacks into AWS accounts and across Regions by using a single CloudFormation template. In the stack set, you specify the template to use, as well as any parameters and capabilities that the template requires. '
     DescribeStacksInput:
       type: object
@@ -9014,19 +9182,19 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/RegistryType'
-            - description: '<p>The kind of type. </p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The kind of extension. </p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         TypeName:
           allOf:
             - $ref: '#/components/schemas/TypeName'
-            - description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The name of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         Arn:
           allOf:
             - $ref: '#/components/schemas/TypeArn'
-            - description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         VersionId:
           allOf:
             - $ref: '#/components/schemas/TypeVersionId'
-            - description: '<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>'
+            - description: '<p>The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific extension version. Otherwise, it returns information about the default extension version.</p>'
     IsDefaultVersion:
       type: boolean
     TypeSchema:
@@ -9191,6 +9359,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: ' <i>The ID of the stack set operation.</i> '
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     DifferenceType:
       type: string
       enum:
@@ -9211,7 +9383,7 @@ components:
         TemplateURL:
           allOf:
             - $ref: '#/components/schemas/TemplateURL'
-            - description: '<p>Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>'
+            - description: '<p>Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>'
         Parameters:
           allOf:
             - $ref: '#/components/schemas/Parameters'
@@ -9320,7 +9492,7 @@ components:
         TemplateURL:
           allOf:
             - $ref: '#/components/schemas/TemplateURL'
-            - description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information about templates, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
+            - description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information about templates, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>'
         StackName:
           allOf:
             - $ref: '#/components/schemas/StackNameOrId'
@@ -9454,6 +9626,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Region'
             - description: 'The name of the Region where you want to list stack instances. '
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     StackInstanceSummaries:
       type: array
       items:
@@ -9500,6 +9676,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: 'The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     StackSetOperationResultSummaries:
       type: array
       items:
@@ -9522,6 +9702,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: 'The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.'
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     StackSetOperationSummaries:
       type: array
       items:
@@ -9547,6 +9731,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StackSetStatus'
             - description: The status of the stack sets that you want to get summary information about.
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     StackSetSummaries:
       type: array
       items:
@@ -9579,19 +9767,19 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/RegistryType'
-            - description: '<p>The kind of type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The kind of extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         TypeName:
           allOf:
             - $ref: '#/components/schemas/TypeName'
-            - description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The name of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         TypeArn:
           allOf:
             - $ref: '#/components/schemas/TypeArn'
-            - description: '<p>The Amazon Resource Name (ARN) of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         RegistrationStatusFilter:
           allOf:
             - $ref: '#/components/schemas/RegistrationStatus'
-            - description: <p>The current status of the type registration request.</p> <p>The default is <code>IN_PROGRESS</code>.</p>
+            - description: <p>The current status of the extension registration request.</p> <p>The default is <code>IN_PROGRESS</code>.</p>
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -9611,15 +9799,15 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/RegistryType'
-            - description: '<p>The kind of the type.</p> <p>Currently the only valid value is <code>RESOURCE</code>.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The kind of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         TypeName:
           allOf:
             - $ref: '#/components/schemas/TypeName'
-            - description: '<p>The name of the type for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The name of the extension for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         Arn:
           allOf:
             - $ref: '#/components/schemas/PrivateTypeArn'
-            - description: '<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of the extension for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -9631,7 +9819,7 @@ components:
         DeprecatedStatus:
           allOf:
             - $ref: '#/components/schemas/DeprecatedStatus'
-            - description: '<p>The deprecation status of the type versions that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The type version has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul> <p>The default is <code>LIVE</code>.</p>'
+            - description: '<p>The deprecation status of the extension versions that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The extension version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The extension version has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul> <p>The default is <code>LIVE</code>.</p>'
     TypeVersionSummaries:
       type: array
       items:
@@ -9643,15 +9831,15 @@ components:
         Visibility:
           allOf:
             - $ref: '#/components/schemas/Visibility'
-            - description: '<p>The scope at which the type is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p> </li> </ul> <p>The default is <code>PRIVATE</code>.</p>'
+            - description: '<p>The scope at which the extension is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The extension is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any extension you create as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The extension is publically visible and usable within any Amazon account.</p> </li> </ul> <p>The default is <code>PRIVATE</code>.</p>'
         ProvisioningType:
           allOf:
             - $ref: '#/components/schemas/ProvisioningType'
-            - description: '<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The type includes an update handler to process updates to the type during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The type does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p> </li> </ul>'
+            - description: '<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The extension includes an update handler to process updates to the extension during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The extension does not include an update handler, so the extension cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The extension does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p> </li> </ul>'
         DeprecatedStatus:
           allOf:
             - $ref: '#/components/schemas/DeprecatedStatus'
-            - description: '<p>The deprecation status of the types that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type is registered for use in CloudFormation operations.</p> </li> <li> <p> <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
+            - description: '<p>The deprecation status of the extension that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The extension is registered for use in CloudFormation operations.</p> </li> <li> <p> <code>DEPRECATED</code>: The extension has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
         Type:
           allOf:
             - $ref: '#/components/schemas/RegistryType'
@@ -9890,27 +10078,27 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/RegistryType'
-            - description: '<p>The kind of type.</p> <p>Currently, the only valid value is <code>RESOURCE</code>.</p>'
+            - description: The kind of extension.
         TypeName:
           allOf:
             - $ref: '#/components/schemas/TypeName'
-            - description: '<p>The name of the type being registered.</p> <p>We recommend that type names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p> <note> <p>The following organization namespaces are reserved and cannot be used in your resource type names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p> <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p> <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul> </note>'
+            - description: '<p>The name of the extension being registered.</p> <p>We recommend that extension names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p> <note> <p>The following organization namespaces are reserved and cannot be used in your extension names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p> <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p> <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul> </note>'
         SchemaHandlerPackage:
           allOf:
             - $ref: '#/components/schemas/S3Url'
-            - description: '<p>A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.</p> <p>For information on generating a schema handler package for the type you want to register, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p> <note> <p>The user registering the resource provider type must be able to access the the schema handler package in the S3 bucket. That is, the user needs to have <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> permissions for the schema handler package. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html">Actions, Resources, and Condition Keys for Amazon S3</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> </note>'
+            - description: '<p>A url to the S3 bucket containing the extension project package that contains the neccessary files for the extension you want to register.</p> <p>For information on generating a schema handler package for the extension you want to register, see <a href="https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p> <note> <p>The user registering the extension must be able to access the package in the S3 bucket. That is, the user needs to have <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html">GetObject</a> permissions for the schema handler package. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html">Actions, Resources, and Condition Keys for Amazon S3</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> </note>'
         LoggingConfig:
           allOf:
             - $ref: '#/components/schemas/LoggingConfig'
-            - description: Specifies logging configuration information for a type.
+            - description: Specifies logging configuration information for an extension.
         ExecutionRoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the resource provider. If your resource type calls AWS APIs in any of its handlers, you must create an <i> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the resource provider handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the resource provider handler, thereby supplying your resource provider with the appropriate credentials.'
+            - description: 'The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension. If your extension calls AWS APIs in any of its handlers, you must create an <i> <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the extension handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the extension handler, thereby supplying your extension with the appropriate credentials.'
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/RequestToken'
-            - description: 'A unique identifier that acts as an idempotency key for this registration request. Specifying a client request token prevents CloudFormation from generating more than one version of a type from the same registeration request, even if the request is submitted multiple times. '
+            - description: 'A unique identifier that acts as an idempotency key for this registration request. Specifying a client request token prevents CloudFormation from generating more than one version of an extension from the same registeration request, even if the request is submitted multiple times. '
     Replacement:
       type: string
       enum:
@@ -10087,19 +10275,19 @@ components:
         Arn:
           allOf:
             - $ref: '#/components/schemas/PrivateTypeArn'
-            - description: '<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of the extension for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         Type:
           allOf:
             - $ref: '#/components/schemas/RegistryType'
-            - description: '<p>The kind of type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The kind of extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         TypeName:
           allOf:
             - $ref: '#/components/schemas/TypeName'
-            - description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
+            - description: '<p>The name of the extension.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
         VersionId:
           allOf:
             - $ref: '#/components/schemas/TypeVersionId'
-            - description: The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+            - description: The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.
     SignalResourceInput:
       type: object
       required:
@@ -10350,7 +10538,7 @@ components:
         Account:
           allOf:
             - $ref: '#/components/schemas/Account'
-            - description: '[<code>Self-managed</code> permissions] The name of the AWS account that the stack instance is associated with.'
+            - description: '[Self-managed permissions] The name of the AWS account that the stack instance is associated with.'
         StackId:
           allOf:
             - $ref: '#/components/schemas/StackId'
@@ -10370,7 +10558,7 @@ components:
         OrganizationalUnitId:
           allOf:
             - $ref: '#/components/schemas/OrganizationalUnitId'
-            - description: '[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html">DeploymentTargets</a>.'
+            - description: '[Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html">DeploymentTargets</a>.'
         DriftStatus:
           allOf:
             - $ref: '#/components/schemas/StackDriftStatus'
@@ -10595,7 +10783,7 @@ components:
         Account:
           allOf:
             - $ref: '#/components/schemas/Account'
-            - description: '[<code>Self-managed</code> permissions] The name of the AWS account for this operation result.'
+            - description: '[Self-managed permissions] The name of the AWS account for this operation result.'
         Region:
           allOf:
             - $ref: '#/components/schemas/Region'
@@ -10615,7 +10803,7 @@ components:
         OrganizationalUnitId:
           allOf:
             - $ref: '#/components/schemas/OrganizationalUnitId'
-            - description: '[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html">DeploymentTargets</a>.'
+            - description: '[Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html">DeploymentTargets</a>.'
       description: The structure that contains information about a specified operation's results for a given account in a given Region.
     StackSetOperationSummary:
       type: object
@@ -10631,7 +10819,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/StackSetOperationStatus'
-            - description: '<p>The overall status of the operation.</p> <ul> <li> <p> <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that you''ve set for an operation is applied for each Region during stack create and update operations. If the number of failed stacks within a Region exceeds the failure tolerance, the status of the operation in the Region is set to <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in any remaining Regions.</p> </li> <li> <p> <code>QUEUED</code>: [<code>Service-managed</code> permissions] For automatic deployments that require a sequence of operations, the operation is queued to be performed. For more information, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes">stack set operation status codes</a> in the AWS CloudFormation User Guide.</p> </li> <li> <p> <code>RUNNING</code>: The operation is currently being performed.</p> </li> <li> <p> <code>STOPPED</code>: The user has cancelled the operation.</p> </li> <li> <p> <code>STOPPING</code>: The operation is in the process of stopping, at user request. </p> </li> <li> <p> <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.</p> </li> </ul>'
+            - description: '<p>The overall status of the operation.</p> <ul> <li> <p> <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that you''ve set for an operation is applied for each Region during stack create and update operations. If the number of failed stacks within a Region exceeds the failure tolerance, the status of the operation in the Region is set to <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in any remaining Regions.</p> </li> <li> <p> <code>QUEUED</code>: [Service-managed permissions] For automatic deployments that require a sequence of operations, the operation is queued to be performed. For more information, see the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes">stack set operation status codes</a> in the AWS CloudFormation User Guide.</p> </li> <li> <p> <code>RUNNING</code>: The operation is currently being performed.</p> </li> <li> <p> <code>STOPPED</code>: The user has cancelled the operation.</p> </li> <li> <p> <code>STOPPING</code>: The operation is in the process of stopping, at user request. </p> </li> <li> <p> <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.</p> </li> </ul>'
         CreationTimestamp:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -10663,7 +10851,7 @@ components:
         AutoDeployment:
           allOf:
             - $ref: '#/components/schemas/AutoDeployment'
-            - description: '[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organizational unit (OU).'
+            - description: '[Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organizational unit (OU).'
         PermissionModel:
           allOf:
             - $ref: '#/components/schemas/PermissionModels'
@@ -10746,6 +10934,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: 'The ID of the stack operation. '
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     TagKey:
       type: string
       minLength: 1
@@ -10857,7 +11049,7 @@ components:
         TemplateURL:
           allOf:
             - $ref: '#/components/schemas/TemplateURL'
-            - description: '<p>Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code>, <code>TemplateURL</code>, or set the <code>UsePreviousTemplate</code> to <code>true</code>.</p>'
+            - description: '<p>Location of file containing the template body. The URL must point to a template that is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code>, <code>TemplateURL</code>, or set the <code>UsePreviousTemplate</code> to <code>true</code>.</p>'
         UsePreviousTemplate:
           allOf:
             - $ref: '#/components/schemas/UsePreviousTemplate'
@@ -10925,11 +11117,11 @@ components:
         Accounts:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: '<p>[<code>Self-managed</code> permissions] The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and Regions.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+            - description: '<p>[Self-managed permissions] The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and Regions.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
         DeploymentTargets:
           allOf:
             - $ref: '#/components/schemas/DeploymentTargets'
-            - description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts for which you want to update parameter values for stack instances. If your update targets OUs, the overridden parameter values only apply to the accounts that are currently in the target OUs and their child OUs. Accounts added to the target OUs and their child OUs in the future won''t use the overridden values.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
+            - description: '<p>[Service-managed permissions] The AWS Organizations accounts for which you want to update parameter values for stack instances. If your update targets OUs, the overridden parameter values only apply to the accounts that are currently in the target OUs and their child OUs. Accounts added to the target OUs and their child OUs in the future won''t use the overridden values.</p> <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>'
         Regions:
           allOf:
             - $ref: '#/components/schemas/RegionList'
@@ -10946,6 +11138,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: '<p>The unique identifier for this stack set operation. </p> <p>The operation ID also functions as an idempotency token, to ensure that AWS CloudFormation performs the stack set operation only once, even if you retry the request multiple times. You might retry stack set operation requests to ensure that AWS CloudFormation successfully received them.</p> <p>If you don''t specify an operation ID, the SDK generates one automatically. </p>'
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     UpdateStackSetInput:
       type: object
       required:
@@ -10967,7 +11163,7 @@ components:
         TemplateURL:
           allOf:
             - $ref: '#/components/schemas/TemplateURL'
-            - description: '<p>The location of the file that contains the template body. The URL must point to a template (maximum size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code> or <code>TemplateURL</code>—or set <code>UsePreviousTemplate</code> to true. </p>'
+            - description: '<p>The location of the file that contains the template body. The URL must point to a template (maximum size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code> or <code>TemplateURL</code>—or set <code>UsePreviousTemplate</code> to true. </p>'
         UsePreviousTemplate:
           allOf:
             - $ref: '#/components/schemas/UsePreviousTemplate'
@@ -10999,7 +11195,7 @@ components:
         DeploymentTargets:
           allOf:
             - $ref: '#/components/schemas/DeploymentTargets'
-            - description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts in which to update associated stack instances.</p> <p>To update all the stack instances associated with this stack set, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p> <p>If the stack set update includes changes to the template (that is, if <code>TemplateBody</code> or <code>TemplateURL</code> is specified), or the <code>Parameters</code>, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status.</p>'
+            - description: '<p>[Service-managed permissions] The AWS Organizations accounts in which to update associated stack instances.</p> <p>To update all the stack instances associated with this stack set, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p> <p>If the stack set update includes changes to the template (that is, if <code>TemplateBody</code> or <code>TemplateURL</code> is specified), or the <code>Parameters</code>, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status.</p>'
         PermissionModel:
           allOf:
             - $ref: '#/components/schemas/PermissionModels'
@@ -11007,7 +11203,7 @@ components:
         AutoDeployment:
           allOf:
             - $ref: '#/components/schemas/AutoDeployment'
-            - description: '<p>[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p> <p>If you specify <code>AutoDeployment</code>, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p>'
+            - description: '<p>[Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p> <p>If you specify <code>AutoDeployment</code>, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p>'
         OperationId:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
@@ -11015,11 +11211,15 @@ components:
         Accounts:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: '<p>[<code>Self-managed</code> permissions] The accounts in which to update associated stack instances. If you specify accounts, you must also specify the Regions in which to update stack set instances.</p> <p>To update <i>all</i> the stack instances associated with this stack set, do not specify the <code>Accounts</code> or <code>Regions</code> properties.</p> <p>If the stack set update includes changes to the template (that is, if the <code>TemplateBody</code> or <code>TemplateURL</code> properties are specified), or the <code>Parameters</code> property, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status. </p>'
+            - description: '<p>[Self-managed permissions] The accounts in which to update associated stack instances. If you specify accounts, you must also specify the Regions in which to update stack set instances.</p> <p>To update <i>all</i> the stack instances associated with this stack set, do not specify the <code>Accounts</code> or <code>Regions</code> properties.</p> <p>If the stack set update includes changes to the template (that is, if the <code>TemplateBody</code> or <code>TemplateURL</code> properties are specified), or the <code>Parameters</code> property, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status. </p>'
         Regions:
           allOf:
             - $ref: '#/components/schemas/RegionList'
             - description: '<p>The Regions in which to update associated stack instances. If you specify Regions, you must also specify accounts in which to update stack set instances.</p> <p>To update <i>all</i> the stack instances associated with this stack set, do not specify the <code>Accounts</code> or <code>Regions</code> properties.</p> <p>If the stack set update includes changes to the template (that is, if the <code>TemplateBody</code> or <code>TemplateURL</code> properties are specified), or the <code>Parameters</code> property, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status. </p>'
+        CallAs:
+          allOf:
+            - $ref: '#/components/schemas/CallAs'
+            - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p> </li> </ul>'
     UpdateTerminationProtectionInput:
       type: object
       required:
@@ -11046,7 +11246,7 @@ components:
         TemplateURL:
           allOf:
             - $ref: '#/components/schemas/TemplateURL'
-            - description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>'
+            - description: '<p>Location of file containing the template body. The URL must point to a template (max size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html">Template Anatomy</a> in the AWS CloudFormation User Guide.</p> <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If both are passed, only <code>TemplateBody</code> is used.</p>'
       description: The input for <a>ValidateTemplate</a> action.
 security:
   - hmac: []
