@@ -2265,7 +2265,7 @@ paths:
         - name: EnableCloudwatchLogsExports
           in: query
           required: false
-          description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p> <p> <b>Aurora MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Aurora PostgreSQL</b> </p> <p>Possible values are <code>postgresql</code> and <code>upgrade</code>. </p>'
+          description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p> <p> <b>Aurora MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Aurora PostgreSQL</b> </p> <p>Possible value is <code>postgresql</code>. </p>'
           schema:
             type: array
             items:
@@ -13900,6 +13900,15 @@ paths:
           description: '<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p> <p>A <i>CoIP</i> provides local or external connectivity to resources in your Outpost subnets through your on-premises network. For some use cases, a CoIP can provide lower latency for connections to the DB instance from outside of its virtual private cloud (VPC) on your local network.</p> <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on AWS Outposts</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing">Customer-owned IP addresses</a> in the <i>AWS Outposts User Guide</i>.</p>'
           schema:
             type: boolean
+        - name: AwsBackupRecoveryPointArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+          schema:
+            type: string
+            pattern: '^arn:aws[a-z-]*:backup:[-a-z0-9]+:[0-9]{12}:[-a-z]+:([a-z0-9\-]+:)?[a-z][a-z0-9\-]{0,255}$'
+            minLength: 43
+            maxLength: 350
         - name: Action
           in: query
           required: true
@@ -22771,6 +22780,11 @@ components:
           - $ref: '#/components/schemas/AvailableProcessorFeature'
           - xml:
               name: AvailableProcessorFeature
+    AwsBackupRecoveryPointArn:
+      type: string
+      pattern: '^arn:aws[a-z-]*:backup:[-a-z0-9]+:[0-9]{12}:[-a-z]+:([a-z0-9\-]+:)?[a-z][a-z0-9\-]{0,255}$'
+      minLength: 43
+      maxLength: 350
     TStamp:
       type: string
       format: date-time
@@ -23599,7 +23613,7 @@ components:
         EnableCloudwatchLogsExports:
           allOf:
             - $ref: '#/components/schemas/LogTypeList'
-            - description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p> <p> <b>Aurora MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Aurora PostgreSQL</b> </p> <p>Possible values are <code>postgresql</code> and <code>upgrade</code>. </p>'
+            - description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p> <p> <b>Aurora MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Aurora PostgreSQL</b> </p> <p>Possible value is <code>postgresql</code>. </p>'
         EngineMode:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -24520,6 +24534,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: '<p>Specifies whether a customer-owned IP address (CoIP) is enabled for an RDS on Outposts DB instance.</p> <p>A <i>CoIP </i>provides local or external connectivity to resources in your Outpost subnets through your on-premises network. For some use cases, a CoIP can provide lower latency for connections to the DB instance from outside of its virtual private cloud (VPC) on your local network.</p> <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on AWS Outposts</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing">Customer-owned IP addresses</a> in the <i>AWS Outposts User Guide</i>.</p>'
+        AwsBackupRecoveryPointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
       description: <p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <code>DescribeDBInstances</code> action. </p>
     CreateDBParameterGroupMessage:
       type: object
@@ -27820,6 +27838,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: '<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p> <p>A <i>CoIP</i> provides local or external connectivity to resources in your Outpost subnets through your on-premises network. For some use cases, a CoIP can provide lower latency for connections to the DB instance from outside of its virtual private cloud (VPC) on your local network.</p> <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Working with Amazon RDS on AWS Outposts</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For more information about CoIPs, see <a href="https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing">Customer-owned IP addresses</a> in the <i>AWS Outposts User Guide</i>.</p>'
+        AwsBackupRecoveryPointArn:
+          allOf:
+            - $ref: '#/components/schemas/AwsBackupRecoveryPointArn'
+            - description: The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
       description: <p/>
     ModifyDBParameterGroupMessage:
       type: object
