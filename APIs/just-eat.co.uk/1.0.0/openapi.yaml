@@ -3538,6 +3538,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Menu"
+        description: "Specification of the menu. This must be valid according to the rules described here: https://developers.just-eat.com/docs/pos-how-the-integration-works#validation-rules"
       responses:
         "202":
           content:
@@ -3545,6 +3546,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/MenuIngestionResponse"
           description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Bad Request
         "401":
           description: Unauthorized
         "403":
@@ -6349,9 +6356,9 @@ components:
     CheckoutIssue:
       discriminator:
         mapping:
+          ADDITIONAL_ITEMS_REQUIRED: "#/components/schemas/CheckoutIssue_AdditionalItemsRequired"
           ADDRESS_LINES_REQUIRED: "#/components/schemas/CheckoutIssue_AddressLinesRequired"
           AGE_VERIFICATION_FAILED: "#/components/schemas/CheckoutIssue_AgeVerificationFailed"
-          AVAILABILITY_UNAVAILABLE: "#/components/schemas/CheckoutIssue_AvailabilityUnavailable"
           DATE_OF_BIRTH_REQUIRED: "#/components/schemas/CheckoutIssue_DateOfBirthRequired"
           FIRST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_FirstNameRequired"
           FULFILMENT_TIME_REQUIRED: "#/components/schemas/CheckoutIssue_FulfilmentTimeRequired"
@@ -6363,15 +6370,17 @@ components:
           MINIMUM_ORDER_VALUE_NOT_MET: "#/components/schemas/CheckoutIssue_MinimumOrderValueNotMet"
           PHONE_NUMBER_REQUIRED: "#/components/schemas/CheckoutIssue_PhoneNumberRequired"
           POSTAL_CODE_REQUIRED: "#/components/schemas/CheckoutIssue_PostalCodeRequired"
-          RESTAURANT_UNAVAILABLE: "#/components/schemas/CheckoutIssue_RestaurantUnavailable"
+          RESTAURANT_NOT_TAKING_ORDERS: "#/components/schemas/CheckoutIssue_RestaurantNotTakingOrders"
+          SERVICE_TYPE_UNAVAILABLE: "#/components/schemas/CheckoutIssue_ServiceTypeUnavailable"
         propertyName: code
       properties:
         code:
           description: The issue code
           enum:
-            - RESTAURANT_UNAVAILABLE
-            - AVAILABILITY_UNAVAILABLE
+            - RESTAURANT_NOT_TAKING_ORDERS
+            - SERVICE_TYPE_UNAVAILABLE
             - ITEMS_UNORDERABLE
+            - ADDITIONAL_ITEMS_REQUIRED
             - MINIMUM_ORDER_VALUE_NOT_MET
             - FULFILMENT_TIME_UNAVAILABLE
             - LOCATION_UNDELIVERABLE
@@ -6389,6 +6398,12 @@ components:
       required:
         - code
       type: object
+    CheckoutIssue_AdditionalItemsRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: The collection of items are not orderable in their current state. Items need to be added.
+          type: object
     CheckoutIssue_AddressLinesRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
@@ -6400,12 +6415,6 @@ components:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
           description: The order cannot proceed because the customer has failed the required age verification check.
-          type: object
-    CheckoutIssue_AvailabilityUnavailable:
-      allOf:
-        - $ref: "#/components/schemas/CheckoutIssue"
-        - additionalProperties: false
-          description: The availability being ordered from is no longer available. The restaurant may still be available to order from.
           type: object
     CheckoutIssue_DateOfBirthRequired:
       allOf:
@@ -6441,7 +6450,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: The collection of items are not orderable in their current state. The customer will need to amend their collection of items.
+          description: The collection of items are not orderable.
           type: object
     CheckoutIssue_LastNameRequired:
       allOf:
@@ -6488,11 +6497,17 @@ components:
         - additionalProperties: false
           description: Indicates that the fulfilment postal code is required to fulfil an order.
           type: object
-    CheckoutIssue_RestaurantUnavailable:
+    CheckoutIssue_RestaurantNotTakingOrders:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: The restaurant being ordered from is no longer available.
+          description: The restaurant being ordered from is no longer taking orders. Either the restaurant is not offline or is no longer available on the platform.
+          type: object
+    CheckoutIssue_ServiceTypeUnavailable:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: The selected service type is not available. The restaurant may still be available to order from with a different service type.
           type: object
     CheckoutRequest:
       description: Details needed to make a payment.
@@ -10605,8 +10620,8 @@ components:
       description: Geometry information for consumers location
       example:
         coordinates:
-          - 51.51469
           - -0.10358
+          - 51.51469
         type: Point
       properties:
         coordinates:
@@ -16645,10 +16660,6 @@ components:
           description: The customer name
           nullable: true
           type: string
-        noteToOrder:
-          description: The customer note to the order
-          nullable: true
-          type: string
       type: object
     RestaurantOrderDetails:
       description: An order details
@@ -16661,7 +16672,6 @@ components:
             - BS5 1KG
             - Bristol
           name: Simon Moon
-          orderNote: Contact-free delivery
         dueDate: 2020-01-01T10:15:00.000Z
         friendlyId: 821367535
         id: rtvtgo0wwugmiiikdpzvsg
@@ -16705,16 +16715,15 @@ components:
             subItems: []
             synonym: ""
             unitPrice: 533
+        orderNote: Contact-free delivery
         orderPrice: 2099
         orderPriceBreakdown:
           accountCredits: 500
           discounts: 207
           fees: 250
           items: 2066
-          taxes: 0
-          tips: 0
           vouchers: 0
-        orderStatus: Rejected
+        orderStatus: Cancelled
         orderType: Delivery
         paymentInfo:
           fees:
@@ -16732,6 +16741,7 @@ components:
               value: 1549
         paymentType: Card
         placedDate: 2020-01-01T09:30:00.000Z
+        promptAsap: false
         statusReason: RejectedByRestaurant
         transactionReference: 123334567667989
       properties:
@@ -16756,6 +16766,10 @@ components:
           items:
             $ref: "#/components/schemas/RestaurantOrderItem"
           type: array
+        orderNote:
+          description: The customer note to the order
+          nullable: true
+          type: string
         orderPrice:
           description: The order price in smallest unit of relevant currency
           format: integer
@@ -16766,9 +16780,8 @@ components:
         orderStatus:
           description: Status of completed order
           enum:
-            - Accepted
+            - Completed
             - Cancelled
-            - Rejected
         orderType:
           description: Type of order (collection or delivery)
           enum:
@@ -16786,6 +16799,9 @@ components:
           description: The order placed date
           format: date-time
           type: string
+        promptAsap:
+          description: The flag that shows whether the customer awaits an order as soon as possible
+          type: boolean
         statusReason:
           description: The reason for the order's status, if known
           enum:
@@ -16814,7 +16830,7 @@ components:
             friendlyId: 821367535
             id: rtvtgo0wwugmiiikdpzvsg
             orderPrice: 2099
-            orderStatus: Accepted
+            orderStatus: Completed
             paymentType: Card
             placedDate: 2020-01-01T09:30:00.000Z
             serviceType: Delivery
@@ -16822,7 +16838,7 @@ components:
             friendlyId: 829022736
             id: uerbbymdfkxdecduuerbby
             orderPrice: 99900
-            orderStatus: Rejected
+            orderStatus: Cancelled
             paymentType: Cash
             placedDate: 2020-01-02T19:20:00.000Z
             serviceType: Collection
@@ -16941,14 +16957,6 @@ components:
           description: The total amount of order items
           format: integer
           type: number
-        taxes:
-          description: The total amount of taxes applied to the order
-          format: integer
-          type: number
-        tips:
-          description: The total amount of tips applied to the order
-          format: integer
-          type: number
         vouchers:
           description: The total amount of voucher(s) applied to the order
           format: integer
@@ -17012,9 +17020,8 @@ components:
         orderStatus:
           description: Status of completed order
           enum:
-            - Accepted
+            - Completed
             - Cancelled
-            - Rejected
         paymentType:
           description: The payment type (cash or card)
           enum:

@@ -1054,7 +1054,7 @@ paths:
             format: date-time
             type: string
         - description: >
-            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
+            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn and not expired are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
           in: query
           name: outcomes
           required: false
@@ -1133,6 +1133,10 @@ paths:
                 content:
                   description: A longer description of the item(s).
                   type: string
+                expires_in:
+                  description: >
+                    When the post should expire.  Defaults to 90 days. Any amount of time from 1 hour to 90 days can be provided.  To pass a number of hours, provide the number of hours prefixed by 'h' (eg. 1hr 24hr). To pass a number of days, provide the number of days prefixed by 'd' (eg. 1d 90d). <br /><br /> Note that posts may not appear instantly after submission because the volunteer moderators of many groups may have additional automatic or manual review processes in place that can cause delays.  So with short expirations (eg. < 8 hours), there is a chance that the post may expire before it's approved and so it will never be published.
+                  type: string
                 fair_offer:
                   default: 0
                   description: If set to 1, the post will be posted with the Fair Offer Policy (only valid for offer posts - see https://trashnothing.com/fair_offer_policy ).
@@ -1198,7 +1202,7 @@ paths:
                     type: string
                   result:
                     description: >
-                      One of: success, error, warning. <br /><br /> A success result indicates that the post  was submitted successfully. Note that posts may not appear instantly after submission because the moderators of many groups may have additional automatic or manual review processes in place that can cause delays. <br /><br /> An error result indicates that there is an error with the post that should be shown to the user and the message property will contain text describing the error. <br /><br /> A warning result indicates that there is a warning about the post  to show the user and the message property will contain a string describing the warning.   A warning result doesn't prevent a post  from being submitted, to continue the submission process after a warning result, just re-submit (with the updated session object) to temporarily override that specific warning.
+                      One of: success, error, warning. <br /><br /> A success result indicates that the post  was submitted successfully. Note that posts may not appear instantly after submission because the volunteer moderators of many groups may have additional automatic or manual review processes in place that can cause delays. <br /><br /> An error result indicates that there is an error with the post that should be shown to the user and the message property will contain text describing the error. <br /><br /> A warning result indicates that there is a warning about the post  to show the user and the message property will contain a string describing the warning.   A warning result doesn't prevent a post  from being submitted, to continue the submission process after a warning result, just re-submit (with the updated session object) to temporarily override that specific warning.
                     type: string
                   session:
                     additionalProperties:
@@ -1292,7 +1296,7 @@ paths:
   /posts/all/changes:
     get:
       description: >
-        This endpoint provides an easy way to get a feed of all the changes that have been made to publicly published posts on trash nothing.  Similar to the /posts/all endpoint, only data from the last 30 days is available and the changes are sorted by date (newest first).  Every change includes the date of the change, the post_id of the post that was changed and the type of change. <br /><br /> The different types of changes that are returned are listed below. <br /><br /> - deleted<br /> - undeleted<br /> - satisfied<br /> - promised<br /> - unpromised<br /> - withdrawn<br /> - edited<br /> - expired<br /> <br /> For edited changes, clients can use the retrieve post API endpoint to get the edits that have been made to the post.
+        This endpoint provides an easy way to get a feed of all the changes that have been made to publicly published posts on trash nothing.  Similar to the /posts/all endpoint, only data from the last 30 days is available and the changes are sorted by date (newest first).  Every change includes the date of the change, the post_id of the post that was changed and the type of change. <br /><br /> The different types of changes that are returned are listed below. <br /><br /> - deleted<br /> - undeleted<br /> - satisfied<br /> - promised<br /> - unpromised<br /> - withdrawn<br /> - edited<br /> <br /> For edited changes, clients can use the retrieve post API endpoint to get the edits that have been made to the post.
       operationId: get_all_posts_changes
       parameters:
         - description: >
@@ -1650,7 +1654,7 @@ paths:
             format: date-time
             type: string
         - description: >
-            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
+            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn and not expired are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
           in: query
           name: outcomes
           required: false
@@ -1761,6 +1765,12 @@ paths:
                 content:
                   description: A longer description of the item(s).
                   type: string
+                expires_in:
+                  description: >
+                    When the post should expire.   Any amount of time from 1 hour to 90 days can be provided.  To pass a number of hours, provide the number of hours prefixed by 'h' (eg. 1hr 24hr). To pass a number of days, provide the number of days prefixed by 'd' (eg. 1d 90d). <br /><br /> Note that updates may not appear instantly after submission because the volunteer moderators of many groups may have additional automatic or manual review processes in place that can cause delays.  So with short expirations (eg. < 8 hours), there is a chance that the post may expire before the update is approved and so it will never be published.
+
+                    <br><br> NOTE: The max expiration for a post is 90 days after the post is published.  So updates to posts that try to set an longer expiration will be silently changed to just apply the max expiration.
+                  type: string
                 fair_offer:
                   default: 0
                   description: If set to 1, the post will be posted with the Fair Offer Policy (only valid for offer posts - see https://trashnothing.com/fair_offer_policy ).
@@ -1824,7 +1834,7 @@ paths:
                     type: string
                   result:
                     description: >
-                      One of: success, error, warning. <br /><br /> A success result indicates that the post update was submitted successfully. Note that post updates may not appear instantly after submission because the moderators of many groups may have additional automatic or manual review processes in place that can cause delays. <br /><br /> An error result indicates that there is an error with the post that should be shown to the user and the message property will contain text describing the error. <br /><br /> A warning result indicates that there is a warning about the post update to show the user and the message property will contain a string describing the warning.   A warning result doesn't prevent a post update from being submitted, to continue the submission process after a warning result, just re-submit (with the updated session object) to temporarily override that specific warning.
+                      One of: success, error, warning. <br /><br /> A success result indicates that the post update was submitted successfully. Note that post updates may not appear instantly after submission because the volunteer moderators of many groups may have additional automatic or manual review processes in place that can cause delays. <br /><br /> An error result indicates that there is an error with the post that should be shown to the user and the message property will contain text describing the error. <br /><br /> A warning result indicates that there is a warning about the post update to show the user and the message property will contain a string describing the warning.   A warning result doesn't prevent a post update from being submitted, to continue the submission process after a warning result, just re-submit (with the updated session object) to temporarily override that specific warning.
                     type: string
                   session:
                     additionalProperties:
@@ -2054,7 +2064,7 @@ paths:
                 $ref: "#/components/schemas/Post"
           description: The updated post.
         "400":
-          description: The post is not an offer post or the post has already been satisfied or withdrawn.
+          description: The post is not an offer post or the post has already been satisfied or withdrawn or expired.
         "403":
           description: The user doesn't have permission to access the post.
         "404":
@@ -2123,7 +2133,7 @@ paths:
                 $ref: "#/components/schemas/Post"
           description: The updated post.
         "400":
-          description: Invalid summary or the post is not an offer or wanted post or the post has been withdrawn.
+          description: Invalid summary or the post is not an offer or wanted post or the post has been withdrawn or has expired.
         "403":
           description: The user doesn't have permission to access the post.
         "404":
@@ -2228,7 +2238,7 @@ paths:
                 $ref: "#/components/schemas/Post"
           description: The updated post.
         "400":
-          description: The post is not an offer or wanted post or the post has already been satisfied.
+          description: The post is not an offer or wanted post or the post has already been satisfied or expired.
         "403":
           description: The user doesn't have permission to access the post.
         "404":
@@ -2858,7 +2868,7 @@ paths:
             format: date-time
             type: string
         - description: >
-            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
+            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn and not expired are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
           in: query
           name: outcomes
           required: false
@@ -3024,7 +3034,7 @@ paths:
             format: date-time
             type: string
         - description: >
-            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
+            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn and not expired are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
           in: query
           name: outcomes
           required: false
@@ -3429,7 +3439,7 @@ paths:
             format: date-time
             type: string
         - description: >
-            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
+            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn and not expired are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
           in: query
           name: outcomes
           required: false
@@ -3600,7 +3610,7 @@ paths:
             format: date-time
             type: string
         - description: >
-            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
+            A comma separated list of the post outcomes to return.  The available post outcomes are: satisfied, withdrawn <br /><br /> There are also a couple special values that can be passed.  If set to an empty string (the default), only posts that are not satisfied and not withdrawn and not expired are returned. If set to 'all', all posts will be returned no matter what outcome the posts have.
           in: query
           name: outcomes
           required: false
@@ -4283,6 +4293,11 @@ components:
           type: string
         date:
           description: The UTC date and time when the post was published.
+          format: date-time
+          type: string
+        expiration:
+          description: >
+            The UTC date and time when the post will expire.   Currently only offer and wanted posts expire.  For all other posts, expiration is always null.
           format: date-time
           type: string
         footer:

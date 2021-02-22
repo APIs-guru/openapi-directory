@@ -555,9 +555,13 @@ paths:
 
         \r
 
-        The serviceId and resourceId are optional. If you want your users to change the resource or service on a reschedule\r
+        StartDateTime and EndDateTime are required. Use the ISO 8601 format for DateTime Timezone. e.g. 2016-10-30T09:00:00-5:00<br /><br />\r
 
-        you will have to use the regular availability endpoint rather than the reschedule availability end point.<br /><br />\r
+        \r
+
+        The serviceId is optional. If you want your users to change the service on a reschedule, include the new serviceId. \r
+
+        The new serviceId's StartDateTime and EndDateTime must match your service's duration.<br /><br />\r
 
         \r
 

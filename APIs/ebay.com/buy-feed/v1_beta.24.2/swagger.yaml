@@ -92,7 +92,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemResponse"
         "400":
-          description: Bad request
+          description: Bad Request
           x-response-codes:
             errors:
               "13000":
@@ -182,7 +182,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":
@@ -253,7 +253,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemGroupResponse"
         "400":
-          description: Bad request
+          description: Bad Request
           x-response-codes:
             errors:
               "13000":
@@ -409,7 +409,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemSnapshotResponse"
         "400":
-          description: Bad Request
+          description: Bad request
           x-response-codes:
             errors:
               "13000":
@@ -541,10 +541,10 @@ definitions:
         description: "The ID of the category of the item. For example: The ID for Toys &amp; Hobbies|Action Figures|Comic Book Heroes is 158671."
         type: string
       condition:
-        description: "The text describing the condition of the item. For a list of condition names, see Item Condition IDs and Names. Note: In the US and Australian marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', but this item condition is only available for use for a select number of US and Australian sellers. For all other marketplaces besides the US and Australia, Condition ID 2000 still maps to 'Manufacturer Refurbished'. Code so that your app gracefully handles any future changes to this list."
+        description: "The text describing the condition of the item. For a list of condition names, see Item Condition IDs and Names. Note: In all eBay marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', and not 'Manufacturer Refurbished'. To list an item as 'Certified Refurbished', a seller must be pre-qualified by eBay for this feature. Code so that your app gracefully handles any future changes to this list."
         type: string
       conditionId:
-        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Note: In the US and Australian marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', but this item condition is only available for use for a select number of US and Australian sellers. For all other marketplaces besides the US and Australia, Condition ID 2000 still maps to 'Manufacturer Refurbished'. Code so that your app gracefully handles any future changes to this list."
+        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Note: In all eBay marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', and not 'Manufacturer Refurbished'. To list an item as 'Certified Refurbished', a seller must be pre-qualified by eBay for this feature. Code so that your app gracefully handles any future changes to this list."
         type: string
       deliveryOptions:
         description: "A comma-separated list of available delivery options. This column lets you filter out items than cannot be shipped to the buyer. Valid Values: SHIP_TO_HOME, SELLER_ARRANGED_LOCAL_PICKUP, IN_STORE_PICKUP, and PICKUP_DROP_OFF. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:DeliveryOptionsEnum'>eBay API documentation</a>"
@@ -798,10 +798,10 @@ definitions:
         description: "The ID of the category of the item. For example: The ID for Toys &amp; Hobbies|Action Figures|Comic Book Heroes is 158671."
         type: string
       condition:
-        description: "The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Note: In the US and Australian marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', but this item condition is only available for use for a select number of US and Australian sellers. For all other marketplaces besides the US and Australia, Condition ID 2000 still maps to 'Manufacturer Refurbished'. Code so that your app gracefully handles any future changes to this list."
+        description: "The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Note: In all eBay marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', and not 'Manufacturer Refurbished'. To list an item as 'Certified Refurbished', a seller must be pre-qualified by eBay for this feature. Code so that your app gracefully handles any future changes to this list."
         type: string
       conditionId:
-        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Note: In the US and Australian marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', but this item condition is only available for use for a select number of US and Australian sellers. For all other marketplaces besides the US and Australia, Condition ID 2000 still maps to 'Manufacturer Refurbished'. Code so that your app gracefully handles any future changes to this list."
+        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Note: In all eBay marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', and not 'Manufacturer Refurbished'. To list an item as 'Certified Refurbished', a seller must be pre-qualified by eBay for this feature. Code so that your app gracefully handles any future changes to this list."
         type: string
       deliveryOptions:
         description: "A comma-separated list of available delivery options. This column lets you filter out items than cannot be shipped to the buyer. Valid Values: SHIP_TO_HOME, SELLER_ARRANGED_LOCAL_PICKUP, IN_STORE_PICKUP, and PICKUP_DROP_OFF. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:DeliveryOptionsEnum'>eBay API documentation</a>"

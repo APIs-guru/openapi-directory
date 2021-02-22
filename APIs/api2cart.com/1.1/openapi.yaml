@@ -454,6 +454,12 @@ paths:
           required: false
           schema:
             type: string
+        - description: Shopware client secret access key
+          in: query
+          name: shopware_api_secret
+          required: false
+          schema:
+            type: string
         - description: It's a Volusion account for which API is enabled
           in: query
           name: volusion_login
@@ -2372,6 +2378,7 @@ paths:
               - Shopify
               - Squarespace
               - Shopware
+              - ShopwareApi
               - Tomatocart
               - Ubercart
               - Virtuemart
@@ -2782,6 +2789,12 @@ paths:
         - description: Shopware api key
           in: query
           name: shopware_api_key
+          required: false
+          schema:
+            type: string
+        - description: Shopware client secret access key
+          in: query
+          name: shopware_api_secret
           required: false
           schema:
             type: string
@@ -5695,6 +5708,13 @@ paths:
     get:
       description: Retrieve list of statuses
       operationId: OrderStatusList
+      parameters:
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -9493,6 +9513,7 @@ components:
             - Shopify
             - Squarespace
             - Shopware
+            - ShopwareApi
             - Tomatocart
             - Ubercart
             - Virtuemart
@@ -9642,6 +9663,9 @@ components:
           type: string
         shopware_api_key:
           description: Shopware api key
+          type: string
+        shopware_api_secret:
+          description: Shopware client secret access key
           type: string
         squarespace_api_key:
           description: Squarespace API Key

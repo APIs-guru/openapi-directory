@@ -10,7 +10,7 @@ info:
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
 
-    > Date: 15 February, 2021
+    > Date: 22 February, 2021
 
     >
 
@@ -38,8 +38,8 @@ info:
     - format: swagger
       url: https://api.meraki.com/api/v0/openapiSpec
       version: "2.0"
-  x-providerName: meraki.com
   x-preferred: true
+  x-providerName: meraki.com
 consumes:
   - application/json
 produces:
@@ -5915,7 +5915,7 @@ paths:
                     serial: Q234-ABCD-5678
                     tags: " recently-added "
                 floorPlanId: g_1234567
-                height: 150
+                height: 150.1
                 imageExtension: png
                 imageMd5: 2a9edd3f4ffd80130c647d13eacb59f3
                 imageUrl: https://meraki-na.s3.amazonaws.com/assets/...
@@ -6051,7 +6051,7 @@ paths:
                   serial: Q234-ABCD-5678
                   tags: " recently-added "
               floorPlanId: g_1234567
-              height: 150
+              height: 150.1
               imageExtension: png
               imageMd5: 2a9edd3f4ffd80130c647d13eacb59f3
               imageUrl: https://meraki-na.s3.amazonaws.com/assets/...
@@ -6133,7 +6133,7 @@ paths:
                   serial: Q234-ABCD-5678
                   tags: " recently-added "
               floorPlanId: g_1234567
-              height: 150
+              height: 150.1
               imageExtension: png
               imageMd5: 2a9edd3f4ffd80130c647d13eacb59f3
               imageUrl: https://meraki-na.s3.amazonaws.com/assets/...
@@ -6269,7 +6269,7 @@ paths:
                   serial: Q234-ABCD-5678
                   tags: " recently-added "
               floorPlanId: g_1234567
-              height: 150
+              height: 150.1
               imageExtension: png
               imageMd5: 2a9edd3f4ffd80130c647d13eacb59f3
               imageUrl: https://meraki-na.s3.amazonaws.com/assets/...
@@ -12200,7 +12200,7 @@ paths:
                 items:
                   properties:
                     portId:
-                      description: 'Port identifier of switch port. For modules, the identifier is "SlotNumber_ModuleType_PortNumber" (Ex: “1_8X10G_1”), otherwise it is just the port number (Ex: "8").'
+                      description: 'Port identifier of switch port. For modules, the identifier is "SlotNumber_ModuleType_PortNumber" (Ex: "1_8X10G_1"), otherwise it is just the port number (Ex: "8").'
                       type: string
                     serial:
                       description: Serial number of the switch.
@@ -12215,7 +12215,7 @@ paths:
                 items:
                   properties:
                     portId:
-                      description: 'Port identifier of switch port. For modules, the identifier is "SlotNumber_ModuleType_PortNumber" (Ex: “1_8X10G_1”), otherwise it is just the port number (Ex: "8").'
+                      description: 'Port identifier of switch port. For modules, the identifier is "SlotNumber_ModuleType_PortNumber" (Ex: "1_8X10G_1"), otherwise it is just the port number (Ex: "8").'
                       type: string
                     profile:
                       description: Profile identifier.
@@ -12313,7 +12313,7 @@ paths:
                 items:
                   properties:
                     portId:
-                      description: 'Port identifier of switch port. For modules, the identifier is "SlotNumber_ModuleType_PortNumber" (Ex: “1_8X10G_1”), otherwise it is just the port number (Ex: "8").'
+                      description: 'Port identifier of switch port. For modules, the identifier is "SlotNumber_ModuleType_PortNumber" (Ex: "1_8X10G_1"), otherwise it is just the port number (Ex: "8").'
                       type: string
                     serial:
                       description: Serial number of the switch.
@@ -12328,7 +12328,7 @@ paths:
                 items:
                   properties:
                     portId:
-                      description: 'Port identifier of switch port. For modules, the identifier is "SlotNumber_ModuleType_PortNumber" (Ex: “1_8X10G_1”), otherwise it is just the port number (Ex: "8").'
+                      description: 'Port identifier of switch port. For modules, the identifier is "SlotNumber_ModuleType_PortNumber" (Ex: "1_8X10G_1"), otherwise it is just the port number (Ex: "8").'
                       type: string
                     profile:
                       description: Profile identifier.

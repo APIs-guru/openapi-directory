@@ -82,8 +82,17 @@ info:
         </tr>
         <tr>
           <td class="code">12</td>
-          <td class="code">6.0</td>
+          <td class="code">6.0 and 6.1</td>
           <td>Node key management</td>
+        </tr>
+        <tr>
+          <td class="code">13</td>
+          <td class="code">6.2</td>
+          <td><ul>
+            <li>Node status endpoint</li>
+            <li>System health check</li>
+            <li>System maintenance job to purge software [that endpoint was back-ported in 6.1]</li>
+          </ul></td>
         </tr>
 
       </tbody>
@@ -4924,6 +4933,10 @@ paths:
                             default: false
                             description: Policy generation continues on error during NodeConfiguration evaluation
                             type: boolean
+                          rudder_generation_delay:
+                            default: 0 seconds
+                            description: Set a delay before starting policy generation, this will allow you to accumulate changes before they are deployed to Nodes, and can also lessen webapp resources needs. The value is a number followed by the time unit needed (seconds/s, minutes/m, hours/h ...), ie "5m" for 5 minutes
+                            type: string
                           rudder_generation_js_timeout:
                             default: 30
                             description: Policy generation JS evaluation of directive parameter timeout in seconds
@@ -4931,6 +4944,10 @@ paths:
                           rudder_generation_max_parallelism:
                             default: "0.5"
                             description: Set the policy generation parallelism, either as an number of thread (i.e. 4), or a multiplicative of the number of core (x0.5)
+                            type: string
+                          rudder_generation_policy:
+                            default: all
+                            description: Should policy generation be triggered automatically after a change (value 'all'), or should we wait until a manual launch (through api or UI, value 'onlyManual') or even no policy generation at all (value "none")
                             type: string
                           rudder_report_protocol_default:
                             description: Default reporting protocol used
@@ -5111,20 +5128,18 @@ paths:
             schema:
               properties:
                 allowed_networks:
-                  example: '{ "delete":["162.168.1.0/24"], "add": ["162.168.2.0/24] }'
                   properties:
                     add:
                       description: List of networks to add to existing allowed networks for that server
+                      example: '{ "add": ["162.168.2.0/24], ... }'
                       items: {}
                       type: array
                     delete:
                       description: List of networks to remove from existing allowed networks for that server
+                      example: '{ "delete":["162.168.1.0/24"], ... }'
                       items: {}
                       type: array
                   type: object
-                  x-optional:
-                    - add
-                    - delete
               type: object
         required: true
       responses:
@@ -5603,6 +5618,45 @@ paths:
       x-code-samples:
         - lang: curl
           source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/system/info'
+  /system/maintenance/purgeSoftware:
+    post:
+      description: Start the software cleaning batch asynchronously.
+      operationId: purgeSoftware
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  action:
+                    description: The id of the action
+                    enum:
+                      - purgeSoftware
+                    type: string
+                  data:
+                    items:
+                      description: a success message.
+                      type: string
+                    type: array
+                  result:
+                    description: Result of the request
+                    enum:
+                      - success
+                      - error
+                    type: string
+                required:
+                  - result
+                  - action
+                  - data
+                type: object
+          description: Purge Software
+      summary: Trigger batch for cleaning unreferenced software
+      tags:
+        - System
+      x-code-samples:
+        - lang: curl
+          source: >
+            curl --header "X-API-Token: yourToken" --request POST 'https://rudder.example.com/rudder/api/latest/system/maintenance/purgeSoftware?prettify=true'
   /system/reload:
     post:
       description: Reload both techniques and dynamic groups

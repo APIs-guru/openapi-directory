@@ -3371,6 +3371,13 @@ paths:
             description: CURRENTLY HAS NO EFFECT
             nullable: true
             type: string
+        - description: Specifies the Getty image id to use in the search.
+          in: query
+          name: asset_id
+          schema:
+            description: Specifies the Getty image id to use in the search.
+            nullable: true
+            type: string
         - description: Specifies fields to return. Defaults to 'summary_set'.
           explode: false
           in: query

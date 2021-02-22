@@ -318,6 +318,10 @@ paths:
           name: connect
           schema:
             type: boolean
+        - in: query
+          name: pfConnect
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -1020,6 +1024,10 @@ paths:
           schema:
             format: uuid
             type: string
+        - in: query
+          name: access
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -2713,6 +2721,8 @@ components:
         platform:
           nullable: true
           type: string
+        portForwardingConnection:
+          $ref: "#/components/schemas/ConnectionInfoBody"
         recentFolders:
           items:
             type: string

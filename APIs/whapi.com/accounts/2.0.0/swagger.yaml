@@ -163,7 +163,7 @@ parameters:
 paths:
   /account:
     get:
-      description: Retrieves a limited set of customer account details. For security purposes, only a subset is supplied, which does not include fields such as security questions and answers.
+      description: Retrieves a limited set of customer account details. For security purposes, only a subset is supplied, which does not include fields such as security questions and answers. argFileDR1.properties argFileDR2.properties argFileGIB1.properties argFileGIB2.properties argFileGIB3.properties argFileGIB4.properties argFilePP1.properties argFilePP2.properties argFilePP3.properties argFile.properties argFilePT1.properties argFilePTE.properties argFileSCC1.properties argFileSCC2.properties argFileSCC3.properties argFileSTG.properties argFileSYS.properties CWP GatewayMigrationUtility-1.4.00-85 GatewayMigrationUtility.jar GatewayMigrationUtility.sh gmu.log inputFile.xml lib logs migratePolicy.sh migratev2CWP.sh migratev2Policy.sh retrieveCWP.sh retrievePolicy.sh updateCWP.sh updatePolicyById.sh updatePolicy.sh returned by default, others need to be selected. argFileDR1.properties argFileDR2.properties argFileGIB1.properties argFileGIB2.properties argFileGIB3.properties argFileGIB4.properties argFilePP1.properties argFilePP2.properties argFilePP3.properties argFile.properties argFilePT1.properties argFilePTE.properties argFileSCC1.properties argFileSCC2.properties argFileSCC3.properties argFileSTG.properties argFileSYS.properties CWP GatewayMigrationUtility-1.4.00-85 GatewayMigrationUtility.jar GatewayMigrationUtility.sh gmu.log inputFile.xml lib logs migratePolicy.sh migratev2CWP.sh migratev2Policy.sh retrieveCWP.sh retrievePolicy.sh updateCWP.sh updatePolicyById.sh updatePolicy.sh returned by default only in italian region.
       operationId: getDetails
       parameters:
         - $ref: "#/parameters/param_apiKey"
@@ -180,24 +180,55 @@ paths:
           examples:
             application/json: >
               {
-               "status": "A",
-               "accountNum": "14652314",
-               "accountId": "18164",
-               "customerId": "48",
-               "currencyCode": "GBP",
-               "countryCode": "GB",
-               "title": "Mr",
-               "firstName": "Joe",
-               "lastName": "Bloggs",
-               "street1": "10 Rillington Place",
-               "street2": "Old Basing",
-               "street3": "Lychpit",
-               "city": "Basingstoke",
-               "county": "Hampshire",
-               "postcode": "RG248YQ",
+               "status*": "A",
+               "userName": "wallet1",
+               "accountNum*": "78041SJ",
+               "accountId": "1653",
+               "accountType": "DEP",
+               "creationDate": "2016-06-28 10:50:27",
+               "lastLogin": "2019-09-06 15:54:29",
+               "countryCode": "UK",
+               "title": "Prof",
+               "firstName*": "Wha",
+               "lastName*": "Pee",
+               "secondLastName*": "Smith",
+               "ipAddress": "10.211.33.1",
+               "street1": "1",
+               "street2": "Test",
+               "county": "Gloucestershire",
+               "city": "Leeds",
+               "postcode": "LS1 1AA",
                "country": "United Kingdom",
-               "email": "jbloggs@email.com",
-               "mobile": "09876543210",
+               "email": "wallet1@wh2.com",
+               "mobile": "07710100100",
+               "telephone": "01131001000",
+               "language": "en",
+               "timeZone": "Europe/London",
+               "nif**": "HMCQVC89T28M347J",
+               "lastLogin**": "2020-03-10 06:44:09",
+               "termsAndConditions":[
+               {
+               "name": "PlaytechCasIta",
+               "url": "http://williamhill-it.custhelp.com/cgi-bin/williamhill_it.cfg/php/enduser/std_adp.php?p_faqid=7320 http://whdn.williamhill.com/content/content/Contratto.pdf http://williamhill-it.custhelp.com/cgi-bin/williamhill_it.cfg/php/enduser/std_adp.php?p_faqid=7113"
+               },
+               {
+               "name": "PlaytechCasIta",
+               "url": "http://williamhill-it.custhelp.com/cgi-bin/williamhill_it.cfg/php/enduser/std_adp.php?p_faqid=7320 http://whdn.williamhill.com/content/content/Contratto.pdf http://williamhill-it.custhelp.com/cgi-bin/williamhill_it.cfg/php/enduser/std_adp.php?p_faqid=7113"
+               },
+               {
+               "name": "PlaytechCasIta",
+               "url": "http://williamhill-it.custhelp.com/cgi-bin/williamhill_it.cfg/php/enduser/std_adp.php?p_faqid=7320 http://whdn.williamhill.com/content/content/Contratto.pdf http://williamhill-it.custhelp.com/cgi-bin/williamhill_it.cfg/php/enduser/std_adp.php?p_faqid=7113"
+               }
+               ],
+               "birthPlace":{
+               "city": "Roma",
+               "province": "RM",
+               "countryCode": ""
+               },
+               "additionalSystemStatuses":{
+               "system": "cnj",
+               "estado": "OK"
+               },
                "partnerContactable": true,
                "contactable": true,
                "flags": [
@@ -768,6 +799,12 @@ definitions:
       accountNum:
         description: Account number
         type: string
+      additionalSystemStatuses:
+        description: Statuses of systems specific to that account - seperate from account status
+        type: string
+      birthPlace:
+        description: Birthplace details (city, province country code) for customer - primaly used in italy
+        type: string
       city:
         description: The city of the customer's address
         type: string
@@ -792,22 +829,43 @@ definitions:
       email:
         description: The primary email address of the customer with that account. Must be unique.
         type: string
+      fax:
+        description: The fax number of the customer
+        type: string
       firstName:
         description: The first name of the customer with that account
         type: string
       flags:
         $ref: "#/definitions/flags"
+      ipAddress:
+        description: Registered ip address of user
+        type: string
+      language:
+        description: The registered language of the customer
+        type: string
+      lastLogin:
+        description: The last time customer logged in - mandatory in italy - available if populated in other territories
+        type: string
       lastName:
         description: The last name of the customer with that account
         type: string
       mobile:
         description: The mobile number of the customer with that account
         type: string
+      nif:
+        description: The national identifcation number of the customer (italy only - mandatory response field)
+        type: string
+      office:
+        description: Office phone number of customer
+        type: string
       partnerContactable:
         description: Is it okay for the bookmaker to give the user's contact details to companies with which it has partnerships
         type: boolean
       postcode:
         description: The postCode of the customer's address
+        type: string
+      secondLastName:
+        description: The second last name of the customer with that account - primarily used in Spanish territory
         type: string
       status:
         description: Account status
@@ -821,6 +879,12 @@ definitions:
       street3:
         description: Line number 3 of the customer's street address written out in full
         type: string
+      terms and conditions:
+        description: name and url location of terms and conditions applicable to this account
+        type: string
+      timeZone:
+        description: The primary time zone for the customer
+        type: string
       title:
         description: The title of the name of the customer with that account
         type: string
@@ -829,6 +893,9 @@ definitions:
       - accountNum
       - firstName
       - lastName
+      - secondLastName
+      - nif (italy only)
+      - lastLogin (default in Italy only)
     type: object
   error:
     properties:

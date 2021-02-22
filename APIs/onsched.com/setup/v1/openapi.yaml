@@ -478,21 +478,21 @@ paths:
       tags:
         - Calendars
     post:
-      description: "Use this endpoint to create a new calendar. If not specified the business location id defaults to the first location in the company.\r
+      description: "Use this endpoint to create an additional calendar. If not specified, the business location id defaults to the primary location of the company.<br /><br />\r
 
-        \r
+        Note: Every location has a primary calendar. All appointments will be booked to that calendar unless otherwise specified with a linked service.<br /><br />\r
 
-        name is a required parameter\r
+        name is a required parameter<br /><br />\r
 
-        type is a required parameter with a value of resource or simple\r
+        type is a required parameter with a value of “resource”<br /><br />\r
 
-        interval is a required parameter with a value of 1,5,10,15,20,30,60\r
+        interval is a required parameter with a value of 1,5,10,15,20,30,60<br /><br />\r
 
-        bookingsPerSlot is a required parameter with a value between 1 and 20\r
+        bookingsPerSlot is a required parameter with a value between 1 and 20<br /><br />\r
 
-        scheduleGroupId is an optional parameter. If supplied it must be a valid Resource Group Id.\r
+        scheduleGroupId is an optional parameter.If supplied, it must be a valid Resource Group Id<br /><br />\r
 
-        weekly availability is option. If this element is not populated then weekly availability defaults to the business hours"
+        weekly availability is optional.If this element is not populated, then weekly availability defaults to the business hours<br /><br />"
       requestBody:
         content:
           application/*+json:

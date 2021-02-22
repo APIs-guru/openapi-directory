@@ -3328,7 +3328,7 @@ paths:
                     type: string
                   type: array
                 refresh_url:
-                  description: The URL that the user will be redirected to if the account link is no longer valid. Your `refresh_url` should trigger a method on your server to create a new account link using this API, with the same parameters, and redirect the user to the new account link.
+                  description: The URL the user will be redirected to if the account link is expired, has been previously-visited, or is otherwise invalid. The URL you specify should attempt to generate a new account link with the same parameters used to create the original account link, then redirect the user to the new account link's URL so they can continue with Connect Onboarding. If a new account link cannot be generated or the redirect fails you should display a useful error to the user.
                   type: string
                 return_url:
                   description: The URL that the user will be redirected to upon leaving or completing the linked flow.
@@ -8809,6 +8809,508 @@ paths:
               schema:
                 $ref: "#/components/schemas/error"
           description: Error response.
+  /v1/billing_portal/configurations:
+    get:
+      description: <p>Returns a list of configurations that describe the functionality of the customer portal.</p>
+      operationId: GetBillingPortalConfigurations
+      parameters:
+        - description: Only return configurations that are active or inactive (e.g., pass `true` to only list active configurations).
+          in: query
+          name: active
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+          in: query
+          name: ending_before
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+        - description: Only return the default or non-default configurations (e.g., pass `true` to only list the default configuration).
+          in: query
+          name: is_default
+          required: false
+          schema:
+            type: boolean
+          style: form
+        - description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+          in: query
+          name: starting_after
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/billing_portal.configuration"
+                    type: array
+                  has_more:
+                    description: True if this list has another page of items after this one that can be fetched.
+                    type: boolean
+                  object:
+                    description: String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+                    enum:
+                      - list
+                    type: string
+                  url:
+                    description: The URL where this list can be accessed.
+                    maxLength: 5000
+                    pattern: ^/v1/billing_portal/configurations
+                    type: string
+                required:
+                  - data
+                  - has_more
+                  - object
+                  - url
+                type: object
+                x-expandableFields:
+                  - data
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+    post:
+      description: <p>Creates a configuration that describes the functionality and behavior of a PortalSession</p>
+      operationId: PostBillingPortalConfigurations
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              business_profile:
+                explode: true
+                style: deepObject
+              default_return_url:
+                explode: true
+                style: deepObject
+              expand:
+                explode: true
+                style: deepObject
+              features:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                business_profile:
+                  description: The business information shown to customers in the portal.
+                  properties:
+                    headline:
+                      maxLength: 60
+                      type: string
+                    privacy_policy_url:
+                      type: string
+                    terms_of_service_url:
+                      type: string
+                  required:
+                    - privacy_policy_url
+                    - terms_of_service_url
+                  title: business_profile_create_param
+                  type: object
+                default_return_url:
+                  anyOf:
+                    - type: string
+                    - enum:
+                        - ""
+                      type: string
+                  description: The default URL to redirect customers to when they click on the portal's link to return to your website. This can be [overriden](https://stripe.com/docs/api/customer_portal/sessions/create#create_portal_session-return_url) when creating the session.
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+                features:
+                  description: Information about the features available in the portal.
+                  properties:
+                    customer_update:
+                      properties:
+                        allowed_updates:
+                          anyOf:
+                            - items:
+                                enum:
+                                  - address
+                                  - email
+                                  - phone
+                                  - shipping
+                                  - tax_id
+                                type: string
+                              type: array
+                            - enum:
+                                - ""
+                              type: string
+                        enabled:
+                          type: boolean
+                      required:
+                        - allowed_updates
+                        - enabled
+                      title: customer_update_creation_param
+                      type: object
+                    invoice_history:
+                      properties:
+                        enabled:
+                          type: boolean
+                      required:
+                        - enabled
+                      title: invoice_list_param
+                      type: object
+                    payment_method_update:
+                      properties:
+                        enabled:
+                          type: boolean
+                      required:
+                        - enabled
+                      title: payment_method_update_param
+                      type: object
+                    subscription_cancel:
+                      properties:
+                        enabled:
+                          type: boolean
+                        mode:
+                          enum:
+                            - at_period_end
+                            - immediately
+                          type: string
+                        proration_behavior:
+                          enum:
+                            - always_invoice
+                            - create_prorations
+                            - none
+                          type: string
+                      required:
+                        - enabled
+                      title: subscription_cancel_creation_param
+                      type: object
+                    subscription_update:
+                      properties:
+                        default_allowed_updates:
+                          anyOf:
+                            - items:
+                                enum:
+                                  - price
+                                  - promotion_code
+                                  - quantity
+                                type: string
+                              type: array
+                            - enum:
+                                - ""
+                              type: string
+                        enabled:
+                          type: boolean
+                        products:
+                          anyOf:
+                            - items:
+                                properties:
+                                  prices:
+                                    items:
+                                      maxLength: 5000
+                                      type: string
+                                    type: array
+                                  product:
+                                    maxLength: 5000
+                                    type: string
+                                required:
+                                  - prices
+                                  - product
+                                title: subscription_update_product_param
+                                type: object
+                              type: array
+                            - enum:
+                                - ""
+                              type: string
+                        proration_behavior:
+                          enum:
+                            - always_invoice
+                            - create_prorations
+                            - none
+                          type: string
+                      required:
+                        - default_allowed_updates
+                        - enabled
+                        - products
+                      title: subscription_update_creation_param
+                      type: object
+                  title: features_creation_param
+                  type: object
+              required:
+                - business_profile
+                - features
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/billing_portal.configuration"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  "/v1/billing_portal/configurations/{configuration}":
+    get:
+      description: <p>Retrieves a configuration that describes the functionality of the customer portal.</p>
+      operationId: GetBillingPortalConfigurationsConfiguration
+      parameters:
+        - in: path
+          name: configuration
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/billing_portal.configuration"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+    post:
+      description: <p>Updates a configuration that describes the functionality of the customer portal.</p>
+      operationId: PostBillingPortalConfigurationsConfiguration
+      parameters:
+        - in: path
+          name: configuration
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              business_profile:
+                explode: true
+                style: deepObject
+              default_return_url:
+                explode: true
+                style: deepObject
+              expand:
+                explode: true
+                style: deepObject
+              features:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                active:
+                  description: Whether the configuration is active and can be used to create portal sessions.
+                  type: boolean
+                business_profile:
+                  description: The business information shown to customers in the portal.
+                  properties:
+                    headline:
+                      maxLength: 60
+                      type: string
+                    privacy_policy_url:
+                      type: string
+                    terms_of_service_url:
+                      type: string
+                  title: business_profile_update_param
+                  type: object
+                default_return_url:
+                  anyOf:
+                    - type: string
+                    - enum:
+                        - ""
+                      type: string
+                  description: The default URL to redirect customers to when they click on the portal's link to return to your website. This can be [overriden](https://stripe.com/docs/api/customer_portal/sessions/create#create_portal_session-return_url) when creating the session.
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+                features:
+                  description: Information about the features available in the portal.
+                  properties:
+                    customer_update:
+                      properties:
+                        allowed_updates:
+                          anyOf:
+                            - items:
+                                enum:
+                                  - address
+                                  - email
+                                  - phone
+                                  - shipping
+                                  - tax_id
+                                type: string
+                              type: array
+                            - enum:
+                                - ""
+                              type: string
+                        enabled:
+                          type: boolean
+                      title: customer_update_updating_param
+                      type: object
+                    invoice_history:
+                      properties:
+                        enabled:
+                          type: boolean
+                      required:
+                        - enabled
+                      title: invoice_list_param
+                      type: object
+                    payment_method_update:
+                      properties:
+                        enabled:
+                          type: boolean
+                      required:
+                        - enabled
+                      title: payment_method_update_param
+                      type: object
+                    subscription_cancel:
+                      properties:
+                        enabled:
+                          type: boolean
+                        mode:
+                          enum:
+                            - at_period_end
+                            - immediately
+                          type: string
+                        proration_behavior:
+                          enum:
+                            - always_invoice
+                            - create_prorations
+                            - none
+                          type: string
+                      title: subscription_cancel_updating_param
+                      type: object
+                    subscription_update:
+                      properties:
+                        default_allowed_updates:
+                          anyOf:
+                            - items:
+                                enum:
+                                  - price
+                                  - promotion_code
+                                  - quantity
+                                type: string
+                              type: array
+                            - enum:
+                                - ""
+                              type: string
+                        enabled:
+                          type: boolean
+                        products:
+                          anyOf:
+                            - items:
+                                properties:
+                                  prices:
+                                    items:
+                                      maxLength: 5000
+                                      type: string
+                                    type: array
+                                  product:
+                                    maxLength: 5000
+                                    type: string
+                                required:
+                                  - prices
+                                  - product
+                                title: subscription_update_product_param
+                                type: object
+                              type: array
+                            - enum:
+                                - ""
+                              type: string
+                        proration_behavior:
+                          enum:
+                            - always_invoice
+                            - create_prorations
+                            - none
+                          type: string
+                      title: subscription_update_updating_param
+                      type: object
+                  title: features_updating_param
+                  type: object
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/billing_portal.configuration"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
   /v1/billing_portal/sessions:
     post:
       description: <p>Creates a session of the customer portal.</p>
@@ -8823,6 +9325,10 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                configuration:
+                  description: The [configuration](https://stripe.com/docs/api/customer_portal/configuration) to use for this session, describing its functionality and features. If not specified, the session uses the default configuration.
+                  maxLength: 5000
+                  type: string
                 customer:
                   description: The ID of an existing customer.
                   maxLength: 5000
@@ -8833,8 +9339,11 @@ paths:
                     maxLength: 5000
                     type: string
                   type: array
+                on_behalf_of:
+                  description: The `on_behalf_of` account to use for this session. When specified, only subscriptions and invoices with this `on_behalf_of` account appear in the portal. For more information, see the [docs](https://stripe.com/docs/connect/charges-transfers#on-behalf-of). Use the [Accounts API](https://stripe.com/docs/api/accounts/object#account_object-settings-branding) to modify the `on_behalf_of` account's branding settings, which the portal displays.
+                  type: string
                 return_url:
-                  description: The URL to which Stripe should send customers when they click on the link to return to your website. This field is required if a default return URL has not been configured for the portal.
+                  description: The default URL to redirect customers to when they click on the portal's link to return to your website.
                   type: string
               required:
                 - customer
@@ -10633,6 +11142,18 @@ paths:
                     consolidate line items if there are more than a few dozen.
                   items:
                     properties:
+                      adjustable_quantity:
+                        properties:
+                          enabled:
+                            type: boolean
+                          maximum:
+                            type: integer
+                          minimum:
+                            type: integer
+                        required:
+                          - enabled
+                        title: adjustable_quantity_params
+                        type: object
                       amount:
                         type: integer
                       currency:
@@ -10877,6 +11398,7 @@ paths:
                     other characteristics.
                   items:
                     enum:
+                      - afterpay_clearpay
                       - alipay
                       - bacs_debit
                       - bancontact
@@ -18899,6 +19421,9 @@ paths:
                         - ""
                       type: string
                   description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+                on_behalf_of:
+                  description: The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
+                  type: string
                 payment_settings:
                   description: Configuration settings for the PaymentIntent that is generated when the invoice is finalized.
                   properties:
@@ -19945,6 +20470,9 @@ paths:
               metadata:
                 explode: true
                 style: deepObject
+              on_behalf_of:
+                explode: true
+                style: deepObject
               payment_settings:
                 explode: true
                 style: deepObject
@@ -20061,6 +20589,13 @@ paths:
                         - ""
                       type: string
                   description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+                on_behalf_of:
+                  anyOf:
+                    - type: string
+                    - enum:
+                        - ""
+                      type: string
+                  description: The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
                 payment_settings:
                   description: Configuration settings for the PaymentIntent that is generated when the invoice is finalized.
                   properties:
@@ -20176,7 +20711,7 @@ paths:
               additionalProperties: false
               properties:
                 auto_advance:
-                  description: Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
+                  description: Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/overview#auto-advance) of the invoice. When `false`, the invoice's state will not automatically advance without an explicit action.
                   type: boolean
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -27949,6 +28484,10 @@ paths:
 
                     property on the PaymentIntent.
                   properties:
+                    afterpay_clearpay:
+                      properties: {}
+                      title: param
+                      type: object
                     alipay:
                       properties: {}
                       title: param
@@ -28105,6 +28644,7 @@ paths:
                             - moneyou
                             - rabobank
                             - regiobank
+                            - revolut
                             - sns_bank
                             - triodos_bank
                             - van_lanschot
@@ -28183,6 +28723,7 @@ paths:
                       type: object
                     type:
                       enum:
+                        - afterpay_clearpay
                         - alipay
                         - au_becs_debit
                         - bacs_debit
@@ -28628,6 +29169,10 @@ paths:
 
                     property on the PaymentIntent.
                   properties:
+                    afterpay_clearpay:
+                      properties: {}
+                      title: param
+                      type: object
                     alipay:
                       properties: {}
                       title: param
@@ -28784,6 +29329,7 @@ paths:
                             - moneyou
                             - rabobank
                             - regiobank
+                            - revolut
                             - sns_bank
                             - triodos_bank
                             - van_lanschot
@@ -28862,6 +29408,7 @@ paths:
                       type: object
                     type:
                       enum:
+                        - afterpay_clearpay
                         - alipay
                         - au_becs_debit
                         - bacs_debit
@@ -29457,6 +30004,10 @@ paths:
 
                     property on the PaymentIntent.
                   properties:
+                    afterpay_clearpay:
+                      properties: {}
+                      title: param
+                      type: object
                     alipay:
                       properties: {}
                       title: param
@@ -29613,6 +30164,7 @@ paths:
                             - moneyou
                             - rabobank
                             - regiobank
+                            - revolut
                             - sns_bank
                             - triodos_bank
                             - van_lanschot
@@ -29691,6 +30243,7 @@ paths:
                       type: object
                     type:
                       enum:
+                        - afterpay_clearpay
                         - alipay
                         - au_becs_debit
                         - bacs_debit
@@ -30004,6 +30557,7 @@ paths:
           required: true
           schema:
             enum:
+              - afterpay_clearpay
               - alipay
               - au_becs_debit
               - bacs_debit
@@ -30077,6 +30631,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              afterpay_clearpay:
+                explode: true
+                style: deepObject
               alipay:
                 explode: true
                 style: deepObject
@@ -30134,6 +30691,11 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                afterpay_clearpay:
+                  description: If this is an `AfterpayClearpay` PaymentMethod, this hash contains details about the AfterpayClearpay payment method.
+                  properties: {}
+                  title: param
+                  type: object
                 alipay:
                   description: If this is an `Alipay` PaymentMethod, this hash contains details about the Alipay payment method.
                   properties: {}
@@ -30339,6 +30901,7 @@ paths:
                         - moneyou
                         - rabobank
                         - regiobank
+                        - revolut
                         - sns_bank
                         - triodos_bank
                         - van_lanschot
@@ -30428,6 +30991,7 @@ paths:
                 type:
                   description: The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
                   enum:
+                    - afterpay_clearpay
                     - alipay
                     - au_becs_debit
                     - bacs_debit
@@ -32741,7 +33305,7 @@ paths:
                   type: boolean
                 code:
                   description: The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific customer. If left blank, we will generate one automatically.
-                  maxLength: 5000
+                  maxLength: 500
                   type: string
                 coupon:
                   description: The coupon for this promotion code.
@@ -40845,7 +41409,7 @@ paths:
                       type: string
                   required:
                     - country
-                  title: required_country_address
+                  title: create_location_address_param
                   type: object
                 display_name:
                   description: A name for the location.
@@ -41010,9 +41574,7 @@ paths:
                     state:
                       maxLength: 5000
                       type: string
-                  required:
-                    - country
-                  title: required_country_address
+                  title: optional_fields_address
                   type: object
                 display_name:
                   description: A name for the location.
@@ -43240,6 +43802,8 @@ paths:
                       - application_fee.refund.updated
                       - application_fee.refunded
                       - balance.available
+                      - billing_portal.configuration.created
+                      - billing_portal.configuration.updated
                       - capability.updated
                       - charge.captured
                       - charge.dispute.closed
@@ -43560,6 +44124,8 @@ paths:
                       - application_fee.refund.updated
                       - application_fee.refunded
                       - balance.available
+                      - billing_portal.configuration.created
+                      - billing_portal.configuration.updated
                       - capability.updated
                       - charge.captured
                       - charge.dispute.closed
@@ -45267,9 +45833,78 @@ components:
       type: object
       x-expandableFields:
         - address
+    billing_portal.configuration:
+      description: A portal configuration describes the functionality and behavior of a portal session.
+      properties:
+        active:
+          description: Whether the configuration is active and can be used to create portal sessions.
+          type: boolean
+        application:
+          description: ID of the Connect Application that created the configuration.
+          maxLength: 5000
+          nullable: true
+          type: string
+        business_profile:
+          $ref: "#/components/schemas/portal_business_profile"
+        created:
+          description: Time at which the object was created. Measured in seconds since the Unix epoch.
+          format: unix-time
+          type: integer
+        default_return_url:
+          description: The default URL to redirect customers to when they click on the portal's link to return to your website. This can be [overriden](https://stripe.com/docs/api/customer_portal/sessions/create#create_portal_session-return_url) when creating the session.
+          maxLength: 5000
+          nullable: true
+          type: string
+        features:
+          $ref: "#/components/schemas/portal_features"
+        id:
+          description: Unique identifier for the object.
+          maxLength: 5000
+          type: string
+        is_default:
+          description: Whether the configuration is the default. If `true`, this configuration can be managed in the Dashboard and portal sessions will use this configuration unless it is overriden when creating the session.
+          type: boolean
+        livemode:
+          description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+          type: boolean
+        object:
+          description: String representing the object's type. Objects of the same type share the same value.
+          enum:
+            - billing_portal.configuration
+          type: string
+        updated:
+          description: Time at which the object was last updated. Measured in seconds since the Unix epoch.
+          format: unix-time
+          type: integer
+      required:
+        - active
+        - business_profile
+        - created
+        - features
+        - id
+        - is_default
+        - livemode
+        - object
+        - updated
+      title: PortalConfiguration
+      type: object
+      x-expandableFields:
+        - business_profile
+        - features
+      x-resourceId: billing_portal.configuration
     billing_portal.session:
       description: >-
-        A session describes the instantiation of the customer portal for
+        The Billing customer portal is a Stripe-hosted UI for subscription and
+
+        billing management.
+
+
+        A portal configuration describes the functionality and features that you
+
+        want to provide to your customers through the portal.
+
+
+        A portal session describes the instantiation of the customer portal for
 
         a particular customer. By visiting the session's URL, the customer
 
@@ -45277,11 +45912,24 @@ components:
 
         sessions are short-lived and will expire if the customer does not visit the URL.
 
-        Create sessions on-demand when customers intend to manage their subscriptions and billing details.
+        Create sessions on-demand when customers intend to manage their subscriptions
+
+        and billing details.
 
 
-        Integration guide: [Billing customer portal](https://stripe.com/docs/billing/subscriptions/integrating-customer-portal).
+        Learn more in the [product overview](https://stripe.com/docs/billing/subscriptions/customer-portal)
+
+        and [integration guide](https://stripe.com/docs/billing/subscriptions/integrating-customer-portal).
       properties:
+        configuration:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/billing_portal.configuration"
+          description: The configuration used by this session, describing the features available.
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/billing_portal.configuration"
         created:
           description: Time at which the object was created. Measured in seconds since the Unix epoch.
           format: unix-time
@@ -45302,15 +45950,21 @@ components:
           enum:
             - billing_portal.session
           type: string
+        on_behalf_of:
+          description: The account for which the session was created on behalf of. When specified, only subscriptions and invoices with this `on_behalf_of` account appear in the portal. For more information, see the [docs](https://stripe.com/docs/connect/charges-transfers#on-behalf-of). Use the [Accounts API](https://stripe.com/docs/api/accounts/object#account_object-settings-branding) to modify the `on_behalf_of` account's branding settings, which the portal displays.
+          maxLength: 5000
+          nullable: true
+          type: string
         return_url:
-          description: The URL to which Stripe should send customers when they click on the link to return to your website.
+          description: The URL to redirect customers to when they click on the portal's link to return to your website.
           maxLength: 5000
           type: string
         url:
-          description: The short-lived URL of the session giving customers access to the customer portal.
+          description: The short-lived URL of the session that gives customers access to the customer portal.
           maxLength: 5000
           type: string
       required:
+        - configuration
         - created
         - customer
         - id
@@ -45320,7 +45974,8 @@ components:
         - url
       title: PortalSession
       type: object
-      x-expandableFields: []
+      x-expandableFields:
+        - configuration
       x-resourceId: billing_portal.session
     bitcoin_receiver:
       description: ""
@@ -49422,6 +50077,16 @@ components:
           enum:
             - invoice
           type: string
+        on_behalf_of:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/account"
+          description: The account (if any) for which the funds of the invoice payment are intended. If set, the invoice will be presented with the branding and support information of the specified account. See the [Invoices with Connect](https://stripe.com/docs/billing/invoices/connect) documentation for details.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/account"
         paid:
           description: Whether payment was successfully collected for this invoice. An invoice can be paid (most commonly) with a charge or with credit from the customer's account balance.
           type: boolean
@@ -49564,6 +50229,7 @@ components:
         - discounts
         - last_finalization_error
         - lines
+        - on_behalf_of
         - payment_intent
         - payment_settings
         - status_transitions
@@ -50183,7 +50849,7 @@ components:
           description: The pending authorization request. This field will only be non-null during an `issuing_authorization.request` webhook.
           nullable: true
         request_history:
-          description: History of every time the authorization was approved/denied (whether approved/denied by you directly or by Stripe based on your `spending_controls`). If the merchant changes the authorization by performing an [incremental authorization or partial capture](https://stripe.com/docs/issuing/purchases/authorizations), you can look at this field to see the previous states of the authorization.
+          description: History of every time `pending_request` was approved/denied, either by you directly or by Stripe (e.g. based on your `spending_controls`). If the merchant changes the authorization by performing an [incremental authorization](https://stripe.com/docs/issuing/purchases/authorizations), you can look at this field to see the previous requests for the authorization.
           items:
             $ref: "#/components/schemas/issuing_authorization_request"
           type: array
@@ -50858,7 +51524,7 @@ components:
       description: ""
       properties:
         amount:
-          description: The authorization amount in your card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). Stripe held this amount from your account to fund the authorization if the request was approved.
+          description: The `pending_request.amount` at the time of the request, presented in your card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). Stripe held this amount from your account to fund the authorization if the request was approved.
           type: integer
         amount_details:
           anyOf:
@@ -50877,7 +51543,7 @@ components:
           maxLength: 5000
           type: string
         merchant_amount:
-          description: The amount that was authorized at the time of this request. This amount is in the `merchant_currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+          description: The `pending_request.merchant_amount` at the time of the request, presented in the `merchant_currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
           type: integer
         merchant_currency:
           description: The currency that was collected by the merchant and presented to the cardholder for the authorization. Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
@@ -55081,6 +55747,8 @@ components:
 
         Related guides: [Payment Methods](https://stripe.com/docs/payments/payment-methods) and [More Payment Scenarios](https://stripe.com/docs/payments/more-payment-scenarios).
       properties:
+        afterpay_clearpay:
+          $ref: "#/components/schemas/payment_method_afterpay_clearpay"
         alipay:
           $ref: "#/components/schemas/payment_flows_private_payment_methods_alipay"
         au_becs_debit:
@@ -55151,6 +55819,7 @@ components:
         type:
           description: The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
           enum:
+            - afterpay_clearpay
             - alipay
             - au_becs_debit
             - bacs_debit
@@ -55179,6 +55848,7 @@ components:
       title: PaymentMethod
       type: object
       x-expandableFields:
+        - afterpay_clearpay
         - alipay
         - au_becs_debit
         - bacs_debit
@@ -55198,6 +55868,12 @@ components:
         - sepa_debit
         - sofort
       x-resourceId: payment_method
+    payment_method_afterpay_clearpay:
+      description: ""
+      properties: {}
+      title: payment_method_afterpay_clearpay
+      type: object
+      x-expandableFields: []
     payment_method_au_becs_debit:
       description: ""
       properties:
@@ -55499,6 +56175,8 @@ components:
           $ref: "#/components/schemas/payment_method_details_ach_credit_transfer"
         ach_debit:
           $ref: "#/components/schemas/payment_method_details_ach_debit"
+        afterpay_clearpay:
+          $ref: "#/components/schemas/payment_method_details_afterpay_clearpay"
         alipay:
           $ref: "#/components/schemas/payment_flows_private_payment_methods_alipay_details"
         au_becs_debit:
@@ -55555,6 +56233,7 @@ components:
       x-expandableFields:
         - ach_credit_transfer
         - ach_debit
+        - afterpay_clearpay
         - alipay
         - au_becs_debit
         - bacs_debit
@@ -55637,6 +56316,12 @@ components:
           nullable: true
           type: string
       title: payment_method_details_ach_debit
+      type: object
+      x-expandableFields: []
+    payment_method_details_afterpay_clearpay:
+      description: ""
+      properties: {}
+      title: payment_method_details_afterpay_clearpay
       type: object
       x-expandableFields: []
     payment_method_details_au_becs_debit:
@@ -56273,7 +56958,7 @@ components:
       description: ""
       properties:
         bank:
-          description: The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
+          description: The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
           enum:
             - abn_amro
             - asn_bank
@@ -56284,6 +56969,7 @@ components:
             - moneyou
             - rabobank
             - regiobank
+            - revolut
             - sns_bank
             - triodos_bank
             - van_lanschot
@@ -56302,6 +56988,7 @@ components:
             - MOYONL21
             - RABONL2U
             - RBRBNL21
+            - REVOLT21
             - SNSBNL2A
             - TRIONL2U
           nullable: true
@@ -56775,7 +57462,7 @@ components:
       description: ""
       properties:
         bank:
-          description: The customer's bank, if provided. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
+          description: The customer's bank, if provided. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
           enum:
             - abn_amro
             - asn_bank
@@ -56786,6 +57473,7 @@ components:
             - moneyou
             - rabobank
             - regiobank
+            - revolut
             - sns_bank
             - triodos_bank
             - van_lanschot
@@ -56804,6 +57492,7 @@ components:
             - MOYONL21
             - RABONL2U
             - RBRBNL21
+            - REVOLT21
             - SNSBNL2A
             - TRIONL2U
           nullable: true
@@ -57791,11 +58480,11 @@ components:
           nullable: true
           type: string
         amount:
-          description: The unit amount in %s to be charged, represented as a whole integer if possible.
+          description: The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.
           nullable: true
           type: integer
         amount_decimal:
-          description: The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places.
+          description: The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.
           format: decimal
           nullable: true
           type: string
@@ -57965,6 +58654,181 @@ components:
       title: PlatformTax
       type: object
       x-expandableFields: []
+    portal_business_profile:
+      description: ""
+      properties:
+        headline:
+          description: The messaging shown to customers in the portal.
+          maxLength: 5000
+          nullable: true
+          type: string
+        privacy_policy_url:
+          description: A link to the business’s publicly available privacy policy.
+          maxLength: 5000
+          type: string
+        terms_of_service_url:
+          description: A link to the business’s publicly available terms of service.
+          maxLength: 5000
+          type: string
+      required:
+        - privacy_policy_url
+        - terms_of_service_url
+      title: PortalBusinessProfile
+      type: object
+      x-expandableFields: []
+    portal_customer_update:
+      description: ""
+      properties:
+        allowed_updates:
+          description: The types of customer updates that are supported. When empty, customers are not updateable.
+          items:
+            enum:
+              - address
+              - email
+              - phone
+              - shipping
+              - tax_id
+            type: string
+          type: array
+        enabled:
+          description: Whether the feature is enabled.
+          type: boolean
+      required:
+        - allowed_updates
+        - enabled
+      title: PortalCustomerUpdate
+      type: object
+      x-expandableFields: []
+    portal_features:
+      description: ""
+      properties:
+        customer_update:
+          $ref: "#/components/schemas/portal_customer_update"
+        invoice_history:
+          $ref: "#/components/schemas/portal_invoice_list"
+        payment_method_update:
+          $ref: "#/components/schemas/portal_payment_method_update"
+        subscription_cancel:
+          $ref: "#/components/schemas/portal_subscription_cancel"
+        subscription_update:
+          $ref: "#/components/schemas/portal_subscription_update"
+      required:
+        - customer_update
+        - invoice_history
+        - payment_method_update
+        - subscription_cancel
+        - subscription_update
+      title: PortalFeatures
+      type: object
+      x-expandableFields:
+        - customer_update
+        - invoice_history
+        - payment_method_update
+        - subscription_cancel
+        - subscription_update
+    portal_invoice_list:
+      description: ""
+      properties:
+        enabled:
+          description: Whether the feature is enabled.
+          type: boolean
+      required:
+        - enabled
+      title: PortalInvoiceList
+      type: object
+      x-expandableFields: []
+    portal_payment_method_update:
+      description: ""
+      properties:
+        enabled:
+          description: Whether the feature is enabled.
+          type: boolean
+      required:
+        - enabled
+      title: PortalPaymentMethodUpdate
+      type: object
+      x-expandableFields: []
+    portal_subscription_cancel:
+      description: ""
+      properties:
+        enabled:
+          description: Whether the feature is enabled.
+          type: boolean
+        mode:
+          description: Whether to cancel subscriptions immediately or at the end of the billing period.
+          enum:
+            - at_period_end
+            - immediately
+          type: string
+        proration_behavior:
+          description: Whether to create prorations when canceling subscriptions. Possible values are `none` and `create_prorations`.
+          enum:
+            - always_invoice
+            - create_prorations
+            - none
+          type: string
+      required:
+        - enabled
+        - mode
+        - proration_behavior
+      title: PortalSubscriptionCancel
+      type: object
+      x-expandableFields: []
+    portal_subscription_update:
+      description: ""
+      properties:
+        default_allowed_updates:
+          description: The types of subscription updates that are supported for items listed in the `products` attribute. When empty, subscriptions are not updateable.
+          items:
+            enum:
+              - price
+              - promotion_code
+              - quantity
+            type: string
+          type: array
+        enabled:
+          description: Whether the feature is enabled.
+          type: boolean
+        products:
+          description: The list of products that support subscription updates.
+          items:
+            $ref: "#/components/schemas/portal_subscription_update_product"
+          nullable: true
+          type: array
+        proration_behavior:
+          description: Determines how to handle prorations resulting from subscription updates. Valid values are `none`, `create_prorations`, and `always_invoice`.
+          enum:
+            - always_invoice
+            - create_prorations
+            - none
+          type: string
+      required:
+        - default_allowed_updates
+        - enabled
+        - proration_behavior
+      title: PortalSubscriptionUpdate
+      type: object
+      x-expandableFields:
+        - products
+    portal_subscription_update_product:
+      description: ""
+      properties:
+        prices:
+          description: The list of price IDs which, when subscribed to, a subscription can be updated.
+          items:
+            maxLength: 5000
+            type: string
+          type: array
+        product:
+          description: The product ID.
+          maxLength: 5000
+          type: string
+      required:
+        - prices
+        - product
+      title: PortalSubscriptionUpdateProduct
+      type: object
+      x-expandableFields: []
     price:
       description: >-
         Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.
@@ -58061,11 +58925,11 @@ components:
             - recurring
           type: string
         unit_amount:
-          description: The unit amount in %s to be charged, represented as a whole integer if possible.
+          description: The unit amount in %s to be charged, represented as a whole integer if possible. Only set if `billing_scheme=per_unit`.
           nullable: true
           type: integer
         unit_amount_decimal:
-          description: The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places.
+          description: The unit amount in %s to be charged, represented as a decimal string with at most 12 decimal places. Only set if `billing_scheme=per_unit`.
           format: decimal
           nullable: true
           type: string
@@ -59407,6 +60271,10 @@ components:
     setup_attempt_payment_method_details:
       description: ""
       properties:
+        au_becs_debit:
+          $ref: "#/components/schemas/setup_attempt_payment_method_details_au_becs_debit"
+        bacs_debit:
+          $ref: "#/components/schemas/setup_attempt_payment_method_details_bacs_debit"
         bancontact:
           $ref: "#/components/schemas/setup_attempt_payment_method_details_bancontact"
         card:
@@ -59415,6 +60283,8 @@ components:
           $ref: "#/components/schemas/setup_attempt_payment_method_details_card_present"
         ideal:
           $ref: "#/components/schemas/setup_attempt_payment_method_details_ideal"
+        sepa_debit:
+          $ref: "#/components/schemas/setup_attempt_payment_method_details_sepa_debit"
         sofort:
           $ref: "#/components/schemas/setup_attempt_payment_method_details_sofort"
         type:
@@ -59426,11 +60296,26 @@ components:
       title: SetupAttemptPaymentMethodDetails
       type: object
       x-expandableFields:
+        - au_becs_debit
+        - bacs_debit
         - bancontact
         - card
         - card_present
         - ideal
+        - sepa_debit
         - sofort
+    setup_attempt_payment_method_details_au_becs_debit:
+      description: ""
+      properties: {}
+      title: setup_attempt_payment_method_details_au_becs_debit
+      type: object
+      x-expandableFields: []
+    setup_attempt_payment_method_details_bacs_debit:
+      description: ""
+      properties: {}
+      title: setup_attempt_payment_method_details_bacs_debit
+      type: object
+      x-expandableFields: []
     setup_attempt_payment_method_details_bancontact:
       description: ""
       properties:
@@ -59532,7 +60417,7 @@ components:
       description: ""
       properties:
         bank:
-          description: The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
+          description: The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `revolut`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
           enum:
             - abn_amro
             - asn_bank
@@ -59543,6 +60428,7 @@ components:
             - moneyou
             - rabobank
             - regiobank
+            - revolut
             - sns_bank
             - triodos_bank
             - van_lanschot
@@ -59561,6 +60447,7 @@ components:
             - MOYONL21
             - RABONL2U
             - RBRBNL21
+            - REVOLT21
             - SNSBNL2A
             - TRIONL2U
           nullable: true
@@ -59603,6 +60490,12 @@ components:
       x-expandableFields:
         - generated_sepa_debit
         - generated_sepa_debit_mandate
+    setup_attempt_payment_method_details_sepa_debit:
+      description: ""
+      properties: {}
+      title: setup_attempt_payment_method_details_sepa_debit
+      type: object
+      x-expandableFields: []
     setup_attempt_payment_method_details_sofort:
       description: ""
       properties:

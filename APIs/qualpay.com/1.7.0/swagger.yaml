@@ -1614,6 +1614,10 @@ definitions:
         description: "<br><strong>Default: </strong>false<br><strong>Description: </strong>When this field is provided and set to true, a customer_email must also be provided. When these two fields are provided, a transaction receipt will be sent via e-mail to the address(es) provided in the customer_email field."
         example: true
         type: boolean
+      emv_tran_id:
+        description: "<strong>Format: </strong>Variable length, up to 36 AN<br><strong>Description: </strong>Base64 encoded MasterCard UCAF Transaction ID returned from the merchant’s third-party 3D Secure Merchant Plug-in (MPI). Use for MasterCard 3-D Secure transactions."
+        example: ASNFZ4nwEjR1We3I85BI70V9nifASNFZ4jwHyL0U=
+        type: string
       exp_date:
         description: '<strong>Format: </strong>Fixed length, 4 N, MMYY format<br><strong>Description: </strong>Expiration date of cardholder card number.  When card_id or customer_id is present in the request this field may also be present; if it is not, then the expiration date from the Card Vault will be used.<br><strong>Conditional Requirement: </strong>Refer to <a href="/developer/api/reference#card-source-conditional-requirements"target="_blank">Card or Bank Account Data Sources and Conditional Requirements</a>'
         example: "0921"

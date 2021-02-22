@@ -3009,7 +3009,7 @@ paths:
         description: Send fax request
         required: true
       responses:
-        "200":
+        "202":
           $ref: "#/components/responses/SendFaxResponse"
         default:
           $ref: "#/components/responses/GenericErrorResponse"
@@ -5807,9 +5807,11 @@ paths:
           schema:
             enum:
               - pending
-              - approved
-              - rejected
+              - authorized
               - ported
+              - rejected
+              - rejected-pending
+              - canceled
             type: string
         - $ref: "#/components/parameters/PageNumber"
         - $ref: "#/components/parameters/PageSize"
@@ -6734,7 +6736,7 @@ paths:
     post:
       description: >-
         This API will asynchronously map a random public IP to a SIM card, making it reachable on the public internet. <br/><br/>
-         The request will return the resource as ""provisioning"" right away, and it'll eventually get ""provisioned"", meaning it completed the setup. <br/><br/>
+         The request will return the resource as "provisioning" right away, and it'll eventually get "provisioned", meaning it completed the setup. <br/><br/>
          Setting up a public IP will generate charges, and we won't be able to provide the IP if the account doesn't have a balance. In that case, this operation will succeed, but its status will change to failed eventually, and the resource will be updated with the associated status. The IP resource will need to be deleted and re-created with our DELETE and POST APIs in this scenario.
       operationId: SIMCardPublicIPPost
       parameters:
@@ -9086,7 +9088,6 @@ components:
           * The subsequent requests will contain the current state, that is what's applied to the SIM card settings, and return the related OTA update in the ota_updates node.
 
 
-
           
         The returned OTA updated (present in the ota_updates node) will, by default, be the resource related to the operation, not all of them.
     PhoneNumberResponse:
@@ -9554,7 +9555,7 @@ components:
           example: 891510ac-f3e4-11e8-af5b-de00688a4901
           type: string
         webhook_url:
-          description: Use this field to override the URL for which Telnyx will send subsuqeunt webhooks to for this call.
+          description: Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
           example: https://www.example.com/server-b/
           type: string
         webhook_url_method:
@@ -11396,6 +11397,7 @@ components:
           - name: head_2
             value: val_2
         from: "+18005550101"
+        from_display_name: Company Name
         link_to: ilditnZK_eVysupV21KzmzN_sM29ygfauQojpm4BgFtfX5hXAcjotg==
         sip_auth_password: password
         sip_auth_username: username
@@ -11513,6 +11515,10 @@ components:
           description: The `from` number to be used as the caller id presented to the destination (`to` number). The number should be in +E164 format. This attribute will default to the `from` number of the original call if omitted.
           example: "+18005550101"
           type: string
+        from_display_name:
+          description: The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
+          example: Company Name
+          type: string
         link_to:
           description: Use another call's control id for sharing the same call session id
           example: ilditnZK_eVysupV21KzmzN_sM29ygfauQojpm4BgFtfX5hXAcjotg==
@@ -11540,7 +11546,7 @@ components:
           example: +18005550100 or sip:username@sip.telnyx.com
           type: string
         webhook_url:
-          description: Use this field to override the URL for which Telnyx will send subsuqeunt webhooks to for this call.
+          description: Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
           example: https://www.example.com/server-b/
           type: string
         webhook_url_method:
@@ -14129,6 +14135,7 @@ components:
           type: string
     CreateNumberOrderRequest:
       example:
+        billing_group_id: abc85f64-5717-4562-b3fc-2c9600
         connection_id: "346789098765567"
         created_at: 2018-01-01T00:00:00.000000Z
         customer_reference: MY REF 001
@@ -14152,6 +14159,10 @@ components:
         status: pending
         updated_at: 2018-01-01T00:00:00.000000Z
       properties:
+        billing_group_id:
+          description: Identifies the billing group associated with the phone number.
+          example: abc85f64-5717-4562-b3fc-2c9600
+          type: string
         connection_id:
           description: Identifies the connection associated with this phone number.
           example: "346789098765567"
@@ -15071,6 +15082,7 @@ components:
       example:
         connection_id: c-1
         created_at: 2020-05-05T09:59:12
+        direction: outbound
         from: "+123"
         id: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
         media_url: http://www.example.com/fax.pdf
@@ -15091,6 +15103,13 @@ components:
         created_at:
           description: ISO 8601 timestamp when resource was created
           format: datetime
+          type: string
+        direction:
+          description: The direction of the fax.
+          enum:
+            - inbound
+            - outbound
+          example: outbound
           type: string
         from:
           description: The phone number, in E.164 format, the fax will be sent from.
@@ -15233,10 +15252,13 @@ components:
           id: 95479a2e-b947-470a-a88f-2da6dd07ae0f
           occurred_at: 2020-05-05T13:08:22.039204Z
           payload:
+            call_duration_secs: 25
             connection_id: "234423"
+            direction: outbound
             fax_id: f8338808-3dc6-4f2b-942a-5d1f39255784
             from: "+17733372107"
             original_media_url: http://www.example.com/fax.pdf
+            page_count: 2
             status: delivered
             to: "+15107882622"
             user_id: 19a75cea-02c6-4b9a-84fa-c9bc8341feb8
@@ -15255,23 +15277,38 @@ components:
           type: string
         payload:
           properties:
+            call_duration_secs:
+              description: The duration of the call in seconds.
+              example: 25
+              type: integer
             connection_id:
               description: The ID of the connection that was used to send the fax.
               example: "234423"
+              type: string
+            direction:
+              description: The direction of the fax.
+              enum:
+                - inbound
+                - outbound
+              example: outbound
+              type: string
+            fax_id:
+              description: Identifies the fax.
+              example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+              format: uuid
               type: string
             from:
               description: The phone number, in E.164 format, the fax will be sent from.
               example: "+13125790015"
               type: string
-            id:
-              description: Identifies the fax.
-              example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
-              format: uuid
-              type: string
             original_media_url:
               description: The original URL to the PDF used for the fax's media.
               example: https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
               type: string
+            page_count:
+              description: Number of transferred pages
+              example: 2
+              type: integer
             status:
               description: The status of the fax.
               enum:
@@ -15303,6 +15340,7 @@ components:
           occurred_at: 2020-05-05T13:08:22.039204Z
           payload:
             connection_id: "234423"
+            direction: outbound
             failure_reason: rejected
             fax_id: f8338808-3dc6-4f2b-942a-5d1f39255784
             from: "+17733372107"
@@ -15329,19 +15367,26 @@ components:
               description: The ID of the connection that was used to send the fax.
               example: "234423"
               type: string
+            direction:
+              description: The direction of the fax.
+              enum:
+                - inbound
+                - outbound
+              example: outbound
+              type: string
             failure_reason:
               description: Cause of the sending failure
               enum:
                 - rejected
               type: string
-            from:
-              description: The phone number, in E.164 format, the fax will be sent from.
-              example: "+13125790015"
-              type: string
-            id:
+            fax_id:
               description: Identifies the fax.
               example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
               format: uuid
+              type: string
+            from:
+              description: The phone number, in E.164 format, the fax will be sent from.
+              example: "+13125790015"
               type: string
             original_media_url:
               description: The original URL to the PDF used for the fax's media.
@@ -15378,6 +15423,7 @@ components:
           occurred_at: 2020-05-05T13:08:22.039204Z
           payload:
             connection_id: "234423"
+            direction: outbound
             fax_id: f8338808-3dc6-4f2b-942a-5d1f39255784
             from: "+17733372107"
             original_media_url: http://www.example.com/fax.pdf
@@ -15403,14 +15449,21 @@ components:
               description: The ID of the connection that was used to send the fax.
               example: "234423"
               type: string
-            from:
-              description: The phone number, in E.164 format, the fax will be sent from.
-              example: "+13125790015"
+            direction:
+              description: The direction of the fax.
+              enum:
+                - inbound
+                - outbound
+              example: outbound
               type: string
-            id:
+            fax_id:
               description: Identifies the fax.
               example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
               format: uuid
+              type: string
+            from:
+              description: The phone number, in E.164 format, the fax will be sent from.
+              example: "+13125790015"
               type: string
             original_media_url:
               description: The original URL to the PDF used for the fax's media.
@@ -15447,6 +15500,7 @@ components:
           occurred_at: 2020-05-05T13:08:22.039204Z
           payload:
             connection_id: "234423"
+            direction: outbound
             fax_id: f8338808-3dc6-4f2b-942a-5d1f39255784
             from: "+17733372107"
             original_media_url: http://www.example.com/fax.pdf
@@ -15472,14 +15526,21 @@ components:
               description: The ID of the connection that was used to send the fax.
               example: "234423"
               type: string
-            from:
-              description: The phone number, in E.164 format, the fax will be sent from.
-              example: "+13125790015"
+            direction:
+              description: The direction of the fax.
+              enum:
+                - inbound
+                - outbound
+              example: outbound
               type: string
-            id:
+            fax_id:
               description: Identifies the fax.
               example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
               format: uuid
+              type: string
+            from:
+              description: The phone number, in E.164 format, the fax will be sent from.
+              example: "+13125790015"
               type: string
             original_media_url:
               description: The original URL to the PDF used for the fax's media.
@@ -15516,6 +15577,7 @@ components:
           occurred_at: 2020-05-05T13:08:22.039204Z
           payload:
             connection_id: "234423"
+            direction: outbound
             fax_id: f8338808-3dc6-4f2b-942a-5d1f39255784
             from: "+17733372107"
             original_media_url: http://www.example.com/fax.pdf
@@ -15541,14 +15603,21 @@ components:
               description: The ID of the connection that was used to send the fax.
               example: "234423"
               type: string
-            from:
-              description: The phone number, in E.164 format, the fax will be sent from.
-              example: "+13125790015"
+            direction:
+              description: The direction of the fax.
+              enum:
+                - inbound
+                - outbound
+              example: outbound
               type: string
-            id:
+            fax_id:
               description: Identifies the fax.
               example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
               format: uuid
+              type: string
+            from:
+              description: The phone number, in E.164 format, the fax will be sent from.
+              example: "+13125790015"
               type: string
             original_media_url:
               description: The original URL to the PDF used for the fax's media.
@@ -17442,6 +17511,7 @@ components:
     MessagingHostedNumberOrder:
       example:
         id: 86f58db9-0fe3-4adc-9d1f-46e66e6e9323
+        messaging_profile_id: dc8f39ac-953d-4520-b93b-786ae87db0da
         phone_numbers:
           - id: bf6307bd-884d-4c1f-b6ea-c62b8c495d3c
             phone_number: "+18665550001"
@@ -17451,7 +17521,6 @@ components:
             phone_number: "+18665550002"
             record_type: messaging_hosted_number
             status: pending
-        profile_id: dc8f39ac-953d-4520-b93b-786ae87db0da
         record_type: messaging_hosted_number_order
         status: pending
       properties:
@@ -18122,6 +18191,7 @@ components:
       type: object
     NumberOrder:
       example:
+        billing_group_id: abc85f64-5717-4562-b3fc-2c9600
         connection_id: "346789098765567"
         created_at: 2018-01-01T00:00:00.000000Z
         customer_reference: MY REF 001
@@ -18145,6 +18215,10 @@ components:
         status: pending
         updated_at: 2018-01-01T00:00:00.000000Z
       properties:
+        billing_group_id:
+          description: Identifies the messaging profile associated with the phone number.
+          example: abc85f64-5717-4562-b3fc-2c9600
+          type: string
         connection_id:
           description: Identifies the connection associated with this phone number.
           example: "346789098765567"
@@ -20006,6 +20080,8 @@ components:
             - authorized
             - ported
             - rejected
+            - rejected-pending
+            - canceled
           example: rejected
           type: string
         updated_at:
@@ -20606,14 +20682,7 @@ components:
       title: SIMCardPublicIP
       type: object
     SIMCardPublicIPStatus:
-      description: >-
-        The current status of the SIM card's public IP. <ul>
-         <li><code>provisioning</code> - the IP is being provisioned.</li>
-         <li><code>provisioned</code> - the IP was provisioned and the SIM is reachable on the public internet.</li>
-         <li><code>failed</code> - the provisioning had failed for a reason and it requires an intervention.</li>
-         <li><code>decommissioning</code> - the public IP is being removed from the SIM card.</li>
-         </ul>
-         Transitioning between the provisioning and provisioned states may take some time.
+      description: The current status or failure details of the SIM card's public IP.
       properties:
         error_code:
           default: null
@@ -20629,10 +20698,19 @@ components:
           type: string
         value:
           default: provisioning
+          description: >-
+            The current status of the SIM card's public IP. <ul>
+             <li><code>provisioning</code> - the IP is being provisioned.</li>
+             <li><code>provisioned</code> - the IP was provisioned and the SIM is reachable on the public internet.</li>
+             <li><code>failed</code> - the provisioning had failed for a reason and it requires an intervention.</li>
+             <li><code>decommissioning</code> - the public IP is being removed from the SIM card.</li>
+             </ul>
+             Transitioning between the provisioning and provisioned states may take some time.
           enum:
             - provisioning
             - provisioned
             - failed
+            - decommissioning
           example: provisioned
           readOnly: true
           type: string
@@ -21442,6 +21520,7 @@ components:
           - name: head_2
             value: val_2
         from: "+18005550101"
+        from_display_name: Company Name
         sip_auth_password: password
         sip_auth_username: username
         timeout_limit_secs: 60
@@ -21550,6 +21629,10 @@ components:
           description: The `from` number to be used as the caller id presented to the destination (`to` number). The number should be in +E164 format. This attribute will default to the `from` number of the original call if omitted.
           example: "+18005550101"
           type: string
+        from_display_name:
+          description: The `from_display_name` string to be used as the caller id name (SIP From Display Name) presented to the destination (`to` number). The string should have a maximum of 128 characters, containing only letters, numbers, spaces, and -_~!.+ special characters. If ommited, the display name will be the same as the number in the `from` field.
+          example: Company Name
+          type: string
         sip_auth_password:
           description: SIP Authentication password used for SIP challenges.
           example: password
@@ -21575,7 +21658,7 @@ components:
           example: +18005550100 or sip:username@sip.telnyx.com
           type: string
         webhook_url:
-          description: Use this field to override the URL for which Telnyx will send subsuqeunt webhooks to for this call.
+          description: Use this field to override the URL for which Telnyx will send subsequent webhooks to for this call.
           example: https://www.example.com/server-b/
           type: string
         webhook_url_method:

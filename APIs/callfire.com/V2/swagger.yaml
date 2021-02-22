@@ -4071,7 +4071,12 @@ paths:
         - application/json
       description: Searches for the user account details. Details include name, email, and basic account permissions. For authentication use api credentials.
       operationId: getAccount
-      parameters: []
+      parameters:
+        - description: "Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page."
+          in: query
+          name: fields
+          required: false
+          type: string
       produces:
         - application/json
       responses:

@@ -5880,6 +5880,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Conflict
         "500":
           content:
             application/json:
@@ -5893,6 +5905,244 @@ paths:
                 $ref: "#/components/schemas/ErrorResponseContent"
           description: Server Error
       summary: Create/Update given duty schedule.
+      tags:
+        - Duties
+  "/teams/{teamId}/schedules/deleteRange":
+    post:
+      parameters:
+        - description: Team ID you want to delete
+          in: path
+          name: teamId
+          required: true
+          schema:
+            description: Team ID you want to delete
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/DeleteRangeInfo"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteRangeInfo"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/DeleteRangeInfo"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/DeleteRangeInfo"
+        description: Information with date range to delete from to
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScheduleInfo"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScheduleInfo"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScheduleInfo"
+                type: array
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Conflict
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Server Error
+      summary: Delete duty schedules in range
+      tags:
+        - Duties
+  "/teams/{teamId}/schedules/multiple":
+    post:
+      parameters:
+        - description: Team ID to set
+          in: path
+          name: teamId
+          required: true
+          schema:
+            description: Team ID to set
+            nullable: true
+            type: string
+        - description: Override or cut existing schedules if set to true.
+          in: query
+          name: overrideExisting
+          schema:
+            description: Override or cut existing schedules if set to true.
+            type: boolean
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              description: List of schedules to save
+              items:
+                $ref: "#/components/schemas/ScheduleInfo"
+              nullable: true
+              type: array
+          application/json:
+            schema:
+              description: List of schedules to save
+              items:
+                $ref: "#/components/schemas/ScheduleInfo"
+              nullable: true
+              type: array
+          application/json-patch+json:
+            schema:
+              description: List of schedules to save
+              items:
+                $ref: "#/components/schemas/ScheduleInfo"
+              nullable: true
+              type: array
+          text/json:
+            schema:
+              description: List of schedules to save
+              items:
+                $ref: "#/components/schemas/ScheduleInfo"
+              nullable: true
+              type: array
+        description: List of schedules to save
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScheduleInfo"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScheduleInfo"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScheduleInfo"
+                type: array
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Conflict
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Server Error
+      summary: Save multiple schedules. It is possible to override existing schedules if you wish
       tags:
         - Duties
   "/teams/{teamId}/schedules/{dutyId}":
@@ -6237,6 +6487,85 @@ paths:
       summary: Get User by Id
       tags:
         - Users
+  "/users/{userId}/changePassword":
+    put:
+      parameters:
+        - description: User ID of user whose password should be changed.
+          in: path
+          name: userId
+          required: true
+          schema:
+            description: User ID of user whose password should be changed.
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdatePasswordInfo"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePasswordInfo"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/UpdatePasswordInfo"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePasswordInfo"
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Server Error
+      summary: Updates the password of a user
+      tags:
+        - Users
   "/users/{userId}/checkPermissions":
     post:
       parameters:
@@ -6341,13 +6670,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserInfo"
+                $ref: "#/components/schemas/UserDutyInfo"
             text/json:
               schema:
-                $ref: "#/components/schemas/UserInfo"
+                $ref: "#/components/schemas/UserDutyInfo"
             text/plain:
               schema:
-                $ref: "#/components/schemas/UserInfo"
+                $ref: "#/components/schemas/UserDutyInfo"
           description: Duty successfully loaded.
         "400":
           content:
@@ -6446,6 +6775,163 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponseContent"
           description: Not Found
+      tags:
+        - Users
+    post:
+      parameters:
+        - description: Id of the user.
+          in: path
+          name: userId
+          required: true
+          schema:
+            description: Id of the user.
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+        "204":
+          description: The image was successfully uploaded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: "Either a passed parameter was either empty/null or the request's multipart does not contain a\r
+
+            file."
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: User is not allowed to upoload an image for the specified user.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Either the user was not found or they aren't activated yet.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Internal general error occured.
+      summary: Uploaded a profile image for a specified user.
+      tags:
+        - Users
+  "/users/{userId}/profile":
+    put:
+      parameters:
+        - description: ID of user to update.
+          in: path
+          name: userId
+          required: true
+          schema:
+            description: ID of user to update.
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UserProfile"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserProfile"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/UserProfile"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UserProfile"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInfo"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/UserInfo"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/UserInfo"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Forbidden
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseContent"
+          description: Server Error
+      summary: Updates user profile of an user
       tags:
         - Users
   "/users/{userId}/punchIn":
@@ -7769,6 +8255,16 @@ components:
           nullable: true
           type: string
       type: object
+    DeleteRangeInfo:
+      additionalProperties: false
+      properties:
+        from:
+          format: date-time
+          type: string
+        to:
+          format: date-time
+          type: string
+      type: object
     Device:
       additionalProperties: false
       properties:
@@ -8502,6 +8998,16 @@ components:
           format: date-time
           type: string
       type: object
+    UpdatePasswordInfo:
+      additionalProperties: false
+      properties:
+        currentPassword:
+          nullable: true
+          type: string
+        newPassword:
+          nullable: true
+          type: string
+      type: object
     UserDeliveryStatusInfo:
       additionalProperties: false
       properties:
@@ -8663,6 +9169,13 @@ components:
           nullable: true
           type: string
         teamId:
+          nullable: true
+          type: string
+      type: object
+    UserProfile:
+      additionalProperties: false
+      properties:
+        name:
           nullable: true
           type: string
       type: object

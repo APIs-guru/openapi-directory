@@ -2031,10 +2031,15 @@ components:
         archived_at:
           format: date-time
           readOnly: true
+          title: Archived
+          type: string
+        availability_message:
+          readOnly: true
+          title: Availability Message
           type: string
         availability_status:
           example: The availability status of source
-          title: AvailabilityStatus
+          title: Availability Status
           type: string
         bytes_received:
           type: integer
@@ -2043,6 +2048,7 @@ components:
         created_at:
           format: date-time
           readOnly: true
+          title: Created
           type: string
         enabled:
           default: false
@@ -2059,42 +2065,57 @@ components:
         last_available_at:
           format: date-time
           readOnly: true
+          title: Last available
           type: string
         last_checked_at:
           format: date-time
           readOnly: true
+          title: Last checked
           type: string
         last_refresh_message:
           readOnly: true
-          title: LastRefreshMessage
+          title: Last refresh message
           type: string
         last_successful_refresh_at:
           format: date-time
           readOnly: true
+          title: Last successful refresh
           type: string
         mqtt_client_id:
-          example: The GUID of MQTT client being used
+          example: The GUID of the RedHat connect client being used
           readOnly: true
-          title: MqttClientId
+          title: RedHat Connect Client Id
           type: string
         name:
           example: The Source Name
           readOnly: true
           title: Name
           type: string
+        previous_sha:
+          readOnly: true
+          title: SHA of previous uploaded files
+          type: string
+        previous_size:
+          readOnly: true
+          title: Size of previous uploaded files
+          type: integer
         refresh_finished_at:
           format: date-time
           readOnly: true
+          title: Refresh finished
           type: string
         refresh_started_at:
           format: date-time
           readOnly: true
+          title: Refresh started
           type: string
         refresh_state:
+          title: Refresh state
           type: string
         refresh_task_id:
           format: uuid
           readOnly: true
+          title: Refresh task
           type: string
         uid:
           readOnly: true
@@ -2103,6 +2124,7 @@ components:
         updated_at:
           format: date-time
           readOnly: true
+          title: Updated
           type: string
       type: object
     SourcesCollection:
@@ -2144,6 +2166,10 @@ components:
         completed_at:
           format: date-time
           type: string
+        controller_message_id:
+          format: uuid
+          readOnly: true
+          type: string
         created_at:
           format: date-time
           readOnly: true
@@ -2170,11 +2196,22 @@ components:
         source_id:
           $ref: "#/components/schemas/ID"
         state:
-          example: Running
+          enum:
+            - pending
+            - queued
+            - running
+            - timedout
+            - completed
+          example: running
           title: State
           type: string
         status:
-          example: Error
+          enum:
+            - ok
+            - warn
+            - unchanged
+            - error
+          example: error
           title: Status
           type: string
         target_source_ref:

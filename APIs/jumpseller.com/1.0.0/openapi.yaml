@@ -2958,7 +2958,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/ShippingMethodCreate"
+            $ref: "#/definitions/ShippingMethodEdit"
       responses:
         "200":
           description: OK
@@ -3031,7 +3031,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/ShippingMethodCreate"
+            $ref: "#/definitions/ShippingMethodEdit"
       responses:
         "200":
           description: OK
@@ -4696,26 +4696,32 @@ definitions:
       shipping_method:
         $ref: "#/definitions/ShippingMethodFields"
     type: object
-  ShippingMethodCreate:
+  ShippingMethodEdit:
     properties:
-      callback_url:
-        description: URL that receives the shipping data and returns rates
-        type: string
-      city:
-        description: City/Municipality name of origin
-        type: string
-      fetch_services_url:
-        description: URL that returns available shipping services
-        type: string
-      name:
-        description: Name of the Shipping Method
-        type: string
-      postal:
-        description: Postal/Zipcode of origin
-        type: string
-      state:
-        description: State/Region code of origin
-        type: string
+      shipping_method:
+        properties:
+          callback_url:
+            description: URL that receives the shipping data and returns rates
+            type: string
+          city:
+            description: City/Municipality name of origin
+            type: string
+          fetch_services_url:
+            description: URL that returns available shipping services
+            type: string
+          name:
+            description: Name of the Shipping Method
+            type: string
+          postal:
+            description: Postal/Zipcode of origin
+            type: string
+          state:
+            description: State/Region code of origin
+            type: string
+          token:
+            description: Token used to authentica on the the fetch_services_url
+            type: string
+        type: object
     type: object
   ShippingMethodFields:
     properties:

@@ -305,8 +305,8 @@ paths:
           name: show_transcript
           required: false
           schema:
-            default: "0"
-            example: "1"
+            default: 0
+            example: 1
             type: integer
           style: form
       responses:
@@ -1236,6 +1236,7 @@ paths:
           name: region
           required: false
           schema:
+            example: ""
             type: string
           style: form
         - description: >
@@ -1582,6 +1583,8 @@ components:
           $ref: "#/components/schemas/CuratedSourceUrlField"
         title:
           $ref: "#/components/schemas/CuratedNameField"
+        total:
+          $ref: "#/components/schemas/CuratedTotalPodcastsField"
       type: object
     CuratedListSearchResult:
       description: When **type** is *curated*.
@@ -1618,6 +1621,8 @@ components:
           description: Plain text of this curated list's title
           example: What are some good Star Wars Podcast to listen to?
           type: string
+        total:
+          $ref: "#/components/schemas/CuratedTotalPodcastsField"
       type: object
     CuratedListSimple:
       properties:
@@ -1640,6 +1645,8 @@ components:
           $ref: "#/components/schemas/CuratedSourceUrlField"
         title:
           $ref: "#/components/schemas/CuratedNameField"
+        total:
+          $ref: "#/components/schemas/CuratedTotalPodcastsField"
       type: object
     CuratedNameField:
       description: Curated list name.
@@ -1657,6 +1664,10 @@ components:
       description: Url of the source of this curated list.
       example: https://parade.com/718913/ashley_johnson/7-bookish-podcasts-for-avid-readers-on-the-go/
       type: string
+    CuratedTotalPodcastsField:
+      description: The total number of podcasts in this curated list.
+      example: 25
+      type: integer
     CustomAudio:
       description: A custom audio in a playlist, which is a type of playlist item.
       properties:

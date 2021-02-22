@@ -571,9 +571,6 @@ paths:
   "/app/installations/{installation_id}/suspended":
     delete:
       description: >-
-        **Note:** Suspending a GitHub App installation is currently in beta and subject to change. Before you can suspend a GitHub App, the app owner must enable suspending installations for the app by opting-in to the beta. For more information, see "[Suspending a GitHub App installation](https://docs.github.com/apps/managing-github-apps/suspending-a-github-app-installation/)."
-
-
         Removes a GitHub App installation suspension.
 
 
@@ -600,9 +597,6 @@ paths:
         subcategory: null
     put:
       description: >-
-        **Note:** Suspending a GitHub App installation is currently in beta and subject to change. Before you can suspend a GitHub App, the app owner must enable suspending installations for the app by opting-in to the beta. For more information, see "[Suspending a GitHub App installation](https://docs.github.com/apps/managing-github-apps/suspending-a-github-app-installation/)."
-
-
         Suspends a GitHub App on a user, organization, or business account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account.
 
 
@@ -8530,6 +8524,279 @@ paths:
         githubCloudOnly: false
         previews: []
         subcategory: outside-collaborators
+  "/orgs/{org}/packages/{package_type}/{package_name}":
+    delete:
+      description: >-
+        Deletes an entire package in an organization. You cannot delete a public package if any version of the package has more than 25 downloads. In this scenario, contact GitHub support for further assistance.
+
+
+        To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` scope. In addition:
+
+        - If `package_type` is not `container`, your token must also include the `repo` scope.
+
+        - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#delete-a-package-for-an-organization
+      operationId: packages/delete-package-for-org
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/org"
+      responses:
+        "204":
+          description: Empty response
+        "401":
+          $ref: "#/components/responses/requires_authentication"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: Delete a package for an organization
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+    get:
+      description: >-
+        Gets a specific package in an organization.
+
+
+        To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+
+        If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#get-a-package-for-an-organization
+      operationId: packages/get-package-for-organization
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/org"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/package-org"
+              schema:
+                $ref: "#/components/schemas/package"
+          description: response
+      summary: Get a package for an organization
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/orgs/{org}/packages/{package_type}/{package_name}/restore":
+    post:
+      description: >-
+        Restores an entire package in an organization.
+
+
+        You can restore a deleted package under the following conditions:
+          - The package was deleted within the last 30 days.
+          - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
+
+        To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:write` scope. In addition:
+
+        - If `package_type` is not `container`, your token must also include the `repo` scope.
+
+        - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#restore-a-package-for-an-organization
+      operationId: packages/restore-package-for-org
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/org"
+      responses:
+        "204":
+          description: Empty response
+        "401":
+          $ref: "#/components/responses/requires_authentication"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: Restore a package for an organization
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/orgs/{org}/packages/{package_type}/{package_name}/versions":
+    get:
+      description: >-
+        Returns all package versions for a package owned by an organization.
+
+
+        To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+
+        If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user
+      operationId: packages/get-all-package-versions-for-a-package-owned-by-an-org
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/org"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/package-versions-for-org"
+              schema:
+                items:
+                  $ref: "#/components/schemas/package-version"
+                type: array
+          description: response
+        "401":
+          $ref: "#/components/responses/requires_authentication"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: Get all package versions for a package owned by an organization
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}":
+    delete:
+      description: >-
+        Deletes a specific package version in an organization. If the package is public and the package version has more than 25 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
+
+
+        To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` scope. In addition:
+
+        - If `package_type` is not `container`, your token must also include the `repo` scope.
+
+        - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#delete-a-package-version-for-an-organization
+      operationId: packages/delete-package-version-for-org
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/org"
+        - $ref: "#/components/parameters/package_version_id"
+      responses:
+        "204":
+          description: Empty response
+        "401":
+          $ref: "#/components/responses/requires_authentication"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: Delete package version for an organization
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+    get:
+      description: >-
+        Gets a specific package version in an organization.
+
+
+        You must authenticate using an access token with the `packages:read` scope.
+
+        If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#get-a-package-version-for-an-organization
+      operationId: packages/get-package-version-for-organization
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/org"
+        - $ref: "#/components/parameters/package_version_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/package-version-org"
+              schema:
+                $ref: "#/components/schemas/package-version"
+          description: response
+      summary: Get a package version for an organization
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}/restore":
+    post:
+      description: >-
+        Restores a specific package version in an organization.
+
+
+        You can restore a deleted package under the following conditions:
+          - The package was deleted within the last 30 days.
+          - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
+
+        To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:write` scope. In addition:
+
+        - If `package_type` is not `container`, your token must also include the `repo` scope.
+
+        - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#restore-a-package-version-for-an-organization
+      operationId: packages/restore-package-version-for-org
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/org"
+        - $ref: "#/components/parameters/package_version_id"
+      responses:
+        "204":
+          description: Empty response
+        "401":
+          $ref: "#/components/responses/requires_authentication"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: Restore package version for an organization
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
   "/orgs/{org}/projects":
     get:
       description: Lists the projects in an organization. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
@@ -9390,6 +9657,7 @@ paths:
                   type: string
                 parent_team_id:
                   description: The ID of a team to set as the parent team.
+                  nullable: true
                   type: integer
                 permission:
                   default: pull
@@ -9423,8 +9691,6 @@ paths:
                     - secret
                     - closed
                   type: string
-              required:
-                - name
               type: object
       responses:
         "201":
@@ -10756,6 +11022,7 @@ paths:
         content:
           application/json:
             schema:
+              nullable: true
               properties:
                 permission:
                   description: >-
@@ -16144,17 +16411,18 @@ paths:
                   type: string
                 conclusion:
                   description: >-
-                    **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
+                    **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  
 
-                    **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.
+                    **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
                   enum:
-                    - success
+                    - action_required
+                    - cancelled
                     - failure
                     - neutral
-                    - cancelled
+                    - success
                     - skipped
+                    - stale
                     - timed_out
-                    - action_required
                   type: string
                 details_url:
                   description: The URL of the integrator's site that has the full details of the check. If the integrator does not provide this, then the homepage of the GitHub app is used.
@@ -16407,17 +16675,18 @@ paths:
                   type: string
                 conclusion:
                   description: >-
-                    **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`.  
+                    **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `action_required`, `cancelled`, `failure`, `neutral`, `success`, `skipped`, `stale`, or `timed_out`.  
 
-                    **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.
+                    **Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. You cannot change a check run conclusion to `stale`, only GitHub can set this.
                   enum:
-                    - success
+                    - action_required
+                    - cancelled
                     - failure
                     - neutral
-                    - cancelled
+                    - success
                     - skipped
+                    - stale
                     - timed_out
-                    - action_required
                   type: string
                 details_url:
                   description: The URL of the integrator's site that has the full details of the check.
@@ -16799,42 +17068,57 @@ paths:
         subcategory: suites
   "/repos/{owner}/{repo}/code-scanning/alerts":
     get:
-      description: Lists all open code scanning alerts for the default branch (usually `main` or `master`). You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
+      description: >-
+        Lists all open code scanning alerts for the default branch (usually `main`
+
+        or `master`). You must use an access token with the `security_events` scope to use
+
+        this endpoint. GitHub Apps must have the `security_events` read permission to use
+
+        this endpoint.
+
+
+        The response includes a `most_recent_instance` object.
+
+        This provides details of the most recent instance of this alert
+
+        for the the default branch or for the specified Git reference
+
+        (if you used `ref` in the request).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/code-scanning/#list-code-scanning-alerts-for-a-repository
+        url: https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-a-repository
       operationId: code-scanning/list-alerts-for-repo
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
+        - $ref: "#/components/parameters/tool_name"
+        - $ref: "#/components/parameters/tool_guid"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/git_ref"
         - description: Set to `open`, `fixed`, or `dismissed` to list code scanning alerts in a specific state.
           in: query
           name: state
           required: false
           schema:
             $ref: "#/components/schemas/code-scanning-alert-state"
-        - description: Set a full Git reference to list alerts for a specific branch. The `ref` must be formatted as `refs/heads/<branch name>`.
-          in: query
-          name: ref
-          required: false
-          schema:
-            $ref: "#/components/schemas/code-scanning-alert-ref"
       responses:
         "200":
           content:
             application/json:
               examples:
                 default:
-                  $ref: "#/components/examples/code-scanning-alert-code-scanning-alert-items"
+                  $ref: "#/components/examples/code-scanning-alert-items"
               schema:
                 items:
-                  $ref: "#/components/schemas/code-scanning-alert-code-scanning-alert-items"
+                  $ref: "#/components/schemas/code-scanning-alert-items"
                 type: array
           description: response
         "403":
-          description: Response if github advanced security is not enabled for this repository
+          $ref: "#/components/responses/code_scanning_forbidden_read"
         "404":
-          description: Response if the ref does not match an existing ref
+          $ref: "#/components/responses/not_found"
         "503":
           $ref: "#/components/responses/service_unavailable"
       summary: List code scanning alerts for a repository
@@ -16852,31 +17136,29 @@ paths:
         Gets a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
 
 
-        The security `alert_number` is found at the end of the security alert's URL. For example, the security alert ID for `https://github.com/Octo-org/octo-repo/security/code-scanning/88` is `88`.
+        **Deprecation notice**:
+
+        The instances field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The same information can now be retrieved via a GET request to the URL specified by `instances_url`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/code-scanning/#get-a-code-scanning-alert
+        url: https://docs.github.com/rest/reference/code-scanning#get-a-code-scanning-alert
       operationId: code-scanning/get-alert
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - in: path
-          name: alert_number
-          required: true
-          schema:
-            type: integer
+        - $ref: "#/components/parameters/alert_number"
       responses:
         "200":
           content:
             application/json:
               examples:
                 default:
-                  $ref: "#/components/examples/code-scanning-alert-code-scanning-alert"
+                  $ref: "#/components/examples/code-scanning-alert"
               schema:
-                $ref: "#/components/schemas/code-scanning-alert-code-scanning-alert"
+                $ref: "#/components/schemas/code-scanning-alert"
           description: response
         "403":
-          description: Response if github advanced security is not enabled for this repository
+          $ref: "#/components/responses/code_scanning_forbidden_read"
         "404":
           $ref: "#/components/responses/not_found"
         "503":
@@ -16894,7 +17176,7 @@ paths:
       description: Updates the status of a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/code-scanning/#upload-a-code-scanning-alert
+        url: https://docs.github.com/rest/reference/code-scanning#update-a-code-scanning-alert
       operationId: code-scanning/update-alert
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -16921,14 +17203,16 @@ paths:
             application/json:
               examples:
                 default:
-                  $ref: "#/components/examples/code-scanning-alert-code-scanning-alert-dismissed"
+                  $ref: "#/components/examples/code-scanning-alert-dismissed"
               schema:
-                $ref: "#/components/schemas/code-scanning-alert-code-scanning-alert"
+                $ref: "#/components/schemas/code-scanning-alert"
           description: response
         "403":
-          description: Response if the repository is archived, or if github advanced security is not enabled for this repository
+          $ref: "#/components/responses/code_scanning_forbidden_write"
+        "404":
+          $ref: "#/components/responses/not_found"
         "503":
-          description: Response when code scanning is not available and you should try again at a later time
+          $ref: "#/components/responses/service_unavailable"
       summary: Update a code scanning alert
       tags:
         - code-scanning
@@ -16937,43 +17221,357 @@ paths:
         enabledForGitHubApps: true
         githubCloudOnly: false
         previews: []
-  "/repos/{owner}/{repo}/code-scanning/analyses":
+  "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances":
     get:
-      description: List the details of recent code scanning analyses for a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
+      description: Lists all instances of the specified code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/code-scanning/#list-recent-analyses
-      operationId: code-scanning/list-recent-analyses
+        url: https://docs.github.com/rest/reference/code-scanning#list-instances-of-a-code-scanning-alert
+      operationId: code-scanning/list-alerts-instances
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: Set a full Git reference to list alerts for a specific branch. The `ref` must be formatted as `refs/heads/<branch name>`.
-          in: query
-          name: ref
-          required: false
-          schema:
-            $ref: "#/components/schemas/code-scanning-analysis-ref"
-        - description: Set a single code scanning tool name to filter alerts by tool.
-          in: query
-          name: tool_name
-          required: false
-          schema:
-            $ref: "#/components/schemas/code-scanning-analysis-tool-name"
+        - $ref: "#/components/parameters/alert_number"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/git_ref"
       responses:
         "200":
           content:
             application/json:
               examples:
                 default:
-                  $ref: "#/components/examples/code-scanning-analysis-code-scanning-analysis-items"
+                  $ref: "#/components/examples/code-scanning-alert-instances"
               schema:
                 items:
-                  $ref: "#/components/schemas/code-scanning-analysis-code-scanning-analysis"
+                  $ref: "#/components/schemas/code-scanning-alert-instance"
                 type: array
           description: response
         "403":
-          description: Response if github advanced security is not enabled for this repository
-      summary: List recent code scanning analyses for a repository
+          $ref: "#/components/responses/code_scanning_forbidden_read"
+        "404":
+          $ref: "#/components/responses/not_found"
+        "503":
+          $ref: "#/components/responses/service_unavailable"
+      summary: List instances of a code scanning alert
+      tags:
+        - code-scanning
+      x-github:
+        category: code-scanning
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/repos/{owner}/{repo}/code-scanning/analyses":
+    get:
+      description: >-
+        Lists the details of all code scanning analyses for a repository,
+
+        starting with the most recent.
+
+        The response is paginated and you can use the `page` and `per_page` parameters
+
+        to list the analyses you're interested in.
+
+        By default 30 analyses are listed per page.
+
+
+        The `rules_count` field in the response give the number of rules
+
+        that were run in the analysis.
+
+        For very old analyses this data is not available,
+
+        and `0` is returned in this field.
+
+
+        You must use an access token with the `security_events` scope to use this endpoint.
+
+        GitHub Apps must have the `security_events` read permission to use this endpoint.
+
+
+        **Deprecation notice**:
+
+        The `tool_name` field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The tool name can now be found inside the `tool` field.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/code-scanning#list-code-scanning-analyses-for-a-repository
+      operationId: code-scanning/list-recent-analyses
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - $ref: "#/components/parameters/tool_name"
+        - $ref: "#/components/parameters/tool_guid"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - description: The Git reference for the analyses you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
+          in: query
+          name: ref
+          required: false
+          schema:
+            $ref: "#/components/schemas/code-scanning-ref"
+        - description: Filter analyses belonging to the same SARIF upload.
+          in: query
+          name: sarif_id
+          required: false
+          schema:
+            $ref: "#/components/schemas/code-scanning-analysis-sarif-id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/code-scanning-analysis-items"
+              schema:
+                items:
+                  $ref: "#/components/schemas/code-scanning-analysis"
+                type: array
+          description: response
+        "403":
+          $ref: "#/components/responses/code_scanning_forbidden_read"
+        "404":
+          $ref: "#/components/responses/not_found"
+        "503":
+          $ref: "#/components/responses/service_unavailable"
+      summary: List code scanning analyses for a repository
+      tags:
+        - code-scanning
+      x-github:
+        category: code-scanning
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+  "/repos/{owner}/{repo}/code-scanning/analyses/{analysis_id}":
+    delete:
+      description: >-
+        Deletes a specified code scanning analysis from a repository. For
+
+        private repositories, you must use an access token with the `repo` scope. For public repositories,
+
+        you must use an access token with `public_repo` and `repo:security_events` scopes.
+
+        GitHub Apps must have the `security_events` write permission to use this endpoint.
+
+
+        You can delete one analysis at a time.
+
+        To delete a series of analyses, start with the most recent analysis and work backwards.
+
+        Conceptually, the process is similar to the undo function in a text editor.
+
+
+        When you list the analyses for a repository,
+
+        one or more will be identified as deletable in the response:
+
+
+        ```
+
+        "deletable": true
+
+        ```
+
+
+        An analysis is deletable when it's the most recent in a set of analyses.
+
+        Typically, a repository will have multiple sets of analyses
+
+        for each enabled code scanning tool,
+
+        where a set is determined by a unique combination of analysis values:
+
+
+        * `ref`
+
+        * `tool`
+
+        * `analysis_key`
+
+        * `environment`
+
+
+        If you attempt to delete an analysis that is not the most recent in a set,
+
+        you'll get a 400 response with the message:
+
+
+        ```
+
+        Analysis specified is not deletable.
+
+        ```
+
+
+        The response from a successful `DELETE` operation provides you with
+
+        two alternative URLs for deleting the next analysis in the set
+
+        (see the example default response below).
+
+        Use the `next_analysis_url` URL if you want to avoid accidentally deleting the final analysis
+
+        in the set. This is a useful option if you want to preserve at least one analysis
+
+        for the specified tool in your repository.
+
+        Use the `confirm_delete_url` URL if you are content to remove all analyses for a tool.
+
+        When you delete the last analysis in a set the value of `next_analysis_url` and `confirm_delete_url`
+
+        in the 200 response is `null`.
+
+
+        As an example of the deletion process,
+
+        let's imagine that you added a workflow that configured a particular code scanning tool
+
+        to analyze the code in a repository. This tool has added 15 analyses:
+
+        10 on the default branch, and another 5 on a topic branch.
+
+        You therefore have two separate sets of analyses for this tool.
+
+        You've now decided that you want to remove all of the analyses for the tool.
+
+        To do this you must make 15 separate deletion requests.
+
+        To start, you must find the deletable analysis for one of the sets,
+
+        step through deleting the analyses in that set,
+
+        and then repeat the process for the second set.
+
+        The procedure therefore consists of a nested loop:
+
+
+        **Outer loop**:
+
+        * List the analyses for the repository, filtered by tool.
+
+        * Parse this list to find a deletable analysis. If found:
+
+          **Inner loop**:
+          * Delete the identified analysis.
+          * Parse the response for the value of `next_analysis_url` and, if found, use this in the next iteration.
+
+        The above process assumes that you want to remove all trace of the tool's analyses from the GitHub user interface, for the specified repository, and it therefore uses the `next_analysis_url` value. Alternatively, you could use the `confirm_delete_url` value, which would leave the last analysis in each set undeleted to avoid removing a tool's analysis entirely.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/code-scanning#delete-a-code-scanning-analysis-from-a-repository
+      operationId: code-scanning/delete-analysis
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - description: The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses` operation.
+          in: path
+          name: analysis_id
+          required: true
+          schema:
+            type: integer
+        - description: "Allow deletion if the specified analysis is the last in a set. The parameter can be used without a value as the parameter value is not considered. If you attempt to delete the final analysis in a set without using this parameter you'll get a 400 response with the message: `Analysis is last of its type and deletion may result in the loss of historical alert data. Please specify confirm_delete.`"
+          in: query
+          name: confirm_delete
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default-response:
+                  $ref: "#/components/examples/code-scanning-analysis-deletion"
+              schema:
+                $ref: "#/components/schemas/code-scanning-analysis-deletion"
+          description: response
+        "400":
+          $ref: "#/components/responses/bad_request"
+        "403":
+          $ref: "#/components/responses/code_scanning_forbidden_write"
+        "404":
+          $ref: "#/components/responses/not_found"
+        "503":
+          $ref: "#/components/responses/service_unavailable"
+      summary: Delete a code scanning analysis from a repository
+      tags:
+        - code-scanning
+      x-github:
+        category: code-scanning
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+    get:
+      description: >-
+        Gets a specified code scanning analysis for a repository.
+
+        You must use an access token with the `security_events` scope to use this endpoint.
+
+        GitHub Apps must have the `security_events` read permission to use this endpoint.
+
+
+        The default JSON response contains fields that describe the analysis.
+
+        This includes the Git reference and commit SHA to which the analysis relates,
+
+        the datetime of the analysis, the name of the code scanning tool,
+
+        and the number of alerts.
+
+
+        The `rules_count` field in the default response give the number of rules
+
+        that were run in the analysis.
+
+        For very old analyses this data is not available,
+
+        and `0` is returned in this field.
+
+
+        If you use the Accept header `application/sarif+json`,
+
+        the response contains the analysis data that was uploaded.
+
+        This is formatted as
+
+        [SARIF version 2.1.0](https://docs.oasis-open.org/sarif/sarif/v2.1.0/cs01/sarif-v2.1.0-cs01.html).
+
+        For an example response, see "[Custom media type for code scanning](#custom-media-type-for-code-scanning)."
+
+
+        **Deprecation notice**:
+
+        The `tool_name` field is deprecated and will, in future, not be included in the response for this endpoint. The example response reflects this change. The tool name can now be found inside the `tool` field.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/code-scanning#get-a-code-scanning-analysis-for-a-repository
+      operationId: code-scanning/get-analysis
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - description: The ID of the analysis, as returned from the `GET /repos/{owner}/{repo}/code-scanning/analyses` operation.
+          in: path
+          name: analysis_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  $ref: "#/components/examples/code-scanning-analysis-default"
+              schema:
+                $ref: "#/components/schemas/code-scanning-analysis"
+          description: response
+        "403":
+          $ref: "#/components/responses/code_scanning_forbidden_read"
+        "404":
+          $ref: "#/components/responses/not_found"
+        "503":
+          $ref: "#/components/responses/service_unavailable"
+      summary: Get a code scanning analysis for a repository
       tags:
         - code-scanning
       x-github:
@@ -16983,10 +17581,31 @@ paths:
         previews: []
   "/repos/{owner}/{repo}/code-scanning/sarifs":
     post:
-      description: Upload a SARIF file containing the results of a code scanning analysis to make the results available in a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
+      description: >-
+        Uploads SARIF data containing the results of a code scanning analysis to make the results available in a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
+
+
+        You must compress the SARIF-formatted analysis data that you want to upload, using `gzip`, and then encode it as a Base64 format string. For example:
+
+
+        ```
+
+        gzip -c analysis-data.sarif | base64
+
+        ```
+
+
+        SARIF upload supports a maximum of 1000 results per analysis run. Any results over this limit are ignored. Typically, but not necessarily, a SARIF file contains a single run of a single tool. If a code scanning tool generates too many results, you should update the analysis configuration to run only the most important rules or queries.
+
+
+        The `202 Accepted`, response includes an `id` value.
+
+        You can use this ID to check the status of the upload by using this for the `/sarifs/{sarif_id}` endpoint.
+
+        For more information, see "[Get information about a SARIF upload](/rest/reference/code-scanning#get-information-about-a-sarif-upload)."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/code-scanning/#upload-a-sarif-analysis
+        url: https://docs.github.com/rest/reference/code-scanning#upload-an-analysis-as-sarif-data
       operationId: code-scanning/upload-sarif
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -16994,11 +17613,6 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              commit_sha: 9a450a043b9038ba86722926570d2312cff6aba8
-              ref: refs/heads/main
-              sarif: REPLACE_ME
-              tool_name: codeql
             schema:
               properties:
                 checkout_uri:
@@ -17012,7 +17626,7 @@ paths:
                 commit_sha:
                   $ref: "#/components/schemas/code-scanning-analysis-commit-sha"
                 ref:
-                  $ref: "#/components/schemas/code-scanning-analysis-ref"
+                  $ref: "#/components/schemas/code-scanning-ref"
                 sarif:
                   $ref: "#/components/schemas/code-scanning-analysis-sarif-file"
                 started_at:
@@ -17020,25 +17634,74 @@ paths:
                   format: date
                   type: string
                 tool_name:
-                  $ref: "#/components/schemas/code-scanning-analysis-tool-name"
+                  description: The name of the tool used to generate the code scanning analysis. If this parameter is not used, the tool name defaults to "API". If the uploaded SARIF contains a tool GUID, this will be available for filtering using the `tool_guid` parameter of operations such as `GET /repos/{owner}/{repo}/code-scanning/alerts`.
+                  type: string
               required:
                 - commit_sha
                 - ref
                 - sarif
-                - tool_name
               type: object
       responses:
         "202":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/code-scanning-sarif-upload"
+              schema:
+                $ref: "#/components/schemas/code-scanning-sarifs-receipt"
           description: response
         "400":
-          description: Response if the `sarif` field is invalid
+          description: Response if the sarif field is invalid
         "403":
-          description: Response if the repository is archived, or if github advanced security is not enabled for this repository
+          $ref: "#/components/responses/code_scanning_forbidden_write"
         "404":
-          description: Response if `commit_sha` or `ref` cannot be found
+          $ref: "#/components/responses/not_found"
         "413":
-          description: Response if the `sarif` field is too large
-      summary: Upload a SARIF file
+          description: Response if the sarif field is too large
+        "503":
+          $ref: "#/components/responses/service_unavailable"
+      summary: Upload an analysis as SARIF data
+      tags:
+        - code-scanning
+      x-github:
+        category: code-scanning
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+  "/repos/{owner}/{repo}/code-scanning/sarifs/{sarif_id}":
+    get:
+      description: Gets information about a SARIF upload, including the status and the URL of the analysis that was uploaded so that you can retrieve details of the analysis. For more information, see "[Get a code scanning analysis for a repository](/rest/reference/code-scanning#get-a-code-scanning-analysis-for-a-repository)." You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/code-scanning#get-information-about-a-sarif-upload
+      operationId: code-scanning/get-sarif
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - description: The SARIF ID obtained after uploading.
+          in: path
+          name: sarif_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/code-scanning-sarif-upload-status"
+              schema:
+                $ref: "#/components/schemas/code-scanning-sarifs-status"
+          description: response
+        "403":
+          $ref: "#/components/responses/code_scanning_forbidden_read"
+        "404":
+          description: Response if the sarif id does not match any upload
+        "503":
+          $ref: "#/components/responses/service_unavailable"
+      summary: Get information about a SARIF upload
       tags:
         - code-scanning
       x-github:
@@ -22578,6 +23241,7 @@ paths:
                   type: array
                 body:
                   description: The contents of the issue.
+                  nullable: true
                   type: string
                 labels:
                   description: "Labels to associate with this issue. Pass one or more Labels to _replace_ the set of Labels on this Issue. Send an empty array (`[]`) to clear all Labels from the Issue. _NOTE: Only users with push access can set labels for issues. Labels are silently dropped otherwise._"
@@ -22611,6 +23275,7 @@ paths:
                   type: string
                 title:
                   description: The title of the issue.
+                  nullable: true
                   oneOf:
                     - type: string
                     - type: integer
@@ -25714,7 +26379,6 @@ paths:
                   type: string
               required:
                 - body
-                - path
               type: object
       responses:
         "201":
@@ -26058,6 +26722,8 @@ paths:
                   items:
                     type: string
                   type: array
+              required:
+                - reviewers
               type: object
       responses:
         "200":
@@ -26128,6 +26794,11 @@ paths:
               team_reviewers:
                 - justice-league
             schema:
+              anyOf:
+                - required:
+                    - reviewers
+                - required:
+                    - team_reviewers
               properties:
                 reviewers:
                   description: An array of user `login`s that will be requested.
@@ -34191,6 +34862,260 @@ paths:
         githubCloudOnly: false
         previews: []
         subcategory: null
+  "/user/packages/{package_type}/{package_name}":
+    delete:
+      description: >-
+        Deletes a package owned by the authenticated user. You cannot delete a public package if any version of the package has more than 25 downloads. In this scenario, contact GitHub support for further assistance.
+
+
+        To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:delete` scope.
+
+        If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#delete-a-package-for-the-authenticated-user
+      operationId: packages/delete-package-for-authenticated-user
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+      responses:
+        "204":
+          description: Empty response
+        "401":
+          $ref: "#/components/responses/requires_authentication"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: Delete a package for the authenticated user
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+    get:
+      description: >-
+        Gets a specific package for a package owned by the authenticated user.
+
+
+        To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+
+        If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#get-a-package-for-the-authenticated-user
+      operationId: packages/get-package-for-authenticated-user
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/package-user"
+              schema:
+                $ref: "#/components/schemas/package"
+          description: response
+      summary: Get a package for the authenticated user
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/user/packages/{package_type}/{package_name}/restore":
+    post:
+      description: >-
+        Restores a package owned by the authenticated user.
+
+
+        You can restore a deleted package under the following conditions:
+          - The package was deleted within the last 30 days.
+          - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
+
+        To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:write` scope. If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#restore-a-package-for-the-authenticated-user
+      operationId: packages/restore-package-for-authenticated-user
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+      responses:
+        "204":
+          description: Empty response
+        "401":
+          $ref: "#/components/responses/requires_authentication"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: Restore a package for the authenticated user
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/user/packages/{package_type}/{package_name}/versions":
+    get:
+      description: >-
+        Returns all package versions for a package owned by the authenticated user.
+
+
+        To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+
+        If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user
+      operationId: packages/get-all-package-versions-for-a-package-owned-by-the-authenticated-user
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/package-versions-for-authenticated-user"
+              schema:
+                items:
+                  $ref: "#/components/schemas/package-version"
+                type: array
+          description: response
+        "401":
+          $ref: "#/components/responses/requires_authentication"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: Get all package versions for a package owned by the authenticated user
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/user/packages/{package_type}/{package_name}/versions/{package_version_id}":
+    delete:
+      description: >-
+        Deletes a specific package version for a package owned by the authenticated user.  If the package is public and the package version has more than 25 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
+
+
+        To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` scope.
+
+        If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#delete-a-package-version-for-the-authenticated-user
+      operationId: packages/delete-package-version-for-authenticated-user
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/package_version_id"
+      responses:
+        "204":
+          description: Empty response
+        "401":
+          $ref: "#/components/responses/requires_authentication"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: Delete a package version for the authenticated user
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+    get:
+      description: >-
+        Gets a specific package version for a package owned by the authenticated user.
+
+
+        To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+
+        If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#get-a-package-version-for-the-authenticated-user
+      operationId: packages/get-package-version-for-authenticated-user
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/package_version_id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/package-version-authenticated-user"
+              schema:
+                $ref: "#/components/schemas/package-version"
+          description: response
+      summary: Get a package version for the authenticated user
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/user/packages/{package_type}/{package_name}/versions/{package_version_id}/restore":
+    post:
+      description: >-
+        Restores a package version owned by the authenticated user.
+
+
+        You can restore a deleted package version under the following conditions:
+          - The package was deleted within the last 30 days.
+          - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
+
+        To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:write` scope. If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#restore-a-package-version-for-the-authenticated-user
+      operationId: packages/restore-package-version-for-authenticated-user
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/package_version_id"
+      responses:
+        "204":
+          description: Empty response
+        "401":
+          $ref: "#/components/responses/requires_authentication"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: Restore a package version for the authenticated user
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
   /user/projects:
     post:
       description: ""
@@ -35397,6 +36322,123 @@ paths:
       x-github:
         category: orgs
         enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/users/{username}/packages/{package_type}/{package_name}":
+    get:
+      description: >-
+        Gets a specific package metadata for a public package owned by a user.
+
+
+        To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+
+        If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#get-a-package-for-a-user
+      operationId: packages/get-package-for-user
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/username"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/package-user"
+              schema:
+                $ref: "#/components/schemas/package"
+          description: response
+      summary: Get a package for a user
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/users/{username}/packages/{package_type}/{package_name}/versions":
+    get:
+      description: >-
+        Returns all package versions for a public package owned by a specified user.
+
+
+        To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+
+        If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-a-user
+      operationId: packages/get-all-package-versions-for-package-owned-by-user
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/username"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/package-versions-for-user"
+              schema:
+                items:
+                  $ref: "#/components/schemas/package-version"
+                type: array
+          description: response
+        "401":
+          $ref: "#/components/responses/requires_authentication"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/not_found"
+      summary: Get all package versions for a package owned by a user
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
+        githubCloudOnly: false
+        previews: []
+        subcategory: null
+  "/users/{username}/packages/{package_type}/{package_name}/versions/{package_version_id}":
+    get:
+      description: >-
+        Gets a specific package version for a public package owned by a specified user.
+
+
+        At this time, to use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+
+        If `package_type` is not `container`, your token must also include the `repo` scope.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/packages#get-a-package-version-for-a-user
+      operationId: packages/get-package-version-for-user
+      parameters:
+        - $ref: "#/components/parameters/package_type"
+        - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/package_version_id"
+        - $ref: "#/components/parameters/username"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/package-version-user"
+              schema:
+                $ref: "#/components/schemas/package-version"
+          description: response
+      summary: Get a package version for a user
+      tags:
+        - packages
+      x-github:
+        category: packages
+        enabledForGitHubApps: false
         githubCloudOnly: false
         previews: []
         subcategory: null
@@ -37824,7 +38866,7 @@ components:
           key: contributor_covenant
           name: Contributor Covenant
           url: https://api.github.com/codes_of_conduct/contributor_covenant
-    code-scanning-alert-code-scanning-alert:
+    code-scanning-alert:
       value:
         created_at: 2020-06-19T11:21:34Z
         dismissed_at: 2020-02-14T12:29:18Z
@@ -37836,7 +38878,7 @@ components:
           gists_url: https://api.github.com/users/octocat/gists{/gist_id}
           gravatar_id: ""
           html_url: https://github.com/octocat
-          id: 1
+          id: 54933897
           login: octocat
           node_id: MDQ6VXNlcjE=
           organizations_url: https://api.github.com/users/octocat/orgs
@@ -37848,27 +38890,42 @@ components:
           type: User
           url: https://api.github.com/users/octocat
         dismissed_reason: false positive
-        html_url: https://github.com/github/hello-world/code-scanning/42
-        instances:
-          - analysis_key: .github/workflows/codeql-analysis.yml:CodeQL-Build
-            environment: ""
-            ref: refs/heads/main
-            state: fixed
-          - analysis_key: .github/workflows/codeql-analysis.yml:CodeQL-Build
-            environment: ""
-            ref: refs/pull/3740/head
-            state: dismissed
+        html_url: https://github.com/octocat/hello-world/code-scanning/42
+        instances_url: https://api.github.com/repos/octocat/hello-world/code-scanning/alerts/42/instances
+        most_recent_instance:
+          analysis_key: .github/workflows/codeql-analysis.yml:CodeQL-Build
+          classifications:
+            - test
+          commit_sha: 39406e42cb832f683daa691dd652a8dc36ee8930
+          environment: "{}"
+          location:
+            end_column: 18
+            end_line: 917
+            path: spec-main/api-session-spec.ts
+            start_column: 7
+            start_line: 917
+          message:
+            text: This path depends on a user-provided value.
+          ref: refs/heads/main
+          state: dismissed
         number: 42
         rule:
-          description: Polynomial regular expression used on uncontrolled data
-          id: js/polynomial-redos
-          severity: warning
+          description: Arbitrary file write during zip extraction ("Zip Slip")
+          full_description: Extracting files from a malicious zip archive without validating that the destination file path is within the destination directory can cause files outside the destination directory to be overwritten.
+          help: '# Arbitrary file write during zip extraction ("Zip Slip")\nExtracting files from a malicious zip archive without validating that the destination file path is within the destination directory can cause files outside the destination directory to be overwritten ...'
+          id: js/zipslip
+          name: js/zipslip
+          severity: error
+          tags:
+            - security
+            - external/cwe/cwe-022
         state: dismissed
         tool:
-          name: CodeQL command-line toolchain
-          version: null
-        url: https://api.github.com/repos/github/hello-world/code-scanning/alerts/42
-    code-scanning-alert-code-scanning-alert-dismissed:
+          guid: null
+          name: CodeQL
+          version: 2.4.0
+        url: https://api.github.com/repos/octocat/hello-world/code-scanning/alerts/42
+    code-scanning-alert-dismissed:
       value:
         created_at: 2020-08-25T21:28:36Z
         dismissed_at: 2020-09-02T22:34:56Z
@@ -37892,43 +38949,109 @@ components:
           type: User
           url: https://api.github.com/users/octocat
         dismissed_reason: false positive
-        html_url: https://github.com/github/hello-world/code-scanning/42
-        instances:
-          - analysis_key: .github/workflows/codeql-analysis.yml:CodeQL-Build
-            environment: ""
-            ref: refs/heads/codeql-analysis-yml
-            state: dismissed
-          - analysis_key: .github/workflows/codeql-analysis.yml:CodeQL-Build
-            environment: ""
-            ref: refs/pull/3740/head
-            state: dismissed
+        html_url: https://github.com/octocat/hello-world/code-scanning/42
+        instances_url: https://api.github.com/repos/octocat/hello-world/code-scanning/alerts/42/instances
+        most_recent_instance:
+          analysis_key: .github/workflows/codeql-analysis.yml:CodeQL-Build
+          classifications:
+            - test
+          commit_sha: 39406e42cb832f683daa691dd652a8dc36ee8930
+          environment: "{}"
+          location:
+            end_column: 18
+            end_line: 917
+            path: spec-main/api-session-spec.ts
+            start_column: 7
+            start_line: 917
+          message:
+            text: This path depends on a user-provided value.
+          ref: refs/heads/main
+          state: dismissed
         number: 42
         rule:
-          description: Polynomial regular expression used on uncontrolled data
-          id: js/polynomial-redos
-          severity: warning
+          description: Arbitrary file write during zip extraction ("Zip Slip")
+          full_description: Extracting files from a malicious zip archive without validating that the destination file path is within the destination directory can cause files outside the destination directory to be overwritten.
+          help: '# Arbitrary file write during zip extraction ("Zip Slip")\nExtracting files from a malicious zip archive without validating that the destination file path is within the destination directory can cause files outside the destination directory to be overwritten ...'
+          id: js/zipslip
+          name: js/zipslip
+          severity: error
+          tags:
+            - security
+            - external/cwe/cwe-022
         state: dismissed
         tool:
-          name: CodeQL command-line toolchain
-          version: null
-        url: https://api.github.com/repos/github/hello-world/code-scanning/alerts/42
-    code-scanning-alert-code-scanning-alert-items:
+          guid: null
+          name: CodeQL
+          version: 2.4.0
+        url: https://api.github.com/repos/octocat/hello-world/code-scanning/alerts/42
+    code-scanning-alert-instances:
+      value:
+        - analysis_key: .github/workflows/codeql-analysis.yml:CodeQL-Build
+          classifications:
+            - library
+          commit_sha: 39406e42cb832f683daa691dd652a8dc36ee8930
+          environment: ""
+          location:
+            end_column: 18
+            end_line: 917
+            path: lib/ab12-gen.js
+            start_column: 7
+            start_line: 917
+          message:
+            text: This path depends on a user-provided value.
+          ref: refs/heads/main
+          state: open
+        - analysis_key: .github/workflows/codeql-analysis.yml:CodeQL-Build
+          classifications:
+            - source
+          commit_sha: b09da05606e27f463a2b49287684b4ae777092f2
+          environment: ""
+          location:
+            end_column: 50
+            end_line: 2
+            path: app/script.js
+            start_column: 10
+            start_line: 2
+          message:
+            text: This suffix check is missing a length comparison to correctly handle lastIndexOf returning -1.
+          ref: refs/pull/3740/merge
+          state: fixed
+    code-scanning-alert-items:
       value:
         - created_at: 2020-02-13T12:29:18Z
           dismissed_at: null
           dismissed_by: null
           dismissed_reason: null
-          html_url: https://github.com/github/hello-world/code-scanning/4
+          html_url: https://github.com/octocat/hello-world/code-scanning/4
+          instances_url: https://api.github.com/repos/octocat/hello-world/code-scanning/alerts/4/instances
+          most_recent_instance:
+            analysis_key: .github/workflows/codeql-analysis.yml:CodeQL-Build
+            classifications:
+              - test
+            commit_sha: 39406e42cb832f683daa691dd652a8dc36ee8930
+            environment: "{}"
+            location:
+              end_column: 18
+              end_line: 917
+              path: spec-main/api-session-spec.ts
+              start_column: 7
+              start_line: 917
+            message:
+              text: This path depends on a user-provided value.
+            ref: refs/heads/main
+            state: open
           number: 4
           rule:
             description: Arbitrary file write during zip extraction
             id: js/zipslip
+            name: js/zipslip
             severity: error
           state: open
           tool:
-            name: CodeQL command-line toolchain
-            version: null
-          url: https://api.github.com/repos/github/hello-world/code-scanning/alerts/4
+            guid: null
+            name: CodeQL
+            version: 2.4.0
+          url: https://api.github.com/repos/octocat/hello-world/code-scanning/alerts/4
         - created_at: 2020-02-13T12:29:18Z
           dismissed_at: 2020-02-14T12:29:18Z
           dismissed_by:
@@ -37951,33 +39074,103 @@ components:
             type: User
             url: https://api.github.com/users/octocat
           dismissed_reason: false positive
-          html_url: https://github.com/github/hello-world/code-scanning/3
+          html_url: https://github.com/octocat/hello-world/code-scanning/3
+          instances_url: https://api.github.com/repos/octocat/hello-world/code-scanning/alerts/3/instances
+          most_recent_instance:
+            analysis_key: .github/workflows/codeql-analysis.yml:CodeQL-Build
+            classifications: []
+            commit_sha: 39406e42cb832f683daa691dd652a8dc36ee8930
+            environment: "{}"
+            location:
+              end_column: 18
+              end_line: 917
+              path: lib/ab12-gen.js
+              start_column: 7
+              start_line: 917
+            message:
+              text: This path depends on a user-provided value.
+            ref: refs/heads/main
+            state: open
           number: 3
           rule:
             description: Arbitrary file write during zip extraction
             id: js/zipslip
+            name: js/zipslip
             severity: error
           state: dismissed
           tool:
-            name: CodeQL command-line toolchain
-            version: null
-          url: https://api.github.com/repos/github/hello-world/code-scanning/alerts/3
-    code-scanning-analysis-code-scanning-analysis-items:
+            guid: null
+            name: CodeQL
+            version: 2.4.0
+          url: https://api.github.com/repos/octocat/hello-world/code-scanning/alerts/3
+    code-scanning-analysis-default:
+      summary: Default response
+      value:
+        analysis_key: .github/workflows/codeql-analysis.yml:analyze
+        commit_sha: c18c69115654ff0166991962832dc2bd7756e655
+        created_at: 2021-01-13T11:55:49Z
+        deletable: true
+        environment: '{"language":"javascript"}'
+        error: ""
+        id: 3602840
+        ref: refs/heads/main
+        results_count: 3
+        rules_count: 67
+        sarif_id: 47177e22-5596-11eb-80a1-c1e54ef945c6
+        tool:
+          guid: null
+          name: CodeQL
+          version: 2.4.0
+        url: https://api.github.com/repos/octocat/hello-world/code-scanning/analyses/201
+    code-scanning-analysis-deletion:
+      summary: Default response
+      value:
+        confirm_delete_url: https://api.github.com/repos/octocat/hello-world/code-scanning/analyses/41?confirm_delete
+        next_analysis_url: https://api.github.com/repos/octocat/hello-world/code-scanning/analyses/41
+    code-scanning-analysis-items:
       value:
         - analysis_key: .github/workflows/codeql-analysis.yml:analyze
           commit_sha: d99612c3e1f2970085cfbaeadf8f010ef69bad83
           created_at: 2020-08-27T15:05:21Z
-          environment: "{}"
+          deletable: true
+          environment: '{"language":"python"}'
           error: ""
-          ref: refs/heads/master
-          tool_name: CodeQL command-line toolchain
+          id: 201
+          ref: refs/heads/main
+          results_count: 17
+          rules_count: 49
+          sarif_id: 6c81cd8e-b078-4ac3-a3be-1dad7dbd0b53
+          tool:
+            guid: null
+            name: CodeQL
+            version: 2.4.0
+          url: https://api.github.com/repos/octocat/hello-world/code-scanning/analyses/201
         - analysis_key: .github/workflows/shiftleft.yml:build
           commit_sha: c8cff6510d4d084fb1b4aa13b64b97ca12b07321
           created_at: 2020-08-31T22:46:44Z
+          deletable: true
           environment: "{}"
           error: ""
+          id: 200
           ref: refs/heads/my-branch
-          tool_name: Python Security Analysis
+          results_count: 17
+          rules_count: 32
+          sarif_id: 8981cd8e-b078-4ac3-a3be-1dad7dbd0b582
+          tool:
+            guid: null
+            name: Python Security Analysis
+            version: 1.2.0
+          url: https://api.github.com/repos/octocat/hello-world/code-scanning/analyses/200
+    code-scanning-sarif-upload:
+      summary: Default response
+      value:
+        id: 47177e22-5596-11eb-80a1-c1e54ef945c6
+        url: https://api.github.com/repos/octocat/hello-world/code-scanning/sarifs/47177e22-5596-11eb-80a1-c1e54ef945c6
+    code-scanning-sarif-upload-status:
+      summary: Default response
+      value:
+        analyses_url: https://api.github.com/repos/octocat/hello-world/code-scanning/analyses?sarif_id=47177e22-5596-11eb-80a1-c1e54ef945c6
+        processing_status: complete
     code-search-result-item-paginated:
       value:
         incomplete_results: false
@@ -40424,105 +41617,492 @@ components:
     full-repository-response-with-scarlet-witch-preview-media-type:
       summary: Response with scarlet-witch-preview media type
       value:
-        archive_url: https://api.github.com/repos/LindseyB/cosee/{archive_format}{/ref}
+        allow_merge_commit: true
+        allow_rebase_merge: true
+        allow_squash_merge: true
+        archive_url: https://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}
         archived: false
-        assignees_url: https://api.github.com/repos/LindseyB/cosee/assignees{/user}
-        blobs_url: https://api.github.com/repos/LindseyB/cosee/git/blobs{/sha}
-        branches_url: https://api.github.com/repos/LindseyB/cosee/branches{/branch}
-        clone_url: https://github.com/LindseyB/cosee.git
-        collaborators_url: https://api.github.com/repos/LindseyB/cosee/collaborators{/collaborator}
-        comments_url: https://api.github.com/repos/LindseyB/cosee/comments{/number}
-        commits_url: https://api.github.com/repos/LindseyB/cosee/commits{/sha}
-        compare_url: https://api.github.com/repos/LindseyB/cosee/compare/{base}...{head}
-        contents_url: https://api.github.com/repos/LindseyB/cosee/contents/{+path}
-        contributors_url: https://api.github.com/repos/LindseyB/cosee/contributors
+        assignees_url: https://api.github.com/repos/octocat/Hello-World/assignees{/user}
+        blobs_url: https://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}
+        branches_url: https://api.github.com/repos/octocat/Hello-World/branches{/branch}
+        clone_url: https://github.com/octocat/Hello-World.git
+        code_of_conduct:
+          html_url: https://github.com/github/docs/blob/main/CODE_OF_CONDUCT.md
+          key: other
+          name: Other
+          url: https://api.github.com/repos/github/docs/community/code_of_conduct
+        collaborators_url: https://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}
+        comments_url: https://api.github.com/repos/octocat/Hello-World/comments{/number}
+        commits_url: https://api.github.com/repos/octocat/Hello-World/commits{/sha}
+        compare_url: https://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}
+        contents_url: https://api.github.com/repos/octocat/Hello-World/contents/{+path}
+        contributors_url: https://api.github.com/repos/octocat/Hello-World/contributors
         created_at: 2011-01-26T19:01:12Z
         default_branch: master
-        deployments_url: https://api.github.com/repos/LindseyB/cosee/deployments
-        description: null
+        delete_branch_on_merge: true
+        deployments_url: https://api.github.com/repos/octocat/Hello-World/deployments
+        description: This your first repo!
         disabled: false
-        downloads_url: https://api.github.com/repos/LindseyB/cosee/downloads
-        events_url: https://api.github.com/repos/LindseyB/cosee/events
+        downloads_url: https://api.github.com/repos/octocat/Hello-World/downloads
+        events_url: https://api.github.com/repos/octocat/Hello-World/events
         fork: false
-        forks: 0
-        forks_count: 0
-        forks_url: https://api.github.com/repos/LindseyB/cosee/forks
-        full_name: LindseyB/cosee
-        git_commits_url: https://api.github.com/repos/LindseyB/cosee/git/commits{/sha}
-        git_refs_url: https://api.github.com/repos/LindseyB/cosee/git/refs{/sha}
-        git_tags_url: https://api.github.com/repos/LindseyB/cosee/git/tags{/sha}
-        git_url: git://github.com/LindseyB/cosee.git
+        forks: 9
+        forks_count: 9
+        forks_url: https://api.github.com/repos/octocat/Hello-World/forks
+        full_name: octocat/Hello-World
+        git_commits_url: https://api.github.com/repos/octocat/Hello-World/git/commits{/sha}
+        git_refs_url: https://api.github.com/repos/octocat/Hello-World/git/refs{/sha}
+        git_tags_url: https://api.github.com/repos/octocat/Hello-World/git/tags{/sha}
+        git_url: git:github.com/octocat/Hello-World.git
         has_downloads: true
         has_issues: true
         has_pages: false
         has_projects: true
         has_wiki: true
-        homepage: null
-        hooks_url: https://api.github.com/repos/LindseyB/cosee/hooks
-        html_url: https://github.com/LindseyB/cosee
-        id: 88760408
-        issue_comment_url: https://api.github.com/repos/LindseyB/cosee/issues/comments{/number}
-        issue_events_url: https://api.github.com/repos/LindseyB/cosee/issues/events{/number}
-        issues_url: https://api.github.com/repos/LindseyB/cosee/issues{/number}
-        keys_url: https://api.github.com/repos/LindseyB/cosee/keys{/key_id}
-        labels_url: https://api.github.com/repos/LindseyB/cosee/labels{/name}
+        homepage: https://github.com
+        hooks_url: https://api.github.com/repos/octocat/Hello-World/hooks
+        html_url: https://github.com/octocat/Hello-World
+        id: 1296269
+        is_template: false
+        issue_comment_url: https://api.github.com/repos/octocat/Hello-World/issues/comments{/number}
+        issue_events_url: https://api.github.com/repos/octocat/Hello-World/issues/events{/number}
+        issues_url: https://api.github.com/repos/octocat/Hello-World/issues{/number}
+        keys_url: https://api.github.com/repos/octocat/Hello-World/keys{/key_id}
+        labels_url: https://api.github.com/repos/octocat/Hello-World/labels{/name}
         language: null
-        languages_url: https://api.github.com/repos/LindseyB/cosee/languages
+        languages_url: https://api.github.com/repos/octocat/Hello-World/languages
         license:
-          html_url: https://github.com/licenses/mit
           key: mit
           name: MIT License
           node_id: MDc6TGljZW5zZW1pdA==
           spdx_id: MIT
           url: https://api.github.com/licenses/mit
-        merges_url: https://api.github.com/repos/LindseyB/cosee/merges
-        milestones_url: https://api.github.com/repos/LindseyB/cosee/milestones{/number}
-        mirror_url: null
-        name: cosee
+        merges_url: https://api.github.com/repos/octocat/Hello-World/merges
+        milestones_url: https://api.github.com/repos/octocat/Hello-World/milestones{/number}
+        mirror_url: git:git.example.com/octocat/Hello-World
+        name: Hello-World
         network_count: 0
-        node_id: MDEwOlJlcG9zaXRvcnk4ODc2MDQwOA==
-        notifications_url: https://api.github.com/repos/LindseyB/cosee/notifications{?since,all,participating}
+        node_id: MDEwOlJlcG9zaXRvcnkxMjk2MjY5
+        notifications_url: https://api.github.com/repos/octocat/Hello-World/notifications{?since,all,participating}
         open_issues: 0
         open_issues_count: 0
-        owner:
-          avatar_url: https://avatars2.githubusercontent.com/u/33750?v=3
-          events_url: https://api.github.com/users/LindseyB/events{/privacy}
-          followers_url: https://api.github.com/users/LindseyB/followers
-          following_url: https://api.github.com/users/LindseyB/following{/other_user}
-          gists_url: https://api.github.com/users/LindseyB/gists{/gist_id}
+        organization:
+          avatar_url: https://github.com/images/error/octocat_happy.gif
+          events_url: https://api.github.com/users/octocat/events{/privacy}
+          followers_url: https://api.github.com/users/octocat/followers
+          following_url: https://api.github.com/users/octocat/following{/other_user}
+          gists_url: https://api.github.com/users/octocat/gists{/gist_id}
           gravatar_id: ""
-          html_url: https://github.com/LindseyB
-          id: 33750
-          login: LindseyB
-          node_id: MDQ6VXNlcjMzNzUw
-          organizations_url: https://api.github.com/users/LindseyB/orgs
-          received_events_url: https://api.github.com/users/LindseyB/received_events
-          repos_url: https://api.github.com/users/LindseyB/repos
-          site_admin: true
-          starred_url: https://api.github.com/users/LindseyB/starred{/owner}{/repo}
-          subscriptions_url: https://api.github.com/users/LindseyB/subscriptions
+          html_url: https://github.com/octocat
+          id: 1
+          login: octocat
+          node_id: MDQ6VXNlcjE=
+          organizations_url: https://api.github.com/users/octocat/orgs
+          received_events_url: https://api.github.com/users/octocat/received_events
+          repos_url: https://api.github.com/users/octocat/repos
+          site_admin: false
+          starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+          subscriptions_url: https://api.github.com/users/octocat/subscriptions
+          type: Organization
+          url: https://api.github.com/users/octocat
+        owner:
+          avatar_url: https://github.com/images/error/octocat_happy.gif
+          events_url: https://api.github.com/users/octocat/events{/privacy}
+          followers_url: https://api.github.com/users/octocat/followers
+          following_url: https://api.github.com/users/octocat/following{/other_user}
+          gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+          gravatar_id: ""
+          html_url: https://github.com/octocat
+          id: 1
+          login: octocat
+          node_id: MDQ6VXNlcjE=
+          organizations_url: https://api.github.com/users/octocat/orgs
+          received_events_url: https://api.github.com/users/octocat/received_events
+          repos_url: https://api.github.com/users/octocat/repos
+          site_admin: false
+          starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+          subscriptions_url: https://api.github.com/users/octocat/subscriptions
           type: User
-          url: https://api.github.com/users/LindseyB
+          url: https://api.github.com/users/octocat
+        parent:
+          allow_merge_commit: true
+          allow_rebase_merge: true
+          allow_squash_merge: true
+          archive_url: https://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}
+          archived: false
+          assignees_url: https://api.github.com/repos/octocat/Hello-World/assignees{/user}
+          blobs_url: https://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}
+          branches_url: https://api.github.com/repos/octocat/Hello-World/branches{/branch}
+          clone_url: https://github.com/octocat/Hello-World.git
+          collaborators_url: https://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}
+          comments_url: https://api.github.com/repos/octocat/Hello-World/comments{/number}
+          commits_url: https://api.github.com/repos/octocat/Hello-World/commits{/sha}
+          compare_url: https://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}
+          contents_url: https://api.github.com/repos/octocat/Hello-World/contents/{+path}
+          contributors_url: https://api.github.com/repos/octocat/Hello-World/contributors
+          created_at: 2011-01-26T19:01:12Z
+          default_branch: master
+          delete_branch_on_merge: true
+          deployments_url: https://api.github.com/repos/octocat/Hello-World/deployments
+          description: This your first repo!
+          disabled: false
+          downloads_url: https://api.github.com/repos/octocat/Hello-World/downloads
+          events_url: https://api.github.com/repos/octocat/Hello-World/events
+          fork: false
+          forks: 1
+          forks_count: 9
+          forks_url: https://api.github.com/repos/octocat/Hello-World/forks
+          full_name: octocat/Hello-World
+          git_commits_url: https://api.github.com/repos/octocat/Hello-World/git/commits{/sha}
+          git_refs_url: https://api.github.com/repos/octocat/Hello-World/git/refs{/sha}
+          git_tags_url: https://api.github.com/repos/octocat/Hello-World/git/tags{/sha}
+          git_url: git:github.com/octocat/Hello-World.git
+          has_downloads: true
+          has_issues: true
+          has_pages: false
+          has_projects: true
+          has_wiki: true
+          homepage: https://github.com
+          hooks_url: https://api.github.com/repos/octocat/Hello-World/hooks
+          html_url: https://github.com/octocat/Hello-World
+          id: 1296269
+          is_template: true
+          issue_comment_url: https://api.github.com/repos/octocat/Hello-World/issues/comments{/number}
+          issue_events_url: https://api.github.com/repos/octocat/Hello-World/issues/events{/number}
+          issues_url: https://api.github.com/repos/octocat/Hello-World/issues{/number}
+          keys_url: https://api.github.com/repos/octocat/Hello-World/keys{/key_id}
+          labels_url: https://api.github.com/repos/octocat/Hello-World/labels{/name}
+          language: null
+          languages_url: https://api.github.com/repos/octocat/Hello-World/languages
+          license:
+            html_url: https://api.github.com/licenses/mit
+            key: mit
+            name: MIT License
+            node_id: MDc6TGljZW5zZW1pdA==
+            spdx_id: MIT
+            url: https://api.github.com/licenses/mit
+          merges_url: https://api.github.com/repos/octocat/Hello-World/merges
+          milestones_url: https://api.github.com/repos/octocat/Hello-World/milestones{/number}
+          mirror_url: git:git.example.com/octocat/Hello-World
+          name: Hello-World
+          network_count: 0
+          node_id: MDEwOlJlcG9zaXRvcnkxMjk2MjY5
+          notifications_url: https://api.github.com/repos/octocat/Hello-World/notifications{?since,all,participating}
+          open_issues: 1
+          open_issues_count: 0
+          owner:
+            avatar_url: https://github.com/images/error/octocat_happy.gif
+            events_url: https://api.github.com/users/octocat/events{/privacy}
+            followers_url: https://api.github.com/users/octocat/followers
+            following_url: https://api.github.com/users/octocat/following{/other_user}
+            gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+            gravatar_id: ""
+            html_url: https://github.com/octocat
+            id: 1
+            login: octocat
+            node_id: MDQ6VXNlcjE=
+            organizations_url: https://api.github.com/users/octocat/orgs
+            received_events_url: https://api.github.com/users/octocat/received_events
+            repos_url: https://api.github.com/users/octocat/repos
+            site_admin: false
+            starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+            subscriptions_url: https://api.github.com/users/octocat/subscriptions
+            type: User
+            url: https://api.github.com/users/octocat
+          permissions:
+            admin: false
+            pull: true
+            push: false
+          private: false
+          pulls_url: https://api.github.com/repos/octocat/Hello-World/pulls{/number}
+          pushed_at: 2011-01-26T19:06:43Z
+          releases_url: https://api.github.com/repos/octocat/Hello-World/releases{/id}
+          size: 108
+          ssh_url: git@github.com:octocat/Hello-World.git
+          stargazers_count: 80
+          stargazers_url: https://api.github.com/repos/octocat/Hello-World/stargazers
+          statuses_url: https://api.github.com/repos/octocat/Hello-World/statuses/{sha}
+          subscribers_count: 42
+          subscribers_url: https://api.github.com/repos/octocat/Hello-World/subscribers
+          subscription_url: https://api.github.com/repos/octocat/Hello-World/subscription
+          svn_url: https://svn.github.com/octocat/Hello-World
+          tags_url: https://api.github.com/repos/octocat/Hello-World/tags
+          teams_url: https://api.github.com/repos/octocat/Hello-World/teams
+          temp_clone_token: ABTLWHOULUVAXGTRYU7OC2876QJ2O
+          topics:
+            - octocat
+            - atom
+            - electron
+            - api
+          trees_url: https://api.github.com/repos/octocat/Hello-World/git/trees{/sha}
+          updated_at: 2011-01-26T19:14:43Z
+          url: https://api.github.com/repos/octocat/Hello-World
+          visibility: public
+          watchers: 1
+          watchers_count: 80
+        permissions:
+          admin: false
+          pull: true
+          push: false
         private: false
-        pulls_url: https://api.github.com/repos/LindseyB/cosee/pulls{/number}
+        pulls_url: https://api.github.com/repos/octocat/Hello-World/pulls{/number}
         pushed_at: 2011-01-26T19:06:43Z
-        releases_url: https://api.github.com/repos/LindseyB/cosee/releases{/id}
-        size: 1
-        ssh_url: git@github.com:LindseyB/cosee.git
-        stargazers_count: 0
-        stargazers_url: https://api.github.com/repos/LindseyB/cosee/stargazers
-        statuses_url: https://api.github.com/repos/LindseyB/cosee/statuses/{sha}
-        subscribers_count: 0
-        subscribers_url: https://api.github.com/repos/LindseyB/cosee/subscribers
-        subscription_url: https://api.github.com/repos/LindseyB/cosee/subscription
-        svn_url: https://github.com/LindseyB/cosee
-        tags_url: https://api.github.com/repos/LindseyB/cosee/tags
-        teams_url: https://api.github.com/repos/LindseyB/cosee/teams
-        trees_url: https://api.github.com/repos/LindseyB/cosee/git/trees{/sha}
+        releases_url: https://api.github.com/repos/octocat/Hello-World/releases{/id}
+        size: 108
+        source:
+          allow_merge_commit: true
+          allow_rebase_merge: true
+          allow_squash_merge: true
+          archive_url: https://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}
+          archived: false
+          assignees_url: https://api.github.com/repos/octocat/Hello-World/assignees{/user}
+          blobs_url: https://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}
+          branches_url: https://api.github.com/repos/octocat/Hello-World/branches{/branch}
+          clone_url: https://github.com/octocat/Hello-World.git
+          collaborators_url: https://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}
+          comments_url: https://api.github.com/repos/octocat/Hello-World/comments{/number}
+          commits_url: https://api.github.com/repos/octocat/Hello-World/commits{/sha}
+          compare_url: https://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}
+          contents_url: https://api.github.com/repos/octocat/Hello-World/contents/{+path}
+          contributors_url: https://api.github.com/repos/octocat/Hello-World/contributors
+          created_at: 2011-01-26T19:01:12Z
+          default_branch: master
+          delete_branch_on_merge: true
+          deployments_url: https://api.github.com/repos/octocat/Hello-World/deployments
+          description: This your first repo!
+          disabled: false
+          downloads_url: https://api.github.com/repos/octocat/Hello-World/downloads
+          events_url: https://api.github.com/repos/octocat/Hello-World/events
+          fork: false
+          forks: 1
+          forks_count: 9
+          forks_url: https://api.github.com/repos/octocat/Hello-World/forks
+          full_name: octocat/Hello-World
+          git_commits_url: https://api.github.com/repos/octocat/Hello-World/git/commits{/sha}
+          git_refs_url: https://api.github.com/repos/octocat/Hello-World/git/refs{/sha}
+          git_tags_url: https://api.github.com/repos/octocat/Hello-World/git/tags{/sha}
+          git_url: git:github.com/octocat/Hello-World.git
+          has_downloads: true
+          has_issues: true
+          has_pages: false
+          has_projects: true
+          has_wiki: true
+          homepage: https://github.com
+          hooks_url: https://api.github.com/repos/octocat/Hello-World/hooks
+          html_url: https://github.com/octocat/Hello-World
+          id: 1296269
+          is_template: true
+          issue_comment_url: https://api.github.com/repos/octocat/Hello-World/issues/comments{/number}
+          issue_events_url: https://api.github.com/repos/octocat/Hello-World/issues/events{/number}
+          issues_url: https://api.github.com/repos/octocat/Hello-World/issues{/number}
+          keys_url: https://api.github.com/repos/octocat/Hello-World/keys{/key_id}
+          labels_url: https://api.github.com/repos/octocat/Hello-World/labels{/name}
+          language: null
+          languages_url: https://api.github.com/repos/octocat/Hello-World/languages
+          license:
+            html_url: https://api.github.com/licenses/mit
+            key: mit
+            name: MIT License
+            node_id: MDc6TGljZW5zZW1pdA==
+            spdx_id: MIT
+            url: https://api.github.com/licenses/mit
+          merges_url: https://api.github.com/repos/octocat/Hello-World/merges
+          milestones_url: https://api.github.com/repos/octocat/Hello-World/milestones{/number}
+          mirror_url: git:git.example.com/octocat/Hello-World
+          name: Hello-World
+          network_count: 0
+          node_id: MDEwOlJlcG9zaXRvcnkxMjk2MjY5
+          notifications_url: https://api.github.com/repos/octocat/Hello-World/notifications{?since,all,participating}
+          open_issues: 1
+          open_issues_count: 0
+          owner:
+            avatar_url: https://github.com/images/error/octocat_happy.gif
+            events_url: https://api.github.com/users/octocat/events{/privacy}
+            followers_url: https://api.github.com/users/octocat/followers
+            following_url: https://api.github.com/users/octocat/following{/other_user}
+            gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+            gravatar_id: ""
+            html_url: https://github.com/octocat
+            id: 1
+            login: octocat
+            node_id: MDQ6VXNlcjE=
+            organizations_url: https://api.github.com/users/octocat/orgs
+            received_events_url: https://api.github.com/users/octocat/received_events
+            repos_url: https://api.github.com/users/octocat/repos
+            site_admin: false
+            starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+            subscriptions_url: https://api.github.com/users/octocat/subscriptions
+            type: User
+            url: https://api.github.com/users/octocat
+          permissions:
+            admin: false
+            pull: true
+            push: false
+          private: false
+          pulls_url: https://api.github.com/repos/octocat/Hello-World/pulls{/number}
+          pushed_at: 2011-01-26T19:06:43Z
+          releases_url: https://api.github.com/repos/octocat/Hello-World/releases{/id}
+          size: 108
+          ssh_url: git@github.com:octocat/Hello-World.git
+          stargazers_count: 80
+          stargazers_url: https://api.github.com/repos/octocat/Hello-World/stargazers
+          statuses_url: https://api.github.com/repos/octocat/Hello-World/statuses/{sha}
+          subscribers_count: 42
+          subscribers_url: https://api.github.com/repos/octocat/Hello-World/subscribers
+          subscription_url: https://api.github.com/repos/octocat/Hello-World/subscription
+          svn_url: https://svn.github.com/octocat/Hello-World
+          tags_url: https://api.github.com/repos/octocat/Hello-World/tags
+          teams_url: https://api.github.com/repos/octocat/Hello-World/teams
+          temp_clone_token: ABTLWHOULUVAXGTRYU7OC2876QJ2O
+          topics:
+            - octocat
+            - atom
+            - electron
+            - api
+          trees_url: https://api.github.com/repos/octocat/Hello-World/git/trees{/sha}
+          updated_at: 2011-01-26T19:14:43Z
+          url: https://api.github.com/repos/octocat/Hello-World
+          visibility: public
+          watchers: 1
+          watchers_count: 80
+        ssh_url: git@github.com:octocat/Hello-World.git
+        stargazers_count: 80
+        stargazers_url: https://api.github.com/repos/octocat/Hello-World/stargazers
+        statuses_url: https://api.github.com/repos/octocat/Hello-World/statuses/{sha}
+        subscribers_count: 42
+        subscribers_url: https://api.github.com/repos/octocat/Hello-World/subscribers
+        subscription_url: https://api.github.com/repos/octocat/Hello-World/subscription
+        svn_url: https://svn.github.com/octocat/Hello-World
+        tags_url: https://api.github.com/repos/octocat/Hello-World/tags
+        teams_url: https://api.github.com/repos/octocat/Hello-World/teams
+        temp_clone_token: ABTLWHOULUVAXGTRYU7OC2876QJ2O
+        template_repository:
+          allow_merge_commit: true
+          allow_rebase_merge: true
+          allow_squash_merge: true
+          archive_url: https://api.github.com/repos/octocat/Hello-World-Template/{archive_format}{/ref}
+          archived: false
+          assignees_url: https://api.github.com/repos/octocat/Hello-World-Template/assignees{/user}
+          blobs_url: https://api.github.com/repos/octocat/Hello-World-Template/git/blobs{/sha}
+          branches_url: https://api.github.com/repos/octocat/Hello-World-Template/branches{/branch}
+          clone_url: https://github.com/octocat/Hello-World-Template.git
+          collaborators_url: https://api.github.com/repos/octocat/Hello-World-Template/collaborators{/collaborator}
+          comments_url: https://api.github.com/repos/octocat/Hello-World-Template/comments{/number}
+          commits_url: https://api.github.com/repos/octocat/Hello-World-Template/commits{/sha}
+          compare_url: https://api.github.com/repos/octocat/Hello-World-Template/compare/{base}...{head}
+          contents_url: https://api.github.com/repos/octocat/Hello-World-Template/contents/{+path}
+          contributors_url: https://api.github.com/repos/octocat/Hello-World-Template/contributors
+          created_at: 2011-01-26T19:01:12Z
+          default_branch: master
+          delete_branch_on_merge: true
+          deployments_url: https://api.github.com/repos/octocat/Hello-World-Template/deployments
+          description: This your first repo!
+          disabled: false
+          downloads_url: https://api.github.com/repos/octocat/Hello-World-Template/downloads
+          events_url: https://api.github.com/repos/octocat/Hello-World-Template/events
+          fork: false
+          forks: 9
+          forks_count: 9
+          forks_url: https://api.github.com/repos/octocat/Hello-World-Template/forks
+          full_name: octocat/Hello-World-Template
+          git_commits_url: https://api.github.com/repos/octocat/Hello-World-Template/git/commits{/sha}
+          git_refs_url: https://api.github.com/repos/octocat/Hello-World-Template/git/refs{/sha}
+          git_tags_url: https://api.github.com/repos/octocat/Hello-World-Template/git/tags{/sha}
+          git_url: git:github.com/octocat/Hello-World-Template.git
+          has_downloads: true
+          has_issues: true
+          has_pages: false
+          has_projects: true
+          has_wiki: true
+          homepage: https://github.com
+          hooks_url: https://api.github.com/repos/octocat/Hello-World-Template/hooks
+          html_url: https://github.com/octocat/Hello-World-Template
+          id: 1296269
+          is_template: true
+          issue_comment_url: https://api.github.com/repos/octocat/Hello-World-Template/issues/comments{/number}
+          issue_events_url: https://api.github.com/repos/octocat/Hello-World-Template/issues/events{/number}
+          issues_url: https://api.github.com/repos/octocat/Hello-World-Template/issues{/number}
+          keys_url: https://api.github.com/repos/octocat/Hello-World-Template/keys{/key_id}
+          labels_url: https://api.github.com/repos/octocat/Hello-World-Template/labels{/name}
+          language: null
+          languages_url: https://api.github.com/repos/octocat/Hello-World-Template/languages
+          license:
+            html_url: https://api.github.com/licenses/mit
+            key: mit
+            name: MIT License
+            node_id: MDc6TGljZW5zZW1pdA==
+            spdx_id: MIT
+            url: https://api.github.com/licenses/mit
+          merges_url: https://api.github.com/repos/octocat/Hello-World-Template/merges
+          milestones_url: https://api.github.com/repos/octocat/Hello-World-Template/milestones{/number}
+          mirror_url: git:git.example.com/octocat/Hello-World-Template
+          name: Hello-World-Template
+          network_count: 0
+          node_id: MDEwOlJlcG9zaXRvcnkxMjk2MjY5
+          notifications_url: https://api.github.com/repos/octocat/Hello-World-Template/notifications{?since,all,participating}
+          open_issues: 0
+          open_issues_count: 0
+          owner:
+            avatar_url: https://github.com/images/error/octocat_happy.gif
+            events_url: https://api.github.com/users/octocat/events{/privacy}
+            followers_url: https://api.github.com/users/octocat/followers
+            following_url: https://api.github.com/users/octocat/following{/other_user}
+            gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+            gravatar_id: ""
+            html_url: https://github.com/octocat
+            id: 1
+            login: octocat
+            node_id: MDQ6VXNlcjE=
+            organizations_url: https://api.github.com/users/octocat/orgs
+            received_events_url: https://api.github.com/users/octocat/received_events
+            repos_url: https://api.github.com/users/octocat/repos
+            site_admin: false
+            starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+            subscriptions_url: https://api.github.com/users/octocat/subscriptions
+            type: User
+            url: https://api.github.com/users/octocat
+          permissions:
+            admin: false
+            pull: true
+            push: false
+          private: false
+          pulls_url: https://api.github.com/repos/octocat/Hello-World-Template/pulls{/number}
+          pushed_at: 2011-01-26T19:06:43Z
+          releases_url: https://api.github.com/repos/octocat/Hello-World-Template/releases{/id}
+          size: 108
+          ssh_url: git@github.com:octocat/Hello-World-Template.git
+          stargazers_count: 80
+          stargazers_url: https://api.github.com/repos/octocat/Hello-World-Template/stargazers
+          statuses_url: https://api.github.com/repos/octocat/Hello-World-Template/statuses/{sha}
+          subscribers_count: 42
+          subscribers_url: https://api.github.com/repos/octocat/Hello-World-Template/subscribers
+          subscription_url: https://api.github.com/repos/octocat/Hello-World-Template/subscription
+          svn_url: https://svn.github.com/octocat/Hello-World-Template
+          tags_url: https://api.github.com/repos/octocat/Hello-World-Template/tags
+          teams_url: https://api.github.com/repos/octocat/Hello-World-Template/teams
+          temp_clone_token: ABTLWHOULUVAXGTRYU7OC2876QJ2O
+          topics:
+            - octocat
+            - atom
+            - electron
+            - api
+          trees_url: https://api.github.com/repos/octocat/Hello-World-Template/git/trees{/sha}
+          updated_at: 2011-01-26T19:14:43Z
+          url: https://api.github.com/repos/octocat/Hello-World-Template
+          visibility: public
+          watchers: 80
+          watchers_count: 80
+        topics:
+          - octocat
+          - atom
+          - electron
+          - api
+        trees_url: https://api.github.com/repos/octocat/Hello-World/git/trees{/sha}
         updated_at: 2011-01-26T19:14:43Z
-        url: https://api.github.com/repos/LindseyB/cosee
-        watchers: 0
-        watchers_count: 0
+        url: https://api.github.com/repos/octocat/Hello-World
+        visibility: public
+        watchers: 80
+        watchers_count: 80
     gist:
       value:
         comments: 0
@@ -45079,6 +46659,251 @@ components:
             repos_url: https://api.github.com/orgs/octo-org/repos
             url: https://api.github.com/orgs/octo-org
         total_count: 1
+    package-org:
+      value:
+        created_at: 2020-05-19T22:19:11Z
+        html_url: https://github.com/orgs/github/packages/container/package/hello_docker
+        id: 197
+        name: hello_docker
+        owner:
+          avatar_url: https://avatars.githubusercontent.com/u/9919?v=4
+          events_url: https://api.github.com/users/github/events{/privacy}
+          followers_url: https://api.github.com/users/github/followers
+          following_url: https://api.github.com/users/github/following{/other_user}
+          gists_url: https://api.github.com/users/github/gists{/gist_id}
+          gravatar_id: ""
+          html_url: https://github.com/github
+          id: 9919
+          login: github
+          node_id: MDEyOk9yZ2FuaXphdGlvbjk5MTk=
+          organizations_url: https://api.github.com/users/github/orgs
+          received_events_url: https://api.github.com/users/github/received_events
+          repos_url: https://api.github.com/users/github/repos
+          site_admin: false
+          starred_url: https://api.github.com/users/github/starred{/owner}{/repo}
+          subscriptions_url: https://api.github.com/users/github/subscriptions
+          type: Organization
+          url: https://api.github.com/users/github
+        package_type: container
+        updated_at: 2020-05-19T22:19:11Z
+        url: https://api.github.com/orgs/github/packages/container/hello_docker
+        version_count: 1
+        visibility: private
+    package-user:
+      value:
+        created_at: 2019-10-20T14:17:14Z
+        html_url: https://github.com/octocat/octo-name-repo/packages/40201
+        id: 40201
+        name: octo-name
+        owner:
+          avatar_url: https://avatars.githubusercontent.com/u/209477?v=4
+          events_url: https://api.github.com/users/octocat/events{/privacy}
+          followers_url: https://api.github.com/users/octocat/followers
+          following_url: https://api.github.com/users/octocat/following{/other_user}
+          gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+          gravatar_id: ""
+          html_url: https://github.com/octocat
+          id: 209477
+          login: octocat
+          node_id: MDQ6VXNlcjIwOTQ3Nw==
+          organizations_url: https://api.github.com/users/octocat/orgs
+          received_events_url: https://api.github.com/users/octocat/received_events
+          repos_url: https://api.github.com/users/octocat/repos
+          site_admin: true
+          starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+          subscriptions_url: https://api.github.com/users/octocat/subscriptions
+          type: User
+          url: https://api.github.com/users/octocat
+        package_type: rubygems
+        repository:
+          archive_url: https://api.github.com/repos/octocat/octo-name-repo/{archive_format}{/ref}
+          assignees_url: https://api.github.com/repos/octocat/octo-name-repo/assignees{/user}
+          blobs_url: https://api.github.com/repos/octocat/octo-name-repo/git/blobs{/sha}
+          branches_url: https://api.github.com/repos/octocat/octo-name-repo/branches{/branch}
+          collaborators_url: https://api.github.com/repos/octocat/octo-name-repo/collaborators{/collaborator}
+          comments_url: https://api.github.com/repos/octocat/octo-name-repo/comments{/number}
+          commits_url: https://api.github.com/repos/octocat/octo-name-repo/commits{/sha}
+          compare_url: https://api.github.com/repos/octocat/octo-name-repo/compare/{base}...{head}
+          contents_url: https://api.github.com/repos/octocat/octo-name-repo/contents/{+path}
+          contributors_url: https://api.github.com/repos/octocat/octo-name-repo/contributors
+          deployments_url: https://api.github.com/repos/octocat/octo-name-repo/deployments
+          description: Project for octocats
+          downloads_url: https://api.github.com/repos/octocat/octo-name-repo/downloads
+          events_url: https://api.github.com/repos/octocat/octo-name-repo/events
+          fork: false
+          forks_url: https://api.github.com/repos/octocat/octo-name-repo/forks
+          full_name: octocat/octo-name-repo
+          git_commits_url: https://api.github.com/repos/octocat/octo-name-repo/git/commits{/sha}
+          git_refs_url: https://api.github.com/repos/octocat/octo-name-repo/git/refs{/sha}
+          git_tags_url: https://api.github.com/repos/octocat/octo-name-repo/git/tags{/sha}
+          hooks_url: https://api.github.com/repos/octocat/octo-name-repo/hooks
+          html_url: https://github.com/octocat/octo-name-repo
+          id: 216219492
+          issue_comment_url: https://api.github.com/repos/octocat/octo-name-repo/issues/comments{/number}
+          issue_events_url: https://api.github.com/repos/octocat/octo-name-repo/issues/events{/number}
+          issues_url: https://api.github.com/repos/octocat/octo-name-repo/issues{/number}
+          keys_url: https://api.github.com/repos/octocat/octo-name-repo/keys{/key_id}
+          labels_url: https://api.github.com/repos/octocat/octo-name-repo/labels{/name}
+          languages_url: https://api.github.com/repos/octocat/octo-name-repo/languages
+          merges_url: https://api.github.com/repos/octocat/octo-name-repo/merges
+          milestones_url: https://api.github.com/repos/octocat/octo-name-repo/milestones{/number}
+          name: octo-name-repo
+          node_id: MDEwOlJlcG9zaXRvcnkyMTYyMTk0OTI=
+          notifications_url: https://api.github.com/repos/octocat/octo-name-repo/notifications{?since,all,participating}
+          owner:
+            avatar_url: https://avatars.githubusercontent.com/u/209477?v=4
+            events_url: https://api.github.com/users/octocat/events{/privacy}
+            followers_url: https://api.github.com/users/octocat/followers
+            following_url: https://api.github.com/users/octocat/following{/other_user}
+            gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+            gravatar_id: ""
+            html_url: https://github.com/octocat
+            id: 209477
+            login: octocat
+            node_id: MDQ6VXNlcjIwOTQ3Nw==
+            organizations_url: https://api.github.com/users/octocat/orgs
+            received_events_url: https://api.github.com/users/octocat/received_events
+            repos_url: https://api.github.com/users/octocat/repos
+            site_admin: true
+            starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+            subscriptions_url: https://api.github.com/users/octocat/subscriptions
+            type: User
+            url: https://api.github.com/users/octocat
+          private: false
+          pulls_url: https://api.github.com/repos/octocat/octo-name-repo/pulls{/number}
+          releases_url: https://api.github.com/repos/octocat/octo-name-repo/releases{/id}
+          stargazers_url: https://api.github.com/repos/octocat/octo-name-repo/stargazers
+          statuses_url: https://api.github.com/repos/octocat/octo-name-repo/statuses/{sha}
+          subscribers_url: https://api.github.com/repos/octocat/octo-name-repo/subscribers
+          subscription_url: https://api.github.com/repos/octocat/octo-name-repo/subscription
+          tags_url: https://api.github.com/repos/octocat/octo-name-repo/tags
+          teams_url: https://api.github.com/repos/octocat/octo-name-repo/teams
+          trees_url: https://api.github.com/repos/octocat/octo-name-repo/git/trees{/sha}
+          url: https://api.github.com/repos/octocat/octo-name-repo
+        updated_at: 2019-10-20T14:17:14Z
+        url: https://api.github.com/users/octocat/packages/rubygems/octo-name
+        version_count: 3
+        visibility: public
+    package-version-authenticated-user:
+      value:
+        created_at: 2020-05-15T03:46:45Z
+        html_url: https://github.com/users/octocat/packages/container/hello_docker/214
+        id: 214
+        metadata:
+          container:
+            tags:
+              - 1.13.6
+          package_type: container
+        name: sha256:3561f0cff06caccddb99c93bd26e712fcc56a811de0f8ea7a17bb865f30b176a
+        package_html_url: https://github.com/users/octocat/packages/container/package/hello_docker
+        updated_at: 2020-05-15T03:46:45Z
+        url: https://api.github.com/users/octocat/packages/container/hello_docker/versions/214
+    package-version-org:
+      value:
+        created_at: 2020-05-19T22:19:11Z
+        html_url: https://github.com/orgs/github/packages/container/hello_docker/836
+        id: 836
+        metadata:
+          container:
+            tags:
+              - latest
+          package_type: container
+        name: sha256:b3d3e366b55f9a54599220198b3db5da8f53592acbbb7dc7e4e9878762fc5344
+        package_html_url: https://github.com/orgs/github/packages/container/package/hello_docker
+        updated_at: 2020-05-19T22:19:11Z
+        url: https://api.github.com/orgs/github/packages/container/hello_docker/versions/836
+    package-version-user:
+      value:
+        created_at: 2019-12-01T20:49:29Z
+        description: Octo-name client for Ruby
+        html_url: https://github.com/octocat/octo-name-repo/packages/40201?version=0.2.0
+        id: 387039
+        license: MIT
+        metadata:
+          package_type: rubygems
+        name: 0.2.0
+        package_html_url: https://github.com/octocat/octo-name-repo/packages/40201
+        updated_at: 2019-12-01T20:49:30Z
+        url: https://api.github.com/users/octocat/packages/rubygems/octo-name/versions/387039
+    package-versions-for-authenticated-user:
+      value:
+        - created_at: 2020-09-11T21:56:40Z
+          html_url: https://github.com/users/octocat/packages/container/hello_docker/45763
+          id: 45763
+          metadata:
+            container:
+              tags:
+                - latest
+            package_type: container
+          name: sha256:08a44bab0bddaddd8837a8b381aebc2e4b933768b981685a9e088360af0d3dd9
+          package_html_url: https://github.com/users/octocat/packages/container/package/hello_docker
+          updated_at: 2021-02-05T21:32:32Z
+          url: https://api.github.com/users/octocat/packages/container/hello_docker/versions/45763
+        - created_at: 2020-05-21T22:22:20Z
+          html_url: https://github.com/users/octocat/packages/container/hello_docker/881
+          id: 881
+          metadata:
+            container:
+              tags: []
+            package_type: container
+          name: sha256:b3d3e366b55f9a54599220198b3db5da8f53592acbbb7dc7e4e9878762fc5344
+          package_html_url: https://github.com/users/octocat/packages/container/package/hello_docker
+          updated_at: 2021-02-05T21:32:32Z
+          url: https://api.github.com/users/octocat/packages/container/hello_docker/versions/881
+    package-versions-for-org:
+      value:
+        - created_at: 2019-11-05T22:49:04Z
+          html_url: https://github.com/octo-org/hello-world-npm/packages/43752?version=1.0.4
+          id: 245301
+          metadata:
+            package_type: npm
+          name: 1.0.4
+          package_html_url: https://github.com/octo-org/hello-world-npm/packages/43752
+          updated_at: 2019-11-05T22:49:04Z
+          url: https://api.github.com/orgs/octo-org/packages/npm/hello-world-npm/versions/245301
+        - created_at: 2019-10-29T15:42:11Z
+          html_url: https://github.com/octo-org/hello-world-npm/packages/43752?version=1.0.3
+          id: 209672
+          metadata:
+            package_type: npm
+          name: 1.0.3
+          package_html_url: https://github.com/octo-org/hello-world-npm/packages/43752
+          updated_at: 2019-10-29T15:42:12Z
+          url: https://api.github.com/orgs/octo-org/packages/npm/hello-world-npm/versions/209672
+    package-versions-for-user:
+      value:
+        - created_at: 2020-08-31T15:22:11Z
+          description: Project for octocats
+          html_url: https://github.com/octocat/octo-name-repo/packages/40201?version=0.3.0
+          id: 3497268
+          license: MIT
+          metadata:
+            package_type: rubygems
+          name: 0.3.0
+          package_html_url: https://github.com/octocat/octo-name-repo/packages/40201
+          updated_at: 2020-08-31T15:22:12Z
+          url: https://api.github.com/users/octocat/packages/rubygems/octo-name/versions/3497268
+        - created_at: 2019-12-01T20:49:29Z
+          description: Project for octocats
+          html_url: https://github.com/octocat/octo-name-repo/packages/40201?version=0.2.0
+          id: 387039
+          license: MIT
+          metadata:
+            package_type: rubygems
+          name: 0.2.0
+          package_html_url: https://github.com/octocat/octo-name-repo/packages/40201
+          updated_at: 2019-12-01T20:49:30Z
+          url: https://api.github.com/users/octocat/packages/rubygems/octo-name/versions/387039
+        - created_at: 2019-10-20T14:17:14Z
+          html_url: https://github.com/octocat/octo-name-repo/packages/40201?version=0.1.0
+          id: 169770
+          license: MIT
+          metadata:
+            package_type: rubygems
+          name: 0.1.0
+          package_html_url: https://github.com/octocat/octo-name-repo/packages/40201
+          updated_at: 2019-10-20T14:17:15Z
+          url: https://api.github.com/users/octocat/packages/rubygems/octo-name/versions/169770
     packages-billing-usage:
       value:
         included_gigabytes_bandwidth: 10
@@ -51992,7 +53817,7 @@ components:
       schema:
         type: string
     alert_number:
-      description: The security alert number, found at the end of the security alert's URL.
+      description: The number that identifies an alert. You can find this at the end of the URL for a code scanning alert within GitHub, and in the `number` field in the response from the `GET /repos/{owner}/{repo}/code-scanning/alerts` operation.
       in: path
       name: alert_number
       required: true
@@ -52220,6 +54045,13 @@ components:
       required: true
       schema:
         type: string
+    git_ref:
+      description: The Git reference for the results you want to list. The `ref` for a branch can be formatted either as `refs/heads/<branch name>` or simply `<branch name>`. To reference a pull request use `refs/pull/<number>/merge`.
+      in: query
+      name: ref
+      required: false
+      schema:
+        $ref: "#/components/schemas/code-scanning-ref"
     gpg_key_id:
       description: gpg_key_id parameter
       in: path
@@ -52326,6 +54158,34 @@ components:
       required: true
       schema:
         type: string
+    package_name:
+      description: The name of the package.
+      in: path
+      name: package_name
+      required: true
+      schema:
+        type: string
+    package_type:
+      description: The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. For Docker images that use the package namespace `https://ghcr.io/owner/package-name`, use `container`.
+      in: path
+      name: package_type
+      required: true
+      schema:
+        enum:
+          - npm
+          - maven
+          - rubygems
+          - docker
+          - nuget
+          - container
+        type: string
+    package_version_id:
+      description: Unique identifier of the package version.
+      in: path
+      name: package_version_id
+      required: true
+      schema:
+        type: integer
     page:
       description: Page number of the results to fetch.
       in: query
@@ -52353,7 +54213,7 @@ components:
           - week
         type: string
     per_page:
-      description: Results per page (max 100)
+      description: Results per page (max 100).
       in: query
       name: per_page
       schema:
@@ -52535,6 +54395,20 @@ components:
       required: true
       schema:
         type: integer
+    tool_guid:
+      description: The GUID of a code scanning tool. Only results by this tool will be listed. Note that some code scanning tools may not include a GUID in their analysis data. You can specify the tool by using either `tool_guid` or `tool_name`, but not both.
+      in: query
+      name: tool_guid
+      required: false
+      schema:
+        $ref: "#/components/schemas/code-scanning-analysis-tool-guid"
+    tool_name:
+      description: The name of a code scanning tool. Only results by this tool will be listed. You can specify the tool by using either `tool_name` or `tool_guid`, but not both.
+      in: query
+      name: tool_name
+      required: false
+      schema:
+        $ref: "#/components/schemas/code-scanning-analysis-tool-name"
     username:
       in: path
       name: username
@@ -52558,15 +54432,25 @@ components:
       schema:
         type: string
     workflow-run-status:
-      description: Returns workflow runs associated with the check run `status` or `conclusion` you specify. For example, a conclusion can be `success` or a status can be `completed`. For more information, see the `status` and `conclusion` options available in "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
+      description: Returns workflow runs with the check run `status` or `conclusion` that you specify. For example, a conclusion can be `success` or a status can be `in_progress`. Only GitHub can set a status of `waiting` or `requested`. For a list of the possible `status` and `conclusion` options, see "[Create a check run](https://docs.github.com/rest/reference/checks#create-a-check-run)."
       in: query
       name: status
       required: false
       schema:
         enum:
           - completed
-          - status
-          - conclusion
+          - action_required
+          - cancelled
+          - failure
+          - neutral
+          - skipped
+          - stale
+          - success
+          - timed_out
+          - in_progress
+          - queued
+          - requested
+          - waiting
         type: string
   responses:
     bad_request:
@@ -52578,6 +54462,18 @@ components:
           schema:
             $ref: "#/components/schemas/scim-error"
       description: Bad Request
+    code_scanning_forbidden_read:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/basic-error"
+      description: Response if github advanced security is not enabled for this repository
+    code_scanning_forbidden_write:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/basic-error"
+      description: Response if the repository is archived or if github advanced security is not enabled for this repository
     conflict:
       content:
         application/json:
@@ -52881,6 +54777,12 @@ components:
       type: string
     alert-html-url:
       description: The GitHub URL of the alert resource.
+      format: uri
+      nullable: false
+      readOnly: true
+      type: string
+    alert-instances-url:
+      description: The REST API URL for fetching the list of instances for an alert.
       format: uri
       nullable: false
       readOnly: true
@@ -54352,6 +56254,7 @@ components:
       description: Code of Conduct Simple
       properties:
         html_url:
+          example: https://github.com/github/docs/blob/main/CODE_OF_CONDUCT.md
           format: uri
           nullable: true
           type: string
@@ -54362,7 +56265,7 @@ components:
           example: Citizen Code of Conduct
           type: string
         url:
-          example: https://api.github.com/codes_of_conduct/citizen_code_of_conduct
+          example: https://api.github.com/repos/github/docs/community/code_of_conduct
           format: uri
           type: string
       required:
@@ -54372,7 +56275,7 @@ components:
         - html_url
       title: Code Of Conduct Simple
       type: object
-    code-scanning-alert-code-scanning-alert:
+    code-scanning-alert:
       properties:
         created_at:
           $ref: "#/components/schemas/alert-created-at"
@@ -54384,43 +56287,10 @@ components:
           $ref: "#/components/schemas/code-scanning-alert-dismissed-reason"
         html_url:
           $ref: "#/components/schemas/alert-html-url"
-        instances:
-          $ref: "#/components/schemas/code-scanning-alert-instances"
-        number:
-          $ref: "#/components/schemas/alert-number"
-        rule:
-          $ref: "#/components/schemas/code-scanning-alert-rule"
-        state:
-          $ref: "#/components/schemas/code-scanning-alert-state"
-        tool:
-          $ref: "#/components/schemas/code-scanning-analysis-tool"
-        url:
-          $ref: "#/components/schemas/alert-url"
-      required:
-        - instances
-        - number
-        - created_at
-        - url
-        - html_url
-        - state
-        - dismissed_by
-        - dismissed_at
-        - dismissed_reason
-        - rule
-        - tool
-      type: object
-    code-scanning-alert-code-scanning-alert-items:
-      properties:
-        created_at:
-          $ref: "#/components/schemas/alert-created-at"
-        dismissed_at:
-          $ref: "#/components/schemas/code-scanning-alert-dismissed-at"
-        dismissed_by:
-          $ref: "#/components/schemas/simple-user"
-        dismissed_reason:
-          $ref: "#/components/schemas/code-scanning-alert-dismissed-reason"
-        html_url:
-          $ref: "#/components/schemas/alert-html-url"
+        instances_url:
+          $ref: "#/components/schemas/alert-instances-url"
+        most_recent_instance:
+          $ref: "#/components/schemas/code-scanning-alert-instance"
         number:
           $ref: "#/components/schemas/alert-number"
         rule:
@@ -54436,13 +56306,24 @@ components:
         - created_at
         - url
         - html_url
+        - instances_url
         - state
         - dismissed_by
         - dismissed_at
         - dismissed_reason
         - rule
         - tool
+        - most_recent_instance
       type: object
+    code-scanning-alert-classification:
+      description: A classification of the file. For example to identify it as generated.
+      enum:
+        - source
+        - generated
+        - test
+        - library
+      nullable: true
+      type: string
     code-scanning-alert-dismissed-at:
       description: "The time that the alert was dismissed in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`."
       format: date-time
@@ -54463,26 +56344,124 @@ components:
     code-scanning-alert-environment:
       description: Identifies the variable values associated with the environment in which the analysis that generated this alert instance was performed, such as the language that was analyzed.
       type: string
-    code-scanning-alert-instances:
-      items:
-        properties:
-          analysis_key:
-            $ref: "#/components/schemas/code-scanning-analysis-analysis-key"
-          environment:
-            $ref: "#/components/schemas/code-scanning-alert-environment"
-          matrix_vars:
-            nullable: true
-            type: string
-          ref:
-            $ref: "#/components/schemas/code-scanning-alert-ref"
-          state:
-            $ref: "#/components/schemas/code-scanning-alert-state"
-      nullable: true
-      type: array
-    code-scanning-alert-ref:
-      description: The full Git reference, formatted as `refs/heads/<branch name>`.
-      type: string
+    code-scanning-alert-instance:
+      properties:
+        analysis_key:
+          $ref: "#/components/schemas/code-scanning-analysis-analysis-key"
+        classifications:
+          description: >-
+            Classifications that have been applied to the file that triggered the alert.
+
+            For example identifying it as documentation, or a generated file.
+          items:
+            $ref: "#/components/schemas/code-scanning-alert-classification"
+          type: array
+        commit_sha:
+          type: string
+        environment:
+          $ref: "#/components/schemas/code-scanning-alert-environment"
+        html_url:
+          type: string
+        location:
+          $ref: "#/components/schemas/code-scanning-alert-location"
+        message:
+          properties:
+            text:
+              type: string
+          type: object
+        ref:
+          $ref: "#/components/schemas/code-scanning-ref"
+        state:
+          $ref: "#/components/schemas/code-scanning-alert-state"
+      type: object
+    code-scanning-alert-items:
+      properties:
+        created_at:
+          $ref: "#/components/schemas/alert-created-at"
+        dismissed_at:
+          $ref: "#/components/schemas/code-scanning-alert-dismissed-at"
+        dismissed_by:
+          $ref: "#/components/schemas/simple-user"
+        dismissed_reason:
+          $ref: "#/components/schemas/code-scanning-alert-dismissed-reason"
+        html_url:
+          $ref: "#/components/schemas/alert-html-url"
+        instances_url:
+          $ref: "#/components/schemas/alert-instances-url"
+        most_recent_instance:
+          $ref: "#/components/schemas/code-scanning-alert-instance"
+        number:
+          $ref: "#/components/schemas/alert-number"
+        rule:
+          $ref: "#/components/schemas/code-scanning-alert-rule-summary"
+        state:
+          $ref: "#/components/schemas/code-scanning-alert-state"
+        tool:
+          $ref: "#/components/schemas/code-scanning-analysis-tool"
+        url:
+          $ref: "#/components/schemas/alert-url"
+      required:
+        - number
+        - created_at
+        - url
+        - html_url
+        - instances_url
+        - state
+        - dismissed_by
+        - dismissed_at
+        - dismissed_reason
+        - rule
+        - tool
+        - most_recent_instance
+      type: object
+    code-scanning-alert-location:
+      description: Describe a region within a file for the alert.
+      properties:
+        end_column:
+          type: integer
+        end_line:
+          type: integer
+        path:
+          type: string
+        start_column:
+          type: integer
+        start_line:
+          type: integer
+      type: object
     code-scanning-alert-rule:
+      properties:
+        description:
+          description: A short description of the rule used to detect the alert.
+          type: string
+        full_description:
+          description: description of the rule used to detect the alert.
+          type: string
+        help:
+          description: Detailed documentation for the rule as GitHub Flavored Markdown.
+          type: string
+        id:
+          description: A unique identifier for the rule used to detect the alert.
+          nullable: true
+          type: string
+        name:
+          description: The name of the rule used to detect the alert.
+          type: string
+        severity:
+          description: The severity of the alert.
+          enum:
+            - none
+            - note
+            - warning
+            - error
+          nullable: true
+          type: string
+        tags:
+          description: A set of tags applicable for the rule.
+          items:
+            type: string
+          type: array
+      type: object
+    code-scanning-alert-rule-summary:
       properties:
         description:
           description: A short description of the rule used to detect the alert.
@@ -54490,6 +56469,9 @@ components:
         id:
           description: A unique identifier for the rule used to detect the alert.
           nullable: true
+          type: string
+        name:
+          description: The name of the rule used to detect the alert.
           type: string
         severity:
           description: The severity of the alert.
@@ -54514,10 +56496,7 @@ components:
         - dismissed
         - fixed
       type: string
-    code-scanning-analysis-analysis-key:
-      description: Identifies the configuration under which the analysis was executed. For example, in GitHub Actions this includes the workflow filename and job name.
-      type: string
-    code-scanning-analysis-code-scanning-analysis:
+    code-scanning-analysis:
       properties:
         analysis_key:
           $ref: "#/components/schemas/code-scanning-analysis-analysis-key"
@@ -54525,26 +56504,50 @@ components:
           $ref: "#/components/schemas/code-scanning-analysis-commit-sha"
         created_at:
           $ref: "#/components/schemas/code-scanning-analysis-created-at"
+        deletable:
+          type: boolean
         environment:
           $ref: "#/components/schemas/code-scanning-analysis-environment"
         error:
           example: error reading field xyz
           type: string
+        id:
+          description: Unique identifier for this analysis.
+          type: integer
         ref:
-          $ref: "#/components/schemas/code-scanning-analysis-ref"
-        tool_name:
-          $ref: "#/components/schemas/code-scanning-analysis-tool-name"
+          $ref: "#/components/schemas/code-scanning-ref"
+        results_count:
+          description: The total number of results in the analysis.
+          type: integer
+        rules_count:
+          description: The total number of rules used in the analysis.
+          type: integer
+        sarif_id:
+          $ref: "#/components/schemas/code-scanning-analysis-sarif-id"
+        tool:
+          $ref: "#/components/schemas/code-scanning-analysis-tool"
+        url:
+          $ref: "#/components/schemas/code-scanning-analysis-url"
       required:
         - ref
         - commit_sha
         - analysis_key
-        - tool_name
         - environment
         - error
         - created_at
+        - results_count
+        - rules_count
+        - id
+        - url
+        - sarif_id
+        - tool
+        - deletable
       type: object
+    code-scanning-analysis-analysis-key:
+      description: Identifies the configuration under which the analysis was executed. For example, in GitHub Actions this includes the workflow filename and job name.
+      type: string
     code-scanning-analysis-commit-sha:
-      description: The commit SHA of the code scanning analysis file.
+      description: The SHA of the commit to which the analysis you are uploading relates.
       maxLength: 40
       minLength: 40
       pattern: ^[0-9a-fA-F]+$
@@ -54555,27 +56558,92 @@ components:
       nullable: false
       readOnly: true
       type: string
+    code-scanning-analysis-deletion:
+      description: Successful deletion of a code scanning analysis
+      properties:
+        confirm_delete_url:
+          description: Next deletable analysis in chain, with last analysis deletion confirmation
+          format: uri
+          nullable: true
+          readOnly: true
+          type: string
+        next_analysis_url:
+          description: Next deletable analysis in chain, without last analysis deletion confirmation
+          format: uri
+          nullable: true
+          readOnly: true
+          type: string
+      required:
+        - next_analysis_url
+        - confirm_delete_url
+      title: Analysis deletion
+      type: object
     code-scanning-analysis-environment:
       description: Identifies the variable values associated with the environment in which this analysis was performed.
       type: string
-    code-scanning-analysis-ref:
-      description: The full Git reference of the code scanning analysis file, formatted as `refs/heads/<branch name>`.
-      type: string
     code-scanning-analysis-sarif-file:
-      description: A Base64 string representing the SARIF file to upload. You must first compress your SARIF file using [`gzip`](http://www.gnu.org/software/gzip/manual/gzip.html) and then translate the contents of the file into a Base64 encoding string.
+      description: A Base64 string representing the SARIF file to upload. You must first compress your SARIF file using [`gzip`](http://www.gnu.org/software/gzip/manual/gzip.html) and then translate the contents of the file into a Base64 encoding string. For more information, see "[SARIF support for code scanning](https://docs.github.com/github/finding-security-vulnerabilities-and-errors-in-your-code/sarif-support-for-code-scanning)."
+      type: string
+    code-scanning-analysis-sarif-id:
+      description: An identifier for the upload.
+      example: 6c81cd8e-b078-4ac3-a3be-1dad7dbd0b53
+      nullable: false
       type: string
     code-scanning-analysis-tool:
       properties:
+        guid:
+          $ref: "#/components/schemas/code-scanning-analysis-tool-guid"
         name:
           $ref: "#/components/schemas/code-scanning-analysis-tool-name"
         version:
-          description: The version of the tool used to detect the alert.
-          nullable: true
+          $ref: "#/components/schemas/code-scanning-analysis-tool-version"
+      type: object
+    code-scanning-analysis-tool-guid:
+      description: The GUID of the tool used to generate the code scanning analysis, if provided in the uploaded SARIF data.
+      nullable: true
+      type: string
+    code-scanning-analysis-tool-name:
+      description: The name of the tool used to generate the code scanning analysis.
+      type: string
+    code-scanning-analysis-tool-version:
+      description: The version of the tool used to generate the code scanning analysis.
+      nullable: true
+      type: string
+    code-scanning-analysis-url:
+      description: The REST API URL of the analysis resource.
+      format: uri
+      nullable: false
+      readOnly: true
+      type: string
+    code-scanning-ref:
+      description: The full Git reference, formatted as `refs/heads/<branch name>`.
+      type: string
+    code-scanning-sarifs-receipt:
+      properties:
+        id:
+          $ref: "#/components/schemas/code-scanning-analysis-sarif-id"
+        url:
+          description: The REST API URL for checking the status of the upload.
+          format: uri
+          nullable: false
+          readOnly: true
           type: string
       type: object
-    code-scanning-analysis-tool-name:
-      description: The name of the tool used to generate the code scanning analysis alert.
-      type: string
+    code-scanning-sarifs-status:
+      properties:
+        analyses_url:
+          description: The REST API URL for getting the analyses associated with the upload.
+          format: uri
+          nullable: true
+          readOnly: true
+          type: string
+        processing_status:
+          description: "`pending` files have not yet been processed, while `complete` means all results in the SARIF have been stored."
+          enum:
+            - pending
+            - complete
+          type: string
+      type: object
     code-search-result-item:
       description: Code Search Result Item
       properties:
@@ -56448,6 +58516,8 @@ components:
         clone_url:
           example: https://github.com/octocat/Hello-World.git
           type: string
+        code_of_conduct:
+          $ref: "#/components/schemas/code-of-conduct-simple"
         collaborators_url:
           example: http://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}
           type: string
@@ -57403,18 +59473,6 @@ components:
     group-mapping:
       description: External Groups to be mapped to a team for membership
       properties:
-        group_description:
-          description: a description of the group
-          example: A group of Developers working on AzureAD SAML SSO
-          type: string
-        group_id:
-          description: The ID of the group
-          example: 111a1a11-aaa1-1aaa-11a1-a1a1a1a1a1aa
-          type: string
-        group_name:
-          description: The name of the group
-          example: saml-azuread-test
-          type: string
         groups:
           description: Array of groups to be mapped to this team
           example:
@@ -57438,20 +59496,20 @@ components:
                 description: The name of the group
                 example: saml-azuread-test
                 type: string
+              status:
+                description: synchronization status for this group mapping
+                example: unsynced
+                type: string
+              synced_at:
+                description: the time of the last sync for this group-mapping
+                example: 2019-06-03 22:27:15:000 -700
+                type: string
             required:
               - group_id
               - group_name
               - group_description
             type: object
           type: array
-        status:
-          description: synchronization status for this group mapping
-          example: unsynced
-          type: string
-        synced_at:
-          description: the time of the last sync for this group-mapping
-          example: 2019-06-03 22:27:15:000 -700
-          type: string
       title: GroupMapping
       type: object
     hook:
@@ -60277,6 +62335,149 @@ components:
         - avatar_url
         - description
       title: Organization Simple
+      type: object
+    package:
+      description: A software package
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        html_url:
+          example: https://github.com/orgs/github/packages/container/package/super-linter
+          type: string
+        id:
+          description: Unique identifier of the package.
+          example: 1
+          type: integer
+        name:
+          description: The name of the package.
+          example: super-linter
+          type: string
+        owner:
+          allOf:
+            - $ref: "#/components/schemas/simple-user"
+          nullable: true
+        package_type:
+          enum:
+            - npm
+            - maven
+            - rubygems
+            - docker
+            - nuget
+            - container
+          example: docker
+          type: string
+        repository:
+          allOf:
+            - $ref: "#/components/schemas/minimal-repository"
+          nullable: true
+        updated_at:
+          format: date-time
+          type: string
+        url:
+          example: https://api.github.com/orgs/github/packages/container/super-linter
+          type: string
+        version_count:
+          description: The number of versions of the package.
+          example: 1
+          type: integer
+        visibility:
+          enum:
+            - private
+            - public
+          example: private
+          type: string
+      required:
+        - id
+        - name
+        - package_type
+        - visibility
+        - url
+        - html_url
+        - version_count
+        - created_at
+        - updated_at
+      title: Package
+      type: object
+    package-version:
+      description: A version of a software package
+      properties:
+        created_at:
+          example: 2011-04-10T20:09:31Z
+          format: date-time
+          type: string
+        deleted_at:
+          example: 2014-03-03T18:58:10Z
+          format: date-time
+          type: string
+        description:
+          type: string
+        html_url:
+          example: https://github.com/orgs/github/packages/container/super-linter/786068
+          type: string
+        id:
+          description: Unique identifier of the package version.
+          example: 1
+          type: integer
+        license:
+          example: MIT
+          type: string
+        metadata:
+          properties:
+            container:
+              properties:
+                tags:
+                  items: {}
+                  type: array
+              required:
+                - tags
+              title: Container Metadata
+              type: object
+            docker:
+              properties:
+                tag:
+                  items: {}
+                  type: array
+              required:
+                - tags
+              title: Docker Metadata
+              type: object
+            package_type:
+              enum:
+                - npm
+                - maven
+                - rubygems
+                - docker
+                - nuget
+                - container
+              example: docker
+              type: string
+          required:
+            - package_type
+          title: Package Version Metadata
+          type: object
+        name:
+          description: The name of the package version.
+          example: latest
+          type: string
+        package_html_url:
+          example: https://github.com/orgs/github/packages/container/package/super-linter
+          type: string
+        updated_at:
+          example: 2014-03-03T18:58:10Z
+          format: date-time
+          type: string
+        url:
+          example: https://api.github.com/orgs/github/packages/container/super-linter/versions/786068
+          type: string
+      required:
+        - id
+        - name
+        - url
+        - package_html_url
+        - created_at
+        - updated_at
+      title: Package Version
       type: object
     packages-billing-usage:
       properties:

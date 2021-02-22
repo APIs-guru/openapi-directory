@@ -5,7 +5,7 @@ host: live-api.letmc.com
 info:
   contact:
     x-twitter: agentOSSoftware
-  title: AgentOS API V3, Diary Call Group
+  title: agentOS API V3, Diary Call Group
   version: v3-diary
   x-apisguru-categories:
     - ecommerce
@@ -103,7 +103,7 @@ paths:
           description: OK
           schema:
             type: string
-      summary: Update an existing appointment using its unique identifier
+      summary: Delete an existing appointment using its unique identifier
       tags:
         - DiaryController
     get:
@@ -221,6 +221,41 @@ paths:
           schema:
             type: string
       summary: Update an existing appointment using its unique identifier
+      tags:
+        - DiaryController
+  "/v3/diary/{shortName}/appointment/feedback":
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: DiaryController_AddFeedback
+      parameters:
+        - description: The unique client short-name
+          in: path
+          name: shortName
+          required: true
+          type: string
+        - description: Feedback submission model
+          in: body
+          name: submissionModel
+          required: true
+          schema:
+            $ref: "#/definitions/FeedbackSubmissionModel"
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Submit appointment feedback
       tags:
         - DiaryController
   "/v3/diary/{shortName}/appointmentsbetweendates":
@@ -557,6 +592,19 @@ definitions:
         type: string
       Surname:
         description: Surname
+        type: string
+    type: object
+  FeedbackSubmissionModel:
+    description: Feedback Submission Model:-
+    properties:
+      AppointmentID:
+        description: Appointment to submit feedback to:-
+        type: string
+      Feedback:
+        description: Feedback to submit:-
+        type: string
+      PropertyID:
+        description: Property to submit feedback to:-
         type: string
     type: object
   LatestTenancyModel:

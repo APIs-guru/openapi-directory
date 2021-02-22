@@ -1,7 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://airbyte.local
-  - url: http://localhost:8001
+  - url: http://localhost:8001/api
 info:
   contact:
     email: contact@airbyte.io
@@ -470,7 +469,7 @@ paths:
           description: Destination  not found
         "422":
           $ref: "#/components/responses/InvalidInput"
-      summary: get configured destination
+      summary: Get configured destination
       tags:
         - destination
   /v1/destinations/list:
@@ -600,6 +599,20 @@ paths:
       summary: Get logs
       tags:
         - logs
+  /v1/openapi:
+    get:
+      operationId: getOpenApiSpec
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                format: binary
+                type: string
+          description: Returns the openapi specification file
+      summary: Returns the openapi specification
+      tags:
+        - openapi
   /v1/scheduler/destinations/check_connection:
     post:
       operationId: executeDestinationCheckConnection

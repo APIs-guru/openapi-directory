@@ -68,33 +68,6 @@ paths:
       summary: Submit a new invoice
       tags:
         - InvoiceSubmissions
-  /invoice_submissions/:guid/evidence:
-    get:
-      consumes:
-        - application/json
-      description: Get evidence for an InvoiceSubmission by GUID with corresponding status
-      operationId: show_invoice_submission_evidence
-      parameters:
-        - description: InvoiceSubmission GUID
-          format: uuid
-          in: path
-          name: guid
-          required: true
-          type: string
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/InvoiceSubmissionEvidence"
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
-      summary: Get InvoiceSubmission Evidence
-      tags:
-        - InvoiceSubmissions
   /invoice_submissions/preflight:
     post:
       consumes:
@@ -124,6 +97,33 @@ paths:
               $ref: "#/definitions/ErrorModel"
             type: array
       summary: Preflight an invoice recipient
+      tags:
+        - InvoiceSubmissions
+  "/invoice_submissions/{guid}/evidence":
+    get:
+      consumes:
+        - application/json
+      description: Get evidence for an InvoiceSubmission by GUID with corresponding status
+      operationId: show_invoice_submission_evidence
+      parameters:
+        - description: InvoiceSubmission GUID
+          format: uuid
+          in: path
+          name: guid
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/InvoiceSubmissionEvidence"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: Get InvoiceSubmission Evidence
       tags:
         - InvoiceSubmissions
   /legal_entities:
@@ -1485,6 +1485,7 @@ definitions:
         enum:
           - ubl
           - cii
+          - idoc
         title: Conversion Strategy
         type: string
       document:
@@ -4117,6 +4118,12 @@ definitions:
         description: DEPRECATED. Use attachments.
         format: uri
         title: Document Url
+        type: string
+      idempotencyGuid:
+        description: A guid that you generated for this InvoiceSubmission to achieve idempotency. If you submit multiple documents with the same idempotencyGuid, only the first one will be processed.
+        maxLength: 36
+        minLength: 36
+        title: Idempotency GUID
         type: string
       invoice:
         $ref: "#/definitions/Invoice"
