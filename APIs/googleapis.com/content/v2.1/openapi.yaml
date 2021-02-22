@@ -51,9 +51,11 @@ tags:
   - name: pubsubnotificationsettings
   - name: regionalinventory
   - name: regions
+  - name: reports
   - name: repricingrules
   - name: returnaddress
   - name: returnpolicy
+  - name: returnpolicyonline
   - name: settlementreports
   - name: settlementtransactions
   - name: shippingsettings
@@ -4974,6 +4976,48 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - regions
+  "/content/v2.1/{merchantId}/reports/search":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Retrieves merchant performance mertrics matching the search query and optionally segmented by selected dimensions.
+      operationId: content.reports.search
+      parameters:
+        - description: Required. Id of the merchant making the call. Must be a standalone account or an MCA subaccount.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - reports
   "/content/v2.1/{merchantId}/repricingrules":
     get:
       description: Lists the repricing rules in your Merchant Center account.
@@ -4985,7 +5029,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: CLDR country code (e.g. "US"), used as a filter on repricing rules.
+        - description: '[CLDR country code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) (e.g. "US"), used as a filter on repricing rules.'
           in: query
           name: countryCode
           schema:
@@ -5517,6 +5561,176 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/content/v2.1/{merchantId}/returnpolicyonline":
+    get:
+      description: Lists all existing return policies.
+      operationId: content.returnpolicyonline.list
+      parameters:
+        - description: Required. The id of the merchant for which to retrieve the return policy online object.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReturnPolicyOnlineResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - returnpolicyonline
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new return policy.
+      operationId: content.returnpolicyonline.create
+      parameters:
+        - description: Required. The id of the merchant for which to retrieve the return policy online object.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnPolicyOnline"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnPolicyOnline"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - returnpolicyonline
+  "/content/v2.1/{merchantId}/returnpolicyonline/{returnPolicyId}":
+    delete:
+      description: Deletes an existing return policy.
+      operationId: content.returnpolicyonline.delete
+      parameters:
+        - description: Required. The id of the merchant for which to retrieve the return policy online object.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. The id of the return policy to delete.
+          in: path
+          name: returnPolicyId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - returnpolicyonline
+    get:
+      description: Gets an existing return policy.
+      operationId: content.returnpolicyonline.get
+      parameters:
+        - description: Required. The id of the merchant for which to retrieve the return policy online object.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. The id of the return policy to retrieve.
+          in: path
+          name: returnPolicyId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnPolicyOnline"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - returnpolicyonline
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates an existing return policy.
+      operationId: content.returnpolicyonline.patch
+      parameters:
+        - description: Required. The id of the merchant for which to retrieve the return policy online object.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. The id of the return policy to update.
+          in: path
+          name: returnPolicyId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReturnPolicyOnline"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnPolicyOnline"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - returnpolicyonline
   "/content/v2.1/{merchantId}/settlementreports":
     get:
       description: Retrieves a list of settlement reports from your Merchant Center account.
@@ -6617,7 +6831,7 @@ components:
           description: The ID of the linked account.
           type: string
         services:
-          description: 'Provided services. Acceptable values are: - "`shoppingAdsProductManagement`" - "`shoppingAdsOther`" - "`shoppingActionsProductManagement`" - "`shoppingActionsOrderManagement`" - "`shoppingActionsOther`" '
+          description: 'Provided services. Acceptable values are: - "`shoppingAdsProductManagement`" - "`shoppingActionsProductManagement`" - "`shoppingActionsOrderManagement`" '
           items:
             type: string
           type: array
@@ -8051,6 +8265,15 @@ components:
             $ref: "#/components/schemas/RepricingRule"
           type: array
       type: object
+    ListReturnPolicyOnlineResponse:
+      description: Response message for the `ListReturnPolicyOnline` method.
+      properties:
+        returnPolicies:
+          description: The retrieved return policies.
+          items:
+            $ref: "#/components/schemas/ReturnPolicyOnline"
+          type: array
+      type: object
     LocalInventory:
       description: Local inventory resource. For accepted attribute values, see the local product inventory feed specification.
       properties:
@@ -8236,6 +8459,22 @@ components:
           type: string
         reasonCode:
           description: Code of the rejection reason.
+          type: string
+      type: object
+    Metrics:
+      description: Performance metrics. Values are only set for metrics requested explicitly in the request's search query.
+      properties:
+        clicks:
+          description: Number of clicks.
+          format: int64
+          type: string
+        ctr:
+          description: Number of clicks merchant's products receive (clicks) divided by the number of times the products are shown (impressions).
+          format: double
+          type: number
+        impressions:
+          description: Number of times merchant's products are shown.
+          format: int64
           type: string
       type: object
     MinimumOrderValueTable:
@@ -10978,6 +11217,16 @@ components:
           $ref: "#/components/schemas/RegionalInventory"
           description: Price and availability of the product.
       type: object
+    ReportRow:
+      description: Result row returned from the search query.
+      properties:
+        metrics:
+          $ref: "#/components/schemas/Metrics"
+          description: Metrics requested by the merchant in the query. Metric values are only set for metrics requested explicitly in the query.
+        segments:
+          $ref: "#/components/schemas/Segments"
+          description: Segmentation dimensions requested by the merchant in the query. Dimension values are only set for dimensions requested explicitly in the query.
+      type: object
     RepricingProductReport:
       description: Resource that represents a daily Repricing product report. Each report contains stats for a single type of Repricing rule for a single product on a given day. If there are multiple rules of the same type for the product on that day, the report lists all the rules by rule ids, combines the stats, and paginates the results by date. To retrieve the stats of a particular rule, provide the rule_id in the request.
       properties:
@@ -11037,7 +11286,7 @@ components:
           $ref: "#/components/schemas/RepricingRuleCostOfGoodsSaleRule"
           description: The rule definition for TYPE_COGS_BASED. Required when the rule type is TYPE_COGS_BASED.
         countryCode:
-          description: Required. Immutable. CLDR country code (e.g. "US").
+          description: Required. Immutable. [CLDR country code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) (e.g. "US").
           type: string
         effectiveTimePeriod:
           $ref: "#/components/schemas/RepricingRuleEffectiveTime"
@@ -11303,6 +11552,121 @@ components:
             $ref: "#/components/schemas/ReturnPolicySeasonalOverride"
           type: array
       type: object
+    ReturnPolicyOnline:
+      description: Return policy online object. This is currently used to represent return policies for ads and free listings programs.
+      properties:
+        countries:
+          description: The countries of sale where the return policy is applicable. The values must be a valid 2 letter ISO 3166 code, e.g. "US".
+          items:
+            type: string
+          type: array
+        itemConditions:
+          description: The item conditions that are accepted for returns. This is required to not be empty unless the type of return policy is noReturns.
+          items:
+            enum:
+              - ITEM_CONDITION_UNSPECIFIED
+              - NEW
+              - USED
+            type: string
+          type: array
+        label:
+          description: The unique user-defined label of the return policy. The same label cannot be used in different return policies for the same country. Policies with the label 'default' will apply to all products, unless a product specifies a return_policy_label attribute.
+          type: string
+        name:
+          description: The name of the policy as shown in Merchant Center.
+          type: string
+        policy:
+          $ref: "#/components/schemas/ReturnPolicyOnlinePolicy"
+          description: The return policy.
+        restockingFee:
+          $ref: "#/components/schemas/ReturnPolicyOnlineRestockingFee"
+          description: The restocking fee that applies to all return reason categories. This would be treated as a free restocking fee if the value is not set.
+        returnMethods:
+          description: The return methods of how customers can return an item. This value is required to not be empty unless the type of return policy is noReturns.
+          items:
+            enum:
+              - RETURN_METHOD_UNSPECIFIED
+              - BY_MAIL
+              - IN_STORE
+              - AT_A_KIOSK
+            type: string
+          type: array
+        returnPolicyId:
+          description: Output only. Return policy ID generated by Google.
+          readOnly: true
+          type: string
+        returnPolicyUri:
+          description: The return policy uri. This can used by Google to do a sanity check for the policy.
+          type: string
+        returnReasonCategoryInfo:
+          description: The return reason category information. This required to not be empty unless the type of return policy is noReturns.
+          items:
+            $ref: "#/components/schemas/ReturnPolicyOnlineReturnReasonCategoryInfo"
+          type: array
+      type: object
+    ReturnPolicyOnlinePolicy:
+      description: The available policies.
+      properties:
+        days:
+          description: The number of days items can be returned after delivery, where one day is defined to be 24 hours after the delivery timestamp. Required for `numberOfDaysAfterDelivery` returns.
+          format: int64
+          type: string
+        type:
+          description: Policy type.
+          enum:
+            - TYPE_UNSPECIFIED
+            - NUMBER_OF_DAYS_AFTER_DELIVERY
+            - NO_RETURNS
+            - LIFETIME_RETURNS
+          type: string
+      type: object
+    ReturnPolicyOnlineRestockingFee:
+      description: The restocking fee. This can either be a fixed fee or a micro percent.
+      properties:
+        fixedFee:
+          $ref: "#/components/schemas/PriceAmount"
+          description: Fixed restocking fee.
+        microPercent:
+          description: Percent of total price in micros. 15,000,000 means 15% of the total price would be charged.
+          format: int32
+          type: integer
+      type: object
+    ReturnPolicyOnlineReturnReasonCategoryInfo:
+      description: The return reason category info wrapper.
+      properties:
+        returnLabelSource:
+          description: The corresponding return label source.
+          enum:
+            - RETURN_LABEL_SOURCE_UNSPECIFIED
+            - DOWNLOAD_AND_PRINT
+            - IN_THE_BOX
+            - CUSTOMER_RESPONSIBILITY
+          type: string
+        returnReasonCategory:
+          description: The return reason category.
+          enum:
+            - RETURN_REASON_CATEGORY_UNSPECIFIED
+            - BUYER_REMORSE
+            - ITEM_DEFECT
+          type: string
+        returnShippingFee:
+          $ref: "#/components/schemas/ReturnPolicyOnlineReturnShippingFee"
+          description: The corresponding return shipping fee. This is only applicable when returnLabelSource is not the customer's responsibility.
+      type: object
+    ReturnPolicyOnlineReturnShippingFee:
+      description: The return shipping fee. This can either be a fixed fee or a boolean to indicate that the customer pays the actual shipping cost.
+      properties:
+        fixedFee:
+          $ref: "#/components/schemas/PriceAmount"
+          description: Fixed return shipping fee amount. This value is only applicable when type is FIXED. We will treat the return shipping fee as free if type is FIXED and this value is not set.
+        type:
+          description: Type of return shipping fee.
+          enum:
+            - TYPE_UNSPECIFIED
+            - FIXED
+            - CUSTOMER_PAYING_ACTUAL_FEE
+          type: string
+      type: object
     ReturnPolicyPolicy:
       properties:
         lastReturnDate:
@@ -11516,6 +11880,51 @@ components:
             $ref: "#/components/schemas/Value"
           type: array
       type: object
+    SearchRequest:
+      description: Request message for the ReportService.Search method.
+      properties:
+        pageSize:
+          description: Number of ReportRows to retrieve in a single page. Defaults to the maximum of 1000. Values above 1000 are coerced to 1000.
+          format: int32
+          type: integer
+        pageToken:
+          description: Token of the page to retrieve. If not specified, the first page of results is returned. In order to request the next page of results, the value obtained from `next_page_token` in the previous response should be used.
+          type: string
+        query:
+          description: "Required. Query that defines performance metrics to retrieve and dimensions according to which the metrics are to be segmented. "
+          type: string
+      type: object
+    SearchResponse:
+      description: Response message for the ReportService.Search method.
+      properties:
+        nextPageToken:
+          description: Token which can be sent as `page_token` to retrieve the next page. If omitted, there are no subsequent pages.
+          type: string
+        results:
+          description: Rows that matched the search query.
+          items:
+            $ref: "#/components/schemas/ReportRow"
+          type: array
+      type: object
+    Segments:
+      description: Dimensions according to which metrics are segmented in the response. Values of product dimensions, e.g., offer id, reflect the state of a product at the time of the corresponding event, e.g., impression or order. Segment fields cannot be selected in queries without also selecting at least one metric field. Values are only set for dimensions requested explicitly in the request's search query.
+      properties:
+        date:
+          $ref: "#/components/schemas/Date"
+          description: Date in the merchant timezone to which metrics apply.
+        offerId:
+          description: Merchant-provided id of the product.
+          type: string
+        program:
+          description: Program to which metrics apply, e.g., Free Product Listing.
+          enum:
+            - PROGRAM_UNSPECIFIED
+            - SHOPPING_ADS
+            - FREE_PRODUCT_LISTING
+            - FREE_LOCAL_PRODUCT_LISTING
+            - BUY_ON_GOOGLE_LISTING
+          type: string
+      type: object
     Service:
       properties:
         active:
@@ -11652,7 +12061,7 @@ components:
           description: The time on which the event occurred in ISO 8601 format.
           type: string
         type:
-          description: 'The type of the transaction that occurred. Acceptable values are: - "`order`" - "`reversal`" - "`orderRefund`" - "`reversalRefund`" - "`issueRelatedRefundAndReplacement`" - "`returnLabelShippingFeeTransaction`" - "`reversalIssueRelatedRefundAndReplacement`" - "`reversalReturnLabelShippingFeeTransaction`" '
+          description: 'The type of the transaction that occurred. Acceptable values are: - "`order`" - "`reversal`" - "`orderRefund`" - "`reversalRefund`" - "`issueRelatedRefundAndReplacement`" - "`returnLabelShippingFeeTransaction`" - "`reversalIssueRelatedRefundAndReplacement`" - "`reversalReturnLabelShippingFeeTransaction`" - "`lumpSumCorrectionTransaction`" '
           type: string
       type: object
     SettlementreportsListResponse:

@@ -452,7 +452,7 @@ components:
         type: string
   schemas:
     AdmissionRule:
-      description: An admission rule specifies either that all container images used in a pod creation request must be attested to by one or more attestors, that all pod creations will be allowed, or that all pod creations will be denied. Images matching an admission whitelist pattern are exempted from admission rules and will never block a pod creation.
+      description: An admission rule specifies either that all container images used in a pod creation request must be attested to by one or more attestors, that all pod creations will be allowed, or that all pod creations will be denied. Images matching an admission allowlist pattern are exempted from admission rules and will never block a pod creation.
       properties:
         enforcementMode:
           description: Required. The action when a pod creation is denied by the admission rule.
@@ -476,7 +476,7 @@ components:
           type: array
       type: object
     AdmissionWhitelistPattern:
-      description: An admission whitelist pattern exempts images from checks by admission rules.
+      description: An admission allowlist pattern exempts images from checks by admission rules.
       properties:
         namePattern:
           description: An image name pattern to allowlist, in the form `registry/path/to/image`. This supports a trailing `*` as a wildcard, but this is allowed only in text after the `registry/` part.

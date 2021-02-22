@@ -111,7 +111,7 @@ paths:
           name: dnsName
           schema:
             type: string
-        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server decides how many results to return.
           in: query
           name: maxResults
           schema:
@@ -382,7 +382,7 @@ paths:
         - managedZones
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/changes":
     get:
-      description: Enumerate Changes to a ResourceRecordSet collection.
+      description: Enumerates Changes to a ResourceRecordSet collection.
       operationId: dns.changes.list
       parameters:
         - description: Identifies the project addressed by this request.
@@ -397,7 +397,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server decides how many results to return.
           in: query
           name: maxResults
           schema:
@@ -458,7 +458,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Atomically update the ResourceRecordSet collection.
+      description: Atomically updates the ResourceRecordSet collection.
       operationId: dns.changes.create
       parameters:
         - description: Identifies the project addressed by this request.
@@ -503,7 +503,7 @@ paths:
         - changes
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/changes/{changeId}":
     get:
-      description: Fetch the representation of an existing Change.
+      description: Fetches the representation of an existing Change.
       operationId: dns.changes.get
       parameters:
         - description: Identifies the project addressed by this request.
@@ -584,12 +584,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type will be computed and displayed.
+        - description: An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type is computed and displayed.
           in: query
           name: digestType
           schema:
             type: string
-        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server decides how many results to return.
           in: query
           name: maxResults
           schema:
@@ -665,7 +665,7 @@ paths:
           name: clientOperationId
           schema:
             type: string
-        - description: An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type will be computed and displayed.
+        - description: An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type is computed and displayed.
           in: query
           name: digestType
           schema:
@@ -710,7 +710,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/operations":
     get:
-      description: Enumerate Operations for the given ManagedZone.
+      description: Enumerates Operations for the given ManagedZone.
       operationId: dns.managedZoneOperations.list
       parameters:
         - description: Identifies the project addressed by this request.
@@ -725,7 +725,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server decides how many results to return.
           in: query
           name: maxResults
           schema:
@@ -783,7 +783,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/operations/{operation}":
     get:
-      description: Fetch the representation of an existing Operation.
+      description: Fetches the representation of an existing Operation.
       operationId: dns.managedZoneOperations.get
       parameters:
         - description: Identifies the project addressed by this request.
@@ -798,7 +798,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Identifies the operation addressed by this request.
+        - description: Identifies the operation addressed by this request (ID of the operation).
           in: path
           name: operation
           required: true
@@ -849,7 +849,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/rrsets":
     get:
-      description: Enumerate ResourceRecordSets that have been created but not yet deleted.
+      description: Enumerate ResourceRecordSets that you have created but not yet deleted.
       operationId: dns.resourceRecordSets.list
       parameters:
         - description: Identifies the project addressed by this request.
@@ -864,7 +864,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server decides how many results to return.
           in: query
           name: maxResults
           schema:
@@ -924,7 +924,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/policies":
     get:
-      description: Enumerate all Policies associated with a project.
+      description: Enumerates all Policies associated with a project.
       operationId: dns.policies.list
       parameters:
         - description: Identifies the project addressed by this request.
@@ -933,7 +933,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server decides how many results to return.
           in: query
           name: maxResults
           schema:
@@ -965,7 +965,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create a new Policy
+      description: Creates a new Policy
       operationId: dns.policies.create
       parameters:
         - description: Identifies the project addressed by this request.
@@ -995,7 +995,7 @@ paths:
         - policies
   "/dns/v2beta1/projects/{project}/policies/{policy}":
     delete:
-      description: Delete a previously created Policy. Will fail if the policy is still being referenced by a network.
+      description: Delete a previously created Policy. Fails if the policy is still being referenced by a network.
       operationId: dns.policies.delete
       parameters:
         - description: Identifies the project addressed by this request.
@@ -1021,7 +1021,7 @@ paths:
       tags:
         - policies
     get:
-      description: Fetch the representation of an existing Policy.
+      description: Fetches the representation of an existing Policy.
       operationId: dns.policies.get
       parameters:
         - description: Identifies the project addressed by this request.
@@ -1255,7 +1255,7 @@ components:
           description: Type of resource.
           type: string
         nextPageToken:
-          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.
           type: string
       type: object
     DnsKey:
@@ -1285,10 +1285,10 @@ components:
           description: Unique identifier for the resource; defined by the server (output only).
           type: string
         isActive:
-          description: Active keys will be used to sign subsequent changes to the ManagedZone. Inactive keys will still be present as DNSKEY Resource Records for the use of resolvers validating existing signatures.
+          description: Active keys are used to sign subsequent changes to the ManagedZone. Inactive keys will still be present as DNSKEY Resource Records for the use of resolvers validating existing signatures.
           type: boolean
         keyLength:
-          description: Length of the key in bits. Specified at creation time then immutable.
+          description: Length of the key in bits. Specified at creation time, then immutable.
           format: uint32
           type: integer
         keyTag:
@@ -1302,7 +1302,7 @@ components:
           description: Base64 encoded public half of this key. Output only.
           type: string
         type:
-          description: One of "KEY_SIGNING" or "ZONE_SIGNING". Keys of type KEY_SIGNING have the Secure Entry Point flag set and, when active, will be used to sign only resource record sets of type DNSKEY. Otherwise, the Secure Entry Point flag will be cleared and this key will be used to sign only resource record sets of other types. Immutable after creation time.
+          description: One of "KEY_SIGNING" or "ZONE_SIGNING". Keys of type KEY_SIGNING have the Secure Entry Point flag set and, when active, are used to sign only resource record sets of type DNSKEY. Otherwise, the Secure Entry Point flag is cleared and this key is used to sign only resource record sets of other types. Immutable after creation time.
           enum:
             - KEY_SIGNING
             - ZONE_SIGNING
@@ -1338,7 +1338,7 @@ components:
           format: uint32
           type: integer
         keyType:
-          description: Specifies whether this is a key signing key (KSK) or a zone signing key (ZSK). Key signing keys have the Secure Entry Point flag set and, when active, will only be used to sign resource record sets of type DNSKEY. Zone signing keys do not have the Secure Entry Point flag set and will be used to sign all other types of resource record sets.
+          description: Specifies whether this is a key signing key (KSK) or a zone signing key (ZSK). Key signing keys have the Secure Entry Point flag set and, when active, are only used to sign resource record sets of type DNSKEY. Zone signing keys do not have the Secure Entry Point flag set and are used to sign all other types of resource record sets.
           enum:
             - KEY_SIGNING
             - ZONE_SIGNING
@@ -1362,7 +1362,7 @@ components:
           description: Type of resource.
           type: string
         nextPageToken:
-          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.
           type: string
       type: object
     ManagedZone:
@@ -1399,7 +1399,7 @@ components:
           description: User assigned name for this resource. Must be unique within the project. The name must be 1-63 characters long, must begin with a letter, end with a letter or digit, and only contain lowercase letters, digits or dashes.
           type: string
         nameServerSet:
-          description: Optionally specifies the NameServerSet for this ManagedZone. A NameServerSet is a set of DNS name servers that all host the same ManagedZones. Most users will leave this field unset.
+          description: Optionally specifies the NameServerSet for this ManagedZone. A NameServerSet is a set of DNS name servers that all host the same ManagedZones. Most users will leave this field unset. If you need to use this field, please reach out to your account team.
           type: string
         nameServers:
           description: Delegate your managed_zone to these virtual name servers; defined by the server (output only)
@@ -1414,7 +1414,7 @@ components:
           description: For privately visible zones, the set of Virtual Private Cloud resources that the zone is visible from.
         reverseLookupConfig:
           $ref: "#/components/schemas/ManagedZoneReverseLookupConfig"
-          description: The presence of this field indicates that this is a managed reverse lookup zone and Cloud DNS will resolve reverse lookup queries using automatically configured records for VPC resources. This only applies to networks listed under private_visibility_config.
+          description: The presence of this field indicates that this is a managed reverse lookup zone and Cloud DNS resolves reverse lookup queries using automatically configured records for VPC resources. This only applies to networks listed under private_visibility_config.
         serviceDirectoryConfig:
           $ref: "#/components/schemas/ManagedZoneServiceDirectoryConfig"
           description: This field links to the associated service directory namespace. This field should not be set for public zones or forwarding zones.
@@ -1455,7 +1455,7 @@ components:
           default: dns#managedZoneForwardingConfig
           type: string
         targetNameServers:
-          description: List of target name servers to forward to. Cloud DNS will select the best available name server if more than one target is given.
+          description: List of target name servers to forward to. Cloud DNS selects the best available name server if more than one target is given.
           items:
             $ref: "#/components/schemas/ManagedZoneForwardingConfigNameServerTarget"
           type: array
@@ -1463,7 +1463,7 @@ components:
     ManagedZoneForwardingConfigNameServerTarget:
       properties:
         forwardingPath:
-          description: Forwarding path for this NameServerTarget. If unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target.
+          description: Forwarding path for this NameServerTarget. If unset or set to DEFAULT, Cloud DNS makes forwarding decisions based on address ranges; that is, RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the internet. When set to PRIVATE, Cloud DNS always sends queries through VPC for this target.
           enum:
             - DEFAULT
             - PRIVATE
@@ -1483,7 +1483,7 @@ components:
           default: dns#managedZoneOperationsListResponse
           type: string
         nextPageToken:
-          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         operations:
           description: The operation resources.
@@ -1574,7 +1574,7 @@ components:
             $ref: "#/components/schemas/ManagedZone"
           type: array
         nextPageToken:
-          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
       type: object
     Operation:
@@ -1635,7 +1635,7 @@ components:
           description: Type of resource.
           type: string
         nextPageToken:
-          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         policies:
           description: The policy resources.
@@ -1667,7 +1667,7 @@ components:
           description: A mutable string of at most 1024 characters associated with this resource for the user's convenience. Has no effect on the policy's function.
           type: string
         enableInboundForwarding:
-          description: Allows networks bound to this policy to receive DNS queries sent by VMs or applications over VPN connections. When enabled, a virtual IP address will be allocated from each of the sub-networks that are bound to this policy.
+          description: Allows networks bound to this policy to receive DNS queries sent by VMs or applications over VPN connections. When enabled, a virtual IP address is allocated from each of the sub-networks that are bound to this policy.
           type: boolean
         enableLogging:
           description: Controls whether logging is enabled for the networks bound to this policy. Defaults to no logging if not set.
@@ -1680,7 +1680,7 @@ components:
           default: dns#policy
           type: string
         name:
-          description: User assigned name for this policy.
+          description: User-assigned name for this policy.
           type: string
         networks:
           description: List of network names specifying networks to which this policy is applied.
@@ -1702,7 +1702,7 @@ components:
     PolicyAlternativeNameServerConfigTargetNameServer:
       properties:
         forwardingPath:
-          description: Forwarding path for this TargetNameServer. If unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target.
+          description: Forwarding path for this TargetNameServer. If unset or set to DEFAULT, Cloud DNS makes forwarding decision based on address ranges; that is, RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the internet. When set to PRIVATE, Cloud DNS always sends queries through VPC for this target.
           enum:
             - DEFAULT
             - PRIVATE
@@ -1840,7 +1840,7 @@ components:
           description: Type of resource.
           type: string
         nextPageToken:
-          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. This lets you retrieve complete contents of even larger collections, one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         rrsets:
           description: The resource record set resources.

@@ -30,61 +30,6 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v3/projects/{projectsId}/locations/{locationsId}/agents/{agentsId}/testCases:run":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Kicks off a test case run.
-      operationId: dialogflow.projects.locations.agents.testCases.run
-      parameters:
-        - in: path
-          name: projectsId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: locationsId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: agentsId
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3RunTestCaseRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleLongrunningOperation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/dialogflow
-          Oauth2c:
-            - https://www.googleapis.com/auth/dialogflow
-      tags:
-        - projects
   "/v3/{agent}/testCases:calculateCoverage":
     get:
       description: Calculates the test coverage for an agent.
@@ -104,6 +49,7 @@ paths:
               - COVERAGE_TYPE_UNSPECIFIED
               - INTENT
               - PAGE_TRANSITION
+              - TRANSITION_ROUTE_GROUP
             type: string
       responses:
         "200":
@@ -520,6 +466,52 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GoogleCloudDialogflowCxV3RestoreAgentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v3/{name}:run":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Kicks off a test case run.
+      operationId: dialogflow.projects.locations.agents.testCases.run
+      parameters:
+        - description: "Required. Format of test case name to run: `projects//locations/ /agents//testCases/`."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3RunTestCaseRequest"
       responses:
         "200":
           content:
@@ -2355,9 +2347,12 @@ components:
         intentCoverage:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3IntentCoverage"
           description: Intent coverage.
+        routeGroupCoverage:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TransitionRouteGroupCoverage"
+          description: Transition route group coverage.
         transitionCoverage:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TransitionCoverage"
-          description: Transition coverage.
+          description: Transition (excluding transition route groups) coverage.
       type: object
     GoogleCloudDialogflowCxV3ConversationTurn:
       description: One interaction between a human and virtual agent. The human provides some input and the virtual agent provides a response.
@@ -2389,7 +2384,7 @@ components:
       properties:
         currentPage:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Page"
-          description: The Page on which the utterance was spoken. Only some fields such as name and displayname will be set.
+          description: The Page on which the utterance was spoken. Only name and displayName will be set.
         diagnosticInfo:
           additionalProperties:
             description: Properties of the object.
@@ -2416,7 +2411,7 @@ components:
           type: array
         triggeredIntent:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Intent"
-          description: The Intent that triggered the response. Only some fields such as name and displayname will be set.
+          description: The Intent that triggered the response. Only name and displayName will be set.
       type: object
     GoogleCloudDialogflowCxV3CreateDocumentOperationMetadata:
       description: Metadata for CreateDocument operation.
@@ -3819,9 +3814,6 @@ components:
         environment:
           description: "Optional. Environment name. If not set, draft environment is assumed. Format: `projects//locations//agents//environments/`."
           type: string
-        name:
-          description: "Required. Format of test case name to run: `projects//locations/ /agents//testCases/`."
-          type: string
       type: object
     GoogleCloudDialogflowCxV3RunTestCaseResponse:
       description: The response message for TestCases.RunTestCase.
@@ -4072,7 +4064,7 @@ components:
       properties: {}
       type: object
     GoogleCloudDialogflowCxV3TransitionCoverage:
-      description: Transition coverage represents the percentage of all possible transitions present within any of a parent's test cases.
+      description: Transition coverage represents the percentage of all possible page transitions (page-level transition routes and event handlers, excluding transition route groups) present within any of a parent's test cases.
       properties:
         coverageScore:
           description: The percent of transitions in the agent that are covered.
@@ -4085,7 +4077,7 @@ components:
           type: array
       type: object
     GoogleCloudDialogflowCxV3TransitionCoverageTransition:
-      description: A transition in the agent's graph.
+      description: A transition in a page.
       properties:
         covered:
           description: Whether or not the transition is covered by at least one of the agent's test cases.
@@ -4154,6 +4146,45 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TransitionRoute"
           type: array
+      type: object
+    GoogleCloudDialogflowCxV3TransitionRouteGroupCoverage:
+      description: Transition route group coverage represents the percentage of all possible transition routes present within any of a parent's test cases. The results are grouped by the transition route group.
+      properties:
+        coverageScore:
+          description: The percent of transition routes in all the transition route groups that are covered.
+          format: float
+          type: number
+        coverages:
+          description: Transition route group coverages.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverage"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverage:
+      description: Coverage result message for one transition route group.
+      properties:
+        coverageScore:
+          description: The percent of transition routes in the transition route group that are covered.
+          format: float
+          type: number
+        routeGroup:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TransitionRouteGroup"
+          description: Transition route group metadata. Only name and displayName will be set.
+        transitions:
+          description: The list of transition routes and coverage in the transition route group.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3TransitionRouteGroupCoverageCoverageTransition:
+      description: A transition coverage in a transition route group.
+      properties:
+        covered:
+          description: Whether or not the transition route is covered by at least one of the agent's test cases.
+          type: boolean
+        transitionRoute:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TransitionRoute"
+          description: Intent route or condition route.
       type: object
     GoogleCloudDialogflowCxV3UpdateDocumentOperationMetadata:
       description: Metadata for UpdateDocument operation.
@@ -4515,7 +4546,7 @@ components:
       properties:
         currentPage:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Page"
-          description: The Page on which the utterance was spoken. Only some fields such as name and displayname will be set.
+          description: The Page on which the utterance was spoken. Only name and displayName will be set.
         diagnosticInfo:
           additionalProperties:
             description: Properties of the object.
@@ -4542,7 +4573,7 @@ components:
           type: array
         triggeredIntent:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Intent"
-          description: The Intent that triggered the response. Only some fields such as name and displayname will be set.
+          description: The Intent that triggered the response. Only name and displayName will be set.
       type: object
     GoogleCloudDialogflowCxV3beta1CreateDocumentOperationMetadata:
       description: Metadata for CreateDocument operation.

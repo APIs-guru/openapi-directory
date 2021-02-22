@@ -402,7 +402,7 @@ components:
           description: Enable boosting low frequency components. The default is `false`.
           type: boolean
         lufs:
-          description: Specify audio loudness normalization in loudness units relative to full scale (LUFS). Enter a value between -24 and 0, where -24 is the Advanced Television Systems Committee (ATSC A/85), -23 is the EU R128 broadcast standard, -19 is the prior standard for online mono audio, -18 is the ReplayGain standard, -16 is the prior standard for stereo audio, -14 is the new online audio standard recommended by Spotify, as well as Amazon Echo, and 0 disables normalization. The default is 0.
+          description: "Specify audio loudness normalization in loudness units relative to full scale (LUFS). Enter a value between -24 and 0 (the default), where: * -24 is the Advanced Television Systems Committee (ATSC A/85) standard * -23 is the EU R128 broadcast standard * -19 is the prior standard for online mono audio * -18 is the ReplayGain standard * -16 is the prior standard for stereo audio * -14 is the new online audio standard recommended by Spotify, as well as Amazon Echo * 0 disables normalization"
           format: double
           type: number
       type: object
@@ -901,6 +901,26 @@ components:
           $ref: "#/components/schemas/Image"
           description: Image overlay.
       type: object
+    Pad:
+      description: Pad filter configuration for the input video. The padded input video is scaled after padding with black to match the output resolution.
+      properties:
+        bottomPixels:
+          description: The number of pixels to add to the bottom. The default is 0.
+          format: int32
+          type: integer
+        leftPixels:
+          description: The number of pixels to add to the left. The default is 0.
+          format: int32
+          type: integer
+        rightPixels:
+          description: The number of pixels to add to the right. The default is 0.
+          format: int32
+          type: integer
+        topPixels:
+          description: The number of pixels to add to the top. The default is 0.
+          format: int32
+          type: integer
+      type: object
     PreprocessingConfig:
       description: Preprocessing configurations.
       properties:
@@ -919,6 +939,9 @@ components:
         denoise:
           $ref: "#/components/schemas/Denoise"
           description: Denoise preprocessing configuration.
+        pad:
+          $ref: "#/components/schemas/Pad"
+          description: Specify the video pad filter configuration.
       type: object
     Progress:
       description: Estimated fractional progress for each step, from `0` to `1`.
@@ -986,6 +1009,10 @@ components:
           description: Starting from `0s`, create sprites at regular intervals. Specify the interval value in seconds.
           format: google-duration
           type: string
+        quality:
+          description: The quality of the generated sprite sheet. Enter a value between 1 and 100, where 1 is the lowest quality and 100 is the highest quality. The default is 100. A high quality value corresponds to a low image data compression ratio.
+          format: int32
+          type: integer
         rowCount:
           description: The maximum number of rows per sprite sheet. When the sprite sheet is full, a new sprite sheet is created. The default is 0, which indicates no maximum limit.
           format: int32

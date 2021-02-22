@@ -37,6 +37,71 @@ tags:
   - name: projects
 paths:
   "/v1/{name}":
+    delete:
+      description: Deletes a schema.
+      operationId: pubsub.projects.schemas.delete
+      parameters:
+        - description: Required. Name of the schema to delete. Format is `projects/{project}/schemas/{schema}`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/pubsub
+          Oauth2c:
+            - https://www.googleapis.com/auth/pubsub
+      tags:
+        - projects
+    get:
+      description: Gets a schema.
+      operationId: pubsub.projects.schemas.get
+      parameters:
+        - description: Required. The name of the schema to get. Format is `projects/{project}/schemas/{schema}`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The set of fields to return in the response. If not set, returns a Schema with `name` and `type`, but not `definition`. Set to `FULL` to retrieve all fields.
+          in: query
+          name: view
+          schema:
+            enum:
+              - SCHEMA_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Schema"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/pubsub
+          Oauth2c:
+            - https://www.googleapis.com/auth/pubsub
+      tags:
+        - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -103,6 +168,196 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Topic"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/pubsub
+          Oauth2c:
+            - https://www.googleapis.com/auth/pubsub
+      tags:
+        - projects
+  "/v1/{parent}/schemas":
+    get:
+      description: Lists schemas in a project.
+      operationId: pubsub.projects.schemas.list
+      parameters:
+        - description: Required. The name of the project in which to list schemas. Format is `projects/{project-id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of schemas to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last `ListSchemasResponse`; indicates that this is a continuation of a prior `ListSchemas` call, and that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: The set of Schema fields to return in the response. If not set, returns Schemas with `name` and `type`, but not `definition`. Set to `FULL` to retrieve all fields.
+          in: query
+          name: view
+          schema:
+            enum:
+              - SCHEMA_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSchemasResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/pubsub
+          Oauth2c:
+            - https://www.googleapis.com/auth/pubsub
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a schema.
+      operationId: pubsub.projects.schemas.create
+      parameters:
+        - description: Required. The name of the project in which to create the schema. Format is `projects/{project-id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The ID to use for the schema, which will become the final component of the schema's resource name. See https://cloud.google.com/pubsub/docs/admin#resource_names for resource name constraints.
+          in: query
+          name: schemaId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Schema"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Schema"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/pubsub
+          Oauth2c:
+            - https://www.googleapis.com/auth/pubsub
+      tags:
+        - projects
+  "/v1/{parent}/schemas:validate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Validates a schema.
+      operationId: pubsub.projects.schemas.validate
+      parameters:
+        - description: Required. The name of the project in which to validate schemas. Format is `projects/{project-id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateSchemaRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidateSchemaResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/pubsub
+          Oauth2c:
+            - https://www.googleapis.com/auth/pubsub
+      tags:
+        - projects
+  "/v1/{parent}/schemas:validateMessage":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Validates a message against a schema.
+      operationId: pubsub.projects.schemas.validateMessage
+      parameters:
+        - description: Required. The name of the project in which to validate schemas. Format is `projects/{project-id}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateMessageRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidateMessageResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1187,6 +1442,18 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
+    ListSchemasResponse:
+      description: Response for the `ListSchemas` method.
+      properties:
+        nextPageToken:
+          description: If not empty, indicates that there may be more schemas that match the request; this value should be passed in a new `ListSchemasRequest`.
+          type: string
+        schemas:
+          description: The resulting schemas.
+          items:
+            $ref: "#/components/schemas/Schema"
+          type: array
+      type: object
     ListSnapshotsResponse:
       description: Response for the `ListSnapshots` method.
       properties:
@@ -1405,6 +1672,37 @@ components:
           format: google-duration
           type: string
       type: object
+    Schema:
+      description: A schema resource.
+      properties:
+        definition:
+          description: The definition of the schema. This should contain a string representing the full definition of the schema that is a valid schema definition of the type specified in `type`.
+          type: string
+        name:
+          description: Required. Name of the schema. Format is `projects/{project}/schemas/{schema}`.
+          type: string
+        type:
+          description: The type of the schema definition.
+          enum:
+            - TYPE_UNSPECIFIED
+            - PROTOCOL_BUFFER
+            - AVRO
+          type: string
+      type: object
+    SchemaSettings:
+      description: Settings for validating messages published against a schema.
+      properties:
+        encoding:
+          description: The encoding of messages validated against `schema`.
+          enum:
+            - ENCODING_UNSPECIFIED
+            - JSON
+            - BINARY
+          type: string
+        schema:
+          description: Required. The name of the schema that messages published should be validated against. Format is `projects/{project}/schemas/{schema}`. The value of this field will be `_deleted-schema_` if the schema has been deleted.
+          type: string
+      type: object
     SeekRequest:
       description: Request for the `Seek` method.
       properties:
@@ -1531,6 +1829,9 @@ components:
         satisfiesPzs:
           description: Reserved for future use. This field is set only in responses from the server; it is ignored if it is set in any requests.
           type: boolean
+        schemaSettings:
+          $ref: "#/components/schemas/SchemaSettings"
+          description: Settings for validating messages published against a schema.
       type: object
     UpdateSnapshotRequest:
       description: Request for the UpdateSnapshot method.
@@ -1564,6 +1865,42 @@ components:
           description: Required. Indicates which fields in the provided topic to update. Must be specified and non-empty. Note that if `update_mask` contains "message_storage_policy" but the `message_storage_policy` is not set in the `topic` provided above, then the updated value is determined by the policy configured at the project or organization level.
           format: google-fieldmask
           type: string
+      type: object
+    ValidateMessageRequest:
+      description: Request for the `ValidateMessage` method.
+      properties:
+        encoding:
+          description: The encoding expected for messages
+          enum:
+            - ENCODING_UNSPECIFIED
+            - JSON
+            - BINARY
+          type: string
+        message:
+          description: Message to validate against the provided `schema_spec`.
+          format: byte
+          type: string
+        name:
+          description: Name of the schema against which to validate. Format is `projects/{project}/schemas/{schema}`.
+          type: string
+        schema:
+          $ref: "#/components/schemas/Schema"
+          description: Ad-hoc schema against which to validate
+      type: object
+    ValidateMessageResponse:
+      description: Response for the `ValidateMessage` method. Empty for now.
+      properties: {}
+      type: object
+    ValidateSchemaRequest:
+      description: Request for the `ValidateSchema` method.
+      properties:
+        schema:
+          $ref: "#/components/schemas/Schema"
+          description: Required. The schema object to validate.
+      type: object
+    ValidateSchemaResponse:
+      description: Response for the `ValidateSchema` method. Empty for now.
+      properties: {}
       type: object
   securitySchemes:
     Oauth2:

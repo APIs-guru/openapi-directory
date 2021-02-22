@@ -2179,6 +2179,11 @@ components:
     JobPlacement:
       description: Dataproc job config.
       properties:
+        clusterLabels:
+          additionalProperties:
+            type: string
+          description: Optional. Cluster labels to identify a cluster where the job will be submitted.
+          type: object
         clusterName:
           description: Required. The name of the cluster where the job will be submitted.
           type: string
@@ -2702,7 +2707,7 @@ components:
       properties:
         kerberosConfig:
           $ref: "#/components/schemas/KerberosConfig"
-          description: Kerberos related configuration.
+          description: Optional. Kerberos related configuration.
       type: object
     SetIamPolicyRequest:
       description: Request message for SetIamPolicy method.

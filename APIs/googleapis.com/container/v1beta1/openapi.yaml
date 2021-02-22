@@ -2992,6 +2992,13 @@ components:
           description: "[Output only] This field is set when upgrades are about to commence with the description of the upgrade."
           type: string
       type: object
+    Autopilot:
+      description: Autopilot is the configuration for Autopilot settings on the cluster. It is the official product name of what is previously known as AutoGKE
+      properties:
+        enabled:
+          description: Enable Autopilot
+          type: boolean
+      type: object
     AutoprovisioningNodePoolDefaults:
       description: AutoprovisioningNodePoolDefaults contains defaults for a node pool created by NAP.
       properties:
@@ -3106,6 +3113,9 @@ components:
         authenticatorGroupsConfig:
           $ref: "#/components/schemas/AuthenticatorGroupsConfig"
           description: Configuration controlling RBAC group membership information.
+        autopilot:
+          $ref: "#/components/schemas/Autopilot"
+          description: Autopilot configuration for the cluster. It has the same semantics as AutoGKE and overrides the setting in autogke.
         autoscaling:
           $ref: "#/components/schemas/ClusterAutoscaling"
           description: Cluster-level autoscaling configuration.

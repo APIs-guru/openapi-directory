@@ -1245,6 +1245,271 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
+  "/v1/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}/targetingTypes/{targetingType}/assignedTargetingOptions":
+    get:
+      description: Lists the targeting options assigned to an insertion order.
+      operationId: displayvideo.advertisers.insertionOrders.targetingTypes.assignedTargetingOptions.list
+      parameters:
+        - description: Required. The ID of the advertiser the insertion order belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the insertion order to list assigned targeting options for.
+          in: path
+          name: insertionOrderId
+          required: true
+          schema:
+            type: string
+        - description: Required. Identifies the type of assigned targeting options to list.
+          in: path
+          name: targetingType
+          required: true
+          schema:
+            enum:
+              - TARGETING_TYPE_UNSPECIFIED
+              - TARGETING_TYPE_CHANNEL
+              - TARGETING_TYPE_APP_CATEGORY
+              - TARGETING_TYPE_APP
+              - TARGETING_TYPE_URL
+              - TARGETING_TYPE_DAY_AND_TIME
+              - TARGETING_TYPE_AGE_RANGE
+              - TARGETING_TYPE_REGIONAL_LOCATION_LIST
+              - TARGETING_TYPE_PROXIMITY_LOCATION_LIST
+              - TARGETING_TYPE_GENDER
+              - TARGETING_TYPE_VIDEO_PLAYER_SIZE
+              - TARGETING_TYPE_USER_REWARDED_CONTENT
+              - TARGETING_TYPE_PARENTAL_STATUS
+              - TARGETING_TYPE_CONTENT_INSTREAM_POSITION
+              - TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION
+              - TARGETING_TYPE_DEVICE_TYPE
+              - TARGETING_TYPE_AUDIENCE_GROUP
+              - TARGETING_TYPE_BROWSER
+              - TARGETING_TYPE_HOUSEHOLD_INCOME
+              - TARGETING_TYPE_ON_SCREEN_POSITION
+              - TARGETING_TYPE_THIRD_PARTY_VERIFIER
+              - TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION
+              - TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION
+              - TARGETING_TYPE_ENVIRONMENT
+              - TARGETING_TYPE_CARRIER_AND_ISP
+              - TARGETING_TYPE_OPERATING_SYSTEM
+              - TARGETING_TYPE_DEVICE_MAKE_MODEL
+              - TARGETING_TYPE_KEYWORD
+              - TARGETING_TYPE_NEGATIVE_KEYWORD_LIST
+              - TARGETING_TYPE_VIEWABILITY
+              - TARGETING_TYPE_CATEGORY
+              - TARGETING_TYPE_INVENTORY_SOURCE
+              - TARGETING_TYPE_LANGUAGE
+              - TARGETING_TYPE_AUTHORIZED_SELLER_STATUS
+              - TARGETING_TYPE_GEO_REGION
+              - TARGETING_TYPE_INVENTORY_SOURCE_GROUP
+              - TARGETING_TYPE_EXCHANGE
+              - TARGETING_TYPE_SUB_EXCHANGE
+            type: string
+        - description: 'Allows filtering by assigned targeting option properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by the logical operator `OR`. * A restriction has the form of `{field} {operator} {value}`. * The operator must be `EQUALS (=)`. * Supported fields: - `assignedTargetingOptionId` - `inheritance` Examples: * AssignedTargetingOptions with ID 1 or 2 `assignedTargetingOptionId="1" OR assignedTargetingOptionId="2"` * AssignedTargetingOptions with inheritance status of NOT_INHERITED or INHERITED_FROM_PARTNER `inheritance="NOT_INHERITED" OR inheritance="INHERITED_FROM_PARTNER"` The length of this field should be no more than 500 characters.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'Field by which to sort the list. Acceptable values are: * `assignedTargetingOptionId` (default) The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `assignedTargetingOptionId desc`.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListInsertionOrderAssignedTargetingOptions` method. If not specified, the first page of results will be returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListInsertionOrderAssignedTargetingOptionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}":
+    get:
+      description: Gets a single targeting option assigned to an insertion order.
+      operationId: displayvideo.advertisers.insertionOrders.targetingTypes.assignedTargetingOptions.get
+      parameters:
+        - description: Required. The ID of the advertiser the insertion order belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the insertion order the assigned targeting option belongs to.
+          in: path
+          name: insertionOrderId
+          required: true
+          schema:
+            type: string
+        - description: Required. Identifies the type of this assigned targeting option.
+          in: path
+          name: targetingType
+          required: true
+          schema:
+            enum:
+              - TARGETING_TYPE_UNSPECIFIED
+              - TARGETING_TYPE_CHANNEL
+              - TARGETING_TYPE_APP_CATEGORY
+              - TARGETING_TYPE_APP
+              - TARGETING_TYPE_URL
+              - TARGETING_TYPE_DAY_AND_TIME
+              - TARGETING_TYPE_AGE_RANGE
+              - TARGETING_TYPE_REGIONAL_LOCATION_LIST
+              - TARGETING_TYPE_PROXIMITY_LOCATION_LIST
+              - TARGETING_TYPE_GENDER
+              - TARGETING_TYPE_VIDEO_PLAYER_SIZE
+              - TARGETING_TYPE_USER_REWARDED_CONTENT
+              - TARGETING_TYPE_PARENTAL_STATUS
+              - TARGETING_TYPE_CONTENT_INSTREAM_POSITION
+              - TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION
+              - TARGETING_TYPE_DEVICE_TYPE
+              - TARGETING_TYPE_AUDIENCE_GROUP
+              - TARGETING_TYPE_BROWSER
+              - TARGETING_TYPE_HOUSEHOLD_INCOME
+              - TARGETING_TYPE_ON_SCREEN_POSITION
+              - TARGETING_TYPE_THIRD_PARTY_VERIFIER
+              - TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION
+              - TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION
+              - TARGETING_TYPE_ENVIRONMENT
+              - TARGETING_TYPE_CARRIER_AND_ISP
+              - TARGETING_TYPE_OPERATING_SYSTEM
+              - TARGETING_TYPE_DEVICE_MAKE_MODEL
+              - TARGETING_TYPE_KEYWORD
+              - TARGETING_TYPE_NEGATIVE_KEYWORD_LIST
+              - TARGETING_TYPE_VIEWABILITY
+              - TARGETING_TYPE_CATEGORY
+              - TARGETING_TYPE_INVENTORY_SOURCE
+              - TARGETING_TYPE_LANGUAGE
+              - TARGETING_TYPE_AUTHORIZED_SELLER_STATUS
+              - TARGETING_TYPE_GEO_REGION
+              - TARGETING_TYPE_INVENTORY_SOURCE_GROUP
+              - TARGETING_TYPE_EXCHANGE
+              - TARGETING_TYPE_SUB_EXCHANGE
+            type: string
+        - description: Required. An identifier unique to the targeting type in this insertion order that identifies the assigned targeting option being requested.
+          in: path
+          name: assignedTargetingOptionId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssignedTargetingOption"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}:bulkListInsertionOrderAssignedTargetingOptions":
+    get:
+      description: Lists assigned targeting options of an insertion order across targeting types.
+      operationId: displayvideo.advertisers.insertionOrders.bulkListInsertionOrderAssignedTargetingOptions
+      parameters:
+        - description: Required. The ID of the advertiser the insertion order belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the insertion order to list assigned targeting options for.
+          in: path
+          name: insertionOrderId
+          required: true
+          schema:
+            type: string
+        - description: 'Allows filtering by assigned targeting option properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by the logical operator `OR` on the same field. * A restriction has the form of `{field} {operator} {value}`. * The operator must be `EQUALS (=)`. * Supported fields: - `targetingType` - `inheritance` Examples: * AssignedTargetingOptions of targeting type TARGETING_TYPE_PROXIMITY_LOCATION_LIST or TARGETING_TYPE_CHANNEL `targetingType="TARGETING_TYPE_PROXIMITY_LOCATION_LIST" OR targetingType="TARGETING_TYPE_CHANNEL"` * AssignedTargetingOptions with inheritance status of NOT_INHERITED or INHERITED_FROM_PARTNER `inheritance="NOT_INHERITED" OR inheritance="INHERITED_FROM_PARTNER"` The length of this field should be no more than 500 characters.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'Field by which to sort the list. Acceptable values are: * `targetingType` (default) The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `targetingType desc`.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. The size must be an integer between `1` and `5000`. If unspecified, the default is `5000`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token that lets the client fetch the next page of results. Typically, this is the value of next_page_token returned from the previous call to `BulkListInsertionOrderAssignedTargetingOptions` method. If not specified, the first page of results will be returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkListInsertionOrderAssignedTargetingOptionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/advertisers/{advertiserId}/lineItems":
     get:
       description: Lists line items in an advertiser. The order is defined by the order_by parameter. If a filter by entity_status is not specified, line items with `ENTITY_STATUS_ARCHIVED` will not be included in the results.
@@ -6655,6 +6920,18 @@ components:
           description: A token identifying the next page of results. This value should be specified as the pageToken in a subsequent BulkListAdvertiserAssignedTargetingOptionsRequest to fetch the next page of results. This token will be absent if there are no more assigned_targeting_options to return.
           type: string
       type: object
+    BulkListInsertionOrderAssignedTargetingOptionsResponse:
+      description: Response message for BulkListInsertionOrderAssignedTargetingOptions.
+      properties:
+        assignedTargetingOptions:
+          description: The list of assigned targeting options. This list will be absent if empty.
+          items:
+            $ref: "#/components/schemas/AssignedTargetingOption"
+          type: array
+        nextPageToken:
+          description: A token identifying the next page of results. This value should be specified as the pageToken in a subsequent BulkListInsertionOrderAssignedTargetingOptionsRequest to fetch the next page of results. This token will be absent if there are no more assigned_targeting_options to return.
+          type: string
+      type: object
     BulkListLineItemAssignedTargetingOptionsResponse:
       properties:
         assignedTargetingOptions:
@@ -6905,6 +7182,15 @@ components:
     ContentInstreamPositionAssignedTargetingOptionDetails:
       description: Assigned content instream position targeting option details. This will be populated in the content_instream_position_details field when targeting_type is `TARGETING_TYPE_CONTENT_INSTREAM_POSITION`.
       properties:
+        adType:
+          description: "Output only. The ad type to target. Only applicable to insertion order targeting and new line items supporting the specified ad type will inherit this targeting option by default. Possible values are: * `AD_TYPE_VIDEO`, the setting will be inherited by new line item when line_item_type is `LINE_ITEM_TYPE_VIDEO_DEFAULT`. * `AD_TYPE_AUDIO`, the setting will be inherited by new line item when line_item_type is `LINE_ITEM_TYPE_AUDIO_DEFAULT`."
+          enum:
+            - AD_TYPE_UNSPECIFIED
+            - AD_TYPE_DISPLAY
+            - AD_TYPE_VIDEO
+            - AD_TYPE_AUDIO
+          readOnly: true
+          type: string
         contentInstreamPosition:
           description: Output only. The content instream position for video or audio ads.
           enum:
@@ -6912,6 +7198,7 @@ components:
             - CONTENT_INSTREAM_POSITION_PRE_ROLL
             - CONTENT_INSTREAM_POSITION_MID_ROLL
             - CONTENT_INSTREAM_POSITION_POST_ROLL
+            - CONTENT_INSTREAM_POSITION_UNKNOWN
           readOnly: true
           type: string
         targetingOptionId:
@@ -6928,12 +7215,22 @@ components:
             - CONTENT_INSTREAM_POSITION_PRE_ROLL
             - CONTENT_INSTREAM_POSITION_MID_ROLL
             - CONTENT_INSTREAM_POSITION_POST_ROLL
+            - CONTENT_INSTREAM_POSITION_UNKNOWN
           readOnly: true
           type: string
       type: object
     ContentOutstreamPositionAssignedTargetingOptionDetails:
       description: Assigned content outstream position targeting option details. This will be populated in the content_outstream_position_details field when targeting_type is `TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION`.
       properties:
+        adType:
+          description: "Output only. The ad type to target. Only applicable to insertion order targeting and new line items supporting the specified ad type will inherit this targeting option by default. Possible values are: * `AD_TYPE_DISPLAY`, the setting will be inherited by new line item when line_item_type is `LINE_ITEM_TYPE_DISPLAY_DEFAULT`. * `AD_TYPE_VIDEO`, the setting will be inherited by new line item when line_item_type is `LINE_ITEM_TYPE_VIDEO_DEFAULT`."
+          enum:
+            - AD_TYPE_UNSPECIFIED
+            - AD_TYPE_DISPLAY
+            - AD_TYPE_VIDEO
+            - AD_TYPE_AUDIO
+          readOnly: true
+          type: string
         contentOutstreamPosition:
           description: Output only. The content outstream position.
           enum:
@@ -7245,6 +7542,10 @@ components:
           format: google-duration
           readOnly: true
           type: string
+        mp3Audio:
+          description: "Output only. Indicates the third-party audio creative supports MP3. Output only and only valid for third-party audio creatives. Third-party audio creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_AUDIO`"
+          readOnly: true
+          type: boolean
         name:
           description: Output only. The resource name of the creative.
           readOnly: true
@@ -7255,6 +7556,10 @@ components:
         obaIcon:
           $ref: "#/components/schemas/ObaIcon"
           description: "Specifies the OBA icon for a video creative. This field is only supported in following creative_type: * `CREATIVE_TYPE_VIDEO`"
+        oggAudio:
+          description: "Output only. Indicates the third-party audio creative supports OGG. Output only and only valid for third-party audio creatives. Third-party audio creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_AUDIO`"
+          readOnly: true
+          type: boolean
         progressOffset:
           $ref: "#/components/schemas/AudioVideoOffset"
           description: "Amount of time to play the video before counting a view. This field is required when skippable is true. This field is only supported for the following creative_type: * `CREATIVE_TYPE_VIDEO`"
@@ -9382,6 +9687,18 @@ components:
           description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListGoogleAudiences` method to retrieve the next page of results.
           type: string
       type: object
+    ListInsertionOrderAssignedTargetingOptionsResponse:
+      description: Response message for ListInsertionOrderAssignedTargetingOptions.
+      properties:
+        assignedTargetingOptions:
+          description: The list of assigned targeting options. This list will be absent if empty.
+          items:
+            $ref: "#/components/schemas/AssignedTargetingOption"
+          type: array
+        nextPageToken:
+          description: A token identifying the next page of results. This value should be specified as the pageToken in a subsequent ListInsertionOrderAssignedTargetingOptionsRequest to fetch the next page of results. This token will be absent if there are no more assigned_targeting_options to return.
+          type: string
+      type: object
     ListInsertionOrdersResponse:
       properties:
         insertionOrders:
@@ -9767,6 +10084,15 @@ components:
     OnScreenPositionAssignedTargetingOptionDetails:
       description: On screen position targeting option details. This will be populated in the on_screen_position_details field when targeting_type is `TARGETING_TYPE_ON_SCREEN_POSITION`.
       properties:
+        adType:
+          description: "Output only. The ad type to target. Only applicable to insertion order targeting and new line items supporting the specified ad type will inherit this targeting option by default. Possible values are: * `AD_TYPE_DISPLAY`, the setting will be inherited by new line item when line_item_type is `LINE_ITEM_TYPE_DISPLAY_DEFAULT`. * `AD_TYPE_VIDEO`, the setting will be inherited by new line item when line_item_type is `LINE_ITEM_TYPE_VIDEO_DEFAULT`."
+          enum:
+            - AD_TYPE_UNSPECIFIED
+            - AD_TYPE_DISPLAY
+            - AD_TYPE_VIDEO
+            - AD_TYPE_AUDIO
+          readOnly: true
+          type: string
         onScreenPosition:
           description: Output only. The on screen position.
           enum:
@@ -10076,11 +10402,11 @@ components:
       description: Settings that control the performance goal of a campaign or insertion order.
       properties:
         performanceGoalAmountMicros:
-          description: "The goal amount, in micros of the advertiser's currency. Applicable when performance_goal_type is one of: * `PERFORMANCE_GOAL_TYPE_CPM` * `PERFORMANCE_GOAL_TYPE_CPC` * `PERFORMANCE_GOAL_TYPE_CPA` * `PERFORMANCE_GOAL_TYPE_CPIAVC` For example 1500000 represents 1.5 standard units of the currency."
+          description: "The goal amount, in micros of the advertiser's currency. Applicable when performance_goal_type is one of: * `PERFORMANCE_GOAL_TYPE_CPM` * `PERFORMANCE_GOAL_TYPE_CPC` * `PERFORMANCE_GOAL_TYPE_CPA` * `PERFORMANCE_GOAL_TYPE_CPIAVC` * `PERFORMANCE_GOAL_TYPE_VCPM` For example 1500000 represents 1.5 standard units of the currency."
           format: int64
           type: string
         performanceGoalPercentageMicros:
-          description: "The decimal representation of the goal percentage in micros. Applicable when performance_goal_type is one of: * `PERFORMANCE_GOAL_TYPE_CTR` * `PERFORMANCE_GOAL_TYPE_VIEWABILITY` For example, 70000 represents 7% (decimal 0.07)."
+          description: "The decimal representation of the goal percentage in micros. Applicable when performance_goal_type is one of: * `PERFORMANCE_GOAL_TYPE_CTR` * `PERFORMANCE_GOAL_TYPE_VIEWABILITY` * `PERFORMANCE_GOAL_TYPE_CLICK_CVR` * `PERFORMANCE_GOAL_TYPE_IMPRESSION_CVR` * `PERFORMANCE_GOAL_TYPE_VTR` * `PERFORMANCE_GOAL_TYPE_AUDIO_COMPLETION_RATE` * `PERFORMANCE_GOAL_TYPE_VIDEO_COMPLETION_RATE` For example, 70000 represents 7% (decimal 0.07)."
           format: int64
           type: string
         performanceGoalString:
@@ -10097,6 +10423,12 @@ components:
             - PERFORMANCE_GOAL_TYPE_VIEWABILITY
             - PERFORMANCE_GOAL_TYPE_CPIAVC
             - PERFORMANCE_GOAL_TYPE_CPE
+            - PERFORMANCE_GOAL_TYPE_CLICK_CVR
+            - PERFORMANCE_GOAL_TYPE_IMPRESSION_CVR
+            - PERFORMANCE_GOAL_TYPE_VCPM
+            - PERFORMANCE_GOAL_TYPE_VTR
+            - PERFORMANCE_GOAL_TYPE_AUDIO_COMPLETION_RATE
+            - PERFORMANCE_GOAL_TYPE_VIDEO_COMPLETION_RATE
             - PERFORMANCE_GOAL_TYPE_OTHER
           type: string
       type: object
@@ -10844,7 +11176,7 @@ components:
           scopes:
             https://www.googleapis.com/auth/display-video: Create, see, edit, and permanently delete your Display & Video 360 entities and reports
             https://www.googleapis.com/auth/display-video-mediaplanning: Create, see, and edit Display & Video 360 Campaign entities and see billing invoices
-            https://www.googleapis.com/auth/display-video-user-management: "New Service: https://www.googleapis.com/auth/display-video-user-management"
+            https://www.googleapis.com/auth/display-video-user-management: "Private Service: https://www.googleapis.com/auth/display-video-user-management"
             https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
       type: oauth2
     Oauth2c:
@@ -10855,7 +11187,7 @@ components:
           scopes:
             https://www.googleapis.com/auth/display-video: Create, see, edit, and permanently delete your Display & Video 360 entities and reports
             https://www.googleapis.com/auth/display-video-mediaplanning: Create, see, and edit Display & Video 360 Campaign entities and see billing invoices
-            https://www.googleapis.com/auth/display-video-user-management: "New Service: https://www.googleapis.com/auth/display-video-user-management"
+            https://www.googleapis.com/auth/display-video-user-management: "Private Service: https://www.googleapis.com/auth/display-video-user-management"
             https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

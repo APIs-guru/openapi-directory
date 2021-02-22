@@ -1790,7 +1790,7 @@ components:
           description: Alphabetic name of current registered operator. For example, Vodafone.
           type: string
         telephonyInfos:
-          description: Provides telephony information associated with each SIM card on the device. Only supported on fully managed devices starting from Android API level 23 and above.
+          description: Provides telephony information associated with each SIM card on the device. Only supported on fully managed devices starting from Android API level 23.
           items:
             $ref: "#/components/schemas/TelephonyInfo"
           type: array
@@ -2028,7 +2028,7 @@ components:
           description: Whether camera is disabled.
           type: boolean
         maxDaysWithWorkOff:
-          description: Controls how long the work profile can stay off.
+          description: Controls how long the work profile can stay off. The duration must be at least 3 days.
           format: int32
           type: integer
         personalApplications:
@@ -2651,7 +2651,7 @@ components:
           type: string
       type: object
     TelephonyInfo:
-      description: Telephony information associated with a given SIM card on the device. Only supported on fully managed devices starting from Android API level 23 and above.
+      description: Telephony information associated with a given SIM card on the device. Only supported on fully managed devices starting from Android API level 23.
       properties:
         carrierName:
           description: The carrier name associated with this SIM card.

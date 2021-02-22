@@ -318,6 +318,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. Raw text query to search for in rows of the table. Special characters must be escaped. Logical operators and field specific filtering not supported.
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: The maximum number of rows to return. The service may return fewer than this value. If unspecified, at most 50 rows are returned. The maximum value is 1,000; values above 1,000 are coerced to 1,000.
           in: query
           name: pageSize
@@ -824,8 +829,16 @@ components:
     Row:
       description: A single row in a table.
       properties:
+        createTime:
+          description: Time when the row was created.
+          format: google-datetime
+          type: string
         name:
           description: The resource name of the row. Row names have the form `tables/{table}/rows/{row}`. The name is ignored when creating a row.
+          type: string
+        updateTime:
+          description: Time when the row was last updated.
+          format: google-datetime
           type: string
         values:
           additionalProperties: {}
@@ -840,11 +853,19 @@ components:
           items:
             $ref: "#/components/schemas/ColumnDescription"
           type: array
+        createTime:
+          description: Time when the table was created.
+          format: google-datetime
+          type: string
         displayName:
           description: The human readable title of the table.
           type: string
         name:
           description: The resource name of the table. Table names have the form `tables/{table}`.
+          type: string
+        updateTime:
+          description: Time when the table was last updated excluding updates to individual rows
+          format: google-datetime
           type: string
       type: object
     UpdateRowRequest:
@@ -867,6 +888,10 @@ components:
     Workspace:
       description: A single workspace.
       properties:
+        createTime:
+          description: Time when the workspace was created.
+          format: google-datetime
+          type: string
         displayName:
           description: The human readable title of the workspace.
           type: string
@@ -878,6 +903,10 @@ components:
           items:
             $ref: "#/components/schemas/Table"
           type: array
+        updateTime:
+          description: Time when the workspace was last updated.
+          format: google-datetime
+          type: string
       type: object
   securitySchemes:
     Oauth2:

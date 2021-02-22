@@ -1344,7 +1344,7 @@ paths:
       description: "Processes a natural language query and returns structured, actionable data as a result. This method is not idempotent, because it may cause contexts and session entity types to be updated, which in turn might affect results of future queries. Note: Always use agent versions for production traffic. See [Versions and environments](https://cloud.google.com/dialogflow/es/docs/agents-versions)."
       operationId: dialogflow.projects.agent.sessions.detectIntent
       parameters:
-        - description: "Required. The name of the session this query is sent to. Format: `projects//agent/sessions/`, or `projects//agent/environments//users//sessions/`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we are using \"-\". It's up to the API caller to choose an appropriate `Session ID` and `User Id`. They can be a random number or some type of user and session identifiers (preferably hashed). The length of the `Session ID` and `User ID` must not exceed 36 characters. For more information, see the [API interactions guide](https://cloud.google.com/dialogflow/docs/api-overview). Note: Always use agent versions for production traffic. See [Versions and environments](https://cloud.google.com/dialogflow/es/docs/agents-versions)."
+        - description: "Required. The name of the session this query is sent to. Format: `projects//agent/sessions/`, or `projects//agent/environments//users//sessions/`. If `Environment ID` is not specified, we assume default 'draft' environment (`Environment ID` might be referred to as environment name at some places). If `User ID` is not specified, we are using \"-\". It's up to the API caller to choose an appropriate `Session ID` and `User Id`. They can be a random number or some type of user and session identifiers (preferably hashed). The length of the `Session ID` and `User ID` must not exceed 36 characters. For more information, see the [API interactions guide](https://cloud.google.com/dialogflow/docs/api-overview). Note: Always use agent versions for production traffic. See [Versions and environments](https://cloud.google.com/dialogflow/es/docs/agents-versions)."
           in: path
           name: session
           required: true
@@ -1508,7 +1508,7 @@ components:
       properties:
         currentPage:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Page"
-          description: The Page on which the utterance was spoken. Only some fields such as name and displayname will be set.
+          description: The Page on which the utterance was spoken. Only name and displayName will be set.
         diagnosticInfo:
           additionalProperties:
             description: Properties of the object.
@@ -1535,7 +1535,7 @@ components:
           type: array
         triggeredIntent:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Intent"
-          description: The Intent that triggered the response. Only some fields such as name and displayname will be set.
+          description: The Intent that triggered the response. Only name and displayName will be set.
       type: object
     GoogleCloudDialogflowCxV3CreateDocumentOperationMetadata:
       description: Metadata for CreateDocument operation.
@@ -2471,7 +2471,7 @@ components:
       properties:
         currentPage:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Page"
-          description: The Page on which the utterance was spoken. Only some fields such as name and displayname will be set.
+          description: The Page on which the utterance was spoken. Only name and displayName will be set.
         diagnosticInfo:
           additionalProperties:
             description: Properties of the object.
@@ -2498,7 +2498,7 @@ components:
           type: array
         triggeredIntent:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Intent"
-          description: The Intent that triggered the response. Only some fields such as name and displayname will be set.
+          description: The Intent that triggered the response. Only name and displayName will be set.
       type: object
     GoogleCloudDialogflowCxV3beta1CreateDocumentOperationMetadata:
       description: Metadata for CreateDocument operation.
