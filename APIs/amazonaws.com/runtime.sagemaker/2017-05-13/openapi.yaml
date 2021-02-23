@@ -200,6 +200,14 @@ paths:
             type: string
             pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
             maxLength: 63
+        - name: X-Amzn-SageMaker-Target-Container-Hostname
+          in: header
+          required: false
+          description: 'If the endpoint hosts multiple containers and is configured to use direct invocation, this parameter specifies the host name of the container to invoke.'
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+            maxLength: 63
         - name: X-Amzn-SageMaker-Inference-Id
           in: header
           required: false
@@ -324,6 +332,10 @@ components:
       minLength: 1
       maxLength: 1024
     TargetVariantHeader:
+      type: string
+      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+      maxLength: 63
+    TargetContainerHostnameHeader:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
       maxLength: 63

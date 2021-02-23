@@ -10555,6 +10555,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContainerDefinitionList'
             - description: Specifies the containers in the inference pipeline.
+        InferenceExecutionConfig:
+          allOf:
+            - $ref: '#/components/schemas/InferenceExecutionConfig'
+            - description: Specifies details of how containers in a multi-container endpoint are called.
         ExecutionRoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
@@ -13499,6 +13503,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContainerDefinitionList'
             - description: The containers in the inference pipeline.
+        InferenceExecutionConfig:
+          allOf:
+            - $ref: '#/components/schemas/InferenceExecutionConfig'
+            - description: Specifies details of how containers in a multi-container endpoint are called.
         ExecutionRoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
@@ -21598,11 +21606,11 @@ components:
         TaskTimeLimitInSeconds:
           allOf:
             - $ref: '#/components/schemas/TaskTimeLimitInSeconds'
-            - description: '<p>The amount of time that a worker has to complete a task. </p> <p>If you create a custom labeling job, the maximum value for this parameter is 8 hours (28,800 seconds).</p> <p>If you create a labeling job using a <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html">built-in task type</a> the maximum for this parameter depends on the task type you use:</p> <ul> <li> <p>For <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html">image</a> and <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html">text</a> labeling jobs, the maximum is 8 hours (28,800 seconds).</p> </li> <li> <p>For <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html">3D point cloud</a> and <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html">video frame</a> labeling jobs, the maximum is 7 days (604,800 seconds).</p> </li> </ul>'
+            - description: '<p>The amount of time that a worker has to complete a task. </p> <p>If you create a custom labeling job, the maximum value for this parameter is 8 hours (28,800 seconds).</p> <p>If you create a labeling job using a <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html">built-in task type</a> the maximum for this parameter depends on the task type you use:</p> <ul> <li> <p>For <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html">image</a> and <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html">text</a> labeling jobs, the maximum is 8 hours (28,800 seconds).</p> </li> <li> <p>For <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html">3D point cloud</a> and <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html">video frame</a> labeling jobs, the maximum is 7 days (604,800 seconds). If you want to change these limits, contact AWS Support.</p> </li> </ul>'
         TaskAvailabilityLifetimeInSeconds:
           allOf:
             - $ref: '#/components/schemas/TaskAvailabilityLifetimeInSeconds'
-            - description: '<p>The length of time that a task remains available for labeling by human workers. The default and maximum values for this parameter depend on the type of workforce you use.</p> <ul> <li> <p>If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds). The default is 6 hours (21,600 seconds).</p> </li> <li> <p>If you choose a private or vendor workforce, the default value is 10 days (864,000 seconds). For most users, the maximum is also 10 days.</p> </li> </ul>'
+            - description: '<p>The length of time that a task remains available for labeling by human workers. The default and maximum values for this parameter depend on the type of workforce you use.</p> <ul> <li> <p>If you choose the Amazon Mechanical Turk workforce, the maximum is 12 hours (43,200 seconds). The default is 6 hours (21,600 seconds).</p> </li> <li> <p>If you choose a private or vendor workforce, the default value is 10 days (864,000 seconds). For most users, the maximum is also 10 days. If you want to change this limit, contact AWS Support.</p> </li> </ul>'
         MaxConcurrentTaskCount:
           allOf:
             - $ref: '#/components/schemas/MaxConcurrentTaskCount'
@@ -21703,6 +21711,16 @@ components:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
       maxLength: 63
+    InferenceExecutionConfig:
+      type: object
+      required:
+        - Mode
+      properties:
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/InferenceExecutionMode'
+            - description: <p>How containers in a multi-container are run. The following values are valid.</p> <ul> <li> <p> <code>SERIAL</code> - Containers run as a serial pipeline.</p> </li> <li> <p> <code>DIRECT</code> - Only the individual container that you specify is run.</p> </li> </ul>
+      description: Specifies details about how containers in a multi-container are run.
     ModelArn:
       type: string
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:model/.*'
@@ -22124,7 +22142,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: '<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following formats: </p> <ul> <li> <p>// KMS Key ID</p> <p> <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// KMS Key Alias</p> <p> <code>"alias/ExampleAlias"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p> <p> <code>"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"</code> </p> </li> </ul> <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must include permissions to call <code>kms:Encrypt</code>. If you don''t provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role''s account. Amazon SageMaker uses server-side encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket policy with an <code>s3:PutObject</code> permission that only allows objects with server-side encryption, set the condition key of <code>s3:x-amz-server-side-encryption</code> to <code>"aws:kms"</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or <code>CreateHyperParameterTuningJob</code> requests. For more information, see <a href="http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+            - description: '<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following formats: </p> <ul> <li> <p>// KMS Key ID</p> <p> <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// KMS Key Alias</p> <p> <code>"alias/ExampleAlias"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p> <p> <code>"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"</code> </p> </li> </ul> <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must include permissions to call <code>kms:Encrypt</code>. If you don''t provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role''s account. Amazon SageMaker uses server-side encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket policy with an <code>s3:PutObject</code> permission that only allows objects with server-side encryption, set the condition key of <code>s3:x-amz-server-side-encryption</code> to <code>"aws:kms"</code>. For more information, see <a href="https://docs.aws.amazon.com/mazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or <code>CreateHyperParameterTuningJob</code> requests. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
         S3OutputPath:
           allOf:
             - $ref: '#/components/schemas/S3Uri'
@@ -25155,6 +25173,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Image'
+    InferenceExecutionMode:
+      type: string
+      enum:
+        - Serial
+        - Direct
     ModelPackageContainerDefinitionList:
       type: array
       items:
@@ -27338,6 +27361,20 @@ components:
         - ml.eia2.medium
         - ml.eia2.large
         - ml.eia2.xlarge
+    ProductionVariantCoreDumpConfig:
+      type: object
+      required:
+        - DestinationS3Uri
+      properties:
+        DestinationS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/DestinationS3Uri'
+            - description: The Amazon S3 bucket to send the core dump to.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the core dump data at rest using Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following formats: </p> <ul> <li> <p>// KMS Key ID</p> <p> <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key</p> <p> <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>// KMS Key Alias</p> <p> <code>"alias/ExampleAlias"</code> </p> </li> <li> <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p> <p> <code>"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"</code> </p> </li> </ul> <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must include permissions to call <code>kms:Encrypt</code>. If you don''t provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role''s account. Amazon SageMaker uses server-side encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket policy with an <code>s3:PutObject</code> permission that only allows objects with server-side encryption, set the condition key of <code>s3:x-amz-server-side-encryption</code> to <code>"aws:kms"</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateEndpoint</code> and <code>UpdateEndpoint</code> requests. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>'
+      description: Specifies configuration for a core dump from the model container when the process crashes.
     ProductionVariant:
       type: object
       required:
@@ -27370,6 +27407,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProductionVariantAcceleratorType'
             - description: 'The size of the Elastic Inference (EI) instance to use for the production variant. EI instances provide on-demand GPU computing for inference. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html">Using Elastic Inference in Amazon SageMaker</a>.'
+        CoreDumpConfig:
+          allOf:
+            - $ref: '#/components/schemas/ProductionVariantCoreDumpConfig'
+            - description: Specifies configuration for a core dump from the model container when the process crashes.
       description: 'Identifies a model that you want to host and the resources to deploy for hosting it. If you are deploying multiple models, tell Amazon SageMaker how to distribute traffic among the models by specifying variant weights. '
     ProductionVariantSummary:
       type: object
