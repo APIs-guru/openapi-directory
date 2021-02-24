@@ -11887,6 +11887,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The sender ID to display on recipients' devices when they receive the SMS message.
+        EntityId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+        TemplateId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The template ID received from the regulatory body for sending SMS in your country.
       description: Specifies the content and settings for an SMS message that's sent to recipients of a campaign.
     CampaignStatus:
       type: string
@@ -13443,6 +13451,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/MapOfListOf__string'
             - description: The message variables to use in the SMS message. You can override the default variables with individual address variables.
+        EntityId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+        TemplateId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The template ID received from the regulatory body for sending SMS in your country.
       description: Specifies the default settings for a one-time SMS message that's sent directly to an endpoint.
     VoiceMessage:
       type: object
@@ -14704,6 +14720,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: 'The sender ID to display as the sender of the message on a recipient''s device. Support for sender IDs varies by country or region. For more information, see <a href="https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html">Supported Countries and Regions</a> in the Amazon Pinpoint User Guide.'
+        EntityId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+        TemplateId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The template ID received from the regulatory body for sending SMS in your country.
       description: Specifies the sender ID and message type for an SMS message that's sent to participants in a journey.
     JourneyStateRequest:
       type: object

@@ -774,16 +774,21 @@ components:
       type: object
       required:
         - ClusterIdentifier
+        - Database
       title: DescribeTableRequest
       properties:
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/Location'
             - description: 'The cluster identifier. This parameter is required when authenticating using either AWS Secrets Manager or temporary credentials. '
+        ConnectedDatabase:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A database name. The connected database is specified when you connect with your authentication credentials. '
         Database:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the database. This parameter is required when authenticating using temporary credentials.
+            - description: 'The name of the database that contains the tables to be described. If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.'
         DbUser:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -970,10 +975,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Location'
             - description: 'The cluster identifier. This parameter is required when authenticating using either AWS Secrets Manager or temporary credentials. '
+        ConnectedDatabase:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A database name. The connected database is specified when you connect with your authentication credentials. '
         Database:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The name of the database. This parameter is required when authenticating using temporary credentials. '
+            - description: 'The name of the database that contains the schemas to list. If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.'
         DbUser:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1053,10 +1062,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Location'
             - description: 'The cluster identifier. This parameter is required when authenticating using either AWS Secrets Manager or temporary credentials. '
+        ConnectedDatabase:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A database name. The connected database is specified when you connect with your authentication credentials. '
         Database:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the database. This parameter is required when authenticating using temporary credentials.
+            - description: 'The name of the database that contains the tables to list. If <code>ConnectedDatabase</code> is not specified, this is also the database to connect to with your authentication credentials.'
         DbUser:
           allOf:
             - $ref: '#/components/schemas/String'

@@ -1648,21 +1648,21 @@ paths:
                   minItems: 1
                   maxItems: 64
                 RowLevelPermissionDataSet:
-                  description: The row-level security configuration for the dataset.
+                  description: '<p>Information about a dataset that contains permissions for row-level security (RLS). The permissions dataset maps fields to users or groups. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Amazon QuickSight User Guide</i>.</p> <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is not supported for new RLS datasets.</p>'
                   type: object
                   properties:
                     Namespace:
                       allOf:
                         - $ref: '#/components/schemas/Namespace'
-                        - description: The namespace associated with the row-level permissions dataset.
+                        - description: The namespace associated with the dataset that contains permissions for RLS.
                     Arn:
                       allOf:
                         - $ref: '#/components/schemas/Arn'
-                        - description: The Amazon Resource Name (ARN) of the permission dataset.
+                        - description: The Amazon Resource Name (ARN) of the dataset that contains permissions for RLS.
                     PermissionPolicy:
                       allOf:
                         - $ref: '#/components/schemas/RowLevelPermissionPolicy'
-                        - description: Permission policy.
+                        - description: The type of permissions to use when interpretting the permissions for RLS. <code>DENY_ACCESS</code> is included for backward compatibility only.
                 ColumnLevelPermissionRules:
                   description: A set of one or more definitions of a <code> <a>ColumnLevelPermissionRule</a> </code>.
                   type: array
@@ -1849,7 +1849,7 @@ paths:
                   minLength: 1
                   maxLength: 128
                 Type:
-                  description: 'The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.'
+                  description: '<p>The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.</p> <p> <code>AMAZON_ELASTICSEARCH</code> is for Amazon managed Elasticsearch Service.</p>'
                   type: string
                   enum:
                     - ADOBE_ANALYTICS
@@ -4451,21 +4451,21 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/FieldFolder'
                 RowLevelPermissionDataSet:
-                  description: The row-level security configuration for the dataset.
+                  description: '<p>Information about a dataset that contains permissions for row-level security (RLS). The permissions dataset maps fields to users or groups. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Amazon QuickSight User Guide</i>.</p> <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is not supported for new RLS datasets.</p>'
                   type: object
                   properties:
                     Namespace:
                       allOf:
                         - $ref: '#/components/schemas/Namespace'
-                        - description: The namespace associated with the row-level permissions dataset.
+                        - description: The namespace associated with the dataset that contains permissions for RLS.
                     Arn:
                       allOf:
                         - $ref: '#/components/schemas/Arn'
-                        - description: The Amazon Resource Name (ARN) of the permission dataset.
+                        - description: The Amazon Resource Name (ARN) of the dataset that contains permissions for RLS.
                     PermissionPolicy:
                       allOf:
                         - $ref: '#/components/schemas/RowLevelPermissionPolicy'
-                        - description: Permission policy.
+                        - description: The type of permissions to use when interpretting the permissions for RLS. <code>DENY_ACCESS</code> is included for backward compatibility only.
                 ColumnLevelPermissionRules:
                   description: A set of one or more definitions of a <code> <a>ColumnLevelPermissionRule</a> </code>.
                   type: array
@@ -12772,16 +12772,16 @@ components:
         Namespace:
           allOf:
             - $ref: '#/components/schemas/Namespace'
-            - description: The namespace associated with the row-level permissions dataset.
+            - description: The namespace associated with the dataset that contains permissions for RLS.
         Arn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the permission dataset.
+            - description: The Amazon Resource Name (ARN) of the dataset that contains permissions for RLS.
         PermissionPolicy:
           allOf:
             - $ref: '#/components/schemas/RowLevelPermissionPolicy'
-            - description: Permission policy.
-      description: The row-level security configuration for the dataset.
+            - description: The type of permissions to use when interpretting the permissions for RLS. <code>DENY_ACCESS</code> is included for backward compatibility only.
+      description: '<p>Information about a dataset that contains permissions for row-level security (RLS). The permissions dataset maps fields to users or groups. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Amazon QuickSight User Guide</i>.</p> <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is not supported for new RLS datasets.</p>'
     CreateDataSetRequest:
       type: object
       required:
@@ -12994,7 +12994,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/DataSourceType'
-            - description: 'The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.'
+            - description: '<p>The type of the data source. Currently, the supported types for this operation are: <code>ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. Use <code>ListDataSources</code> to return a list of all data sources.</p> <p> <code>AMAZON_ELASTICSEARCH</code> is for Amazon managed Elasticsearch Service.</p>'
         DataSourceParameters:
           allOf:
             - $ref: '#/components/schemas/DataSourceParameters'
@@ -14752,7 +14752,7 @@ components:
         DataSourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The amazon Resource Name (ARN) for the data source.
+            - description: The Amazon Resource Name (ARN) for the data source.
         UploadSettings:
           allOf:
             - $ref: '#/components/schemas/UploadSettings'

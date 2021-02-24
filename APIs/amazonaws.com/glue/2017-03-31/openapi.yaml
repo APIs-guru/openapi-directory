@@ -11730,7 +11730,7 @@ components:
             - description: 'A continuation token, if this is a continuation call.'
         MaxResults:
           allOf:
-            - $ref: '#/components/schemas/PageSize'
+            - $ref: '#/components/schemas/CatalogGetterPageSize'
             - description: The maximum number of databases to return in one response.
         ResourceShareType:
           allOf:
@@ -12266,6 +12266,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/PageSize'
             - description: The maximum number of partitions to return in a single response.
+        ExcludeColumnSchema:
+          $ref: '#/components/schemas/BooleanNullable'
     GetPlanResponse:
       type: object
       properties:
@@ -12709,7 +12711,7 @@ components:
             - description: 'A continuation token, if this is not the first call.'
         MaxResults:
           allOf:
-            - $ref: '#/components/schemas/PageSize'
+            - $ref: '#/components/schemas/CatalogGetterPageSize'
             - description: The maximum number of table versions to return in one response.
     GetTablesResponse:
       type: object
@@ -12746,7 +12748,7 @@ components:
             - description: 'A continuation token, included if this is a continuation call.'
         MaxResults:
           allOf:
-            - $ref: '#/components/schemas/PageSize'
+            - $ref: '#/components/schemas/CatalogGetterPageSize'
             - description: The maximum number of tables to return in a single response.
     GetTagsResponse:
       type: object
@@ -12870,7 +12872,7 @@ components:
             - description: 'A continuation token, if this is a continuation call.'
         MaxResults:
           allOf:
-            - $ref: '#/components/schemas/PageSize'
+            - $ref: '#/components/schemas/CatalogGetterPageSize'
             - description: The maximum number of functions to return in one response.
     GetWorkflowResponse:
       type: object
@@ -14870,6 +14872,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CatalogEntry'
+    CatalogGetterPageSize:
+      type: integer
+      minimum: 1
+      maximum: 100
     Timestamp:
       type: string
       format: date-time

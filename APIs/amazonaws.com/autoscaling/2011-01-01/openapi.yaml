@@ -3651,7 +3651,7 @@ paths:
     get:
       x-aws-operation-name: DescribeScalingActivities
       operationId: GET_DescribeScalingActivities
-      description: Describes one or more scaling activities for the specified Auto Scaling group.
+      description: '<p>Describes one or more scaling activities for the specified Auto Scaling group.</p> <p>To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the <b>Activity</b> tab of the Auto Scaling group. When scaling events occur, you see scaling activity messages in the <b>Activity history</b>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html">Verifying a scaling activity for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -3689,6 +3689,12 @@ paths:
             minLength: 1
             maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+        - name: IncludeDeletedGroups
+          in: query
+          required: false
+          description: Indicates whether to include scaling activity from deleted Auto Scaling groups.
+          schema:
+            type: boolean
         - name: MaxRecords
           in: query
           required: false
@@ -3727,7 +3733,7 @@ paths:
     post:
       x-aws-operation-name: DescribeScalingActivities
       operationId: POST_DescribeScalingActivities
-      description: Describes one or more scaling activities for the specified Auto Scaling group.
+      description: '<p>Describes one or more scaling activities for the specified Auto Scaling group.</p> <p>To view the scaling activities from the Amazon EC2 Auto Scaling console, choose the <b>Activity</b> tab of the Auto Scaling group. When scaling events occur, you see scaling activity messages in the <b>Activity history</b>. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html">Verifying a scaling activity for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -7684,6 +7690,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlString'
             - description: The details about the activity.
+        AutoScalingGroupState:
+          allOf:
+            - $ref: '#/components/schemas/AutoScalingGroupState'
+            - description: 'The state of the Auto Scaling group, which is either <code>InService</code> or <code>Deleted</code>.'
+        AutoScalingGroupARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The Amazon Resource Name (ARN) of the Auto Scaling group.
       description: 'Describes scaling activity, which is a long-running process that represents a change to your Auto Scaling group, such as changing its size or replacing an instance.'
     Activities:
       type: array
@@ -7714,6 +7728,10 @@ components:
         - Cancelled
     Progress:
       type: integer
+    AutoScalingGroupState:
+      type: string
+      minLength: 1
+      maxLength: 32
     ActivityIds:
       type: array
       items:
@@ -8750,6 +8768,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxRecords'
             - description: The maximum number of items to be returned with each call. The default value is <code>50</code> and the maximum value is <code>100</code>.
+    IncludeDeletedGroups:
+      type: boolean
     DescribeScalingActivitiesType:
       type: object
       title: DescribeScalingActivitiesType
@@ -8762,6 +8782,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
+        IncludeDeletedGroups:
+          allOf:
+            - $ref: '#/components/schemas/IncludeDeletedGroups'
+            - description: Indicates whether to include scaling activity from deleted Auto Scaling groups.
         MaxRecords:
           allOf:
             - $ref: '#/components/schemas/MaxRecords'
