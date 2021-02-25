@@ -115,6 +115,85 @@ servers:
     description: The MediaPackage Vod endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/packaging_groups/{id}/configure_logs':
+    put:
+      operationId: ConfigureLogs
+      description: Changes the packaging group's properities to configure log subscription
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigureLogsResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of a MediaPackage VOD PackagingGroup resource.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                egressAccessLogs:
+                  description: Configure egress access logging.
+                  type: object
+                  properties:
+                    LogGroupName:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: logGroupName
+                          description: Customize the log group name.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /assets:
     post:
       operationId: CreateAsset
@@ -623,6 +702,16 @@ paths:
                         - xml:
                             name: secretsRoleArn
                           description: The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+                egressAccessLogs:
+                  description: Configure egress access logging.
+                  type: object
+                  properties:
+                    LogGroupName:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: logGroupName
+                          description: Customize the log group name.
                 id:
                   description: The ID of the PackagingGroup.
                   type: string
@@ -1268,6 +1357,50 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    ConfigureLogsResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The ARN of the PackagingGroup.
+        Authorization:
+          allOf:
+            - $ref: '#/components/schemas/Authorization'
+            - xml:
+                name: authorization
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: domainName
+              description: The fully qualified domain name for Assets in the PackagingGroup.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The ID of the PackagingGroup.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    __string:
+      type: string
+    UnprocessableEntityException: {}
+    InternalServerErrorException: {}
+    ForbiddenException: {}
+    NotFoundException: {}
+    ServiceUnavailableException: {}
+    TooManyRequestsException: {}
     CreateAssetResponse:
       type: object
       properties:
@@ -1324,14 +1457,6 @@ components:
             - $ref: '#/components/schemas/Tags'
             - xml:
                 name: tags
-    __string:
-      type: string
-    UnprocessableEntityException: {}
-    InternalServerErrorException: {}
-    ForbiddenException: {}
-    NotFoundException: {}
-    ServiceUnavailableException: {}
-    TooManyRequestsException: {}
     CreatePackagingConfigurationResponse:
       type: object
       properties:
@@ -1482,6 +1607,11 @@ components:
             - xml:
                 name: domainName
               description: The fully qualified domain name for Assets in the PackagingGroup.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
         Id:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -1624,6 +1754,11 @@ components:
             - xml:
                 name: domainName
               description: The fully qualified domain name for Assets in the PackagingGroup.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
         Id:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -1709,6 +1844,11 @@ components:
             - xml:
                 name: domainName
               description: The fully qualified domain name for Assets in the PackagingGroup.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
         Id:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -1854,6 +1994,26 @@ components:
                 Duration (in seconds) of each fragment. Actual fragments will be
                 rounded to the nearest multiple of the source fragment duration.
       description: A CMAF packaging configuration.
+    EgressAccessLogs:
+      type: object
+      properties:
+        LogGroupName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: logGroupName
+              description: Customize the log group name.
+      description: Configure egress access logging.
+    ConfigureLogsRequest:
+      type: object
+      title: ConfigureLogsRequest
+      properties:
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
+      description: The option to configure log subscription.
     CreateAssetRequest:
       required:
         - SourceArn
@@ -2054,6 +2214,11 @@ components:
             - $ref: '#/components/schemas/Authorization'
             - xml:
                 name: authorization
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
         Id:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2348,6 +2513,11 @@ components:
             - xml:
                 name: domainName
               description: The fully qualified domain name for Assets in the PackagingGroup.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
         Id:
           allOf:
             - $ref: '#/components/schemas/__string'

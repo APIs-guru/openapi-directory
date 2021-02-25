@@ -201,7 +201,10 @@ paths:
                     - Amplitude
                     - Veeva
                     - EventBridge
+                    - LookoutMetrics
                     - Upsolver
+                    - Honeycode
+                    - CustomerProfiles
                 connectionMode:
                   description: ' Indicates the connection mode and specifies whether it is public or private. Private flows use AWS PrivateLink to route data over AWS infrastructure without exposing it to the public internet. '
                   type: string
@@ -555,7 +558,10 @@ paths:
                     - Amplitude
                     - Veeva
                     - EventBridge
+                    - LookoutMetrics
                     - Upsolver
+                    - Honeycode
+                    - CustomerProfiles
                 connectorProfileName:
                   description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
                   type: string
@@ -640,7 +646,10 @@ paths:
                     - Amplitude
                     - Veeva
                     - EventBridge
+                    - LookoutMetrics
                     - Upsolver
+                    - Honeycode
+                    - CustomerProfiles
                 maxResults:
                   description: ' Specifies the maximum number of items that should be returned in the result set. The default for <code>maxResults</code> is 20 (for all paginated API operations). '
                   type: integer
@@ -911,7 +920,10 @@ paths:
                     - Amplitude
                     - Veeva
                     - EventBridge
+                    - LookoutMetrics
                     - Upsolver
+                    - Honeycode
+                    - CustomerProfiles
                 entitiesPath:
                   description: ' This optional parameter is specific to connector implementation. Some connectors support multiple levels or categories of entities. You can find out the list of roots for such providers by sending a request without the <code>entitiesPath</code> parameter. If the connector supports entities at different roots, this initial request returns the list of roots. Otherwise, this request returns all entities supported by the provider. '
                   type: string
@@ -1545,6 +1557,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/GoogleAnalyticsConnectorProfileProperties'
             - description: ' The connector-specific properties required Google Analytics. '
+        Honeycode:
+          $ref: '#/components/schemas/HoneycodeConnectorProfileProperties'
         InforNexus:
           allOf:
             - $ref: '#/components/schemas/InforNexusConnectorProfileProperties'
@@ -1609,6 +1623,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/GoogleAnalyticsConnectorProfileCredentials'
             - description: ' The connector-specific credentials required when using Google Analytics. '
+        Honeycode:
+          $ref: '#/components/schemas/HoneycodeConnectorProfileCredentials'
         InforNexus:
           allOf:
             - $ref: '#/components/schemas/InforNexusConnectorProfileCredentials'
@@ -1704,7 +1720,10 @@ components:
         - Amplitude
         - Veeva
         - EventBridge
+        - LookoutMetrics
         - Upsolver
+        - Honeycode
+        - CustomerProfiles
     ConnectorProfileName:
       type: string
       pattern: '[\w/!@#+=.-]+'
@@ -2241,6 +2260,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/UpsolverMetadata'
             - description: ' The connector metadata specific to Upsolver. '
+        CustomerProfiles:
+          $ref: '#/components/schemas/CustomerProfilesMetadata'
+        Honeycode:
+          $ref: '#/components/schemas/HoneycodeMetadata'
       description: ' A structure to specify connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. '
     ConnectorConfiguration:
       type: object
@@ -2492,6 +2515,14 @@ components:
       type: object
       properties: {}
       description: ' The connector metadata specific to Upsolver. '
+    CustomerProfilesMetadata:
+      type: object
+      properties: {}
+    HoneycodeMetadata:
+      type: object
+      properties:
+        oAuthScopes:
+          $ref: '#/components/schemas/OAuthScopeList'
     RedirectUri:
       type: string
       pattern: \S+
@@ -2924,6 +2955,15 @@ components:
             - $ref: '#/components/schemas/ConnectorOAuthRequest'
             - description: ' The OAuth requirement needed to request security tokens from the connector endpoint. '
       description: ' The connector-specific profile credentials required by Google Analytics. '
+    HoneycodeConnectorProfileCredentials:
+      type: object
+      properties:
+        accessToken:
+          $ref: '#/components/schemas/AccessToken'
+        refreshToken:
+          $ref: '#/components/schemas/RefreshToken'
+        oAuthRequest:
+          $ref: '#/components/schemas/ConnectorOAuthRequest'
     InforNexusConnectorProfileCredentials:
       type: object
       required:
@@ -3152,6 +3192,9 @@ components:
       type: object
       properties: {}
       description: ' The connector-specific profile properties required by Google Analytics. '
+    HoneycodeConnectorProfileProperties:
+      type: object
+      properties: {}
     InforNexusConnectorProfileProperties:
       type: object
       required:
@@ -3444,6 +3487,23 @@ components:
       type: string
       pattern: \S+
       maxLength: 256
+    DomainName:
+      type: string
+      pattern: \S+
+      maxLength: 64
+    ObjectTypeName:
+      type: string
+      pattern: \S+
+      maxLength: 255
+    CustomerProfilesDestinationProperties:
+      type: object
+      required:
+        - domainName
+      properties:
+        domainName:
+          $ref: '#/components/schemas/DomainName'
+        objectTypeName:
+          $ref: '#/components/schemas/ObjectTypeName'
     DataPullMode:
       type: string
       enum:
@@ -3709,6 +3769,9 @@ components:
         errorHandlingConfig:
           $ref: '#/components/schemas/ErrorHandlingConfig'
       description: ' The properties that are applied when Amazon EventBridge is being used as a destination. '
+    LookoutMetricsDestinationProperties:
+      type: object
+      properties: {}
     UpsolverDestinationProperties:
       type: object
       required:
@@ -3728,6 +3791,15 @@ components:
             - $ref: '#/components/schemas/UpsolverS3OutputFormatConfig'
             - description: ' The configuration that determines how data is formatted when Upsolver is used as the flow destination. '
       description: ' The properties that are applied when Upsolver is used as a destination. '
+    HoneycodeDestinationProperties:
+      type: object
+      required:
+        - object
+      properties:
+        object:
+          $ref: '#/components/schemas/Object'
+        errorHandlingConfig:
+          $ref: '#/components/schemas/ErrorHandlingConfig'
     DestinationConnectorProperties:
       type: object
       properties:
@@ -3751,10 +3823,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/EventBridgeDestinationProperties'
             - description: ' The properties required to query Amazon EventBridge. '
+        LookoutMetrics:
+          $ref: '#/components/schemas/LookoutMetricsDestinationProperties'
         Upsolver:
           allOf:
             - $ref: '#/components/schemas/UpsolverDestinationProperties'
             - description: ' The properties required to query Upsolver. '
+        Honeycode:
+          $ref: '#/components/schemas/HoneycodeDestinationProperties'
+        CustomerProfiles:
+          $ref: '#/components/schemas/CustomerProfilesDestinationProperties'
       description: ' This stores the information that is required to query a particular connector. '
     DestinationField:
       type: string
@@ -4261,6 +4339,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ScheduleOffset'
             - description: ' Specifies the optional offset that is added to the time interval for a schedule-triggered flow. '
+        firstExecutionFrom:
+          $ref: '#/components/schemas/Date'
       description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
     ServiceNowSourceProperties:
       type: object

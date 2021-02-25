@@ -599,6 +599,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/SAMLOptionsInput'
                         - description: Specifies the SAML application configuration for the domain.
+                AutoTuneOptions:
+                  description: 'Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.'
+                  type: object
+                  properties:
+                    DesiredState:
+                      allOf:
+                        - $ref: '#/components/schemas/AutoTuneDesiredState'
+                        - description: 'Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. '
+                    MaintenanceSchedules:
+                      allOf:
+                        - $ref: '#/components/schemas/AutoTuneMaintenanceScheduleList'
+                        - description: 'Specifies list of maitenance schedules. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1056,6 +1068,86 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/es/domain/{DomainName}/autoTunes':
+    get:
+      operationId: DescribeDomainAutoTunes
+      description: 'Provides scheduled Auto-Tune action details for the Elasticsearch domain, such as Auto-Tune action type, description, severity, and scheduled date.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDomainAutoTunesResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: Specifies the domain name for which you want Auto-Tune action details.
+          schema:
+            type: string
+            pattern: '[a-z][a-z0-9\-]+'
+            description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+            minLength: 3
+            maxLength: 28
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                MaxResults:
+                  description: ' Set this value to limit the number of results returned. '
+                  type: integer
+                  maximum: 100
+                NextToken:
+                  description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2015-01-01/es/domain/{DomainName}/config':
     get:
       operationId: DescribeElasticsearchDomainConfig
@@ -1355,6 +1447,22 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/KmsKeyId'
                         - description: ' Specifies the KMS Key ID for Encryption At Rest options.'
+                AutoTuneOptions:
+                  description: 'Specifies the Auto-Tune options: the Auto-Tune desired state for the domain, rollback state when disabling Auto-Tune options and list of maintenance schedules.'
+                  type: object
+                  properties:
+                    DesiredState:
+                      allOf:
+                        - $ref: '#/components/schemas/AutoTuneDesiredState'
+                        - description: 'Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. '
+                    RollbackOnDisable:
+                      allOf:
+                        - $ref: '#/components/schemas/RollbackOnDisable'
+                        - description: 'Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK. '
+                    MaintenanceSchedules:
+                      allOf:
+                        - $ref: '#/components/schemas/AutoTuneMaintenanceScheduleList'
+                        - description: 'Specifies list of maitenance schedules. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
   /2015-01-01/es/domain-info:
     post:
       operationId: DescribeElasticsearchDomains
@@ -3361,6 +3469,17 @@ components:
             - $ref: '#/components/schemas/IntegerClass'
             - description: 'The duration, in minutes, after which a user session becomes inactive. Acceptable values are between 1 and 1440, and the default value is 60.'
       description: Specifies the SAML application configuration for the domain.
+    AutoTuneDesiredState:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+      description: 'Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED.'
+    AutoTuneMaintenanceScheduleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutoTuneMaintenanceSchedule'
+      maxItems: 100
     InvalidTypeException: {}
     ResourceAlreadyExistsException: {}
     CreateOutboundCrossClusterSearchConnectionResponse:
@@ -3445,6 +3564,18 @@ components:
             - $ref: '#/components/schemas/PackageDetails'
             - description: <code>PackageDetails</code>
       description: ' Container for response parameters to <code> <a>DeletePackage</a> </code> operation. '
+    DescribeDomainAutoTunesResponse:
+      type: object
+      properties:
+        AutoTunes:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneList'
+            - description: 'Specifies the list of setting adjustments that Auto-Tune has made to the domain. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: Specifies an identifier to allow retrieval of paginated results.
+      description: 'The result of <code>DescribeDomainAutoTunes</code> request. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. '
     DescribeElasticsearchDomainResponse:
       type: object
       required:
@@ -3716,6 +3847,12 @@ components:
             - $ref: '#/components/schemas/ElasticsearchDomainConfig'
             - description: 'The status of the updated Elasticsearch domain. '
       description: The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.
+    RollbackOnDisable:
+      type: string
+      enum:
+        - NO_ROLLBACK
+        - DEFAULT_ROLLBACK
+      description: 'Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK.'
     UpdatePackageResponse:
       type: object
       properties:
@@ -3994,6 +4131,191 @@ components:
             - $ref: '#/components/schemas/ErrorDetails'
             - description: Additional information if the package is in an error state. Null otherwise.
       description: Information on a package that is associated with a domain.
+    AutoTuneType:
+      type: string
+      enum:
+        - SCHEDULED_ACTION
+      description: 'Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. '
+    AutoTuneDetails:
+      type: object
+      properties:
+        ScheduledAutoTuneDetails:
+          $ref: '#/components/schemas/ScheduledAutoTuneDetails'
+      description: 'Specifies details of the Auto-Tune action. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. '
+    AutoTune:
+      type: object
+      properties:
+        AutoTuneType:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneType'
+            - description: 'Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. '
+        AutoTuneDetails:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneDetails'
+            - description: 'Specifies details of the Auto-Tune action. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. '
+      description: 'Specifies Auto-Tune type and Auto-Tune action details. '
+    AutoTuneDate:
+      type: string
+      description: 'Specifies timestamp for the Auto-Tune action scheduled for the domain. '
+      format: date-time
+    ScheduledAutoTuneDetails:
+      type: object
+      properties:
+        Date:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneDate'
+            - description: 'Specifies timestamp for the Auto-Tune action scheduled for the domain. '
+        ActionType:
+          allOf:
+            - $ref: '#/components/schemas/ScheduledAutoTuneActionType'
+            - description: 'Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. '
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/ScheduledAutoTuneDescription'
+            - description: 'Specifies Auto-Tune action description. '
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/ScheduledAutoTuneSeverityType'
+            - description: 'Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. '
+      description: 'Specifies details of the scheduled Auto-Tune action. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information. '
+    AutoTuneList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AutoTune'
+    StartAt:
+      type: string
+      format: date-time
+    Duration:
+      type: object
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/DurationValue'
+            - description: ' Integer to specify the value of a maintenance schedule duration. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
+        Unit:
+          allOf:
+            - $ref: '#/components/schemas/TimeUnit'
+            - description: 'Specifies the unit of a maintenance schedule duration. Valid value is HOURS. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
+      description: 'Specifies maintenance schedule duration: duration value and duration unit. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
+    AutoTuneMaintenanceSchedule:
+      type: object
+      properties:
+        StartAt:
+          allOf:
+            - $ref: '#/components/schemas/StartAt'
+            - description: 'Specifies timestamp at which Auto-Tune maintenance schedule start. '
+        Duration:
+          allOf:
+            - $ref: '#/components/schemas/Duration'
+            - description: 'Specifies maintenance schedule duration: duration value and duration unit. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
+        CronExpressionForRecurrence:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Specifies cron expression for a recurring maintenance schedule. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
+      description: 'Specifies Auto-Tune maitenance schedule. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
+    AutoTuneOptions:
+      type: object
+      properties:
+        DesiredState:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneDesiredState'
+            - description: 'Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. '
+        RollbackOnDisable:
+          allOf:
+            - $ref: '#/components/schemas/RollbackOnDisable'
+            - description: 'Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK. '
+        MaintenanceSchedules:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneMaintenanceScheduleList'
+            - description: 'Specifies list of maitenance schedules. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
+      description: 'Specifies the Auto-Tune options: the Auto-Tune desired state for the domain, rollback state when disabling Auto-Tune options and list of maintenance schedules.'
+    AutoTuneOptionsInput:
+      type: object
+      properties:
+        DesiredState:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneDesiredState'
+            - description: 'Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. '
+        MaintenanceSchedules:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneMaintenanceScheduleList'
+            - description: 'Specifies list of maitenance schedules. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
+      description: 'Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.'
+    AutoTuneState:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+        - ENABLE_IN_PROGRESS
+        - DISABLE_IN_PROGRESS
+        - DISABLED_AND_ROLLBACK_SCHEDULED
+        - DISABLED_AND_ROLLBACK_IN_PROGRESS
+        - DISABLED_AND_ROLLBACK_COMPLETE
+        - DISABLED_AND_ROLLBACK_ERROR
+        - ERROR
+      description: 'Specifies the Auto-Tune state for the Elasticsearch domain. For valid states see the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a>.'
+    AutoTuneOptionsOutput:
+      type: object
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneState'
+            - description: Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Specifies the error message while enabling or disabling the Auto-Tune.
+      description: 'Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.'
+    AutoTuneStatus:
+      type: object
+      required:
+        - CreationDate
+        - UpdateDate
+        - State
+      properties:
+        CreationDate:
+          allOf:
+            - $ref: '#/components/schemas/UpdateTimestamp'
+            - description: Timestamp which tells Auto-Tune options creation date .
+        UpdateDate:
+          allOf:
+            - $ref: '#/components/schemas/UpdateTimestamp'
+            - description: Timestamp which tells Auto-Tune options last updated time.
+        UpdateVersion:
+          allOf:
+            - $ref: '#/components/schemas/UIntValue'
+            - description: Specifies the Auto-Tune options latest version.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneState'
+            - description: Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Specifies the error message while enabling or disabling the Auto-Tune options.
+        PendingDeletion:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the Elasticsearch domain is being deleted.
+      description: 'Provides the current status of the Auto-Tune options. '
+    AutoTuneOptionsStatus:
+      type: object
+      properties:
+        Options:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneOptions'
+            - description: ' Specifies Auto-Tune options for the specified Elasticsearch domain.'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneStatus'
+            - description: ' Specifies Status of the Auto-Tune options for the specified Elasticsearch domain.'
+      description: ' Specifies the status of Auto-Tune options for the specified Elasticsearch domain.'
+    UpdateTimestamp:
+      type: string
+      format: date-time
+    UIntValue:
+      type: integer
+      minimum: 0
     BackendRole:
       type: string
       minLength: 1
@@ -4304,6 +4626,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdvancedSecurityOptionsInput'
             - description: Specifies advanced security options.
+        AutoTuneOptions:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneOptionsInput'
+            - description: Specifies Auto-Tune options.
     ElasticsearchDomainStatus:
       type: object
       required:
@@ -4402,6 +4728,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdvancedSecurityOptions'
             - description: The current status of the Elasticsearch domain's advanced security options.
+        AutoTuneOptions:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneOptionsOutput'
+            - description: The current status of the Elasticsearch domain's Auto-Tune options.
       description: The current status of an Elasticsearch domain.
     DomainInformation:
       type: object
@@ -4592,6 +4922,26 @@ components:
         - COMPLETED
         - NOT_ELIGIBLE
         - ELIGIBLE
+    MaxResults:
+      type: integer
+      description: ' Set this value to limit the number of results returned. '
+      maximum: 100
+    NextToken:
+      type: string
+      description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+    DescribeDomainAutoTunesRequest:
+      type: object
+      title: DescribeDomainAutoTunesRequest
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'Set this value to limit the number of results returned. If not specified, defaults to 100.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.
+      description: Container for the parameters to the <code>DescribeDomainAutoTunes</code> operation.
     DescribeElasticsearchDomainConfigRequest:
       type: object
       title: DescribeElasticsearchDomainConfigRequest
@@ -4652,6 +5002,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdvancedSecurityOptionsStatus'
             - description: 'Specifies <code>AdvancedSecurityOptions</code> for the domain. '
+        AutoTuneOptions:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneOptionsStatus'
+            - description: 'Specifies <code>AutoTuneOptions</code> for the domain. '
       description: The configuration of an Elasticsearch domain.
     DescribeElasticsearchDomainRequest:
       type: object
@@ -4693,13 +5047,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Filter'
-    MaxResults:
-      type: integer
-      description: ' Set this value to limit the number of results returned. '
-      maximum: 100
-    NextToken:
-      type: string
-      description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
     DescribeInboundCrossClusterSearchConnectionsRequest:
       type: object
       title: DescribeInboundCrossClusterSearchConnectionsRequest
@@ -4868,6 +5215,16 @@ components:
     Double:
       type: number
       format: double
+    DurationValue:
+      type: integer
+      description: ' Integer to specify the value of a maintenance schedule duration. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
+      minimum: 1
+      maximum: 24
+    TimeUnit:
+      type: string
+      enum:
+        - HOURS
+      description: 'Specifies the unit of a maintenance schedule duration. Valid value is HOUR. See the <a href="https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html" target="_blank">Developer Guide</a> for more information.'
     EBSOptionsStatus:
       type: object
       required:
@@ -5195,12 +5552,6 @@ components:
         - Processing
         - Active
       description: '<p>The state of a requested change. One of the following:</p> <ul> <li>Processing: The request change is still in-process.</li> <li>Active: The request change is processed and deployed to the Elasticsearch domain.</li> </ul>'
-    UpdateTimestamp:
-      type: string
-      format: date-time
-    UIntValue:
-      type: integer
-      minimum: 0
     OutboundCrossClusterSearchConnectionStatusCode:
       type: string
       enum:
@@ -5421,6 +5772,22 @@ components:
             - $ref: '#/components/schemas/SAMLEntityId'
             - description: The unique Entity ID of the application in SAML Identity Provider.
       description: Specifies the SAML Identity Provider's information.
+    ScheduledAutoTuneActionType:
+      type: string
+      enum:
+        - JVM_HEAP_SIZE_TUNING
+        - JVM_YOUNG_GEN_TUNING
+      description: 'Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. '
+    ScheduledAutoTuneDescription:
+      type: string
+      description: 'Specifies Auto-Tune action description. '
+    ScheduledAutoTuneSeverityType:
+      type: string
+      enum:
+        - LOW
+        - MEDIUM
+        - HIGH
+      description: 'Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. '
     StartElasticsearchServiceSoftwareUpdateRequest:
       type: object
       required:
@@ -5531,6 +5898,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EncryptionAtRestOptions'
             - description: Specifies the Encryption At Rest Options.
+        AutoTuneOptions:
+          allOf:
+            - $ref: '#/components/schemas/AutoTuneOptions'
+            - description: Specifies Auto-Tune options.
       description: Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.
     UpdatePackageRequest:
       type: object

@@ -340,12 +340,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
         '482':
+          description: InvalidTagParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagParameterException'
+        '483':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '484':
           description: RepositoryAlreadyExistsException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RepositoryAlreadyExistsException'
-        '483':
+        '485':
           description: LimitExceededException
           content:
             application/json:
@@ -1006,6 +1018,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SpencerFrontendService.ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: List the tags for an Amazon ECR Public resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '482':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SpencerFrontendService.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SpencerFrontendService.PutImage:
     post:
       operationId: PutImage
@@ -1250,6 +1313,132 @@ paths:
             type: string
             enum:
               - SpencerFrontendService.SetRepositoryPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SpencerFrontendService.TagResource:
+    post:
+      operationId: TagResource
+      description: 'Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: InvalidTagParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagParameterException'
+        '482':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '483':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '484':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SpencerFrontendService.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SpencerFrontendService.UntagResource:
+    post:
+      operationId: UntagResource
+      description: Deletes specified tags from a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: InvalidTagParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagParameterException'
+        '482':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '483':
+          description: RepositoryNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryNotFoundException'
+        '484':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SpencerFrontendService.UntagResource
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1527,6 +1716,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/RepositoryCatalogDataInput'
             - description: The details about the repository that are publicly visible in the Amazon ECR Public Gallery.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'The metadata that you apply to the repository to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+    InvalidTagParameterException: {}
+    TooManyTagsException: {}
     RepositoryAlreadyExistsException: {}
     LimitExceededException: {}
     DeleteRepositoryResponse:
@@ -1811,6 +2006,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/RepositoryName'
             - description: The name of the repository to which you intend to upload layers.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the resource.
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - resourceArn
+      title: ListTagsForResourceRequest
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resource is an Amazon ECR Public repository.'
     PutImageResponse:
       type: object
       properties:
@@ -1935,6 +2147,42 @@ components:
           allOf:
             - $ref: '#/components/schemas/ForceFlag'
             - description: 'If the policy you are attempting to set on a repository policy would prevent you from setting another policy in the future, you must force the <a>SetRepositoryPolicy</a> operation. This is intended to prevent accidental repository lock outs.'
+    TagResourceResponse:
+      type: object
+      properties: {}
+    TagResourceRequest:
+      type: object
+      required:
+        - resourceArn
+        - tags
+      title: TagResourceRequest
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the supported resource is an Amazon ECR Public repository.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceRequest:
+      type: object
+      required:
+        - resourceArn
+        - tagKeys
+      title: UntagResourceRequest
+      properties:
+        resourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported resource is an Amazon ECR Public repository.'
+        tagKeys:
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The keys of the tags to be removed.
     UploadLayerPartResponse:
       type: object
       properties:
@@ -2101,6 +2349,12 @@ components:
             - $ref: '#/components/schemas/UsageText'
             - description: 'Detailed information on how to use the contents of the repository. It is publicly visible in the Amazon ECR Public Gallery. The usage text provides context, support information, and additional usage details for users of the repository. The text must be in markdown format.'
       description: An object containing the catalog data for a repository. This data is publicly visible in the Amazon ECR Public Gallery.
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 200
     Repository:
       type: object
       properties:
@@ -2526,5 +2780,31 @@ components:
     UsageText:
       type: string
       maxLength: 10240
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Tag:
+      type: object
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: One part of a key-value pair that make up a tag. A <code>key</code> is a general label that acts like a category for more specific tag values.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a descriptor within a tag category (key).
+      description: 'The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
 security:
   - hmac: []
