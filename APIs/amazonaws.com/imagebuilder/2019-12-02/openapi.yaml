@@ -923,6 +923,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/NonEmptyString'
                         - description: '<p>The cron expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.</p> <p>For information on how to format a cron expression in Image Builder, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html">Use cron expressions in EC2 Image Builder</a>.</p>'
+                    timezone:
+                      allOf:
+                        - $ref: '#/components/schemas/Timezone'
+                        - description: 'The timezone that applies to the scheduling expression. For example, "Etc/UTC", "America/Los_Angeles" in the <a href="https://www.joda.org/joda-time/timezones.html">IANA timezone format</a>. If not specified this defaults to UTC.'
                     pipelineExecutionStartCondition:
                       allOf:
                         - $ref: '#/components/schemas/PipelineExecutionStartCondition'
@@ -3099,6 +3103,109 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListImagePackages:
+    post:
+      operationId: ListImagePackages
+      description: 'List the Packages that are associated with an Image Build Version, as determined by AWS Systems Manager Inventory at build time.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImagePackagesResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '487':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - imageBuildVersionArn
+              properties:
+                imageBuildVersionArn:
+                  description: Filter results for the ListImagePackages request by the Image Build Version ARN
+                  type: string
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+                maxResults:
+                  description: The maxiumum number of results to return from the ListImagePackages request.
+                  type: integer
+                  minimum: 1
+                  maximum: 25
+                nextToken:
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+                  type: string
+                  minLength: 1
+                  maxLength: 65535
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /ListImagePipelineImages:
     post:
       operationId: ListImagePipelineImages
@@ -4437,6 +4544,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/NonEmptyString'
                         - description: '<p>The cron expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.</p> <p>For information on how to format a cron expression in Image Builder, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html">Use cron expressions in EC2 Image Builder</a>.</p>'
+                    timezone:
+                      allOf:
+                        - $ref: '#/components/schemas/Timezone'
+                        - description: 'The timezone that applies to the scheduling expression. For example, "Etc/UTC", "America/Los_Angeles" in the <a href="https://www.joda.org/joda-time/timezones.html">IANA timezone format</a>. If not specified this defaults to UTC.'
                     pipelineExecutionStartCondition:
                       allOf:
                         - $ref: '#/components/schemas/PipelineExecutionStartCondition'
@@ -4806,6 +4917,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImagePipelineArn'
             - description: ' The Amazon Resource Name (ARN) of the image pipeline that was created by this request. '
+    Timezone:
+      type: string
+      pattern: '[a-zA-Z0-9]{2,}(?:\/[a-zA-z0-9-_+]+)*'
+      minLength: 3
+      maxLength: 100
     PipelineExecutionStartCondition:
       type: string
       enum:
@@ -5179,6 +5295,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
+    ListImagePackagesResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        imagePackageList:
+          allOf:
+            - $ref: '#/components/schemas/ImagePackageList'
+            - description: The list of Image Packages returned in the response.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     ListImagePipelineImagesResponse:
       type: object
       properties:
@@ -6077,6 +6208,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>The cron expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.</p> <p>For information on how to format a cron expression in Image Builder, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html">Use cron expressions in EC2 Image Builder</a>.</p>'
+        timezone:
+          allOf:
+            - $ref: '#/components/schemas/Timezone'
+            - description: 'The timezone that applies to the scheduling expression. For example, "Etc/UTC", "America/Los_Angeles" in the <a href="https://www.joda.org/joda-time/timezones.html">IANA timezone format</a>. If not specified this defaults to UTC.'
         pipelineExecutionStartCondition:
           allOf:
             - $ref: '#/components/schemas/PipelineExecutionStartCondition'
@@ -6451,6 +6586,7 @@ components:
         - io1
         - io2
         - gp2
+        - gp3
         - sc1
         - st1
     EbsInstanceBlockDeviceSpecification:
@@ -6784,7 +6920,7 @@ components:
             - description: The instance types of the infrastructure configuration.
         instanceProfileName:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/InstanceProfileNameType'
             - description: The instance profile of the infrastructure configuration.
         securityGroupIds:
           allOf:
@@ -6844,6 +6980,22 @@ components:
             - $ref: '#/components/schemas/ContainerList'
             - description: Container images that the pipeline has generated and stored in the output repository.
       description: 'The resources produced by this image. '
+    ImagePackage:
+      type: object
+      properties:
+        packageName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the package as reported to the operating system package manager.
+        packageVersion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The version of the package as reported to the operating system package manager.
+      description: Represents a package installed on an Image Builder image.
+    ImagePackageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImagePackage'
     ImagePipelineList:
       type: array
       items:
@@ -7052,6 +7204,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: 'The idempotency token of the component. '
+    InstanceProfileNameType:
+      type: string
+      pattern: '^[\w+=,.@-]+$'
+      minLength: 1
+      maxLength: 256
     InfrastructureConfigurationSummary:
       type: object
       properties:
@@ -7083,6 +7240,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags of the infrastructure configuration.
+        instanceTypes:
+          allOf:
+            - $ref: '#/components/schemas/InstanceTypeList'
+            - description: The instance types of the infrastructure configuration.
+        instanceProfileName:
+          allOf:
+            - $ref: '#/components/schemas/InstanceProfileNameType'
+            - description: The instance profile of the infrastructure configuration.
       description: The infrastructure used when building EC2 AMIs.
     InfrastructureConfigurationSummaryList:
       type: array
@@ -7205,6 +7370,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+    ListImagePackagesRequest:
+      type: object
+      required:
+        - imageBuildVersionArn
+      title: ListImagePackagesRequest
+      properties:
+        imageBuildVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuildVersionArn'
+            - description: Filter results for the ListImagePackages request by the Image Build Version ARN
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/RestrictedInteger'
+            - description: The maxiumum number of results to return from the ListImagePackages request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     ListImagePipelineImagesRequest:
       type: object
       required:

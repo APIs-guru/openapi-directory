@@ -228,6 +228,14 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 255
+                Format:
+                  description: Specifies the file format of a dataset created from an S3 file or folder.
+                  type: string
+                  enum:
+                    - CSV
+                    - JSON
+                    - PARQUET
+                    - EXCEL
                 FormatOptions:
                   description: 'Options that define the structure of either Csv, Excel, or JSON input.'
                   type: object
@@ -1095,6 +1103,14 @@ paths:
               required:
                 - Input
               properties:
+                Format:
+                  description: Specifies the file format of a dataset created from an S3 file or folder.
+                  type: string
+                  enum:
+                    - CSV
+                    - JSON
+                    - PARQUET
+                    - EXCEL
                 FormatOptions:
                   description: 'Options that define the structure of either Csv, Excel, or JSON input.'
                   type: object
@@ -2635,6 +2651,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SheetIndexList'
             - description: 'Specifies one or more sheet numbers in the Excel file, which will be included in the dataset.'
+        HeaderRow:
+          allOf:
+            - $ref: '#/components/schemas/HeaderRow'
+            - description: 'A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.'
       description: 'Options that define how DataBrew will interpret a Microsoft Excel file, when creating a dataset from that file.'
     CsvOptions:
       type: object
@@ -2643,6 +2663,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Delimiter'
             - description: A single character that specifies the delimiter being used in the Csv file.
+        HeaderRow:
+          allOf:
+            - $ref: '#/components/schemas/HeaderRow'
+            - description: 'A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.'
       description: Options that define how DataBrew will read a Csv file when creating a dataset from that file.
     S3Location:
       type: object
@@ -2877,6 +2901,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatasetName'
             - description: The name of the dataset.
+        Format:
+          allOf:
+            - $ref: '#/components/schemas/InputFormat'
+            - description: Specifies the file format of a dataset created from an S3 file or folder.
         FormatOptions:
           $ref: '#/components/schemas/FormatOptions'
         Input:
@@ -3554,6 +3582,13 @@ components:
       type: string
       minLength: 1
       maxLength: 255
+    InputFormat:
+      type: string
+      enum:
+        - CSV
+        - JSON
+        - PARQUET
+        - EXCEL
     FormatOptions:
       type: object
       properties:
@@ -3599,6 +3634,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatasetName'
             - description: 'The name of the dataset to be created. Valid characters are alphanumeric (A-Z, a-z, 0-9), hyphen (-), period (.), and space.'
+        Format:
+          allOf:
+            - $ref: '#/components/schemas/InputFormat'
+            - description: Specifies the file format of a dataset created from an S3 file or folder.
         FormatOptions:
           $ref: '#/components/schemas/FormatOptions'
         Input:
@@ -3894,6 +3933,8 @@ components:
       type: string
       minLength: 1
       maxLength: 1
+    HeaderRow:
+      type: boolean
     CsvOutputOptions:
       type: object
       properties:
@@ -3942,6 +3983,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatasetName'
             - description: The unique name of the dataset.
+        Format:
+          allOf:
+            - $ref: '#/components/schemas/InputFormat'
+            - description: Specifies the file format of a dataset created from an S3 file or folder.
         FormatOptions:
           allOf:
             - $ref: '#/components/schemas/FormatOptions'
@@ -4622,6 +4667,10 @@ components:
         - Input
       title: UpdateDatasetRequest
       properties:
+        Format:
+          allOf:
+            - $ref: '#/components/schemas/InputFormat'
+            - description: Specifies the file format of a dataset created from an S3 file or folder.
         FormatOptions:
           $ref: '#/components/schemas/FormatOptions'
         Input:

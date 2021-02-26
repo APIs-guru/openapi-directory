@@ -15677,7 +15677,7 @@ components:
         progress:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: The progress of the disk snapshot operation.
+            - description: The progress of the snapshot.
         fromDiskName:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -16132,7 +16132,7 @@ components:
         progress:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: The progress of the snapshot.
+            - description: '<p>The progress of the snapshot.</p> <note> <p>This is populated only for disk snapshots, and is <code>null</code> for instance snapshots.</p> </note>'
         fromAttachedDisks:
           allOf:
             - $ref: '#/components/schemas/DiskList'
