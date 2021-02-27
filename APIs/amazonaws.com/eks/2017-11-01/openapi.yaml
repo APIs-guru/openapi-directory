@@ -115,6 +115,86 @@ servers:
     description: The Amazon EKS endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/clusters/{name}/encryption-config/associate':
+    post:
+      operationId: AssociateEncryptionConfig
+      description: <p>Associate encryption configuration to an existing cluster.</p> <p>You can use this API to enable encryption on existing clusters which do not have encryption already enabled. This allows you to implement a defense-in-depth security strategy without migrating applications to new EKS clusters.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateEncryptionConfigResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '483':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the cluster that you are associating with encryption configuration.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - encryptionConfig
+              properties:
+                encryptionConfig:
+                  description: The configuration you are using for encryption.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/EncryptionConfig'
+                  maxItems: 1
+                clientRequestToken:
+                  description: The client request token you are using with the encryption configuration.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/clusters/{name}/identity-provider-configs/associate':
     post:
       operationId: AssociateIdentityProviderConfig
@@ -400,7 +480,7 @@ paths:
   /clusters:
     post:
       operationId: CreateCluster
-      description: '<p>Creates an Amazon EKS control plane. </p> <p>The Amazon EKS control plane consists of control plane instances that run the Kubernetes software, such as <code>etcd</code> and the API server. The control plane runs in an account managed by AWS, and the Kubernetes API is exposed via the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane is single-tenant and unique and runs on its own set of Amazon EC2 instances.</p> <p>The cluster control plane is provisioned across multiple Availability Zones and fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC subnets to provide connectivity from the control plane instances to the nodes (for example, to support <code>kubectl exec</code>, <code>logs</code>, and <code>proxy</code> data flows).</p> <p>Amazon EKS nodes run in your AWS account and connect to your cluster''s control plane via the Kubernetes API server endpoint and a certificate file that is created for your cluster.</p> <p>You can use the <code>endpointPublicAccess</code> and <code>endpointPrivateAccess</code> parameters to enable or disable public and private access to your cluster''s Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>. </p> <p>You can use the <code>logging</code> parameter to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren''t exported to CloudWatch Logs. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html">Amazon EKS Cluster Control Plane Logs</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see <a href="http://aws.amazon.com/cloudwatch/pricing/">Amazon CloudWatch Pricing</a>.</p> </note> <p>Cluster creation typically takes between 10 and 15 minutes. After you create an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate with the API server and launch nodes into your cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html">Managing Cluster Authentication</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html">Launching Amazon EKS nodes</a> in the <i>Amazon EKS User Guide</i>.</p>'
+      description: '<p>Creates an Amazon EKS control plane. </p> <p>The Amazon EKS control plane consists of control plane instances that run the Kubernetes software, such as <code>etcd</code> and the API server. The control plane runs in an account managed by AWS, and the Kubernetes API is exposed via the Amazon EKS API server endpoint. Each Amazon EKS cluster control plane is single-tenant and unique and runs on its own set of Amazon EC2 instances.</p> <p>The cluster control plane is provisioned across multiple Availability Zones and fronted by an Elastic Load Balancing Network Load Balancer. Amazon EKS also provisions elastic network interfaces in your VPC subnets to provide connectivity from the control plane instances to the nodes (for example, to support <code>kubectl exec</code>, <code>logs</code>, and <code>proxy</code> data flows).</p> <p>Amazon EKS nodes run in your AWS account and connect to your cluster''s control plane via the Kubernetes API server endpoint and a certificate file that is created for your cluster.</p> <p>Cluster creation typically takes several minutes. After you create an Amazon EKS cluster, you must configure your Kubernetes tooling to communicate with the API server and launch nodes into your cluster. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html">Managing Cluster Authentication</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html">Launching Amazon EKS nodes</a> in the <i>Amazon EKS User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2519,6 +2599,29 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AssociateEncryptionConfigResponse:
+      type: object
+      properties:
+        update:
+          $ref: '#/components/schemas/Update'
+    EncryptionConfig:
+      type: object
+      properties:
+        resources:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Specifies the resources to be encrypted. The only supported value is "secrets".
+        provider:
+          allOf:
+            - $ref: '#/components/schemas/Provider'
+            - description: AWS Key Management Service (AWS KMS) customer master key (CMK). Either the ARN or the alias can be used.
+      description: The encryption configuration for the cluster.
+    InvalidParameterException: {}
+    ClientException: {}
+    ServerException: {}
+    ResourceInUseException: {}
+    ResourceNotFoundException: {}
+    InvalidRequestException: {}
     AssociateIdentityProviderConfigResponse:
       type: object
       properties:
@@ -2537,12 +2640,6 @@ components:
     TagValue:
       type: string
       maxLength: 256
-    InvalidParameterException: {}
-    ClientException: {}
-    ServerException: {}
-    ResourceInUseException: {}
-    ResourceNotFoundException: {}
-    InvalidRequestException: {}
     CreateAddonResponse:
       type: object
       properties:
@@ -2566,18 +2663,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/LogSetup'
-    EncryptionConfig:
-      type: object
-      properties:
-        resources:
-          allOf:
-            - $ref: '#/components/schemas/StringList'
-            - description: Specifies the resources to be encrypted. The only supported value is "secrets".
-        provider:
-          allOf:
-            - $ref: '#/components/schemas/Provider'
-            - description: AWS Key Management Service (AWS KMS) customer master key (CMK). Either the ARN or the alias can be used.
-      description: The encryption configuration for the cluster.
     ResourceLimitExceededException: {}
     ServiceUnavailableException: {}
     UnsupportedAvailabilityZoneException: {}
@@ -2996,6 +3081,53 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AddonInfo'
+    EncryptionConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EncryptionConfig'
+      maxItems: 1
+    AssociateEncryptionConfigRequest:
+      type: object
+      required:
+        - encryptionConfig
+      title: AssociateEncryptionConfigRequest
+      properties:
+        encryptionConfig:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConfigList'
+            - description: The configuration you are using for encryption.
+        clientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The client request token you are using with the encryption configuration.
+    Update:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A UUID that is used to track the update.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/UpdateStatus'
+            - description: The current status of the update.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/UpdateType'
+            - description: The type of the update.
+        params:
+          allOf:
+            - $ref: '#/components/schemas/UpdateParams'
+            - description: A key-value map that contains the parameters associated with the update.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix epoch timestamp in seconds for when the update was created.
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetails'
+            - description: Any errors associated with a <code>Failed</code> update.
+      description: An object representing an asynchronous update.
     OidcIdentityProviderConfigRequest:
       type: object
       required:
@@ -3054,34 +3186,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
-    Update:
-      type: object
-      properties:
-        id:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: A UUID that is used to track the update.
-        status:
-          allOf:
-            - $ref: '#/components/schemas/UpdateStatus'
-            - description: The current status of the update.
-        type:
-          allOf:
-            - $ref: '#/components/schemas/UpdateType'
-            - description: The type of the update.
-        params:
-          allOf:
-            - $ref: '#/components/schemas/UpdateParams'
-            - description: A key-value map that contains the parameters associated with the update.
-        createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The Unix epoch timestamp in seconds for when the update was created.
-        errors:
-          allOf:
-            - $ref: '#/components/schemas/ErrorDetails'
-            - description: Any errors associated with a <code>Failed</code> update.
-      description: An object representing an asynchronous update.
     AutoScalingGroup:
       type: object
       properties:
@@ -3175,11 +3279,6 @@ components:
         - DELETING
         - FAILED
         - UPDATING
-    EncryptionConfigList:
-      type: array
-      items:
-        $ref: '#/components/schemas/EncryptionConfig'
-      maxItems: 1
     Cluster:
       type: object
       properties:
@@ -4055,6 +4154,7 @@ components:
         - ConfigUpdate
         - AssociateIdentityProviderConfig
         - DisassociateIdentityProviderConfig
+        - AssociateEncryptionConfig
         - AddonUpdate
     UpdateParams:
       type: array
@@ -4176,6 +4276,7 @@ components:
         - ReleaseVersion
         - PublicAccessCidrs
         - IdentityProviderConfig
+        - EncryptionConfig
         - AddonVersion
         - ServiceAccountRoleArn
         - ResolveConflicts
