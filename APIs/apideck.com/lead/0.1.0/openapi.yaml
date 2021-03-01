@@ -15,7 +15,7 @@ info:
     If you are working with APIs, you are probably already familiar with Postman, a development tool that enables you to configure and run API requests. Click the button below to run the collection.
 
 
-    [![Run our LEAD API in Postman](https://app.apideck.com/images/postman-button.svg)](https://app.getpostman.com/run-collection/467cc44559b7226ecb61)
+    [![Run our LEAD API in Postman](https://app.apideck.com/images/postman-button.svg)](https://www.postman.com/apideck/workspace/unified-apis/overview)
 
 
     ## Base URL
@@ -86,7 +86,7 @@ info:
 
     | [Pipedrive](https://www.pipedrive.com/)                         | &#9989;           | 1.0.0      | &#128284;     | &#128284; |
 
-    | [Salesflare](https://salesflare.com)                            | &#9989;           | 1.0.0      | &#9989;       | &#9989;   |
+    | [Salesflare](https://salesflare.com)                            | &#9989;           | 0.0.1      | &#128284;     | &#128284; |
 
     | [Salesforce](https://www.salesforce.com)                        | &#9989;           | v39.0      | &#9989;       | &#128284; |
 
@@ -384,7 +384,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Lead API
-  version: 0.0.1
+  version: 0.1.0
   x-logo:
     url: https://www.apideck.com/logo.png
   x-origin:
@@ -408,6 +408,7 @@ paths:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/offset"
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/per_page"
       responses:
@@ -575,7 +576,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/lead"
+                $ref: "#/components/schemas/leadsUpdateResponse"
           description: Leads updated
         "400":
           $ref: "#/components/responses/BadRequest"
@@ -607,6 +608,12 @@ components:
       required: true
       schema:
         type: string
+    offset:
+      description: The number of items to skip before starting to collect the result set
+      in: query
+      name: offset
+      schema:
+        type: integer
     page:
       description: Page number to start from. Omitting the page parameter will return page 1
       in: query
@@ -615,7 +622,7 @@ components:
         default: 1
         type: integer
     per_page:
-      description: Number of records to return per page. Default = 100.
+      description: Number of records to return per result set. Default = 100.
       in: query
       name: per_page
       schema:
@@ -868,8 +875,207 @@ components:
           type: string
     lead:
       properties:
-        id:
+        addresses:
+          items:
+            properties:
+              city:
+                description: Name of city.
+                example: San Francisco
+                nullable: true
+                type: string
+              country:
+                description: country code according to ISO 3166-1 alpha-2.
+                example: US
+                nullable: true
+                type: string
+              id:
+                example: "123"
+                type: string
+              latitude:
+                example: "40.759211"
+                nullable: true
+                type: string
+              line1:
+                description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
+                example: Main street
+                nullable: true
+                type: string
+              line2:
+                description: Line 2 of the address
+                example: "apt #"
+                nullable: true
+                type: string
+              longitude:
+                example: "-73.984638"
+                nullable: true
+                type: string
+              name:
+                example: HQ US
+                type: string
+              postal_code:
+                description: Zip code or equivalent.
+                example: "94104"
+                nullable: true
+                type: string
+              state:
+                description: Name of state
+                example: CA
+                nullable: true
+                type: string
+              type:
+                enum:
+                  - default
+                  - primary
+                  - secondary
+                  - tertiary
+                  - invoicing
+                  - delivery
+                  - visiting
+                  - mailing
+                  - home
+                  - work
+                  - other
+                example: invoicing
+                type: string
+            type: object
+          type: array
+        company_id:
+          example: "2"
+          nullable: true
           type: string
+        company_name:
+          example: Spacex
+          nullable: true
+          type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        custom_fields:
+          items:
+            additionalProperties: false
+            properties:
+              id:
+                example: custom_technologies
+                type: string
+              value:
+                example: Uses Salesforce and Marketo
+                nullable: true
+                type: string
+            required:
+              - id
+            type: object
+          type: array
+        description:
+          example: A thinker
+          type: string
+        emails:
+          items:
+            properties:
+              email:
+                example: elon@musk.com
+                format: email
+                type: string
+              id:
+                example: "123"
+                type: string
+              type:
+                example: default
+                type: string
+            type: object
+          type: array
+        fax:
+          example: "+12129876543"
+          nullable: true
+          type: string
+        first_name:
+          type: string
+        id:
+          readOnly: true
+          type: string
+        last_name:
+          nullable: true
+          type: string
+        name:
+          type: string
+        owner_id:
+          example: "1"
+          type: string
+        phone_numbers:
+          items:
+            properties:
+              id:
+                example: "123"
+                type: string
+              number:
+                example: 111-111-1111
+                type: string
+              phone_type:
+                enum:
+                  - default
+                  - mobile
+                  - work
+                  - office
+                  - home
+                  - fax
+                  - assistant
+                  - other
+                type: string
+            type: object
+          type: array
+        prefix:
+          type: string
+        social_links:
+          items:
+            properties:
+              id:
+                example: "123"
+                type: string
+              platform:
+                example: twitter
+                type: string
+              url:
+                example: https://www.twitter.com/apideck-io
+                type: string
+            type: object
+          type: array
+        status:
+          type: string
+        tags:
+          example:
+            - New
+          items:
+            type: string
+          type: array
+        title:
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        websites:
+          items:
+            properties:
+              category:
+                example: default
+                type: string
+              id:
+                example: "123"
+                type: string
+              url:
+                example: http://example.com
+                type: string
+            required:
+              - url
+            type: object
+          type: array
+      required:
+        - id
+      x-pii:
+        - name
+        - email
+        - first_name
+        - last_name
     leads:
       description: ""
       items:
@@ -878,49 +1084,24 @@ components:
       type: array
     leadsAdd:
       properties:
-        address:
-          properties:
-            city:
-              description: Name of city.
-              example: San Francisco
-              type: string
-            country:
-              description: country code according to ISO 3166-1 alpha-2.
-              example: US
-              type: string
-            line1:
-              description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
-              example: Main street
-              type: string
-            line2:
-              description: "Line 2 of the address e.g. number, street, suite, apt #, etc."
-              example: Bus 100
-              type: string
-            postal_code:
-              description: Zip code or equivalent.
-              example: "94104"
-              type: string
-            state:
-              description: Name of state
-              example: CA
-              type: string
-          type: object
+        addresses:
+          $ref: "#/components/schemas/lead/properties/addresses"
+        company_id:
+          example: "1234567"
+          type: string
         company_name:
           example: SpaceX
           type: string
         custom_fields:
-          items:
-            properties:
-              id:
-                example: custom_technologies
-                type: string
-              value:
-                example: Uses Salesforce and Marketo
-                type: string
-            type: object
-          type: array
-        email:
-          example: elon@spacex.com
+          $ref: "#/components/schemas/lead/properties/custom_fields"
+        description:
+          example: A thinker
+          type: string
+        emails:
+          $ref: "#/components/schemas/lead/properties/emails"
+        fax:
+          example: "+12129876543"
+          nullable: true
           type: string
         first_name:
           example: Elon
@@ -937,29 +1118,23 @@ components:
         note:
           example: Eager to buy more rockets.
           type: string
-        phone_number:
-          example: +444 111 222 333
-          nullable: true
-          type: string
+        phone_numbers:
+          $ref: "#/components/schemas/lead/properties/phone_numbers"
         prefix:
           example: Duke
           type: string
+        social_links:
+          $ref: "#/components/schemas/lead/properties/social_links"
         status:
           example: open
           type: string
         tags:
-          example:
-            - new
-            - hot
-          items:
-            type: string
-          type: array
+          $ref: "#/components/schemas/lead/properties/tags"
         title:
           example: CEO
           type: string
-        website:
-          example: https://www.spacex.com
-          type: string
+        websites:
+          $ref: "#/components/schemas/lead/properties/websites"
       required:
         - name
         - company_name
@@ -972,6 +1147,8 @@ components:
     leadsAddResponse:
       properties:
         id:
+          example: "12345"
+          readOnly: true
           type: string
     leadsDeleteResponse:
       properties:
@@ -979,49 +1156,30 @@ components:
           type: string
     leadsUpdate:
       properties:
-        address:
-          properties:
-            city:
-              description: Name of city.
-              example: San Francisco
-              type: string
-            country:
-              description: country code according to ISO 3166-1 alpha-2.
-              example: US
-              type: string
-            line1:
-              description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
-              example: Main street
-              type: string
-            line2:
-              description: "Line 2 of the address e.g. number, street, suite, apt #, etc."
-              example: Bus 100
-              type: string
-            postal_code:
-              description: Zip code or equivalent.
-              example: "94104"
-              type: string
-            state:
-              description: Name of state
-              example: CA
-              type: string
-          type: object
+        addresses:
+          $ref: "#/components/schemas/lead/properties/addresses"
+        company_id:
+          example: "1234567"
+          type: string
         company_name:
           example: SpaceX
           type: string
         custom_fields:
-          items:
-            properties:
-              id:
-                example: custom_technologies
-                type: string
-              value:
-                example: Uses Salesforce and Marketo
-                type: string
-            type: object
-          type: array
-        email:
-          example: elon@spacex.com
+          $ref: "#/components/schemas/lead/properties/custom_fields"
+        description:
+          example: A thinker
+          type: string
+        emails:
+          $ref: "#/components/schemas/lead/properties/emails"
+        fax:
+          example: "+12129876543"
+          nullable: true
+          type: string
+        first_name:
+          example: Elon
+          type: string
+        last_name:
+          example: Musk
           type: string
         lead_source:
           example: website
@@ -1032,38 +1190,38 @@ components:
         note:
           example: Eager to buy more rockets.
           type: string
-        phone_number:
-          example: +444 111 222 333
-          nullable: true
-          type: string
+        phone_numbers:
+          $ref: "#/components/schemas/lead/properties/phone_numbers"
         prefix:
           example: Duke
           type: string
+        social_links:
+          $ref: "#/components/schemas/lead/properties/social_links"
         status:
           example: open
           type: string
         tags:
-          example:
-            - new
-            - hot
-          items:
-            type: string
-          type: array
+          $ref: "#/components/schemas/lead/properties/tags"
         title:
           example: CEO
           type: string
-        website:
-          example: https://www.spacex.com
-          type: string
+        websites:
+          $ref: "#/components/schemas/lead/properties/websites"
       required:
         - name
         - company_name
       x-pii:
         - name
+        - first_name
+        - last_name
         - email
         - phone_number
     leadsUpdateResponse:
-      $ref: "#/components/schemas/lead"
+      properties:
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
   securitySchemes:
     apiKey:
       description: >

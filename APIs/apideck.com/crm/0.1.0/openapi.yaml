@@ -15,7 +15,7 @@ info:
     If you are working with APIs, you are probably already familiar with Postman, a development tool that enables you to configure and run API requests. Click the button below to run the collection.
 
 
-    [![Run our CRM API in Postman](https://app.apideck.com/images/postman-button.svg)](https://app.getpostman.com/run-collection/1bb95f1a8b36f3e4515b)
+    [![Run our CRM API in Postman](https://app.apideck.com/images/postman-button.svg)](https://www.postman.com/apideck/workspace/unified-apis/overview)
 
 
     ## Base URL
@@ -90,7 +90,7 @@ info:
 
     | [Reply](https://reply.io)                                       | &#128736;&#65039; | 1.0        | &#128284;     | &#128284; |
 
-    | [Salesflare](https://salesflare.com)                            | &#128736;&#65039; | 1.0.0      | &#128284;     | &#128284; |
+    | [Salesflare](https://salesflare.com)                            | &#128736;&#65039; | 0.0.1      | &#128284;     | &#128284; |
 
     | [Salesforce](https://www.salesforce.com)                        | &#9989;           | v39.0      | &#9989;       | &#128284; |
 
@@ -386,7 +386,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 0.0.1
+  version: 0.1.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -418,6 +418,7 @@ paths:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/offset"
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/per_page"
       responses:
@@ -617,6 +618,7 @@ paths:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/offset"
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/per_page"
       responses:
@@ -816,6 +818,7 @@ paths:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/offset"
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/per_page"
       responses:
@@ -1015,6 +1018,7 @@ paths:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/offset"
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/per_page"
       responses:
@@ -1214,6 +1218,12 @@ components:
       required: true
       schema:
         type: string
+    offset:
+      description: The number of items to skip before starting to collect the result set
+      in: query
+      name: offset
+      schema:
+        type: integer
     page:
       description: Page number to start from. Omitting the page parameter will return page 1
       in: query
@@ -1476,22 +1486,68 @@ components:
           example: MissingHeadersError
           type: string
     companies:
-      description: ""
-      items:
-        $ref: "#/components/schemas/company"
-      minItems: 0
-      type: array
+      properties:
+        data:
+          description: Operation Results
+          items:
+            $ref: "#/components/schemas/company/properties/data"
+          minItems: 0
+          type: array
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
     companiesAdd:
       properties:
         addresses:
-          $ref: "#/components/schemas/company/properties/addresses"
+          $ref: "#/components/schemas/contactsAdd/properties/addresses"
+        bank-accounts:
+          items:
+            properties:
+              bic:
+                example: AUDSCHGGXXX
+                nullable: true
+                type: string
+              iban:
+                example: CH2989144532982975332
+                nullable: true
+                type: string
+            type: object
+          type: array
+        currency:
+          example: USD
+          nullable: true
+          type: string
         custom_fields:
-          $ref: "#/components/schemas/company/properties/custom_fields"
+          $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
         description:
           example: A crm that works for you, so you can spend time on relationships instead of data.
           type: string
         email_domain:
           example: spacex.com
+          type: string
+        emails:
+          $ref: "#/components/schemas/contactsAdd/properties/emails"
+        fax:
+          example: "+12129876543"
+          nullable: true
           type: string
         image_url:
           example: https://www.spacex.com/static/images/share.jpg
@@ -1503,37 +1559,100 @@ components:
           example: "12345"
           type: string
         phone_numbers:
-          $ref: "#/components/schemas/company/properties/phone_numbers"
+          $ref: "#/components/schemas/contactsAdd/properties/phone_numbers"
         social_links:
-          $ref: "#/components/schemas/company/properties/social_links"
+          $ref: "#/components/schemas/contactsAdd/properties/social_links"
         tags:
-          $ref: "#/components/schemas/company/properties/tags"
+          $ref: "#/components/schemas/contactsAdd/properties/tags"
+        vat_number:
+          description: VAT number
+          example: BE0689615164
+          nullable: true
+          type: string
         websites:
-          $ref: "#/components/schemas/company/properties/websites"
+          $ref: "#/components/schemas/contactsAdd/properties/websites"
       required:
         - name
       type: object
     companiesAddResponse:
       properties:
-        id:
-          example: "12345"
-          readOnly: true
+        data:
+          properties:
+            id:
+              example: "12345"
+              readOnly: true
+              type: string
+        operation:
+          description: Operation performed
+          example: add
           type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: Created
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 201
+          type: integer
+      type: object
     companiesDeleteResponse:
       properties:
-        id:
+        data:
+          properties:
+            id:
+              type: string
+        operation:
+          description: Operation performed
+          example: delete
           type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
     companiesUpdate:
       properties:
         addresses:
-          $ref: "#/components/schemas/company/properties/addresses"
+          $ref: "#/components/schemas/contactsAdd/properties/addresses"
+        bank-accounts:
+          $ref: "#/components/schemas/companiesAdd/properties/bank-accounts"
+        currency:
+          example: USD
+          nullable: true
+          type: string
         custom_fields:
-          $ref: "#/components/schemas/company/properties/custom_fields"
+          $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
         description:
           example: A crm that works for you, so you can spend time on relationships instead of data.
           type: string
         email_domain:
           example: spacex.com
+          type: string
+        emails:
+          $ref: "#/components/schemas/contactsAdd/properties/emails"
+        fax:
+          example: "+12129876543"
+          nullable: true
           type: string
         image_url:
           example: https://www.spacex.com/static/images/share.jpg
@@ -1545,27 +1664,307 @@ components:
           example: "12345"
           type: string
         phone_numbers:
-          $ref: "#/components/schemas/company/properties/phone_numbers"
+          $ref: "#/components/schemas/contactsAdd/properties/phone_numbers"
         social_links:
-          $ref: "#/components/schemas/company/properties/social_links"
+          $ref: "#/components/schemas/contactsAdd/properties/social_links"
         tags:
-          example:
-            - sample
-          items:
-            type: string
-          type: array
+          $ref: "#/components/schemas/contactsAdd/properties/tags"
+        vat_number:
+          description: VAT number
+          example: BE0689615164
+          nullable: true
+          type: string
         websites:
-          $ref: "#/components/schemas/company/properties/websites"
+          $ref: "#/components/schemas/contactsAdd/properties/websites"
       required:
         - name
       type: object
     companiesUpdateResponse:
       properties:
-        id:
-          example: "12345"
-          readOnly: true
+        data:
+          properties:
+            id:
+              example: "12345"
+              readOnly: true
+              type: string
+        operation:
+          description: Operation performed
+          example: update
           type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
     company:
+      properties:
+        data:
+          properties:
+            addresses:
+              $ref: "#/components/schemas/contactsAdd/properties/addresses"
+            bank-accounts:
+              $ref: "#/components/schemas/companiesAdd/properties/bank-accounts"
+            created_at:
+              example: 2020-09-30T07:43:32.000Z
+              readOnly: true
+              type: string
+            created_by:
+              example: "12345"
+              nullable: true
+              type: string
+            currency:
+              example: USD
+              nullable: true
+              type: string
+            custom_fields:
+              $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
+            description:
+              example: A crm that works for you, so you can spend time on relationships instead of data.
+              type: string
+            emails:
+              $ref: "#/components/schemas/contactsAdd/properties/emails"
+            fax:
+              example: "+12129876543"
+              nullable: true
+              type: string
+            id:
+              example: "12345"
+              readOnly: true
+              type: string
+            image_url:
+              type: string
+            interaction_count:
+              example: 1
+              readOnly: true
+              type: integer
+            name:
+              example: Copper
+              type: string
+            owner_id:
+              example: "12345"
+              type: string
+            phone_numbers:
+              $ref: "#/components/schemas/contactsAdd/properties/phone_numbers"
+            social_links:
+              $ref: "#/components/schemas/contactsAdd/properties/social_links"
+            tags:
+              $ref: "#/components/schemas/contactsAdd/properties/tags"
+            updated_at:
+              example: 2020-09-30T07:43:32.000Z
+              readOnly: true
+              type: string
+            updated_by:
+              example: "12345"
+              nullable: true
+              type: string
+            vat_number:
+              description: VAT number
+              example: BE0689615164
+              nullable: true
+              type: string
+            websites:
+              $ref: "#/components/schemas/contactsAdd/properties/websites"
+          required:
+            - id
+            - name
+          type: object
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
+    contact:
+      properties:
+        data:
+          properties:
+            addresses:
+              $ref: "#/components/schemas/contactsAdd/properties/addresses"
+            birthday:
+              example: 2000-08-12
+              nullable: true
+              type: string
+            company_id:
+              example: "2"
+              nullable: true
+              type: string
+            created_at:
+              example: 2017-08-12T20:43:21.291Z
+              readOnly: true
+              type: string
+            custom_fields:
+              $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
+            department:
+              example: Engineering
+              nullable: true
+              type: string
+            description:
+              example: Internal champion
+              nullable: true
+              type: string
+            emails:
+              $ref: "#/components/schemas/contactsAdd/properties/emails"
+            fax:
+              example: "+12129876543"
+              nullable: true
+              type: string
+            first_name:
+              example: Elon
+              type: string
+            gender:
+              enum:
+                - male
+                - female
+                - unisex
+              example: female
+              nullable: true
+              type: string
+            id:
+              example: "1"
+              readOnly: true
+              type: string
+            image:
+              example: https://logo.clearbit.com/spacex.com?s=128
+              nullable: true
+              type: string
+            language:
+              description: language code according to ISO 639-1. For the United States - EN
+              example: EN
+              nullable: true
+              type: string
+            last_name:
+              example: Musk
+              type: string
+            lead_id:
+              example: "3"
+              type: string
+            lead_source:
+              example: Cold Call
+              minLength: 1
+              nullable: true
+              type: string
+            middle_name:
+              example: D.
+              type: string
+            name:
+              example: Elon Musk
+              type: string
+            owner_id:
+              example: "1"
+              type: string
+            phone_numbers:
+              $ref: "#/components/schemas/contactsAdd/properties/phone_numbers"
+            prefix:
+              example: Mr.
+              nullable: true
+              type: string
+            social_links:
+              $ref: "#/components/schemas/contactsAdd/properties/social_links"
+            status:
+              example: open
+              type: string
+            suffix:
+              example: PhD
+              nullable: true
+              type: string
+            tags:
+              $ref: "#/components/schemas/contactsAdd/properties/tags"
+            title:
+              example: CEO
+              nullable: true
+              type: string
+            updated_at:
+              example: 2017-08-12T20:43:21.291Z
+              readOnly: true
+              type: string
+            websites:
+              $ref: "#/components/schemas/contactsAdd/properties/websites"
+          required:
+            - name
+          x-pii:
+            - name
+            - first_name
+            - middle_name
+            - last_name
+            - email
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: contacts
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
+    contacts:
+      properties:
+        data:
+          description: Operation Results
+          items:
+            $ref: "#/components/schemas/contact/properties/data"
+          minItems: 0
+          type: array
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: contacts
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
+    contactsAdd:
       properties:
         addresses:
           items:
@@ -1580,8 +1979,12 @@ components:
                 example: US
                 nullable: true
                 type: string
-              lattitude:
+              id:
+                example: "123"
+                type: string
+              latitude:
                 example: "40.759211"
+                nullable: true
                 type: string
               line1:
                 description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
@@ -1595,6 +1998,543 @@ components:
                 type: string
               longitude:
                 example: "-73.984638"
+                nullable: true
+                type: string
+              name:
+                example: HQ US
+                nullable: true
+                type: string
+              postal_code:
+                description: Zip code or equivalent.
+                example: "94104"
+                nullable: true
+                type: string
+              state:
+                description: Name of state
+                example: CA
+                nullable: true
+                type: string
+              type:
+                enum:
+                  - default
+                  - primary
+                  - secondary
+                  - tertiary
+                  - invoicing
+                  - delivery
+                  - visiting
+                  - mailing
+                  - home
+                  - work
+                  - other
+                example: invoicing
+                type: string
+            type: object
+          type: array
+        birthday:
+          example: 2000-08-12
+          nullable: true
+          type: string
+        company_id:
+          example: "1234567"
+          type: string
+        custom_fields:
+          items:
+            additionalProperties: false
+            properties:
+              id:
+                example: custom_technologies
+                type: string
+              value:
+                example: Uses Salesforce and Marketo
+                nullable: true
+                type: string
+            required:
+              - id
+            type: object
+          type: array
+        department:
+          example: Engineering
+          nullable: true
+          type: string
+        description:
+          example: Internal champion
+          nullable: true
+          type: string
+        emails:
+          items:
+            properties:
+              email:
+                example: elon@musk.com
+                format: email
+                type: string
+              id:
+                example: "123"
+                type: string
+              type:
+                example: default
+                type: string
+            type: object
+          type: array
+        fax:
+          example: "+12129876543"
+          nullable: true
+          type: string
+        first_name:
+          example: Elon
+          type: string
+        gender:
+          enum:
+            - male
+            - female
+            - unisex
+          example: female
+          nullable: true
+          type: string
+        image:
+          example: https://logo.clearbit.com/spacex.com?s=128
+          nullable: true
+          type: string
+        language:
+          description: language code according to ISO 639-1. For the United States - EN
+          example: EN
+          nullable: true
+          type: string
+        last_name:
+          example: Musk
+          type: string
+        lead_id:
+          example: "3"
+          type: string
+        lead_source:
+          example: Cold Call
+          minLength: 1
+          nullable: true
+          type: string
+        middle_name:
+          example: D.
+          type: string
+        name:
+          example: Elon Musk
+          type: string
+        owner_id:
+          example: "1234567"
+          type: string
+        phone_numbers:
+          items:
+            properties:
+              id:
+                example: "123"
+                type: string
+              number:
+                example: 111-111-1111
+                type: string
+              phone_type:
+                enum:
+                  - default
+                  - phone
+                  - mobile
+                  - work
+                  - office
+                  - home
+                  - fax
+                  - assistant
+                  - other
+                type: string
+            type: object
+          type: array
+        prefix:
+          example: Mr.
+          nullable: true
+          type: string
+        social_links:
+          items:
+            properties:
+              id:
+                example: "123"
+                type: string
+              platform:
+                example: twitter
+                type: string
+              url:
+                example: https://www.twitter.com/apideck-io
+                type: string
+            type: object
+          type: array
+        status:
+          example: open
+          type: string
+        suffix:
+          example: PhD
+          nullable: true
+          type: string
+        tags:
+          example:
+            - New
+          items:
+            type: string
+          type: array
+        title:
+          example: CEO
+          nullable: true
+          type: string
+        websites:
+          items:
+            properties:
+              category:
+                type: string
+              id:
+                example: "123"
+                type: string
+              url:
+                type: string
+            required:
+              - url
+            type: object
+          type: array
+      required:
+        - name
+      x-pii:
+        - name
+        - first_name
+        - middle_name
+        - last_name
+        - email
+    contactsAddResponse:
+      properties:
+        data:
+          properties:
+            id:
+              example: "12345"
+              readOnly: true
+              type: string
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: contacts
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: Created
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 201
+          type: integer
+      type: object
+    contactsDeleteResponse:
+      properties:
+        data:
+          properties:
+            id:
+              type: string
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: contacts
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
+    contactsUpdate:
+      properties:
+        addresses:
+          $ref: "#/components/schemas/contactsAdd/properties/addresses"
+        birthday:
+          example: 2000-08-12
+          nullable: true
+          type: string
+        company_id:
+          example: "1234567"
+          type: string
+        custom_fields:
+          $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
+        department:
+          example: Engineering
+          nullable: true
+          type: string
+        description:
+          example: Internal champion
+          nullable: true
+          type: string
+        emails:
+          $ref: "#/components/schemas/contactsAdd/properties/emails"
+        fax:
+          example: "+12129876543"
+          nullable: true
+          type: string
+        first_name:
+          example: Elon
+          type: string
+        gender:
+          enum:
+            - male
+            - female
+            - unisex
+          example: female
+          nullable: true
+          type: string
+        image:
+          example: https://logo.clearbit.com/spacex.com?s=128
+          nullable: true
+          type: string
+        language:
+          description: language code according to ISO 639-1. For the United States - EN
+          example: EN
+          nullable: true
+          type: string
+        last_name:
+          example: Musk
+          type: string
+        lead_id:
+          example: "3"
+          type: string
+        lead_source:
+          example: Cold Call
+          minLength: 1
+          nullable: true
+          type: string
+        middle_name:
+          example: D.
+          type: string
+        name:
+          example: Elon Musk
+          type: string
+        owner_id:
+          example: "1234567"
+          type: string
+        phone_numbers:
+          $ref: "#/components/schemas/contactsAdd/properties/phone_numbers"
+        prefix:
+          example: Mr.
+          nullable: true
+          type: string
+        social_links:
+          $ref: "#/components/schemas/contactsAdd/properties/social_links"
+        status:
+          example: open
+          type: string
+        suffix:
+          example: PhD
+          nullable: true
+          type: string
+        tags:
+          $ref: "#/components/schemas/contactsAdd/properties/tags"
+        title:
+          example: CEO
+          nullable: true
+          type: string
+        websites:
+          $ref: "#/components/schemas/contactsAdd/properties/websites"
+      required:
+        - name
+      x-pii:
+        - name
+        - first_name
+        - middle_name
+        - last_name
+        - email
+    contactsUpdateResponse:
+      properties:
+        data:
+          properties:
+            id:
+              example: "12345"
+              readOnly: true
+              type: string
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: contacts
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
+    lead:
+      properties:
+        data:
+          properties:
+            addresses:
+              $ref: "#/components/schemas/leadsAdd/properties/addresses"
+            company_id:
+              example: "2"
+              nullable: true
+              type: string
+            company_name:
+              example: Spacex
+              nullable: true
+              type: string
+            created_at:
+              example: 2020-09-30T07:43:32.000Z
+              readOnly: true
+              type: string
+            custom_fields:
+              $ref: "#/components/schemas/leadsAdd/properties/custom_fields"
+            description:
+              example: A thinker
+              type: string
+            emails:
+              $ref: "#/components/schemas/leadsAdd/properties/emails"
+            fax:
+              example: "+12129876543"
+              nullable: true
+              type: string
+            first_name:
+              type: string
+            id:
+              readOnly: true
+              type: string
+            last_name:
+              nullable: true
+              type: string
+            name:
+              type: string
+            owner_id:
+              example: "1"
+              type: string
+            phone_numbers:
+              $ref: "#/components/schemas/leadsAdd/properties/phone_numbers"
+            prefix:
+              type: string
+            social_links:
+              $ref: "#/components/schemas/leadsAdd/properties/social_links"
+            status:
+              type: string
+            tags:
+              $ref: "#/components/schemas/leadsAdd/properties/tags"
+            title:
+              type: string
+            updated_at:
+              example: 2020-09-30T07:43:32.000Z
+              readOnly: true
+              type: string
+            websites:
+              $ref: "#/components/schemas/leadsAdd/properties/websites"
+          required:
+            - id
+          x-pii:
+            - name
+            - email
+            - first_name
+            - last_name
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: leads
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
+    leads:
+      properties:
+        data:
+          description: Operation Results
+          items:
+            $ref: "#/components/schemas/lead/properties/data"
+          minItems: 0
+          type: array
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: leads
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
+    leadsAdd:
+      properties:
+        addresses:
+          items:
+            properties:
+              city:
+                description: Name of city.
+                example: San Francisco
+                nullable: true
+                type: string
+              country:
+                description: country code according to ISO 3166-1 alpha-2.
+                example: US
+                nullable: true
+                type: string
+              id:
+                example: "123"
+                type: string
+              latitude:
+                example: "40.759211"
+                nullable: true
+                type: string
+              line1:
+                description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
+                example: Main street
+                nullable: true
+                type: string
+              line2:
+                description: Line 2 of the address
+                example: "apt #"
+                nullable: true
+                type: string
+              longitude:
+                example: "-73.984638"
+                nullable: true
                 type: string
               name:
                 example: HQ US
@@ -1612,18 +2552,25 @@ components:
               type:
                 enum:
                   - default
+                  - primary
+                  - secondary
+                  - tertiary
                   - invoicing
                   - delivery
                   - visiting
                   - mailing
+                  - home
+                  - work
                   - other
                 example: invoicing
                 type: string
             type: object
           type: array
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          readOnly: true
+        company_id:
+          example: "1234567"
+          type: string
+        company_name:
+          example: SpaceX
           type: string
         custom_fields:
           items:
@@ -1641,100 +2588,7 @@ components:
             type: object
           type: array
         description:
-          example: A crm that works for you, so you can spend time on relationships instead of data.
-          type: string
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        image_url:
-          type: string
-        interaction_count:
-          example: 1
-          readOnly: true
-          type: integer
-        name:
-          example: Copper
-          type: string
-        owner_id:
-          example: "12345"
-          type: string
-        phone_numbers:
-          items:
-            properties:
-              number:
-                example: 111-111-1111
-                type: string
-              phone_type:
-                enum:
-                  - mobile
-                  - work
-                  - home
-                  - fax
-                  - other
-                type: string
-            type: object
-          type: array
-        social_links:
-          items:
-            properties:
-              platform:
-                example: twitter
-                type: string
-              url:
-                example: https://www.twitter.com/apideck-io
-                type: string
-            type: object
-          type: array
-        tags:
-          example:
-            - New
-          items:
-            type: string
-          type: array
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          readOnly: true
-          type: string
-        websites:
-          items:
-            properties:
-              category:
-                type: string
-              url:
-                type: string
-            required:
-              - url
-            type: object
-          type: array
-      required:
-        - id
-        - name
-      type: object
-    contact:
-      properties:
-        addresses:
-          $ref: "#/components/schemas/company/properties/addresses"
-        birthday:
-          example: 2000-08-12
-          nullable: true
-          type: string
-        company_id:
-          example: "2"
-          type: string
-        created_at:
-          example: 2017-08-12T20:43:21.291Z
-          readOnly: true
-          type: string
-        custom_fields:
-          $ref: "#/components/schemas/company/properties/custom_fields"
-        department:
-          example: Engineering
-          nullable: true
-          type: string
-        description:
-          example: Internal champion
-          nullable: true
+          example: A thinker
           type: string
         emails:
           items:
@@ -1742,6 +2596,9 @@ components:
               email:
                 example: elon@musk.com
                 format: email
+                type: string
+              id:
+                example: "123"
                 type: string
               type:
                 example: default
@@ -1755,422 +2612,6 @@ components:
         first_name:
           example: Elon
           type: string
-        gender:
-          enum:
-            - M
-            - F
-            - U
-          example: M
-          nullable: true
-          type: string
-        id:
-          example: "1"
-          readOnly: true
-          type: string
-        image:
-          example: https://logo.clearbit.com/spacex.com?s=128
-          nullable: true
-          type: string
-        language:
-          description: language code according to ISO 639-1. For the United States - EN
-          example: EN
-          nullable: true
-          type: string
-        last_name:
-          example: Musk
-          type: string
-        lead_id:
-          example: "3"
-          type: string
-        lead_source:
-          example: Cold Call
-          minLength: 1
-          nullable: true
-          type: string
-        middle_name:
-          example: D.
-          type: string
-        name:
-          example: Elon Musk
-          type: string
-        owner_id:
-          example: "1"
-          type: string
-        phone_numbers:
-          $ref: "#/components/schemas/company/properties/phone_numbers"
-        prefix:
-          example: Mr.
-          nullable: true
-          type: string
-        social_links:
-          $ref: "#/components/schemas/company/properties/social_links"
-        suffix:
-          example: PhD
-          nullable: true
-          type: string
-        tags:
-          $ref: "#/components/schemas/company/properties/tags"
-        title:
-          example: CEO
-          nullable: true
-          type: string
-        updated_at:
-          example: 2017-08-12T20:43:21.291Z
-          readOnly: true
-          type: string
-        websites:
-          $ref: "#/components/schemas/company/properties/websites"
-      required:
-        - name
-      x-pii:
-        - name
-        - first_name
-        - middle_name
-        - last_name
-        - email
-    contacts:
-      description: ""
-      items:
-        $ref: "#/components/schemas/contact"
-      minItems: 0
-      type: array
-    contactsAdd:
-      properties:
-        addresses:
-          $ref: "#/components/schemas/company/properties/addresses"
-        birthday:
-          example: 2000-08-12
-          nullable: true
-          type: string
-        company_id:
-          example: "2"
-          type: string
-        custom_fields:
-          $ref: "#/components/schemas/company/properties/custom_fields"
-        department:
-          example: Engineering
-          nullable: true
-          type: string
-        description:
-          example: Internal champion
-          nullable: true
-          type: string
-        emails:
-          $ref: "#/components/schemas/contact/properties/emails"
-        fax:
-          example: "+12129876543"
-          nullable: true
-          type: string
-        first_name:
-          example: Elon
-          type: string
-        gender:
-          enum:
-            - M
-            - F
-            - U
-          example: M
-          nullable: true
-          type: string
-        image:
-          example: https://logo.clearbit.com/spacex.com?s=128
-          nullable: true
-          type: string
-        language:
-          description: language code according to ISO 639-1. For the United States - EN
-          example: EN
-          nullable: true
-          type: string
-        last_name:
-          example: Musk
-          type: string
-        lead_id:
-          example: "3"
-          type: string
-        lead_source:
-          example: Cold Call
-          minLength: 1
-          nullable: true
-          type: string
-        middle_name:
-          example: D.
-          type: string
-        name:
-          example: Elon Musk
-          type: string
-        owner_id:
-          example: "1"
-          type: string
-        phone_numbers:
-          $ref: "#/components/schemas/company/properties/phone_numbers"
-        prefix:
-          example: Mr.
-          nullable: true
-          type: string
-        social_links:
-          $ref: "#/components/schemas/company/properties/social_links"
-        suffix:
-          example: PhD
-          nullable: true
-          type: string
-        tags:
-          $ref: "#/components/schemas/company/properties/tags"
-        title:
-          example: CEO
-          nullable: true
-          type: string
-        websites:
-          $ref: "#/components/schemas/company/properties/websites"
-      required:
-        - name
-      x-pii:
-        - name
-        - first_name
-        - middle_name
-        - last_name
-        - email
-    contactsAddResponse:
-      properties:
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-    contactsDeleteResponse:
-      properties:
-        id:
-          type: string
-    contactsUpdate:
-      properties:
-        addresses:
-          $ref: "#/components/schemas/company/properties/addresses"
-        birthday:
-          example: 2000-08-12
-          nullable: true
-          type: string
-        company_id:
-          example: "2"
-          type: string
-        custom_fields:
-          $ref: "#/components/schemas/company/properties/custom_fields"
-        department:
-          example: Engineering
-          nullable: true
-          type: string
-        description:
-          example: Internal champion
-          nullable: true
-          type: string
-        emails:
-          $ref: "#/components/schemas/contact/properties/emails"
-        fax:
-          example: "+12129876543"
-          nullable: true
-          type: string
-        first_name:
-          example: Elon
-          type: string
-        gender:
-          enum:
-            - M
-            - F
-            - U
-          example: M
-          nullable: true
-          type: string
-        image:
-          example: https://logo.clearbit.com/spacex.com?s=128
-          nullable: true
-          type: string
-        language:
-          description: language code according to ISO 639-1. For the United States - EN
-          example: EN
-          nullable: true
-          type: string
-        last_name:
-          example: Musk
-          type: string
-        lead_id:
-          example: "3"
-          type: string
-        lead_source:
-          example: Cold Call
-          minLength: 1
-          nullable: true
-          type: string
-        middle_name:
-          example: D.
-          type: string
-        name:
-          example: Elon Musk
-          type: string
-        owner_id:
-          example: "1"
-          type: string
-        phone_numbers:
-          $ref: "#/components/schemas/company/properties/phone_numbers"
-        prefix:
-          example: Mr.
-          nullable: true
-          type: string
-        social_links:
-          $ref: "#/components/schemas/company/properties/social_links"
-        suffix:
-          example: PhD
-          nullable: true
-          type: string
-        tags:
-          $ref: "#/components/schemas/company/properties/tags"
-        title:
-          example: CEO
-          nullable: true
-          type: string
-        websites:
-          $ref: "#/components/schemas/company/properties/websites"
-      required:
-        - name
-      x-pii:
-        - name
-        - first_name
-        - middle_name
-        - last_name
-        - email
-    contactsUpdateResponse:
-      properties:
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-    lead:
-      properties:
-        address:
-          properties:
-            city:
-              description: Name of city.
-              example: San Francisco
-              type: string
-            country:
-              description: country code according to ISO 3166-1 alpha-2.
-              example: US
-              nullable: true
-              type: string
-            line1:
-              description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
-              example: Main street
-              nullable: true
-              type: string
-            line2:
-              description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
-              example: Main street
-              type: string
-            postal_code:
-              description: Zip code or equivalent.
-              example: "94104"
-              type: string
-            state:
-              description: Name of state
-              example: CA
-              type: string
-          type: object
-        company_name:
-          type: string
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          readOnly: true
-          type: string
-        email:
-          type: string
-        first_name:
-          type: string
-        id:
-          readOnly: true
-          type: string
-        last_name:
-          nullable: true
-          type: string
-        name:
-          type: string
-        phone_number:
-          nullable: true
-          type: string
-        prefix:
-          type: string
-        tags:
-          example:
-            - new
-            - hot
-          items:
-            type: string
-          type: array
-        title:
-          type: string
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          readOnly: true
-          type: string
-        website:
-          type: string
-      required:
-        - id
-      x-pii:
-        - name
-        - email
-        - first_name
-        - last_name
-    leads:
-      description: ""
-      items:
-        $ref: "#/components/schemas/lead"
-      minItems: 0
-      type: array
-    leadsAdd:
-      properties:
-        address:
-          properties:
-            city:
-              description: Name of city.
-              example: San Francisco
-              type: string
-            country:
-              description: country code according to ISO 3166-1 alpha-2.
-              example: US
-              type: string
-            line1:
-              description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
-              example: Main street
-              type: string
-            line2:
-              description: "Line 2 of the address e.g. number, street, suite, apt #, etc."
-              example: Bus 100
-              type: string
-            postal_code:
-              description: Zip code or equivalent.
-              example: "94104"
-              type: string
-            state:
-              description: Name of state
-              example: CA
-              type: string
-          type: object
-        company_name:
-          example: SpaceX
-          type: string
-        custom_fields:
-          items:
-            properties:
-              id:
-                example: custom_technologies
-                type: string
-              value:
-                example: Uses Salesforce and Marketo
-                type: string
-            type: object
-          type: array
-        email:
-          example: elon@spacex.com
-          type: string
-        first_name:
-          example: Elon
-          type: string
         last_name:
           example: Musk
           type: string
@@ -2183,29 +2624,73 @@ components:
         note:
           example: Eager to buy more rockets.
           type: string
-        phone_number:
-          example: +444 111 222 333
-          nullable: true
-          type: string
+        phone_numbers:
+          items:
+            properties:
+              id:
+                example: "123"
+                type: string
+              number:
+                example: 111-111-1111
+                type: string
+              phone_type:
+                enum:
+                  - default
+                  - mobile
+                  - work
+                  - office
+                  - home
+                  - fax
+                  - assistant
+                  - other
+                type: string
+            type: object
+          type: array
         prefix:
           example: Duke
           type: string
+        social_links:
+          items:
+            properties:
+              id:
+                example: "123"
+                type: string
+              platform:
+                example: twitter
+                type: string
+              url:
+                example: https://www.twitter.com/apideck-io
+                type: string
+            type: object
+          type: array
         status:
           example: open
           type: string
         tags:
           example:
-            - new
-            - hot
+            - New
           items:
             type: string
           type: array
         title:
           example: CEO
           type: string
-        website:
-          example: https://www.spacex.com
-          type: string
+        websites:
+          items:
+            properties:
+              category:
+                example: default
+                type: string
+              id:
+                example: "123"
+                type: string
+              url:
+                example: http://example.com
+                type: string
+            required:
+              - url
+            type: object
+          type: array
       required:
         - name
         - company_name
@@ -2217,57 +2702,86 @@ components:
         - phone_number
     leadsAddResponse:
       properties:
-        id:
+        data:
+          properties:
+            id:
+              example: "12345"
+              readOnly: true
+              type: string
+        operation:
+          description: Operation performed
+          example: add
           type: string
+        resource:
+          description: Unified API resource name
+          example: leads
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: Created
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 201
+          type: integer
+      type: object
     leadsDeleteResponse:
       properties:
-        id:
+        data:
+          properties:
+            id:
+              type: string
+        operation:
+          description: Operation performed
+          example: delete
           type: string
+        resource:
+          description: Unified API resource name
+          example: leads
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
     leadsUpdate:
       properties:
-        address:
-          properties:
-            city:
-              description: Name of city.
-              example: San Francisco
-              type: string
-            country:
-              description: country code according to ISO 3166-1 alpha-2.
-              example: US
-              type: string
-            line1:
-              description: "Line 1 of the address e.g. number, street, suite, apt #, etc."
-              example: Main street
-              type: string
-            line2:
-              description: "Line 2 of the address e.g. number, street, suite, apt #, etc."
-              example: Bus 100
-              type: string
-            postal_code:
-              description: Zip code or equivalent.
-              example: "94104"
-              type: string
-            state:
-              description: Name of state
-              example: CA
-              type: string
-          type: object
+        addresses:
+          $ref: "#/components/schemas/leadsAdd/properties/addresses"
+        company_id:
+          example: "1234567"
+          type: string
         company_name:
           example: SpaceX
           type: string
         custom_fields:
-          items:
-            properties:
-              id:
-                example: custom_technologies
-                type: string
-              value:
-                example: Uses Salesforce and Marketo
-                type: string
-            type: object
-          type: array
-        email:
-          example: elon@spacex.com
+          $ref: "#/components/schemas/leadsAdd/properties/custom_fields"
+        description:
+          example: A thinker
+          type: string
+        emails:
+          $ref: "#/components/schemas/leadsAdd/properties/emails"
+        fax:
+          example: "+12129876543"
+          nullable: true
+          type: string
+        first_name:
+          example: Elon
+          type: string
+        last_name:
+          example: Musk
           type: string
         lead_source:
           example: website
@@ -2278,46 +2792,90 @@ components:
         note:
           example: Eager to buy more rockets.
           type: string
-        phone_number:
-          example: +444 111 222 333
-          nullable: true
-          type: string
+        phone_numbers:
+          $ref: "#/components/schemas/leadsAdd/properties/phone_numbers"
         prefix:
           example: Duke
           type: string
+        social_links:
+          $ref: "#/components/schemas/leadsAdd/properties/social_links"
         status:
           example: open
           type: string
         tags:
-          example:
-            - new
-            - hot
-          items:
-            type: string
-          type: array
+          $ref: "#/components/schemas/leadsAdd/properties/tags"
         title:
           example: CEO
           type: string
-        website:
-          example: https://www.spacex.com
-          type: string
+        websites:
+          $ref: "#/components/schemas/leadsAdd/properties/websites"
       required:
         - name
         - company_name
       x-pii:
         - name
+        - first_name
+        - last_name
         - email
         - phone_number
     leadsUpdateResponse:
       properties:
-        id:
+        data:
+          properties:
+            id:
+              example: "12345"
+              readOnly: true
+              type: string
+        operation:
+          description: Operation performed
+          example: update
           type: string
+        resource:
+          description: Unified API resource name
+          example: leads
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
     opportunities:
-      description: ""
-      items:
-        $ref: "#/components/schemas/opportunity"
-      minItems: 0
-      type: array
+      properties:
+        data:
+          description: Operation Results
+          items:
+            $ref: "#/components/schemas/opportunity/properties/data"
+          minItems: 0
+          type: array
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: opportunities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
     opportunitiesAdd:
       properties:
         close_date:
@@ -2326,7 +2884,8 @@ components:
           nullable: true
           type: string
         company_id:
-          example: "49362140"
+          example: "12345"
+          nullable: true
           type: string
         company_name:
           example: Copper
@@ -2337,13 +2896,10 @@ components:
           type: string
         currency:
           example: USD
+          nullable: true
           type: string
         custom_fields:
-          $ref: "#/components/schemas/company/properties/custom_fields"
-        date_last_contacted:
-          ? example
-        date_lead_created:
-          ? example
+          $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
         description:
           example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
           minLength: 1
@@ -2352,11 +2908,6 @@ components:
           example: "12345"
           nullable: true
           type: string
-        leads_converted_from:
-          example: []
-          items:
-            type: string
-          type: array
         loss_reason_id:
           example: "12345"
           nullable: true
@@ -2366,23 +2917,34 @@ components:
           type: number
         owner_id:
           example: "12345"
+          nullable: true
           type: string
         pipeline_id:
-          example: "782261"
+          example: "12345"
+          nullable: true
           type: string
         pipeline_stage_id:
-          example: "3665451"
+          example: "12345"
+          nullable: true
           type: string
         primary_contact_id:
-          example: "109639656"
+          example: "12345"
           type: string
         priority:
           example: None
           minLength: 1
           type: string
+        source_id:
+          example: "12345"
+          type: string
         status:
           example: Open
           minLength: 1
+          nullable: true
+          type: string
+        status_id:
+          example: "12345"
+          nullable: true
           type: string
         tags:
           example:
@@ -2403,14 +2965,60 @@ components:
       type: object
     opportunitiesAddResponse:
       properties:
-        id:
-          example: "12345"
-          readOnly: true
+        data:
+          properties:
+            id:
+              example: "12345"
+              readOnly: true
+              type: string
+        operation:
+          description: Operation performed
+          example: add
           type: string
+        resource:
+          description: Unified API resource name
+          example: opportunities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: Created
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 201
+          type: integer
+      type: object
     opportunitiesDeleteResponse:
       properties:
-        id:
+        data:
+          properties:
+            id:
+              type: string
+        operation:
+          description: Operation performed
+          example: delete
           type: string
+        resource:
+          description: Unified API resource name
+          example: opportunities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
     opportunitiesUpdate:
       properties:
         close_date:
@@ -2419,7 +3027,8 @@ components:
           nullable: true
           type: string
         company_id:
-          example: "49362140"
+          example: "12345"
+          nullable: true
           type: string
         company_name:
           example: Copper
@@ -2432,11 +3041,7 @@ components:
           example: USD
           type: string
         custom_fields:
-          $ref: "#/components/schemas/company/properties/custom_fields"
-        date_last_contacted:
-          ? example
-        date_lead_created:
-          ? example
+          $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
         description:
           example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
           minLength: 1
@@ -2445,11 +3050,6 @@ components:
           example: "12345"
           nullable: true
           type: string
-        leads_converted_from:
-          example: []
-          items:
-            type: string
-          type: array
         loss_reason_id:
           example: "12345"
           nullable: true
@@ -2459,23 +3059,34 @@ components:
           type: number
         owner_id:
           example: "12345"
+          nullable: true
           type: string
         pipeline_id:
-          example: "782261"
+          example: "12345"
+          nullable: true
           type: string
         pipeline_stage_id:
-          example: "3665451"
+          example: "12345"
+          nullable: true
           type: string
         primary_contact_id:
-          example: "109639656"
+          example: "12345"
+          nullable: true
           type: string
         priority:
           example: None
           minLength: 1
           type: string
+        source_id:
+          example: "12345"
+          type: string
         status:
           example: Open
           minLength: 1
+          type: string
+        status_id:
+          example: "12345"
+          nullable: true
           type: string
         tags:
           example:
@@ -2496,125 +3107,186 @@ components:
       type: object
     opportunitiesUpdateResponse:
       properties:
-        id:
-          example: "12345"
-          readOnly: true
+        data:
+          properties:
+            id:
+              example: "12345"
+              readOnly: true
+              type: string
+        operation:
+          description: Operation performed
+          example: update
           type: string
-    opportunity:
-      properties:
-        close_date:
-          example: 2020-10-30T00:00:00.000Z
-          format: date-time
-          nullable: true
+        resource:
+          description: Unified API resource name
+          example: opportunities
           type: string
-        company_id:
-          example: "12345"
-          type: string
-        company_name:
-          example: Copper
-          type: string
-        contact_id:
-          example: "12345"
-          nullable: true
-          type: string
-        created_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
-          type: string
-        currency:
-          example: USD
-          type: string
-        custom_fields:
-          $ref: "#/components/schemas/company/properties/custom_fields"
-        date_last_contacted:
-          example: 2020-09-30T00:00:00.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        date_lead_created:
-          example: 2020-09-30T00:00:00.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        date_stage_changed:
-          example: 2020-09-30T00:00:00.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          type: string
-        description:
-          example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
-          minLength: 1
-          type: string
-        id:
-          example: "12345"
-          readOnly: true
-          type: string
-        interaction_count:
-          example: 0
-          readOnly: true
-          type: number
-        lead_id:
-          example: "12345"
-          nullable: true
-          type: string
-        leads_converted_from:
-          example: []
-          items:
-            type: string
-          type: array
-        loss_reason_id:
-          example: "12345"
-          nullable: true
-          type: string
-        monetary_amount:
-          example: 75000
-          type: number
-        owner_id:
-          example: "12345"
-          type: string
-        pipeline_id:
-          example: "12345"
-          type: string
-        pipeline_stage_id:
-          example: "12345"
-          type: string
-        primary_contact_id:
-          example: "12345"
-          type: string
-        priority:
-          example: None
-          minLength: 1
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
           type: string
         status:
-          example: Open
-          minLength: 1
+          description: HTTP Response Status
+          example: OK
           type: string
-        tags:
-          example:
-            - sample
-          items:
-            type: string
-          type: array
-        title:
-          example: New Rocket
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      type: object
+    opportunity:
+      properties:
+        data:
+          properties:
+            close_date:
+              example: 2020-10-30
+              format: date
+              nullable: true
+              type: string
+            company_id:
+              example: "12345"
+              nullable: true
+              type: string
+            company_name:
+              example: Copper
+              type: string
+            contact_id:
+              example: "12345"
+              nullable: true
+              type: string
+            created_at:
+              example: 2020-09-30T07:43:32.000Z
+              format: date-time
+              readOnly: true
+              type: string
+            created_by:
+              example: "12345"
+              nullable: true
+              type: string
+            currency:
+              example: USD
+              type: string
+            custom_fields:
+              $ref: "#/components/schemas/contactsAdd/properties/custom_fields"
+            date_last_contacted:
+              example: 2020-09-30T00:00:00.000Z
+              format: date-time
+              nullable: true
+              readOnly: true
+              type: string
+            date_lead_created:
+              example: 2020-09-30T00:00:00.000Z
+              format: date-time
+              nullable: true
+              readOnly: true
+              type: string
+            date_stage_changed:
+              example: 2020-09-30T00:00:00.000Z
+              format: date-time
+              nullable: true
+              readOnly: true
+              type: string
+            description:
+              example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
+              minLength: 1
+              type: string
+            id:
+              example: "12345"
+              readOnly: true
+              type: string
+            interaction_count:
+              example: 0
+              readOnly: true
+              type: number
+            lead_id:
+              example: "12345"
+              nullable: true
+              type: string
+            loss_reason_id:
+              example: "12345"
+              nullable: true
+              type: string
+            monetary_amount:
+              example: 75000
+              type: number
+            owner_id:
+              example: "12345"
+              nullable: true
+              type: string
+            pipeline_id:
+              example: "12345"
+              nullable: true
+              type: string
+            pipeline_stage_id:
+              example: "12345"
+              nullable: true
+              type: string
+            primary_contact_id:
+              example: "12345"
+              nullable: true
+              type: string
+            priority:
+              example: None
+              minLength: 1
+              type: string
+            source_id:
+              example: "12345"
+              type: string
+            status:
+              example: Open
+              minLength: 1
+              type: string
+            status_id:
+              example: "12345"
+              nullable: true
+              type: string
+            tags:
+              example:
+                - sample
+              items:
+                type: string
+              type: array
+            title:
+              example: New Rocket
+              type: string
+            updated_at:
+              example: 2020-09-30T07:43:32.000Z
+              format: date-time
+              readOnly: true
+              type: string
+            updated_by:
+              example: "12345"
+              nullable: true
+              type: string
+            win_probability:
+              example: 40
+              nullable: true
+              type: number
+          required:
+            - id
+            - title
+            - primary_contact_id
+          type: object
+        operation:
+          description: Operation performed
+          example: one
           type: string
-        updated_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          readOnly: true
+        resource:
+          description: Unified API resource name
+          example: opportunities
           type: string
-        win_probability:
-          example: 40
-          nullable: true
-          type: number
-      required:
-        - id
-        - title
-        - primary_contact_id
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
       type: object
   securitySchemes:
     apiKey:
