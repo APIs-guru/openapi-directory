@@ -1,6 +1,6 @@
 openapi: 3.0.2
 servers:
-  - url: https://u50g7n0cbj.execute-api.us-east-1.amazonaws.com/
+  - url: http://openaq.local
 info:
   description: API for OpenAQ LCS
   title: OpenAQ
@@ -52,9 +52,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -64,9 +63,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -206,9 +204,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -327,9 +324,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -409,9 +405,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -421,9 +416,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -462,9 +456,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -489,9 +482,8 @@ paths:
           required: false
           schema:
             default: 1000
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Radius
             type: integer
         - description: "
@@ -691,9 +683,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -703,9 +694,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -744,9 +734,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -771,9 +760,8 @@ paths:
           required: false
           schema:
             default: 1000
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Radius
             type: integer
         - description: "
@@ -961,9 +949,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -973,9 +960,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -1014,9 +1000,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -1041,9 +1026,8 @@ paths:
           required: false
           schema:
             default: 1000
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Radius
             type: integer
         - description: "
@@ -1243,9 +1227,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -1255,9 +1238,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -1296,9 +1278,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -1323,9 +1304,8 @@ paths:
           required: false
           schema:
             default: 1000
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Radius
             type: integer
         - description: "
@@ -1532,7 +1512,7 @@ paths:
                 type: string
               - format: date
                 type: string
-            default: 2021-02-22T17:48:00+00:00
+            default: 2021-03-01T11:13:00+00:00
             title: Date To
         - description: Change the number of results returned.
           in: query
@@ -1541,9 +1521,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -1553,9 +1532,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -1592,9 +1570,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -1619,9 +1596,8 @@ paths:
           required: false
           schema:
             default: 1000
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Radius
             type: integer
         - description: "
@@ -1789,9 +1765,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -1801,9 +1776,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -1885,9 +1859,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -1897,9 +1870,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -1973,7 +1945,7 @@ paths:
                 type: string
               - format: date
                 type: string
-            default: 2021-02-22T17:48:00+00:00
+            default: 2021-03-01T11:13:00+00:00
             title: Date To
         - in: query
           name: parameter_id
@@ -1987,9 +1959,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -2014,9 +1985,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Project
@@ -2076,9 +2046,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -2088,9 +2057,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -2163,9 +2131,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -2175,9 +2142,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -2317,9 +2283,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -2438,9 +2403,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -2520,9 +2484,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -2532,9 +2495,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -2573,9 +2535,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -2600,9 +2561,8 @@ paths:
           required: false
           schema:
             default: 1000
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Radius
             type: integer
         - description: "
@@ -2802,9 +2762,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -2814,9 +2773,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -2855,9 +2813,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -2882,9 +2839,8 @@ paths:
           required: false
           schema:
             default: 1000
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Radius
             type: integer
         - description: "
@@ -3072,9 +3028,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -3084,9 +3039,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -3125,9 +3079,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -3152,9 +3105,8 @@ paths:
           required: false
           schema:
             default: 1000
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Radius
             type: integer
         - description: "
@@ -3702,9 +3654,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -3714,9 +3665,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -3755,9 +3705,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -3782,9 +3731,8 @@ paths:
           required: false
           schema:
             default: 1000
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Radius
             type: integer
         - description: "
@@ -4004,7 +3952,7 @@ paths:
                 type: string
               - format: date
                 type: string
-            default: 2021-02-22T17:48:00+00:00
+            default: 2021-03-01T11:13:00+00:00
             title: Date To
         - description: Change the number of results returned.
           in: query
@@ -4013,9 +3961,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -4025,9 +3972,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -4064,9 +4010,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -4091,9 +4036,8 @@ paths:
           required: false
           schema:
             default: 1000
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Radius
             type: integer
         - description: "
@@ -4274,9 +4218,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -4286,9 +4229,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -4418,9 +4360,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -4430,9 +4371,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -4465,9 +4405,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -4492,9 +4431,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Project
@@ -4619,9 +4557,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -4631,9 +4568,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query
@@ -4666,9 +4602,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Parameter
@@ -4687,9 +4622,8 @@ paths:
           schema:
             items:
               anyOf:
-                - exclusiveMinimum: true
+                - exclusiveMinimum: 0
                   maximum: 2147483647
-                  minimum: 0
                   type: integer
                 - type: string
             title: Project
@@ -4760,9 +4694,8 @@ paths:
           schema:
             default: 100
             description: Change the number of results returned.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 100000
-            minimum: 0
             title: Limit
             type: integer
         - description: Paginate through results.
@@ -4772,9 +4705,8 @@ paths:
           schema:
             default: 1
             description: Paginate through results.
-            exclusiveMinimum: true
+            exclusiveMinimum: 0
             maximum: 6000
-            minimum: 0
             title: Page
             type: integer
         - in: query

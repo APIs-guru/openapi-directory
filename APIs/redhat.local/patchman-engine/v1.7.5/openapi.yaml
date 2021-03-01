@@ -1,14 +1,19 @@
 openapi: 3.0.1
 servers:
+  - url: http://redhat.local
   - url: /
 info:
   contact: {}
-  description: Description here
+  description: >-
+    API of the Patch application on [cloud.redhat.com](cloud.redhat.com)
+
+
+    Syntax of the `filter[name]` query parameters is described in  [Filters documentation](https://github.com/RedHatInsights/patchman-engine/wiki/API-custom-filters)
   license:
     name: GPLv3
     url: https://www.gnu.org/licenses/gpl-3.0.en.html
   title: Patchman-engine API
-  version: v1.7.4
+  version: v1.7.5
   x-apisguru-categories:
     - developer_tools
   x-origin:
@@ -50,7 +55,7 @@ paths:
           name: search
           schema:
             type: string
-        - description: Filter
+        - description: "Filter "
           in: query
           name: filter[id]
           schema:
@@ -1279,6 +1284,8 @@ components:
           type: integer
         stale:
           type: boolean
+        third_party:
+          type: boolean
       type: object
     controllers.SystemItem:
       properties:
@@ -1314,6 +1321,8 @@ components:
         rhsa_count:
           type: integer
         stale:
+          type: boolean
+        third_party:
           type: boolean
       type: object
     controllers.SystemPackageData:

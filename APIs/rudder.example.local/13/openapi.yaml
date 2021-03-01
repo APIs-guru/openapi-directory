@@ -3424,6 +3424,71 @@ paths:
       x-code-samples:
         - lang: curl
           source: 'curl --header "X-API-Token: yourToken" --request POST --header "Content-Type: application/json" https://rudder.example.com/rudder/api/latest/nodes/applyPolicy'
+  /nodes/pending:
+    get:
+      description: Get information about the nodes pending acceptation
+      operationId: listPendingNodes
+      parameters:
+        - $ref: "#/components/parameters/include"
+        - $ref: "#/components/parameters/node-query"
+        - $ref: "#/components/parameters/node-where"
+        - $ref: "#/components/parameters/node-composition"
+        - $ref: "#/components/parameters/node-select"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  action:
+                    description: The id of the action
+                    enum:
+                      - listPendingNodes
+                    type: string
+                  data:
+                    description: Information about the nodes
+                    properties:
+                      nodes:
+                        items:
+                          $ref: "#/components/schemas/node-full"
+                        type: array
+                    required:
+                      - nodes
+                    type: object
+                  result:
+                    description: Result of the request
+                    enum:
+                      - success
+                      - error
+                    type: string
+                required:
+                  - result
+                  - action
+                  - data
+                type: object
+          description: Nodes
+      summary: List pending nodes
+      tags:
+        - Nodes
+      x-code-samples:
+        - lang: curl
+          source: >+
+            # To get the list of pending nodes
+
+            curl --header "X-API-Token: yourToken" 'https://rudder.example.com/rudder/api/latest/nodes/pending'
+
+
+            # To get the pending Linux nodes with a hostname starting with "node1"
+
+            curl --header "X-API-Token: yourToken" 'https://rudder.example.com/rudder/api/latest/nodes/pending?where=\[\{"objectType":"node","attribute":"OS","comparator":"eq","value":"Linux"\},\{"objectType":"node","attribute":"nodeHostname","comparator":"regex","value":"node1.*"\}\]'
+
+
+            # To get the list of pending nodes with their agent version
+
+            curl -k -H "X-API-Token: yourToken" -X GET "https://rudder.example.com/rudder/api/latest/nodes/pending?include=minimal,managementTechnology" | jq '.data.nodes[] | {"id": .id, "version": .managementTechnology[].version}'
+
+
+
   "/nodes/pending/{nodeId}":
     post:
       description: Accept or refuse a pending node
@@ -5035,7 +5100,6 @@ paths:
                         example:
                           - 162.168.1.0/24
                           - 162.168.2.0/24
-                        items: {}
                         type: array
                     required:
                       - settings
@@ -5093,7 +5157,6 @@ paths:
                         example:
                           - 162.168.1.0/24
                           - 162.168.2.0/24
-                        items: {}
                         type: array
                     required:
                       - settings
@@ -5132,12 +5195,10 @@ paths:
                     add:
                       description: List of networks to add to existing allowed networks for that server
                       example: '{ "add": ["162.168.2.0/24], ... }'
-                      items: {}
                       type: array
                     delete:
                       description: List of networks to remove from existing allowed networks for that server
                       example: '{ "delete":["162.168.1.0/24"], ... }'
-                      items: {}
                       type: array
                   type: object
               type: object
@@ -5161,7 +5222,6 @@ paths:
                         example:
                           - 162.168.1.0/24
                           - 162.168.2.0/24
-                        items: {}
                         type: array
                     required:
                       - settings
