@@ -1046,6 +1046,10 @@ components:
           description: Output only. The relative resource name of the metastore service backup to restore from, in the following form:projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}
           readOnly: true
           type: string
+        details:
+          description: Output only. The restore details containing the revision of the service to be restored to, in format of JSON.
+          readOnly: true
+          type: string
         endTime:
           description: Output only. The time when the restore ended.
           format: google-datetime

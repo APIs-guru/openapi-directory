@@ -575,6 +575,21 @@ paths:
           name: backupId
           schema:
             type: string
+        - description: Required. The encryption type of the backup.
+          in: query
+          name: encryptionConfig.encryptionType
+          schema:
+            enum:
+              - ENCRYPTION_TYPE_UNSPECIFIED
+              - USE_DATABASE_ENCRYPTION
+              - GOOGLE_DEFAULT_ENCRYPTION
+              - CUSTOMER_MANAGED_ENCRYPTION
+            type: string
+        - description: Optional. The Cloud KMS key that will be used to protect the backup. This field should be set only when encryption_type is `CUSTOMER_MANAGED_ENCRYPTION`. Values are of the form `projects//locations//keyRings//cryptoKeys/`.
+          in: query
+          name: encryptionConfig.kmsKeyName
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -1614,6 +1629,10 @@ components:
         database:
           description: Required for the CreateBackup operation. Name of the database from which this backup was created. This needs to be in the same instance as the backup. Values are of the form `projects//instances//databases/`.
           type: string
+        encryptionInfo:
+          $ref: "#/components/schemas/EncryptionInfo"
+          description: Output only. The encryption information for the backup.
+          readOnly: true
         expireTime:
           description: Required for the CreateBackup operation. The expiration time of the backup, with microseconds granularity that must be at least 6 hours and at most 366 days from the time the CreateBackup request is processed. Once the `expire_time` has passed, the backup is eligible to be automatically deleted by Cloud Spanner to free the resources used by the backup.
           format: google-datetime
@@ -1787,6 +1806,9 @@ components:
         createStatement:
           description: Required. A `CREATE DATABASE` statement, which specifies the ID of the new database. The database ID must conform to the regular expression `a-z*[a-z0-9]` and be between 2 and 30 characters in length. If the database ID is a reserved word or if it contains a hyphen, the database ID must be enclosed in backticks (`` ` ``).
           type: string
+        encryptionConfig:
+          $ref: "#/components/schemas/EncryptionConfig"
+          description: Optional. The encryption configuration for the database. If this field is not specified, Cloud Spanner will encrypt/decrypt all data at rest using Google default encryption.
         extraStatements:
           description: "Optional. A list of DDL statements to run inside the newly created database. Statements can create tables, indexes, etc. These statements execute atomically with the creation of the database: if there is an error in any statement, the database is not created."
           items:
@@ -1842,6 +1864,16 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        encryptionConfig:
+          $ref: "#/components/schemas/EncryptionConfig"
+          description: Output only. For databases that are using customer managed encryption, this field contains the encryption configuration for the database. For databases that are using Google default or other types of encryption, this field is empty.
+          readOnly: true
+        encryptionInfo:
+          description: Output only. For databases that are using customer managed encryption, this field contains the encryption information for the database, such as encryption state and the Cloud KMS key versions that are in use. For databases that are using Google default or other types of encryption, this field is empty. This field is propagated lazily from the backend. There might be a delay from when a key version is being used and when it appears in this field.
+          items:
+            $ref: "#/components/schemas/EncryptionInfo"
+          readOnly: true
+          type: array
         name:
           description: Required. The name of the database. Values are of the form `projects//instances//databases/`, where `` is as specified in the `CREATE DATABASE` statement. This name can be passed to other API methods to identify the database.
           type: string
@@ -1876,6 +1908,33 @@ components:
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
+      type: object
+    EncryptionConfig:
+      description: Encryption configuration for a Cloud Spanner database.
+      properties:
+        kmsKeyName:
+          description: The Cloud KMS key to be used for encrypting and decrypting the database. Values are of the form `projects//locations//keyRings//cryptoKeys/`.
+          type: string
+      type: object
+    EncryptionInfo:
+      description: Encryption information for a Cloud Spanner database or backup.
+      properties:
+        encryptionStatus:
+          $ref: "#/components/schemas/Status"
+          description: Output only. If present, the status of a recent encrypt/decrypt call on underlying data for this database or backup. Regardless of status, data is always encrypted at rest.
+          readOnly: true
+        encryptionType:
+          description: Output only. The type of encryption.
+          enum:
+            - TYPE_UNSPECIFIED
+            - GOOGLE_DEFAULT_ENCRYPTION
+            - CUSTOMER_MANAGED_ENCRYPTION
+          readOnly: true
+          type: string
+        kmsKeyVersion:
+          description: Output only. A Cloud KMS key version that is being used to protect the database or backup.
+          readOnly: true
+          type: string
       type: object
     ExecuteBatchDmlRequest:
       description: The request for ExecuteBatchDml.
@@ -2507,6 +2566,21 @@ components:
             - WITNESS
           type: string
       type: object
+    RestoreDatabaseEncryptionConfig:
+      description: Encryption configuration for the restored database.
+      properties:
+        encryptionType:
+          description: Required. The encryption type of the restored database.
+          enum:
+            - ENCRYPTION_TYPE_UNSPECIFIED
+            - USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION
+            - GOOGLE_DEFAULT_ENCRYPTION
+            - CUSTOMER_MANAGED_ENCRYPTION
+          type: string
+        kmsKeyName:
+          description: Optional. The Cloud KMS key that will be used to encrypt/decrypt the restored database. This field should be set only when encryption_type is `CUSTOMER_MANAGED_ENCRYPTION`. Values are of the form `projects//locations//keyRings//cryptoKeys/`.
+          type: string
+      type: object
     RestoreDatabaseMetadata:
       description: Metadata type for the long-running operation returned by RestoreDatabase.
       properties:
@@ -2542,6 +2616,9 @@ components:
         databaseId:
           description: Required. The id of the database to create and restore to. This database must not already exist. The `database_id` appended to `parent` forms the full database name of the form `projects//instances//databases/`.
           type: string
+        encryptionConfig:
+          $ref: "#/components/schemas/RestoreDatabaseEncryptionConfig"
+          description: Optional. An encryption configuration describing the encryption type and key resources in Cloud KMS used to encrypt/decrypt the database to restore to. If this field is not specified, the restored database will use the same encryption configuration as the backup by default, namely encryption_type = `USE_CONFIG_DEFAULT_OR_DATABASE_ENCRYPTION`.
       type: object
     RestoreInfo:
       description: Information about the database restore.

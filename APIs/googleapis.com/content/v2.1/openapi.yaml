@@ -33,6 +33,7 @@ tags:
   - name: accounts
   - name: accountstatuses
   - name: accounttax
+  - name: buyongoogleprograms
   - name: collections
   - name: collectionstatuses
   - name: csses
@@ -1674,6 +1675,93 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounttax
+  "/content/v2.1/{merchantId}/buyongoogleprograms/{regionCode}":
+    get:
+      description: Retrieves a status of BoG program for your Merchant Center account.
+      operationId: content.buyongoogleprograms.get
+      parameters:
+        - description: Required. The ID of the account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The Program region code [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Currently only US is available.
+          in: path
+          name: regionCode
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuyOnGoogleProgramStatus"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - buyongoogleprograms
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/content/v2.1/{merchantId}/buyongoogleprograms/{regionCode}/onboard":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Onboards BoG in your Merchant Center account. By using this method, you agree to the Terms of Service.
+      operationId: content.buyongoogleprograms.onboard
+      parameters:
+        - description: Required. The ID of the account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The program region code [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Currently only US is available.
+          in: path
+          name: regionCode
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OnboardBuyOnGoogleProgramRequest"
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - buyongoogleprograms
   "/content/v2.1/{merchantId}/collections":
     get:
       description: Lists the collections in your Merchant Center account. The response might contain fewer items than specified by page_size. Rely on next_page_token to determine if there are more items to be requested.
@@ -7087,6 +7175,26 @@ components:
             type: string
           type: array
       type: object
+    BuyOnGoogleProgramStatus:
+      description: Response message for the GetProgramStatus method.
+      properties:
+        customerServicePendingEmail:
+          description: The customer service pending email.
+          type: string
+        customerServiceVerifiedEmail:
+          description: The customer service verified email.
+          type: string
+        participationStage:
+          description: The current participation stage for the program.
+          enum:
+            - PROGRAM_PARTICIPATION_STAGE_UNSPECIFIED
+            - NOT_ELIGIBLE
+            - ELIGIBLE
+            - ONBOARDING
+            - ACTIVE
+            - PAUSED
+          type: string
+      type: object
     CarrierRate:
       properties:
         carrierName:
@@ -8504,6 +8612,13 @@ components:
         taxAmount:
           $ref: "#/components/schemas/Price"
           description: Tax value, present only for countries where price attribute excludes tax (e.g. US). No tax is referenced as 0 value with the corresponding `currency`.
+      type: object
+    OnboardBuyOnGoogleProgramRequest:
+      description: Request message for the OnboardProgram method.
+      properties:
+        customerServiceEmail:
+          description: The customer service email.
+          type: string
       type: object
     Order:
       description: Order. Production access (all methods) requires the order manager role. Sandbox access does not.

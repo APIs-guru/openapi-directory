@@ -41,7 +41,7 @@ tags:
 paths:
   "/v2/{instanceName}/actionResults/{hash}/{sizeBytes}":
     get:
-      description: "Retrieve a cached execution result. Implementations SHOULD ensure that any blobs referenced from the ContentAddressableStorage are available at the time of returning the ActionResult and will be for some period of time afterwards. The TTLs of the referenced blobs SHOULD be increased if necessary and applicable. Errors: * `NOT_FOUND`: The requested `ActionResult` is not in the cache."
+      description: "Retrieve a cached execution result. Implementations SHOULD ensure that any blobs referenced from the ContentAddressableStorage are available at the time of returning the ActionResult and will be for some period of time afterwards. The lifetimes of the referenced blobs SHOULD be increased if necessary and applicable. Errors: * `NOT_FOUND`: The requested `ActionResult` is not in the cache."
       operationId: remotebuildexecution.actionResults.get
       parameters:
         - description: The instance of the execution system to operate against. A server may support multiple instances of the execution system (with their own workers, storage, caches, etc.). The server MAY require use of this field to select between them in an implementation-defined fashion, otherwise it can be omitted.
@@ -62,7 +62,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A hint to the server to inline the contents of the listed output files. Each path needs to exactly match one path in `output_files` in the Command message.
+        - description: A hint to the server to inline the contents of the listed output files. Each path needs to exactly match one file path in either `output_paths` or `output_files` (DEPRECATED since v2.1) in the Command message.
           explode: true
           in: query
           name: inlineOutputFiles
@@ -108,7 +108,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     put:
-      description: "Upload a new execution result. In order to allow the server to perform access control based on the type of action, and to assist with client debugging, the client MUST first upload the Action that produced the result, along with its Command, into the `ContentAddressableStorage`. Errors: * `INVALID_ARGUMENT`: One or more arguments are invalid. * `FAILED_PRECONDITION`: One or more errors occurred in updating the action result, such as a missing command or action. * `RESOURCE_EXHAUSTED`: There is insufficient storage space to add the entry to the cache."
+      description: "Upload a new execution result. In order to allow the server to perform access control based on the type of action, and to assist with client debugging, the client MUST first upload the Action that produced the result, along with its Command, into the `ContentAddressableStorage`. Server implementations MAY modify the `UpdateActionResultRequest.action_result` and return an equivalent value. Errors: * `INVALID_ARGUMENT`: One or more arguments are invalid. * `FAILED_PRECONDITION`: One or more errors occurred in updating the action result, such as a missing command or action. * `RESOURCE_EXHAUSTED`: There is insufficient storage space to add the entry to the cache."
       operationId: remotebuildexecution.actionResults.update
       parameters:
         - description: The instance of the execution system to operate against. A server may support multiple instances of the execution system (with their own workers, storage, caches, etc.). The server MAY require use of this field to select between them in an implementation-defined fashion, otherwise it can be omitted.
@@ -167,7 +167,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Execute an action remotely. In order to execute an action, the client must first upload all of the inputs, the Command to run, and the Action into the ContentAddressableStorage. It then calls `Execute` with an `action_digest` referring to them. The server will run the action and eventually return the result. The input `Action`'s fields MUST meet the various canonicalization requirements specified in the documentation for their types so that it has the same digest as other logically equivalent `Action`s. The server MAY enforce the requirements and return errors if a non-canonical input is received. It MAY also proceed without verifying some or all of the requirements, such as for performance reasons. If the server does not verify the requirement, then it will treat the `Action` as distinct from another logically equivalent action if they hash differently. Returns a stream of google.longrunning.Operation messages describing the resulting execution, with eventual `response` ExecuteResponse. The `metadata` on the operation is of type ExecuteOperationMetadata. If the client remains connected after the first response is returned after the server, then updates are streamed as if the client had called WaitExecution until the execution completes or the request reaches an error. The operation can also be queried using Operations API. The server NEED NOT implement other methods or functionality of the Operations API. Errors discovered during creation of the `Operation` will be reported as gRPC Status errors, while errors that occurred while running the action will be reported in the `status` field of the `ExecuteResponse`. The server MUST NOT set the `error` field of the `Operation` proto. The possible errors include: * `INVALID_ARGUMENT`: One or more arguments are invalid. * `FAILED_PRECONDITION`: One or more errors occurred in setting up the action requested, such as a missing input or command or no worker being available. The client may be able to fix the errors and retry. * `RESOURCE_EXHAUSTED`: There is insufficient quota of some resource to run the action. * `UNAVAILABLE`: Due to a transient condition, such as all workers being occupied (and the server does not support a queue), the action could not be started. The client should retry. * `INTERNAL`: An internal error occurred in the execution engine or the worker. * `DEADLINE_EXCEEDED`: The execution timed out. * `CANCELLED`: The operation was cancelled by the client. This status is only possible if the server implements the Operations API CancelOperation method, and it was called for the current execution. In the case of a missing input or command, the server SHOULD additionally send a PreconditionFailure error detail where, for each requested blob not present in the CAS, there is a `Violation` with a `type` of `MISSING` and a `subject` of `\"blobs/{hash}/{size}\"` indicating the digest of the missing blob."
+      description: "Execute an action remotely. In order to execute an action, the client must first upload all of the inputs, the Command to run, and the Action into the ContentAddressableStorage. It then calls `Execute` with an `action_digest` referring to them. The server will run the action and eventually return the result. The input `Action`'s fields MUST meet the various canonicalization requirements specified in the documentation for their types so that it has the same digest as other logically equivalent `Action`s. The server MAY enforce the requirements and return errors if a non-canonical input is received. It MAY also proceed without verifying some or all of the requirements, such as for performance reasons. If the server does not verify the requirement, then it will treat the `Action` as distinct from another logically equivalent action if they hash differently. Returns a stream of google.longrunning.Operation messages describing the resulting execution, with eventual `response` ExecuteResponse. The `metadata` on the operation is of type ExecuteOperationMetadata. If the client remains connected after the first response is returned after the server, then updates are streamed as if the client had called WaitExecution until the execution completes or the request reaches an error. The operation can also be queried using Operations API. The server NEED NOT implement other methods or functionality of the Operations API. Errors discovered during creation of the `Operation` will be reported as gRPC Status errors, while errors that occurred while running the action will be reported in the `status` field of the `ExecuteResponse`. The server MUST NOT set the `error` field of the `Operation` proto. The possible errors include: * `INVALID_ARGUMENT`: One or more arguments are invalid. * `FAILED_PRECONDITION`: One or more errors occurred in setting up the action requested, such as a missing input or command or no worker being available. The client may be able to fix the errors and retry. * `RESOURCE_EXHAUSTED`: There is insufficient quota of some resource to run the action. * `UNAVAILABLE`: Due to a transient condition, such as all workers being occupied (and the server does not support a queue), the action could not be started. The client should retry. * `INTERNAL`: An internal error occurred in the execution engine or the worker. * `DEADLINE_EXCEEDED`: The execution timed out. * `CANCELLED`: The operation was cancelled by the client. This status is only possible if the server implements the Operations API CancelOperation method, and it was called for the current execution. In the case of a missing input or command, the server SHOULD additionally send a PreconditionFailure error detail where, for each requested blob not present in the CAS, there is a `Violation` with a `type` of `MISSING` and a `subject` of `\"blobs/{hash}/{size}\"` indicating the digest of the missing blob. The server does not need to guarantee that a call to this method leads to at most one execution of the action. The server MAY execute the action multiple times, potentially in parallel. These redundant executions MAY continue to run, even if the operation is completed."
       operationId: remotebuildexecution.actions.execute
       parameters:
         - description: The instance of the execution system to operate against. A server may support multiple instances of the execution system (with their own workers, storage, caches, etc.). The server MAY require use of this field to select between them in an implementation-defined fashion, otherwise it can be omitted.
@@ -352,7 +352,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Determine if blobs are present in the CAS. Clients can use this API before uploading blobs to determine which ones are already present in the CAS and do not need to be uploaded again. Servers SHOULD increase the TTLs of the referenced blobs if necessary and applicable. There are no method-specific errors.
+      description: Determine if blobs are present in the CAS. Clients can use this API before uploading blobs to determine which ones are already present in the CAS and do not need to be uploaded again. Servers SHOULD increase the lifetimes of the referenced blobs if necessary and applicable. There are no method-specific errors.
       operationId: remotebuildexecution.blobs.findMissing
       parameters:
         - description: The instance of the execution system to operate against. A server may support multiple instances of the execution system (with their own workers, storage, caches, etc.). The server MAY require use of this field to select between them in an implementation-defined fashion, otherwise it can be omitted.
@@ -547,11 +547,13 @@ components:
         inputRootDigest:
           $ref: "#/components/schemas/BuildBazelRemoteExecutionV2Digest"
           description: The digest of the root Directory for the input files. The files in the directory tree are available in the correct location on the build machine before the command is executed. The root directory, as well as every subdirectory and content blob referred to, MUST be in the ContentAddressableStorage.
-        outputNodeProperties:
-          description: List of required supported NodeProperty keys. In order to ensure that equivalent `Action`s always hash to the same value, the supported node properties MUST be lexicographically sorted by name. Sorting of strings is done by code point, equivalently, by the UTF-8 bytes. The interpretation of these properties is server-dependent. If a property is not recognized by the server, the server will return an `INVALID_ARGUMENT` error.
-          items:
-            type: string
-          type: array
+        platform:
+          $ref: "#/components/schemas/BuildBazelRemoteExecutionV2Platform"
+          description: "The optional platform requirements for the execution environment. The server MAY choose to execute the action on any worker satisfying the requirements, so the client SHOULD ensure that running the action on any such worker will have the same result. A detailed lexicon for this can be found in the accompanying platform.md. New in version 2.2: clients SHOULD set these platform properties as well as those in the Command. Servers SHOULD prefer those set here."
+        salt:
+          description: An optional additional salt value used to place this `Action` into a separate cache namespace from other instances having the same field contents. This salt typically comes from operational configuration specific to sources such as repo and service configuration, and allows disowning an entire set of ActionResults that might have been poisoned by buggy software or tool failures.
+          format: byte
+          type: string
         timeout:
           description: A timeout after which the execution should be killed. If the timeout is absent, then the client is specifying that the execution should continue as long as the server will let it. The server SHOULD impose a timeout if the client does not specify one, however, if the client does specify a timeout that is longer than the server's maximum timeout, the server MUST reject the request. The timeout is a part of the Action message, and therefore two `Actions` with different timeouts are different, even if they are otherwise identical. This is because, if they were not, running an `Action` with a lower timeout than is required might result in a cache hit from an execution run with a longer timeout, hiding the fact that the timeout is too short. By encoding it directly in the `Action`, a lower timeout will result in a cache miss and the execution timeout will fail immediately, rather than whenever the cache entry gets evicted.
           format: google-duration
@@ -564,7 +566,7 @@ components:
           type: boolean
       type: object
     BuildBazelRemoteExecutionV2ActionResult:
-      description: An ActionResult represents the result of an Action being run.
+      description: An ActionResult represents the result of an Action being run. It is advised that at least one field (for example `ActionResult.execution_metadata.Worker`) have a non-default value, to ensure that the serialized value is non-empty, which can then be used as a basic data sanity check.
       properties:
         executionMetadata:
           $ref: "#/components/schemas/BuildBazelRemoteExecutionV2ExecutedActionMetadata"
@@ -704,6 +706,7 @@ components:
               - VSO
               - SHA384
               - SHA512
+              - MURMUR3
             type: string
           type: array
         maxBatchTotalSizeBytes:
@@ -741,6 +744,11 @@ components:
           items:
             type: string
           type: array
+        outputNodeProperties:
+          description: A list of keys for node properties the client expects to retrieve for output files and directories. Keys are either names of string-based NodeProperty or names of fields in NodeProperties. In order to ensure that equivalent `Action`s always hash to the same value, the node properties MUST be lexicographically sorted by name. Sorting of strings is done by code point, equivalently, by the UTF-8 bytes. The interpretation of string-based properties is server-dependent. If a property is not recognized by the server, the server will return an `INVALID_ARGUMENT`.
+          items:
+            type: string
+          type: array
         outputPaths:
           description: "A list of the output paths that the client expects to retrieve from the action. Only the listed paths will be returned to the client as output. The type of the output (file or directory) is not specified, and will be determined by the server after action execution. If the resulting path is a file, it will be returned in an OutputFile) typed field. If the path is a directory, the entire directory structure will be returned as a Tree message digest, see OutputDirectory) Other files or directories that may be created during command execution are discarded. The paths are relative to the working directory of the action execution. The paths are specified using a single forward slash (`/`) as a path separator, even if the execution platform natively uses a different separator. The path MUST NOT include a trailing slash, nor a leading slash, being a relative path. In order to ensure consistent hashing of the same Action, the output paths MUST be deduplicated and sorted lexicographically by code point (or, equivalently, by UTF-8 bytes). Directories leading up to the output paths are created by the worker prior to execution, even if they are not explicitly part of the input root. New in v2.1: this field supersedes the DEPRECATED `output_files` and `output_directories` fields. If `output_paths` is used, `output_files` and `output_directories` will be ignored!"
           items:
@@ -748,7 +756,7 @@ components:
           type: array
         platform:
           $ref: "#/components/schemas/BuildBazelRemoteExecutionV2Platform"
-          description: The platform requirements for the execution environment. The server MAY choose to execute the action on any worker satisfying the requirements, so the client SHOULD ensure that running the action on any such worker will have the same result. A detailed lexicon for this can be found in the accompanying platform.md.
+          description: "The platform requirements for the execution environment. The server MAY choose to execute the action on any worker satisfying the requirements, so the client SHOULD ensure that running the action on any such worker will have the same result. A detailed lexicon for this can be found in the accompanying platform.md. DEPRECATED as of v2.2: platform properties are now specified directly in the action. See documentation note in the Action for migration."
         workingDirectory:
           description: The working directory, relative to the input root, for the command to run in. It must be a directory which exists in the input tree. If it is left empty, then the action is run in the input root.
           type: string
@@ -788,10 +796,7 @@ components:
             $ref: "#/components/schemas/BuildBazelRemoteExecutionV2FileNode"
           type: array
         nodeProperties:
-          description: The node properties of the Directory.
-          items:
-            $ref: "#/components/schemas/BuildBazelRemoteExecutionV2NodeProperty"
-          type: array
+          $ref: "#/components/schemas/BuildBazelRemoteExecutionV2NodeProperties"
         symlinks:
           description: The symlinks in the directory.
           items:
@@ -824,10 +829,10 @@ components:
             - COMPLETED
           type: string
         stderrStreamName:
-          description: If set, the client can use this name with ByteStream.Read to stream the standard error.
+          description: If set, the client can use this resource name with ByteStream.Read to stream the standard error from the endpoint hosting streamed responses.
           type: string
         stdoutStreamName:
-          description: If set, the client can use this name with ByteStream.Read to stream the standard output.
+          description: If set, the client can use this resource name with ByteStream.Read to stream the standard output from the endpoint hosting streamed responses.
           type: string
       type: object
     BuildBazelRemoteExecutionV2ExecuteRequest:
@@ -870,6 +875,13 @@ components:
     BuildBazelRemoteExecutionV2ExecutedActionMetadata:
       description: ExecutedActionMetadata contains details about a completed execution.
       properties:
+        auxiliaryMetadata:
+          description: Details that are specific to the kind of worker used. For example, on POSIX-like systems this could contain a message with getrusage(2) statistics.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
         executionCompletedTimestamp:
           description: When the worker completed executing the action command.
           format: google-datetime
@@ -923,6 +935,7 @@ components:
             - VSO
             - SHA384
             - SHA512
+            - MURMUR3
           type: string
         execEnabled:
           description: Whether remote execution is enabled for the particular server/instance.
@@ -957,10 +970,7 @@ components:
           description: The name of the file.
           type: string
         nodeProperties:
-          description: The node properties of the FileNode.
-          items:
-            $ref: "#/components/schemas/BuildBazelRemoteExecutionV2NodeProperty"
-          type: array
+          $ref: "#/components/schemas/BuildBazelRemoteExecutionV2NodeProperties"
       type: object
     BuildBazelRemoteExecutionV2FindMissingBlobsRequest:
       description: A request message for ContentAddressableStorage.FindMissingBlobs.
@@ -1002,6 +1012,23 @@ components:
           description: This is a hint as to the purpose of the log, and is set to true if the log is human-readable text that can be usefully displayed to a user, and false otherwise. For instance, if a command-line client wishes to print the server logs to the terminal for a failed action, this allows it to avoid displaying a binary file.
           type: boolean
       type: object
+    BuildBazelRemoteExecutionV2NodeProperties:
+      description: Node properties for FileNodes, DirectoryNodes, and SymlinkNodes. The server is responsible for specifying the properties that it accepts.
+      properties:
+        mtime:
+          description: The file's last modification timestamp.
+          format: google-datetime
+          type: string
+        properties:
+          description: A list of string-based NodeProperties.
+          items:
+            $ref: "#/components/schemas/BuildBazelRemoteExecutionV2NodeProperty"
+          type: array
+        unixMode:
+          description: The UNIX file mode, e.g., 0755.
+          format: uint32
+          type: integer
+      type: object
     BuildBazelRemoteExecutionV2NodeProperty:
       description: A single property for FileNodes, DirectoryNodes, and SymlinkNodes. The server is responsible for specifying the property `name`s that it accepts. If permitted by the server, the same `name` may occur multiple times.
       properties:
@@ -1036,10 +1063,7 @@ components:
           description: True if file is executable, false otherwise.
           type: boolean
         nodeProperties:
-          description: The supported node properties of the OutputFile, if requested by the Action.
-          items:
-            $ref: "#/components/schemas/BuildBazelRemoteExecutionV2NodeProperty"
-          type: array
+          $ref: "#/components/schemas/BuildBazelRemoteExecutionV2NodeProperties"
         path:
           description: The full path of the file relative to the working directory, including the filename. The path separator is a forward slash `/`. Since this is a relative path, it MUST NOT begin with a leading forward slash.
           type: string
@@ -1048,15 +1072,12 @@ components:
       description: An `OutputSymlink` is similar to a Symlink, but it is used as an output in an `ActionResult`. `OutputSymlink` is binary-compatible with `SymlinkNode`.
       properties:
         nodeProperties:
-          description: The supported node properties of the OutputSymlink, if requested by the Action.
-          items:
-            $ref: "#/components/schemas/BuildBazelRemoteExecutionV2NodeProperty"
-          type: array
+          $ref: "#/components/schemas/BuildBazelRemoteExecutionV2NodeProperties"
         path:
           description: The full path of the symlink relative to the working directory, including the filename. The path separator is a forward slash `/`. Since this is a relative path, it MUST NOT begin with a leading forward slash.
           type: string
         target:
-          description: The target path of the symlink. The path separator is a forward slash `/`. The target path can be relative to the parent directory of the symlink or it can be an absolute path starting with `/`. Support for absolute paths can be checked using the Capabilities API. The canonical form forbids the substrings `/./` and `//` in the target path. `..` components are allowed anywhere in the target path.
+          description: The target path of the symlink. The path separator is a forward slash `/`. The target path can be relative to the parent directory of the symlink or it can be an absolute path starting with `/`. Support for absolute paths can be checked using the Capabilities API. `..` components are allowed anywhere in the target path.
           type: string
       type: object
     BuildBazelRemoteExecutionV2Platform:
@@ -1069,7 +1090,7 @@ components:
           type: array
       type: object
     BuildBazelRemoteExecutionV2PlatformProperty:
-      description: A single property for the environment. The server is responsible for specifying the property `name`s that it accepts. If an unknown `name` is provided in the requirements for an Action, the server SHOULD reject the execution request. If permitted by the server, the same `name` may occur multiple times. The server is also responsible for specifying the interpretation of property `value`s. For instance, a property describing how much RAM must be available may be interpreted as allowing a worker with 16GB to fulfill a request for 8GB, while a property describing the OS environment on which the action must be performed may require an exact match with the worker's OS. The server MAY use the `value` of one or more properties to determine how it sets up the execution environment, such as by making specific system files available to the worker.
+      description: A single property for the environment. The server is responsible for specifying the property `name`s that it accepts. If an unknown `name` is provided in the requirements for an Action, the server SHOULD reject the execution request. If permitted by the server, the same `name` may occur multiple times. The server is also responsible for specifying the interpretation of property `value`s. For instance, a property describing how much RAM must be available may be interpreted as allowing a worker with 16GB to fulfill a request for 8GB, while a property describing the OS environment on which the action must be performed may require an exact match with the worker's OS. The server MAY use the `value` of one or more properties to determine how it sets up the execution environment, such as by making specific system files available to the worker. Both names and values are typically case-sensitive. Note that the platform is implicitly part of the action digest, so even tiny changes in the names or values (like changing case) may result in different action cache entries.
       properties:
         name:
           description: The property name.
@@ -1079,7 +1100,7 @@ components:
           type: string
       type: object
     BuildBazelRemoteExecutionV2PriorityCapabilities:
-      description: Allowed values for priority in ResultsCachePolicy Used for querying both cache and execution valid priority ranges.
+      description: Allowed values for priority in ResultsCachePolicy and ExecutionPolicy Used for querying both cache and execution valid priority ranges.
       properties:
         priorities:
           items:
@@ -1090,9 +1111,11 @@ components:
       description: Supported range of priorities, including boundaries.
       properties:
         maxPriority:
+          description: The maximum numeric value for this priority range, which represents the least urgent task or shortest retained item.
           format: int32
           type: integer
         minPriority:
+          description: The minimum numeric value for this priority range, which represents the most urgent task or longest retained item.
           format: int32
           type: integer
       type: object
@@ -1146,12 +1169,9 @@ components:
           description: The name of the symlink.
           type: string
         nodeProperties:
-          description: The node properties of the SymlinkNode.
-          items:
-            $ref: "#/components/schemas/BuildBazelRemoteExecutionV2NodeProperty"
-          type: array
+          $ref: "#/components/schemas/BuildBazelRemoteExecutionV2NodeProperties"
         target:
-          description: The target path of the symlink. The path separator is a forward slash `/`. The target path can be relative to the parent directory of the symlink or it can be an absolute path starting with `/`. Support for absolute paths can be checked using the Capabilities API. The canonical form forbids the substrings `/./` and `//` in the target path. `..` components are allowed anywhere in the target path.
+          description: The target path of the symlink. The path separator is a forward slash `/`. The target path can be relative to the parent directory of the symlink or it can be an absolute path starting with `/`. Support for absolute paths can be checked using the Capabilities API. `..` components are allowed anywhere in the target path as logical canonicalization may lead to different behavior in the presence of directory symlinks (e.g. `foo/../bar` may not be the same as `bar`). To reduce potential cache misses, canonicalization is still recommended where this is possible without impacting correctness.
           type: string
       type: object
     BuildBazelRemoteExecutionV2ToolDetails:
@@ -1202,6 +1222,10 @@ components:
     GoogleDevtoolsRemotebuildbotCommandDurations:
       description: CommandDuration contains the various duration metrics tracked when a bot performs a command.
       properties:
+        casRelease:
+          description: The time spent to release the CAS blobs used by the task.
+          format: google-duration
+          type: string
         cmWaitForAssignment:
           description: The time spent waiting for Container Manager to assign an asynchronous container for execution.
           format: google-duration

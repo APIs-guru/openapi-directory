@@ -566,10 +566,10 @@ components:
           description: The state of human review on the processing request.
           enum:
             - STATE_UNSPECIFIED
-            - HUMAN_REVIEW_SKIPPED
-            - HUMAN_REVIEW_VALIDATION_PASSED
-            - HUMAN_REVIEW_IN_PROGRESS
-            - HUMAN_REVIEW_ERROR
+            - SKIPPED
+            - VALIDATION_PASSED
+            - IN_PROGRESS
+            - ERROR
           type: string
         stateMessage:
           description: A message providing more details about the human review state.
@@ -716,6 +716,9 @@ components:
         addressValue:
           $ref: "#/components/schemas/GoogleTypePostalAddress"
           description: "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto"
+        booleanValue:
+          description: Boolean value. Can be used for entities with binary values, or for checkboxes.
+          type: boolean
         dateValue:
           $ref: "#/components/schemas/GoogleTypeDate"
           description: "Date value. Includes year, month, day. See also: https://github.com/googleapis/googleapis/blob/master/google/type/date.proto"
@@ -1500,6 +1503,9 @@ components:
         addressValue:
           $ref: "#/components/schemas/GoogleTypePostalAddress"
           description: "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto"
+        booleanValue:
+          description: Boolean value. Can be used for entities with binary values, or for checkboxes.
+          type: boolean
         dateValue:
           $ref: "#/components/schemas/GoogleTypeDate"
           description: "Date value. Includes year, month, day. See also: https://github.com/googleapis/googleapis/blob/master/google/type/date.proto"
@@ -2170,6 +2176,16 @@ components:
           format: int32
           type: integer
       type: object
+    GoogleCloudDocumentaiV1beta3BatchDocumentsInputConfig:
+      description: The common config to specify a set of documents used as input.
+      properties:
+        gcsDocuments:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3GcsDocuments"
+          description: The set of documents individually specified on Cloud Storage.
+        gcsPrefix:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3GcsPrefix"
+          description: The set of documents that match the specified Cloud Storage [gcs_prefix].
+      type: object
     GoogleCloudDocumentaiV1beta3BatchProcessMetadata:
       description: The long running operation metadata for batch process method.
       properties:
@@ -2232,7 +2248,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3BatchProcessRequestBatchInputConfig"
           type: array
         inputDocuments:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3BatchProcessRequestBatchInputConfig"
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3BatchDocumentsInputConfig"
           description: The input documents for batch process.
         outputConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3BatchProcessRequestBatchOutputConfig"
@@ -2405,6 +2421,9 @@ components:
         addressValue:
           $ref: "#/components/schemas/GoogleTypePostalAddress"
           description: "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto"
+        booleanValue:
+          description: Boolean value. Can be used for entities with binary values, or for checkboxes.
+          type: boolean
         dateValue:
           $ref: "#/components/schemas/GoogleTypeDate"
           description: "Date value. Includes year, month, day. See also: https://github.com/googleapis/googleapis/blob/master/google/type/date.proto"
@@ -2978,6 +2997,32 @@ components:
           description: Text translated into the target language.
           type: string
       type: object
+    GoogleCloudDocumentaiV1beta3GcsDocument:
+      description: Specifies a document stored on Cloud Storage.
+      properties:
+        gcsUri:
+          description: The Cloud Storage object uri.
+          type: string
+        mimeType:
+          description: An IANA MIME type (RFC6838) of the content.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3GcsDocuments:
+      description: Specifies a set of documents on Cloud Storage.
+      properties:
+        documents:
+          description: The list of documents.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3GcsDocument"
+          type: array
+      type: object
+    GoogleCloudDocumentaiV1beta3GcsPrefix:
+      description: Specifies all documents on Cloud Storage with a common prefix.
+      properties:
+        gcsUriPrefix:
+          description: The URI prefix.
+          type: string
+      type: object
     GoogleCloudDocumentaiV1beta3HumanReviewStatus:
       description: The status of human review on a processed document.
       properties:
@@ -2988,10 +3033,10 @@ components:
           description: The state of human review on the processing request.
           enum:
             - STATE_UNSPECIFIED
-            - HUMAN_REVIEW_SKIPPED
-            - HUMAN_REVIEW_VALIDATION_PASSED
-            - HUMAN_REVIEW_IN_PROGRESS
-            - HUMAN_REVIEW_ERROR
+            - SKIPPED
+            - VALIDATION_PASSED
+            - IN_PROGRESS
+            - ERROR
           type: string
         stateMessage:
           description: A message providing more details about the human review state.

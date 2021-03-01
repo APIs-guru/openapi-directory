@@ -34,6 +34,7 @@ externalDocs:
   url: https://cloud.google.com/speech-to-text/docs/quickstart-protocol
 tags:
   - name: operations
+  - name: projects
   - name: speech
 paths:
   /v1p1beta1/operations:
@@ -194,6 +195,253 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - speech
+  "/v1p1beta1/{name}":
+    delete:
+      description: Delete a phrase set.
+      operationId: speech.projects.locations.phraseSets.delete
+      parameters:
+        - description: "Required. The name of the phrase set to delete. Format: {api_version}/projects/{project}/locations/{location}/phraseSets/{phrase_set}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: Get a phrase set.
+      operationId: speech.projects.locations.phraseSets.get
+      parameters:
+        - description: "Required. The name of the phrase set to retrieve. Format: {api_version}/projects/{project}/locations/{location}/phraseSets/{phrase_set}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PhraseSet"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Update a phrase set.
+      operationId: speech.projects.locations.phraseSets.patch
+      parameters:
+        - description: The resource name of the phrase set.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The list of fields to be updated.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhraseSet"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PhraseSet"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1p1beta1/{parent}/customClasses":
+    get:
+      description: List custom classes.
+      operationId: speech.projects.locations.customClasses.list
+      parameters:
+        - description: "Required. The parent, which owns this collection of custom classes. Format: {api_version}/projects/{project}/locations/{location}/customClasses"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of custom classes to return. The service may return fewer than this value. If unspecified, at most 50 custom classes will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListCustomClass` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListCustomClass` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCustomClassesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a custom class.
+      operationId: speech.projects.locations.customClasses.create
+      parameters:
+        - description: "Required. The parent resource where this custom class will be created. Format: {api_version}/projects/{project}/locations/{location}/customClasses"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCustomClassRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomClass"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1p1beta1/{parent}/phraseSets":
+    get:
+      description: List phrase sets.
+      operationId: speech.projects.locations.phraseSets.list
+      parameters:
+        - description: "Required. The parent, which owns this collection of phrase set. Format: projects/{project}/locations/{location}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of phrase sets to return. The service may return fewer than this value. If unspecified, at most 50 phrase sets will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListPhraseSet` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListPhraseSet` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPhraseSetResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a set of phrase hints. Each item in the set can be a single word or a multi-word phrase. The items in the PhraseSet are favored by the recognition model when you send a call that includes the PhraseSet.
+      operationId: speech.projects.locations.phraseSets.create
+      parameters:
+        - description: "Required. The parent resource where this phrase set will be created. Format: {api_version}/projects/{project}/locations/{location}/phraseSets"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePhraseSetRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PhraseSet"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -277,6 +525,26 @@ components:
           description: The class item's value.
           type: string
       type: object
+    CreateCustomClassRequest:
+      description: Message sent by the client for the `CreateCustomClass` method.
+      properties:
+        customClass:
+          $ref: "#/components/schemas/CustomClass"
+          description: Required. The custom class to create.
+        customClassId:
+          description: The ID to use for the custom class, which will become the final component of the custom class' resource name. This value should be 4-63 characters, and valid characters are /a-z-/.
+          type: string
+      type: object
+    CreatePhraseSetRequest:
+      description: Message sent by the client for the `CreatePhraseSet` method.
+      properties:
+        phraseSet:
+          $ref: "#/components/schemas/PhraseSet"
+          description: Required. The phrase set to create.
+        phraseSetId:
+          description: The ID to use for the phrase set, which will become the final component of the phrase set's resource name. This value should be 4-63 characters, and valid characters are /a-z-/.
+          type: string
+      type: object
     CustomClass:
       description: A set of words or phrases that represents a common concept likely to appear in your audio, for example a list of passenger ship names. CustomClass items can be substituted into placeholders that you set in PhraseSet phrases.
       properties:
@@ -292,6 +560,22 @@ components:
           description: The resource name of the custom class.
           type: string
       type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      properties: {}
+      type: object
+    ListCustomClassesResponse:
+      description: Message returned to the client by the `ListCustomClasses` method.
+      properties:
+        customClasses:
+          description: The custom classes.
+          items:
+            $ref: "#/components/schemas/CustomClass"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -302,6 +586,18 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListPhraseSetResponse:
+      description: Message returned to the client by the `ListPhraseSet` method.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        phraseSets:
+          description: The phrase set.
+          items:
+            $ref: "#/components/schemas/PhraseSet"
           type: array
       type: object
     LongRunningRecognizeMetadata:
@@ -589,6 +885,11 @@ components:
           description: A collection of custom classes. To specify the classes inline, leave the class' `name` blank and fill in the rest of its fields, giving it a unique `custom_class_id`. Refer to the inline defined class in phrase hints by its `custom_class_id`.
           items:
             $ref: "#/components/schemas/CustomClass"
+          type: array
+        phraseSetReferences:
+          description: A collection of phrase set resource names to use.
+          items:
+            type: string
           type: array
         phraseSets:
           description: A collection of phrase sets. To specify the hints inline, leave the phrase set's `name` blank and fill in the rest of its fields. Any phrase set can use any custom class.

@@ -342,7 +342,7 @@ components:
       properties:
         endDate:
           $ref: "#/components/schemas/GoogleTypeDate"
-          description: Optional. The end date of the time period. If unset, specifies to track all usage incurred since the start_date.
+          description: Optional. The end date of the time period. Budgets with elapsed end date won't be processed. If unset, specifies to track all usage incurred since the start_date.
         startDate:
           $ref: "#/components/schemas/GoogleTypeDate"
           description: Required. The start date must be after January 1, 2017.

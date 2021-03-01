@@ -472,10 +472,10 @@ components:
           description: The state of human review on the processing request.
           enum:
             - STATE_UNSPECIFIED
-            - HUMAN_REVIEW_SKIPPED
-            - HUMAN_REVIEW_VALIDATION_PASSED
-            - HUMAN_REVIEW_IN_PROGRESS
-            - HUMAN_REVIEW_ERROR
+            - SKIPPED
+            - VALIDATION_PASSED
+            - IN_PROGRESS
+            - ERROR
           type: string
         stateMessage:
           description: A message providing more details about the human review state.
@@ -622,6 +622,9 @@ components:
         addressValue:
           $ref: "#/components/schemas/GoogleTypePostalAddress"
           description: "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto"
+        booleanValue:
+          description: Boolean value. Can be used for entities with binary values, or for checkboxes.
+          type: boolean
         dateValue:
           $ref: "#/components/schemas/GoogleTypeDate"
           description: "Date value. Includes year, month, day. See also: https://github.com/googleapis/googleapis/blob/master/google/type/date.proto"
@@ -1422,6 +1425,9 @@ components:
         addressValue:
           $ref: "#/components/schemas/GoogleTypePostalAddress"
           description: "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto"
+        booleanValue:
+          description: Boolean value. Can be used for entities with binary values, or for checkboxes.
+          type: boolean
         dateValue:
           $ref: "#/components/schemas/GoogleTypeDate"
           description: "Date value. Includes year, month, day. See also: https://github.com/googleapis/googleapis/blob/master/google/type/date.proto"
@@ -2289,10 +2295,10 @@ components:
           description: The state of human review on the processing request.
           enum:
             - STATE_UNSPECIFIED
-            - HUMAN_REVIEW_SKIPPED
-            - HUMAN_REVIEW_VALIDATION_PASSED
-            - HUMAN_REVIEW_IN_PROGRESS
-            - HUMAN_REVIEW_ERROR
+            - SKIPPED
+            - VALIDATION_PASSED
+            - IN_PROGRESS
+            - ERROR
           type: string
         stateMessage:
           description: A message providing more details about the human review state.

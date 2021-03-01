@@ -125,7 +125,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The language to retrieve the intent for. The following fields are language dependent: * `Intent.training_phrases.parts.text` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+        - description: "The language to retrieve the intent for. The following fields are language dependent: * `Intent.training_phrases.parts.text` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
           in: query
           name: languageCode
           schema:
@@ -859,7 +859,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The language of the following fields in `entity_type`: * `EntityType.entities.value` * `EntityType.entities.synonyms` * `EntityType.excluded_phrases.value` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+        - description: "The language of the following fields in `entity_type`: * `EntityType.entities.value` * `EntityType.entities.synonyms` * `EntityType.excluded_phrases.value` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
           in: query
           name: languageCode
           schema:
@@ -1066,7 +1066,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The language to list flows for. The following fields are language dependent: * `Flow.event_handlers.trigger_fulfillment.messages` * `Flow.transition_routes.trigger_fulfillment.messages` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+        - description: "The language to list flows for. The following fields are language dependent: * `Flow.event_handlers.trigger_fulfillment.messages` * `Flow.transition_routes.trigger_fulfillment.messages` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
           in: query
           name: languageCode
           schema:
@@ -1121,7 +1121,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The language of the following fields in `flow`: * `Flow.event_handlers.trigger_fulfillment.messages` * `Flow.transition_routes.trigger_fulfillment.messages` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+        - description: "The language of the following fields in `flow`: * `Flow.event_handlers.trigger_fulfillment.messages` * `Flow.transition_routes.trigger_fulfillment.messages` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
           in: query
           name: languageCode
           schema:
@@ -1169,7 +1169,7 @@ paths:
               - INTENT_VIEW_PARTIAL
               - INTENT_VIEW_FULL
             type: string
-        - description: "The language to list intents for. The following fields are language dependent: * `Intent.training_phrases.parts.text` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+        - description: "The language to list intents for. The following fields are language dependent: * `Intent.training_phrases.parts.text` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
           in: query
           name: languageCode
           schema:
@@ -1224,7 +1224,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The language of the following fields in `intent`: * `Intent.training_phrases.parts.text` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+        - description: "The language of the following fields in `intent`: * `Intent.training_phrases.parts.text` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
           in: query
           name: languageCode
           schema:
@@ -1263,7 +1263,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The language to list pages for. The following fields are language dependent: * `Page.entry_fulfillment.messages` * `Page.form.parameters.fill_behavior.initial_prompt_fulfillment.messages` * `Page.form.parameters.fill_behavior.reprompt_event_handlers.messages` * `Page.transition_routes.trigger_fulfillment.messages` * `Page.transition_route_groups.transition_routes.trigger_fulfillment.messages` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+        - description: "The language to list pages for. The following fields are language dependent: * `Page.entry_fulfillment.messages` * `Page.form.parameters.fill_behavior.initial_prompt_fulfillment.messages` * `Page.form.parameters.fill_behavior.reprompt_event_handlers.messages` * `Page.transition_routes.trigger_fulfillment.messages` * `Page.transition_route_groups.transition_routes.trigger_fulfillment.messages` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
           in: query
           name: languageCode
           schema:
@@ -1318,7 +1318,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The language of the following fields in `page`: * `Page.entry_fulfillment.messages` * `Page.form.parameters.fill_behavior.initial_prompt_fulfillment.messages` * `Page.form.parameters.fill_behavior.reprompt_event_handlers.messages` * `Page.transition_routes.trigger_fulfillment.messages` * `Page.transition_route_groups.transition_routes.trigger_fulfillment.messages` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+        - description: "The language of the following fields in `page`: * `Page.entry_fulfillment.messages` * `Page.form.parameters.fill_behavior.initial_prompt_fulfillment.messages` * `Page.form.parameters.fill_behavior.reprompt_event_handlers.messages` * `Page.transition_routes.trigger_fulfillment.messages` * `Page.transition_route_groups.transition_routes.trigger_fulfillment.messages` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
           in: query
           name: languageCode
           schema:
@@ -1774,7 +1774,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The language to list transition route groups for. The field `messages` in TransitionRoute is language dependent. If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+        - description: "The language to list transition route groups for. The field `messages` in TransitionRoute is language dependent. If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
           in: query
           name: languageCode
           schema:
@@ -1829,7 +1829,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The language to list transition route groups for. The field `messages` in TransitionRoute is language dependent. If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+        - description: "The language to list transition route groups for. The field `messages` in TransitionRoute is language dependent. If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
           in: query
           name: languageCode
           schema:
@@ -2246,7 +2246,7 @@ components:
           description: The URI of the agent's avatar. Avatars are used throughout the Dialogflow console and in the self-hosted [Web Demo](https://cloud.google.com/dialogflow/docs/integrations/web-demo) integration.
           type: string
         defaultLanguageCode:
-          description: Immutable. The default language of the agent as a language tag. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes. This field cannot be set by the Agents.UpdateAgent method.
+          description: Immutable. The default language of the agent as a language tag. See [Language Support](https://cloud.google.com/dialogflow/cx/docs/reference/language) for a list of the currently supported language codes. This field cannot be set by the Agents.UpdateAgent method.
           type: string
         description:
           description: The description of the agent. The maximum length is 500 characters. If exceeded, the request is rejected.
@@ -3559,7 +3559,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3IntentInput"
           description: The intent to be triggered.
         languageCode:
-          description: Required. The language of the input. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language.
+          description: Required. The language of the input. See [Language Support](https://cloud.google.com/dialogflow/cx/docs/reference/language) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language.
           type: string
         text:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TextInput"
@@ -3570,6 +3570,9 @@ components:
       properties:
         analyzeQueryTextSentiment:
           description: Configures whether sentiment analysis should be performed. If not provided, sentiment analysis is not performed.
+          type: boolean
+        disableWebhook:
+          description: Whether to disable webhook calls for this request.
           type: boolean
         geoLocation:
           $ref: "#/components/schemas/GoogleTypeLatLng"
@@ -3617,7 +3620,7 @@ components:
           format: float
           type: number
         languageCode:
-          description: The language that was triggered during intent detection. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes.
+          description: The language that was triggered during intent detection. See [Language Support](https://cloud.google.com/dialogflow/cx/docs/reference/language) for a list of the currently supported language codes.
           type: string
         match:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Match"
@@ -3685,7 +3688,7 @@ components:
           description: Indicates that the conversation succeeded.
         endInteraction:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ResponseMessageEndInteraction"
-          description: Output only. A signal that indicates the interaction with the Dialogflow agent has ended. This message is generated by Dialogflow only when the conversation reaches `END_SESSION` or `END_PAGE` page. It is not supposed to be defined by the user. It's guaranteed that there is at most one such message in each response.
+          description: Output only. A signal that indicates the interaction with the Dialogflow agent has ended. This message is generated by Dialogflow only when the conversation reaches `END_SESSION` page. It is not supposed to be defined by the user. It's guaranteed that there is at most one such message in each response.
           readOnly: true
         liveAgentHandoff:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ResponseMessageLiveAgentHandoff"
@@ -5031,7 +5034,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1IntentInput"
           description: The intent to be triggered.
         languageCode:
-          description: Required. The language of the input. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language.
+          description: Required. The language of the input. See [Language Support](https://cloud.google.com/dialogflow/cx/docs/reference/language) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language.
           type: string
         text:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TextInput"
@@ -5052,7 +5055,7 @@ components:
           description: Indicates that the conversation succeeded.
         endInteraction:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ResponseMessageEndInteraction"
-          description: Output only. A signal that indicates the interaction with the Dialogflow agent has ended. This message is generated by Dialogflow only when the conversation reaches `END_SESSION` or `END_PAGE` page. It is not supposed to be defined by the user. It's guaranteed that there is at most one such message in each response.
+          description: Output only. A signal that indicates the interaction with the Dialogflow agent has ended. This message is generated by Dialogflow only when the conversation reaches `END_SESSION` page. It is not supposed to be defined by the user. It's guaranteed that there is at most one such message in each response.
           readOnly: true
         liveAgentHandoff:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ResponseMessageLiveAgentHandoff"

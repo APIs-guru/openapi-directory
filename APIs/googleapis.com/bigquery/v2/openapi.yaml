@@ -2060,7 +2060,7 @@ components:
             type: string
           type: array
         timeSeriesId:
-          description: The id to indicate different time series.
+          description: The time_series_id value for this time series. It will be one of the unique values from the time_series_id_column specified during ARIMA model training. Only present when time_series_id_column training option was used.
           type: string
       type: object
     ArimaOrder:
@@ -2127,7 +2127,7 @@ components:
             type: string
           type: array
         timeSeriesId:
-          description: The id to indicate different time series.
+          description: The time_series_id value for this time series. It will be one of the unique values from the time_series_id_column specified during ARIMA model training. Only present when time_series_id_column training option was used.
           type: string
       type: object
     AuditConfig:
@@ -2919,6 +2919,9 @@ components:
           description: "[Optional] The maximum number of bad records that BigQuery can ignore when reading data. If the number of bad records exceeds this value, an invalid error is returned in the job result. This is only valid for CSV, JSON, and Google Sheets. The default value is 0, which requires that all records are valid. This setting is ignored for Google Cloud Bigtable, Google Cloud Datastore backups and Avro formats."
           format: int32
           type: integer
+        parquetOptions:
+          $ref: "#/components/schemas/ParquetOptions"
+          description: Additional properties to set if sourceFormat is set to Parquet.
         schema:
           $ref: "#/components/schemas/TableSchema"
           description: "[Optional] The schema for the data. Schema is required for CSV and JSON formats. Schema is disallowed for Google Cloud Bigtable, Cloud Datastore backups, and Avro formats."
@@ -3244,6 +3247,9 @@ components:
         nullMarker:
           description: '[Optional] Specifies a string that represents a null value in a CSV file. For example, if you specify "\N", BigQuery interprets "\N" as a null value when loading a CSV file. The default value is the empty string. If you set this property to a custom value, BigQuery throws an error if an empty string is present for all data types except for STRING and BYTE. For STRING and BYTE columns, BigQuery interprets the empty string as an empty value.'
           type: string
+        parquetOptions:
+          $ref: "#/components/schemas/ParquetOptions"
+          description: "[Optional] Options to configure parquet support."
         projectionFields:
           description: If sourceFormat is set to "DATASTORE_BACKUP", indicates which entity properties to load into BigQuery from a Cloud Datastore backup. Property names are case sensitive and must be top-level properties. If no properties are specified, BigQuery loads all properties. If any named property isn't found in the Cloud Datastore backup, an invalid error is returned in the job result.
           items:
@@ -3888,6 +3894,15 @@ components:
           items:
             $ref: "#/components/schemas/ConfusionMatrix"
           type: array
+      type: object
+    ParquetOptions:
+      properties:
+        enableListInference:
+          description: "[Optional] Indicates whether to use schema inference specifically for Parquet LIST logical type."
+          type: boolean
+        enumAsString:
+          description: "[Optional] Indicates whether to infer Parquet ENUM logical type as STRING instead of BYTES by default."
+          type: boolean
       type: object
     Policy:
       description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') - etag: BwWWja0YfJA= - version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
@@ -5070,7 +5085,7 @@ components:
           description: Column to be designated as time series data for ARIMA model.
           type: string
         timeSeriesIdColumn:
-          description: The id column that will be used to indicate different time series to forecast in parallel.
+          description: The time series id column that was used during ARIMA model training.
           type: string
         timeSeriesTimestampColumn:
           description: Column to be designated as time series timestamp for ARIMA model.

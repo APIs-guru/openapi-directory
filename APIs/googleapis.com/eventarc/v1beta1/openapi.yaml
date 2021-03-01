@@ -910,8 +910,13 @@ components:
           description: Output only. This checksum is computed by the server based on the value of other fields, and may be sent only on create requests to ensure the client has an up-to-date value before proceeding.
           readOnly: true
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. User labels attached to the triggers that can be used to group resources.
+          type: object
         matchingCriteria:
-          description: Required. The criteria by which events are filtered. Only events that match with this criteria will be sent to the destination.
+          description: Required. null The criteria by which events are filtered. Only events that match with this criteria will be sent to the destination.
           items:
             $ref: "#/components/schemas/MatchingCriteria"
           type: array

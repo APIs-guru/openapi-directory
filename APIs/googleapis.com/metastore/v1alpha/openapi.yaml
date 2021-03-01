@@ -765,40 +765,6 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
-    GoogleCloudMetastoreV1alphaOperationMetadata:
-      description: Represents the metadata of a long-running operation.
-      properties:
-        apiVersion:
-          description: Output only. API version used to start the operation.
-          readOnly: true
-          type: string
-        createTime:
-          description: Output only. The time the operation was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        endTime:
-          description: Output only. The time the operation finished running.
-          format: google-datetime
-          readOnly: true
-          type: string
-        requestedCancellation:
-          description: Output only. Identifies whether the caller has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to Code.CANCELLED.
-          readOnly: true
-          type: boolean
-        statusMessage:
-          description: Output only. Human-readable status of the operation, if any.
-          readOnly: true
-          type: string
-        target:
-          description: Output only. Server-defined resource path for the target of the operation.
-          readOnly: true
-          type: string
-        verb:
-          description: Output only. Name of the verb executed by the operation.
-          readOnly: true
-          type: string
-      type: object
     HiveMetastoreConfig:
       description: Specifies configuration information specific to running Hive metastore software as the metastore service.
       properties:
@@ -1078,6 +1044,10 @@ components:
       properties:
         backup:
           description: Output only. The relative resource name of the metastore service backup to restore from, in the following form:projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}
+          readOnly: true
+          type: string
+        details:
+          description: Output only. The restore details containing the revision of the service to be restored to, in format of JSON.
           readOnly: true
           type: string
         endTime:

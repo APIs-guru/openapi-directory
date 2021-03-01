@@ -223,6 +223,52 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/otherContacts:search:
+    get:
+      description: Provides a list of contacts in the authenticated user's other contacts that matches the search query.
+      operationId: people.otherContacts.search
+      parameters:
+        - description: Optional. The number of results to return. Defaults to 10 if field is not set, or set to 0.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Required. The plain-text query for the request. The query is used to match prefix phrases of the fields on a person. For example, a person with name "foo name" matches queries such as "f", "fo", "foo", "foo n", "nam", etc., but not "oo n".
+          in: query
+          name: query
+          schema:
+            type: string
+        - description: "Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * emailAddresses * names * phoneNumbers"
+          in: query
+          name: readMask
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/contacts.other.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/contacts.other.readonly
+      tags:
+        - otherContacts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/people:batchGet:
     get:
       description: Provides information about a list of specific people by specifying a list of requested resource names. Use `people/me` to indicate the authenticated user. The request returns a 400 error if 'personFields' is not specified.
@@ -449,6 +495,56 @@ paths:
             - https://www.googleapis.com/auth/directory.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/directory.readonly
+      tags:
+        - people
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1/people:searchContacts:
+    get:
+      description: Provides a list of contacts in the authenticated user's grouped contacts that matches the search query.
+      operationId: people.people.searchContacts
+      parameters:
+        - description: Optional. The number of results to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Required. The plain-text query for the request. The query is used to match prefix phrases of the fields on a person. For example, a person with name "foo name" matches queries such as "f", "fo", "foo", "foo n", "nam", etc., but not "oo n".
+          in: query
+          name: query
+          schema:
+            type: string
+        - description: "Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
+          in: query
+          name: readMask
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/contacts
+          Oauth2c:
+            - https://www.googleapis.com/auth/contacts
+        - Oauth2:
+            - https://www.googleapis.com/auth/contacts.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/contacts.readonly
       tags:
         - people
     parameters:
@@ -1435,7 +1531,7 @@ components:
           type: integer
       type: object
     DeleteContactPhotoResponse:
-      description: The response for deleteing a contact's photo.
+      description: The response for deleting a contact's photo.
       properties:
         person:
           $ref: "#/components/schemas/Person"
@@ -2287,6 +2383,22 @@ components:
           description: The total number of items in the list without pagination.
           format: int32
           type: integer
+      type: object
+    SearchResponse:
+      description: The response to a search request for the authenticated user, given a query.
+      properties:
+        results:
+          description: The results of the request.
+          items:
+            $ref: "#/components/schemas/SearchResult"
+          type: array
+      type: object
+    SearchResult:
+      description: A result of a search query.
+      properties:
+        person:
+          $ref: "#/components/schemas/Person"
+          description: The matched Person.
       type: object
     SipAddress:
       description: A person's SIP address. Session Initial Protocol addresses are used for VoIP communications to make voice or video calls over the internet.
