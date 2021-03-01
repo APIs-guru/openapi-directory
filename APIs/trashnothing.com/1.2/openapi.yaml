@@ -2777,6 +2777,40 @@ paths:
       summary: List current users' group notices
       tags:
         - users
+  /users/me/post-locations:
+    get:
+      description: Only the most recent 3 post locations are returned.
+      operationId: get_post_locations
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    latitude:
+                      type: number
+                    longitude:
+                      type: number
+                    name:
+                      description: The location name used when submitting new posts.
+                      type: string
+                  type: object
+                type: array
+          description: The current users' post locations.
+      summary: List current users' post locations
+      tags:
+        - users
+    put:
+      description: >
+        Creates or updates a post location for the current user. Updates will happen when the name of the post location matches a previous post location.
+      operationId: save_post_locations
+      responses:
+        "200":
+          description: Post location created.
+      summary: Save a post location for the current user
+      tags:
+        - users
   /users/me/posts:
     get:
       description: >
@@ -3872,7 +3906,7 @@ components:
                   type: number
               type: object
             post_location:
-              description: The short location description used by the user the last time they posted.
+              description: Location data used by the user the last time they posted.
               properties:
                 latitude:
                   description: May be null.
@@ -4453,6 +4487,10 @@ components:
             A 2 letter country code for the country that has been automatically detected for the user (see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ). May be null if no country has been set.
           type: string
         feedback:
+          about_me:
+            description: >
+              A short bio a user has written about themselves to help other members get to know them better. May be null if the user has not written anything about themselves.
+            type: string
           properties:
             percent_positive:
               description: >
@@ -4473,10 +4511,6 @@ components:
                 The feedback score of this user.  Higher scores are better.   Scores are calculated by substracting the total number of negative feedback from the total number of positive feedback that a user has received.  May be null if a user has not received enough feedback to calculate a score.
               type: integer
           type: object
-          x-about_me:
-            description: >
-              A short bio a user has written about themselves to help other members get to know them better. May be null if the user has not written anything about themselves.
-            type: string
         firstname:
           description: The first name of the user (may be null).
           type: string

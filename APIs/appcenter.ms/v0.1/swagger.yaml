@@ -924,6 +924,8 @@ paths:
         - APIToken: []
       tags:
         - account
+      x-api-principals:
+        - user
     get:
       description: Return a specific app with the given app name which belongs to the given owner.
       operationId: apps_get

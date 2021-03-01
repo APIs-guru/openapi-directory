@@ -246,7 +246,7 @@ paths:
         You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#get-the-authenticated-app
+        url: https://docs.github.com/rest/reference/apps/#get-the-authenticated-app
       operationId: apps/get-authenticated
       parameters: []
       responses:
@@ -273,7 +273,7 @@ paths:
       description: Use this endpoint to complete the handshake necessary when implementing the [GitHub App Manifest flow](https://docs.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/). When you create a GitHub App with the manifest flow, you receive a temporary `code` used to retrieve the GitHub App's `id`, `pem` (private key), and `webhook_secret`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#create-a-github-app-from-a-manifest
+        url: https://docs.github.com/rest/reference/apps/#create-a-github-app-from-a-manifest
       operationId: apps/create-from-manifest
       parameters:
         - in: path
@@ -330,7 +330,7 @@ paths:
         You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps#get-a-webhook-configuration-for-an-app
+        url: https://docs.github.com/rest/reference/apps#get-a-webhook-configuration-for-an-app
       operationId: apps/get-webhook-config-for-app
       responses:
         "200":
@@ -359,7 +359,7 @@ paths:
         You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps#update-a-webhook-configuration-for-an-app
+        url: https://docs.github.com/rest/reference/apps#update-a-webhook-configuration-for-an-app
       operationId: apps/update-webhook-config-for-app
       requestBody:
         content:
@@ -408,7 +408,7 @@ paths:
         The permissions the installation has are included under the `permissions` key.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#list-installations-for-the-authenticated-app
+        url: https://docs.github.com/rest/reference/apps/#list-installations-for-the-authenticated-app
       operationId: apps/list-installations
       parameters:
         - $ref: "#/components/parameters/per_page"
@@ -446,13 +446,13 @@ paths:
   "/app/installations/{installation_id}":
     delete:
       description: >-
-        Uninstalls a GitHub App on a user, organization, or business account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/v3/apps/#suspend-an-app-installation)" endpoint.
+        Uninstalls a GitHub App on a user, organization, or business account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://docs.github.com/rest/reference/apps/#suspend-an-app-installation)" endpoint.
 
 
         You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#delete-an-installation-for-the-authenticated-app
+        url: https://docs.github.com/rest/reference/apps/#delete-an-installation-for-the-authenticated-app
       operationId: apps/delete-installation
       parameters:
         - $ref: "#/components/parameters/installation_id"
@@ -478,7 +478,7 @@ paths:
         You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#get-an-installation-for-the-authenticated-app
+        url: https://docs.github.com/rest/reference/apps/#get-an-installation-for-the-authenticated-app
       operationId: apps/get-installation
       parameters:
         - $ref: "#/components/parameters/installation_id"
@@ -514,7 +514,7 @@ paths:
         You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#create-an-installation-access-token-for-an-app
+        url: https://docs.github.com/rest/reference/apps/#create-an-installation-access-token-for-an-app
       operationId: apps/create-installation-access-token
       parameters:
         - $ref: "#/components/parameters/installation_id"
@@ -577,7 +577,7 @@ paths:
         You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#unsuspend-an-app-installation
+        url: https://docs.github.com/rest/reference/apps/#unsuspend-an-app-installation
       operationId: apps/unsuspend-installation
       parameters:
         - $ref: "#/components/parameters/installation_id"
@@ -603,7 +603,7 @@ paths:
         You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#suspend-an-app-installation
+        url: https://docs.github.com/rest/reference/apps/#suspend-an-app-installation
       operationId: apps/suspend-installation
       parameters:
         - $ref: "#/components/parameters/installation_id"
@@ -1106,7 +1106,7 @@ paths:
         If the GitHub App you specify is public, you can access this endpoint without authenticating. If the GitHub App you specify is private, you must authenticate with a [personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or an [installation access token](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#get-an-app
+        url: https://docs.github.com/rest/reference/apps/#get-an-app
       operationId: apps/get-by-slug
       parameters:
         - $ref: "#/components/parameters/app_slug"
@@ -1615,7 +1615,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/codes_of_conduct/#get-all-codes-of-conduct
+        url: https://docs.github.com/rest/reference/codes_of_conduct/#get-all-codes-of-conduct
       operationId: codes-of-conduct/get-all-codes-of-conduct
       parameters: []
       responses:
@@ -1661,7 +1661,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/codes_of_conduct/#get-a-code-of-conduct
+        url: https://docs.github.com/rest/reference/codes_of_conduct/#get-a-code-of-conduct
       operationId: codes-of-conduct/get-conduct-code
       parameters:
         - in: path
@@ -1792,7 +1792,7 @@ paths:
       description: Lists all the emojis available to use on GitHub.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/emojis/#get-emojis
+        url: https://docs.github.com/rest/reference/emojis/#get-emojis
       operationId: emojis/get
       parameters: []
       responses:
@@ -2876,7 +2876,7 @@ paths:
         The authenticated user must be an enterprise admin.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/billing/#get-github-actions-billing-for-an-enterprise
+        url: https://docs.github.com/rest/reference/billing/#get-github-actions-billing-for-an-enterprise
       operationId: billing/get-github-actions-billing-ghe
       parameters:
         - $ref: "#/components/parameters/enterprise"
@@ -2911,7 +2911,7 @@ paths:
         The authenticated user must be an enterprise admin.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/billing/#get-github-packages-billing-for-an-enterprise
+        url: https://docs.github.com/rest/reference/billing/#get-github-packages-billing-for-an-enterprise
       operationId: billing/get-github-packages-billing-ghe
       parameters:
         - $ref: "#/components/parameters/enterprise"
@@ -2946,7 +2946,7 @@ paths:
         The authenticated user must be an enterprise admin.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/billing/#get-shared-storage-billing-for-an-enterprise
+        url: https://docs.github.com/rest/reference/billing/#get-shared-storage-billing-for-an-enterprise
       operationId: billing/get-shared-storage-billing-ghe
       parameters:
         - $ref: "#/components/parameters/enterprise"
@@ -3054,7 +3054,7 @@ paths:
       description: "Lists the authenticated user's gists or if called anonymously, this endpoint returns all public gists:"
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#list-gists-for-the-authenticated-user
+        url: https://docs.github.com/rest/reference/gists/#list-gists-for-the-authenticated-user
       operationId: gists/list
       parameters:
         - $ref: "#/components/parameters/since"
@@ -3096,7 +3096,7 @@ paths:
         **Note:** Don't name your files "gistfile" with a numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#create-a-gist
+        url: https://docs.github.com/rest/reference/gists/#create-a-gist
       operationId: gists/create
       parameters: []
       requestBody:
@@ -3179,7 +3179,7 @@ paths:
         Note: With [pagination](https://docs.github.com/rest/overview/resources-in-the-rest-api#pagination), you can fetch up to 3000 gists. For example, you can fetch 100 pages with 30 gists per page or 30 pages with 100 gists per page.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#list-public-gists
+        url: https://docs.github.com/rest/reference/gists/#list-public-gists
       operationId: gists/list-public
       parameters:
         - $ref: "#/components/parameters/since"
@@ -3220,7 +3220,7 @@ paths:
       description: "List the authenticated user's starred gists:"
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#list-starred-gists
+        url: https://docs.github.com/rest/reference/gists/#list-starred-gists
       operationId: gists/list-starred
       parameters:
         - $ref: "#/components/parameters/since"
@@ -3261,7 +3261,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#delete-a-gist
+        url: https://docs.github.com/rest/reference/gists/#delete-a-gist
       operationId: gists/delete
       parameters:
         - $ref: "#/components/parameters/gist_id"
@@ -3287,7 +3287,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#get-a-gist
+        url: https://docs.github.com/rest/reference/gists/#get-a-gist
       operationId: gists/get
       parameters:
         - $ref: "#/components/parameters/gist_id"
@@ -3320,7 +3320,7 @@ paths:
       description: Allows you to update or delete a gist file and rename gist files. Files from the previous version of the gist that aren't explicitly changed during an edit are unchanged.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#update-a-gist
+        url: https://docs.github.com/rest/reference/gists/#update-a-gist
       operationId: gists/update
       parameters:
         - $ref: "#/components/parameters/gist_id"
@@ -3590,7 +3590,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#list-gist-commits
+        url: https://docs.github.com/rest/reference/gists/#list-gist-commits
       operationId: gists/list-commits
       parameters:
         - $ref: "#/components/parameters/gist_id"
@@ -3633,7 +3633,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#list-gist-forks
+        url: https://docs.github.com/rest/reference/gists/#list-gist-forks
       operationId: gists/list-forks
       parameters:
         - $ref: "#/components/parameters/gist_id"
@@ -3673,7 +3673,7 @@ paths:
       description: "**Note**: This was previously `/gists/:gist_id/fork`."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#fork-a-gist
+        url: https://docs.github.com/rest/reference/gists/#fork-a-gist
       operationId: gists/fork
       parameters:
         - $ref: "#/components/parameters/gist_id"
@@ -3714,7 +3714,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#unstar-a-gist
+        url: https://docs.github.com/rest/reference/gists/#unstar-a-gist
       operationId: gists/unstar
       parameters:
         - $ref: "#/components/parameters/gist_id"
@@ -3740,7 +3740,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#check-if-a-gist-is-starred
+        url: https://docs.github.com/rest/reference/gists/#check-if-a-gist-is-starred
       operationId: gists/check-is-starred
       parameters:
         - $ref: "#/components/parameters/gist_id"
@@ -3772,7 +3772,7 @@ paths:
       description: Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#star-a-gist
+        url: https://docs.github.com/rest/reference/gists/#star-a-gist
       operationId: gists/star
       parameters:
         - $ref: "#/components/parameters/gist_id"
@@ -3799,7 +3799,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#get-a-gist-revision
+        url: https://docs.github.com/rest/reference/gists/#get-a-gist-revision
       operationId: gists/get-revision
       parameters:
         - $ref: "#/components/parameters/gist_id"
@@ -3838,7 +3838,7 @@ paths:
       description: List all templates available to pass as an option when [creating a repository](https://docs.github.com/rest/reference/repos#create-a-repository-for-the-authenticated-user).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gitignore/#get-all-gitignore-templates
+        url: https://docs.github.com/rest/reference/gitignore/#get-all-gitignore-templates
       operationId: gitignore/get-all-templates
       parameters: []
       responses:
@@ -3877,7 +3877,7 @@ paths:
         Use the raw [media type](https://docs.github.com/rest/overview/media-types/) to get the raw contents.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gitignore/#get-a-gitignore-template
+        url: https://docs.github.com/rest/reference/gitignore/#get-a-gitignore-template
       operationId: gitignore/get-template
       parameters:
         - in: path
@@ -4018,7 +4018,7 @@ paths:
         request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/issues/#list-issues-assigned-to-the-authenticated-user
+        url: https://docs.github.com/rest/reference/issues/#list-issues-assigned-to-the-authenticated-user
       operationId: issues/list
       parameters:
         - description: >-
@@ -4142,7 +4142,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/licenses/#get-all-commonly-used-licenses
+        url: https://docs.github.com/rest/reference/licenses/#get-all-commonly-used-licenses
       operationId: licenses/get-all-commonly-used
       parameters:
         - in: query
@@ -4179,7 +4179,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/licenses/#get-a-license
+        url: https://docs.github.com/rest/reference/licenses/#get-a-license
       operationId: licenses/get
       parameters:
         - in: path
@@ -4217,7 +4217,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/markdown/#render-a-markdown-document
+        url: https://docs.github.com/rest/reference/markdown/#render-a-markdown-document
       operationId: markdown/render
       parameters: []
       requestBody:
@@ -4274,7 +4274,7 @@ paths:
       description: You must send Markdown as plain text (using a `Content-Type` header of `text/plain` or `text/x-markdown`) to this endpoint, rather than using JSON format. In raw mode, [GitHub Flavored Markdown](https://github.github.com/gfm/) is not supported and Markdown will be rendered in plain format like a README.md file. Markdown content must be 400 KB or less.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode
+        url: https://docs.github.com/rest/reference/markdown/#render-a-markdown-document-in-raw-mode
       operationId: markdown/render-raw
       parameters: []
       requestBody:
@@ -4579,7 +4579,7 @@ paths:
         **Note:** The IP addresses shown in the documentation's response are only example values. You must always query the API directly to get the latest list of IP addresses.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/meta/#get-github-meta-information
+        url: https://docs.github.com/rest/reference/meta/#get-github-meta-information
       operationId: meta/get
       parameters: []
       responses:
@@ -4941,7 +4941,7 @@ paths:
         **Note:** Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of organizations.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/orgs/#list-organizations
+        url: https://docs.github.com/rest/reference/orgs/#list-organizations
       operationId: orgs/list
       parameters:
         - $ref: "#/components/parameters/since-org"
@@ -4983,7 +4983,7 @@ paths:
         GitHub Apps with the `Organization plan` permission can use this endpoint to retrieve information about an organization's GitHub plan. See "[Authenticating with GitHub Apps](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/)" for details. For an example response, see 'Response with GitHub plan information' below."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/orgs/#get-an-organization
+        url: https://docs.github.com/rest/reference/orgs/#get-an-organization
       operationId: orgs/get
       parameters:
         - $ref: "#/components/parameters/org"
@@ -5031,7 +5031,7 @@ paths:
         Enables an authenticated organization owner with the `admin:org` scope to update the organization's profile and member privileges.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/orgs/#update-an-organization
+        url: https://docs.github.com/rest/reference/orgs/#update-an-organization
       operationId: orgs/update
       parameters:
         - $ref: "#/components/parameters/org"
@@ -6884,7 +6884,7 @@ paths:
         An authenticated organization owner with the `read:org` scope can list all credential authorizations for an organization that uses SAML single sign-on (SSO). The credentials are either personal access tokens or SSH keys that organization members have authorized for the organization. For more information, see [About authentication with SAML single sign-on](https://help.github.com/en/articles/about-authentication-with-saml-single-sign-on).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/orgs/#list-saml-sso-authorizations-for-an-organization
+        url: https://docs.github.com/rest/reference/orgs/#list-saml-sso-authorizations-for-an-organization
       operationId: orgs/list-saml-sso-authorizations
       parameters:
         - $ref: "#/components/parameters/org"
@@ -6918,7 +6918,7 @@ paths:
         An authenticated organization owner with the `admin:org` scope can remove a credential authorization for an organization that uses SAML SSO. Once you remove someone's credential authorization, they will need to create a new personal access token or SSH key and authorize it for the organization they want to access.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/orgs/#remove-a-saml-sso-authorization-for-an-organization
+        url: https://docs.github.com/rest/reference/orgs/#remove-a-saml-sso-authorization-for-an-organization
       operationId: orgs/remove-saml-sso-authorization
       parameters:
         - $ref: "#/components/parameters/org"
@@ -7265,7 +7265,7 @@ paths:
         Access tokens must have the `admin:org_hook` scope, and GitHub Apps must have the `organization_hooks:read` permission.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/orgs#get-a-webhook-configuration-for-an-organization
+        url: https://docs.github.com/rest/reference/orgs#get-a-webhook-configuration-for-an-organization
       operationId: orgs/get-webhook-config-for-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -7297,7 +7297,7 @@ paths:
         Access tokens must have the `admin:org_hook` scope, and GitHub Apps must have the `organization_hooks:write` permission.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/orgs#update-a-webhook-configuration-for-an-organization
+        url: https://docs.github.com/rest/reference/orgs#update-a-webhook-configuration-for-an-organization
       operationId: orgs/update-webhook-config-for-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -7373,7 +7373,7 @@ paths:
         You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#get-an-organization-installation-for-the-authenticated-app
+        url: https://docs.github.com/rest/reference/apps/#get-an-organization-installation-for-the-authenticated-app
       operationId: apps/get-org-installation
       parameters:
         - $ref: "#/components/parameters/org"
@@ -7401,7 +7401,7 @@ paths:
       description: Lists all GitHub Apps in an organization. The installation count includes all GitHub Apps installed on repositories in the organization. You must be an organization owner with `admin:read` scope to use this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/orgs/#list-app-installations-for-an-organization
+        url: https://docs.github.com/rest/reference/orgs/#list-app-installations-for-an-organization
       operationId: orgs/list-app-installations
       parameters:
         - $ref: "#/components/parameters/org"
@@ -7716,7 +7716,7 @@ paths:
         request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/issues/#list-organization-issues-assigned-to-the-authenticated-user
+        url: https://docs.github.com/rest/reference/issues/#list-organization-issues-assigned-to-the-authenticated-user
       operationId: issues/list-for-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -8802,7 +8802,7 @@ paths:
       description: Lists the projects in an organization. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/projects/#list-organization-projects
+        url: https://docs.github.com/rest/reference/projects/#list-organization-projects
       operationId: projects/list-for-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -8859,7 +8859,7 @@ paths:
       description: Creates an organization project board. Returns a `404 Not Found` status if projects are disabled in the organization. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/projects/#create-an-organization-project
+        url: https://docs.github.com/rest/reference/projects/#create-an-organization-project
       operationId: projects/create-for-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -9031,7 +9031,7 @@ paths:
       description: Lists repositories for the specified organization.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#list-organization-repositories
+        url: https://docs.github.com/rest/reference/repos/#list-organization-repositories
       operationId: repos/list-for-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -9136,7 +9136,7 @@ paths:
         *   `repo` scope to create a private repository
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#create-an-organization-repository
+        url: https://docs.github.com/rest/reference/repos/#create-an-organization-repository
       operationId: repos/create-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -9289,7 +9289,7 @@ paths:
         Access tokens must have the `repo` or `admin:org` scope.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/billing/#get-github-actions-billing-for-an-organization
+        url: https://docs.github.com/rest/reference/billing/#get-github-actions-billing-for-an-organization
       operationId: billing/get-github-actions-billing-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -9324,7 +9324,7 @@ paths:
         Access tokens must have the `repo` or `admin:org` scope.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/billing/#get-github-packages-billing-for-an-organization
+        url: https://docs.github.com/rest/reference/billing/#get-github-packages-billing-for-an-organization
       operationId: billing/get-github-packages-billing-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -9359,7 +9359,7 @@ paths:
         Access tokens must have the `repo` or `admin:org` scope.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/billing/#get-shared-storage-billing-for-an-organization
+        url: https://docs.github.com/rest/reference/billing/#get-shared-storage-billing-for-an-organization
       operationId: billing/get-shared-storage-billing-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -9429,7 +9429,7 @@ paths:
       description: Lists all teams in an organization that are visible to the authenticated user.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#list-teams
+        url: https://docs.github.com/rest/reference/teams/#list-teams
       operationId: teams/list
       parameters:
         - $ref: "#/components/parameters/org"
@@ -9469,7 +9469,7 @@ paths:
         When you create a new team, you automatically become a team maintainer without explicitly adding yourself to the optional array of `maintainers`. For more information, see "[About teams](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-teams)".
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#create-a-team
+        url: https://docs.github.com/rest/reference/teams/#create-a-team
       operationId: teams/create
       parameters:
         - $ref: "#/components/parameters/org"
@@ -9576,7 +9576,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#delete-a-team
+        url: https://docs.github.com/rest/reference/teams/#delete-a-team
       operationId: teams/delete-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -9601,7 +9601,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#get-a-team-by-name
+        url: https://docs.github.com/rest/reference/teams/#get-a-team-by-name
       operationId: teams/get-by-name
       parameters:
         - $ref: "#/components/parameters/org"
@@ -9635,7 +9635,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#update-a-team
+        url: https://docs.github.com/rest/reference/teams/#update-a-team
       operationId: teams/update-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -10247,7 +10247,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#list-reactions-for-a-team-discussion-comment
+        url: https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-comment
       operationId: reactions/list-for-team-discussion-comment-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -10318,7 +10318,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number/reactions`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#create-reaction-for-a-team-discussion-comment
+        url: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-team-discussion-comment
       operationId: reactions/create-for-team-discussion-comment-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -10390,7 +10390,7 @@ paths:
         Delete a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#delete-team-discussion-comment-reaction
+        url: https://docs.github.com/rest/reference/reactions/#delete-team-discussion-comment-reaction
       operationId: reactions/delete-for-team-discussion-comment
       parameters:
         - $ref: "#/components/parameters/org"
@@ -10434,7 +10434,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number/reactions`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#list-reactions-for-a-team-discussion
+        url: https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion
       operationId: reactions/list-for-team-discussion-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -10504,7 +10504,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/:org_id/team/:team_id/discussions/:discussion_number/reactions`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#create-reaction-for-a-team-discussion
+        url: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-team-discussion
       operationId: reactions/create-for-team-discussion-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -10575,7 +10575,7 @@ paths:
         Delete a reaction to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#delete-team-discussion-reaction
+        url: https://docs.github.com/rest/reference/reactions/#delete-team-discussion-reaction
       operationId: reactions/delete-for-team-discussion
       parameters:
         - $ref: "#/components/parameters/org"
@@ -10891,7 +10891,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/projects`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#list-team-projects
+        url: https://docs.github.com/rest/reference/teams/#list-team-projects
       operationId: teams/list-projects-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -10941,7 +10941,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#remove-a-project-from-a-team
+        url: https://docs.github.com/rest/reference/teams/#remove-a-project-from-a-team
       operationId: teams/remove-project-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -10967,7 +10967,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#check-team-permissions-for-a-project
+        url: https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-project
       operationId: teams/check-permissions-for-project-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -11012,7 +11012,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#add-or-update-team-project-permissions
+        url: https://docs.github.com/rest/reference/teams/#add-or-update-team-project-permissions
       operationId: teams/add-or-update-project-permissions-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -11088,7 +11088,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#list-team-repositories
+        url: https://docs.github.com/rest/reference/teams/#list-team-repositories
       operationId: teams/list-repos-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -11128,7 +11128,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#remove-a-repository-from-a-team
+        url: https://docs.github.com/rest/reference/teams/#remove-a-repository-from-a-team
       operationId: teams/remove-repo-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -11161,7 +11161,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#check-team-permissions-for-a-repository
+        url: https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-repository
       operationId: teams/check-permissions-for-repo-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -11202,7 +11202,7 @@ paths:
         For more information about the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#add-or-update-team-repository-permissions
+        url: https://docs.github.com/rest/reference/teams/#add-or-update-team-repository-permissions
       operationId: teams/add-or-update-repo-permissions-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -11361,7 +11361,7 @@ paths:
         **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/teams`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#list-child-teams
+        url: https://docs.github.com/rest/reference/teams/#list-child-teams
       operationId: teams/list-child-in-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -12023,7 +12023,7 @@ paths:
       description: Deletes a project board. Returns a `404 Not Found` status if projects are disabled.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/projects/#delete-a-project
+        url: https://docs.github.com/rest/reference/projects/#delete-a-project
       operationId: projects/delete
       parameters:
         - $ref: "#/components/parameters/project-id"
@@ -12076,7 +12076,7 @@ paths:
       description: Gets a project by its `id`. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/projects/#get-a-project
+        url: https://docs.github.com/rest/reference/projects/#get-a-project
       operationId: projects/get
       parameters:
         - $ref: "#/components/parameters/project-id"
@@ -12119,7 +12119,7 @@ paths:
       description: Updates a project board's information. Returns a `404 Not Found` status if projects are disabled. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/projects/#update-a-project
+        url: https://docs.github.com/rest/reference/projects/#update-a-project
       operationId: projects/update
       parameters:
         - $ref: "#/components/parameters/project-id"
@@ -12558,7 +12558,7 @@ paths:
         **Note:** The `rate` object is deprecated. If you're writing new API client code or updating existing code, you should use the `core` object instead of the `rate` object. The `core` object contains the same information that is present in the `rate` object.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/rate_limit/#get-rate-limit-status-for-the-authenticated-user
+        url: https://docs.github.com/rest/reference/rate_limit/#get-rate-limit-status-for-the-authenticated-user
       operationId: rate-limit/get
       parameters: []
       responses:
@@ -12601,7 +12601,7 @@ paths:
         OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/), when deleting a [team discussion](https://docs.github.com/rest/reference/teams#discussions) or [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#delete-a-reaction-legacy
+        url: https://docs.github.com/rest/reference/reactions/#delete-a-reaction-legacy
       operationId: reactions/delete-legacy
       parameters:
         - $ref: "#/components/parameters/reaction-id"
@@ -12655,7 +12655,7 @@ paths:
         repositories, you will get a `403 Forbidden` response.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#delete-a-repository
+        url: https://docs.github.com/rest/reference/repos/#delete-a-repository
       operationId: repos/delete
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -12696,7 +12696,7 @@ paths:
         The `parent` and `source` objects are present when the repository is a fork. `parent` is the repository this repository was forked from, `source` is the ultimate source for the network.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#get-a-repository
+        url: https://docs.github.com/rest/reference/repos/#get-a-repository
       operationId: repos/get
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -12758,7 +12758,7 @@ paths:
       description: "**Note**: To edit a repository's topics, use the [Replace all repository topics](https://docs.github.com/rest/reference/repos#replace-all-repository-topics) endpoint."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#update-a-repository
+        url: https://docs.github.com/rest/reference/repos/#update-a-repository
       operationId: repos/update
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -13578,6 +13578,38 @@ paths:
         githubCloudOnly: false
         previews: []
         subcategory: workflow-runs
+  "/repos/{owner}/{repo}/actions/runs/{run_id}/approvals":
+    get:
+      description: Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/actions#get-the-review-history-for-a-workflow-run
+      operationId: actions/get-reviews-for-run
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - $ref: "#/components/parameters/run-id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/environment-approvals-items"
+              schema:
+                items:
+                  $ref: "#/components/schemas/environment-approvals"
+                type: array
+          description: response
+      summary: Get the review history for a workflow run
+      tags:
+        - actions
+      x-github:
+        category: actions
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: workflow-runs
   "/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts":
     get:
       description: Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
@@ -13755,6 +13787,107 @@ paths:
               schema:
                 type: string
       summary: Download workflow run logs
+      tags:
+        - actions
+      x-github:
+        category: actions
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: workflow-runs
+  "/repos/{owner}/{repo}/actions/runs/{run_id}/pending_deployments":
+    get:
+      description: >-
+        Get all deployment environments for a workflow run that are waiting for protection rules to pass.
+
+
+        Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/actions#get-pending-deployments-for-a-workflow-run
+      operationId: actions/get-pending-deployments-for-run
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - $ref: "#/components/parameters/run-id"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/pending-deployment-items"
+              schema:
+                items:
+                  $ref: "#/components/schemas/pending-deployment"
+                type: array
+          description: response
+      summary: Get pending deployments for a workflow run
+      tags:
+        - actions
+      x-github:
+        category: actions
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: workflow-runs
+    post:
+      description: >-
+        Approve or reject pending deployments that are waiting on approval by a required reviewer.
+
+
+        Anyone with read access to the repository contents and deployments can use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/actions#review-pending-deployments-for-a-workflow-run
+      operationId: actions/review-pending-deployments-for-run
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - $ref: "#/components/parameters/run-id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                comment:
+                  description: A comment to accompany the deployment review
+                  example: Ship it!
+                  type: string
+                environment_ids:
+                  description: The list of environment ids to approve or reject
+                  example:
+                    - 161171787
+                    - 161171795
+                  items:
+                    example: 161171787
+                    type: integer
+                  type: array
+                state:
+                  description: "Whether to approve or reject deployment to the specified environments. Must be one of: `approved` or `rejected`"
+                  enum:
+                    - approved
+                    - rejected
+                  example: approved
+                  type: string
+              required:
+                - environment_ids
+                - state
+                - comment
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/deployment-items"
+              schema:
+                items:
+                  $ref: "#/components/schemas/deployment"
+                type: array
+          description: response
+      summary: Review pending deployments for a workflow run
       tags:
         - actions
       x-github:
@@ -14453,7 +14586,7 @@ paths:
       description: Disables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#disable-automated-security-fixes
+        url: https://docs.github.com/rest/reference/repos/#disable-automated-security-fixes
       operationId: repos/disable-automated-security-fixes
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -14484,7 +14617,7 @@ paths:
       description: Enables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#enable-automated-security-fixes
+        url: https://docs.github.com/rest/reference/repos/#enable-automated-security-fixes
       operationId: repos/enable-automated-security-fixes
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -18109,7 +18242,7 @@ paths:
       description: List the reactions to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#list-reactions-for-a-commit-comment
+        url: https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-commit-comment
       operationId: reactions/list-for-commit-comment
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -18179,7 +18312,7 @@ paths:
       description: "Create a reaction to a [commit comment](https://docs.github.com/rest/reference/repos#comments). A response with a `Status: 200 OK` means that you already added the reaction type to this commit comment."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#create-reaction-for-a-commit-comment
+        url: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-commit-comment
       operationId: reactions/create-for-commit-comment
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -18263,7 +18396,7 @@ paths:
         Delete a reaction to a [commit comment](https://docs.github.com/rest/reference/repos#comments).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#delete-a-commit-comment-reaction
+        url: https://docs.github.com/rest/reference/reactions/#delete-a-commit-comment-reaction
       operationId: reactions/delete-for-commit-comment
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -18981,7 +19114,7 @@ paths:
         A code of conduct is detected if there is a file named `CODE_OF_CONDUCT` in the root directory of the repository. GitHub detects which code of conduct it is using fuzzy matching.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/codes_of_conduct/#get-the-code-of-conduct-for-a-repository
+        url: https://docs.github.com/rest/reference/codes_of_conduct/#get-the-code-of-conduct-for-a-repository
       operationId: codes-of-conduct/get-for-repo
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -19526,7 +19659,7 @@ paths:
         GitHub identifies contributors by author email address. This endpoint groups contribution counts by GitHub user, which includes all associated email addresses. To improve performance, only the first 500 author email addresses in the repository link to GitHub users. The rest will appear as anonymous contributors without associated GitHub user information.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#list-repository-contributors
+        url: https://docs.github.com/rest/reference/repos/#list-repository-contributors
       operationId: repos/list-contributors
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -20233,7 +20366,7 @@ paths:
         This input example shows how you can use the `client_payload` as a test to debug your workflow.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#create-a-repository-dispatch-event
+        url: https://docs.github.com/rest/reference/repos/#create-a-repository-dispatch-event
       operationId: repos/create-dispatch-event
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -20272,6 +20405,167 @@ paths:
         githubCloudOnly: false
         previews: []
         subcategory: null
+  "/repos/{owner}/{repo}/environments":
+    get:
+      description: >-
+        Get all environments for a repository.
+
+
+        Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/repos#get-all-environments
+      operationId: repos/get-all-environments
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/environments"
+              schema:
+                properties:
+                  environments:
+                    items:
+                      $ref: "#/components/schemas/environment"
+                    type: array
+                  total_count:
+                    description: The number of environments in this repository
+                    example: 5
+                    type: integer
+                type: object
+          description: response
+      summary: Get all environments
+      tags:
+        - repos
+      x-github:
+        category: repos
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: environments
+  "/repos/{owner}/{repo}/environments/{environment_name}":
+    delete:
+      description: You must authenticate using an access token with the repo scope to use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/repos#delete-an-environment
+      operationId: repos/delete-an-environment
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - $ref: "#/components/parameters/environment_name"
+      responses:
+        "204":
+          description: Empty response
+      summary: Delete an environment
+      tags:
+        - repos
+      x-github:
+        category: repos
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: environments
+    get:
+      description: Anyone with read access to the repository can use this endpoint. If the repository is private, you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/repos#get-an-environment
+      operationId: repos/get-environment
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - $ref: "#/components/parameters/environment_name"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/environment"
+              schema:
+                $ref: "#/components/schemas/environment"
+          description: response
+      summary: Get an environment
+      tags:
+        - repos
+      x-github:
+        category: repos
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: environments
+    put:
+      description: >-
+        Create or update an environment with protection rules, such as required reviewers. For more information about environment protection rules, see "[Environments](/actions/reference/environments#environment-protection-rules)."
+
+
+        **Note:** Although you can use this operation to specify that only branches that match specified name patterns can deploy to this environment, you must use the UI to set the name patterns. For more information, see "[Environments](/actions/reference/environments#deployment-branches)."
+
+
+        **Note:** To create or update secrets for an environment, see "[Secrets](/rest/reference/actions#secrets)."
+
+
+        You must authenticate using an access token with the repo scope to use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/repos#create-or-update-an-environment
+      operationId: repos/create-or-update-environment
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - $ref: "#/components/parameters/environment_name"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                deployment_branch_policy:
+                  $ref: "#/components/schemas/deployment_branch_policy"
+                reviewers:
+                  description: The people or teams that may review jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
+                  items:
+                    properties:
+                      id:
+                        description: The id of the user or team who can review the deployment
+                        example: 4532992
+                        type: integer
+                      type:
+                        $ref: "#/components/schemas/deployment-reviewer-type"
+                    type: object
+                  type: array
+                wait_timer:
+                  $ref: "#/components/schemas/wait-timer"
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/environment"
+              schema:
+                $ref: "#/components/schemas/environment"
+          description: response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/basic-error"
+          description: Validation error when the environment name is invalid or when `protected_branches` and `custom_branch_policies` in `deployment_branch_policy` are set to the same value
+      summary: Create or update an environment
+      tags:
+        - repos
+      x-github:
+        category: repos
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: environments
   "/repos/{owner}/{repo}/events":
     get:
       description: ""
@@ -21669,7 +21963,7 @@ paths:
         Access tokens must have the `read:repo_hook` or `repo` scope, and GitHub Apps must have the `repository_hooks:read` permission.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos#get-a-webhook-configuration-for-a-repository
+        url: https://docs.github.com/rest/reference/repos#get-a-webhook-configuration-for-a-repository
       operationId: repos/get-webhook-config-for-repo
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -21702,7 +21996,7 @@ paths:
         Access tokens must have the `write:repo_hook` or `repo` scope, and GitHub Apps must have the `repository_hooks:write` permission.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos#update-a-webhook-configuration-for-a-repository
+        url: https://docs.github.com/rest/reference/repos#update-a-webhook-configuration-for-a-repository
       operationId: repos/update-webhook-config-for-repo
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -22218,7 +22512,7 @@ paths:
         You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#get-a-repository-installation-for-the-authenticated-app
+        url: https://docs.github.com/rest/reference/apps/#get-a-repository-installation-for-the-authenticated-app
       operationId: apps/get-repo-installation
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -22451,7 +22745,7 @@ paths:
         request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/issues/#list-repository-issues
+        url: https://docs.github.com/rest/reference/issues/#list-repository-issues
       operationId: issues/list-for-repo
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -22560,7 +22854,7 @@ paths:
         This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/issues/#create-an-issue
+        url: https://docs.github.com/rest/reference/issues/#create-an-issue
       operationId: issues/create
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -22841,7 +23135,7 @@ paths:
       description: List the reactions to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#list-reactions-for-an-issue-comment
+        url: https://docs.github.com/rest/reference/reactions/#list-reactions-for-an-issue-comment
       operationId: reactions/list-for-issue-comment
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -22911,7 +23205,7 @@ paths:
       description: "Create a reaction to an [issue comment](https://docs.github.com/rest/reference/issues#comments). A response with a `Status: 200 OK` means that you already added the reaction type to this issue comment."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#create-reaction-for-an-issue-comment
+        url: https://docs.github.com/rest/reference/reactions/#create-reaction-for-an-issue-comment
       operationId: reactions/create-for-issue-comment
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -22995,7 +23289,7 @@ paths:
         Delete a reaction to an [issue comment](https://docs.github.com/rest/reference/issues#comments).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#delete-an-issue-comment-reaction
+        url: https://docs.github.com/rest/reference/reactions/#delete-an-issue-comment-reaction
       operationId: reactions/delete-for-issue-comment
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -23158,7 +23452,7 @@ paths:
         request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/issues/#get-an-issue
+        url: https://docs.github.com/rest/reference/issues/#get-an-issue
       operationId: issues/get
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -23210,7 +23504,7 @@ paths:
       description: Issue owners and users with push access can edit an issue.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/issues/#update-an-issue
+        url: https://docs.github.com/rest/reference/issues/#update-an-issue
       operationId: issues/update
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -23776,7 +24070,7 @@ paths:
       description: Users with push access can unlock an issue's conversation.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/issues/#unlock-an-issue
+        url: https://docs.github.com/rest/reference/issues/#unlock-an-issue
       operationId: issues/unlock
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -23806,7 +24100,7 @@ paths:
         Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/issues/#lock-an-issue
+        url: https://docs.github.com/rest/reference/issues/#lock-an-issue
       operationId: issues/lock
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -23861,7 +24155,7 @@ paths:
       description: List the reactions to an [issue](https://docs.github.com/rest/reference/issues).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#list-reactions-for-an-issue
+        url: https://docs.github.com/rest/reference/reactions/#list-reactions-for-an-issue
       operationId: reactions/list-for-issue
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -23933,7 +24227,7 @@ paths:
       description: "Create a reaction to an [issue](https://docs.github.com/rest/reference/issues/). A response with a `Status: 200 OK` means that you already added the reaction type to this issue."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#create-reaction-for-an-issue
+        url: https://docs.github.com/rest/reference/reactions/#create-reaction-for-an-issue
       operationId: reactions/create-for-issue
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -24008,7 +24302,7 @@ paths:
         Delete a reaction to an [issue](https://docs.github.com/rest/reference/issues/).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#delete-an-issue-reaction
+        url: https://docs.github.com/rest/reference/reactions/#delete-an-issue-reaction
       operationId: reactions/delete-for-issue
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -24472,7 +24766,7 @@ paths:
       description: Lists languages for the specified repository. The value shown for each language is the number of bytes of code written in that language.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#list-repository-languages
+        url: https://docs.github.com/rest/reference/repos/#list-repository-languages
       operationId: repos/list-languages
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -24505,7 +24799,7 @@ paths:
         Similar to [Get repository content](https://docs.github.com/rest/reference/repos#get-repository-content), this method also supports [custom media types](https://docs.github.com/rest/overview/media-types) for retrieving the raw license content or rendered license HTML.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/licenses/#get-the-license-for-a-repository
+        url: https://docs.github.com/rest/reference/licenses/#get-the-license-for-a-repository
       operationId: licenses/get-for-repo
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -25320,7 +25614,7 @@ paths:
       description: Lists the projects in a repository. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/projects/#list-repository-projects
+        url: https://docs.github.com/rest/reference/projects/#list-repository-projects
       operationId: projects/list-for-repo
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -25386,7 +25680,7 @@ paths:
       description: Creates a repository project board. Returns a `404 Not Found` status if projects are disabled in the repository. If you do not have sufficient privileges to perform this action, a `401 Unauthorized` or `410 Gone` status is returned.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/projects/#create-a-repository-project
+        url: https://docs.github.com/rest/reference/projects/#create-a-repository-project
       operationId: projects/create-for-repo
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -25452,7 +25746,7 @@ paths:
       description: Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/pulls/#list-pull-requests
+        url: https://docs.github.com/rest/reference/pulls/#list-pull-requests
       operationId: pulls/list
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -25545,7 +25839,7 @@ paths:
         This endpoint triggers [notifications](https://docs.github.com/en/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-rate-limits)" for details.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/pulls/#create-a-pull-request
+        url: https://docs.github.com/rest/reference/pulls/#create-a-pull-request
       operationId: pulls/create
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -25890,7 +26184,7 @@ paths:
       description: List the reactions to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#list-reactions-for-a-pull-request-review-comment
+        url: https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-pull-request-review-comment
       operationId: reactions/list-for-pull-request-review-comment
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -25960,7 +26254,7 @@ paths:
       description: "Create a reaction to a [pull request review comment](https://docs.github.com/rest/reference/pulls#comments). A response with a `Status: 200 OK` means that you already added the reaction type to this pull request review comment."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#create-reaction-for-a-pull-request-review-comment
+        url: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-pull-request-review-comment
       operationId: reactions/create-for-pull-request-review-comment
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -26044,7 +26338,7 @@ paths:
         Delete a reaction to a [pull request review comment](https://docs.github.com/rest/reference/pulls#review-comments).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#delete-a-pull-request-comment-reaction
+        url: https://docs.github.com/rest/reference/reactions/#delete-a-pull-request-comment-reaction
       operationId: reactions/delete-for-pull-request-comment
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -26106,7 +26400,7 @@ paths:
         Pass the appropriate [media type](https://docs.github.com/rest/overview/media-types/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/pulls/#get-a-pull-request
+        url: https://docs.github.com/rest/reference/pulls/#get-a-pull-request
       operationId: pulls/get
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -26145,7 +26439,7 @@ paths:
         To open or update a pull request in a public repository, you must have write access to the head or the source branch. For organization-owned repositories, you must be a member of the organization that owns the repository to open or update a pull request.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/pulls/#update-a-pull-request
+        url: https://docs.github.com/rest/reference/pulls/#update-a-pull-request
       operationId: pulls/update
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -26502,7 +26796,7 @@ paths:
       description: Lists a maximum of 250 commits for a pull request. To receive a complete commit list for pull requests with more than 250 commits, use the [List commits](https://docs.github.com/rest/reference/repos#list-commits) endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/pulls/#list-commits-on-a-pull-request
+        url: https://docs.github.com/rest/reference/pulls/#list-commits-on-a-pull-request
       operationId: pulls/list-commits
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -26539,7 +26833,7 @@ paths:
       description: "**Note:** Responses include a maximum of 3000 files. The paginated response returns 30 files per page by default."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/pulls/#list-pull-requests-files
+        url: https://docs.github.com/rest/reference/pulls/#list-pull-requests-files
       operationId: pulls/list-files
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -26580,7 +26874,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/pulls/#check-if-a-pull-request-has-been-merged
+        url: https://docs.github.com/rest/reference/pulls/#check-if-a-pull-request-has-been-merged
       operationId: pulls/check-if-merged
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -26604,7 +26898,7 @@ paths:
       description: This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://docs.github.com/rest/overview/resources-in-the-rest-api#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://docs.github.com/rest/guides/best-practices-for-integrators#dealing-with-abuse-rate-limits)" for details.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/pulls/#merge-a-pull-request
+        url: https://docs.github.com/rest/reference/pulls/#merge-a-pull-request
       operationId: pulls/merge
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -27234,7 +27528,7 @@ paths:
       description: Updates the pull request branch with the latest upstream changes by merging HEAD from the base branch into the pull request branch.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/pulls/#update-a-pull-request-branch
+        url: https://docs.github.com/rest/reference/pulls/#update-a-pull-request-branch
       operationId: pulls/update-branch
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -28451,7 +28745,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#list-repository-tags
+        url: https://docs.github.com/rest/reference/repos/#list-repository-tags
       operationId: repos/list-tags
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -28526,7 +28820,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#list-repository-teams
+        url: https://docs.github.com/rest/reference/repos/#list-repository-teams
       operationId: repos/list-teams
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -28562,7 +28856,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#get-all-repository-topics
+        url: https://docs.github.com/rest/reference/repos/#get-all-repository-topics
       operationId: repos/get-all-topics
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -28604,7 +28898,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#replace-all-repository-topics
+        url: https://docs.github.com/rest/reference/repos/#replace-all-repository-topics
       operationId: repos/replace-all-topics
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -28798,7 +29092,7 @@ paths:
       description: A transfer request will need to be accepted by the new owner when transferring a personal repository to another user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more details on the requirements to transfer personal and organization-owned repositories, see [about repository transfers](https://help.github.com/articles/about-repository-transfers/).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#transfer-a-repository
+        url: https://docs.github.com/rest/reference/repos/#transfer-a-repository
       operationId: repos/transfer
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -28848,7 +29142,7 @@ paths:
       description: Disables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#disable-vulnerability-alerts
+        url: https://docs.github.com/rest/reference/repos/#disable-vulnerability-alerts
       operationId: repos/disable-vulnerability-alerts
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -28879,7 +29173,7 @@ paths:
       description: Shows whether dependency alerts are enabled or disabled for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#check-if-vulnerability-alerts-are-enabled-for-a-repository
+        url: https://docs.github.com/rest/reference/repos/#check-if-vulnerability-alerts-are-enabled-for-a-repository
       operationId: repos/check-vulnerability-alerts
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -28912,7 +29206,7 @@ paths:
       description: Enables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#enable-vulnerability-alerts
+        url: https://docs.github.com/rest/reference/repos/#enable-vulnerability-alerts
       operationId: repos/enable-vulnerability-alerts
       parameters:
         - $ref: "#/components/parameters/owner"
@@ -28995,7 +29289,7 @@ paths:
         *   `repo` scope to create a private repository
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#create-a-repository-using-a-template
+        url: https://docs.github.com/rest/reference/repos/#create-a-repository-using-a-template
       operationId: repos/create-using-template
       parameters:
         - in: path
@@ -29083,7 +29377,7 @@ paths:
         Note: Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of repositories.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#list-public-repositories
+        url: https://docs.github.com/rest/reference/repos/#list-public-repositories
       operationId: repos/list-public
       parameters:
         - $ref: "#/components/parameters/since-repo"
@@ -29117,6 +29411,289 @@ paths:
         githubCloudOnly: false
         previews: []
         subcategory: null
+  "/repositories/{repository_id}/environments/{environment_name}/secrets":
+    get:
+      description: Lists all secrets available in an environment without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/actions#list-environment-secrets
+      operationId: actions/list-environment-secrets
+      parameters:
+        - $ref: "#/components/parameters/repository_id"
+        - $ref: "#/components/parameters/environment_name"
+        - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/page"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/actions-secret-paginated"
+              schema:
+                properties:
+                  secrets:
+                    items:
+                      $ref: "#/components/schemas/actions-secret"
+                    type: array
+                  total_count:
+                    type: integer
+                required:
+                  - total_count
+                  - secrets
+                type: object
+          description: response
+          headers:
+            Link:
+              $ref: "#/components/headers/link"
+      summary: List environment secrets
+      tags:
+        - actions
+      x-github:
+        category: actions
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: secrets
+  "/repositories/{repository_id}/environments/{environment_name}/secrets/public-key":
+    get:
+      description: Get the public key for an environment, which you need to encrypt environment secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/actions#get-an-environment-public-key
+      operationId: actions/get-environment-public-key
+      parameters:
+        - $ref: "#/components/parameters/repository_id"
+        - $ref: "#/components/parameters/environment_name"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/actions-public-key"
+              schema:
+                $ref: "#/components/schemas/actions-public-key"
+          description: response
+      summary: Get an environment public key
+      tags:
+        - actions
+      x-github:
+        category: actions
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: secrets
+  "/repositories/{repository_id}/environments/{environment_name}/secrets/{secret_name}":
+    delete:
+      description: Deletes a secret in an environment using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/actions#delete-an-environment-secret
+      operationId: actions/delete-environment-secret
+      parameters:
+        - $ref: "#/components/parameters/repository_id"
+        - $ref: "#/components/parameters/environment_name"
+        - $ref: "#/components/parameters/secret_name"
+      responses:
+        "204":
+          description: Empty response
+      summary: Delete an environment secret
+      tags:
+        - actions
+      x-github:
+        category: actions
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: secrets
+    get:
+      description: Gets a single environment secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/actions#get-an-environment-secret
+      operationId: actions/get-environment-secret
+      parameters:
+        - $ref: "#/components/parameters/repository_id"
+        - $ref: "#/components/parameters/environment_name"
+        - $ref: "#/components/parameters/secret_name"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/actions-secret"
+              schema:
+                $ref: "#/components/schemas/actions-secret"
+          description: response
+      summary: Get an environment secret
+      tags:
+        - actions
+      x-github:
+        category: actions
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: secrets
+    put:
+      description: >-
+        Creates or updates an environment secret with an encrypted value. Encrypt your secret using
+
+        [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). You must authenticate using an access
+
+        token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use
+
+        this endpoint.
+
+
+        #### Example encrypting a secret using Node.js
+
+
+        Encrypt your secret using the [tweetsodium](https://github.com/github/tweetsodium) library.
+
+
+        ```
+
+        const sodium = require('tweetsodium');
+
+
+        const key = "base64-encoded-public-key";
+
+        const value = "plain-text-secret";
+
+
+        // Convert the message and key to Uint8Array's (Buffer implements that interface)
+
+        const messageBytes = Buffer.from(value);
+
+        const keyBytes = Buffer.from(key, 'base64');
+
+
+        // Encrypt using LibSodium.
+
+        const encryptedBytes = sodium.seal(messageBytes, keyBytes);
+
+
+        // Base64 the encrypted secret
+
+        const encrypted = Buffer.from(encryptedBytes).toString('base64');
+
+
+        console.log(encrypted);
+
+        ```
+
+
+
+        #### Example encrypting a secret using Python
+
+
+        Encrypt your secret using [pynacl](https://pynacl.readthedocs.io/en/stable/public/#nacl-public-sealedbox) with Python 3.
+
+
+        ```
+
+        from base64 import b64encode
+
+        from nacl import encoding, public
+
+
+        def encrypt(public_key: str, secret_value: str) -> str:
+          """Encrypt a Unicode string using the public key."""
+          public_key = public.PublicKey(public_key.encode("utf-8"), encoding.Base64Encoder())
+          sealed_box = public.SealedBox(public_key)
+          encrypted = sealed_box.encrypt(secret_value.encode("utf-8"))
+          return b64encode(encrypted).decode("utf-8")
+        ```
+
+
+        #### Example encrypting a secret using C#
+
+
+        Encrypt your secret using the [Sodium.Core](https://www.nuget.org/packages/Sodium.Core/) package.
+
+
+        ```
+
+        var secretValue = System.Text.Encoding.UTF8.GetBytes("mySecret");
+
+        var publicKey = Convert.FromBase64String("2Sg8iYjAxxmI2LvUXpJjkYrMxURPc8r+dB7TJyvvcCU=");
+
+
+        var sealedPublicKeyBox = Sodium.SealedPublicKeyBox.Create(secretValue, publicKey);
+
+
+        Console.WriteLine(Convert.ToBase64String(sealedPublicKeyBox));
+
+        ```
+
+
+        #### Example encrypting a secret using Ruby
+
+
+        Encrypt your secret using the [rbnacl](https://github.com/RubyCrypto/rbnacl) gem.
+
+
+        ```ruby
+
+        require "rbnacl"
+
+        require "base64"
+
+
+        key = Base64.decode64("+ZYvJDZMHUfBkJdyq5Zm9SKqeuBQ4sj+6sfjlH4CgG0=")
+
+        public_key = RbNaCl::PublicKey.new(key)
+
+
+        box = RbNaCl::Boxes::Sealed.from_public_key(public_key)
+
+        encrypted_secret = box.encrypt("my_secret")
+
+
+        # Print the base64 encoded secret
+
+        puts Base64.strict_encode64(encrypted_secret)
+
+        ```
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/actions#create-or-update-an-environment-secret
+      operationId: actions/create-or-update-environment-secret
+      parameters:
+        - $ref: "#/components/parameters/repository_id"
+        - $ref: "#/components/parameters/environment_name"
+        - $ref: "#/components/parameters/secret_name"
+      requestBody:
+        content:
+          application/json:
+            example:
+              encrypted_value: "****************************************************************************************"
+              key_id: "012345678912345678"
+            schema:
+              properties:
+                encrypted_value:
+                  description: Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get an environment public key](https://docs.github.com/rest/reference/actions#get-an-environment-public-key) endpoint.
+                  type: string
+                key_id:
+                  description: ID of the key you used to encrypt the secret.
+                  type: string
+              type: object
+      responses:
+        "201":
+          description: Response when creating a secret
+        "204":
+          description: Response when updating a secret
+      summary: Create or update an environment secret
+      tags:
+        - actions
+      x-github:
+        category: actions
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: secrets
   "/scim/v2/enterprises/{enterprise}/Groups":
     get:
       description: "**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change."
@@ -29812,7 +30389,7 @@ paths:
            - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub organization, and the external identity `null` entry remains in place.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/scim/#list-scim-provisioned-identities
+        url: https://docs.github.com/rest/reference/scim/#list-scim-provisioned-identities
       operationId: scim/list-provisioned-identities
       parameters:
         - $ref: "#/components/parameters/org"
@@ -29877,7 +30454,7 @@ paths:
       description: Provision organization membership for a user, and send an activation email to the email address.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/scim/#provision-and-invite-a-scim-user
+        url: https://docs.github.com/rest/reference/scim/#provision-and-invite-a-scim-user
       operationId: scim/provision-and-invite-user
       parameters:
         - $ref: "#/components/parameters/org"
@@ -29982,7 +30559,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/scim/#delete-a-scim-user-from-an-organization
+        url: https://docs.github.com/rest/reference/scim/#delete-a-scim-user-from-an-organization
       operationId: scim/delete-user-from-org
       parameters:
         - $ref: "#/components/parameters/org"
@@ -30009,7 +30586,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/scim/#get-scim-provisioning-information-for-a-user
+        url: https://docs.github.com/rest/reference/scim/#get-scim-provisioning-information-for-a-user
       operationId: scim/get-provisioning-information-for-user
       parameters:
         - $ref: "#/components/parameters/org"
@@ -30064,7 +30641,7 @@ paths:
         ```
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/scim/#update-an-attribute-for-a-scim-user
+        url: https://docs.github.com/rest/reference/scim/#update-an-attribute-for-a-scim-user
       operationId: scim/update-attribute-for-user
       parameters:
         - $ref: "#/components/parameters/org"
@@ -30174,7 +30751,7 @@ paths:
         **Warning:** Setting `active: false` removes the user from the organization, deletes the external identity, and deletes the associated `{scim_user_id}`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/scim/#set-scim-information-for-a-provisioned-user
+        url: https://docs.github.com/rest/reference/scim/#set-scim-information-for-a-provisioned-user
       operationId: scim/set-information-for-provisioned-user
       parameters:
         - $ref: "#/components/parameters/org"
@@ -30302,7 +30879,7 @@ paths:
         language:go`](https://github.com/search?utf8=%E2%9C%93&q=amazing+language%3Ago&type=Code) is.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/search/#search-code
+        url: https://docs.github.com/rest/reference/search/#search-code
       operationId: search/code
       parameters:
         - description: The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching code](https://help.github.com/articles/searching-code/)" for a detailed list of qualifiers.
@@ -30379,7 +30956,7 @@ paths:
         `q=repo:octocat/Spoon-Knife+css`
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/search/#search-commits
+        url: https://docs.github.com/rest/reference/search/#search-commits
       operationId: search/commits
       parameters:
         - description: The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching commits](https://help.github.com/articles/searching-commits/)" for a detailed list of qualifiers.
@@ -30472,7 +31049,7 @@ paths:
         **Note:** For [user-to-server](https://docs.github.com/developers/apps/identifying-and-authorizing-users-for-github-apps#user-to-server-requests) GitHub App requests, you can't retrieve a combination of issues and pull requests in a single query. Requests that don't include the `is:issue` or `is:pull-request` qualifier will receive an HTTP `422 Unprocessable Entity` response. To get results for both issues and pull requests, you must send separate queries for issues and pull requests. For more information about the `is` qualifier, see "[Searching only issues or pull requests](https://docs.github.com/github/searching-for-information-on-github/searching-issues-and-pull-requests#search-only-issues-or-pull-requests)."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/search/#search-issues-and-pull-requests
+        url: https://docs.github.com/rest/reference/search/#search-issues-and-pull-requests
       operationId: search/issues-and-pull-requests
       parameters:
         - description: The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching issues and pull requests](https://help.github.com/articles/searching-issues-and-pull-requests/)" for a detailed list of qualifiers.
@@ -30560,7 +31137,7 @@ paths:
         The labels that best match the query appear first in the search results.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/search/#search-labels
+        url: https://docs.github.com/rest/reference/search/#search-labels
       operationId: search/labels
       parameters:
         - description: The id of the repository.
@@ -30649,7 +31226,7 @@ paths:
         `q=topic:ruby+topic:rails`
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/search/#search-repositories
+        url: https://docs.github.com/rest/reference/search/#search-repositories
       operationId: search/repos
       parameters:
         - description: The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching for repositories](https://help.github.com/articles/searching-for-repositories/)" for a detailed list of qualifiers.
@@ -30738,7 +31315,7 @@ paths:
         This query searches for topics with the keyword `ruby` and limits the results to find only topics that are featured. The topics that are the best match for the query appear first in the search results.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/search/#search-topics
+        url: https://docs.github.com/rest/reference/search/#search-topics
       operationId: search/topics
       parameters:
         - description: The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query).
@@ -30811,7 +31388,7 @@ paths:
         This query searches for users with the name `tom`. The results are restricted to users with more than 42 repositories and over 1,000 followers.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/search/#search-users
+        url: https://docs.github.com/rest/reference/search/#search-users
       operationId: search/users
       parameters:
         - description: The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://docs.github.com/rest/reference/search#constructing-a-search-query). See "[Searching users](https://help.github.com/articles/searching-users/)" for a detailed list of qualifiers.
@@ -30884,7 +31461,7 @@ paths:
         If you are an organization owner, deleting a parent team will delete all of its child teams as well.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#delete-a-team-legacy
+        url: https://docs.github.com/rest/reference/teams/#delete-a-team-legacy
       operationId: teams/delete-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -30911,7 +31488,7 @@ paths:
       description: "**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the [Get a team by name](https://docs.github.com/rest/reference/teams#get-a-team-by-name) endpoint."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#get-a-team-legacy
+        url: https://docs.github.com/rest/reference/teams/#get-a-team-legacy
       operationId: teams/get-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -30950,7 +31527,7 @@ paths:
         **Note:** With nested teams, the `privacy` for parent teams cannot be `secret`.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#update-a-team-legacy
+        url: https://docs.github.com/rest/reference/teams/#update-a-team-legacy
       operationId: teams/update-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -31592,7 +32169,7 @@ paths:
         List the reactions to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#list-reactions-for-a-team-discussion-comment-legacy
+        url: https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-comment-legacy
       operationId: reactions/list-for-team-discussion-comment-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -31665,7 +32242,7 @@ paths:
         Create a reaction to a [team discussion comment](https://docs.github.com/rest/reference/teams#discussion-comments). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with a `Status: 200 OK` means that you already added the reaction type to this team discussion comment.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#create-reaction-for-a-team-discussion-comment-legacy
+        url: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-team-discussion-comment-legacy
       operationId: reactions/create-for-team-discussion-comment-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -31739,7 +32316,7 @@ paths:
         List the reactions to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `read:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#list-reactions-for-a-team-discussion-legacy
+        url: https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-legacy
       operationId: reactions/list-for-team-discussion-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -31811,7 +32388,7 @@ paths:
         Create a reaction to a [team discussion](https://docs.github.com/rest/reference/teams#discussions). OAuth access tokens require the `write:discussion` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/). A response with a `Status: 200 OK` means that you already added the reaction type to this team discussion.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/reactions/#create-reaction-for-a-team-discussion-legacy
+        url: https://docs.github.com/rest/reference/reactions/#create-reaction-for-a-team-discussion-legacy
       operationId: reactions/create-for-team-discussion-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -32331,7 +32908,7 @@ paths:
         Lists the organization projects for a team.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#list-team-projects-legacy
+        url: https://docs.github.com/rest/reference/teams/#list-team-projects-legacy
       operationId: teams/list-projects-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -32387,7 +32964,7 @@ paths:
         Removes an organization project from a team. An organization owner or a team maintainer can remove any project from the team. To remove a project from a team as an organization member, the authenticated user must have `read` access to both the team and project, or `admin` access to the team or project. **Note:** This endpoint removes the project from the team, but does not delete it.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#remove-a-project-from-a-team-legacy
+        url: https://docs.github.com/rest/reference/teams/#remove-a-project-from-a-team-legacy
       operationId: teams/remove-project-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -32421,7 +32998,7 @@ paths:
         Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#check-team-permissions-for-a-project-legacy
+        url: https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-project-legacy
       operationId: teams/check-permissions-for-project-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -32470,7 +33047,7 @@ paths:
         Adds an organization project to a team. To add a project to a team or update the team's permission on a project, the authenticated user must have `admin` permissions for the project. The project and team must be part of the same organization.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#add-or-update-team-project-permissions-legacy
+        url: https://docs.github.com/rest/reference/teams/#add-or-update-team-project-permissions-legacy
       operationId: teams/add-or-update-project-permissions-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -32549,7 +33126,7 @@ paths:
       description: "**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List team repositories](https://docs.github.com/rest/reference/teams#list-team-repositories) endpoint."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#list-team-repositories-legacy
+        url: https://docs.github.com/rest/reference/teams/#list-team-repositories-legacy
       operationId: teams/list-repos-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -32593,7 +33170,7 @@ paths:
         If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. NOTE: This does not delete the repository, it just removes it from the team.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#remove-a-repository-from-a-team-legacy
+        url: https://docs.github.com/rest/reference/teams/#remove-a-repository-from-a-team-legacy
       operationId: teams/remove-repo-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -32625,7 +33202,7 @@ paths:
         You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#check-team-permissions-for-a-repository-legacy
+        url: https://docs.github.com/rest/reference/teams/#check-team-permissions-for-a-repository-legacy
       operationId: teams/check-permissions-for-repo-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -32668,7 +33245,7 @@ paths:
         Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://docs.github.com/rest/overview/resources-in-the-rest-api#http-verbs)."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#add-or-update-team-repository-permissions-legacy
+        url: https://docs.github.com/rest/reference/teams/#add-or-update-team-repository-permissions-legacy
       operationId: teams/add-or-update-repo-permissions-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -32848,7 +33425,7 @@ paths:
       description: "**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List child teams`](https://docs.github.com/rest/reference/teams#list-child-teams) endpoint."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#list-child-teams-legacy
+        url: https://docs.github.com/rest/reference/teams/#list-child-teams-legacy
       operationId: teams/list-child-legacy
       parameters:
         - $ref: "#/components/parameters/team-id"
@@ -32895,7 +33472,7 @@ paths:
         If the authenticated user is authenticated through OAuth without the `user` scope, then the response lists only public profile information.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/users/#get-the-authenticated-user
+        url: https://docs.github.com/rest/reference/users/#get-the-authenticated-user
       operationId: users/get-authenticated
       parameters: []
       responses:
@@ -32931,7 +33508,7 @@ paths:
       description: "**Note:** If your email is set to private and you send an `email` parameter as part of this request to update your profile, your privacy settings are still enforced: the email address will not be displayed on your public profile or via the API."
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/users/#update-the-authenticated-user
+        url: https://docs.github.com/rest/reference/users/#update-the-authenticated-user
       operationId: users/update-authenticated
       parameters: []
       requestBody:
@@ -33964,7 +34541,7 @@ paths:
         request id, use the "[List pull requests](https://docs.github.com/rest/reference/pulls#list-pull-requests)" endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/issues/#list-user-account-issues-assigned-to-the-authenticated-user
+        url: https://docs.github.com/rest/reference/issues/#list-user-account-issues-assigned-to-the-authenticated-user
       operationId: issues/list-for-authenticated-user
       parameters:
         - description: >-
@@ -34827,7 +35404,7 @@ paths:
         This only lists organizations that your authorization allows you to operate on in some way (e.g., you can list teams with `read:org` scope, you can publicize your organization membership with `user` scope, etc.). Therefore, this API requires at least `user` or `read:org` scope. OAuth requests with insufficient scope receive a `403 Forbidden` response.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/orgs/#list-organizations-for-the-authenticated-user
+        url: https://docs.github.com/rest/reference/orgs/#list-organizations-for-the-authenticated-user
       operationId: orgs/list-for-authenticated-user
       parameters:
         - $ref: "#/components/parameters/per_page"
@@ -35121,7 +35698,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/projects/#create-a-user-project
+        url: https://docs.github.com/rest/reference/projects/#create-a-user-project
       operationId: projects/create-for-authenticated-user
       parameters: []
       requestBody:
@@ -35231,7 +35808,7 @@ paths:
         The authenticated user has explicit permission to access repositories they own, repositories where they are a collaborator, and repositories that they can access through an organization membership.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#list-repositories-for-the-authenticated-user
+        url: https://docs.github.com/rest/reference/repos/#list-repositories-for-the-authenticated-user
       operationId: repos/list-for-authenticated-user
       parameters:
         - description: Can be one of `all`, `public`, or `private`.
@@ -35345,7 +35922,7 @@ paths:
         *   `repo` scope to create a private repository
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#create-a-repository-for-the-authenticated-user
+        url: https://docs.github.com/rest/reference/repos/#create-a-repository-for-the-authenticated-user
       operationId: repos/create-for-authenticated-user
       parameters: []
       requestBody:
@@ -35780,7 +36357,7 @@ paths:
       description: List all of the teams across all of the organizations to which the authenticated user belongs. This method requires `user`, `repo`, or `read:org` [scope](https://docs.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/) when authenticating via [OAuth](https://docs.github.com/apps/building-oauth-apps/).
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/teams/#list-teams-for-the-authenticated-user
+        url: https://docs.github.com/rest/reference/teams/#list-teams-for-the-authenticated-user
       operationId: teams/list-for-authenticated-user
       parameters:
         - $ref: "#/components/parameters/per_page"
@@ -35824,7 +36401,7 @@ paths:
         Note: Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/overview/resources-in-the-rest-api#link-header) to get the URL for the next page of users.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/users/#list-users
+        url: https://docs.github.com/rest/reference/users/#list-users
       operationId: users/list
       parameters:
         - $ref: "#/components/parameters/since-user"
@@ -35872,7 +36449,7 @@ paths:
         The Emails API enables you to list all of your email addresses, and toggle a primary email to be visible publicly. For more information, see "[Emails API](https://docs.github.com/rest/reference/users#emails)".
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/users/#get-a-user
+        url: https://docs.github.com/rest/reference/users/#get-a-user
       operationId: users/get-by-username
       parameters:
         - $ref: "#/components/parameters/username"
@@ -36092,7 +36669,7 @@ paths:
       description: "Lists public gists for the specified user:"
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/gists/#list-gists-for-a-user
+        url: https://docs.github.com/rest/reference/gists/#list-gists-for-a-user
       operationId: gists/list-for-user
       parameters:
         - $ref: "#/components/parameters/username"
@@ -36175,7 +36752,7 @@ paths:
         ```
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/users/#get-contextual-information-for-a-user
+        url: https://docs.github.com/rest/reference/users/#get-contextual-information-for-a-user
       operationId: users/get-context-for-user
       parameters:
         - $ref: "#/components/parameters/username"
@@ -36228,7 +36805,7 @@ paths:
         You must use a [JWT](https://docs.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/apps/#get-a-user-installation-for-the-authenticated-app
+        url: https://docs.github.com/rest/reference/apps/#get-a-user-installation-for-the-authenticated-app
       operationId: apps/get-user-installation
       parameters:
         - $ref: "#/components/parameters/username"
@@ -36295,7 +36872,7 @@ paths:
         This method only lists _public_ memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the [List organizations for the authenticated user](https://docs.github.com/rest/reference/orgs#list-organizations-for-the-authenticated-user) API instead.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/orgs/#list-organizations-for-a-user
+        url: https://docs.github.com/rest/reference/orgs/#list-organizations-for-a-user
       operationId: orgs/list-for-user
       parameters:
         - $ref: "#/components/parameters/username"
@@ -36447,7 +37024,7 @@ paths:
       description: ""
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/projects/#list-user-projects
+        url: https://docs.github.com/rest/reference/projects/#list-user-projects
       operationId: projects/list-for-user
       parameters:
         - $ref: "#/components/parameters/username"
@@ -36565,7 +37142,7 @@ paths:
       description: Lists public repositories for the specified user.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/repos/#list-repositories-for-a-user
+        url: https://docs.github.com/rest/reference/repos/#list-repositories-for-a-user
       operationId: repos/list-for-user
       parameters:
         - $ref: "#/components/parameters/username"
@@ -36652,7 +37229,7 @@ paths:
         Access tokens must have the `user` scope.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/billing/#get-github-actions-billing-for-a-user
+        url: https://docs.github.com/rest/reference/billing/#get-github-actions-billing-for-a-user
       operationId: billing/get-github-actions-billing-user
       parameters:
         - $ref: "#/components/parameters/username"
@@ -36687,7 +37264,7 @@ paths:
         Access tokens must have the `user` scope.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/billing/#get-github-packages-billing-for-a-user
+        url: https://docs.github.com/rest/reference/billing/#get-github-packages-billing-for-a-user
       operationId: billing/get-github-packages-billing-user
       parameters:
         - $ref: "#/components/parameters/username"
@@ -36722,7 +37299,7 @@ paths:
         Access tokens must have the `user` scope.
       externalDocs:
         description: API method documentation
-        url: https://docs.github.com/v3/billing/#get-shared-storage-billing-for-a-user
+        url: https://docs.github.com/rest/reference/billing/#get-shared-storage-billing-for-a-user
       operationId: billing/get-shared-storage-billing-user
       parameters:
         - $ref: "#/components/parameters/username"
@@ -40497,6 +41074,153 @@ components:
           primary: true
           verified: true
           visibility: private
+    environment:
+      value:
+        created_at: 2020-11-23T22:00:40Z
+        deployment_branch_policy:
+          custom_branch_policies: true
+          protected_branches: false
+        html_url: https://github.com/github/hello-world/deployments/activity_log?environments_filter=staging
+        id: 161088068
+        name: staging
+        node_id: MDExOkVudmlyb25tZW50MTYxMDg4MDY4
+        protection_rules:
+          - id: 3736
+            node_id: MDQ6R2F0ZTM3MzY=
+            type: wait_timer
+            wait_timer: 30
+          - id: 3755
+            node_id: MDQ6R2F0ZTM3NTU=
+            reviewers:
+              - reviewer:
+                  avatar_url: https://github.com/images/error/octocat_happy.gif
+                  events_url: https://api.github.com/users/octocat/events{/privacy}
+                  followers_url: https://api.github.com/users/octocat/followers
+                  following_url: https://api.github.com/users/octocat/following{/other_user}
+                  gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+                  gravatar_id: ""
+                  html_url: https://github.com/octocat
+                  id: 1
+                  login: octocat
+                  node_id: MDQ6VXNlcjE=
+                  organizations_url: https://api.github.com/users/octocat/orgs
+                  received_events_url: https://api.github.com/users/octocat/received_events
+                  repos_url: https://api.github.com/users/octocat/repos
+                  site_admin: false
+                  starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+                  subscriptions_url: https://api.github.com/users/octocat/subscriptions
+                  type: User
+                  url: https://api.github.com/users/octocat
+                type: User
+              - reviewer:
+                  description: A great team.
+                  html_url: https://github.com/orgs/github/teams/justice-league
+                  id: 1
+                  members_url: https://api.github.com/teams/1/members{/member}
+                  name: Justice League
+                  node_id: MDQ6VGVhbTE=
+                  permission: admin
+                  privacy: closed
+                  repositories_url: https://api.github.com/teams/1/repos
+                  slug: justice-league
+                  url: https://api.github.com/teams/1
+                type: Team
+            type: required_reviewers
+          - id: 3756
+            node_id: MDQ6R2F0ZTM3NTY=
+            type: branch_policy
+        updated_at: 2020-11-23T22:00:40Z
+        url: https://api.github.com/repos/github/hello-world/environments/staging
+    environment-approvals-items:
+      value:
+        - comment: Ship it!
+          environments:
+            - created_at: 2020-11-23T22:00:40Z
+              html_url: https://github.com/github/hello-world/deployments/activity_log?environments_filter=staging
+              id: 161088068
+              name: staging
+              node_id: MDExOkVudmlyb25tZW50MTYxMDg4MDY4
+              updated_at: 2020-11-23T22:00:40Z
+              url: https://api.github.com/repos/github/hello-world/environments/staging
+          state: approved
+          user:
+            avatar_url: https://github.com/images/error/octocat_happy.gif
+            events_url: https://api.github.com/users/octocat/events{/privacy}
+            followers_url: https://api.github.com/users/octocat/followers
+            following_url: https://api.github.com/users/octocat/following{/other_user}
+            gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+            gravatar_id: ""
+            html_url: https://github.com/octocat
+            id: 1
+            login: octocat
+            node_id: MDQ6VXNlcjE=
+            organizations_url: https://api.github.com/users/octocat/orgs
+            received_events_url: https://api.github.com/users/octocat/received_events
+            repos_url: https://api.github.com/users/octocat/repos
+            site_admin: false
+            starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+            subscriptions_url: https://api.github.com/users/octocat/subscriptions
+            type: User
+            url: https://api.github.com/users/octocat
+    environments:
+      value:
+        environments:
+          - created_at: 2020-11-23T22:00:40Z
+            deployment_branch_policy:
+              custom_branch_policies: true
+              protected_branches: false
+            html_url: https://github.com/github/hello-world/deployments/activity_log?environments_filter=staging
+            id: 161088068
+            name: staging
+            node_id: MDExOkVudmlyb25tZW50MTYxMDg4MDY4
+            protection_rules:
+              - id: 3736
+                node_id: MDQ6R2F0ZTM3MzY=
+                type: wait_timer
+                wait_timer: 30
+              - id: 3755
+                node_id: MDQ6R2F0ZTM3NTU=
+                reviewers:
+                  - reviewer:
+                      avatar_url: https://github.com/images/error/octocat_happy.gif
+                      events_url: https://api.github.com/users/octocat/events{/privacy}
+                      followers_url: https://api.github.com/users/octocat/followers
+                      following_url: https://api.github.com/users/octocat/following{/other_user}
+                      gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+                      gravatar_id: ""
+                      html_url: https://github.com/octocat
+                      id: 1
+                      login: octocat
+                      node_id: MDQ6VXNlcjE=
+                      organizations_url: https://api.github.com/users/octocat/orgs
+                      received_events_url: https://api.github.com/users/octocat/received_events
+                      repos_url: https://api.github.com/users/octocat/repos
+                      site_admin: false
+                      starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+                      subscriptions_url: https://api.github.com/users/octocat/subscriptions
+                      type: User
+                      url: https://api.github.com/users/octocat
+                    type: User
+                  - reviewer:
+                      description: A great team.
+                      html_url: https://github.com/orgs/github/teams/justice-league
+                      id: 1
+                      members_url: https://api.github.com/teams/1/members{/member}
+                      name: Justice League
+                      node_id: MDQ6VGVhbTE=
+                      permission: admin
+                      privacy: closed
+                      repositories_url: https://api.github.com/teams/1/repos
+                      slug: justice-league
+                      url: https://api.github.com/teams/1
+                    type: Team
+                type: required_reviewers
+              - id: 3756
+                node_id: MDQ6R2F0ZTM3NTY=
+                type: branch_policy
+            updated_at: 2020-11-23T22:00:40Z
+            url: https://api.github.com/repos/github/hello-world/environments/staging
+        total_count: 1
     feed:
       value:
         _links:
@@ -47090,6 +47814,51 @@ components:
           - 1
           - 10
           - 3
+    pending-deployment-items:
+      value:
+        - current_user_can_approve: true
+          environment:
+            html_url: https://github.com/github/hello-world/deployments/activity_log?environments_filter=staging
+            id: 161088068
+            name: staging
+            node_id: MDExOkVudmlyb25tZW50MTYxMDg4MDY4
+            url: https://api.github.com/repos/github/hello-world/environments/staging
+          reviewers:
+            - reviewer:
+                avatar_url: https://github.com/images/error/octocat_happy.gif
+                events_url: https://api.github.com/users/octocat/events{/privacy}
+                followers_url: https://api.github.com/users/octocat/followers
+                following_url: https://api.github.com/users/octocat/following{/other_user}
+                gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+                gravatar_id: ""
+                html_url: https://github.com/octocat
+                id: 1
+                login: octocat
+                node_id: MDQ6VXNlcjE=
+                organizations_url: https://api.github.com/users/octocat/orgs
+                received_events_url: https://api.github.com/users/octocat/received_events
+                repos_url: https://api.github.com/users/octocat/repos
+                site_admin: false
+                starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+                subscriptions_url: https://api.github.com/users/octocat/subscriptions
+                type: User
+                url: https://api.github.com/users/octocat
+              type: User
+            - reviewer:
+                description: A great team.
+                html_url: https://github.com/orgs/github/teams/justice-league
+                id: 1
+                members_url: https://api.github.com/teams/1/members{/member}
+                name: Justice League
+                node_id: MDQ6VGVhbTE=
+                permission: admin
+                privacy: closed
+                repositories_url: https://api.github.com/teams/1/repos
+                slug: justice-league
+                url: https://api.github.com/teams/1
+              type: Team
+          wait_timer: 30
+          wait_timer_started_at: 2020-11-23T22:00:40Z
     porter-author:
       value:
         email: hubot@github.com
@@ -54031,6 +54800,13 @@ components:
       required: true
       schema:
         type: string
+    environment_name:
+      description: The name of the environment
+      in: path
+      name: environment_name
+      required: true
+      schema:
+        type: string
     event:
       description: Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)."
       in: query
@@ -54278,6 +55054,7 @@ components:
       schema:
         type: integer
     run-id:
+      description: The id of the workflow run
       in: path
       name: run_id
       required: true
@@ -55918,6 +56695,8 @@ components:
           example: neutral
           nullable: true
           type: string
+        deployment:
+          $ref: "#/components/schemas/deployment-simple"
         details_url:
           example: https://example.com
           nullable: true
@@ -58014,6 +58793,83 @@ components:
         - updated_at
       title: Deployment
       type: object
+    deployment-reviewer-type:
+      description: "The type of reviewer. Must be one of: `User` or `Team`"
+      enum:
+        - User
+        - Team
+      example: User
+      type: string
+    deployment-simple:
+      description: A deployment created as the result of an Actions check run from a workflow that references an environment
+      properties:
+        created_at:
+          example: 2012-07-20T01:19:13Z
+          format: date-time
+          type: string
+        description:
+          example: Deploy request from hubot
+          nullable: true
+          type: string
+        environment:
+          description: Name for the target deployment environment.
+          example: production
+          type: string
+        id:
+          description: Unique identifier of the deployment
+          example: 42
+          type: integer
+        node_id:
+          example: MDEwOkRlcGxveW1lbnQx
+          type: string
+        original_environment:
+          example: staging
+          type: string
+        performed_via_github_app:
+          allOf:
+            - $ref: "#/components/schemas/integration"
+          nullable: true
+        production_environment:
+          description: "Specifies if the given environment is one that end-users directly interact with. Default: false."
+          example: true
+          type: boolean
+        repository_url:
+          example: https://api.github.com/repos/octocat/example
+          format: uri
+          type: string
+        statuses_url:
+          example: https://api.github.com/repos/octocat/example/deployments/1/statuses
+          format: uri
+          type: string
+        task:
+          description: Parameter to specify a task to execute
+          example: deploy
+          type: string
+        transient_environment:
+          description: "Specifies if the given environment is will no longer exist at some point in the future. Default: false."
+          example: true
+          type: boolean
+        updated_at:
+          example: 2012-07-20T01:19:13Z
+          format: date-time
+          type: string
+        url:
+          example: https://api.github.com/repos/octocat/example/deployments/1
+          format: uri
+          type: string
+      required:
+        - id
+        - node_id
+        - task
+        - environment
+        - description
+        - statuses_url
+        - repository_url
+        - url
+        - created_at
+        - updated_at
+      title: Deployment
+      type: object
     deployment-status:
       description: The status of a deployment.
       properties:
@@ -58105,6 +58961,20 @@ components:
         - created_at
         - updated_at
       title: Deployment Status
+      type: object
+    deployment_branch_policy:
+      description: The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
+      nullable: true
+      properties:
+        custom_branch_policies:
+          description: Whether only branches that match the specified name patterns can deploy to this environment.  If `custom_branch_policies` is `true`, `protected_branches` must be `false`; if `custom_branch_policies` is `false`, `protected_branches` must be `true`.
+          type: boolean
+        protected_branches:
+          description: Whether only branches with branch protection rules can deploy to this environment. If `protected_branches` is `true`, `custom_branch_policies` must be `false`; if `protected_branches` is `false`, `custom_branch_policies` must be `true`.
+          type: boolean
+      required:
+        - protected_branches
+        - custom_branch_policies
       type: object
     diff-entry:
       description: Diff Entry
@@ -58249,6 +59119,167 @@ components:
         - updated_at
         - avatar_url
       title: Enterprise
+      type: object
+    environment:
+      description: Details of a deployment environment
+      properties:
+        created_at:
+          description: The time that the environment was created, in ISO 8601 format.
+          example: 2020-11-23T22:00:40Z
+          format: date-time
+          type: string
+        deployment_branch_policy:
+          $ref: "#/components/schemas/deployment_branch_policy"
+        html_url:
+          example: https://github.com/github/hello-world/deployments/activity_log?environments_filter=staging
+          type: string
+        id:
+          description: The id of the environment.
+          example: 56780428
+          type: integer
+        name:
+          description: The name of the environment.
+          example: staging
+          type: string
+        node_id:
+          example: MDExOkVudmlyb25tZW50NTY3ODA0Mjg=
+          type: string
+        protection_rules:
+          items:
+            anyOf:
+              - properties:
+                  id:
+                    example: 3515
+                    type: integer
+                  node_id:
+                    example: MDQ6R2F0ZTM1MTU=
+                    type: string
+                  type:
+                    example: wait_timer
+                    type: string
+                  wait_timer:
+                    $ref: "#/components/schemas/wait-timer"
+                required:
+                  - id
+                  - node_id
+                  - type
+                type: object
+              - properties:
+                  id:
+                    example: 3755
+                    type: integer
+                  node_id:
+                    example: MDQ6R2F0ZTM3NTU=
+                    type: string
+                  reviewers:
+                    description: The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
+                    items:
+                      properties:
+                        reviewer:
+                          anyOf:
+                            - $ref: "#/components/schemas/simple-user"
+                            - $ref: "#/components/schemas/team-simple"
+                        type:
+                          $ref: "#/components/schemas/deployment-reviewer-type"
+                      type: object
+                    type: array
+                  type:
+                    example: required_reviewers
+                    type: string
+                required:
+                  - id
+                  - node_id
+                  - type
+                type: object
+              - properties:
+                  id:
+                    example: 3515
+                    type: integer
+                  node_id:
+                    example: MDQ6R2F0ZTM1MTU=
+                    type: string
+                  type:
+                    example: branch_policy
+                    type: string
+                required:
+                  - id
+                  - node_id
+                  - type
+                type: object
+          type: array
+        updated_at:
+          description: The time that the environment was last updated, in ISO 8601 format.
+          example: 2020-11-23T22:00:40Z
+          format: date-time
+          type: string
+        url:
+          example: https://api.github.com/repos/github/hello-world/environments/staging
+          type: string
+      required:
+        - id
+        - node_id
+        - name
+        - url
+        - html_url
+        - created_at
+        - updated_at
+      title: Environment
+      type: object
+    environment-approvals:
+      description: An entry in the reviews log for environment deployments
+      properties:
+        comment:
+          description: The comment submitted with the deployment review
+          example: Ship it!
+          type: string
+        environments:
+          description: The list of environments that were approved or rejected
+          items:
+            properties:
+              created_at:
+                description: The time that the environment was created, in ISO 8601 format.
+                example: 2020-11-23T22:00:40Z
+                format: date-time
+                type: string
+              html_url:
+                example: https://github.com/github/hello-world/deployments/activity_log?environments_filter=staging
+                type: string
+              id:
+                description: The id of the environment.
+                example: 56780428
+                type: integer
+              name:
+                description: The name of the environment.
+                example: staging
+                type: string
+              node_id:
+                example: MDExOkVudmlyb25tZW50NTY3ODA0Mjg=
+                type: string
+              updated_at:
+                description: The time that the environment was last updated, in ISO 8601 format.
+                example: 2020-11-23T22:00:40Z
+                format: date-time
+                type: string
+              url:
+                example: https://api.github.com/repos/github/hello-world/environments/staging
+                type: string
+            type: object
+          type: array
+        state:
+          description: Whether deployment to the environment(s) was approved or rejected
+          enum:
+            - approved
+            - rejected
+          example: approved
+          type: string
+        user:
+          $ref: "#/components/schemas/simple-user"
+      required:
+        - environments
+        - state
+        - user
+        - comment
+      title: Environment Approval
       type: object
     event:
       description: Event
@@ -62622,6 +63653,63 @@ components:
         - all
         - owner
       title: Participation Stats
+      type: object
+    pending-deployment:
+      description: Details of a deployment that is waiting for protection rules to pass
+      properties:
+        current_user_can_approve:
+          description: Whether the currently authenticated user can approve the deployment
+          example: true
+          type: boolean
+        environment:
+          properties:
+            html_url:
+              example: https://github.com/github/hello-world/deployments/activity_log?environments_filter=staging
+              type: string
+            id:
+              description: The id of the environment.
+              example: 56780428
+              type: integer
+            name:
+              description: The name of the environment.
+              example: staging
+              type: string
+            node_id:
+              example: MDExOkVudmlyb25tZW50NTY3ODA0Mjg=
+              type: string
+            url:
+              example: https://api.github.com/repos/github/hello-world/environments/staging
+              type: string
+          type: object
+        reviewers:
+          description: The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
+          items:
+            properties:
+              reviewer:
+                anyOf:
+                  - $ref: "#/components/schemas/simple-user"
+                  - $ref: "#/components/schemas/team-simple"
+              type:
+                $ref: "#/components/schemas/deployment-reviewer-type"
+            type: object
+          type: array
+        wait_timer:
+          description: The set duration of the wait timer
+          example: 30
+          type: integer
+        wait_timer_started_at:
+          description: The time that the wait timer began.
+          example: 2020-11-23T22:00:40Z
+          format: date-time
+          nullable: true
+          type: string
+      required:
+        - environment
+        - wait_timer
+        - wait_timer_started_at
+        - current_user_can_approve
+        - reviewers
+      title: Pending Deployment
       type: object
     porter-author:
       description: Porter Author
@@ -68808,6 +69896,10 @@ components:
         - views
       title: View Traffic
       type: object
+    wait-timer:
+      description: The amount of time to delay a job after the job is initially triggered. The time (in minutes) must be an integer between 0 and 43,200 (30 days).
+      example: 30
+      type: integer
     webhook-config:
       description: Configuration object of the webhook
       properties:

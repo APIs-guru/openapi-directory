@@ -446,10 +446,7 @@ paths:
           schema:
             enum:
               - toll-free
-              - national
-              - mobile
-              - local
-            example: local
+            example: toll-free
             type: string
         - description: Filter if the phone number should be used for voice, fax, mms, sms, emergency.
           in: query
@@ -21640,6 +21637,10 @@ components:
         sip_auth_username:
           description: SIP Authentication username used for SIP challenges.
           example: username
+          type: string
+        target_leg_client_state:
+          description: Use this field to add state to every subsequent webhook for the new leg. It must be a valid Base-64 encoded string.
+          example: aGF2ZSBhIG5pY2UgZGF5ID1d
           type: string
         time_limit_secs:
           default: 14400

@@ -104,6 +104,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-get-apps"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - apps
   "/apps/{ID}":
@@ -128,6 +133,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-get-apps-ID"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - apps
   /audiences:
@@ -155,6 +165,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-get-audiences"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - audiences
   "/audiences/{ID}":
@@ -179,6 +194,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-get-audiences-ID"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - audiences
   "/audiences/{ID}/memberships":
@@ -199,6 +219,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-post-audiences-ID-memberships"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - audiences
   /autocompletes:
@@ -912,6 +937,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-post-groups-messages-metadata-filters"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - groups
   "/groups/messages/{ID}":
@@ -1731,6 +1761,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-get-industries"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - industries
   /markdown:
@@ -1753,6 +1788,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-post-markdown"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - markdown
   /markdown/emoticons:
@@ -1764,6 +1804,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-get-markdown-emoticons"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - markdown
   /messages/metadata/filters:
@@ -1830,6 +1875,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-post-messages-metadata-filters"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - messages
   "/messages/{ID}":
@@ -2392,6 +2442,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-post-users-metadata-filters"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - users
   /users/nearby:
@@ -2711,6 +2766,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-post-users-searches"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - users
   "/users/{ID}":
@@ -2735,6 +2795,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-get-users-ID"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - users
   "/users/{ID}/groups":
@@ -2755,6 +2820,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-get-users-ID-groups"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - users
   "/users/{ID}/groups/messages":
@@ -2941,6 +3011,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-get-users-ID-metadata"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - users
     post:
@@ -3029,6 +3104,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-post-users-ID-metadata"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - users
   "/users/{ID}/metadata/collections":
@@ -3049,6 +3129,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-get-users-ID-metadata-collections"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - users
   "/users/{ID}/positions":
@@ -3138,6 +3223,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-patch-users-ID-synergies"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - users
   /users/~:
@@ -3610,6 +3700,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-get-webhooks"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - webhooks
     post:
@@ -3654,6 +3749,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-post-webhooks"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - webhooks
   "/webhooks/{ID}":
@@ -3674,6 +3774,11 @@ paths:
           description: Valid Response
           schema:
             $ref: "#/definitions/Endpoint-delete-webhooks-ID"
+      security:
+        - explicit_flow:
+            - basic
+        - implicit_flow:
+            - basic
       tags:
         - webhooks
 definitions:

@@ -1289,19 +1289,19 @@ components:
           default: false
           description: Boolean flag to indicate whether or not the access end date is approximated
           example: yyyy-MM-ddThh-mm-ssZ
+          position: 3
           type: boolean
-          x-position: 3
         endDateTime:
           description: Event's end access time
           example: yyyy-MM-ddThh-mm-ssZ
           format: date-time
+          position: 2
           type: string
-          x-position: 2
         startApproximate:
           default: false
           description: Boolean flag to indicate whether or not the access start date is approximated
+          position: 1
           type: boolean
-          x-position: 1
         startDateTime:
           description: Event's start access time
           example: yyyy-MM-ddThh-mm-ssZ
@@ -1313,8 +1313,8 @@ components:
       properties:
         info:
           description: Accessibility's information
+          position: 1
           type: string
-          x-position: 1
       type: object
     Address:
       description: Address
@@ -1324,70 +1324,70 @@ components:
           type: string
         line2:
           description: Address second line
+          position: 3
           type: string
-          x-position: 3
         line3:
           description: Address third line
+          position: 3
           type: string
-          x-position: 3
       type: object
     Area:
       description: Area
       properties:
         name:
           description: Name of the entity
+          position: 10
           type: string
-          x-position: 10
       type: object
     Attraction:
       description: Attraction
       properties:
         additionalInfo:
           description: Additional information of the entity
+          position: 22
           type: string
-          x-position: 22
         classifications:
           description: Attraction's classifications
           items:
             $ref: "#/components/schemas/Classification"
+          position: 30
           type: array
-          x-position: 30
         description:
           description: Description's of the entity
+          position: 20
           type: string
-          x-position: 20
         externalLinks:
           additionalProperties:
             items:
               $ref: "#/components/schemas/ExternalLink"
             type: array
           description: List of external links
+          position: 79
           type: object
-          x-position: 79
         id:
           description: Unique id of the entity in the discovery API
+          position: 1
           type: string
-          x-position: 1
         images:
           description: Images of the entity
           items:
             $ref: "#/components/schemas/Image"
+          position: 29
           type: array
           uniqueItems: true
-          x-position: 29
         locale:
           description: Locale in which the content is returned
+          position: 3
           type: string
-          x-position: 3
         name:
           description: Name of the entity
+          position: 10
           type: string
-          x-position: 10
         test:
           default: false
           description: Indicate if this is a test entity, by default test entities won't appear in discovery API
+          position: 96
           type: boolean
-          x-position: 96
         type:
           description: Type of the entity
           enum:
@@ -1400,12 +1400,12 @@ components:
             format: int32
             type: integer
           description: number of upcoming events
+          position: 110
           type: object
-          x-position: 110
         url:
           description: URL of a web site detail page of the entity
+          position: 24
           type: string
-          x-position: 24
       required:
         - id
         - type
@@ -1450,8 +1450,8 @@ components:
       properties:
         name:
           description: Name of the entity
+          position: 10
           type: string
-          x-position: 10
       type: object
     Classification:
       description: Classification
@@ -1479,8 +1479,8 @@ components:
           type: string
         name:
           description: Name of the entity
+          position: 10
           type: string
-          x-position: 10
       type: object
     DateTimeField:
       properties:
@@ -1567,14 +1567,14 @@ components:
         approximate:
           default: false
           description: Boolean flag to indicate whether or not the end date is approximated
+          position: 3
           type: boolean
-          x-position: 3
         dateTime:
           description: The event end date time
           example: yyyy-MM-ddThh-mm-ssZ
           format: date-time
+          position: 2
           type: string
-          x-position: 2
         localDate:
           description: The event end date in local date
           example: yyyy-MM-dd
@@ -1585,8 +1585,8 @@ components:
         noSpecificTime:
           default: false
           description: Boolean flag to indicate whether or not the event end time has no specific time
+          position: 4
           type: boolean
-          x-position: 4
       type: object
     EntityChanges:
       properties:
@@ -1606,20 +1606,20 @@ components:
           $ref: "#/components/schemas/Accessibility"
         additionalInfo:
           description: Additional information of the entity
+          position: 22
           type: string
-          x-position: 22
         classifications:
           description: Event's classifications
           items:
             $ref: "#/components/schemas/Classification"
+          position: 50
           type: array
-          x-position: 50
         dates:
           $ref: "#/components/schemas/EventDates"
         description:
           description: Description's of the entity
+          position: 20
           type: string
-          x-position: 20
         distance:
           format: double
           type: number
@@ -1629,66 +1629,66 @@ components:
               $ref: "#/components/schemas/ExternalLink"
             type: array
           description: List of external links
+          position: 79
           type: object
-          x-position: 79
         id:
           description: Unique id of the entity in the discovery API
+          position: 1
           type: string
-          x-position: 1
         images:
           description: Images of the entity
           items:
             $ref: "#/components/schemas/Image"
+          position: 29
           type: array
           uniqueItems: true
-          x-position: 29
         info:
           description: Any information related to the event
+          position: 32
           type: string
-          x-position: 32
         locale:
           description: Locale in which the content is returned
+          position: 3
           type: string
-          x-position: 3
         location:
           $ref: "#/components/schemas/Location"
         name:
           description: Name of the entity
+          position: 10
           type: string
-          x-position: 10
         outlets:
           description: Related outlets informations
           items:
             $ref: "#/components/schemas/Outlet"
+          position: 37
           type: array
-          x-position: 37
         place:
           $ref: "#/components/schemas/Place"
         pleaseNote:
           description: Any notes related to the event
+          position: 34
           type: string
-          x-position: 34
         priceRanges:
           description: Price ranges of this event
           items:
             $ref: "#/components/schemas/PriceRange"
+          position: 36
           type: array
           uniqueItems: true
-          x-position: 36
         products:
           description: Related products informations
           items:
             $ref: "#/components/schemas/Product"
+          position: 38
           type: array
-          x-position: 38
         promoter:
           $ref: "#/components/schemas/Promoter"
         promoters:
           description: Event's promoters
           items:
             $ref: "#/components/schemas/Promoter"
+          position: 37
           type: array
-          x-position: 37
         sales:
           $ref: "#/components/schemas/EventSalesDates"
         seatmap:
@@ -1696,8 +1696,8 @@ components:
         test:
           default: false
           description: Indicate if this is a test entity, by default test entities won't appear in discovery API
+          position: 96
           type: boolean
-          x-position: 96
         type:
           description: Type of the entity
           enum:
@@ -1709,8 +1709,8 @@ components:
           type: string
         url:
           description: URL of a web site detail page of the entity
+          position: 24
           type: string
-          x-position: 24
       required:
         - id
         - type
@@ -1725,16 +1725,16 @@ components:
         spanMultipleDays:
           default: false
           description: Flag indicating if date spans of multiple days
+          position: 5
           type: boolean
-          x-position: 5
         start:
           $ref: "#/components/schemas/StartDates"
         status:
           $ref: "#/components/schemas/EventStatus"
         timezone:
           description: Event's timezone
+          position: 3
           type: string
-          x-position: 3
       type: object
     EventExtensions:
       description: All Event's extensions
@@ -1744,15 +1744,15 @@ components:
       properties:
         id:
           description: Unique id of the entity in the discovery API
+          position: 1
           type: string
-          x-position: 1
         images:
           description: Images of the entity
           items:
             $ref: "#/components/schemas/Image"
+          position: 2
           type: array
           uniqueItems: true
-          x-position: 2
         type:
           description: Type of the entity
           enum:
@@ -1769,8 +1769,8 @@ components:
           description: Presale information on this event
           items:
             $ref: "#/components/schemas/Presale"
+          position: 1
           type: array
-          x-position: 1
         public:
           $ref: "#/components/schemas/PublicSaleDates"
       type: object
@@ -1794,12 +1794,12 @@ components:
       properties:
         id:
           description: An external link id is the unique identifier of a resource on a different domain or api
+          position: 2
           type: string
-          x-position: 2
         url:
           description: An external link url is a url that goes to a different domain or api
+          position: 2
           type: string
-          x-position: 2
       type: object
     Genre:
       description: Secondary Genre
@@ -1809,8 +1809,8 @@ components:
           type: string
         name:
           description: The Name of the classification's level
+          position: 1
           type: string
-          x-position: 1
       type: object
     GeocodeExtension:
       properties:
@@ -1852,35 +1852,35 @@ components:
       properties:
         attribution:
           description: Attribution of the image
+          position: 8
           type: string
-          x-position: 8
         fallback:
           default: false
           description: true if the image is not the event's image but a fallbak image
+          position: 6
           type: boolean
-          x-position: 6
         height:
           description: Height of the image
           format: int32
+          position: 5
           type: integer
-          x-position: 5
         ratio:
           description: Aspect ratio of the image
           enum:
             - 16_9
             - 3_2
             - 4_3
+          position: 3
           type: string
-          x-position: 3
         url:
           description: Public URL of the image
+          position: 2
           type: string
-          x-position: 2
         width:
           description: Width of the image
           format: int32
+          position: 4
           type: integer
-          x-position: 4
       type: object
     Level:
       properties:
@@ -1889,8 +1889,8 @@ components:
           type: string
         name:
           description: The Name of the classification's level
+          position: 1
           type: string
-          x-position: 1
       type: object
     LocalTime:
       properties:
@@ -1987,24 +1987,24 @@ components:
       properties:
         type:
           description: Outlet's type
+          position: 2
           type: string
-          x-position: 2
         url:
           description: Outlet's url
+          position: 1
           type: string
-          x-position: 1
       type: object
     Parking:
       description: Parking
       properties:
         name:
           description: Name of the entity
+          position: 10
           type: string
-          x-position: 10
         url:
           description: Url to the web page of the parking
+          position: 20
           type: string
-          x-position: 20
       type: object
     Place:
       description: Place
@@ -2021,12 +2021,12 @@ components:
           $ref: "#/components/schemas/Location"
         name:
           description: Name of the entity
+          position: 10
           type: string
-          x-position: 10
         postalCode:
           description: Postal code / zipcode of the place
+          position: 5
           type: string
-          x-position: 5
         state:
           $ref: "#/components/schemas/State"
       type: object
@@ -2035,43 +2035,43 @@ components:
       properties:
         description:
           description: Description of the presame
+          position: 1
           type: string
-          x-position: 1
         endDateTime:
           description: Presale's end dates. The date and time when the presale will end
           format: date-time
+          position: 5
           type: string
-          x-position: 5
         name:
           description: Name of the presale
           type: string
         startDateTime:
           description: Presale's start dates. The date and time when the presale will start
           format: date-time
+          position: 4
           type: string
-          x-position: 4
         url:
           description: Presale link URL
+          position: 3
           type: string
-          x-position: 3
       type: object
     PriceRange:
       description: PriceRange
       properties:
         currency:
           description: Currency
+          position: 1
           type: string
-          x-position: 1
         max:
           description: Maximum price
           format: double
+          position: 3
           type: number
-          x-position: 3
         min:
           description: Minimum price
           format: double
+          position: 2
           type: number
-          x-position: 2
         type:
           description: Type of price
           enum:
@@ -2083,35 +2083,35 @@ components:
       properties:
         id:
           description: Product's primary id
+          position: 10
           type: string
-          x-position: 10
         name:
           description: Name of the entity
+          position: 10
           type: string
-          x-position: 10
         type:
           description: Product's type
+          position: 13
           type: string
-          x-position: 13
         url:
           description: Product's url
+          position: 12
           type: string
-          x-position: 12
       type: object
     Promoter:
       description: Promoter
       properties:
         description:
           description: Description of the promoter
+          position: 3
           type: string
-          x-position: 3
         id:
           description: Id of the promoter
           type: string
         name:
           description: Name of the promoter
+          position: 1
           type: string
-          x-position: 1
       type: object
     PublicSaleDates:
       description: Event's Public Onsales Dates
@@ -2119,8 +2119,8 @@ components:
         endDateTime:
           description: Public sale's end dates. The date and time when the public sale will end
           format: date-time
+          position: 1
           type: string
-          x-position: 1
         startDateTime:
           description: Public sale's start dates. The date and time when the public sale will start
           format: date-time
@@ -2128,8 +2128,8 @@ components:
         startTBD:
           default: false
           description: True if the public sale's date is to be determined
+          position: 2
           type: boolean
-          x-position: 2
       type: object
     PublicVisibility:
       description: The class defines the public visibility period on the Discovery/Publish API.
@@ -2139,19 +2139,19 @@ components:
       properties:
         id:
           description: The ID of the related entity
+          position: 2
           type: string
-          x-position: 2
         references:
           additionalProperties:
             type: string
           description: References of this relationship in another system. Reference is the exact same entity
           example: "sourceName: id"
+          position: 3
           type: object
-          x-position: 3
         source:
           description: The source name of the related entity
+          position: 1
           type: string
-          x-position: 1
         type:
           description: The type of the relationship
           enum:
@@ -2163,8 +2163,8 @@ components:
       properties:
         staticUrl:
           description: Static Seatmap Url
+          position: 3
           type: string
-          x-position: 3
       type: object
     Segment:
       description: Segment
@@ -2174,8 +2174,8 @@ components:
           type: string
         name:
           description: The Name of the classification's level
+          position: 1
           type: string
-          x-position: 1
       type: object
     Social:
       description: Social networks data
@@ -2192,19 +2192,19 @@ components:
         dateTBA:
           default: false
           description: Boolean flag to indicate whether or not the start date is TBA
+          position: 4
           type: boolean
-          x-position: 4
         dateTBD:
           default: false
           description: Boolean flag to indicate whether or not the start date is TBD
+          position: 3
           type: boolean
-          x-position: 3
         dateTime:
           description: The event start datetime
           example: yyyy-MM-ddThh:mm:ssZ
           format: date-time
+          position: 2
           type: string
-          x-position: 2
         localDate:
           description: The event start date in local date
           example: yyyy-MM-dd
@@ -2215,21 +2215,21 @@ components:
         noSpecificTime:
           default: false
           description: Boolean flag to indicate whether or not the event start time has no specific time
+          position: 6
           type: boolean
-          x-position: 6
         timeTBA:
           default: false
           description: Boolean flag to indicate whether or not the start time is TBA
+          position: 5
           type: boolean
-          x-position: 5
       type: object
     State:
       description: State
       properties:
         name:
           description: Name of the entity
+          position: 10
           type: string
-          x-position: 10
         stateCode:
           description: State code
           type: string
@@ -2263,20 +2263,20 @@ components:
           example: "#hashtag example #hashtag another example"
           items:
             type: string
+          position: 1
           type: array
-          x-position: 1
       type: object
     Venue:
       description: Venue
       properties:
         accessibleSeatingDetail:
           description: Venue accessible seating detail
+          position: 35
           type: string
-          x-position: 35
         additionalInfo:
           description: Additional information of the entity
+          position: 22
           type: string
-          x-position: 22
         address:
           $ref: "#/components/schemas/Address"
         boxOfficeInfo:
@@ -2287,12 +2287,12 @@ components:
           $ref: "#/components/schemas/Country"
         currency:
           description: Default currency of ticket prices for events in this venue
+          position: 27
           type: string
-          x-position: 27
         description:
           description: Description's of the entity
+          position: 20
           type: string
-          x-position: 20
         distance:
           format: double
           type: number
@@ -2300,53 +2300,53 @@ components:
           description: The list of associated DMAs (Designated Market Areas) of the venue
           items:
             $ref: "#/components/schemas/Dma"
+          position: 29
           type: array
-          x-position: 29
         externalLinks:
           additionalProperties:
             items:
               $ref: "#/components/schemas/ExternalLink"
             type: array
           description: List of external links
+          position: 79
           type: object
-          x-position: 79
         generalInfo:
           $ref: "#/components/schemas/VenueGeneralInfo"
         id:
           description: Unique id of the entity in the discovery API
+          position: 1
           type: string
-          x-position: 1
         images:
           description: Images of the entity
           items:
             $ref: "#/components/schemas/Image"
+          position: 29
           type: array
           uniqueItems: true
-          x-position: 29
         locale:
           description: Locale in which the content is returned
+          position: 3
           type: string
-          x-position: 3
         location:
           $ref: "#/components/schemas/Location"
         markets:
           description: Markets of the venue
           items:
             $ref: "#/components/schemas/Market"
+          position: 28
           type: array
-          x-position: 28
         name:
           description: Name of the entity
+          position: 10
           type: string
-          x-position: 10
         parkingDetail:
           description: Venue parking info
+          position: 33
           type: string
-          x-position: 33
         postalCode:
           description: Postal code / zipcode of the venue
+          position: 24
           type: string
-          x-position: 24
         social:
           $ref: "#/components/schemas/Social"
         state:
@@ -2354,12 +2354,12 @@ components:
         test:
           default: false
           description: Indicate if this is a test entity, by default test entities won't appear in discovery API
+          position: 96
           type: boolean
-          x-position: 96
         timezone:
           description: Timezone of the venue
+          position: 26
           type: string
-          x-position: 26
         type:
           description: Type of the entity
           enum:
@@ -2374,12 +2374,12 @@ components:
             format: int32
             type: integer
           description: number of upcoming events
+          position: 110
           type: object
-          x-position: 110
         url:
           description: URL of a web site detail page of the entity
+          position: 24
           type: string
-          x-position: 24
       required:
         - id
         - type
@@ -2389,20 +2389,20 @@ components:
       properties:
         acceptedPaymentDetail:
           description: Venue box office accepted payment details
+          position: 5
           type: string
-          x-position: 5
         openHoursDetail:
           description: Venue box office opening hours
+          position: 3
           type: string
-          x-position: 3
         phoneNumberDetail:
           description: Venue box office phone number
+          position: 1
           type: string
-          x-position: 1
         willCallDetail:
           description: Venue box office will call details
+          position: 7
           type: string
-          x-position: 7
       type: object
     VenueExtensions:
       description: All Venue's extensions
@@ -2415,10 +2415,10 @@ components:
       properties:
         childRule:
           description: Venue children rule
+          position: 3
           type: string
-          x-position: 3
         generalRule:
           description: Venue general rules
+          position: 1
           type: string
-          x-position: 1
       type: object

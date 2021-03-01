@@ -8837,6 +8837,31 @@ components:
         - Undefined
         - NewConsumer
         - ReturnConsumer
+    CourierFeedbackRequest:
+      example:
+        additionalComment: Went above and beyond
+        isFeedbackPositive: true
+        reasons:
+          - had thermal bag
+          - friendly
+      properties:
+        additionalComment:
+          description: An additional freefrom comment accompanying the feedback
+          maxLength: 210
+          nullable: true
+          type: string
+        isFeedbackPositive:
+          description: A flag to determine if the feedback is overall positive
+          type: boolean
+        reasons:
+          description: A list of reasons describing the feedback
+          items:
+            type: string
+          nullable: false
+          type: array
+      required:
+        - isFeedbackPositive
+      type: object
     CourierStatus:
       description: The courier application status. A courier could have one of these status associated with their application, here is a brief example of each status. <p>ON-BOARDING - Courier is actively trying to be on-boarded and will progress through the courier on-boarding program</p><p>STALLED - Courier has not proceeded with a step inside the courier on-boarding program for 14 days and will not to proceed further</p><p>SURPLUS - Zone has been closed for On-boarding; courier cannot proceed until zone on-boarding re-opens</p><p>ACTIVE - Courier has interacted with the app within the last two weeks and will be automatically scheduled based on their availability, receive notifications and may complete orders</p><p>INACTIVE - Courier has not interacted with the app for at least two weeks, and will not be scheduled for shifts. May interact with the app to convert their status to active, and be eligible for shifts and deliveries</p><p>RELIABILITY_ISSUES - No longer in use, historically account was suspended due to frequent flakes or rejected orders</p><p>VEHICLE_ISSUES - Account suspended due to reported vehicle problems, but may reactivate by contacting courier support</p><p>INCIDENT_ISSUES - Account suspended indefinitely due to significant concern (used exclusively by Incidents team)</p><p>OTHER_ACCOUNT_ISSUES - General account suspension, usually in connection with problems not categorised under regular courier status</p><p>EXPIRED_DOCUMENTS - General account suspension, typically for expired right to work documentation</p><p>REJECTED - Applicant did not meet minimum requirements for access to the network</p><p>WITHDRAWN - Applicant decided not to proceed with onboarding</p><p>BANNED - Courier’s access to the network was revoked following escalation</p><p>LEFT_NETWORK - Courier voluntarily left the network</p>
       enum:
@@ -10625,7 +10650,7 @@ components:
         type: Point
       properties:
         coordinates:
-          description: longitude and latitude
+          description: first element of the array represents longitude, second latitude
           items:
             format: double
             type: number
@@ -23553,6 +23578,7 @@ x-tagGroups:
       - Attempted Delivery API
       - Attempted Delivery Webhooks
       - Checkout
+      - Courier Feedback
   - name: Restaurant Management
     tags:
       - RestaurantProduct

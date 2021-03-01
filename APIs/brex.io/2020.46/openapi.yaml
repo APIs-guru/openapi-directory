@@ -2112,43 +2112,7 @@ paths:
       summary: Returns a list of products with prices
       tags:
         - v1-system
-  /api/v1/tin-verification/name-lookup:
-    get:
-      description: Performs an EIN name match using provided TIN Number
-      operationId: TinVerificationNameLookup
-      parameters:
-        - description: Nine letter TIN number with or without hyphens
-          in: query
-          name: tin
-          required: true
-          schema:
-            format: string
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  matchStatus:
-                    type: string
-                  possibleMatch:
-                    type: string
-                  tin:
-                    type: string
-                required:
-                  - tin
-                  - matchStatus
-                  - possibleMatch
-          description: Result of a EIN name lookup with TIN number
-        default:
-          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
-      security:
-        - user_key: []
-      summary: EIN Name Lookup with TIN number
-      tags:
-        - v1-tin-verification
-  /api/v1/tin-verification/tin-basic-check:
+  /api/v1/tin-verification/basic-check:
     get:
       description: Performs a basic verification check of a given TIN number and name.
       operationId: TinVerificationBasicCheck
@@ -2195,6 +2159,42 @@ paths:
       security:
         - user_key: []
       summary: Verifies a TIN number
+      tags:
+        - v1-tin-verification
+  /api/v1/tin-verification/name-lookup:
+    get:
+      description: Performs an EIN name match using provided TIN Number
+      operationId: TinVerificationNameLookup
+      parameters:
+        - description: Nine letter TIN number with or without hyphens
+          in: query
+          name: tin
+          required: true
+          schema:
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  matchStatus:
+                    type: string
+                  possibleMatch:
+                    type: string
+                  tin:
+                    type: string
+                required:
+                  - tin
+                  - matchStatus
+                  - possibleMatch
+          description: Result of a EIN name lookup with TIN number
+        default:
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+      security:
+        - user_key: []
+      summary: EIN Name Lookup with TIN number
       tags:
         - v1-tin-verification
   "/api/v1/vat-verification/basic-check/{country}":

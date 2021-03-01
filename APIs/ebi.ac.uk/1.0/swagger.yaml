@@ -66,6 +66,8 @@ tags:
     name: EFO disease terms
   - description: HPO Resource
     name: HPO
+  - description: Intact Resource
+    name: Intact
   - description: Chembl Molecules Resource
     name: Molecules
   - description: Protein Resource
@@ -430,6 +432,63 @@ paths:
       summary: Get HPO phenotypes data
       tags:
         - HPO
+  /intact:
+    get:
+      deprecated: false
+      operationId: getIntactUsingGET
+      parameters:
+        - collectionFormat: multi
+          description: accession
+          in: query
+          items:
+            type: string
+          name: accession
+          required: false
+          type: array
+        - description: confidence
+          format: double
+          in: query
+          name: confidence
+          required: false
+          type: number
+        - collectionFormat: multi
+          description: gene
+          in: query
+          items:
+            type: string
+          name: gene
+          required: false
+          type: array
+        - default: 10
+          description: limit
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: page
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/IntactInteractions"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: Molecular Interactions collected from IntAct
+      tags:
+        - Intact
   /molecules:
     get:
       deprecated: false
@@ -1461,6 +1520,43 @@ definitions:
       pageMeta:
         $ref: "#/definitions/PageMeta"
     title: HpoEntities
+    type: object
+  Intact:
+    properties:
+      confidence:
+        format: double
+        type: number
+      interaction_ac:
+        items:
+          type: string
+        type: array
+      interactor_a:
+        $ref: "#/definitions/Interactor"
+      interactor_b:
+        $ref: "#/definitions/Interactor"
+      method:
+        type: string
+      source_db:
+        type: string
+    title: Intact
+    type: object
+  IntactInteractions:
+    properties:
+      interactions:
+        items:
+          $ref: "#/definitions/Intact"
+        type: array
+      pageMeta:
+        $ref: "#/definitions/PageMeta"
+    title: IntactInteractions
+    type: object
+  Interactor:
+    properties:
+      accession:
+        type: string
+      gene:
+        type: string
+    title: Interactor
     type: object
   Interpro:
     properties:

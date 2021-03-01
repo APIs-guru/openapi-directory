@@ -4,7 +4,54 @@ schemes:
 host: wft-geo-db.p.rapidapi.com
 basePath: /v1
 info:
-  description: The GeoDB API focuses on getting global city and region data.<ul> <li>Filter cities by name prefix, country, location, time-zone, and even minimum population</li> <li>Sort cities by name, country code, elevation, and population - or any combination of these</li> <li>Get nearby cities</li> <li>Get distances between cities</li> <li>Get all country regions</li> <li>Get all cities in a given region</li> <li>Display results in multiple languages</li> <li>Backed by cloud-based load-balanced infrastructure for resiliency and performance</li> <li>Data is periodically refreshed from GeoNames and WikiData</li> </ul> </ul> <hr/> <h3>Useful Resources</h3><ul> <li>SDKs <ul> <li> <a href='https://www.npmjs.com/package/wft-geodb-angular-client'>Angular</a>, <a href='https://github.com/wirefreethought/geodb-sample-angular-app'>Sample App</a> </li> <li><a href='https://github.com/wirefreethought/geodb-java-client'>Java</a></li> <li><a href='https://www.npmjs.com/package/wft-geodb-js-client'>JavaScript</a></li> </ul> <li><a href='swagger.json'>Swagger Docs</a></li> <li><a href='http://creativecommons.org/licenses/by/3.0/'>Usage License</a></li> </li></ul>
+  description: >
+    The GeoDB API focuses on getting global city and region data. Easily obtain country, region, and city data for use
+
+    in your apps! 
+
+    <ul>
+      <li>Filter cities by name prefix, country, location, time-zone, and even minimum population.</li>
+      <li>Sort cities by name, country code, elevation, and population - or any combination of these.</li> 
+      <li>Get all country regions.</li> <li>Get all cities in a given region.</li>
+      <li>
+        Display results in multiple languages.</li> <li>RESTful API adheres to industry best-practices, including
+        HATEOAS-style links to facilitate paging results.
+      </li> 
+      <li>Backed by cloud-based load-balanced infrastructure for resiliency and performance!</li>
+      <li>Data is periodically refreshed from GeoNames and WikiData.</li>
+    </ul>
+
+    <p>Notes:
+
+    <ul>
+      <li>
+        Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities
+        being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude
+        cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set
+        of affected results - and you care about the paged results suddenly changing underneath - specify 
+        <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you're really paranoid!).
+      </li>
+    </ul>
+
+    <hr/>
+
+    <h3>Useful Resources</h3>
+
+    <ul>
+      <li>
+        SDKs
+        <ul>
+          <li>
+            <a href='https://www.npmjs.com/package/wft-geodb-angular-client'>Angular</a>, 
+            <a href='https://github.com/wirefreethought/geodb-sample-angular-app'>Sample App</a>
+          </li>
+          <li><a href='https://github.com/wirefreethought/geodb-java-client'>Java</a></li>
+          <li><a href='https://www.npmjs.com/package/wft-geodb-js-client'>JavaScript</a></li>
+        </ul>
+        <li><a href='swagger.json'>Swagger Docs</a></li>
+        <li><a href='http://creativecommons.org/licenses/by/3.0/'>Usage License</a></li>
+      </li>      
+    </ul>
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -95,7 +142,10 @@ parameters:
     required: false
     type: string
   query.entity.namePrefix:
-    description: Only places whose names start with this prefix. If languageCode is set, the prefix will be matched on the name nas it appears in that language.
+    description: >
+      Only entities whose names start with this prefix. If languageCode is set, the prefix will be matched on the name
+
+      as it appears in that language.
     in: query
     name: namePrefix
     required: false
@@ -109,7 +159,7 @@ parameters:
     type: boolean
   query.includeDeleted:
     default: NONE
-    description: "Whether to include any places marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
+    description: "Whether to include any divisions marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE"
     in: query
     name: includeDeleted
     required: false
@@ -176,13 +226,23 @@ parameters:
     required: false
     type: integer
   query.place.sort:
-    description: "How to sort place results. 'Format: ±SORT_FIELD,±SORT_FIELD' where SORT_FIELD = countryCode | elevation | name | population"
+    description: >
+      How to sort place results. 
+
+      'Format: ±SORT_FIELD,±SORT_FIELD' 
+
+      where SORT_FIELD = countryCode | elevation | name | population
     in: query
     name: sort
     required: false
     type: string
   query.place.sort.withinRegion:
-    description: "How to sort place results. 'Format: ±SORT_FIELD,±SORT_FIELD' where SORT_FIELD = elevation | name | population"
+    description: >
+      How to sort place results. 
+
+      'Format: ±SORT_FIELD,±SORT_FIELD' 
+
+      where SORT_FIELD = elevation | name | population
     in: query
     name: sort
     required: false
@@ -194,7 +254,12 @@ parameters:
     required: false
     type: string
   query.sort:
-    description: "How to sort place results. 'Format: ±SORT_FIELD,±SORT_FIELD' where SORT_FIELD = countryCode | elevation | name | population"
+    description: >
+      How to sort place results. 
+
+      'Format: ±SORT_FIELD,±SORT_FIELD' 
+
+      where SORT_FIELD = countryCode | elevation | name | population
     in: query
     name: sort
     required: false
@@ -288,7 +353,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find administrative divisions, filtering by optional criteria. If no criteria are set, you will get back all known divisions.
+      description: >
+        Find administrative divisions, filtering by optional criteria. If no criteria are set, you will get back all
+
+        known divisions.
       operationId: findAdminDivisionsUsingGET
       parameters:
         - $ref: "#/parameters/query.place.location.id"
@@ -325,7 +393,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get the details for a specific administrative division, including location coordinates, population, and elevation above sea-level (if available).
+      description: >
+        Get the details for a specific administrative division, including location coordinates, population, and
+
+        elevation above sea-level (if available).
       operationId: getAdminDivisionUsingGET
       parameters:
         - $ref: "#/parameters/path.divisionId"
@@ -351,7 +422,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find cities near the given administrative division, filtering by optional criteria. If no criteria are set, you will get back all known cities.
+      description: >
+        Find cities near the given administrative division, filtering by optional criteria. If no criteria are set, you
+
+        will get back all known cities.
       operationId: findCitiesNearAdminDivisionUsingGET
       parameters:
         - $ref: "#/parameters/path.divisionId"
@@ -391,7 +465,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find administrative divisions near the given origin division, filtering by optional criteria. If no criteria are set, you will get back all known divisions.
+      description: >
+        Find administrative divisions near the given origin division, filtering by optional criteria. If no criteria
+
+        are set, you will get back all known divisions.
       operationId: findDivisionsNearAdminDivisionUsingGET
       parameters:
         - $ref: "#/parameters/path.divisionId"
@@ -430,7 +507,8 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find cities, filtering by optional criteria. If no criteria are set, you will get back all known cities.
+      description: >
+        Find cities, filtering by optional criteria. If no criteria are set, you will get back all known cities.
       operationId: findCitiesUsingGET
       parameters:
         - $ref: "#/parameters/query.place.location.id"
@@ -468,7 +546,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get the details for a specific city, including location coordinates, population, and elevation above sea-level (if available).
+      description: >
+        Get the details for a specific city, including location coordinates, population, and elevation above sea-level
+
+        (if available).
       operationId: getCityUsingGET
       parameters:
         - $ref: "#/parameters/path.cityId"
@@ -540,11 +621,43 @@ paths:
       summary: Get city distance
       tags:
         - Geo
+  "/geo/cities/{cityId}/locatedIn":
+    get:
+      consumes:
+        - application/json
+      description: >
+        Get the details for the containing populated place (e.g., its county or other administrative division), including location coordinates, population, and elevation above sea-level
+
+        (if available).
+      operationId: getCityLocatedInUsingGET
+      parameters:
+        - $ref: "#/parameters/path.cityId"
+        - $ref: "#/parameters/query.asciiMode"
+        - $ref: "#/parameters/query.languageCode"
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: "#/responses/PopulatedPlace"
+        "400":
+          $ref: "#/responses/BadRequest"
+        "401":
+          $ref: "#/responses/Unauthorized"
+        "403":
+          $ref: "#/responses/Forbidden"
+        "404":
+          $ref: "#/responses/NotFound"
+      summary: Get city admin region
+      tags:
+        - Geo
   "/geo/cities/{cityId}/nearbyCities":
     get:
       consumes:
         - application/json
-      description: Find cities near the given origin city, filtering by optional criteria. If no criteria are set, you will get back all known cities.
+      description: >
+        Find cities near the given origin city, filtering by optional criteria. If no criteria are set, you will get
+
+        back all known cities.
       operationId: findCitiesNearCityUsingGET
       parameters:
         - $ref: "#/parameters/path.cityId"
@@ -608,7 +721,8 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find countries, filtering by optional criteria. If no criteria are set, you will get back all known countries.
+      description: >
+        Find countries, filtering by optional criteria. If no criteria are set, you will get back all known countries.
       operationId: getCountriesUsingGET
       parameters:
         - $ref: "#/parameters/query.country.currencyCode"
@@ -662,7 +776,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get all regions in a specific country. These could be states, provinces, districts, or otherwise major political divisions.
+      description: >
+        Get all regions in a specific country. These could be states, provinces, districts, or otherwise major
+
+        political divisions.
       operationId: getRegionsUsingGET
       parameters:
         - $ref: "#/parameters/path.countryId"
@@ -719,7 +836,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get the administrative divisions in a specific country region. The country and region info is omitted in the response.
+      description: >
+        Get the administrative divisions in a specific country region. The country and region info is omitted in the
+
+        response.
       operationId: findRegionDivisionsUsingGET
       parameters:
         - $ref: "#/parameters/path.countryId"
@@ -755,7 +875,8 @@ paths:
     get:
       consumes:
         - application/json
-      description: Get the cities in a specific country region. The country and region info is omitted in the response.
+      description: >
+        Get the cities in a specific country region. The country and region info is omitted in the response.
       operationId: findRegionCitiesUsingGET
       parameters:
         - $ref: "#/parameters/path.countryId"
@@ -792,7 +913,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find cities near the given location, filtering by optional criteria. If no criteria are set, you will get back all known cities.
+      description: >
+        Find cities near the given location, filtering by optional criteria. If no criteria are set, you will get back
+
+        all known cities.
       operationId: findCitiesNearLocationUsingGET
       parameters:
         - $ref: "#/parameters/path.location.id"
@@ -830,7 +954,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: Find administrative divisions near the given location, filtering by optional criteria. If no criteria are set, you will get back all known divisions.
+      description: >
+        Find administrative divisions near the given location, filtering by optional criteria. If no criteria are set,
+
+        you will get back all known divisions.
       operationId: findDivisionsNearLocationUsingGET
       parameters:
         - $ref: "#/parameters/path.location.id"
@@ -1016,7 +1143,7 @@ definitions:
     example:
       errors:
         - code: PARAM_INVALID
-          message: Param 'someParam[invalidValue]' has invalid value
+          message: "Param [someParam] has invalid value: invalidValue"
     title: Bad Request Response
     type: object
   BaseCollectionResponse:
@@ -1034,13 +1161,13 @@ definitions:
     description: Common properties for all collection  responses
     example:
       links:
-        - href: /v1/some/resource?offset=0&limit=5
+        - href: /data/world/v1/some/resource?offset=0&limit=5
           rel: first
-        - href: /v1/some/resource?offset=0&limit=5
+        - href: /data/world/v1/some/resource?offset=0&limit=5
           rel: prev
-        - href: /v1/some/resource?offset=10&limit=5
+        - href: /data/world/v1/some/resource?offset=10&limit=5
           rel: next
-        - href: /v1/some/resource?offset=95&limit=5
+        - href: /data/world/v1/some/resource?offset=95&limit=5
           rel: last
       metadata:
         currentOffset: 5
@@ -1097,13 +1224,13 @@ definitions:
           name: Kenya
           wikiDataId: Q114
       links:
-        - href: /v1/geo/countries?offset=0&limit=5
+        - href: /data/world/v1/geo/countries?offset=0&limit=5
           rel: first
-        - href: /v1/geo/countries?offset=0&limit=5
+        - href: /data/world/v1/geo/countries?offset=0&limit=5
           rel: prev
-        - href: /v1/geo/countries?offset=10&limit=5
+        - href: /data/world/v1/geo/countries?offset=10&limit=5
           rel: next
-        - href: /v1/geo/countries?offset=195&limit=5
+        - href: /data/world/v1/geo/countries?offset=195&limit=5
           rel: last
       metadata:
         currentOffset: 5
@@ -1121,9 +1248,6 @@ definitions:
       numRegions: 56
       wikiDataId: Q30
     properties:
-      capital:
-        description: The country's capital city
-        type: string
       code:
         description: The ISO-3166 country code
         type: string
@@ -1136,7 +1260,7 @@ definitions:
         description: The country flag image
         type: string
       name:
-        description: The country name
+        description: The country name (varies by languageCode)
         type: string
       numRegions:
         description: The number of regions in this country
@@ -1183,7 +1307,7 @@ definitions:
           type: string
         type: array
       name:
-        description: The country name
+        description: The country name (varies by languageCode)
         type: string
       wikiDataId:
         description: The country WikiData id
@@ -1204,31 +1328,26 @@ definitions:
         - code: AWG
           countryCodes:
             - AW
-          symbol: AWG
         - code: AZN
           countryCodes:
             - AZ
-          symbol: AZN
         - code: BAM
           countryCodes:
             - BA
-          symbol: BAM
         - code: BBD
           countryCodes:
             - BB
-          symbol: BBD
         - code: BDT
           countryCodes:
             - BD
-          symbol: BDT
       links:
-        - href: /v1/locale/currencies?offset=0&limit=5
+        - href: /data/world/v1/locale/currencies?offset=0&limit=5
           rel: first
-        - href: /v1/locale/currencies?offset=5&limit=5
+        - href: /data/world/v1/locale/currencies?offset=5&limit=5
           rel: prev
-        - href: /v1/locale/currencies?offset=15&limit=5
+        - href: /data/world/v1/locale/currencies?offset=15&limit=5
           rel: next
-        - href: /v1/locale/currencies?offset=200&limit=5
+        - href: /data/world/v1/locale/currencies?offset=200&limit=5
           rel: last
       metadata:
         currentOffset: 10
@@ -1297,7 +1416,7 @@ definitions:
     description: An error that occurred processing the request
     example:
       code: ENTITY_NOT_FOUND
-      message: Param 'someParam[invalidValue]' has invalid value
+      message: "Param [someParam] has invalid value: invalidValue"
     properties:
       code:
         $ref: "#/definitions/ErrorCode"
@@ -1306,7 +1425,10 @@ definitions:
     title: Error
     type: object
   ErrorCode:
-    description: One of a set of enumerated error codes representing the types of errors that can occur processing a request
+    description: >
+      One of a set of enumerated error codes representing the types of errors that can occur processing a
+
+      request
     enum:
       - ACCESS_DENIED
       - ENTITY_NOT_FOUND
@@ -1543,13 +1665,13 @@ definitions:
         - code: pt
           name: Portuguese
       links:
-        - href: /v1/locale/languages?offset=0&limit=3
+        - href: /data/world/v1/locale/languages?offset=0&limit=3
           rel: first
-        - href: /v1/locale/languages?offset=0&limit=3
+        - href: /data/world/v1/locale/languages?offset=0&limit=3
           rel: prev
-        - href: /v1/locale/languages?offset=6&limit=3
+        - href: /data/world/v1/locale/languages?offset=6&limit=3
           rel: next
-        - href: /v1/locale/languages?offset=6&limit=3
+        - href: /data/world/v1/locale/languages?offset=6&limit=3
           rel: last
       metadata:
         currentOffset: 3
@@ -1559,7 +1681,7 @@ definitions:
   Link:
     description: A HATEAOS link
     example:
-      href: /v1/geo/cities?offset=10&limit=10
+      href: /data/world/v1/geo/cities?offset=10&limit=10
       rel: next
     properties:
       href:
@@ -1589,25 +1711,22 @@ definitions:
     description: A list of locales
     example:
       data:
-        - code: nds
-          name: Low German
-        - code: ti_ET
-          name: Tigrinya (Ethiopia)
-        - code: ta_SG
-          name: Tamil (Singapore)
-        - code: lv
-          name: Latvian
-        - code: en_NU
-          name: English (Niue)
+        - code: eu
+        - code: ar_MR
+        - code: es_DO
+        - code: ru
+        - code: az
       links:
-        - href: /v1/locale/locales?offset=0&limit=5
+        - href: /data/world/v1/locale/locales?offset=0&limit=5
           rel: first
-        - href: /v1/locale/locales?offset=5&limit=5
+        - href: /data/world/v1/locale/locales?offset=45&limit=5
+          rel: prev
+        - href: /data/world/v1/locale/locales?offset=55&limit=5
           rel: next
-        - href: /v1/locale/locales?offset=770&limit=5
+        - href: /data/world/v1/locale/locales?offset=770&limit=5
           rel: last
       metadata:
-        currentOffset: 0
+        currentOffset: 50
         totalCount: 772
     title: Locales Response
     type: object
@@ -1634,7 +1753,7 @@ definitions:
     example:
       errors:
         - code: ENTITY_NOT_FOUND
-          message: Entity for id 'someId' not found
+          message: "Entity not found for id: someEntityId"
     title: Not Found Response
     type: object
   PopulatedPlaceDetails:
@@ -1656,7 +1775,7 @@ definitions:
       wikiDataId: Q60
     properties:
       country:
-        description: The country name
+        description: The country name (varies by languageCode)
         type: string
       countryCode:
         description: The ISO-3166 country code
@@ -1688,7 +1807,7 @@ definitions:
         format: int32
         type: integer
       region:
-        description: The region name
+        description: The region name (varies by languageCode)
         type: string
       regionCode:
         description: The ISO or FIPS region code
@@ -1744,7 +1863,7 @@ definitions:
       wikiDataId: Q60
     properties:
       country:
-        description: The country name
+        description: The country name (varies by languageCode)
         type: string
       countryCode:
         description: The ISO-3166 country code
@@ -1766,10 +1885,10 @@ definitions:
         format: double
         type: number
       name:
-        description: The place name
+        description: The place name (varies by languageCode)
         type: string
       region:
-        description: The region name
+        description: The region name (varies by languageCode)
         type: string
       regionCode:
         description: The ISO or FIPS region code
@@ -1782,7 +1901,10 @@ definitions:
         type: string
     type: object
   PopulatedPlaceType:
-    description: One of a set of enumerated populated-place types known by the service (currently only level-2 admin divisions and cities)
+    description: >
+      One of a set of enumerated populated-place types known by the service (currently only level-2 admin divisions and
+
+      cities)
     enum:
       - ADM2
       - CITY
@@ -1850,13 +1972,13 @@ definitions:
           type: CITY
           wikiDataId: Q1050185
       links:
-        - href: /v1/geo/cities?offset=0&limit=5
+        - href: /data/world/v1/geo/cities?offset=0&limit=5
           rel: first
-        - href: /v1/geo/cities?offset=0&limit=5
+        - href: /data/world/v1/geo/cities?offset=0&limit=5
           rel: prev
-        - href: /v1/geo/cities?offset=10&limit=5
+        - href: /data/world/v1/geo/cities?offset=10&limit=5
           rel: next
-        - href: /v1/geo/cities?offset=273685&limit=5
+        - href: /data/world/v1/geo/cities?offset=273685&limit=5
           rel: last
       metadata:
         currentOffset: 5
@@ -1875,7 +1997,7 @@ definitions:
       wikiDataId: Q99
     properties:
       capital:
-        description: The region's capital city
+        description: The region's capital city (varies by languageCode)
         type: string
       countryCode:
         description: An ISO-3166 country code
@@ -1887,7 +2009,7 @@ definitions:
         description: The ISO region code
         type: string
       name:
-        description: The region name
+        description: The region name (varies by languageCode)
         type: string
       numCities:
         description: The number of cities in this region
@@ -1935,7 +2057,7 @@ definitions:
         description: The ISO region code
         type: string
       name:
-        description: The region name
+        description: The region name (varies by languageCode)
         type: string
       wikiDataId:
         description: The region WikiData id
@@ -1980,13 +2102,13 @@ definitions:
           name: Hawaii
           wikiDataId: Q782
       links:
-        - href: /v1/geo/countries/US/regions?offset=0&limit=5
+        - href: /data/world/v1/geo/countries/US/regions?offset=0&limit=5
           rel: first
-        - href: /v1/geo/countries/US/regions?offset=0&limit=5
+        - href: /data/world/v1/geo/countries/US/regions?offset=0&limit=5
           rel: prev
-        - href: /v1/geo/countries/US/regions?offset=10&limit=5
+        - href: /data/world/v1/geo/countries/US/regions?offset=10&limit=5
           rel: next
-        - href: /v1/geo/countries/US/regions?offset=55&limit=5
+        - href: /data/world/v1/geo/countries/US/regions?offset=55&limit=5
           rel: last
       metadata:
         currentOffset: 5
@@ -2051,13 +2173,13 @@ definitions:
           name: Western Indonesia Time
           rawUtcOffsetHours: 7
       links:
-        - href: /v1/locale/timezones?offset=0&limit=5
+        - href: /data/world/v1/locale/timezones?offset=0&limit=5
           rel: first
-        - href: /v1/locale/timezones?offset=0&limit=5
+        - href: /data/world/v1/locale/timezones?offset=0&limit=5
           rel: prev
-        - href: /v1/locale/timezones?offset=10&limit=5
+        - href: /data/world/v1/locale/timezones?offset=10&limit=5
           rel: next
-        - href: /v1/locale/timezones?offset=595&limit=5
+        - href: /data/world/v1/locale/timezones?offset=595&limit=5
           rel: last
       metadata:
         currentOffset: 5

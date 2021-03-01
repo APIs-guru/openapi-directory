@@ -564,13 +564,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CloudEnvironmentResult"
+                $ref: "#/components/schemas/UnfilteredCloudEnvironmentResult"
             text/json:
               schema:
-                $ref: "#/components/schemas/CloudEnvironmentResult"
+                $ref: "#/components/schemas/UnfilteredCloudEnvironmentResult"
             text/plain:
               schema:
-                $ref: "#/components/schemas/CloudEnvironmentResult"
+                $ref: "#/components/schemas/UnfilteredCloudEnvironmentResult"
           description: Success
         "400":
           content:
@@ -3429,6 +3429,88 @@ components:
           type: object
         time:
           nullable: true
+          type: string
+      type: object
+    UnfilteredCloudEnvironmentResult:
+      additionalProperties: false
+      properties:
+        accessToken:
+          nullable: true
+          type: string
+        active:
+          format: date-time
+          type: string
+        autoShutdownDelayMinutes:
+          format: int32
+          type: integer
+        connection:
+          $ref: "#/components/schemas/ConnectionInfoBody"
+        containerImage:
+          nullable: true
+          type: string
+        created:
+          format: date-time
+          type: string
+        exportedBlobUrl:
+          nullable: true
+          type: string
+        features:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        friendlyName:
+          nullable: true
+          type: string
+        hasUnpushedGitChanges:
+          type: boolean
+        id:
+          nullable: true
+          type: string
+        lastStateUpdateReason:
+          nullable: true
+          type: string
+        lastUsed:
+          format: date-time
+          nullable: true
+          type: string
+        location:
+          nullable: true
+          type: string
+        ownerId:
+          nullable: true
+          type: string
+        planId:
+          nullable: true
+          type: string
+        platform:
+          nullable: true
+          type: string
+        portForwardingConnection:
+          $ref: "#/components/schemas/ConnectionInfoBody"
+        recentFolders:
+          items:
+            type: string
+          nullable: true
+          type: array
+        seed:
+          $ref: "#/components/schemas/SeedInfoBody"
+        skuDisplayName:
+          nullable: true
+          type: string
+        skuName:
+          nullable: true
+          type: string
+        state:
+          nullable: true
+          type: string
+        subscriptionData:
+          $ref: "#/components/schemas/SubscriptionData"
+        type:
+          nullable: true
+          type: string
+        updated:
+          format: date-time
           type: string
       type: object
     UpdateCloudEnvironmentBody:

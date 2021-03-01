@@ -8,7 +8,7 @@ servers:
           - v1
           - stage
 info:
-  description: The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details check https://shotstack.io
+  description: The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation.
   title: Shotstack
   version: v1
   x-apisguru-categories:
@@ -261,7 +261,6 @@ components:
               <li>`invert` - invert colors</li>
             </ul>
           enum:
-            - blur
             - boost
             - contrast
             - darken
@@ -372,8 +371,19 @@ components:
       description: An edit defines the content of the video in a timeline and the output format.
       properties:
         callback:
-          description: An optional webhook callback URL used to receive status notifications when a render completes or fails.
+          description: An optional webhook callback URL used to receive status notifications when a render completes or fails. See [webhooks](https://shotstack.gitbook.io/docs/guides/architecting-an-application/webhooks) for  more details.
           example: https://my-server.com/callback.php
+          type: string
+        disk:
+          default: local
+          description: >-
+            The disk type to use for storing footage and assets for each render. See [disk types](https://shotstack.gitbook.io/docs/guides/architecting-an-application/disk-types) for more details. <ul>
+              <li>`local` - optimised for high speed rendering with up to 512MB storage</li>
+              <li>`mount` - optimised for larger file sizes and longer videos with 5GB for source footage and 512MB for output render</li>
+            </ul>
+          enum:
+            - local
+            - mount
           type: string
         output:
           $ref: "#/components/schemas/Output"
@@ -384,7 +394,7 @@ components:
         - output
       type: object
     Font:
-      description: Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag.
+      description: Download a custom font to use with the HTML asset type, using the font name in the CSS or font tag. See our [custom fonts](https://shotstack.io/learn/html-custom-fonts/) getting started guide for more details.
       properties:
         src:
           description: The URL of the font file. The URL must be publicly accessible or include credentials.
@@ -401,7 +411,7 @@ components:
           description: "Apply a background color behind the HTML bounding box using. Set the text color using hexadecimal  color notation. Transparency is supported by setting the first two characters of the hex string  (opposite to HTML), i.e. #80ffffff will be white with 50% transparency."
           type: string
         css:
-          description: The CSS text string to apply styling to the HTML.
+          description: The CSS text string to apply styling to the HTML. See list of  [support CSS properties](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).
           example: "p { color: #ffffff; } b { color: #ffff00; }"
           type: string
         height:
@@ -409,7 +419,7 @@ components:
           example: 200
           type: integer
         html:
-          description: The HTML text string.
+          description: The HTML text string. See list of [supported HTML tags](https://shotstack.gitbook.io/docs/guides/architecting-an-application/html-support#supported-html-tags).
           example: <p>Hello <b>World</b></p>
           type: string
         position:
@@ -798,6 +808,10 @@ components:
           default: "#000000"
           description: "A hexadecimal value for the timeline background colour. Defaults to #000000 (black)."
           type: string
+        cache:
+          default: true
+          description: Disable the caching of ingested source footage and assets. See  [caching](https://shotstack.gitbook.io/docs/guides/architecting-an-application/caching) for more details.
+          type: boolean
         fonts:
           description: An array of custom fonts to be downloaded for use by the HTML assets.
           items:
@@ -1020,7 +1034,7 @@ components:
       type: object
   securitySchemes:
     DeveloperKey:
-      description: Set the header named below with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.
+      description: Set the **x-api-key** header with your provided key for the correct environment (v1 or stage). Include the header in all calls to the API that are secured with a key.
       in: header
       name: x-api-key
       type: apiKey

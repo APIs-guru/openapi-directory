@@ -623,6 +623,10 @@ paths:
 
         specified entity.
 
+        **The team and user webhooks are deprecated, and you should use workspace instead.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
+
 
         This is public data that does not require any scopes or authentication.
 
@@ -630,14 +634,14 @@ paths:
         Example:
 
 
-        NOTE: The following example is a truncated response object for the `team` `subject_type`.
+        NOTE: The following example is a truncated response object for the `workspace` `subject_type`.
 
         We return the same structure for the other `subject_type` objects.
 
 
         ```
 
-        $ curl https://api.bitbucket.org/2.0/hook_events/team
+        $ curl https://api.bitbucket.org/2.0/hook_events/workspace
 
         {
             "page": 1,
@@ -656,13 +660,19 @@ paths:
                     "event": "repo:fork",
                     "label": "Fork"
                 },
-                ...
                 {
                     "category": "Repository",
                     "description": "Whenever a repository import occurs",
                     "event": "repo:imported",
                     "label": "Import"
-                }
+                },
+                ...
+                {
+                    "category":"Pull Request",
+                    "label":"Approved",
+                    "description":"When someone has approved a pull request",
+                    "event":"pullrequest:approved"
+                },
             ]
         }
 
@@ -1526,8 +1536,6 @@ paths:
         * `push` and `restrict_merges` require `users` and `groups` to be
           specified. Empty lists are allowed, in which case permission is
           denied for everybody.
-        * `force` can not be specified in a Mercurial repository.
-
 
         The restriction applies to all branches that match. There are
 
@@ -2679,9 +2687,9 @@ paths:
     get:
       operationId: getPullrequestsForCommit
       parameters:
-        - description: The account; either the UUID in curly braces, or the account_id
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -2713,11 +2721,6 @@ paths:
             default: 30
             format: int32
             type: integer
-        - in: path
-          name: workspace
-          required: true
-          schema:
-            type: string
       responses:
         "200":
           content:
@@ -2745,9 +2748,9 @@ paths:
       description: Returns a paginated list of Reports linked to this commit.
       operationId: getReportsForCommit
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -2760,11 +2763,6 @@ paths:
         - description: The commit for which to retrieve reports.
           in: path
           name: commit
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -2783,9 +2781,9 @@ paths:
       description: Deletes a single Report matching the provided ID.
       operationId: deleteReport
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -2804,11 +2802,6 @@ paths:
         - description: Either the uuid or external-id of the report.
           in: path
           name: reportId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -2822,9 +2815,9 @@ paths:
       description: Returns a single Report matching the provided ID.
       operationId: getReport
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -2843,11 +2836,6 @@ paths:
         - description: Either the uuid or external-id of the report.
           in: path
           name: reportId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -2918,9 +2906,9 @@ paths:
         Please refer to the [Code Insights documentation](https://confluence.atlassian.com/bitbucket/code-insights-994316785.html) for more information.
       operationId: createOrUpdateReport
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -2939,11 +2927,6 @@ paths:
         - description: Either the uuid or external-id of the report.
           in: path
           name: reportId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -2975,9 +2958,9 @@ paths:
       description: Returns a paginated list of Annotations for a specified report.
       operationId: getAnnotationsForReport
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -2996,11 +2979,6 @@ paths:
         - description: Uuid or external-if of the report for which to get annotations for.
           in: path
           name: reportId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -3069,9 +3047,9 @@ paths:
         Please refer to the [Code Insights documentation](https://confluence.atlassian.com/bitbucket/code-insights-994316785.html) for more information.
       operationId: bulkCreateOrUpdateAnnotations
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -3090,11 +3068,6 @@ paths:
         - description: Uuid or external-if of the report for which to get annotations for.
           in: path
           name: reportId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -3126,9 +3099,9 @@ paths:
       description: Deletes a single Annotation matching the provided ID.
       operationId: deleteAnnotation
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -3156,11 +3129,6 @@ paths:
           required: true
           schema:
             type: string
-        - in: path
-          name: workspace
-          required: true
-          schema:
-            type: string
       responses:
         "204":
           description: No content
@@ -3171,9 +3139,9 @@ paths:
       description: Returns a single Annotation matching the provided ID.
       operationId: getAnnotation
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -3198,11 +3166,6 @@ paths:
         - description: Either the uuid or external-id of the annotation.
           in: path
           name: annotationId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -3264,9 +3227,9 @@ paths:
         Please refer to the [Code Insights documentation](https://confluence.atlassian.com/bitbucket/code-insights-994316785.html) for more information.
       operationId: createOrUpdateAnnotation
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -3291,11 +3254,6 @@ paths:
         - description: Either the uuid or external-id of the annotation.
           in: path
           name: annotationId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -3694,12 +3652,18 @@ paths:
 
         query string, clients can use a `x-www-form-urlencoded` POST instead.
       responses:
-        default:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/paginated_changeset"
+          description: A paginated list of commits
+        "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
-          description: Unexpected error.
+          description: If the specified revision or repository does not exist.
       security:
         - oauth2:
             - repository
@@ -3743,12 +3707,18 @@ paths:
 
         **Note that this resource does NOT support new commit creation.**
       responses:
-        default:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/paginated_changeset"
+          description: A paginated list of commits
+        "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
-          description: Unexpected error.
+          description: If the specified revision or repository does not exist.
       security:
         - oauth2:
             - repository
@@ -3852,12 +3822,18 @@ paths:
 
         query string, clients can use a `x-www-form-urlencoded` POST instead.
       responses:
-        default:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/paginated_changeset"
+          description: A paginated list of commits
+        "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
-          description: Unexpected error.
+          description: If the specified revision or repository does not exist.
       security:
         - oauth2:
             - repository
@@ -3901,12 +3877,18 @@ paths:
 
         **Note that this resource does NOT support new commit creation.**
       responses:
-        default:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/paginated_changeset"
+          description: A paginated list of commits
+        "404":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/error"
-          description: Unexpected error.
+          description: If the specified revision or repository does not exist.
       security:
         - oauth2:
             - repository
@@ -4505,20 +4487,15 @@ paths:
       description: Find deployments
       operationId: getDeploymentsForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -4536,9 +4513,9 @@ paths:
       description: Retrieve a deployment
       operationId: getDeploymentForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -4551,11 +4528,6 @@ paths:
         - description: The deployment UUID.
           in: path
           name: deployment_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -4579,9 +4551,9 @@ paths:
       description: Find deployment environment level variables.
       operationId: getDeploymentVariables
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -4594,11 +4566,6 @@ paths:
         - description: The environment.
           in: path
           name: environment_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -4615,9 +4582,9 @@ paths:
       description: Create a deployment environment level variable.
       operationId: createDeploymentVariable
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -4636,11 +4603,6 @@ paths:
         - description: The UUID of the variable to update.
           in: query
           name: variable_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -4682,9 +4644,9 @@ paths:
       description: Delete a deployment environment level variable.
       operationId: deleteDeploymentVariable
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -4706,11 +4668,6 @@ paths:
           required: true
           schema:
             type: string
-        - in: path
-          name: workspace
-          required: true
-          schema:
-            type: string
       responses:
         "204":
           description: The variable was deleted.
@@ -4726,9 +4683,9 @@ paths:
       description: Update a deployment environment level variable.
       operationId: updateDeploymentVariable
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -4747,11 +4704,6 @@ paths:
         - description: The UUID of the variable to update.
           in: path
           name: variable_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -5196,20 +5148,15 @@ paths:
       description: Find environments
       operationId: getEnvironmentsForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -5226,20 +5173,15 @@ paths:
       description: Create an environment.
       operationId: createEnvironment
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -5281,9 +5223,9 @@ paths:
       description: Delete an environment
       operationId: deleteEnvironmentForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -5296,11 +5238,6 @@ paths:
         - description: The environment UUID.
           in: path
           name: environment_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -5319,9 +5256,9 @@ paths:
       description: Retrieve an environment
       operationId: getEnvironmentForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -5334,11 +5271,6 @@ paths:
         - description: The environment UUID.
           in: path
           name: environment_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -5362,9 +5294,9 @@ paths:
       description: Update an environment
       operationId: updateEnvironmentForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -5377,11 +5309,6 @@ paths:
         - description: The environment UUID.
           in: path
           name: environment_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -5803,15 +5730,7 @@ paths:
         - repositories
   "/repositories/{workspace}/{repo_slug}/hooks":
     get:
-      description: >-
-        Returns a paginated list of webhooks installed on this repository.
-
-
-        The teams endpoint for projects has been deprecated, and you should
-
-        ensure you are using the workspaces endpoint.
-
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+      description: Returns a paginated list of webhooks installed on this repository.
       responses:
         "200":
           content:
@@ -5863,19 +5782,14 @@ paths:
         Creates a new webhook on the specified repository.
 
 
-        The teams endpoint for projects has been deprecated, and you should
-
-        ensure you are using the workspaces endpoint.
-
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
-
-
         Example:
 
 
         ```
 
-        $ curl -X POST -u credentials -H 'Content-Type: application/json'           https://api.bitbucket.org/2.0/repositories/username/slug/hooks           -d '
+        $ curl -X POST -u credentials -H 'Content-Type: application/json'
+          https://api.bitbucket.org/2.0/repositories/my-workspace/my-repo-slug/hooks
+          -d '
             {
               "description": "Webhook Description",
               "url": "https://example.com/",
@@ -8019,20 +7933,15 @@ paths:
       description: Find pipelines
       operationId: getPipelinesForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8258,20 +8167,15 @@ paths:
         ```
       operationId: createPipelineForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8313,9 +8217,9 @@ paths:
       description: Retrieve a specified pipeline
       operationId: getPipelineForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -8328,11 +8232,6 @@ paths:
         - description: The pipeline UUID.
           in: path
           name: pipeline_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8356,9 +8255,9 @@ paths:
       description: Find steps for the given pipeline.
       operationId: getPipelineStepsForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -8371,11 +8270,6 @@ paths:
         - description: The UUID of the pipeline.
           in: path
           name: pipeline_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8393,9 +8287,9 @@ paths:
       description: Retrieve a given step of a pipeline.
       operationId: getPipelineStepForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -8414,11 +8308,6 @@ paths:
         - description: The UUID of the step.
           in: path
           name: step_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8446,9 +8335,9 @@ paths:
         This endpoint supports (and encourages!) the use of [HTTP Range requests](https://tools.ietf.org/html/rfc7233) to deal with potentially very large log files.
       operationId: getPipelineStepLogForRepository
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -8467,11 +8356,6 @@ paths:
         - description: The UUID of the step.
           in: path
           name: step_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8617,9 +8501,9 @@ paths:
       description: Signal the stop of a pipeline and all of its steps that not have completed yet.
       operationId: stopPipeline
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -8632,11 +8516,6 @@ paths:
         - description: The UUID of the pipeline.
           in: path
           name: pipeline_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8687,20 +8566,15 @@ paths:
       description: Update the pipelines configuration for a repository.
       operationId: updateRepositoryPipelineConfig
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8725,20 +8599,15 @@ paths:
       description: Update the next build number that should be assigned to a pipeline. The next build number that will be configured has to be strictly higher than the current latest build number for this repository.
       operationId: updateRepositoryBuildNumber
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8775,20 +8644,15 @@ paths:
       description: Retrieve the configured schedules for the given repository.
       operationId: getRepositoryPipelineSchedules
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8811,20 +8675,15 @@ paths:
       description: Create a schedule for the given repository.
       operationId: createRepositoryPipelineSchedule
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8867,9 +8726,9 @@ paths:
       description: Delete a schedule.
       operationId: deleteRepositoryPipelineSchedule
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -8882,11 +8741,6 @@ paths:
         - description: The uuid of the schedule.
           in: path
           name: schedule_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8905,9 +8759,9 @@ paths:
       description: Retrieve a schedule by its UUID.
       operationId: getRepositoryPipelineSchedule
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -8920,11 +8774,6 @@ paths:
         - description: The uuid of the schedule.
           in: path
           name: schedule_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8947,9 +8796,9 @@ paths:
       description: Update a schedule.
       operationId: updateRepositoryPipelineSchedule
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -8962,11 +8811,6 @@ paths:
         - description: The uuid of the schedule.
           in: path
           name: schedule_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -8997,20 +8841,15 @@ paths:
       description: Retrieve the executions of a given schedule.
       operationId: getRepositoryPipelineScheduleExecutions
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9039,20 +8878,15 @@ paths:
       description: Delete the repository SSH key pair.
       operationId: deleteRepositoryPipelineKeyPair
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9071,20 +8905,15 @@ paths:
       description: Retrieve the repository SSH key pair excluding the SSH private key. The private key is a write only field and will never be exposed in the logs or the REST API.
       operationId: getRepositoryPipelineSshKeyPair
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9107,20 +8936,15 @@ paths:
       description: Create or update the repository SSH key pair. The private key will be set as a default SSH identity in your build container.
       operationId: updateRepositoryPipelineKeyPair
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9151,20 +8975,15 @@ paths:
       description: Find repository level known hosts.
       operationId: getRepositoryPipelineKnownHosts
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9181,20 +9000,15 @@ paths:
       description: Create a repository level known host.
       operationId: createRepositoryPipelineKnownHost
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9236,9 +9050,9 @@ paths:
       description: Delete a repository level known host.
       operationId: deleteRepositoryPipelineKnownHost
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -9251,11 +9065,6 @@ paths:
         - description: The UUID of the known host to delete.
           in: path
           name: known_host_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9274,9 +9083,9 @@ paths:
       description: Retrieve a repository level known host.
       operationId: getRepositoryPipelineKnownHost
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -9289,11 +9098,6 @@ paths:
         - description: The UUID of the known host to retrieve.
           in: path
           name: known_host_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9316,9 +9120,9 @@ paths:
       description: Update a repository level known host.
       operationId: updateRepositoryPipelineKnownHost
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -9331,11 +9135,6 @@ paths:
         - description: The UUID of the known host to update.
           in: path
           name: known_host_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9366,20 +9165,15 @@ paths:
       description: Find repository level variables.
       operationId: getRepositoryPipelineVariables
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9396,20 +9190,15 @@ paths:
       description: Create a repository level variable.
       operationId: createRepositoryPipelineVariable
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
         - description: The repository.
           in: path
           name: repo_slug
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9451,9 +9240,9 @@ paths:
       description: Delete a repository level variable.
       operationId: deleteRepositoryPipelineVariable
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -9466,11 +9255,6 @@ paths:
         - description: The UUID of the variable to delete.
           in: path
           name: variable_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9489,9 +9273,9 @@ paths:
       description: Retrieve a repository level variable.
       operationId: getRepositoryPipelineVariable
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -9504,11 +9288,6 @@ paths:
         - description: The UUID of the variable to retrieve.
           in: path
           name: variable_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -9531,9 +9310,9 @@ paths:
       description: Update a repository level variable.
       operationId: updateRepositoryPipelineVariable
       parameters:
-        - description: The account.
-          in: query
-          name: username
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: path
+          name: workspace
           required: true
           schema:
             type: string
@@ -9546,11 +9325,6 @@ paths:
         - description: The UUID of the variable to update.
           in: path
           name: variable_uuid
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: workspace
           required: true
           schema:
             type: string
@@ -13649,14 +13423,7 @@ paths:
 
             identifies the commit from which the content will be
 
-            inherited.
-
-
-            When more than 2 parents are provided on a Mercurial repo,
-
-            a 400 is returned as Mercurial does not support "octopus
-
-            merges".
+            inherited.".
           in: query
           name: parents
           required: false
@@ -13724,11 +13491,6 @@ paths:
             tip/HEAD at the time the request is made. When this is not
 
             the case, a 409 is returned.
-
-
-            This API cannot be used to create new anonymous heads in
-
-            Mercurial repositories.
 
 
             When a new branch name is specified (that does not already
@@ -14099,7 +13861,7 @@ paths:
 
         details.
       parameters:
-        - description: If 'meta' is provided, returns the (json) meta data for the contents of the file.  If 'rendered' is provided, returns the contents of a non-binary file in HTML-formatted rendered markup. Since Git and Mercurial do not generally track what text encoding scheme is used, this endpoint attempts to detect the most appropriate character encoding. While usually correct, determining the character encoding can be ambiguous which in exceptional cases can lead to misinterpretation of the characters. As such, the raw element in the response object should not be treated as equivalent to the file's actual contents.
+        - description: If 'meta' is provided, returns the (json) meta data for the contents of the file.  If 'rendered' is provided, returns the contents of a non-binary file in HTML-formatted rendered markup. Since Git does not generally track what text encoding scheme is used, this endpoint attempts to detect the most appropriate character encoding. While usually correct, determining the character encoding can be ambiguous which in exceptional cases can lead to misinterpretation of the characters. As such, the raw element in the response object should not be treated as equivalent to the file's actual contents.
           in: query
           name: format
           required: false
@@ -16205,7 +15967,7 @@ paths:
 
         Note that the character encoding of the contents of the diff is
 
-        unspecified as Git and Mercurial do not track this, making it hard for
+        unspecified as Git does not track this, making it hard for
 
         Bitbucket to reliably determine this.
       parameters:
@@ -16286,7 +16048,7 @@ paths:
 
         Note that the character encoding of the contents of the patch is
 
-        unspecified as Git and Mercurial do not track this, making it hard for
+        unspecified as Git does not track this, making it hard for
 
         Bitbucket to reliably determine this.
       responses:
@@ -16342,9 +16104,11 @@ paths:
         with.
 
 
-        This endpoint has been deprecated, and you should use the new workspaces endpoint.
+        **This endpoint has been deprecated,
 
-        For more information, see [this post](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+        and you should use the [workspaces](./workspaces) endpoint.
+
+        For more information, see [this post](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       parameters:
         - description: >
             
@@ -16388,6 +16152,7 @@ paths:
     parameters: []
   "/teams/{username}":
     get:
+      deprecated: true
       description: >-
         Gets the public information associated with a team.
 
@@ -16395,6 +16160,13 @@ paths:
         If the team's profile is private, `location`, `website` and
 
         `created_on` elements are omitted.
+
+
+        **This endpoint has been deprecated,
+
+        and you should use the [workspace](../workspaces/%7Bworkspace%7D) endpoint.
+
+        For more information, see [this post](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -16428,7 +16200,14 @@ paths:
           type: string
   "/teams/{username}/followers":
     get:
-      description: Returns the list of accounts that are following this team.
+      deprecated: true
+      description: >-
+        Returns the list of accounts that are following this team.
+
+
+        **This endpoint has been deprecated. There is no workspaces replacement.
+
+        For more information, see [this post](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -16467,9 +16246,9 @@ paths:
         Returns the list of accounts this team is following.
 
 
-        This endpoint has been deprecated, and you should use the new workspaces endpoint.
+        **This endpoint has been deprecated. There is no workspaces replacement.
 
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+        For more information, see [this post](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -16504,7 +16283,16 @@ paths:
           type: string
   "/teams/{username}/hooks":
     get:
-      description: Returns a paginated list of webhooks installed on this team.
+      deprecated: true
+      description: >-
+        Returns a paginated list of webhooks installed on this team.
+
+
+        **This endpoint has been deprecated, and you should
+
+        use the new [workspace hooks](../../workspaces/%7Bworkspace%7D/hooks#get) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -16545,6 +16333,7 @@ paths:
         schema:
           type: string
     post:
+      deprecated: true
       description: >-
         Creates a new webhook on the specified team.
 
@@ -16555,6 +16344,13 @@ paths:
 
 
         Note that only admins can install webhooks on teams.
+
+
+        **This endpoint has been deprecated, and you should
+
+        use the new [workspace hooks](../../workspaces/%7Bworkspace%7D/hooks#post) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "201":
           content:
@@ -16589,10 +16385,18 @@ paths:
         - webhooks
   "/teams/{username}/hooks/{uid}":
     delete:
+      deprecated: true
       description: >-
         Deletes the specified webhook subscription from the given team
 
         account.
+
+
+        **This endpoint has been deprecated, and you should
+
+        use the new [workspace hooks](../../../workspaces/%7Bworkspace%7D/hooks/%7Buid%7D#delete) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "204":
           description: When the webhook was deleted successfully
@@ -16617,10 +16421,18 @@ paths:
         - teams
         - webhooks
     get:
+      deprecated: true
       description: >-
         Returns the webhook with the specified id installed on the given
 
         team account.
+
+
+        **This endpoint has been deprecated, and you should
+
+        use the new [workspace hooks](../../../workspaces/%7Bworkspace%7D/hooks/%7Buid%7D#get) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -16661,6 +16473,7 @@ paths:
         schema:
           type: string
     put:
+      deprecated: true
       description: >-
         Updates the specified webhook subscription.
 
@@ -16675,6 +16488,13 @@ paths:
         * `active`
 
         * `events`
+
+
+        **This endpoint has been deprecated, and you should
+
+        use the new [workspace hooks](../../../workspaces/%7Bworkspace%7D/hooks/%7Buid%7D#put) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -16715,16 +16535,13 @@ paths:
         repositories.
 
 
-        This operation has been deprecated due to privacy changes.
+        **This operation has been deprecated due to privacy changes.
 
         See the [announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/)
 
         for details.
 
-
-        Use this [workspaces](https://developer.atlassian.com/bitbucket/api/2/reference/resource/workspaces/%7Bworkspace%7D/members)
-
-        endpoint as a replacement.
+        You should this [workspaces](../../workspaces/%7Bworkspace%7D/members) endpoint as a replacement.**
       responses:
         "200":
           content:
@@ -16781,9 +16598,11 @@ paths:
         Returns an object for each team permission a user on the team has.
 
 
-        This endpoint has been deprecated, and you should use the new workspaces endpoint.
+        **This endpoint has been deprecated,
 
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/)."
+        and you should use the [workspace permissions](../../workspaces/%7Bworkspace%7D/permissions) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
 
 
         Permissions returned are effective permissions — if a user is a member of
@@ -16925,9 +16744,11 @@ paths:
         team’s repositories.
 
 
-        This endpoint has been deprecated, and you should use the new workspaces endpoint.
+        **This endpoint has been deprecated,
 
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/)."
+        and you should use the [workspace repository permissions](../../../workspaces/%7Bworkspace%7D/permissions/repositories) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
 
 
         If the username URL parameter refers to a user account instead of
@@ -17082,9 +16903,11 @@ paths:
         Returns an object for each repository permission of a given repository.
 
 
-        This endpoint has been deprecated, and you should use the new workspaces endpoint.
+        **This endpoint has been deprecated,
 
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/)."
+        and you should use the [workspace repository permissions](../../../../workspaces/%7Bworkspace%7D/permissions/repositories/%7Brepo_slug%7D) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
 
 
         If the username URL parameter refers to a user account instead of
@@ -17248,8 +17071,13 @@ paths:
         This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
       operationId: getPipelineVariablesForTeam
       parameters:
-        - description: The account.
-          in: path
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: query
+          name: workspace
+          required: true
+          schema:
+            type: string
+        - in: path
           name: username
           required: true
           schema:
@@ -17271,8 +17099,13 @@ paths:
         This endpoint has been deprecated, and you should use the new workspaces endpoint. For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
       operationId: createPipelineVariableForTeam
       parameters:
-        - description: The account.
-          in: path
+        - description: This can either be the workspace ID (slug) or the workspace UUID surrounded by curly-braces, for example `{workspace UUID}`.
+          in: query
+          name: workspace
+          required: true
+          schema:
+            type: string
+        - in: path
           name: username
           required: true
           schema:
@@ -17411,12 +17244,13 @@ paths:
         - pipelines
   "/teams/{username}/projects/":
     get:
+      deprecated: true
       description: >-
-        The teams endpoint for projects has been deprecated, and you should
+        **This endpoint has been deprecated,
 
-        ensure you are using the workspaces endpoint.
+        and you should use the [workspace projects](../../../workspaces/%7Bworkspace%7D/projects#get) endpoint.
 
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -17456,15 +17290,16 @@ paths:
         schema:
           type: string
     post:
+      deprecated: true
       description: >-
         Creates a new project.
 
 
-        The teams endpoint for projects has been deprecated, and you should
+        **This endpoint has been deprecated,
 
-        ensure you are using the workspaces endpoint.
+        and you should use the [workspace projects](../../../workspaces/%7Bworkspace%7D/projects#post) endpoint.
 
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
 
 
         Note that the avatar has to be embedded as either a data-url
@@ -17570,12 +17405,13 @@ paths:
         - projects
   "/teams/{username}/projects/{project_key}":
     delete:
+      deprecated: true
       description: >-
-        The teams endpoint for projects has been deprecated, and you should
+        **This endpoint has been deprecated,
 
-        ensure you are using the workspaces endpoint.
+        and you should use the [workspace project](../../../workspaces/%7Bworkspace%7D/projects/%7Bproject_key%7D#delete) endpoint.
 
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "204":
           description: Successful deletion.
@@ -17599,12 +17435,13 @@ paths:
       tags:
         - projects
     get:
+      deprecated: true
       description: >-
-        The teams endpoint for projects has been deprecated, and you should
+        **This endpoint has been deprecated,
 
-        ensure you are using the workspaces endpoint.
+        and you should use the [workspace project](../../../workspaces/%7Bworkspace%7D/projects/%7Bproject_key%7D#get) endpoint.
 
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -17653,17 +17490,18 @@ paths:
         schema:
           type: string
     put:
+      deprecated: true
       description: >-
         Since this endpoint can be used to both update and to create a
 
         project, the request body depends on the intent.
 
 
-        The teams endpoint for projects has been deprecated, and you should
+        **This endpoint has been deprecated,
 
-        ensure you are using the workspaces endpoint.
+        and you should use the [workspace project](../../../workspaces/%7Bworkspace%7D/projects/%7Bproject_key%7D#put) endpoint.
 
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
 
 
         ### Creation
@@ -17994,15 +17832,18 @@ paths:
         - search
   "/teams/{workspace}/repositories":
     get:
+      deprecated: true
       description: >-
         All repositories in the given workspace. This includes any private
 
         repositories the calling user has access to.
 
 
-        The teams and users endpoints have been deprecated. Use the [/repositories/{workspace}](https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D)
-         endpoint in place of both of these endpoints.
-        For more information, see the [deprecation announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+        **This endpoint has been deprecated,
+
+        and you should use the [repository list](../../repositories/%7Bworkspace%7D) endpoint.
+
+        For more information, see the [deprecation announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         default:
           content:
@@ -18246,6 +18087,7 @@ paths:
     parameters: []
   /user/permissions/teams:
     get:
+      deprecated: true
       description: >-
         Returns an object for each team the caller is a member of, and their
 
@@ -18254,6 +18096,13 @@ paths:
         user is a member of multiple groups with distinct roles, only the
 
         highest level is returned.
+
+
+        **This endpoint has been deprecated,
+
+        and you should use the [workspace permissions](./workspaces) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
 
 
         Permissions can be:
@@ -18533,11 +18382,11 @@ paths:
         Use the account's UUID or account_id instead.
 
 
-        Also note that the users endpoint has been deprecated, and the workspaces
+        **This endpoint has been deprecated, and you should
 
-        endpoint should be used instead.
+        use the new [workspace hooks](../../workspaces/%7Bworkspace%7D/hooks#get) endpoint.
 
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -18576,6 +18425,7 @@ paths:
         schema:
           type: string
     post:
+      deprecated: true
       description: >-
         Creates a new webhook on the specified user account.
 
@@ -18597,11 +18447,11 @@ paths:
         Use the account's UUID or account_id instead.
 
 
-        The users endpoints have been deprecated, and the workspaces
+        **This endpoint has been deprecated, and you should
 
-        endpoint should be used instead.
+        use the new [workspace hooks](../../workspaces/%7Bworkspace%7D/hooks#post) endpoint.
 
-        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "201":
           content:
@@ -18636,6 +18486,7 @@ paths:
         - webhooks
   "/users/{selected_user}/hooks/{uid}":
     delete:
+      deprecated: true
       description: >-
         Deletes the specified webhook subscription from the given user
 
@@ -18647,6 +18498,13 @@ paths:
         [privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).
 
         Use the account's UUID or account_id instead.
+
+
+        **This endpoint has been deprecated, and you should
+
+        use the new [workspace hooks](../../../workspaces/%7Bworkspace%7D/hooks/%7Buid%7D#delete) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "204":
           description: When the webhook was deleted successfully
@@ -18671,6 +18529,7 @@ paths:
         - users
         - webhooks
     get:
+      deprecated: true
       description: >-
         Returns the webhook with the specified id installed on the given
 
@@ -18682,6 +18541,13 @@ paths:
         [privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).
 
         Use the account's UUID or account_id instead.
+
+
+        **This endpoint has been deprecated, and you should
+
+        use the new [workspace hook details](../../../workspaces/%7Bworkspace%7D/hooks/%7Buid%7D#get) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -18720,6 +18586,7 @@ paths:
         schema:
           type: string
     put:
+      deprecated: true
       description: >-
         Updates the specified webhook subscription.
 
@@ -18741,6 +18608,13 @@ paths:
         [privacy changes](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/#removal-of-usernames-from-user-referencing-apis).
 
         Use the account's UUID or account_id instead.
+
+
+        **This endpoint has been deprecated, and you should
+
+        use the new [workspace hook details](../../../workspaces/%7Bworkspace%7D/hooks/%7Buid%7D#put) endpoint.
+
+        For more information, see [the announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -19638,7 +19512,13 @@ paths:
         - ssh
   "/users/{username}/members":
     get:
-      description: ""
+      deprecated: true
+      description: >-
+        **This endpoint has been deprecated,
+
+        and you should use the [workspaces](../../workspaces/%7Bworkspace%7D/members) endpoint.
+
+        For more information, see [this post](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         "200":
           content:
@@ -19673,15 +19553,18 @@ paths:
           type: string
   "/users/{workspace}/repositories":
     get:
+      deprecated: true
       description: >-
         All repositories in the given workspace. This includes any private
 
         repositories the calling user has access to.
 
 
-        The teams and users endpoints have been deprecated. Use the [/repositories/{workspace}](https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D)
-         endpoint in place of both of these endpoints.
-        For more information, see the [deprecation announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).
+        **This endpoint has been deprecated,
+
+        and you should use the [repository list](../../repositories/%7Bworkspace%7D) endpoint.
+
+        For more information, see the [deprecation announcement](https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-teams-deprecation/).**
       responses:
         default:
           content:
@@ -20575,6 +20458,28 @@ paths:
         required: true
         schema:
           type: string
+  "/workspaces/{workspace}/pipelines-config/identity/oidc/.well-known/openid-configuration":
+    get:
+      parameters:
+        - in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Default response
+  "/workspaces/{workspace}/pipelines-config/identity/oidc/keys.json":
+    get:
+      parameters:
+        - in: path
+          name: workspace
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Default response
   "/workspaces/{workspace}/pipelines-config/variables":
     get:
       description: Find workspace level variables.
@@ -21643,6 +21548,7 @@ components:
                 - force
                 - restrict_merges
                 - enforce_merge_checks
+                - reset_pullrequest_changes_requested_on_change
                 - require_approvals_to_merge
                 - allow_auto_merge_when_builds_pass
                 - delete
@@ -22302,13 +22208,15 @@ components:
           enum:
             - pullrequest:unapproved
             - issue:comment_created
-            - pullrequest:approved
-            - repo:created
-            - repo:deleted
             - repo:imported
+            - repo:created
+            - repo:commit_comment_created
+            - pullrequest:approved
             - pullrequest:comment_updated
             - issue:updated
             - project:updated
+            - repo:deleted
+            - pullrequest:changes_request_created
             - pullrequest:comment_created
             - repo:commit_status_updated
             - pullrequest:updated
@@ -22319,10 +22227,10 @@ components:
             - repo:updated
             - pullrequest:rejected
             - pullrequest:fulfilled
-            - repo:push
             - pullrequest:created
+            - pullrequest:changes_request_removed
             - repo:transfer
-            - repo:commit_comment_created
+            - repo:push
           type: string
         label:
           description: Summary of the webhook event type.
@@ -22831,6 +22739,37 @@ components:
         values:
           items:
             $ref: "#/components/schemas/branchrestriction"
+          minItems: 0
+          type: array
+          uniqueItems: true
+      type: object
+    paginated_changeset:
+      additionalProperties: false
+      description: A paginated list of commits.
+      properties:
+        next:
+          description: Link to the next page if it exists. The last page of a collection does not have this value. Use this link to navigate the result set and refrain from constructing your own URLs.
+          format: uri
+          type: string
+        page:
+          description: Page number of the current results. This is an optional element that is not provided in all responses.
+          minimum: 1
+          type: integer
+        pagelen:
+          description: Current number of objects on the existing page. The default value is 10 with 100 being the maximum allowed value. Individual APIs may enforce different values.
+          minimum: 1
+          type: integer
+        previous:
+          description: Link to previous page if it exists. A collections first page does not have this value. This is an optional element that is not provided in all responses. Some result sets strictly support forward navigation and never provide previous links. Clients must anticipate that backwards navigation is not always available. Use this link to navigate the result set and refrain from constructing your own URLs.
+          format: uri
+          type: string
+        size:
+          description: Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.
+          minimum: 0
+          type: integer
+        values:
+          items:
+            $ref: "#/components/schemas/base_commit"
           minItems: 0
           type: array
           uniqueItems: true
@@ -25944,13 +25883,15 @@ components:
                 enum:
                   - pullrequest:unapproved
                   - issue:comment_created
-                  - pullrequest:approved
-                  - repo:created
-                  - repo:deleted
                   - repo:imported
+                  - repo:created
+                  - repo:commit_comment_created
+                  - pullrequest:approved
                   - pullrequest:comment_updated
                   - issue:updated
                   - project:updated
+                  - repo:deleted
+                  - pullrequest:changes_request_created
                   - pullrequest:comment_created
                   - repo:commit_status_updated
                   - pullrequest:updated
@@ -25961,10 +25902,10 @@ components:
                   - repo:updated
                   - pullrequest:rejected
                   - pullrequest:fulfilled
-                  - repo:push
                   - pullrequest:created
+                  - pullrequest:changes_request_removed
                   - repo:transfer
-                  - repo:commit_comment_created
+                  - repo:push
                 type: string
               minItems: 1
               type: array
@@ -30006,4 +29947,4 @@ x-radar-pages:
     icon: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMjU3LjMxNjMgMTYyLjU5OTQiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGlzb2xhdGlvbjogaXNvbGF0ZTsKICAgICAgfQoKICAgICAgLmNscy0yIHsKICAgICAgICBmaWxsOiAjMzQ0NTYzOwogICAgICB9CgogICAgICAuY2xzLTMgewogICAgICAgIGZpbGw6ICMxZGI5ZDQ7CiAgICAgIH0KCiAgICAgIC5jbHMtNCB7CiAgICAgICAgZmlsbDogIzAwNTdkODsKICAgICAgfQoKICAgICAgLmNscy01LCAuY2xzLTcsIC5jbHMtOSB7CiAgICAgICAgbWl4LWJsZW5kLW1vZGU6IG11bHRpcGx5OwogICAgICB9CgogICAgICAuY2xzLTUgewogICAgICAgIGZpbGw6IHVybCgjTjc1KTsKICAgICAgfQoKICAgICAgLmNscy02IHsKICAgICAgICBmaWxsOiAjMDA2NWZmOwogICAgICB9CgogICAgICAuY2xzLTcgewogICAgICAgIGZpbGw6IHVybCgjTjc1LTIpOwogICAgICB9CgogICAgICAuY2xzLTggewogICAgICAgIGZpbGw6IHVybCgjbGluZWFyLWdyYWRpZW50KTsKICAgICAgfQoKICAgICAgLmNscy05IHsKICAgICAgICBmaWxsOiB1cmwoI043NS0zKTsKICAgICAgfQoKICAgICAgLmNscy0xMCB7CiAgICAgICAgZmlsbDogdXJsKCNUMjAwLVQ3NSk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Ik43NSIgeDE9Ii0yMTg5LjU1NiIgeTE9IjI4MDguMjI4NCIgeDI9Ii0yMDkxLjE1NTEiIHkyPSIyODA4LjIyODQiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMC4xNjgxLCAwLjk4NTgsIDAuOTg1OCwgLTAuMTY4MSwgLTIzNzMuNzM2LCAyNzIyLjEyNzgpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2U1ZThlYyIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNWU4ZWMiIHN0b3Atb3BhY2l0eT0iMC4xIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJONzUtMiIgZGF0YS1uYW1lPSJONzUiIHgxPSItMjE2OC41OTQ3IiB5MT0iMjkzNS4wNTU2IiB4Mj0iLTIwNzAuMTkzNyIgeTI9IjI5MzUuMDU1NiIgeGxpbms6aHJlZj0iI043NSIvPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQiIHgxPSIxOTAuMzU0NyIgeTE9IjE1OS45NjciIHgyPSIyNTkuOTQ4NyIgeTI9IjkwLjM3MyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzNDQ1NjMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWU2Yzg0Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJONzUtMyIgZGF0YS1uYW1lPSJONzUiIHgxPSItMjI1Ny4zOTc3IiB5MT0iMjg4NC4yMjYzIiB4Mj0iLTIxNTguOTk2NyIgeTI9IjI4ODQuMjI2MyIgeGxpbms6aHJlZj0iI043NSIvPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJUMjAwLVQ3NSIgeDE9IjEyNi4wMjU3IiB5MT0iODUuMTA4IiB4Mj0iMTk1LjYxOTciIHkyPSIxNS41MTQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjM2RjN2RjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljZTNlZSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHRpdGxlPkFkZCBPbiBCbG9ja3MgMjwvdGl0bGU+CiAgPGcgY2xhc3M9ImNscy0xIj4KICAgIDxnIGlkPSJMYXllcl8yIiBkYXRhLW5hbWU9IkxheWVyIDIiPgogICAgICA8ZyBpZD0iT2JqZWN0cyI+CiAgICAgICAgPHJlY3QgaWQ9Il9SZWN0YW5nbGVfIiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTIiIHg9IjEyOC42NTgxIiB5PSI4Ny43NDA1IiB3aWR0aD0iNjQuMzI5MSIgaGVpZ2h0PSI3NC44NTkiLz4KICAgICAgICA8cmVjdCBpZD0iX1JlY3RhbmdsZV8yIiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTMiIHg9IjY0LjMyOTEiIHk9IjEyLjg4MTUiIHdpZHRoPSI2NC4zMjkxIiBoZWlnaHQ9Ijc0Ljg1OSIvPgogICAgICAgIDxyZWN0IGlkPSJfUmVjdGFuZ2xlXzMiIGRhdGEtbmFtZT0iJmx0O1JlY3RhbmdsZSZndDsiIGNsYXNzPSJjbHMtNCIgeT0iODcuNzQwNSIgd2lkdGg9IjY0LjMyOTEiIGhlaWdodD0iNzQuODU5Ii8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNjQuMzI5MSw4Ny43NEg1OC42NTIzYTYyLjc4NzcsNjIuNzg3NywwLDAsMC0yNC41Njg0LDIwLjc2MjFjLTguMjYwNywxMi4xOTYtNC4zNDM3LDE4LjI0MTUtMTEuNjYzNywzMS42Mzk1QzE2LjUxLDE1MC45Niw4LjA1MSwxNTcuODIsMCwxNjIuNTU2di4wNDM1aDY0LjMyOVoiLz4KICAgICAgICA8cmVjdCBpZD0iX1JlY3RhbmdsZV80IiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTYiIHg9IjY0LjMyOTEiIHk9Ijg3Ljc0MDUiIHdpZHRoPSI2NC4zMjkxIiBoZWlnaHQ9Ijc0Ljg1OSIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTE5Mi45ODcyLDg3Ljc0SDE4My4zNDNhNjIuNzg3Nyw2Mi43ODc3LDAsMCwwLTI0LjU2ODQsMjAuNzYyMWMtOC4yNjA3LDEyLjE5Ni00LjM0MzgsMTguMjQxNS0xMS42NjM3LDMxLjYzOTVhNTYuNzI0Niw1Ni43MjQ2LDAsMCwxLTE4LjQ1MjcsMTkuOTF2Mi41NDc0aDY0LjMyOVoiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTgiIHg9IjE5Mi45ODcyIiB5PSI4Ny43NDA1IiB3aWR0aD0iNjQuMzI5MSIgaGVpZ2h0PSI3NC44NTkiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTkiIGQ9Ik0xMjguNjU4MiwxMi44ODE1SDExNi41OUE2MS45NjQ2LDYxLjk2NDYsMCwwLDAsMTAxLjMyMzMsMjguMjE1QzkzLjA2MjUsNDAuNDEwOSw5Ni45Nzk0LDQ2LjQ1NjUsODkuNjYsNTkuODU0NCw4My4wMzE2LDcxLjk4NTcsNzMuMTk3LDc5LjE1MTQsNjQuMzI5MSw4My45MTA4djMuODNoNjQuMzI5MVoiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTEwIiB4PSIxMjguNjU4MSIgeT0iMTIuODgxNSIgd2lkdGg9IjY0LjMyOTEiIGhlaWdodD0iNzQuODU5Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSIxMC4xNjA1IiB5PSI3NC44NTkiIHdpZHRoPSIyNC43NTM2IiBoZWlnaHQ9IjEyLjg4MTUiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTQiIHg9IjUxLjk1MjMiIHk9Ijc0Ljg1OSIgd2lkdGg9IjI0Ljc1MzYiIGhlaWdodD0iMTIuODgxNSIvPgogICAgICAgIDxyZWN0IGNsYXNzPSJjbHMtNCIgeD0iOTMuNzQ0MSIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIxMzguODE4NiIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIxODAuNjEwNCIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIyMjIuNDAyMiIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSI3NC40ODk1IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSIxMTYuMjgxNCIgd2lkdGg9IjI0Ljc1MzYiIGhlaWdodD0iMTIuODgxNSIvPgogICAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMyIgeD0iMTU4LjA3MzIiIHdpZHRoPSIyNC43NTM2IiBoZWlnaHQ9IjEyLjg4MTUiLz4KICAgICAgPC9nPgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cg==
     key: bb-connect
     title: Atlassian Connect
-x-revision: c2cc27dc0c65
+x-revision: 2ec5084b4f14
