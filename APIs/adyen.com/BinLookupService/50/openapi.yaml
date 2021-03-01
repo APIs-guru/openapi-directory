@@ -14,9 +14,9 @@ info:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/BinLookupService-v50.json
       version: "3.0"
+  x-preferred: true
   x-providerName: adyen.com
   x-serviceName: BinLookupService
-  x-preferred: true
 paths:
   /get3dsAvailability:
     post:

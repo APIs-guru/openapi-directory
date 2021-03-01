@@ -56,9 +56,9 @@ info:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/FundService-v6.json
       version: "3.0"
+  x-preferred: true
   x-providerName: adyen.com
   x-serviceName: FundService
-  x-preferred: true
 paths:
   /accountHolderBalance:
     post:

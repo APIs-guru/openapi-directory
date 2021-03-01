@@ -57,9 +57,9 @@ info:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/PaymentService-v64.json
       version: "3.0"
+  x-preferred: true
   x-providerName: adyen.com
   x-serviceName: PaymentService
-  x-preferred: true
 paths:
   /adjustAuthorisation:
     post:
