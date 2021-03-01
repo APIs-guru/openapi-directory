@@ -1,0 +1,282 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Pricing
+  version: 1.10.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://static1.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_pricing_v2.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_pricing_v2
+paths:
+  /v2/Voice/Countries:
+    description: Voice pricing by country
+    get:
+      description: ""
+      operationId: ListVoiceCountry
+      parameters:
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  countries:
+                    items:
+                      $ref: "#/components/schemas/pricing.v2.voice.voice_country"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListVoiceCountryResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://pricing.twilio.com
+    x-default-output-properties:
+      - country
+      - price_unit
+    x-path-type: list
+  "/v2/Voice/Countries/{IsoCountry}":
+    description: Voice pricing by country
+    get:
+      description: Fetch a specific Country.
+      operationId: FetchVoiceCountry
+      parameters:
+        - description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the origin-based voice pricing information to fetch.
+          in: path
+          name: IsoCountry
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/pricing.v2.voice.voice_country-instance"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://pricing.twilio.com
+    x-default-output-properties:
+      - country
+      - price_unit
+    x-path-type: instance
+  "/v2/Voice/Numbers/{DestinationNumber}":
+    description: Voice pricing for a specific phone number
+    get:
+      description: Fetch pricing information for a specific destination and, optionally, origination phone number.
+      operationId: FetchVoiceNumber
+      parameters:
+        - description: The destination phone number, in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, for which to fetch the origin-based voice pricing information. E.164 format consists of a + followed by the country code and subscriber number.
+          in: path
+          name: DestinationNumber
+          required: true
+          schema:
+            type: string
+        - description: The origination phone number, in [E.164](https://www.twilio.com/docs/glossary/what-e164) format, for which to fetch the origin-based voice pricing information. E.164 format consists of a + followed by the country code and subscriber number.
+          in: query
+          name: OriginationNumber
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/pricing.v2.voice.voice_number"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://pricing.twilio.com
+    x-default-output-properties:
+      - country
+      - inbound_call_price
+      - price_unit
+    x-path-type: instance
+components:
+  schemas:
+    currency:
+      nullable: true
+      type: string
+    inbound_call_price:
+      nullable: true
+      properties:
+        base_price:
+          type: number
+        current_price:
+          type: number
+        number_type:
+          type: string
+      type: object
+    inbound_call_price_list:
+      items:
+        properties:
+          base_price:
+            type: number
+          current_price:
+            type: number
+          number_type:
+            type: string
+        type: object
+      nullable: true
+      type: array
+    iso_country_code:
+      nullable: true
+      type: string
+    outbound_call_price_with_origin_list:
+      items:
+        properties:
+          base_price:
+            type: number
+          current_price:
+            type: number
+          origination_prefixes:
+            items:
+              type: string
+            type: array
+        type: object
+      nullable: true
+      type: array
+    outbound_prefix_price_with_origin_list:
+      items:
+        properties:
+          base_price:
+            type: number
+          current_price:
+            type: number
+          destination_prefixes:
+            items:
+              type: string
+            type: array
+          friendly_name:
+            type: string
+          origination_prefixes:
+            items:
+              type: string
+            type: array
+        type: object
+      nullable: true
+      type: array
+    phone_number_e164:
+      nullable: true
+      type: string
+    pricing.v2.voice:
+      properties:
+        links:
+          $ref: "#/components/schemas/uri_map"
+        name:
+          $ref: "#/components/schemas/string"
+        url:
+          $ref: "#/components/schemas/url"
+      type: object
+    pricing.v2.voice.voice_country:
+      properties:
+        country:
+          $ref: "#/components/schemas/string"
+        iso_country:
+          $ref: "#/components/schemas/iso_country_code"
+        url:
+          $ref: "#/components/schemas/url"
+      type: object
+    pricing.v2.voice.voice_country-instance:
+      properties:
+        country:
+          $ref: "#/components/schemas/string"
+        inbound_call_prices:
+          $ref: "#/components/schemas/inbound_call_price_list"
+        iso_country:
+          $ref: "#/components/schemas/iso_country_code"
+        outbound_prefix_prices:
+          $ref: "#/components/schemas/outbound_prefix_price_with_origin_list"
+        price_unit:
+          $ref: "#/components/schemas/currency"
+        url:
+          $ref: "#/components/schemas/url"
+      type: object
+    pricing.v2.voice.voice_number:
+      properties:
+        country:
+          $ref: "#/components/schemas/string"
+        destination_number:
+          $ref: "#/components/schemas/phone_number_e164"
+        inbound_call_price:
+          $ref: "#/components/schemas/inbound_call_price"
+        iso_country:
+          $ref: "#/components/schemas/iso_country_code"
+        origination_number:
+          $ref: "#/components/schemas/phone_number_e164"
+        outbound_call_prices:
+          $ref: "#/components/schemas/outbound_call_price_with_origin_list"
+        price_unit:
+          $ref: "#/components/schemas/currency"
+        url:
+          $ref: "#/components/schemas/url"
+      type: object
+    string:
+      nullable: true
+      type: string
+    uri_map:
+      nullable: true
+      type: object
+    url:
+      format: uri
+      nullable: true
+      type: string
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: This product is Generally Available.
+    name: GA

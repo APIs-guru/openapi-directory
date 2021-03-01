@@ -1,0 +1,441 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Monitor
+  version: 1.10.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://static1.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_monitor_v1.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_monitor_v1
+paths:
+  /v1/Alerts:
+    description: Debugger alerts
+    get:
+      description: ""
+      operationId: ListAlert
+      parameters:
+        - description: "Only show alerts for this log-level.  Can be: `error`, `warning`, `notice`, or `debug`."
+          in: query
+          name: LogLevel
+          schema:
+            type: string
+        - description: Only include alerts that occurred on or after this date and time. Specify the date and time in GMT and format as `YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ssZ`. Queries for alerts older than 30 days are not supported.
+          in: query
+          name: StartDate
+          schema:
+            format: date-time
+            type: string
+        - description: Only include alerts that occurred on or before this date and time. Specify the date and time in GMT and format as `YYYY-MM-DD` or `YYYY-MM-DDThh:mm:ssZ`. Queries for alerts older than 30 days are not supported.
+          in: query
+          name: EndDate
+          schema:
+            format: date-time
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  alerts:
+                    items:
+                      $ref: "#/components/schemas/monitor.v1.alert"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListAlertResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://monitor.twilio.com
+    x-default-output-properties:
+      - sid
+      - error_code
+      - log_level
+      - alert_text
+    x-path-type: list
+  "/v1/Alerts/{Sid}":
+    description: Debugger alerts
+    get:
+      description: ""
+      operationId: FetchAlert
+      parameters:
+        - description: The SID of the Alert resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^NO[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/monitor.v1.alert-instance"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://monitor.twilio.com
+    x-default-output-properties:
+      - sid
+      - error_code
+      - log_level
+      - alert_text
+    x-path-type: instance
+  /v1/Events:
+    description: Debugger events
+    get:
+      description: Returns a list of events in the account, sorted by event-date.
+      operationId: ListEvent
+      parameters:
+        - description: Only include events initiated by this Actor. Useful for auditing actions taken by specific users or API credentials.
+          in: query
+          name: ActorSid
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^US[0-9a-fA-F]{32}$
+            type: string
+        - description: Only include events of this [Event Type](https://www.twilio.com/docs/usage/monitor-events#event-types).
+          in: query
+          name: EventType
+          schema:
+            type: string
+        - description: Only include events that refer to this resource. Useful for discovering the history of a specific resource.
+          in: query
+          name: ResourceSid
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^[a-zA-Z]{2}[0-9a-fA-F]{32}$
+            type: string
+        - description: Only include events that originated from this IP address. Useful for tracking suspicious activity originating from the API or the Twilio Console.
+          in: query
+          name: SourceIpAddress
+          schema:
+            type: string
+        - description: Only include events that occurred on or after this date. Specify the date in GMT and [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          in: query
+          name: StartDate
+          schema:
+            format: date-time
+            type: string
+        - description: Only include events that occurred on or before this date. Specify the date in GMT and [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          in: query
+          name: EndDate
+          schema:
+            format: date-time
+            type: string
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
+          in: query
+          name: PageSize
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  events:
+                    items:
+                      $ref: "#/components/schemas/monitor.v1.event"
+                    type: array
+                  meta:
+                    properties:
+                      first_page_url:
+                        format: uri
+                        type: string
+                      key:
+                        type: string
+                      next_page_url:
+                        format: uri
+                        type: string
+                      page:
+                        type: integer
+                      page_size:
+                        type: integer
+                      previous_page_url:
+                        format: uri
+                        type: string
+                      url:
+                        format: uri
+                        type: string
+                    type: object
+                title: ListEventResponse
+                type: object
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://monitor.twilio.com
+    x-default-output-properties:
+      - sid
+      - event_type
+      - event_type
+      - description
+    x-path-type: list
+  "/v1/Events/{Sid}":
+    description: Debugger events
+    get:
+      description: ""
+      operationId: FetchEvent
+      parameters:
+        - description: The SID of the Event resource to fetch.
+          in: path
+          name: Sid
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^AE[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/monitor.v1.event"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - GA
+    servers:
+      - url: https://monitor.twilio.com
+    x-default-output-properties:
+      - sid
+      - event_type
+      - event_type
+      - description
+    x-path-type: instance
+components:
+  schemas:
+    date_time_iso8601:
+      format: date-time
+      nullable: true
+      type: string
+    http_method:
+      enum:
+        - HEAD
+        - GET
+        - POST
+        - PATCH
+        - PUT
+        - DELETE
+      nullable: true
+      type: string
+    monitor.v1.alert:
+      properties:
+        account_sid:
+          $ref: "#/components/schemas/sid_AC"
+        alert_text:
+          $ref: "#/components/schemas/string"
+        api_version:
+          $ref: "#/components/schemas/string"
+        date_created:
+          $ref: "#/components/schemas/date_time_iso8601"
+        date_generated:
+          $ref: "#/components/schemas/date_time_iso8601"
+        date_updated:
+          $ref: "#/components/schemas/date_time_iso8601"
+        error_code:
+          $ref: "#/components/schemas/string"
+        log_level:
+          $ref: "#/components/schemas/string"
+        more_info:
+          $ref: "#/components/schemas/string"
+        request_method:
+          $ref: "#/components/schemas/http_method"
+        request_url:
+          $ref: "#/components/schemas/uri"
+        resource_sid:
+          $ref: "#/components/schemas/sid"
+        service_sid:
+          $ref: "#/components/schemas/sid"
+        sid:
+          $ref: "#/components/schemas/sid_NO"
+        url:
+          $ref: "#/components/schemas/url"
+      type: object
+    monitor.v1.alert-instance:
+      properties:
+        account_sid:
+          $ref: "#/components/schemas/sid_AC"
+        alert_text:
+          $ref: "#/components/schemas/string"
+        api_version:
+          $ref: "#/components/schemas/string"
+        date_created:
+          $ref: "#/components/schemas/date_time_iso8601"
+        date_generated:
+          $ref: "#/components/schemas/date_time_iso8601"
+        date_updated:
+          $ref: "#/components/schemas/date_time_iso8601"
+        error_code:
+          $ref: "#/components/schemas/string"
+        log_level:
+          $ref: "#/components/schemas/string"
+        more_info:
+          $ref: "#/components/schemas/string"
+        request_headers:
+          $ref: "#/components/schemas/string"
+        request_method:
+          $ref: "#/components/schemas/http_method"
+        request_url:
+          $ref: "#/components/schemas/uri"
+        request_variables:
+          $ref: "#/components/schemas/string"
+        resource_sid:
+          $ref: "#/components/schemas/sid"
+        response_body:
+          $ref: "#/components/schemas/string"
+        response_headers:
+          $ref: "#/components/schemas/string"
+        service_sid:
+          $ref: "#/components/schemas/sid"
+        sid:
+          $ref: "#/components/schemas/sid_NO"
+        url:
+          $ref: "#/components/schemas/url"
+      type: object
+    monitor.v1.event:
+      properties:
+        account_sid:
+          $ref: "#/components/schemas/sid_AC"
+        actor_sid:
+          $ref: "#/components/schemas/sid_US"
+        actor_type:
+          $ref: "#/components/schemas/string"
+        description:
+          $ref: "#/components/schemas/string"
+        event_data:
+          $ref: "#/components/schemas/object"
+        event_date:
+          $ref: "#/components/schemas/date_time_iso8601"
+        event_type:
+          $ref: "#/components/schemas/string"
+        links:
+          $ref: "#/components/schemas/uri_map"
+        resource_sid:
+          $ref: "#/components/schemas/sid"
+        resource_type:
+          $ref: "#/components/schemas/string"
+        sid:
+          $ref: "#/components/schemas/sid_AE"
+        source:
+          $ref: "#/components/schemas/string"
+        source_ip_address:
+          $ref: "#/components/schemas/string"
+        url:
+          $ref: "#/components/schemas/url"
+      type: object
+    object:
+      nullable: true
+      type: object
+    sid:
+      maxLength: 34
+      minLength: 34
+      nullable: true
+      pattern: ^[a-zA-Z]{2}[0-9a-fA-F]{32}$
+      type: string
+    sid_AC:
+      maxLength: 34
+      minLength: 34
+      nullable: true
+      pattern: ^AC[0-9a-fA-F]{32}$
+      type: string
+    sid_AE:
+      maxLength: 34
+      minLength: 34
+      nullable: true
+      pattern: ^AE[0-9a-fA-F]{32}$
+      type: string
+    sid_NO:
+      maxLength: 34
+      minLength: 34
+      nullable: true
+      pattern: ^NO[0-9a-fA-F]{32}$
+      type: string
+    sid_US:
+      maxLength: 34
+      minLength: 34
+      nullable: true
+      pattern: ^US[0-9a-fA-F]{32}$
+      type: string
+    string:
+      nullable: true
+      type: string
+    uri:
+      format: uri
+      nullable: true
+      type: string
+    uri_map:
+      nullable: true
+      type: object
+    url:
+      format: uri
+      nullable: true
+      type: string
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: This product is Generally Available.
+    name: GA
