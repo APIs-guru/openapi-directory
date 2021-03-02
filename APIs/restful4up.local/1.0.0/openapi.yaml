@@ -1,0 +1,77 @@
+openapi: 3.0.0
+servers:
+  - url: http://restful4up.local
+  - url: /v1
+info:
+  description: RESTful API 4 Unipacker
+  title: RESTful4Up
+  version: 1.0.0
+  x-apisguru-categories:
+    - developer_tools
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/rpgeeganage/restful4up/master/app/spec/api.yml
+      version: "3.0"
+  x-providerName: restful4up.local
+paths:
+  /clean:
+    head:
+      description: clean up the uploaded files
+      operationId: clean
+      responses:
+        "204":
+          description: Ok
+        "500":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/error"
+          description: server error
+  /unpack:
+    post:
+      description: try to unpack the given file
+      operationId: unpack
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: file
+                  format: binary
+                  type: string
+              required:
+                - file
+        required: true
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                format: binary
+                type: string
+          description: Ok
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/error"
+          description: request error
+        "500":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/error"
+          description: server error
+components:
+  schemas:
+    error:
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+      required:
+        - status
+        - message
+      type: object
