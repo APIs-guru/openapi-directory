@@ -8394,7 +8394,7 @@ components:
         ApprovedPatchesComplianceLevel:
           allOf:
             - $ref: '#/components/schemas/PatchComplianceLevel'
-            - description: 'Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. The default value is UNSPECIFIED.'
+            - description: 'Defines the compliance level for approved patches. When an approved patch is reported as missing, this value describes the severity of the compliance violation. The default value is UNSPECIFIED.'
         ApprovedPatchesEnableNonSecurity:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -9999,6 +9999,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SnapshotId'
             - description: The user-defined snapshot ID.
+        BaselineOverride:
+          allOf:
+            - $ref: '#/components/schemas/BaselineOverride'
+            - description: Defines the basic information about a patch baseline override.
     UnsupportedFeatureRequiredException: {}
     GetDocumentResult:
       type: object
@@ -10798,7 +10802,7 @@ components:
         SettingId:
           allOf:
             - $ref: '#/components/schemas/ServiceSettingId'
-            - description: 'The ID of the service setting to get. The setting ID can be <code>/ssm/parameter-store/default-parameter-tier</code>, <code>/ssm/parameter-store/high-throughput-enabled</code>, or <code>/ssm/managed-instance/activation-tier</code>.'
+            - description: 'The ID of the service setting to get. The setting ID can be <code>/ssm/automation/customer-script-log-destination</code>, <code>/ssm/automation/customer-script-log-group-name</code>, <code>/ssm/parameter-store/default-parameter-tier</code>, <code>/ssm/parameter-store/high-throughput-enabled</code>, or <code>/ssm/managed-instance/activation-tier</code>.'
       description: The request body of the GetServiceSetting API action.
     ServiceSettingNotFound: {}
     LabelParameterVersionResult:
@@ -11443,7 +11447,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/PSParameterName'
-            - description: '<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For parameters in a hierarchy, you must include a leading forward slash character (/) when you create or reference a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an AWS Region</p> </li> <li> <p>A parameter name can''t be prefixed with "aws" or "ssm" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-/</code> </p> </li> <li> <p>A parameter name can''t include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html">About requirements and constraints for parameter names</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for a parameter name, including the full length of the parameter ARN, is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters:</p> <p> <code>arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName</code> </p> </note>'
+            - description: '<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For parameters in a hierarchy, you must include a leading forward slash character (/) when you create or reference a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an AWS Region</p> </li> <li> <p>A parameter name can''t be prefixed with "aws" or "ssm" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-</code> </p> <p>In addition, the slash character ( / ) is used to delineate hierarchies in parameter names. For example: <code>/Dev/Production/East/Project-ABC/MyParameter</code> </p> </li> <li> <p>A parameter name can''t include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html">Creating Systems Manager parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that are not part of the name. The maximum length for a parameter name, including the full length of the parameter ARN, is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters:</p> <p> <code>arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName</code> </p> </note>'
         Description:
           allOf:
             - $ref: '#/components/schemas/ParameterDescription'
@@ -11566,7 +11570,7 @@ components:
         Targets:
           allOf:
             - $ref: '#/components/schemas/Targets'
-            - description: '<p>The targets to register with the maintenance window. In other words, the instances to run commands on when the maintenance window runs.</p> <p>You can specify targets using instance IDs, resource group names, or tags that have been applied to instances.</p> <p> <b>Example 1</b>: Specify instance IDs</p> <p> <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i> </code> </p> <p> <b>Example 2</b>: Use tag key-pairs applied to instances</p> <p> <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i> </code> </p> <p> <b>Example 3</b>: Use tag-keys applied to instances</p> <p> <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i> </code> </p> <p> <b>Example 4</b>: Use resource group names</p> <p> <code>Key=resource-groups:Name,Values=<i>resource-group-name</i> </code> </p> <p> <b>Example 5</b>: Use filters for resource group types</p> <p> <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i> </code> </p> <note> <p>For <code>Key=resource-groups:ResourceTypeFilters</code>, specify resource types in the following format</p> <p> <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i> </code> </p> </note> <p>For more information about these examples formats, including the best use case for each one, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html">Examples: Register targets with a maintenance window</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+            - description: '<p>The targets to register with the maintenance window. In other words, the instances to run commands on when the maintenance window runs.</p> <note> <p>If a single maintenance window task is registered with multiple targets, its task invocations occur sequentially and not in parallel. If your task must run on multiple targets at the same time, register a task for each target individually and assign each task the same priority level.</p> </note> <p>You can specify targets using instance IDs, resource group names, or tags that have been applied to instances.</p> <p> <b>Example 1</b>: Specify instance IDs</p> <p> <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i> </code> </p> <p> <b>Example 2</b>: Use tag key-pairs applied to instances</p> <p> <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i> </code> </p> <p> <b>Example 3</b>: Use tag-keys applied to instances</p> <p> <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i> </code> </p> <p> <b>Example 4</b>: Use resource group names</p> <p> <code>Key=resource-groups:Name,Values=<i>resource-group-name</i> </code> </p> <p> <b>Example 5</b>: Use filters for resource group types</p> <p> <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i> </code> </p> <note> <p>For <code>Key=resource-groups:ResourceTypeFilters</code>, specify resource types in the following format</p> <p> <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i> </code> </p> </note> <p>For more information about these examples formats, including the best use case for each one, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html">Examples: Register targets with a maintenance window</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
         OwnerInformation:
           allOf:
             - $ref: '#/components/schemas/OwnerInformation'
@@ -11695,7 +11699,7 @@ components:
         SettingId:
           allOf:
             - $ref: '#/components/schemas/ServiceSettingId'
-            - description: 'The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be <code>/ssm/parameter-store/default-parameter-tier</code>, <code>/ssm/parameter-store/high-throughput-enabled</code>, or <code>/ssm/managed-instance/activation-tier</code>. For example, <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>.'
+            - description: 'The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be <code>/ssm/automation/customer-script-log-destination</code>, <code>/ssm/automation/customer-script-log-group-name</code>, <code>/ssm/parameter-store/default-parameter-tier</code>, <code>/ssm/parameter-store/high-throughput-enabled</code>, or <code>/ssm/managed-instance/activation-tier</code>. For example, <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>.'
       description: The request body of the ResetServiceSetting API action.
     ResumeSessionResponse:
       type: object
@@ -12774,11 +12778,11 @@ components:
         SettingId:
           allOf:
             - $ref: '#/components/schemas/ServiceSettingId'
-            - description: '<p>The Amazon Resource Name (ARN) of the service setting to reset. For example, <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>. The setting ID can be one of the following.</p> <ul> <li> <p> <code>/ssm/parameter-store/default-parameter-tier</code> </p> </li> <li> <p> <code>/ssm/parameter-store/high-throughput-enabled</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code> </p> </li> </ul>'
+            - description: '<p>The Amazon Resource Name (ARN) of the service setting to reset. For example, <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>. The setting ID can be one of the following.</p> <ul> <li> <p> <code>/ssm/automation/customer-script-log-destination</code> </p> </li> <li> <p> <code>/ssm/automation/customer-script-log-group-name</code> </p> </li> <li> <p> <code>/ssm/parameter-store/default-parameter-tier</code> </p> </li> <li> <p> <code>/ssm/parameter-store/high-throughput-enabled</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code> </p> </li> </ul>'
         SettingValue:
           allOf:
             - $ref: '#/components/schemas/ServiceSettingValue'
-            - description: '<p>The new value to specify for the service setting. For the <code>/ssm/parameter-store/default-parameter-tier</code> setting ID, the setting value can be one of the following.</p> <ul> <li> <p>Standard</p> </li> <li> <p>Advanced</p> </li> <li> <p>Intelligent-Tiering</p> </li> </ul> <p>For the <code>/ssm/parameter-store/high-throughput-enabled</code>, and <code>/ssm/managed-instance/activation-tier</code> setting IDs, the setting value can be true or false.</p>'
+            - description: '<p>The new value to specify for the service setting. For the <code>/ssm/parameter-store/default-parameter-tier</code> setting ID, the setting value can be one of the following.</p> <ul> <li> <p>Standard</p> </li> <li> <p>Advanced</p> </li> <li> <p>Intelligent-Tiering</p> </li> </ul> <p>For the <code>/ssm/parameter-store/high-throughput-enabled</code>, and <code>/ssm/managed-instance/activation-tier</code> setting IDs, the setting value can be true or false.</p> <p>For the <code>/ssm/automation/customer-script-log-destination</code> setting ID, the setting value can be CloudWatch.</p> <p>For the <code>/ssm/automation/customer-script-log-group-name</code> setting ID, the setting value can be the name of a CloudWatch Logs log group.</p>'
       description: The request body of the UpdateServiceSetting API action.
     Account:
       type: string
@@ -14042,6 +14046,101 @@ components:
       pattern: '^[a-zA-Z0-9_\-.]{3,128}$'
       minLength: 3
       maxLength: 128
+    OperatingSystem:
+      type: string
+      enum:
+        - WINDOWS
+        - AMAZON_LINUX
+        - AMAZON_LINUX_2
+        - UBUNTU
+        - REDHAT_ENTERPRISE_LINUX
+        - SUSE
+        - CENTOS
+        - ORACLE_LINUX
+        - DEBIAN
+        - MACOS
+    PatchFilterGroup:
+      type: object
+      required:
+        - PatchFilters
+      properties:
+        PatchFilters:
+          allOf:
+            - $ref: '#/components/schemas/PatchFilterList'
+            - description: The set of patch filters that make up the group.
+      description: 'A set of patch filters, typically used for approval rules.'
+    PatchRuleGroup:
+      type: object
+      required:
+        - PatchRules
+      properties:
+        PatchRules:
+          allOf:
+            - $ref: '#/components/schemas/PatchRuleList'
+            - description: The rules that make up the rule group.
+      description: A set of rules defining the approval rules for a patch baseline.
+    PatchIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PatchId'
+      minItems: 0
+      maxItems: 50
+    PatchComplianceLevel:
+      type: string
+      enum:
+        - CRITICAL
+        - HIGH
+        - MEDIUM
+        - LOW
+        - INFORMATIONAL
+        - UNSPECIFIED
+    PatchAction:
+      type: string
+      enum:
+        - ALLOW_AS_DEPENDENCY
+        - BLOCK
+    PatchSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PatchSource'
+      minItems: 0
+      maxItems: 20
+    BaselineOverride:
+      type: object
+      properties:
+        OperatingSystem:
+          allOf:
+            - $ref: '#/components/schemas/OperatingSystem'
+            - description: The operating system rule used by the patch baseline override.
+        GlobalFilters:
+          $ref: '#/components/schemas/PatchFilterGroup'
+        ApprovalRules:
+          $ref: '#/components/schemas/PatchRuleGroup'
+        ApprovedPatches:
+          allOf:
+            - $ref: '#/components/schemas/PatchIdList'
+            - description: '<p>A list of explicitly approved patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html">About package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+        ApprovedPatchesComplianceLevel:
+          allOf:
+            - $ref: '#/components/schemas/PatchComplianceLevel'
+            - description: 'Defines the compliance level for approved patches. When an approved patch is reported as missing, this value describes the severity of the compliance violation.'
+        RejectedPatches:
+          allOf:
+            - $ref: '#/components/schemas/PatchIdList'
+            - description: '<p>A list of explicitly rejected patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html">About package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
+        RejectedPatchesAction:
+          allOf:
+            - $ref: '#/components/schemas/PatchAction'
+            - description: 'The action for Patch Manager to take on patches included in the RejectedPackages list. A patch can be allowed only if it is a dependency of another package, or blocked entirely along with packages that include it as a dependency.'
+        ApprovedPatchesEnableNonSecurity:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
+        Sources:
+          allOf:
+            - $ref: '#/components/schemas/PatchSourceList'
+            - description: 'Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.'
+      description: Defines the basic information about a patch baseline override.
     BatchErrorMessage:
       type: string
     CalendarNameOrARN:
@@ -15048,65 +15147,6 @@ components:
       pattern: 'arn:(aws[a-zA-Z-]*)?:ssm:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:opsmetadata\/([a-zA-Z0-9-_\.\/]*)'
       minLength: 1
       maxLength: 1011
-    OperatingSystem:
-      type: string
-      enum:
-        - WINDOWS
-        - AMAZON_LINUX
-        - AMAZON_LINUX_2
-        - UBUNTU
-        - REDHAT_ENTERPRISE_LINUX
-        - SUSE
-        - CENTOS
-        - ORACLE_LINUX
-        - DEBIAN
-        - MACOS
-    PatchFilterGroup:
-      type: object
-      required:
-        - PatchFilters
-      properties:
-        PatchFilters:
-          allOf:
-            - $ref: '#/components/schemas/PatchFilterList'
-            - description: The set of patch filters that make up the group.
-      description: 'A set of patch filters, typically used for approval rules.'
-    PatchRuleGroup:
-      type: object
-      required:
-        - PatchRules
-      properties:
-        PatchRules:
-          allOf:
-            - $ref: '#/components/schemas/PatchRuleList'
-            - description: The rules that make up the rule group.
-      description: A set of rules defining the approval rules for a patch baseline.
-    PatchIdList:
-      type: array
-      items:
-        $ref: '#/components/schemas/PatchId'
-      minItems: 0
-      maxItems: 50
-    PatchComplianceLevel:
-      type: string
-      enum:
-        - CRITICAL
-        - HIGH
-        - MEDIUM
-        - LOW
-        - INFORMATIONAL
-        - UNSPECIFIED
-    PatchAction:
-      type: string
-      enum:
-        - ALLOW_AS_DEPENDENCY
-        - BLOCK
-    PatchSourceList:
-      type: array
-      items:
-        $ref: '#/components/schemas/PatchSource'
-      minItems: 0
-      maxItems: 20
     ResourceDataSyncName:
       type: string
       minLength: 1
@@ -16668,7 +16708,7 @@ components:
         Key:
           allOf:
             - $ref: '#/components/schemas/InstanceInformationStringFilterKey'
-            - description: '<p>The filter key name to describe your instances. For example:</p> <p>"InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag Key"</p>'
+            - description: '<p>The filter key name to describe your instances. For example:</p> <p>"InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag Key"</p> <important> <p> <code>Tag key</code> is not a valid filter. You must specify either <code>tag-key</code> or <code>tag:keyname</code> and a string. Here are some valid examples: tag-key, tag:123, tag:al!, tag:Windows. Here are some <i>invalid</i> examples: tag-keys, Tag Key, tag:, tagKey, abc:keyname.</p> </important>'
         Values:
           allOf:
             - $ref: '#/components/schemas/InstanceInformationFilterValueSet'
@@ -18659,11 +18699,11 @@ components:
         ApproveAfterDays:
           allOf:
             - $ref: '#/components/schemas/ApproveAfterDays'
-            - description: 'The number of days after the release date of each patch matched by the rule that the patch is marked as approved in the patch baseline. For example, a value of <code>7</code> means that patches are approved seven days after they are released. Not supported on Ubuntu Server.'
+            - description: 'The number of days after the release date of each patch matched by the rule that the patch is marked as approved in the patch baseline. For example, a value of <code>7</code> means that patches are approved seven days after they are released. Not supported on Debian Server or Ubuntu Server.'
         ApproveUntilDate:
           allOf:
             - $ref: '#/components/schemas/PatchStringDateTime'
-            - description: '<p>The cutoff date for auto approval of released patches. Any patches released on or before this date are installed automatically. Not supported on Ubuntu Server.</p> <p>Enter dates in the format <code>YYYY-MM-DD</code>. For example, <code>2020-12-31</code>.</p>'
+            - description: '<p>The cutoff date for auto approval of released patches. Any patches released on or before this date are installed automatically. Not supported on Debian Server or Ubuntu Server.</p> <p>Enter dates in the format <code>YYYY-MM-DD</code>. For example, <code>2020-12-31</code>.</p>'
         EnableNonSecurity:
           allOf:
             - $ref: '#/components/schemas/Boolean'

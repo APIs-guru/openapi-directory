@@ -3041,6 +3041,7 @@ components:
         - ClusterUnreachable
         - InsufficientNumberOfReplicas
         - ConfigurationConflict
+        - AdmissionRequestDenied
     AddonIssue:
       type: object
       properties:
@@ -3869,6 +3870,7 @@ components:
         - ClusterUnreachable
         - InsufficientNumberOfReplicas
         - ConfigurationConflict
+        - AdmissionRequestDenied
     ErrorDetail:
       type: object
       properties:

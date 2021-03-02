@@ -3045,7 +3045,7 @@ paths:
   /#X-Amz-Target=AlexaForBusiness.ResolveRoom:
     post:
       operationId: ResolveRoom
-      description: Determines the details for the room from which a skill request was invoked. This operation is used by skill developers.
+      description: '<p>Determines the details for the room from which a skill request was invoked. This operation is used by skill developers.</p> <p>To query ResolveRoom from an Alexa skill, the skill ID needs to be authorized. When the skill is using an AWS Lambda function, the skill is automatically authorized when you publish your skill as a private skill to your AWS account. Skills that are hosted using a custom web service must be manually authorized. To get your skill authorized, contact AWS Support with your AWS account ID that queries the ResolveRoom API and skill ID. </p>'
       responses:
         '200':
           description: Success
@@ -4460,6 +4460,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: 'A unique, user-specified identifier for the request that ensures idempotency.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to be added to the specified resource. Do not provide system tags.
     AlreadyExistsException: {}
     CreateBusinessReportScheduleResponse:
       type: object
@@ -4546,6 +4550,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: The request token of the client.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to be added to the specified resource. Do not provide system tags.
     CreateContactResponse:
       type: object
       properties:
@@ -4587,6 +4595,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: 'A unique, user-specified identifier for this request that ensures idempotency.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to be added to the specified resource. Do not provide system tags.
     CreateGatewayGroupResponse:
       type: object
       properties:
@@ -4613,6 +4625,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: ' A unique, user-specified identifier for the request that ensures idempotency.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to be added to the specified resource. Do not provide system tags.
     CreateNetworkProfileResponse:
       type: object
       properties:
@@ -4667,6 +4683,10 @@ components:
             - description: 'The root certificates of your authentication server that is installed on your devices and used to trust your authentication server during EAP negotiation. '
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'The tags to be added to the specified resource. Do not provide system tags. '
     InvalidCertificateAuthorityException: {}
     InvalidServiceLinkedRoleStateException: {}
     CreateProfileResponse:
@@ -5738,7 +5758,11 @@ components:
         RoomArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the room with which to associate your AVS device.
+            - description: The Amazon Resource Name (ARN) of the room with which to associate your AVS device.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to be added to the specified resource. Do not provide system tags.
     InvalidDeviceException: {}
     RejectSkillResponse:
       type: object
