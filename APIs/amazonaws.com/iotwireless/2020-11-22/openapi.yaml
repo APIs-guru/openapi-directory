@@ -190,6 +190,13 @@ paths:
                   pattern: '^[a-zA-Z0-9-_]+$'
                   minLength: 1
                   maxLength: 64
+                Tags:
+                  description: The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1836,6 +1843,13 @@ paths:
                   pattern: '^[a-zA-Z0-9-_]+$'
                   minLength: 1
                   maxLength: 64
+                Tags:
+                  description: The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3600,6 +3614,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SidewalkAccountInfo'
             - description: The Sidewalk account credentials.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/PartnerAccountArn'
+            - description: The Amazon Resource Name of the resource.
     AmazonId:
       type: string
       maxLength: 2048
@@ -3609,6 +3627,21 @@ components:
       minLength: 1
       maxLength: 4096
       format: password
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The tag's key value.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The tag's value.
+      description: A simple label consisting of a customer-defined key-value pair
     ValidationException: {}
     ResourceNotFoundException: {}
     InternalServerException: {}
@@ -3639,21 +3672,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/DestinationName'
             - description: The name of the new resource.
-    Tag:
-      type: object
-      required:
-        - Key
-        - Value
-      properties:
-        Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: The tag's key value.
-        Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: The tag's value.
-      description: A simple label consisting of a customer-defined key-value pair
     CreateDeviceProfileResponse:
       type: object
       properties:
@@ -3849,6 +3867,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionId'
             - description: The ID of the new wireless gateway task definition.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionArn'
+            - description: The Amazon Resource Name of the resource.
     UpdateDataSource:
       type: string
       minLength: 1
@@ -4092,7 +4114,7 @@ components:
         LoRaWANNetworkServerCertificateId:
           allOf:
             - $ref: '#/components/schemas/IotCertificateId'
-            - description: The ID of the certificate associated with the wireless gateway and used for LoRaWANNetworkServer endpoint.
+            - description: The ID of the certificate that is associated with the wireless gateway and used for the LoRaWANNetworkServer endpoint.
     GetWirelessGatewayFirmwareInformationResponse:
       type: object
       properties:
@@ -4149,6 +4171,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/UpdateWirelessGatewayTaskCreate'
             - description: Information about the gateways to update.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionArn'
+            - description: The Amazon Resource Name of the resource.
     ListDestinationsResponse:
       type: object
       properties:
@@ -4353,6 +4379,12 @@ components:
       pattern: '^[a-zA-Z0-9-_]+$'
       minLength: 1
       maxLength: 64
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 200
     AssociateAwsAccountWithPartnerAccountRequest:
       type: object
       required:
@@ -4367,6 +4399,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+    PartnerAccountArn:
+      type: string
     WirelessDeviceId:
       type: string
       maxLength: 256
@@ -4442,12 +4480,6 @@ components:
       type: string
       minLength: 20
       maxLength: 2048
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
-      minItems: 0
-      maxItems: 200
     CreateDestinationRequest:
       type: object
       required:
@@ -4783,10 +4815,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: 'Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
     WirelessGatewayTaskDefinitionId:
       type: string
       pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
       maxLength: 36
+    WirelessGatewayTaskDefinitionArn:
+      type: string
     CreateWirelessGatewayTaskRequest:
       type: object
       required:
@@ -4979,6 +5017,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Fingerprint'
             - description: The fingerprint of the Sidewalk application server private key.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/PartnerAccountArn'
+            - description: The Amazon Resource Name of the resource.
       description: Information about a Sidewalk account.
     WirelessGatewayServiceType:
       type: string
@@ -5536,6 +5578,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LoRaWANUpdateGatewayTaskEntry'
             - description: The properties that relate to the LoRaWAN wireless gateway.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/WirelessGatewayTaskDefinitionArn'
+            - description: The Amazon Resource Name of the resource.
       description: UpdateWirelessGatewayTaskEntry object.
     WirelessDeviceStatistics:
       type: object

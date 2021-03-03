@@ -3320,7 +3320,7 @@ components:
         Event:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The event, in JSON format, to test against the event pattern.'
+            - description: '<p>The event, in JSON format, to test against the event pattern. The JSON must follow the format specified in <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html">AWS Events</a>, and the following fields are mandatory:</p> <ul> <li> <p> <code>id</code> </p> </li> <li> <p> <code>account</code> </p> </li> <li> <p> <code>source</code> </p> </li> <li> <p> <code>time</code> </p> </li> <li> <p> <code>region</code> </p> </li> <li> <p> <code>resources</code> </p> </li> <li> <p> <code>detail-type</code> </p> </li> </ul>'
     UntagResourceResponse:
       type: object
       properties: {}
@@ -3606,12 +3606,12 @@ components:
       maxLength: 128
     Database:
       type: string
-      pattern: '([a-zA-Z0-9]+)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)'
+      pattern: '([a-zA-Z0-9_+.-@]+)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)'
       minLength: 1
       maxLength: 64
     DbUser:
       type: string
-      pattern: '([a-zA-Z0-9]+)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)'
+      pattern: '([a-zA-Z0-9_+.-@]+)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)'
       minLength: 1
       maxLength: 128
     ResourceArn:
@@ -3987,6 +3987,10 @@ components:
         $ref: '#/components/schemas/PutEventsRequestEntry'
       minItems: 1
       maxItems: 10
+    TraceHeader:
+      type: string
+      minLength: 1
+      maxLength: 500
     PutEventsRequestEntry:
       type: object
       properties:
@@ -4014,6 +4018,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonPartnerEventBusNameOrArn'
             - description: 'The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.'
+        TraceHeader:
+          allOf:
+            - $ref: '#/components/schemas/TraceHeader'
+            - description: '<p>An AWS X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that contains the trace-id associated with the event.</p> <p>To learn more about X-Ray trace headers, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader">Tracing header</a> in the AWS X-Ray Developer Guide.</p>'
       description: Represents an event to be submitted.
     PutEventsResultEntryList:
       type: array
