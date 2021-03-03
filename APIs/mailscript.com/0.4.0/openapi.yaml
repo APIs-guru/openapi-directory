@@ -11,7 +11,7 @@ info:
     - email
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/mailscript/cli/main/api/swagger/swagger.yaml
+      url: http://api.mailscript.com/v2/swagger
       version: "3.0"
   x-providerName: mailscript.com
 security:
@@ -519,6 +519,59 @@ paths:
       summary: Get all inputs you have access to
       tags:
         - inputs
+  /integrations:
+    get:
+      operationId: getAllIntegrations
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAllIntegrationsResponse"
+          description: Successful operation
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad credentials
+      summary: Get all integrations for the user
+      tags:
+        - integrations
+  "/integrations/{integration}":
+    delete:
+      operationId: deleteIntegration
+      parameters:
+        - description: ID of the integration
+          in: path
+          name: integration
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Successful delete operation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Failure
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad credentials
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Key not found
+      summary: Delete an integration
+      tags:
+        - integrations
   /send:
     post:
       operationId: send
@@ -1463,6 +1516,15 @@ components:
           type: array
       required:
         - list
+    GetAllIntegrationsResponse:
+      properties:
+        list:
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/Integration"
+          type: array
+      required:
+        - list
     GetAllKeysResponse:
       properties:
         list:
@@ -1512,6 +1574,21 @@ components:
           type: array
       required:
         - list
+    Integration:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        id:
+          type: string
+        type:
+          enum:
+            - google
+          type: string
+      required:
+        - id
+        - type
+        - createdAt
     Key:
       properties:
         createdAt:
