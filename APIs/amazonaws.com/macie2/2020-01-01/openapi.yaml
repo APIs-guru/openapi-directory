@@ -979,7 +979,7 @@ paths:
         - name: onlyAssociated
           in: query
           required: false
-          description: 'Specifies which accounts to include in the response, based on the status of an account''s relationship with the administrator account. By default, the response includes only current member accounts. To include all accounts, set the value for this parameter to false.'
+          description: 'Specifies which accounts to include in the response, based on the status of an account''s relationship with the administrator account. By default, the response includes only current member accounts. To include all accounts, set this value to false.'
           schema:
             type: string
   /findings/sample:
@@ -1769,11 +1769,11 @@ paths:
                     attributeName:
                       allOf:
                         - $ref: '#/components/schemas/__string'
-                        - description: 'The name of the property to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.'
+                        - description: 'The name of the bucket property to sort the results by. This value can be one of the following properties that Amazon Macie defines as bucket metadata: accountId, bucketName, classifiableObjectCount, classifiableSizeInBytes, objectCount, or sizeInBytes.'
                     orderBy:
                       allOf:
                         - $ref: '#/components/schemas/OrderBy'
-                        - description: 'The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.'
+                        - description: 'The sort order to apply to the results, based on the value specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2053,7 +2053,7 @@ paths:
                 - autoEnable
               properties:
                 autoEnable:
-                  description: 'Specifies whether Amazon Macie is enabled automatically for each account, when the account is added to the AWS organization.'
+                  description: 'Specifies whether to enable Amazon Macie automatically for each account, when the account is added to the AWS organization.'
                   type: boolean
   /macie:
     delete:
@@ -2452,7 +2452,7 @@ paths:
   /master/disassociate:
     post:
       operationId: DisassociateFromMasterAccount
-      description: (Deprecated) Disassociates a member account from its Amazon Macie administrator account.
+      description: (Deprecated) Disassociates a member account from its Amazon Macie administrator account. This operation has been replaced by the <link  linkend="DisassociateFromAdministratorAccount">DisassociateFromAdministratorAccount</link> operation.
       responses:
         '200':
           description: Success
@@ -3244,7 +3244,7 @@ paths:
   /master:
     get:
       operationId: GetMasterAccount
-      description: (Deprecated) Retrieves information about the Amazon Macie administrator account for an account.
+      description: (Deprecated) Retrieves information about the Amazon Macie administrator account for an account. This operation has been replaced by the <link  linkend="GetAdministratorAccount">GetAdministratorAccount</link> operation.
       responses:
         '200':
           description: Success
@@ -3470,7 +3470,7 @@ paths:
         - name: timeRange
           in: query
           required: false
-          description: 'The time period to retrieve the data for. Valid values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days. If you don’t specify a value for this parameter, Amazon Macie provides aggregated usage data for the preceding 30 days.'
+          description: 'The inclusive time period to retrieve the data for. Valid values are: MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for the preceding 30 days. If you don''t specify a value for this parameter, Amazon Macie provides aggregated usage data for the preceding 30 days.'
           schema:
             type: string
     parameters:
@@ -4163,7 +4163,7 @@ components:
         dayOfMonth:
           allOf:
             - $ref: '#/components/schemas/__integer'
-            - description: '<p>The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 31.</p> <p>If this value exceeds the number of days in a certain month, Macie runs the job on the last day of that month. For example, if this value is 31 and a month has only 30 days, Macie runs the job on day 30 of that month.</p>'
+            - description: '<p>The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 31.</p> <p>If this value exceeds the number of days in a certain month, Macie doesn''t run the job that month. Macie runs the job only during months that have the specified day. For example, if this value is 31 and a month has only 30 days, Macie doesn''t run the job that month. To run the job every month, specify a value that''s less than 29.</p>'
       description: Specifies a monthly recurrence pattern for running a classification job.
     WeeklySchedule:
       type: object
@@ -4438,11 +4438,11 @@ components:
         classifiableSizeInBytes:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: 'The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format.'
+            - description: '<p>The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p> <p>If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each applicable object in those buckets. This value doesn''t reflect the storage size of all versions of all applicable objects in the buckets.</p>'
         lastUpdated:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
-            - description: 'The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved data about the buckets from Amazon S3.'
+            - description: 'The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved both bucket and object metadata from Amazon S3 for the buckets.'
         objectCount:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -4450,11 +4450,11 @@ components:
         sizeInBytes:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: 'The total storage size, in bytes, of the buckets.'
+            - description: '<p>The total storage size, in bytes, of the buckets.</p> <p>If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn''t reflect the storage size of all versions of the objects in the buckets.</p>'
         sizeInBytesCompressed:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: 'The total compressed storage size, in bytes, of the buckets.'
+            - description: '<p>The total compressed storage size, in bytes, of the buckets.</p> <p>If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn''t reflect the storage size of all versions of the objects in the buckets.</p>'
         unclassifiableObjectCount:
           allOf:
             - $ref: '#/components/schemas/ObjectLevelStatistics'
@@ -4462,7 +4462,7 @@ components:
         unclassifiableObjectSizeInBytes:
           allOf:
             - $ref: '#/components/schemas/ObjectLevelStatistics'
-            - description: 'The total storage size, in bytes, of all the objects that Amazon Macie can''t analyze in the buckets. These objects don''t use a supported storage class or don''t have a file name extension for a supported file or storage format.'
+            - description: 'The total storage size, in bytes, of the objects that Amazon Macie can''t analyze in the buckets. These objects don''t use a supported storage class or don''t have a file name extension for a supported file or storage format.'
     GetClassificationExportConfigurationResponse:
       type: object
       properties:
@@ -4677,8 +4677,8 @@ components:
         values:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: '<p>An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported field are:</p> <ul><li><p>accountId - The unique identifier for an AWS account.</p></li></ul> <ul><li><p>freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account.</p></li></ul> <ul><li><p>serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota.</p></li></ul> <ul><li><p>total - A string that represents the current, estimated month-to-date cost for an account.</p></li></ul>'
-      description: Specifies a condition for filtering the results of a query for the quotas and usage data that applies to one or more Amazon Macie accounts.
+            - description: '<p>An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported field are:</p> <ul><li><p>accountId - The unique identifier for an AWS account.</p></li></ul> <ul><li><p>freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account.</p></li></ul> <ul><li><p>serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota.</p></li></ul> <ul><li><p>total - A string that represents the current estimated cost for an account.</p></li></ul>'
+      description: Specifies a condition for filtering the results of a query for quota and usage data for one or more Amazon Macie accounts.
     UsageStatisticsSortKey:
       type: string
       enum:
@@ -5269,7 +5269,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/__long'
             - description: The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported storage class or don't have a file name extension for a supported file or storage format.
-      description: 'Provides information about the total storage size (in bytes) or number of objects that Amazon Macie can''t analyze in one or more S3 buckets. In a BucketMetadata object, this data is for a specific bucket. In a GetBucketStatisticsResponse object, this data is aggregated for all the buckets in the query results.'
+      description: 'Provides information about the total storage size (in bytes) or number of objects that Amazon Macie can''t analyze in one or more S3 buckets. In a BucketMetadata object, this data is for a specific bucket. In a GetBucketStatisticsResponse object, this data is aggregated for all the buckets in the query results. If versioning is enabled for a bucket, total storage size values are based on the size of the latest version of each applicable object in the bucket.'
     BucketMetadata:
       type: object
       properties:
@@ -5296,7 +5296,7 @@ components:
         classifiableSizeInBytes:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: 'The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.'
+            - description: '<p>The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p> <p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn''t reflect the storage size of all versions of each applicable object in the bucket.</p>'
         jobDetails:
           allOf:
             - $ref: '#/components/schemas/JobDetails'
@@ -5304,7 +5304,7 @@ components:
         lastUpdated:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
-            - description: 'The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved data about the bucket from Amazon S3.'
+            - description: 'The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved both bucket and object metadata from Amazon S3 for the bucket.'
         objectCount:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -5336,11 +5336,11 @@ components:
         sizeInBytes:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: 'The total storage size, in bytes, of the bucket.'
+            - description: '<p>The total storage size, in bytes, of the bucket.</p> <p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn''t reflect the storage size of all versions of each object in the bucket.</p>'
         sizeInBytesCompressed:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: 'The total compressed storage size, in bytes, of the bucket.'
+            - description: '<p>The total compressed storage size, in bytes, of the bucket.</p> <p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn''t reflect the storage size of all versions of each object in the bucket.</p>'
         tags:
           allOf:
             - $ref: '#/components/schemas/__listOfKeyValuePair'
@@ -5388,11 +5388,11 @@ components:
         attributeName:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: 'The name of the property to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.'
+            - description: 'The name of the bucket property to sort the results by. This value can be one of the following properties that Amazon Macie defines as bucket metadata: accountId, bucketName, classifiableObjectCount, classifiableSizeInBytes, objectCount, or sizeInBytes.'
         orderBy:
           allOf:
             - $ref: '#/components/schemas/OrderBy'
-            - description: 'The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.'
+            - description: 'The sort order to apply to the results, based on the value specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.'
       description: Specifies criteria for sorting the results of a query for information about S3 buckets.
     Cell:
       type: object
@@ -7079,7 +7079,7 @@ components:
         serverSideEncryption:
           allOf:
             - $ref: '#/components/schemas/ServerSideEncryption'
-            - description: The type of server-side encryption that's used for the object.
+            - description: The type of server-side encryption that's used to encrypt the object.
         size:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -7103,11 +7103,11 @@ components:
         encryptionType:
           allOf:
             - $ref: '#/components/schemas/EncryptionType'
-            - description: 'The server-side encryption algorithm that''s used when storing data in the bucket or object. If encryption is disabled for the bucket or object, this value is NONE.'
+            - description: 'The server-side encryption algorithm that''s used when storing data in the bucket or object. If default encryption is disabled for the bucket or the object isn''t encrypted using server-side encryption, this value is NONE.'
         kmsMasterKeyId:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: The unique identifier for the AWS Key Management Service (AWS KMS) master key that's used to encrypt the bucket or object. This value is null if AWS KMS isn't used to encrypt the bucket or object.
+            - description: 'The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key Management Service (AWS KMS) customer master key (CMK) that''s used to encrypt data in the bucket or the object. If an AWS KMS CMK isn''t used, this value is null.'
       description: Provides information about the server-side encryption settings for an S3 bucket or S3 object.
     S3BucketOwner:
       type: object
@@ -7367,7 +7367,7 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/MacieStatus'
-            - description: 'Specifies whether to change the status of the account. Valid values are: ENABLED, resume all Amazon Macie activities for the account; and, PAUSED, suspend all Macie activities for the account.'
+            - description: 'Specifies a new status for the account. Valid values are: ENABLED, resume all Amazon Macie activities for the account; and, PAUSED, suspend all Macie activities for the account.'
     UpdateMemberSessionRequest:
       type: object
       required:
@@ -7387,7 +7387,7 @@ components:
         autoEnable:
           allOf:
             - $ref: '#/components/schemas/__boolean'
-            - description: 'Specifies whether Amazon Macie is enabled automatically for each account, when the account is added to the AWS organization.'
+            - description: 'Specifies whether to enable Amazon Macie automatically for each account, when the account is added to the AWS organization.'
     UsageType:
       type: string
       enum:

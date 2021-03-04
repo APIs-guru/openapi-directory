@@ -262,7 +262,7 @@ paths:
   /#X-Amz-Target=secretsmanager.DeleteResourcePolicy:
     post:
       operationId: DeleteResourcePolicy
-      description: '<p>Deletes the resource-based permission policy attached to the secret.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p>secretsmanager:DeleteResourcePolicy</p> </li> </ul> <p> <b>Related operations</b> </p> <ul> <li> <p>To attach a resource policy to a secret, use <a>PutResourcePolicy</a>.</p> </li> <li> <p>To retrieve the current resource-based policy that''s attached to a secret, use <a>GetResourcePolicy</a>.</p> </li> <li> <p>To list all of the currently available secrets, use <a>ListSecrets</a>.</p> </li> </ul>'
+      description: '<p>Deletes the resource-based permission policy attached to the secret.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p>secretsmanager:DeleteResourcePolicy</p> </li> </ul> <p> <b>Related operations</b> </p> <ul> <li> <p>To attach a resource policy to a secret, use <a>PutResourcePolicy</a>.</p> </li> <li> <p>To retrieve the current resource-based policy attached to a secret, use <a>GetResourcePolicy</a>.</p> </li> <li> <p>To list all of the currently available secrets, use <a>ListSecrets</a>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -288,6 +288,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
       requestBody:
         required: true
         content:
@@ -313,7 +319,7 @@ paths:
   /#X-Amz-Target=secretsmanager.DeleteSecret:
     post:
       operationId: DeleteSecret
-      description: '<p>Deletes an entire secret and all of its versions. You can optionally include a recovery window during which you can restore the secret. If you don''t specify a recovery window value, the operation defaults to 30 days. Secrets Manager attaches a <code>DeletionDate</code> stamp to the secret that specifies the end of the recovery window. At the end of the recovery window, Secrets Manager deletes the secret permanently.</p> <p>At any time before recovery window ends, you can use <a>RestoreSecret</a> to remove the <code>DeletionDate</code> and cancel the deletion of the secret.</p> <p>You cannot access the encrypted secret information in any secret that is scheduled for deletion. If you need to access that information, you must cancel the deletion with <a>RestoreSecret</a> and then retrieve the information.</p> <note> <ul> <li> <p>There is no explicit operation to delete a version of a secret. Instead, remove all staging labels from the <code>VersionStage</code> field of a version. That marks the version as deprecated and allows Secrets Manager to delete it as needed. Versions that do not have any staging labels do not show up in <a>ListSecretVersionIds</a> unless you specify <code>IncludeDeprecated</code>.</p> </li> <li> <p>The permanent secret deletion at the end of the waiting period is performed as a background task with low priority. There is no guarantee of a specific time after the recovery window for the actual delete operation to occur.</p> </li> </ul> </note> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p>secretsmanager:DeleteSecret</p> </li> </ul> <p> <b>Related operations</b> </p> <ul> <li> <p>To create a secret, use <a>CreateSecret</a>.</p> </li> <li> <p>To cancel deletion of a version of a secret before the recovery window has expired, use <a>RestoreSecret</a>.</p> </li> </ul>'
+      description: '<p>Deletes an entire secret and all of the versions. You can optionally include a recovery window during which you can restore the secret. If you don''t specify a recovery window value, the operation defaults to 30 days. Secrets Manager attaches a <code>DeletionDate</code> stamp to the secret that specifies the end of the recovery window. At the end of the recovery window, Secrets Manager deletes the secret permanently.</p> <p>At any time before recovery window ends, you can use <a>RestoreSecret</a> to remove the <code>DeletionDate</code> and cancel the deletion of the secret.</p> <p>You cannot access the encrypted secret information in any secret scheduled for deletion. If you need to access that information, you must cancel the deletion with <a>RestoreSecret</a> and then retrieve the information.</p> <note> <ul> <li> <p>There is no explicit operation to delete a version of a secret. Instead, remove all staging labels from the <code>VersionStage</code> field of a version. That marks the version as deprecated and allows Secrets Manager to delete it as needed. Versions without any staging labels do not show up in <a>ListSecretVersionIds</a> unless you specify <code>IncludeDeprecated</code>.</p> </li> <li> <p>The permanent secret deletion at the end of the waiting period is performed as a background task with low priority. There is no guarantee of a specific time after the recovery window for the actual delete operation to occur.</p> </li> </ul> </note> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p>secretsmanager:DeleteSecret</p> </li> </ul> <p> <b>Related operations</b> </p> <ul> <li> <p>To create a secret, use <a>CreateSecret</a>.</p> </li> <li> <p>To cancel deletion of a version of a secret before the recovery window has expired, use <a>RestoreSecret</a>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -706,7 +712,7 @@ paths:
   /#X-Amz-Target=secretsmanager.PutResourcePolicy:
     post:
       operationId: PutResourcePolicy
-      description: '<p>Attaches the contents of the specified resource-based permission policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM identity-based policies that specify the secret''s Amazon Resource Name (ARN) in the policy statement''s <code>Resources</code> element. You can also use a combination of both identity-based and resource-based policies. The affected users and roles receive the permissions that are permitted by all of the relevant policies. For more information, see <a href="http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-based-policies.html">Using Resource-Based Policies for AWS Secrets Manager</a>. For the complete description of the AWS policy syntax and grammar, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html">IAM JSON Policy Reference</a> in the <i>IAM User Guide</i>.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p>secretsmanager:PutResourcePolicy</p> </li> </ul> <p> <b>Related operations</b> </p> <ul> <li> <p>To retrieve the resource policy attached to a secret, use <a>GetResourcePolicy</a>.</p> </li> <li> <p>To delete the resource-based policy that''s attached to a secret, use <a>DeleteResourcePolicy</a>.</p> </li> <li> <p>To list all of the currently available secrets, use <a>ListSecrets</a>.</p> </li> </ul>'
+      description: '<p>Attaches the contents of the specified resource-based permission policy to a secret. A resource-based policy is optional. Alternatively, you can use IAM identity-based policies that specify the secret''s Amazon Resource Name (ARN) in the policy statement''s <code>Resources</code> element. You can also use a combination of both identity-based and resource-based policies. The affected users and roles receive the permissions that are permitted by all of the relevant policies. For more information, see <a href="http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-based-policies.html">Using Resource-Based Policies for AWS Secrets Manager</a>. For the complete description of the AWS policy syntax and grammar, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html">IAM JSON Policy Reference</a> in the <i>IAM User Guide</i>.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p>secretsmanager:PutResourcePolicy</p> </li> </ul> <p> <b>Related operations</b> </p> <ul> <li> <p>To retrieve the resource policy attached to a secret, use <a>GetResourcePolicy</a>.</p> </li> <li> <p>To delete the resource-based policy attached to a secret, use <a>DeleteResourcePolicy</a>.</p> </li> <li> <p>To list all of the currently available secrets, use <a>ListSecrets</a>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -775,7 +781,7 @@ paths:
   /#X-Amz-Target=secretsmanager.PutSecretValue:
     post:
       operationId: PutSecretValue
-      description: '<p>Stores a new encrypted secret value in the specified secret. To do this, the operation creates a new version and attaches it to the secret. The version can contain a new <code>SecretString</code> value or a new <code>SecretBinary</code> value. You can also specify the staging labels that are initially attached to the new version.</p> <note> <p>The Secrets Manager console uses only the <code>SecretString</code> field. To add binary data to a secret with the <code>SecretBinary</code> field you must use the AWS CLI or one of the AWS SDKs.</p> </note> <ul> <li> <p>If this operation creates the first version for the secret then Secrets Manager automatically attaches the staging label <code>AWSCURRENT</code> to the new version.</p> </li> <li> <p>If another version of this secret already exists, then this operation does not automatically move any staging labels other than those that you explicitly specify in the <code>VersionStages</code> parameter.</p> </li> <li> <p>If this operation moves the staging label <code>AWSCURRENT</code> from another version to this version (because you included it in the <code>StagingLabels</code> parameter) then Secrets Manager also automatically moves the staging label <code>AWSPREVIOUS</code> to the version that <code>AWSCURRENT</code> was removed from.</p> </li> <li> <p>This operation is idempotent. If a version with a <code>VersionId</code> with the same value as the <code>ClientRequestToken</code> parameter already exists and you specify the same secret data, the operation succeeds but does nothing. However, if the secret data is different, then the operation fails because you cannot modify an existing version; you can only create new ones.</p> </li> </ul> <note> <ul> <li> <p>If you call an operation to encrypt or decrypt the <code>SecretString</code> or <code>SecretBinary</code> for a secret in the same account as the calling user and that secret doesn''t specify a AWS KMS encryption key, Secrets Manager uses the account''s default AWS managed customer master key (CMK) with the alias <code>aws/secretsmanager</code>. If this key doesn''t already exist in your account then Secrets Manager creates it for you automatically. All users and roles in the same AWS account automatically have access to use the default CMK. Note that if an Secrets Manager API call results in AWS creating the account''s AWS-managed CMK, it can result in a one-time significant delay in returning the result.</p> </li> <li> <p>If the secret resides in a different AWS account from the credentials calling an API that requires encryption or decryption of the secret value then you must create and use a custom AWS KMS CMK because you can''t access the default CMK for the account using credentials from a different AWS account. Store the ARN of the CMK in the secret when you create the secret or when you update it by including it in the <code>KMSKeyId</code>. If you call an API that must encrypt or decrypt <code>SecretString</code> or <code>SecretBinary</code> using credentials from a different account then the AWS KMS key policy must grant cross-account access to that other account''s user or role for both the kms:GenerateDataKey and kms:Decrypt operations.</p> </li> </ul> </note> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p>secretsmanager:PutSecretValue</p> </li> <li> <p>kms:GenerateDataKey - needed only if you use a customer-managed AWS KMS key to encrypt the secret. You do not need this permission to use the account''s default AWS managed CMK for Secrets Manager.</p> </li> </ul> <p> <b>Related operations</b> </p> <ul> <li> <p>To retrieve the encrypted value you store in the version of a secret, use <a>GetSecretValue</a>.</p> </li> <li> <p>To create a secret, use <a>CreateSecret</a>.</p> </li> <li> <p>To get the details for a secret, use <a>DescribeSecret</a>.</p> </li> <li> <p>To list the versions attached to a secret, use <a>ListSecretVersionIds</a>.</p> </li> </ul>'
+      description: '<p>Stores a new encrypted secret value in the specified secret. To do this, the operation creates a new version and attaches it to the secret. The version can contain a new <code>SecretString</code> value or a new <code>SecretBinary</code> value. You can also specify the staging labels that are initially attached to the new version.</p> <note> <p>The Secrets Manager console uses only the <code>SecretString</code> field. To add binary data to a secret with the <code>SecretBinary</code> field you must use the AWS CLI or one of the AWS SDKs.</p> </note> <ul> <li> <p>If this operation creates the first version for the secret then Secrets Manager automatically attaches the staging label <code>AWSCURRENT</code> to the new version.</p> </li> <li> <p>If you do not specify a value for VersionStages then Secrets Manager automatically moves the staging label <code>AWSCURRENT</code> to this new version.</p> </li> <li> <p>If this operation moves the staging label <code>AWSCURRENT</code> from another version to this version, then Secrets Manager also automatically moves the staging label <code>AWSPREVIOUS</code> to the version that <code>AWSCURRENT</code> was removed from.</p> </li> <li> <p>This operation is idempotent. If a version with a <code>VersionId</code> with the same value as the <code>ClientRequestToken</code> parameter already exists and you specify the same secret data, the operation succeeds but does nothing. However, if the secret data is different, then the operation fails because you cannot modify an existing version; you can only create new ones.</p> </li> </ul> <note> <ul> <li> <p>If you call an operation to encrypt or decrypt the <code>SecretString</code> or <code>SecretBinary</code> for a secret in the same account as the calling user and that secret doesn''t specify a AWS KMS encryption key, Secrets Manager uses the account''s default AWS managed customer master key (CMK) with the alias <code>aws/secretsmanager</code>. If this key doesn''t already exist in your account then Secrets Manager creates it for you automatically. All users and roles in the same AWS account automatically have access to use the default CMK. Note that if an Secrets Manager API call results in AWS creating the account''s AWS-managed CMK, it can result in a one-time significant delay in returning the result.</p> </li> <li> <p>If the secret resides in a different AWS account from the credentials calling an API that requires encryption or decryption of the secret value then you must create and use a custom AWS KMS CMK because you can''t access the default CMK for the account using credentials from a different AWS account. Store the ARN of the CMK in the secret when you create the secret or when you update it by including it in the <code>KMSKeyId</code>. If you call an API that must encrypt or decrypt <code>SecretString</code> or <code>SecretBinary</code> using credentials from a different account then the AWS KMS key policy must grant cross-account access to that other account''s user or role for both the kms:GenerateDataKey and kms:Decrypt operations.</p> </li> </ul> </note> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p>secretsmanager:PutSecretValue</p> </li> <li> <p>kms:GenerateDataKey - needed only if you use a customer-managed AWS KMS key to encrypt the secret. You do not need this permission to use the account''s default AWS managed CMK for Secrets Manager.</p> </li> </ul> <p> <b>Related operations</b> </p> <ul> <li> <p>To retrieve the encrypted value you store in the version of a secret, use <a>GetSecretValue</a>.</p> </li> <li> <p>To create a secret, use <a>CreateSecret</a>.</p> </li> <li> <p>To get the details for a secret, use <a>DescribeSecret</a>.</p> </li> <li> <p>To list the versions attached to a secret, use <a>ListSecretVersionIds</a>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -839,6 +845,120 @@ paths:
             type: string
             enum:
               - secretsmanager.PutSecretValue
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=secretsmanager.RemoveRegionsFromReplication:
+    post:
+      operationId: RemoveRegionsFromReplication
+      description: Remove regions from replication.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveRegionsFromReplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InternalServiceError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveRegionsFromReplicationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - secretsmanager.RemoveRegionsFromReplication
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=secretsmanager.ReplicateSecretToRegions:
+    post:
+      operationId: ReplicateSecretToRegions
+      description: 'Converts an existing secret to a multi-Region secret and begins replication the secret to a list of new regions. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplicateSecretToRegionsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InternalServiceError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplicateSecretToRegionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - secretsmanager.ReplicateSecretToRegions
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -953,6 +1073,63 @@ paths:
             type: string
             enum:
               - secretsmanager.RotateSecret
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=secretsmanager.StopReplicationToReplica:
+    post:
+      operationId: StopReplicationToReplica
+      description: Removes the secret from replication and promotes the secret to a regional secret in the replica Region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopReplicationToReplicaResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: InternalServiceError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopReplicationToReplicaRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - secretsmanager.StopReplicationToReplica
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1220,7 +1397,7 @@ paths:
   /#X-Amz-Target=secretsmanager.ValidateResourcePolicy:
     post:
       operationId: ValidateResourcePolicy
-      description: Validates the JSON text of the resource-based policy document attached to the specified secret. The JSON request string input and response output displays formatted code with white space and line breaks for better readability. Submit your input as a single line JSON string. A resource-based policy is optional.
+      description: '<p>Validates that the resource policy does not grant a wide range of IAM principals access to your secret. The JSON request string input and response output displays formatted code with white space and line breaks for better readability. Submit your input as a single line JSON string. A resource-based policy is optional for secrets.</p> <p>The API performs three checks when validating the secret:</p> <ul> <li> <p>Sends a call to <a href="https://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/">Zelkova</a>, an automated reasoning engine, to ensure your Resource Policy does not allow broad access to your secret.</p> </li> <li> <p>Checks for correct syntax in a policy.</p> </li> <li> <p>Verifies the policy does not lock out a caller.</p> </li> </ul> <p> <b>Minimum Permissions</b> </p> <p>You must have the permissions required to access the following APIs:</p> <ul> <li> <p> <code>secretsmanager:PutResourcePolicy</code> </p> </li> <li> <p> <code>secretsmanager:ValidateResourcePolicy</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1383,6 +1560,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SecretVersionIdType'
             - description: The unique identifier associated with the version of the secret you just created.
+        ReplicationStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationStatusListType'
+            - description: 'Describes a list of replication status objects as <code>InProgress</code>, <code>Failed</code> or <code>InSync</code>.'
     CreateSecretRequest:
       type: object
       required:
@@ -1396,7 +1577,7 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestTokenType'
-            - description: '<p>(Optional) If you include <code>SecretString</code> or <code>SecretBinary</code>, then an initial version is created as part of the secret, and this parameter specifies a unique identifier for the new version. </p> <note> <p>If you use the AWS CLI or one of the AWS SDK to call this operation, then you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes it as the value for this parameter in the request. If you don''t use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, then you must generate a <code>ClientRequestToken</code> yourself for the new version and include the value in the request.</p> </note> <p>This value helps ensure idempotency. Secrets Manager uses this value to prevent the accidental creation of duplicate versions if there are failures and retries during a rotation. We recommend that you generate a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID-type</a> value to ensure uniqueness of your versions within the specified secret. </p> <ul> <li> <p>If the <code>ClientRequestToken</code> value isn''t already associated with a version of the secret then a new version of the secret is created. </p> </li> <li> <p>If a version with this value already exists and the version <code>SecretString</code> and <code>SecretBinary</code> values are the same as those in the request, then the request is ignored.</p> </li> <li> <p>If a version with this value already exists and that version''s <code>SecretString</code> and <code>SecretBinary</code> values are different from those in the request then the request fails because you cannot modify an existing version. Instead, use <a>PutSecretValue</a> to create a new version.</p> </li> </ul> <p>This value becomes the <code>VersionId</code> of the new version.</p>'
+            - description: '<p>(Optional) If you include <code>SecretString</code> or <code>SecretBinary</code>, then an initial version is created as part of the secret, and this parameter specifies a unique identifier for the new version. </p> <note> <p>If you use the AWS CLI or one of the AWS SDK to call this operation, then you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes it as the value for this parameter in the request. If you don''t use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, then you must generate a <code>ClientRequestToken</code> yourself for the new version and include the value in the request.</p> </note> <p>This value helps ensure idempotency. Secrets Manager uses this value to prevent the accidental creation of duplicate versions if there are failures and retries during a rotation. We recommend that you generate a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID-type</a> value to ensure uniqueness of your versions within the specified secret. </p> <ul> <li> <p>If the <code>ClientRequestToken</code> value isn''t already associated with a version of the secret then a new version of the secret is created. </p> </li> <li> <p>If a version with this value already exists and the version <code>SecretString</code> and <code>SecretBinary</code> values are the same as those in the request, then the request is ignored.</p> </li> <li> <p>If a version with this value already exists and that version''s <code>SecretString</code> and <code>SecretBinary</code> values are different from those in the request, then the request fails because you cannot modify an existing version. Instead, use <a>PutSecretValue</a> to create a new version.</p> </li> </ul> <p>This value becomes the <code>VersionId</code> of the new version.</p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/DescriptionType'
@@ -1417,6 +1598,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagListType'
             - description: '<p>(Optional) Specifies a list of user-defined tags that are attached to the secret. Each tag is a "Key" and "Value" pair of strings. This operation only appends tags to the existing list of tags. To remove tags, you must use <a>UntagResource</a>.</p> <important> <ul> <li> <p>Secrets Manager tag key names are case sensitive. A tag with the key "ABC" is a different tag from one with key "abc".</p> </li> <li> <p>If you check tags in IAM policy <code>Condition</code> elements as part of your security strategy, then adding or removing a tag can change permissions. If the successful completion of this operation would result in you losing your permissions for this secret, then this operation is blocked and returns an <code>Access Denied</code> error.</p> </li> </ul> </important> <p>This parameter requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>. For example:</p> <p> <code>[{"Key":"CostCenter","Value":"12345"},{"Key":"environment","Value":"production"}]</code> </p> <p>If your command-line tool or SDK requires quotation marks around the parameter, you should use single quotes to avoid confusion with the double quotes required in the JSON text. </p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per secret—50</p> </li> <li> <p>Maximum key length—127 Unicode characters in UTF-8</p> </li> <li> <p>Maximum value length—255 Unicode characters in UTF-8</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use the <code>aws:</code> prefix in your tag names or values because AWS reserves it for AWS use. You can''t edit or delete tag names or values with this prefix. Tags with this prefix do not count against your tags per secret limit.</p> </li> <li> <p>If you use your tagging schema across multiple services and resources, remember other services might have restrictions on allowed characters. Generally allowed characters: letters, spaces, and numbers representable in UTF-8, plus the following special characters: + - = . _ : / @.</p> </li> </ul>'
+        AddReplicaRegions:
+          allOf:
+            - $ref: '#/components/schemas/AddReplicaRegionListType'
+            - description: (Optional) Add a list of regions to replicate secrets. Secrets Manager replicates the KMSKeyID objects to the list of regions specified in the parameter.
+        ForceOverwriteReplicaSecret:
+          allOf:
+            - $ref: '#/components/schemas/BooleanType'
+            - description: '(Optional) If set, the replication overwrites a secret with the same name in the destination region.'
     LimitExceededException: {}
     EncryptionFailure: {}
     ResourceExistsException: {}
@@ -1460,7 +1649,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/SecretNameType'
-            - description: The friendly name of the secret that is now scheduled for deletion.
+            - description: The friendly name of the secret currently scheduled for deletion.
         DeletionDate:
           allOf:
             - $ref: '#/components/schemas/DeletionDateType'
@@ -1474,15 +1663,15 @@ components:
         SecretId:
           allOf:
             - $ref: '#/components/schemas/SecretIdType'
-            - description: '<p>Specifies the secret that you want to delete. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.</p> <note> <p>If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters.</p> <p>If you specify an incomplete ARN without the random suffix, and instead provide the ''friendly name'', you <i>must</i> not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a <i>ResourceNotFoundException</i> or an <i>AccessDeniedException</i> error, depending on your permissions.</p> </note>'
+            - description: '<p>Specifies the secret to delete. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.</p> <note> <p>If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters.</p> <p>If you specify an incomplete ARN without the random suffix, and instead provide the ''friendly name'', you <i>must</i> not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a <i>ResourceNotFoundException</i> or an <i>AccessDeniedException</i> error, depending on your permissions.</p> </note>'
         RecoveryWindowInDays:
           allOf:
             - $ref: '#/components/schemas/RecoveryWindowInDaysType'
-            - description: <p>(Optional) Specifies the number of days that Secrets Manager waits before it can delete the secret. You can't use both this parameter and the <code>ForceDeleteWithoutRecovery</code> parameter in the same API call.</p> <p>This value can range from 7 to 30 days. The default value is 30.</p>
+            - description: <p>(Optional) Specifies the number of days that Secrets Manager waits before Secrets Manager can delete the secret. You can't use both this parameter and the <code>ForceDeleteWithoutRecovery</code> parameter in the same API call.</p> <p>This value can range from 7 to 30 days with a default value of 30.</p>
         ForceDeleteWithoutRecovery:
           allOf:
             - $ref: '#/components/schemas/BooleanType'
-            - description: '<p>(Optional) Specifies that the secret is to be deleted without any recovery window. You can''t use both this parameter and the <code>RecoveryWindowInDays</code> parameter in the same API call.</p> <p>An asynchronous background process performs the actual deletion, so there can be a short delay before the operation completes. If you write code to delete and then immediately recreate a secret with the same name, ensure that your code includes appropriate back off and retry logic.</p> <important> <p>Use this parameter with caution. This parameter causes the operation to skip the normal waiting period before the permanent deletion that AWS would normally impose with the <code>RecoveryWindowInDays</code> parameter. If you delete a secret with the <code>ForceDeleteWithouRecovery</code> parameter, then you have no opportunity to recover the secret. It is permanently lost.</p> </important>'
+            - description: '<p>(Optional) Specifies that the secret is to be deleted without any recovery window. You can''t use both this parameter and the <code>RecoveryWindowInDays</code> parameter in the same API call.</p> <p>An asynchronous background process performs the actual deletion, so there can be a short delay before the operation completes. If you write code to delete and then immediately recreate a secret with the same name, ensure that your code includes appropriate back off and retry logic.</p> <important> <p>Use this parameter with caution. This parameter causes the operation to skip the normal waiting period before the permanent deletion that AWS would normally impose with the <code>RecoveryWindowInDays</code> parameter. If you delete a secret with the <code>ForceDeleteWithouRecovery</code> parameter, then you have no opportunity to recover the secret. You lose the secret permanently.</p> </important> <important> <p>If you use this parameter and include a previously deleted or nonexistent secret, the operation does not return the error <code>ResourceNotFoundException</code> in order to correctly handle retries.</p> </important>'
     DescribeSecretResponse:
       type: object
       example:
@@ -1535,11 +1724,11 @@ components:
         RotationRules:
           allOf:
             - $ref: '#/components/schemas/RotationRulesType'
-            - description: A structure that contains the rotation configuration for this secret.
+            - description: A structure with the rotation configuration for this secret.
         LastRotatedDate:
           allOf:
             - $ref: '#/components/schemas/LastRotatedDateType'
-            - description: The most recent date and time that the Secrets Manager rotation process was successfully completed. This value is null if the secret has never rotated.
+            - description: '<p>The last date and time that the rotation process for this secret was invoked.</p> <p>The most recent date and time that the Secrets Manager rotation process successfully completed. If the secret doesn''t rotate, Secrets Manager returns a null value.</p>'
         LastChangedDate:
           allOf:
             - $ref: '#/components/schemas/LastChangedDateType'
@@ -1567,7 +1756,15 @@ components:
         CreatedDate:
           allOf:
             - $ref: '#/components/schemas/TimestampType'
-            - description: The date that the secret was created.
+            - description: The date you created the secret.
+        PrimaryRegion:
+          allOf:
+            - $ref: '#/components/schemas/RegionType'
+            - description: 'Specifies the primary region for secret replication. '
+        ReplicationStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationStatusListType'
+            - description: 'Describes a list of replication status objects as <code>InProgress</code>, <code>Failed</code> or <code>InSync</code>.<code>P</code> '
     DescribeSecretRequest:
       type: object
       required:
@@ -1719,11 +1916,11 @@ components:
         VersionId:
           allOf:
             - $ref: '#/components/schemas/SecretVersionIdType'
-            - description: '<p>Specifies the unique identifier of the version of the secret that you want to retrieve. If you specify this parameter then don''t specify <code>VersionStage</code>. If you don''t specify either a <code>VersionStage</code> or <code>VersionId</code> then the default is to perform the operation on the version with the <code>VersionStage</code> value of <code>AWSCURRENT</code>.</p> <p>This value is typically a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID-type</a> value with 32 hexadecimal digits.</p>'
+            - description: '<p>Specifies the unique identifier of the version of the secret that you want to retrieve. If you specify both this parameter and <code>VersionStage</code>, the two parameters must refer to the same secret version. If you don''t specify either a <code>VersionStage</code> or <code>VersionId</code> then the default is to perform the operation on the version with the <code>VersionStage</code> value of <code>AWSCURRENT</code>.</p> <p>This value is typically a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID-type</a> value with 32 hexadecimal digits.</p>'
         VersionStage:
           allOf:
             - $ref: '#/components/schemas/SecretVersionStageType'
-            - description: '<p>Specifies the secret version that you want to retrieve by the staging label attached to the version.</p> <p>Staging labels are used to keep track of different versions during the rotation process. If you use this parameter then don''t specify <code>VersionId</code>. If you don''t specify either a <code>VersionStage</code> or <code>VersionId</code>, then the default is to perform the operation on the version with the <code>VersionStage</code> value of <code>AWSCURRENT</code>.</p>'
+            - description: '<p>Specifies the secret version that you want to retrieve by the staging label attached to the version.</p> <p>Staging labels are used to keep track of different versions during the rotation process. If you specify both this parameter and <code>VersionId</code>, the two parameters must refer to the same secret version . If you don''t specify either a <code>VersionStage</code> or <code>VersionId</code>, then the default is to perform the operation on the version with the <code>VersionStage</code> value of <code>AWSCURRENT</code>.</p>'
     DecryptionFailure: {}
     ListSecretVersionIdsResponse:
       type: object
@@ -1841,7 +2038,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/NameType'
-            - description: The friendly name of the secret that the retrieved by the resource-based policy.
+            - description: The friendly name of the secret retrieved by the resource-based policy.
     PutResourcePolicyRequest:
       type: object
       required:
@@ -1852,15 +2049,15 @@ components:
         SecretId:
           allOf:
             - $ref: '#/components/schemas/SecretIdType'
-            - description: '<p>Specifies the secret that you want to attach the resource-based policy to. You can specify either the ARN or the friendly name of the secret.</p> <note> <p>If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters.</p> <p>If you specify an incomplete ARN without the random suffix, and instead provide the ''friendly name'', you <i>must</i> not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a <i>ResourceNotFoundException</i> or an <i>AccessDeniedException</i> error, depending on your permissions.</p> </note>'
+            - description: '<p>Specifies the secret that you want to attach the resource-based policy. You can specify either the ARN or the friendly name of the secret.</p> <note> <p>If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters.</p> <p>If you specify an incomplete ARN without the random suffix, and instead provide the ''friendly name'', you <i>must</i> not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a <i>ResourceNotFoundException</i> or an <i>AccessDeniedException</i> error, depending on your permissions.</p> </note>'
         ResourcePolicy:
           allOf:
             - $ref: '#/components/schemas/NonEmptyResourcePolicyType'
-            - description: 'A JSON-formatted string that''s constructed according to the grammar and syntax for an AWS resource-based policy. The policy in the string identifies who can access or manage this secret and its versions. For information on how to format a JSON parameter for the various command line tool environments, see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>.'
+            - description: 'A JSON-formatted string constructed according to the grammar and syntax for an AWS resource-based policy. The policy in the string identifies who can access or manage this secret and its versions. For information on how to format a JSON parameter for the various command line tool environments, see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>.'
         BlockPublicPolicy:
           allOf:
             - $ref: '#/components/schemas/BooleanType'
-            - description: Makes an optional API call to Zelkova to validate the Resource Policy to prevent broad access to your secret.
+            - description: '(Optional) If you set the parameter, <code>BlockPublicPolicy</code> to true, then you block resource-based policies that allow broad access to the secret.'
     PublicPolicyException: {}
     PutSecretValueResponse:
       type: object
@@ -1913,6 +2110,62 @@ components:
           allOf:
             - $ref: '#/components/schemas/SecretVersionStagesType'
             - description: <p>(Optional) Specifies a list of staging labels that are attached to this version of the secret. These staging labels are used to track the versions through the rotation process by the Lambda rotation function.</p> <p>A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version.</p> <p>If you do not specify a value for <code>VersionStages</code> then Secrets Manager automatically moves the staging label <code>AWSCURRENT</code> to this new version.</p>
+    RemoveRegionsFromReplicationResponse:
+      type: object
+      properties:
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/SecretARNType'
+            - description: The secret <code>ARN</code> removed from replication regions.
+        ReplicationStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationStatusListType'
+            - description: Describes the remaining replication status after you remove regions from the replication list.
+    RemoveRegionsFromReplicationRequest:
+      type: object
+      required:
+        - SecretId
+        - RemoveReplicaRegions
+      title: RemoveRegionsFromReplicationRequest
+      properties:
+        SecretId:
+          allOf:
+            - $ref: '#/components/schemas/SecretIdType'
+            - description: Remove a secret by <code>SecretId</code> from replica Regions.
+        RemoveReplicaRegions:
+          allOf:
+            - $ref: '#/components/schemas/RemoveReplicaRegionListType'
+            - description: Remove replication from specific Regions.
+    ReplicateSecretToRegionsResponse:
+      type: object
+      properties:
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/SecretARNType'
+            - description: 'Replicate a secret based on the <code>ReplicaRegionType</code>&gt; consisting of a Region(required) and a KMSKeyId (optional) which can be the ARN, KeyID, or Alias. '
+        ReplicationStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationStatusListType'
+            - description: 'Describes the secret replication status as <code>PENDING</code>, <code>SUCCESS</code> or <code>FAIL</code>.'
+    ReplicateSecretToRegionsRequest:
+      type: object
+      required:
+        - SecretId
+        - AddReplicaRegions
+      title: ReplicateSecretToRegionsRequest
+      properties:
+        SecretId:
+          allOf:
+            - $ref: '#/components/schemas/SecretIdType'
+            - description: Use the <code>Secret Id</code> to replicate a secret to regions.
+        AddReplicaRegions:
+          allOf:
+            - $ref: '#/components/schemas/AddReplicaRegionListType'
+            - description: Add Regions to replicate the secret.
+        ForceOverwriteReplicaSecret:
+          allOf:
+            - $ref: '#/components/schemas/BooleanType'
+            - description: '(Optional) If set, Secrets Manager replication overwrites a secret with the same name in the destination region.'
     RestoreSecretResponse:
       type: object
       example:
@@ -1978,6 +2231,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/RotationRulesType'
             - description: A structure that defines the rotation configuration for this secret.
+    StopReplicationToReplicaResponse:
+      type: object
+      properties:
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/SecretARNType'
+            - description: 'Response <code>StopReplicationToReplica</code> of a secret, based on the <code>ARN,</code>.'
+    StopReplicationToReplicaRequest:
+      type: object
+      required:
+        - SecretId
+      title: StopReplicationToReplicaRequest
+      properties:
+        SecretId:
+          allOf:
+            - $ref: '#/components/schemas/SecretIdType'
+            - description: 'Response to <code>StopReplicationToReplica</code> of a secret, based on the <code>SecretId</code>.'
     TagResourceRequest:
       type: object
       required:
@@ -1992,7 +2262,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagListType'
-            - description: '<p>The tags to attach to the secret. Each element in the list consists of a <code>Key</code> and a <code>Value</code>.</p> <p>This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>. For the AWS CLI, you can also use the syntax: <code>--Tags Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]</code> </p>'
+            - description: '<p>The tags to attach to the secret. Each element in the list consists of a <code>Key</code> and a <code>Value</code>.</p> <p>This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>. For the AWS CLI, you can also use the syntax: <code>--Tags Key="Key1",Value="Value1" Key="Key2",Value="Value2"[,…]</code> </p>'
     UntagResourceRequest:
       type: object
       required:
@@ -2117,11 +2387,28 @@ components:
         SecretId:
           allOf:
             - $ref: '#/components/schemas/SecretIdType'
-            - description: '<p> The identifier for the secret that you want to validate a resource policy. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.</p> <note> <p>If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters.</p> <p>If you specify an incomplete ARN without the random suffix, and instead provide the ''friendly name'', you <i>must</i> not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a <i>ResourceNotFoundException</i> or an <i>AccessDeniedException</i> error, depending on your permissions.</p> </note>'
+            - description: '<p> (Optional) The identifier of the secret with the resource-based policy you want to validate. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.</p> <note> <p>If you specify an ARN, we generally recommend that you specify a complete ARN. You can specify a partial ARN too—for example, if you don’t include the final hyphen and six random characters that Secrets Manager adds at the end of the ARN when you created the secret. A partial ARN match can work as long as it uniquely matches only one secret. However, if your secret has a name that ends in a hyphen followed by six characters (before Secrets Manager adds the hyphen and six characters to the ARN) and you try to use that as a partial ARN, then those characters cause Secrets Manager to assume that you’re specifying a complete ARN. This confusion can cause unexpected results. To avoid this situation, we recommend that you don’t create secret names ending with a hyphen followed by six characters.</p> <p>If you specify an incomplete ARN without the random suffix, and instead provide the ''friendly name'', you <i>must</i> not include the random suffix. If you do include the random suffix added by Secrets Manager, you receive either a <i>ResourceNotFoundException</i> or an <i>AccessDeniedException</i> error, depending on your permissions.</p> </note>'
         ResourcePolicy:
           allOf:
             - $ref: '#/components/schemas/NonEmptyResourcePolicyType'
-            - description: Identifies the Resource Policy attached to the secret.
+            - description: 'A JSON-formatted string constructed according to the grammar and syntax for an AWS resource-based policy. The policy in the string identifies who can access or manage this secret and its versions. For information on how to format a JSON parameter for the various command line tool environments, see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>.publi'
+    ReplicaRegionType:
+      type: object
+      properties:
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/RegionType'
+            - description: Describes a single instance of Region objects.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyIdType'
+            - description: 'Can be an <code>ARN</code>, <code>Key ID</code>, or <code>Alias</code>. '
+      description: '(Optional) Custom type consisting of a <code>Region</code> (required) and the <code>KmsKeyId</code> which can be an <code>ARN</code>, <code>Key ID</code>, or <code>Alias</code>.'
+    AddReplicaRegionListType:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicaRegionType'
+      minItems: 1
     AutomaticallyRotateAfterDaysType:
       type: integer
       minimum: 1
@@ -2173,6 +2460,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Tag'
+    ReplicationStatusListType:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicationStatusType'
     CreatedDateType:
       type: string
       format: date-time
@@ -2218,6 +2509,11 @@ components:
     TimestampType:
       type: string
       format: date-time
+    RegionType:
+      type: string
+      pattern: '^([a-z]+-)+\d+$'
+      minLength: 1
+      maxLength: 128
     ErrorMessage:
       type: string
     ExcludeCharactersType:
@@ -2239,6 +2535,7 @@ components:
         - name
         - tag-key
         - tag-value
+        - primary-region
         - all
     FilterValuesStringList:
       type: array
@@ -2256,12 +2553,11 @@ components:
         Values:
           allOf:
             - $ref: '#/components/schemas/FilterValuesStringList'
-            - description: Filters your list of secrets by a specific value.
-      description: Allows you to filter your list of secrets.
+            - description: <p>Filters your list of secrets by a specific value.</p> <p>You can prefix your search value with an exclamation mark (<code>!</code>) in order to perform negation filters. </p>
+      description: Allows you to add filters when you use the search function in Secrets Manager.
     FilterValueStringType:
       type: string
-      pattern: '[a-zA-Z0-9 :_@\/\+\=\.\-]+'
-      minLength: 1
+      pattern: '^\!?[a-zA-Z0-9 :_@\/\+\=\.\-]*$'
       maxLength: 512
     FiltersListType:
       type: array
@@ -2316,6 +2612,45 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SecretListEntry'
+    RemoveReplicaRegionListType:
+      type: array
+      items:
+        $ref: '#/components/schemas/RegionType'
+      minItems: 1
+    ReplicationStatusType:
+      type: object
+      properties:
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/RegionType'
+            - description: The Region where replication occurs.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyIdType'
+            - description: 'Can be an <code>ARN</code>, <code>Key ID</code>, or <code>Alias</code>. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusType'
+            - description: 'The status can be <code>InProgress</code>, <code>Failed</code>, or <code>InSync</code>.'
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessageType'
+            - description: Status message such as "<i>Secret with this name already exists in this region</i>".
+        LastAccessedDate:
+          allOf:
+            - $ref: '#/components/schemas/LastAccessedDateType'
+            - description: 'The date that you last accessed the secret in the Region. '
+      description: 'A replication object consisting of a <code>RegionReplicationStatus</code> object and includes a Region, KMSKeyId, status, and status message.'
+    StatusType:
+      type: string
+      enum:
+        - InSync
+        - Failed
+        - InProgress
+    StatusMessageType:
+      type: string
+      minLength: 1
+      maxLength: 4096
     SecretListEntry:
       type: object
       properties:
@@ -2350,7 +2685,7 @@ components:
         LastRotatedDate:
           allOf:
             - $ref: '#/components/schemas/LastRotatedDateType'
-            - description: The last date and time that the rotation process for this secret was invoked.
+            - description: The most recent date and time that the Secrets Manager rotation process was successfully completed. This value is null if the secret hasn't ever rotated.
         LastChangedDate:
           allOf:
             - $ref: '#/components/schemas/LastChangedDateType'
@@ -2379,6 +2714,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TimestampType'
             - description: The date and time when a secret was created.
+        PrimaryRegion:
+          allOf:
+            - $ref: '#/components/schemas/RegionType'
+            - description: The Region where Secrets Manager originated the secret.
       description: 'A structure that contains the details about a secret. It does not include the encrypted <code>SecretString</code> and <code>SecretBinary</code> values. To get those values, use the <a>GetSecretValue</a> operation.'
     SecretVersionsListEntry:
       type: object

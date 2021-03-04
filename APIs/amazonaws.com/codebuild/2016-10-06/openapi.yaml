@@ -3577,6 +3577,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProjectBuildBatchConfig'
             - description: A <code>BuildBatchConfigOverride</code> object that contains batch build configuration overrides.
+        debugSessionEnabled:
+          allOf:
+            - $ref: '#/components/schemas/WrapperBoolean'
+            - description: 'Specifies if session debugging is enabled for this batch build. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.'
     StopBuildOutput:
       type: object
       properties:
@@ -3895,7 +3899,7 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/SourceType'
-            - description: '<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub or GitHub Enterprise Cloud repository.</p> </li> <li> <p> <code>GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise Server repository.</p> </li> <li> <p> <code>NO_SOURCE</code>: The project does not have input source code.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon S3 input bucket.</p> </li> </ul>'
+            - description: '<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub or GitHub Enterprise Cloud repository.</p> </li> <li> <p> <code>GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise Server repository.</p> </li> <li> <p> <code>NO_SOURCE</code>: The project does not have input source code.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon S3 bucket.</p> </li> </ul>'
         location:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3931,7 +3935,7 @@ components:
         sourceIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' An identifier for this project source. '
+            - description: 'An identifier for this project source. The identifier can only contain alphanumeric characters and underscores, and must be less than 128 characters in length. '
       description: Information about the build input source code for the build project.
     ProjectSources:
       type: array
@@ -4406,6 +4410,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BuildGroups'
             - description: An array of <code>BuildGroup</code> objects that define the build groups for the batch build.
+        debugSessionEnabled:
+          allOf:
+            - $ref: '#/components/schemas/WrapperBoolean'
+            - description: '<p/> <p>Specifies if session debugging is enabled for this batch build. For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.</p>'
       description: Contains information about a batch build.
     BuildBatchFilter:
       type: object
@@ -5374,7 +5382,7 @@ components:
         sourceIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: An identifier for a source in the build project.
+            - description: 'An identifier for a source in the build project. The identifier can only contain alphanumeric characters and underscores, and must be less than 128 characters in length. '
         sourceVersion:
           allOf:
             - $ref: '#/components/schemas/String'

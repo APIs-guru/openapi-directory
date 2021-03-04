@@ -408,6 +408,13 @@ paths:
                 ClientRequestToken:
                   description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
+                Tags:
+                  description: The tags to be associated with the workload.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -886,7 +893,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     patch:
       operationId: UpdateAnswer
-      description: Update the answer.
+      description: Update the answer to a specific question in a workload review.
       responses:
         '200':
           description: Success
@@ -2104,6 +2111,91 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{WorkloadArn}':
+    get:
+      operationId: ListTagsForResource
+      description: List the tags for a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: WorkloadArn
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: The ARN for the workload.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds one or more tags to the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: WorkloadArn
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: The ARN for the workload.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: The tags for the resource.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
   /workloadsSummaries:
     post:
       operationId: ListWorkloads
@@ -2171,6 +2263,55 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{WorkloadArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Deletes specified tags from a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: WorkloadArn
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: The ARN for the workload.
+        - name: tagKeys
+          in: query
+          required: true
+          description: The keys of the tags to be removed.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 1
+            maxItems: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2527,6 +2668,10 @@ components:
       description: '<p>The ID used to identify a pillar, for example, <code>security</code>.</p> <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>'
       minLength: 1
       maxLength: 64
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
     CreateWorkloadShareOutput:
       type: object
       properties:
@@ -2673,6 +2818,13 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
       description: Input for List Share Invitations
+    ListTagsForResourceOutput:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags for the resource.
     ListWorkloadSharesOutput:
       type: object
       properties:
@@ -2691,6 +2843,16 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
       description: Output of a list workloads call.
+    TagResourceOutput:
+      type: object
+      properties: {}
+    UntagResourceOutput:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
     UpdateAnswerOutput:
       type: object
       properties:
@@ -2967,6 +3129,12 @@ components:
       description: The list of lenses associated with the workload. Each lens is identified by its <a>LensSummary$LensAlias</a>.
       items:
         $ref: '#/components/schemas/LensAlias'
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     CreateWorkloadInput:
       type: object
       required:
@@ -3006,6 +3174,10 @@ components:
           $ref: '#/components/schemas/Notes'
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to be associated with the workload.
       description: Input for workload creation.
     WorkloadArn:
       type: string
@@ -3203,6 +3375,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ShareInvitationId'
             - description: The ID assigned to the share invitation.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags associated with the workload.
       description: A workload return object.
     ImprovementSummary:
       type: object
@@ -3404,6 +3580,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ShareInvitationSummary'
+    ListTagsForResourceInput:
+      type: object
+      title: ListTagsForResourceInput
+      properties: {}
     SharedWithPrefix:
       type: string
       maxLength: 100
@@ -3594,6 +3774,26 @@ components:
         - REVOKED
         - EXPIRED
       description: The status of a workload share.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceInput:
+      type: object
+      required:
+        - Tags
+      title: TagResourceInput
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags for the resource.
+    UntagResourceInput:
+      type: object
+      title: UntagResourceInput
+      properties: {}
     UpdateAnswerInput:
       type: object
       title: UpdateAnswerInput
