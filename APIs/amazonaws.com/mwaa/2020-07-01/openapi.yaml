@@ -247,6 +247,10 @@ paths:
                   description: 'The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers and the Fargate containers that run your tasks up to the number you specify in this field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra containers leaving the one worker that is included with your environment.'
                   type: integer
                   minimum: 1
+                MinWorkers:
+                  description: 'The minimum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers and the Fargate containers that run your tasks up to the number you specify in the <code>MaxWorkers</code> field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra containers leaving the worker count you specify in the <code>MinWorkers</code> field.'
+                  type: integer
+                  minimum: 1
                 NetworkConfiguration:
                   description: Provide the security group and subnet IDs for the workers and scheduler.
                   type: object
@@ -284,7 +288,7 @@ paths:
                 SourceBucketArn:
                   description: 'The Amazon Resource Name (ARN) of your Amazon S3 storage bucket. For example, <code>arn:aws:s3:::airflow-mybucketname</code>.'
                   type: string
-                  pattern: '^arn:aws(-[a-z]+)?:s3:::airflow-[a-z0-9.\-]+$'
+                  pattern: '^arn:aws(-[a-z]+)?:s3:::[a-z0-9.\-]+$'
                   minLength: 1
                   maxLength: 1224
                 Tags:
@@ -478,7 +482,11 @@ paths:
                     WorkerLogs:
                       $ref: '#/components/schemas/ModuleLoggingConfigurationInput'
                 MaxWorkers:
-                  description: The Maximum Workers to update of your Amazon MWAA environment.
+                  description: The maximum number of workers to update of your Amazon MWAA environment.
+                  type: integer
+                  minimum: 1
+                MinWorkers:
+                  description: The minimum number of workers to update of your Amazon MWAA environment.
                   type: integer
                   minimum: 1
                 NetworkConfiguration:
@@ -514,7 +522,7 @@ paths:
                 SourceBucketArn:
                   description: The S3 Source Bucket ARN to update of your Amazon MWAA environment.
                   type: string
-                  pattern: '^arn:aws(-[a-z]+)?:s3:::airflow-[a-z0-9.\-]+$'
+                  pattern: '^arn:aws(-[a-z]+)?:s3:::[a-z0-9.\-]+$'
                   minLength: 1
                   maxLength: 1224
                 WebserverAccessMode:
@@ -1121,6 +1129,9 @@ components:
     MaxWorkers:
       type: integer
       minimum: 1
+    MinWorkers:
+      type: integer
+      minimum: 1
     NetworkConfiguration:
       type: object
       properties:
@@ -1139,7 +1150,7 @@ components:
       maxLength: 1024
     S3BucketArn:
       type: string
-      pattern: '^arn:aws(-[a-z]+)?:s3:::airflow-[a-z0-9.\-]+$'
+      pattern: '^arn:aws(-[a-z]+)?:s3:::[a-z0-9.\-]+$'
       minLength: 1
       maxLength: 1224
     TagMap:
@@ -1199,6 +1210,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxWorkers'
             - description: 'The maximum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers and the Fargate containers that run your tasks up to the number you specify in this field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra containers leaving the one worker that is included with your environment.'
+        MinWorkers:
+          allOf:
+            - $ref: '#/components/schemas/MinWorkers'
+            - description: 'The minimum number of workers that you want to run in your environment. MWAA scales the number of Apache Airflow workers and the Fargate containers that run your tasks up to the number you specify in the <code>MaxWorkers</code> field. When there are no more tasks running, and no more in the queue, MWAA disposes of the extra containers leaving the worker count you specify in the <code>MinWorkers</code> field.'
         NetworkConfiguration:
           allOf:
             - $ref: '#/components/schemas/NetworkConfiguration'
@@ -1367,7 +1382,11 @@ components:
         MaxWorkers:
           allOf:
             - $ref: '#/components/schemas/MaxWorkers'
-            - description: The Maximum Workers of the Amazon MWAA Environment.
+            - description: The maximum number of workers to run in your Amazon MWAA Environment.
+        MinWorkers:
+          allOf:
+            - $ref: '#/components/schemas/MinWorkers'
+            - description: The minimum number of workers to run in your Amazon MWAA Environment.
         Name:
           allOf:
             - $ref: '#/components/schemas/EnvironmentName'
@@ -1642,7 +1661,11 @@ components:
         MaxWorkers:
           allOf:
             - $ref: '#/components/schemas/MaxWorkers'
-            - description: The Maximum Workers to update of your Amazon MWAA environment.
+            - description: The maximum number of workers to update of your Amazon MWAA environment.
+        MinWorkers:
+          allOf:
+            - $ref: '#/components/schemas/MinWorkers'
+            - description: The minimum number of workers to update of your Amazon MWAA environment.
         NetworkConfiguration:
           allOf:
             - $ref: '#/components/schemas/UpdateNetworkConfigurationInput'

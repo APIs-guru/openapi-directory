@@ -1430,7 +1430,7 @@ components:
       properties:
         Name:
           allOf:
-            - $ref: '#/components/schemas/NamespaceName'
+            - $ref: '#/components/schemas/NamespaceNameHttp'
             - description: The name that you want to assign to this namespace.
         CreatorRequestId:
           allOf:
@@ -1467,7 +1467,7 @@ components:
       properties:
         Name:
           allOf:
-            - $ref: '#/components/schemas/NamespaceName'
+            - $ref: '#/components/schemas/NamespaceNamePrivate'
             - description: "The name that you want to assign to this namespace. When you create a private DNS namespace, AWS Cloud Map automatically creates an Amazon Route\_53 private hosted zone that has the same name as the namespace."
         CreatorRequestId:
           allOf:
@@ -1502,7 +1502,7 @@ components:
       properties:
         Name:
           allOf:
-            - $ref: '#/components/schemas/NamespaceName'
+            - $ref: '#/components/schemas/NamespaceNamePublic'
             - description: The name that you want to assign to this namespace.
         CreatorRequestId:
           allOf:
@@ -1546,7 +1546,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/ServiceName'
-            - description: '<p>The name that you want to assign to the service.</p> <p>If you want AWS Cloud Map to create an <code>SRV</code> record when you register an instance, and if you''re using a system that requires a specific <code>SRV</code> format, such as <a href="http://www.haproxy.org/">HAProxy</a>, specify the following for <code>Name</code>:</p> <ul> <li> <p>Start the name with an underscore (_), such as <code>_exampleservice</code> </p> </li> <li> <p>End the name with <i>._protocol</i>, such as <code>._tcp</code> </p> </li> </ul> <p>When you register an instance, AWS Cloud Map creates an <code>SRV</code> record and assigns a name to the record by concatenating the service name and the namespace name, for example:</p> <p> <code>_exampleservice._tcp.example.com</code> </p>'
+            - description: '<p>The name that you want to assign to the service.</p> <p>If you want AWS Cloud Map to create an <code>SRV</code> record when you register an instance, and if you''re using a system that requires a specific <code>SRV</code> format, such as <a href="http://www.haproxy.org/">HAProxy</a>, specify the following for <code>Name</code>:</p> <ul> <li> <p>Start the name with an underscore (_), such as <code>_exampleservice</code> </p> </li> <li> <p>End the name with <i>._protocol</i>, such as <code>._tcp</code> </p> </li> </ul> <p>When you register an instance, AWS Cloud Map creates an <code>SRV</code> record and assigns a name to the record by concatenating the service name and the namespace name, for example:</p> <p> <code>_exampleservice._tcp.example.com</code> </p> <note> <p>For a single DNS namespace, you cannot create two services with names that differ only by case (such as EXAMPLE and example). Otherwise, these services will have the same DNS name. However, you can create multiple HTTP services with names that differ only by case because HTTP services are case sensitive.</p> </note>'
         NamespaceId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
@@ -1575,6 +1575,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: 'The tags to add to the service. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ServiceTypeOption'
+            - description: 'If present, specifies that the service instances are only discoverable using the <code>DiscoverInstances</code> API operation. No DNS records will be registered for the service instances. The only valid value is <code>HTTP</code>.'
     NamespaceNotFound: {}
     ServiceAlreadyExists: {}
     DeleteNamespaceResponse:
@@ -2168,8 +2172,9 @@ components:
         $ref: '#/components/schemas/AttrValue'
     Code:
       type: string
-    NamespaceName:
+    NamespaceNameHttp:
       type: string
+      pattern: '^[!-~]{1,1024}$'
       maxLength: 1024
     ResourceId:
       type: string
@@ -2186,6 +2191,14 @@ components:
     OperationId:
       type: string
       maxLength: 255
+    NamespaceNamePrivate:
+      type: string
+      pattern: '^[!-~]{1,1024}$'
+      maxLength: 1024
+    NamespaceNamePublic:
+      type: string
+      pattern: '^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?$'
+      maxLength: 1024
     ServiceName:
       type: string
       pattern: '((?=^.{1,127}$)^([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9])(\.([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9]))*$)|(^\.$)'
@@ -2232,8 +2245,13 @@ components:
         FailureThreshold:
           allOf:
             - $ref: '#/components/schemas/FailureThreshold'
-            - description: <important> <p>This parameter has been deprecated and is always set to 1. AWS Cloud Map waits for approximately 30 seconds after receiving an <code>UpdateInstanceCustomHealthStatus</code> request before changing the status of the service instance.</p> </important> <p>The number of 30-second intervals that you want AWS Cloud Map to wait after receiving an <code>UpdateInstanceCustomHealthStatus</code> request before it changes the health status of a service instance.</p> <p>Sending a second or subsequent <code>UpdateInstanceCustomHealthStatus</code> request with the same value before 30 seconds has passed doesn't accelerate the change. AWS Cloud Map still waits <code>30</code> seconds after the first request to make the change.</p>
+            - deprecated: true
+              description: <important> <p>This parameter has been deprecated and is always set to 1. AWS Cloud Map waits for approximately 30 seconds after receiving an <code>UpdateInstanceCustomHealthStatus</code> request before changing the status of the service instance.</p> </important> <p>The number of 30-second intervals that you want AWS Cloud Map to wait after receiving an <code>UpdateInstanceCustomHealthStatus</code> request before it changes the health status of a service instance.</p> <p>Sending a second or subsequent <code>UpdateInstanceCustomHealthStatus</code> request with the same value before 30 seconds has passed doesn't accelerate the change. AWS Cloud Map still waits <code>30</code> seconds after the first request to make the change.</p>Configurable FailureThreshold of HealthCheckCustomConfig is deprecated.  It will always have value 1.
       description: '<p>A complex type that contains information about an optional custom health check. A custom health check, which requires that you use a third-party health checker to evaluate the health of your resources, is useful in the following circumstances:</p> <ul> <li> <p>You can''t use a health check that is defined by <code>HealthCheckConfig</code> because the resource isn''t available over the internet. For example, you can use a custom health check when the instance is in an Amazon VPC. (To check the health of resources in a VPC, the health checker must also be in the VPC.)</p> </li> <li> <p>You want to use a third-party health checker regardless of where your resources are.</p> </li> </ul> <important> <p>If you specify a health check configuration, you can specify either <code>HealthCheckCustomConfig</code> or <code>HealthCheckConfig</code> but not both.</p> </important> <p>To change the status of a custom health check, submit an <code>UpdateInstanceCustomHealthStatus</code> request. AWS Cloud Map doesn''t monitor the status of the resource, it just keeps a record of the status specified in the most recent <code>UpdateInstanceCustomHealthStatus</code> request.</p> <p>Here''s how custom health checks work:</p> <ol> <li> <p>You create a service and specify a value for <code>FailureThreshold</code>. </p> <p>The failure threshold indicates the number of 30-second intervals you want AWS Cloud Map to wait between the time that your application sends an <a href="https://docs.aws.amazon.com/cloud-map/latest/api/API_UpdateInstanceCustomHealthStatus.html">UpdateInstanceCustomHealthStatus</a> request and the time that AWS Cloud Map stops routing internet traffic to the corresponding resource.</p> </li> <li> <p>You register an instance.</p> </li> <li> <p>You configure a third-party health checker to monitor the resource that is associated with the new instance. </p> <note> <p>AWS Cloud Map doesn''t check the health of the resource directly. </p> </note> </li> <li> <p>The third-party health-checker determines that the resource is unhealthy and notifies your application.</p> </li> <li> <p>Your application submits an <code>UpdateInstanceCustomHealthStatus</code> request.</p> </li> <li> <p>AWS Cloud Map waits for (<code>FailureThreshold</code> x 30) seconds.</p> </li> <li> <p>If another <code>UpdateInstanceCustomHealthStatus</code> request doesn''t arrive during that time to change the status back to healthy, AWS Cloud Map stops routing traffic to the resource.</p> </li> </ol>'
+    ServiceTypeOption:
+      type: string
+      enum:
+        - HTTP
     Service:
       type: object
       properties:
@@ -2265,6 +2283,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DnsConfig'
             - description: "A complex type that contains information about the Route\_53 DNS records that you want AWS Cloud Map to create when you register an instance."
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ServiceType'
+            - description: <p>Describes the systems that can be used to discover the service instances.</p> <dl> <dt>DNS_HTTP</dt> <dd> <p>The service instances can be discovered using either DNS queries or the <code>DiscoverInstances</code> API operation.</p> </dd> <dt>HTTP</dt> <dd> <p>The service instances can only be discovered using the <code>DiscoverInstances</code> API operation.</p> </dd> <dt>DNS</dt> <dd> <p>Reserved.</p> </dd> </dl>
         HealthCheckConfig:
           allOf:
             - $ref: '#/components/schemas/HealthCheckConfig'
@@ -2287,6 +2309,9 @@ components:
       enum:
         - HEALTHY
         - UNHEALTHY
+    NamespaceName:
+      type: string
+      maxLength: 1024
     DiscoverMaxResults:
       type: integer
       minimum: 1
@@ -2506,7 +2531,7 @@ components:
             - description: The ID of an instance that matches the values that you specified in the request.
         NamespaceName:
           allOf:
-            - $ref: '#/components/schemas/NamespaceName'
+            - $ref: '#/components/schemas/NamespaceNameHttp'
             - description: The name of the namespace that you specified when you registered the instance.
         ServiceName:
           allOf:
@@ -2715,6 +2740,12 @@ components:
         - NAMESPACE
         - SERVICE
         - INSTANCE
+    ServiceType:
+      type: string
+      enum:
+        - HTTP
+        - DNS_HTTP
+        - DNS
     ServiceChange:
       type: object
       properties:
@@ -2767,6 +2798,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ServiceName'
             - description: The name of the service.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ServiceType'
+            - description: <p>Describes the systems that can be used to discover the service instances.</p> <dl> <dt>DNS_HTTP</dt> <dd> <p>The service instances can be discovered using either DNS queries or the <code>DiscoverInstances</code> API operation.</p> </dd> <dt>HTTP</dt> <dd> <p>The service instances can only be discovered using the <code>DiscoverInstances</code> API operation.</p> </dd> <dt>DNS</dt> <dd> <p>Reserved.</p> </dd> </dl>
         Description:
           allOf:
             - $ref: '#/components/schemas/ResourceDescription'
