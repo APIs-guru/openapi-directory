@@ -1648,6 +1648,171 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSShield_20160616.ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS Shield.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShield_20160616.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSShield_20160616.TagResource:
+    post:
+      operationId: TagResource
+      description: Adds or updates tags for a resource in AWS Shield.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShield_20160616.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSShield_20160616.UntagResource:
+    post:
+      operationId: UntagResource
+      description: Removes tags from a resource in AWS Shield.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShield_20160616.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSShield_20160616.UpdateEmergencyContactSettings:
     post:
       operationId: UpdateEmergencyContactSettings
@@ -1964,6 +2129,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceArn'
             - description: '<p>The ARN (Amazon Resource Name) of the resource to be protected.</p> <p>The ARN should be in one of the following formats:</p> <ul> <li> <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i> </code> </p> </li> <li> <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i> </code> </p> </li> <li> <p>For an AWS CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i> </code> </p> </li> <li> <p>For an AWS Global Accelerator accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i> </code> </p> </li> <li> <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i> </code> </p> </li> <li> <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i> </code> </p> </li> </ul>'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: One or more tag key-value pairs for the <a>Protection</a> object that is created.
     InvalidResourceException: {}
     ResourceAlreadyExistsException: {}
     CreateProtectionGroupResponse:
@@ -1997,6 +2166,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProtectionGroupMembers'
             - description: 'The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: One or more tag key-value pairs for the protection group.
     CreateSubscriptionResponse:
       type: object
       properties: {}
@@ -2329,6 +2502,59 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: '<p>The maximum number of resource ARN objects to return. If you leave this blank, Shield Advanced returns the first 20 results.</p> <p>This is a maximum value. Shield Advanced might return the results in smaller batches. That is, the number of objects returned could be less than <code>MaxResults</code>, even if there are still more objects yet to return. If there are more objects to return, Shield Advanced returns a value in <code>NextToken</code> that you can use in your next request, to get the next batch of objects.</p>'
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tag key and value pairs associated with the specified resource.
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+      title: ListTagsForResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource to get tags for.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource that you want to add or update tags for.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags that you want to modify or add to the resource.
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource that you want to remove tags from.
+        TagKeys:
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The tag key for each tag that you want to remove from the resource.
     UpdateEmergencyContactSettingsResponse:
       type: object
       properties: {}
@@ -2671,6 +2897,12 @@ components:
         $ref: '#/components/schemas/ResourceArn'
       minItems: 0
       maxItems: 10000
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 200
     ProtectionName:
       type: string
       pattern: '[ a-zA-Z0-9_\\.\\-]*'
@@ -2722,6 +2954,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProtectionGroupMembers'
             - description: 'The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. '
+        ProtectionGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN (Amazon Resource Name) of the protection group.
       description: 'A grouping of protected resources that you and AWS Shield Advanced can monitor as a collective. This resource grouping improves the accuracy of detection and reduces false positives. '
     Protection:
       type: object
@@ -2742,6 +2978,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/HealthCheckIds'
             - description: 'The unique identifier (ID) for the Route 53 health check that''s associated with the protection. '
+        ProtectionArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN (Amazon Resource Name) of the protection.
       description: An object that represents a resource that is under DDoS protection.
     Subscription:
       type: object
@@ -2776,6 +3016,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SubscriptionLimits'
             - description: 'Limits settings for your subscription. '
+        SubscriptionArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN (Amazon Resource Name) of the subscription.
       description: Information about the AWS Shield Advanced subscription for an account.
     DurationInSeconds:
       type: integer
@@ -3010,5 +3254,31 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The unit of the counters.
       description: The counter that describes a DDoS attack.
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    Tag:
+      type: object
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: 'Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as "customer." Tag keys are case-sensitive.'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: 'Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as "companyA" or "companyB." Tag values are case-sensitive.'
+      description: 'A tag associated with an AWS resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing or other management. Typically, the tag key represents a category, such as "environment", and the tag value represents a specific value within that category, such as "test," "development," or "production". Or you might set the tag key to "customer" and the value to the customer name or ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a resource.'
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
 security:
   - hmac: []

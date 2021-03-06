@@ -706,7 +706,7 @@ paths:
               type: object
               properties:
                 connectorTypes:
-                  description: '<p> The type of connector, such as Salesforce, Amplitude, and so on. </p> <note> <p> <i>Locke</i> refers to a new destination known as Amazon Connect Customer Profiles. At this time, we recommend that you do not use this destination. </p> </note>'
+                  description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
                   type: array
                   items:
                     $ref: '#/components/schemas/ConnectorType'
@@ -1558,7 +1558,9 @@ components:
             - $ref: '#/components/schemas/GoogleAnalyticsConnectorProfileProperties'
             - description: ' The connector-specific properties required Google Analytics. '
         Honeycode:
-          $ref: '#/components/schemas/HoneycodeConnectorProfileProperties'
+          allOf:
+            - $ref: '#/components/schemas/HoneycodeConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Amazon Honeycode. '
         InforNexus:
           allOf:
             - $ref: '#/components/schemas/InforNexusConnectorProfileProperties'
@@ -1624,7 +1626,9 @@ components:
             - $ref: '#/components/schemas/GoogleAnalyticsConnectorProfileCredentials'
             - description: ' The connector-specific credentials required when using Google Analytics. '
         Honeycode:
-          $ref: '#/components/schemas/HoneycodeConnectorProfileCredentials'
+          allOf:
+            - $ref: '#/components/schemas/HoneycodeConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Amazon Honeycode. '
         InforNexus:
           allOf:
             - $ref: '#/components/schemas/InforNexusConnectorProfileCredentials'
@@ -2261,9 +2265,13 @@ components:
             - $ref: '#/components/schemas/UpsolverMetadata'
             - description: ' The connector metadata specific to Upsolver. '
         CustomerProfiles:
-          $ref: '#/components/schemas/CustomerProfilesMetadata'
+          allOf:
+            - $ref: '#/components/schemas/CustomerProfilesMetadata'
+            - description: ' The connector metadata specific to Amazon Connect Customer Profiles. '
         Honeycode:
-          $ref: '#/components/schemas/HoneycodeMetadata'
+          allOf:
+            - $ref: '#/components/schemas/HoneycodeMetadata'
+            - description: ' The connector metadata specific to Amazon Honeycode. '
       description: ' A structure to specify connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. '
     ConnectorConfiguration:
       type: object
@@ -2518,11 +2526,15 @@ components:
     CustomerProfilesMetadata:
       type: object
       properties: {}
+      description: ' The connector metadata specific to Amazon Connect Customer Profiles. '
     HoneycodeMetadata:
       type: object
       properties:
         oAuthScopes:
-          $ref: '#/components/schemas/OAuthScopeList'
+          allOf:
+            - $ref: '#/components/schemas/OAuthScopeList'
+            - description: ' The desired authorization scope for the Amazon Honeycode account. '
+      description: ' The connector metadata specific to Amazon Honeycode. '
     RedirectUri:
       type: string
       pattern: \S+
@@ -2959,11 +2971,16 @@ components:
       type: object
       properties:
         accessToken:
-          $ref: '#/components/schemas/AccessToken'
+          allOf:
+            - $ref: '#/components/schemas/AccessToken'
+            - description: ' The credentials used to access protected Amazon Honeycode resources. '
         refreshToken:
-          $ref: '#/components/schemas/RefreshToken'
+          allOf:
+            - $ref: '#/components/schemas/RefreshToken'
+            - description: ' The credentials used to acquire new access tokens. '
         oAuthRequest:
           $ref: '#/components/schemas/ConnectorOAuthRequest'
+      description: ' The connector-specific credentials required when using Amazon Honeycode. '
     InforNexusConnectorProfileCredentials:
       type: object
       required:
@@ -3195,6 +3212,7 @@ components:
     HoneycodeConnectorProfileProperties:
       type: object
       properties: {}
+      description: ' The connector-specific properties required when using Amazon Honeycode. '
     InforNexusConnectorProfileProperties:
       type: object
       required:
@@ -3501,9 +3519,14 @@ components:
         - domainName
       properties:
         domainName:
-          $ref: '#/components/schemas/DomainName'
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: ' The unique name of the Amazon Connect Customer Profiles domain. '
         objectTypeName:
-          $ref: '#/components/schemas/ObjectTypeName'
+          allOf:
+            - $ref: '#/components/schemas/ObjectTypeName'
+            - description: ' The object specified in the Amazon Connect Customer Profiles flow destination. '
+      description: ' The properties that are applied when Amazon Connect Customer Profiles is used as a destination. '
     DataPullMode:
       type: string
       enum:
@@ -3612,7 +3635,7 @@ components:
         connectorTypes:
           allOf:
             - $ref: '#/components/schemas/ConnectorTypeList'
-            - description: '<p> The type of connector, such as Salesforce, Amplitude, and so on. </p> <note> <p> <i>Locke</i> refers to a new destination known as Amazon Connect Customer Profiles. At this time, we recommend that you do not use this destination. </p> </note>'
+            - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -3772,6 +3795,7 @@ components:
     LookoutMetricsDestinationProperties:
       type: object
       properties: {}
+      description: ' The properties that are applied when Amazon Lookout for Metrics is used as a destination. '
     UpsolverDestinationProperties:
       type: object
       required:
@@ -3797,9 +3821,12 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Amazon Honeycode flow destination. '
         errorHandlingConfig:
           $ref: '#/components/schemas/ErrorHandlingConfig'
+      description: ' The properties that are applied when Amazon Honeycode is used as a destination. '
     DestinationConnectorProperties:
       type: object
       properties:
@@ -3824,15 +3851,21 @@ components:
             - $ref: '#/components/schemas/EventBridgeDestinationProperties'
             - description: ' The properties required to query Amazon EventBridge. '
         LookoutMetrics:
-          $ref: '#/components/schemas/LookoutMetricsDestinationProperties'
+          allOf:
+            - $ref: '#/components/schemas/LookoutMetricsDestinationProperties'
+            - description: ' The properties required to query Amazon Lookout for Metrics. '
         Upsolver:
           allOf:
             - $ref: '#/components/schemas/UpsolverDestinationProperties'
             - description: ' The properties required to query Upsolver. '
         Honeycode:
-          $ref: '#/components/schemas/HoneycodeDestinationProperties'
+          allOf:
+            - $ref: '#/components/schemas/HoneycodeDestinationProperties'
+            - description: ' The properties required to query Amazon Honeycode. '
         CustomerProfiles:
-          $ref: '#/components/schemas/CustomerProfilesDestinationProperties'
+          allOf:
+            - $ref: '#/components/schemas/CustomerProfilesDestinationProperties'
+            - description: ' The properties required to query Amazon Connect Customer Profiles. '
       description: ' This stores the information that is required to query a particular connector. '
     DestinationField:
       type: string
@@ -4210,11 +4243,11 @@ components:
         prefixType:
           allOf:
             - $ref: '#/components/schemas/PrefixType'
-            - description: ' Determines the level of granularity that''s included in the prefix. '
+            - description: ' Determines the format of the prefix, and whether it applies to the file name, file path, or both. '
         prefixFormat:
           allOf:
             - $ref: '#/components/schemas/PrefixFormat'
-            - description: ' Determines the format of the prefix, and whether it applies to the file name, file path, or both. '
+            - description: ' Determines the level of granularity that''s included in the prefix. '
       description: ' Determines the prefix that Amazon AppFlow applies to the destination folder name. You can name your destination folders according to the flow frequency and date. '
     PrivateLinkServiceName:
       type: string
@@ -4340,7 +4373,9 @@ components:
             - $ref: '#/components/schemas/ScheduleOffset'
             - description: ' Specifies the optional offset that is added to the time interval for a schedule-triggered flow. '
         firstExecutionFrom:
-          $ref: '#/components/schemas/Date'
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies the date range for the records to import from the connector in the first flow run. '
       description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
     ServiceNowSourceProperties:
       type: object

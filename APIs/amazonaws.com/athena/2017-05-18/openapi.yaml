@@ -294,6 +294,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.CreatePreparedStatement:
+    post:
+      operationId: CreatePreparedStatement
+      description: Creates a prepared statement for use with SQL queries in Athena.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePreparedStatementOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePreparedStatementInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.CreatePreparedStatement
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonAthena.CreateWorkGroup:
     post:
       operationId: CreateWorkGroup
@@ -421,6 +466,57 @@ paths:
             type: string
             enum:
               - AmazonAthena.DeleteNamedQuery
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.DeletePreparedStatement:
+    post:
+      operationId: DeletePreparedStatement
+      description: Deletes the prepared statement with the specified name from the specified workgroup.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePreparedStatementOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePreparedStatementInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.DeletePreparedStatement
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -607,6 +703,57 @@ paths:
             type: string
             enum:
               - AmazonAthena.GetNamedQuery
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.GetPreparedStatement:
+    post:
+      operationId: GetPreparedStatement
+      description: Retrieves the prepared statement with the specified name from the specified workgroup.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPreparedStatementOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPreparedStatementInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.GetPreparedStatement
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1027,6 +1174,63 @@ paths:
             type: string
             enum:
               - AmazonAthena.ListNamedQueries
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.ListPreparedStatements:
+    post:
+      operationId: ListPreparedStatements
+      description: Lists the prepared statements in the specfied workgroup.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPreparedStatementsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPreparedStatementsInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.ListPreparedStatements
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1518,6 +1722,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.UpdatePreparedStatement:
+    post:
+      operationId: UpdatePreparedStatement
+      description: Updates a prepared statement.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePreparedStatementOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePreparedStatementInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.UpdatePreparedStatement
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonAthena.UpdateWorkGroup:
     post:
       operationId: UpdateWorkGroup
@@ -1728,6 +1983,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkGroupName'
             - description: The name of the workgroup in which the named query is being created.
+    CreatePreparedStatementOutput:
+      type: object
+      properties: {}
+    CreatePreparedStatementInput:
+      type: object
+      required:
+        - StatementName
+        - WorkGroup
+        - QueryStatement
+      title: CreatePreparedStatementInput
+      properties:
+        StatementName:
+          allOf:
+            - $ref: '#/components/schemas/StatementName'
+            - description: The name of the prepared statement.
+        WorkGroup:
+          allOf:
+            - $ref: '#/components/schemas/WorkGroupName'
+            - description: The name of the workgroup to which the prepared statement belongs.
+        QueryStatement:
+          allOf:
+            - $ref: '#/components/schemas/QueryString'
+            - description: The query string for the prepared statement.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: The description of the prepared statement.
     CreateWorkGroupOutput:
       type: object
       properties: {}
@@ -1779,6 +2061,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/NamedQueryId'
             - description: The unique ID of the query to delete.
+    DeletePreparedStatementOutput:
+      type: object
+      properties: {}
+    DeletePreparedStatementInput:
+      type: object
+      required:
+        - StatementName
+        - WorkGroup
+      title: DeletePreparedStatementInput
+      properties:
+        StatementName:
+          allOf:
+            - $ref: '#/components/schemas/StatementName'
+            - description: The name of the prepared statement to delete.
+        WorkGroup:
+          allOf:
+            - $ref: '#/components/schemas/WorkGroupName'
+            - description: The workgroup to which the statement to be deleted belongs.
+    ResourceNotFoundException: {}
     DeleteWorkGroupOutput:
       type: object
       properties: {}
@@ -1853,6 +2154,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/NamedQueryId'
             - description: The unique ID of the query. Use <a>ListNamedQueries</a> to get query IDs.
+    GetPreparedStatementOutput:
+      type: object
+      properties:
+        PreparedStatement:
+          allOf:
+            - $ref: '#/components/schemas/PreparedStatement'
+            - description: The name of the prepared statement that was retrieved.
+    GetPreparedStatementInput:
+      type: object
+      required:
+        - StatementName
+        - WorkGroup
+      title: GetPreparedStatementInput
+      properties:
+        StatementName:
+          allOf:
+            - $ref: '#/components/schemas/StatementName'
+            - description: The name of the prepared statement to retrieve.
+        WorkGroup:
+          allOf:
+            - $ref: '#/components/schemas/WorkGroupName'
+            - description: The workgroup to which the statement to be retrieved belongs.
     GetQueryExecutionOutput:
       type: object
       properties:
@@ -2049,6 +2372,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkGroupName'
             - description: 'The name of the workgroup from which the named queries are being returned. If a workgroup is not specified, the saved queries for the primary workgroup are returned.'
+    ListPreparedStatementsOutput:
+      type: object
+      properties:
+        PreparedStatements:
+          allOf:
+            - $ref: '#/components/schemas/PreparedStatementsList'
+            - description: The list of prepared statements for the workgroup.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
+    ListPreparedStatementsInput:
+      type: object
+      required:
+        - WorkGroup
+      title: ListPreparedStatementsInput
+      properties:
+        WorkGroup:
+          allOf:
+            - $ref: '#/components/schemas/WorkGroupName'
+            - description: The workgroup to list the prepared statements for.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxPreparedStatementsCount'
+            - description: The maximum number of results to return in this request.
     ListQueryExecutionsOutput:
       type: object
       properties:
@@ -2143,7 +2495,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxTagsCount'
             - description: The maximum number of results to be returned per request that lists the tags for the resource.
-    ResourceNotFoundException: {}
     ListWorkGroupsOutput:
       type: object
       properties:
@@ -2276,6 +2627,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/ParametersMap'
             - description: '<p>Specifies the Lambda function or functions to use for updating the data catalog. This is a mapping whose values depend on the catalog type. </p> <ul> <li> <p>For the <code>HIVE</code> data catalog type, use the following syntax. The <code>metadata-function</code> parameter is required. <code>The sdk-version</code> parameter is optional and defaults to the currently supported version.</p> <p> <code>metadata-function=<i>lambda_arn</i>, sdk-version=<i>version_number</i> </code> </p> </li> <li> <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets of required parameters, but not both.</p> <ul> <li> <p>If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.</p> <p> <code>metadata-function=<i>lambda_arn</i>, record-function=<i>lambda_arn</i> </code> </p> </li> <li> <p> If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.</p> <p> <code>function=<i>lambda_arn</i> </code> </p> </li> </ul> </li> </ul>'
+    UpdatePreparedStatementOutput:
+      type: object
+      properties: {}
+    UpdatePreparedStatementInput:
+      type: object
+      required:
+        - StatementName
+        - WorkGroup
+        - QueryStatement
+      title: UpdatePreparedStatementInput
+      properties:
+        StatementName:
+          allOf:
+            - $ref: '#/components/schemas/StatementName'
+            - description: The name of the prepared statement.
+        WorkGroup:
+          allOf:
+            - $ref: '#/components/schemas/WorkGroupName'
+            - description: The workgroup for the prepared statement.
+        QueryStatement:
+          allOf:
+            - $ref: '#/components/schemas/QueryString'
+            - description: The query string for the prepared statement.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: The description of the prepared statement.
     UpdateWorkGroupOutput:
       type: object
       properties: {}
@@ -2477,6 +2855,11 @@ components:
       pattern: '[a-zA-Z0-9._-]{1,128}'
     NamedQueryId:
       type: string
+    StatementName:
+      type: string
+      pattern: '[a-zA-Z_][a-zA-Z0-9_@:]{1,256}'
+      minLength: 1
+      maxLength: 256
     WorkGroupConfiguration:
       type: object
       properties:
@@ -2664,6 +3047,30 @@ components:
             - $ref: '#/components/schemas/WorkGroupName'
             - description: The name of the workgroup that contains the named query.
       description: 'A query, where <code>QueryString</code> is the list of SQL query statements that comprise the query.'
+    PreparedStatement:
+      type: object
+      properties:
+        StatementName:
+          allOf:
+            - $ref: '#/components/schemas/StatementName'
+            - description: The name of the prepared statement.
+        QueryStatement:
+          allOf:
+            - $ref: '#/components/schemas/QueryString'
+            - description: The query string for the prepared statement.
+        WorkGroupName:
+          allOf:
+            - $ref: '#/components/schemas/WorkGroupName'
+            - description: The name of the workgroup to which the prepared statement belongs.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: The description of the prepared statement.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The last modified time of the prepared statement.
+      description: A prepared SQL statement for use with Athena.
     QueryExecutionId:
       type: string
     QueryExecution:
@@ -2809,6 +3216,16 @@ components:
       type: integer
       minimum: 0
       maximum: 50
+    MaxPreparedStatementsCount:
+      type: integer
+      minimum: 1
+      maximum: 50
+    PreparedStatementsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PreparedStatementSummary'
+      minItems: 0
+      maxItems: 50
     MaxQueryExecutionsCount:
       type: integer
       minimum: 0
@@ -2837,6 +3254,18 @@ components:
     ParametersMapValue:
       type: string
       maxLength: 51200
+    PreparedStatementSummary:
+      type: object
+      properties:
+        StatementName:
+          allOf:
+            - $ref: '#/components/schemas/StatementName'
+            - description: The name of the prepared statement.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The last modified time of the prepared statement.
+      description: The name and last modified time of the prepared statement.
     StatementType:
       type: string
       enum:

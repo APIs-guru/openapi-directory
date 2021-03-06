@@ -4963,6 +4963,9 @@ paths:
                 targetCustomerId:
                   description: Placeholder documentation for __string
                   type: string
+                targetRegion:
+                  description: Placeholder documentation for __string
+                  type: string
                 transferMessage:
                   description: Placeholder documentation for __string
                   type: string
@@ -16078,6 +16081,12 @@ components:
             - xml:
                 name: targetCustomerId
               description: The AWS account ID (12 digits) for the recipient of the device transfer.
+        TargetRegion:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: targetRegion
+              description: The target AWS region to transfer the device.
         TransferMessage:
           allOf:
             - $ref: '#/components/schemas/__string'

@@ -1787,16 +1787,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssociateSubnetCidrBlockResult'
       parameters:
-        - name: Ipv6CidrBlock
-          in: query
-          required: true
-          description: The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
-          schema:
-            type: string
         - name: SubnetId
           in: query
           required: true
           description: The ID of your subnet.
+          schema:
+            type: string
+        - name: Ipv6CidrBlock
+          in: query
+          required: true
+          description: The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
           schema:
             type: string
         - name: Action
@@ -5145,7 +5145,7 @@ paths:
               AllocationStrategy:
                 allOf:
                   - $ref: '#/components/schemas/SpotAllocationStrategy'
-                  - description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all of the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
+                  - description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all of the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code> (recommended), EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use <code>capacity-optimized-prioritized</code>. Set a priority for each instance type by using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You can assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. <code>capacity-optimized-prioritized</code> is supported only if your fleet uses a launch template. Note that if the On-Demand <code>AllocationStrategy</code> is set to <code>prioritized</code>, the same priority is applied when fulfilling On-Demand capacity.</p>'
               MaintenanceStrategies:
                 allOf:
                   - $ref: '#/components/schemas/FleetSpotMaintenanceStrategiesRequest'
@@ -6860,12 +6860,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateNatGatewayResult'
       parameters:
-        - name: AllocationId
-          in: query
-          required: true
-          description: 'The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.'
-          schema:
-            type: string
         - name: ClientToken
           in: query
           required: false
@@ -6895,6 +6889,12 @@ paths:
                 - $ref: '#/components/schemas/TagSpecification'
                 - xml:
                     name: item
+        - name: AllocationId
+          in: query
+          required: true
+          description: 'The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.'
+          schema:
+            type: string
         - name: Action
           in: query
           required: true
@@ -8461,12 +8461,6 @@ paths:
           description: The AZ ID or the Local Zone ID of the subnet.
           schema:
             type: string
-        - name: CidrBlock
-          in: query
-          required: true
-          description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
-          schema:
-            type: string
         - name: Ipv6CidrBlock
           in: query
           required: false
@@ -8491,6 +8485,12 @@ paths:
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
           schema:
             type: boolean
+        - name: CidrBlock
+          in: query
+          required: true
+          description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
+          schema:
+            type: string
         - name: Action
           in: query
           required: true
@@ -19697,7 +19697,7 @@ paths:
         - name: Attribute
           in: query
           required: true
-          description: '<p>The AMI attribute.</p> <p> <b>Note</b>: Depending on your account privileges, the <code>blockDeviceMapping</code> attribute may return a <code>Client.AuthFailure</code> error. If this happens, use <a>DescribeImages</a> to get information about the block device mapping for the AMI.</p>'
+          description: '<p>The AMI attribute.</p> <p> <b>Note</b>: The <code>blockDeviceMapping</code> attribute is deprecated. Using this attribute returns the <code>Client.AuthFailure</code> error. To get information about the block device mappings for an AMI, use the <a>DescribeImages</a> action.</p>'
           schema:
             type: string
             enum:
@@ -42572,7 +42572,7 @@ paths:
                   - $ref: '#/components/schemas/AllocationStrategy'
                   - xml:
                       name: allocationStrategy
-                    description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the Spot Fleet request.</p> <p>If the allocation strategy is <code>lowestPrice</code>, Spot Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, Spot Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacityOptimized</code>, Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
+                    description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the Spot Fleet request.</p> <p>If the allocation strategy is <code>lowestPrice</code>, Spot Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, Spot Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacityOptimized</code> (recommended), Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use <code>capacityOptimizedPrioritized</code>. Set a priority for each instance type by using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You can assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. <code>capacityOptimizedPrioritized</code> is supported only if your Spot Fleet uses a launch template. Note that if the <code>OnDemandAllocationStrategy</code> is set to <code>prioritized</code>, the same priority is applied when fulfilling On-Demand capacity.</p>'
               OnDemandAllocationStrategy:
                 allOf:
                   - $ref: '#/components/schemas/OnDemandAllocationStrategy'
@@ -47489,6 +47489,7 @@ components:
         - lowest-price
         - diversified
         - capacity-optimized
+        - capacity-optimized-prioritized
     FleetSpotMaintenanceStrategiesRequest:
       type: object
       properties:
@@ -54039,6 +54040,7 @@ components:
         - lowestPrice
         - diversified
         - capacityOptimized
+        - capacityOptimizedPrioritized
     OnDemandAllocationStrategy:
       type: string
       enum:
@@ -56222,22 +56224,22 @@ components:
     AssociateSubnetCidrBlockRequest:
       type: object
       required:
-        - Ipv6CidrBlock
         - SubnetId
+        - Ipv6CidrBlock
       title: AssociateSubnetCidrBlockRequest
       properties:
-        Ipv6CidrBlock:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - xml:
-                name: ipv6CidrBlock
-              description: The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
         SubnetId:
           allOf:
             - $ref: '#/components/schemas/SubnetId'
             - xml:
                 name: subnetId
               description: The ID of your subnet.
+        Ipv6CidrBlock:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: ipv6CidrBlock
+              description: The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
     SubnetIpv6CidrBlockAssociation:
       type: object
       properties:
@@ -59830,7 +59832,7 @@ components:
         AllocationStrategy:
           allOf:
             - $ref: '#/components/schemas/SpotAllocationStrategy'
-            - description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all of the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
+            - description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all of the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code> (recommended), EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use <code>capacity-optimized-prioritized</code>. Set a priority for each instance type by using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You can assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. <code>capacity-optimized-prioritized</code> is supported only if your fleet uses a launch template. Note that if the On-Demand <code>AllocationStrategy</code> is set to <code>prioritized</code>, the same priority is applied when fulfilling On-Demand capacity.</p>'
         MaintenanceStrategies:
           allOf:
             - $ref: '#/components/schemas/FleetSpotMaintenanceStrategiesRequest'
@@ -60911,14 +60913,10 @@ components:
     CreateNatGatewayRequest:
       type: object
       required:
-        - AllocationId
         - SubnetId
+        - AllocationId
       title: CreateNatGatewayRequest
       properties:
-        AllocationId:
-          allOf:
-            - $ref: '#/components/schemas/AllocationId'
-            - description: 'The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.'
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -60937,6 +60935,10 @@ components:
             - xml:
                 name: TagSpecification
               description: The tags to assign to the NAT gateway.
+        AllocationId:
+          allOf:
+            - $ref: '#/components/schemas/AllocationId'
+            - description: 'The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.'
     NatGateway:
       type: object
       properties:
@@ -62027,8 +62029,8 @@ components:
     CreateSubnetRequest:
       type: object
       required:
-        - CidrBlock
         - VpcId
+        - CidrBlock
       title: CreateSubnetRequest
       properties:
         TagSpecifications:
@@ -62045,10 +62047,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The AZ ID or the Local Zone ID of the subnet.
-        CidrBlock:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
         Ipv6CidrBlock:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -62067,6 +62065,10 @@ components:
             - xml:
                 name: dryRun
               description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        CidrBlock:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
     ResourceIdList:
       type: array
       items:
@@ -66698,7 +66700,7 @@ components:
         Attribute:
           allOf:
             - $ref: '#/components/schemas/ImageAttributeName'
-            - description: '<p>The AMI attribute.</p> <p> <b>Note</b>: Depending on your account privileges, the <code>blockDeviceMapping</code> attribute may return a <code>Client.AuthFailure</code> error. If this happens, use <a>DescribeImages</a> to get information about the block device mapping for the AMI.</p>'
+            - description: '<p>The AMI attribute.</p> <p> <b>Note</b>: The <code>blockDeviceMapping</code> attribute is deprecated. Using this attribute returns the <code>Client.AuthFailure</code> error. To get information about the block device mappings for an AMI, use the <a>DescribeImages</a> action.</p>'
         ImageId:
           allOf:
             - $ref: '#/components/schemas/ImageId'
@@ -72241,7 +72243,7 @@ components:
             - $ref: '#/components/schemas/SpotAllocationStrategy'
             - xml:
                 name: allocationStrategy
-              description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all of the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
+              description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all of the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code> (recommended), EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use <code>capacity-optimized-prioritized</code>. Set a priority for each instance type by using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You can assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. <code>capacity-optimized-prioritized</code> is supported only if your fleet uses a launch template. Note that if the On-Demand <code>AllocationStrategy</code> is set to <code>prioritized</code>, the same priority is applied when fulfilling On-Demand capacity.</p>'
         MaintenanceStrategies:
           allOf:
             - $ref: '#/components/schemas/FleetSpotMaintenanceStrategies'
@@ -72567,7 +72569,7 @@ components:
             - $ref: '#/components/schemas/Double'
             - xml:
                 name: priority
-              description: 'The priority for the launch template override. If <b>AllocationStrategy</b> is set to <code>prioritized</code>, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at <code>0</code>. The lower the number, the higher the priority. If no number is set, the override has the lowest priority.'
+              description: '<p>The priority for the launch template override. The highest priority is launched first.</p> <p>If the On-Demand <code>AllocationStrategy</code> is set to <code>prioritized</code>, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity.</p> <p>If the Spot <code>AllocationStrategy</code> is set to <code>capacity-optimized-prioritized</code>, EC2 Fleet uses priority on a best-effort basis to determine which launch template override to use first in fulfilling Spot capacity, but optimizes for capacity first.</p> <p>Valid values are whole numbers starting at <code>0</code>. The lower the number, the higher the priority. If no number is set, the override has the lowest priority. You can set the same priority for different launch template overrides.</p>'
         Placement:
           allOf:
             - $ref: '#/components/schemas/PlacementResponse'
@@ -72601,7 +72603,7 @@ components:
         Priority:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: 'The priority for the launch template override. If <b>AllocationStrategy</b> is set to <code>prioritized</code>, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at <code>0</code>. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority.'
+            - description: '<p>The priority for the launch template override. The highest priority is launched first.</p> <p>If the On-Demand <code>AllocationStrategy</code> is set to <code>prioritized</code>, EC2 Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity.</p> <p>If the Spot <code>AllocationStrategy</code> is set to <code>capacity-optimized-prioritized</code>, EC2 Fleet uses priority on a best-effort basis to determine which launch template override to use first in fulfilling Spot capacity, but optimizes for capacity first.</p> <p>Valid values are whole numbers starting at <code>0</code>. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority. You can set the same priority for different launch template overrides.</p>'
         Placement:
           allOf:
             - $ref: '#/components/schemas/Placement'
@@ -77464,7 +77466,7 @@ components:
             - $ref: '#/components/schemas/Double'
             - xml:
                 name: priority
-              description: 'The priority for the launch template override. If <b>OnDemandAllocationStrategy</b> is set to <code>prioritized</code>, Spot Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at <code>0</code>. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority.'
+              description: '<p>The priority for the launch template override. The highest priority is launched first.</p> <p>If <code>OnDemandAllocationStrategy</code> is set to <code>prioritized</code>, Spot Fleet uses priority to determine which launch template override to use first in fulfilling On-Demand capacity.</p> <p>If the Spot <code>AllocationStrategy</code> is set to <code>capacityOptimizedPrioritized</code>, Spot Fleet uses priority on a best-effort basis to determine which launch template override to use first in fulfilling Spot capacity, but optimizes for capacity first.</p> <p>Valid values are whole numbers starting at <code>0</code>. The lower the number, the higher the priority. If no number is set, the launch template override has the lowest priority. You can set the same priority for different launch template overrides.</p>'
       description: Describes overrides for a launch template.
     LaunchTemplatePlacement:
       type: object
@@ -81890,7 +81892,7 @@ components:
             - $ref: '#/components/schemas/AllocationStrategy'
             - xml:
                 name: allocationStrategy
-              description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the Spot Fleet request.</p> <p>If the allocation strategy is <code>lowestPrice</code>, Spot Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, Spot Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacityOptimized</code>, Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
+              description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the Spot Fleet request.</p> <p>If the allocation strategy is <code>lowestPrice</code>, Spot Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, Spot Fleet launches instances from all the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacityOptimized</code> (recommended), Spot Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. To give certain instance types a higher chance of launching first, use <code>capacityOptimizedPrioritized</code>. Set a priority for each instance type by using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You can assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2 implements the priorities on a best-effort basis, but optimizes for capacity first. <code>capacityOptimizedPrioritized</code> is supported only if your Spot Fleet uses a launch template. Note that if the <code>OnDemandAllocationStrategy</code> is set to <code>prioritized</code>, the same priority is applied when fulfilling On-Demand capacity.</p>'
         OnDemandAllocationStrategy:
           allOf:
             - $ref: '#/components/schemas/OnDemandAllocationStrategy'
