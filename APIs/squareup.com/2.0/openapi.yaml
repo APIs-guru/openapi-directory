@@ -12064,7 +12064,6 @@ components:
           type: "{{ [ITEM | ITEM_VARIATION | MODIFIER | MODIFIER_LIST | CATEGORY | DISCOUNT | TAX] }}"
           updated_at: "{{ date & time of most recent update }}"
           version: "{{ version of the CatalogObject }}"
-      example_type: Schema
       properties:
         absent_at_location_ids:
           description: A list of locations where the object is not present, even if `present_at_all_locations` is `true`.
@@ -12215,6 +12214,7 @@ components:
         - type
         - id
       type: object
+      x-example_type: Schema
       x-release-status: PUBLIC
     CatalogObjectBatch:
       description: A batch of catalog objects.
