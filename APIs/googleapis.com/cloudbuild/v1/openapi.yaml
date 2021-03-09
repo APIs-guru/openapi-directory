@@ -1179,7 +1179,7 @@ components:
           description: If true, the trigger will never automatically execute a build.
           type: boolean
         filename:
-          description: Path, from the source root, to a file whose contents is used for the template.
+          description: Path, from the source root, to the build configuration file (i.e. cloudbuild.yaml).
           type: string
         github:
           $ref: "#/components/schemas/GitHubEventsConfig"

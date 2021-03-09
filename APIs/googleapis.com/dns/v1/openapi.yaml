@@ -846,7 +846,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/dns/v1/projects/{project}/managedZones/{managedZone}/rrsets":
     get:
-      description: Enumerate ResourceRecordSets that you have created but not yet deleted.
+      description: Enumerates ResourceRecordSets that you have created but not yet deleted.
       operationId: dns.resourceRecordSets.list
       parameters:
         - description: Identifies the project addressed by this request.
@@ -919,6 +919,229 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a new ResourceRecordSet.
+      operationId: dns.projects.managedZones.rrsets.create
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or ID.
+          in: path
+          name: managedZone
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResourceRecordSet"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceRecordSet"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - projects
+  "/dns/v1/projects/{project}/managedZones/{managedZone}/rrsets/{name}/{type}":
+    delete:
+      description: Delete a previously created ResourceRecordSet.
+      operationId: dns.projects.managedZones.rrsets.delete
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or ID.
+          in: path
+          name: managedZone
+          required: true
+          schema:
+            type: string
+        - description: Fully qualified domain name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: RRSet type.
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceRecordSetsDeleteResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - projects
+    get:
+      description: Fetch the representation of an existing ResourceRecordSet.
+      operationId: dns.projects.managedZones.rrsets.get
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or ID.
+          in: path
+          name: managedZone
+          required: true
+          schema:
+            type: string
+        - description: Fully qualified domain name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: RRSet type.
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceRecordSet"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Apply a partial update to an existing ResourceRecordSet.
+      operationId: dns.projects.managedZones.rrsets.patch
+      parameters:
+        - description: Identifies the project addressed by this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or ID.
+          in: path
+          name: managedZone
+          required: true
+          schema:
+            type: string
+        - description: Fully qualified domain name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: RRSet type.
+          in: path
+          name: type
+          required: true
+          schema:
+            type: string
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
+          in: query
+          name: clientOperationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResourceRecordSet"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceRecordSet"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+      tags:
+        - projects
   "/dns/v1/projects/{project}/policies":
     get:
       description: Enumerates all Policies associated with a project.
@@ -979,7 +1202,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new Policy
+      description: Creates a new Policy.
       operationId: dns.policies.create
       parameters:
         - description: Identifies the project addressed by this request.
@@ -1018,7 +1241,7 @@ paths:
         - policies
   "/dns/v1/projects/{project}/policies/{policy}":
     delete:
-      description: Delete a previously created Policy. Fails if the policy is still being referenced by a network.
+      description: Deletes a previously created Policy. Fails if the policy is still being referenced by a network.
       operationId: dns.policies.delete
       parameters:
         - description: Identifies the project addressed by this request.
@@ -1301,7 +1524,7 @@ components:
           description: The time that this operation was started by the server (output only). This is in RFC3339 text format.
           type: string
         status:
-          description: Status of the operation (output only). A status of "done" means that the request to update the authoritative servers has been sent but the servers might not be updated yet.
+          description: Status of the operation (output only). A status of "done" means that the request to update the authoritative servers has been sent, but the servers might not be updated yet.
           enum:
             - pending
             - done
@@ -1352,10 +1575,10 @@ components:
           description: Unique identifier for the resource; defined by the server (output only).
           type: string
         isActive:
-          description: Active keys are used to sign subsequent changes to the ManagedZone. Inactive keys will still be present as DNSKEY Resource Records for the use of resolvers validating existing signatures.
+          description: Active keys are used to sign subsequent changes to the ManagedZone. Inactive keys are still present as DNSKEY Resource Records for the use of resolvers validating existing signatures.
           type: boolean
         keyLength:
-          description: Length of the key in bits. Specified at creation time, then immutable.
+          description: Length of the key in bits. Specified at creation time, and then immutable.
           format: uint32
           type: integer
         keyTag:
@@ -1369,7 +1592,7 @@ components:
           description: Base64 encoded public half of this key. Output only.
           type: string
         type:
-          description: One of "KEY_SIGNING" or "ZONE_SIGNING". Keys of type KEY_SIGNING have the Secure Entry Point flag set and, when active, are used to sign only resource record sets of type DNSKEY. Otherwise, the Secure Entry Point flag is cleared and this key is used to sign only resource record sets of other types. Immutable after creation time.
+          description: One of "KEY_SIGNING" or "ZONE_SIGNING". Keys of type KEY_SIGNING have the Secure Entry Point flag set and, when active, are used to sign only resource record sets of type DNSKEY. Otherwise, the Secure Entry Point flag is cleared, and this key is used to sign only resource record sets of other types. Immutable after creation time.
           enum:
             - keySigning
             - zoneSigning
@@ -1466,7 +1689,7 @@ components:
           description: User assigned name for this resource. Must be unique within the project. The name must be 1-63 characters long, must begin with a letter, end with a letter or digit, and only contain lowercase letters, digits or dashes.
           type: string
         nameServerSet:
-          description: Optionally specifies the NameServerSet for this ManagedZone. A NameServerSet is a set of DNS name servers that all host the same ManagedZones. Most users will leave this field unset. If you need to use this field, please reach out to your account team.
+          description: Optionally specifies the NameServerSet for this ManagedZone. A NameServerSet is a set of DNS name servers that all host the same ManagedZones. Most users leave this field unset. If you need to use this field, contact your account team.
           type: string
         nameServers:
           description: Delegate your managed_zone to these virtual name servers; defined by the server (output only)
@@ -1484,7 +1707,7 @@ components:
           description: The presence of this field indicates that this is a managed reverse lookup zone and Cloud DNS resolves reverse lookup queries using automatically configured records for VPC resources. This only applies to networks listed under private_visibility_config.
         serviceDirectoryConfig:
           $ref: "#/components/schemas/ManagedZoneServiceDirectoryConfig"
-          description: This field links to the associated service directory namespace. This field should not be set for public zones or forwarding zones.
+          description: This field links to the associated service directory namespace. Do not set this field for public zones or forwarding zones.
         visibility:
           description: "The zone's visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private Cloud resources."
           enum:
@@ -1530,7 +1753,7 @@ components:
     ManagedZoneForwardingConfigNameServerTarget:
       properties:
         forwardingPath:
-          description: Forwarding path for this NameServerTarget. If unset or set to DEFAULT, Cloud DNS makes forwarding decisions based on address ranges; that is, RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the internet. When set to PRIVATE, Cloud DNS always sends queries through VPC for this target.
+          description: Forwarding path for this NameServerTarget. If unset or set to DEFAULT, Cloud DNS makes forwarding decisions based on IP address ranges; that is, RFC1918 addresses go to the VPC network, non-RFC1918 addresses go to the internet. When set to PRIVATE, Cloud DNS always sends queries through the VPC network for this target.
           enum:
             - default
             - private
@@ -1596,7 +1819,7 @@ components:
           default: dns#managedZonePrivateVisibilityConfigNetwork
           type: string
         networkUrl:
-          description: The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
+          description: The fully qualified URL of the VPC network to bind to. Format this URL like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
           type: string
       type: object
     ManagedZoneReverseLookupConfig:
@@ -1618,7 +1841,7 @@ components:
     ManagedZoneServiceDirectoryConfigNamespace:
       properties:
         deletionTime:
-          description: The time that the namespace backing this zone was deleted, empty string if it still exists. This is in RFC3339 text format. Output only.
+          description: The time that the namespace backing this zone was deleted; an empty string if it still exists. This is in RFC3339 text format. Output only.
           type: string
         kind:
           default: dns#managedZoneServiceDirectoryConfigNamespace
@@ -1734,7 +1957,7 @@ components:
           description: A mutable string of at most 1024 characters associated with this resource for the user's convenience. Has no effect on the policy's function.
           type: string
         enableInboundForwarding:
-          description: Allows networks bound to this policy to receive DNS queries sent by VMs or applications over VPN connections. When enabled, a virtual IP address is allocated from each of the sub-networks that are bound to this policy.
+          description: Allows networks bound to this policy to receive DNS queries sent by VMs or applications over VPN connections. When enabled, a virtual IP address is allocated from each of the subnetworks that are bound to this policy.
           type: boolean
         enableLogging:
           description: Controls whether logging is enabled for the networks bound to this policy. Defaults to no logging if not set.
@@ -1769,7 +1992,7 @@ components:
     PolicyAlternativeNameServerConfigTargetNameServer:
       properties:
         forwardingPath:
-          description: Forwarding path for this TargetNameServer. If unset or set to DEFAULT, Cloud DNS makes forwarding decision based on address ranges; that is, RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the internet. When set to PRIVATE, Cloud DNS always sends queries through VPC for this target.
+          description: Forwarding path for this TargetNameServer. If unset or set to DEFAULT, Cloud DNS makes forwarding decisions based on address ranges; that is, RFC1918 addresses go to the VPC network, non-RFC1918 addresses go to the internet. When set to PRIVATE, Cloud DNS always sends queries through the VPC network for this target.
           enum:
             - default
             - private
@@ -1872,7 +2095,7 @@ components:
           type: array
       type: object
     ResourceRecordSet:
-      description: A unit of data that will be returned by the DNS servers.
+      description: A unit of data that is returned by the DNS servers.
       properties:
         kind:
           default: dns#resourceRecordSet
@@ -1897,6 +2120,9 @@ components:
         type:
           description: The identifier of a supported record type. See the list of Supported DNS record types.
           type: string
+      type: object
+    ResourceRecordSetsDeleteResponse:
+      properties: {}
       type: object
     ResourceRecordSetsListResponse:
       properties:

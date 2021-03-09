@@ -105,6 +105,41 @@ paths:
             - https://www.googleapis.com/auth/homegraph
       tags:
         - devices
+  /v1/devices:requestLink:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Sends an account linking suggestion to users associated with any potential Cast devices detected by third-party devices. This request must be authorized using service account credentials from your Actions console project.
+      operationId: homegraph.devices.requestLink
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestLinkRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/homegraph
+          Oauth2c:
+            - https://www.googleapis.com/auth/homegraph
+      tags:
+        - devices
   /v1/devices:requestSync:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -498,6 +533,29 @@ components:
         requestId:
           description: Request ID copied from ReportStateAndNotificationRequest.
           type: string
+      type: object
+    RequestLinkRequest:
+      description: Request type for the [`RequestLink`](#google.home.graph.v1.HomeGraphApiService.RequestLink) call.
+      properties:
+        payload:
+          $ref: "#/components/schemas/RequestLinkRequestPayload"
+          description: Required. ID(s) and detection time of potential Cast devices.
+        requestId:
+          description: Required. Request ID used for debugging.
+          type: string
+      type: object
+    RequestLinkRequestPayload:
+      description: Payload containing potential devices detected and when they were detected.
+      properties:
+        detectionTime:
+          description: Required. Time at which devices represented in `potential_cast_device_ids` were detected.
+          format: google-datetime
+          type: string
+        potentialCastDeviceIds:
+          description: Required. List of device IDs detected that may potentially be for Cast devices.
+          items:
+            type: string
+          type: array
       type: object
     RequestSyncDevicesRequest:
       description: Request type for the [`RequestSyncDevices`](#google.home.graph.v1.HomeGraphApiService.RequestSyncDevices) call.

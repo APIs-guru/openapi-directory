@@ -610,7 +610,7 @@ components:
           $ref: "#/components/schemas/NormalizedCoordinate"
           description: "Normalized image resolution, based on output video resolution. Valid values: `0.0`–`1.0`. To respect the original image aspect ratio, set either `x` or `y` to `0.0`. To use the original image resolution, set both `x` and `y` to `0.0`."
         uri:
-          description: Required. URI of the image in Cloud Storage. For example, `gs://bucket/inputs/image.jpeg`.
+          description: Required. URI of the JPEG image in Cloud Storage. For example, `gs://bucket/inputs/image.jpeg`. JPEG is the only supported image type.
           type: string
       type: object
     Input:

@@ -6375,68 +6375,68 @@ components:
       properties:
         ageRangeDetails:
           $ref: "#/components/schemas/AgeRangeAssignedTargetingOptionDetails"
-          description: Age range details. This field will be populated when the TargetingType is `TARGETING_TYPE_AGE_RANGE`.
+          description: Age range details. This field will be populated when the targeting_type is `TARGETING_TYPE_AGE_RANGE`.
         appCategoryDetails:
           $ref: "#/components/schemas/AppCategoryAssignedTargetingOptionDetails"
-          description: App category details. This field will be populated when the TargetingType is `TARGETING_TYPE_APP_CATEGORY`.
+          description: App category details. This field will be populated when the targeting_type is `TARGETING_TYPE_APP_CATEGORY`.
         appDetails:
           $ref: "#/components/schemas/AppAssignedTargetingOptionDetails"
-          description: App details. This field will be populated when the TargetingType is `TARGETING_TYPE_APP`.
+          description: App details. This field will be populated when the targeting_type is `TARGETING_TYPE_APP`.
         assignedTargetingOptionId:
-          description: Output only. The unique ID of the assigned targeting option. The ID is only unique within a given line item and targeting type. It may be reused in other contexts.
+          description: Output only. The unique ID of the assigned targeting option. The ID is only unique within a given resource and targeting type. It may be reused in other contexts.
           readOnly: true
           type: string
         audienceGroupDetails:
           $ref: "#/components/schemas/AudienceGroupAssignedTargetingOptionDetails"
-          description: Audience targeting details. This field will be populated when the TargetingType is `TARGETING_TYPE_AUDIENCE_GROUP`. You can only target one audience group option per line item.
+          description: Audience targeting details. This field will be populated when the targeting_type is `TARGETING_TYPE_AUDIENCE_GROUP`. You can only target one audience group option per resource.
         authorizedSellerStatusDetails:
           $ref: "#/components/schemas/AuthorizedSellerStatusAssignedTargetingOptionDetails"
-          description: Authorized seller status details. This field will be populated when the TargetingType is `TARGETING_TYPE_AUTHORIZED_SELLER_STATUS`. You can only target one authorized seller status option per line item. If a line item doesn't have an authorized seller status option, all authorized sellers indicated as DIRECT or RESELLER in the ads.txt file are targeted by default.
+          description: Authorized seller status details. This field will be populated when the targeting_type is `TARGETING_TYPE_AUTHORIZED_SELLER_STATUS`. You can only target one authorized seller status option per resource. If a resource doesn't have an authorized seller status option, all authorized sellers indicated as DIRECT or RESELLER in the ads.txt file are targeted by default.
         browserDetails:
           $ref: "#/components/schemas/BrowserAssignedTargetingOptionDetails"
-          description: Browser details. This field will be populated when the TargetingType is `TARGETING_TYPE_BROWSER`.
+          description: Browser details. This field will be populated when the targeting_type is `TARGETING_TYPE_BROWSER`.
         carrierAndIspDetails:
           $ref: "#/components/schemas/CarrierAndIspAssignedTargetingOptionDetails"
-          description: Carrier and ISP details. This field will be populated when the TargetingType is `TARGETING_TYPE_CARRIER_AND_ISP`.
+          description: Carrier and ISP details. This field will be populated when the targeting_type is `TARGETING_TYPE_CARRIER_AND_ISP`.
         categoryDetails:
           $ref: "#/components/schemas/CategoryAssignedTargetingOptionDetails"
-          description: Category details. This field will be populated when the TargetingType is `TARGETING_TYPE_CATEGORY`. Targeting a category will also target its subcategories. If a category is excluded from targeting and a subcategory is included, the exclusion will take precedence.
+          description: Category details. This field will be populated when the targeting_type is `TARGETING_TYPE_CATEGORY`. Targeting a category will also target its subcategories. If a category is excluded from targeting and a subcategory is included, the exclusion will take precedence.
         channelDetails:
           $ref: "#/components/schemas/ChannelAssignedTargetingOptionDetails"
-          description: Channel details. This field will be populated when the TargetingType is `TARGETING_TYPE_CHANNEL`.
+          description: Channel details. This field will be populated when the targeting_type is `TARGETING_TYPE_CHANNEL`.
         contentInstreamPositionDetails:
           $ref: "#/components/schemas/ContentInstreamPositionAssignedTargetingOptionDetails"
-          description: Content instream position details. This field will be populated when the TargetingType is `TARGETING_TYPE_CONTENT_INSTREAM_POSITION`.
+          description: Content instream position details. This field will be populated when the targeting_type is `TARGETING_TYPE_CONTENT_INSTREAM_POSITION`.
         contentOutstreamPositionDetails:
           $ref: "#/components/schemas/ContentOutstreamPositionAssignedTargetingOptionDetails"
-          description: Content outstream position details. This field will be populated when the TargetingType is `TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION`.
+          description: Content outstream position details. This field will be populated when the targeting_type is `TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION`.
         dayAndTimeDetails:
           $ref: "#/components/schemas/DayAndTimeAssignedTargetingOptionDetails"
-          description: Day and time details. This field will be populated when the TargetingType is `TARGETING_TYPE_DAY_AND_TIME`.
+          description: Day and time details. This field will be populated when the targeting_type is `TARGETING_TYPE_DAY_AND_TIME`.
         deviceMakeModelDetails:
           $ref: "#/components/schemas/DeviceMakeModelAssignedTargetingOptionDetails"
-          description: Device make and model details. This field will be populated when the TargetingType is `TARGETING_TYPE_DEVICE_MAKE_MODEL`.
+          description: Device make and model details. This field will be populated when the targeting_type is `TARGETING_TYPE_DEVICE_MAKE_MODEL`.
         deviceTypeDetails:
           $ref: "#/components/schemas/DeviceTypeAssignedTargetingOptionDetails"
-          description: Device Type details. This field will be populated when the TargetingType is `TARGETING_TYPE_DEVICE_TYPE`.
+          description: Device Type details. This field will be populated when the targeting_type is `TARGETING_TYPE_DEVICE_TYPE`.
         digitalContentLabelExclusionDetails:
           $ref: "#/components/schemas/DigitalContentLabelAssignedTargetingOptionDetails"
-          description: Digital content label details. This field will be populated when the TargetingType is `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION`. Digital content labels are targeting exclusions. Advertiser level digital content label exclusions, if set, are always applied in serving (even though they aren't visible in line item settings). Line item settings can exclude content labels in addition to advertiser exclusions, but can't override them. A line item won't serve if all the digital content labels are excluded.
+          description: Digital content label details. This field will be populated when the targeting_type is `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION`. Digital content labels are targeting exclusions. Advertiser level digital content label exclusions, if set, are always applied in serving (even though they aren't visible in resource settings). Resource settings can exclude content labels in addition to advertiser exclusions, but can't override them. A line item won't serve if all the digital content labels are excluded.
         environmentDetails:
           $ref: "#/components/schemas/EnvironmentAssignedTargetingOptionDetails"
-          description: Environment details. This field will be populated when the TargetingType is `TARGETING_TYPE_ENVIRONMENT`.
+          description: Environment details. This field will be populated when the targeting_type is `TARGETING_TYPE_ENVIRONMENT`.
         exchangeDetails:
           $ref: "#/components/schemas/ExchangeAssignedTargetingOptionDetails"
-          description: Exchange details. This field will be populated when the TargetingType is `TARGETING_TYPE_EXCHANGE`.
+          description: Exchange details. This field will be populated when the targeting_type is `TARGETING_TYPE_EXCHANGE`.
         genderDetails:
           $ref: "#/components/schemas/GenderAssignedTargetingOptionDetails"
-          description: Gender details. This field will be populated when the TargetingType is `TARGETING_TYPE_GENDER`.
+          description: Gender details. This field will be populated when the targeting_type is `TARGETING_TYPE_GENDER`.
         geoRegionDetails:
           $ref: "#/components/schemas/GeoRegionAssignedTargetingOptionDetails"
-          description: Geographic region details. This field will be populated when the TargetingType is `TARGETING_TYPE_GEO_REGION`.
+          description: Geographic region details. This field will be populated when the targeting_type is `TARGETING_TYPE_GEO_REGION`.
         householdIncomeDetails:
           $ref: "#/components/schemas/HouseholdIncomeAssignedTargetingOptionDetails"
-          description: Household income details. This field will be populated when the TargetingType is `TARGETING_TYPE_HOUSEHOLD_INCOME`.
+          description: Household income details. This field will be populated when the targeting_type is `TARGETING_TYPE_HOUSEHOLD_INCOME`.
         inheritance:
           description: Output only. The inheritance status of the assigned targeting option.
           enum:
@@ -6448,44 +6448,44 @@ components:
           type: string
         inventorySourceDetails:
           $ref: "#/components/schemas/InventorySourceAssignedTargetingOptionDetails"
-          description: Inventory source details. This field will be populated when the TargetingType is `TARGETING_TYPE_INVENTORY_SOURCE`.
+          description: Inventory source details. This field will be populated when the targeting_type is `TARGETING_TYPE_INVENTORY_SOURCE`.
         inventorySourceGroupDetails:
           $ref: "#/components/schemas/InventorySourceGroupAssignedTargetingOptionDetails"
-          description: Inventory source group details. This field will be populated when the TargetingType is `TARGETING_TYPE_INVENTORY_SOURCE_GROUP`.
+          description: Inventory source group details. This field will be populated when the targeting_type is `TARGETING_TYPE_INVENTORY_SOURCE_GROUP`.
         keywordDetails:
           $ref: "#/components/schemas/KeywordAssignedTargetingOptionDetails"
-          description: Keyword details. This field will be populated when the TargetingType is `TARGETING_TYPE_KEYWORD`. A maximum of 5000 direct negative keywords can be assigned to a line item. No limit on number of positive keywords that can be assigned.
+          description: Keyword details. This field will be populated when the targeting_type is `TARGETING_TYPE_KEYWORD`. A maximum of 5000 direct negative keywords can be assigned to a resource. No limit on number of positive keywords that can be assigned.
         languageDetails:
           $ref: "#/components/schemas/LanguageAssignedTargetingOptionDetails"
-          description: Language details. This field will be populated when the TargetingType is `TARGETING_TYPE_LANGUAGE`.
+          description: Language details. This field will be populated when the targeting_type is `TARGETING_TYPE_LANGUAGE`.
         name:
           description: Output only. The resource name for this assigned targeting option.
           readOnly: true
           type: string
         negativeKeywordListDetails:
           $ref: "#/components/schemas/NegativeKeywordListAssignedTargetingOptionDetails"
-          description: Keyword details. This field will be populated when the TargetingType is `TARGETING_TYPE_NEGATIVE_KEYWORD_LIST`. A maximum of 4 negative keyword lists can be assigned to a line item.
+          description: Keyword details. This field will be populated when the targeting_type is `TARGETING_TYPE_NEGATIVE_KEYWORD_LIST`. A maximum of 4 negative keyword lists can be assigned to a resource.
         onScreenPositionDetails:
           $ref: "#/components/schemas/OnScreenPositionAssignedTargetingOptionDetails"
-          description: On screen position details. This field will be populated when the TargetingType is `TARGETING_TYPE_ON_SCREEN_POSITION`.
+          description: On screen position details. This field will be populated when the targeting_type is `TARGETING_TYPE_ON_SCREEN_POSITION`.
         operatingSystemDetails:
           $ref: "#/components/schemas/OperatingSystemAssignedTargetingOptionDetails"
-          description: Operating system details. This field will be populated when the TargetingType is `TARGETING_TYPE_OPERATING_SYSTEM`.
+          description: Operating system details. This field will be populated when the targeting_type is `TARGETING_TYPE_OPERATING_SYSTEM`.
         parentalStatusDetails:
           $ref: "#/components/schemas/ParentalStatusAssignedTargetingOptionDetails"
-          description: Parental status details. This field will be populated when the TargetingType is `TARGETING_TYPE_PARENTAL_STATUS`.
+          description: Parental status details. This field will be populated when the targeting_type is `TARGETING_TYPE_PARENTAL_STATUS`.
         proximityLocationListDetails:
           $ref: "#/components/schemas/ProximityLocationListAssignedTargetingOptionDetails"
-          description: Proximity location list details. This field will be populated when the TargetingType is `TARGETING_TYPE_PROXIMITY_LOCATION_LIST`.
+          description: Proximity location list details. This field will be populated when the targeting_type is `TARGETING_TYPE_PROXIMITY_LOCATION_LIST`.
         regionalLocationListDetails:
           $ref: "#/components/schemas/RegionalLocationListAssignedTargetingOptionDetails"
-          description: Regional location list details. This field will be populated when the TargetingType is `TARGETING_TYPE_REGIONAL_LOCATION_LIST`.
+          description: Regional location list details. This field will be populated when the targeting_type is `TARGETING_TYPE_REGIONAL_LOCATION_LIST`.
         sensitiveCategoryExclusionDetails:
           $ref: "#/components/schemas/SensitiveCategoryAssignedTargetingOptionDetails"
-          description: Sensitive category details. This field will be populated when the TargetingType is `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`. Sensitive categories are targeting exclusions. Advertiser level sensitive category exclusions, if set, are always applied in serving (even though they aren't visible in line item settings). Line item settings can exclude sensitive categories in addition to advertiser exclusions, but can't override them.
+          description: Sensitive category details. This field will be populated when the targeting_type is `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`. Sensitive categories are targeting exclusions. Advertiser level sensitive category exclusions, if set, are always applied in serving (even though they aren't visible in resource settings). Resource settings can exclude sensitive categories in addition to advertiser exclusions, but can't override them.
         subExchangeDetails:
           $ref: "#/components/schemas/SubExchangeAssignedTargetingOptionDetails"
-          description: Sub-exchange details. This field will be populated when the TargetingType is `TARGETING_TYPE_SUB_EXCHANGE`.
+          description: Sub-exchange details. This field will be populated when the targeting_type is `TARGETING_TYPE_SUB_EXCHANGE`.
         targetingType:
           description: Output only. Identifies the type of this assigned targeting option.
           enum:
@@ -6531,19 +6531,19 @@ components:
           type: string
         thirdPartyVerifierDetails:
           $ref: "#/components/schemas/ThirdPartyVerifierAssignedTargetingOptionDetails"
-          description: Third party verification details. This field will be populated when the TargetingType is `TARGETING_TYPE_THIRD_PARTY_VERIFIER`.
+          description: Third party verification details. This field will be populated when the targeting_type is `TARGETING_TYPE_THIRD_PARTY_VERIFIER`.
         urlDetails:
           $ref: "#/components/schemas/UrlAssignedTargetingOptionDetails"
-          description: URL details. This field will be populated when the TargetingType is `TARGETING_TYPE_URL`.
+          description: URL details. This field will be populated when the targeting_type is `TARGETING_TYPE_URL`.
         userRewardedContentDetails:
           $ref: "#/components/schemas/UserRewardedContentAssignedTargetingOptionDetails"
-          description: User rewarded content details. This field will be populated when the TargetingType is `TARGETING_TYPE_USER_REWARDED_CONTENT`.
+          description: User rewarded content details. This field will be populated when the targeting_type is `TARGETING_TYPE_USER_REWARDED_CONTENT`.
         videoPlayerSizeDetails:
           $ref: "#/components/schemas/VideoPlayerSizeAssignedTargetingOptionDetails"
-          description: Video player size details. This field will be populated when the TargetingType is `TARGETING_TYPE_VIDEO_PLAYER_SIZE`.
+          description: Video player size details. This field will be populated when the targeting_type is `TARGETING_TYPE_VIDEO_PLAYER_SIZE`.
         viewabilityDetails:
           $ref: "#/components/schemas/ViewabilityAssignedTargetingOptionDetails"
-          description: Viewability details. This field will be populated when the TargetingType is `TARGETING_TYPE_VIEWABILITY`. You can only target one viewability option per line item.
+          description: Viewability details. This field will be populated when the targeting_type is `TARGETING_TYPE_VIEWABILITY`. You can only target one viewability option per resource.
       type: object
     AssignedUserRole:
       description: A single assigned user role, which defines a user's authorized interaction with a specified partner or advertiser.
@@ -6697,7 +6697,7 @@ components:
           readOnly: true
           type: string
         negative:
-          description: Indicates if this option is being negatively targeted. All assigned browser targeting options on the same line item must have the same value for this field.
+          description: Indicates if this option is being negatively targeted. All assigned browser targeting options on the same resource must have the same value for this field.
           type: boolean
         targetingOptionId:
           description: Required. The targeting_option_id of a TargetingOption of type `TARGETING_TYPE_BROWSER`.
@@ -7023,7 +7023,7 @@ components:
           readOnly: true
           type: string
         negative:
-          description: Indicates if this option is being negatively targeted. All assigned carrier and ISP targeting options on the same line item must have the same value for this field.
+          description: Indicates if this option is being negatively targeted. All assigned carrier and ISP targeting options on the same resource must have the same value for this field.
           type: boolean
         targetingOptionId:
           description: Required. The targeting_option_id of a TargetingOption of type `TARGETING_TYPE_CARRIER_AND_ISP`.
@@ -8615,11 +8615,11 @@ components:
       description: Settings that control the number of times a user may be shown with the same ad during a given time period.
       properties:
         maxImpressions:
-          description: The maximum number of times a user may be shown with the same ad during this period. Must be greater than 0. Applicable when unlimited is `false`.
+          description: The maximum number of times a user may be shown with the same ad during this period. Must be greater than 0. Required when unlimited is `false`.
           format: int32
           type: integer
         timeUnit:
-          description: The time unit in which the frequency cap will be applied. Applicable when unlimited is `false`.
+          description: The time unit in which the frequency cap will be applied. Required when unlimited is `false`.
           enum:
             - TIME_UNIT_UNSPECIFIED
             - TIME_UNIT_LIFETIME
@@ -8630,7 +8630,7 @@ components:
             - TIME_UNIT_MINUTES
           type: string
         timeUnitCount:
-          description: "The number of time_unit the frequency cap will last. Applicable when unlimited is `false`. The following restrictions apply based on the value of time_unit: * `TIME_UNIT_LIFETIME` - this field is output only and will default to 1 * `TIME_UNIT_MONTHS` - must be between 1 and 2 * `TIME_UNIT_WEEKS` - must be between 1 and 4 * `TIME_UNIT_DAYS` - must be between 1 and 6 * `TIME_UNIT_HOURS` - must be between 1 and 23 * `TIME_UNIT_MINUTES` - must be between 1 and 59"
+          description: "The number of time_unit the frequency cap will last. Required when unlimited is `false`. The following restrictions apply based on the value of time_unit: * `TIME_UNIT_LIFETIME` - this field is output only and will default to 1 * `TIME_UNIT_MONTHS` - must be between 1 and 2 * `TIME_UNIT_WEEKS` - must be between 1 and 4 * `TIME_UNIT_DAYS` - must be between 1 and 6 * `TIME_UNIT_HOURS` - must be between 1 and 23 * `TIME_UNIT_MINUTES` - must be between 1 and 59"
           format: int32
           type: integer
         unlimited:
@@ -9365,7 +9365,7 @@ components:
           readOnly: true
           type: string
         negative:
-          description: Indicates if this option is being negatively targeted. All assigned language targeting options on the same line item must have the same value for this field.
+          description: Indicates if this option is being negatively targeted. All assigned language targeting options on the same resource must have the same value for this field.
           type: boolean
         targetingOptionId:
           description: Required. The targeting_option_id of a TargetingOption of type `TARGETING_TYPE_LANGUAGE`.
@@ -10468,7 +10468,7 @@ components:
           format: int64
           type: string
         proximityRadiusRange:
-          description: Required. Radius range for proximity location list. This represents the size of the area around a chosen location that will be targeted. `All` proximity location targeting under a single line item must have the same radius range value. Set this value to match any existing targeting. If updated, this field will change the radius range for all proximity targeting under the line item.
+          description: Required. Radius range for proximity location list. This represents the size of the area around a chosen location that will be targeted. `All` proximity location targeting under a single resource must have the same radius range value. Set this value to match any existing targeting. If updated, this field will change the radius range for all proximity targeting under the resource.
           enum:
             - PROXIMITY_RADIUS_RANGE_UNSPECIFIED
             - PROXIMITY_RADIUS_RANGE_SMALL
@@ -10712,7 +10712,7 @@ components:
           readOnly: true
           type: string
         urlOrAppId:
-          description: Required. The URL or app ID of the site. Must be UTF-8 encoded with a maximum length of 240 bytes.
+          description: Required. The app ID or URL of the site. Must be UTF-8 encoded with a maximum length of 240 bytes.
           type: string
       type: object
     Status:

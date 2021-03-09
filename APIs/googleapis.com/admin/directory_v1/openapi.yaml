@@ -3421,6 +3421,18 @@ paths:
           name: domain
           schema:
             type: string
+        - description: Event on which subscription is intended (if subscribing)
+          in: query
+          name: event
+          schema:
+            enum:
+              - eventUndefined
+              - add
+              - delete
+              - makeAdmin
+              - undelete
+              - update
+            type: string
         - description: Maximum number of results to return.
           in: query
           name: maxResults

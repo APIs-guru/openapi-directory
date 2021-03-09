@@ -1831,7 +1831,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Truncate MySQL general and slow query log tables
+      description: Truncate MySQL general and slow query log tables MySQL only.
       operationId: sql.instances.truncateLog
       parameters:
         - description: Project ID of the Cloud SQL project.
@@ -2586,7 +2586,7 @@ components:
           type: string
       type: object
     DatabaseInstance:
-      description: "A Cloud SQL instance resource. Next field: 36"
+      description: A Cloud SQL instance resource.
       properties:
         backendType:
           description: " *SECOND_GEN*: Cloud SQL database instance. *EXTERNAL*: A database server that is not managed by Google. This property is read-only; use the *tier* property in the *settings* object to determine the database type."
@@ -2694,7 +2694,7 @@ components:
           description: Initial root password. Use only on creation.
           type: string
         satisfiesPzs:
-          description: The status indicating if instance satisfies physical zone separation. Reserved for future use.
+          description: The status indicating if instance satisfiesPzs. Reserved for future use.
           type: boolean
         scheduledMaintenance:
           $ref: "#/components/schemas/SqlScheduledMaintenance"
@@ -2841,7 +2841,7 @@ components:
               type: string
           type: object
         databases:
-          description: Databases to be exported. *MySQL instances:* If *fileType* is *SQL* and no database is specified, all databases are exported, except for the *mysql* system database. If *fileType* is *CSV*, you can specify one database, either by using this property or by using the *csvExportOptions.selectQuery* property, which takes precedence over this property. *PostgreSQL instances:* You must specify one database to be exported. If *fileType* is *CSV*, this database must match the one specified in the *csvExportOptions.selectQuery* property.
+          description: Databases to be exported. *MySQL instances:* If *fileType* is *SQL* and no database is specified, all databases are exported, except for the *mysql* system database. If *fileType* is *CSV*, you can specify one database, either by using this property or by using the *csvExportOptions.selectQuery* property, which takes precedence over this property. *PostgreSQL instances:* You must specify one database to be exported. If *fileType* is *CSV*, this database must match the one specified in the *csvExportOptions.selectQuery* property. *SQL Server instances:* You must specify one database to be exported, and the *fileType* must be *BAK*.
           items:
             type: string
           type: array
@@ -3277,7 +3277,7 @@ components:
           type: string
       type: object
     Operation:
-      description: "An Operation resource. For successful operations that return an Operation resource, only the fields relevant to the operation are populated in the resource. Next field: 18"
+      description: An Operation resource. For successful operations that return an Operation resource, only the fields relevant to the operation are populated in the resource.
       properties:
         backupContext:
           $ref: "#/components/schemas/BackupContext"
@@ -3586,13 +3586,13 @@ components:
           type: string
       type: object
     SqlExternalSyncSettingError:
-      description: External primary instance migration setting error.
+      description: External primary instance migration setting error/warning.
       properties:
         detail:
           description: Additional information about the error encountered.
           type: string
         kind:
-          description: This is always *sql#migrationSettingError*.
+          description: Can be *sql#externalSyncSettingError* or *sql#externalSyncSettingWarning*.
           type: string
         type:
           description: Identifies the specific error that occurred.
@@ -3639,6 +3639,11 @@ components:
         kind:
           description: This is always *sql#migrationSettingErrorList*.
           type: string
+        warnings:
+          description: List of migration warnings.
+          items:
+            $ref: "#/components/schemas/SqlExternalSyncSettingError"
+          type: array
       type: object
     SqlScheduledMaintenance:
       description: Any scheduled maintenancce for this instance.
@@ -3865,7 +3870,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
             https://www.googleapis.com/auth/sqlservice.admin: Manage your Google SQL Service instances
       type: oauth2
     Oauth2c:
@@ -3874,7 +3879,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
             https://www.googleapis.com/auth/sqlservice.admin: Manage your Google SQL Service instances
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

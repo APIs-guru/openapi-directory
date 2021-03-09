@@ -547,8 +547,12 @@ components:
           $ref: "#/components/schemas/LoginDetails"
           description: "Optional. Details of the login action associated with the warning event. This is only available for: * Suspicious login * Suspicious login (less secure app) * Suspicious programmatic login * User suspended (suspicious activity)"
       type: object
+    ActionInfo:
+      description: Metadata related to the action.
+      properties: {}
+      type: object
     ActivityRule:
-      description: Alerts from G Suite Security Center rules service configured by admin.
+      description: Alerts from Google Workspace Security Center rules service configured by an admin.
       properties:
         actionNames:
           description: List of action names associated with the rule threshold.
@@ -916,7 +920,7 @@ components:
           type: string
       type: object
     GoogleOperations:
-      description: An incident reported by Google Operations for a G Suite application.
+      description: An incident reported by Google Operations for a Google Workspace application.
       properties:
         affectedUserEmails:
           description: The list of emails which correspond to the users directly affected by the incident.
@@ -925,12 +929,12 @@ components:
           type: array
         attachmentData:
           $ref: "#/components/schemas/Attachment"
-          description: Optional. Application-specific data for an incident, provided when the G Suite application which reported the incident cannot be completely restored to a valid state.
+          description: Optional. Application-specific data for an incident, provided when the Google Workspace application which reported the incident cannot be completely restored to a valid state.
         description:
           description: A detailed, freeform incident description.
           type: string
         header:
-          description: A header to display above the incident message. Typcially used to attach a localized notice on the timeline for followup comms translations.
+          description: A header to display above the incident message. Typically used to attach a localized notice on the timeline for followup comms translations.
           type: string
         title:
           description: A one-line incident description.
@@ -1085,7 +1089,7 @@ components:
           type: string
       type: object
     RuleViolationInfo:
-      description: Common alert information about violated rules that are configured by G Suite administrators.
+      description: Common alert information about violated rules that are configured by Google Workspace administrators.
       properties:
         dataSource:
           description: Source of the data.
@@ -1127,6 +1131,11 @@ components:
             - TRIGGER_UNSPECIFIED
             - DRIVE_SHARE
           type: string
+        triggeredActionInfo:
+          description: Metadata related to the triggered actions.
+          items:
+            $ref: "#/components/schemas/ActionInfo"
+          type: array
         triggeredActionTypes:
           description: Actions applied as a consequence of the rule being triggered.
           items:

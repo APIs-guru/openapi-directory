@@ -2211,7 +2211,7 @@ components:
       description: The payment plan for the Offer. Describes how to make a payment.
       properties:
         billingAccount:
-          description: Reseller Billing account that will be charged when this offer is transacted. Only present for GCP offers.
+          description: Reseller Billing account to charge after an offer transaction. Only present for Google Cloud Platform offers.
           type: string
         paymentCycle:
           $ref: "#/components/schemas/GoogleCloudChannelV1Period"

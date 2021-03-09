@@ -4239,7 +4239,7 @@ components:
           description: The email address that appears in the "From:" header for mail sent using this alias. This is read-only for all operations except create.
           type: string
         signature:
-          description: An optional HTML signature that is included in messages composed with this alias in the Gmail web UI.
+          description: An optional HTML signature that is included in messages composed with this alias in the Gmail web UI. This signature is added to new emails only.
           type: string
         smtpMsa:
           $ref: "#/components/schemas/SmtpMsa"
@@ -4399,13 +4399,13 @@ components:
             https://www.googleapis.com/auth/gmail.addons.current.message.metadata: View your email message metadata when the add-on is running
             https://www.googleapis.com/auth/gmail.addons.current.message.readonly: View your email messages when the add-on is running
             https://www.googleapis.com/auth/gmail.compose: Manage drafts and send emails
-            https://www.googleapis.com/auth/gmail.insert: Insert mail into your mailbox
-            https://www.googleapis.com/auth/gmail.labels: Manage mailbox labels
+            https://www.googleapis.com/auth/gmail.insert: Add emails into your Gmail mailbox
+            https://www.googleapis.com/auth/gmail.labels: See and edit your email labels
             https://www.googleapis.com/auth/gmail.metadata: View your email message metadata such as labels and headers, but not the email body
             https://www.googleapis.com/auth/gmail.modify: View and modify but not delete your email
             https://www.googleapis.com/auth/gmail.readonly: View your email messages and settings
             https://www.googleapis.com/auth/gmail.send: Send email on your behalf
-            https://www.googleapis.com/auth/gmail.settings.basic: Manage your basic mail settings
+            https://www.googleapis.com/auth/gmail.settings.basic: See, edit, create, or change your email settings and filters in Gmail
             https://www.googleapis.com/auth/gmail.settings.sharing: Manage your sensitive mail settings, including who can manage your mail
       type: oauth2
     Oauth2c:
@@ -4420,13 +4420,13 @@ components:
             https://www.googleapis.com/auth/gmail.addons.current.message.metadata: View your email message metadata when the add-on is running
             https://www.googleapis.com/auth/gmail.addons.current.message.readonly: View your email messages when the add-on is running
             https://www.googleapis.com/auth/gmail.compose: Manage drafts and send emails
-            https://www.googleapis.com/auth/gmail.insert: Insert mail into your mailbox
-            https://www.googleapis.com/auth/gmail.labels: Manage mailbox labels
+            https://www.googleapis.com/auth/gmail.insert: Add emails into your Gmail mailbox
+            https://www.googleapis.com/auth/gmail.labels: See and edit your email labels
             https://www.googleapis.com/auth/gmail.metadata: View your email message metadata such as labels and headers, but not the email body
             https://www.googleapis.com/auth/gmail.modify: View and modify but not delete your email
             https://www.googleapis.com/auth/gmail.readonly: View your email messages and settings
             https://www.googleapis.com/auth/gmail.send: Send email on your behalf
-            https://www.googleapis.com/auth/gmail.settings.basic: Manage your basic mail settings
+            https://www.googleapis.com/auth/gmail.settings.basic: See, edit, create, or change your email settings and filters in Gmail
             https://www.googleapis.com/auth/gmail.settings.sharing: Manage your sensitive mail settings, including who can manage your mail
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

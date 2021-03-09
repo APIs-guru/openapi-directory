@@ -31,6 +31,7 @@ externalDocs:
   url: https://cloud.google.com/artifacts/docs/
 tags:
   - name: operations
+  - name: projects
 paths:
   /v1/operations:
     get:
@@ -194,6 +195,57 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
+  "/v1/{parent}/dockerImages":
+    get:
+      description: Lists docker images.
+      operationId: artifactregistry.projects.locations.repositories.dockerImages.list
+      parameters:
+        - description: Required. The name of the parent resource whose docker images will be listed.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of artifacts to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous list request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListDockerImagesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -285,7 +337,7 @@ components:
           description: Media type of this image, e.g. "application/vnd.docker.distribution.manifest.v2+json".
           type: string
         name:
-          description: Required. registry_location, project_id, repository_name and image id forms a unique image name:`projects//locations//repository//dockerimages/`. For example, "projects/test-project/locations/us-west4/repositories/test-repo/dockerimages/ nginx@sha256:e9954c1fc875017be1c3e36eca16be2d9e9bccc4bf072163515467d6a823c7cf", where "us-west4" is the registry_location, "test-project" is the project_id, "test-repo" is the repository_name and "nginx@sha256:e9954c1fc875017be1c3e36eca16be2d9e9bccc4bf072163515467d6a823c7cf" is the image's digest.
+          description: Required. registry_location, project_id, repository_name and image id forms a unique image name:`projects//locations//repository//dockerImages/`. For example, "projects/test-project/locations/us-west4/repositories/test-repo/dockerImages/ nginx@sha256:e9954c1fc875017be1c3e36eca16be2d9e9bccc4bf072163515467d6a823c7cf", where "us-west4" is the registry_location, "test-project" is the project_id, "test-repo" is the repository_name and "nginx@sha256:e9954c1fc875017be1c3e36eca16be2d9e9bccc4bf072163515467d6a823c7cf" is the image's digest.
           type: string
         tags:
           description: Tags attached to this image.
@@ -303,6 +355,18 @@ components:
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
+      type: object
+    ListDockerImagesResponse:
+      description: The response from listing docker images.
+      properties:
+        dockerImages:
+          description: The docker images returned.
+          items:
+            $ref: "#/components/schemas/DockerImage"
+          type: array
+        nextPageToken:
+          description: The token to retrieve the next page of artifacts, or empty if there are no more artifacts to return.
+          type: string
       type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.

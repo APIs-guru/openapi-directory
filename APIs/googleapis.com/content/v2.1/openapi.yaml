@@ -126,6 +126,48 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
+  "/content/v2.1/accounts/{accountId}/credentials":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Uploads credentials for the Merchant Center account. If credentials already exist for this Merchant Center account and purpose, this method updates them.
+      operationId: content.accounts.credentials.create
+      parameters:
+        - description: Required. The merchant id of the account these credentials belong to.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountCredentials"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountCredentials"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accounts
   "/content/v2.1/accounts/{accountId}/labels":
     get:
       description: Lists the labels assigned to an account.
@@ -1732,7 +1774,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Onboards BoG in your Merchant Center account. By using this method, you agree to the Terms of Service.
+      description: Onboards BoG in your Merchant Center account. By using this method, you agree to the [Terms of Service](https://merchants.google.com/mc/termsofservice/transactions/US/latest). Calling this method is only possible if the authenticated account is the same as the merchant id in the request. Calling this method multiple times will only accept Terms of Service if the latest version is not currently signed.
       operationId: content.buyongoogleprograms.onboard
       parameters:
         - description: Required. The ID of the account.
@@ -6579,6 +6621,23 @@ components:
           description: The customer service information of the business.
         phoneNumber:
           description: The phone number of the business.
+          type: string
+      type: object
+    AccountCredentials:
+      description: Credentials allowing Google to call a partner's API on behalf of a merchant.
+      properties:
+        accessToken:
+          description: An OAuth access token.
+          type: string
+        expiresIn:
+          description: The amount of time, in seconds, after which the access token is no longer valid.
+          format: int64
+          type: string
+        purpose:
+          description: Indicates to Google how Google should use these OAuth tokens.
+          enum:
+            - ACCOUNT_CREDENTIALS_PURPOSE_UNSPECIFIED
+            - SHOPIFY_ORDER_MANAGEMENT
           type: string
       type: object
     AccountCustomerService:

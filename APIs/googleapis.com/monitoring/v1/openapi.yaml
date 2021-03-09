@@ -205,7 +205,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new custom dashboard.This method requires the monitoring.dashboards.create permission on the specified project. For more information, see Google Cloud IAM (https://cloud.google.com/iam).
+      description: Creates a new custom dashboard. For examples on how you can use this API to create dashboards, see Managing dashboards by API. This method requires the monitoring.dashboards.create permission on the specified project. For more information about permissions, see Cloud Identity and Access Management.
       operationId: monitoring.projects.dashboards.create
       parameters:
         - description: "Required. The project on which to execute the request. The format is: projects/[PROJECT_ID_OR_NUMBER] The [PROJECT_ID_OR_NUMBER] must match the dashboard resource name."

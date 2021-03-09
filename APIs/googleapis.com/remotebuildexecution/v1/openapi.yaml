@@ -787,7 +787,7 @@ components:
         cmUsage:
           description: Indicates if and how Container Manager is being used for task execution.
           enum:
-            - NONE
+            - CONFIG_NONE
             - CONFIG_MATCH
             - CONFIG_MISMATCH
           type: string
@@ -808,6 +808,15 @@ components:
         numWarnings:
           description: The number of warnings reported.
           format: uint64
+          type: string
+        outputLocation:
+          description: Indicates whether output files and/or output directories were found relative to the execution root or to the user provided work directory or both or none.
+          enum:
+            - LOCATION_UNDEFINED
+            - LOCATION_NONE
+            - LOCATION_EXEC_ROOT_RELATIVE
+            - LOCATION_WORKING_DIR_RELATIVE
+            - LOCATION_EXEC_ROOT_AND_WORKING_DIR_RELATIVE
           type: string
         usedAsyncContainer:
           description: Indicates whether an asynchronous container was used for execution.
@@ -859,6 +868,7 @@ components:
             - DOCKER_CREATE_COMPUTE_SYSTEM_INCORRECT_PARAMETER_ERROR
             - DOCKER_TOO_MANY_SYMBOLIC_LINK_LEVELS
             - LOCAL_CONTAINER_MANAGER_NOT_RUNNING
+            - DOCKER_IMAGE_VPCSC_PERMISSION_DENIED
           type: string
         message:
           description: The error message.

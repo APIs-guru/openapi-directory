@@ -260,12 +260,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Boolean flag that specifies whether to replace existing values in the debug mask when doing an update. Set to true to replace existing values. The default behavior is to append the values (false).
-          in: query
-          name: replaceRepeatedFields
-          schema:
-            type: boolean
-        - description: Field debug mask to support partial updates.
+        - description: List of fields to be updated.
           in: query
           name: updateMask
           schema:
@@ -2539,6 +2534,82 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  "/v1/{parent}/overrides":
+    get:
+      description: Lists all of the distributed trace configuration overrides in an environment.
+      operationId: apigee.organizations.environments.traceConfig.overrides.list
+      parameters:
+        - description: 'Required. Parent resource of the trace configuration override. Use the following structure in your request: "organizations/*/environments/*/traceConfig".'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of trace configuration overrides to return. If not specified, the maximum number returned is 25. The maximum number cannot exceed 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, returned from a previous `ListTraceConfigOverrides` call. Token value that can be used to retrieve the subsequent page. When paginating, all other parameters provided to `ListTraceConfigOverrides` must match those specified in the call to obtain the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ListTraceConfigOverridesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a trace configuration override. The response contains a system-generated UUID, that can be used to view, update, or delete the configuration override. Use the List API to view the existing trace configuration overrides.
+      operationId: apigee.organizations.environments.traceConfig.overrides.create
+      parameters:
+        - description: Required. Parent resource of the trace configuration override. Use the following structure in your request. "organizations/*/environments/*/traceConfig".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1TraceConfigOverride"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1TraceConfigOverride"
           description: Successful response
       security:
         - Oauth2:
@@ -5361,6 +5432,18 @@ components:
             $ref: "#/components/schemas/GoogleCloudApigeeV1SharedFlow"
           type: array
       type: object
+    GoogleCloudApigeeV1ListTraceConfigOverridesResponse:
+      description: Response for ListTraceConfigOverrides.
+      properties:
+        nextPageToken:
+          description: Token value that can be passed as `page_token` to retrieve the next page of content.
+          type: string
+        traceConfigOverrides:
+          description: List all trace configuration overrides in an environment.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1TraceConfigOverride"
+          type: array
+      type: object
     GoogleCloudApigeeV1Metadata:
       description: This message type encapsulates additional information about query execution.
       properties:
@@ -6375,6 +6458,51 @@ components:
         trustStore:
           description: "Name of the keystore or keystore reference containing trusted certificates for the server in the following format: `organizations/{org}/environments/{env}/keystores/{keystore}` or `organizations/{org}/environments/{env}/references/{reference}`"
           type: string
+      type: object
+    GoogleCloudApigeeV1TraceConfig:
+      description: TraceConfig defines the configurations in an environment of distributed trace.
+      properties:
+        endpoint:
+          description: Required. Endpoint of the exporter.
+          type: string
+        exporter:
+          description: Required. Exporter that is used to view the distributed trace captured using OpenCensus. An exporter sends traces to any backend that is capable of consuming them. Recorded spans can be exported by registered exporters.
+          enum:
+            - EXPORTER_UNSPECIFIED
+            - JAEGER
+            - CLOUD_TRACE
+          type: string
+        samplingConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1TraceSamplingConfig"
+          description: Distributed trace configuration for all API proxies in an environment. You can also override the configuration for a specific API proxy using the distributed trace configuration overrides API.
+      type: object
+    GoogleCloudApigeeV1TraceConfigOverride:
+      description: A representation of a configuration override.
+      properties:
+        apiProxy:
+          description: ID of the API proxy that will have its trace configuration overridden.
+          type: string
+        name:
+          description: ID of the trace configuration override specified as a system-generated UUID.
+          type: string
+        samplingConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1TraceSamplingConfig"
+          description: Trace configuration to override.
+      type: object
+    GoogleCloudApigeeV1TraceSamplingConfig:
+      description: TraceSamplingConfig represents the detail settings of distributed tracing. Only the fields that are defined in the distributed trace configuration can be overridden using the distribute trace configuration override APIs.
+      properties:
+        sampler:
+          description: Sampler of distributed tracing. OFF is the default value.
+          enum:
+            - SAMPLER_UNSPECIFIED
+            - OFF
+            - PROBABILITY
+          type: string
+        samplingRate:
+          description: Field sampling rate. This value is only applicable when using the PROBABILITY sampler. The supported values are > 0 and <= 0.5.
+          format: float
+          type: number
       type: object
     GoogleCloudApigeeV1UpdateError:
       description: Details on why a resource update failed in the runtime.

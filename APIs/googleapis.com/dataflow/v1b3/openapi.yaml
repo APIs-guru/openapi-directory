@@ -3714,7 +3714,7 @@ components:
           description: "The dataset for the current project where various workflow related tables are stored. The supported resource type is: Google BigQuery: bigquery.googleapis.com/{dataset}"
           type: string
         experiments:
-          description: The list of experiments to enable.
+          description: The list of experiments to enable. This field should be used for SDK related experiments and not for service related experiments. The proper field for service related experiments is service_options. For more details see the rationale at go/user-specified-service-options.
           items:
             type: string
           type: array
@@ -3741,6 +3741,11 @@ components:
         serviceKmsKeyName:
           description: "If set, contains the Cloud KMS key identifier used to encrypt data at rest, AKA a Customer Managed Encryption Key (CMEK). Format: projects/PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY"
           type: string
+        serviceOptions:
+          description: The list of service options to enable. This field should be used for service related experiments only. These experiments, when graduating to GA, should be replaced by dedicated fields or become default (i.e. always on). For more details see the rationale at go/user-specified-service-options.
+          items:
+            type: string
+          type: array
         shuffleMode:
           description: Output only. The shuffle mode used for the job.
           enum:
