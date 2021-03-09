@@ -686,6 +686,16 @@ components:
           format: int32
           type: integer
       type: object
+    GroupedQuestionViewModel:
+      additionalProperties: false
+      properties:
+        dateTabled:
+          format: date-time
+          type: string
+        questionUin:
+          nullable: true
+          type: string
+      type: object
     HouseEnum:
       enum:
         - Bicameral
@@ -840,6 +850,11 @@ components:
         groupedQuestions:
           items:
             type: string
+          nullable: true
+          type: array
+        groupedQuestionsDates:
+          items:
+            $ref: "#/components/schemas/GroupedQuestionViewModel"
           nullable: true
           type: array
         heading:

@@ -1428,17 +1428,17 @@ components:
         type: string
   responses:
     CaptionSrt:
-      content:
+      description: Caption in SubRip Text format
+      x-content:
         application/x-subrip:
           schema:
             type: string
-      description: Caption in SubRip Text format
     CaptionVtt:
-      content:
+      description: Caption in Web Video Text Tracks format
+      x-content:
         text/vtt:
           schema:
             type: string
-      description: Caption in Web Video Text Tracks format
     InvalidCaptionFormat:
       content:
         application/problem+json:
@@ -1625,11 +1625,11 @@ components:
 
         for files larger than 2GBs
     TranscriptText:
-      content:
+      description: Transcript in plain text format
+      x-content:
         text/plain:
           schema:
             type: string
-      description: Transcript in plain text format
   schemas:
     Account:
       description: Rev.ai Account Model

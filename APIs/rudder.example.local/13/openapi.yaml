@@ -5100,6 +5100,7 @@ paths:
                         example:
                           - 162.168.1.0/24
                           - 162.168.2.0/24
+                        items: {}
                         type: array
                     required:
                       - settings
@@ -5157,6 +5158,7 @@ paths:
                         example:
                           - 162.168.1.0/24
                           - 162.168.2.0/24
+                        items: {}
                         type: array
                     required:
                       - settings
@@ -5195,10 +5197,12 @@ paths:
                     add:
                       description: List of networks to add to existing allowed networks for that server
                       example: '{ "add": ["162.168.2.0/24], ... }'
+                      items: {}
                       type: array
                     delete:
                       description: List of networks to remove from existing allowed networks for that server
                       example: '{ "delete":["162.168.1.0/24"], ... }'
+                      items: {}
                       type: array
                   type: object
               type: object
@@ -5222,6 +5226,7 @@ paths:
                         example:
                           - 162.168.1.0/24
                           - 162.168.2.0/24
+                        items: {}
                         type: array
                     required:
                       - settings

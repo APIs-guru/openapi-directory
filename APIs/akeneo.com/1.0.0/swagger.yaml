@@ -103,7 +103,7 @@ parameters:
     type: string
   with_attribute_options:
     default: false
-    description: Return labels of attribute options in the response. (Only available in the PIM Serenity version.)
+    description: Return labels of attribute options in the response. (Only available since the 5.0 version)
     in: query
     name: with_attribute_options
     required: false
@@ -117,7 +117,7 @@ parameters:
     type: boolean
   with_quality_scores:
     default: false
-    description: Return product quality scores in the response. (Only available in the PIM Serenity version.)
+    description: Return product quality scores in the response. (Only available since the 5.0 version)
     in: query
     name: with_quality_scores
     required: false
@@ -469,6 +469,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1:
     get:
@@ -538,6 +539,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/asset-categories:
     get:
@@ -1651,6 +1653,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/asset-families/{asset_family_code}/assets":
     get:
@@ -1892,6 +1895,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update and/or create several assets of one given asset family at once. Learn more about the <a href="/documentation/update.html#patch-asset-attribute-values">Update behavior</a>. Note that if the asset does not already exist for the given asset family, it creates it. This endpoint is case sensitive on the asset family code.
@@ -2126,6 +2130,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/asset-families/{asset_family_code}/assets/{code}":
     delete:
@@ -2183,6 +2188,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
     get:
       description: This endpoint allows you to get the information about a given asset for a given asset family. This endpoint is case sensitive on the asset family code.
@@ -2307,6 +2313,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given asset of a given asset family. Learn more about the <a href="/documentation/update.html#patch-asset-attribute-values">Update behavior</a>. Note that if the asset does not already exist for the given asset family, it creates it. This endpoint is case sensitive on the asset family code.
@@ -2463,6 +2470,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/asset-families/{asset_family_code}/attributes":
     get:
@@ -2689,6 +2697,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/asset-families/{asset_family_code}/attributes/{attribute_code}/options":
     get:
@@ -2784,6 +2793,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/asset-families/{asset_family_code}/attributes/{attribute_code}/options/{code}":
     get:
@@ -2884,6 +2894,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given option for a given attribute and a given asset family. Learn more about the <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if the option does not already exist for the given attribute of the given asset family, it creates it.
@@ -3000,6 +3011,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/asset-families/{asset_family_code}/attributes/{code}":
     get:
@@ -3211,6 +3223,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given attribute for a given asset family. Note that if the attribute does not already exist for the given asset family, it creates it.
@@ -3438,6 +3451,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/asset-families/{code}":
     get:
@@ -3704,6 +3718,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given asset family. Note that if the asset family does not already exist, it creates it.
@@ -3986,6 +4001,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/asset-media-files:
     post:
@@ -4074,6 +4090,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/asset-media-files/{code}":
     get:
@@ -4128,6 +4145,7 @@ paths:
       x-versions:
         - "3.2"
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/asset-tags:
     get:
@@ -6785,6 +6803,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update and/or create several association types at once.
@@ -6925,6 +6944,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     post:
       description: This endpoint allows you to create a new association type.
@@ -7060,6 +7080,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/association-types/{code}":
     get:
@@ -7177,6 +7198,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given association type. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no association type exists for the given code, it creates it.
@@ -7325,6 +7347,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/attribute-groups:
     get:
@@ -7555,6 +7578,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update and/or create several attribute groups at once.
@@ -7703,6 +7727,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     post:
       description: This endpoint allows you to create a new attribute group.
@@ -7846,6 +7871,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/attribute-groups/{code}":
     get:
@@ -7971,6 +7997,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given attribute group. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no attribute group exists for the given code, it creates it.
@@ -8127,6 +8154,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/attributes:
     get:
@@ -8364,7 +8392,7 @@ paths:
                                   x-validation-rules: Required for `pim_catalog_metric` attribute type
                                   x-warning: Only for `pim_catalog_metric` attribute type
                                 default_value:
-                                  description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+                                  description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available since the 5.0)
                                   type: boolean
                                   x-warning: Only for `pim_catalog_boolean` attribute type
                                 group:
@@ -8543,6 +8571,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update and/or create several attributes at once.
@@ -8623,7 +8652,7 @@ paths:
                 x-validation-rules: Required for `pim_catalog_metric` attribute type
                 x-warning: Only for `pim_catalog_metric` attribute type
               default_value:
-                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available since the 5.0)
                 type: boolean
                 x-warning: Only for `pim_catalog_boolean` attribute type
               group:
@@ -8844,6 +8873,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     post:
       description: This endpoint allows you to create a new attribute.
@@ -8924,7 +8954,7 @@ paths:
                 x-validation-rules: Required for `pim_catalog_metric` attribute type
                 x-warning: Only for `pim_catalog_metric` attribute type
               default_value:
-                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available since the 5.0)
                 type: boolean
                 x-warning: Only for `pim_catalog_boolean` attribute type
               group:
@@ -9139,6 +9169,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/attributes/{attribute_code}/options":
     get:
@@ -9353,6 +9384,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update several attribute options at once.
@@ -9498,6 +9530,7 @@ paths:
         - "2.3"
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     post:
       description: This endpoint allows you to create a new attribute option.
@@ -9636,6 +9669,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/attributes/{attribute_code}/options/{code}":
     get:
@@ -9756,6 +9790,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given attribute option. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no attribute option exists for the given code, it creates it.
@@ -9907,6 +9942,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/attributes/{code}":
     get:
@@ -9994,7 +10030,7 @@ paths:
                 x-validation-rules: Required for `pim_catalog_metric` attribute type
                 x-warning: Only for `pim_catalog_metric` attribute type
               default_value:
-                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available since the 5.0)
                 type: boolean
                 x-warning: Only for `pim_catalog_boolean` attribute type
               group:
@@ -10184,6 +10220,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given attribute. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no attribute exists for the given code, it creates it.
@@ -10270,7 +10307,7 @@ paths:
                 x-validation-rules: Required for `pim_catalog_metric` attribute type
                 x-warning: Only for `pim_catalog_metric` attribute type
               default_value:
-                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+                description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available since the 5.0)
                 type: boolean
                 x-warning: Only for `pim_catalog_boolean` attribute type
               group:
@@ -10492,6 +10529,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/categories:
     get:
@@ -10721,6 +10759,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update several categories at once.
@@ -10857,6 +10896,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     post:
       description: This endpoint allows you to create a new category.
@@ -10987,6 +11027,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/categories/{code}":
     get:
@@ -11099,6 +11140,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given category. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no category exists for the given code, it creates it.
@@ -11242,6 +11284,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/channels:
     get:
@@ -11506,6 +11549,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update and/or create several channels at once.
@@ -11672,6 +11716,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     post:
       description: This endpoint allows you to create a new channel.
@@ -11833,6 +11878,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/channels/{code}":
     get:
@@ -11977,6 +12023,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given channel. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no channel exists for the given code, it creates it.
@@ -12151,6 +12198,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/currencies:
     get:
@@ -12326,6 +12374,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/currencies/{code}":
     get:
@@ -12423,6 +12472,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/families:
     get:
@@ -12707,6 +12757,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update and/or create several families at once.
@@ -12885,6 +12936,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     post:
       description: This endpoint allows you to create a new family.
@@ -13057,6 +13109,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/families/{code}":
     get:
@@ -13211,6 +13264,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given family. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no family exists for the given code, it creates it.
@@ -13396,6 +13450,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/families/{family_code}/variants":
     get:
@@ -13622,6 +13677,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update and/or create several family variants at once, for a given family.
@@ -13800,6 +13856,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     post:
       description: This endpoint allows you to create a family variant.
@@ -13972,6 +14029,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/families/{family_code}/variants/{code}":
     get:
@@ -14126,6 +14184,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given family variant. Know more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no family variant exists for the given code, it creates it.
@@ -14311,6 +14370,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/locales:
     get:
@@ -14497,6 +14557,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/locales/{code}":
     get:
@@ -14596,6 +14657,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/measure-families:
     get:
@@ -14800,6 +14862,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/measure-families/{code}":
     get:
@@ -14924,6 +14987,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/measurement-families:
     get:
@@ -15103,6 +15167,7 @@ paths:
       tags:
         - Measurement family
       x-versions:
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update and/or create several measurement families at once.
@@ -15337,6 +15402,7 @@ paths:
       tags:
         - Measurement family
       x-versions:
+        - "5.0"
         - Serenity
   /api/rest/v1/media-files:
     get:
@@ -15561,6 +15627,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     post:
       description: This endpoint allows you to create a new media file and associate it to an attribute value of a given product or product model.
@@ -15682,6 +15749,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/media-files/{code}":
     get:
@@ -15815,6 +15883,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/media-files/{code}/download":
     get:
@@ -15885,6 +15954,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/product-models:
     get:
@@ -16237,7 +16307,7 @@ paths:
                                   type: string
                                   x-validation-rules: "&bull; It is equal to an existing product model code&#10;&bull; This product model has the same family variant as the one given in the `family_variant field`"
                                 quantified_associations:
-                                  description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                                  description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                                   properties:
                                     quantifiedAssociationTypeCode:
                                       properties:
@@ -16352,6 +16422,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update and/or create several product models at once. Learn more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no product models exists for the given code, it creates it. In the Enterprise Edition, since the v2.3, permissions based on your user groups are applied to the product models you try to update. It may result in the creation of drafts if you only have edit rights through the product model's categories.
@@ -16482,7 +16553,7 @@ paths:
                 type: string
                 x-validation-rules: "&bull; It is equal to an existing product model code&#10;&bull; This product model has the same family variant as the one given in the `family_variant field`"
               quantified_associations:
-                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                 properties:
                   quantifiedAssociationTypeCode:
                     properties:
@@ -16636,6 +16707,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     post:
       description: This endpoint allows you to create a new product model. In the Enterprise Edition, since the v2.3, permissions based on your user groups are applied to the product model you try to create.
@@ -16766,7 +16838,7 @@ paths:
                 type: string
                 x-validation-rules: "&bull; It is equal to an existing product model code&#10;&bull; This product model has the same family variant as the one given in the `family_variant field`"
               quantified_associations:
-                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                 properties:
                   quantifiedAssociationTypeCode:
                     properties:
@@ -16899,6 +16971,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/product-models/{code}":
     get:
@@ -17036,7 +17109,7 @@ paths:
                 type: string
                 x-validation-rules: "&bull; It is equal to an existing product model code&#10;&bull; This product model has the same family variant as the one given in the `family_variant field`"
               quantified_associations:
-                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                 properties:
                   quantifiedAssociationTypeCode:
                     properties:
@@ -17144,6 +17217,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given product model. Learn more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no product model exists for the given code, it creates it. In the Enterprise Edition PIM since the 2.3, permissions based on your user groups are applied to the product model you try to update. It may result in the creation of a draft if you only have edit rights through the product model's categories.
@@ -17280,7 +17354,7 @@ paths:
                 type: string
                 x-validation-rules: "&bull; It is equal to an existing product model code&#10;&bull; This product model has the same family variant as the one given in the `family_variant field`"
               quantified_associations:
-                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                 properties:
                   quantifiedAssociationTypeCode:
                     properties:
@@ -17405,6 +17479,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/product-models/{code}/draft":
     get:
@@ -17542,7 +17617,7 @@ paths:
                 type: string
                 x-validation-rules: "&bull; It is equal to an existing product model code&#10;&bull; This product model has the same family variant as the one given in the `family_variant field`"
               quantified_associations:
-                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                 properties:
                   quantifiedAssociationTypeCode:
                     properties:
@@ -17666,6 +17741,7 @@ paths:
         - "2.3"
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/product-models/{code}/proposal":
     post:
@@ -17756,6 +17832,7 @@ paths:
         - "2.3"
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/products:
     get:
@@ -17819,13 +17896,13 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: Return labels of attribute options in the response. (Only available in the PIM Serenity version.)
+          description: Return labels of attribute options in the response. (Only available since the 5.0 version)
           in: query
           name: with_attribute_options
           required: false
           type: boolean
         - default: false
-          description: Return product quality scores in the response. (Only available in the PIM Serenity version.)
+          description: Return product quality scores in the response. (Only available since the 5.0 version)
           in: query
           name: with_quality_scores
           required: false
@@ -18262,12 +18339,12 @@ paths:
                                   type: string
                                   x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
                                 quality_scores:
-                                  description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                                  description: Product quality scores for each channel/locale combination (only available since the 5.0 and when the "with_quality_scores" query parameter is set to "true")
                                   type: object
                                   x-immutable: true
                                   x-read-only: true
                                 quantified_associations:
-                                  description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                                  description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                                   properties:
                                     quantifiedAssociationTypeCode:
                                       properties:
@@ -18309,7 +18386,7 @@ paths:
                                             description: Product value
                                             type: object
                                           linked_data:
-                                            description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
+                                            description: Object containing labels of attribute options (only available since the 5.0 and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                                             properties:
                                               attribute:
                                                 type: string
@@ -18408,6 +18485,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update and/or create several products at once. Learn more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no product exists for the given identifier, it creates it. In the Enterprise Edition, since the v2.0, permissions based on your user groups are applied to the products you try to update. It may result in the creation of drafts if you only have edit rights through the product's categories.
@@ -18592,12 +18670,12 @@ paths:
                 type: string
                 x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
               quality_scores:
-                description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                description: Product quality scores for each channel/locale combination (only available since the 5.0 and when the "with_quality_scores" query parameter is set to "true")
                 type: object
                 x-immutable: true
                 x-read-only: true
               quantified_associations:
-                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                 properties:
                   quantifiedAssociationTypeCode:
                     properties:
@@ -18639,7 +18717,7 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
+                          description: Object containing labels of attribute options (only available since the 5.0 and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                           properties:
                             attribute:
                               type: string
@@ -18762,6 +18840,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     post:
       description: This endpoint allows you to create a new product. In the Enterprise Edition, since the v2.0, permissions based on your user groups are applied to the product you try to create.
@@ -18946,12 +19025,12 @@ paths:
                 type: string
                 x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
               quality_scores:
-                description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                description: Product quality scores for each channel/locale combination (only available since the 5.0 and when the "with_quality_scores" query parameter is set to "true")
                 type: object
                 x-immutable: true
                 x-read-only: true
               quantified_associations:
-                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                 properties:
                   quantifiedAssociationTypeCode:
                     properties:
@@ -18993,7 +19072,7 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
+                          description: Object containing labels of attribute options (only available since the 5.0 and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                           properties:
                             attribute:
                               type: string
@@ -19110,6 +19189,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/products/{code}":
     delete:
@@ -19178,6 +19258,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     get:
       description: This endpoint allows you to get the information about a given product. In the Entreprise Edition, since the v2.0, permissions based on your user groups are applied to the product you request.
@@ -19189,13 +19270,13 @@ paths:
           required: true
           type: string
         - default: false
-          description: Return labels of attribute options in the response. (Only available in the PIM Serenity version.)
+          description: Return labels of attribute options in the response. (Only available since the 5.0 version)
           in: query
           name: with_attribute_options
           required: false
           type: boolean
         - default: false
-          description: Return product quality scores in the response. (Only available in the PIM Serenity version.)
+          description: Return product quality scores in the response. (Only available since the 5.0 version)
           in: query
           name: with_quality_scores
           required: false
@@ -19380,12 +19461,12 @@ paths:
                 type: string
                 x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
               quality_scores:
-                description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                description: Product quality scores for each channel/locale combination (only available since the 5.0 and when the "with_quality_scores" query parameter is set to "true")
                 type: object
                 x-immutable: true
                 x-read-only: true
               quantified_associations:
-                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                 properties:
                   quantifiedAssociationTypeCode:
                     properties:
@@ -19427,7 +19508,7 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
+                          description: Object containing labels of attribute options (only available since the 5.0 and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                           properties:
                             attribute:
                               type: string
@@ -19519,6 +19600,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given product. Learn more about <a href="/documentation/update.html#update-behavior">Update behavior</a>. Note that if no product exists for the given identifier, it creates it. In the Entreprise Edition, since the v2.0, permissions based on your user groups are applied to the product you try to update. It may result in the creation of a draft if you only have edit rights through the product's categories.
@@ -19709,12 +19791,12 @@ paths:
                 type: string
                 x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
               quality_scores:
-                description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                description: Product quality scores for each channel/locale combination (only available since the 5.0 and when the "with_quality_scores" query parameter is set to "true")
                 type: object
                 x-immutable: true
                 x-read-only: true
               quantified_associations:
-                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                 properties:
                   quantifiedAssociationTypeCode:
                     properties:
@@ -19756,7 +19838,7 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
+                          description: Object containing labels of attribute options (only available since the 5.0 and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                           properties:
                             attribute:
                               type: string
@@ -19865,6 +19947,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/products/{code}/draft":
     get:
@@ -20056,12 +20139,12 @@ paths:
                 type: string
                 x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
               quality_scores:
-                description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+                description: Product quality scores for each channel/locale combination (only available since the 5.0 and when the "with_quality_scores" query parameter is set to "true")
                 type: object
                 x-immutable: true
                 x-read-only: true
               quantified_associations:
-                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+                description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
                 properties:
                   quantifiedAssociationTypeCode:
                     properties:
@@ -20103,7 +20186,7 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
+                          description: Object containing labels of attribute options (only available since the 5.0 and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                           properties:
                             attribute:
                               type: string
@@ -20195,6 +20278,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/products/{code}/proposal":
     post:
@@ -20285,6 +20369,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/published-products:
     get:
@@ -20639,6 +20724,9 @@ paths:
                                 identifier:
                                   description: Published product identifier, i.e. the value of the only `pim_catalog_identifier` attribute
                                   type: string
+                                quantified_associations:
+                                  description: "Warning: associations with quantities are not compatible with the published products. The response will always be empty."
+                                  type: object
                                 updated:
                                   description: Date of the last update
                                   format: dateTime
@@ -20757,6 +20845,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/published-products/{code}":
     get:
@@ -20880,6 +20969,9 @@ paths:
               identifier:
                 description: Published product identifier, i.e. the value of the only `pim_catalog_identifier` attribute
                 type: string
+              quantified_associations:
+                description: "Warning: associations with quantities are not compatible with the published products. The response will always be empty."
+                type: object
               updated:
                 description: Date of the last update
                 format: dateTime
@@ -20976,6 +21068,7 @@ paths:
         - 2.x
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/reference-entities:
     get:
@@ -21144,6 +21237,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   /api/rest/v1/reference-entities-media-files:
     post:
@@ -21232,6 +21326,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/reference-entities-media-files/{code}":
     get:
@@ -21286,6 +21381,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/reference-entities/{code}":
     get:
@@ -21404,6 +21500,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given reference entity. Note that if the reference entity does not already exist, it creates it.
@@ -21515,6 +21612,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/reference-entities/{reference_entity_code}/attributes":
     get:
@@ -21738,6 +21836,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/reference-entities/{reference_entity_code}/attributes/{attribute_code}/options":
     get:
@@ -21833,6 +21932,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/reference-entities/{reference_entity_code}/attributes/{attribute_code}/options/{code}":
     get:
@@ -21933,6 +22033,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given option for a given attribute and a given reference entity. Learn more about <a href="/documentation/update.html#patch-reference-entity-record-values">Update behavior</a>. Note that if the option does not already exist for the given attribute of the given reference entity, it creates it.
@@ -22049,6 +22150,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/reference-entities/{reference_entity_code}/attributes/{code}":
     get:
@@ -22246,6 +22348,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given attribute for a given renference entity. Note that if the attribute does not already exist for the given reference entity, it creates it.
@@ -22459,6 +22562,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/reference-entities/{reference_entity_code}/records":
     get:
@@ -22717,6 +22821,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update and/or create several records of one given reference entity at once. Learn more about <a href="/documentation/update.html#patch-reference-entity-record-values">Update behavior</a>. Note that if the record does not already exist for the given reference entity, it creates it.
@@ -22949,6 +23054,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
   "/api/rest/v1/reference-entities/{reference_entity_code}/records/{code}":
     get:
@@ -23079,6 +23185,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
     patch:
       description: This endpoint allows you to update a given record of a given renference entity. Learn more about <a href="/documentation/update.html#patch-reference-entity-record-values">Update behavior</a>. Note that if the record does not already exist for the given reference entity, it creates it.
@@ -23225,6 +23332,7 @@ paths:
       x-versions:
         - 3.x
         - "4.0"
+        - "5.0"
         - Serenity
 definitions:
   AssetAttributeList:
@@ -23851,7 +23959,7 @@ definitions:
         x-validation-rules: Required for `pim_catalog_metric` attribute type
         x-warning: Only for `pim_catalog_metric` attribute type
       default_value:
-        description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+        description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available since the 5.0)
         type: boolean
         x-warning: Only for `pim_catalog_boolean` attribute type
       group:
@@ -24156,7 +24264,7 @@ definitions:
             x-validation-rules: Required for `pim_catalog_metric` attribute type
             x-warning: Only for `pim_catalog_metric` attribute type
           default_value:
-            description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available in Serenity)
+            description: Default value for a Yes/No attribute, applied when creating a new product or product model (only available since the 5.0)
             type: boolean
             x-warning: Only for `pim_catalog_boolean` attribute type
           group:
@@ -26093,12 +26201,12 @@ definitions:
         type: string
         x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
       quality_scores:
-        description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+        description: Product quality scores for each channel/locale combination (only available since the 5.0 and when the "with_quality_scores" query parameter is set to "true")
         type: object
         x-immutable: true
         x-read-only: true
       quantified_associations:
-        description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+        description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
         properties:
           quantifiedAssociationTypeCode:
             properties:
@@ -26140,7 +26248,7 @@ definitions:
                   description: Product value
                   type: object
                 linked_data:
-                  description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
+                  description: Object containing labels of attribute options (only available since the 5.0 and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                   properties:
                     attribute:
                       type: string
@@ -26352,12 +26460,12 @@ definitions:
             type: string
             x-validation-rules: It is equal to an existing product model code only if the product is variant otherwise it's equal to null
           quality_scores:
-            description: Product quality scores for each channel/locale combination (only available in Serenity and when the "with_quality_scores" query parameter is set to "true")
+            description: Product quality scores for each channel/locale combination (only available since the 5.0 and when the "with_quality_scores" query parameter is set to "true")
             type: object
             x-immutable: true
             x-read-only: true
           quantified_associations:
-            description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+            description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
             properties:
               quantifiedAssociationTypeCode:
                 properties:
@@ -26399,7 +26507,7 @@ definitions:
                       description: Product value
                       type: object
                     linked_data:
-                      description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
+                      description: Object containing labels of attribute options (only available since the 5.0 and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                       properties:
                         attribute:
                           type: string
@@ -26546,7 +26654,7 @@ definitions:
         type: string
         x-validation-rules: "&bull; It is equal to an existing product model code&#10;&bull; This product model has the same family variant as the one given in the `family_variant field`"
       quantified_associations:
-        description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+        description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
         properties:
           quantifiedAssociationTypeCode:
             properties:
@@ -26736,7 +26844,7 @@ definitions:
             type: string
             x-validation-rules: "&bull; It is equal to an existing product model code&#10;&bull; This product model has the same family variant as the one given in the `family_variant field`"
           quantified_associations:
-            description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available in Serenity)
+            description: Several quantified associations related to products and/or product models, grouped by quantified association types (only available since the 5.0)
             properties:
               quantifiedAssociationTypeCode:
                 properties:
@@ -26901,6 +27009,9 @@ definitions:
       identifier:
         description: Published product identifier, i.e. the value of the only `pim_catalog_identifier` attribute
         type: string
+      quantified_associations:
+        description: "Warning: associations with quantities are not compatible with the published products. The response will always be empty."
+        type: object
       updated:
         description: Date of the last update
         format: dateTime
@@ -27049,6 +27160,9 @@ definitions:
           identifier:
             description: Published product identifier, i.e. the value of the only `pim_catalog_identifier` attribute
             type: string
+          quantified_associations:
+            description: "Warning: associations with quantities are not compatible with the published products. The response will always be empty."
+            type: object
           updated:
             description: Date of the last update
             format: dateTime

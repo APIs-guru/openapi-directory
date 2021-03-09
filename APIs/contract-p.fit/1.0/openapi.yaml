@@ -147,6 +147,9 @@ paths:
                 hints:
                   description: 'Additional hints as a dictionary. Example: {"VAT_number":{"blacklist":"XXXX.XXX.XXX", "whitelist": ["YYYY.YYY.YYY", "ZZZZ.ZZZ.ZZZ"]}}'
                   type: string
+                key_value_flag:
+                  default: false
+                  type: boolean
                 sync:
                   default: true
                   type: boolean
@@ -172,10 +175,6 @@ components:
       properties:
         escalate:
           $ref: "#/components/schemas/StateModelGet"
-        evaluation_data:
-          items:
-            type: object
-          type: array
         feedback:
           type: object
         files:
@@ -212,6 +211,10 @@ components:
           $ref: "#/components/schemas/TimingsModelGet"
         usage_data:
           type: object
+        versions:
+          items:
+            type: object
+          type: array
       required:
         - id
         - inbox

@@ -552,6 +552,40 @@ paths:
       tags:
         - Estimate
   /api/Expense:
+    delete:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: Expense_Delete
+      parameters:
+        - description: A collection of ExpenseIDs to delete
+          in: body
+          name: ExpenseIDs
+          required: true
+          schema:
+            items:
+              format: int64
+              type: integer
+            type: array
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ExpenseDeleteResultSet"
+      security:
+        - oauth2:
+            - write_expenses
+      summary: Delete a Timesheet Entry
+      tags:
+        - Expense
     get:
       consumes: []
       operationId: Expense_Get
@@ -685,6 +719,63 @@ paths:
       summary: Create an Expense
       tags:
         - Expense
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: Update an Expense
+      operationId: Expense_Put
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateExpense"
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ExpenseDetails"
+      security:
+        - oauth2:
+            - write_expenses
+      summary: Update an Expense
+      tags:
+        - Expense
+  /api/Expense/Attachment:
+    post:
+      consumes:
+        - application/form-data
+      operationId: ExpenseAttachment
+      parameters:
+        - description: Upload software package
+          in: formData
+          name: File
+          required: true
+          type: file
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ExpenseAttachmentUploadResult"
+      security:
+        - oauth2:
+            - write_expenses
+      tags:
+        - Expense
   "/api/Expense/{id}":
     get:
       consumes: []
@@ -714,6 +805,52 @@ paths:
         - oauth2:
             - read_expenses
       summary: Gets an Expense Entry by Expense ID
+      tags:
+        - Expense
+  /api/ExpenseApproval/Submit:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: ExpenseApproval
+      parameters:
+        - description: A collection of ExpenseID's that should be submitted for approval. If not provided, submits all verified expenses for approval.
+          in: body
+          name: ExpenseIDs
+          required: true
+          schema:
+            items:
+              format: int64
+              type: integer
+            type: array
+        - description: The user to submit the Expenses for. Defaults to current user. Only allowed to be different from the current user when the current user has rights to Impersonate other users.
+          format: int32
+          in: query
+          name: UserID
+          required: false
+          type: integer
+        - description: Send email alerts to expense approvers. Defaults to true
+          in: query
+          name: SendNotifications
+          required: false
+          type: boolean
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      security:
+        - oauth2:
+            - write_expenses
+      summary: Submit Expenses for Approval.
       tags:
         - Expense
   /api/ExpenseCategory:
@@ -842,6 +979,62 @@ paths:
       summary: Gets minimal list of Expense Payment Methods.
       tags:
         - ExpensePaymentMethod
+  /api/ExpenseSummary:
+    get:
+      consumes: []
+      operationId: ExpenseSummary_Get
+      parameters:
+        - collectionFormat: multi
+          description: '(Optional) Combine one, two or three levels of Grouping. Combine these possible grouping values: "Category", "ChargeableStatus", "Merchant", "ApprovalStatus", "ReimbursementStatus", "Customer", "Project", "User", "Task", "Year", "Month", "Day", "Week".'
+          in: query
+          items:
+            type: string
+          name: model.groupBy
+          required: false
+          type: array
+        - description: (Required) Filter for expenses with expense dates greater or equal to the specified date. e.g. 2019-01-25.
+          format: date-time
+          in: query
+          name: model.expenseDateFrom
+          required: false
+          type: string
+        - description: (Required) Filter for expenses with an expense date smaller or equal to the specified  date. e.g. 2019-01-25.
+          format: date-time
+          in: query
+          name: model.expenseDateTo
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: (Optional) Defaults to the current user. Provide one or more UserIDs of Users whose expenses should be retrieved. If the current user doesn't have impersonation rights, then they will only see their own data.
+          in: query
+          items:
+            format: int32
+            type: integer
+          name: model.userID
+          required: false
+          type: array
+        - description: (Optional) Filter by Project
+          format: int32
+          in: query
+          name: model.projectID
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ExpenseSummaryResult"
+      security:
+        - oauth2:
+            - read_expenses
+      summary: Gets Basic Summary of Expense Statistics
+      tags:
+        - ExpenseSummary
   /api/FixedAmount:
     get:
       consumes: []
@@ -3002,6 +3195,13 @@ definitions:
         format: int32
         type: integer
     type: object
+  ExpenseAttachmentUploadResult:
+    properties:
+      FileAttachments:
+        items:
+          $ref: "#/definitions/FileAttachmentDetails"
+        type: array
+    type: object
   ExpenseCategoryDetails:
     properties:
       Enabled:
@@ -3024,6 +3224,23 @@ definitions:
       Categories:
         items:
           $ref: "#/definitions/ExpenseCategoryDetails"
+        type: array
+    type: object
+  ExpenseDeleteResult:
+    properties:
+      ErrorMessage:
+        type: string
+      ExpenseID:
+        format: int64
+        type: integer
+      Success:
+        type: boolean
+    type: object
+  ExpenseDeleteResultSet:
+    properties:
+      Results:
+        items:
+          $ref: "#/definitions/ExpenseDeleteResult"
         type: array
     type: object
   ExpenseDetails:
@@ -3090,6 +3307,9 @@ definitions:
         type: integer
       ExpenseReportName:
         type: string
+      FileAttachmentIDFK:
+        format: int64
+        type: integer
       Firstname:
         type: string
       Lastname:
@@ -3108,18 +3328,29 @@ definitions:
       Quantity:
         format: double
         type: number
+      TaskIDFK:
+        format: int32
+        type: integer
+      TaskTitle:
+        type: string
       TaxAmount:
         format: double
         type: number
       TaxIDFK:
         format: int32
         type: integer
+      TaxName:
+        type: string
       TransactionTaxConfigCode:
+        type: string
+      TransactionTaxConfigName:
         type: string
       UserIDFK:
         format: int32
         type: integer
       isChargeable:
+        type: boolean
+      isOfficialExchangeRate:
         type: boolean
       isReimbursable:
         type: boolean
@@ -3199,6 +3430,86 @@ definitions:
         type: integer
       Name:
         type: string
+    type: object
+  ExpenseSummaryGroup:
+    properties:
+      GroupData:
+        items:
+          $ref: "#/definitions/ExpenseSummaryGroup"
+        type: array
+      GroupID:
+        type: string
+      GroupName:
+        type: string
+      TotalAmount:
+        format: double
+        type: number
+    type: object
+  ExpenseSummaryRequest:
+    properties:
+      ExpenseDateFrom:
+        description: (Required) Filter for expenses with expense dates greater or equal to the specified date. e.g. 2019-01-25.
+        format: date-time
+        type: string
+      ExpenseDateTo:
+        description: (Required) Filter for expenses with an expense date smaller or equal to the specified  date. e.g. 2019-01-25.
+        format: date-time
+        type: string
+      GroupBy:
+        description: '(Optional) Combine one, two or three levels of Grouping. Combine these possible grouping values: "Category", "ChargeableStatus", "Merchant", "ApprovalStatus", "ReimbursementStatus", "Customer", "Project", "User", "Task", "Year", "Month", "Day", "Week".'
+        items:
+          type: string
+        type: array
+      ProjectID:
+        description: (Optional) Filter by Project
+        format: int32
+        type: integer
+      UserID:
+        description: (Optional) Defaults to the current user. Provide one or more UserIDs of Users whose expenses should be retrieved. If the current user doesn't have impersonation rights, then they will only see their own data.
+        items:
+          format: int32
+          type: integer
+        type: array
+    type: object
+  ExpenseSummaryResult:
+    properties:
+      ExpenseDateFrom:
+        format: date-time
+        type: string
+      ExpenseDateTo:
+        format: date-time
+        type: string
+      GroupData:
+        items:
+          $ref: "#/definitions/ExpenseSummaryGroup"
+        type: array
+      GroupingLevels:
+        items:
+          type: string
+        type: array
+      TotalAmount:
+        format: double
+        type: number
+      UserID:
+        items:
+          format: int32
+          type: integer
+        type: array
+    type: object
+  FileAttachmentDetails:
+    properties:
+      FileAttachmentID:
+        format: int64
+        type: integer
+      OriginalFilename:
+        type: string
+      PreviewBaseURL:
+        type: string
+      PublicFileURL:
+        type: string
+      SizeBytes:
+        format: int64
+        type: integer
     type: object
   FixedAmountDetails:
     properties:
@@ -3652,6 +3963,16 @@ definitions:
         description: The date of the expense entry (Required)
         format: date-time
         type: string
+      ExpensePaymentMethodIDFK:
+        description: (Optional) ID of Expense Payment Method.
+        format: int32
+        type: integer
+      FileAttachmentIDs:
+        description: Array of File Attachment IDs to associate with this expense. The files need to have already been uploaded. Currently only accepts a single file.
+        items:
+          format: int64
+          type: integer
+        type: array
       GroupTripName:
         description: Links the expense to a Grouping/Trip report. If no matching name found, creates a new Group/Trip Report name.
         type: string
@@ -3671,6 +3992,14 @@ definitions:
       ProjectName:
         description: Can work for matching an expense to a project, but only if it's an exact match for a single project under the customer.
         type: string
+      Quantity:
+        description: Conditional - available for expenses that are assigned a unit priced based expense category. e.g Mileage
+        format: double
+        type: number
+      TaskIDFK:
+        description: (optional) TaskID of a Task to link the new Expense to. A Customer and Project must be provided also.
+        format: int32
+        type: integer
       TaxIDFK:
         description: Avaza Tax ID the expense belongs to. If left blank then Tax Name must be provided.
         format: int32
@@ -3688,6 +4017,9 @@ definitions:
         description: UserID for a Timesheet/Expense user in Avaza. If not provided, UserEmail field must be provided
         format: int32
         type: integer
+      VerifyAndSave:
+        description: Pass false if creating a draft expense. True otherwise.
+        type: boolean
       isChargeable:
         description: aka Billable. Defaults to false if not provided. If set to true, a CustomerIDFK or CustomerName must be provided.
         type: boolean
@@ -4994,6 +5326,92 @@ definitions:
         type: string
       website:
         type: string
+    type: object
+  UpdateExpense:
+    properties:
+      Amount:
+        description: Expense Amount (Required). Must be &gt;= 0
+        format: double
+        type: number
+      CurrencyCode:
+        description: A 3-letter ISO CurrencyCode for the expense currency. (e.g. USD). If not provided, defaults to the Account base currency.
+        type: string
+      CustomerIDFK:
+        description: The Avaza Customer ID to associate the Expense with.
+        format: int32
+        type: integer
+      ExchangeRate:
+        description: Optional (Only relevant if the expense currency is different to your account currency. If not provided we will look up the market exchange rate for you based on the expense date.) Exchange Rate = Expense Currency Amount / Base Currency Amount (e.g. if Expense currency is in AUD, and Base Currency is in USD, Exchange Rate = AUD $140 / USD $100 = 1.4)
+        format: double
+        type: number
+      ExpenseCategoryIDFK:
+        description: The expense category to link the Expense to.
+        format: int32
+        type: integer
+      ExpenseDate:
+        description: The date of the expense entry
+        format: date-time
+        type: string
+      ExpenseID:
+        format: int64
+        type: integer
+      ExpensePaymentMethodIDFK:
+        description: (Optional) ID of Expense Payment Method.
+        format: int32
+        type: integer
+      FieldsToUpdate:
+        items:
+          type: string
+        type: array
+      FileAttachmentIDs:
+        description: Array of File Attachment IDs to associate with this expense. The files need to have already been uploaded. Currently only accepts a single file.
+        items:
+          format: int64
+          type: integer
+        type: array
+      GroupTripName:
+        description: Links the expense to a Grouping/Trip report. If no matching name found, creates a new Group/Trip Report name.
+        type: string
+      Merchant:
+        description: The name of the merchant.
+        type: string
+      MerchantTaxNumber:
+        description: A Tax number identifier for the merchant.
+        type: string
+      Notes:
+        description: Expense Notes
+        type: string
+      ProjectIDFK:
+        description: The Avaza project ID to associate the Expense with.
+        format: int32
+        type: integer
+      Quantity:
+        description: Conditional - available for expenses that are assigned a unit priced based expense category. e.g Mileage
+        format: double
+        type: number
+      TaskIDFK:
+        description: (optional) TaskID of a Task to link the new Expense to. A Customer and Project must be provided also.
+        format: int32
+        type: integer
+      TaxIDFK:
+        description: Avaza Tax ID the expense belongs to.
+        format: int32
+        type: integer
+      TransactionTaxConfigCode:
+        description: Optional - Enter "INC" if the tax amount is included in the expense amount otherwise enter "EX" when the amount exlcudes the tax. Defaults to "Ex". The tax amount on the expense will be autocalculated.
+        type: string
+      VerifyAndSave:
+        description: Pass false if creating a draft expense. True otherwise.
+        type: boolean
+      isChargeable:
+        description: aka Billable. Defaults to false if not provided. If set to true, a CustomerIDFK or CustomerName must be provided.
+        type: boolean
+      isReimbursable:
+        description: Defaults to false if not provided.
+        type: boolean
+    required:
+      - ExpenseID
+      - FieldsToUpdate
     type: object
   UpdateTask:
     properties:

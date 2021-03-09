@@ -394,52 +394,6 @@ paths:
       tags:
         - games
     parameters: []
-  /games/sitemap:
-    get:
-      description: ""
-      operationId: games_sitemap_read
-      parameters:
-        - description: A page number within the paginated result set.
-          in: query
-          name: page
-          required: false
-          schema:
-            type: integer
-        - description: Number of results to return per page.
-          in: query
-          name: page_size
-          required: false
-          schema:
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  count:
-                    type: integer
-                  next:
-                    format: uri
-                    nullable: true
-                    type: string
-                  previous:
-                    format: uri
-                    nullable: true
-                    type: string
-                  results:
-                    items:
-                      $ref: "#/components/schemas/GameSingle"
-                    type: array
-                required:
-                  - count
-                  - results
-                type: object
-          description: ""
-      summary: Get The Sitemap Games list.
-      tags:
-        - games
-    parameters: []
   "/games/{game_pk}/additions":
     get:
       description: ""

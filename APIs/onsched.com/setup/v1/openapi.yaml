@@ -2452,9 +2452,15 @@ paths:
       tags:
         - Resources
     post:
-      description: "Use this endpoint to create a new resource. If not specified the business location id defaults to the first location in the company.\r
+      description: "Use this endpoint to create a new resource. If not specified, the business location id defaults to the first location in the company.<br /><br /> \r
 
-        Email Address and a Name are required for creating a new resource."
+        Email Address and a Name are required for creating a new resource. <br /><br />\r
+
+        Passing in a single or many serviceId(s) in the service array will result in those service(s) being associated with the resource, \r
+
+        while passing in an empty array will result in all services being selected. <br /><br />\r
+
+        This includes company and business scoped services.<br /><br />"
       parameters:
         - description: Google calendar authorization returns to this url.
           in: query
@@ -2570,9 +2576,15 @@ paths:
         - Resources
   /setup/v1/resources/bulk:
     post:
-      description: "Use this endpoint to create new resources. If not specified the business location id defaults to the first location in the company.\r
+      description: "Use this endpoint to create new resources. If not specified the business location id defaults to the first location in the company.<br /><br />\r
 
-        Email Address and a Name are required for creating each new resource."
+        Email Address and a Name are required for creating each new resource.<br /><br />\r
+
+        Passing in a single or many serviceId(s) in the service array will result in those service(s) being associated with the resources,\r
+
+        while passing in an empty array will result in all services being selected.<br /><br />\r
+
+        This includes company and business scoped services.<br /><br />"
       parameters:
         - description: Google calendar authorization returns to this url.
           in: query
@@ -2613,9 +2625,13 @@ paths:
       tags:
         - Resources
     put:
-      description: "Use this endpoint to create new resources. If not specified the business location id defaults to the first location in the company.\r
+      description: "Use this endpoint to update multiple resources.<br /><br /> \r
 
-        Email Address and a Name are required for creating each new resource."
+        Passing in a single or many serviceId(s) in the service array will result in those service(s) being associated with the each resource, \r
+
+        while passing in an empty array will result in all services being selected.<br /><br /> \r
+
+        This includes company and business scoped services.<br /><br />"
       parameters:
         - description: Google calendar authorization returns to this url.
           in: query
@@ -2722,7 +2738,13 @@ paths:
       tags:
         - Resources
     put:
-      description: Use this endpoint to update a resource.
+      description: "Use this endpoint to update a resource. <br /><br />\r
+
+        Passing in a single or many serviceId(s) in the service array will result in those service(s) being associated with the resource,\r
+
+        while passing in an empty array will result in all services being selected.<br /><br />\r
+
+        This includes company and business scoped services.<br /><br />"
       parameters:
         - description: Id of the resource object.
           in: path
@@ -6060,6 +6082,10 @@ components:
           type: string
         options:
           $ref: "#/components/schemas/ResourceOptionsUpdateModel"
+        serviceIds:
+          items:
+            type: string
+          type: array
         timezoneId:
           type: string
       type: object
@@ -6189,6 +6215,10 @@ components:
           type: string
         options:
           $ref: "#/components/schemas/ResourceOptionsInputModel"
+        serviceIds:
+          items:
+            type: string
+          type: array
         timezoneId:
           type: string
       type: object
@@ -6333,6 +6363,10 @@ components:
           type: string
         options:
           $ref: "#/components/schemas/ResourceOptionsUpdateModel"
+        serviceIds:
+          items:
+            type: string
+          type: array
         timezoneId:
           type: string
       type: object

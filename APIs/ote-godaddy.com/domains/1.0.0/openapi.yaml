@@ -3784,6 +3784,208 @@ paths:
       tags:
         - v1
   "/v1/domains/{domain}/records/{type}/{name}":
+    delete:
+      operationId: recordDeleteTypeName
+      parameters:
+        - description: "Shopper ID which owns the domain. NOTE: This is only required if you are a Reseller managing a domain purchased outside the scope of your reseller account. For instance, if you're a Reseller, but purchased a Domain via http://www.godaddy.com"
+          in: header
+          name: X-Shopper-Id
+          required: false
+          schema:
+            type: string
+        - description: Domain whose DNS Records are to be deleted
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+        - description: DNS Record Type for which DNS Records are to be deleted
+          in: path
+          name: type
+          required: true
+          schema:
+            enum:
+              - A
+              - AAAA
+              - CNAME
+              - MX
+              - SRV
+              - TXT
+            type: string
+        - description: DNS Record Name for which DNS Records are to be deleted
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Request was successful
+        "400":
+          content:
+            application/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Request was malformed
+        "401":
+          content:
+            application/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authentication info not sent or invalid
+        "403":
+          content:
+            application/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Authenticated user is not allowed access
+        "404":
+          content:
+            application/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Domain not found
+        "409":
+          content:
+            application/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: The given domain is not eligible to have its records changed
+        "422":
+          content:
+            application/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: "`domain` is not a valid Domain name"
+        "429":
+          content:
+            application/javascript:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+            text/javascript:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/ErrorLimit"
+          description: Too many requests received within interval
+        "500":
+          content:
+            application/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Internal server error
+        "504":
+          content:
+            application/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/javascript:
+              schema:
+                $ref: "#/components/schemas/Error"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Gateway timeout
+      summary: Delete all DNS Records for the specified Domain with the specified Type and Name
+      tags:
+        - v1
     get:
       operationId: recordGet
       parameters:

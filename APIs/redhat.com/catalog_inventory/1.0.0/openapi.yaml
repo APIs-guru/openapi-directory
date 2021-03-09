@@ -2045,6 +2045,11 @@ components:
           type: integer
         bytes_sent:
           type: integer
+        cloud_connector_id:
+          example: The GUID of the RedHat connect client being used
+          readOnly: true
+          title: RedHat Connect Client Id
+          type: string
         created_at:
           format: date-time
           readOnly: true
@@ -2080,11 +2085,6 @@ components:
           format: date-time
           readOnly: true
           title: Last successful refresh
-          type: string
-        mqtt_client_id:
-          example: The GUID of the RedHat connect client being used
-          readOnly: true
-          title: RedHat Connect Client Id
           type: string
         name:
           example: The Source Name
@@ -2219,7 +2219,7 @@ components:
         target_type:
           type: string
         type:
-          example: MqttClientTask
+          example: CloudConnectorTask
           title: Type
           type: string
         updated_at:
@@ -2255,6 +2255,8 @@ components:
           readOnly: true
           type: string
       type: object
+    TowingTask:
+      $ref: "#/components/schemas/Task"
     UUID:
       description: UUID of task
       format: uuid

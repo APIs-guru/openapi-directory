@@ -14697,9 +14697,9 @@ components:
                 x-ms-summary: Automation type
               destination:
                 default: destination
-                description: Destination Path
+                description: "DEPRECATED: Destination Path"
                 type: string
-                x-ms-summary: Destination Path
+                x-ms-summary: "DEPRECATED: Destination Path"
               destination_replace_from:
                 description: If set, this string in the destination path will be replaced with the value in `destination_replace_to`.
                 type: string
@@ -14708,6 +14708,13 @@ components:
                 description: If set, this string will replace the value `destination_replace_from` in the destination filename. You can use special patterns here.
                 type: string
                 x-ms-summary: If set, this string will replace the value `destination_replace_from` in the destination filename. You can use special patterns here.
+              destinations:
+                description: A list of String destination paths or Hash of folder_path and optional file_path.
+                items:
+                  default: '["folder_a/file_a.txt", {"folder_path":"folder_b", "file_path":"file_b.txt"}, {"folder_path":"folder_c"}]'
+                  type: string
+                type: array
+                x-ms-summary: A list of String destination paths or Hash of folder_path and optional file_path.
               group_ids:
                 description: A list of group IDs the automation is associated with. If sent as a string, it should be comma-delimited.
                 type: string
@@ -15871,7 +15878,7 @@ components:
           example: create_folder
           type: string
         destination:
-          description: Destination Path
+          description: "DEPRECATED: Destination Path"
           example: ""
           type: string
         destination_replace_from:
@@ -15881,6 +15888,11 @@ components:
         destination_replace_to:
           description: If set, this string will replace the value `destination_replace_from` in the destination filename. You can use special patterns here.
           example: ""
+          type: string
+        destinations:
+          description: Destination Path
+          example:
+            - destination
           type: string
         group_ids:
           description: IDs of Groups for the Automation (i.e. who to Request File from)
@@ -20115,7 +20127,7 @@ x-errors:
   - http-code: 403
     title: Password Change Not Required
     type: not-authorized/password-change-not-required
-  - http-code: 400
+  - http-code: 403
     title: Password Change Required
     type: not-authorized/password-change-required
   - http-code: 403

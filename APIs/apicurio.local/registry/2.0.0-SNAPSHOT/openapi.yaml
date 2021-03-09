@@ -35,11 +35,11 @@ info:
 
 
 
-    **Important**: The Apicurio Registry REST API is available from `http://MY-REGISTRY-URL/api` by default. Therefore you must prefix all API operation paths with `/api` in this case. For example: `api/ids/{globalId}`.
+    **Important**: The Apicurio Registry REST API is available from `http://MY-REGISTRY-URL/api` by default. Therefore you must prefix all API operation paths with `/api` in this case. For example: `/api/ids/{globalId}`.
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
-  title: Apicurio Registry API
+  title: Apicurio Registry API [v2]
   version: 2.0.0-SNAPSHOT
   x-apisguru-categories:
     - developer_tools
@@ -94,35 +94,337 @@ tags:
     name: Global rules
   - description: "The search API is used to browse or find artifacts in the registry. This section describes the operations for searching for artifacts and versions. "
     name: Search
+  - description: Application functionality that is only accessible to admin users.  Includes things like Logging and Global Rules.
+    name: Admin
 paths:
-  /artifacts:
+  /admin/loggers:
     get:
       description: >-
-        Returns a list of IDs of all artifacts in the registry as a flat list.  Typically the
+        List all of the configured logging levels.  These override the default
 
-        server is configured to limit the number of artifact IDs returned when a large number 
-
-        of artifacts exist. In this case, the result of this call may be non-deterministic. The 
-
-        default limit is typically 1000 artifacts.
-      operationId: listArtifacts
+        logging configuration.
+      operationId: listLogConfigurations
       responses:
         "200":
           content:
             application/json:
               schema:
                 items:
-                  type: string
+                  $ref: "#/components/schemas/NamedLogConfiguration"
                 type: array
-          description: >-
-            On a successful response, returns an array of artifact IDs - one for each artifact
-
-            in the registry.
+          description: The list of logging configurations.
         "500":
           $ref: "#/components/responses/ServerError"
-      summary: List all artifact IDs
+      summary: List logging configurations
+      tags:
+        - Admin
+    summary: Manage logger settings/configurations.
+  "/admin/loggers/{logger}":
+    delete:
+      description: Removes the configured logger configuration (if any) for the given logger.
+      operationId: removeLogConfiguration
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NamedLogConfiguration"
+          description: >-
+            The default logger configuration (now that the configuration for this logger has been removed, the 
+
+            default configuration is applied).
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Removes logger configuration
+      tags:
+        - Admin
+    get:
+      description: Returns the configured logger configuration for the provided logger name, if no logger configuration is persisted it will return the current default log configuration in the system.
+      operationId: getLogConfiguration
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NamedLogConfiguration"
+          description: The logger configuration for the named logger.
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Get a single logger configuration
+      tags:
+        - Admin
+    parameters:
+      - description: The name of a single logger.
+        in: path
+        name: logger
+        required: true
+        schema:
+          type: string
+    put:
+      description: Configures the logger referenced by the provided logger name with the given configuration.
+      operationId: setLogConfiguration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LogConfiguration"
+        description: The new logger configuration.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NamedLogConfiguration"
+          description: The new configuration for the given logger.
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Set a logger's configuration
+      tags:
+        - Admin
+    summary: Manage logger settings/configurations.
+  /admin/rules:
+    delete:
+      description: >
+        Deletes all globally configured rules.
+
+
+        This operation can fail for the following reasons:
+
+
+        * A server error occurred (HTTP error `500`)
+      operationId: deleteAllGlobalRules
+      responses:
+        "204":
+          description: All global rules have been removed successfully.
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Delete all global rules
+      tags:
+        - Global rules
+        - Admin
+    get:
+      description: >
+        Gets a list of all the currently configured global rules (if any).
+
+
+        This operation can fail for the following reasons:
+
+
+        * A server error occurred (HTTP error `500`)
+      operationId: listGlobalRules
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/RuleType"
+                type: array
+          description: The list of names of the globally configured rules.
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: List global rules
+      tags:
+        - Global rules
+        - Admin
+    post:
+      description: >
+        Adds a rule to the list of globally configured rules.
+
+
+        This operation can fail for the following reasons:
+
+
+        * The rule type is unknown (HTTP error `400`)
+
+        * The rule already exists (HTTP error `409`)
+
+        * A server error occurred (HTTP error `500`)
+      operationId: createGlobalRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Rule"
+        required: true
+      responses:
+        "204":
+          description: The global rule was added.
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Create global rule
+      tags:
+        - Global rules
+        - Admin
+    summary: Manage the global rules that apply to all artifacts if not otherwise configured.
+  "/admin/rules/{rule}":
+    delete:
+      description: >
+        Deletes a single global rule.  If this is the only rule configured, this is the same
+
+        as deleting **all** rules.
+
+
+        This operation can fail for the following reasons:
+
+
+        * Invalid rule name/type (HTTP error `400`)
+
+        * No rule with name/type `rule` exists (HTTP error `404`)
+
+        * Rule cannot be deleted (HTTP error `409`)
+
+        * A server error occurred (HTTP error `500`)
+      operationId: deleteGlobalRule
+      responses:
+        "204":
+          description: The global rule was successfully deleted.
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Delete global rule
+      tags:
+        - Global rules
+        - Admin
+    get:
+      description: >
+        Returns information about the named globally configured rule.
+
+
+        This operation can fail for the following reasons:
+
+
+        * Invalid rule name/type (HTTP error `400`)
+
+        * No rule with name/type `rule` exists (HTTP error `404`)
+
+        * A server error occurred (HTTP error `500`)
+      operationId: getGlobalRuleConfig
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rule"
+          description: The global rule's configuration.
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Get global rule configuration
+      tags:
+        - Global rules
+        - Admin
+    parameters:
+      - description: The unique name/type of a rule.
+        in: path
+        name: rule
+        required: true
+        schema:
+          $ref: "#/components/schemas/RuleType"
+    put:
+      description: >
+        Updates the configuration for a globally configured rule.
+
+
+        This operation can fail for the following reasons:
+
+
+        * Invalid rule name/type (HTTP error `400`)
+
+        * No rule with name/type `rule` exists (HTTP error `404`)
+
+        * A server error occurred (HTTP error `500`)
+      operationId: updateGlobalRuleConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Rule"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rule"
+          description: The global rule's configuration was successfully updated.
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Update global rule configuration
+      tags:
+        - Global rules
+        - Admin
+    summary: Manage the configuration of a single global artifact rule.
+  "/groups/{groupId}/artifacts":
+    delete:
+      description: Deletes all of the artifacts that exist in a given group.
+      operationId: deleteArtifactsInGroup
+      responses:
+        "204":
+          description: When the delete operation is successful, a simple 204 is returned.
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Deletes all artifacts in a group
       tags:
         - Artifacts
+    get:
+      description: Returns a list of all artifacts in the group.  This list is paged.
+      operationId: listArtifactsInGroup
+      parameters:
+        - description: The number of artifacts to return.  Defaults to 20.
+          in: query
+          name: limit
+          schema:
+            type: integer
+        - description: The number of artifacts to skip before starting the result set.  Defaults to 0.
+          in: query
+          name: offset
+          schema:
+            type: integer
+        - description: Sort order, ascending (`asc`) or descending (`desc`).
+          in: query
+          name: order
+          schema:
+            $ref: "#/components/schemas/SortOrder"
+        - description: >
+            The field to sort by.  Can be one of:
+
+
+            * `name`
+
+            * `createdOn`
+          in: query
+          name: orderby
+          schema:
+            $ref: "#/components/schemas/SortBy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArtifactSearchResults"
+          description: On a successful response, returns a bounded set of artifacts.
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: List artifacts in group
+      tags:
+        - Artifacts
+    parameters:
+      - description: Unique ID of an Artifact Group.
+        in: path
+        name: groupId
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
     post:
       description: >
         Creates a new artifact by posting the artifact content.  The body of the request should
@@ -247,34 +549,27 @@ paths:
           in: header
           name: X-Registry-ArtifactType
           schema:
-            enum:
-              - AVRO
-              - PROTOBUF
-              - PROTOBUF_FD
-              - JSON
-              - OPENAPI
-              - ASYNCAPI
-              - GRAPHQL
-              - KCONNECT
-              - WSDL
-              - XSD
-              - XML
-            type: string
+            $ref: "#/components/schemas/ArtifactType"
         - description: A client-provided, globally unique identifier for the new artifact.
           in: header
           name: X-Registry-ArtifactId
           schema:
             type: string
+        - description: >-
+            Specifies the version number of this initial version of the artifact content.  This would typically
+
+            be a simple integer or a SemVer value.  If not provided, the server will assign a version number
+
+            automatically (starting with version `1`).
+          in: header
+          name: X-Registry-Version
+          schema:
+            $ref: "#/components/schemas/Version"
         - description: Set this option to instruct the server on what to do if the artifact already exists.
           in: query
           name: ifExists
           schema:
-            enum:
-              - FAIL
-              - UPDATE
-              - RETURN
-              - RETURN_OR_UPDATE
-            type: string
+            $ref: "#/components/schemas/IfExists"
         - description: Used only when the `ifExists` query parameter is set to `RETURN_OR_UPDATE`, this parameter can be set to `true` to indicate that the server should "canonicalize" the content when searching for a matching version.  The canonicalization algorithm is unique to each artifact type, but typically involves removing extra whitespace and formatting the content in a consistent manner.
           in: query
           name: canonical
@@ -361,8 +656,8 @@ paths:
       tags:
         - Artifacts
       x-codegen-async: true
-    summary: Manage the collection of artifacts in the registry.
-  "/artifacts/{artifactId}":
+    summary: Manage the collection of artifacts within a single group in the registry.
+  "/groups/{groupId}/artifacts/{artifactId}":
     delete:
       description: >-
         Deletes an artifact completely, resulting in all versions of the artifact also being
@@ -450,12 +745,18 @@ paths:
       tags:
         - Artifacts
     parameters:
-      - description: The artifact ID.  Can be a string (client-provided) or integer (server-generated) representing the unique artifact identifier.
+      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+        in: path
+        name: groupId
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
         schema:
-          type: string
+          $ref: "#/components/schemas/ArtifactId"
     put:
       description: >-
         Updates an artifact by uploading new content.  The body of the request should
@@ -464,43 +765,9 @@ paths:
 
         of the supported types, but may be in another format for a few (for example, `PROTOBUF`).
 
+        The type of the content should be compatible with the artifact's type (it would be
 
-        The registry attempts to figure out what kind of artifact is being added from the
-
-        following supported list:
-
-
-        * Avro (`AVRO`)
-
-        * Protobuf (`PROTOBUF`)
-
-        * Protobuf File Descriptor (`PROTOBUF_FD`)
-
-        * JSON Schema (`JSON`)
-
-        * Kafka Connect (`KCONNECT`)
-
-        * OpenAPI (`OPENAPI`)
-
-        * AsyncAPI (`ASYNCAPI`)
-
-        * GraphQL (`GRAPHQL`)
-
-        * Web Services Description Language (`WSDL`)
-
-        * XML Schema (`XSD`)
-
-
-        Alternatively, you can specify the artifact type using the `X-Registry-ArtifactType` 
-
-        HTTP request header, or include a hint in the request's `Content-Type`.  For example:
-
-
-        ```
-
-        Content-Type: application/json; artifactType=AVRO
-
-        ```
+        an error to update an `AVRO` artifact with new `OPENAPI` content, for example).
 
 
         The update could fail for a number of reasons including:
@@ -512,8 +779,6 @@ paths:
 
         * The new content violates one of the rules configured for the artifact (HTTP error `409`)
 
-        * The provided artifact type is not recognized (HTTP error `404`)
-
         * A server error occurred (HTTP error `500`)
 
 
@@ -521,47 +786,6 @@ paths:
 
         (and therefore official) version of the artifact.
       operationId: updateArtifact
-      parameters:
-        - description: >-
-            Specifies the type of the artifact being added.  Possible values include:
-
-
-            * Avro (`AVRO`)
-
-            * Protobuf (`PROTOBUF`)
-
-            * Protobuf File Descriptor (`PROTOBUF_FD`)
-
-            * JSON Schema (`JSON`)
-
-            * Kafka Connect (`KCONNECT`)
-
-            * OpenAPI (`OPENAPI`)
-
-            * AsyncAPI (`ASYNCAPI`)
-
-            * GraphQL (`GRAPHQL`)
-
-            * Web Services Description Language (`WSDL`)
-
-            * XML Schema (`XSD`)
-          in: header
-          name: X-Registry-ArtifactType
-          required: false
-          schema:
-            enum:
-              - AVRO
-              - PROTOBUF
-              - PROTOBUF_FD
-              - JSON
-              - OPENAPI
-              - ASYNCAPI
-              - GRAPHQL
-              - KCONNECT
-              - WSDL
-              - XSD
-              - XML
-            type: string
       requestBody:
         content:
           "*/*":
@@ -644,7 +868,7 @@ paths:
         - Artifacts
       x-codegen-async: true
     summary: Manage a single artifact.
-  "/artifacts/{artifactId}/meta":
+  "/groups/{groupId}/artifacts/{artifactId}/meta":
     get:
       description: >-
         Gets the metadata for an artifact in the registry.  The returned metadata includes
@@ -674,12 +898,18 @@ paths:
       tags:
         - Metadata
     parameters:
-      - description: The artifact ID.  Can be a string (client-provided) or integer (server-generated) representing the unique artifact identifier.
+      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+        in: path
+        name: groupId
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
         schema:
-          type: string
+          $ref: "#/components/schemas/ArtifactId"
     post:
       description: >
         Gets the metadata for an artifact that matches the raw content.  Searches the registry
@@ -792,7 +1022,7 @@ paths:
       tags:
         - Metadata
     summary: Manage the metadata of a single artifact.
-  "/artifacts/{artifactId}/rules":
+  "/groups/{groupId}/artifacts/{artifactId}/rules":
     delete:
       description: >-
         Deletes all of the rules configured for the artifact.  After this is done, the global
@@ -852,12 +1082,18 @@ paths:
       tags:
         - Artifact rules
     parameters:
-      - description: The artifact ID.  Can be a string (client-provided) or integer (server-generated) representing the unique artifact identifier.
+      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+        in: path
+        name: groupId
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
         schema:
-          type: string
+          $ref: "#/components/schemas/ArtifactId"
     post:
       description: >-
         Adds a rule to the list of rules that get applied to the artifact when adding new
@@ -893,7 +1129,7 @@ paths:
       tags:
         - Artifact rules
     summary: Manage the rules for a single artifact.
-  "/artifacts/{artifactId}/rules/{rule}":
+  "/groups/{groupId}/artifacts/{artifactId}/rules/{rule}":
     delete:
       description: >-
         Deletes a rule from the artifact.  This results in the rule no longer applying for
@@ -959,6 +1195,18 @@ paths:
       tags:
         - Artifact rules
     parameters:
+      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+        in: path
+        name: groupId
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+        in: path
+        name: artifactId
+        required: true
+        schema:
+          $ref: "#/components/schemas/ArtifactId"
       - description: The unique name/type of a rule.
         in: path
         name: rule
@@ -967,12 +1215,6 @@ paths:
           enum:
             - VALIDITY
             - COMPATIBILITY
-          type: string
-      - description: The artifact ID.  Can be a string (client-provided) or integer (server-generated) representing the unique artifact identifier.
-        in: path
-        name: artifactId
-        required: true
-        schema:
           type: string
     put:
       description: >
@@ -1015,14 +1257,20 @@ paths:
       tags:
         - Artifact rules
     summary: Manage the configuration of a single artifact rule.
-  "/artifacts/{artifactId}/state":
+  "/groups/{groupId}/artifacts/{artifactId}/state":
     parameters:
-      - description: The artifact ID.  Can be a string (client-provided) or integer (server-generated) representing the unique artifact identifier.
+      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+        in: path
+        name: groupId
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
         schema:
-          type: string
+          $ref: "#/components/schemas/ArtifactId"
     put:
       description: >
         Updates the state of the artifact.  For example, you can use this to mark the latest
@@ -1058,14 +1306,20 @@ paths:
       tags:
         - Artifacts
     summary: Manage the state of an artifact.
-  "/artifacts/{artifactId}/test":
+  "/groups/{groupId}/artifacts/{artifactId}/test":
     parameters:
-      - description: The artifact ID.  Can be a string (client-provided) or integer (server-generated) representing the unique artifact identifier.
+      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+        in: path
+        name: groupId
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
         schema:
-          type: string
+          $ref: "#/components/schemas/ArtifactId"
     put:
       description: >-
         Tests whether an update to the artifact's content *would* succeed for the provided content.
@@ -1084,42 +1338,6 @@ paths:
         (for example, `PROTOBUF`).
 
 
-        The registry attempts to figure out what kind of artifact is being added from the following  supported list: 
-
-
-        * Avro (`AVRO`)  
-
-        * Protobuf (`PROTOBUF`)  
-
-        * Protobuf File Descriptor (`PROTOBUF_FD`)  
-
-        * JSON Schema (`JSON`)  
-
-        * Kafka Connect (`KCONNECT`) 
-
-        * OpenAPI (`OPENAPI`)  
-
-        * AsyncAPI (`ASYNCAPI`) 
-
-        * GraphQL (`GRAPHQL`) 
-
-        * Web Services Description Language (`WSDL`) 
-
-        * XML Schema (`XSD`)
-
-
-        Alternatively, you can explicitly specify the artifact type using the `X-Registry-ArtifactType` 
-
-        HTTP request header, or by including a hint in the request's `Content-Type`.  For example:
-
-
-        ```
-
-        Content-Type: application/json; artifactType=AVRO
-
-        ```
-
-
         The update could fail for a number of reasons including:
 
 
@@ -1134,47 +1352,12 @@ paths:
         * A server error occurred (HTTP error `500`)
 
 
-        When successful, this operation simply returns a *No Content* response.
+        When successful, this operation simply returns a *No Content* response.  This response
+
+        indicates that the content is valid against the configured content rules for the 
+
+        artifact (or the global rules if no artifact rules are enabled).
       operationId: testUpdateArtifact
-      parameters:
-        - description: >-
-            This header parameter can be used to indicate the type of the artifact being added.  Possible values include: 
-
-            * Avro (`AVRO`)  
-
-            * Protobuf (`PROTOBUF`)  
-
-            * Protobuf File Descriptor (`PROTOBUF_FD`)  
-
-            * JSON Schema (`JSON`)  
-
-            * Kafka Connect (`KCONNECT`)  
-
-            * OpenAPI (`OPENAPI`)  
-
-            * AsyncAPI (`ASYNCAPI`) 
-
-            * GraphQL (`GRAPHQL`)  
-
-            * Web Services Description Language (`WSDL`)  
-
-            * XML Schema (`XSD`)
-          in: header
-          name: X-Registry-ArtifactType
-          schema:
-            enum:
-              - AVRO
-              - PROTOBUF
-              - PROTOBUF_FD
-              - JSON
-              - OPENAPI
-              - ASYNCAPI
-              - GRAPHQL
-              - KCONNECT
-              - WSDL
-              - XSD
-              - XML
-            type: string
       requestBody:
         content:
           "*/*": {}
@@ -1220,10 +1403,10 @@ paths:
       tags:
         - Artifact rules
     summary: Test whether content would pass update rules.
-  "/artifacts/{artifactId}/versions":
+  "/groups/{groupId}/artifacts/{artifactId}/versions":
     get:
       description: >
-        Returns a list of all version numbers for the artifact.
+        Returns a list of all versions of the artifact.  The result set is paged.
 
 
         This operation can fail for the following reasons:
@@ -1233,6 +1416,19 @@ paths:
 
         * A server error occurred (HTTP error `500`)
       operationId: listArtifactVersions
+      parameters:
+        - description: The number of versions to skip before starting to collect the result set.  Defaults to 0.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+        - description: The number of versions to return.  Defaults to 20.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
       responses:
         "200":
           content:
@@ -1245,11 +1441,8 @@ paths:
                     - 10
                     - 103
               schema:
-                items:
-                  format: int64
-                  type: integer
-                type: array
-          description: List of all artifact versions (just the version IDs).
+                $ref: "#/components/schemas/VersionSearchResults"
+          description: List of all artifact versions.
         "404":
           $ref: "#/components/responses/NotFound"
         "500":
@@ -1258,12 +1451,18 @@ paths:
       tags:
         - Versions
     parameters:
-      - description: The artifact ID.  Can be a string (client-provided) or integer (server-generated) representing the unique artifact identifier.
+      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+        in: path
+        name: groupId
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
         in: path
         name: artifactId
         required: true
         schema:
-          type: string
+          $ref: "#/components/schemas/ArtifactId"
     post:
       description: >
         Creates a new version of the artifact by uploading new content.  The configured rules for
@@ -1273,52 +1472,11 @@ paths:
         version of the artifact.  If any of the rules fail, an error is returned.
 
 
-        The body of the request should be the raw content of the new artifact version.  This 
+        The body of the request should be the raw content of the new artifact version, and the type
 
-        is typically in JSON format for *most* of the supported types, but may be in another 
+        of that content should match the artifact's type (for example if the artifact type is `AVRO`
 
-        format for a few (for example, `PROTOBUF`).
-
-
-        The registry attempts to figure out what kind of artifact is being added from the
-
-        following supported list:
-
-
-        * Avro (`AVRO`)
-
-        * Protobuf (`PROTOBUF`)
-
-        * Protobuf File Descriptor (`PROTOBUF_FD`)
-
-        * JSON Schema (`JSON`)
-
-        * Kafka Connect (`KCONNECT`)
-
-        * OpenAPI (`OPENAPI`)
-
-        * AsyncAPI (`ASYNCAPI`)
-
-        * GraphQL (`GRAPHQL`)
-
-        * Web Services Description Language (`WSDL`)
-
-        * XML Schema (`XSD`)
-
-
-        Alternatively, you can explicitly specify the artifact type using the `X-Registry-ArtifactType` 
-
-        HTTP request header, or by including a hint in the request's `Content-Type`.
-
-
-        For example:
-
-
-        ```
-
-        Content-Type: application/json; artifactType=AVRO
-
-        ```
+        then the content of the request should be an Apache Avro document).
 
 
         This operation can fail for the following reasons:
@@ -1334,43 +1492,15 @@ paths:
       operationId: createArtifactVersion
       parameters:
         - description: >-
-            This header parameter can be used to indicate the type of the artifact being added. Possible values include: 
+            Specifies the version number of this new version of the artifact content.  This would typically
 
-            * Avro (`AVRO`)   
+            be a simple integer or a SemVer value.  It must be unique within the artifact.  If this is not
 
-            * Protobuf (`PROTOBUF`)  
-
-            * Protobuf File Descriptor (`PROTOBUF_FD`)   
-
-            * JSON Schema (`JSON`)   
-
-            * Kafka Connect (`KCONNECT`)   
-
-            * OpenAPI (`OPENAPI`)   
-
-            * AsyncAPI (`ASYNCAPI`)  
-
-            * GraphQL (`GRAPHQL`)   
-
-            * Web Services Description Language (`WSDL`)   
-
-            * XML Schema (`XSD`)
+            provided, the server will generate a new, unique version number for this new updated content.
           in: header
-          name: X-Registry-ArtifactType
+          name: X-Registry-Version
           schema:
-            enum:
-              - AVRO
-              - PROTOBUF
-              - PROTOBUF_FD
-              - JSON
-              - OPENAPI
-              - ASYNCAPI
-              - GRAPHQL
-              - KCONNECT
-              - WSDL
-              - XSD
-              - XML
-            type: string
+            $ref: "#/components/schemas/Version"
       requestBody:
         content:
           "*/*":
@@ -1453,7 +1583,7 @@ paths:
         - Versions
       x-codegen-async: true
     summary: Manage all the versions of an artifact in the registry.
-  "/artifacts/{artifactId}/versions/{version}":
+  "/groups/{groupId}/artifacts/{artifactId}/versions/{version}":
     get:
       description: >
         Retrieves a single version of the artifact content.  Both the `artifactId` and the
@@ -1524,20 +1654,26 @@ paths:
       tags:
         - Versions
     parameters:
+      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+        in: path
+        name: groupId
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+        in: path
+        name: artifactId
+        required: true
+        schema:
+          $ref: "#/components/schemas/ArtifactId"
       - description: The unique identifier of a specific version of the artifact content.
         in: path
         name: version
         required: true
         schema:
-          type: integer
-      - description: The artifact ID.  Can be a string (client-provided) or integer (server-generated) representing the unique artifact identifier.
-        in: path
-        name: artifactId
-        required: true
-        schema:
-          type: string
+          $ref: "#/components/schemas/Version"
     summary: Manage a single version of a single artifact in the registry.
-  "/artifacts/{artifactId}/versions/{version}/meta":
+  "/groups/{groupId}/artifacts/{artifactId}/versions/{version}/meta":
     delete:
       description: >
         Deletes the user-editable metadata properties of the artifact version.  Any properties
@@ -1597,18 +1733,24 @@ paths:
       tags:
         - Metadata
     parameters:
+      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+        in: path
+        name: groupId
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+        in: path
+        name: artifactId
+        required: true
+        schema:
+          $ref: "#/components/schemas/ArtifactId"
       - description: The unique identifier of a specific version of the artifact content.
         in: path
         name: version
         required: true
         schema:
-          type: integer
-      - description: The artifact ID.  Can be a string (client-provided) or integer (server-generated) representing the unique artifact identifier.
-        in: path
-        name: artifactId
-        required: true
-        schema:
-          type: string
+          $ref: "#/components/schemas/Version"
     put:
       description: >
         Updates the user-editable portion of the artifact version's metadata.  Only some of 
@@ -1644,20 +1786,26 @@ paths:
       tags:
         - Metadata
     summary: Manage the metadata for a single version of an artifact in the registry.
-  "/artifacts/{artifactId}/versions/{version}/state":
+  "/groups/{groupId}/artifacts/{artifactId}/versions/{version}/state":
     parameters:
+      - description: The artifact group ID.  Must be a string provided by the client - represents the name of the grouping of artifacts.
+        in: path
+        name: groupId
+        required: true
+        schema:
+          $ref: "#/components/schemas/GroupId"
+      - description: The artifact ID.  Can be a string (client-provided) or UUID (server-generated) representing the unique artifact identifier.
+        in: path
+        name: artifactId
+        required: true
+        schema:
+          $ref: "#/components/schemas/ArtifactId"
       - description: The unique identifier of a specific version of the artifact content.
         in: path
         name: version
         required: true
         schema:
-          type: integer
-      - description: The artifact ID.  Can be a string (client-provided) or integer (server-generated) representing the unique artifact identifier.
-        in: path
-        name: artifactId
-        required: true
-        schema:
-          type: string
+          $ref: "#/components/schemas/Version"
     put:
       description: >
         Updates the state of a specific version of an artifact.  For example, you can use 
@@ -1693,7 +1841,146 @@ paths:
       tags:
         - Versions
     summary: Manage the state of a specific artifact version.
-  "/ids/{globalId}":
+  "/ids/contentHashes/{contentHash}/":
+    get:
+      description: >
+        Gets the content for an artifact version in the registry using the 
+
+        SHA-256 hash of the content.  This content hash may be shared by multiple artifact
+
+        versions in the case where the artifact versions have identical content.
+
+
+        This operation may fail for one of the following reasons:
+
+
+        * No content with this `contentHash` exists (HTTP error `404`)
+
+        * A server error occurred (HTTP error `500`)
+      operationId: getContentByHash
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                OpenAPI Example:
+                  value:
+                    info:
+                      description: An example API design using OpenAPI.
+                      title: Empty API
+                      version: 1.0.0
+                    openapi: 3.0.2
+            application/x-protobuf:
+              examples:
+                Protobuf Example:
+                  value: >-
+                    message SearchResponse {
+                      repeated Result result = 1;
+                    }
+
+
+                    message Result {
+                      required string url = 1;
+                      optional string title = 2;
+                      repeated string snippets = 3;
+                    }
+            application/x-protobuffer:
+              examples:
+                Protobuffer Example:
+                  value: >-
+                    message SearchResponse {
+                      repeated Result result = 1;
+                    }
+
+
+                    message Result {
+                      required string url = 1;
+                      optional string title = 2;
+                      repeated string snippets = 3;
+                    }
+          description: The content of the artifact version.
+      summary: Get artifact content by SHA-256 hash
+      tags:
+        - Artifacts
+    parameters:
+      - description: SHA-256 content hash for a single artifact content.
+        in: path
+        name: contentHash
+        required: true
+        schema:
+          type: string
+    summary: Access artifact content utilizing the SHA-256 hash of the content.
+  "/ids/contentIds/{contentId}/":
+    get:
+      description: >
+        Gets the content for an artifact version in the registry using the unique content
+
+        identifier for that content.  This content ID may be shared by multiple artifact
+
+        versions in the case where the artifact versions are identical.
+
+
+        This operation may fail for one of the following reasons:
+
+
+        * No content with this `contentId` exists (HTTP error `404`)
+
+        * A server error occurred (HTTP error `500`)
+      operationId: getContentById
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                OpenAPI Example:
+                  value:
+                    info:
+                      description: An example API design using OpenAPI.
+                      title: Empty API
+                      version: 1.0.0
+                    openapi: 3.0.2
+            application/x-protobuf:
+              examples:
+                Protobuf Example:
+                  value: >-
+                    message SearchResponse {
+                      repeated Result result = 1;
+                    }
+
+
+                    message Result {
+                      required string url = 1;
+                      optional string title = 2;
+                      repeated string snippets = 3;
+                    }
+            application/x-protobuffer:
+              examples:
+                Protobuffer Example:
+                  value: >-
+                    message SearchResponse {
+                      repeated Result result = 1;
+                    }
+
+
+                    message Result {
+                      required string url = 1;
+                      optional string title = 2;
+                      repeated string snippets = 3;
+                    }
+          description: The content of the artifact version.
+      summary: Get artifact content by ID
+      tags:
+        - Artifacts
+    parameters:
+      - description: Global identifier for a single artifact content.
+        in: path
+        name: contentId
+        required: true
+        schema:
+          format: int64
+          type: integer
+    summary: Access artifact content utilizing the unique content identifier for that content.
+  "/ids/globalIds/{globalId}":
     get:
       description: >
         Gets the content for an artifact version in the registry using its globally unique
@@ -1707,7 +1994,7 @@ paths:
         * No artifact version with this `globalId` exists (HTTP error `404`)
 
         * A server error occurred (HTTP error `500`)
-      operationId: getArtifactByGlobalId
+      operationId: getContentByGlobalId
       responses:
         "200":
           content:
@@ -1761,268 +2048,78 @@ paths:
           format: int64
           type: integer
     summary: Access artifact content utilizing an artifact version's globally unique identifier.
-  "/ids/{globalId}/meta":
-    get:
-      description: >
-        Gets the metadata for an artifact version in the registry using its globally unique
-
-        identifier.  The returned metadata includes both generated (read-only) and editable
-
-        metadata (such as name and description).
-
-
-        This operation may fail for one of the following reasons:
-
-
-        * No artifact version with this `globalId` exists (HTTP error `404`)
-
-        * A server error occurred (HTTP error `500`)
-      operationId: getArtifactMetaDataByGlobalId
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ArtifactMetaData"
-          description: The artifact's metadata.
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "500":
-          $ref: "#/components/responses/ServerError"
-      summary: Get global artifact metadata
-      tags:
-        - Metadata
-    parameters:
-      - description: Global identifier for an artifact version.
-        in: path
-        name: globalId
-        required: true
-        schema:
-          format: int64
-          type: integer
-    summary: Access an artifact verison's metadata using its globally unique identifier.
-  /rules:
-    delete:
-      description: >
-        Deletes all globally configured rules.
-
-
-        This operation can fail for the following reasons:
-
-
-        * A server error occurred (HTTP error `500`)
-      operationId: deleteAllGlobalRules
-      responses:
-        "204":
-          description: All global rules have been removed successfully.
-        "500":
-          $ref: "#/components/responses/ServerError"
-      summary: Delete all global rules
-      tags:
-        - Global rules
-    get:
-      description: >
-        Gets a list of all the currently configured global rules (if any).
-
-
-        This operation can fail for the following reasons:
-
-
-        * A server error occurred (HTTP error `500`)
-      operationId: listGlobalRules
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: "#/components/schemas/RuleType"
-                type: array
-          description: The list of names of the globally configured rules.
-        "500":
-          $ref: "#/components/responses/ServerError"
-      summary: List global rules
-      tags:
-        - Global rules
-    post:
-      description: >
-        Adds a rule to the list of globally configured rules.
-
-
-        This operation can fail for the following reasons:
-
-
-        * The rule type is unknown (HTTP error `400`)
-
-        * The rule already exists (HTTP error `409`)
-
-        * A server error occurred (HTTP error `500`)
-      operationId: createGlobalRule
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Rule"
-        required: true
-      responses:
-        "204":
-          description: The global rule was added.
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "409":
-          $ref: "#/components/responses/Conflict"
-        "500":
-          $ref: "#/components/responses/ServerError"
-      summary: Create global rule
-      tags:
-        - Global rules
-    summary: Manage the global rules that apply to all artifacts if not otherwise configured.
-  "/rules/{rule}":
-    delete:
-      description: >
-        Deletes a single global rule.  If this is the only rule configured, this is the same
-
-        as deleting **all** rules.
-
-
-        This operation can fail for the following reasons:
-
-
-        * Invalid rule name/type (HTTP error `400`)
-
-        * No rule with name/type `rule` exists (HTTP error `404`)
-
-        * Rule cannot be deleted (HTTP error `409`)
-
-        * A server error occurred (HTTP error `500`)
-      operationId: deleteGlobalRule
-      responses:
-        "204":
-          description: The global rule was successfully deleted.
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "500":
-          $ref: "#/components/responses/ServerError"
-      summary: Delete global rule
-      tags:
-        - Global rules
-    get:
-      description: >
-        Returns information about the named globally configured rule.
-
-
-        This operation can fail for the following reasons:
-
-
-        * Invalid rule name/type (HTTP error `400`)
-
-        * No rule with name/type `rule` exists (HTTP error `404`)
-
-        * A server error occurred (HTTP error `500`)
-      operationId: getGlobalRuleConfig
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Rule"
-          description: The global rule's configuration.
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "500":
-          $ref: "#/components/responses/ServerError"
-      summary: Get global rule configuration
-      tags:
-        - Global rules
-    parameters:
-      - description: The unique name/type of a rule.
-        in: path
-        name: rule
-        required: true
-        schema:
-          enum:
-            - VALIDITY
-            - COMPATIBILITY
-          type: string
-    put:
-      description: >
-        Updates the configuration for a globally configured rule.
-
-
-        This operation can fail for the following reasons:
-
-
-        * Invalid rule name/type (HTTP error `400`)
-
-        * No rule with name/type `rule` exists (HTTP error `404`)
-
-        * A server error occurred (HTTP error `500`)
-      operationId: updateGlobalRuleConfig
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Rule"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Rule"
-          description: The global rule's configuration was successfully updated.
-        "404":
-          $ref: "#/components/responses/NotFound"
-        "500":
-          $ref: "#/components/responses/ServerError"
-      summary: Update global rule configuration
-      tags:
-        - Global rules
-    summary: Manage the configuration of a single global artifact rule.
   /search/artifacts:
     get:
       description: >
-        Returns a paginated list of all artifacts that match the provided search criteria.
+        Returns a paginated list of all artifacts that match the provided filter criteria.
       operationId: searchArtifacts
       parameters:
-        - description: The text to search.
+        - description: Filter by artifact name.
           in: query
-          name: search
+          name: name
           schema:
             type: string
-        - description: The number of artifacts to skip before starting to collect the result set.
+        - description: The number of artifacts to skip before starting to collect the result set.  Defaults to 0.
           in: query
           name: offset
-          required: true
+          required: false
           schema:
             default: 0
             type: integer
-        - description: The number of artifacts to return.
+        - description: The number of artifacts to return.  Defaults to 20.
           in: query
           name: limit
-          required: true
+          required: false
           schema:
             default: 20
             type: integer
-        - description: What fields to search.
-          in: query
-          name: over
-          required: false
-          schema:
-            enum:
-              - everything
-              - name
-              - description
-              - labels
-            type: string
-        - description: Sort order, ascending or descending.
+        - description: Sort order, ascending (`asc`) or descending (`desc`).
           in: query
           name: order
-          required: false
           schema:
-            enum:
-              - asc
-              - desc
+            $ref: "#/components/schemas/SortOrder"
+        - description: >
+            The field to sort by.  Can be one of:
+
+
+            * `name`
+
+            * `createdOn`
+          in: query
+          name: orderby
+          schema:
+            $ref: "#/components/schemas/SortBy"
+        - description: >-
+            Filter by label.  Include one or more label to only return artifacts containing all of the
+
+            specified labels.
+          in: query
+          name: labels
+          schema:
+            items:
+              type: string
+            type: array
+        - description: >-
+            Filter by one or more name/value property.  Separate each name/value pair using a colon.  For
+
+            example `properties=foo:bar` will return only artifacts with a custom property named `foo`
+
+            and value `bar`.
+          in: query
+          name: properties
+          schema:
+            items:
+              type: string
+            type: array
+        - description: Filter by description.
+          in: query
+          name: description
+          schema:
+            type: string
+        - description: Filter by artifact group.
+          in: query
+          name: group
+          schema:
             type: string
       responses:
         "200":
@@ -2040,53 +2137,72 @@ paths:
       tags:
         - Search
         - Artifacts
-    summary: Search for content in the registry; artifacts in particular.
-  "/search/artifacts/{artifactId}/versions":
-    get:
-      description: >-
-        Searches for versions of a specific artifact.  This is typically used to get a listing
+    post:
+      description: >
+        Returns a paginated list of all artifacts with at least one version that matches the
 
-        of all versions of an artifact (for example, in a user interface).
-      operationId: searchVersions
+        posted content.
+      operationId: searchArtifactsByContent
       parameters:
-        - description: The number of versions to skip before starting to collect the result set.
+        - description: The number of artifacts to skip before starting to collect the result set.  Defaults to 0.
           in: query
           name: offset
-          required: true
+          required: false
           schema:
+            default: 0
             type: integer
-        - description: The number of versions to return.
+        - description: The number of artifacts to return.  Defaults to 20.
           in: query
           name: limit
-          required: true
+          required: false
           schema:
+            default: 20
             type: integer
+        - description: Sort order, ascending (`asc`) or descending (`desc`).
+          in: query
+          name: order
+          schema:
+            enum:
+              - asc
+              - desc
+            type: string
+        - description: >
+            The field to sort by.  Can be one of:
+
+
+            * `name`
+
+            * `createdOn`
+          in: query
+          name: orderby
+          schema:
+            enum:
+              - name
+              - createdOn
+            type: string
+      requestBody:
+        content:
+          "*/*": {}
+        description: The content to search for.
+        required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/VersionSearchResults"
+                $ref: "#/components/schemas/ArtifactSearchResults"
           description: >-
-            On a successful response, returns a result set of versions - one for each version
+            On a successful response, returns a result set of artifacts - one for each artifact
 
-            of the artifact.
-        "404":
-          $ref: "#/components/responses/NotFound"
+            in the registry that matches the criteria.
         "500":
           $ref: "#/components/responses/ServerError"
-      summary: Search artifact versions
+      summary: Search for artifacts by content
       tags:
         - Search
-        - Versions
-    parameters:
-      - description: The artifact ID.  Can be a string (client-provided) or integer (server-generated) representing the unique artifact identifier.
-        in: path
-        name: artifactId
-        required: true
-        schema:
-          type: string
-    summary: Search for all versions of an artifact.
+        - Artifacts
+    summary: Search for artifacts in the registry.
+  x-codegen-contextRoot: /v2
 components:
   responses:
     BadRequest:
@@ -2145,13 +2261,19 @@ components:
             $ref: "#/components/schemas/Error"
       description: Common response for all operations that can fail with an unexpected server error.
   schemas:
+    ArtifactId:
+      description: The ID of a single Artifact.
+      example: '"example-artifact"'
+      type: string
     ArtifactMetaData:
       description: ""
       example:
+        contentId: 82736
         createdBy: user1
         createdOn: 2019-03-22T12:51:19Z
         description: Description of the artifact
         globalId: 12984719247
+        groupId: My-Group
         id: Procurement-Invoice
         labels:
           - label-1
@@ -2165,6 +2287,10 @@ components:
         type: AVRO
         version: 18
       properties:
+        contentId:
+          description: ""
+          format: int64
+          type: integer
         createdBy:
           type: string
         createdOn:
@@ -2176,9 +2302,12 @@ components:
           description: ""
           format: int64
           type: integer
-        id:
+        groupId:
+          $ref: "#/components/schemas/GroupId"
           description: ""
-          type: string
+        id:
+          $ref: "#/components/schemas/ArtifactId"
+          description: ""
         labels:
           description: ""
           items:
@@ -2214,18 +2343,23 @@ components:
         - type
         - globalId
         - state
+        - group
+        - contentId
       title: Root Type for ArtifactMetaData
       type: object
     ArtifactSearchResults:
       description: Describes the response received when searching for artifacts.
       properties:
         artifacts:
-          description: The artifacts that matched the search criteria.
+          description: The artifacts returned in the result set.
           items:
             $ref: "#/components/schemas/SearchedArtifact"
           type: array
         count:
-          description: The total number of artifacts that matched the search criteria.
+          description: >-
+            The total number of artifacts that matched the query that produced the result set (may be 
+
+            more than the number of artifacts in the result set).
           type: integer
       required:
         - count
@@ -2311,13 +2445,67 @@ components:
         message:
           description: The short error message.
           type: string
+        name:
+          description: The error name - typically the classname of the exception thrown by the server.
+          type: string
       title: Root Type for Error
+      type: object
+    GroupId:
+      description: An id of a single Artifact Group.
+      example: '"my-group"'
+      type: string
+    IfExists:
+      description: ""
+      enum:
+        - FAIL
+        - UPDATE
+        - RETURN
+        - RETURN_OR_UPDATE
+      type: string
+    LogConfiguration:
+      description: ""
+      properties:
+        level:
+          $ref: "#/components/schemas/LogLevel"
+          description: ""
+      required:
+        - level
+      type: object
+    LogLevel:
+      description: ""
+      enum:
+        - DEBUG
+        - TRACE
+        - WARN
+        - ERROR
+        - SEVERE
+        - WARNING
+        - INFO
+        - CONFIG
+        - FINE
+        - FINER
+        - FINEST
+      type: string
+      x-codegen-package: io.apicurio.registry.types
+    NamedLogConfiguration:
+      allOf:
+        - properties:
+            name:
+              description: ""
+              type: string
+          required:
+            - name
+          type: object
+        - $ref: "#/components/schemas/LogConfiguration"
+      description: ""
       type: object
     Properties:
       additionalProperties:
         type: string
       description: User-defined name-value pairs. Name and value must be strings.
       type: object
+      x-codegen-inline: true
+      x-codegen-type: StringMap
     Rule:
       description: ""
       example:
@@ -2378,20 +2566,13 @@ components:
         message: Artifact failed validation
       title: Root Type for Error
       type: object
-    SearchOver:
-      description: ""
-      enum:
-        - everything
-        - name
-        - description
-        - labels
-      type: string
     SearchedArtifact:
       description: Models a single artifact from the result set returned when searching for artifacts.
       example:
         createdBy: user1
         createdOn: 2019-03-22T12:51:19Z
         description: Description of the artifact
+        groupId: My-Group
         id: Procurement-Invoice
         labels:
           - current
@@ -2410,9 +2591,12 @@ components:
         description:
           description: ""
           type: string
-        id:
+        groupId:
+          $ref: "#/components/schemas/GroupId"
           description: ""
-          type: string
+        id:
+          $ref: "#/components/schemas/ArtifactId"
+          description: ""
         labels:
           description: ""
           items:
@@ -2440,22 +2624,29 @@ components:
         - id
         - type
         - state
+        - group
       type: object
     SearchedVersion:
       description: Models a single artifact from the result set returned when searching for artifacts.
       example:
-        createdBy: user1
-        createdOn: 2019-03-22T12:51:19Z
+        contentId: 62
+        createdBy: some text
+        createdOn: 2018-02-10T09:30Z
         description: Description of the artifact version
-        globalId: 3849759283547
+        globalId: 37
         labels:
           - current
           - internal
         name: Artifact Version Name
+        properties: {}
         state: ENABLED
         type: AVRO
-        version: 17
+        version: 85
       properties:
+        contentId:
+          description: ""
+          format: int64
+          type: integer
         createdBy:
           description: ""
           type: string
@@ -2478,6 +2669,9 @@ components:
         name:
           description: ""
           type: string
+        properties:
+          $ref: "#/components/schemas/Properties"
+          description: ""
         state:
           $ref: "#/components/schemas/ArtifactState"
           description: ""
@@ -2486,7 +2680,7 @@ components:
           description: ""
         version:
           description: ""
-          format: int32
+          format: int64
           type: integer
       required:
         - createdBy
@@ -2495,7 +2689,14 @@ components:
         - state
         - globalId
         - version
+        - contentId
       type: object
+    SortBy:
+      description: ""
+      enum:
+        - name
+        - createdOn
+      type: string
     SortOrder:
       description: ""
       enum:
@@ -2513,13 +2714,24 @@ components:
         - state
       title: Root Type for UpdateState
       type: object
+    Version:
+      description: >-
+        A single version of an artifact.  Can be provided by the client when creating a new version,
+
+        or it can be server-generated.  The value can be any string unique to the artifact, but it is
+
+        recommended to use a simple integer or a semver value.
+      example: '"3.1.6"'
+      type: string
     VersionMetaData:
       description: ""
       example:
+        contentId: 12347
         createdBy: user1
         createdOn: 2019-05-17T12:00:00Z
         description: The description of the artifact
         globalId: 183282932983
+        groupId: My-Group
         id: my-artifact-id
         labels:
           - label-1
@@ -2531,6 +2743,10 @@ components:
         type: PROTOBUF
         version: 1221432
       properties:
+        contentId:
+          description: ""
+          format: int64
+          type: integer
         createdBy:
           type: string
         createdOn:
@@ -2542,9 +2758,12 @@ components:
           description: ""
           format: int64
           type: integer
+        groupId:
+          $ref: "#/components/schemas/GroupId"
+          description: ""
         id:
-          description: The artifact id.
-          type: string
+          $ref: "#/components/schemas/ArtifactId"
+          description: ""
         labels:
           description: ""
           items:
@@ -2571,16 +2790,20 @@ components:
         - type
         - globalId
         - id
+        - contentId
       title: Root Type for ArtifactVersionMetaData
       type: object
     VersionSearchResults:
       description: Describes the response received when searching for artifacts.
       properties:
         count:
-          description: The total number of artifacts that matched the search criteria.
+          description: >-
+            The total number of versions that matched the query (may be more than the number of versions
+
+            returned in the result set).
           type: integer
         versions:
-          description: ""
+          description: The collection of artifact versions returned in the result set.
           items:
             $ref: "#/components/schemas/SearchedVersion"
           type: array
@@ -2588,3 +2811,6 @@ components:
         - count
         - versions
       type: object
+x-codegen:
+  bean-annotations:
+    - io.quarkus.runtime.annotations.RegisterForReflection

@@ -3578,6 +3578,9 @@ components:
         max_images_per_account:
           description: This is the maximum number of image analyses an account can have. Can only be set on system_global rules
           type: integer
+        rule_id:
+          description: Unique identifier for archive rule
+          type: string
         selector:
           $ref: "#/components/schemas/ImageSelector"
         system_global:
@@ -3861,6 +3864,11 @@ components:
         content:
           items:
             properties:
+              cpes:
+                description: A list of Common Platform Enumerations that may uniquely identify the package
+                items:
+                  type: string
+                type: array
               implementation-version:
                 type: string
               location:
@@ -3901,6 +3909,11 @@ components:
         content:
           items:
             properties:
+              cpes:
+                description: A list of Common Platform Enumerations that may uniquely identify the package
+                items:
+                  type: string
+                type: array
               license:
                 description: Deprecated in favor of the 'licenses' field"
                 type: string

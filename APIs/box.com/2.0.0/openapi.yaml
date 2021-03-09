@@ -19316,6 +19316,15 @@ paths:
         permissions.
 
 
+        All existing shared links and folder-level collaborations are transferred
+
+        during the operation. Please note that while collaborations at the individual
+
+        file-level are transferred during the operation, the collaborations are
+
+        deleted when the original user is deleted.
+
+
         This call will be performed synchronously which might lead to a slow response
 
         when the source user has a large number of items in all of its folders.

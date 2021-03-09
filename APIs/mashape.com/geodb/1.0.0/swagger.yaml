@@ -1375,15 +1375,19 @@ definitions:
         - MH
         - EC
         - US
+      symbol: $
     properties:
       code:
-        description: A ISO-4217 currency code
+        description: The ISO-4217 currency code
         type: string
       countryCodes:
-        description: A list of ISO-3166 country codes
+        description: A list of ISO-3166 country codes of countries supporting this currency
         items:
           type: string
         type: array
+      symbol:
+        description: The currency symbol
+        type: string
     title: Currency
     type: object
   DateTimeResponse:

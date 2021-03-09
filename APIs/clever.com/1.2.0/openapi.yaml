@@ -1644,8 +1644,8 @@ components:
           type: string
           x-validation: true
         dob:
-          format: datetime
           nullable: true
+          pattern: (?:[0-9]{1,2})/([0-9]{1,2})/([0-9]{4})
           type: string
           x-validation: true
         ell_status:

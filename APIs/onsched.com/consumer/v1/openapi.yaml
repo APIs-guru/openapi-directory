@@ -2343,10 +2343,20 @@ components:
     AppointmentInitialModel:
       additionalProperties: false
       properties:
+        appointmentBookingFields:
+          items:
+            $ref: "#/components/schemas/BookingFieldItem"
+          type: array
         bookedBy:
           type: string
         bookingWindowId:
           type: string
+        customFields:
+          $ref: "#/components/schemas/CustomFieldInputModel"
+        customerBookingFields:
+          items:
+            $ref: "#/components/schemas/BookingFieldItem"
+          type: array
         customerId:
           type: string
         email:
@@ -4010,6 +4020,10 @@ components:
           type: string
         outlookCalendarId:
           type: string
+        services:
+          items:
+            $ref: "#/components/schemas/ResourceServiceViewModel"
+          type: array
         skypeName:
           type: string
         sortKey:

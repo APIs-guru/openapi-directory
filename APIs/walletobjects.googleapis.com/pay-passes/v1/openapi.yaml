@@ -5920,7 +5920,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/wallet_object.issuer: You should never encounter this message. Please do not approve the access request.
+            https://www.googleapis.com/auth/wallet_object.issuer: "Private Service: https://www.googleapis.com/auth/wallet_object.issuer"
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -5928,6 +5928,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/wallet_object.issuer: You should never encounter this message. Please do not approve the access request.
+            https://www.googleapis.com/auth/wallet_object.issuer: "Private Service: https://www.googleapis.com/auth/wallet_object.issuer"
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

@@ -1273,6 +1273,9 @@ components:
         name:
           description: Optional name of the connection
           type: string
+        prefix:
+          description: Prefix that will be prepended to the name of each stream when it is written to the destination.
+          type: string
         schedule:
           $ref: "#/components/schemas/ConnectionSchedule"
         sourceId:
@@ -1303,6 +1306,9 @@ components:
         destinationId:
           $ref: "#/components/schemas/DestinationId"
         name:
+          type: string
+        prefix:
+          description: Prefix that will be prepended to the name of each stream when it is written to the destination.
           type: string
         schedule:
           $ref: "#/components/schemas/ConnectionSchedule"
@@ -1358,6 +1364,9 @@ components:
       properties:
         connectionId:
           $ref: "#/components/schemas/ConnectionId"
+        prefix:
+          description: Prefix that will be prepended to the name of each stream when it is written to the destination.
+          type: string
         schedule:
           $ref: "#/components/schemas/ConnectionSchedule"
         status:
@@ -1920,6 +1929,8 @@ components:
           format: int64
           type: integer
         name:
+          type: string
+        prefix:
           type: string
         schedule:
           $ref: "#/components/schemas/ConnectionSchedule"

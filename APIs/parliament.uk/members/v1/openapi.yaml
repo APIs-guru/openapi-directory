@@ -1964,6 +1964,14 @@ components:
           format: date-time
           type: string
       type: object
+    GroupedQuestion:
+      properties:
+        dateTabled:
+          format: date-time
+          type: string
+        questionUin:
+          type: string
+      type: object
     HouseMembership:
       properties:
         house:
@@ -2891,6 +2899,11 @@ components:
         groupedQuestions:
           items:
             type: string
+          type: array
+          uniqueItems: false
+        groupedQuestionsDates:
+          items:
+            $ref: "#/components/schemas/GroupedQuestion"
           type: array
           uniqueItems: false
         heading:

@@ -27,6 +27,47 @@ paths:
               schema:
                 $ref: "#/components/schemas/error"
           description: server error
+  /emulation-output:
+    post:
+      description: try to get the emulation output after unpacking the file
+      operationId: emulationOutput
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: file
+                  format: binary
+                  type: string
+              required:
+                - file
+        required: true
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                properties:
+                  output:
+                    items:
+                      type: string
+                    type: array
+                required:
+                  - output
+          description: emulation output after unpacking the file
+        "400":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/error"
+          description: request error
+        "500":
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/error"
+          description: server error
   /unpack:
     post:
       description: try to unpack the given file

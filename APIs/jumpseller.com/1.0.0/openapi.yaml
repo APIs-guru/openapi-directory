@@ -1447,6 +1447,7 @@ paths:
       tags:
         - Orders
     post:
+      description: Orders created externally keep the given order product's values (bypassing internal promotion or product amounts).
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -1461,7 +1462,7 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Order"
-      summary: Create a new Order. Orders created externally keep the given order product's values (bypassing internal promotion or product amounts)
+      summary: Create a new Order.
       tags:
         - Orders
   "/orders/after/{id}.json":

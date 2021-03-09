@@ -9560,6 +9560,13 @@ components:
           transactionData_newTransactionId: orderid
           transactionData_orderDelay: null
           transactionData_orderStatus: Accepted
+        experimentEvents:
+          - id: EX-1742
+            name: bandit_exp_new_carousels_2
+            parentId: null
+            platform: optimizely_fullstack
+            variantName: variant_d
+            version: 1
         helpSessionId: helpsessionid
         personalisation:
           callRestaurantAction:
@@ -9665,6 +9672,11 @@ components:
               description: Should we show Personalised Help
               type: boolean
           type: object
+        experimentEvents:
+          description: list of experiments running for this client
+          items:
+            $ref: "#/components/schemas/ExperimentEvent"
+          type: array
         helpSessionId:
           description: Unique id for this help session
           type: string
@@ -10286,6 +10298,28 @@ components:
         Message:
           type: string
       type: object
+    ExperimentEvent:
+      description: Represents a possible experiment event on personalised help attached to customisation or to a Help Action. This will be sent from the client as an ExperimentV2 Google Analytics event
+      properties:
+        id:
+          description: Unique but meaningful id for the experiment
+          type: string
+        name:
+          description: A name that describes the experiment
+          type: string
+        parentId:
+          description: The parent experiment id of the current experiment
+          type: string
+        platform:
+          description: The platform where the experiment comes from
+          type: string
+        variantName:
+          description: The name of the variant the user is bucketed into
+          type: string
+        version:
+          description: The version of the running experiment
+          type: string
+      type: object
     ExperimentResultResponse:
       example:
         AssociatedTicket: EX-1234
@@ -10539,6 +10573,11 @@ components:
       properties:
         closeButton:
           $ref: "#/components/schemas/HelpAction"
+        experimentEvents:
+          description: list of experiments running for this client
+          items:
+            $ref: "#/components/schemas/ExperimentEvent"
+          type: array
         screenEvent:
           properties:
             dataLayer:

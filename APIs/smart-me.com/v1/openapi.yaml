@@ -712,6 +712,31 @@ paths:
       summary: Creates and updates the folder menu items
       tags:
         - FolderMenu
+  /api/Health:
+    get:
+      deprecated: false
+      operationId: Health_Get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Object"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Object"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Object"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Object"
+          description: OK
+      summary: "A method returning HTTP 200 OK when queried.\r
+
+        \            It is used by Kubernetes probes to determine whether the app is healthy."
+      tags:
+        - Health
   /api/MBus:
     post:
       deprecated: false
@@ -2184,6 +2209,7 @@ components:
             - ReadyCarConnected
             - StartedWaitForCar
             - Charging
+            - Offline
           type: string
         CounterReading:
           description: The Meter Counter Reading (Total Energy used)
@@ -2621,13 +2647,16 @@ components:
     FolderMenuConfiguration:
       description: Container Class for the Web API representing a folder menu and it's items
       properties:
+        BrowserTimeZoneName:
+          description: The time zone name taken from the browser
+          type: string
+        BrowserUtcTime:
+          description: The UTC time taken from the browser
+          type: string
         Items:
           items:
             $ref: "#/components/schemas/FolderMenuItem"
           type: array
-        TimeZoneName:
-          description: The time zone name (usually taken from the browser)
-          type: string
       type: object
     FolderMenuItem:
       description: A folder menu item
@@ -2921,6 +2950,7 @@ components:
             - ReadyCarConnected
             - StartedWaitForCar
             - Charging
+            - Offline
           readOnly: true
           type: string
         ValueDate:
@@ -2957,8 +2987,11 @@ components:
           description: The Brightness of the LCD Matrix display. 0 = minimum, 255 = maximum
           format: byte
           type: string
-        ImageNoCarConnected:
+        IdleImageData:
           description: The base 64 string for the "no car connected" image
+          type: string
+        IdleImageUrl:
+          description: The url of the idle image
           type: string
         Name:
           description: The name of the station

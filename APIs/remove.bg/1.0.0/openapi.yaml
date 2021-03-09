@@ -228,11 +228,147 @@ paths:
         "400":
           content:
             "*/*":
+              examples:
+                failed_bg_download:
+                  value:
+                    errors:
+                      - code: failed_bg_download
+                        title: "Failed to download background image from given image_url: https://unsplash.com/"
+                failed_image_download:
+                  value:
+                    errors:
+                      - code: failed_image_download
+                        title: "Failed to download image from given image_url: https://unsplash.com/"
+                failed_to_read_image:
+                  value:
+                    errors:
+                      - code: failed_to_read_image
+                        title: There was an error reading the image.
+                file_too_large:
+                  value:
+                    errors:
+                      - code: file_too_large
+                        detail: File exceeds limit of 12MB
+                        title: File too large
+                invalid_bg_color:
+                  value:
+                    errors:
+                      - code: invalid_bg_color
+                        title: Invalid bg_color parameter given
+                invalid_bg_image_url:
+                  value:
+                    errors:
+                      - code: invalid_bg_image_url
+                        title: "Invalid bg_image_url: Please provide a valid URL."
+                invalid_channels:
+                  value:
+                    errors:
+                      - code: invalid_channels
+                        title: Invalid value for parameter 'channels'
+                invalid_crop_margin:
+                  value:
+                    errors:
+                      - code: invalid_crop_margin
+                        title: Invalid crop_margin parameter given
+                invalid_dimensions:
+                  value:
+                    errors:
+                      - code: invalid_dimensions
+                        detail: The dimensions of the given image could not be read.
+                        title: Failed to read image dimensions
+                invalid_file_type:
+                  value:
+                    errors:
+                      - code: invalid_file_type
+                        detail: Expected jpg/png, received mp4
+                        title: Invalid file type
+                invalid_format:
+                  value:
+                    errors:
+                      - code: invalid_format
+                        title: Invalid format parameter given
+                invalid_image_url:
+                  value:
+                    errors:
+                      - code: invalid_image_url
+                        title: "Invalid image_url: Please provide a valid URL."
+                invalid_position:
+                  value:
+                    errors:
+                      - code: invalid_position
+                        title: Invalid position parameter given
+                invalid_roi:
+                  value:
+                    errors:
+                      - code: invalid_roi
+                        title: Invalid roi parameter given
+                invalid_scale:
+                  value:
+                    errors:
+                      - code: invalid_scale
+                        title: Invalid scale parameter given
+                invalid_semitransparency:
+                  value:
+                    errors:
+                      - code: invalid_semitransparency
+                        title: Invalid semitransparency parameter given
+                invalid_size:
+                  value:
+                    errors:
+                      - code: invalid_size
+                        title: Invalid value for parameter 'size'
+                missing_source:
+                  value:
+                    errors:
+                      - code: missing_source
+                        detail: Please provide the source image in the image_url, image_file or image_file_b64 parameter.
+                        title: No image given
+                multiple_bg_sources:
+                  value:
+                    errors:
+                      - code: multiple_bg_sources
+                        title: "Multiple background sources given: Please provide either the bg_color, the bg_image_url or the bg_image_file parameter."
+                multiple_sources:
+                  value:
+                    errors:
+                      - code: multiple_sources
+                        title: "Multiple image sources given: Please provide either the image_url, image_file or image_file_b64 parameter."
+                resolution_too_high:
+                  value:
+                    errors:
+                      - code: resolution_too_high
+                        detail: Input image has 60 megapixels, maximum supported input resolution is 50 megapixels
+                        title: Image resolution too high
+                roi_exceeds_bounds:
+                  value:
+                    errors:
+                      - code: roi_exceeds_bounds
+                        detail: The given roi parameter defines a region that exceeds the image bounds
+                        title: ROI exceeds image bounds
+                roi_region_empty:
+                  value:
+                    errors:
+                      - code: roi_region_empty
+                        detail: The given roi parameter defines an empty region
+                        title: ROI region is empty
+                unknown_foreground:
+                  value:
+                    errors:
+                      - code: unknown_foreground
+                        title: Could not identify foreground in image. For details and recommendations see https://www.remove.bg/supported-images.
               schema:
                 properties:
                   errors:
                     items:
                       properties:
+                        code:
+                          description: Error code
+                          example: file_too_large
+                          type: string
+                        detail:
+                          description: Detailed description of the error
+                          example: File exceeds limit of 12MB
+                          type: string
                         title:
                           description: Error message
                           example: File too large

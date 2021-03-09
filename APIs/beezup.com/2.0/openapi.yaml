@@ -213,7 +213,7 @@ tags:
   - name: Analytics - Rules
     x-displayName: Rules
 paths:
-  "/orders/v3/batches/changeOrders/{changeOrderType}":
+  /orders/v3/batches/changeOrders:
     post:
       deprecated: false
       description: >
@@ -222,7 +222,6 @@ paths:
         Max 100 items per call.
       operationId: ChangeOrderListV3
       parameters:
-        - $ref: "#/components/parameters/changeOrderTypeParameter"
         - $ref: "#/components/parameters/userNameInQueryParameter"
         - $ref: "#/components/parameters/testModeInQueryParameter"
       requestBody:
@@ -251,6 +250,8 @@ paths:
       deprecated: false
       description: The purpose of this operation is to reduce the amount of request to the API.
       operationId: ClearMerchantOrderInfoListV3
+      parameters:
+        - $ref: "#/components/parameters/testModeInQueryParameter"
       requestBody:
         $ref: "#/components/requestBodies/clearMerchantOrderInfoListRequest"
       responses:
@@ -276,6 +277,8 @@ paths:
     post:
       description: The purpose of this operation is to reduce the amount of request to the API.
       operationId: SetMerchantOrderInfoListV3
+      parameters:
+        - $ref: "#/components/parameters/testModeInQueryParameter"
       requestBody:
         $ref: "#/components/requestBodies/setMerchantOrderInfoListRequest"
       responses:
@@ -676,6 +679,7 @@ paths:
         - $ref: "#/components/parameters/marketplaceTechnicalCodeParameter"
         - $ref: "#/components/parameters/accountIdParameter"
         - $ref: "#/components/parameters/beezUPOrderIdParameter"
+        - $ref: "#/components/parameters/testModeInQueryParameter"
       responses:
         "202":
           description: Clear Order merchant order info accepted
@@ -813,6 +817,7 @@ paths:
         - $ref: "#/components/parameters/marketplaceTechnicalCodeParameter"
         - $ref: "#/components/parameters/accountIdParameter"
         - $ref: "#/components/parameters/beezUPOrderIdParameter"
+        - $ref: "#/components/parameters/testModeInQueryParameter"
       requestBody:
         $ref: "#/components/requestBodies/setMerchantOrderInfoRequest"
       responses:
@@ -3370,7 +3375,7 @@ paths:
           description: >-
             ExecutionId not found or not yet synchronized. If not synchronized within 30 sec, please contact our support
                   schema:
-            $ref: 'https://api.swaggerhub.com/domains/BeezUP/api.beezup.com/v2#/definitions/BeezUP.Common.ErrorResponseMessage'
+            $ref: 'https://api.beezup.com/swaggerhub/domains/BeezUP/api.beezup.com/v2#/definitions/BeezUP.Common.ErrorResponseMessage'
         "409":
           content:
             application/json:
@@ -5593,6 +5598,50 @@ paths:
       summary: Fetch the publication history for an account, sorted by descending start date
       tags:
         - Marketplaces - Channel catalogs - Publications
+  "/v2/user/marketplaces/channelcatalogs/publications/{marketplaceTechnicalCode}/{accountId}/publish":
+    post:
+      deprecated: false
+      operationId: PublishCatalogToMarketplace
+      parameters:
+        - description: Marketplace Technical Code to query (required)
+          in: path
+          name: marketplaceTechnicalCode
+          required: true
+          schema:
+            type: string
+          x-lov: MarketplaceTechnicalCode
+        - description: Account Id to query (required)
+          in: path
+          name: accountId
+          required: true
+          schema:
+            format: int32
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/publishCatalogToMarketplaceRequest"
+        required: true
+      responses:
+        "202":
+          description: Publication request accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
+          description: One or more channel catalog marketplace property keys or values are invalid for requested marketplace channel catalog. See response for details.
+        "404":
+          description: Requested account, marketplace or authorization for current user not found
+        "503":
+          $ref: "#/components/responses/processingResponse"
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: "[PREVIEW] Launch a publication of the catalog to the marketplace"
+      tags:
+        - Marketplaces - Channel catalogs - Publications
+      x-releaseStatus: PREVIEW
   "/v2/user/marketplaces/channelcatalogs/{channelCatalogId}/properties":
     get:
       operationId: GetChannelCatalogMarketplaceProperties
@@ -8702,7 +8751,7 @@ components:
           description: The billing period list
           example:
             - billingPeriodInMonth: "12"
-              discountPercentage: "20.0"
+              discountPercentage: "20"
           items:
             $ref: "#/components/schemas/billingPeriod"
           type: array
@@ -9467,7 +9516,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/channelCatalogMarketplaceProperty"
         - properties:
-            _default:
+            default:
               description: Indicate the default values of the property
               example: "false"
               type: boolean
@@ -9485,7 +9534,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/channelCatalogMarketplaceProperty"
         - properties:
-            _default:
+            default:
               description: Indicate the default values of the property
               example:
                 - "201"
@@ -9509,7 +9558,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/channelCatalogMarketplaceProperty"
         - properties:
-            _default:
+            default:
               description: Indicate the default values of the property
               example:
                 - "201.69"
@@ -9545,7 +9594,7 @@ components:
                   position: "1"
                   readOnly: "true"
                   values:
-                    - ebaytokenblabla
+                    - AgAAAA**AQAAAA**aAAAAA**2VFhVg**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AElISgCJaLpwWdj6x9nY+seQ**OEsBAA**AAMAAA**jzsVAMwj1dPBsyCEp0Fuj/toSBrfZF2JpKKDrrXIirMzgvgbsyxnA2h1wl7WjFD+TfdCmaBq3CAFLOog/433G5gsse1DLTT6uXFajdiHnPVfnL7QtKIpQEIwL8ZO5Tx1dGl0XQLsU7knPwbGHn5X6Z3JzXrCGvvpw2+MIzDNhasYlqPfOEr8Lct5dcsIIdhXl/qgrzALe5++v76/XjaXvP6eic3uCWBEXBiXC1uisjEtOqaNIPkFaiICBaXsQUzVZdM68bQatBg5bwf6hxvqOyNJRw4pttGStovcXXjL+aszw7ejbxLv1lJ6qeTMj5oRwTPl0AzBAejcY+DTBrLEmgdzrvWHLvMOa1ijGOGzVodBoDGimiqadCPQpAVZr0e7HvQIVbOlbmKpuCUFJ4RPCv0NxpkCm1/nxZWeS9H8gd/SfLf9Chgd115dcKzgxFBoSh7myJcw+MRM7szPQ2Pwv980dTRyHvbI8XR4OieYvXmU4H7Nl51N8B3qkjYFkdcp6J06eqs4dO68lDNdWZfXHkjwI3dY6umDUp4y82IdQl8IykPty3/DZfUAfqafgiAwMHZvXjewp5HhPjDi2zgf+5EcDlvf6rNMzjsghjdWUQi4WldDk+LXgkos6jswIQaNPdpW1D4KyPYWtGYknx0Xzzuc6WmBoVwGFalgMvCWWI9Gs2w6PG5GqB9zm1Fnr3svtPbNYPQ6q3VQpkKL2SWQXy383O1cp6ZMLI9GwZe0FnrqCxb/wc4XJUVw2RoR3qiX
                 - name: PayPalEmailAddress
                   pattern: (?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])
                   position: "2"
@@ -9767,7 +9816,7 @@ components:
               position: "1"
               readOnly: "true"
               values:
-                - ebaytokenblabla
+                - AgAAAA**AQAAAA**aAAAAA**2VFhVg**nY+sHZ2PrBmdj6wVnY+sEZ2PrA2dj6AElISgCJaLpwWdj6x9nY+seQ**OEsBAA**AAMAAA**jzsVAMwj1dPBsyCEp0Fuj/toSBrfZF2JpKKDrrXIirMzgvgbsyxnA2h1wl7WjFD+TfdCmaBq3CAFLOog/433G5gsse1DLTT6uXFajdiHnPVfnL7QtKIpQEIwL8ZO5Tx1dGl0XQLsU7knPwbGHn5X6Z3JzXrCGvvpw2+MIzDNhasYlqPfOEr8Lct5dcsIIdhXl/qgrzALe5++v76/XjaXvP6eic3uCWBEXBiXC1uisjEtOqaNIPkFaiICBaXsQUzVZdM68bQatBg5bwf6hxvqOyNJRw4pttGStovcXXjL+aszw7ejbxLv1lJ6qeTMj5oRwTPl0AzBAejcY+DTBrLEmgdzrvWHLvMOa1ijGOGzVodBoDGimiqadCPQpAVZr0e7HvQIVbOlbmKpuCUFJ4RPCv0NxpkCm1/nxZWeS9H8gd/SfLf9Chgd115dcKzgxFBoSh7myJcw+MRM7szPQ2Pwv980dTRyHvbI8XR4OieYvXmU4H7Nl51N8B3qkjYFkdcp6J06eqs4dO68lDNdWZfXHkjwI3dY6umDUp4y82IdQl8IykPty3/DZfUAfqafgiAwMHZvXjewp5HhPjDi2zgf+5EcDlvf6rNMzjsghjdWUQi4WldDk+LXgkos6jswIQaNPdpW1D4KyPYWtGYknx0Xzzuc6WmBoVwGFalgMvCWWI9Gs2w6PG5GqB9zm1Fnr3svtPbNYPQ6q3VQpkKL2SWQXy383O1cp6ZMLI9GwZe0FnrqCxb/wc4XJUVw2RoR3qiX
             - name: PaypalAddress
               pattern: (?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])
               position: "2"
@@ -9905,7 +9954,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/channelCatalogMarketplaceProperty"
         - properties:
-            _default:
+            default:
               description: Indicate the default values of the property
               example:
                 - My default value
@@ -10343,13 +10392,13 @@ components:
         orders:
           example:
             - accountId: "1234"
-              beezUPOrderId: "00000000000000000000000000000000000000000000000"
+              beezUPOrderId: "0"
               marketplaceTechnicalCode: Amazon
             - accountId: "5678"
-              beezUPOrderId: "00000000000000000000000000000000000000000000000"
+              beezUPOrderId: "0"
               marketplaceTechnicalCode: Amazon
             - accountId: "9876"
-              beezUPOrderId: "00000000000000000000000000000000000000000000000"
+              beezUPOrderId: "0"
               marketplaceTechnicalCode: Ebay
           items:
             $ref: "#/components/schemas/orderIdentifier"
@@ -10541,14 +10590,14 @@ components:
       properties:
         amountBillingPeriodDiscount:
           description: The amount discounted related to the billing period
-          example: "20"
+          example: "20.0"
           format: double
           type: number
         billingPeriodInMonth:
           $ref: "#/components/schemas/billingPeriodInMonth"
         billingPeriodPercentDiscount:
           description: The discount percent related to the billing period
-          example: "10"
+          example: "10.0"
           format: double
           type: number
       type: object
@@ -12600,8 +12649,8 @@ components:
       properties:
         invoices:
           example:
-            - amount: "101.42"
-              amountToBePaid: "0.0"
+            - amount: "101"
+              amountToBePaid: "0"
               contractId: 7098487a-86f6-4322-b8a5-b67f7363b3e7
               currencyCode: EUR
               dueDate: 2016-05-10
@@ -13892,7 +13941,7 @@ components:
                   performanceIndicatorFilters:
                     - operatorName: Equals
                       performanceIndicator: Cost
-                      value: "10.42"
+                      value: "10"
                   productState: All
     links.OptimiseByCategoryLink:
       allOf:
@@ -13968,7 +14017,7 @@ components:
                   performanceIndicatorFilters:
                     - operatorName: Equals
                       performanceIndicator: Cost
-                      value: "10.42"
+                      value: "10"
                   productState: All
     links.OverrideChannelCatalogProductValuesLink:
       allOf:
@@ -13976,6 +14025,11 @@ components:
         - example:
             href: /v2/user/channelCatalogs/6d6b04de-406b-4539-8e7e-bf3e8da5dfb0/products/578419df-1bbf-41a6-96fa-862e42182b67/overrides
             method: POST
+    links.PublishCatalogToMarketplaceLink:
+      allOf:
+        - $ref: "#/components/schemas/BeezUP.Common.Link3"
+        - example:
+            href: /v2/user/marketplaces/channelcatalogs/publications/Cdiscount/123/publish
     links.ReenableChannelCatalogCategoryMappingLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
@@ -14413,6 +14467,10 @@ components:
           $ref: "#/components/schemas/links.GetChannelCatalogMarketplacePropertiesLink"
         publications:
           $ref: "#/components/schemas/links.GetPublicationsLink"
+        publishOptions:
+          items:
+            $ref: "#/components/schemas/marketplaceChannelCatalogPublicationOption"
+          type: array
         settings:
           $ref: "#/components/schemas/links.GetChannelCatalogMarketplaceSettingsLink"
       required:
@@ -14455,6 +14513,25 @@ components:
           $ref: "#/components/schemas/BeezUP.Common.LOVLink3"
         shippingMethodLOV:
           $ref: "#/components/schemas/BeezUP.Common.LOVLink3"
+      type: object
+    marketplaceChannelCatalogPublicationOption:
+      properties:
+        feedType:
+          $ref: "#/components/schemas/feedType"
+        kind:
+          $ref: "#/components/schemas/publicationStrategyKind"
+        link:
+          $ref: "#/components/schemas/links.PublishCatalogToMarketplaceLink"
+        strategy:
+          $ref: "#/components/schemas/publicationStrategy"
+        withUnpublish:
+          type: boolean
+      required:
+        - kind
+        - feedType
+        - withUnpublish
+        - strategy
+        - link
       type: object
     marketplaceOrderId:
       description: The order marketplace identifier
@@ -14859,7 +14936,7 @@ components:
       example: Ascending
       type: string
     orderChangeType:
-      description: The business operation type that can be done on an orde
+      description: The business operation type that can be done on an order
       type: string
       x-lov: OrderChangeBusinessOperationType
     orderExportationReporting:
@@ -15294,7 +15371,7 @@ components:
           type: string
         orderItem_Quantity:
           description: The quantity of the order item
-          example: "1"
+          example: "1.0"
           format: decimal
           type: number
         orderItem_Shipping_Price:
@@ -16194,7 +16271,7 @@ components:
       type: string
     productVATPercent:
       description: Product VAT in percent
-      example: "4"
+      example: "4.0"
       maximum: 100
       minimum: 0
       type: number
@@ -16445,6 +16522,23 @@ components:
         - publicationType
         - feeds
       type: object
+    publicationStrategy:
+      description: The Publication Type
+      type: string
+      x-lov: MarketplacePublicationV3Strategy
+    publicationStrategyKind:
+      default: Delta
+      description: >
+        Define the publication strategy kind, for that you have 2 choices 
+
+        * Delta - This is the recommanded publication strategy kind, this strategy will push to the marketplace only the difference between your catalog and the previous published feeds done by BeezUP. 
+
+        * Full - If you want to force the publication of all your catalog feeds to the marketplace. 
+              !WARNING! Depending to the marketplace this operation will purge the existing offers on the marketplace that are not in the catalog or unknown from the publication feed referential.
+      enum:
+        - Delta
+        - Full
+      type: string
     publicationType:
       description: The Publication Type
       enum:
@@ -16454,6 +16548,21 @@ components:
       example: PublishOffers
       type: string
       x-lov: MarketplacePublicationType
+    publishCatalogToMarketplaceRequest:
+      description: Publish the catalog to the marketplace
+      properties:
+        feedType:
+          $ref: "#/components/schemas/feedType"
+        publicationStrategyKind:
+          $ref: "#/components/schemas/publicationStrategyKind"
+        withUnpublish:
+          description: In full publication strategy kind, for some marktetplace, you can ask to unpublish or not your existing feeds on the markeptlace absent from your exported catalog.
+          type: boolean
+      required:
+        - feedType
+        - publicationStrategyKind
+        - withUnpublish
+      type: object
     randomProductList:
       properties:
         products:
@@ -16566,7 +16675,7 @@ components:
           type: number
         orderCount:
           description: The order count for this category
-          example: "25.33"
+          example: "25"
           type: integer
         performanceIndicator:
           description: The performance indicator based on the performance indicator formula indicated in the request for this category
@@ -16895,7 +17004,7 @@ components:
           type: number
         orderCount:
           description: The order count for this product
-          example: "234.42"
+          example: "234"
           type: integer
         performanceIndicator:
           description: The performance indicator based on the performance indicator formula indicated in the request for this product
@@ -17040,7 +17149,7 @@ components:
           example:
             - indicator: Cost
               operatorName: Equals
-              value: "10.42"
+              value: "10"
           items:
             $ref: "#/components/schemas/performanceIndicatorFilter"
           type: array
@@ -17496,7 +17605,7 @@ components:
       type: object
     shippingVATPercent:
       description: Shipping cost VAT in percent
-      example: "8"
+      example: "8.0"
       maximum: 100
       minimum: 0
       type: number
@@ -17588,9 +17697,9 @@ components:
         offers:
           description: All standard offers
           example:
-            - additionalClickPrice: "0.1234"
+            - additionalClickPrice: "0"
               currencyCode: EUR
-              fixedPrice: "101.42"
+              fixedPrice: "101"
               functionalities:
                 - functionalityCode: MARKETMANA
                   maxValueInteger: "4"
@@ -18150,14 +18259,14 @@ components:
         products:
           description: Can be null. The product list included in the external order
           example:
-            - margin: "9.66"
+            - margin: "9"
               merchantOrderId: My_Merchant_Order_Id
               productActive: "true"
               productImageUrl: http://cdn3.sarenza.net/static/_img/productsV4/0000010744/MD_0000010744_29411_09.jpg?201308142051
               productSku: something
               productTitle: Something great
-              quantity: "1.00"
-              unitPrice: "101.42"
+              quantity: "1"
+              unitPrice: "101"
           items:
             $ref: "#/components/schemas/trackedExternalOrderProduct"
           type: array
@@ -18246,14 +18355,14 @@ components:
         products:
           description: The product list of this order
           example:
-            - margin: "9.66"
+            - margin: "9"
               productActive: "true"
               productId: 00000000-0000-0000-0000-000000000000
               productImageUrl: http://i2.cdscdn.com/pdt2/3/9/0/1/550x550/hai6901018043390/rw/haier-b20fwrss-refrigerateur-americain.jpg
               productSku: SKU123345
               productTitle: My super product title
-              quantity: "1.0"
-              unitPrice: "101.42"
+              quantity: "1"
+              unitPrice: "101"
           items:
             $ref: "#/components/schemas/trackedOrderProduct"
           type: array

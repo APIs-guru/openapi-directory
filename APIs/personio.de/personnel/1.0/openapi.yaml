@@ -20,7 +20,7 @@ info:
 paths:
   /company/attendances:
     get:
-      description: This endpoint is responsible for fetching attendance data for the company employees. It is possible to paginate results, filter by period and/or specific employees. The result will contain a list of attendance periods, structured as defined here.
+      description: This endpoint is responsible for fetching attendance data for the company employees. It is possible to paginate results, filter by period, the date and/or time it was updated, and/or specific employees. The result will contain a list of attendance periods, structured as defined here.
       parameters:
         - description: First day of the period to be queried. It is inclusive, so the day specified as start_date will also be considered on the results
           in: query
@@ -35,6 +35,20 @@ paths:
           required: true
           schema:
             format: date
+            type: string
+        - description: Datetime from when the queried periods have been updated. Same format as updated_at. It is inclusive, so the day specified as updated_from will also be considered on the results. Can be just the date, or the date and the time, with or without the timezone.
+          in: query
+          name: updated_from
+          required: false
+          schema:
+            format: datetime
+            type: string
+        - description: Datetime until when the queried periods have been updated. Same format as updated_at. It is inclusive, so the day specified as updated_to will also be considered on the results. Can be just the date, or the date and the time, with or without the timezone.
+          in: query
+          name: updated_to
+          required: false
+          schema:
+            format: datetime
             type: string
         - description: A list of Personio employee identifiers to filter the results. Only those employees specified here will be returned.
           explode: true
@@ -78,6 +92,7 @@ paths:
                           is_holiday: false
                           is_on_time_off: false
                           start_time: 9:00
+                          updated_at: 2017-01-17T16:41:08+00:00
                         id: 1234
                         type: AttendancePeriod
                       - attributes:
@@ -89,6 +104,7 @@ paths:
                           is_holiday: false
                           is_on_time_off: true
                           start_time: 9:30
+                          updated_at: 2017-01-18T16:41:08+01:00
                         id: 1235
                         type: AttendancePeriod
                     limit: 200
@@ -732,6 +748,20 @@ paths:
           required: false
           schema:
             format: date
+            type: string
+        - description: Datetime from when the queried periods have been updated. It is inclusive, so the day specified as updated_from will also be considered on the results.
+          in: query
+          name: updated_from
+          required: false
+          schema:
+            format: datetime
+            type: string
+        - description: Datetime until when the queried periods have been updated. It is inclusive, so the day specified as updated_to will also be considered on the results.
+          in: query
+          name: updated_to
+          required: false
+          schema:
+            format: datetime
             type: string
         - description: A list of Personio employee identifiers to filter the results. Only those employees specified here will be returned.
           explode: true

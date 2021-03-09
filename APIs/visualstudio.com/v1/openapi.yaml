@@ -2592,6 +2592,15 @@ components:
           nullable: true
           type: string
       type: object
+    AvailableSettingsResult:
+      additionalProperties: false
+      properties:
+        sku:
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
     AzureLocation:
       enum:
         - 101 (EastAsia)
@@ -2697,6 +2706,8 @@ components:
         friendlyName:
           nullable: true
           type: string
+        gitStatus:
+          $ref: "#/components/schemas/GitStatus"
         hasUnpushedGitChanges:
           type: boolean
         id:
@@ -2799,7 +2810,7 @@ components:
         containerImage:
           nullable: true
           type: string
-        devContainer:
+        devContainerJson:
           nullable: true
           type: string
         experimentalFeatures:
@@ -2811,6 +2822,11 @@ components:
           type: object
         friendlyName:
           type: string
+        githubEnvironmentEndpoint:
+          nullable: true
+          type: string
+        hasDevcontainerJson:
+          type: boolean
         label:
           nullable: true
           type: string
@@ -2897,6 +2913,24 @@ components:
         userName:
           nullable: true
           type: string
+      type: object
+    GitStatus:
+      additionalProperties: false
+      properties:
+        ahead:
+          format: int32
+          type: integer
+        behind:
+          format: int32
+          type: integer
+        branch:
+          nullable: true
+          type: string
+        commit:
+          nullable: true
+          type: string
+        hasUnpushedChanges:
+          type: boolean
       type: object
     HeartBeatBody:
       additionalProperties: false
@@ -3356,6 +3390,8 @@ components:
     SkuInfoResult:
       additionalProperties: false
       properties:
+        availableSettings:
+          $ref: "#/components/schemas/AvailableSettingsResult"
         displayName:
           nullable: true
           type: string
@@ -3462,6 +3498,8 @@ components:
         friendlyName:
           nullable: true
           type: string
+        gitStatus:
+          $ref: "#/components/schemas/GitStatus"
         hasUnpushedGitChanges:
           type: boolean
         id:

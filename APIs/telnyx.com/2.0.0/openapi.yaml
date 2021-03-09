@@ -1832,6 +1832,63 @@ paths:
       tags:
         - Call Commands
       x-latency-category: interactive
+  "/calls/{call_control_id}/actions/transcription_start":
+    post:
+      callbacks:
+        transcription:
+          "{$request.body#/webhook_url}":
+            post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/TranscriptionEvent"
+                required: true
+              responses:
+                "200":
+                  description: The server must return an HTTP 200, otherwise we will reattempt delivery at the failover webhook URL.
+      description: Start real-time transcription. Transcription will stop on call hang-up, or can be initiated via the Transcription stop command.
+      operationId: callTranscriptionStart
+      parameters:
+        - $ref: "#/components/parameters/CallControlId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TranscriptionStartRequest"
+        description: Transcription start request
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/CallControlCommandResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Transcription start
+      tags:
+        - Call Commands
+      x-latency-category: interactive
+  "/calls/{call_control_id}/actions/transcription_stop":
+    post:
+      description: Stop real-time transcription.
+      operationId: callTranscriptionStop
+      parameters:
+        - $ref: "#/components/parameters/CallControlId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TranscriptionStopRequest"
+        description: Transcription stop request
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/CallControlCommandResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Transcription stop
+      tags:
+        - Call Commands
+      x-latency-category: interactive
   "/calls/{call_control_id}/actions/transfer":
     post:
       callbacks:
@@ -2534,6 +2591,49 @@ paths:
       tags:
         - Conference Commands
       x-latency-category: interactive
+  "/conferences/{id}/actions/stop":
+    post:
+      callbacks:
+        conferenceParticipantPlaybackEnded:
+          "{$request.body#/webhook_url}":
+            post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/ConferenceParticipantPlaybackEndedEvent"
+                required: true
+              responses:
+                "200":
+                  description: The server must return an HTTP 200, otherwise we will reattempt delivery at the failover webhook URL.
+      description: Stop audio being played to all or some participants on a conference call.
+      operationId: conferenceStopAudio
+      parameters:
+        - description: Uniquely identifies the conference by id or name
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConferenceStopRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/ConferenceCommandResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+      summary: Stop audio being played on the conference
+      tags:
+        - Conference Commands
+      x-latency-category: interactive
   "/conferences/{id}/actions/unhold":
     post:
       description: Unhold a list of participants in a conference call
@@ -2591,6 +2691,35 @@ paths:
         "422":
           $ref: "#/components/responses/UnprocessableEntityResponse"
       summary: Unmute conference participants
+      tags:
+        - Conference Commands
+      x-latency-category: interactive
+  "/conferences/{id}/actions/update":
+    post:
+      description: Update conference participant supervisor_role
+      operationId: conferenceUpdate
+      parameters:
+        - description: Uniquely identifies the conference by id or name
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateConferenceRequest"
+        description: Update Conference request object
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/ConferenceCommandResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+      summary: Update conference participant
       tags:
         - Conference Commands
       x-latency-category: interactive
@@ -10471,6 +10600,7 @@ components:
           hangup_cause: call_rejected
           hangup_source: caller
           sip_hangup_cause: "603"
+          start_time: 2018-02-02T22:20:27.521992Z
           state: hangup
           to: "+35319605860"
         record_type: event
@@ -10541,6 +10671,11 @@ components:
             sip_hangup_cause:
               description: The reason the call was ended (SIP response code). If the SIP response is unavailable (in inbound calls for example) this is set to `unspecified`.
               example: "603"
+              type: string
+            start_time:
+              description: ISO 8601 datetime of when the call started.
+              example: 2018-02-02T22:20:27.521992Z
+              format: date-time
               type: string
             state:
               description: State received from a command.
@@ -12976,6 +13111,15 @@ components:
         data:
           $ref: "#/components/schemas/ConferenceSpeakStarted"
       title: Conference Speak Started Event
+      type: object
+    ConferenceStopRequest:
+      properties:
+        call_control_ids:
+          description: List of call control ids identifying participants the audio file should stop be played to. If not given, the audio will be stoped to the entire conference.
+          items:
+            type: string
+          type: array
+      title: Conference Stop Request
       type: object
     ConferenceUnholdRequest:
       example:
@@ -21494,6 +21638,130 @@ components:
         - short_duration
       example: conversational
       type: string
+    Transcription:
+      example:
+        event_type: call.transcription
+        id: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+        occurred_at: 2018-02-02T22:25:27.521992Z
+        payload:
+          call_control_id: v2:7subYr8fLrXmaAXm8egeAMpoSJ72J3SGPUuome81-hQuaKRf9b7hKA
+          call_leg_id: 5ca81340-5beb-11eb-ae45-02420a0f8b69
+          call_session_id: 5ca81eee-5beb-11eb-ba6c-02420a0f8b69
+          client_state: null
+          connection_id: "1240401930086254526"
+          transcription_data:
+            confidence: 0.977219
+            transcript: hello this is a test speech
+        record_type: event
+      properties:
+        event_type:
+          description: The type of event being delivered.
+          enum:
+            - call.transcription
+          example: call.transcription
+          type: string
+        id:
+          description: Identifies the type of resource.
+          example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+          format: uuid
+          type: string
+        occurred_at:
+          description: ISO 8601 datetime of when the event occurred.
+          example: 2018-02-02T22:25:27.521992Z
+          format: date-time
+          type: string
+        payload:
+          properties:
+            call_control_id:
+              description: Unique identifier and token for controlling the call.
+              example: v2:T02llQxIyaRkhfRKxgAP8nY511EhFLizdvdUKJiSw8d6A9BborherQ
+              type: string
+            call_leg_id:
+              description: ID that is unique to the call and can be used to correlate webhook events.
+              example: 428c31b6-7af4-4bcb-b7f5-5013ef9657c1
+              type: string
+            call_session_id:
+              description: ID that is unique to the call session and can be used to correlate webhook events.
+              example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
+              type: string
+            client_state:
+              description: Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+              example: aGF2ZSBhIG5pY2UgZGF5ID1d
+              type: string
+            connection_id:
+              description: Telnyx connection ID used in the call.
+              example: 7267xxxxxxxxxxxxxx
+              type: string
+            transcription_data:
+              properties:
+                confidence:
+                  description: Speech recognition confidence level.
+                  example: 0.977219
+                  format: double
+                  type: number
+                transcript:
+                  description: Recognized text.
+                  example: hello this is a test speech
+                  type: string
+              type: object
+          type: object
+        record_type:
+          description: Identifies the type of the resource.
+          enum:
+            - event
+          example: event
+          type: string
+      title: Transcription
+      type: object
+    TranscriptionEvent:
+      properties:
+        data:
+          $ref: "#/components/schemas/Transcription"
+      title: Transcription Event
+      type: object
+    TranscriptionStartRequest:
+      example:
+        client_state: aGF2ZSBhIG5pY2UgZGF5ID1d
+        command_id: 891510ac-f3e4-11e8-af5b-de00688a4901
+        language: en
+      properties:
+        client_state:
+          description: Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+          example: aGF2ZSBhIG5pY2UgZGF5ID1d
+          type: string
+        command_id:
+          description: Use this field to avoid duplicate commands. Telnyx will ignore commands with the same `command_id`.
+          example: 891510ac-f3e4-11e8-af5b-de00688a4901
+          type: string
+        language:
+          default: en
+          description: Language to use for speech recognition
+          enum:
+            - de
+            - en
+            - es
+            - fr
+            - it
+            - pl
+          example: en
+          type: string
+      title: Transcription start request
+      type: object
+    TranscriptionStopRequest:
+      example:
+        client_state: aGF2ZSBhIG5pY2UgZGF5ID1d
+        command_id: 891510ac-f3e4-11e8-af5b-de00688a4901
+      properties:
+        client_state:
+          description: Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+          example: aGF2ZSBhIG5pY2UgZGF5ID1d
+          type: string
+        command_id:
+          description: Use this field to avoid duplicate commands. Telnyx will ignore commands with the same `command_id`.
+          example: 891510ac-f3e4-11e8-af5b-de00688a4901
+          type: string
+      title: Transcription stop request
+      type: object
     TransferCallRequest:
       example:
         answering_machine_detection: detect
@@ -21799,6 +22067,44 @@ components:
         - application_name
         - webhook_event_url
       title: Update Call Control Application Request
+      type: object
+    UpdateConferenceRequest:
+      example:
+        call_control_id: v2:T02llQxIyaRkhfRKxgAP8nY511EhFLizdvdUKJiSw8d6A9BborherQ
+        command_id: 891510ac-f3e4-11e8-af5b-de00688a4901
+        supervisor_role: whisper
+        whisper_call_control_ids:
+          - v2:Sg1xxxQ_U3ixxxyXT_VDNI3xxxazZdg6Vxxxs4-GNYxxxVaJPOhFMRQ
+          - v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw
+      properties:
+        call_control_id:
+          description: Unique identifier and token for controlling the call
+          example: v2:T02llQxIyaRkhfRKxgAP8nY511EhFLizdvdUKJiSw8d6A9BborherQczRrZvZakpWxBlpw48KyZQ==
+          type: string
+        command_id:
+          description: Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
+          example: 891510ac-f3e4-11e8-af5b-de00688a4901
+          type: string
+        supervisor_role:
+          description: Sets the participant as a supervisor for the conference. A conference can have multiple supervisors. "barge" means the supervisor enters the conference as a normal participant. This is the same as "none". "monitor" means the supervisor is muted but can hear all participants. "whisper" means that only the specified "whisper_call_control_ids" can hear the supervisor. Defaults to "none".
+          enum:
+            - barge
+            - monitor
+            - none
+            - whisper
+          example: whisper
+          type: string
+        whisper_call_control_ids:
+          description: Array of unique call_control_ids the supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
+          example:
+            - v2:Sg1xxxQ_U3ixxxyXT_VDNI3xxxazZdg6Vxxxs4-GNYxxxVaJPOhFMRQ
+            - v2:qqpb0mmvd-ovhhBr0BUQQn0fld5jIboaaX3-De0DkqXHzbf8d75xkw
+          items:
+            type: string
+          type: array
+      required:
+        - call_control_id
+      title: Update Conference Request
       type: object
     UpdateCredentialConnectionRequest:
       example:

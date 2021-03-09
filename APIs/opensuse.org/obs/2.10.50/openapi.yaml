@@ -2888,49 +2888,6 @@ paths:
           content:
             application/xml; charset=utf-8:
               schema:
-                components:
-                  schemas:
-                    NewOldDestination:
-                      properties:
-                        package:
-                          example: ruby
-                          type: string
-                          xml:
-                            attribute: true
-                        project:
-                          example: home:Iggy:branches:home:Admin
-                          type: string
-                          xml:
-                            attribute: true
-                        rev:
-                          example: 3
-                          type: string
-                          xml:
-                            attribute: true
-                        srcmd5:
-                          example: 59300f4ba65f53334b2e2a39f87ba3a0
-                          type: string
-                          xml:
-                            attribute: true
-                      type: object
-                    OldNewFile:
-                      properties:
-                        md5:
-                          example: d4f573d2bf9a0e306f87dad7eee0cf56
-                          type: string
-                          xml:
-                            attribute: true
-                        name:
-                          example: ruby.spec
-                          type: string
-                          xml:
-                            attribute: true
-                        size:
-                          example: 70
-                          type: string
-                          xml:
-                            attribute: true
-                      type: object
                 properties:
                   action:
                     properties:
@@ -3103,6 +3060,49 @@ paths:
                     xml:
                       attribute: true
                 type: object
+                x-components:
+                  schemas:
+                    NewOldDestination:
+                      properties:
+                        package:
+                          example: ruby
+                          type: string
+                          xml:
+                            attribute: true
+                        project:
+                          example: home:Iggy:branches:home:Admin
+                          type: string
+                          xml:
+                            attribute: true
+                        rev:
+                          example: 3
+                          type: string
+                          xml:
+                            attribute: true
+                        srcmd5:
+                          example: 59300f4ba65f53334b2e2a39f87ba3a0
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
+                    OldNewFile:
+                      properties:
+                        md5:
+                          example: d4f573d2bf9a0e306f87dad7eee0cf56
+                          type: string
+                          xml:
+                            attribute: true
+                        name:
+                          example: ruby.spec
+                          type: string
+                          xml:
+                            attribute: true
+                        size:
+                          example: 70
+                          type: string
+                          xml:
+                            attribute: true
+                      type: object
                 xml:
                   name: diff
             text/plain; charset=utf-8:
