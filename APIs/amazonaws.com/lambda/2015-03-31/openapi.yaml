@@ -210,6 +210,7 @@ paths:
                   description: 'The API action that grants access to the layer. For example, <code>lambda:GetLayerVersion</code>.'
                   type: string
                   pattern: 'lambda:GetLayerVersion'
+                  maxLength: 22
                 Principal:
                   description: 'An account ID, or <code>*</code> to grant permission to all AWS accounts.'
                   type: string
@@ -218,6 +219,7 @@ paths:
                   description: 'With the principal set to <code>*</code>, grant permission to all accounts in the specified organization.'
                   type: string
                   pattern: 'o-[a-z0-9]{10,32}'
+                  maxLength: 34
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -372,7 +374,7 @@ paths:
                 Principal:
                   description: 'The AWS service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through that service.'
                   type: string
-                  pattern: .*
+                  pattern: '[^\s]+'
                 SourceArn:
                   description: 'For AWS services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.'
                   type: string
@@ -381,6 +383,7 @@ paths:
                   description: 'For Amazon S3, the ID of the account that owns the resource. Use this together with <code>SourceArn</code> to ensure that the resource is owned by the specified account. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account.'
                   type: string
                   pattern: '\d{12}'
+                  maxLength: 12
                 EventSourceToken:
                   description: 'For Alexa Smart Home functions, a token that must be supplied by the invoker.'
                   type: string
@@ -3530,7 +3533,7 @@ paths:
   /2015-03-31/functions/:
     get:
       operationId: ListFunctions
-      description: '<p>Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call.</p> <p>Set <code>FunctionVersion</code> to <code>ALL</code> to include all published versions of each function in addition to the unpublished version. To get more information about a function or version, use <a>GetFunction</a>.</p>'
+      description: '<p>Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50 functions per call.</p> <p>Set <code>FunctionVersion</code> to <code>ALL</code> to include all published versions of each function in addition to the unpublished version. </p> <note> <p>The <code>ListFunctions</code> action returns a subset of the <a>FunctionConfiguration</a> fields. To get the additional fields (State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode) for a function or version, use <a>GetFunction</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3581,7 +3584,7 @@ paths:
         - name: MaxItems
           in: query
           required: false
-          description: The maximum number of functions to return.
+          description: 'The maximum number of functions to return in the response. Note that <code>ListFunctions</code> returns a maximum of 50 items in each response, even if you set the number higher.'
           schema:
             type: integer
             minimum: 1
@@ -5880,12 +5883,14 @@ components:
     LayerPermissionAllowedAction:
       type: string
       pattern: 'lambda:GetLayerVersion'
+      maxLength: 22
     LayerPermissionAllowedPrincipal:
       type: string
       pattern: '\d{12}|\*|arn:(aws[a-zA-Z-]*):iam::\d{12}:root'
     OrganizationId:
       type: string
       pattern: 'o-[a-z0-9]{10,32}'
+      maxLength: 34
     AddLayerVersionPermissionRequest:
       type: object
       required:
@@ -5917,13 +5922,14 @@ components:
       maxLength: 140
     Principal:
       type: string
-      pattern: .*
+      pattern: '[^\s]+'
     Arn:
       type: string
       pattern: 'arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
     SourceOwner:
       type: string
       pattern: '\d{12}'
+      maxLength: 12
     EventSourceToken:
       type: string
       pattern: '[a-zA-Z0-9._\-]+'
