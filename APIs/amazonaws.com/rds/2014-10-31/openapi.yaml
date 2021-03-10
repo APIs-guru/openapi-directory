@@ -4382,6 +4382,187 @@ paths:
             type: string
             enum:
               - '2014-10-31'
+  /#Action=CreateDBProxyEndpoint:
+    get:
+      x-aws-operation-name: CreateDBProxyEndpoint
+      operationId: GET_CreateDBProxyEndpoint
+      description: ' Creates a <code>DBProxyEndpoint</code>. Only applies to proxies that are associated with Aurora DB clusters. You can use DB proxy endpoints to specify read/write or read-only access to the DB cluster. You can also use DB proxy endpoints to access a DB proxy through a different VPC than the proxy''s default VPC. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateDBProxyEndpointResponse'
+        '480':
+          description: InvalidSubnet
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+        '481':
+          description: DBProxyNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyNotFoundFault'
+        '482':
+          description: DBProxyEndpointAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointAlreadyExistsFault'
+        '483':
+          description: DBProxyEndpointQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointQuotaExceededFault'
+        '484':
+          description: InvalidDBProxyStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBProxyStateFault'
+      parameters:
+        - name: DBProxyName
+          in: query
+          required: true
+          description: The name of the DB proxy associated with the DB proxy endpoint that you create.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*'
+            minLength: 1
+            maxLength: 63
+        - name: DBProxyEndpointName
+          in: query
+          required: true
+          description: The name of the DB proxy endpoint to create.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*'
+            minLength: 1
+            maxLength: 63
+        - name: VpcSubnetIds
+          in: query
+          required: true
+          description: The VPC subnet IDs for the DB proxy endpoint that you create. You can specify a different set of subnet IDs than for the original DB proxy.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: VpcSecurityGroupIds
+          in: query
+          required: false
+          description: The VPC security group IDs for the DB proxy endpoint that you create. You can specify a different set of security group IDs than for the original DB proxy. The default is the default security group for the VPC.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: TargetRole
+          in: query
+          required: false
+          description: A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations. The default is <code>READ_WRITE</code>.
+          schema:
+            type: string
+            enum:
+              - READ_WRITE
+              - READ_ONLY
+        - name: Tags
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: array
+            description: 'A list of tags. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> '
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateDBProxyEndpoint
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateDBProxyEndpoint
+      operationId: POST_CreateDBProxyEndpoint
+      description: ' Creates a <code>DBProxyEndpoint</code>. Only applies to proxies that are associated with Aurora DB clusters. You can use DB proxy endpoints to specify read/write or read-only access to the DB cluster. You can also use DB proxy endpoints to access a DB proxy through a different VPC than the proxy''s default VPC. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateDBProxyEndpointResponse'
+        '480':
+          description: InvalidSubnet
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+        '481':
+          description: DBProxyNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyNotFoundFault'
+        '482':
+          description: DBProxyEndpointAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointAlreadyExistsFault'
+        '483':
+          description: DBProxyEndpointQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointQuotaExceededFault'
+        '484':
+          description: InvalidDBProxyStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBProxyStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateDBProxyEndpointRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateDBProxyEndpoint
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
   /#Action=CreateDBSecurityGroup:
     get:
       x-aws-operation-name: CreateDBSecurityGroup
@@ -6185,7 +6366,7 @@ paths:
     get:
       x-aws-operation-name: DeleteDBProxy
       operationId: GET_DeleteDBProxy
-      description: Deletes an existing proxy.
+      description: Deletes an existing DB proxy.
       responses:
         '200':
           description: Success
@@ -6237,7 +6418,7 @@ paths:
     post:
       x-aws-operation-name: DeleteDBProxy
       operationId: POST_DeleteDBProxy
-      description: Deletes an existing proxy.
+      description: Deletes an existing DB proxy.
       responses:
         '200':
           description: Success
@@ -6270,6 +6451,105 @@ paths:
             type: string
             enum:
               - DeleteDBProxy
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+  /#Action=DeleteDBProxyEndpoint:
+    get:
+      x-aws-operation-name: DeleteDBProxyEndpoint
+      operationId: GET_DeleteDBProxyEndpoint
+      description: 'Deletes a <code>DBProxyEndpoint</code>. Doing so removes the ability to access the DB proxy using the endpoint that you defined. The endpoint that you delete might have provided capabilities such as read/write or read-only operations, or using a different VPC than the DB proxy''s default VPC.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteDBProxyEndpointResponse'
+        '480':
+          description: DBProxyEndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointNotFoundFault'
+        '481':
+          description: InvalidDBProxyEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBProxyEndpointStateFault'
+      parameters:
+        - name: DBProxyEndpointName
+          in: query
+          required: true
+          description: The name of the DB proxy endpoint to delete.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*'
+            minLength: 1
+            maxLength: 63
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteDBProxyEndpoint
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteDBProxyEndpoint
+      operationId: POST_DeleteDBProxyEndpoint
+      description: 'Deletes a <code>DBProxyEndpoint</code>. Doing so removes the ability to access the DB proxy using the endpoint that you defined. The endpoint that you delete might have provided capabilities such as read/write or read-only operations, or using a different VPC than the DB proxy''s default VPC.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteDBProxyEndpointResponse'
+        '480':
+          description: DBProxyEndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointNotFoundFault'
+        '481':
+          description: InvalidDBProxyEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBProxyEndpointStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteDBProxyEndpointRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteDBProxyEndpoint
         - name: Version
           in: query
           required: true
@@ -9025,7 +9305,7 @@ paths:
         - name: DBProxyName
           in: query
           required: false
-          description: The name of the DB proxy.
+          description: 'The name of the DB proxy. If you omit this parameter, the output includes information about all DB proxies owned by your AWS account ID.'
           schema:
             type: string
         - name: Filters
@@ -9117,6 +9397,151 @@ paths:
             type: string
             enum:
               - DescribeDBProxies
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+  /#Action=DescribeDBProxyEndpoints:
+    get:
+      x-aws-operation-name: DescribeDBProxyEndpoints
+      operationId: GET_DescribeDBProxyEndpoints
+      description: Returns information about DB proxy endpoints.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeDBProxyEndpointsResponse'
+        '480':
+          description: DBProxyNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyNotFoundFault'
+        '481':
+          description: DBProxyEndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointNotFoundFault'
+      parameters:
+        - name: DBProxyName
+          in: query
+          required: false
+          description: 'The name of the DB proxy whose endpoints you want to describe. If you omit this parameter, the output includes information about all DB proxy endpoints associated with all your DB proxies.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*'
+            minLength: 1
+            maxLength: 63
+        - name: DBProxyEndpointName
+          in: query
+          required: false
+          description: 'The name of a DB proxy endpoint to describe. If you omit this parameter, the output includes information about all DB proxy endpoints associated with the specified proxy.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*'
+            minLength: 1
+            maxLength: 63
+        - name: Filters
+          in: query
+          required: false
+          description: This parameter is not currently supported.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Filter'
+                - xml:
+                    name: Filter
+        - name: Marker
+          in: query
+          required: false
+          description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+          schema:
+            type: string
+        - name: MaxRecords
+          in: query
+          required: false
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          schema:
+            type: integer
+            minimum: 20
+            maximum: 100
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDBProxyEndpoints
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeDBProxyEndpoints
+      operationId: POST_DescribeDBProxyEndpoints
+      description: Returns information about DB proxy endpoints.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeDBProxyEndpointsResponse'
+        '480':
+          description: DBProxyNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyNotFoundFault'
+        '481':
+          description: DBProxyEndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeDBProxyEndpointsRequest'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDBProxyEndpoints
         - name: Version
           in: query
           required: true
@@ -14330,6 +14755,146 @@ paths:
             type: string
             enum:
               - ModifyDBProxy
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+  /#Action=ModifyDBProxyEndpoint:
+    get:
+      x-aws-operation-name: ModifyDBProxyEndpoint
+      operationId: GET_ModifyDBProxyEndpoint
+      description: Changes the settings for an existing DB proxy endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyDBProxyEndpointResponse'
+        '480':
+          description: DBProxyEndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointNotFoundFault'
+        '481':
+          description: DBProxyEndpointAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointAlreadyExistsFault'
+        '482':
+          description: InvalidDBProxyEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBProxyEndpointStateFault'
+        '483':
+          description: InvalidDBProxyStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBProxyStateFault'
+      parameters:
+        - name: DBProxyEndpointName
+          in: query
+          required: true
+          description: The name of the DB proxy sociated with the DB proxy endpoint that you want to modify.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*'
+            minLength: 1
+            maxLength: 63
+        - name: NewDBProxyEndpointName
+          in: query
+          required: false
+          description: 'The new identifier for the <code>DBProxyEndpoint</code>. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can''t end with a hyphen or contain two consecutive hyphens.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*'
+            minLength: 1
+            maxLength: 63
+        - name: VpcSecurityGroupIds
+          in: query
+          required: false
+          description: 'The VPC security group IDs for the DB proxy endpoint. When the DB proxy endpoint uses a different VPC than the original proxy, you also specify a different set of security group IDs than for the original proxy.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyDBProxyEndpoint
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyDBProxyEndpoint
+      operationId: POST_ModifyDBProxyEndpoint
+      description: Changes the settings for an existing DB proxy endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyDBProxyEndpointResponse'
+        '480':
+          description: DBProxyEndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointNotFoundFault'
+        '481':
+          description: DBProxyEndpointAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBProxyEndpointAlreadyExistsFault'
+        '482':
+          description: InvalidDBProxyEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBProxyEndpointStateFault'
+        '483':
+          description: InvalidDBProxyStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBProxyStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ModifyDBProxyEndpointRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyDBProxyEndpoint
         - name: Version
           in: query
           required: true
@@ -21507,6 +22072,16 @@ components:
       description: Specifies the details of authentication used by a proxy to log in as a specific database user.
     DBProxyAlreadyExistsFault: {}
     DBProxyQuotaExceededFault: {}
+    CreateDBProxyEndpointResponse:
+      type: object
+      properties:
+        DBProxyEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpoint'
+            - description: 'The <code>DBProxyEndpoint</code> object that is created by the API operation. The DB proxy endpoint that you create might provide capabilities such as read/write or read-only operations, or using a different VPC than the proxy''s default VPC.'
+    DBProxyEndpointAlreadyExistsFault: {}
+    DBProxyEndpointQuotaExceededFault: {}
+    InvalidDBProxyStateFault: {}
     CreateDBSecurityGroupResult:
       type: object
       properties:
@@ -21589,7 +22164,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/DBProxy'
             - description: The data structure representing the details of the DB proxy that you delete.
-    InvalidDBProxyStateFault: {}
+    DeleteDBProxyEndpointResponse:
+      type: object
+      properties:
+        DBProxyEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpoint'
+            - description: The data structure representing the details of the DB proxy endpoint that you delete.
+    DBProxyEndpointNotFoundFault: {}
+    InvalidDBProxyEndpointStateFault: {}
     DeleteDBSnapshotResult:
       type: object
       properties:
@@ -21852,6 +22435,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/DBProxyList'
             - description: A return value representing an arbitrary number of <code>DBProxy</code> data structures.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+    DescribeDBProxyEndpointsResponse:
+      type: object
+      properties:
+        DBProxyEndpoints:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpointList'
+            - description: The list of <code>ProxyEndpoint</code> objects returned by the API operation.
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22240,6 +22834,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/DBProxy'
             - description: The <code>DBProxy</code> object representing the new settings for the proxy.
+    ModifyDBProxyEndpointResponse:
+      type: object
+      properties:
+        DBProxyEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpoint'
+            - description: The <code>DBProxyEndpoint</code> object representing the new settings for the DB proxy endpoint.
     ModifyDBProxyTargetGroupResponse:
       type: object
       properties:
@@ -24564,6 +25165,99 @@ components:
             - $ref: '#/components/schemas/TagList'
             - description: Tags to assign to the DB parameter group.
       description: <p/>
+    DBProxyName:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*'
+      minLength: 1
+      maxLength: 63
+    DBProxyEndpointName:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*'
+      minLength: 1
+      maxLength: 63
+    DBProxyEndpointTargetRole:
+      type: string
+      enum:
+        - READ_WRITE
+        - READ_ONLY
+    CreateDBProxyEndpointRequest:
+      type: object
+      required:
+        - DBProxyName
+        - DBProxyEndpointName
+        - VpcSubnetIds
+      title: CreateDBProxyEndpointRequest
+      properties:
+        DBProxyName:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyName'
+            - description: The name of the DB proxy associated with the DB proxy endpoint that you create.
+        DBProxyEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpointName'
+            - description: The name of the DB proxy endpoint to create.
+        VpcSubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The VPC subnet IDs for the DB proxy endpoint that you create. You can specify a different set of subnet IDs than for the original DB proxy.
+        VpcSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The VPC security group IDs for the DB proxy endpoint that you create. You can specify a different set of security group IDs than for the original DB proxy. The default is the default security group for the VPC.
+        TargetRole:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpointTargetRole'
+            - description: A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations. The default is <code>READ_WRITE</code>.
+        Tags:
+          $ref: '#/components/schemas/TagList'
+    DBProxyEndpoint:
+      type: object
+      properties:
+        DBProxyEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name for the DB proxy endpoint. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can''t end with a hyphen or contain two consecutive hyphens.'
+        DBProxyEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the DB proxy endpoint.
+        DBProxyName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the DB proxy that is associated with this DB proxy endpoint.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpointStatus'
+            - description: 'The current status of this DB proxy endpoint. A status of <code>available</code> means the endpoint is ready to handle requests. Other values indicate that you must wait for the endpoint to be ready, or take some action to resolve an issue.'
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provides the VPC ID of the DB proxy endpoint.
+        VpcSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Provides a list of VPC security groups that the DB proxy endpoint belongs to.
+        VpcSubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The EC2 subnet IDs for the DB proxy endpoint.
+        Endpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.
+        CreatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date and time when the DB proxy endpoint was first created.
+        TargetRole:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpointTargetRole'
+            - description: A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.
+        IsDefault:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether this endpoint is the default endpoint for the associated DB proxy. Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the DB proxy can be either read/write or read-only.
+      description: '<p>The data structure representing an endpoint associated with a DB proxy. RDS automatically creates one endpoint for each DB proxy. For Aurora DB clusters, you can associate additional endpoints with the same DB proxy. These endpoints can be read/write or read-only. They can also reside in different VPCs than the associated DB proxy.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyEndpoints</code> operation.</p>'
     EngineFamily:
       type: string
       enum:
@@ -24642,6 +25336,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provides the VPC ID of the DB proxy.
         VpcSecurityGroupIds:
           allOf:
             - $ref: '#/components/schemas/StringList'
@@ -24661,7 +25359,7 @@ components:
         Endpoint:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
+            - description: The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.
         RequireTLS:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -25638,6 +26336,19 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UserAuthConfigInfo'
+    DBProxyEndpointStatus:
+      type: string
+      enum:
+        - available
+        - modifying
+        - incompatible-network
+        - insufficient-resource-limits
+        - creating
+        - deleting
+    DBProxyEndpointList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DBProxyEndpoint'
     DBProxyList:
       type: array
       items:
@@ -25648,6 +26359,12 @@ components:
         - RDS_INSTANCE
         - RDS_SERVERLESS_ENDPOINT
         - TRACKED_CLUSTER
+    TargetRole:
+      type: string
+      enum:
+        - READ_WRITE
+        - READ_ONLY
+        - UNKNOWN
     TargetHealth:
       type: object
       properties:
@@ -25691,6 +26408,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TargetType'
             - description: 'Specifies the kind of database, such as an RDS DB instance or an Aurora DB cluster, that the target represents.'
+        Role:
+          allOf:
+            - $ref: '#/components/schemas/TargetRole'
+            - description: A value that indicates whether the target of the proxy can be used for read/write or read-only operations.
         TargetHealth:
           allOf:
             - $ref: '#/components/schemas/TargetHealth'
@@ -25925,6 +26646,16 @@ components:
             - $ref: '#/components/schemas/String'
             - description: '<p>The name of the DB parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must be the name of an existing DB parameter group</p> </li> <li> <p>You can''t delete a default DB parameter group</p> </li> <li> <p>Can''t be associated with any DB instances</p> </li> </ul>'
       description: <p/>
+    DeleteDBProxyEndpointRequest:
+      type: object
+      required:
+        - DBProxyEndpointName
+      title: DeleteDBProxyEndpointRequest
+      properties:
+        DBProxyEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpointName'
+            - description: The name of the DB proxy endpoint to delete.
     DeleteDBProxyRequest:
       type: object
       required:
@@ -26467,7 +27198,31 @@ components:
         DBProxyName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the DB proxy.
+            - description: 'The name of the DB proxy. If you omit this parameter, the output includes information about all DB proxies owned by your AWS account ID.'
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: This parameter is not currently supported.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/MaxRecords'
+            - description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+    DescribeDBProxyEndpointsRequest:
+      type: object
+      title: DescribeDBProxyEndpointsRequest
+      properties:
+        DBProxyName:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyName'
+            - description: 'The name of the DB proxy whose endpoints you want to describe. If you omit this parameter, the output includes information about all DB proxy endpoints associated with all your DB proxies.'
+        DBProxyEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpointName'
+            - description: 'The name of a DB proxy endpoint to describe. If you omit this parameter, the output includes information about all DB proxy endpoints associated with the specified proxy.'
         Filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
@@ -27859,6 +28614,24 @@ components:
             - $ref: '#/components/schemas/ParametersList'
             - description: '<p>An array of parameter names, values, and the apply method for the parameter update. At least one parameter name, value, and apply method must be supplied; later arguments are optional. A maximum of 20 parameters can be modified in a single request.</p> <p>Valid Values (for the application method): <code>immediate | pending-reboot</code> </p> <note> <p>You can use the immediate value with dynamic parameters only. You can use the pending-reboot value for both dynamic and static parameters, and changes are applied when you reboot the DB instance without failover.</p> </note>'
       description: <p/>
+    ModifyDBProxyEndpointRequest:
+      type: object
+      required:
+        - DBProxyEndpointName
+      title: ModifyDBProxyEndpointRequest
+      properties:
+        DBProxyEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpointName'
+            - description: The name of the DB proxy sociated with the DB proxy endpoint that you want to modify.
+        NewDBProxyEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/DBProxyEndpointName'
+            - description: 'The new identifier for the <code>DBProxyEndpoint</code>. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can''t end with a hyphen or contain two consecutive hyphens.'
+        VpcSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: 'The VPC security group IDs for the DB proxy endpoint. When the DB proxy endpoint uses a different VPC than the original proxy, you also specify a different set of security group IDs than for the original proxy.'
     ModifyDBProxyRequest:
       type: object
       required:
@@ -29898,6 +30671,7 @@ components:
         - CONNECTION_FAILED
         - AUTH_FAILURE
         - PENDING_PROXY_CAPACITY
+        - INVALID_REPLICATION_STATE
     UpgradeTarget:
       type: object
       properties:

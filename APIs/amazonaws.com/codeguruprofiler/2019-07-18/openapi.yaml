@@ -3,7 +3,7 @@ info:
   version: '2019-07-18'
   x-release: v4
   title: Amazon CodeGuru Profiler
-  description: '<p>This section provides documentation for the Amazon CodeGuru Profiler API operations.</p> <pre><code> &lt;p&gt;Amazon CodeGuru Profiler collects runtime performance data from your live applications, and provides recommendations that can help you fine-tune your application performance. Using machine learning algorithms, CodeGuru Profiler can help you find your most expensive lines of code and suggest ways you can improve efficiency and remove CPU bottlenecks. &lt;/p&gt; &lt;p&gt;Amazon CodeGuru Profiler provides different visualizations of profiling data to help you identify what code is running on the CPU, see how much time is consumed, and suggest ways to reduce CPU utilization. &lt;/p&gt; &lt;note&gt; &lt;p&gt;Amazon CodeGuru Profiler currently supports applications written in all Java virtual machine (JVM) languages. While CodeGuru Profiler supports both visualizations and recommendations for applications written in Java, it can also generate visualizations and a subset of recommendations for applications written in other JVM languages.&lt;/p&gt; &lt;/note&gt; &lt;p&gt; For more information, see &lt;a href=&quot;https://docs.aws.amazon.com/codeguru/latest/profiler-ug/what-is-codeguru-profiler.html&quot;&gt;What is Amazon CodeGuru Profiler&lt;/a&gt; in the &lt;i&gt;Amazon CodeGuru Profiler User Guide&lt;/i&gt;. &lt;/p&gt; </code></pre>'
+  description: '<p> This section provides documentation for the Amazon CodeGuru Profiler API operations. </p> <p> Amazon CodeGuru Profiler collects runtime performance data from your live applications, and provides recommendations that can help you fine-tune your application performance. Using machine learning algorithms, CodeGuru Profiler can help you find your most expensive lines of code and suggest ways you can improve efficiency and remove CPU bottlenecks. </p> <p> Amazon CodeGuru Profiler provides different visualizations of profiling data to help you identify what code is running on the CPU, see how much time is consumed, and suggest ways to reduce CPU utilization. </p> <note> <p>Amazon CodeGuru Profiler currently supports applications written in all Java virtual machine (JVM) languages and Python. While CodeGuru Profiler supports both visualizations and recommendations for applications written in Java, it can also generate visualizations and a subset of recommendations for applications written in other JVM languages and Python.</p> </note> <p> For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-ug/what-is-codeguru-profiler.html">What is Amazon CodeGuru Profiler</a> in the <i>Amazon CodeGuru Profiler User Guide</i>. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -314,9 +314,9 @@ paths:
           schema:
             type: string
             enum:
-              - P1D
-              - PT1H
               - PT5M
+              - PT1H
+              - P1D
       requestBody:
         required: true
         content:
@@ -340,7 +340,7 @@ paths:
   '/profilingGroups/{profilingGroupName}/configureAgent':
     post:
       operationId: ConfigureAgent
-      description: ' Used by profiler agents to report their current state and to receive remote configuration updates. For example, <code>ConfigureAgent</code> can be used to tell and agent whether to profile or not and for how long to return profiling data. '
+      description: ' Used by profiler agents to report their current state and to receive remote configuration updates. For example, <code>ConfigureAgent</code> can be used to tell an agent whether to profile or not and for how long to return profiling data. '
       responses:
         '200':
           description: Success
@@ -479,8 +479,8 @@ paths:
                   description: ' The compute platform of the profiling group. Use <code>AWSLambda</code> if your application runs on AWS Lambda. Use <code>Default</code> if your application runs on a compute platform that is not AWS Lambda, such an Amazon EC2 instance, an on-premises server, or a different platform. If not specified, <code>Default</code> is used. '
                   type: string
                   enum:
-                    - AWSLambda
                     - Default
+                    - AWSLambda
                 profilingGroupName:
                   description: The name of the profiling group to create.
                   type: string
@@ -518,18 +518,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
-        '482':
+        '483':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '483':
+        '484':
           description: ResourceNotFoundException
           content:
             application/json:
@@ -1092,8 +1098,8 @@ paths:
           schema:
             type: string
             enum:
-              - TimestampAscending
               - TimestampDescending
+              - TimestampAscending
         - name: period
           in: query
           required: true
@@ -1101,9 +1107,9 @@ paths:
           schema:
             type: string
             enum:
-              - P1D
-              - PT1H
               - PT5M
+              - PT1H
+              - P1D
         - name: profilingGroupName
           in: path
           required: true
@@ -1645,8 +1651,8 @@ paths:
                   description: ' The feedback tpye. Thee are two valid values, <code>Positive</code> and <code>Negative</code>. '
                   type: string
                   enum:
-                    - Negative
                     - Positive
+                    - Negative
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2153,11 +2159,11 @@ components:
     AgentParameterField:
       type: string
       enum:
-        - MaxStackDepth
-        - MemoryUsageLimitPercent
-        - MinimumTimeForReportingInMilliseconds
-        - ReportingIntervalInMilliseconds
         - SamplingIntervalInMilliseconds
+        - ReportingIntervalInMilliseconds
+        - MinimumTimeForReportingInMilliseconds
+        - MemoryUsageLimitPercent
+        - MaxStackDepth
     AgentProfile:
       type: string
     AggregatedProfile:
@@ -2165,9 +2171,9 @@ components:
     AggregationPeriod:
       type: string
       enum:
-        - P1D
-        - PT1H
         - PT5M
+        - PT1H
+        - P1D
     Timestamp:
       type: string
       format: date-time
@@ -2316,8 +2322,8 @@ components:
     ComputePlatform:
       type: string
       enum:
-        - AWSLambda
         - Default
+        - AWSLambda
     FleetInstanceId:
       type: string
       minLength: 1
@@ -2422,8 +2428,8 @@ components:
     FeedbackType:
       type: string
       enum:
-        - Negative
         - Positive
+        - Negative
     FindingsReportId:
       type: string
       pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
@@ -2479,7 +2485,10 @@ components:
     FrameMetricValues:
       type: array
       items:
-        $ref: '#/components/schemas/Double'
+        $ref: '#/components/schemas/FrameMetricValue'
+    FrameMetricValue:
+      type: number
+      format: double
     MaxResults:
       type: integer
       minimum: 1
@@ -2546,8 +2555,8 @@ components:
     OrderBy:
       type: string
       enum:
-        - TimestampAscending
         - TimestampDescending
+        - TimestampAscending
     ListProfileTimesRequest:
       type: object
       title: ListProfileTimesRequest
@@ -2599,15 +2608,15 @@ components:
     MetadataField:
       type: string
       enum:
+        - ComputePlatform
         - AgentId
         - AwsRequestId
-        - ComputePlatform
         - ExecutionEnvironment
         - LambdaFunctionArn
         - LambdaMemoryLimitInMB
-        - LambdaPreviousExecutionTimeInMilliseconds
         - LambdaRemainingTimeInMilliseconds
         - LambdaTimeGapBetweenInvokesInMilliseconds
+        - LambdaPreviousExecutionTimeInMilliseconds
     Strings:
       type: array
       items:

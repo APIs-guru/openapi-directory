@@ -532,7 +532,7 @@ paths:
     get:
       x-aws-operation-name: BatchPutScheduledUpdateGroupAction
       operationId: GET_BatchPutScheduledUpdateGroupAction
-      description: 'Creates or updates one or more scheduled scaling actions for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.'
+      description: Creates or updates one or more scheduled scaling actions for an Auto Scaling group.
       responses:
         '200':
           description: Success
@@ -601,7 +601,7 @@ paths:
     post:
       x-aws-operation-name: BatchPutScheduledUpdateGroupAction
       operationId: POST_BatchPutScheduledUpdateGroupAction
-      description: 'Creates or updates one or more scheduled scaling actions for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.'
+      description: Creates or updates one or more scheduled scaling actions for an Auto Scaling group.
       responses:
         '200':
           description: Success
@@ -5485,7 +5485,7 @@ paths:
     get:
       x-aws-operation-name: PutScheduledUpdateGroupAction
       operationId: GET_PutScheduledUpdateGroupAction
-      description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -5543,14 +5543,14 @@ paths:
         - name: EndTime
           in: query
           required: false
-          description: The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling does not perform the action after this time.
+          description: 'The date and time for the recurring schedule to end, in UTC.'
           schema:
             type: string
             format: date-time
         - name: Recurrence
           in: query
           required: false
-          description: '<p>The recurring schedule for this action, in Unix cron syntax format. This format consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example, <code>"30 0 1 1,6,12 *"</code>). For more information about this format, see <a href="http://crontab.org">Crontab</a>.</p> <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring action starts and stops.</p>'
+          description: '<p>The recurring schedule for this action. This format consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example, <code>"30 0 1 1,6,12 *"</code>). For more information about this format, see <a href="http://crontab.org">Crontab</a>.</p> <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring action starts and stops.</p> <p>Cron expressions use Universal Coordinated Time (UTC) by default.</p>'
           schema:
             type: string
             minLength: 1
@@ -5574,6 +5574,15 @@ paths:
           description: 'The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain. It can scale beyond this capacity if you add more scaling conditions. '
           schema:
             type: integer
+        - name: TimeZone
+          in: query
+          required: false
+          description: '<p>Specifies the time zone for a cron expression. If a time zone is not provided, UTC is used by default. </p> <p>Valid values are the canonical names of the IANA time zones, derived from the IANA Time Zone Database (such as <code>Etc/GMT+9</code> or <code>Pacific/Tahiti</code>). For more information, see <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</a>.</p>'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+            x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: Action
           in: query
           required: true
@@ -5599,7 +5608,7 @@ paths:
     post:
       x-aws-operation-name: PutScheduledUpdateGroupAction
       operationId: POST_PutScheduledUpdateGroupAction
-      description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group. If you leave a parameter unspecified when updating a scheduled scaling action, the corresponding value remains unchanged.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      description: '<p>Creates or updates a scheduled scaling action for an Auto Scaling group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html">Scheduled scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -6855,11 +6864,11 @@ components:
         EndTime:
           allOf:
             - $ref: '#/components/schemas/TimestampType'
-            - description: The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling does not perform the action after this time.
+            - description: 'The date and time for the recurring schedule to end, in UTC.'
         Recurrence:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen255'
-            - description: '<p>The recurring schedule for the action, in Unix cron syntax format. This format consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example, <code>"30 0 1 1,6,12 *"</code>). For more information about this format, see <a href="http://crontab.org">Crontab</a>.</p> <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring action starts and stops.</p>'
+            - description: '<p>The recurring schedule for the action, in Unix cron syntax format. This format consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example, <code>"30 0 1 1,6,12 *"</code>). For more information about this format, see <a href="http://crontab.org">Crontab</a>.</p> <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring action starts and stops.</p> <p>Cron expressions use Universal Coordinated Time (UTC) by default.</p>'
         MinSize:
           allOf:
             - $ref: '#/components/schemas/AutoScalingGroupMinSize'
@@ -6872,7 +6881,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoScalingGroupDesiredCapacity'
             - description: The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.
-      description: '<p>Describes information used for one or more scheduled scaling action updates in a <a>BatchPutScheduledUpdateGroupAction</a> operation.</p> <p>When updating a scheduled scaling action, all optional parameters are left unchanged if not specified.</p>'
+        TimeZone:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
+            - description: '<p>Specifies the time zone for a cron expression. If a time zone is not provided, UTC is used by default. </p> <p>Valid values are the canonical names of the IANA time zones, derived from the IANA Time Zone Database (such as <code>Etc/GMT+9</code> or <code>Pacific/Tahiti</code>). For more information, see <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</a>.</p>'
+      description: Describes information used for one or more scheduled scaling action updates in a <a>BatchPutScheduledUpdateGroupAction</a> operation.
     AlreadyExistsFault: {}
     LimitExceededFault: {}
     CancelInstanceRefreshAnswer:
@@ -9628,11 +9641,11 @@ components:
         EndTime:
           allOf:
             - $ref: '#/components/schemas/TimestampType'
-            - description: The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling does not perform the action after this time.
+            - description: 'The date and time for the recurring schedule to end, in UTC.'
         Recurrence:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen255'
-            - description: '<p>The recurring schedule for this action, in Unix cron syntax format. This format consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example, <code>"30 0 1 1,6,12 *"</code>). For more information about this format, see <a href="http://crontab.org">Crontab</a>.</p> <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring action starts and stops.</p>'
+            - description: '<p>The recurring schedule for this action. This format consists of five fields separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for example, <code>"30 0 1 1,6,12 *"</code>). For more information about this format, see <a href="http://crontab.org">Crontab</a>.</p> <p>When <code>StartTime</code> and <code>EndTime</code> are specified with <code>Recurrence</code>, they form the boundaries of when the recurring action starts and stops.</p> <p>Cron expressions use Universal Coordinated Time (UTC) by default.</p>'
         MinSize:
           allOf:
             - $ref: '#/components/schemas/AutoScalingGroupMinSize'
@@ -9645,6 +9658,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoScalingGroupDesiredCapacity'
             - description: 'The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain. It can scale beyond this capacity if you add more scaling conditions. '
+        TimeZone:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
+            - description: '<p>Specifies the time zone for a cron expression. If a time zone is not provided, UTC is used by default. </p> <p>Valid values are the canonical names of the IANA time zones, derived from the IANA Time Zone Database (such as <code>Etc/GMT+9</code> or <code>Pacific/Tahiti</code>). For more information, see <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</a>.</p>'
     RecordLifecycleActionHeartbeatType:
       type: object
       required:
@@ -9809,6 +9826,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoScalingGroupDesiredCapacity'
             - description: The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.
+        TimeZone:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
+            - description: The time zone for the cron expression.
       description: Describes a scheduled scaling action.
     SetDesiredCapacityType:
       type: object
