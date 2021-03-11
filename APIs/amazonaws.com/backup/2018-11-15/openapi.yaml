@@ -1083,7 +1083,7 @@ paths:
   '/backup-vaults/{backupVaultName}/recovery-points/{recoveryPointArn}':
     delete:
       operationId: DeleteRecoveryPoint
-      description: Deletes the recovery point specified by a recovery point ID.
+      description: '<p>Deletes the recovery point specified by a recovery point ID.</p> <p>If the recovery point ID belongs to a continuous backup, calling this endpoint deletes the existing continuous backup and stops future continuous backup.</p>'
       responses:
         '200':
           description: Success
@@ -1106,12 +1106,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/MissingParameterValueException'
         '483':
+          description: InvalidResourceStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateException'
+        '484':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '484':
+        '485':
           description: InvalidRequestException
           content:
             application/json:
@@ -1189,7 +1195,7 @@ paths:
             type: string
     post:
       operationId: UpdateRecoveryPointLifecycle
-      description: '<p>Sets the transition lifecycle of a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. </p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. </p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>'
+      description: '<p>Sets the transition lifecycle of a recovery point.</p> <p>The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.</p> <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.</p> <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p> <p>Does not support continuous backups.</p>'
       responses:
         '200':
           description: Success
@@ -1415,6 +1421,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/DescribeGlobalSettingsOutput'
         '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
           description: ServiceUnavailableException
           content:
             application/json:
@@ -1641,6 +1653,71 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/backup-vaults/{backupVaultName}/recovery-points/{recoveryPointArn}/disassociate':
+    post:
+      operationId: DisassociateRecoveryPoint
+      description: '<p>Deletes the specified continuous backup recovery point from AWS Backup and releases control of that continuous backup to the source service, such as Amazon RDS. The source service will continue to create and retain continuous backups using the lifecycle that you specified in your original backup plan.</p> <p>Does not support snapshot backup recovery points.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '483':
+          description: InvalidResourceStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: backupVaultName
+          in: path
+          required: true
+          description: The unique name of an AWS Backup vault. Required.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
+        - name: recoveryPointArn
+          in: path
+          required: true
+          description: An Amazon Resource Name (ARN) that uniquely identifies an AWS Backup recovery point. Required.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/backup/plans/{backupPlanId}/toTemplate/':
     get:
       operationId: ExportBackupPlanTemplate
@@ -1694,7 +1771,7 @@ paths:
   '/backup/plans/{backupPlanId}/':
     get:
       operationId: GetBackupPlan
-      description: 'Returns <code>BackupPlan</code> details for the specified <code>BackupPlanId</code>. Returns the body of a backup plan in JSON format, in addition to plan metadata.'
+      description: 'Returns <code>BackupPlan</code> details for the specified <code>BackupPlanId</code>. The details are the body of a backup plan in JSON format, in addition to plan metadata.'
       responses:
         '200':
           description: Success
@@ -1944,7 +2021,7 @@ paths:
   /backup-jobs/:
     get:
       operationId: ListBackupJobs
-      description: Returns a list of existing backup jobs for an authenticated account.
+      description: 'Returns a list of existing backup jobs for an authenticated account for the last 30 days. For a longer period of time, consider using these <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html">monitoring tools</a>.'
       responses:
         '200':
           description: Success
@@ -2914,7 +2991,7 @@ paths:
   /copy-jobs:
     put:
       operationId: StartCopyJob
-      description: Starts a job to create a one-time copy of the specified resource.
+      description: <p>Starts a job to create a one-time copy of the specified resource.</p> <p>Does not support continuous backups.</p>
       responses:
         '200':
           description: Success
@@ -2952,6 +3029,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
       parameters: []
       requestBody:
         required: true
@@ -3004,7 +3087,7 @@ paths:
   /restore-jobs:
     put:
       operationId: StartRestoreJob
-      description: 'Recovers the saved resource identified by an Amazon Resource Name (ARN). '
+      description: Recovers the saved resource identified by an Amazon Resource Name (ARN).
       responses:
         '200':
           description: Success
@@ -3128,7 +3211,7 @@ paths:
                 - Tags
               properties:
                 Tags:
-                  description: 'Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create. '
+                  description: Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create.
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
@@ -3356,6 +3439,7 @@ components:
             - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited.'
     ResourceNotFoundException: {}
     InvalidRequestException: {}
+    InvalidResourceStateException: {}
     DescribeBackupJobOutput:
       type: object
       properties:
@@ -4299,6 +4383,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CopyAction'
+    Boolean:
+      type: boolean
     BackupRule:
       type: object
       required:
@@ -4341,6 +4427,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CopyActions'
             - description: 'An array of <code>CopyAction</code> objects, which contains the details of the copy operation.'
+        EnableContinuousBackup:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
       description: Specifies a scheduled task used to back up a selection of resources.
     BackupRuleInput:
       type: object
@@ -4380,6 +4470,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CopyActions'
             - description: 'An array of <code>CopyAction</code> objects, which contains the details of the copy operation.'
+        EnableContinuousBackup:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
       description: Specifies a scheduled task used to back up a selection of resources.
     BackupSelection:
       type: object
@@ -4474,8 +4568,6 @@ components:
         $ref: '#/components/schemas/BackupVaultListMember'
     long:
       type: integer
-    Boolean:
-      type: boolean
     CalculatedLifecycle:
       type: object
       properties:
@@ -4595,7 +4687,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. '
+            - description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
       description: Contains detailed information about a copy job.
     CopyJobsList:
       type: array
@@ -4738,6 +4830,10 @@ components:
         - COMPLETED
         - ABORTED
         - FAILED
+    DisassociateRecoveryPointInput:
+      type: object
+      title: DisassociateRecoveryPointInput
+      properties: {}
     ExportBackupPlanTemplateInput:
       type: object
       title: ExportBackupPlanTemplateInput
@@ -5175,7 +5271,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: 'Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create. '
+            - description: Key-value pairs that are used to help organize your resources. You can assign your own metadata to the resources you create.
     UntagResourceInput:
       type: object
       required:

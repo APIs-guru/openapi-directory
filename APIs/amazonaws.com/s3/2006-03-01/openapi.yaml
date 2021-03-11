@@ -6069,12 +6069,10 @@ components:
       type: object
       example:
         Deleted:
-          - DeleteMarker: 'true'
-            DeleteMarkerVersionId: A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F
-            Key: objectkey1
-          - DeleteMarker: 'true'
-            DeleteMarkerVersionId: iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt
-            Key: objectkey2
+          - Key: HappyFace.jpg
+            VersionId: yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd
+          - Key: HappyFace.jpg
+            VersionId: 2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b
       properties:
         Deleted:
           allOf:
@@ -6367,12 +6365,12 @@ components:
       type: object
       example:
         AcceptRanges: bytes
-        ContentLength: '10'
-        ContentRange: bytes 0-9/43
-        ContentType: text/plain
-        ETag: '"0d94420ffd0bc68cd3d152506b97a9cc"'
-        LastModified: 'Thu, 09 Oct 2014 22:57:28 GMT'
+        ContentLength: '3191'
+        ContentType: image/jpeg
+        ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
+        LastModified: 'Thu, 15 Dec 2016 01:19:41 GMT'
         Metadata: {}
+        TagCount: 2
         VersionId: 'null'
       properties:
         Body:
@@ -6602,34 +6600,27 @@ components:
     ListMultipartUploadsOutput:
       type: object
       example:
-        Bucket: acl1
-        IsTruncated: true
-        KeyMarker: ''
-        MaxUploads: '2'
-        NextKeyMarker: someobjectkey
-        NextUploadIdMarker: examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--
-        UploadIdMarker: ''
         Uploads:
           - Initiated: '2014-05-01T05:40:58.000Z'
             Initiator:
-              DisplayName: ownder-display-name
+              DisplayName: display-name
               ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
             Key: JavaFile
             Owner:
-              DisplayName: mohanataws
-              ID: 852b113e7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
+              DisplayName: display-name
+              ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
             StorageClass: STANDARD
-            UploadId: gZ30jIqlUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--
+            UploadId: examplelUa.CInXklLQtSMJITdUnoZ1Y5GACB5UckOtspm5zbDMCkPF_qkfZzMiFZ6dksmcnqxJyIBvQMG9X9Q--
           - Initiated: '2014-05-01T05:41:27.000Z'
             Initiator:
-              DisplayName: ownder-display-name
+              DisplayName: display-name
               ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
             Key: JavaFile
             Owner:
-              DisplayName: ownder-display-name
+              DisplayName: display-name
               ID: examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc
             StorageClass: STANDARD
-            UploadId: b7tZSqIlo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--
+            UploadId: examplelo91lv1iwvWpvCiJWugw2xXLPAD7Z8cJyX9.WiIRgNrdG6Ldsn.9FtS63TCl1Uf5faTB.1U5Ckcbmdw--
       properties:
         Bucket:
           allOf:
@@ -7307,7 +7298,8 @@ components:
       type: object
       example:
         ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
-        VersionId: pSKidl4pHBiNwukdbcPXAIs.sshFFOc0
+        ServerSideEncryption: AES256
+        VersionId: CG612hodqujkf8FaaNfp8U..FIhLROcp
       properties: {}
     PutObjectAclOutput:
       type: object
@@ -7806,6 +7798,8 @@ components:
                 name: CORSRule
               description: A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.
       description: 'Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html">Enabling Cross-Origin Resource Sharing</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+    ID:
+      type: string
     ExposeHeaders:
       type: array
       items:
@@ -7820,6 +7814,10 @@ components:
         - AllowedMethods
         - AllowedOrigins
       properties:
+        ID:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: Unique identifier for the rule. The value cannot be longer than 255 characters.
         AllowedHeaders:
           allOf:
             - $ref: '#/components/schemas/AllowedHeaders'
@@ -8945,8 +8943,6 @@ components:
             - $ref: '#/components/schemas/Permission'
             - description: Specifies the permission given to the grantee.
       description: Container for grant information.
-    ID:
-      type: string
     Type:
       type: string
       enum:

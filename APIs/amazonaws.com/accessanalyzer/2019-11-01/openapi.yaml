@@ -3,7 +3,7 @@ info:
   version: '2019-11-01'
   x-release: v4
   title: Access Analyzer
-  description: '<p>AWS IAM Access Analyzer helps identify potential resource-access risks by enabling you to identify any policies that grant access to an external principal. It does this by using logic-based reasoning to analyze resource-based policies in your AWS environment. An external principal can be another AWS account, a root user, an IAM user or role, a federated user, an AWS service, or an anonymous user. This guide describes the AWS IAM Access Analyzer operations that you can call programmatically. For general information about Access Analyzer, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html">AWS IAM Access Analyzer</a> in the <b>IAM User Guide</b>.</p> <p>To start using Access Analyzer, you first need to create an analyzer.</p>'
+  description: '<p>AWS IAM Access Analyzer helps identify potential resource-access risks by enabling you to identify any policies that grant access to an external principal. It does this by using logic-based reasoning to analyze resource-based policies in your AWS environment. An external principal can be another AWS account, a root user, an IAM user or role, a federated user, an AWS service, or an anonymous user. You can also use Access Analyzer to preview and validate public and cross-account access to your resources before deploying permissions changes. This guide describes the AWS IAM Access Analyzer operations that you can call programmatically. For general information about Access Analyzer, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html">AWS IAM Access Analyzer</a> in the <b>IAM User Guide</b>.</p> <p>To start using Access Analyzer, you first need to create an analyzer.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -176,6 +176,90 @@ paths:
                   pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
                   minLength: 1
                   maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /access-preview:
+    put:
+      operationId: CreateAccessPreview
+      description: Creates an access preview that allows you to preview Access Analyzer findings for your resource before deploying resource permissions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAccessPreviewResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - analyzerArn
+                - configurations
+              properties:
+                analyzerArn:
+                  description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the account analyzer</a> used to generate the access preview. You can only create an access preview for analyzers with an <code>Account</code> type and <code>Active</code> status.'
+                  type: string
+                  pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+                clientToken:
+                  description: A client token.
+                  type: string
+                configurations:
+                  description: Access control configuration for your resource that is used to generate the access preview. The access preview includes findings for external access allowed to the resource with the proposed access control configuration. The configuration must contain exactly one element.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/Configuration'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -790,6 +874,70 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/Criterion'
+  '/access-preview/{accessPreviewId}#analyzerArn':
+    get:
+      operationId: GetAccessPreview
+      description: Retrieves information about an access preview for the specified analyzer.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccessPreviewResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: accessPreviewId
+          in: path
+          required: true
+          description: The unique ID for the access preview.
+          schema:
+            type: string
+            pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+        - name: analyzerArn
+          in: query
+          required: true
+          description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> used to generate the access preview.'
+          schema:
+            type: string
+            pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /analyzed-resource#analyzerArn&resourceArn:
     get:
       operationId: GetAnalyzedResource
@@ -835,7 +983,7 @@ paths:
         - name: analyzerArn
           in: query
           required: true
-          description: The ARN of the analyzer to retrieve information from.
+          description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to retrieve information from.'
           schema:
             type: string
             pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
@@ -899,7 +1047,7 @@ paths:
         - name: analyzerArn
           in: query
           required: true
-          description: The ARN of the analyzer that generated the finding.
+          description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> that generated the finding.'
           schema:
             type: string
             pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
@@ -907,6 +1055,174 @@ paths:
           in: path
           required: true
           description: The ID of the finding to retrieve.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/access-preview/{accessPreviewId}':
+    post:
+      operationId: ListAccessPreviewFindings
+      description: Retrieves a list of access preview findings generated by the specified access preview.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccessPreviewFindingsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: accessPreviewId
+          in: path
+          required: true
+          description: The unique ID for the access preview.
+          schema:
+            type: string
+            pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - analyzerArn
+              properties:
+                analyzerArn:
+                  description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> used to generate the access.'
+                  type: string
+                  pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+                filter:
+                  description: Criteria to filter the returned findings.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/Criterion'
+                maxResults:
+                  description: The maximum number of results to return in the response.
+                  type: integer
+                nextToken:
+                  description: A token used for pagination of results returned.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /access-preview#analyzerArn:
+    get:
+      operationId: ListAccessPreviews
+      description: Retrieves a list of access previews for the specified analyzer.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccessPreviewsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: analyzerArn
+          in: query
+          required: true
+          description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> used to generate the access preview.'
+          schema:
+            type: string
+            pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in the response.
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used for pagination of results returned.
           schema:
             type: string
     parameters:
@@ -981,7 +1297,7 @@ paths:
                 - analyzerArn
               properties:
                 analyzerArn:
-                  description: The ARN of the analyzer to retrieve a list of analyzed resources from.
+                  description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to retrieve a list of analyzed resources from.'
                   type: string
                   pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
                 maxResults:
@@ -1012,7 +1328,7 @@ paths:
   /finding:
     post:
       operationId: ListFindings
-      description: '<p>Retrieves a list of findings generated by the specified analyzer.</p> <p>To learn about filter keys that you can use to create an archive rule, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html">Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>'
+      description: '<p>Retrieves a list of findings generated by the specified analyzer.</p> <p>To learn about filter keys that you can use to retrieve a list of findings, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html">Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>'
       responses:
         '200':
           description: Success
@@ -1073,7 +1389,7 @@ paths:
                 - analyzerArn
               properties:
                 analyzerArn:
-                  description: The ARN of the analyzer to retrieve findings from.
+                  description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to retrieve findings from.'
                   type: string
                   pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
                 filter:
@@ -1155,7 +1471,7 @@ paths:
                 - status
               properties:
                 analyzerArn:
-                  description: The ARN of the analyzer that generated the findings to update.
+                  description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> that generated the findings to update.'
                   type: string
                   pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
                 clientToken:
@@ -1342,7 +1658,7 @@ paths:
                 - resourceArn
               properties:
                 analyzerArn:
-                  description: The ARN of the analyzer to use to scan the policies applied to the specified resource.
+                  description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to use to scan the policies applied to the specified resource.'
                   type: string
                   pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
                 resourceArn:
@@ -1478,6 +1794,41 @@ components:
     InternalServerException: {}
     ThrottlingException: {}
     AccessDeniedException: {}
+    CreateAccessPreviewResponse:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AccessPreviewId'
+            - description: The unique ID for the access preview.
+    Configuration:
+      type: object
+      properties:
+        iamRole:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleConfiguration'
+            - description: 'The access control configuration is for an IAM role. '
+        kmsKey:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyConfiguration'
+            - description: 'The access control configuration is for a KMS key. '
+        s3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketConfiguration'
+            - description: 'The access control configuration is for an Amazon S3 Bucket. '
+        secretsManagerSecret:
+          allOf:
+            - $ref: '#/components/schemas/SecretsManagerSecretConfiguration'
+            - description: The access control configuration is for a Secrets Manager secret.
+        sqsQueue:
+          allOf:
+            - $ref: '#/components/schemas/SqsQueueConfiguration'
+            - description: 'The access control configuration is for an SQS queue. '
+      description: Access control configuration structures for your resource. You specify the configuration as a type-value pair. You can specify only one type of access control configuration.
+    ConflictException: {}
+    ServiceQuotaExceededException: {}
     CreateAnalyzerResponse:
       type: object
       properties:
@@ -1503,8 +1854,6 @@ components:
       description: An criterion statement in an archive rule. Each archive rule may have multiple criteria.
     String:
       type: string
-    ConflictException: {}
-    ServiceQuotaExceededException: {}
     Criterion:
       type: object
       properties:
@@ -1525,13 +1874,22 @@ components:
             - $ref: '#/components/schemas/ValueList'
             - description: A "not equals" operator to match for the filter used to create the rule.
       description: The criteria to use in the filter that defines the archive rule.
+    GetAccessPreviewResponse:
+      type: object
+      required:
+        - accessPreview
+      properties:
+        accessPreview:
+          allOf:
+            - $ref: '#/components/schemas/AccessPreview'
+            - description: An object that contains information about the access preview.
     GetAnalyzedResourceResponse:
       type: object
       properties:
         resource:
           allOf:
             - $ref: '#/components/schemas/AnalyzedResource'
-            - description: An <code>AnalyedResource</code> object that contains information that Access Analyzer found when it analyzed the resource.
+            - description: An <code>AnalyzedResource</code> object that contains information that Access Analyzer found when it analyzed the resource.
       description: The response to the request.
     GetAnalyzerResponse:
       type: object
@@ -1559,6 +1917,32 @@ components:
             - $ref: '#/components/schemas/Finding'
             - description: A <code>finding</code> object that contains finding details.
       description: The response to the request.
+    ListAccessPreviewFindingsResponse:
+      type: object
+      required:
+        - findings
+      properties:
+        findings:
+          allOf:
+            - $ref: '#/components/schemas/AccessPreviewFindingsList'
+            - description: A list of access preview findings that match the specified filter criteria.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token used for pagination of results returned.
+    ListAccessPreviewsResponse:
+      type: object
+      required:
+        - accessPreviews
+      properties:
+        accessPreviews:
+          allOf:
+            - $ref: '#/components/schemas/AccessPreviewsList'
+            - description: A list of access previews retrieved for the analyzer.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token used for pagination of results returned.
     ListAnalyzedResourcesResponse:
       type: object
       required:
@@ -1638,18 +2022,102 @@ components:
       description: The response to the request.
     FindingId:
       type: string
+    AccessPointArn:
+      type: string
+      pattern: 'arn:[^:]*:s3:[^:]*:[^:]*:accesspoint/.*$'
+    AccessPointPolicy:
+      type: string
+    AnalyzerArn:
+      type: string
+      pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+    ConfigurationsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Configuration'
+    Timestamp:
+      type: string
+      format: date-time
+    AccessPreviewId:
+      type: string
+      pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+    AccessPreviewStatus:
+      type: string
+      enum:
+        - COMPLETED
+        - CREATING
+        - FAILED
+    AccessPreviewStatusReason:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/AccessPreviewStatusReasonCode'
+            - description: The reason code for the current status of the access preview.
+      description: 'Provides more details about the current status of the access preview. For example, if the creation of the access preview fails, a <code>Failed</code> status is returned. This failure can be due to an internal issue with the analysis or due to an invalid proposed resource configuration.'
+    AccessPreview:
+      type: object
+      required:
+        - analyzerArn
+        - configurations
+        - createdAt
+        - id
+        - status
+      properties:
+        analyzerArn:
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerArn'
+            - description: The ARN of the analyzer used to generate the access preview.
+        configurations:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationsMap'
+            - description: A map of resource ARNs for the proposed resource configuration.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the access preview was created.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AccessPreviewId'
+            - description: The unique ID for the access preview.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AccessPreviewStatus'
+            - description: <p>The status of the access preview.</p> <ul> <li> <p> <code>Creating</code> - The access preview creation is in progress.</p> </li> <li> <p> <code>Completed</code> - The access preview is complete. You can preview findings for external access to the resource.</p> </li> <li> <p> <code>Failed</code> - The access preview creation has failed.</p> </li> </ul>
+        statusReason:
+          allOf:
+            - $ref: '#/components/schemas/AccessPreviewStatusReason'
+            - description: '<p>Provides more details about the current status of the access preview.</p> <p>For example, if the creation of the access preview fails, a <code>Failed</code> status is returned. This failure can be due to an internal issue with the analysis or due to an invalid resource configuration.</p>'
+      description: Contains information about an access preview.
     ActionList:
       type: array
       items:
         $ref: '#/components/schemas/String'
-    Timestamp:
+    FindingChangeType:
       type: string
-      format: date-time
+      enum:
+        - CHANGED
+        - NEW
+        - UNCHANGED
+    ConditionKeyMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    FindingStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - ARCHIVED
+        - RESOLVED
+    AccessPreviewFindingId:
+      type: string
     Boolean:
       type: boolean
-    ResourceArn:
-      type: string
-      pattern: 'arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$'
+    PrincipalMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
     ResourceType:
       type: string
       enum:
@@ -1660,16 +2128,152 @@ components:
         - 'AWS::Lambda::LayerVersion'
         - 'AWS::KMS::Key'
         - 'AWS::SecretsManager::Secret'
+    FindingSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FindingSource'
+    AccessPreviewFinding:
+      type: object
+      required:
+        - changeType
+        - createdAt
+        - id
+        - resourceOwnerAccount
+        - resourceType
+        - status
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/ActionList'
+            - description: The action in the analyzed policy statement that an external principal has permission to perform.
+        changeType:
+          allOf:
+            - $ref: '#/components/schemas/FindingChangeType'
+            - description: '<p>Provides context on how the access preview finding compares to existing access identified in Access Analyzer.</p> <ul> <li> <p> <code>New</code> - The finding is for newly-introduced access.</p> </li> <li> <p> <code>Unchanged</code> - The preview finding is an existing finding that would remain unchanged.</p> </li> <li> <p> <code>Changed</code> - The preview finding is an existing finding with a change in status.</p> </li> </ul> <p>For example, a <code>Changed</code> finding with preview status <code>Resolved</code> and existing status <code>Active</code> indicates the existing <code>Active</code> finding would become <code>Resolved</code> as a result of the proposed permissions change.</p>'
+        condition:
+          allOf:
+            - $ref: '#/components/schemas/ConditionKeyMap'
+            - description: The condition in the analyzed policy statement that resulted in a finding.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the access preview finding was created.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An error.
+        existingFindingId:
+          allOf:
+            - $ref: '#/components/schemas/FindingId'
+            - description: 'The existing ID of the finding in Access Analyzer, provided only for existing findings.'
+        existingFindingStatus:
+          allOf:
+            - $ref: '#/components/schemas/FindingStatus'
+            - description: 'The existing status of the finding, provided only for existing findings.'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AccessPreviewFindingId'
+            - description: The ID of the access preview finding. This ID uniquely identifies the element in the list of access preview findings and is not related to the finding ID in Access Analyzer.
+        isPublic:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the policy that generated the finding allows public access to the resource.
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalMap'
+            - description: The external principal that has access to a resource within the zone of trust.
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The resource that an external principal has access to. This is the resource associated with the access preview.
+        resourceOwnerAccount:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The AWS account ID that owns the resource. For most AWS resources, the owning account is the account in which the resource was created.'
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: The type of the resource that can be accessed in the finding.
+        sources:
+          allOf:
+            - $ref: '#/components/schemas/FindingSourceList'
+            - description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/FindingStatus'
+            - description: 'The preview status of the finding. This is what the status of the finding would be after permissions deployment. For example, a <code>Changed</code> finding with preview status <code>Resolved</code> and existing status <code>Active</code> indicates the existing <code>Active</code> finding would become <code>Resolved</code> as a result of the proposed permissions change.'
+      description: An access preview finding generated by the access preview.
+    AccessPreviewFindingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessPreviewFinding'
+    AccessPreviewStatusReasonCode:
+      type: string
+      enum:
+        - INTERNAL_ERROR
+        - INVALID_CONFIGURATION
+    AccessPreviewSummary:
+      type: object
+      required:
+        - analyzerArn
+        - createdAt
+        - id
+        - status
+      properties:
+        analyzerArn:
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerArn'
+            - description: The ARN of the analyzer used to generate the access preview.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the access preview was created.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AccessPreviewId'
+            - description: The unique ID for the access preview.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AccessPreviewStatus'
+            - description: <p>The status of the access preview.</p> <ul> <li> <p> <code>Creating</code> - The access preview creation is in progress.</p> </li> <li> <p> <code>Completed</code> - The access preview is complete and previews the findings for external access to the resource.</p> </li> <li> <p> <code>Failed</code> - The access preview creation has failed.</p> </li> </ul>
+        statusReason:
+          $ref: '#/components/schemas/AccessPreviewStatusReason'
+      description: Contains a summary of information about an access preview.
+    AccessPreviewsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessPreviewSummary'
+    AclCanonicalId:
+      type: string
+    AclUri:
+      type: string
+    AclGrantee:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AclCanonicalId'
+            - description: The value specified is the canonical user ID of an AWS account.
+        uri:
+          allOf:
+            - $ref: '#/components/schemas/AclUri'
+            - description: Used for granting permissions to a predefined group.
+      description: 'You specify each grantee as a type-value pair using one of these types. You can specify only one type of grantee. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAcl.html">PutBucketAcl</a>.'
+    AclPermission:
+      type: string
+      enum:
+        - READ
+        - WRITE
+        - READ_ACP
+        - WRITE_ACP
+        - FULL_CONTROL
+    ResourceArn:
+      type: string
+      pattern: 'arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$'
     SharedViaList:
       type: array
       items:
         $ref: '#/components/schemas/String'
-    FindingStatus:
-      type: string
-      enum:
-        - ACTIVE
-        - ARCHIVED
-        - RESOLVED
     AnalyzedResource:
       type: object
       required:
@@ -1750,9 +2354,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AnalyzedResourceSummary'
-    AnalyzerArn:
-      type: string
-      pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
     AnalyzerStatus:
       type: string
       enum:
@@ -1774,7 +2375,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReasonCode'
             - description: The reason code for the current status of the analyzer.
-      description: 'Provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
+      description: 'Provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is returned. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
     TagsMap:
       type: object
       additionalProperties:
@@ -1820,7 +2421,7 @@ components:
         statusReason:
           allOf:
             - $ref: '#/components/schemas/StatusReason'
-            - description: 'The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
+            - description: 'The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is returned. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
@@ -1887,10 +2488,87 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ArchiveRuleSummary'
-    ConditionKeyMap:
+    IamRoleConfiguration:
       type: object
-      additionalProperties:
-        $ref: '#/components/schemas/String'
+      properties:
+        trustPolicy:
+          allOf:
+            - $ref: '#/components/schemas/IamTrustPolicy'
+            - description: The proposed trust policy for the IAM role.
+      description: 'The proposed access control configuration for an IAM role. You can propose a configuration for a new IAM role or an existing IAM role that you own by specifying the trust policy. If the configuration is for a new IAM role, you must specify the trust policy. If the configuration is for an existing IAM role that you own and you do not propose the trust policy, the access preview uses the existing trust policy for the role. The proposed trust policy cannot be an empty string. For more information about role trust policy limits, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html">IAM and STS quotas</a>.'
+    KmsKeyConfiguration:
+      type: object
+      properties:
+        grants:
+          allOf:
+            - $ref: '#/components/schemas/KmsGrantConfigurationsList'
+            - description: 'A list of proposed grant configurations for the KMS key. If the proposed grant configuration is for an existing key, the access preview uses the proposed list of grant configurations in place of the existing grants. Otherwise, the access preview uses the existing grants for the key.'
+        keyPolicies:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyPoliciesMap'
+            - description: 'Resource policy configuration for the KMS key. The only valid value for the name of the key policy is <code>default</code>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default">Default key policy</a>.'
+      description: '<p>Proposed access control configuration for a KMS key. You can propose a configuration for a new KMS key or an existing KMS key that you own by specifying the key policy and KMS grant configuration. If the configuration is for an existing key and you do not specify the key policy, the access preview uses the existing policy for the key. If the access preview is for a new resource and you do not specify the key policy, then the access preview uses the default key policy. The proposed key policy cannot be an empty string. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default">Default key policy</a>. For more information about key policy limits, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html">Resource quotas</a>.</p> <p/>'
+    S3BucketConfiguration:
+      type: object
+      properties:
+        accessPoints:
+          allOf:
+            - $ref: '#/components/schemas/S3AccessPointConfigurationsMap'
+            - description: The configuration of Amazon S3 access points for the bucket.
+        bucketAclGrants:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketAclGrantConfigurationsList'
+            - description: 'The proposed list of ACL grants for the Amazon S3 bucket. You can propose up to 100 ACL grants per bucket. If the proposed grant configuration is for an existing bucket, the access preview uses the proposed list of grant configurations in place of the existing grants. Otherwise, the access preview uses the existing grants for the bucket.'
+        bucketPolicy:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketPolicy'
+            - description: The proposed bucket policy for the Amazon S3 bucket.
+        bucketPublicAccessBlock:
+          allOf:
+            - $ref: '#/components/schemas/S3PublicAccessBlockConfiguration'
+            - description: The proposed block public access configuration for the Amazon S3 bucket.
+      description: 'Proposed access control configuration for an Amazon S3 bucket. You can propose a configuration for a new Amazon S3 bucket or an existing Amazon S3 bucket that you own by specifying the Amazon S3 bucket policy, bucket ACLs, bucket BPA settings, and Amazon S3 access points attached to the bucket. If the configuration is for an existing Amazon S3 bucket and you do not specify the Amazon S3 bucket policy, the access preview uses the existing policy attached to the bucket. If the access preview is for a new resource and you do not specify the Amazon S3 bucket policy, the access preview assumes a bucket without a policy. To propose deletion of an existing bucket policy, you can specify an empty string. For more information about bucket policy limits, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html">Bucket Policy Examples</a>.'
+    SecretsManagerSecretConfiguration:
+      type: object
+      properties:
+        kmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/SecretsManagerSecretKmsId'
+            - description: 'The proposed ARN, key ID, or alias of the AWS KMS customer master key (CMK).'
+        secretPolicy:
+          allOf:
+            - $ref: '#/components/schemas/SecretsManagerSecretPolicy'
+            - description: The proposed resource policy defining who can access or manage the secret.
+      description: '<p>The configuration for a Secrets Manager secret. For more information, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html">CreateSecret</a>.</p> <p>You can propose a configuration for a new secret or an existing secret that you own by specifying the secret policy and optional KMS encryption key. If the configuration is for an existing secret and you do not specify the secret policy, the access preview uses the existing policy for the secret. If the access preview is for a new resource and you do not specify the policy, the access preview assumes a secret without a policy. To propose deletion of an existing policy, you can specify an empty string. If the proposed configuration is for a new secret and you do not specify the KMS key ID, the access preview uses the default CMK of the AWS account. If you specify an empty string for the KMS key ID, the access preview uses the default CMK of the AWS account. For more information about secret policy limits, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html">Quotas for AWS Secrets Manager.</a>.</p>'
+    SqsQueueConfiguration:
+      type: object
+      properties:
+        queuePolicy:
+          allOf:
+            - $ref: '#/components/schemas/SqsQueuePolicy'
+            - description: ' The proposed resource policy for the SQS queue. '
+      description: 'The proposed access control configuration for an SQS queue. You can propose a configuration for a new SQS queue or an existing SQS queue that you own by specifying the SQS policy. If the configuration is for an existing SQS queue and you do not specify the SQS policy, the access preview uses the existing SQS policy for the queue. If the access preview is for a new resource and you do not specify the policy, the access preview assumes an SQS queue without a policy. To propose deletion of an existing SQS queue policy, you can specify an empty string for the SQS policy. For more information about SQS policy limits, see <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-policies.html">Quotas related to policies</a>.'
+    ConfigurationsMapKey:
+      type: string
+    CreateAccessPreviewRequest:
+      type: object
+      required:
+        - analyzerArn
+        - configurations
+      title: CreateAccessPreviewRequest
+      properties:
+        analyzerArn:
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerArn'
+            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the account analyzer</a> used to generate the access preview. You can only create an access preview for analyzers with an <code>Account</code> type and <code>Active</code> status.'
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A client token.
+        configurations:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationsMap'
+            - description: Access control configuration for your resource that is used to generate the access preview. The access preview includes findings for external access allowed to the resource with the proposed access control configuration. The configuration must contain exactly one element.
     InlineArchiveRulesList:
       type: array
       items:
@@ -1959,14 +2637,6 @@ components:
       title: DeleteArchiveRuleRequest
       properties: {}
       description: Deletes an archive rule.
-    PrincipalMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/String'
-    FindingSourceList:
-      type: array
-      items:
-        $ref: '#/components/schemas/FindingSource'
     Finding:
       type: object
       required:
@@ -2022,7 +2692,7 @@ components:
         resourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: The type of the resource reported in the finding.
+            - description: The type of the resource identified in the finding.
         sources:
           allOf:
             - $ref: '#/components/schemas/FindingSourceList'
@@ -2146,6 +2816,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FindingSummary'
+    GetAccessPreviewRequest:
+      type: object
+      title: GetAccessPreviewRequest
+      properties: {}
     GetAnalyzedResourceRequest:
       type: object
       title: GetAnalyzedResourceRequest
@@ -2166,10 +2840,127 @@ components:
       title: GetFindingRequest
       properties: {}
       description: Retrieves a finding.
+    GranteePrincipal:
+      type: string
+    IamTrustPolicy:
+      type: string
     Integer:
       type: integer
+    InternetConfiguration:
+      type: object
+      properties: {}
+      description: This configuration sets the Amazon S3 access point network origin to <code>Internet</code>.
+    IssuingAccount:
+      type: string
+    KmsConstraintsKey:
+      type: string
+    KmsConstraintsValue:
+      type: string
+    KmsConstraintsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/KmsConstraintsValue'
+    KmsGrantConstraints:
+      type: object
+      properties:
+        encryptionContextEquals:
+          allOf:
+            - $ref: '#/components/schemas/KmsConstraintsMap'
+            - description: 'A list of key-value pairs that must match the encryption context in the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operation</a> request. The grant allows the operation only when the encryption context in the request is the same as the encryption context specified in this constraint.'
+        encryptionContextSubset:
+          allOf:
+            - $ref: '#/components/schemas/KmsConstraintsMap'
+            - description: 'A list of key-value pairs that must be included in the encryption context of the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operation</a> request. The grant allows the cryptographic operation only when the encryption context in the request includes the key-value pairs specified in this constraint, although it can include additional key-value pairs.'
+      description: 'Use this structure to propose allowing <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operations</a> in the grant only when the operation request includes the specified <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">encryption context</a>. You can specify only one type of encryption context. An empty map is treated as not specified. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_GrantConstraints.html">GrantConstraints</a>.'
+    KmsGrantOperationsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/KmsGrantOperation'
+    RetiringPrincipal:
+      type: string
+    KmsGrantConfiguration:
+      type: object
+      required:
+        - granteePrincipal
+        - issuingAccount
+        - operations
+      properties:
+        constraints:
+          allOf:
+            - $ref: '#/components/schemas/KmsGrantConstraints'
+            - description: 'Use this structure to propose allowing <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations">cryptographic operations</a> in the grant only when the operation request includes the specified <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">encryption context</a>.'
+        granteePrincipal:
+          allOf:
+            - $ref: '#/components/schemas/GranteePrincipal'
+            - description: The principal that is given permission to perform the operations that the grant permits.
+        issuingAccount:
+          allOf:
+            - $ref: '#/components/schemas/IssuingAccount'
+            - description: ' The AWS account under which the grant was issued. The account is used to propose KMS grants issued by accounts other than the owner of the key.'
+        operations:
+          allOf:
+            - $ref: '#/components/schemas/KmsGrantOperationsList'
+            - description: A list of operations that the grant permits.
+        retiringPrincipal:
+          allOf:
+            - $ref: '#/components/schemas/RetiringPrincipal'
+            - description: 'The principal that is given permission to retire the grant by using <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_RetireGrant.html">RetireGrant</a> operation.'
+      description: 'A proposed grant configuration for a KMS key. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html">CreateGrant</a>.'
+    KmsGrantConfigurationsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/KmsGrantConfiguration'
+    KmsGrantOperation:
+      type: string
+      enum:
+        - CreateGrant
+        - Decrypt
+        - DescribeKey
+        - Encrypt
+        - GenerateDataKey
+        - GenerateDataKeyPair
+        - GenerateDataKeyPairWithoutPlaintext
+        - GenerateDataKeyWithoutPlaintext
+        - GetPublicKey
+        - ReEncryptFrom
+        - ReEncryptTo
+        - RetireGrant
+        - Sign
+        - Verify
+    KmsKeyPoliciesMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/KmsKeyPolicy'
+    KmsKeyPolicy:
+      type: string
     Token:
       type: string
+    ListAccessPreviewFindingsRequest:
+      type: object
+      required:
+        - analyzerArn
+      title: ListAccessPreviewFindingsRequest
+      properties:
+        analyzerArn:
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerArn'
+            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> used to generate the access.'
+        filter:
+          allOf:
+            - $ref: '#/components/schemas/FilterCriteriaMap'
+            - description: Criteria to filter the returned findings.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum number of results to return in the response.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token used for pagination of results returned.
+    ListAccessPreviewsRequest:
+      type: object
+      title: ListAccessPreviewsRequest
+      properties: {}
     ListAnalyzedResourcesRequest:
       type: object
       required:
@@ -2179,7 +2970,7 @@ components:
         analyzerArn:
           allOf:
             - $ref: '#/components/schemas/AnalyzerArn'
-            - description: The ARN of the analyzer to retrieve a list of analyzed resources from.
+            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to retrieve a list of analyzed resources from.'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -2224,7 +3015,7 @@ components:
         analyzerArn:
           allOf:
             - $ref: '#/components/schemas/AnalyzerArn'
-            - description: The ARN of the analyzer to retrieve findings from.
+            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to retrieve findings from.'
         filter:
           allOf:
             - $ref: '#/components/schemas/FilterCriteriaMap'
@@ -2247,6 +3038,28 @@ components:
       title: ListTagsForResourceRequest
       properties: {}
       description: Retrieves a list of tags applied to the specified resource.
+    VpcConfiguration:
+      type: object
+      required:
+        - vpcId
+      properties:
+        vpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: ' If this field is specified, this access point will only allow connections from the specified VPC ID. '
+      description: ' The proposed virtual private cloud (VPC) configuration for the Amazon S3 access point. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html">VpcConfiguration</a>. '
+    NetworkOriginConfiguration:
+      type: object
+      properties:
+        internetConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/InternetConfiguration'
+            - description: The configuration for the Amazon S3 access point with an <code>Internet</code> origin.
+        vpcConfiguration:
+          $ref: '#/components/schemas/VpcConfiguration'
+      description: 'The proposed <code>InternetConfiguration</code> or <code>VpcConfiguration</code> to apply to the Amazon S3 Access point. You can make the access point accessible from the internet, or you can specify that all requests made through that access point must originate from a specific virtual private cloud (VPC). You can specify only one type of network configuration. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html">Creating access points</a>.'
+    PolicyName:
+      type: string
     ReasonCode:
       type: string
       enum:
@@ -2254,6 +3067,68 @@ components:
         - DELEGATED_ADMINISTRATOR_DEREGISTERED
         - ORGANIZATION_DELETED
         - SERVICE_LINKED_ROLE_CREATION_FAILED
+    S3PublicAccessBlockConfiguration:
+      type: object
+      required:
+        - ignorePublicAcls
+        - restrictPublicBuckets
+      properties:
+        ignorePublicAcls:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. '
+        restrictPublicBuckets:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies whether Amazon S3 should restrict public bucket policies for this bucket. '
+      description: 'The <code>PublicAccessBlock</code> configuration to apply to this Amazon S3 bucket. If the proposed configuration is for an existing Amazon S3 bucket and the configuration is not specified, the access preview uses the existing setting. If the proposed configuration is for a new bucket and the configuration is not specified, the access preview uses <code>false</code>. If the proposed configuration is for a new access point and the access point BPA configuration is not specified, the access preview uses <code>true</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html">PublicAccessBlockConfiguration</a>. '
+    S3AccessPointConfiguration:
+      type: object
+      properties:
+        accessPointPolicy:
+          allOf:
+            - $ref: '#/components/schemas/AccessPointPolicy'
+            - description: The access point policy.
+        networkOrigin:
+          allOf:
+            - $ref: '#/components/schemas/NetworkOriginConfiguration'
+            - description: 'The proposed <code>Internet</code> and <code>VpcConfiguration</code> to apply to this Amazon S3 access point. If the access preview is for a new resource and neither is specified, the access preview uses <code>Internet</code> for the network origin. If the access preview is for an existing resource and neither is specified, the access preview uses the exiting network origin.'
+        publicAccessBlock:
+          allOf:
+            - $ref: '#/components/schemas/S3PublicAccessBlockConfiguration'
+            - description: The proposed <code>S3PublicAccessBlock</code> configuration to apply to this Amazon S3 Access Point.
+      description: 'The configuration for an Amazon S3 access point for the bucket. You can propose up to 10 access points per bucket. If the proposed Amazon S3 access point configuration is for an existing bucket, the access preview uses the proposed access point configuration in place of the existing access points. To propose an access point without a policy, you can provide an empty string as the access point policy. For more information, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html">Creating access points</a>. For more information about access point policy limits, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html">Access points restrictions and limitations</a>.'
+    S3AccessPointConfigurationsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/S3AccessPointConfiguration'
+    S3BucketAclGrantConfiguration:
+      type: object
+      required:
+        - grantee
+        - permission
+      properties:
+        grantee:
+          allOf:
+            - $ref: '#/components/schemas/AclGrantee'
+            - description: The grantee to whom you’re assigning access rights.
+        permission:
+          allOf:
+            - $ref: '#/components/schemas/AclPermission'
+            - description: The permissions being granted.
+      description: 'A proposed access control list grant configuration for an Amazon S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#setting-acls">How to Specify an ACL</a>.'
+    S3BucketAclGrantConfigurationsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/S3BucketAclGrantConfiguration'
+    S3BucketPolicy:
+      type: string
+    SecretsManagerSecretKmsId:
+      type: string
+    SecretsManagerSecretPolicy:
+      type: string
+    SqsQueuePolicy:
+      type: string
     StartResourceScanRequest:
       type: object
       required:
@@ -2264,7 +3139,7 @@ components:
         analyzerArn:
           allOf:
             - $ref: '#/components/schemas/AnalyzerArn'
-            - description: The ARN of the analyzer to use to scan the policies applied to the specified resource.
+            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> to use to scan the policies applied to the specified resource.'
         resourceArn:
           allOf:
             - $ref: '#/components/schemas/ResourceArn'
@@ -2315,7 +3190,7 @@ components:
         analyzerArn:
           allOf:
             - $ref: '#/components/schemas/AnalyzerArn'
-            - description: The ARN of the analyzer that generated the findings to update.
+            - description: 'The <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources">ARN of the analyzer</a> that generated the findings to update.'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2333,5 +3208,8 @@ components:
             - $ref: '#/components/schemas/FindingStatusUpdate'
             - description: The state represents the action to take to update the finding Status. Use <code>ARCHIVE</code> to change an Active finding to an Archived finding. Use <code>ACTIVE</code> to change an Archived finding to an Active finding.
       description: Updates findings with the new values provided in the request.
+    VpcId:
+      type: string
+      pattern: '^vpc-([0-9a-f]){8}(([0-9a-f]){9})?$'
 security:
   - hmac: []
