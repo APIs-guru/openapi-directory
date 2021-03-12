@@ -481,6 +481,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.ContainsPiiEntities:
+    post:
+      operationId: ContainsPiiEntities
+      description: 'Analyzes input text for the presence of personally identifiable information (PII) and returns the labels of identified PII entity types such as name, address, bank account number, or phone number.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainsPiiEntitiesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TextSizeLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextSizeLimitExceededException'
+        '482':
+          description: UnsupportedLanguageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedLanguageException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContainsPiiEntitiesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.ContainsPiiEntities
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.CreateDocumentClassifier:
     post:
       operationId: CreateDocumentClassifier
@@ -3999,6 +4056,28 @@ components:
             - $ref: '#/components/schemas/DocumentClassifierEndpointArn'
             - description: The Amazon Resource Number (ARN) of the endpoint.
     ResourceUnavailableException: {}
+    ContainsPiiEntitiesResponse:
+      type: object
+      properties:
+        Labels:
+          allOf:
+            - $ref: '#/components/schemas/ListOfEntityLabels'
+            - description: The labels used in the document being analyzed. Individual labels represent personally identifiable information (PII) entity types.
+    ContainsPiiEntitiesRequest:
+      type: object
+      required:
+        - Text
+        - LanguageCode
+      title: ContainsPiiEntitiesRequest
+      properties:
+        Text:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Creates a new document classification request to analyze a single document in real-time, returning personally identifiable information (PII) entity labels.'
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCode'
+            - description: The language of the input documents.
     CreateDocumentClassifierResponse:
       type: object
       properties:
@@ -5752,6 +5831,10 @@ components:
       type: string
       pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:(document-classifier|entity-recognizer)/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
       maxLength: 256
+    ListOfEntityLabels:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntityLabel'
     IamRoleArn:
       type: string
       pattern: 'arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+'
@@ -6706,6 +6789,44 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: 'A character offset in the input text that shows where the entity ends. The offset returns the position of each UTF-8 code point in the string. A <i>code point</i> is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point. '
       description: <p>Provides information about an entity. </p> <p> </p>
+    PiiEntityType:
+      type: string
+      enum:
+        - BANK_ACCOUNT_NUMBER
+        - BANK_ROUTING
+        - CREDIT_DEBIT_NUMBER
+        - CREDIT_DEBIT_CVV
+        - CREDIT_DEBIT_EXPIRY
+        - PIN
+        - EMAIL
+        - ADDRESS
+        - NAME
+        - PHONE
+        - SSN
+        - DATE_TIME
+        - PASSPORT_NUMBER
+        - DRIVER_ID
+        - URL
+        - AGE
+        - USERNAME
+        - PASSWORD
+        - AWS_ACCESS_KEY
+        - AWS_SECRET_KEY
+        - IP_ADDRESS
+        - MAC_ADDRESS
+        - ALL
+    EntityLabel:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/PiiEntityType'
+            - description: The name of the label.
+        Score:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The level of confidence that Amazon Comprehend has in the accuracy of the detection.
+      description: Specifies one of the label or labels that categorize the personally identifiable information (PII) entity being analyzed.
     EntityRecognizerAnnotations:
       type: object
       required:
@@ -6843,7 +6964,7 @@ components:
         $ref: '#/components/schemas/EntityRecognizerProperties'
     EntityTypeName:
       type: string
-      pattern: '^(?:(?!\\n+|\\t+|\\r+|[\r\t\n\s,]).)+$'
+      pattern: '^(?:(?!\\n+|\\t+|\\r+|[\r\t\n,]).)+$'
       maxLength: 64
     EntityTypesListItem:
       type: object
@@ -6962,32 +7083,6 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: 'A character offset in the input text that shows where the PII entity ends. The offset returns the position of each UTF-8 code point in the string. A <i>code point</i> is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.'
       description: Provides information about a PII entity.
-    PiiEntityType:
-      type: string
-      enum:
-        - BANK_ACCOUNT_NUMBER
-        - BANK_ROUTING
-        - CREDIT_DEBIT_NUMBER
-        - CREDIT_DEBIT_CVV
-        - CREDIT_DEBIT_EXPIRY
-        - PIN
-        - EMAIL
-        - ADDRESS
-        - NAME
-        - PHONE
-        - SSN
-        - DATE_TIME
-        - PASSPORT_NUMBER
-        - DRIVER_ID
-        - URL
-        - AGE
-        - USERNAME
-        - PASSWORD
-        - AWS_ACCESS_KEY
-        - AWS_SECRET_KEY
-        - IP_ADDRESS
-        - MAC_ADDRESS
-        - ALL
     ListOfPiiEntityTypes:
       type: array
       items:
