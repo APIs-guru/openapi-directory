@@ -78,6 +78,7 @@ Existing integrations
  - [WinSwag](https://github.com/SvenEV/WinSwag) - A UWP app for loading Swagger definitions and exploring REST APIs
  - [ReadMe.io](https://preview.readme.io) - Beautiful, personalized, interactive developer hubs.
  - [OpenAPI-Directory-JS](https://github.com/httptoolkit/openapi-directory-js) - The OpenAPI directory precompiled & indexed for JS usage & searching.
+ - [API Tracker](https://apitracker.io/) - Aggregates 14,000+ APIs, SDKs, API specifications, integrations and DX profiles. It aims to help developers access the information they need to integrate APIs faster.
 
 Also used as test suite in the following projects:
  - [ReDoc](https://github.com/Redocly/redoc) - **OpenAPI-generated API Reference Documentation**
