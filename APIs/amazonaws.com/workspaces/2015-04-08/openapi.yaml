@@ -573,6 +573,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.CreateWorkspaceBundle:
+    post:
+      operationId: CreateWorkspaceBundle
+      description: 'Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html"> Create a Custom WorkSpaces Image and Bundle</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkspaceBundleResult'
+        '480':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspaceBundleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.CreateWorkspaceBundle
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.CreateWorkspaces:
     post:
       operationId: CreateWorkspaces
@@ -781,6 +850,63 @@ paths:
             type: string
             enum:
               - WorkspacesService.DeleteTags
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.DeleteWorkspaceBundle:
+    post:
+      operationId: DeleteWorkspaceBundle
+      description: 'Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/delete_bundle.html"> Delete a Custom WorkSpaces Bundle or Image</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkspaceBundleResult'
+        '480':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceAssociatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAssociatedException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteWorkspaceBundleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.DeleteWorkspaceBundle
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2739,6 +2865,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.UpdateWorkspaceBundle:
+    post:
+      operationId: UpdateWorkspaceBundle
+      description: '<p>Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html"> Update a Custom WorkSpaces Bundle</a>.</p> <important> <p>Existing WorkSpaces aren''t automatically updated when you update the bundle that they''re based on. To update existing WorkSpaces that are based on a bundle that you''ve updated, you must either rebuild the WorkSpaces or delete and recreate them.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkspaceBundleResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkspaceBundleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.UpdateWorkspaceBundle
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.UpdateWorkspaceImagePermission:
     post:
       operationId: UpdateWorkspaceImagePermission
@@ -3025,6 +3208,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    CreateWorkspaceBundleResult:
+      type: object
+      properties:
+        WorkspaceBundle:
+          $ref: '#/components/schemas/WorkspaceBundle'
+    CreateWorkspaceBundleRequest:
+      type: object
+      required:
+        - BundleName
+        - BundleDescription
+        - ImageId
+        - ComputeType
+        - UserStorage
+      title: CreateWorkspaceBundleRequest
+      properties:
+        BundleName:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceBundleName'
+            - description: The name of the bundle.
+        BundleDescription:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceBundleDescription'
+            - description: The description of the bundle.
+        ImageId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the image that is used to create the bundle.
+        ComputeType:
+          $ref: '#/components/schemas/ComputeType'
+        UserStorage:
+          $ref: '#/components/schemas/UserStorage'
+        RootStorage:
+          $ref: '#/components/schemas/RootStorage'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>The tags associated with the bundle.</p> <note> <p>To add tags at the same time that you''re creating the bundle, you must create an IAM policy that grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p> </note>'
     CreateWorkspacesResult:
       type: object
       properties:
@@ -3090,6 +3310,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The tag keys.
+    DeleteWorkspaceBundleResult:
+      type: object
+      properties: {}
+    DeleteWorkspaceBundleRequest:
+      type: object
+      title: DeleteWorkspaceBundleRequest
+      properties:
+        BundleId:
+          allOf:
+            - $ref: '#/components/schemas/BundleId'
+            - description: The identifier of the bundle.
     DeleteWorkspaceImageResult:
       type: object
       properties: {}
@@ -3141,7 +3372,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
     DescribeAccountModificationsRequest:
       type: object
       title: DescribeAccountModificationsRequest
@@ -3181,7 +3412,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
     DescribeConnectionAliasPermissionsRequest:
       type: object
       required:
@@ -3210,7 +3441,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
     DescribeConnectionAliasesRequest:
       type: object
       title: DescribeConnectionAliasesRequest
@@ -3241,7 +3472,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
     DescribeIpGroupsRequest:
       type: object
       title: DescribeIpGroupsRequest
@@ -3285,7 +3516,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
+            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return. This token is valid for one day and must be used within that time frame.
     DescribeWorkspaceBundlesRequest:
       type: object
       title: DescribeWorkspaceBundlesRequest
@@ -3297,7 +3528,7 @@ components:
         Owner:
           allOf:
             - $ref: '#/components/schemas/BundleOwner'
-            - description: <p>The owner of the bundles. You cannot combine this parameter with any other filter.</p> <p>Specify <code>AMAZON</code> to describe the bundles provided by AWS or null to describe the bundles that belong to your account.</p>
+            - description: '<p>The owner of the bundles. You cannot combine this parameter with any other filter.</p> <p>To describe the bundles provided by AWS, specify <code>AMAZON</code>. To describe the bundles that belong to your account, don''t specify a value.</p>'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -3312,7 +3543,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
     DescribeWorkspaceDirectoriesRequest:
       type: object
       title: DescribeWorkspaceDirectoriesRequest
@@ -3343,7 +3574,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
     DescribeWorkspaceImagePermissionsRequest:
       type: object
       required:
@@ -3372,7 +3603,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
     DescribeWorkspaceImagesRequest:
       type: object
       title: DescribeWorkspaceImagesRequest
@@ -3424,7 +3655,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
     DescribeWorkspacesRequest:
       type: object
       title: DescribeWorkspacesRequest
@@ -3463,7 +3694,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
     DescribeWorkspacesConnectionStatusRequest:
       type: object
       title: DescribeWorkspacesConnectionStatusRequest
@@ -3557,7 +3788,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
     ListAvailableManagementCidrRangesRequest:
       type: object
       required:
@@ -3915,6 +4146,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/IpRuleList'
             - description: One or more rules.
+    UpdateWorkspaceBundleResult:
+      type: object
+      properties: {}
+    UpdateWorkspaceBundleRequest:
+      type: object
+      title: UpdateWorkspaceBundleRequest
+      properties:
+        BundleId:
+          allOf:
+            - $ref: '#/components/schemas/BundleId'
+            - description: The identifier of the bundle.
+        ImageId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the image.
     UpdateWorkspaceImagePermissionResult:
       type: object
       properties: {}
@@ -4069,7 +4315,7 @@ components:
         BundleId:
           allOf:
             - $ref: '#/components/schemas/BundleId'
-            - description: The bundle identifier.
+            - description: The identifier of the bundle.
         Name:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -4081,11 +4327,11 @@ components:
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
-            - description: A description.
+            - description: The description of the bundle.
         ImageId:
           allOf:
             - $ref: '#/components/schemas/WorkspaceImageId'
-            - description: The image identifier of the bundle.
+            - description: The identifier of the image that was used to create the bundle.
         RootStorage:
           allOf:
             - $ref: '#/components/schemas/RootStorage'
@@ -4093,15 +4339,19 @@ components:
         UserStorage:
           allOf:
             - $ref: '#/components/schemas/UserStorage'
-            - description: The size of the user storage.
+            - description: The size of the user volume.
         ComputeType:
           allOf:
             - $ref: '#/components/schemas/ComputeType'
-            - description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
+            - description: 'The compute type of the bundle. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
         LastUpdatedTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The last time that the bundle was updated.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the bundle was created.
       description: Describes a WorkSpace bundle.
     BundleList:
       type: array
@@ -4155,7 +4405,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Compute'
             - description: The compute type.
-      description: Describes the compute type.
+      description: Describes the compute type of the bundle.
     ComputerName:
       type: string
     ConnectionString:
@@ -4284,6 +4534,32 @@ components:
       type: string
     IpGroupDesc:
       type: string
+    WorkspaceBundleName:
+      type: string
+      pattern: '^[a-zA-Z0-9_./()\\-]+$'
+      minLength: 1
+      maxLength: 64
+    WorkspaceBundleDescription:
+      type: string
+      pattern: '^[a-zA-Z0-9_./() -]+$'
+      minLength: 1
+      maxLength: 255
+    UserStorage:
+      type: object
+      properties:
+        Capacity:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The size of the user volume.
+      description: Describes the user volume for a WorkSpace bundle.
+    RootStorage:
+      type: object
+      properties:
+        Capacity:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The size of the root volume.
+      description: Describes the root volume for a WorkSpace bundle.
     WorkspaceRequestList:
       type: array
       items:
@@ -4827,14 +5103,6 @@ components:
       type: string
       minLength: 1
       maxLength: 20
-    RootStorage:
-      type: object
-      properties:
-        Capacity:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The size of the root volume.
-      description: Describes the root volume for a WorkSpace bundle.
     RootVolumeSizeGib:
       type: integer
     RunningMode:
@@ -4922,14 +5190,6 @@ components:
         $ref: '#/components/schemas/TerminateRequest'
       minItems: 1
       maxItems: 25
-    UserStorage:
-      type: object
-      properties:
-        Capacity:
-          allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: The size of the user storage.
-      description: Describes the user storage for a WorkSpace bundle.
     UserVolumeSizeGib:
       type: integer
     VolumeEncryptionKey:

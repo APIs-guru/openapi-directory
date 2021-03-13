@@ -495,6 +495,10 @@ components:
       description: A list of additional artifacts.
       items:
         $ref: '#/components/schemas/AdditionalArtifact'
+    BillingViewArn:
+      type: string
+      pattern: '(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\+=\.\-@].{1,30}'
+      maxLength: 128
     CompressionFormat:
       type: string
       enum:
@@ -567,6 +571,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReportVersioning'
             - description: Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.
+        BillingViewArn:
+          allOf:
+            - $ref: '#/components/schemas/BillingViewArn'
+            - description: ' The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs. '
       description: 'The definition of AWS Cost and Usage Report. You can specify the report name, time unit, report format, compression format, S3 bucket, additional artifacts, and schema elements in the definition. '
     RefreshClosedReports:
       type: boolean
