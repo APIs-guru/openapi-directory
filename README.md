@@ -65,6 +65,8 @@ Existing integrations
 
 [![Become a partner](https://opencollective.com/openapi-directory/tiers/partner.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
 
+ - [Apideck](https://apideck.com) - **Faster data integration through Unified APIs**
+ - [API Tracker](https://apitracker.io/) - **Aggregates 14,000+ APIs, SDKs, API specifications, integrations and DX profiles. It aims to help developers access the information they need to integrate APIs faster.**
  - https://any-api.com - **Documentation and Test Consoles for Public APIs**
  - https://datafire.io - **allows you to process and transfer data between APIs, databases, and more**
  - https://pipedream.com/ - **The integration platform built for developers**
@@ -78,7 +80,6 @@ Existing integrations
  - [WinSwag](https://github.com/SvenEV/WinSwag) - A UWP app for loading Swagger definitions and exploring REST APIs
  - [ReadMe.io](https://preview.readme.io) - Beautiful, personalized, interactive developer hubs.
  - [OpenAPI-Directory-JS](https://github.com/httptoolkit/openapi-directory-js) - The OpenAPI directory precompiled & indexed for JS usage & searching.
- - [API Tracker](https://apitracker.io/) - Aggregates 14,000+ APIs, SDKs, API specifications, integrations and DX profiles. It aims to help developers access the information they need to integrate APIs faster.
 
 Also used as test suite in the following projects:
  - [ReDoc](https://github.com/Redocly/redoc) - **OpenAPI-generated API Reference Documentation**
