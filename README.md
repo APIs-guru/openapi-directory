@@ -65,6 +65,8 @@ Existing integrations
 
 [![Become a partner](https://opencollective.com/openapi-directory/tiers/partner.svg?avatarHeight=36&width=600)](https://opencollective.com/openapi-directory)
 
+ - [Apideck](https://apideck.com) - **Faster data integration through Unified APIs**
+ - [API Tracker](https://apitracker.io/) - **Aggregates 14,000+ APIs, SDKs, API specifications, integrations and DX profiles. It aims to help developers access the information they need to integrate APIs faster.**
  - https://any-api.com - **Documentation and Test Consoles for Public APIs**
  - https://datafire.io - **allows you to process and transfer data between APIs, databases, and more**
  - https://pipedream.com/ - **The integration platform built for developers**
