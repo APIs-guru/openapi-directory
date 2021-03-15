@@ -31,6 +31,88 @@ tags:
   - name: bidders
   - name: buyers
 paths:
+  /v1/bidders:
+    get:
+      description: Lists all the bidder accounts that belong to the caller.
+      operationId: realtimebidding.bidders.list
+      parameters:
+        - description: The maximum number of bidders to return. If unspecified, at most 100 bidders will be returned. The maximum value is 500; values above 500 will be coerced to 500.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return. This value is received from a previous `ListBidders` call in ListBiddersResponse.nextPageToken.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListBiddersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/realtime-bidding
+          Oauth2c:
+            - https://www.googleapis.com/auth/realtime-bidding
+      tags:
+        - bidders
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1/buyers:
+    get:
+      description: Lists all buyer account information the calling buyer user or service account is permissioned to manage.
+      operationId: realtimebidding.buyers.list
+      parameters:
+        - description: The maximum number of buyers to return. If unspecified, at most 100 buyers will be returned. The maximum value is 500; values above 500 will be coerced to 500.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return. This value is received from a previous `ListBuyers` call in ListBuyersResponse.nextPageToken.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListBuyersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/realtime-bidding
+          Oauth2c:
+            - https://www.googleapis.com/auth/realtime-bidding
+      tags:
+        - buyers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}":
     delete:
       description: Deletes a pretargeting configuration.
@@ -501,6 +583,53 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
+  "/v1/{parent}/endpoints":
+    get:
+      description: Lists all the bidder's endpoints.
+      operationId: realtimebidding.bidders.endpoints.list
+      parameters:
+        - description: "Required. Name of the bidder whose endpoints will be listed. Format: `bidders/{bidderAccountId}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of endpoints to return. If unspecified, at most 100 endpoints will be returned. The maximum value is 500; values above 500 will be coerced to 500.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return. This value is received from a previous `ListEndpoints` call in ListEndpointsResponse.nextPageToken.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEndpointsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/realtime-bidding
+          Oauth2c:
+            - https://www.googleapis.com/auth/realtime-bidding
+      tags:
+        - bidders
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/pretargetingConfigs":
     get:
       description: Lists all pretargeting configurations for a single bidder.
@@ -985,6 +1114,27 @@ components:
       description: A request to activate a pretargeting configuration. Sets the configuration's state to ACTIVE.
       properties: {}
       type: object
+    AdTechnologyProviders:
+      description: The list of detected Ad Technology Providers for this creative. Bids placed for inventory that will serve to EEA or UK users are expected to comply with GDPR requirements. You must ensure that the creatives used in such bids should contain only user consented ad technology providers as indicated in the bid request. Google reserves the right to filter non-compliant bids. User consented ad technology providers can be found in the [Google Protocol](https://developers.google.com/authorized-buyers/rtb/downloads/realtime-bidding-proto) with the `BidRequest.adslot.consented_providers_settings` field, and can be found as an [OpenRTB extension](https://developers.google.com/authorized-buyers/rtb/downloads/openrtb-adx-proto) with the `BidRequest.user.ext.consented_providers_settings` and `BidRequest.user.ext.consent` fields. See https://support.google.com/authorizedbuyers/answer/9789378 for additional information about the Google TCF v2 integration.
+      properties:
+        detectedGvlIds:
+          description: The detected IAB Global Vendor List (GVL) IDs for this creative. See the IAB Global Vendor List at https://vendorlist.consensu.org/v2/vendor-list.json for details about the vendors.
+          items:
+            format: int64
+            type: string
+          type: array
+        detectedProviderIds:
+          description: The detected [Google Ad Tech Providers (ATP)](https://support.google.com/admanager/answer/9012903) for this creative. See https://storage.googleapis.com/adx-rtb-dictionaries/providers.csv for mapping of provider ID to provided name, a privacy policy URL, and a list of domains which can be attributed to the provider.
+          items:
+            format: int64
+            type: string
+          type: array
+        unidentifiedProviderDomains:
+          description: Domains of detected unidentified ad technology providers (if any). You must ensure that the creatives used in bids placed for inventory that will serve to EEA or UK users does not contain unidentified ad technology providers. Google reserves the right to filter non-compliant bids.
+          items:
+            type: string
+          type: array
+      type: object
     AddTargetedAppsRequest:
       description: A request to start targeting the provided app IDs in a specific pretargeting configuration. The pretargeting configuration itself specifies how these apps are targeted. in PretargetingConfig.appTargeting.mobileAppTargeting.
       properties:
@@ -1060,6 +1210,62 @@ components:
         mobileAppTargeting:
           $ref: "#/components/schemas/StringTargetingDimension"
           description: Targeted app IDs. App IDs can refer to those found in an app store or ones that are not published in an app store. A maximum of 30,000 app IDs can be targeted.
+      type: object
+    Bidder:
+      description: Bidder settings.
+      properties:
+        bypassNonguaranteedDealsPretargeting:
+          description: Output only. A flag to bypass pretargeting for private auctions and preferred deals. When true, bid requests from these nonguaranteed deals will always be sent. When false, bid requests will be subject to regular pretargeting configurations. Programmatic Guaranteed deals will always be sent to the bidder, regardless of the value for this flag. Auction packages are not impacted by this value and are subject to the regular pretargeting configurations.
+          readOnly: true
+          type: boolean
+        cookieMatchingNetworkId:
+          description: Output only. The buyer's network ID used for cookie matching. This ID corresponds to the `google_nid` parameter in the URL used in cookie match requests. Refer to https://developers.google.com/authorized-buyers/rtb/cookie-guide for further information.
+          readOnly: true
+          type: string
+        cookieMatchingUrl:
+          description: Output only. The base URL used in cookie match requests. Refer to https://developers.google.com/authorized-buyers/rtb/cookie-guide for further information.
+          readOnly: true
+          type: string
+        dealsBillingId:
+          description: Output only. The billing ID for the deals pretargeting config. This billing ID is sent on the bid request for guaranteed and nonguaranteed deals matched in pretargeting.
+          readOnly: true
+          type: string
+        name:
+          description: Output only. Name of the bidder resource that must follow the pattern `bidders/{bidderAccountId}`, where `{bidderAccountId}` is the account ID of the bidder whose information is to be received. One can get their account ID on the Authorized Buyers or Open Bidding UI, or by contacting their Google account manager.
+          readOnly: true
+          type: string
+      type: object
+    Buyer:
+      description: RTB Buyer account information.
+      properties:
+        activeCreativeCount:
+          description: Output only. The number of creatives that this buyer submitted via the API or bid with in the last 30 days. This is counted against the maximum number of active creatives.
+          format: int64
+          readOnly: true
+          type: string
+        bidder:
+          description: Output only. The name of the bidder resource that is responsible for receiving bidding traffic for this account. The bidder name must follow the pattern `bidders/{bidderAccountId}`, where `{bidderAccountId}` is the account ID of the bidder receiving traffic for this buyer.
+          readOnly: true
+          type: string
+        billingIds:
+          description: "Output only. A list of billing IDs associated with this account. These IDs appear on: 1. A bid request, to signal which buyers are eligible to bid on a given opportunity, and which pretargeting configurations were matched for each eligible buyer. 2. The bid response, to attribute a winning impression to a specific account for billing, reporting, policy and publisher block enforcement."
+          items:
+            type: string
+          readOnly: true
+          type: array
+        displayName:
+          description: Output only. The diplay name associated with this buyer account, as visible to sellers.
+          readOnly: true
+          type: string
+        maximumActiveCreativeCount:
+          description: Output only. The maximum number of active creatives that this buyer can have.
+          format: int64
+          readOnly: true
+          type: string
+        name:
+          description: Output only. Name of the buyer resource that must follow the pattern `buyers/{buyerAccountId}`, where `{buyerAccountId}` is the account ID of the buyer account whose information is to be received. One can get their account ID on the Authorized Buyers or Open Bidding UI, or by contacting their Google account manager.
+          readOnly: true
+          type: string
       type: object
     CloseUserListRequest:
       description: A request to close a specified user list.
@@ -1220,6 +1426,9 @@ components:
     CreativeServingDecision:
       description: Top level status and detected attributes of a creative.
       properties:
+        adTechnologyProviders:
+          $ref: "#/components/schemas/AdTechnologyProviders"
+          description: The detected ad technology providers.
         chinaPolicyCompliance:
           $ref: "#/components/schemas/PolicyCompliance"
           description: The policy compliance of this creative in China. When approved or disapproved, this applies to both deals and open auction in China. When pending review, this creative is allowed to serve for deals but not for open auction.
@@ -1459,6 +1668,44 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
+    Endpoint:
+      description: Bidder endpoint that receives bid requests.
+      properties:
+        bidProtocol:
+          description: The protocol that the bidder endpoint is using.
+          enum:
+            - BID_PROTOCOL_UNSPECIFIED
+            - GOOGLE_RTB
+            - OPENRTB_2_2
+            - OPENRTB_2_3
+            - OPENRTB_PROTOBUF_2_3
+            - OPENRTB_2_4
+            - OPENRTB_PROTOBUF_2_4
+            - OPENRTB_2_5
+            - OPENRTB_PROTOBUF_2_5
+          type: string
+        maximumQps:
+          description: The maximum number of queries per second allowed to be sent to this server.
+          format: int64
+          type: string
+        name:
+          description: Output only. Name of the endpoint resource that must follow the pattern `bidders/{bidderAccountId}/endpoints/{endpointId}`, where {bidderAccountId} is the account ID of the bidder who operates this endpoint, and {endpointId} is a unique ID assigned by the server.
+          readOnly: true
+          type: string
+        tradingLocation:
+          description: The trading location that bid requests should be sent from. See https://developers.google.com/authorized-buyers/rtb/peer-guide#trading-locations for further information.
+          enum:
+            - TRADING_LOCATION_UNSPECIFIED
+            - US_WEST
+            - US_EAST
+            - EUROPE
+            - ASIA
+          type: string
+        url:
+          description: Output only. The URL that bid requests should be sent to.
+          readOnly: true
+          type: string
+      type: object
     GetRemarketingTagResponse:
       description: Response for a request to get remarketing tag.
       properties:
@@ -1518,6 +1765,30 @@ components:
           format: int32
           type: integer
       type: object
+    ListBiddersResponse:
+      description: A response containing bidders.
+      properties:
+        bidders:
+          description: List of bidders.
+          items:
+            $ref: "#/components/schemas/Bidder"
+          type: array
+        nextPageToken:
+          description: A token which can be passed to a subsequent call to the `ListBidders` method to retrieve the next page of results in ListBiddersRequest.pageToken.
+          type: string
+      type: object
+    ListBuyersResponse:
+      description: A response containing buyer account information.
+      properties:
+        buyers:
+          description: List of buyers.
+          items:
+            $ref: "#/components/schemas/Buyer"
+          type: array
+        nextPageToken:
+          description: A token which can be passed to a subsequent call to the `ListBuyers` method to retrieve the next page of results in ListBuyersRequest.pageToken.
+          type: string
+      type: object
     ListCreativesResponse:
       description: A response for listing creatives.
       properties:
@@ -1528,6 +1799,18 @@ components:
           type: array
         nextPageToken:
           description: A token to retrieve the next page of results. Pass this value in the ListCreativesRequest.pageToken field in the subsequent call to the `ListCreatives` method to retrieve the next page of results.
+          type: string
+      type: object
+    ListEndpointsResponse:
+      description: A response containing bidder endpoints.
+      properties:
+        endpoints:
+          description: List of bidder endpoints.
+          items:
+            $ref: "#/components/schemas/Endpoint"
+          type: array
+        nextPageToken:
+          description: A token which can be passed to a subsequent call to the `ListEndpoints` method to retrieve the next page of results in ListEndpointsRequest.pageToken.
           type: string
       type: object
     ListPretargetingConfigsResponse:

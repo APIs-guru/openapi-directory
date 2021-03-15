@@ -1089,6 +1089,21 @@ components:
           description: The phone number of the EU representative. The phone number is validated but not verified.
           type: string
       type: object
+    ContentProviderEndpoint:
+      description: This feature is not generally available.
+      properties:
+        packageName:
+          description: This feature is not generally available.
+          type: string
+        signingCertsSha256:
+          description: Required. This feature is not generally available.
+          items:
+            type: string
+          type: array
+        uri:
+          description: This feature is not generally available.
+          type: string
+      type: object
     Date:
       description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: A full date, with non-zero year, month, and day values A month and day value, with a zero year, such as an anniversary A year on its own, with zero month and day values A year and month value, with a zero day, such as a credit card expiration dateRelated types are google.type.TimeOfDay and google.protobuf.Timestamp."
       properties:
@@ -1868,6 +1883,18 @@ components:
           description: The name of the policy setting. This is the JSON field name of a top-level Policy field. If not set, then this condition matches any setting name.
           type: string
       type: object
+    OncCertificateProvider:
+      description: This feature is not generally available.
+      properties:
+        certificateReferences:
+          description: This feature is not generally available.
+          items:
+            type: string
+          type: array
+        contentProviderEndpoint:
+          $ref: "#/components/schemas/ContentProviderEndpoint"
+          description: This feature is not generally available.
+      type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
       properties:
@@ -2177,7 +2204,7 @@ components:
           description: Whether user installation of apps is disabled.
           type: boolean
         installUnknownSourcesAllowed:
-          description: Whether the user is allowed to enable the "Unknown Sources" setting, which allows installation of apps from unknown sources.
+          description: This field has no effect.
           type: boolean
         keyguardDisabled:
           description: Whether the keyguard is disabled.
@@ -2246,6 +2273,11 @@ components:
         networkResetDisabled:
           description: Whether resetting network settings is disabled.
           type: boolean
+        oncCertificateProviders:
+          description: This feature is not generally available.
+          items:
+            $ref: "#/components/schemas/OncCertificateProvider"
+          type: array
         openNetworkConfiguration:
           additionalProperties:
             description: Properties of the object.

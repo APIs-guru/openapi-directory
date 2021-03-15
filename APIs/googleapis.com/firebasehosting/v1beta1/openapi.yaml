@@ -538,6 +538,103 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - sites
+  "/v1beta1/{parent}/sites":
+    get:
+      description: Lists each Site associated with the specified parent Project. Sites are returned in a consistent, but undefined, order to facilitate pagination. Site data might be out of sync by a few seconds. If you require up-to-date data, use GetSite.
+      operationId: firebasehosting.projects.sites.list
+      parameters:
+        - description: "Required. The Project that owns the sites to list, e.g.: `projects/{project-number}`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum number of sites to return in the response. The server may return fewer Sites at its discretion. If you don't specify a value or specify one that's too large, the server can select its own value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token from a previous call to `ListSites` that tells the server where to resume listing.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSitesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase.readonly
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Site. Sites take several minutes to propagate through Firebase systems.
+      operationId: firebasehosting.projects.sites.create
+      parameters:
+        - description: "Required. The parent Project of a Site, e.g.: `projects/{project-number}`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Immutable. A globally unique ID to identify the Site. The ID must also be a valid domain name label.
+          in: query
+          name: siteId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Site"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Site"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
   "/v1beta1/{parent}/versions":
     get:
       description: Lists the versions that have been created for the specified site. This list includes versions for both the default `live` channel and any active preview channels for the specified site.
@@ -1062,6 +1159,18 @@ components:
             $ref: "#/components/schemas/Release"
           type: array
       type: object
+    ListSitesResponse:
+      description: The response from ListSites.
+      properties:
+        nextPageToken:
+          description: A token returned when the list of results is too large to fit in a single response. If the string is empty, the response is the last or only page of results. Use the token in a follow-up call to `ListSites` to find the next group of Sites. Page tokens are short-lived and should not be stored.
+          type: string
+        sites:
+          description: A list of Site objects from the parent Firebase Project.
+          items:
+            $ref: "#/components/schemas/Site"
+          type: array
+      type: object
     ListVersionFilesResponse:
       properties:
         files:
@@ -1249,6 +1358,34 @@ components:
             - TRAILING_SLASH_BEHAVIOR_UNSPECIFIED
             - ADD
             - REMOVE
+          type: string
+      type: object
+    Site:
+      description: A `Site` represents a Firebase Hosting Site.
+      properties:
+        appId:
+          description: Optional. The ID of a Web App associated with the Site.
+          type: string
+        defaultUrl:
+          description: Output only. The default URL for this Hosting Site.
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. User-specified labels for the Hosting Site.
+          type: object
+        name:
+          description: "Output only. The fully qualified resource name of the Hosting Site, e.g.: `projects/{project-number}/sites/{site-id}`."
+          readOnly: true
+          type: string
+        type:
+          description: Output only. The Hosting site type. There will always be a single DEFAULT_SITE, which is created when Hosting is provisioned. All additional sites are USER_SITE.
+          enum:
+            - TYPE_UNSPECIFIED
+            - DEFAULT_SITE
+            - USER_SITE
+          readOnly: true
           type: string
       type: object
     SiteConfig:

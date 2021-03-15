@@ -24,9 +24,9 @@ info:
     - format: google
       url: https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v3
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: cloudresourcemanager
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/resource-manager
 tags:
@@ -117,7 +117,7 @@ paths:
       description: "Lists the TagBindings for the given cloud resource, as specified with `parent`. NOTE: The `parent` field is expected to be a full resource name: https://cloud.google.com/apis/design/resource_names#full_resource_name"
       operationId: cloudresourcemanager.tagBindings.list
       parameters:
-        - description: Optional. The maximum number of TagBindings to return in the response. This is currently not used by the server and will return the full page even if a size is specified.
+        - description: Optional. The maximum number of TagBindings to return in the response. The server allows a maximum of 300 TagBindings to return. If unspecified, the server will use 100 as the default.
           in: query
           name: pageSize
           schema:
@@ -195,12 +195,12 @@ paths:
       description: Lists all TagKeys for a parent resource.
       operationId: cloudresourcemanager.tagKeys.list
       parameters:
-        - description: Optional. The maximum number of TagKeys to return in the response. This is currently not used by the server and will return the full page even if a size is specified currently.
+        - description: Optional. The maximum number of TagKeys to return in the response. The server allows a maximum of 300 TagKeys to return. If unspecified, the server will use 100 as the default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. A pagination token returned from a previous call to `ListTagKey` that indicates where this listing should continue from. This is currently not used by the server.
+        - description: Optional. A pagination token returned from a previous call to `ListTagKey` that indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -273,12 +273,12 @@ paths:
       description: Lists all TagValues for a specific TagKey.
       operationId: cloudresourcemanager.tagValues.list
       parameters:
-        - description: Optional. The maximum number of TagValues to return in the response. This is currently not used by the server and will return the full page even if a size is specified currently.
+        - description: Optional. The maximum number of TagValues to return in the response. The server allows a maximum of 300 TagValues to return. If unspecified, the server will use 100 as the default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. A pagination token returned from a previous call to `ListTagValues` that indicates where this listing should continue from. This is currently not used by the server.
+        - description: Optional. A pagination token returned from a previous call to `ListTagValues` that indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -884,7 +884,7 @@ components:
       description: The ListTagBindings response.
       properties:
         nextPageToken:
-          description: A pagination token returned from a previous call to `ListTagBindings` that indicates from where listing should continue. This is currently not used, but the server may at any point start supplying a valid token.
+          description: A pagination token returned from a previous call to `ListTagBindings` that indicates from where listing should continue.
           type: string
         tagBindings:
           description: A possibly paginated list of TagBindings for the specified TagValue or resource.
@@ -896,7 +896,7 @@ components:
       description: The ListTagKeys response message.
       properties:
         nextPageToken:
-          description: A pagination token returned from a previous call to `ListTagKeys` that indicates from where listing should continue. This is currently not used, but the server may at any point start supplying a valid token.
+          description: A pagination token returned from a previous call to `ListTagKeys` that indicates from where listing should continue.
           type: string
         tagKeys:
           description: List of TagKeys that live under the specified parent in the request.
@@ -1117,7 +1117,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
@@ -1126,7 +1126,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

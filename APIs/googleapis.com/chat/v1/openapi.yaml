@@ -160,8 +160,7 @@ paths:
       description: Updates a message.
       operationId: chat.spaces.messages.update
       parameters:
-        - description: 'Resource name, in the form "spaces/*/messages/*". Example: spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4'
-          in: path
+        - in: path
           name: name
           required: true
           schema:
@@ -800,7 +799,6 @@ components:
           description: A plain-text description of the message's cards, used when the actual cards cannot be displayed (e.g. mobile notifications).
           type: string
         name:
-          description: 'Resource name, in the form "spaces/*/messages/*". Example: spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4'
           type: string
         previewText:
           description: Text for generating preview chips. This text will not be displayed to the user, but any links to images, web pages, videos, etc. included here will generate preview chips.
@@ -851,7 +849,7 @@ components:
           type: array
       type: object
     SlashCommand:
-      description: A Slash Command in Hangouts Chat.
+      description: A Slash Command in Chat.
       properties:
         commandId:
           description: The id of the slash command invoked.

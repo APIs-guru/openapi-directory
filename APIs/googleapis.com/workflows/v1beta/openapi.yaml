@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://workflows.googleapis.com/$discovery/rest?version=v1beta
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: workflows
-  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/workflows
 tags:
@@ -558,7 +558,7 @@ components:
           description: "Name of the service account associated with the latest workflow version. This service account represents the identity of the workflow and determines what permissions the workflow has. Format: projects/{project}/serviceAccounts/{account} Using `-` as a wildcard for the `{project}` will infer the project from the account. The `{account}` value can be the `email` address or the `unique_id` of the service account. If not provided, workflow will use the project's default service account. Modifying this field for an existing workflow results in a new workflow revision."
           type: string
         sourceContents:
-          description: Workflow code to be executed. The size limit is 32KB.
+          description: Workflow code to be executed. The size limit is 128KB.
           type: string
         state:
           description: Output only. State of the workflow deployment.

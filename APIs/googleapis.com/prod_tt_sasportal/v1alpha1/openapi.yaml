@@ -848,6 +848,17 @@ components:
           description: Required. Role that is assigned to `members`.
           type: string
       type: object
+    SasPortalChannelWithScore:
+      description: The channel with score.
+      properties:
+        frequencyRange:
+          $ref: "#/components/schemas/SasPortalFrequencyRange"
+          description: The frequency range of the channel.
+        score:
+          description: The channel score, normalized to be in [0,100].
+          format: double
+          type: number
+      type: object
     SasPortalCreateSignedDeviceRequest:
       description: Request for CreateSignedDevice.
       properties:
@@ -911,6 +922,12 @@ components:
         activeConfig:
           $ref: "#/components/schemas/SasPortalDeviceConfig"
           description: Output only. Current configuration of the device as registered to the SAS.
+        currentChannels:
+          description: Output only. Current channels with scores.
+          items:
+            $ref: "#/components/schemas/SasPortalChannelWithScore"
+          readOnly: true
+          type: array
         deviceMetadata:
           $ref: "#/components/schemas/SasPortalDeviceMetadata"
           description: Device parameters that can be overridden by both SAS Portal and SAS registration requests.

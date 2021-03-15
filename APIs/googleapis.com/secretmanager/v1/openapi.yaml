@@ -1072,7 +1072,7 @@ components:
           type: array
       type: object
     Topic:
-      description: A Pub/Sub topic which SM will publish to when control plane events occur on this secret.
+      description: A Pub/Sub topic which Secret Manager will publish to when control plane events occur on this secret.
       properties:
         name:
           description: "Required. The resource name of the Pub/Sub topic that will be published to, in the following format: `projects/*/topics/*`. For publication to succeed, the Secret Manager P4SA must have `pubsub.publisher` permissions on the topic."

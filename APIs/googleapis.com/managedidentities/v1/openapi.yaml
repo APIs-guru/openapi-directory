@@ -1071,7 +1071,7 @@ components:
       description: Maintenance schedule which is exposed to customer and potentially end user, indicating published upcoming future maintenance schedule
       properties:
         canReschedule:
-          description: Can this scheduled update be rescheduled? By default, it's true and API needs to do explicitly check whether it's set, if it's set as false explicitly, it's false
+          description: This field will be deprecated, and will be always set to true since reschedule can happen multiple times now.
           type: boolean
         endTime:
           description: The scheduled end time for the maintenance.

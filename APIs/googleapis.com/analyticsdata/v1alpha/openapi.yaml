@@ -1097,7 +1097,7 @@ components:
           description: If false or unspecified, each row with all metrics equal to 0 will not be returned. If true, these rows will be returned if they are not separately removed by a filter.
           type: boolean
         limit:
-          description: The number of rows to return. If the `limit` parameter is unspecified, 10,000 rows are returned. The API returns a maximum of 100,000 rows per request, no matter how many you ask for.
+          description: The number of rows to return. If the `limit` parameter is unspecified, 10,000 rows are returned. The API returns a maximum of 100,000 rows per request, no matter how many you ask for. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
           format: int64
           type: string
         metricAggregations:
@@ -1120,7 +1120,7 @@ components:
             $ref: "#/components/schemas/Metric"
           type: array
         offset:
-          description: The row count of the start row. The first row is counted as row 0.
+          description: The row count of the start row. The first row is counted as row 0. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
           format: int64
           type: string
         orderBys:

@@ -32,21 +32,26 @@ tags:
 paths:
   "/v2/{name}":
     delete:
-      description: Deletes the specified session entity type. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.
-      operationId: dialogflow.projects.agent.sessions.entityTypes.delete
+      description: "Deletes the specified document. Operation "
+      operationId: dialogflow.projects.locations.knowledgeBases.documents.delete
       parameters:
-        - description: "Required. The name of the entity type to delete. Format: `projects//agent/sessions//entityTypes/` or `projects//agent/environments//users//sessions//entityTypes/`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user."
+        - description: "Required. The name of the document to delete. Format: `projects//locations//knowledgeBases//documents/`."
           in: path
           name: name
           required: true
           schema:
             type: string
+        - description: Optional. Force deletes the knowledge base. When set to true, any documents in the knowledge base are also deleted.
+          in: query
+          name: force
+          schema:
+            type: boolean
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleProtobufEmpty"
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -113,16 +118,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the specified session entity type. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.
-      operationId: dialogflow.projects.agent.sessions.entityTypes.patch
+      description: "Updates the specified document. Operation "
+      operationId: dialogflow.projects.locations.knowledgeBases.documents.patch
       parameters:
-        - description: "Required. The unique identifier of this session entity type. Format: `projects//agent/sessions//entityTypes/`, or `projects//agent/environments//users//sessions//entityTypes/`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented."
+        - description: "Optional. The document resource name. The name must be empty when creating a document. Format: `projects//locations//knowledgeBases//documents/`."
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. The mask to control which fields get updated.
+        - description: Optional. Not specified means `update all`. Currently, only `display_name` can be updated, an InvalidArgument will be returned for attempting to update other fields.
           in: query
           name: updateMask
           schema:
@@ -139,13 +144,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudDialogflowV2SessionEntityType"
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2Document"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudDialogflowV2SessionEntityType"
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -243,6 +248,98 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleProtobufEmpty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v2/{name}:complete":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Completes the specified conversation. Finished conversations are purged from the database after 30 days.
+      operationId: dialogflow.projects.locations.conversations.complete
+      parameters:
+        - description: "Required. Resource identifier of the conversation to close. Format: `projects//locations//conversations/`."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2CompleteConversationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2Conversation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v2/{name}:reload":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Reloads the specified document from its specified source, content_uri or content. The previously loaded content of the document will be deleted. Note: Even when the content of the document has not changed, there still may be side effects because of internal implementation changes. Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`. Operation "
+      operationId: dialogflow.projects.locations.knowledgeBases.documents.reload
+      parameters:
+        - description: "Required. The name of the document to reload. Format: `projects//locations//knowledgeBases//documents/`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2ReloadDocumentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -643,6 +740,146 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
+  "/v2/{parent}/answerRecords":
+    get:
+      description: Returns the list of all answer records in the specified project in reverse chronological order.
+      operationId: dialogflow.projects.locations.answerRecords.list
+      parameters:
+        - description: "Required. The project to list all answer records for in reverse chronological order. Format: `projects//locations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Filters to restrict results to specific answer records. Filter on answer record type. Currently predicates on `type` is supported, valid values are `ARTICLE_ANSWER`, `FAQ_ANSWER`. For more information about filtering, see [API Filtering](https://aip.dev/160).
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of records to return in a single page. The server may return fewer records than this. If unspecified, we use 10. The maximum is 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The ListAnswerRecordsResponse.next_page_token value returned from a previous list request used to continue listing on the next page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2ListAnswerRecordsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/callMatchers":
+    get:
+      description: Returns the list of all call matchers in the specified conversation.
+      operationId: dialogflow.projects.locations.conversations.callMatchers.list
+      parameters:
+        - description: "Required. The conversation to list all call matchers from. Format: `projects//locations//conversations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return in a single page. By default 100 and at most 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2ListCallMatchersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a call matcher that links incoming SIP calls to the specified conversation if they fulfill specified criteria.
+      operationId: dialogflow.projects.locations.conversations.callMatchers.create
+      parameters:
+        - description: "Required. Resource identifier of the conversation adding the call matcher. Format: `projects//locations//conversations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2CreateCallMatcherRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2CallMatcher"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
   "/v2/{parent}/contexts":
     delete:
       description: Deletes all active contexts in the specified session.
@@ -743,6 +980,268 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudDialogflowV2Context"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v2/{parent}/conversationProfiles":
+    get:
+      description: Returns the list of all conversation profiles in the specified project.
+      operationId: dialogflow.projects.locations.conversationProfiles.list
+      parameters:
+        - description: "Required. The project to list all conversation profiles from. Format: `projects//locations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return in a single page. By default 100 and at most 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2ListConversationProfilesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a conversation profile in the specified project. ConversationProfile.CreateTime and ConversationProfile.UpdateTime aren't populated in the response. You can retrieve them via GetConversationProfile API.
+      operationId: dialogflow.projects.locations.conversationProfiles.create
+      parameters:
+        - description: "Required. The project to create a conversation profile for. Format: `projects//locations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2ConversationProfile"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2ConversationProfile"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v2/{parent}/conversations":
+    get:
+      description: Returns the list of all conversations in the specified project.
+      operationId: dialogflow.projects.locations.conversations.list
+      parameters:
+        - description: "Required. The project from which to list all conversation. Format: `projects//locations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'A filter expression that filters conversations listed in the response. In general, the expression must specify the field name, a comparison operator, and the value to use for filtering: - The value must be a string, a number, or a boolean. - The comparison operator must be either `=`,`!=`, `>`, or `<`. - To filter on multiple expressions, separate the expressions with `AND` or `OR` (omitting both implies `AND`). - For clarity, expressions can be enclosed in parentheses. Only `lifecycle_state` can be filtered on in this way. For example, the following expression only returns `COMPLETED` conversations: `lifecycle_state = "COMPLETED"` For more information about filtering, see [API Filtering](https://aip.dev/160).'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return in a single page. By default 100 and at most 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2ListConversationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Creates a new conversation. Conversations are auto-completed after 24 hours. Conversation Lifecycle: There are two stages during a conversation: Automated Agent Stage and Assist Stage. For Automated Agent Stage, there will be a dialogflow agent responding to user queries. For Assist Stage, there's no dialogflow agent responding to user queries. But we will provide suggestions which are generated from conversation. If Conversation.conversation_profile is configured for a dialogflow agent, conversation will start from `Automated Agent Stage`, otherwise, it will start from `Assist Stage`. And during `Automated Agent Stage`, once an Intent with Intent.live_agent_handoff is triggered, conversation will transfer to Assist Stage."
+      operationId: dialogflow.projects.locations.conversations.create
+      parameters:
+        - description: "Required. Resource identifier of the project creating the conversation. Format: `projects//locations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Identifier of the conversation. Generally it's auto generated by Google. Only set it if you cannot wait for the response to return a auto-generated one to you. The conversation ID must be compliant with the regression fomula "a-zA-Z*" with the characters length in range of [3,64]. If the field is provided, the caller is resposible for 1. the uniqueness of the ID, otherwise the request will be rejected. 2. the consistency for whether to use custom ID or not under a project to better ensure uniqueness.
+          in: query
+          name: conversationId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2Conversation"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2Conversation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v2/{parent}/documents":
+    get:
+      description: Returns the list of all documents of the knowledge base.
+      operationId: dialogflow.projects.locations.knowledgeBases.documents.list
+      parameters:
+        - description: "Required. The knowledge base to list all documents for. Format: `projects//locations//knowledgeBases/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return in a single page. By default 10 and at most 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2ListDocumentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Creates a new document. Operation "
+      operationId: dialogflow.projects.locations.knowledgeBases.documents.create
+      parameters:
+        - description: "Required. The knowledge base to create a document for. Format: `projects//locations//knowledgeBases/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2Document"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -1315,6 +1814,368 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v2/{parent}/knowledgeBases":
+    get:
+      description: Returns the list of all knowledge bases of the specified agent.
+      operationId: dialogflow.projects.locations.knowledgeBases.list
+      parameters:
+        - description: "Required. The project to list of knowledge bases for. Format: `projects//locations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return in a single page. By default 10 and at most 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2ListKnowledgeBasesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a knowledge base.
+      operationId: dialogflow.projects.locations.knowledgeBases.create
+      parameters:
+        - description: "Required. The project to create a knowledge base for. Format: `projects//locations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2KnowledgeBase"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2KnowledgeBase"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v2/{parent}/messages":
+    get:
+      description: Lists messages that belong to a given conversation. `messages` are ordered by `create_time` in descending order. To fetch updates without duplication, send request with filter `create_time_epoch_microseconds > [first item's create_time of previous request]` and empty page_token.
+      operationId: dialogflow.projects.locations.conversations.messages.list
+      parameters:
+        - description: "Required. The name of the conversation to list messages for. Format: `projects//locations//conversations/`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filter on message fields. Currently predicates on `create_time` and `create_time_epoch_microseconds` are supported. `create_time` only support milliseconds accuracy. E.g., `create_time_epoch_microseconds > 1551790877964485` or `create_time > 2017-01-15T01:30:15.01Z`. For more information about filtering, see [API Filtering](https://aip.dev/160).
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return in a single page. By default 100 and at most 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2ListMessagesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/participants":
+    get:
+      description: Returns the list of all participants in the specified conversation.
+      operationId: dialogflow.projects.locations.conversations.participants.list
+      parameters:
+        - description: "Required. The conversation to list all participants from. Format: `projects//locations//conversations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return in a single page. By default 100 and at most 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2ListParticipantsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new participant in a conversation.
+      operationId: dialogflow.projects.locations.conversations.participants.create
+      parameters:
+        - description: "Required. Resource identifier of the conversation adding the participant. Format: `projects//locations//conversations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2Participant"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2Participant"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v2/{parent}/suggestions:suggestArticles":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Gets suggested articles for a participant based on specific historical messages.
+      operationId: dialogflow.projects.locations.conversations.participants.suggestions.suggestArticles
+      parameters:
+        - description: "Required. The name of the participant to fetch suggestion for. Format: `projects//locations//conversations//participants/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestArticlesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestArticlesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v2/{parent}/suggestions:suggestFaqAnswers":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Gets suggested faq answers for a participant based on specific historical messages.
+      operationId: dialogflow.projects.locations.conversations.participants.suggestions.suggestFaqAnswers
+      parameters:
+        - description: "Required. The name of the participant to fetch suggestion for. Format: `projects//locations//conversations//participants/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestFaqAnswersRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestFaqAnswersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  "/v2/{participant}:analyzeContent":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Adds a text (chat, for example), or audio (phone recording, for example) message from a participant into the conversation. Note: Always use agent versions for production traffic sent to virtual agents. See [Versions and environments(https://cloud.google.com/dialogflow/es/docs/agents-versions)."
+      operationId: dialogflow.projects.locations.conversations.participants.analyzeContent
+      parameters:
+        - description: "Required. The name of the participant this text comes from. Format: `projects//locations//conversations//participants/`."
+          in: path
+          name: participant
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2AnalyzeContentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2AnalyzeContentResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -3432,6 +4293,94 @@ components:
           description: Required. The time zone of this agent from the [time zone database](https://www.iana.org/time-zones), e.g., America/New_York, Europe/Paris.
           type: string
       type: object
+    GoogleCloudDialogflowV2AgentAssistantFeedback:
+      description: Detail feedback of Agent Assist result.
+      properties:
+        answerRelevance:
+          description: 'Optional. Whether or not the suggested answer is relevant. For example: * Query: "Can I change my mailing address?" * Suggested document says: "Items must be returned/exchanged within 60 days of the purchase date." * answer_relevance: AnswerRelevance.IRRELEVANT'
+          enum:
+            - ANSWER_RELEVANCE_UNSPECIFIED
+            - IRRELEVANT
+            - RELEVANT
+          type: string
+        documentCorrectness:
+          description: 'Optional. Whether or not the information in the document is correct. For example: * Query: "Can I return the package in 2 days once received?" * Suggested document says: "Items must be returned/exchanged within 60 days of the purchase date." * Ground truth: "No return or exchange is allowed." * [document_correctness]: INCORRECT'
+          enum:
+            - DOCUMENT_CORRECTNESS_UNSPECIFIED
+            - INCORRECT
+            - CORRECT
+          type: string
+        documentEfficiency:
+          description: Optional. Whether or not the suggested document is efficient. For example, if the document is poorly written, hard to understand, hard to use or too long to find useful information, document_efficiency is DocumentEfficiency.INEFFICIENT.
+          enum:
+            - DOCUMENT_EFFICIENCY_UNSPECIFIED
+            - INEFFICIENT
+            - EFFICIENT
+          type: string
+      type: object
+    GoogleCloudDialogflowV2AgentAssistantRecord:
+      description: Represents a record of a human agent assist answer.
+      properties:
+        articleSuggestionAnswer:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2ArticleAnswer"
+          description: Output only. The article suggestion answer.
+          readOnly: true
+        faqAnswer:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2FaqAnswer"
+          description: Output only. The FAQ answer.
+          readOnly: true
+      type: object
+    GoogleCloudDialogflowV2AnalyzeContentRequest:
+      description: The request message for Participants.AnalyzeContent.
+      properties:
+        audioInput:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2AudioInput"
+          description: The natural language speech audio to be processed.
+        eventInput:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2EventInput"
+          description: An input event to send to Dialogflow.
+        queryParams:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2QueryParameters"
+          description: Parameters for a Dialogflow virtual-agent query.
+        replyAudioConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2OutputAudioConfig"
+          description: Speech synthesis configuration. The speech synthesis settings for a virtual agent that may be configured for the associated conversation profile are not used when calling AnalyzeContent. If this configuration is not supplied, speech synthesis is disabled.
+        requestId:
+          description: A unique identifier for this request. Restricted to 36 ASCII characters. A random UUID is recommended. This request is only idempotent if a `request_id` is provided.
+          type: string
+        textInput:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2TextInput"
+          description: The natural language text to be processed.
+      type: object
+    GoogleCloudDialogflowV2AnalyzeContentResponse:
+      description: The response message for Participants.AnalyzeContent.
+      properties:
+        automatedAgentReply:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2AutomatedAgentReply"
+          description: "Only set if a Dialogflow automated agent has responded. Note that: AutomatedAgentReply.detect_intent_response.output_audio and AutomatedAgentReply.detect_intent_response.output_audio_config are always empty, use reply_audio instead."
+        dtmfParameters:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2DtmfParameters"
+          description: Indicates the parameters of DTMF.
+        endUserSuggestionResults:
+          description: The suggestions for end user. The order is the same as HumanAgentAssistantConfig.SuggestionConfig.feature_configs of HumanAgentAssistantConfig.end_user_suggestion_config.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestionResult"
+          type: array
+        humanAgentSuggestionResults:
+          description: The suggestions for most recent human agent. The order is the same as HumanAgentAssistantConfig.SuggestionConfig.feature_configs of HumanAgentAssistantConfig.human_agent_suggestion_config.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestionResult"
+          type: array
+        message:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2Message"
+          description: Message analyzed by CCAI.
+        replyAudio:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2OutputAudio"
+          description: "The audio data bytes encoded as specified in the request. This field is set if: - `reply_audio_config` was specified in the request, or - The automated agent responded with audio to play to the user. In such case, `reply_audio.config` contains settings used to synthesize the speech. In some scenarios, multiple output audio fields may be present in the response structure. In these cases, only the top-most-level audio output has content."
+        replyText:
+          description: The output text content. This field is set if the automated agent responded with text to show to the user.
+          type: string
+      type: object
     GoogleCloudDialogflowV2AnnotatedMessagePart:
       description: Represents a part of a message possibly annotated with an entity. The part can be an entity or purely a part of the message between two entities or message start/end.
       properties:
@@ -3443,6 +4392,101 @@ components:
         text:
           description: A part of a message possibly annotated with an entity.
           type: string
+      type: object
+    GoogleCloudDialogflowV2AnswerFeedback:
+      description: Represents feedback the customer has about the quality & correctness of a certain answer in a conversation.
+      properties:
+        agentAssistantDetailFeedback:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2AgentAssistantFeedback"
+          description: Detail feedback of agent assist suggestions.
+        clickTime:
+          description: Time when the answer/item was clicked.
+          format: google-datetime
+          type: string
+        clicked:
+          description: Indicates whether the answer/item was clicked by the human agent or not. Default to false.
+          type: boolean
+        correctnessLevel:
+          description: The correctness level of the specific answer.
+          enum:
+            - CORRECTNESS_LEVEL_UNSPECIFIED
+            - NOT_CORRECT
+            - PARTIALLY_CORRECT
+            - FULLY_CORRECT
+          type: string
+        displayTime:
+          description: Time when the answer/item was displayed.
+          format: google-datetime
+          type: string
+        displayed:
+          description: Indicates whether the answer/item was displayed to the human agent in the agent desktop UI. Default to false.
+          type: boolean
+      type: object
+    GoogleCloudDialogflowV2AnswerRecord:
+      description: "Answer records are records to manage answer history and feedbacks for Dialogflow. Currently, answer record includes: - human agent assistant article suggestion - human agent assistant faq article It doesn't include: - `DetectIntent` intent matching - `DetectIntent` knowledge Answer records are not related to the conversation history in the Dialogflow Console. A Record is generated even when the end-user disables conversation history in the console. Records are created when there's a human agent assistant suggestion generated. A typical workflow for customers provide feedback to an answer is: 1. For human agent assistant, customers get suggestion via ListSuggestions API. Together with the answers, AnswerRecord.name are returned to the customers. 2. The customer uses the AnswerRecord.name to call the UpdateAnswerRecord method to send feedback about a specific answer that they believe is wrong."
+      properties:
+        agentAssistantRecord:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2AgentAssistantRecord"
+          description: Output only. The record for human agent assistant.
+          readOnly: true
+        answerFeedback:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2AnswerFeedback"
+          description: Required. The AnswerFeedback for this record. You can set this with AnswerRecords.UpdateAnswerRecord in order to give us feedback about this answer.
+        name:
+          description: "The unique identifier of this answer record. Format: `projects//locations//answerRecords/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2ArticleAnswer:
+      description: Represents article answer.
+      properties:
+        answerRecord:
+          description: The name of answer record, in the format of "projects//locations//answerRecords/"
+          type: string
+        confidence:
+          description: Article match confidence. The system's confidence score that this article is a good match for this conversation, as a value from 0.0 (completely uncertain) to 1.0 (completely certain).
+          format: float
+          type: number
+        metadata:
+          additionalProperties:
+            type: string
+          description: A map that contains metadata about the answer and the document from which it originates.
+          type: object
+        snippets:
+          description: Article snippets.
+          items:
+            type: string
+          type: array
+        title:
+          description: The article title.
+          type: string
+        uri:
+          description: The article URI.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2AudioInput:
+      description: Represents the natural language speech audio to be processed.
+      properties:
+        audio:
+          description: Required. The natural language speech audio to be processed. A single request can contain up to 1 minute of speech audio data. The transcribed text cannot contain more than 256 bytes.
+          format: byte
+          type: string
+        config:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2InputAudioConfig"
+          description: Required. Instructs the speech recognizer how to process the speech audio.
+      type: object
+    GoogleCloudDialogflowV2AutomatedAgentConfig:
+      description: Defines the Automated Agent to connect to a conversation.
+      properties:
+        agent:
+          description: "Required. ID of the Dialogflow agent environment to use. This project needs to either be the same project as the conversation or you need to grant `service-@gcp-sa-dialogflow.iam.gserviceaccount.com` the `Dialogflow API Service Agent` role in this project. Format: `projects//locations//agent/environments/`. If environment is not specified, the default `draft` environment is used. Refer to [DetectIntentRequest](/dialogflow/docs/reference/rpc/google.cloud.dialogflow.v2#google.cloud.dialogflow.v2.DetectIntentRequest) for more details."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2AutomatedAgentReply:
+      description: Represents a response from an automated agent.
+      properties:
+        detectIntentResponse:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2DetectIntentResponse"
+          description: Response of the Dialogflow Sessions.DetectIntent call.
       type: object
     GoogleCloudDialogflowV2BatchCreateEntitiesRequest:
       description: The request message for EntityTypes.BatchCreateEntities.
@@ -3559,6 +4603,37 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2Intent"
           type: array
       type: object
+    GoogleCloudDialogflowV2CallMatcher:
+      description: "Represents a call matcher that describes criteria for matching incoming SIP calls to a conversation. When Dialogflow get a SIP call from a third-party carrier, Dialogflow matches the call to an existing conversation by either: * Extracting the conversation id from the [Call-Info header](https://tools.ietf.org/html/rfc3261#section-20.9), e.g. `Call-Info: ;purpose=Goog-ContactCenter-Conversation`. * Or, if that doesn't work, matching incoming [SIP headers](https://tools.ietf.org/html/rfc3261#section-7.3) against any CallMatcher for the conversation. If an incoming SIP call without valid `Call-Info` header matches to zero or multiple conversations with `CallMatcher`, we reject it. A call matcher contains equality conditions for SIP headers that all have to be fulfilled in order for a SIP call to match. The matched SIP headers consist of well-known headers (`To`, `From`, `Call-ID`) and custom headers. A CallMatcher is only valid if it specifies: * At least 1 custom header, * or at least 2 well-known headers."
+      properties:
+        callIdHeader:
+          description: Value of the [`Call-ID` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.4) to match. If empty or unspecified, we don't match to the [`Call-ID` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.4).
+          type: string
+        customHeaders:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2CallMatcherCustomHeaders"
+          description: Custom SIP headers that must match.
+        fromHeader:
+          description: Value of the [`From` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.3) to match. If empty or unspecified, we don't match to the [`From` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.3).
+          type: string
+        name:
+          description: "Output only. The unique identifier of this call matcher. Format: `projects//locations//conversations//callMatchers/`."
+          readOnly: true
+          type: string
+        toHeader:
+          description: Value of the [`To` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.2) to match. If empty or unspecified, we don't match to the [`To` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.2).
+          type: string
+      type: object
+    GoogleCloudDialogflowV2CallMatcherCustomHeaders:
+      description: Custom SIP headers. See the [description of headers in the RFC](https://tools.ietf.org/html/rfc3261#section-7.3).
+      properties:
+        ciscoGuid:
+          description: Cisco's proprietary `Cisco-Guid` header.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2CompleteConversationRequest:
+      description: The request message for Conversations.CompleteConversation.
+      properties: {}
+      type: object
     GoogleCloudDialogflowV2Context:
       description: Dialogflow contexts are similar to natural language context. If a person says to you "they are orange", you need context in order to understand what "they" is referring to. Similarly, for Dialogflow to handle an end-user expression like that, it needs to be provided with context in order to correctly match an intent. Using contexts, you can control the flow of a conversation. You can configure contexts for an intent by setting input and output contexts, which are identified by string names. When an intent is matched, any configured output contexts for that intent become active. While any contexts are active, Dialogflow is more likely to match intents that are configured with input contexts that correspond to the currently active contexts. For more information about context, see the [Contexts guide](https://cloud.google.com/dialogflow/docs/contexts-overview).
       properties:
@@ -3574,6 +4649,46 @@ components:
             description: Properties of the object.
           description: "Optional. The collection of parameters associated with this context. Depending on your protocol or client library language, this is a map, associative array, symbol table, dictionary, or JSON object composed of a collection of (MapKey, MapValue) pairs: - MapKey type: string - MapKey value: parameter name - MapValue type: - If parameter's entity type is a composite entity: map - Else: depending on parameter value type, could be one of string, number, boolean, null, list or map - MapValue value: - If parameter's entity type is a composite entity: map from composite entity property names to property values - Else: parameter value"
           type: object
+      type: object
+    GoogleCloudDialogflowV2Conversation:
+      description: Represents a conversation. A conversation is an interaction between an agent, including live agents and Dialogflow agents, and a support customer. Conversations can include phone calls and text-based chat sessions.
+      properties:
+        conversationProfile:
+          description: "Required. The Conversation Profile to be used to configure this Conversation. This field cannot be updated. Format: `projects//locations//conversationProfiles/`."
+          type: string
+        conversationStage:
+          description: The stage of a conversation. It indicates whether the virtual agent or a human agent is handling the conversation. If the conversation is created with the conversation profile that has Dialogflow config set, defaults to ConversationStage.VIRTUAL_AGENT_STAGE; Otherwise, defaults to ConversationStage.HUMAN_ASSIST_STAGE. If the conversation is created with the conversation profile that has Dialogflow config set but explicitly sets conversation_stage to ConversationStage.HUMAN_ASSIST_STAGE, it skips ConversationStage.VIRTUAL_AGENT_STAGE stage and directly goes to ConversationStage.HUMAN_ASSIST_STAGE.
+          enum:
+            - CONVERSATION_STAGE_UNSPECIFIED
+            - VIRTUAL_AGENT_STAGE
+            - HUMAN_ASSIST_STAGE
+          type: string
+        endTime:
+          description: Output only. The time the conversation was finished.
+          format: google-datetime
+          readOnly: true
+          type: string
+        lifecycleState:
+          description: Output only. The current state of the Conversation.
+          enum:
+            - LIFECYCLE_STATE_UNSPECIFIED
+            - IN_PROGRESS
+            - COMPLETED
+          readOnly: true
+          type: string
+        name:
+          description: "Output only. The unique identifier of this conversation. Format: `projects//locations//conversations/`."
+          readOnly: true
+          type: string
+        phoneNumber:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2ConversationPhoneNumber"
+          description: Output only. It will not be empty if the conversation is to be connected over telephony.
+          readOnly: true
+        startTime:
+          description: Output only. The time the conversation was started.
+          format: google-datetime
+          readOnly: true
+          type: string
       type: object
     GoogleCloudDialogflowV2ConversationEvent:
       description: Represents a notification sent to Pub/Sub subscribers for conversation lifecycle events.
@@ -3597,6 +4712,65 @@ components:
             - NEW_MESSAGE
             - UNRECOVERABLE_ERROR
           type: string
+      type: object
+    GoogleCloudDialogflowV2ConversationPhoneNumber:
+      description: Represents a phone number for telephony integration. It allows for connecting a particular conversation over telephony.
+      properties:
+        phoneNumber:
+          description: Output only. The phone number to connect to this conversation.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudDialogflowV2ConversationProfile:
+      description: Defines the services to connect to incoming Dialogflow conversations.
+      properties:
+        automatedAgentConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2AutomatedAgentConfig"
+          description: Configuration for an automated agent to use with this profile.
+        createTime:
+          description: Output only. Create time of the conversation profile.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Required. Human readable name for this profile. Max length 1024 bytes.
+          type: string
+        humanAgentAssistantConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfig"
+          description: Configuration for agent assistance to use with this profile.
+        humanAgentHandoffConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentHandoffConfig"
+          description: Configuration for connecting to a live agent.
+        languageCode:
+          description: Language which represents the conversationProfile. If unspecified, the default language code en-us applies. Users need to create a ConversationProfile for each language they want to support.
+          type: string
+        loggingConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2LoggingConfig"
+          description: Configuration for logging conversation lifecycle events.
+        name:
+          description: "Optional. The unique identifier of this conversation profile. Format: `projects//locations//conversationProfiles/`."
+          type: string
+        newMessageEventNotificationConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2NotificationConfig"
+          description: Configuration for publishing new message events. Event will be sent in format of ConversationEvent
+        notificationConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2NotificationConfig"
+          description: Configuration for publishing conversation lifecycle events.
+        sttConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2SpeechToTextConfig"
+          description: Settings for speech transcription.
+        updateTime:
+          description: Output only. Update time of the conversation profile.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudDialogflowV2CreateCallMatcherRequest:
+      description: The request message for Conversations.CreateCallMatcher.
+      properties:
+        callMatcher:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2CallMatcher"
+          description: Required. The call matcher to create.
       type: object
     GoogleCloudDialogflowV2DetectIntentRequest:
       description: The request to detect user's intent.
@@ -3638,6 +4812,66 @@ components:
         webhookStatus:
           $ref: "#/components/schemas/GoogleRpcStatus"
           description: Specifies the status of the webhook request.
+      type: object
+    GoogleCloudDialogflowV2Document:
+      description: "A knowledge document to be used by a KnowledgeBase. For more information, see the [knowledge base guide](https://cloud.google.com/dialogflow/docs/how/knowledge-bases). Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`."
+      properties:
+        contentUri:
+          description: "The URI where the file content is located. For documents stored in Google Cloud Storage, these URIs must have the form `gs:///`. NOTE: External URLs must correspond to public webpages, i.e., they must be indexed by Google Search. In particular, URLs for showing documents in Google Cloud Storage (i.e. the URL in your browser) are not supported. Instead use the `gs://` format URI described above."
+          type: string
+        displayName:
+          description: Required. The display name of the document. The name must be 1024 bytes or less; otherwise, the creation request fails.
+          type: string
+        enableAutoReload:
+          description: Optional. If true, we try to automatically reload the document every day (at a time picked by the system). If false or unspecified, we don't try to automatically reload the document. Currently you can only enable automatic reload for documents sourced from a public url, see `source` field for the source types. Reload status can be tracked in `latest_reload_status`. If a reload fails, we will keep the document unchanged. If a reload fails with internal errors, the system will try to reload the document on the next day. If a reload fails with non-retriable errors (e.g. PERMISION_DENIED), the system will not try to reload the document anymore. You need to manually reload the document successfully by calling `ReloadDocument` and clear the errors.
+          type: boolean
+        knowledgeTypes:
+          description: Required. The knowledge type of document content.
+          items:
+            enum:
+              - KNOWLEDGE_TYPE_UNSPECIFIED
+              - FAQ
+              - EXTRACTIVE_QA
+              - ARTICLE_SUGGESTION
+            type: string
+          type: array
+        latestReloadStatus:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2DocumentReloadStatus"
+          description: Output only. The time and status of the latest reload. This reload may have been triggered automatically or manually and may not have succeeded.
+          readOnly: true
+        metadata:
+          additionalProperties:
+            type: string
+          description: Optional. Metadata for the document. The metadata supports arbitrary key-value pairs. Suggested use cases include storing a document's title, an external URL distinct from the document's content_uri, etc. The max size of a `key` or a `value` of the metadata is 1024 bytes.
+          type: object
+        mimeType:
+          description: Required. The MIME type of this document.
+          type: string
+        name:
+          description: "Optional. The document resource name. The name must be empty when creating a document. Format: `projects//locations//knowledgeBases//documents/`."
+          type: string
+        rawContent:
+          description: The raw content of the document. This field is only permitted for EXTRACTIVE_QA and FAQ knowledge types.
+          format: byte
+          type: string
+      type: object
+    GoogleCloudDialogflowV2DocumentReloadStatus:
+      description: The status of a reload attempt.
+      properties:
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The status of a reload attempt or the initial load.
+        time:
+          description: The time of a reload attempt. This reload may have been triggered automatically or manually and may not have succeeded.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDialogflowV2DtmfParameters:
+      description: The message in the response that indicates the parameters of DTMF.
+      properties:
+        acceptsDtmfInput:
+          description: Indicates whether DTMF input can be handled in the next request.
+          type: boolean
       type: object
     GoogleCloudDialogflowV2EntityType:
       description: Each intent parameter has a type, called the entity type, which dictates exactly how data from an end-user expression is extracted. Dialogflow provides predefined system entities that can match many common types of data. For example, there are system entities for matching dates, times, colors, email addresses, and so on. You can also create your own custom entities for matching custom data. For example, you could define a vegetable entity that can match the types of vegetables available for purchase with a grocery store agent. For more information, see the [Entity guide](https://cloud.google.com/dialogflow/docs/entities-overview).
@@ -3753,6 +4987,31 @@ components:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in `ExportAgentRequest`.
           type: string
       type: object
+    GoogleCloudDialogflowV2FaqAnswer:
+      description: Represents answer from "frequently asked questions".
+      properties:
+        answer:
+          description: The piece of text from the `source` knowledge base document.
+          type: string
+        answerRecord:
+          description: The name of answer record, in the format of "projects//locations//answerRecords/"
+          type: string
+        confidence:
+          description: The system's confidence score that this Knowledge answer is a good match for this conversational query, range from 0.0 (completely uncertain) to 1.0 (completely certain).
+          format: float
+          type: number
+        metadata:
+          additionalProperties:
+            type: string
+          description: A map that contains metadata about the answer and the document from which it originates.
+          type: object
+        question:
+          description: The corresponding FAQ question.
+          type: string
+        source:
+          description: "Indicates which Knowledge Document this answer was extracted from. Format: `projects//locations//agent/knowledgeBases//documents/`."
+          type: string
+      type: object
     GoogleCloudDialogflowV2Fulfillment:
       description: By default, your agent responds to a matched intent with a static response. As an alternative, you can provide a more dynamic response by using fulfillment. When you enable fulfillment for an intent, Dialogflow responds to that intent by calling a service that you define. For example, if an end-user wants to schedule a haircut on Friday, your service can check your database and respond to the end-user with availability information for Friday. For more information, see the [fulfillment guide](https://cloud.google.com/dialogflow/docs/fulfillment-overview).
       properties:
@@ -3805,6 +5064,190 @@ components:
           description: Optional. The user name for HTTP Basic authentication.
           type: string
       type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantConfig:
+      description: Defines the Human Agent Assist to connect to a conversation.
+      properties:
+        endUserSuggestionConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionConfig"
+          description: Configuration for agent assistance of end user participant.
+        humanAgentSuggestionConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionConfig"
+          description: Configuration for agent assistance of human agent participant.
+        messageAnalysisConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigMessageAnalysisConfig"
+          description: Configuration for message analysis.
+        notificationConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2NotificationConfig"
+          description: Pub/Sub topic on which to publish new agent assistant events.
+      type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantConfigConversationModelConfig:
+      description: "Custom conversation models used in agent assist feature. Supported feature: ARTICLE_SUGGESTION, SMART_COMPOSE, SMART_REPLY."
+      properties:
+        model:
+          description: "Required. Conversation model resource name. Format: `projects//conversationModels/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantConfigMessageAnalysisConfig:
+      description: Configuration for analyses to run on each conversation message.
+      properties:
+        enableEntityExtraction:
+          description: Enable entity extraction in conversation messages on [agent assist stage](https://cloud.google.com/dialogflow/priv/docs/contact-center/basics#stages). If unspecified, defaults to false.
+          type: boolean
+        enableSentimentAnalysis:
+          description: "Enable sentiment analysis in conversation messages on [agent assist stage](https://cloud.google.com/dialogflow/priv/docs/contact-center/basics#stages). If unspecified, defaults to false. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user's attitude as positive, negative, or neutral: https://cloud.google.com/natural-language/docs/basics#sentiment_analysis For Participants.StreamingAnalyzeContent method, result will be in StreamingAnalyzeContentResponse.message.SentimentAnalysisResult. For Participants.AnalyzeContent method, result will be in AnalyzeContentResponse.message.SentimentAnalysisResult For Conversations.ListMessages method, result will be in ListMessagesResponse.messages.SentimentAnalysisResult If Pub/Sub notification is configured, result will be in ConversationEvent.new_message_payload.SentimentAnalysisResult."
+          type: boolean
+      type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionConfig:
+      description: Detail human agent assistant config.
+      properties:
+        featureConfigs:
+          description: Configuration of different suggestion features. One feature can have only one config.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionFeatureConfig"
+          type: array
+        groupSuggestionResponses:
+          description: If `group_suggestion_responses` is false, and there are multiple `feature_configs` in `event based suggestion` or StreamingAnalyzeContent, we will try to deliver suggestions to customers as soon as we get new suggestion. Different type of suggestions based on the same context will be in separate Pub/Sub event or `StreamingAnalyzeContentResponse`. If `group_suggestion_responses` set to true. All the suggestions to the same participant based on the same context will be grouped into a single Pub/Sub event or StreamingAnalyzeContentResponse.
+          type: boolean
+      type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionFeatureConfig:
+      description: Config for suggestion features.
+      properties:
+        conversationModelConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigConversationModelConfig"
+          description: Configs of custom conversation model.
+        enableEventBasedSuggestion:
+          description: "Automatically iterates all participants and tries to compile suggestions. Supported features: ARTICLE_SUGGESTION, FAQ, DIALOGFLOW_ASSIST."
+          type: boolean
+        queryConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionQueryConfig"
+          description: Configs of query.
+        suggestionFeature:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestionFeature"
+          description: The suggestion feature.
+        suggestionTriggerSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionTriggerSettings"
+          description: Settings of suggestion trigger. Currently, only ARTICLE_SUGGESTION and FAQ will use this field.
+      type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionQueryConfig:
+      description: Config for suggestion query.
+      properties:
+        confidenceThreshold:
+          description: "Confidence threshold of query result. Agent Assist gives each suggestion a score in the range [0.0, 1.0], based on the relevance between the suggestion and the current conversation context. A score of 0.0 has no relevance, while a score of 1.0 has high relevance. Only suggestions with a score greater than or equal to the value of this field are included in the results. For a baseline model (the default), the recommended value is in the range [0.05, 0.1]. For a custom model, there is no recommended value. Tune this value by starting from a very low value and slowly increasing until you have desired results. If this field is not set, it defaults to 0.0, which means that all suggestions are returned. Supported features: ARTICLE_SUGGESTION."
+          format: float
+          type: number
+        contextFilterSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionQueryConfigContextFilterSettings"
+          description: Determines how recent conversation context is filtered when generating suggestions. If unspecified, no messages will be dropped.
+        dialogflowQuerySource:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionQueryConfigDialogflowQuerySource"
+          description: Query from Dialogflow agent. It is used by DIALOGFLOW_ASSIST.
+        documentQuerySource:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionQueryConfigDocumentQuerySource"
+          description: "Query from knowledge base document. It is used by: SMART_REPLY, SMART_COMPOSE."
+        knowledgeBaseQuerySource:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionQueryConfigKnowledgeBaseQuerySource"
+          description: "Query from knowledgebase. It is used by: ARTICLE_SUGGESTION, FAQ."
+        maxResults:
+          description: Maximum number of results to return. Currently, if unset, defaults to 10. And the max number is 20.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionQueryConfigContextFilterSettings:
+      description: Settings that determine how to filter recent conversation context when generating suggestions.
+      properties:
+        dropHandoffMessages:
+          description: If set to true, the last message from virtual agent (hand off message) and the message before it (trigger message of hand off) are dropped.
+          type: boolean
+        dropIvrMessages:
+          description: If set to true, all messages from ivr stage are dropped.
+          type: boolean
+        dropVirtualAgentMessages:
+          description: If set to true, all messages from virtual agent are dropped.
+          type: boolean
+      type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionQueryConfigDialogflowQuerySource:
+      description: "Dialogflow source setting. Supported feature: DIALOGFLOW_ASSIST."
+      properties:
+        agent:
+          description: "Required. The name of a Dialogflow virtual agent used for end user side intent detection and suggestion. Format: `projects//locations//agent`. When multiple agents are allowed in the same Dialogflow project."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionQueryConfigDocumentQuerySource:
+      description: "Document source settings. Supported features: SMART_REPLY, SMART_COMPOSE."
+      properties:
+        documents:
+          description: "Required. Knowledge documents to query from. Format: `projects//locations//knowledgeBases//documents/`. Currently, at most 5 documents are supported."
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionQueryConfigKnowledgeBaseQuerySource:
+      description: "Knowledge base source settings. Supported features: ARTICLE_SUGGESTION, FAQ."
+      properties:
+        knowledgeBases:
+          description: "Required. Knowledge bases to query. Format: `projects//locations//knowledgeBases/`. Currently, at most 5 knowledge bases are supported."
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionTriggerSettings:
+      description: Settings of suggestion trigger.
+      properties:
+        noSmalltalk:
+          description: Do not trigger if last utterance is small talk.
+          type: boolean
+        onlyEndUser:
+          description: Only trigger suggestion if participant role of last utterance is END_USER.
+          type: boolean
+      type: object
+    GoogleCloudDialogflowV2HumanAgentAssistantEvent:
+      description: Represents a notification sent to Cloud Pub/Sub subscribers for human agent assistant events in a specific conversation.
+      properties:
+        conversation:
+          description: "The conversation this notification refers to. Format: `projects//conversations/`."
+          type: string
+        participant:
+          description: "The participant that the suggestion is compiled for. Format: `projects//conversations//participants/`. It will not be set in legacy workflow."
+          type: string
+        suggestionResults:
+          description: The suggestion results payload that this notification refers to.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestionResult"
+          type: array
+      type: object
+    GoogleCloudDialogflowV2HumanAgentHandoffConfig:
+      description: Defines the hand off to a live agent, typically on which external agent service provider to connect to a conversation.
+      properties:
+        livePersonConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentHandoffConfigLivePersonConfig"
+          description: Uses LivePerson (https://www.liveperson.com).
+        salesforceLiveAgentConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentHandoffConfigSalesforceLiveAgentConfig"
+          description: Uses Salesforce Live Agent.
+      type: object
+    GoogleCloudDialogflowV2HumanAgentHandoffConfigLivePersonConfig:
+      description: Configuration specific to LivePerson (https://www.liveperson.com).
+      properties:
+        accountNumber:
+          description: Required. Account number of the LivePerson account to connect. This is the account number you input at the login page.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2HumanAgentHandoffConfigSalesforceLiveAgentConfig:
+      description: Configuration specific to Salesforce Live Agent.
+      properties:
+        buttonId:
+          description: Required. Live Agent chat button ID.
+          type: string
+        deploymentId:
+          description: Required. Live Agent deployment ID.
+          type: string
+        endpointDomain:
+          description: Required. Domain of the Live Agent endpoint for this agent. You can find the endpoint URL in the `Live Agent settings` page. For example if URL has the form https://d.la4-c2-phx.salesforceliveagent.com/..., you should fill in d.la4-c2-phx.salesforceliveagent.com.
+          type: string
+        organizationId:
+          description: Required. The organization ID of the Salesforce account.
+          type: string
+      type: object
     GoogleCloudDialogflowV2ImportAgentRequest:
       description: The request message for Agents.ImportAgent.
       properties:
@@ -3831,6 +5274,9 @@ components:
             - AUDIO_ENCODING_OGG_OPUS
             - AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE
           type: string
+        disableNoSpeechRecognizedEvent:
+          description: Only used in Participants.AnalyzeContent and Participants.StreamingAnalyzeContent. If `false` and recognition doesn't return any result, trigger `NO_SPEECH_RECOGNIZED` event to Dialogflow agent.
+          type: boolean
         enableWordInfo:
           description: If `true`, Dialogflow returns SpeechWordInfo in StreamingRecognitionResult with information about the recognized speech words, e.g. start and end time offsets. If false or unspecified, Speech doesn't return any word-level information.
           type: boolean
@@ -3891,6 +5337,9 @@ components:
         displayName:
           description: Required. The name of this intent.
           type: string
+        endInteraction:
+          description: Optional. Indicates that this intent ends an interaction. Some integrations (e.g., Actions on Google or Dialogflow phone gateway) use this information to close interaction with an end user. Default is false.
+          type: boolean
         events:
           description: Optional. The collection of event names that trigger the intent. If the collection of input contexts is not empty, all of the contexts must be present in the active user session for an event to trigger this intent. Event names are limited to 150 characters.
           items:
@@ -3908,6 +5357,9 @@ components:
           type: array
         isFallback:
           description: Optional. Indicates whether this is a fallback intent.
+          type: boolean
+        liveAgentHandoff:
+          description: Optional. Indicates that a live agent should be brought in to handle the interaction with the user. In most cases, when you set this flag to true, you would also want to set end_interaction to true as well. Default is false.
           type: boolean
         messages:
           description: Optional. The collection of rich messages corresponding to the `Response` field in the Dialogflow console.
@@ -4466,6 +5918,56 @@ components:
           description: Optional. Indicates whether the text was manually annotated. This field is set to true when the Dialogflow Console is used to manually annotate the part. When creating an annotated part with the API, you must set this to true.
           type: boolean
       type: object
+    GoogleCloudDialogflowV2KnowledgeBase:
+      description: "A knowledge base represents a collection of knowledge documents that you provide to Dialogflow. Your knowledge documents contain information that may be useful during conversations with end-users. Some Dialogflow features use knowledge bases when looking for a response to an end-user input. For more information, see the [knowledge base guide](https://cloud.google.com/dialogflow/docs/how/knowledge-bases). Note: The `projects.agent.knowledgeBases` resource is deprecated; only use `projects.knowledgeBases`."
+      properties:
+        displayName:
+          description: Required. The display name of the knowledge base. The name must be 1024 bytes or less; otherwise, the creation request fails.
+          type: string
+        languageCode:
+          description: Language which represents the KnowledgeBase. When the KnowledgeBase is created/updated, expect this to be present for non en-us languages. When unspecified, the default language code en-us applies.
+          type: string
+        name:
+          description: "The knowledge base resource name. The name must be empty when creating a knowledge base. Format: `projects//locations//knowledgeBases/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2KnowledgeOperationMetadata:
+      description: Metadata in google::longrunning::Operation for Knowledge operations.
+      properties:
+        state:
+          description: Output only. The current state of this operation.
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - RUNNING
+            - DONE
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudDialogflowV2ListAnswerRecordsResponse:
+      description: Response message for AnswerRecords.ListAnswerRecords.
+      properties:
+        answerRecords:
+          description: The list of answer records.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2AnswerRecord"
+          type: array
+        nextPageToken:
+          description: A token to retrieve next page of results. Or empty if there are no more results. Pass this value in the ListAnswerRecordsRequest.page_token field in the subsequent call to `ListAnswerRecords` method to retrieve the next page of results.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2ListCallMatchersResponse:
+      description: The response message for Conversations.ListCallMatchers.
+      properties:
+        callMatchers:
+          description: The list of call matchers. There is a maximum number of items returned based on the page_size field in the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2CallMatcher"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results or empty if there are no more results in the list.
+          type: string
+      type: object
     GoogleCloudDialogflowV2ListContextsResponse:
       description: The response message for Contexts.ListContexts.
       properties:
@@ -4473,6 +5975,42 @@ components:
           description: The list of contexts. There will be a maximum number of items returned based on the page_size field in the request.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2Context"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2ListConversationProfilesResponse:
+      description: The response message for ConversationProfiles.ListConversationProfiles.
+      properties:
+        conversationProfiles:
+          description: The list of project conversation profiles. There is a maximum number of items returned based on the page_size field in the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2ConversationProfile"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2ListConversationsResponse:
+      description: The response message for Conversations.ListConversations.
+      properties:
+        conversations:
+          description: The list of conversations. There will be a maximum number of items returned based on the page_size field in the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2Conversation"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2ListDocumentsResponse:
+      description: Response message for Documents.ListDocuments.
+      properties:
+        documents:
+          description: The list of documents.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2Document"
           type: array
         nextPageToken:
           description: Token to retrieve the next page of results, or empty if there are no more results in the list.
@@ -4514,6 +6052,42 @@ components:
           description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
       type: object
+    GoogleCloudDialogflowV2ListKnowledgeBasesResponse:
+      description: Response message for KnowledgeBases.ListKnowledgeBases.
+      properties:
+        knowledgeBases:
+          description: The list of knowledge bases.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2KnowledgeBase"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2ListMessagesResponse:
+      description: The response message for Conversations.ListMessages.
+      properties:
+        messages:
+          description: The list of messages. There will be a maximum number of items returned based on the page_size field in the request. `messages` is sorted by `create_time` in descending order.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2Message"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2ListParticipantsResponse:
+      description: The response message for Participants.ListParticipants.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results or empty if there are no more results in the list.
+          type: string
+        participants:
+          description: The list of participants. There is a maximum number of items returned based on the page_size field in the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2Participant"
+          type: array
+      type: object
     GoogleCloudDialogflowV2ListSessionEntityTypesResponse:
       description: The response message for SessionEntityTypes.ListSessionEntityTypes.
       properties:
@@ -4525,6 +6099,13 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2SessionEntityType"
           type: array
+      type: object
+    GoogleCloudDialogflowV2LoggingConfig:
+      description: Defines logging behavior for conversation lifecycle events.
+      properties:
+        enableStackdriverLogging:
+          description: Whether to log conversation events like CONVERSATION_STARTED to Stackdriver in the conversation project as JSON format ConversationEvent protos.
+          type: boolean
       type: object
     GoogleCloudDialogflowV2Message:
       description: Represents a message posted into a conversation.
@@ -4573,6 +6154,20 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2AnnotatedMessagePart"
           type: array
       type: object
+    GoogleCloudDialogflowV2NotificationConfig:
+      description: Defines notification behavior.
+      properties:
+        messageFormat:
+          description: Format of message.
+          enum:
+            - MESSAGE_FORMAT_UNSPECIFIED
+            - PROTO
+            - JSON
+          type: string
+        topic:
+          description: "Name of the Pub/Sub topic to publish conversation events like CONVERSATION_STARTED as serialized ConversationEvent protos. Notification works for phone calls, if this topic either is in the same project as the conversation or you grant `service-@gcp-sa-dialogflow.iam.gserviceaccount.com` the `Dialogflow Service Agent` role in the topic project. Format: `projects//locations//topics/`."
+          type: string
+      type: object
     GoogleCloudDialogflowV2OriginalDetectIntentRequest:
       description: Represents the contents of the original request that was passed to the `[Streaming]DetectIntent` call.
       properties:
@@ -4587,6 +6182,17 @@ components:
         version:
           description: Optional. The version of the protocol used for this request. This field is AoG-specific.
           type: string
+      type: object
+    GoogleCloudDialogflowV2OutputAudio:
+      description: Represents the natural language speech audio to be played to the end user.
+      properties:
+        audio:
+          description: The natural language speech audio.
+          format: byte
+          type: string
+        config:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2OutputAudioConfig"
+          description: Instructs the speech synthesizer how to generate the speech audio.
       type: object
     GoogleCloudDialogflowV2OutputAudioConfig:
       description: Instructs the speech synthesizer on how to generate the output audio content. If this audio config is supplied in a request, it overrides all existing text-to-speech settings applied to the agent.
@@ -4606,6 +6212,24 @@ components:
         synthesizeSpeechConfig:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2SynthesizeSpeechConfig"
           description: Configuration of how speech should be synthesized.
+      type: object
+    GoogleCloudDialogflowV2Participant:
+      description: Represents a conversation participant (human agent, virtual agent, end-user).
+      properties:
+        name:
+          description: "Optional. The unique identifier of this participant. Format: `projects//locations//conversations//participants/`."
+          type: string
+        role:
+          description: Immutable. The role this participant plays in the conversation. This field must be set during participant creation and is then immutable.
+          enum:
+            - ROLE_UNSPECIFIED
+            - HUMAN_AGENT
+            - AUTOMATED_AGENT
+            - END_USER
+          type: string
+        sipRecordingMediaLabel:
+          description: Optional. Label applied to streams representing this participant in SIPREC XML metadata and SDP. This is used to assign transcriptions from that media stream to this participant. This field can be updated.
+          type: string
       type: object
     GoogleCloudDialogflowV2QueryInput:
       description: "Represents the query input. It can contain either: 1. An audio config which instructs the speech recognizer how to process the speech audio. 2. A conversational query in the form of text,. 3. An event that specifies which intent to trigger."
@@ -4717,6 +6341,13 @@ components:
           description: If the query was fulfilled by a webhook call, this field is set to the value of the `source` field returned in the webhook response.
           type: string
       type: object
+    GoogleCloudDialogflowV2ReloadDocumentRequest:
+      description: Request message for Documents.ReloadDocument.
+      properties:
+        contentUri:
+          description: Optional. The path of gcs source file for reloading document content. For now, only gcs uri is supported. For documents stored in Google Cloud Storage, these URIs must have the form `gs:///`.
+          type: string
+      type: object
     GoogleCloudDialogflowV2RestoreAgentRequest:
       description: The request message for Agents.RestoreAgent.
       properties:
@@ -4797,6 +6428,96 @@ components:
           items:
             type: string
           type: array
+      type: object
+    GoogleCloudDialogflowV2SpeechToTextConfig:
+      description: Configures speech transcription for ConversationProfile.
+      properties:
+        speechModelVariant:
+          description: Optional. The speech model used in speech to text. `SPEECH_MODEL_VARIANT_UNSPECIFIED`, `USE_BEST_AVAILABLE` will be treated as `USE_ENHANCED`. It can be overridden in AnalyzeContentRequest and StreamingAnalyzeContentRequest request.
+          enum:
+            - SPEECH_MODEL_VARIANT_UNSPECIFIED
+            - USE_BEST_AVAILABLE
+            - USE_STANDARD
+            - USE_ENHANCED
+          type: string
+      type: object
+    GoogleCloudDialogflowV2SuggestArticlesRequest:
+      description: The request message for Participants.SuggestArticles.
+      properties:
+        contextSize:
+          description: Max number of messages prior to and including latest_message to use as context when compiling the suggestion. By default 20 and at most 50.
+          format: int32
+          type: integer
+        latestMessage:
+          description: "The name of the latest conversation message to compile suggestion for. If empty, it will be the latest message of the conversation. Format: `projects//locations//conversations//messages/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2SuggestArticlesResponse:
+      description: The response message for Participants.SuggestArticles.
+      properties:
+        articleAnswers:
+          description: Articles ordered by score in descending order.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2ArticleAnswer"
+          type: array
+        contextSize:
+          description: Number of messages prior to and including latest_message to compile the suggestion. It may be smaller than the SuggestArticlesRequest.context_size field in the request if there aren't that many messages in the conversation.
+          format: int32
+          type: integer
+        latestMessage:
+          description: "The name of the latest conversation message used to compile suggestion for. Format: `projects//locations//conversations//messages/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2SuggestFaqAnswersRequest:
+      description: The request message for Participants.SuggestFaqAnswers.
+      properties:
+        contextSize:
+          description: Max number of messages prior to and including [latest_message] to use as context when compiling the suggestion. By default 20 and at most 50.
+          format: int32
+          type: integer
+        latestMessage:
+          description: "The name of the latest conversation message to compile suggestion for. If empty, it will be the latest message of the conversation. Format: `projects//locations//conversations//messages/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2SuggestFaqAnswersResponse:
+      description: The request message for Participants.SuggestFaqAnswers.
+      properties:
+        contextSize:
+          description: Number of messages prior to and including latest_message to compile the suggestion. It may be smaller than the SuggestFaqAnswersRequest.context_size field in the request if there aren't that many messages in the conversation.
+          format: int32
+          type: integer
+        faqAnswers:
+          description: Answers extracted from FAQ documents.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2FaqAnswer"
+          type: array
+        latestMessage:
+          description: "The name of the latest conversation message used to compile suggestion for. Format: `projects//locations//conversations//messages/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2SuggestionFeature:
+      description: The type of Human Agent Assistant API suggestion to perform, and the maximum number of results to return for that type. Multiple `Feature` objects can be specified in the `features` list.
+      properties:
+        type:
+          description: Type of Human Agent Assistant API feature to request.
+          enum:
+            - TYPE_UNSPECIFIED
+            - ARTICLE_SUGGESTION
+            - FAQ
+          type: string
+      type: object
+    GoogleCloudDialogflowV2SuggestionResult:
+      description: One response of different type of suggestion response which is used in the response of Participants.AnalyzeContent and Participants.AnalyzeContent, as well as HumanAgentAssistantEvent.
+      properties:
+        error:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: Error status if the request failed.
+        suggestArticlesResponse:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestArticlesResponse"
+          description: SuggestArticlesResponse if request is for ARTICLE_SUGGESTION.
+        suggestFaqAnswersResponse:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestFaqAnswersResponse"
+          description: SuggestFaqAnswersResponse if request is for FAQ_ANSWER.
       type: object
     GoogleCloudDialogflowV2SynthesizeSpeechConfig:
       description: Configuration of how speech should be synthesized.
@@ -4930,6 +6651,41 @@ components:
           description: Optional. A custom field used to identify the webhook source. Arbitrary strings are supported. When provided, Dialogflow uses this field to populate QueryResult.webhook_source sent to the integration or API caller.
           type: string
       type: object
+    GoogleCloudDialogflowV2beta1AnnotatedMessagePart:
+      description: Represents a part of a message possibly annotated with an entity. The part can be an entity or purely a part of the message between two entities or message start/end.
+      properties:
+        entityType:
+          description: Optional. The [Dialogflow system entity type](https://cloud.google.com/dialogflow/docs/reference/system-entities) of this message part. If this is empty, Dialogflow could not annotate the phrase part with a system entity.
+          type: string
+        formattedValue:
+          description: 'Optional. The [Dialogflow system entity formatted value ](https://cloud.google.com/dialogflow/docs/reference/system-entities) of this message part. For example for a system entity of type `@sys.unit-currency`, this may contain: { "amount": 5, "currency": "USD" } '
+        text:
+          description: Required. A part of a message possibly annotated with an entity.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1ArticleAnswer:
+      description: Represents article answer.
+      properties:
+        answerRecord:
+          description: The name of answer record, in the format of "projects//locations//answerRecords/"
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          description: A map that contains metadata about the answer and the document from which it originates.
+          type: object
+        snippets:
+          description: Output only. Article snippets.
+          items:
+            type: string
+          type: array
+        title:
+          description: The article title.
+          type: string
+        uri:
+          description: The article URI.
+          type: string
+      type: object
     GoogleCloudDialogflowV2beta1BatchUpdateEntityTypesResponse:
       description: The response message for EntityTypes.BatchUpdateEntityTypes.
       properties:
@@ -4963,6 +6719,28 @@ components:
             description: Properties of the object.
           description: "Optional. The collection of parameters associated with this context. Depending on your protocol or client library language, this is a map, associative array, symbol table, dictionary, or JSON object composed of a collection of (MapKey, MapValue) pairs: - MapKey type: string - MapKey value: parameter name - MapValue type: - If parameter's entity type is a composite entity: map - Else: depending on parameter value type, could be one of string, number, boolean, null, list or map - MapValue value: - If parameter's entity type is a composite entity: map from composite entity property names to property values - Else: parameter value"
           type: object
+      type: object
+    GoogleCloudDialogflowV2beta1ConversationEvent:
+      description: Represents a notification sent to Pub/Sub subscribers for conversation lifecycle events.
+      properties:
+        conversation:
+          description: "Required. The unique identifier of the conversation this notification refers to. Format: `projects//conversations/`."
+          type: string
+        errorStatus:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: Optional. More detailed information about an error. Only set for type UNRECOVERABLE_ERROR_IN_PHONE_CALL.
+        newMessagePayload:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1Message"
+          description: Payload of NEW_MESSAGE event.
+        type:
+          description: Required. The type of the event that this notification refers to.
+          enum:
+            - TYPE_UNSPECIFIED
+            - CONVERSATION_STARTED
+            - CONVERSATION_FINISHED
+            - NEW_MESSAGE
+            - UNRECOVERABLE_ERROR
+          type: string
       type: object
     GoogleCloudDialogflowV2beta1EntityType:
       description: Each intent parameter has a type, called the entity type, which dictates exactly how data from an end-user expression is extracted. Dialogflow provides predefined system entities that can match many common types of data. For example, there are system entities for matching dates, times, colors, email addresses, and so on. You can also create your own custom entities for matching custom data. For example, you could define a vegetable entity that can match the types of vegetables available for purchase with a grocery store agent. For more information, see the [Entity guide](https://cloud.google.com/dialogflow/docs/entities-overview).
@@ -5034,6 +6812,55 @@ components:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in `ExportAgentRequest`.
           type: string
       type: object
+    GoogleCloudDialogflowV2beta1FaqAnswer:
+      description: Represents answer from "frequently asked questions".
+      properties:
+        answer:
+          description: The piece of text from the `source` knowledge base document.
+          type: string
+        answerRecord:
+          description: The name of answer record, in the format of "projects//locations//answerRecords/"
+          type: string
+        confidence:
+          description: The system's confidence score that this Knowledge answer is a good match for this conversational query, range from 0.0 (completely uncertain) to 1.0 (completely certain).
+          format: float
+          type: number
+        metadata:
+          additionalProperties:
+            type: string
+          description: A map that contains metadata about the answer and the document from which it originates.
+          type: object
+        question:
+          description: The corresponding FAQ question.
+          type: string
+        source:
+          description: "Indicates which Knowledge Document this answer was extracted from. Format: `projects//locations//agent/knowledgeBases//documents/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1HumanAgentAssistantEvent:
+      description: Output only. Represents a notification sent to Pub/Sub subscribers for agent assistant events in a specific conversation.
+      properties:
+        conversation:
+          description: "The conversation this notification refers to. Format: `projects//conversations/`."
+          type: string
+        participant:
+          description: "The participant that the suggestion is compiled for. And This field is used to call Participants.ListSuggestions API. Format: `projects//conversations//participants/`. It will not be set in legacy workflow. HumanAgentAssistantConfig.name for more information."
+          type: string
+        suggestionResults:
+          description: The suggestion results payload that this notification refers to. It will only be set when HumanAgentAssistantConfig.SuggestionConfig.group_suggestion_responses sets to true.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestionResult"
+          type: array
+      type: object
+    GoogleCloudDialogflowV2beta1ImportDocumentsResponse:
+      description: Response message for Documents.ImportDocuments.
+      properties:
+        warnings:
+          description: Includes details about skipped documents or any other warnings.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+      type: object
     GoogleCloudDialogflowV2beta1Intent:
       description: An intent categorizes an end-user's intention for one conversation turn. For each agent, you define many intents, where your combined intents can handle a complete conversation. When an end-user writes or says something, referred to as an end-user expression or end-user input, Dialogflow matches the end-user input to the best intent in your agent. Matching an intent is also known as intent classification. For more information, see the [intent guide](https://cloud.google.com/dialogflow/docs/intents-overview).
       properties:
@@ -5081,6 +6908,9 @@ components:
           type: array
         isFallback:
           description: Optional. Indicates whether this is a fallback intent.
+          type: boolean
+        liveAgentHandoff:
+          description: Optional. Indicates that a live agent should be brought in to handle the interaction with the user. In most cases, when you set this flag to true, you would also want to set end_interaction to true as well. Default is false.
           type: boolean
         messages:
           description: Optional. The collection of rich messages corresponding to the `Response` field in the Dialogflow console.
@@ -5866,6 +7696,61 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudDialogflowV2beta1Message:
+      description: Represents a message posted into a conversation.
+      properties:
+        content:
+          description: Required. The message content.
+          type: string
+        createTime:
+          description: Output only. The time when the message was created in Contact Center AI.
+          format: google-datetime
+          readOnly: true
+          type: string
+        languageCode:
+          description: 'Optional. The message language. This should be a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US".'
+          type: string
+        messageAnnotation:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1MessageAnnotation"
+          description: Output only. The annotation for the message.
+          readOnly: true
+        name:
+          description: "Optional. The unique identifier of the message. Format: `projects//locations//conversations//messages/`."
+          type: string
+        participant:
+          description: Output only. The participant that sends this message.
+          readOnly: true
+          type: string
+        participantRole:
+          description: Output only. The role of the participant.
+          enum:
+            - ROLE_UNSPECIFIED
+            - HUMAN_AGENT
+            - AUTOMATED_AGENT
+            - END_USER
+          readOnly: true
+          type: string
+        sendTime:
+          description: Optional. The time when the message was sent.
+          format: google-datetime
+          type: string
+        sentimentAnalysis:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SentimentAnalysisResult"
+          description: Output only. The sentiment analysis result for the message.
+          readOnly: true
+      type: object
+    GoogleCloudDialogflowV2beta1MessageAnnotation:
+      description: Represents the result of annotation for the message.
+      properties:
+        containEntities:
+          description: Required. Indicates whether the text message contains entities.
+          type: boolean
+        parts:
+          description: Optional. The collection of annotated message parts ordered by their position in the message. You can recover the annotated message by concatenating [AnnotatedMessagePart.text].
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1AnnotatedMessagePart"
+          type: array
+      type: object
     GoogleCloudDialogflowV2beta1OriginalDetectIntentRequest:
       description: Represents the contents of the original request that was passed to the `[Streaming]DetectIntent` call.
       properties:
@@ -5983,6 +7868,84 @@ components:
           description: "Required. The unique identifier of this session entity type. Supported formats: - `projects//agent/sessions//entityTypes/` - `projects//locations//agent/sessions//entityTypes/` - `projects//agent/environments//users//sessions//entityTypes/` - `projects//locations//agent/environments/ /users//sessions//entityTypes/` If `Location ID` is not specified we assume default 'us' location. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented."
           type: string
       type: object
+    GoogleCloudDialogflowV2beta1SmartReplyAnswer:
+      description: Represents a smart reply answer.
+      properties:
+        answerRecord:
+          description: The name of answer record, in the format of "projects//locations//answerRecords/"
+          type: string
+        confidence:
+          description: Smart reply confidence. The system's confidence score that this reply is a good match for this conversation, as a value from 0.0 (completely uncertain) to 1.0 (completely certain).
+          format: float
+          type: number
+        reply:
+          description: The content of the reply.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SuggestArticlesResponse:
+      description: The response message for Participants.SuggestArticles.
+      properties:
+        articleAnswers:
+          description: Output only. Articles ordered by score in descending order.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1ArticleAnswer"
+          type: array
+        contextSize:
+          description: Number of messages prior to and including latest_message to compile the suggestion. It may be smaller than the SuggestArticlesResponse.context_size field in the request if there aren't that many messages in the conversation.
+          format: int32
+          type: integer
+        latestMessage:
+          description: "The name of the latest conversation message used to compile suggestion for. Format: `projects//locations//conversations//messages/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SuggestFaqAnswersResponse:
+      description: The request message for Participants.SuggestFaqAnswers.
+      properties:
+        contextSize:
+          description: Number of messages prior to and including latest_message to compile the suggestion. It may be smaller than the SuggestFaqAnswersRequest.context_size field in the request if there aren't that many messages in the conversation.
+          format: int32
+          type: integer
+        faqAnswers:
+          description: Output only. Answers extracted from FAQ documents.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1FaqAnswer"
+          type: array
+        latestMessage:
+          description: "The name of the latest conversation message used to compile suggestion for. Format: `projects//locations//conversations//messages/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SuggestSmartRepliesResponse:
+      description: The response message for Participants.SuggestSmartReplies.
+      properties:
+        contextSize:
+          description: Number of messages prior to and including latest_message to compile the suggestion. It may be smaller than the SuggestSmartRepliesRequest.context_size field in the request if there aren't that many messages in the conversation.
+          format: int32
+          type: integer
+        latestMessage:
+          description: "The name of the latest conversation message used to compile suggestion for. Format: `projects//locations//conversations//messages/`."
+          type: string
+        smartReplyAnswers:
+          description: Output only. Multiple reply options provided by smart reply service. The order is based on the rank of the model prediction. The maximum number of the returned replies is set in SmartReplyConfig.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SmartReplyAnswer"
+          type: array
+      type: object
+    GoogleCloudDialogflowV2beta1SuggestionResult:
+      description: One response of different type of suggestion response which is used in the response of Participants.AnalyzeContent and Participants.AnalyzeContent, as well as HumanAgentAssistantEvent.
+      properties:
+        error:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: Error status if the request failed.
+        suggestArticlesResponse:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestArticlesResponse"
+          description: SuggestArticlesResponse if request is for ARTICLE_SUGGESTION.
+        suggestFaqAnswersResponse:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestFaqAnswersResponse"
+          description: SuggestFaqAnswersResponse if request is for FAQ_ANSWER.
+        suggestSmartRepliesResponse:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestSmartRepliesResponse"
+          description: SuggestSmartRepliesResponse if request is for SMART_REPLY.
+      type: object
     GoogleCloudDialogflowV2beta1WebhookRequest:
       description: The request message for a webhook call.
       properties:
@@ -6021,6 +7984,9 @@ components:
         fulfillmentText:
           description: Optional. The text response message intended for the end-user. It is recommended to use `fulfillment_messages.text.text[0]` instead. When provided, Dialogflow uses this field to populate QueryResult.fulfillment_text sent to the integration or API caller.
           type: string
+        liveAgentHandoff:
+          description: Indicates that a live agent should be brought in to handle the interaction with the user. In most cases, when you set this flag to true, you would also want to set end_interaction to true as well. Default is false.
+          type: boolean
         outputContexts:
           description: Optional. The collection of output contexts that will overwrite currently active contexts for the session and reset their lifespans. When provided, Dialogflow uses this field to populate QueryResult.output_contexts sent to the integration or API caller.
           items:

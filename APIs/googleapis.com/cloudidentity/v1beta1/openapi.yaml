@@ -33,6 +33,7 @@ info:
 externalDocs:
   url: https://cloud.google.com/identity/
 tags:
+  - name: customers
   - name: devices
   - name: groups
 paths:
@@ -41,11 +42,6 @@ paths:
       description: Lists/Searches devices.
       operationId: cloudidentity.devices.list
       parameters:
-        - description: Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer.
-          in: query
-          name: customer
-          schema:
-            type: string
         - description: Optional. Additional restrictions when fetching list of devices. For a list of search fields, refer to [Mobile device search fields](https://developers.google.com/admin-sdk/directory/v1/search-operators). Multiple search fields are separated by the space character.
           in: query
           name: filter
@@ -334,11 +330,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
-          in: query
-          name: customer
-          schema:
-            type: string
       responses:
         "200":
           content:
@@ -367,7 +358,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
+        - description: Optional. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
           in: query
           name: customer
           schema:
@@ -518,6 +509,43 @@ paths:
           description: Successful response
       tags:
         - devices
+  "/v1beta1/{name}:cancel":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Cancels a UserInvitation that was already sent.
+      operationId: cloudidentity.customers.userinvitations.cancel
+      parameters:
+        - description: Required. `UserInvitation` name in the format `customers/{customer}/userinvitations/{user_email_address}`
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelUserInvitationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      tags:
+        - customers
   "/v1beta1/{name}:cancelWipe":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -555,6 +583,38 @@ paths:
           description: Successful response
       tags:
         - devices
+  "/v1beta1/{name}:isInvitableUser":
+    get:
+      description: "Verifies whether a user account is eligible to receive a UserInvitation (is an unmanaged account). Eligibility is based on the following criteria: * the email address is a consumer account and it’s the primary email address of the account, and * the domain of the email address matches an existing verified Google Workspace or Cloud Identity domain If both conditions are met, the user is eligible. **Note:** This method is not supported for Workspace Essentials customers."
+      operationId: cloudidentity.customers.userinvitations.isInvitableUser
+      parameters:
+        - description: Required. `UserInvitation` name in the format `customers/{customer}/userinvitations/{user_email_address}`
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IsInvitableUserResponse"
+          description: Successful response
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{name}:modifyMembershipRoles":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -601,6 +661,43 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
+  "/v1beta1/{name}:send":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Sends a UserInvitation to email. If the `UserInvitation` does not exist for this request and it is a valid request, the request creates a `UserInvitation`. **Note:** The `get` and `list` methods have a 48-hour delay where newly-created consumer accounts will not appear in the results. You can still send a `UserInvitation` to those accounts if you know the unmanaged email address and IsInvitableUser==True.
+      operationId: cloudidentity.customers.userinvitations.send
+      parameters:
+        - description: Required. `UserInvitation` name in the format `customers/{customer}/userinvitations/{user_email_address}`
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendUserInvitationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      tags:
+        - customers
   "/v1beta1/{name}:wipe":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -647,11 +744,6 @@ paths:
           in: path
           name: parent
           required: true
-          schema:
-            type: string
-        - description: Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
-          in: query
-          name: customer
           schema:
             type: string
         - description: Optional. Additional restrictions when fetching list of devices. For a list of search fields, refer to [Mobile device search fields](https://developers.google.com/admin-sdk/directory/v1/search-operators). Multiple search fields are separated by the space character.
@@ -1061,6 +1153,58 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{parent}/userinvitations":
+    get:
+      description: Retrieves a list of UserInvitation resources. **Note:** New consumer accounts with the customer’s verified domain created within the previous 48 hours will not appear in the result. This delay also applies to newly-verified domains.
+      operationId: cloudidentity.customers.userinvitations.list
+      parameters:
+        - description: Required. The customer ID of the Google Workspace or Cloud Identity account the UserInvitation resources are associated with.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. A query string for filtering `UserInvitation` results by their current state, in the format: `\"state=='invited'\"`."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The sort order of the list results. You can sort the results in descending order based on either email or last update timestamp but not both, using `order_by="email desc"`. Currently, sorting is supported for `update_time asc`, `update_time desc`, `email asc`, and `email desc`. If not specified, results will be returned based on `email asc` order.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of UserInvitation resources to return. If unspecified, at most 100 resources will be returned. The maximum value is 200; values above 200 will be set to 200.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous `ListUserInvitations` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListBooks` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListUserInvitationsResponse"
+          description: Successful response
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{parent}:lookup":
     get:
       description: "Looks up resource names of the DeviceUsers associated with the caller's credentials, as well as the properties provided in the request. This method must be called with end-user credentials with the scope: https://www.googleapis.com/auth/cloud-identity.devices.lookup If multiple properties are provided, only DeviceUsers having all of these properties are considered as matches - i.e. the query behaves like an AND. Different platforms require different amounts of information from the caller to ensure that the DeviceUser is uniquely identified. - iOS: No properties need to be passed, the caller's credentials are sufficient to identify the corresponding DeviceUser. - Android: Specifying the 'android_id' field is required. - Desktop: Specifying the 'raw_resource_id' field is required."
@@ -1222,10 +1366,7 @@ components:
       type: object
     ApproveDeviceUserRequest:
       description: Request message for approving the device to access user data.
-      properties:
-        customer:
-          description: Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
-          type: string
+      properties: {}
       type: object
     ApproveDeviceUserResponse:
       description: Response message for approving the device to access user data.
@@ -1236,10 +1377,7 @@ components:
       type: object
     BlockDeviceUserRequest:
       description: Request message for blocking account on device.
-      properties:
-        customer:
-          description: Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
-          type: string
+      properties: {}
       type: object
     BlockDeviceUserResponse:
       description: Response message for blocking the device from accessing user data.
@@ -1248,12 +1386,13 @@ components:
           $ref: "#/components/schemas/DeviceUser"
           description: Resultant DeviceUser object for the action.
       type: object
+    CancelUserInvitationRequest:
+      description: Request to cancel sent invitation for target email in UserInvitation.
+      properties: {}
+      type: object
     CancelWipeDeviceRequest:
       description: Request message for cancelling an unfinished device wipe.
-      properties:
-        customer:
-          description: Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
-          type: string
+      properties: {}
       type: object
     CancelWipeDeviceResponse:
       description: Response message for cancelling an unfinished device wipe.
@@ -1264,10 +1403,7 @@ components:
       type: object
     CancelWipeDeviceUserRequest:
       description: Request message for cancelling an unfinished user account wipe.
-      properties:
-        customer:
-          description: Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
-          type: string
+      properties: {}
       type: object
     CancelWipeDeviceUserResponse:
       description: Response message for cancelling an unfinished user account wipe.
@@ -1355,12 +1491,9 @@ components:
     CreateDeviceRequest:
       description: Request message for creating a Company Owned device.
       properties:
-        customer:
-          description: Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
-          type: string
         device:
           $ref: "#/components/schemas/Device"
-          description: Required. The device to be created. The name field within this device is ignored in the create method. A new name is created by the method, and returned within the response. Only the fields `device_type`, `serial_number` and `asset_tag` (if present) are used to create the device.`device_type` and `serial_number` are required.
+          description: Required. The device to be created. The name field within this device is ignored in the create method. A new name is created by the method, and returned within the response. Only the fields `device_type`, `serial_number` and `asset_tag` (if present) are used to create the device. All other fields are ignored. The `device_type` and `serial_number` fields are required.
       type: object
     CustomAttributeValue:
       description: Additional custom attribute values may be one of these types
@@ -2084,6 +2217,13 @@ components:
             $ref: "#/components/schemas/TransitiveMembershipRole"
           type: array
       type: object
+    IsInvitableUserResponse:
+      description: Response for IsInvitableUser RPC.
+      properties:
+        isInvitableUser:
+          description: Returns true if the email address is invitable.
+          type: boolean
+      type: object
     ListClientStatesResponse:
       description: Response message that is returned in LRO result of ListClientStates Operation.
       properties:
@@ -2143,6 +2283,18 @@ components:
         nextPageToken:
           description: A continuation token to retrieve the next page of results, or empty if there are no more results available.
           type: string
+      type: object
+    ListUserInvitationsResponse:
+      description: Response message for UserInvitation listing request.
+      properties:
+        nextPageToken:
+          description: The token for the next page. If not empty, indicates that there may be more `UserInvitation` resources that match the listing request; this value can be used in a subsequent ListUserInvitationsRequest to get continued results with the current list call.
+          type: string
+        userInvitations:
+          description: The list of UserInvitation resources.
+          items:
+            $ref: "#/components/schemas/UserInvitation"
+          type: array
       type: object
     LookupGroupNameResponse:
       description: The response message for GroupsService.LookupGroupName.
@@ -2345,6 +2497,10 @@ components:
           description: Token to retrieve the next page of results, or empty if there are no more results.
           type: string
       type: object
+    SendUserInvitationRequest:
+      description: A request to send email for inviting target user corresponding to the UserInvitation.
+      properties: {}
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -2382,7 +2538,7 @@ components:
           description: The `MembershipRole`s to be updated. Only `MEMBER` `MembershipRoles` can currently be updated. May only contain a `MembershipRole` with `name` `MEMBER`.
       type: object
     UserInvitation:
-      description: The `UserInvitation` resource represents an email sent to an unmanaged user account (an email address that shares the domain of the Google Workspace customer but is not managed by it yet), inviting them to join the customer’s domain. If the user accepts the `UserInvitation`, the account will become a managed account.
+      description: The `UserInvitation` resource represents an email that can be sent to an unmanaged user account inviting them to join the customer’s Google Workspace or Cloud Identity account. An unmanaged account shares an email address domain with the Google Workspace or Cloud Identity account but is not managed by it yet. If the user accepts the `UserInvitation`, the user account will become managed.
       properties:
         mailsSentCount:
           description: Number of invitation emails sent to the user.
@@ -2407,10 +2563,7 @@ components:
       type: object
     WipeDeviceRequest:
       description: Request message for wiping all data on the device.
-      properties:
-        customer:
-          description: Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
-          type: string
+      properties: {}
       type: object
     WipeDeviceResponse:
       description: Response message for wiping all data on the device.
@@ -2421,10 +2574,7 @@ components:
       type: object
     WipeDeviceUserRequest:
       description: Request message for starting an account wipe on device.
-      properties:
-        customer:
-          description: Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the customer. If you're using this API for your own organization, use `customers/my_customer` If you're using this API to manage another organization, use `customers/{customer_id}`, where customer_id is the customer to whom the device belongs.
-          type: string
+      properties: {}
       type: object
     WipeDeviceUserResponse:
       description: Response message for wiping the user's account from the device.

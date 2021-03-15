@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://workflowexecutions.googleapis.com/$discovery/rest?version=v1beta
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: workflowexecutions
-  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/workflows
 tags:
@@ -377,7 +377,7 @@ components:
           type: array
       type: object
     StackTraceElement:
-      description: A single stack element (frame) where an error occurred. This field currently only exists in v1Beta. We will need to roll this change out to V1 after the feature is thoroughly tested. TODO(b/178540475)
+      description: A single stack element (frame) where an error occurred.
       properties:
         position:
           $ref: "#/components/schemas/Position"

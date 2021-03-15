@@ -719,6 +719,13 @@ components:
           description: Role that is assigned to members. For example, roles/viewer, roles/editor, or roles/owner.
           type: string
       type: object
+    DataCatalogConfig:
+      description: Specifies how metastore metadata should be integrated with the Data Catalog service.
+      properties:
+        enabled:
+          description: Defines whether the metastore metadata should be synced to Data Catalog. The default value is to disable syncing metastore metadata to Data Catalog.
+          type: boolean
+      type: object
     DatabaseDump:
       description: A specification of the location of and metadata about a database dump from a relational database management system.
       properties:
@@ -998,7 +1005,10 @@ components:
       type: object
     MetadataIntegration:
       description: Specifies how metastore metadata should be integrated with external services.
-      properties: {}
+      properties:
+        dataCatalogConfig:
+          $ref: "#/components/schemas/DataCatalogConfig"
+          description: The integration config for the Data Catalog service.
       type: object
     MetadataManagementActivity:
       description: The metadata management activities of the metastore service.

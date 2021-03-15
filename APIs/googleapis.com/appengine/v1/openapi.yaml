@@ -3256,6 +3256,9 @@ components:
         runtimeMainExecutablePath:
           description: The path or name of the app's main executable.
           type: string
+        serviceAccount:
+          description: The identity that the deployed version will run as. Admin API will use the App Engine Appspot service account as default if this field is neither provided in app.yaml file nor through CLI flag.
+          type: string
         servingStatus:
           description: Current serving status of this version. Only the versions with a SERVING status create instances and can be billed.SERVING_STATUS_UNSPECIFIED is an invalid value. Defaults to SERVING.
           enum:
