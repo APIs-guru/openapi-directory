@@ -3868,6 +3868,46 @@ paths:
       x-code-samples:
         - lang: curl
           source: 'curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/nodes/nodeId/fetchData/datasourceId'
+  "/nodes/{nodeId}/inheritedProperties":
+    get:
+      description: This API returns all node properties for a node, including group inherited ones.
+      operationId: nodeInheritedProperties
+      parameters:
+        - $ref: "#/components/parameters/node-id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  action:
+                    description: The id of the action
+                    enum:
+                      - nodeInheritedProperties
+                    type: string
+                  data:
+                    description: Information about the node inherited properties
+                    items:
+                      $ref: "#/components/schemas/node-inherited-properties"
+                    type: array
+                  result:
+                    description: Result of the request
+                    enum:
+                      - success
+                      - error
+                    type: string
+                required:
+                  - result
+                  - action
+                  - data
+                type: object
+          description: Node
+      summary: Get inherited node properties for a node
+      tags:
+        - Nodes
+      x-code-samples:
+        - lang: curl
+          source: 'curl --header "X-API-Token: yourToken" https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7/inheritedProperties'
   /parameters:
     get:
       description: Get the current value of all the global parameters
@@ -6547,7 +6587,7 @@ components:
 
         * **minimal** includes: `id`, `hostname` and `status`
 
-        * **default** includes **minimal** plus `architectureDescription`, `description`, `ipAddresses`, `lastRunDate`, `lastInventoryDate`, `machine`, `os`, `managementTechnology`, `policyServerId`, `properties`, `policyMode `, `ram` and `timezone`
+        * **default** includes **minimal** plus `architectureDescription`, `description`, `ipAddresses`, `lastRunDate`, `lastInventoryDate`, `machine`, `os`, `managementTechnology`, `policyServerId`, `properties` (be careful! Only node own properties, if you also need inherited properties, look at the dedicated `/nodes/{id}/inheritedProperties` endpoint), `policyMode `, `ram` and `timezone`
 
         * **full** includes: **default** plus `accounts`, `bios`, `controllers`, `environmentVariables`, `fileSystems`, `managementTechnologyDetails`, `memories`, `networkInterfaces`, `ports`, `processes`, `processors`, `slots`, `software`, `sound`, `storage`, `videos` and `virtualMachines`
       in: query
@@ -8474,6 +8514,73 @@ components:
         - ipAddresses
         - managementTechnology
         - policyServerId
+        - properties
+      type: object
+    node-inherited-properties:
+      properties:
+        id:
+          description: Unique id of the node
+          example: 9a1773c9-0889-40b6-be89-f6504443ac1b
+          format: uuid (or "root")
+          type: string
+        properties:
+          description: Node properties (either set by user or filled by third party sources)
+          items:
+            properties:
+              hierarchy:
+                description: A description of the inheritance hierarchy for that property, with most direct parent at head and oldest one at tail
+                items:
+                  properties:
+                    id:
+                      description: in the case of a group, its identifier
+                      example: 9180b869-08a3-4173-9dd4-ab68f227e76c
+                      type: string
+                    kind:
+                      description: The kind of object from which the property's value is inherited
+                      enum:
+                        - global
+                        - group
+                      example: global
+                      type: string
+                    name:
+                      description: in the case of a group, its name
+                      example: all centos7
+                      type: string
+                    value:
+                      description: a string representation of the value. If it was a json value, it will be escaped.
+                      example: '{"array":[1,2],"object":{"parent":"value"},"string":"parent"}'
+                      type: string
+                  required:
+                    - kind
+                    - value
+                  type: object
+                type: array
+              name:
+                description: Property name
+                example: datacenter
+                type: string
+              origval:
+                description: The original value (ie, before overriding and inheritance resolution) for that node
+                example: AMS2
+                format: string or JSON
+              provider:
+                description: Property provider (if the property is not a simple node property)
+                enum:
+                  - inherited
+                  - overridden
+                  - plugin name like datasources
+                type: string
+              value:
+                description: Resolved (ie, with inheritance and overriding done) property value (can be a string or JSON object)
+                example: AMS2
+                format: string or JSON
+            required:
+              - name
+              - value
+            type: object
+          type: array
+      required:
+        - id
         - properties
       type: object
     node-settings:

@@ -901,7 +901,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.json":
     get:
       deprecated: false
-      operationId: getSingleRecordJson
+      operationId: getSingleRecordJson_3
       parameters:
         - description: callback
           in: query
@@ -1068,7 +1068,7 @@ paths:
   "/v2/record/{collectionId}/{recordId}.ttl":
     get:
       deprecated: false
-      operationId: getSingleRecordTurtle_3
+      operationId: getSingleRecordTurtle
       parameters:
         - description: collectionId
           in: path

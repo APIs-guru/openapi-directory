@@ -636,6 +636,12 @@ paths:
       parameters:
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/page"
+        - description: The client ID of your GitHub app.
+          in: query
+          name: client_id
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -1150,6 +1156,12 @@ paths:
       parameters:
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/page"
+        - description: The client ID of your GitHub app.
+          in: query
+          name: client_id
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -2846,6 +2858,7 @@ paths:
         - $ref: "#/components/parameters/audit-log-after"
         - $ref: "#/components/parameters/audit-log-before"
         - $ref: "#/components/parameters/audit-log-order"
+        - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/per_page"
       responses:
         "200":
@@ -4047,6 +4060,7 @@ paths:
               - created
               - mentioned
               - subscribed
+              - repos
               - all
             type: string
         - description: Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
@@ -4155,6 +4169,7 @@ paths:
           schema:
             type: boolean
         - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/page"
       responses:
         "200":
           content:
@@ -5771,6 +5786,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/org"
         - $ref: "#/components/parameters/runner_group_id"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
       responses:
         "200":
           content:
@@ -6612,6 +6629,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/org"
         - $ref: "#/components/parameters/secret_name"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
       responses:
         "200":
           content:
@@ -6755,6 +6774,7 @@ paths:
         - $ref: "#/components/parameters/audit-log-before"
         - $ref: "#/components/parameters/audit-log-order"
         - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/page"
       responses:
         "200":
           content:
@@ -7747,6 +7767,7 @@ paths:
               - created
               - mentioned
               - subscribed
+              - repos
               - all
             type: string
         - description: Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
@@ -8089,6 +8110,17 @@ paths:
         - $ref: "#/components/parameters/org"
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/page"
+        - description: Exclude attributes from the API response to improve performance
+          in: query
+          name: exclude
+          schema:
+            items:
+              description: Allowed values that can be passed to the exclude param.
+              enum:
+                - repositories
+              example: repositories
+              type: string
+            type: array
       responses:
         "200":
           content:
@@ -8206,6 +8238,17 @@ paths:
       parameters:
         - $ref: "#/components/parameters/org"
         - $ref: "#/components/parameters/migration_id"
+        - description: Exclude attributes from the API response to improve performance
+          in: query
+          name: exclude
+          schema:
+            items:
+              description: Allowed values that can be passed to the exclude param.
+              enum:
+                - repositories
+              example: repositories
+              type: string
+            type: array
       responses:
         "200":
           content:
@@ -8624,6 +8667,12 @@ paths:
         - $ref: "#/components/parameters/package_type"
         - $ref: "#/components/parameters/package_name"
         - $ref: "#/components/parameters/org"
+        - description: package token
+          in: query
+          name: token
+          required: false
+          schema:
+            type: string
       responses:
         "204":
           description: Empty response
@@ -8654,11 +8703,23 @@ paths:
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user
-      operationId: packages/get-all-package-versions-for-a-package-owned-by-an-org
+      operationId: packages/get-all-package-versions-for-package-owned-by-org
       parameters:
         - $ref: "#/components/parameters/package_type"
         - $ref: "#/components/parameters/package_name"
         - $ref: "#/components/parameters/org"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - description: The state of the package, either active or deleted.
+          in: query
+          name: state
+          required: false
+          schema:
+            default: active
+            enum:
+              - active
+              - deleted
+            type: string
       responses:
         "200":
           content:
@@ -9288,7 +9349,7 @@ paths:
         Gets the summary of the free and paid GitHub Actions minutes used.
 
 
-        Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+        Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage returned includes any minute multipliers for macOS and Windows runners, and is rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
 
         Access tokens must have the `repo` or `admin:org` scope.
@@ -9404,7 +9465,11 @@ paths:
       parameters:
         - $ref: "#/components/parameters/org"
         - $ref: "#/components/parameters/per_page"
-        - $ref: "#/components/parameters/page"
+        - description: Page token
+          in: query
+          name: page
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -9733,6 +9798,12 @@ paths:
         - $ref: "#/components/parameters/direction"
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/page"
+        - description: Pinned discussions only filter
+          in: query
+          name: pinned
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -17222,7 +17293,7 @@ paths:
 
         This provides details of the most recent instance of this alert
 
-        for the the default branch or for the specified Git reference
+        for the default branch or for the specified Git reference
 
         (if you used `ref` in the request).
       externalDocs:
@@ -17614,6 +17685,7 @@ paths:
           name: confirm_delete
           required: false
           schema:
+            nullable: true
             type: string
       responses:
         "200":
@@ -17724,6 +17796,10 @@ paths:
       description: >-
         Uploads SARIF data containing the results of a code scanning analysis to make the results available in a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` write permission to use this endpoint.
 
+
+        There are two places where you can upload code scanning results.
+         - If you upload to a pull request, for example `--ref refs/pull/42/merge` or `--ref refs/pull/42/head`, then the results appear as alerts in a pull request check. For more information, see "[Triaging code scanning alerts in pull requests](/github/finding-security-vulnerabilities-and-errors-in-your-code/triaging-code-scanning-alerts-in-pull-requests)."
+         - If you upload to a branch, for example `--ref refs/heads/my-branch`, then the results appear in the **Security** tab for your repository. For more information, see "[Managing code scanning alerts for your repository](/github/finding-security-vulnerabilities-and-errors-in-your-code/managing-code-scanning-alerts-for-your-repository#viewing-the-alerts-for-a-repository)."
 
         You must compress the SARIF-formatted analysis data that you want to upload, using `gzip`, and then encode it as a Base64 format string. For example:
 
@@ -18525,6 +18601,20 @@ paths:
             type: string
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/page"
+        - deprecated: true
+          description: legacy parameter for pagination.
+          in: query
+          name: top
+          required: false
+          schema:
+            type: string
+        - deprecated: true
+          description: legacy parameter for pagination.
+          in: query
+          name: last_sha
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -18849,7 +18939,9 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: ref+ parameter
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - description: ref parameter
           in: path
           name: ref
           required: true
@@ -18895,7 +18987,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: ref+ parameter
+        - description: ref parameter
           in: path
           name: ref
           required: true
@@ -18916,6 +19008,11 @@ paths:
             type: string
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/page"
+        - in: query
+          name: app_id
+          required: false
+          schema:
+            type: integer
       responses:
         "200":
           content:
@@ -18962,7 +19059,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: ref+ parameter
+        - description: ref parameter
           in: path
           name: ref
           required: true
@@ -19035,13 +19132,15 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: ref+ parameter
+        - description: ref parameter
           in: path
           name: ref
           required: true
           schema:
             type: string
           x-multi-segment: true
+        - $ref: "#/components/parameters/per_page"
+        - $ref: "#/components/parameters/page"
       responses:
         "200":
           content:
@@ -19077,7 +19176,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: ref+ parameter
+        - description: ref parameter
           in: path
           name: ref
           required: true
@@ -19341,7 +19440,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: path+ parameter
+        - description: path parameter
           in: path
           name: path
           required: true
@@ -19485,7 +19584,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: path+ parameter
+        - description: path parameter
           in: path
           name: path
           required: true
@@ -19545,7 +19644,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: path+ parameter
+        - description: path parameter
           in: path
           name: path
           required: true
@@ -19746,6 +19845,7 @@ paths:
           required: false
           schema:
             default: none
+            nullable: true
             type: string
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/page"
@@ -20626,9 +20726,24 @@ paths:
               - newest
               - oldest
               - stargazers
+              - watchers
             type: string
         - $ref: "#/components/parameters/per_page"
         - $ref: "#/components/parameters/page"
+        - deprecated: true
+          description: legacy query parameter for specifying the org.
+          in: query
+          name: org
+          required: false
+          schema:
+            type: string
+        - deprecated: true
+          description: legacy query parameter for specifying the org.
+          in: query
+          name: organization
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -20668,10 +20783,25 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
+        - deprecated: true
+          description: legacy query parameter for specifying the org.
+          in: query
+          name: org
+          required: false
+          schema:
+            type: string
+        - deprecated: true
+          description: legacy query parameter for specifying the org.
+          in: query
+          name: organization
+          required: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
+              nullable: true
               properties:
                 organization:
                   description: Optional parameter to specify the organization name if forking into an organization.
@@ -21095,7 +21225,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: ref+ parameter
+        - description: ref parameter
           in: path
           name: ref
           required: true
@@ -21142,7 +21272,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: ref+ parameter
+        - description: ref parameter
           in: path
           name: ref
           required: true
@@ -21237,7 +21367,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: ref+ parameter
+        - description: ref parameter
           in: path
           name: ref
           required: true
@@ -21267,7 +21397,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: ref+ parameter
+        - description: ref parameter
           in: path
           name: ref
           required: true
@@ -21661,6 +21791,7 @@ paths:
           required: true
           schema:
             type: string
+          x-multi-segment: true
         - description: 'Setting this parameter to any value returns the objects or subtrees referenced by the tree specified in `:tree_sha`. For example, setting `recursive` to any of the following will enable returning objects or subtrees: `0`, `1`, `"true"`, and `"false"`. Omit this parameter to prevent recursively returning objects or subtrees.'
           in: query
           name: recursive
@@ -25928,7 +26059,15 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - $ref: "#/components/parameters/sort"
+        - in: query
+          name: sort
+          required: false
+          schema:
+            enum:
+              - created
+              - updated
+              - created_at
+            type: string
         - description: Can be either `asc` or `desc`. Ignored without `sort` parameter.
           in: query
           name: direction
@@ -27639,6 +27778,56 @@ paths:
         githubCloudOnly: false
         previews: []
         subcategory: contents
+  "/repos/{owner}/{repo}/readme/{dir}":
+    get:
+      description: >-
+        Gets the preferred README for a repository.
+
+
+        READMEs support [custom media types](https://docs.github.com/rest/reference/repos#custom-media-types) for retrieving the raw content or rendered HTML.
+      externalDocs:
+        description: API method documentation
+        url: https://docs.github.com/rest/reference/repos#get-a-repository-readme
+      operationId: repos/get-readme-from-alt-path
+      parameters:
+        - $ref: "#/components/parameters/owner"
+        - $ref: "#/components/parameters/repo"
+        - description: The alternate path to look for a README file
+          in: path
+          name: dir
+          required: true
+          schema:
+            type: string
+          x-multi-segment: true
+        - description: "The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)"
+          in: query
+          name: ref
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  $ref: "#/components/examples/content-file"
+              schema:
+                $ref: "#/components/schemas/content-file"
+          description: response
+        "404":
+          $ref: "#/components/responses/not_found"
+        "422":
+          $ref: "#/components/responses/validation_failed"
+      summary: Get a repository README
+      tags:
+        - repos
+      x-github:
+        category: repos
+        enabledForGitHubApps: true
+        githubCloudOnly: false
+        previews: []
+        subcategory: contents
   "/repos/{owner}/{repo}/releases":
     get:
       description: >-
@@ -27904,7 +28093,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
-        - description: tag+ parameter
+        - description: tag parameter
           in: path
           name: tag
           required: true
@@ -28871,6 +29060,8 @@ paths:
       parameters:
         - $ref: "#/components/parameters/owner"
         - $ref: "#/components/parameters/repo"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
       responses:
         "200":
           content:
@@ -29720,6 +29911,18 @@ paths:
         - $ref: "#/components/parameters/enterprise"
         - $ref: "#/components/parameters/start_index"
         - $ref: "#/components/parameters/count"
+        - description: filter results
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+        - description: attributes to exclude
+          in: query
+          name: excludedAttributes
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -29835,6 +30038,12 @@ paths:
       parameters:
         - $ref: "#/components/parameters/enterprise"
         - $ref: "#/components/parameters/scim_group_id"
+        - description: Attributes to exclude.
+          in: query
+          name: excludedAttributes
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -30034,6 +30243,12 @@ paths:
         - $ref: "#/components/parameters/enterprise"
         - $ref: "#/components/parameters/start_index"
         - $ref: "#/components/parameters/count"
+        - description: filter results
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -34602,6 +34817,7 @@ paths:
               - created
               - mentioned
               - subscribed
+              - repos
               - all
             type: string
         - description: Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
@@ -35561,6 +35777,12 @@ paths:
       parameters:
         - $ref: "#/components/parameters/package_type"
         - $ref: "#/components/parameters/package_name"
+        - description: package token
+          in: query
+          name: token
+          required: false
+          schema:
+            type: string
       responses:
         "204":
           description: Empty response
@@ -35591,10 +35813,22 @@ paths:
       externalDocs:
         description: API method documentation
         url: https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user
-      operationId: packages/get-all-package-versions-for-a-package-owned-by-the-authenticated-user
+      operationId: packages/get-all-package-versions-for-package-owned-by-authenticated-user
       parameters:
         - $ref: "#/components/parameters/package_type"
         - $ref: "#/components/parameters/package_name"
+        - $ref: "#/components/parameters/page"
+        - $ref: "#/components/parameters/per_page"
+        - description: The state of the package, either active or deleted.
+          in: query
+          name: state
+          required: false
+          schema:
+            default: active
+            enum:
+              - active
+              - deleted
+            type: string
       responses:
         "200":
           content:
@@ -37259,7 +37493,7 @@ paths:
         Gets the summary of the free and paid GitHub Actions minutes used.
 
 
-        Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+        Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage returned includes any minute multipliers for macOS and Windows runners, and is rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
 
         Access tokens must have the `user` scope.
@@ -55021,6 +55255,7 @@ components:
       schema:
         default: day
         enum:
+          - ""
           - day
           - week
         type: string
@@ -57308,6 +57543,7 @@ components:
       description: State of a code scanning alert.
       enum:
         - open
+        - closed
         - dismissed
         - fixed
       type: string
@@ -57431,7 +57667,10 @@ components:
       readOnly: true
       type: string
     code-scanning-ref:
-      description: The full Git reference, formatted as `refs/heads/<branch name>`.
+      description: >-
+        The full Git reference, formatted as `refs/heads/<branch name>`,
+
+        `refs/pull/<number>/merge`, or `refs/pull/<number>/head`.
       type: string
     code-scanning-sarifs-receipt:
       properties:

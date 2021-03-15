@@ -500,6 +500,15 @@ tags:
       Datacenter names are made up of their Location and Datacenter number, for example `fsn1-dc8` means Datacenter `8` in Location `fsn1`.
     name: Datacenters
   - description: >
+      Firewalls can limit the network access to or from your resources.
+
+
+      * When applying a firewall with no `in` rule all inbound traffic will be dropped. The default for `in` is `DROP`.
+
+      * When applying a firewall with no `out` rule all outbound traffic will be accepted. The default for `out` is `ACCEPT`.
+    name: Firewalls
+  - name: Firewall Actions
+  - description: >
       Floating IPs help you to create highly available setups. You can assign a Floating IP to any Server. The Server can then use this IP. You can reassign it to a different Server at any time, or you can choose to unassign the IP from Servers all together.
 
 
@@ -1652,6 +1661,1545 @@ paths:
       summary: Get a Datacenter
       tags:
         - Datacenters
+  /firewalls:
+    get:
+      description: Returns all Firewall objects.
+      parameters:
+        - description: Can be used multiple times.
+          in: query
+          name: sort
+          required: false
+          schema:
+            enum:
+              - id
+              - id:asc
+              - id:desc
+              - name
+              - name:asc
+              - name:desc
+              - created
+              - created:asc
+              - created:desc
+            type: string
+        - description: Can be used to filter resources by their name. The response will only contain the resources matching the specified name
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: Can be used to filter resources by labels. The response will only contain resources matching the label selector.
+          in: query
+          name: label_selector
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  firewalls:
+                    items:
+                      properties:
+                        applied_to:
+                          items:
+                            properties:
+                              server:
+                                properties:
+                                  id:
+                                    description: ID of the Server
+                                    example: 42
+                                    type: number
+                                type: object
+                              type:
+                                description: Type of resource referenced
+                                enum:
+                                  - server
+                                example: server
+                                type: string
+                            required:
+                              - type
+                            type: object
+                          type: array
+                        created:
+                          description: Point in time when the Firewall was created (in ISO-8601 format)
+                          example: 2016-01-30T23:50:00+00:00
+                          type: string
+                        id:
+                          description: ID of the Firewall
+                          example: 38
+                          type: integer
+                        labels:
+                          description: User-defined labels (key-value pairs)
+                          properties: {}
+                          type: object
+                        name:
+                          description: Unique name of the Firewall
+                          example: Corporate Intranet Protection
+                          type: string
+                        rules:
+                          items:
+                            properties:
+                              destination_ips:
+                                description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                                example:
+                                  - 28.239.13.1/32
+                                  - 28.239.14.0/24
+                                  - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                                items:
+                                  type: string
+                                type: array
+                              direction:
+                                description: Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                                enum:
+                                  - in
+                                  - out
+                                type: string
+                              port:
+                                description: Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                                example: "80"
+                                type: string
+                              protocol:
+                                description: Type of traffic to allow
+                                enum:
+                                  - tcp
+                                  - udp
+                                  - icmp
+                                type: string
+                              source_ips:
+                                description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                                example:
+                                  - 28.239.13.1/32
+                                  - 28.239.14.0/24
+                                  - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                              - direction
+                              - protocol
+                            title: Rule
+                            type: object
+                          type: array
+                      required:
+                        - id
+                        - name
+                        - created
+                        - rules
+                        - applied_to
+                      title: Firewall
+                      type: object
+                    type: array
+                required:
+                  - firewalls
+                title: FirewallsResponse
+                type: object
+          description: The `firewalls` key contains an array of Firewall objects
+      summary: Get all Firewalls
+      tags:
+        - Firewalls
+    post:
+      description: >
+        Creates a new Firewall.
+
+
+        #### Call specific error codes
+
+
+        | Code                        | Description                                             |
+
+        |-----------------------------|---------------------------------------------------------|
+
+        | `server_already_added`      | Server added more than one time to resource             |
+
+        | `incompatible_network_type` | The Network type is incompatible for the given resource |
+      requestBody:
+        content:
+          application/json:
+            example:
+              apply_to:
+                - server:
+                    id: 42
+                  type: server
+              labels: {}
+              name: Corporate Intranet Protection
+              rules:
+                - direction: in
+                  port: "80"
+                  protocol: tcp
+                  source_ips:
+                    - 28.239.13.1/32
+                    - 28.239.14.0/24
+                    - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+            schema:
+              properties:
+                apply_to:
+                  description: Resources the Firewall should be applied to after creation
+                  items:
+                    properties:
+                      server:
+                        description: Configuration for type Server, required if type is `server`
+                        properties:
+                          id:
+                            description: ID of the Server
+                            type: number
+                        required:
+                          - id
+                        type: object
+                      type:
+                        description: Type of the resource
+                        enum:
+                          - server
+                        type: string
+                    required:
+                      - type
+                    type: object
+                  type: array
+                labels:
+                  description: User-defined labels (key-value pairs)
+                  properties: {}
+                  type: object
+                name:
+                  description: Name of the Firewall
+                  example: Corporate Intranet Protection
+                  type: string
+                rules:
+                  description: Array of rules
+                  example:
+                    - direction: in
+                      port: "80"
+                      protocol: tcp
+                      source_ips:
+                        - 28.239.13.1/32
+                        - 28.239.14.0/24
+                        - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                  items:
+                    properties:
+                      destination_ips:
+                        description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                        example:
+                          - 28.239.13.1/32
+                          - 28.239.14.0/24
+                          - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                        items:
+                          type: string
+                        type: array
+                      direction:
+                        description: Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                        enum:
+                          - in
+                          - out
+                        type: string
+                      port:
+                        description: Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                        example: "80"
+                        type: string
+                      protocol:
+                        description: Type of traffic to allow
+                        enum:
+                          - tcp
+                          - udp
+                          - icmp
+                        type: string
+                      source_ips:
+                        description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                        example:
+                          - 28.239.13.1/32
+                          - 28.239.14.0/24
+                          - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                        items:
+                          type: string
+                        type: array
+                    required:
+                      - direction
+                      - protocol
+                    title: Rule
+                    type: object
+                  type: array
+              required:
+                - name
+              title: CreateFirewallRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                properties:
+                  actions:
+                    example:
+                      - command: set_firewall_rules
+                        error:
+                          code: action_failed
+                          message: Action failed
+                        finished: 2016-01-30T23:56:00+00:00
+                        id: 13
+                        progress: 100
+                        resources:
+                          - id: 38
+                            type: firewall
+                        started: 2016-01-30T23:55:00+00:00
+                        status: success
+                      - command: apply_firewall
+                        error:
+                          code: action_failed
+                          message: Action failed
+                        finished: 2016-01-30T23:56:00+00:00
+                        id: 14
+                        progress: 100
+                        resources:
+                          - id: 42
+                            type: server
+                          - id: 38
+                            type: firewall
+                        started: 2016-01-30T23:55:00+00:00
+                        status: success
+                    items:
+                      properties:
+                        command:
+                          description: Command executed in the Action
+                          example: start_server
+                          type: string
+                        error:
+                          description: Error message for the Action if error occurred, otherwise null
+                          nullable: true
+                          properties:
+                            code:
+                              description: Fixed machine readable code
+                              example: action_failed
+                              type: string
+                            message:
+                              description: Humanized error message
+                              example: Action failed
+                              type: string
+                          required:
+                            - code
+                            - message
+                          type: object
+                        finished:
+                          description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                          example: 2016-01-30T23:56:00+00:00
+                          nullable: true
+                          type: string
+                        id:
+                          description: ID of the Action
+                          example: 13
+                          type: integer
+                        progress:
+                          description: Progress of Action in percent
+                          example: 100
+                          type: number
+                        resources:
+                          description: Resources the Action relates to
+                          items:
+                            properties:
+                              id:
+                                description: ID of resource referenced
+                                example: 42
+                                type: number
+                              type:
+                                description: Type of resource referenced
+                                example: server
+                                type: string
+                            required:
+                              - id
+                              - type
+                            type: object
+                          type: array
+                        started:
+                          description: Point in time when the Action was started (in ISO-8601 format)
+                          example: 2016-01-30T23:55:00+00:00
+                          type: string
+                        status:
+                          description: Status of the Action
+                          enum:
+                            - success
+                            - running
+                            - error
+                          type: string
+                      required:
+                        - id
+                        - command
+                        - status
+                        - progress
+                        - started
+                        - finished
+                        - resources
+                        - error
+                      title: Action
+                      type: object
+                    type: array
+                  firewall:
+                    properties:
+                      applied_to:
+                        items:
+                          properties:
+                            server:
+                              properties:
+                                id:
+                                  description: ID of the Server
+                                  example: 42
+                                  type: number
+                              type: object
+                            type:
+                              description: Type of resource referenced
+                              enum:
+                                - server
+                              example: server
+                              type: string
+                          required:
+                            - type
+                          type: object
+                        type: array
+                      created:
+                        description: Point in time when the Firewall was created (in ISO-8601 format)
+                        example: 2016-01-30T23:50:00+00:00
+                        type: string
+                      id:
+                        description: ID of the Firewall
+                        example: 38
+                        type: integer
+                      labels:
+                        description: User-defined labels (key-value pairs)
+                        properties: {}
+                        type: object
+                      name:
+                        description: Unique name of the Firewall
+                        example: Corporate Intranet Protection
+                        type: string
+                      rules:
+                        items:
+                          properties:
+                            destination_ips:
+                              description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                              example:
+                                - 28.239.13.1/32
+                                - 28.239.14.0/24
+                                - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                              items:
+                                type: string
+                              type: array
+                            direction:
+                              description: Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                              enum:
+                                - in
+                                - out
+                              type: string
+                            port:
+                              description: Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                              example: "80"
+                              type: string
+                            protocol:
+                              description: Type of traffic to allow
+                              enum:
+                                - tcp
+                                - udp
+                                - icmp
+                              type: string
+                            source_ips:
+                              description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                              example:
+                                - 28.239.13.1/32
+                                - 28.239.14.0/24
+                                - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                              items:
+                                type: string
+                              type: array
+                          required:
+                            - direction
+                            - protocol
+                          title: Rule
+                          type: object
+                        type: array
+                    required:
+                      - id
+                      - name
+                      - created
+                      - rules
+                      - applied_to
+                    title: Firewall
+                    type: object
+                title: CreateFirewallResponse
+                type: object
+          description: The `firewall` key contains the Firewall that was just created
+      summary: Create a Firewall
+      tags:
+        - Firewalls
+  "/firewalls/{id}":
+    delete:
+      description: >
+        Deletes a Firewall.
+
+
+        #### Call specific error codes
+
+
+        | Code              | Description                               |
+
+        |-------------------|-------------------------------------------|
+
+        | `resource_in_use` | Firewall must not be in use to be deleted |
+      parameters:
+        - description: ID of the resource
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Firewall deleted
+      summary: Delete a Firewall
+      tags:
+        - Firewalls
+    get:
+      description: Gets a specific Firewall object.
+      parameters:
+        - description: ID of the resource
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  firewall:
+                    properties:
+                      applied_to:
+                        items:
+                          properties:
+                            server:
+                              properties:
+                                id:
+                                  description: ID of the Server
+                                  example: 42
+                                  type: number
+                              type: object
+                            type:
+                              description: Type of resource referenced
+                              enum:
+                                - server
+                              example: server
+                              type: string
+                          required:
+                            - type
+                          type: object
+                        type: array
+                      created:
+                        description: Point in time when the Firewall was created (in ISO-8601 format)
+                        example: 2016-01-30T23:50:00+00:00
+                        type: string
+                      id:
+                        description: ID of the Firewall
+                        example: 38
+                        type: integer
+                      labels:
+                        description: User-defined labels (key-value pairs)
+                        properties: {}
+                        type: object
+                      name:
+                        description: Unique name of the Firewall
+                        example: Corporate Intranet Protection
+                        type: string
+                      rules:
+                        items:
+                          properties:
+                            destination_ips:
+                              description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                              example:
+                                - 28.239.13.1/32
+                                - 28.239.14.0/24
+                                - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                              items:
+                                type: string
+                              type: array
+                            direction:
+                              description: Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                              enum:
+                                - in
+                                - out
+                              type: string
+                            port:
+                              description: Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                              example: "80"
+                              type: string
+                            protocol:
+                              description: Type of traffic to allow
+                              enum:
+                                - tcp
+                                - udp
+                                - icmp
+                              type: string
+                            source_ips:
+                              description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                              example:
+                                - 28.239.13.1/32
+                                - 28.239.14.0/24
+                                - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                              items:
+                                type: string
+                              type: array
+                          required:
+                            - direction
+                            - protocol
+                          title: Rule
+                          type: object
+                        type: array
+                    required:
+                      - id
+                      - name
+                      - created
+                      - rules
+                      - applied_to
+                    title: Firewall
+                    type: object
+                required:
+                  - firewall
+                title: FirewallResponse
+                type: object
+          description: The `firewall` key contains a Firewall object
+      summary: Get a Firewall
+      tags:
+        - Firewalls
+    put:
+      description: >
+        Updates the Firewall.
+
+
+        Note that when updating labels, the Firewall's current set of labels will be replaced with the labels provided in the request body. So, for example, if you want to add a new label, you have to provide all existing labels plus the new label in the request body.
+
+
+        Note: if the Firewall object changes during the request, the response will be a “conflict” error.
+      parameters:
+        - description: ID of the resource
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                labels:
+                  description: User-defined labels (key-value pairs)
+                  example:
+                    labelkey: value
+                  properties: {}
+                  type: object
+                name:
+                  description: New Firewall name
+                  example: new-name
+                  type: string
+              title: UpdateFirewallRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  firewall:
+                    properties:
+                      applied_to:
+                        items:
+                          properties:
+                            server:
+                              properties:
+                                id:
+                                  description: ID of the Server
+                                  example: 42
+                                  type: number
+                              type: object
+                            type:
+                              description: Type of resource referenced
+                              enum:
+                                - server
+                              example: server
+                              type: string
+                          required:
+                            - type
+                          type: object
+                        type: array
+                      created:
+                        description: Point in time when the Firewall was created (in ISO-8601 format)
+                        example: 2016-01-30T23:50:00+00:00
+                        type: string
+                      id:
+                        description: ID of the Firewall
+                        example: 38
+                        type: integer
+                      labels:
+                        description: User-defined labels (key-value pairs)
+                        properties: {}
+                        type: object
+                      name:
+                        description: Unique name of the Firewall
+                        example: Corporate Intranet Protection
+                        type: string
+                      rules:
+                        items:
+                          properties:
+                            destination_ips:
+                              description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                              example:
+                                - 28.239.13.1/32
+                                - 28.239.14.0/24
+                                - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                              items:
+                                type: string
+                              type: array
+                            direction:
+                              description: Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                              enum:
+                                - in
+                                - out
+                              type: string
+                            port:
+                              description: Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                              example: "80"
+                              type: string
+                            protocol:
+                              description: Type of traffic to allow
+                              enum:
+                                - tcp
+                                - udp
+                                - icmp
+                              type: string
+                            source_ips:
+                              description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                              example:
+                                - 28.239.13.1/32
+                                - 28.239.14.0/24
+                                - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                              items:
+                                type: string
+                              type: array
+                          required:
+                            - direction
+                            - protocol
+                          title: Rule
+                          type: object
+                        type: array
+                    required:
+                      - id
+                      - name
+                      - created
+                      - rules
+                      - applied_to
+                    title: Firewall
+                    type: object
+                required:
+                  - firewall
+                title: FirewallResponse
+                type: object
+          description: The `firewall` key contains the Firewall that was just updated
+      summary: Update a Firewall
+      tags:
+        - Firewalls
+  "/firewalls/{id}/actions":
+    get:
+      description: Returns all Action objects for a Firewall. You can sort the results by using the `sort` URI parameter, and filter them with the `status` parameter.
+      parameters:
+        - description: ID of the Resource
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        - description: Can be used multiple times.
+          in: query
+          name: sort
+          required: false
+          schema:
+            enum:
+              - id
+              - id:asc
+              - id:desc
+              - command
+              - command:asc
+              - command:desc
+              - status
+              - status:asc
+              - status:desc
+              - progress
+              - progress:asc
+              - progress:desc
+              - started
+              - started:asc
+              - started:desc
+              - finished
+              - finished:asc
+              - finished:desc
+            title: ParameterSort
+            type: string
+        - description: Can be used multiple times, the response will contain only Actions with specified statuses
+          in: query
+          name: status
+          required: false
+          schema:
+            enum:
+              - running
+              - success
+              - error
+            title: ParameterStatus
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                actions:
+                  - command: set_firewall_rules
+                    error:
+                      code: action_failed
+                      message: Action failed
+                    finished: 2016-01-30T23:56:00+00:00
+                    id: 13
+                    progress: 100
+                    resources:
+                      - id: 38
+                        type: firewall
+                    started: 2016-01-30T23:55:00+00:00
+                    status: success
+              schema:
+                properties:
+                  actions:
+                    items:
+                      properties:
+                        command:
+                          description: Command executed in the Action
+                          example: start_server
+                          type: string
+                        error:
+                          description: Error message for the Action if error occurred, otherwise null
+                          nullable: true
+                          properties:
+                            code:
+                              description: Fixed machine readable code
+                              example: action_failed
+                              type: string
+                            message:
+                              description: Humanized error message
+                              example: Action failed
+                              type: string
+                          required:
+                            - code
+                            - message
+                          type: object
+                        finished:
+                          description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                          example: 2016-01-30T23:56:00+00:00
+                          nullable: true
+                          type: string
+                        id:
+                          description: ID of the Action
+                          example: 13
+                          type: integer
+                        progress:
+                          description: Progress of Action in percent
+                          example: 100
+                          type: number
+                        resources:
+                          description: Resources the Action relates to
+                          items:
+                            properties:
+                              id:
+                                description: ID of resource referenced
+                                example: 42
+                                type: number
+                              type:
+                                description: Type of resource referenced
+                                example: server
+                                type: string
+                            required:
+                              - id
+                              - type
+                            type: object
+                          type: array
+                        started:
+                          description: Point in time when the Action was started (in ISO-8601 format)
+                          example: 2016-01-30T23:55:00+00:00
+                          type: string
+                        status:
+                          description: Status of the Action
+                          enum:
+                            - success
+                            - running
+                            - error
+                          type: string
+                      required:
+                        - id
+                        - command
+                        - status
+                        - progress
+                        - started
+                        - finished
+                        - resources
+                        - error
+                      title: Action
+                      type: object
+                    type: array
+                required:
+                  - actions
+                title: ActionsResponse
+                type: object
+          description: The `actions` key contains a list of Actions
+      summary: Get all Actions for a Firewall
+      tags:
+        - Firewall Actions
+  "/firewalls/{id}/actions/apply_to_resources":
+    post:
+      description: >
+        Applies one Firewall to multiple resources.
+
+
+        Currently only Servers (and their public network interfaces) are supported.
+
+
+        #### Call specific error codes
+
+
+        | Code                        | Description                                             |
+
+        |-----------------------------|---------------------------------------------------------|
+
+        | `firewall_already_applied`  | Firewall was already applied on resource                |
+
+        | `incompatible_network_type` | The Network type is incompatible for the given resource |
+      parameters:
+        - description: ID of the Firewall
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            example:
+              apply_to:
+                - server:
+                    id: 42
+                  type: server
+            schema:
+              properties:
+                apply_to:
+                  description: Resources the Firewall should be applied to
+                  items:
+                    properties:
+                      server:
+                        description: Configuration for type Server, required if type is `server`
+                        properties:
+                          id:
+                            description: ID of the Server
+                            type: number
+                        required:
+                          - id
+                        type: object
+                      type:
+                        description: Type of the resource
+                        enum:
+                          - server
+                        type: string
+                    required:
+                      - type
+                    type: object
+                  type: array
+              required:
+                - apply_to
+              title: ApplyToResources
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                actions:
+                  - command: apply_firewall
+                    error:
+                      code: action_failed
+                      message: Action failed
+                    finished: 2016-01-30T23:56:00+00:00
+                    id: 14
+                    progress: 100
+                    resources:
+                      - id: 42
+                        type: server
+                      - id: 38
+                        type: firewall
+                    started: 2016-01-30T23:55:00+00:00
+                    status: success
+              schema:
+                properties:
+                  actions:
+                    items:
+                      properties:
+                        command:
+                          description: Command executed in the Action
+                          example: start_server
+                          type: string
+                        error:
+                          description: Error message for the Action if error occurred, otherwise null
+                          nullable: true
+                          properties:
+                            code:
+                              description: Fixed machine readable code
+                              example: action_failed
+                              type: string
+                            message:
+                              description: Humanized error message
+                              example: Action failed
+                              type: string
+                          required:
+                            - code
+                            - message
+                          type: object
+                        finished:
+                          description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                          example: 2016-01-30T23:56:00+00:00
+                          nullable: true
+                          type: string
+                        id:
+                          description: ID of the Action
+                          example: 13
+                          type: integer
+                        progress:
+                          description: Progress of Action in percent
+                          example: 100
+                          type: number
+                        resources:
+                          description: Resources the Action relates to
+                          items:
+                            properties:
+                              id:
+                                description: ID of resource referenced
+                                example: 42
+                                type: number
+                              type:
+                                description: Type of resource referenced
+                                example: server
+                                type: string
+                            required:
+                              - id
+                              - type
+                            type: object
+                          type: array
+                        started:
+                          description: Point in time when the Action was started (in ISO-8601 format)
+                          example: 2016-01-30T23:55:00+00:00
+                          type: string
+                        status:
+                          description: Status of the Action
+                          enum:
+                            - success
+                            - running
+                            - error
+                          type: string
+                      required:
+                        - id
+                        - command
+                        - status
+                        - progress
+                        - started
+                        - finished
+                        - resources
+                        - error
+                      title: Action
+                      type: object
+                    type: array
+                required:
+                  - actions
+                title: ActionsResponse
+                type: object
+          description: The `actions` key contains multiple `apply_firewall` Actions
+      summary: Apply to Resources
+      tags:
+        - Firewall Actions
+  "/firewalls/{id}/actions/remove_from_resources":
+    post:
+      description: >
+        Removes one Firewall from multiple resources.
+
+
+        Currently only Servers (and their public network interfaces) are supported.
+
+
+        #### Call specific error codes
+
+
+        | Code                       | Description                                    |
+
+        |----------------------------|------------------------------------------------|
+
+        | `firewall_already_removed` | Firewall was already removed from the resource |
+      parameters:
+        - description: ID of the Firewall
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            example:
+              remove_from:
+                - server:
+                    id: 42
+                  type: server
+            schema:
+              properties:
+                remove_from:
+                  description: Resources the Firewall should be removed from
+                  items:
+                    properties:
+                      server:
+                        description: Configuration for type Server, required if type is `server`
+                        properties:
+                          id:
+                            description: ID of the Server
+                            type: number
+                        required:
+                          - id
+                        type: object
+                      type:
+                        description: Type of the resource
+                        enum:
+                          - server
+                        type: string
+                    required:
+                      - type
+                    type: object
+                  type: array
+              required:
+                - remove_from
+              title: RemoveFromResources
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                actions:
+                  - command: remove_firewall
+                    error:
+                      code: action_failed
+                      message: Action failed
+                    finished: 2016-01-30T23:56:00+00:00
+                    id: 14
+                    progress: 100
+                    resources:
+                      - id: 42
+                        type: server
+                      - id: 38
+                        type: firewall
+                    started: 2016-01-30T23:55:00+00:00
+                    status: success
+              schema:
+                properties:
+                  actions:
+                    items:
+                      properties:
+                        command:
+                          description: Command executed in the Action
+                          example: start_server
+                          type: string
+                        error:
+                          description: Error message for the Action if error occurred, otherwise null
+                          nullable: true
+                          properties:
+                            code:
+                              description: Fixed machine readable code
+                              example: action_failed
+                              type: string
+                            message:
+                              description: Humanized error message
+                              example: Action failed
+                              type: string
+                          required:
+                            - code
+                            - message
+                          type: object
+                        finished:
+                          description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                          example: 2016-01-30T23:56:00+00:00
+                          nullable: true
+                          type: string
+                        id:
+                          description: ID of the Action
+                          example: 13
+                          type: integer
+                        progress:
+                          description: Progress of Action in percent
+                          example: 100
+                          type: number
+                        resources:
+                          description: Resources the Action relates to
+                          items:
+                            properties:
+                              id:
+                                description: ID of resource referenced
+                                example: 42
+                                type: number
+                              type:
+                                description: Type of resource referenced
+                                example: server
+                                type: string
+                            required:
+                              - id
+                              - type
+                            type: object
+                          type: array
+                        started:
+                          description: Point in time when the Action was started (in ISO-8601 format)
+                          example: 2016-01-30T23:55:00+00:00
+                          type: string
+                        status:
+                          description: Status of the Action
+                          enum:
+                            - success
+                            - running
+                            - error
+                          type: string
+                      required:
+                        - id
+                        - command
+                        - status
+                        - progress
+                        - started
+                        - finished
+                        - resources
+                        - error
+                      title: Action
+                      type: object
+                    type: array
+                required:
+                  - actions
+                title: ActionsResponse
+                type: object
+          description: The `actions` key contains multiple `remove_firewall` Actions
+      summary: Remove from Resources
+      tags:
+        - Firewall Actions
+  "/firewalls/{id}/actions/set_rules":
+    post:
+      description: >
+        Sets the rules of a Firewall.
+
+
+        All existing rules will be overwritten. Pass an empty `rules` array to remove all rules.
+      parameters:
+        - description: ID of the Firewall
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                rules:
+                  description: Array of rules
+                  example:
+                    - direction: in
+                      port: "80"
+                      protocol: tcp
+                      source_ips:
+                        - 28.239.13.1/32
+                        - 28.239.14.0/24
+                        - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                  items:
+                    properties:
+                      destination_ips:
+                        description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                        example:
+                          - 28.239.13.1/32
+                          - 28.239.14.0/24
+                          - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                        items:
+                          type: string
+                        type: array
+                      direction:
+                        description: Select traffic direction on which rule should be applied. Use `source_ips` for direction `in` and `destination_ips` for direction `out`.
+                        enum:
+                          - in
+                          - out
+                        type: string
+                      port:
+                        description: Port or port range to which traffic will be allowed, only applicable for protocols TCP and UDP. A port range can be specified by separating two ports with a dash, e.g `1024-5000`.
+                        example: "80"
+                        type: string
+                      protocol:
+                        description: Type of traffic to allow
+                        enum:
+                          - tcp
+                          - udp
+                          - icmp
+                        type: string
+                      source_ips:
+                        description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
+                        example:
+                          - 28.239.13.1/32
+                          - 28.239.14.0/24
+                          - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+                        items:
+                          type: string
+                        type: array
+                    required:
+                      - direction
+                      - protocol
+                    title: Rule
+                    type: object
+                  type: array
+              required:
+                - rules
+              title: SetRules
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                actions:
+                  - command: set_firewall_rules
+                    error:
+                      code: action_failed
+                      message: Action failed
+                    finished: 2016-01-30T23:56:00+00:00
+                    id: 13
+                    progress: 100
+                    resources:
+                      - id: 38
+                        type: firewall
+                    started: 2016-01-30T23:55:00+00:00
+                    status: success
+                  - command: apply_firewall
+                    error:
+                      code: action_failed
+                      message: Action failed
+                    finished: 2016-01-30T23:56:00+00:00
+                    id: 14
+                    progress: 100
+                    resources:
+                      - id: 38
+                        type: firewall
+                      - id: 42
+                        type: server
+                    started: 2016-01-30T23:55:00+00:00
+                    status: success
+              schema:
+                properties:
+                  actions:
+                    items:
+                      properties:
+                        command:
+                          description: Command executed in the Action
+                          example: start_server
+                          type: string
+                        error:
+                          description: Error message for the Action if error occurred, otherwise null
+                          nullable: true
+                          properties:
+                            code:
+                              description: Fixed machine readable code
+                              example: action_failed
+                              type: string
+                            message:
+                              description: Humanized error message
+                              example: Action failed
+                              type: string
+                          required:
+                            - code
+                            - message
+                          type: object
+                        finished:
+                          description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                          example: 2016-01-30T23:56:00+00:00
+                          nullable: true
+                          type: string
+                        id:
+                          description: ID of the Action
+                          example: 13
+                          type: integer
+                        progress:
+                          description: Progress of Action in percent
+                          example: 100
+                          type: number
+                        resources:
+                          description: Resources the Action relates to
+                          items:
+                            properties:
+                              id:
+                                description: ID of resource referenced
+                                example: 42
+                                type: number
+                              type:
+                                description: Type of resource referenced
+                                example: server
+                                type: string
+                            required:
+                              - id
+                              - type
+                            type: object
+                          type: array
+                        started:
+                          description: Point in time when the Action was started (in ISO-8601 format)
+                          example: 2016-01-30T23:55:00+00:00
+                          type: string
+                        status:
+                          description: Status of the Action
+                          enum:
+                            - success
+                            - running
+                            - error
+                          type: string
+                      required:
+                        - id
+                        - command
+                        - status
+                        - progress
+                        - started
+                        - finished
+                        - resources
+                        - error
+                      title: Action
+                      type: object
+                    type: array
+                required:
+                  - actions
+                title: ActionsResponse
+                type: object
+          description: The `action` key contains one `set_firewall_rules` Action plus one `apply_firewall` Action per resource where the Firewall is active
+      summary: Set Rules
+      tags:
+        - Firewall Actions
+  "/firewalls/{id}/actions/{action_id}":
+    get:
+      description: Returns a specific Action for a Firewall.
+      parameters:
+        - description: ID of the Firewall
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+        - description: ID of the Action
+          in: path
+          name: action_id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                action:
+                  command: set_firewall_rules
+                  error:
+                    code: action_failed
+                    message: Action failed
+                  finished: 2016-01-30T23:56:00+00:00
+                  id: 13
+                  progress: 100
+                  resources:
+                    - id: 38
+                      type: firewall
+                  started: 2016-01-30T23:55:00+00:00
+                  status: success
+              schema:
+                properties:
+                  action:
+                    properties:
+                      command:
+                        description: Command executed in the Action
+                        example: start_server
+                        type: string
+                      error:
+                        description: Error message for the Action if error occurred, otherwise null
+                        nullable: true
+                        properties:
+                          code:
+                            description: Fixed machine readable code
+                            example: action_failed
+                            type: string
+                          message:
+                            description: Humanized error message
+                            example: Action failed
+                            type: string
+                        required:
+                          - code
+                          - message
+                        type: object
+                      finished:
+                        description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                        example: 2016-01-30T23:56:00+00:00
+                        nullable: true
+                        type: string
+                      id:
+                        description: ID of the Action
+                        example: 13
+                        type: integer
+                      progress:
+                        description: Progress of Action in percent
+                        example: 100
+                        type: number
+                      resources:
+                        description: Resources the Action relates to
+                        items:
+                          properties:
+                            id:
+                              description: ID of resource referenced
+                              example: 42
+                              type: number
+                            type:
+                              description: Type of resource referenced
+                              example: server
+                              type: string
+                          required:
+                            - id
+                            - type
+                          type: object
+                        type: array
+                      started:
+                        description: Point in time when the Action was started (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      status:
+                        description: Status of the Action
+                        enum:
+                          - success
+                          - running
+                          - error
+                        type: string
+                    required:
+                      - id
+                      - command
+                      - status
+                      - progress
+                      - started
+                      - finished
+                      - resources
+                      - error
+                    title: Action
+                    type: object
+                required:
+                  - action
+                title: ActionResponse
+                type: object
+          description: The `action` key contains the Firewall Action
+      summary: Get an Action for a Firewall
+      tags:
+        - Firewall Actions
   /floating_ips:
     get:
       description: Returns all Floating IP objects.
@@ -12102,6 +13650,23 @@ paths:
                         public_net:
                           description: Public network information. The Server's IPv4 address can be found in `public_net->ipv4->ip`
                           properties:
+                            firewalls:
+                              description: Firewalls applied to the public network interface of this Server
+                              items:
+                                properties:
+                                  id:
+                                    description: ID of the Firewall
+                                    example: 38
+                                    type: integer
+                                  status:
+                                    description: Status of the Firewall on the Server
+                                    enum:
+                                      - applied
+                                      - pending
+                                    example: applied
+                                    type: string
+                                type: object
+                              type: array
                             floating_ips:
                               description: IDs of Floating IPs assigned to this Server
                               example:
@@ -12338,6 +13903,17 @@ paths:
                   description: ID or name of Datacenter to create Server in (must not be used together with location)
                   example: nbg1-dc3
                   type: string
+                firewalls:
+                  description: Firewalls which should be applied on the Server's public network interface at creation time
+                  example:
+                    - firewall: 38
+                  items:
+                    properties:
+                      firewall:
+                        description: ID of the Firewall
+                        type: integer
+                    type: object
+                  type: array
                 image:
                   description: ID or name of the Image the Server is created from
                   example: ubuntu-20.04
@@ -12527,6 +14103,9 @@ paths:
                     delete: false
                     rebuild: false
                   public_net:
+                    firewalls:
+                      - id: 38
+                        status: applied
                     floating_ips:
                       - 478
                     ipv4:
@@ -13060,6 +14639,23 @@ paths:
                       public_net:
                         description: Public network information. The Server's IPv4 address can be found in `public_net->ipv4->ip`
                         properties:
+                          firewalls:
+                            description: Firewalls applied to the public network interface of this Server
+                            items:
+                              properties:
+                                id:
+                                  description: ID of the Firewall
+                                  example: 38
+                                  type: integer
+                                status:
+                                  description: Status of the Firewall on the Server
+                                  enum:
+                                    - applied
+                                    - pending
+                                  example: applied
+                                  type: string
+                              type: object
+                            type: array
                           floating_ips:
                             description: IDs of Floating IPs assigned to this Server
                             example:
@@ -13732,6 +15328,23 @@ paths:
                       public_net:
                         description: Public network information. The Server's IPv4 address can be found in `public_net->ipv4->ip`
                         properties:
+                          firewalls:
+                            description: Firewalls applied to the public network interface of this Server
+                            items:
+                              properties:
+                                id:
+                                  description: ID of the Firewall
+                                  example: 38
+                                  type: integer
+                                status:
+                                  description: Status of the Firewall on the Server
+                                  enum:
+                                    - applied
+                                    - pending
+                                  example: applied
+                                  type: string
+                              type: object
+                            type: array
                           floating_ips:
                             description: IDs of Floating IPs assigned to this Server
                             example:
@@ -14324,6 +15937,23 @@ paths:
                       public_net:
                         description: Public network information. The Server's IPv4 address can be found in `public_net->ipv4->ip`
                         properties:
+                          firewalls:
+                            description: Firewalls applied to the public network interface of this Server
+                            items:
+                              properties:
+                                id:
+                                  description: ID of the Firewall
+                                  example: 38
+                                  type: integer
+                                status:
+                                  description: Status of the Firewall on the Server
+                                  enum:
+                                    - applied
+                                    - pending
+                                  example: applied
+                                  type: string
+                              type: object
+                            type: array
                           floating_ips:
                             description: IDs of Floating IPs assigned to this Server
                             example:

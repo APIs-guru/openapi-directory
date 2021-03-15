@@ -2804,10 +2804,42 @@ paths:
     put:
       description: >
         Creates or updates a post location for the current user. Updates will happen when the name of the post location matches a previous post location.
-      operationId: save_post_locations
+      operationId: save_post_location
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                latitude:
+                  type: number
+                longitude:
+                  type: number
+                name:
+                  description: A name that describes the location specified by the given latitude and longitude (must be >= 2 characters and <= 30 characters).
+                  type: string
+              required:
+                - name
+                - latitude
+                - longitude
+              type: object
+        required: true
       responses:
         "200":
-          description: Post location created.
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    latitude:
+                      type: number
+                    longitude:
+                      type: number
+                    name:
+                      description: The location name used when submitting new posts.
+                      type: string
+                  type: object
+                type: array
+          description: The current users' post locations.
       summary: Save a post location for the current user
       tags:
         - users

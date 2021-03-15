@@ -245,6 +245,43 @@ paths:
       tags:
         - Marketplaces - Orders V3 - Batches
       x-releaseStatus: PLANNED
+  "/orders/v3/batches/changeOrders/{changeOrderType}":
+    post:
+      deprecated: false
+      description: >
+        The purpose of this operation is to reduce the amount of request to the API. 
+
+        Max 100 items per call.
+      operationId: ChangeOrderListV2
+      parameters:
+        - $ref: "#/components/parameters/userNameInQueryParameter"
+        - $ref: "#/components/parameters/testModeInQueryParameter"
+        - $ref: "#/components/parameters/changeOrderTypeParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/changeOrderListRequestV2"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/batchOrderOperationResponse"
+          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: Requested too many batch operations
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: "[PLANNED] Send a batch of operations to change your marketplace Order information: accept, ship, etc.  (max 100 items per call)"
+      tags:
+        - Marketplaces - Orders V3 - Batches
+      x-releaseStatus: PLANNED
   /orders/v3/batches/clearMerchantOrderInfos:
     post:
       deprecated: false
@@ -9074,6 +9111,29 @@ components:
           $ref: "#/components/schemas/orderIdentifierWithETag"
       required:
         - order
+      type: object
+    changeOrderListRequestItemV2:
+      description: Contains the order identifier and the change order request
+      properties:
+        changeOrderRequest:
+          $ref: "#/components/schemas/changeOrderRequest"
+        order:
+          $ref: "#/components/schemas/orderIdentifierWithETag"
+      required:
+        - order
+      type: object
+    changeOrderListRequestV2:
+      description: Contains all change order operations you want to make.  (max 100 items per call)
+      properties:
+        changeOrders:
+          description: The change order operations
+          items:
+            $ref: "#/components/schemas/changeOrderListRequestItemV2"
+          maxLength: 100
+          minLength: 1
+          type: array
+      required:
+        - changeOrders
       type: object
     changeOrderReporting:
       description: The reporting related to a change order operation

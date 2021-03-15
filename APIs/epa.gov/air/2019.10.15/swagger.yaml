@@ -1,8 +1,8 @@
 swagger: "2.0"
 schemes:
   - https
-host: ordsstage1.rtpnc.epa.gov
-basePath: /echo7
+host: ofmpub.epa.gov
+basePath: /echo
 info:
   contact:
     name: U.S. EPA, OECA Integration, Targeting and Access Branch
@@ -3676,31 +3676,34 @@ definitions:
       AIRCaseIDs:
         description: Space-delimited list of AIR cases associated with the facility.
         example: 05-1993-1585 05-2014-5021
+        title: Air Enforcement Case IDs
         type: string
       AIRCity:
         description: The city where the AIR facility is located.
         example: Washington
-        title: City
+        title: Air Facility City
         type: string
       AIRClassification:
         type: string
       AIRComplStatus:
         description: The facility's recent violation status under the Clean Air Act.
         example: No Viol
-        title: Compliance Status
+        title: Current Compliance Status
         type: string
       AIRCounty:
         description: The name of the county where the AIR facility is located.
         example: Racine
+        title: Air Facility County
         type: string
       AIRDaysLastEval:
         description: The number of days since the most recent compliance evaluation of the facility.
         example: "2806"
-        title: Days Since Last Compliance Evaluation
+        title: Days Since Last Evaluation
         type: string
       AIREPARegion:
         description: The EPA region where the AIR facility is located.
         example: "05"
+        title: EPA Region
         type: string
       AIREvalCnt:
         description: The number of compliance evaluations, under the Clean Air Act, occurring at the facility within the last five years.
@@ -3710,7 +3713,7 @@ definitions:
       AIRFIPSCode:
         description: A 5 digit combination of the 2 digit Federal Information Processing Standards (FIPS) code for the state and the 3 digit FIPS code of the county that a facility is located in.
         example: "11001"
-        title: State County FIPS Code
+        title: FIPS Code
         type: string
       AIRFacilityTypeCode:
         description: >-
@@ -3746,7 +3749,7 @@ definitions:
 
           UNK - Unknown
         example: POF
-        title: Facility Type Code
+        title: Air Facility Type Code
         type: string
       AIRFacilityTypeDesc:
         type: string
@@ -3758,12 +3761,12 @@ definitions:
       AIRHpvStatus:
         description: Indicates whether the facility currently has an unresolved High Priority Violation (HPV) under the Clean Air Act.
         example: Yes
-        title: HPV Status
+        title: Current HPV Status
         type: string
       AIRIDs:
         description: Air Facility System (AFS) ID.
         example: DC0000001100195254
-        title: AIR Facility System ID
+        title: ICIS-AIR Facility IDs
         type: string
       AIRIeaCnt:
         description: The total number of informal enforcement actions taken against the facility within the last five years.
@@ -3773,22 +3776,22 @@ definitions:
       AIRIndianCntryFlg:
         description: Flag indicating whether the AIR facility is located in Indian country.
         example: N
-        title: AIR Facility Indian Country Flag
+        title: Air Facility Indian Country
         type: string
       AIRLastEvalDate:
         description: The date on which the most recent Full Compliance Evaluation (FCE) of the facility by EPA or a state agency was completed.
         example: 05/18/2009
-        title: Last Compliance Evaluation Date
+        title: Date of Last Evaluation
         type: string
       AIRLastEvalDateEPA:
         description: The last Air Inspection Date performed by EPA.
         example: 05/16/2014
-        title: Air Last EPA Inspection Date
+        title: Last Evaluation EPA Date
         type: string
       AIRLastEvalDateState:
         description: The last Air Inspection Date performed by State or local authorities.
         example: 05/18/2009
-        title: Air Last State Insprection Date
+        title: Last Evaluation State Date
         type: string
       AIRLastFeaDate:
         description: The effective date of the most recent listed formal enforcement action taken against the facility.
@@ -3823,17 +3826,17 @@ definitions:
       AIRLastPenaltyDate:
         description: Indicates the date on which the most recent assessed (or final) penalty was taken against the facility for AIR.
         example: 05/16/2014
-        title: Air Last Penalty Date
+        title: Last Penalty Date
         type: string
       AIRLastStckDateEPA:
         description: The date on which the most recent stack test by EPA occurred.
         example: 04/25/2014
-        title: Last EPA Stack Test Date
+        title: Last Stack Test EPA Date
         type: string
       AIRLastStckDateState:
         description: The date on which the most recent stack test by a state agency occurred.
         example: 04/25/2014
-        title: Last State Stack Test Date
+        title: Last Stack Test State Date
         type: string
       AIRLastStckTestDate:
         description: The date on which the most recent stack test occurred.
@@ -3848,27 +3851,27 @@ definitions:
       AIRLastViolDate:
         description: The date on which the most recent violation was reported.
         example: 04/25/2014
-        title: Last Violation Date
+        title: Date of Last Violation
         type: string
       AIRMacts:
         description: The Maximum Achievable Control Technology (MACT) Subpart associated with the facility.
         example: ZZZZZ
-        title: MACT Subparts
+        title: Maximum Achievable Control Technology
         type: string
       AIRMajorFlag:
         description: Indicated whether the facility is designated as a major facilitiy.
         example: N
-        title: Major Flag
+        title: Air Facility Major
         type: string
       AIRMnthsWithHpv:
         description: The number of months in the last three years in which the permit or site is considered in High Priority Violation (HPV) status
         example: "3"
-        title: Months with HPV
+        title: Months in HPV
         type: string
       AIRNAICS:
         description: The facility’s or permit's primary North American Industry Classification System (NAICS) Code.
         example: "812320"
-        title: NAICS Codes
+        title: Air Facility NAICS
         type: string
       AIRName:
         description: The name of the AIR Facility.
@@ -3888,7 +3891,7 @@ definitions:
       AIRPenalties:
         description: The total dollar amount of assessed (or final) penalties taken against the facility within the last five years under the Clean Air Act. This value only includes penalties that have been entered in the national program database, ICIS-Air.
         example: $435
-        title: Penalties
+        title: Air Facility Penalties
         type: string
       AIRPollRecentViol:
         description: The names of pollutants or pollutant categories with violations reported in the last year.
@@ -3903,12 +3906,12 @@ definitions:
       AIRQtrsWithHpv:
         description: The number of quarters in the last three years in which the permit or site is considered in High Priority Violation (HPV) status.
         example: "4"
-        title: Quarters with HPV
+        title: Quarters in HPV
         type: string
       AIRQtrsWithViol:
         description: The number of quarters in the last three years in which the permit or site has had unresolved violation(s) reported.
         example: "2"
-        title: Quarters with Violation Reported
+        title: Quarters with Violations
         type: string
       AIRRecentViolCnt:
         description: The number of violations reported in the last year.
@@ -3932,7 +3935,7 @@ definitions:
       AIRStreet:
         description: The street address of the AIR facility location.
         example: 2130 P STREET N.W.
-        title: AIR Facility Street Address
+        title: Air Facility Street
         type: string
       AIRTRIbalEPAids:
         description: The EPA Tribal or Native Alaskan Village Identifier for facilities, that based on their Best Pick FRS spatial coordinate, are within a Tribal or Alaskan Village area.
@@ -3945,7 +3948,7 @@ definitions:
       AIRUniverse:
         description: The program office defines each CAA Source ID and the associated permits as being Federally Reportable or Non-Federally Reportable. Under the CAA, federally reportable source include majors, synthetic minors, NESHAP Part 61 minors, minors with an unresolved High Priority Violation (HPV), with recent enforcement action, or included on a Compliance Monitoring Strategy plan.
         example: Minor Emissions
-        title: AIR Universe
+        title: Air Facility Universe
         type: string
       AIRZip:
         description: The five-digit zip code of the AIR facility.
@@ -3958,7 +3961,7 @@ definitions:
       CWAIDs:
         description: A unique  ID assigned for each record/permit/site/facility within ICIS-NPDES. These identifiers are for used tracking purposes in the individual data systems.
         example: DC0000001
-        title: CWA IDs
+        title: NPDES IDs
         type: string
       CalculatedAccuracyMeters:
         description: The estimated accuracy in Meters for the facility's geospatial coordinate.
@@ -3977,7 +3980,7 @@ definitions:
       ChesapeakeBayFlag:
         description: Displays "Y" if the facility is located within the Chesapeake Bay watershed.
         example: Y
-        title: Chesapeake Bay Flag
+        title: Chesapeake Bay
         type: string
       CollectionMethod:
         description: ??
@@ -4030,7 +4033,7 @@ definitions:
         type: string
       EjscreenFlagUs:
         description: A Y/N indicator identifying whether or not the facility is within an Environmental Justice area.
-        title: EJ Screen Flag (US)
+        title: EJSCREEN
         type: string
       FacCamdReporter:
         description: Indicates whether the facility reports to the Clean Air Markets Division (CAMD).
@@ -4050,7 +4053,7 @@ definitions:
       FacDerivedTRIbes:
         description: The tribes or tribal territories located within 25 miles of the facility's location.
         example: Cherokee Nation
-        title: FRS Spatially Derived Tribe
+        title: FRS Spatially Derived Tribes
         type: string
       FacDerivedWBD:
         description: The Hydrologic Unit Code (HUC-12) of the waterbody in which the facility resides, derived based on location data in FRS.
@@ -4065,7 +4068,7 @@ definitions:
       FacEisAIRReleases:
         description: The amount of hazardous air pollutants released to air in tons per year, as reported in the most recent National Emissions Inventory (NEI).
         example: "2.35"
-        title: EIS Releases
+        title: EIS Air Releases
         type: string
       FacEisReporter:
         description: Indicates whether the facility reports to the Emissions Inventory System (EIS).
@@ -4099,7 +4102,7 @@ definitions:
         type: string
       FacIndianCntryFlg:
         description: Flag showing Y/N whether the facility is located in Indian Country.
-        title: Facility Indian Country Flag
+        title: Indian Country
         type: string
       FacIndianSpatialFlg:
         description: Returns “Y” if a facility is located within a tribal spatial boundary as defined by the U.S. Census Bureau 2010 tribal boundary layer data for tribes in the lower 48 states and Bureau of Land Management Alaska State Office data for native villages in Alaska. Returns “N” if a facility is not located within a tribal or native Alaskan village area.
@@ -4119,7 +4122,7 @@ definitions:
       FacMapFlg:
         description: Graphical indicator denoting whether geographical data required to map a facility are available.
         example: Y
-        title: Facility Mapped Flag
+        title: Facility Mapped Indicator
         type: string
       FacMapIcon:
         description: The default map icon image file calculated for the facility by the ECHO program.
@@ -4129,12 +4132,12 @@ definitions:
       FacNaaFlag:
         description: Indicates whether the facility is located in a nonattainment area of the country, where air pollution levels persistently exceed the national ambient air quality standards. This flag does not indicate whether or not the facility has violated national ambient area quality standards.
         example: Y
-        title: NAA Flag
+        title: Nonattainment Area
         type: string
       FacPercentMinority:
         description: Percent Minority is the percentage of the population of the given area that is considered minority. Statistics are shown for the area within a 3-mile radius of each facility.
         example: "45.379"
-        title: Facility Percent Minority
+        title: Percent Minority
         type: string
       FacPopulationDensity:
         description: The number of persons per square mile in the profiled area.
@@ -4144,7 +4147,7 @@ definitions:
       FacSICCodes:
         description: Indicates the facility’s or permit's primary Standard Industrial Classification (SIC) Code. The SIC code describes the primary activity of the facility.
         example: "811"
-        title: SIC Codes
+        title: Facility SIC
         type: string
       FacStdCountyName:
         description: The standardized  facility county name from EPA's Facility Registry System
@@ -4154,7 +4157,7 @@ definitions:
       FacTRIAIRReleases:
         description: The total chemical releases to air, in pounds, as reported to TRI by the facility for the most recent reporting year.
         example: "36"
-        title: TRI Releases
+        title: TRI Air Releases
         type: string
       FacTRICarcAIRReleases:
         description: The pounds of chemicals considered to be carcinogens released to air, as reported to TRI for the most recent reporting year. Chemicals are classified as carcinogens under the requirements of the Occupational Safety and Health Administration (OSHA).
@@ -4169,7 +4172,7 @@ definitions:
       FacTRIReporter:
         description: Indicates whether facility reported to the Toxics Release Inventory (TRI) for the most recent reporting year.
         example: B
-        title: Facility TRI Reporter
+        title: TRI Reporter
         type: string
       FacUsMexBorderFlg:
         description: A Y/N flag indicating that the facility is within 100KM of the US-Mexico Border.
@@ -4215,12 +4218,18 @@ definitions:
         type: string
       LocalControlRegionName:
         description: Regions within a state. Search criteria for DFR in OTIS.
-        title: Local Control Region Name
+        title: Load Control Region Name
         type: string
       Lower48:
         description: Flag showing Y/N whether location is within the contiguous (lower 48) United States.
         example: Y
         title: Contiguous United States Flag
+        type: string
+      MaintPollutantsNaa:
+        type: string
+      MaintStandardsNaa:
+        type: string
+      MaintStatusNaa:
         type: string
       Map:
         description: No Longer Used.
@@ -4229,11 +4238,18 @@ definitions:
       MaxPctileUs:
         description: The maximum percentile from all individual EJSCREEN indicators.
         example: "98"
+        title: EJ Indexes Above 80th Percentile
         type: string
       MaxScore:
         description: A sorting score for internal use.
         example: "1"
         title: Max Score
+        type: string
+      NaPollutantsNaa:
+        type: string
+      NaStandardsNaa:
+        type: string
+      NaStatusNaa:
         type: string
       NaaCategories:
         description: The nonattainment area categories that the facility is in, derived spatially based on the facility's geographic coordinates in FRS.�
@@ -4255,51 +4271,62 @@ definitions:
       PctileCancerUs:
         description: The national percentile of the census block group for the EJSCREEN NATA air toxics cancer risk indicator.
         example: "99"
+        title: EJSCREEN NATA Cancer Risk
         type: string
       PctileDpmUs:
         description: The national percentile of the census block group for the EJSCREEN diesel particulate matter indicator.
         example: "99"
+        title: EJSCREEN NATA Diesel PM
         type: string
       PctileO3Us:
         description: The national percentile of the census block group for the EJSCREEN ozone indicator.
         example: "94"
+        title: EJSCREEN Ozone
         type: string
       PctilePctpre1960Us:
         description: The national percentile of the census block group for the EJSCREEN Lead paint indicator.
         example: "14.6"
+        title: EJSCREEN Lead Paint Indicator
         type: string
       PctilePmUs:
         description: The national percentile of the census block group for the EJSCREEN particulate matter indicator.
         example: "93"
+        title: EJSCREEN PM 2.5
         type: string
       PctileProximityNPDESUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to major direct water dischargers indicator.
         example: "23.7"
+        title: EJSCREEN Wastewater Discharge Proximity
         type: string
       PctileProximityNplUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to National Priorities List (NPL) sites indicator.
         example: "96"
+        title: EJSCREEN Superfund Proximity
         type: string
       PctileProximityRmpUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to Risk Management Plan (RMP) sites indicator.
         example: "91"
+        title: EJSCREEN RMP Proximity
         type: string
       PctileProximityTsdfUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to Treatment Storage and Disposal Facilities (TSDFs) indicator.
         example: "82"
+        title: EJSCREEN Hazardous Waste Proximity
         type: string
       PctileRespUs:
         description: The national percentile of the census block group for the EJSCREEN NATA respiratory hazard index indicator.
         example: "99"
+        title: EJSCREEN NATA Respiratory Hazard
         type: string
       PctileTrafficScoreUs:
         description: The national percentile of the census block group for the EJSCREEN Traffic proximity and volume indicator.
         example: "92"
+        title: EJSCREEN Traffic Proximity
         type: string
       RCRAIDs:
         description: A unique 12-character ID assigned for each record/permit/site/facility within the RCRAInfo database.
         example: VAD981111784
-        title: Resource Conservation and Recovery Act IDs
+        title: RCRA IDs
         type: string
       ReferencePoint:
         description: ??
@@ -4319,6 +4346,7 @@ definitions:
       SDWAIDs:
         description: A unique 9-character ID assigned for each public water system within the Safe Drinking Water Information System (SDWIS).
         example: DC0000001
+        title: SDWA IDs
         type: string
       Score:
         example: "1"
@@ -4345,12 +4373,12 @@ definitions:
 
           - SDWA = the Safe Drinking Water Act
         example: CWA
-        title: Regulatory Statute
+        title: Statute
         type: string
       TRIIDs:
         description: A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.
         example: 20011FRTTT5001F
-        title: Toxics Release Inventory Program IDs
+        title: TRI Program IDs
         type: string
       TRIbalFlag:
         description: A flag indicating that the facility is within a tribal area.
@@ -4497,6 +4525,12 @@ definitions:
       - WebDocs
       - NaaCategories
       - NaaPollutants
+      - NaStandardsNaa
+      - MaintStandardsNaa
+      - NaPollutantsNaa
+      - MaintPollutantsNaa
+      - NaStatusNaa
+      - MaintStatusNaa
       - FacCountyName
       - FacStdCountyName
       - AIRNsps
@@ -4648,31 +4682,34 @@ definitions:
       AIRCaseIDs:
         description: Space-delimited list of AIR cases associated with the facility.
         example: 05-1993-1585 05-2014-5021
+        title: Air Enforcement Case IDs
         type: string
       AIRCity:
         description: The city where the AIR facility is located.
         example: Washington
-        title: City
+        title: Air Facility City
         type: string
       AIRClassification:
         type: string
       AIRComplStatus:
         description: The facility's recent violation status under the Clean Air Act.
         example: No Viol
-        title: Compliance Status
+        title: Current Compliance Status
         type: string
       AIRCounty:
         description: The name of the county where the AIR facility is located.
         example: Racine
+        title: Air Facility County
         type: string
       AIRDaysLastEval:
         description: The number of days since the most recent compliance evaluation of the facility.
         example: "2806"
-        title: Days Since Last Compliance Evaluation
+        title: Days Since Last Evaluation
         type: string
       AIREPARegion:
         description: The EPA region where the AIR facility is located.
         example: "05"
+        title: EPA Region
         type: string
       AIREvalCnt:
         description: The number of compliance evaluations, under the Clean Air Act, occurring at the facility within the last five years.
@@ -4682,7 +4719,7 @@ definitions:
       AIRFIPSCode:
         description: A 5 digit combination of the 2 digit Federal Information Processing Standards (FIPS) code for the state and the 3 digit FIPS code of the county that a facility is located in.
         example: "11001"
-        title: State County FIPS Code
+        title: FIPS Code
         type: string
       AIRFacilityTypeCode:
         description: >-
@@ -4718,7 +4755,7 @@ definitions:
 
           UNK - Unknown
         example: POF
-        title: Facility Type Code
+        title: Air Facility Type Code
         type: string
       AIRFacilityTypeDesc:
         type: string
@@ -4730,12 +4767,12 @@ definitions:
       AIRHpvStatus:
         description: Indicates whether the facility currently has an unresolved High Priority Violation (HPV) under the Clean Air Act.
         example: Yes
-        title: HPV Status
+        title: Current HPV Status
         type: string
       AIRIDs:
         description: Air Facility System (AFS) ID.
         example: DC0000001100195254
-        title: AIR Facility System ID
+        title: ICIS-AIR Facility IDs
         type: string
       AIRIeaCnt:
         description: The total number of informal enforcement actions taken against the facility within the last five years.
@@ -4745,22 +4782,22 @@ definitions:
       AIRIndianCntryFlg:
         description: Flag indicating whether the AIR facility is located in Indian country.
         example: N
-        title: AIR Facility Indian Country Flag
+        title: Air Facility Indian Country
         type: string
       AIRLastEvalDate:
         description: The date on which the most recent Full Compliance Evaluation (FCE) of the facility by EPA or a state agency was completed.
         example: 05/18/2009
-        title: Last Compliance Evaluation Date
+        title: Date of Last Evaluation
         type: string
       AIRLastEvalDateEPA:
         description: The last Air Inspection Date performed by EPA.
         example: 05/16/2014
-        title: Air Last EPA Inspection Date
+        title: Last Evaluation EPA Date
         type: string
       AIRLastEvalDateState:
         description: The last Air Inspection Date performed by State or local authorities.
         example: 05/18/2009
-        title: Air Last State Insprection Date
+        title: Last Evaluation State Date
         type: string
       AIRLastFeaDate:
         description: The effective date of the most recent listed formal enforcement action taken against the facility.
@@ -4795,17 +4832,17 @@ definitions:
       AIRLastPenaltyDate:
         description: Indicates the date on which the most recent assessed (or final) penalty was taken against the facility for AIR.
         example: 05/16/2014
-        title: Air Last Penalty Date
+        title: Last Penalty Date
         type: string
       AIRLastStckDateEPA:
         description: The date on which the most recent stack test by EPA occurred.
         example: 04/25/2014
-        title: Last EPA Stack Test Date
+        title: Last Stack Test EPA Date
         type: string
       AIRLastStckDateState:
         description: The date on which the most recent stack test by a state agency occurred.
         example: 04/25/2014
-        title: Last State Stack Test Date
+        title: Last Stack Test State Date
         type: string
       AIRLastStckTestDate:
         description: The date on which the most recent stack test occurred.
@@ -4820,27 +4857,27 @@ definitions:
       AIRLastViolDate:
         description: The date on which the most recent violation was reported.
         example: 04/25/2014
-        title: Last Violation Date
+        title: Date of Last Violation
         type: string
       AIRMacts:
         description: The Maximum Achievable Control Technology (MACT) Subpart associated with the facility.
         example: ZZZZZ
-        title: MACT Subparts
+        title: Maximum Achievable Control Technology
         type: string
       AIRMajorFlag:
         description: Indicated whether the facility is designated as a major facilitiy.
         example: N
-        title: Major Flag
+        title: Air Facility Major
         type: string
       AIRMnthsWithHpv:
         description: The number of months in the last three years in which the permit or site is considered in High Priority Violation (HPV) status
         example: "3"
-        title: Months with HPV
+        title: Months in HPV
         type: string
       AIRNAICS:
         description: The facility’s or permit's primary North American Industry Classification System (NAICS) Code.
         example: "812320"
-        title: NAICS Codes
+        title: Air Facility NAICS
         type: string
       AIRName:
         description: The name of the AIR Facility.
@@ -4860,7 +4897,7 @@ definitions:
       AIRPenalties:
         description: The total dollar amount of assessed (or final) penalties taken against the facility within the last five years under the Clean Air Act. This value only includes penalties that have been entered in the national program database, ICIS-Air.
         example: $435
-        title: Penalties
+        title: Air Facility Penalties
         type: string
       AIRPollRecentViol:
         description: The names of pollutants or pollutant categories with violations reported in the last year.
@@ -4875,12 +4912,12 @@ definitions:
       AIRQtrsWithHpv:
         description: The number of quarters in the last three years in which the permit or site is considered in High Priority Violation (HPV) status.
         example: "4"
-        title: Quarters with HPV
+        title: Quarters in HPV
         type: string
       AIRQtrsWithViol:
         description: The number of quarters in the last three years in which the permit or site has had unresolved violation(s) reported.
         example: "2"
-        title: Quarters with Violation Reported
+        title: Quarters with Violations
         type: string
       AIRRecentViolCnt:
         description: The number of violations reported in the last year.
@@ -4904,7 +4941,7 @@ definitions:
       AIRStreet:
         description: The street address of the AIR facility location.
         example: 2130 P STREET N.W.
-        title: AIR Facility Street Address
+        title: Air Facility Street
         type: string
       AIRTRIbalEPAids:
         description: The EPA Tribal or Native Alaskan Village Identifier for facilities, that based on their Best Pick FRS spatial coordinate, are within a Tribal or Alaskan Village area.
@@ -4917,7 +4954,7 @@ definitions:
       AIRUniverse:
         description: The program office defines each CAA Source ID and the associated permits as being Federally Reportable or Non-Federally Reportable. Under the CAA, federally reportable source include majors, synthetic minors, NESHAP Part 61 minors, minors with an unresolved High Priority Violation (HPV), with recent enforcement action, or included on a Compliance Monitoring Strategy plan.
         example: Minor Emissions
-        title: AIR Universe
+        title: Air Facility Universe
         type: string
       AIRZip:
         description: The five-digit zip code of the AIR facility.
@@ -4930,7 +4967,7 @@ definitions:
       CWAIDs:
         description: A unique  ID assigned for each record/permit/site/facility within ICIS-NPDES. These identifiers are for used tracking purposes in the individual data systems.
         example: DC0000001
-        title: CWA IDs
+        title: NPDES IDs
         type: string
       CalculatedAccuracyMeters:
         description: The estimated accuracy in Meters for the facility's geospatial coordinate.
@@ -4949,7 +4986,7 @@ definitions:
       ChesapeakeBayFlag:
         description: Displays "Y" if the facility is located within the Chesapeake Bay watershed.
         example: Y
-        title: Chesapeake Bay Flag
+        title: Chesapeake Bay
         type: string
       CollectionMethod:
         description: ??
@@ -5002,7 +5039,7 @@ definitions:
         type: string
       EjscreenFlagUs:
         description: A Y/N indicator identifying whether or not the facility is within an Environmental Justice area.
-        title: EJ Screen Flag (US)
+        title: EJSCREEN
         type: string
       FacCamdReporter:
         description: Indicates whether the facility reports to the Clean Air Markets Division (CAMD).
@@ -5022,7 +5059,7 @@ definitions:
       FacDerivedTRIbes:
         description: The tribes or tribal territories located within 25 miles of the facility's location.
         example: Cherokee Nation
-        title: FRS Spatially Derived Tribe
+        title: FRS Spatially Derived Tribes
         type: string
       FacDerivedWBD:
         description: The Hydrologic Unit Code (HUC-12) of the waterbody in which the facility resides, derived based on location data in FRS.
@@ -5037,7 +5074,7 @@ definitions:
       FacEisAIRReleases:
         description: The amount of hazardous air pollutants released to air in tons per year, as reported in the most recent National Emissions Inventory (NEI).
         example: "2.35"
-        title: EIS Releases
+        title: EIS Air Releases
         type: string
       FacEisReporter:
         description: Indicates whether the facility reports to the Emissions Inventory System (EIS).
@@ -5071,7 +5108,7 @@ definitions:
         type: string
       FacIndianCntryFlg:
         description: Flag showing Y/N whether the facility is located in Indian Country.
-        title: Facility Indian Country Flag
+        title: Indian Country
         type: string
       FacIndianSpatialFlg:
         description: Returns “Y” if a facility is located within a tribal spatial boundary as defined by the U.S. Census Bureau 2010 tribal boundary layer data for tribes in the lower 48 states and Bureau of Land Management Alaska State Office data for native villages in Alaska. Returns “N” if a facility is not located within a tribal or native Alaskan village area.
@@ -5091,7 +5128,7 @@ definitions:
       FacMapFlg:
         description: Graphical indicator denoting whether geographical data required to map a facility are available.
         example: Y
-        title: Facility Mapped Flag
+        title: Facility Mapped Indicator
         type: string
       FacMapIcon:
         description: The default map icon image file calculated for the facility by the ECHO program.
@@ -5101,12 +5138,12 @@ definitions:
       FacNaaFlag:
         description: Indicates whether the facility is located in a nonattainment area of the country, where air pollution levels persistently exceed the national ambient air quality standards. This flag does not indicate whether or not the facility has violated national ambient area quality standards.
         example: Y
-        title: NAA Flag
+        title: Nonattainment Area
         type: string
       FacPercentMinority:
         description: Percent Minority is the percentage of the population of the given area that is considered minority. Statistics are shown for the area within a 3-mile radius of each facility.
         example: "45.379"
-        title: Facility Percent Minority
+        title: Percent Minority
         type: string
       FacPopulationDensity:
         description: The number of persons per square mile in the profiled area.
@@ -5116,7 +5153,7 @@ definitions:
       FacSICCodes:
         description: Indicates the facility’s or permit's primary Standard Industrial Classification (SIC) Code. The SIC code describes the primary activity of the facility.
         example: "811"
-        title: SIC Codes
+        title: Facility SIC
         type: string
       FacStdCountyName:
         description: The standardized  facility county name from EPA's Facility Registry System
@@ -5126,7 +5163,7 @@ definitions:
       FacTRIAIRReleases:
         description: The total chemical releases to air, in pounds, as reported to TRI by the facility for the most recent reporting year.
         example: "36"
-        title: TRI Releases
+        title: TRI Air Releases
         type: string
       FacTRICarcAIRReleases:
         description: The pounds of chemicals considered to be carcinogens released to air, as reported to TRI for the most recent reporting year. Chemicals are classified as carcinogens under the requirements of the Occupational Safety and Health Administration (OSHA).
@@ -5141,7 +5178,7 @@ definitions:
       FacTRIReporter:
         description: Indicates whether facility reported to the Toxics Release Inventory (TRI) for the most recent reporting year.
         example: B
-        title: Facility TRI Reporter
+        title: TRI Reporter
         type: string
       FacUsMexBorderFlg:
         description: A Y/N flag indicating that the facility is within 100KM of the US-Mexico Border.
@@ -5187,12 +5224,18 @@ definitions:
         type: string
       LocalControlRegionName:
         description: Regions within a state. Search criteria for DFR in OTIS.
-        title: Local Control Region Name
+        title: Load Control Region Name
         type: string
       Lower48:
         description: Flag showing Y/N whether location is within the contiguous (lower 48) United States.
         example: Y
         title: Contiguous United States Flag
+        type: string
+      MaintPollutantsNaa:
+        type: string
+      MaintStandardsNaa:
+        type: string
+      MaintStatusNaa:
         type: string
       Map:
         description: No Longer Used.
@@ -5201,11 +5244,18 @@ definitions:
       MaxPctileUs:
         description: The maximum percentile from all individual EJSCREEN indicators.
         example: "98"
+        title: EJ Indexes Above 80th Percentile
         type: string
       MaxScore:
         description: A sorting score for internal use.
         example: "1"
         title: Max Score
+        type: string
+      NaPollutantsNaa:
+        type: string
+      NaStandardsNaa:
+        type: string
+      NaStatusNaa:
         type: string
       NaaCategories:
         description: The nonattainment area categories that the facility is in, derived spatially based on the facility's geographic coordinates in FRS.�
@@ -5232,51 +5282,62 @@ definitions:
       PctileCancerUs:
         description: The national percentile of the census block group for the EJSCREEN NATA air toxics cancer risk indicator.
         example: "99"
+        title: EJSCREEN NATA Cancer Risk
         type: string
       PctileDpmUs:
         description: The national percentile of the census block group for the EJSCREEN diesel particulate matter indicator.
         example: "99"
+        title: EJSCREEN NATA Diesel PM
         type: string
       PctileO3Us:
         description: The national percentile of the census block group for the EJSCREEN ozone indicator.
         example: "94"
+        title: EJSCREEN Ozone
         type: string
       PctilePctpre1960Us:
         description: The national percentile of the census block group for the EJSCREEN Lead paint indicator.
         example: "14.6"
+        title: EJSCREEN Lead Paint Indicator
         type: string
       PctilePmUs:
         description: The national percentile of the census block group for the EJSCREEN particulate matter indicator.
         example: "93"
+        title: EJSCREEN PM 2.5
         type: string
       PctileProximityNPDESUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to major direct water dischargers indicator.
         example: "23.7"
+        title: EJSCREEN Wastewater Discharge Proximity
         type: string
       PctileProximityNplUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to National Priorities List (NPL) sites indicator.
         example: "96"
+        title: EJSCREEN Superfund Proximity
         type: string
       PctileProximityRmpUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to Risk Management Plan (RMP) sites indicator.
         example: "91"
+        title: EJSCREEN RMP Proximity
         type: string
       PctileProximityTsdfUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to Treatment Storage and Disposal Facilities (TSDFs) indicator.
         example: "82"
+        title: EJSCREEN Hazardous Waste Proximity
         type: string
       PctileRespUs:
         description: The national percentile of the census block group for the EJSCREEN NATA respiratory hazard index indicator.
         example: "99"
+        title: EJSCREEN NATA Respiratory Hazard
         type: string
       PctileTrafficScoreUs:
         description: The national percentile of the census block group for the EJSCREEN Traffic proximity and volume indicator.
         example: "92"
+        title: EJSCREEN Traffic Proximity
         type: string
       RCRAIDs:
         description: A unique 12-character ID assigned for each record/permit/site/facility within the RCRAInfo database.
         example: VAD981111784
-        title: Resource Conservation and Recovery Act IDs
+        title: RCRA IDs
         type: string
       ReferencePoint:
         description: ??
@@ -5296,6 +5357,7 @@ definitions:
       SDWAIDs:
         description: A unique 9-character ID assigned for each public water system within the Safe Drinking Water Information System (SDWIS).
         example: DC0000001
+        title: SDWA IDs
         type: string
       Score:
         example: "1"
@@ -5322,12 +5384,12 @@ definitions:
 
           - SDWA = the Safe Drinking Water Act
         example: CWA
-        title: Regulatory Statute
+        title: Statute
         type: string
       TRIIDs:
         description: A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.
         example: 20011FRTTT5001F
-        title: Toxics Release Inventory Program IDs
+        title: TRI Program IDs
         type: string
       TRIbalFlag:
         description: A flag indicating that the facility is within a tribal area.
@@ -5475,6 +5537,12 @@ definitions:
       - WebDocs
       - NaaCategories
       - NaaPollutants
+      - NaStandardsNaa
+      - MaintStandardsNaa
+      - NaPollutantsNaa
+      - MaintPollutantsNaa
+      - NaStatusNaa
+      - MaintStatusNaa
       - FacCountyName
       - FacStdCountyName
       - AIRNsps
@@ -5637,31 +5705,34 @@ definitions:
       AIRCaseIDs:
         description: Space-delimited list of AIR cases associated with the facility.
         example: 05-1993-1585 05-2014-5021
+        title: Air Enforcement Case IDs
         type: string
       AIRCity:
         description: The city where the AIR facility is located.
         example: Washington
-        title: City
+        title: Air Facility City
         type: string
       AIRClassification:
         type: string
       AIRComplStatus:
         description: The facility's recent violation status under the Clean Air Act.
         example: No Viol
-        title: Compliance Status
+        title: Current Compliance Status
         type: string
       AIRCounty:
         description: The name of the county where the AIR facility is located.
         example: Racine
+        title: Air Facility County
         type: string
       AIRDaysLastEval:
         description: The number of days since the most recent compliance evaluation of the facility.
         example: 2806
-        title: Days Since Last Compliance Evaluation
+        title: Days Since Last Evaluation
         type: number
       AIREPARegion:
         description: The EPA region where the AIR facility is located.
         example: "05"
+        title: EPA Region
         type: string
       AIREvalCnt:
         description: The number of compliance evaluations, under the Clean Air Act, occurring at the facility within the last five years.
@@ -5671,7 +5742,7 @@ definitions:
       AIRFIPSCode:
         description: A 5 digit combination of the 2 digit Federal Information Processing Standards (FIPS) code for the state and the 3 digit FIPS code of the county that a facility is located in.
         example: "11001"
-        title: State County FIPS Code
+        title: FIPS Code
         type: string
       AIRFacilityTypeCode:
         description: >-
@@ -5707,7 +5778,7 @@ definitions:
 
           UNK - Unknown
         example: POF
-        title: Facility Type Code
+        title: Air Facility Type Code
         type: string
       AIRFacilityTypeDesc:
         type: string
@@ -5719,12 +5790,12 @@ definitions:
       AIRHpvStatus:
         description: Indicates whether the facility currently has an unresolved High Priority Violation (HPV) under the Clean Air Act.
         example: Yes
-        title: HPV Status
+        title: Current HPV Status
         type: string
       AIRIDs:
         description: Air Facility System (AFS) ID.
         example: DC0000001100195254
-        title: AIR Facility System ID
+        title: ICIS-AIR Facility IDs
         type: string
       AIRIeaCnt:
         description: The total number of informal enforcement actions taken against the facility within the last five years.
@@ -5734,22 +5805,22 @@ definitions:
       AIRIndianCntryFlg:
         description: Flag indicating whether the AIR facility is located in Indian country.
         example: N
-        title: AIR Facility Indian Country Flag
+        title: Air Facility Indian Country
         type: string
       AIRLastEvalDate:
         description: The date on which the most recent Full Compliance Evaluation (FCE) of the facility by EPA or a state agency was completed.
         example: 05/18/2009
-        title: Last Compliance Evaluation Date
+        title: Date of Last Evaluation
         type: string
       AIRLastEvalDateEPA:
         description: The last Air Inspection Date performed by EPA.
         example: 05/16/2014
-        title: Air Last EPA Inspection Date
+        title: Last Evaluation EPA Date
         type: string
       AIRLastEvalDateState:
         description: The last Air Inspection Date performed by State or local authorities.
         example: 05/18/2009
-        title: Air Last State Insprection Date
+        title: Last Evaluation State Date
         type: string
       AIRLastFeaDate:
         description: The effective date of the most recent listed formal enforcement action taken against the facility.
@@ -5784,17 +5855,17 @@ definitions:
       AIRLastPenaltyDate:
         description: Indicates the date on which the most recent assessed (or final) penalty was taken against the facility for AIR.
         example: 05/16/2014
-        title: Air Last Penalty Date
+        title: Last Penalty Date
         type: string
       AIRLastStckDateEPA:
         description: The date on which the most recent stack test by EPA occurred.
         example: 04/25/2014
-        title: Last EPA Stack Test Date
+        title: Last Stack Test EPA Date
         type: string
       AIRLastStckDateState:
         description: The date on which the most recent stack test by a state agency occurred.
         example: 04/25/2014
-        title: Last State Stack Test Date
+        title: Last Stack Test State Date
         type: string
       AIRLastStckTestDate:
         description: The date on which the most recent stack test occurred.
@@ -5809,27 +5880,27 @@ definitions:
       AIRLastViolDate:
         description: The date on which the most recent violation was reported.
         example: 04/25/2014
-        title: Last Violation Date
+        title: Date of Last Violation
         type: string
       AIRMacts:
         description: The Maximum Achievable Control Technology (MACT) Subpart associated with the facility.
         example: ZZZZZ
-        title: MACT Subparts
+        title: Maximum Achievable Control Technology
         type: string
       AIRMajorFlag:
         description: Indicated whether the facility is designated as a major facilitiy.
         example: N
-        title: Major Flag
+        title: Air Facility Major
         type: string
       AIRMnthsWithHpv:
         description: The number of months in the last three years in which the permit or site is considered in High Priority Violation (HPV) status
         example: 3
-        title: Months with HPV
+        title: Months in HPV
         type: number
       AIRNAICS:
         description: The facility’s or permit's primary North American Industry Classification System (NAICS) Code.
         example: "812320"
-        title: NAICS Codes
+        title: Air Facility NAICS
         type: string
       AIRName:
         description: The name of the AIR Facility.
@@ -5849,7 +5920,7 @@ definitions:
       AIRPenalties:
         description: The total dollar amount of assessed (or final) penalties taken against the facility within the last five years under the Clean Air Act. This value only includes penalties that have been entered in the national program database, ICIS-Air.
         example: $435
-        title: Penalties
+        title: Air Facility Penalties
         type: string
       AIRPollRecentViol:
         description: The names of pollutants or pollutant categories with violations reported in the last year.
@@ -5864,12 +5935,12 @@ definitions:
       AIRQtrsWithHpv:
         description: The number of quarters in the last three years in which the permit or site is considered in High Priority Violation (HPV) status.
         example: 4
-        title: Quarters with HPV
+        title: Quarters in HPV
         type: number
       AIRQtrsWithViol:
         description: The number of quarters in the last three years in which the permit or site has had unresolved violation(s) reported.
         example: 2
-        title: Quarters with Violation Reported
+        title: Quarters with Violations
         type: number
       AIRRecentViolCnt:
         description: The number of violations reported in the last year.
@@ -5893,7 +5964,7 @@ definitions:
       AIRStreet:
         description: The street address of the AIR facility location.
         example: 2130 P STREET N.W.
-        title: AIR Facility Street Address
+        title: Air Facility Street
         type: string
       AIRTRIbalEPAids:
         description: The EPA Tribal or Native Alaskan Village Identifier for facilities, that based on their Best Pick FRS spatial coordinate, are within a Tribal or Alaskan Village area.
@@ -5906,7 +5977,7 @@ definitions:
       AIRUniverse:
         description: The program office defines each CAA Source ID and the associated permits as being Federally Reportable or Non-Federally Reportable. Under the CAA, federally reportable source include majors, synthetic minors, NESHAP Part 61 minors, minors with an unresolved High Priority Violation (HPV), with recent enforcement action, or included on a Compliance Monitoring Strategy plan.
         example: Minor Emissions
-        title: AIR Universe
+        title: Air Facility Universe
         type: string
       AIRZip:
         description: The five-digit zip code of the AIR facility.
@@ -5919,7 +5990,7 @@ definitions:
       CWAIDs:
         description: A unique  ID assigned for each record/permit/site/facility within ICIS-NPDES. These identifiers are for used tracking purposes in the individual data systems.
         example: DC0000001
-        title: CWA IDs
+        title: NPDES IDs
         type: string
       CalculatedAccuracyMeters:
         description: Indicates the calculated accuracy in meters for the facilities geospatial coordinate.  Generally, the accuracy is directly linked to the collection method where GPS methods are more accurate that manual methods like map or photo interpolations.
@@ -5938,7 +6009,7 @@ definitions:
       ChesapeakeBayFlag:
         description: Displays "Y" if the facility is located within the Chesapeake Bay watershed.
         example: Y
-        title: Chesapeake Bay Flag
+        title: Chesapeake Bay
         type: string
       CollectionMethod:
         description: ??
@@ -5991,7 +6062,7 @@ definitions:
         type: string
       EjscreenFlagUs:
         description: A Y/N indicator identifying whether or not the facility is within an Environmental Justice area.
-        title: EJ Screen Flag (US)
+        title: EJSCREEN
         type: string
       FacCamdReporter:
         description: Indicates whether the facility reports to the Clean Air Markets Division (CAMD).
@@ -6011,7 +6082,7 @@ definitions:
       FacDerivedTRIbes:
         description: The tribes or tribal territories located within 25 miles of the facility's location.
         example: Cherokee Nation
-        title: FRS Spatially Derived Tribe
+        title: FRS Spatially Derived Tribes
         type: string
       FacDerivedWBD:
         description: The Hydrologic Unit Code (HUC-12) of the waterbody in which the facility resides, derived based on location data in FRS.
@@ -6026,7 +6097,7 @@ definitions:
       FacEisAIRReleases:
         description: The amount of hazardous air pollutants released to air in tons per year, as reported in the most recent National Emissions Inventory (NEI).
         example: "2.35"
-        title: EIS Releases
+        title: EIS Air Releases
         type: string
       FacEisReporter:
         description: Indicates whether the facility reports to the Emissions Inventory System (EIS).
@@ -6060,7 +6131,7 @@ definitions:
         type: string
       FacIndianCntryFlg:
         description: Flag showing Y/N whether the facility is located in Indian Country.
-        title: Facility Indian Country Flag
+        title: Indian Country
         type: string
       FacIndianSpatialFlg:
         description: Returns “Y” if a facility is located within a tribal spatial boundary as defined by the U.S. Census Bureau 2010 tribal boundary layer data for tribes in the lower 48 states and Bureau of Land Management Alaska State Office data for native villages in Alaska. Returns “N” if a facility is not located within a tribal or native Alaskan village area.
@@ -6070,7 +6141,7 @@ definitions:
       FacMapFlg:
         description: Graphical indicator denoting whether geographical data required to map a facility are available.
         example: Y
-        title: Facility Mapped Flag
+        title: Facility Mapped Indicator
         type: string
       FacMapIcon:
         description: The default map icon image file calculated for the facility by the ECHO program.
@@ -6080,12 +6151,12 @@ definitions:
       FacNaaFlag:
         description: Indicates whether the facility is located in a nonattainment area of the country, where air pollution levels persistently exceed the national ambient air quality standards. This flag does not indicate whether or not the facility has violated national ambient area quality standards.
         example: Y
-        title: NAA Flag
+        title: Nonattainment Area
         type: string
       FacPercentMinority:
         description: Percent Minority is the percentage of the population of the given area that is considered minority. Statistics are shown for the area within a 3-mile radius of each facility.
         example: 45.379
-        title: Facility Percent Minority
+        title: Percent Minority
         type: number
       FacPopulationDensity:
         description: The number of persons per square mile in the profiled area.
@@ -6095,7 +6166,7 @@ definitions:
       FacSICCodes:
         description: Indicates the facility’s or permit's primary Standard Industrial Classification (SIC) Code. The SIC code describes the primary activity of the facility.
         example: "811"
-        title: SIC Codes
+        title: Facility SIC
         type: string
       FacStdCountyName:
         description: The standardized  facility county name from EPA's Facility Registry System
@@ -6105,7 +6176,7 @@ definitions:
       FacTRIAIRReleases:
         description: The total chemical releases to air, in pounds, as reported to TRI by the facility for the most recent reporting year.
         example: "36"
-        title: TRI Releases
+        title: TRI Air Releases
         type: string
       FacTRICarcAIRReleases:
         description: The pounds of chemicals considered to be carcinogens released to air, as reported to TRI for the most recent reporting year. Chemicals are classified as carcinogens under the requirements of the Occupational Safety and Health Administration (OSHA).
@@ -6120,7 +6191,7 @@ definitions:
       FacTRIReporter:
         description: Indicates whether facility reported to the Toxics Release Inventory (TRI) for the most recent reporting year.
         example: B
-        title: Facility TRI Reporter
+        title: TRI Reporter
         type: string
       FacUsMexBorderFlg:
         description: A Y/N flag indicating that the facility is within 100KM of the US-Mexico Border.
@@ -6166,12 +6237,18 @@ definitions:
         type: string
       LocalControlRegionName:
         description: Regions within a state. Search criteria for DFR in OTIS.
-        title: Local Control Region Name
+        title: Load Control Region Name
         type: string
       Lower48:
         description: Flag showing Y/N whether location is within the contiguous (lower 48) United States.
         example: Y
         title: Contiguous United States Flag
+        type: string
+      MaintPollutantsNaa:
+        type: string
+      MaintStandardsNaa:
+        type: string
+      MaintStatusNaa:
         type: string
       Map:
         description: No Longer Used.
@@ -6180,12 +6257,19 @@ definitions:
       MaxPctileUs:
         description: The maximum percentile from all individual EJSCREEN indicators.
         example: 54.7
+        title: EJ Indexes Above 80th Percentile
         type: number
       MaxScore:
         description: "[Col. 121]"
         example: 1
         title: Max Score
         type: number
+      NaPollutantsNaa:
+        type: string
+      NaStandardsNaa:
+        type: string
+      NaStatusNaa:
+        type: string
       NaaCategories:
         description: The nonattainment area categories that the facility is in, derived spatially based on the facility's geographic coordinates in FRS.�
         example: 8-HOUR OZONE(2015)
@@ -6206,51 +6290,62 @@ definitions:
       PctileCancerUs:
         description: The national percentile of the census block group for the EJSCREEN NATA air toxics cancer risk indicator.
         example: 99
+        title: EJSCREEN NATA Cancer Risk
         type: number
       PctileDpmUs:
         description: The national percentile of the census block group for the EJSCREEN diesel particulate matter indicator.
         example: 99
+        title: EJSCREEN NATA Diesel PM
         type: number
       PctileO3Us:
         description: The national percentile of the census block group for the EJSCREEN ozone indicator.
         example: 52.4
+        title: EJSCREEN Ozone
         type: number
       PctilePctpre1960Us:
         description: The national percentile of the census block group for the EJSCREEN Lead paint indicator.
         example: 14.6
+        title: EJSCREEN Lead Paint Indicator
         type: number
       PctilePmUs:
         description: The national percentile of the census block group for the EJSCREEN particulate matter indicator.
         example: 52.4
+        title: EJSCREEN PM 2.5
         type: number
       PctileProximityNPDESUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to major direct water dischargers indicator.
         example: 45.3
+        title: EJSCREEN Wastewater Discharge Proximity
         type: number
       PctileProximityNplUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to National Priorities List (NPL) sites indicator.
         example: 38.9
+        title: EJSCREEN Superfund Proximity
         type: number
       PctileProximityRmpUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to Risk Management Plan (RMP) sites indicator.
         example: 54.7
+        title: EJSCREEN RMP Proximity
         type: number
       PctileProximityTsdfUs:
         description: The national percentile of the census block group for the EJSCREEN proximity to Treatment Storage and Disposal Facilities (TSDFs) indicator.
         example: 42.4
+        title: EJSCREEN Hazardous Waste Proximity
         type: number
       PctileRespUs:
         description: The national percentile of the census block group for the EJSCREEN NATA respiratory hazard index indicator.
         example: 41.9
+        title: EJSCREEN NATA Respiratory Hazard
         type: number
       PctileTrafficScoreUs:
         description: The national percentile of the census block group for the EJSCREEN Traffic proximity and volume indicator.
         example: 7
+        title: EJSCREEN Traffic Proximity
         type: number
       RCRAIDs:
         description: A unique 12-character ID assigned for each record/permit/site/facility within the RCRAInfo database.
         example: VAD981111784
-        title: Resource Conservation and Recovery Act IDs
+        title: RCRA IDs
         type: string
       ReferencePoint:
         description: ??
@@ -6270,6 +6365,7 @@ definitions:
       SDWAIDs:
         description: A unique 9-character ID assigned for each public water system within the Safe Drinking Water Information System (SDWIS).
         example: DC0000001
+        title: SDWA IDs
         type: string
       Score:
         example: 1
@@ -6296,12 +6392,12 @@ definitions:
 
           - SDWA = the Safe Drinking Water Act
         example: CWA
-        title: Regulatory Statute
+        title: Statute
         type: string
       TRIIDs:
         description: A unique 15-character ID assigned for each facility within the Toxics Release Inventory (TRI) program. The format is ZZZZZNNNNNSSSSS, where ZZZZZ = ZIP code, NNNNN = the first 5 consonants of the name, and SSSSS = the first 5 non-blank non-special characters in the street address.
         example: 20011FRTTT5001F
-        title: Toxics Release Inventory Program IDs
+        title: TRI Program IDs
         type: string
       TRIbalFlag:
         description: A value of "1" indicates that the facility is within an Indian Tribal or Alaskan Native Village area.
@@ -6446,6 +6542,12 @@ definitions:
       - WebDocs
       - NaaCategories
       - NaaPollutants
+      - NaStandardsNaa
+      - MaintStandardsNaa
+      - NaPollutantsNaa
+      - MaintPollutantsNaa
+      - NaStatusNaa
+      - MaintStatusNaa
       - FacCountyName
       - FacStdCountyName
       - AIRNsps

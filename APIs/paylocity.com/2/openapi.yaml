@@ -858,6 +858,60 @@ paths:
       summary: Add/update employee's benefit setup
       tags:
         - Employee Benefit Setup
+  "/v2/companies/{companyId}/employees/{employeeId}/directDeposit":
+    get:
+      description: Get All Direct Deposit returns main direct deposit and all additional direct depositsfor the selected employee.
+      operationId: Get All Direct Deposit
+      parameters:
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+        - description: Employee Id
+          in: path
+          name: employeeId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/directDeposit"
+                type: array
+          description: Successfully Retrieved
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/error"
+                type: array
+          description: The employee, or direct deposit does not exist
+        "429":
+          description: Too Many Requests
+        "500":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/error"
+                type: array
+          description: Internal Server Error
+      security:
+        - paylocity_auth:
+            - WebLinkAPI
+      summary: Get All Direct Deposit
+      tags:
+        - Direct Deposit
   "/v2/companies/{companyId}/employees/{employeeId}/earnings":
     get:
       description: Get All Earnings returns all earnings for the selected employee.
@@ -2123,6 +2177,90 @@ components:
                 type: string
             type: object
           type: array
+      type: object
+    directDeposit:
+      additionalProperties: false
+      description: The Direct Deposit model
+      properties:
+        additionalDirectDeposit:
+          description: Additional Direct Deposits that are not the main Direct Deposit.
+          items:
+            additionalProperties: false
+            description: The additional direct deposit model
+            properties:
+              accountNumber:
+                description: "Account number, entered without special characters and spaces. <br  />Max length: 17<br />"
+                nullable: true
+                type: string
+              accountType:
+                description: "Account type. Valid values are *C* (Checking), *S* (Saving), *P* (Pay Card). <br   />Max length: 1<br />"
+                nullable: true
+                type: string
+              amount:
+                description: Amount value to be deposited to the account.<br  />Decimal (12,2)<br />
+                nullable: true
+                type: number
+              amountType:
+                description: "Amount type to indicate the context of the amount. Common values are *F* (FLAT), *F-* (Net Minus), *P* (Percent). <br  /> Max length: 5<br />"
+                nullable: true
+                type: string
+              blockSpecial:
+                description: Indicates if direct deposit should be blocked when special check types such as Bonus are processed.<br />
+                nullable: true
+                type: boolean
+              isSkipPreNote:
+                description: Indicates if account will not pre-note.<br />
+                nullable: true
+                type: boolean
+              nameOnAccount:
+                description: "Name on the bank account. Defaults to employee's name. <br  />Max length: 30<br />"
+                nullable: true
+                type: string
+              preNoteDate:
+                description: Date to end the pre-note of the account. Common formats include *MM-DD-CCYY*, *CCYY-MM-DD*.<br />
+                format: paylocity-date
+                nullable: true
+                type: string
+              routingNumber:
+                description: "ABA Transit Routing Number, entered without dashes or spaces. <br  />Max length: 9<br />"
+                nullable: true
+                type: string
+            type: object
+          type: array
+        mainDirectDeposit:
+          additionalProperties: false
+          description: The main Direct Deposit account.
+          properties:
+            accountNumber:
+              description: "Account number, entered without special characters and spaces. <br  />Max length: 17"
+              nullable: true
+              type: string
+            accountType:
+              description: "Account type. Valid values are *C* (Checking), *S* (Saving), *P* (Pay Card). <br   />Max length: 1"
+              nullable: true
+              type: string
+            blockSpecial:
+              description: Indicates if direct deposit should be blocked when special check types such as Bonus are processed.<br />
+              nullable: true
+              type: boolean
+            isSkipPreNote:
+              description: Indicates if account will not pre-note.
+              nullable: true
+              type: boolean
+            nameOnAccount:
+              description: "Name on the bank account. Defaults to employee's name. <br  />Max length: 30<br />"
+              nullable: true
+              type: string
+            preNoteDate:
+              description: Date to end the pre-note of the account. Common formats include *MM-DD-CCYY*, *CCYY-MM-DD*.
+              format: paylocity-date
+              nullable: true
+              type: string
+            routingNumber:
+              description: "ABA Transit Routing Number, entered without dashes or spaces. <br  />Max length: 9"
+              nullable: true
+              type: string
+          type: object
       type: object
     earning:
       additionalProperties: false

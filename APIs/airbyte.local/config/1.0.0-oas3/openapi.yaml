@@ -338,7 +338,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/DestinationDefinitionReadList"
           description: Successful operation
-      summary: List all of the destinationDefinitions that Airbyte supports
+      summary: List all the destinationDefinitions the current Airbyte deployment is configured to use
+      tags:
+        - destination_definition
+  /v1/destination_definitions/list_latest:
+    post:
+      description: Guaranteed to retrieve the latest information on supported destinations.
+      operationId: listLatestDestinationDefinitions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DestinationDefinitionReadList"
+          description: Successful operation
+      summary: List the latest destinationDefinitions Airbyte supports
       tags:
         - destination_definition
   /v1/destination_definitions/update:
@@ -742,7 +756,7 @@ paths:
           $ref: "#/components/responses/InvalidInput"
       summary: Get source
       tags:
-        - source
+        - source_definition
   /v1/source_definitions/list:
     post:
       operationId: listSourceDefinitions
@@ -753,7 +767,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/SourceDefinitionReadList"
           description: Successful operation
-      summary: List all of the sourceDefinitions that Airbyte supports
+      summary: List all the sourceDefinitions the current Airbyte deployment is configured to use
+      tags:
+        - source_definition
+  /v1/source_definitions/list_latest:
+    post:
+      description: Guaranteed to retrieve the latest information on supported sources.
+      operationId: listLatestSourceDefinitions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SourceDefinitionReadList"
+          description: Successful operation
+      summary: List the latest sourceDefinitions Airbyte supports
       tags:
         - source_definition
   /v1/source_definitions/update:
@@ -1066,6 +1094,46 @@ paths:
       summary: Recreate a source
       tags:
         - web_backend
+  /v1/workspaces/create:
+    post:
+      operationId: createWorkspace
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkspaceCreate"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceRead"
+          description: Successful operation
+        "422":
+          $ref: "#/components/responses/InvalidInput"
+      summary: Creates a workspace
+      tags:
+        - workspace
+  /v1/workspaces/delete:
+    post:
+      operationId: deleteWorkspace
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkspaceIdRequestBody"
+        required: true
+      responses:
+        "204":
+          description: The resource was deleted successfully.
+        "404":
+          description: Source not found
+        "422":
+          $ref: "#/components/responses/InvalidInput"
+      summary: Deletes a workspace
+      tags:
+        - workspace
   /v1/workspaces/get:
     post:
       operationId: getWorkspace
@@ -1170,8 +1238,15 @@ components:
           description: Stream's name.
           type: string
         sourceDefinedCursor:
-          description: If the source defines the cursor field, then it does any other cursor field inputs will be ignored. If it does not either the user_provided one is used or as a backup the default one is used.
+          description: If the source defines the cursor field, then any other cursor field inputs will be ignored. If it does not, either the user_provided one is used, or the default one is used as a backup.
           type: boolean
+        sourceDefinedPrimaryKey:
+          description: If the source defines the primary key, paths to the fields that will be used as a primary key. If not provided by the source, the end user will have to specify the primary key themselves.
+          items:
+            items:
+              type: string
+            type: array
+          type: array
         supportedSyncModes:
           items:
             $ref: "#/components/schemas/SyncMode"
@@ -1200,6 +1275,16 @@ components:
           description: Path to the field that will be used to determine if a record is new or modified since the last sync. This field is REQUIRED if `sync_mode` is `incremental`. Otherwise it is ignored.
           items:
             type: string
+          type: array
+        destinationSyncMode:
+          $ref: "#/components/schemas/DestinationSyncMode"
+          default: append
+        primaryKey:
+          description: Paths to the fields that will be used as primary key. This field is REQUIRED if `destination_sync_mode` is `*_dedup`. Otherwise it is ignored.
+          items:
+            items:
+              type: string
+            type: array
           type: array
         selected:
           type: boolean
@@ -1559,6 +1644,12 @@ components:
         - connectionConfiguration
         - name
       type: object
+    DestinationSyncMode:
+      enum:
+        - append
+        - overwrite
+        - append_dedup
+      type: string
     DestinationUpdate:
       properties:
         connectionConfiguration:
@@ -1978,6 +2069,22 @@ components:
             withRefreshedCatalog:
               type: boolean
           type: object
+    WorkspaceCreate:
+      properties:
+        anonymousDataCollection:
+          type: boolean
+        email:
+          format: email
+          type: string
+        name:
+          type: string
+        news:
+          type: boolean
+        securityUpdates:
+          type: boolean
+      required:
+        - name
+      type: object
     WorkspaceId:
       format: uuid
       type: string

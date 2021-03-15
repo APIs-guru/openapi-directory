@@ -1555,7 +1555,7 @@ paths:
       tags:
         - Orders
     put:
-      description: Only `status`, `shipment_status`, `tracking_number`, `tracking_company`, `additional_information` and `additional_fields` are available for update.
+      description: Only `status`, `shipment_status`, `tracking_number`, `tracking_company`, `additional_information` and `additional_fields` are available for update. An email is send if `shipment_status` changes.
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -3852,6 +3852,7 @@ definitions:
           - in_transit
           - delivered
           - failed
+          - pickup_available
         type: string
       status:
         description: Status of the Order
@@ -3924,6 +3925,7 @@ definitions:
           - requested
           - in_transit
           - failed
+          - pickup_available
         type: string
       shipping:
         description: Shipping value for the given Order

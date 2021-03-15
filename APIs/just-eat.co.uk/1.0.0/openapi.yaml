@@ -4810,6 +4810,7 @@ components:
       description: Information sent when a Just Eat agent sends a follow up message about a Scoober support ticket to Scoober
       properties:
         city:
+          deprecated: true
           description: City this order is located in.
           example: london
           nullable: true
@@ -4830,6 +4831,11 @@ components:
         reason:
           description: Scoober contact reason for this ticket.
           example: front_line_reason_food_quality_cold_crushed_spilled
+          type: string
+        restaurantId:
+          description: Restaurant Id of the order.
+          example: "1234567"
+          nullable: true
           type: string
         scooberJobId:
           description: Scoober job ID for this order.
@@ -6275,6 +6281,10 @@ components:
               description: The address where the customer would like to receive the order
               nullable: false
               properties:
+                administrativeArea:
+                  description: Administrative area for where the customer would like to receive the order. Alternative names include County, State, Provence and Prefecture.
+                  nullable: true
+                  type: string
                 lines:
                   description: Ordered list of address parts where the customer would like to receive the order
                   items:
@@ -6285,6 +6295,10 @@ components:
                   minItems: 0
                   nullable: false
                   type: array
+                locality:
+                  description: Locality for where the customer would like to receive the order. Alternative names include Town and City.
+                  nullable: true
+                  type: string
                 postalCode:
                   description: Postcode for where the customer would like to receive the order
                   nullable: true
@@ -6358,6 +6372,7 @@ components:
         mapping:
           ADDITIONAL_ITEMS_REQUIRED: "#/components/schemas/CheckoutIssue_AdditionalItemsRequired"
           ADDRESS_LINES_REQUIRED: "#/components/schemas/CheckoutIssue_AddressLinesRequired"
+          ADMINISTRATIVE_AREA_REQUIRED: "#/components/schemas/CheckoutIssue_AdministrativeAreaRequired"
           AGE_VERIFICATION_FAILED: "#/components/schemas/CheckoutIssue_AgeVerificationFailed"
           DATE_OF_BIRTH_REQUIRED: "#/components/schemas/CheckoutIssue_DateOfBirthRequired"
           FIRST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_FirstNameRequired"
@@ -6366,6 +6381,7 @@ components:
           GEOLOCATION_REQUIRED: "#/components/schemas/CheckoutIssue_GeolocationRequired"
           ITEMS_UNORDERABLE: "#/components/schemas/CheckoutIssue_ItemsUnorderable"
           LAST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_LastNameRequired"
+          LOCALITY_REQUIRED: "#/components/schemas/CheckoutIssue_LocalityRequired"
           LOCATION_UNDELIVERABLE: "#/components/schemas/CheckoutIssue_LocationUndeliverable"
           MINIMUM_ORDER_VALUE_NOT_MET: "#/components/schemas/CheckoutIssue_MinimumOrderValueNotMet"
           PHONE_NUMBER_REQUIRED: "#/components/schemas/CheckoutIssue_PhoneNumberRequired"
@@ -6391,6 +6407,8 @@ components:
             - DATE_OF_BIRTH_REQUIRED
             - FULFILMENT_TIME_REQUIRED
             - ADDRESS_LINES_REQUIRED
+            - LOCALITY_REQUIRED
+            - ADMINISTRATIVE_AREA_REQUIRED
             - POSTAL_CODE_REQUIRED
             - GEOLOCATION_REQUIRED
           nullable: false
@@ -6409,6 +6427,12 @@ components:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
           description: Indicates that the fulfilment address lines is required to fulfil an order.
+          type: object
+    CheckoutIssue_AdministrativeAreaRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that the fulfilment address administrative area is required to fulfil an order.
           type: object
     CheckoutIssue_AgeVerificationFailed:
       allOf:
@@ -6457,6 +6481,12 @@ components:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
           description: Indicates that the customer's last name is required to fulfil an order.
+          type: object
+    CheckoutIssue_LocalityRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that the fulfilment address locality is required to fulfil an order.
           type: object
     CheckoutIssue_LocationUndeliverable:
       allOf:
@@ -6590,6 +6620,8 @@ components:
                       - DATE_OF_BIRTH_INVALID
                       - FULFILMENT_TIME_INVALID
                       - ADDRESS_LINES_INVALID
+                      - LOCALITY_INVALID
+                      - ADMINISTRATIVE_AREA_INVALID
                       - POSTAL_CODE_INVALID
                       - GEOLOCATION_INVALID
                       - DELIVERY_NOTE_INVALID
@@ -6650,6 +6682,10 @@ components:
                   description: The address where the customer would like to receive the order
                   nullable: true
                   properties:
+                    administrativeArea:
+                      description: Administrative area for where the customer would like to receive the order. Alternative names include County, State, Provence and Prefecture.
+                      nullable: true
+                      type: string
                     lines:
                       description: Ordered list of address parts where the customer would like to receive the order
                       items:
@@ -6660,6 +6696,10 @@ components:
                       minItems: 0
                       nullable: false
                       type: array
+                    locality:
+                      description: Locality for where the customer would like to receive the order. Alternative names include Town and City.
+                      nullable: false
+                      type: string
                     postalCode:
                       description: Postcode for where the customer would like to receive the order
                       nullable: true
@@ -9171,6 +9211,7 @@ components:
       description: Information needed to create a message for the Scoober ops team
       properties:
         city:
+          deprecated: true
           description: City this order is located in.
           example: london
           nullable: true
@@ -9187,6 +9228,11 @@ components:
         reason:
           description: Scoober contact reason for this ticket.
           example: front_line_reason_food_quality_cold_crushed_spilled
+          type: string
+        restaurantId:
+          description: Restaurant Id of the order.
+          example: "1234567"
+          nullable: true
           type: string
         scooberJobId:
           description: Scoober job ID, if known.
@@ -10055,7 +10101,7 @@ components:
           nullable: true
           type: string
         driverName:
-          description: The driver's full name
+          description: The driver's first name
           nullable: true
           type: string
         dynamicArrivalEstimate:
@@ -16208,6 +16254,103 @@ components:
       required:
         - restaurantId
       type: object
+    RestaurantCapabilitiesPaymentTypeItem:
+      example:
+        - paymentType: ApplePay
+          selected: true
+          voucherAvailable: true
+        - paymentType: GooglePay
+          selected: false
+        - paymentType: PayPal
+          selected: false
+          token: token123
+        - paymentType: VCO
+          selected: false
+        - maxOrderValueCents: 5000
+          paymentType: Cash
+          selected: false
+        - cardTypes:
+            - VISA
+            - MASTERCARD
+            - AMEX
+          paymentType: Card
+          selected: false
+      properties:
+        cardTypes:
+          description: List of card types (only applies to `Card` payment type)
+          items:
+            enum:
+              - AMEX
+              - DK
+              - MASTERCARD
+              - VISA
+              - VISADK
+            format: enum
+            type: string
+          type: array
+        maxOrderValueCents:
+          description: Max order value in smallest unit of relevant currency (only applies to `Cash` payment type)
+          format: integer
+          type: number
+        paymentType:
+          description: The payment type
+          enum:
+            - ApplePay
+            - Card
+            - Cash
+            - GooglePay
+            - PayPal
+            - VCO
+          type: string
+        selected:
+          description: Flag to indicate if the payment type has been selected
+          type: boolean
+        token:
+          description: Token to be used with the payment type (only applies to `PayPal` payment type)
+          type: string
+        voucherAvailable:
+          description: Flag to indicate if vouchers are available for the payment type
+          type: boolean
+      type: object
+    RestaurantCapabilitiesResponse:
+      example:
+        availablePaymentTypes:
+          - paymentType: ApplePay
+            selected: true
+            voucherAvailable: true
+          - paymentType: GooglePay
+            selected: false
+          - paymentType: PayPal
+            selected: false
+            token: token123
+          - paymentType: VCO
+            selected: false
+          - maxOrderValueCents: 5000
+            paymentType: Cash
+            selected: false
+          - cardTypes:
+              - Visa
+              - MasterCard
+              - Amex
+            paymentType: Card
+            selected: false
+        feeConfig:
+          amountCents: 1000
+      properties:
+        availablePaymentTypes:
+          description: List of available payment types
+          items:
+            $ref: "#/components/schemas/RestaurantCapabilitiesPaymentTypeItem"
+          type: array
+        feeConfig:
+          description: Details of any additional fees
+          properties:
+            amountCents:
+              description: The fee amount in smallest unit of relevant currency
+              format: integer
+              type: number
+          type: object
+      type: object
     RestaurantCommentsOnReview:
       example:
         restaurantComments: Thank you very much for positive feedback
@@ -21207,7 +21350,7 @@ components:
           type: string
         DriverName:
           description: This should represent the driver's name.
-          example: David McDriverson
+          example: David
           type: string
         EtaAtDeliveryAddress:
           description: This should represent the delivery partner's best guess at when the driver will arrive at the delivery address.

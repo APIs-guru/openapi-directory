@@ -27,23 +27,65 @@ info:
 externalDocs:
   url: https://bitbucket.org/api
 tags:
-  - description: ""
-    name: users
-  - description: ""
-    name: teams
-  - description: ""
-    name: repositories
-  - description: >-
-      Browse the source code in the repository and
-                                    create new commits by uploading.
-    name: source
-  - description: ""
-    name: refs
-  - description: ""
-    name: commits
-  - description: ""
-    name: pullrequests
-  - description: >-
+  - description: >
+      The addon resource is intended to use used by Bitbucket Cloud Connect
+
+      Apps, and only supports JWT authentication.
+    name: Addon
+  - description: >
+      Repository owners and administrators can set branch management
+
+      rules on a repository that control what can be pushed by whom.
+
+      Through these rules, you can enforce a project or team
+
+      workflow. For example, owners or administrators can:
+
+
+      * Limit push powers
+
+      * Prevent branch (bookmark) deletion
+
+      * Prevent history re-writes (Git only)
+    name: Branch restrictions
+  - description: >
+      The branching model resource is used to modify the branching model
+
+      for a repository.
+
+
+      You can use the branching model to define a branch based workflow
+
+      for your repositories. When you map your workflow to branch types,
+
+      you can ensure that branches are named consistently by configuring
+
+      which branch types to make available.
+    name: Branching model
+  - description: >
+      Commit statuses provide a way to tag commits with meta data,
+
+      like automated build results.
+    name: Commit statuses
+  - description: >
+      These are the repository's commits. They are paginated and returned in
+
+      reverse chronological order, similar to the output of git log.
+    name: Commits
+  - description: >
+      Teams are deploying code faster than ever, thanks to continuous
+
+      delivery practices and tools like Bitbucket Pipelines. Bitbucket
+
+      Deployments gives teams visibility into their deployment
+
+      environments and helps teams to track how far changes have
+
+      progressed in their deployment pipeline.
+    name: Deployments
+  - description: Access the list of download links associated with the repository.
+    name: Downloads
+  - description: >
       The issue resources provide functionality for getting information on
 
       issues in an issue tracker, creating new issues, updating them and deleting
@@ -58,13 +100,97 @@ tags:
       to create issues, as well as access to updating data or deleting issues you
 
       have access to.
-    name: issue_tracker
-  - description: ""
-    name: wiki
-  - description: ""
-    name: downloads
-  - description: ""
-    name: snippets
+    name: Issue tracker
+  - description: >
+      Bitbucket Pipelines brings continuous delivery to Bitbucket
+
+      Cloud, empowering teams with full branching to deployment
+
+      visibility and faster feedback loops.
+    name: Pipelines
+  - description: >
+      Bitbucket Cloud projects make it easier for teams to focus on
+
+      a goal, product, or process by organizing their repositories.
+    name: Projects
+  - description: >
+      Pull requests are a feature that makes it easier for developers
+
+      to collaborate using Bitbucket. They provide a user-friendly web
+
+      interface for discussing proposed changes before integrating them
+
+      into the official project.
+    name: Pullrequests
+  - description: >
+      The refs resource allows you access branches and tags in a repository.
+
+      By default, results will be in the order the underlying source control
+
+      system returns them and identical to the ordering one sees when running
+
+      "$ git show-ref". Note that this follows simple lexical ordering of the
+       ref names.
+    name: Refs
+  - description: >
+      Code insights provides reports, annotations, and metrics to help you
+
+      and your team improve code quality in pull requests throughout the code
+
+      review process. Some of the available code insights are static analysis
+
+      reports, security scan results, artifact links, unit tests, and build
+
+      status.
+    name: Reports
+  - description: >
+      A Git repository is a virtual storage of your project. It
+
+      allows you to save versions of your code, which you can access
+
+      when needed. The repo resource allows you to access public repos,
+
+      or repos that belong to a specific workspace.
+    name: Repositories
+  - description: >
+      Snippets allow you share code segments or files with yourself, members of
+
+      your workspace, or the world.
+
+
+      Like pull requests, repositories and workspaces, the full set of snippets
+
+      is defined by what the current user has access to. This includes all
+
+      snippets owned by any of the workspaces the user is a member of, or
+
+      snippets by other users that the current user is either watching or has
+       collaborated on (for instance by commenting on it).
+    name: Snippets
+  - description: >-
+      Browse the source code in the repository and
+                                    create new commits by uploading.
+    name: Source
+  - description: >
+      The SSH resource allows you to manage SSH keys.
+    name: Ssh
+  - description: >
+      The teams resource has been deprecated, and the workspaces
+
+      endpoint should be used instead.
+
+
+      The teams resource returns all the teams that the authenticated
+
+      user is associated with.
+    name: Teams
+  - description: >
+      The users resource allows you to access public information
+
+      associated with a user account. Most resources in the users
+
+      endpoint have been deprecated in favor of workspaces.
+    name: Users
   - description: >
       Webhooks provide a way to configure Bitbucket Cloud to make requests to
 
@@ -77,11 +203,17 @@ tags:
 
 
       * A subject -- The resource that generates the events. Currently, this resource
-        is the repository, user account, or team where you create the webhook.
+
+      is the repository, user account, or team where you create the webhook.
+
       * One or more event -- The default event is a repository push, but you can
-        select multiple events that can trigger the webhook.
+
+      select multiple events that can trigger the webhook.
+
       * A URL -- The endpoint where you want Bitbucket to send the event payloads
-        when a matching event happens.
+
+      when a matching event happens.
+
 
       There are two parts to getting a webhook to work: creating the webhook and
 
@@ -100,54 +232,29 @@ tags:
 
 
       * Every time a user pushes commits in a repository, you may want to notify
-        your CI server to start a build.
+
+      your CI server to start a build.
+
       * Every time a user pushes commits or creates a pull request, you may want to
-        display a notification in your application.
-    name: webhooks
+
+      display a notification in your application.
+    name: Webhooks
   - description: >
-      Commit statuses provide a way to tag commits with meta data,
+      The wiki is a simple place to keep documents. Some people use it
 
-      like automated build results.
-    name: commitstatuses
+      as their project home page. The wiki is a Git repository, so you
+
+      can clone it and edit it like any other source files.
+    name: Wiki
   - description: >
-      Repository owners and administrators can set branch management
+      A workspace is where you create repositories, collaborate on
 
-      rules on a repository that control what can be pushed by whom.
+      your code, and organize different streams of work in your Bitbucket
 
-      Through these rules, you can enforce a project or team
+      Cloud account. Workspaces replace the use of teams and users in API
 
-      workflow. For example, owners or administrators can:
-
-
-      * Limit push powers
-
-      * Prevent branch (bookmark) deletion
-
-      * Prevent history re-writes (Git only)
-    name: branchrestrictions
-  - description: >
-      Bitbucket Cloud projects make it easier for teams to focus on
-
-      a goal, product, or process by organizing their repositories.
-    name: projects
-  - description: >
-      Bitbucket Pipelines brings continuous delivery to Bitbucket
-
-      Cloud, empowering teams with full branching to deployment
-
-      visibility and faster feedback loops.
-    name: pipelines
-  - description: >
-      Teams are deploying code faster than ever, thanks to continuous
-
-      delivery practices and tools like Bitbucket Pipelines. Bitbucket
-
-      Deployments gives teams visibility into their deployment
-
-      environments and helps teams to track how far changes have
-
-      progressed in their deployment pipeline.
-    name: deployments
+      calls.
+    name: Workspaces
 paths:
   /addon:
     delete:
@@ -195,7 +302,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - addon
+        - Addon
     parameters: []
     put:
       description: >-
@@ -260,7 +367,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - addon
+        - Addon
   /addon/linkers:
     get:
       description: >-
@@ -281,7 +388,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - addon
+        - Addon
     parameters: []
   "/addon/linkers/{linker_key}":
     get:
@@ -309,7 +416,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - addon
+        - Addon
     parameters:
       - description: >-
           The unique key of a [linker module](/cloud/bitbucket/modules/linker/)
@@ -346,7 +453,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - addon
+        - Addon
     get:
       description: >-
         Gets a list of all [linker](/cloud/bitbucket/modules/linker/) values for the
@@ -383,7 +490,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - addon
+        - Addon
     parameters:
       - description: >-
           The unique key of a [linker module](/cloud/bitbucket/modules/linker/)
@@ -436,7 +543,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - addon
+        - Addon
     put:
       description: >-
         Bulk update [linker](/cloud/bitbucket/modules/linker/) values for the specified
@@ -479,7 +586,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - addon
+        - Addon
   "/addon/linkers/{linker_key}/values/{value_id}":
     delete:
       description: >-
@@ -506,7 +613,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - addon
+        - Addon
     get:
       description: >-
         Get a single [linker](/cloud/bitbucket/modules/linker/) value
@@ -532,7 +639,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - addon
+        - Addon
     parameters:
       - description: >-
           The unique key of a [linker module](/cloud/bitbucket/modules/linker/)
@@ -614,7 +721,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - webhooks
+        - Webhooks
     parameters: []
   "/hook_events/{subject_type}":
     get:
@@ -695,7 +802,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - webhooks
+        - Webhooks
     parameters:
       - description: A resource or subject type.
         in: path
@@ -756,7 +863,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: >
           This can either be the username of the pull request author, the author's UUID
@@ -837,7 +944,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
+        - Repositories
     parameters: []
   "/repositories/{workspace}":
     get:
@@ -926,7 +1033,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
+        - Repositories
     parameters:
       - description: >
           This can either be the workspace ID (slug) or the workspace UUID
@@ -979,7 +1086,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
+        - Repositories
     get:
       description: Returns the object describing this repository.
       responses:
@@ -1071,7 +1178,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
+        - Repositories
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -1233,7 +1340,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
+        - Repositories
     put:
       description: >-
         Since this endpoint can be used to both update and to create a
@@ -1449,7 +1556,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
+        - Repositories
   "/repositories/{workspace}/{repo_slug}/branch-restrictions":
     get:
       description: >-
@@ -1500,7 +1607,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - branchrestrictions
+        - Branch restrictions
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -1619,7 +1726,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - branchrestrictions
+        - Branch restrictions
   "/repositories/{workspace}/{repo_slug}/branch-restrictions/{id}":
     delete:
       description: Deletes an existing branch restriction rule.
@@ -1650,7 +1757,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - branchrestrictions
+        - Branch restrictions
     get:
       description: Returns a specific branch restriction rule.
       responses:
@@ -1684,7 +1791,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - branchrestrictions
+        - Branch restrictions
     parameters:
       - description: The restriction rule's id
         in: path
@@ -1757,7 +1864,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - branchrestrictions
+        - Branch restrictions
   "/repositories/{workspace}/{repo_slug}/branching-model":
     get:
       description: >-
@@ -1869,7 +1976,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - branching_model
+        - Branching model
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -1990,7 +2097,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - branching_model
+        - Branching model
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -2161,7 +2268,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - branching_model
+        - Branching model
   "/repositories/{workspace}/{repo_slug}/commit/{commit}":
     get:
       description: >-
@@ -2293,7 +2400,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
     parameters:
       - description: The commit's SHA1.
         in: path
@@ -2347,7 +2454,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
     parameters:
       - description: The commit's SHA1.
         in: path
@@ -2404,7 +2511,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments":
     get:
       description: >-
@@ -2449,7 +2556,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
     parameters:
       - description: The commit's SHA1.
         in: path
@@ -2516,7 +2623,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/comments/{comment_id}":
     get:
       description: Returns the specified commit comment.
@@ -2533,7 +2640,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
     parameters:
       - description: The id of the comment.
         in: path
@@ -3325,8 +3432,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
-        - commitstatuses
+        - Repositories
+        - Commit statuses
     parameters:
       - description: The commit's SHA1.
         in: path
@@ -3444,8 +3551,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
-        - commitstatuses
+        - Repositories
+        - Commit statuses
   "/repositories/{workspace}/{repo_slug}/commit/{commit}/statuses/build/{key}":
     get:
       description: Returns the specified build status for a commit.
@@ -3470,8 +3577,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
-        - commitstatuses
+        - Repositories
+        - Commit statuses
     parameters:
       - description: The commit's SHA1.
         in: path
@@ -3554,8 +3661,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
-        - commitstatuses
+        - Repositories
+        - Commit statuses
   "/repositories/{workspace}/{repo_slug}/commits":
     get:
       description: >-
@@ -3670,7 +3777,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -3725,7 +3832,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
   "/repositories/{workspace}/{repo_slug}/commits/{revision}":
     get:
       description: >-
@@ -3840,7 +3947,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -3895,7 +4002,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
   "/repositories/{workspace}/{repo_slug}/components":
     get:
       description: >-
@@ -3924,7 +4031,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -3966,7 +4073,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: The component's id
         in: path
@@ -4010,7 +4117,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -4046,7 +4153,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     get:
       description: >-
         Returns the specified reviewer.
@@ -4070,7 +4177,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -4120,7 +4227,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
   "/repositories/{workspace}/{repo_slug}/deploy-keys":
     get:
       description: >-
@@ -4189,7 +4296,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - deploy
+        - Deployments
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -4280,7 +4387,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - deploy
+        - Deployments
   "/repositories/{workspace}/{repo_slug}/deploy-keys/{key_id}":
     delete:
       description: >-
@@ -4316,7 +4423,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - deploy
+        - Deployments
     get:
       description: >-
         Returns the deploy key belonging to a specific key.
@@ -4377,7 +4484,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - deploy
+        - Deployments
     parameters:
       - description: The key ID matching the deploy key.
         in: path
@@ -4481,7 +4588,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - deploy
+        - Deployments
   "/repositories/{workspace}/{repo_slug}/deployments/":
     get:
       description: Find deployments
@@ -4846,7 +4953,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -4946,7 +5053,8 @@ paths:
             - repository
         - basic: []
         - api_key: []
-      tags: []
+      tags:
+        - Commits
     parameters:
       - description: Generate diffs that ignore whitespace
         in: query
@@ -5027,7 +5135,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - downloads
+        - Downloads
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -5075,7 +5183,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - downloads
+        - Downloads
   "/repositories/{workspace}/{repo_slug}/downloads/{filename}":
     delete:
       description: Deletes the specified download artifact from the repository.
@@ -5092,7 +5200,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - downloads
+        - Downloads
     get:
       description: >-
         Return a redirect to the contents of a download artifact.
@@ -5117,7 +5225,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - downloads
+        - Downloads
     parameters:
       - description: Name of the file.
         in: path
@@ -5445,8 +5553,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - source
-        - repositories
+        - Source
+        - Repositories
     parameters:
       - description: The commit's SHA1.
         in: path
@@ -5533,7 +5641,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
+        - Repositories
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -5727,7 +5835,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
+        - Repositories
   "/repositories/{workspace}/{repo_slug}/hooks":
     get:
       description: Returns a paginated list of webhooks installed on this repository.
@@ -5756,8 +5864,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
-        - webhooks
+        - Repositories
+        - Webhooks
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -5843,8 +5951,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
-        - webhooks
+        - Repositories
+        - Webhooks
   "/repositories/{workspace}/{repo_slug}/hooks/{uid}":
     delete:
       description: >-
@@ -5872,8 +5980,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
-        - webhooks
+        - Repositories
+        - Webhooks
     get:
       description: >-
         Returns the webhook with the specified id installed on the specified
@@ -5898,8 +6006,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
-        - webhooks
+        - Repositories
+        - Webhooks
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -5965,8 +6073,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
-        - webhooks
+        - Repositories
+        - Webhooks
   "/repositories/{workspace}/{repo_slug}/issues":
     get:
       description: Returns the issues in the issue tracker.
@@ -5989,7 +6097,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -6065,7 +6173,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
   "/repositories/{workspace}/{repo_slug}/issues/export":
     parameters:
       - description: >
@@ -6135,7 +6243,8 @@ paths:
             - repository:admin
         - basic: []
         - api_key: []
-      tags: []
+      tags:
+        - Issue tracker
   "/repositories/{workspace}/{repo_slug}/issues/export/{repo_name}-issues-{task_id}.zip":
     get:
       description: >-
@@ -6209,7 +6318,8 @@ paths:
             - repository:admin
         - basic: []
         - api_key: []
-      tags: []
+      tags:
+        - Issue tracker
     parameters:
       - description: The name of the repo
         in: path
@@ -6314,7 +6424,8 @@ paths:
             - repository:admin
         - basic: []
         - api_key: []
-      tags: []
+      tags:
+        - Issue tracker
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -6408,7 +6519,8 @@ paths:
             - repository:admin
         - basic: []
         - api_key: []
-      tags: []
+      tags:
+        - Issue tracker
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}":
     delete:
       description: >-
@@ -6440,7 +6552,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     get:
       description: Returns the specified issue.
       responses:
@@ -6474,7 +6586,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: The issue id
         in: path
@@ -6563,7 +6675,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments":
     get:
       description: >-
@@ -6597,7 +6709,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: The issue id
         in: path
@@ -6660,7 +6772,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/attachments/{path}":
     delete:
       description: Deletes an attachment.
@@ -6681,7 +6793,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     get:
       description: >-
         Returns the contents of the specified file attachment.
@@ -6718,7 +6830,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: The issue id
         in: path
@@ -6947,7 +7059,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: The issue id
         in: path
@@ -7072,7 +7184,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/changes/{change_id}":
     get:
       description: >-
@@ -7101,7 +7213,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: The issue change id
         in: path
@@ -7173,7 +7285,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: The issue id
         in: path
@@ -7238,7 +7350,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/comments/{comment_id}":
     delete:
       description: Deletes the specified comment.
@@ -7253,7 +7365,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     get:
       description: Returns the specified issue comment object.
       responses:
@@ -7269,7 +7381,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: The id of the comment.
         in: path
@@ -7336,7 +7448,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/vote":
     delete:
       description: Retract your vote.
@@ -7354,7 +7466,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     get:
       description: >-
         Check whether the authenticated user has voted for this issue.
@@ -7388,7 +7500,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: The issue id
         in: path
@@ -7448,7 +7560,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
   "/repositories/{workspace}/{repo_slug}/issues/{issue_id}/watch":
     delete:
       description: Stop watching this issue.
@@ -7478,7 +7590,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     get:
       description: >-
         Indicated whether or not the authenticated user is watching this
@@ -7510,7 +7622,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: The issue id
         in: path
@@ -7570,7 +7682,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
   "/repositories/{workspace}/{repo_slug}/merge-base/{revspec}":
     get:
       description: >-
@@ -7613,7 +7725,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -7668,7 +7780,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -7710,7 +7822,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: The milestone's id
         in: path
@@ -7795,7 +7907,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - commits
+        - Commits
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -9500,7 +9612,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -9650,7 +9762,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
   "/repositories/{workspace}/{repo_slug}/pullrequests/activity":
     get:
       description: >-
@@ -9974,7 +10086,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -10122,7 +10234,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: The id of the pull request.
         in: path
@@ -10298,7 +10410,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/activity":
     get:
       description: >-
@@ -10622,7 +10734,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: The id of the pull request.
         in: path
@@ -10675,7 +10787,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: The id of the pull request.
         in: path
@@ -10728,7 +10840,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments":
     get:
       description: >-
@@ -10773,7 +10885,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: The id of the pull request.
         in: path
@@ -10842,7 +10954,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}":
     delete:
       description: Deletes a specific pull request comment.
@@ -10867,7 +10979,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     get:
       description: Returns a specific pull request comment.
       responses:
@@ -10895,7 +11007,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: The id of the comment.
         in: path
@@ -10961,7 +11073,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/commits":
     get:
       description: >-
@@ -10984,7 +11096,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: The id of the pull request.
         in: path
@@ -11164,7 +11276,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/diff":
     get:
       description: >-
@@ -11183,7 +11295,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: The id of the pull request.
         in: path
@@ -11227,7 +11339,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: The id of the pull request.
         in: path
@@ -11414,7 +11526,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/merge/task-status/{task_id}":
     get:
       description: >-
@@ -11497,7 +11609,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: The id of the pull request.
         in: path
@@ -11547,7 +11659,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: The id of the pull request.
         in: path
@@ -11597,7 +11709,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
     parameters:
       - description: The id of the pull request.
         in: path
@@ -11650,7 +11762,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - pullrequests
+        - Pullrequests
   "/repositories/{workspace}/{repo_slug}/pullrequests/{pull_request_id}/statuses":
     get:
       description: >-
@@ -11699,9 +11811,9 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
-        - pullrequests
-        - commitstatuses
+        - Repositories
+        - Pullrequests
+        - Commit statuses
     parameters:
       - description: The id of the pull request.
         in: path
@@ -11921,7 +12033,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - refs
+        - Refs
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -12268,7 +12380,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - refs
+        - Refs
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -12425,7 +12537,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - refs
+        - Refs
   "/repositories/{workspace}/{repo_slug}/refs/branches/{name}":
     delete:
       description: >-
@@ -12468,7 +12580,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - refs
+        - Refs
     get:
       description: >-
         Returns a branch object within the specified repository.
@@ -12698,7 +12810,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - refs
+        - Refs
     parameters:
       - description: The name of the branch.
         in: path
@@ -12798,7 +12910,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - refs
+        - Refs
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -12874,7 +12986,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - refs
+        - Refs
   "/repositories/{workspace}/{repo_slug}/refs/tags/{name}":
     delete:
       description: >-
@@ -12910,7 +13022,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - refs
+        - Refs
     get:
       description: >-
         Returns the specified tag.
@@ -13071,7 +13183,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - refs
+        - Refs
     parameters:
       - description: The name of the tag.
         in: path
@@ -13154,8 +13266,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - source
-        - repositories
+        - Source
+        - Repositories
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -13578,8 +13690,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - source
-        - repositories
+        - Source
+        - Repositories
   "/repositories/{workspace}/{repo_slug}/src/{commit}/{path}":
     get:
       description: >-
@@ -13930,8 +14042,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - source
-        - repositories
+        - Source
+        - Repositories
     parameters:
       - description: The commit's SHA1.
         in: path
@@ -13991,7 +14103,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -14033,7 +14145,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - issue_tracker
+        - Issue tracker
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -14074,7 +14186,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - repositories
+        - Repositories
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -14165,7 +14277,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters: []
     post:
       description: >-
@@ -14390,7 +14502,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
   "/snippets/{workspace}":
     get:
       description: >-
@@ -14429,7 +14541,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: >
           This can either be the workspace ID (slug) or the workspace UUID
@@ -14479,7 +14591,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
   "/snippets/{workspace}/{encoded_id}":
     delete:
       description: Deletes a snippet and returns an empty response.
@@ -14510,7 +14622,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     get:
       description: >-
         Retrieves a single snippet.
@@ -14788,7 +14900,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: The snippet id.
         in: path
@@ -15114,7 +15226,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
   "/snippets/{workspace}/{encoded_id}/comments":
     get:
       description: >-
@@ -15154,7 +15266,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: The snippet id.
         in: path
@@ -15217,7 +15329,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
   "/snippets/{workspace}/{encoded_id}/comments/{comment_id}":
     delete:
       description: >-
@@ -15246,7 +15358,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     get:
       description: Returns the specific snippet comment.
       responses:
@@ -15274,7 +15386,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: The id of the comment.
         in: path
@@ -15324,7 +15436,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
   "/snippets/{workspace}/{encoded_id}/commits":
     get:
       description: Returns the changes (commits) made on this snippet.
@@ -15353,7 +15465,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: The snippet id.
         in: path
@@ -15398,7 +15510,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: The snippet id.
         in: path
@@ -15455,7 +15567,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippet
+        - Snippets
     parameters:
       - description: The snippet id.
         in: path
@@ -15509,7 +15621,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     get:
       description: >-
         Used to check if the current user is watching a specific snippet.
@@ -15540,7 +15652,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: The snippet id.
         in: path
@@ -15584,7 +15696,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
   "/snippets/{workspace}/{encoded_id}/watchers":
     get:
       deprecated: true
@@ -15608,7 +15720,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: The snippet id.
         in: path
@@ -15674,7 +15786,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     get:
       description: >-
         Identical to `GET /snippets/encoded_id`, except that this endpoint
@@ -15747,7 +15859,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: The snippet id.
         in: path
@@ -15863,7 +15975,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
   "/snippets/{workspace}/{encoded_id}/{node_id}/files/{path}":
     get:
       description: >-
@@ -15912,7 +16024,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: The snippet id.
         in: path
@@ -15997,7 +16109,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: The snippet id.
         in: path
@@ -16072,7 +16184,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - snippets
+        - Snippets
     parameters:
       - description: The snippet id.
         in: path
@@ -16148,7 +16260,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - teams
+        - Teams
     parameters: []
   "/teams/{username}":
     get:
@@ -16185,7 +16297,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - teams
+        - Teams
     parameters:
       - description: >
           This can either be the username or the UUID of the account,
@@ -16226,7 +16338,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - teams
+        - Teams
     parameters:
       - description: >
           This can either be the username or the UUID of the account,
@@ -16268,7 +16380,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - teams
+        - Teams
     parameters:
       - description: >
           This can either be the username or the UUID of the account,
@@ -16318,8 +16430,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - teams
-        - webhooks
+        - Teams
+        - Webhooks
     parameters:
       - description: >
           This can either be the username or the UUID of the account,
@@ -16381,8 +16493,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - teams
-        - webhooks
+        - Teams
+        - Webhooks
   "/teams/{username}/hooks/{uid}":
     delete:
       deprecated: true
@@ -16418,8 +16530,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - teams
-        - webhooks
+        - Teams
+        - Webhooks
     get:
       deprecated: true
       description: >-
@@ -16452,8 +16564,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - teams
-        - webhooks
+        - Teams
+        - Webhooks
     parameters:
       - description: Installed webhook's ID
         in: path
@@ -16520,8 +16632,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - teams
-        - webhooks
+        - Teams
+        - Webhooks
   "/teams/{username}/members":
     get:
       deprecated: true
@@ -16578,7 +16690,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - teams
+        - Teams
     parameters:
       - description: >
           This can either be the username or the UUID of the account,
@@ -16722,7 +16834,8 @@ paths:
             - team
         - basic: []
         - api_key: []
-      tags: []
+      tags:
+        - Teams
     parameters:
       - description: >
           This can either be the username or the UUID of the account,
@@ -16880,10 +16993,12 @@ paths:
           description: The requesting user isn't an admin of the team.
       security:
         - oauth2:
+            - repository
             - team
         - basic: []
         - api_key: []
-      tags: []
+      tags:
+        - Teams
     parameters:
       - description: >
           This can either be the username or the UUID of the account,
@@ -17040,7 +17155,8 @@ paths:
             - repository
         - basic: []
         - api_key: []
-      tags: []
+      tags:
+        - Teams
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -17276,7 +17392,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - projects
+        - Projects
     parameters:
       - description: >
           This can either be the username or the UUID of the account,
@@ -17402,7 +17518,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - projects
+        - Projects
   "/teams/{username}/projects/{project_key}":
     delete:
       deprecated: true
@@ -17433,7 +17549,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - projects
+        - Projects
     get:
       deprecated: true
       description: >-
@@ -17467,7 +17583,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - projects
+        - Projects
     parameters:
       - description: >
           The project in question. This can either be the actual `key` assigned
@@ -17582,7 +17698,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - projects
+        - Projects
   "/teams/{username}/search/code":
     get:
       operationId: searchAccount
@@ -17857,8 +17973,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
-        - teams
+        - Users
+        - Teams
     parameters:
       - description: >
           This can either be the workspace ID (slug) or the workspace UUID
@@ -17920,7 +18036,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
+        - Users
     parameters: []
   /user/emails:
     get:
@@ -17941,7 +18057,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
+        - Users
     parameters: []
   "/user/emails/{email}":
     get:
@@ -17967,7 +18083,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
+        - Users
     parameters:
       - description: Email address of the user.
         in: path
@@ -18080,10 +18196,11 @@ paths:
       security:
         - oauth2:
             - account
+            - repository
         - basic: []
         - api_key: []
       tags:
-        - repositories
+        - Repositories
     parameters: []
   /user/permissions/teams:
     get:
@@ -18192,7 +18309,8 @@ paths:
             - account
         - basic: []
         - api_key: []
-      tags: []
+      tags:
+        - Teams
     parameters: []
   /user/permissions/workspaces:
     get:
@@ -18308,7 +18426,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
+        - Workspaces
     parameters: []
   "/users/{selected_user}":
     get:
@@ -18357,7 +18475,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
+        - Users
     parameters:
       - description: >
           This can either be the UUID of the account, surrounded by curly-braces, for
@@ -18412,8 +18530,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
-        - webhooks
+        - Users
+        - Webhooks
     parameters:
       - description: >
           This can either be the UUID of the account, surrounded by curly-braces, for
@@ -18482,8 +18600,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
-        - webhooks
+        - Users
+        - Webhooks
   "/users/{selected_user}/hooks/{uid}":
     delete:
       deprecated: true
@@ -18526,8 +18644,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
-        - webhooks
+        - Users
+        - Webhooks
     get:
       deprecated: true
       description: >-
@@ -18567,8 +18685,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
-        - webhooks
+        - Users
+        - Webhooks
     parameters:
       - description: >
           This can either be the UUID of the account, surrounded by curly-braces, for
@@ -18640,8 +18758,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
-        - webhooks
+        - Users
+        - Webhooks
   "/users/{selected_user}/pipelines_config/variables/":
     get:
       deprecated: true
@@ -19215,7 +19333,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - ssh
+        - Ssh
     parameters:
       - description: >
           This can either be the UUID of the account, surrounded by curly-braces, for
@@ -19305,7 +19423,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - ssh
+        - Ssh
   "/users/{selected_user}/ssh-keys/{key_id}":
     delete:
       description: >-
@@ -19342,7 +19460,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - ssh
+        - Ssh
     get:
       description: >-
         Returns a specific SSH public key belonging to a user.
@@ -19410,7 +19528,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - ssh
+        - Ssh
     parameters:
       - description: The SSH key's UUID value.
         in: path
@@ -19509,7 +19627,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - ssh
+        - Ssh
   "/users/{username}/members":
     get:
       deprecated: true
@@ -19538,7 +19656,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
+        - Users
     parameters:
       - description: >
           This can either be the username or the UUID of the account,
@@ -19578,8 +19696,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - users
-        - teams
+        - Users
+        - Teams
     parameters:
       - description: >
           This can either be the workspace ID (slug) or the workspace UUID
@@ -19729,7 +19847,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
+        - Workspaces
     parameters: []
   "/workspaces/{workspace}":
     get:
@@ -19752,7 +19870,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
+        - Workspaces
     parameters:
       - description: >
           This can either be the workspace ID (slug) or the workspace UUID
@@ -19791,8 +19909,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
-        - webhooks
+        - Workspaces
+        - Webhooks
     parameters:
       - description: >
           This can either be the workspace ID (slug) or the workspace UUID
@@ -19844,8 +19962,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
-        - webhooks
+        - Workspaces
+        - Webhooks
   "/workspaces/{workspace}/hooks/{uid}":
     delete:
       description: Deletes the specified webhook subscription from the given workspace.
@@ -19870,8 +19988,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
-        - webhooks
+        - Workspaces
+        - Webhooks
     get:
       description: >-
         Returns the webhook with the specified id installed on the given
@@ -19896,8 +20014,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
-        - webhooks
+        - Workspaces
+        - Webhooks
     parameters:
       - description: Installed webhook's ID
         in: path
@@ -19954,8 +20072,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
-        - webhooks
+        - Workspaces
+        - Webhooks
   "/workspaces/{workspace}/members":
     get:
       description: Returns all members of the requested workspace.
@@ -19978,7 +20096,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
+        - Workspaces
     parameters:
       - description: >
           This can either be the workspace ID (slug) or the workspace UUID
@@ -20022,7 +20140,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
+        - Workspaces
     parameters:
       - description: Member's UUID or Atlassian ID.
         in: path
@@ -20141,7 +20259,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
+        - Workspaces
     parameters:
       - description: >
           This can either be the workspace ID (slug) or the workspace UUID
@@ -20298,7 +20416,8 @@ paths:
             - account
         - basic: []
         - api_key: []
-      tags: []
+      tags:
+        - Workspaces
     parameters:
       - description: >
           This can either be the workspace ID (slug) or the workspace UUID
@@ -20438,7 +20557,8 @@ paths:
             - repository
         - basic: []
         - api_key: []
-      tags: []
+      tags:
+        - Workspaces
     parameters:
       - description: >
           This can either be the repository slug or the UUID of the repository,
@@ -20652,7 +20772,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - workspaces
+        - Workspaces
     parameters:
       - description: >
           This can either be the workspace ID (slug) or the workspace UUID
@@ -20768,7 +20888,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - projects
+        - Projects
   "/workspaces/{workspace}/projects/{project_key}":
     delete:
       description: >-
@@ -20810,7 +20930,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - projects
+        - Projects
     get:
       description: Returns the requested project.
       responses:
@@ -20844,8 +20964,8 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - projects
-        - workspaces
+        - Projects
+        - Workspaces
     parameters:
       - description: >
           The project in question. This is the actual `key` assigned
@@ -20950,7 +21070,7 @@ paths:
         - basic: []
         - api_key: []
       tags:
-        - projects
+        - Projects
   "/workspaces/{workspace}/search/code":
     get:
       parameters:
@@ -21254,57 +21374,69 @@ components:
               properties:
                 avatar:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 followers:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 following:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 html:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 repositories:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             nickname:
@@ -21317,6 +21449,7 @@ components:
               type: string
             website:
               type: string
+          title: Account
           type: object
     author:
       allOf:
@@ -21329,6 +21462,7 @@ components:
               type: string
             user:
               $ref: "#/components/schemas/account"
+          title: Author
           type: object
     base_commit:
       allOf:
@@ -21368,6 +21502,7 @@ components:
                   description: The text as it was typed by a user.
                   type: string
               type: object
+          title: Base Commit
           type: object
     branch:
       allOf:
@@ -21375,6 +21510,7 @@ components:
         - additionalProperties: true
           description: A branch object, representing a branch in a repository.
           properties: {}
+          title: Branch
           type: object
     branching_model:
       allOf:
@@ -21436,6 +21572,7 @@ components:
                 - name
                 - use_mainbranch
               type: object
+          title: Branching Model
           type: object
     branching_model_settings:
       allOf:
@@ -21486,12 +21623,14 @@ components:
               properties:
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             production:
@@ -21510,6 +21649,7 @@ components:
                   description: Indicates if the setting points at an explicit branch (`false`) or tracks the main branch (`true`). When `true` the `name` must be `null` or not provided. When `false` the `name` must contain a non-empty branch name.
                   type: boolean
               type: object
+          title: Branching Model Settings
           type: object
     branchrestriction:
       allOf:
@@ -21564,12 +21704,14 @@ components:
               properties:
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             pattern:
@@ -21587,6 +21729,7 @@ components:
             - kind
             - branch_match_kind
             - pattern
+          title: Branch Restriction
           type: object
     comment:
       allOf:
@@ -21640,30 +21783,36 @@ components:
               properties:
                 code:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 html:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             parent:
@@ -21673,6 +21822,7 @@ components:
               type: string
             user:
               $ref: "#/components/schemas/user"
+          title: Comment
           type: object
     commit:
       allOf:
@@ -21687,6 +21837,7 @@ components:
               type: array
             repository:
               $ref: "#/components/schemas/repository"
+          title: Commit
           type: object
     commit_comment:
       allOf:
@@ -21696,6 +21847,7 @@ components:
           properties:
             commit:
               $ref: "#/components/schemas/commit"
+          title: Commit Comment
           type: object
     commit_file:
       additionalProperties: true
@@ -21721,6 +21873,7 @@ components:
           type: string
       required:
         - type
+      title: Commit File
       type: object
     commitstatus:
       allOf:
@@ -21745,21 +21898,25 @@ components:
               properties:
                 commit:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             name:
@@ -21799,6 +21956,7 @@ components:
             uuid:
               description: The commit status' id.
               type: string
+          title: Commit Status
           type: object
     component:
       allOf:
@@ -21813,16 +21971,19 @@ components:
               properties:
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             name:
               type: string
+          title: Component
           type: object
     ddev_report:
       allOf:
@@ -21860,18 +22021,21 @@ components:
               properties:
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             owner:
               $ref: "#/components/schemas/account"
             repository:
               $ref: "#/components/schemas/repository"
+          title: Deploy Key
           type: object
     deployment:
       allOf:
@@ -22104,6 +22268,7 @@ components:
           type: string
       required:
         - type
+      title: Diff Stat
       type: object
     error:
       additionalProperties: true
@@ -22128,6 +22293,7 @@ components:
           type: string
       required:
         - type
+      title: Error
       type: object
     export_options:
       additionalProperties: true
@@ -22145,6 +22311,7 @@ components:
           type: string
       required:
         - type
+      title: Export Options
       type: object
     group:
       allOf:
@@ -22163,21 +22330,25 @@ components:
               properties:
                 html:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             name:
@@ -22192,6 +22363,7 @@ components:
               type: string
             workspace:
               $ref: "#/components/schemas/workspace"
+          title: Group
           type: object
     hook_event:
       additionalProperties: false
@@ -22235,6 +22407,7 @@ components:
         label:
           description: Summary of the webhook event type.
           type: string
+      title: Hook Event
       type: object
     issue:
       allOf:
@@ -22283,57 +22456,69 @@ components:
               properties:
                 attachments:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 comments:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 html:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 vote:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 watch:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             milestone:
@@ -22370,6 +22555,7 @@ components:
               $ref: "#/components/schemas/version"
             votes:
               type: integer
+          title: Issue
           type: object
     issue_attachment:
       allOf:
@@ -22382,16 +22568,19 @@ components:
               properties:
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             name:
               type: string
+          title: Issue Attachment
           type: object
     issue_change:
       additionalProperties: true
@@ -22483,21 +22672,25 @@ components:
           properties:
             issue:
               additionalProperties: false
+              description: A link to a resource related to this object.
               properties:
                 href:
                   format: uri
                   type: string
                 name:
                   type: string
+              title: Link
               type: object
             self:
               additionalProperties: false
+              description: A link to a resource related to this object.
               properties:
                 href:
                   format: uri
                   type: string
                 name:
                   type: string
+              title: Link
               type: object
           type: object
         message:
@@ -22525,6 +22718,7 @@ components:
           $ref: "#/components/schemas/user"
       required:
         - type
+      title: Issue Change
       type: object
     issue_comment:
       allOf:
@@ -22534,6 +22728,7 @@ components:
           properties:
             issue:
               $ref: "#/components/schemas/issue"
+          title: Issue Comment
           type: object
     issue_job_status:
       additionalProperties: false
@@ -22563,6 +22758,7 @@ components:
           type: integer
         type:
           type: string
+      title: Issue Job Status
       type: object
     jira_project:
       allOf:
@@ -22608,16 +22804,19 @@ components:
               properties:
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             name:
               type: string
+          title: Milestone
           type: object
     object:
       additionalProperties: true
@@ -22653,6 +22852,7 @@ components:
           description: Total number of objects in the response. This is an optional element that is not provided in all responses, as it can be expensive to compute.
           minimum: 0
           type: integer
+      title: Page
       type: object
     paginated_annotations:
       description: A paginated list of annotations.
@@ -22711,6 +22911,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Branches
       type: object
     paginated_branchrestrictions:
       additionalProperties: false
@@ -22742,6 +22943,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Branch Restrictions
       type: object
     paginated_changeset:
       additionalProperties: false
@@ -22773,6 +22975,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Page
       type: object
     paginated_commit_comments:
       additionalProperties: false
@@ -22804,6 +23007,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Commit Comments
       type: object
     paginated_commitstatuses:
       additionalProperties: false
@@ -22835,6 +23039,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Commit Statuses
       type: object
     paginated_components:
       additionalProperties: false
@@ -22866,6 +23071,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Components
       type: object
     paginated_deploy_keys:
       additionalProperties: false
@@ -22897,6 +23103,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Deploy Keys
       type: object
     paginated_deployment_variable:
       description: A paged list of deployment variables.
@@ -22982,6 +23189,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Diff Stat
       type: object
     paginated_environments:
       description: A paged list of environments
@@ -23040,6 +23248,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Files
       type: object
     paginated_hook_events:
       additionalProperties: false
@@ -23071,6 +23280,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Hook Events
       type: object
     paginated_issue_attachments:
       additionalProperties: false
@@ -23101,6 +23311,7 @@ components:
             $ref: "#/components/schemas/issue_attachment"
           minItems: 0
           type: array
+      title: Paginated Issue Attachment
       type: object
     paginated_issue_comments:
       additionalProperties: false
@@ -23132,6 +23343,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Issue Comments
       type: object
     paginated_issues:
       additionalProperties: false
@@ -23163,6 +23375,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Issues
       type: object
     paginated_log_entries:
       additionalProperties: false
@@ -23193,6 +23406,7 @@ components:
             $ref: "#/components/schemas/issue_change"
           minItems: 0
           type: array
+      title: Paginated Log Entries
       type: object
     paginated_milestones:
       additionalProperties: false
@@ -23224,6 +23438,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Milestones
       type: object
     paginated_pipeline_caches:
       description: A paged list of pipeline caches
@@ -23444,6 +23659,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Projects
       type: object
     paginated_pullrequest_comments:
       additionalProperties: false
@@ -23475,6 +23691,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Pull Request Comments
       type: object
     paginated_pullrequests:
       additionalProperties: false
@@ -23506,6 +23723,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Pull Requests
       type: object
     paginated_refs:
       additionalProperties: false
@@ -23537,6 +23755,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Refs
       type: object
     paginated_reports:
       description: A paginated list of reports.
@@ -23595,6 +23814,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Repositories
       type: object
     paginated_repository_permissions:
       additionalProperties: false
@@ -23626,6 +23846,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Repository Permissions
       type: object
     paginated_snippet_comments:
       additionalProperties: false
@@ -23657,6 +23878,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Snippet Comments
       type: object
     paginated_snippet_commit:
       additionalProperties: false
@@ -23687,6 +23909,7 @@ components:
             $ref: "#/components/schemas/snippet_commit"
           minItems: 0
           type: array
+      title: Paginated Snippet Commits
       type: object
     paginated_snippets:
       additionalProperties: false
@@ -23718,6 +23941,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Snippets
       type: object
     paginated_ssh_user_keys:
       additionalProperties: false
@@ -23749,6 +23973,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated SSH User Keys
       type: object
     paginated_tags:
       additionalProperties: false
@@ -23780,6 +24005,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Tags
       type: object
     paginated_team_permissions:
       additionalProperties: false
@@ -23811,6 +24037,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Team Permissions
       type: object
     paginated_teams:
       additionalProperties: false
@@ -23842,6 +24069,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Teams
       type: object
     paginated_treeentries:
       additionalProperties: false
@@ -23873,6 +24101,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Tree Entry
       type: object
     paginated_users:
       additionalProperties: false
@@ -23904,6 +24133,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Users
       type: object
     paginated_versions:
       additionalProperties: false
@@ -23935,6 +24165,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Versions
       type: object
     paginated_webhook_subscriptions:
       additionalProperties: false
@@ -23966,6 +24197,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Webhook Subscriptions
       type: object
     paginated_workspace_memberships:
       additionalProperties: false
@@ -23997,6 +24229,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Workspace Memberships
       type: object
     paginated_workspaces:
       additionalProperties: false
@@ -24028,6 +24261,7 @@ components:
           minItems: 0
           type: array
           uniqueItems: true
+      title: Paginated Workspaces
       type: object
     participant:
       allOf:
@@ -24054,6 +24288,7 @@ components:
               type: string
             user:
               $ref: "#/components/schemas/user"
+          title: Participant
           type: object
     pipeline:
       allOf:
@@ -24767,21 +25002,25 @@ components:
               properties:
                 avatar:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 html:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             name:
@@ -24795,6 +25034,7 @@ components:
             uuid:
               description: The project's immutable id.
               type: string
+          title: Project
           type: object
     pullrequest:
       allOf:
@@ -24827,93 +25067,113 @@ components:
               properties:
                 activity:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 approve:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 comments:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 commits:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 decline:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 diff:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 diffstat:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 html:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 merge:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             merge_commit:
@@ -24922,6 +25182,7 @@ components:
                 hash:
                   pattern: "[0-9a-f]{7,}?"
                   type: string
+              title: Pull Request Commit
               type: object
             participants:
               description: "        The list of users that are collaborating on this pull request.
@@ -24955,6 +25216,7 @@ components:
               type: string
             rendered:
               additionalProperties: false
+              description: User provided pull request text, interpreted in a markup language and rendered in HTML
               properties:
                 description:
                   additionalProperties: false
@@ -25007,6 +25269,7 @@ components:
                       description: The text as it was typed by a user.
                       type: string
                   type: object
+              title: Rendered Pull Request Markup
               type: object
             reviewers:
               description: The list of users that were added as reviewers on this pull request when it was created. For performance reasons, the API only includes this list on a pull request's `self` URL.
@@ -25051,6 +25314,7 @@ components:
               description: The ISO8601 timestamp the request was last updated.
               format: date-time
               type: string
+          title: Pull Request
           type: object
     pullrequest_comment:
       allOf:
@@ -25060,6 +25324,7 @@ components:
           properties:
             pullrequest:
               $ref: "#/components/schemas/pullrequest"
+          title: Pull Request Comment
           type: object
     pullrequest_endpoint:
       additionalProperties: false
@@ -25081,6 +25346,7 @@ components:
               type: array
             name:
               type: string
+          title: Pull Request Branch
           type: object
         commit:
           additionalProperties: false
@@ -25088,9 +25354,11 @@ components:
             hash:
               pattern: "[0-9a-f]{7,}?"
               type: string
+          title: Pull Request Commit
           type: object
         repository:
           $ref: "#/components/schemas/repository"
+      title: Pull Request Endpoint
       type: object
     pullrequest_merge_parameters:
       additionalProperties: true
@@ -25114,6 +25382,7 @@ components:
           type: string
       required:
         - type
+      title: Pull Request Merge Parameters
       type: object
     ref:
       additionalProperties: true
@@ -25124,30 +25393,36 @@ components:
           properties:
             commits:
               additionalProperties: false
+              description: A link to a resource related to this object.
               properties:
                 href:
                   format: uri
                   type: string
                 name:
                   type: string
+              title: Link
               type: object
             html:
               additionalProperties: false
+              description: A link to a resource related to this object.
               properties:
                 href:
                   format: uri
                   type: string
                 name:
                   type: string
+              title: Link
               type: object
             self:
               additionalProperties: false
+              description: A link to a resource related to this object.
               properties:
                 href:
                   format: uri
                   type: string
                 name:
                   type: string
+              title: Link
               type: object
           type: object
         name:
@@ -25159,6 +25434,7 @@ components:
           type: string
       required:
         - type
+      title: Ref
       type: object
     report:
       allOf:
@@ -25353,95 +25629,115 @@ components:
               properties:
                 avatar:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 clone:
                   items:
                     additionalProperties: false
+                    description: A link to a resource related to this object.
                     properties:
                       href:
                         format: uri
                         type: string
                       name:
                         type: string
+                    title: Link
                     type: object
                   type: array
                 commits:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 downloads:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 forks:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 hooks:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 html:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 pullrequests:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 watchers:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             mainbranch:
@@ -25467,6 +25763,7 @@ components:
             uuid:
               description: The repository's immutable id. This can be used as a substitute for the slug segment in URLs. Doing this guarantees your URLs will survive renaming of the repository by its owner, or even transfer of the repository to a different user.
               type: string
+          title: Repository
           type: object
     repository_permission:
       additionalProperties: true
@@ -25486,6 +25783,7 @@ components:
           $ref: "#/components/schemas/user"
       required:
         - type
+      title: Repository Permission
       type: object
     search_code_search_result:
       properties:
@@ -25598,6 +25896,7 @@ components:
             updated_on:
               format: date-time
               type: string
+          title: Snippet
           type: object
     snippet_comment:
       allOf:
@@ -25610,25 +25909,30 @@ components:
               properties:
                 html:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             snippet:
               $ref: "#/components/schemas/snippet"
+          title: Snippet Comment
           type: object
     snippet_commit:
       allOf:
@@ -25641,34 +25945,41 @@ components:
               properties:
                 diff:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 html:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             snippet:
               $ref: "#/components/schemas/snippet"
+          title: Snippet Commit
           type: object
     ssh_account_key:
       allOf:
@@ -25678,6 +25989,7 @@ components:
           properties:
             owner:
               $ref: "#/components/schemas/account"
+          title: SSH Account Key
           type: object
     ssh_key:
       allOf:
@@ -25705,17 +26017,20 @@ components:
               properties:
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             uuid:
               description: The SSH key's immutable ID.
               type: string
+          title: SSH Key
           type: object
     stg_west_report:
       allOf:
@@ -25736,12 +26051,14 @@ components:
           properties:
             events:
               additionalProperties: false
+              description: A link to a resource related to this object.
               properties:
                 href:
                   format: uri
                   type: string
                 name:
                   type: string
+              title: Link
               type: object
           type: object
         team:
@@ -25749,12 +26066,14 @@ components:
           properties:
             events:
               additionalProperties: false
+              description: A link to a resource related to this object.
               properties:
                 href:
                   format: uri
                   type: string
                 name:
                   type: string
+              title: Link
               type: object
           type: object
         user:
@@ -25762,14 +26081,17 @@ components:
           properties:
             events:
               additionalProperties: false
+              description: A link to a resource related to this object.
               properties:
                 href:
                   format: uri
                   type: string
                 name:
                   type: string
+              title: Link
               type: object
           type: object
+      title: Subject Types
       type: object
     tag:
       allOf:
@@ -25786,6 +26108,7 @@ components:
               type: string
             tagger:
               $ref: "#/components/schemas/author"
+          title: Tag
           type: object
     team:
       allOf:
@@ -25793,6 +26116,7 @@ components:
         - additionalProperties: true
           description: A team object.
           properties: {}
+          title: Team
           type: object
     team_permission:
       additionalProperties: true
@@ -25812,6 +26136,7 @@ components:
           $ref: "#/components/schemas/user"
       required:
         - type
+      title: Team Permission
       type: object
     treeentry:
       additionalProperties: true
@@ -25826,6 +26151,7 @@ components:
           type: string
       required:
         - type
+      title: Tree Entry
       type: object
     user:
       allOf:
@@ -25838,6 +26164,7 @@ components:
               type: string
             is_staff:
               type: boolean
+          title: User
           type: object
     version:
       allOf:
@@ -25852,16 +26179,19 @@ components:
               properties:
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             name:
               type: string
+          title: Version
           type: object
     webhook_subscription:
       allOf:
@@ -25927,6 +26257,7 @@ components:
             uuid:
               description: The webhook's id
               type: string
+          title: Webhook Subscription
           type: object
     workspace:
       allOf:
@@ -25952,75 +26283,91 @@ components:
               properties:
                 avatar:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 html:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 members:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 owners:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 projects:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 repositories:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
                 snippets:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             name:
@@ -26035,6 +26382,7 @@ components:
             uuid:
               description: The workspace's immutable id.
               type: string
+          title: Workspace
           type: object
     workspace_membership:
       allOf:
@@ -26049,18 +26397,21 @@ components:
               properties:
                 self:
                   additionalProperties: false
+                  description: A link to a resource related to this object.
                   properties:
                     href:
                       format: uri
                       type: string
                     name:
                       type: string
+                  title: Link
                   type: object
               type: object
             user:
               $ref: "#/components/schemas/account"
             workspace:
               $ref: "#/components/schemas/workspace"
+          title: Workspace Membership
           type: object
   securitySchemes:
     api_key:
@@ -29947,4 +30298,4 @@ x-radar-pages:
     icon: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMjU3LjMxNjMgMTYyLjU5OTQiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGlzb2xhdGlvbjogaXNvbGF0ZTsKICAgICAgfQoKICAgICAgLmNscy0yIHsKICAgICAgICBmaWxsOiAjMzQ0NTYzOwogICAgICB9CgogICAgICAuY2xzLTMgewogICAgICAgIGZpbGw6ICMxZGI5ZDQ7CiAgICAgIH0KCiAgICAgIC5jbHMtNCB7CiAgICAgICAgZmlsbDogIzAwNTdkODsKICAgICAgfQoKICAgICAgLmNscy01LCAuY2xzLTcsIC5jbHMtOSB7CiAgICAgICAgbWl4LWJsZW5kLW1vZGU6IG11bHRpcGx5OwogICAgICB9CgogICAgICAuY2xzLTUgewogICAgICAgIGZpbGw6IHVybCgjTjc1KTsKICAgICAgfQoKICAgICAgLmNscy02IHsKICAgICAgICBmaWxsOiAjMDA2NWZmOwogICAgICB9CgogICAgICAuY2xzLTcgewogICAgICAgIGZpbGw6IHVybCgjTjc1LTIpOwogICAgICB9CgogICAgICAuY2xzLTggewogICAgICAgIGZpbGw6IHVybCgjbGluZWFyLWdyYWRpZW50KTsKICAgICAgfQoKICAgICAgLmNscy05IHsKICAgICAgICBmaWxsOiB1cmwoI043NS0zKTsKICAgICAgfQoKICAgICAgLmNscy0xMCB7CiAgICAgICAgZmlsbDogdXJsKCNUMjAwLVQ3NSk7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Ik43NSIgeDE9Ii0yMTg5LjU1NiIgeTE9IjI4MDguMjI4NCIgeDI9Ii0yMDkxLjE1NTEiIHkyPSIyODA4LjIyODQiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMC4xNjgxLCAwLjk4NTgsIDAuOTg1OCwgLTAuMTY4MSwgLTIzNzMuNzM2LCAyNzIyLjEyNzgpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2U1ZThlYyIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlNWU4ZWMiIHN0b3Atb3BhY2l0eT0iMC4xIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJONzUtMiIgZGF0YS1uYW1lPSJONzUiIHgxPSItMjE2OC41OTQ3IiB5MT0iMjkzNS4wNTU2IiB4Mj0iLTIwNzAuMTkzNyIgeTI9IjI5MzUuMDU1NiIgeGxpbms6aHJlZj0iI043NSIvPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQiIHgxPSIxOTAuMzU0NyIgeTE9IjE1OS45NjciIHgyPSIyNTkuOTQ4NyIgeTI9IjkwLjM3MyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzNDQ1NjMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWU2Yzg0Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJONzUtMyIgZGF0YS1uYW1lPSJONzUiIHgxPSItMjI1Ny4zOTc3IiB5MT0iMjg4NC4yMjYzIiB4Mj0iLTIxNTguOTk2NyIgeTI9IjI4ODQuMjI2MyIgeGxpbms6aHJlZj0iI043NSIvPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJUMjAwLVQ3NSIgeDE9IjEyNi4wMjU3IiB5MT0iODUuMTA4IiB4Mj0iMTk1LjYxOTciIHkyPSIxNS41MTQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjM2RjN2RjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljZTNlZSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHRpdGxlPkFkZCBPbiBCbG9ja3MgMjwvdGl0bGU+CiAgPGcgY2xhc3M9ImNscy0xIj4KICAgIDxnIGlkPSJMYXllcl8yIiBkYXRhLW5hbWU9IkxheWVyIDIiPgogICAgICA8ZyBpZD0iT2JqZWN0cyI+CiAgICAgICAgPHJlY3QgaWQ9Il9SZWN0YW5nbGVfIiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTIiIHg9IjEyOC42NTgxIiB5PSI4Ny43NDA1IiB3aWR0aD0iNjQuMzI5MSIgaGVpZ2h0PSI3NC44NTkiLz4KICAgICAgICA8cmVjdCBpZD0iX1JlY3RhbmdsZV8yIiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTMiIHg9IjY0LjMyOTEiIHk9IjEyLjg4MTUiIHdpZHRoPSI2NC4zMjkxIiBoZWlnaHQ9Ijc0Ljg1OSIvPgogICAgICAgIDxyZWN0IGlkPSJfUmVjdGFuZ2xlXzMiIGRhdGEtbmFtZT0iJmx0O1JlY3RhbmdsZSZndDsiIGNsYXNzPSJjbHMtNCIgeT0iODcuNzQwNSIgd2lkdGg9IjY0LjMyOTEiIGhlaWdodD0iNzQuODU5Ii8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNjQuMzI5MSw4Ny43NEg1OC42NTIzYTYyLjc4NzcsNjIuNzg3NywwLDAsMC0yNC41Njg0LDIwLjc2MjFjLTguMjYwNywxMi4xOTYtNC4zNDM3LDE4LjI0MTUtMTEuNjYzNywzMS42Mzk1QzE2LjUxLDE1MC45Niw4LjA1MSwxNTcuODIsMCwxNjIuNTU2di4wNDM1aDY0LjMyOVoiLz4KICAgICAgICA8cmVjdCBpZD0iX1JlY3RhbmdsZV80IiBkYXRhLW5hbWU9IiZsdDtSZWN0YW5nbGUmZ3Q7IiBjbGFzcz0iY2xzLTYiIHg9IjY0LjMyOTEiIHk9Ijg3Ljc0MDUiIHdpZHRoPSI2NC4zMjkxIiBoZWlnaHQ9Ijc0Ljg1OSIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTE5Mi45ODcyLDg3Ljc0SDE4My4zNDNhNjIuNzg3Nyw2Mi43ODc3LDAsMCwwLTI0LjU2ODQsMjAuNzYyMWMtOC4yNjA3LDEyLjE5Ni00LjM0MzgsMTguMjQxNS0xMS42NjM3LDMxLjYzOTVhNTYuNzI0Niw1Ni43MjQ2LDAsMCwxLTE4LjQ1MjcsMTkuOTF2Mi41NDc0aDY0LjMyOVoiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTgiIHg9IjE5Mi45ODcyIiB5PSI4Ny43NDA1IiB3aWR0aD0iNjQuMzI5MSIgaGVpZ2h0PSI3NC44NTkiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTkiIGQ9Ik0xMjguNjU4MiwxMi44ODE1SDExNi41OUE2MS45NjQ2LDYxLjk2NDYsMCwwLDAsMTAxLjMyMzMsMjguMjE1QzkzLjA2MjUsNDAuNDEwOSw5Ni45Nzk0LDQ2LjQ1NjUsODkuNjYsNTkuODU0NCw4My4wMzE2LDcxLjk4NTcsNzMuMTk3LDc5LjE1MTQsNjQuMzI5MSw4My45MTA4djMuODNoNjQuMzI5MVoiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTEwIiB4PSIxMjguNjU4MSIgeT0iMTIuODgxNSIgd2lkdGg9IjY0LjMyOTEiIGhlaWdodD0iNzQuODU5Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSIxMC4xNjA1IiB5PSI3NC44NTkiIHdpZHRoPSIyNC43NTM2IiBoZWlnaHQ9IjEyLjg4MTUiLz4KICAgICAgICA8cmVjdCBjbGFzcz0iY2xzLTQiIHg9IjUxLjk1MjMiIHk9Ijc0Ljg1OSIgd2lkdGg9IjI0Ljc1MzYiIGhlaWdodD0iMTIuODgxNSIvPgogICAgICAgIDxyZWN0IGNsYXNzPSJjbHMtNCIgeD0iOTMuNzQ0MSIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIxMzguODE4NiIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIxODAuNjEwNCIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0yIiB4PSIyMjIuNDAyMiIgeT0iNzQuODU5IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSI3NC40ODk1IiB3aWR0aD0iMjQuNzUzNiIgaGVpZ2h0PSIxMi44ODE1Ii8+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSIxMTYuMjgxNCIgd2lkdGg9IjI0Ljc1MzYiIGhlaWdodD0iMTIuODgxNSIvPgogICAgICAgIDxyZWN0IGNsYXNzPSJjbHMtMyIgeD0iMTU4LjA3MzIiIHdpZHRoPSIyNC43NTM2IiBoZWlnaHQ9IjEyLjg4MTUiLz4KICAgICAgPC9nPgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cg==
     key: bb-connect
     title: Atlassian Connect
-x-revision: 2ec5084b4f14
+x-revision: 6b1c24795dca

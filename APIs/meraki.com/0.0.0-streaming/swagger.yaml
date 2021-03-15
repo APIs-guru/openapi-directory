@@ -10,7 +10,7 @@ info:
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
 
-    > Date: 09 March, 2021
+    > Date: 15 March, 2021
 
     >
 
@@ -4578,7 +4578,7 @@ paths:
         - Devices
   "/networks/{networkId}/devices/claim":
     post:
-      description: Claim devices into a network
+      description: "Claim devices into a network. (Note: for recently claimed devices, it may take a few minutes for API requests against that device to succeed)"
       operationId: claimNetworkDevices
       parameters:
         - in: path
@@ -4606,7 +4606,7 @@ paths:
       responses:
         "200":
           description: Successful operation
-      summary: Claim devices into a network
+      summary: "Claim devices into a network. (Note: for recently claimed devices, it may take a few minutes for API requests against that device to succeed)"
       tags:
         - Devices
   "/networks/{networkId}/devices/connectionStats":
@@ -5170,16 +5170,16 @@ paths:
           examples:
             application/json:
               - endTime: 2018-10-09T22:19:27Z
-                latencyMs: 324
-                lossPercent: 5
+                latencyMs: 324.12
+                lossPercent: 5.23
                 startTime: 2018-10-09T22:18:27Z
               - endTime: 2018-10-09T22:20:27Z
                 latencyMs: 43
                 lossPercent: 1
                 startTime: 2018-10-09T22:19:27Z
               - endTime: 2018-10-09T22:21:27Z
-                latencyMs: 44
-                lossPercent: 0
+                latencyMs: 44.02
+                lossPercent: 0.01
                 startTime: 2018-10-09T22:20:27Z
           schema:
             type: object
@@ -19216,7 +19216,7 @@ x-batchable-actions:
   - group: Device
     operation: claim
     resource: /networks/{networkId}/devices
-    summary: Claim devices into a network
+    summary: "Claim devices into a network. (Note: for recently claimed devices, it may take a few minutes for API requests against that device to succeed)"
   - group: Device
     operation: remove
     resource: /networks/{networkId}/devices/{serial}

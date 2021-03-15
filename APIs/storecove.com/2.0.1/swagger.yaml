@@ -4256,33 +4256,10 @@ definitions:
           - OPStatusAction
         title: Clarification Code Type
         type: string
-      conditions:
-        description: A list of conditions that triggered the error.
-        items:
-          $ref: "#/definitions/InvoiceResponseCondition"
-        minItems: 0
-        title: Conditions
-        type: array
     required:
       - clarificationCodeType
       - clarificationCode
     title: Invoice Response Clarification
-    type: object
-  InvoiceResponseCondition:
-    description: Specifies an error in the received invoice.
-    properties:
-      fieldCode:
-        description: "The code of the field with the error. Find the element here: https://docs.peppol.eu/poacc/billing/3.0/syntax/ubl-invoice/ and then get the field's Business term."
-        title: Field Code
-        type: string
-      fieldValue:
-        description: The (error) value of the field.
-        title: Field value
-        type: string
-    required:
-      - fieldCode
-      - fieldValue
-    title: Invoice Response Condition
     type: object
   InvoiceSubmission:
     description: The invoice you want Storecove to process, with some meta-data.
@@ -4408,12 +4385,21 @@ definitions:
             items:
               $ref: "#/definitions/PeppolIdentifier"
             type: array
-      - properties:
-          peppol_identifiers:
-            items: {}
-            type: array
   LegalEntityCreate:
     properties:
+      advertisements:
+        default:
+          - invoice
+        description: A list of document types to advertise. Use if this LegalEntity needs the ability to receive more than only invoice documents.
+        items:
+          description: A document type to advertise.
+          enum:
+            - invoice
+            - invoice_response
+          title: Document type
+          type: string
+        title: Advertisements
+        type: array
       city:
         description: The city.
         maxLength: 64
@@ -4468,6 +4454,19 @@ definitions:
       - country
   LegalEntityUpdate:
     properties:
+      advertisements:
+        default:
+          - invoice
+        description: A list of document types to advertise. Use if this LegalEntity needs the ability to receive more than only invoice documents.
+        items:
+          description: A document type to advertise.
+          enum:
+            - invoice
+            - invoice_response
+          title: Document type
+          type: string
+        title: Advertisements
+        type: array
       city:
         description: The city.
         maxLength: 64

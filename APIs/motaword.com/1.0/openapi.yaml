@@ -949,6 +949,41 @@ paths:
       summary: Get a new quote
       tags:
         - Project
+  "/projects/from-internal-id/{projectId}":
+    get:
+      description: Get Quote Id
+      operationId: getQuoteIdFromInternalId
+      parameters:
+        - description: Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  internal-id:
+                    format: int64
+                    type: integer
+                  public-id:
+                    format: int64
+                    type: integer
+                type: object
+          description: QuoteId
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Get Quote Id
+      tags:
+        - Project
   /projects/vendor:
     get:
       description: Get a list of your vendor projects
@@ -3918,6 +3953,36 @@ paths:
       summary: Get a list of platform users
       tags:
         - User
+  /users/available-vendors:
+    get:
+      description: Get a list of vendors available for the criteria given
+      operationId: getAvailableVendors
+      parameters:
+        - description: Include detailed information. Possible values 'user'. Requesting user info enrichment takes much longer.
+          in: query
+          name: with[]
+          required: false
+          schema:
+            items:
+              enum:
+                - user
+              type: string
+            type: array
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AvailableVendorsFilter"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserList"
+          description: User list
+      summary: Get a list of vendors available for the criteria given
+      tags:
+        - Vendor
   /users/send-password-reminder:
     post:
       operationId: sendPasswordReminder
@@ -4879,6 +4944,33 @@ components:
         - completed
         - failed
       type: string
+    AvailableVendorsFilter:
+      properties:
+        corporateId:
+          description: Corporate account ID to filter for vendor authorization
+          type: number
+        manualWorkPermission:
+          default: 0
+          description: Filter vendors for manual work permission
+          type: boolean
+        sourceLanguage:
+          description: Source language code
+          type: string
+        targetLanguages:
+          description: List of target language codes.
+          items:
+            type: string
+          type: array
+        types:
+          description: List of vendor types
+          items:
+            enum:
+              - translator
+              - proofreader
+              - both
+            type: string
+          type: array
+      type: object
     BillingAddress:
       allOf:
         - $ref: "#/components/schemas/Address"
@@ -6134,6 +6226,8 @@ components:
       type: object
     UseAsRegularPayload:
       properties:
+        allowOriginalFilePreview:
+          type: boolean
         allowReviewInManualEditor:
           type: boolean
         disableInvitations:

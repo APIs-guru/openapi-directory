@@ -1101,6 +1101,12 @@ definitions:
       deleted:
         description: Whether or not the account has been deleted.  Deleted accounts will only be included in delta requests.
         type: boolean
+      direct_import_in_error:
+        description: If an account linked to a financial institution (direct_import_linked=true) and the linked connection is not in a healthy state, this will be true.
+        type: boolean
+      direct_import_linked:
+        description: Whether or not the account is linked to a financial institution for automatic transaction import.
+        type: boolean
       id:
         format: uuid
         type: string
@@ -1422,7 +1428,7 @@ definitions:
           - null
         type: string
       goal_under_funded:
-        description: The amount of funding still needed in the current month to stay on track towards completing the goal within the current goal period.
+        description: The amount of funding still needed in the current month to stay on track towards completing the goal within the current goal period.  This amount will generally correspond to the 'Underfunded' amount in the web and mobile clients except when viewing a category with a Needed for Spending Goal in a future month.  The web and mobile clients will ignore any funding from a prior goal period when viewing category with a Needed for Spending Goal in a future month.
         format: int64
         type: integer
       hidden:

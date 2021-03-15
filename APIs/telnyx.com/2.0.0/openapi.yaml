@@ -72,6 +72,8 @@ tags:
     name: Notifications
   - description: Background jobs performed over a batch of phone numbers
     name: Number Background Jobs
+  - description: Background jobs performed over a phone-numbers block's phone numbers
+    name: Number Blocks Background Jobs
   - description: Configure your phone numbers
     name: Number Configurations
   - description: Look up phone number data
@@ -5230,6 +5232,108 @@ paths:
       tags:
         - Outbound Voice Profiles
       x-latency-category: responsive
+  /phone_number_blocks/jobs:
+    get:
+      operationId: listPhoneNumberBlocksJobs
+      parameters:
+        - description: Filter the phone number blocks jobs by type.
+          in: query
+          name: filter[type]
+          schema:
+            description: Identifies the type of the background job.
+            enum:
+              - delete_phone_number_block
+            example: delete_phone_number_block
+            type: string
+        - description: Filter the phone number blocks jobs by status.
+          in: query
+          name: filter[status]
+          schema:
+            description: Identifies the status of the background job.
+            enum:
+              - pending
+              - in_progress
+              - completed
+              - failed
+            example: in_progress
+            type: string
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - description: Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
+          in: query
+          name: sort
+          required: false
+          schema:
+            enum:
+              - created_at
+            example: created_at
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/ListPhoneNumberBlocksJobsResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Lists the phone number blocks jobs
+      tags:
+        - Number Blocks Background Jobs
+      x-group-parameters: "true"
+      x-latency-category: responsive
+  /phone_number_blocks/jobs/delete_phone_number_block:
+    post:
+      description: Creates a new background job to delete all the phone numbers associated with the given block. We will only consider the phone number block as deleted after all phone numbers associated with it are removed, so multiple executions of this job may be necessary in case some of the phone numbers present errors during the deletion process.
+      operationId: createPhoneNumberBlocksJobDeletePhoneNumberBlock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhoneNumberBlocksJobDeletePhoneNumberBlockRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/PhoneNumberBlocksJob"
+                title: Phone Number Blocks Job Delete Phone Number Block
+                type: object
+          description: Phone number blocks job delete phone numbers requested.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Deletes all numbers associated with a phone number block
+      tags:
+        - Number Blocks Background Jobs
+      x-group-parameters: "true"
+      x-latency-category: background
+  "/phone_number_blocks/jobs/{id}":
+    get:
+      operationId: retrievePhoneNumberBlocksJob
+      parameters:
+        - description: Identifies the Phone Number Blocks Job.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/PhoneNumberBlocksJob"
+                title: Phone Number Blocks Job
+                type: object
+          description: Phone number blocks job details.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieves a phone number blocks job
+      tags:
+        - Number Blocks Background Jobs
+      x-group-parameters: "true"
+      x-latency-category: responsive
   /phone_number_regulatory_requirements:
     get:
       description: Gets a paginated list of phone number regulatory requirements.
@@ -5612,6 +5716,34 @@ paths:
       summary: Update the emergency settings from a batch of numbers
       tags:
         - Number Background Jobs
+      x-latency-category: background
+  /phone_numbers/jobs/update_phone_numbers:
+    post:
+      description: Creates a new background job to update a batch of numbers. At most one thousand numbers can be updated per API call. At least one of the updateable fields must be submitted
+      operationId: createPhoneNumbersJobUpdatePhoneNumber
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PhoneNumbersJobUpdatePhoneNumbersRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/PhoneNumbersJob"
+                title: Phone Numbers Job Update Phone Numbers
+                type: object
+          description: Phone numbers job update phone numbers requested.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Update a batch of numbers
+      tags:
+        - Number Background Jobs
+      x-group-parameters: "true"
       x-latency-category: background
   "/phone_numbers/jobs/{id}":
     get:
@@ -8921,6 +9053,20 @@ components:
             title: List Participants Response
             type: object
       description: Successful response with a list of conference participants.
+    ListPhoneNumberBlocksJobsResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/PhoneNumberBlocksJob"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            title: List Phone Number Blocks Background Jobs Response
+            type: object
+      description: Successful response with a list of phone number blocks background jobs.
     ListPhoneNumberRegulatoryRequirementsResponse:
       content:
         application/json:
@@ -19325,6 +19471,105 @@ components:
             - failure
           readOnly: true
           type: string
+    PhoneNumberBlocksJob:
+      example:
+        created_at: 2020-10-23T18:10:00.000Z
+        etc: 2020-10-30T18:10:00.000Z
+        failed_operations: []
+        id: 42587e44-3a3e-46de-9255-0c9a7a1d1ec7
+        record_type: phone_numbers_job
+        status: pending
+        successful_operations: []
+        type: delete_phone_number_block
+        updated_at: 2020-10-23T18:10:01.000Z
+      properties:
+        created_at:
+          description: ISO 8601 formatted date indicating when the resource was created.
+          readOnly: true
+          type: string
+        etc:
+          description: ISO 8601 formatted date indicating when the estimated time of completion of the background job.
+          format: date-time
+          readOnly: true
+          type: string
+        failed_operations:
+          items:
+            $ref: "#/components/schemas/PhoneNumberBlocksJobFailedOperation"
+          readOnly: true
+          type: array
+        id:
+          description: Identifies the resource.
+          example: 42587e44-3a3e-46de-9255-0c9a7a1d1ec7
+          format: uuid
+          readOnly: true
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: phone_number_block_job
+          readOnly: true
+          type: string
+        status:
+          default: pending
+          description: Indicates the completion status of the background operation.
+          enum:
+            - pending
+            - in_progress
+            - completed
+            - failed
+          example: pending
+          readOnly: true
+          type: string
+        successful_operations:
+          items:
+            $ref: "#/components/schemas/PhoneNumberBlocksJobSuccessfulOperation"
+            description: The phone numbers successfully updated.
+          readOnly: true
+          type: array
+        type:
+          description: Identifies the type of the background job.
+          enum:
+            - delete_phone_number_block
+          example: delete_phone_number_block
+          readOnly: true
+          type: string
+        updated_at:
+          description: ISO 8601 formatted date indicating when the resource was updated.
+          readOnly: true
+          type: string
+      type: object
+    PhoneNumberBlocksJobDeletePhoneNumberBlockRequest:
+      example:
+        phone_number_block_id: f3946371-7199-4261-9c3d-81a0d7935146
+      properties:
+        phone_number_block_id:
+          type: string
+      required:
+        - phone_number_block_id
+      type: object
+    PhoneNumberBlocksJobFailedOperation:
+      properties:
+        errors:
+          items:
+            $ref: "#/components/schemas/Error"
+          type: array
+        id:
+          description: The phone number's ID
+          format: int64
+          type: string
+        phone_number:
+          description: The phone number in e164 format.
+          format: e164
+          type: string
+    PhoneNumberBlocksJobSuccessfulOperation:
+      properties:
+        id:
+          description: The phone number's ID
+          format: int64
+          type: string
+        phone_number:
+          description: The phone number in e164 format.
+          format: e164
+          type: string
     PhoneNumberDeletedDetailed:
       example:
         billing_group_id: 86f58db9-0fe3-4adc-9d1f-46e66e6e9323
@@ -19901,6 +20146,7 @@ components:
           enum:
             - update_emergency_settings
             - delete_phone_numbers
+            - update_phone_numbers
           example: update_emergency_settings
           readOnly: true
           type: string
@@ -19972,6 +20218,44 @@ components:
       required:
         - emergency_enabled
         - emergency_address_id
+        - phone_numbers
+      type: object
+    PhoneNumbersJobUpdatePhoneNumbersRequest:
+      example:
+        billing_group_id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
+        connection_id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
+        customer_reference: customer-reference
+        external_pin: "123456"
+        phone_numbers:
+          - "1583466971586889004"
+          - "+13127367254"
+        tags:
+          - tag
+      properties:
+        billing_group_id:
+          description: Identifies the billing group associated with the phone number.
+          type: string
+        connection_id:
+          description: Identifies the connection associated with the phone number.
+          type: string
+        customer_reference:
+          description: A customer reference string for customer look ups.
+          example: MY REF 001
+          type: string
+        external_pin:
+          description: If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
+          type: string
+        phone_numbers:
+          description: Array of phone number ids and/or phone numbers in E164 format to update
+          items:
+            type: string
+          type: array
+        tags:
+          description: A list of user-assigned tags to help organize phone numbers.
+          items:
+            type: string
+          type: array
+      required:
         - phone_numbers
       type: object
     PlayAudioUrlRequest:

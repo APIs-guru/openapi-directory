@@ -96,6 +96,8 @@ tags:
     name: Search
   - description: Application functionality that is only accessible to admin users.  Includes things like Logging and Global Rules.
     name: Admin
+  - description: System level functionality, including versioning and status information.
+    name: System
 paths:
   /admin/loggers:
     get:
@@ -2144,6 +2146,16 @@ paths:
         posted content.
       operationId: searchArtifactsByContent
       parameters:
+        - description: Parameter that can be set to `true` to indicate that the server should "canonicalize" the content when searching for matching artifacts.  Canonicalization is unique to each artifact type, but typically involves removing any extra whitespace and formatting the content in a consistent manner.  Must be used along with the `artifactType` query parameter.
+          in: query
+          name: canonical
+          schema:
+            type: boolean
+        - description: Indicates the type of artifact represented by the content being used for the search.  This is only needed when using the `canonical` query parameter, so that the server knows how to canonicalize the content prior to searching for matching artifacts.
+          in: query
+          name: artifactType
+          schema:
+            $ref: "#/components/schemas/ArtifactType"
         - description: The number of artifacts to skip before starting to collect the result set.  Defaults to 0.
           in: query
           name: offset
@@ -2202,7 +2214,25 @@ paths:
         - Search
         - Artifacts
     summary: Search for artifacts in the registry.
-  x-codegen-contextRoot: /v2
+  /system/info:
+    get:
+      description: >-
+        This operation retrieves information about the running registry system, such as the version
+
+        of the software and when it was built.
+      operationId: getSystemInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SystemInfo"
+          description: On success, returns the system information.
+      summary: Get system information
+      tags:
+        - System
+    summary: Retrieve system information
+  x-codegen-contextRoot: /apis/registry/v2
 components:
   responses:
     BadRequest:
@@ -2703,6 +2733,25 @@ components:
         - asc
         - desc
       type: string
+    SystemInfo:
+      description: ""
+      example:
+        builtOn: 2021-03-19T12:55:00Z
+        description: The Apicurio Registry application.
+        name: Apicurio Registry (SQL)
+        version: 2.0.0.Final
+      properties:
+        builtOn:
+          format: date-time
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+      title: Root Type for SystemInfo
+      type: object
     UpdateState:
       description: ""
       example:

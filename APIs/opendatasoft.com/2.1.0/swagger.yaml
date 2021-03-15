@@ -443,19 +443,19 @@ paths:
   "/{source}/aggregates":
     get:
       description: >
-        Compute aggregations from catalog and return a list of each aggregate indexed by their names.
+        **Deprecated, use `/datasets` instead.**
       operationId: aggregateDatasets
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/select"
-        - $ref: "#/parameters/group_by"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/group_by"
+        - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/order_by"
-        - $ref: "#/parameters/offset"
-        - $ref: "#/parameters/limit"
       responses:
         "200":
           description: Aggregation result
@@ -493,14 +493,15 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/group_by"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit"
-        - $ref: "#/parameters/offset"
-        - $ref: "#/parameters/sort"
-        - $ref: "#/parameters/order_by"
         - $ref: "#/parameters/pretty"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
@@ -548,9 +549,9 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
+        - $ref: "#/parameters/select"
         - $ref: "#/parameters/pretty"
         - $ref: "#/parameters/timezone"
-        - $ref: "#/parameters/select"
         - $ref: "#/parameters/include_app_metas"
       responses:
         "200":
@@ -569,20 +570,20 @@ paths:
   "/{source}/datasets/{dataset_id}/aggregates":
     get:
       description: >
-        Compute aggregations from dataset records and return a list of each aggregate indexed by their names.
+        **Deprecated, use `/records` instead.**
       operationId: aggregateRecords
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
         - $ref: "#/parameters/select"
-        - $ref: "#/parameters/group_by"
         - $ref: "#/parameters/where"
-        - $ref: "#/parameters/facet"
-        - $ref: "#/parameters/refine"
-        - $ref: "#/parameters/exclude"
+        - $ref: "#/parameters/group_by"
         - $ref: "#/parameters/order_by"
         - $ref: "#/parameters/limit"
         - $ref: "#/parameters/offset"
+        - $ref: "#/parameters/facet"
+        - $ref: "#/parameters/refine"
+        - $ref: "#/parameters/exclude"
       responses:
         "200":
           description: Aggregation result
@@ -647,15 +648,15 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
+        - $ref: "#/parameters/select"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit_export"
-        - $ref: "#/parameters/offset"
-        - $ref: "#/parameters/sort"
-        - $ref: "#/parameters/order_by"
-        - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
         - default: ;
           description: Provide a different delimiter (default ',').
@@ -685,16 +686,16 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
+        - $ref: "#/parameters/select"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit_export"
-        - $ref: "#/parameters/offset"
-        - $ref: "#/parameters/sort"
-        - $ref: "#/parameters/order_by"
-        - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/pretty"
       produces:
@@ -715,16 +716,16 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
+        - $ref: "#/parameters/select"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit_export"
-        - $ref: "#/parameters/offset"
-        - $ref: "#/parameters/sort"
-        - $ref: "#/parameters/order_by"
-        - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
       produces:
         - application/json
@@ -744,16 +745,16 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
+        - $ref: "#/parameters/select"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit_export"
-        - $ref: "#/parameters/offset"
-        - $ref: "#/parameters/sort"
-        - $ref: "#/parameters/order_by"
-        - $ref: "#/parameters/select"
         - $ref: "#/parameters/pretty"
         - $ref: "#/parameters/timezone"
       produces:
@@ -774,16 +775,16 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
+        - $ref: "#/parameters/select"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit_export"
-        - $ref: "#/parameters/offset"
-        - $ref: "#/parameters/sort"
-        - $ref: "#/parameters/order_by"
-        - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
       produces:
         - text/plain
@@ -803,16 +804,16 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
+        - $ref: "#/parameters/select"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit_export"
-        - $ref: "#/parameters/offset"
-        - $ref: "#/parameters/sort"
-        - $ref: "#/parameters/order_by"
-        - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
       produces:
         - application/zip
@@ -832,16 +833,16 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
+        - $ref: "#/parameters/select"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit_export"
-        - $ref: "#/parameters/offset"
-        - $ref: "#/parameters/sort"
-        - $ref: "#/parameters/order_by"
-        - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
       produces:
         - xls
@@ -866,10 +867,10 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
+        - $ref: "#/parameters/where"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/timezone"
       responses:
@@ -942,16 +943,17 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
+        - $ref: "#/parameters/select"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/group_by"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit"
-        - $ref: "#/parameters/offset"
-        - $ref: "#/parameters/sort"
-        - $ref: "#/parameters/order_by"
-        - $ref: "#/parameters/select"
         - $ref: "#/parameters/pretty"
         - $ref: "#/parameters/timezone"
       responses:
@@ -988,9 +990,9 @@ paths:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
         - $ref: "#/parameters/record_id"
+        - $ref: "#/parameters/select"
         - $ref: "#/parameters/pretty"
         - $ref: "#/parameters/timezone"
-        - $ref: "#/parameters/select"
       responses:
         "200":
           description: A single record
@@ -1013,8 +1015,8 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
-        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/timezone"
       responses:
         "200":
@@ -1107,12 +1109,12 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit"
-        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
         - default: ;
@@ -1143,12 +1145,12 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit"
-        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/pretty"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
@@ -1170,12 +1172,12 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit"
-        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
       produces:
@@ -1196,12 +1198,12 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit"
-        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
       produces:
@@ -1222,12 +1224,12 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit"
-        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
       produces:
@@ -1248,12 +1250,12 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/search"
         - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/limit"
-        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
       produces:

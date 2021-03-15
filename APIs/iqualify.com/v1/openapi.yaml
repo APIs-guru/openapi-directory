@@ -1169,6 +1169,32 @@ paths:
       summary: Find submissions to a specified open response assessment, including marks if any
       tags:
         - Assessment data
+  "/offerings/{offeringId}/analytics/submissions/{userEmail}/assignments/{assessmentId}":
+    get:
+      description: Responds with the learner's assessment submission and any marks for the submission.
+      parameters:
+        - $ref: "#/components/parameters/offeringId"
+        - $ref: "#/components/parameters/userEmail"
+        - $ref: "#/components/parameters/assessmentId"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SubmissionMarkResponse"
+                title: SubmissionMarkResponse
+                type: array
+          description: Responds with the learner's assessment submission and any marks for the submission.
+        "401":
+          $ref: "#/components/responses/NotAuthorizedError"
+        "403":
+          $ref: "#/components/responses/AccessDeniedError"
+        "404":
+          $ref: "#/components/responses/ObjectNotFoundError"
+      summary: Find a learner's submission to a specified assessment, including marks if any
+      tags:
+        - Assessment data
   "/offerings/{offeringId}/analytics/unit-reactions":
     get:
       description: Responds with user reactions to units in a specified offering.

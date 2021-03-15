@@ -753,6 +753,33 @@ paths:
       summary: Get the authenticated user
       tags:
         - user
+    put:
+      operationId: updateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserRequest"
+        description: User body
+        required: true
+      responses:
+        "200":
+          description: Successful update operation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Failure
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+          description: Bad credentials
+      summary: Update a user
+      tags:
+        - user
   /verifications:
     get:
       operationId: getAllVerifications
@@ -1692,6 +1719,12 @@ components:
         - name
         - read
         - write
+    UpdateUserRequest:
+      properties:
+        displayName:
+          type: string
+      required:
+        - displayName
     User:
       properties:
         createdAt:

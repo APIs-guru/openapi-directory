@@ -905,6 +905,155 @@ paths:
           description: Not Found
       tags:
         - Environments
+  "/api/v1/Environments/{environmentId}/ports/{port}":
+    delete:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: port
+          required: true
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Server Error
+      tags:
+        - Environments
+    put:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: port
+          required: true
+          schema:
+            format: int32
+            type: integer
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AddForwardedPortBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddForwardedPortBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/AddForwardedPortBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AddForwardedPortBody"
+      responses:
+        "200":
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Server Error
+      tags:
+        - Environments
   "/api/v1/Environments/{environmentId}/restore":
     patch:
       parameters:
@@ -2579,6 +2728,12 @@ paths:
         - Warmup
 components:
   schemas:
+    AddForwardedPortBody:
+      additionalProperties: false
+      properties:
+        isPublic:
+          type: boolean
+      type: object
     AgentResponse:
       additionalProperties: false
       properties:
@@ -2689,6 +2844,8 @@ components:
           type: integer
         connection:
           $ref: "#/components/schemas/ConnectionInfoBody"
+        container:
+          $ref: "#/components/schemas/ContainerInfoBody"
         containerImage:
           nullable: true
           type: string
@@ -2796,6 +2953,16 @@ components:
           nullable: true
           type: string
         sessionToken:
+          nullable: true
+          type: string
+      type: object
+    ContainerInfoBody:
+      additionalProperties: false
+      properties:
+        id:
+          nullable: true
+          type: string
+        schemaVersion:
           nullable: true
           type: string
       type: object
@@ -2929,6 +3096,8 @@ components:
         commit:
           nullable: true
           type: string
+        hasUncommittedChanges:
+          type: boolean
         hasUnpushedChanges:
           type: boolean
       type: object
@@ -3481,6 +3650,8 @@ components:
           type: integer
         connection:
           $ref: "#/components/schemas/ConnectionInfoBody"
+        container:
+          $ref: "#/components/schemas/ContainerInfoBody"
         containerImage:
           nullable: true
           type: string

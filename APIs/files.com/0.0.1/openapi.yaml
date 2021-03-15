@@ -41,6 +41,8 @@ tags:
     name: bundle_downloads
   - description: Operations about bundle_recipients
     name: bundle_recipients
+  - description: Operations about bundle_registrations
+    name: bundle_registrations
   - description: Operations about clickwraps
     name: clickwraps
   - description: Operations about dns_records
@@ -71,6 +73,8 @@ tags:
     name: history_export_results
   - description: Operations about inbox_recipients
     name: inbox_recipients
+  - description: Operations about inbox_registrations
+    name: inbox_registrations
   - description: Operations about inbox_uploads
     name: inbox_uploads
   - description: Operations about invoices
@@ -246,12 +250,14 @@ paths:
                 expires_at:
                   default: 2000-01-01T01:00:00Z
                   description: API Key expiration date
+                  example: 2000-01-01T01:00:00Z
                   format: date-time
                   type: string
                   x-ms-summary: API Key expiration date
                 name:
                   default: My Main API Key
                   description: Internal name for the API Key.  For your use.
+                  example: My Main API Key
                   type: string
                   x-ms-summary: Internal name for the API Key.  For your use.
                 permission_set:
@@ -263,6 +269,7 @@ paths:
                     - desktop_app
                     - sync_app
                     - office_integration
+                  example: full
                   type: string
                   x-ms-summary: Permissions for this API Key.  Keys with the `desktop_app` permission set only have the ability to do the functions provided in our Desktop App (File and Share Link operations).  Additional permission sets may become available in the future, such as for a Site Admin to give a key with no administrator privileges.  If you have ideas for permission sets, please let us know.
               type: object
@@ -614,12 +621,14 @@ paths:
                 expires_at:
                   default: 2000-01-01T01:00:00Z
                   description: API Key expiration date
+                  example: 2000-01-01T01:00:00Z
                   format: date-time
                   type: string
                   x-ms-summary: API Key expiration date
                 name:
                   default: My Main API Key
                   description: Internal name for the API Key.  For your use.
+                  example: My Main API Key
                   type: string
                   x-ms-summary: Internal name for the API Key.  For your use.
                 permission_set:
@@ -631,6 +640,7 @@ paths:
                     - desktop_app
                     - sync_app
                     - office_integration
+                  example: full
                   type: string
                   x-ms-summary: Permissions for this API Key.  Keys with the `desktop_app` permission set only have the ability to do the functions provided in our Desktop App (File and Share Link operations).  Additional permission sets may become available in the future, such as for a Site Admin to give a key with no administrator privileges.  If you have ideas for permission sets, please let us know.
               type: object
@@ -1046,6 +1056,7 @@ paths:
                 as2_partnership_name:
                   default: Test
                   description: AS2 Partnership Name
+                  example: Test
                   type: string
                   x-ms-summary: AS2 Partnership Name
               required:
@@ -1678,6 +1689,7 @@ paths:
                 behavior:
                   default: webhook
                   description: Behavior type.
+                  example: webhook
                   type: string
                   x-ms-summary: Behavior type.
                 path:
@@ -1687,6 +1699,7 @@ paths:
                 value:
                   default: '{"method": "GET"}'
                   description: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior.
+                  example: '{"method": "GET"}'
                   type: string
                   x-ms-summary: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior.
               required:
@@ -2055,6 +2068,7 @@ paths:
                 behavior:
                   default: webhook
                   description: Behavior type.
+                  example: webhook
                   type: string
                   x-ms-summary: Behavior type.
                 path:
@@ -2069,6 +2083,7 @@ paths:
                 value:
                   default: '{"method": "GET"}'
                   description: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior.
+                  example: '{"method": "GET"}'
                   type: string
                   x-ms-summary: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior.
               type: object
@@ -2339,21 +2354,25 @@ paths:
                 company:
                   default: Acme Ltd
                   description: Company of recipient.
+                  example: Acme Ltd
                   type: string
                   x-ms-summary: Company of recipient.
                 name:
                   default: John Smith
                   description: Name of recipient.
+                  example: John Smith
                   type: string
                   x-ms-summary: Name of recipient.
                 note:
                   default: Just a note.
                   description: Note to include in email.
+                  example: Just a note.
                   type: string
                   x-ms-summary: Note to include in email.
                 recipient:
                   default: johndoe@gmail.com
                   description: Email addresses to share this bundle with.
+                  example: johndoe@gmail.com
                   type: string
                   x-ms-summary: Email addresses to share this bundle with.
                 share_after_create:
@@ -2410,6 +2429,86 @@ paths:
       summary: Create Bundle Recipient
       tags:
         - bundle_recipients
+      x-authentication: []
+  /bundle_registrations:
+    get:
+      description: List Bundle Registrations
+      operationId: GetBundleRegistrations
+      parameters:
+        - description: User ID.  Provide a value of `0` to operate the current session's user.
+          in: query
+          name: user_id
+          required: false
+          schema:
+            format: int32
+            type: integer
+          x-ms-summary: User ID.  Provide a value of `0` to operate the current session's user.
+        - description: Used for pagination.  Send a cursor value to resume an existing list from the point at which you left off.  Get a cursor from an existing list via the X-Files-Cursor-Next header.
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+          x-ms-summary: Used for pagination.  Send a cursor value to resume an existing list from the point at which you left off.  Get a cursor from an existing list via the X-Files-Cursor-Next header.
+        - description: "Number of records to show per page.  (Max: 10,000, 1,000 or less is recommended)."
+          in: query
+          name: per_page
+          required: false
+          schema:
+            format: int32
+            type: integer
+          x-ms-summary: "Number of records to show per page.  (Max: 10,000, 1,000 or less is recommended)."
+        - description: ID of the associated Bundle
+          in: query
+          name: bundle_id
+          required: true
+          schema:
+            format: int32
+            type: integer
+          x-ms-summary: ID of the associated Bundle
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/BundleRegistrationEntity"
+                type: array
+          description: A list of BundleRegistrations objects.
+          x-ms-summary: A list of BundleRegistrations objects.
+        "400":
+          description: Bad Request
+          x-ms-summary: Bad Request
+        "401":
+          description: Unauthorized
+          x-ms-summary: Unauthorized
+        "403":
+          description: Forbidden
+          x-ms-summary: Forbidden
+        "404":
+          description: Not Found
+          x-ms-summary: Not Found
+        "405":
+          description: Method Not Allowed
+          x-ms-summary: Method Not Allowed
+        "409":
+          description: Conflict
+          x-ms-summary: Conflict
+        "412":
+          description: Precondition Failed
+          x-ms-summary: Precondition Failed
+        "422":
+          description: Unprocessable Entity
+          x-ms-summary: Unprocessable Entity
+        "423":
+          description: Locked
+          x-ms-summary: Locked
+        "429":
+          description: Too Many Requests
+          x-ms-summary: Too Many Requests
+      summary: List Bundle Registrations
+      tags:
+        - bundle_registrations
       x-authentication: []
   /bundles:
     get:
@@ -2543,22 +2642,26 @@ paths:
                 clickwrap_id:
                   default: 1
                   description: ID of the clickwrap to use with this bundle.
+                  example: 1
                   format: int32
                   type: integer
                   x-ms-summary: ID of the clickwrap to use with this bundle.
                 code:
                   default: abc123
                   description: Bundle code.  This code forms the end part of the Public URL.
+                  example: abc123
                   type: string
                   x-ms-summary: Bundle code.  This code forms the end part of the Public URL.
                 description:
                   default: The public description of the bundle.
                   description: Public description
+                  example: The public description of the bundle.
                   type: string
                   x-ms-summary: Public description
                 expires_at:
                   default: 2000-01-01T01:00:00Z
                   description: Bundle expiration date/time
+                  example: 2000-01-01T01:00:00Z
                   format: date-time
                   type: string
                   x-ms-summary: Bundle expiration date/time
@@ -2570,23 +2673,27 @@ paths:
                 inbox_id:
                   default: 1
                   description: ID of the associated inbox, if available.
+                  example: 1
                   format: int32
                   type: integer
                   x-ms-summary: ID of the associated inbox, if available.
                 max_uses:
                   default: 1
                   description: Maximum number of times bundle can be accessed
+                  example: 1
                   format: int32
                   type: integer
                   x-ms-summary: Maximum number of times bundle can be accessed
                 note:
                   default: The internal note on the bundle.
                   description: Bundle internal note
+                  example: The internal note on the bundle.
                   type: string
                   x-ms-summary: Bundle internal note
                 password:
                   default: Password
                   description: Password for this bundle.
+                  example: Password
                   type: string
                   x-ms-summary: Password for this bundle.
                 paths:
@@ -2781,22 +2888,26 @@ paths:
                 clickwrap_id:
                   default: 1
                   description: ID of the clickwrap to use with this bundle.
+                  example: 1
                   format: int32
                   type: integer
                   x-ms-summary: ID of the clickwrap to use with this bundle.
                 code:
                   default: abc123
                   description: Bundle code.  This code forms the end part of the Public URL.
+                  example: abc123
                   type: string
                   x-ms-summary: Bundle code.  This code forms the end part of the Public URL.
                 description:
                   default: The public description of the bundle.
                   description: Public description
+                  example: The public description of the bundle.
                   type: string
                   x-ms-summary: Public description
                 expires_at:
                   default: 2000-01-01T01:00:00Z
                   description: Bundle expiration date/time
+                  example: 2000-01-01T01:00:00Z
                   format: date-time
                   type: string
                   x-ms-summary: Bundle expiration date/time
@@ -2808,23 +2919,27 @@ paths:
                 inbox_id:
                   default: 1
                   description: ID of the associated inbox, if available.
+                  example: 1
                   format: int32
                   type: integer
                   x-ms-summary: ID of the associated inbox, if available.
                 max_uses:
                   default: 1
                   description: Maximum number of times bundle can be accessed
+                  example: 1
                   format: int32
                   type: integer
                   x-ms-summary: Maximum number of times bundle can be accessed
                 note:
                   default: The internal note on the bundle.
                   description: Bundle internal note
+                  example: The internal note on the bundle.
                   type: string
                   x-ms-summary: Bundle internal note
                 password:
                   default: Password
                   description: Password for this bundle.
+                  example: Password
                   type: string
                   x-ms-summary: Password for this bundle.
                 paths:
@@ -2907,6 +3022,7 @@ paths:
                 note:
                   default: Just a note.
                   description: Note to include in email.
+                  example: Just a note.
                   type: string
                   x-ms-summary: Note to include in email.
                 recipients:
@@ -4184,6 +4300,7 @@ paths:
                 priority_color:
                   default: red
                   description: Priority/Bookmark color of file.
+                  example: red
                   type: string
                   x-ms-summary: Priority/Bookmark color of file.
                 provided_mtime:
@@ -5620,6 +5737,7 @@ paths:
                 allowed_ips:
                   default: 127.0.0.1
                   description: A list of allowed IPs if applicable.  Newline delimited
+                  example: 127.0.0.1
                   type: string
                   x-ms-summary: A list of allowed IPs if applicable.  Newline delimited
                 announcements_read:
@@ -5629,11 +5747,13 @@ paths:
                 attachments_permission:
                   default: true
                   description: "DEPRECATED: Can the user create Bundles (aka Share Links)? Use the bundle permission instead."
+                  example: true
                   type: boolean
                   x-ms-summary: "DEPRECATED: Can the user create Bundles (aka Share Links)? Use the bundle permission instead."
                 authenticate_until:
                   default: 2000-01-01T01:00:00Z
                   description: Scheduled Date/Time at which user will be deactivated
+                  example: 2000-01-01T01:00:00Z
                   format: date-time
                   type: string
                   x-ms-summary: Scheduled Date/Time at which user will be deactivated
@@ -5646,6 +5766,7 @@ paths:
                     - sso
                     - none
                     - email_signup
+                  example: password
                   type: string
                   x-ms-summary: How is this user authenticated?
                 avatar_delete:
@@ -5680,16 +5801,19 @@ paths:
                 company:
                   default: ACME Corp.
                   description: User's company
+                  example: ACME Corp.
                   type: string
                   x-ms-summary: User's company
                 dav_permission:
                   default: true
                   description: Can the user connect with WebDAV?
+                  example: true
                   type: boolean
                   x-ms-summary: Can the user connect with WebDAV?
                 disabled:
                   default: true
                   description: Is user disabled? Disabled users cannot log in, and do not count for billing purposes.  Users can be automatically disabled after an inactivity period via a Site setting.
+                  example: true
                   type: boolean
                   x-ms-summary: Is user disabled? Disabled users cannot log in, and do not count for billing purposes.  Users can be automatically disabled after an inactivity period via a Site setting.
                 email:
@@ -5699,6 +5823,7 @@ paths:
                 ftp_permission:
                   default: true
                   description: Can the user access with FTP/FTPS?
+                  example: true
                   type: boolean
                   x-ms-summary: Can the user access with FTP/FTPS?
                 grant_permission:
@@ -5712,32 +5837,38 @@ paths:
                 header_text:
                   default: User-specific message.
                   description: Text to display to the user in the header of the UI
+                  example: User-specific message.
                   type: string
                   x-ms-summary: Text to display to the user in the header of the UI
                 language:
                   default: en
                   description: Preferred language
+                  example: en
                   type: string
                   x-ms-summary: Preferred language
                 name:
                   default: John Doe
                   description: User's full name
+                  example: John Doe
                   type: string
                   x-ms-summary: User's full name
                 notes:
                   default: Internal notes on this user.
                   description: Any internal notes on the user
+                  example: Internal notes on this user.
                   type: string
                   x-ms-summary: Any internal notes on the user
                 notification_daily_send_time:
                   default: 18
                   description: Hour of the day at which daily notifications should be sent. Can be in range 0 to 23
+                  example: 18
                   format: int32
                   type: integer
                   x-ms-summary: Hour of the day at which daily notifications should be sent. Can be in range 0 to 23
                 office_integration_enabled:
                   default: true
                   description: Enable integration with Office for the web?
+                  example: true
                   type: boolean
                   x-ms-summary: Enable integration with Office for the web?
                 password:
@@ -5751,12 +5882,14 @@ paths:
                 password_validity_days:
                   default: 1
                   description: Number of days to allow user to use the same password
+                  example: 1
                   format: int32
                   type: integer
                   x-ms-summary: Number of days to allow user to use the same password
                 receive_admin_alerts:
                   default: true
                   description: Should the user receive admin alerts such a certificate expiration notifications and overages?
+                  example: true
                   type: boolean
                   x-ms-summary: Should the user receive admin alerts such a certificate expiration notifications and overages?
                 require_2fa:
@@ -5766,36 +5899,43 @@ paths:
                     - use_system_setting
                     - always_require
                     - never_require
+                  example: always_require
                   type: string
                   x-ms-summary: 2FA required setting
                 require_password_change:
                   default: true
                   description: Is a password change required upon next user login?
+                  example: true
                   type: boolean
                   x-ms-summary: Is a password change required upon next user login?
                 restapi_permission:
                   default: true
                   description: Can this user access the REST API?
+                  example: true
                   type: boolean
                   x-ms-summary: Can this user access the REST API?
                 self_managed:
                   default: true
                   description: Does this user manage it's own credentials or is it a shared/bot user?
+                  example: true
                   type: boolean
                   x-ms-summary: Does this user manage it's own credentials or is it a shared/bot user?
                 sftp_permission:
                   default: true
                   description: Can the user access with SFTP?
+                  example: true
                   type: boolean
                   x-ms-summary: Can the user access with SFTP?
                 site_admin:
                   default: true
                   description: Is the user an administrator for this site?
+                  example: true
                   type: boolean
                   x-ms-summary: Is the user an administrator for this site?
                 skip_welcome_screen:
                   default: true
                   description: Skip Welcome page in the UI?
+                  example: true
                   type: boolean
                   x-ms-summary: Skip Welcome page in the UI?
                 ssl_required:
@@ -5805,22 +5945,26 @@ paths:
                     - use_system_setting
                     - always_require
                     - never_require
+                  example: always_require
                   type: string
                   x-ms-summary: SSL required setting
                 sso_strategy_id:
                   default: 1
                   description: SSO (Single Sign On) strategy ID for the user, if applicable.
+                  example: 1
                   format: int32
                   type: integer
                   x-ms-summary: SSO (Single Sign On) strategy ID for the user, if applicable.
                 subscribe_to_newsletter:
                   default: true
                   description: Is the user subscribed to the newsletter?
+                  example: true
                   type: boolean
                   x-ms-summary: Is the user subscribed to the newsletter?
                 time_zone:
                   default: Pacific Time (US & Canada)
                   description: User time zone
+                  example: Pacific Time (US & Canada)
                   type: string
                   x-ms-summary: User time zone
                 user_root:
@@ -5830,6 +5974,7 @@ paths:
                 username:
                   default: user
                   description: User's username
+                  example: user
                   type: string
                   x-ms-summary: User's username
               type: object
@@ -6670,107 +6815,128 @@ paths:
                 end_at:
                   default: 2000-01-01T01:00:00Z
                   description: End date/time of export range.
+                  example: 2000-01-01T01:00:00Z
                   format: date-time
                   type: string
                   x-ms-summary: End date/time of export range.
                 query_action:
                   default: read
                   description: "Filter results by this this action type. Valid values: `create`, `read`, `update`, `destroy`, `move`, `login`, `failedlogin`, `copy`, `user_create`, `user_update`, `user_destroy`, `group_create`, `group_update`, `group_destroy`, `permission_create`, `permission_destroy`, `api_key_create`, `api_key_update`, `api_key_destroy`"
+                  example: read
                   type: string
                   x-ms-summary: "Filter results by this this action type. Valid values: `create`, `read`, `update`, `destroy`, `move`, `login`, `failedlogin`, `copy`, `user_create`, `user_update`, `user_destroy`, `group_create`, `group_update`, `group_destroy`, `permission_create`, `permission_destroy`, `api_key_create`, `api_key_update`, `api_key_destroy`"
                 query_destination:
                   default: DestFolder
                   description: Return results that are file moves with this path as destination.
+                  example: DestFolder
                   type: string
                   x-ms-summary: Return results that are file moves with this path as destination.
                 query_failure_type:
                   default: bad_password
                   description: "If searching for Histories about login failures, this parameter restricts results to failures of this specific type.  Valid values: `expired_trial`, `account_overdue`, `locked_out`, `ip_mismatch`, `password_mismatch`, `site_mismatch`, `username_not_found`, `none`, `no_ftp_permission`, `no_web_permission`, `no_directory`, `errno_enoent`, `no_sftp_permission`, `no_dav_permission`, `no_restapi_permission`, `key_mismatch`, `region_mismatch`, `expired_access`, `desktop_ip_mismatch`, `desktop_api_key_not_used_quickly_enough`, `disabled`, `country_mismatch`"
+                  example: bad_password
                   type: string
                   x-ms-summary: "If searching for Histories about login failures, this parameter restricts results to failures of this specific type.  Valid values: `expired_trial`, `account_overdue`, `locked_out`, `ip_mismatch`, `password_mismatch`, `site_mismatch`, `username_not_found`, `none`, `no_ftp_permission`, `no_web_permission`, `no_directory`, `errno_enoent`, `no_sftp_permission`, `no_dav_permission`, `no_restapi_permission`, `key_mismatch`, `region_mismatch`, `expired_access`, `desktop_ip_mismatch`, `desktop_api_key_not_used_quickly_enough`, `disabled`, `country_mismatch`"
                 query_file_id:
                   default: "1"
                   description: Return results that are file actions related to the file indicated by this File ID
+                  example: "1"
                   type: string
                   x-ms-summary: Return results that are file actions related to the file indicated by this File ID
                 query_folder:
                   default: Folder
                   description: Return results that are file actions related to files or folders inside this folder path.
+                  example: Folder
                   type: string
                   x-ms-summary: Return results that are file actions related to files or folders inside this folder path.
                 query_interface:
                   default: ftp
                   description: "Filter results by this this interface type. Valid values: `web`, `ftp`, `robot`, `jsapi`, `webdesktopapi`, `sftp`, `dav`, `desktop`, `restapi`, `scim`, `office`"
+                  example: ftp
                   type: string
                   x-ms-summary: "Filter results by this this interface type. Valid values: `web`, `ftp`, `robot`, `jsapi`, `webdesktopapi`, `sftp`, `dav`, `desktop`, `restapi`, `scim`, `office`"
                 query_ip:
                   default: 127.0.0.1
                   description: Filter results by this IP address.
+                  example: 127.0.0.1
                   type: string
                   x-ms-summary: Filter results by this IP address.
                 query_parent_id:
                   default: "1"
                   description: Return results that are file actions inside the parent folder specified by this folder ID
+                  example: "1"
                   type: string
                   x-ms-summary: Return results that are file actions inside the parent folder specified by this folder ID
                 query_path:
                   default: MyFile.txt
                   description: Return results that are file actions related to this path.
+                  example: MyFile.txt
                   type: string
                   x-ms-summary: Return results that are file actions related to this path.
                 query_src:
                   default: SrcFolder
                   description: Return results that are file moves originating from this path.
+                  example: SrcFolder
                   type: string
                   x-ms-summary: Return results that are file moves originating from this path.
                 query_target_id:
                   default: "1"
                   description: If searching for Histories about specific objects (such as Users, or API Keys), this paremeter restricts results to objects that match this ID.
+                  example: "1"
                   type: string
                   x-ms-summary: If searching for Histories about specific objects (such as Users, or API Keys), this paremeter restricts results to objects that match this ID.
                 query_target_name:
                   default: full
                   description: If searching for Histories about Users, Groups or other objects with names, this parameter restricts results to objects with this name/username.
+                  example: full
                   type: string
                   x-ms-summary: If searching for Histories about Users, Groups or other objects with names, this parameter restricts results to objects with this name/username.
                 query_target_permission:
                   default: full
                   description: If searching for Histories about Permisisons, this parameter restricts results to permissions of this level.
+                  example: full
                   type: string
                   x-ms-summary: If searching for Histories about Permisisons, this parameter restricts results to permissions of this level.
                 query_target_permission_set:
                   default: desktop_app
                   description: If searching for Histories about API keys, this parameter restricts results to API keys with this permission set.
+                  example: desktop_app
                   type: string
                   x-ms-summary: If searching for Histories about API keys, this parameter restricts results to API keys with this permission set.
                 query_target_platform:
                   default: windows
                   description: If searching for Histories about API keys, this parameter restricts results to API keys associated with this platform.
+                  example: windows
                   type: string
                   x-ms-summary: If searching for Histories about API keys, this parameter restricts results to API keys associated with this platform.
                 query_target_user_id:
                   default: "1"
                   description: If searching for Histories about API keys, this parameter restricts results to API keys created by/for this user ID.
+                  example: "1"
                   type: string
                   x-ms-summary: If searching for Histories about API keys, this parameter restricts results to API keys created by/for this user ID.
                 query_target_username:
                   default: jerry
                   description: If searching for Histories about API keys, this parameter restricts results to API keys created by/for this username.
+                  example: jerry
                   type: string
                   x-ms-summary: If searching for Histories about API keys, this parameter restricts results to API keys created by/for this username.
                 query_user_id:
                   default: "1"
                   description: Return results that are actions performed by the user indiciated by this User ID
+                  example: "1"
                   type: string
                   x-ms-summary: Return results that are actions performed by the user indiciated by this User ID
                 query_username:
                   default: jerry
                   description: Filter results by this username.
+                  example: jerry
                   type: string
                   x-ms-summary: Filter results by this username.
                 start_at:
                   default: 2000-01-01T01:00:00Z
                   description: Start date/time of export range.
+                  example: 2000-01-01T01:00:00Z
                   format: date-time
                   type: string
                   x-ms-summary: Start date/time of export range.
@@ -7017,6 +7183,7 @@ paths:
                 company:
                   default: Acme Ltd
                   description: Company of recipient.
+                  example: Acme Ltd
                   type: string
                   x-ms-summary: Company of recipient.
                 inbox_id:
@@ -7027,16 +7194,19 @@ paths:
                 name:
                   default: John Smith
                   description: Name of recipient.
+                  example: John Smith
                   type: string
                   x-ms-summary: Name of recipient.
                 note:
                   default: Just a note.
                   description: Note to include in email.
+                  example: Just a note.
                   type: string
                   x-ms-summary: Note to include in email.
                 recipient:
                   default: johndoe@gmail.com
                   description: Email addresses to share this inbox with.
+                  example: johndoe@gmail.com
                   type: string
                   x-ms-summary: Email addresses to share this inbox with.
                 share_after_create:
@@ -7093,6 +7263,78 @@ paths:
       summary: Create Inbox Recipient
       tags:
         - inbox_recipients
+      x-authentication: []
+  /inbox_registrations:
+    get:
+      description: List Inbox Registrations
+      operationId: GetInboxRegistrations
+      parameters:
+        - description: Used for pagination.  Send a cursor value to resume an existing list from the point at which you left off.  Get a cursor from an existing list via the X-Files-Cursor-Next header.
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+          x-ms-summary: Used for pagination.  Send a cursor value to resume an existing list from the point at which you left off.  Get a cursor from an existing list via the X-Files-Cursor-Next header.
+        - description: "Number of records to show per page.  (Max: 10,000, 1,000 or less is recommended)."
+          in: query
+          name: per_page
+          required: false
+          schema:
+            format: int32
+            type: integer
+          x-ms-summary: "Number of records to show per page.  (Max: 10,000, 1,000 or less is recommended)."
+        - description: ID of the associated Inbox.
+          in: query
+          name: folder_behavior_id
+          required: true
+          schema:
+            format: int32
+            type: integer
+          x-ms-summary: ID of the associated Inbox.
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/InboxRegistrationEntity"
+                type: array
+          description: A list of InboxRegistrations objects.
+          x-ms-summary: A list of InboxRegistrations objects.
+        "400":
+          description: Bad Request
+          x-ms-summary: Bad Request
+        "401":
+          description: Unauthorized
+          x-ms-summary: Unauthorized
+        "403":
+          description: Forbidden
+          x-ms-summary: Forbidden
+        "404":
+          description: Not Found
+          x-ms-summary: Not Found
+        "405":
+          description: Method Not Allowed
+          x-ms-summary: Method Not Allowed
+        "409":
+          description: Conflict
+          x-ms-summary: Conflict
+        "412":
+          description: Precondition Failed
+          x-ms-summary: Precondition Failed
+        "422":
+          description: Unprocessable Entity
+          x-ms-summary: Unprocessable Entity
+        "423":
+          description: Locked
+          x-ms-summary: Locked
+        "429":
+          description: Too Many Requests
+          x-ms-summary: Too Many Requests
+      summary: List Inbox Registrations
+      tags:
+        - inbox_registrations
       x-authentication: []
   /inbox_uploads:
     get:
@@ -8492,6 +8734,7 @@ paths:
                 body:
                   default: We should upgrade our Files.com account!
                   description: Message body.
+                  example: We should upgrade our Files.com account!
                   type: string
                   x-ms-summary: Message body.
                 project_id:
@@ -8502,6 +8745,7 @@ paths:
                 subject:
                   default: Files.com Account Upgrade
                   description: Message subject.
+                  example: Files.com Account Upgrade
                   type: string
                   x-ms-summary: Message subject.
                 user_id:
@@ -8681,6 +8925,7 @@ paths:
                 body:
                   default: We should upgrade our Files.com account!
                   description: Message body.
+                  example: We should upgrade our Files.com account!
                   type: string
                   x-ms-summary: Message body.
                 project_id:
@@ -8691,6 +8936,7 @@ paths:
                 subject:
                   default: Files.com Account Upgrade
                   description: Message subject.
+                  example: Files.com Account Upgrade
                   type: string
                   x-ms-summary: Message subject.
               required:
@@ -8916,6 +9162,7 @@ paths:
                 send_interval:
                   default: daily
                   description: The time interval that notifications are aggregated by.  Can be `five_minutes`, `fifteen_minutes`, `hourly`, or `daily`.
+                  example: daily
                   type: string
                   x-ms-summary: The time interval that notifications are aggregated by.  Can be `five_minutes`, `fifteen_minutes`, `hourly`, or `daily`.
                 user_id:
@@ -9107,6 +9354,7 @@ paths:
                 send_interval:
                   default: daily
                   description: The time interval that notifications are aggregated by.  Can be `five_minutes`, `fifteen_minutes`, `hourly`, or `daily`.
+                  example: daily
                   type: string
                   x-ms-summary: The time interval that notifications are aggregated by.  Can be `five_minutes`, `fifteen_minutes`, `hourly`, or `daily`.
               type: object
@@ -10078,6 +10326,7 @@ paths:
                 title:
                   default: My Main Key
                   description: Internal reference for key.
+                  example: My Main Key
                   type: string
                   x-ms-summary: Internal reference for key.
               required:
@@ -10766,6 +11015,7 @@ paths:
                 otp:
                   default: "123456"
                   description: If this user has a 2FA device, provide its OTP or code here.
+                  example: "123456"
                   type: string
                   x-ms-summary: If this user has a 2FA device, provide its OTP or code here.
                 partial_session_id:
@@ -10775,11 +11025,13 @@ paths:
                 password:
                   default: password
                   description: Password for sign in
+                  example: password
                   type: string
                   x-ms-summary: Password for sign in
                 username:
                   default: username
                   description: Username to sign in as
+                  example: username
                   type: string
                   x-ms-summary: Username to sign in as
               type: object
@@ -13994,17 +14246,20 @@ paths:
                 expires_at:
                   default: 2000-01-01T01:00:00Z
                   description: API Key expiration date
+                  example: 2000-01-01T01:00:00Z
                   format: date-time
                   type: string
                   x-ms-summary: API Key expiration date
                 name:
                   default: My Main API Key
                   description: Internal name for the API Key.  For your use.
+                  example: My Main API Key
                   type: string
                   x-ms-summary: Internal name for the API Key.  For your use.
                 path:
                   default: shared/docs
                   description: Folder path restriction for this api key.
+                  example: shared/docs
                   type: string
                   x-ms-summary: Folder path restriction for this api key.
                 permission_set:
@@ -14016,6 +14271,7 @@ paths:
                     - desktop_app
                     - sync_app
                     - office_integration
+                  example: full
                   type: string
                   x-ms-summary: Permissions for this API Key.  Keys with the `desktop_app` permission set only have the ability to do the functions provided in our Desktop App (File and Share Link operations).  Additional permission sets may become available in the future, such as for a Site Admin to give a key with no administrator privileges.  If you have ideas for permission sets, please let us know.
               type: object
@@ -14162,6 +14418,7 @@ paths:
                 as2_partnership_name:
                   default: Test
                   description: AS2 Partnership Name
+                  example: Test
                   type: string
                   x-ms-summary: AS2 Partnership Name
                 public_key:
@@ -14622,6 +14879,7 @@ paths:
                 title:
                   default: My Main Key
                   description: Internal reference for key.
+                  example: My Main Key
                   type: string
                   x-ms-summary: Internal reference for key.
               required:
@@ -14693,11 +14951,13 @@ components:
                   - delete_file
                   - copy_file
                   - move_file
+                example: create_folder
                 type: string
                 x-ms-summary: Automation type
               destination:
                 default: destination
                 description: "DEPRECATED: Destination Path"
+                example: destination
                 type: string
                 x-ms-summary: "DEPRECATED: Destination Path"
               destination_replace_from:
@@ -14722,6 +14982,7 @@ components:
               interval:
                 default: year
                 description: "How often to run this automation? One of: `day`, `week`, `week_end`, `month`, `month_end`, `quarter`, `quarter_end`, `year`, `year_end`"
+                example: year
                 type: string
                 x-ms-summary: "How often to run this automation? One of: `day`, `week`, `week_end`, `month`, `month_end`, `quarter`, `quarter_end`, `year`, `year_end`"
               path:
@@ -14731,11 +14992,13 @@ components:
               schedule:
                 default: '{"days_of_week": [ 0, 1, 3 ], "times_of_day": [ "7:30", "11:30" ], "time_zone": "Eastern Time (US & Canada)"}'
                 description: Custom schedule for running this automation.
+                example: '{"days_of_week": [ 0, 1, 3 ], "times_of_day": [ "7:30", "11:30" ], "time_zone": "Eastern Time (US & Canada)"}'
                 type: object
                 x-ms-summary: Custom schedule for running this automation.
               source:
                 default: source
                 description: Source Path
+                example: source
                 type: string
                 x-ms-summary: Source Path
               trigger:
@@ -14748,11 +15011,13 @@ components:
                   - webhook
                   - email
                   - action
+                example: realtime
                 type: string
                 x-ms-summary: "How this automation is triggered to run. One of: `realtime`, `daily`, `custom_schedule`, `webhook`, `email`, or `action`."
               trigger_action_path:
                 default: path/to/file/or/folder
                 description: If trigger is `action`, this is the path to watch for the specified trigger actions.
+                example: path/to/file/or/folder
                 type: string
                 x-ms-summary: If trigger is `action`, this is the path to watch for the specified trigger actions.
               trigger_actions:
@@ -14769,6 +15034,7 @@ components:
               value:
                 default: '{"limit": "1"}'
                 description: A Hash of attributes specific to the automation type.
+                example: '{"limit": "1"}'
                 type: object
                 x-ms-summary: A Hash of attributes specific to the automation type.
             required:
@@ -14831,6 +15097,7 @@ components:
               allowed_ips:
                 default: 127.0.0.1
                 description: A list of allowed IPs if applicable.  Newline delimited
+                example: 127.0.0.1
                 type: string
                 x-ms-summary: A list of allowed IPs if applicable.  Newline delimited
               announcements_read:
@@ -14840,11 +15107,13 @@ components:
               attachments_permission:
                 default: true
                 description: "DEPRECATED: Can the user create Bundles (aka Share Links)? Use the bundle permission instead."
+                example: true
                 type: boolean
                 x-ms-summary: "DEPRECATED: Can the user create Bundles (aka Share Links)? Use the bundle permission instead."
               authenticate_until:
                 default: 2000-01-01T01:00:00Z
                 description: Scheduled Date/Time at which user will be deactivated
+                example: 2000-01-01T01:00:00Z
                 format: date-time
                 type: string
                 x-ms-summary: Scheduled Date/Time at which user will be deactivated
@@ -14857,6 +15126,7 @@ components:
                   - sso
                   - none
                   - email_signup
+                example: password
                 type: string
                 x-ms-summary: How is this user authenticated?
               avatar_delete:
@@ -14891,16 +15161,19 @@ components:
               company:
                 default: ACME Corp.
                 description: User's company
+                example: ACME Corp.
                 type: string
                 x-ms-summary: User's company
               dav_permission:
                 default: true
                 description: Can the user connect with WebDAV?
+                example: true
                 type: boolean
                 x-ms-summary: Can the user connect with WebDAV?
               disabled:
                 default: true
                 description: Is user disabled? Disabled users cannot log in, and do not count for billing purposes.  Users can be automatically disabled after an inactivity period via a Site setting.
+                example: true
                 type: boolean
                 x-ms-summary: Is user disabled? Disabled users cannot log in, and do not count for billing purposes.  Users can be automatically disabled after an inactivity period via a Site setting.
               email:
@@ -14910,6 +15183,7 @@ components:
               ftp_permission:
                 default: true
                 description: Can the user access with FTP/FTPS?
+                example: true
                 type: boolean
                 x-ms-summary: Can the user access with FTP/FTPS?
               grant_permission:
@@ -14928,32 +15202,38 @@ components:
               header_text:
                 default: User-specific message.
                 description: Text to display to the user in the header of the UI
+                example: User-specific message.
                 type: string
                 x-ms-summary: Text to display to the user in the header of the UI
               language:
                 default: en
                 description: Preferred language
+                example: en
                 type: string
                 x-ms-summary: Preferred language
               name:
                 default: John Doe
                 description: User's full name
+                example: John Doe
                 type: string
                 x-ms-summary: User's full name
               notes:
                 default: Internal notes on this user.
                 description: Any internal notes on the user
+                example: Internal notes on this user.
                 type: string
                 x-ms-summary: Any internal notes on the user
               notification_daily_send_time:
                 default: 18
                 description: Hour of the day at which daily notifications should be sent. Can be in range 0 to 23
+                example: 18
                 format: int32
                 type: integer
                 x-ms-summary: Hour of the day at which daily notifications should be sent. Can be in range 0 to 23
               office_integration_enabled:
                 default: true
                 description: Enable integration with Office for the web?
+                example: true
                 type: boolean
                 x-ms-summary: Enable integration with Office for the web?
               password:
@@ -14967,12 +15247,14 @@ components:
               password_validity_days:
                 default: 1
                 description: Number of days to allow user to use the same password
+                example: 1
                 format: int32
                 type: integer
                 x-ms-summary: Number of days to allow user to use the same password
               receive_admin_alerts:
                 default: true
                 description: Should the user receive admin alerts such a certificate expiration notifications and overages?
+                example: true
                 type: boolean
                 x-ms-summary: Should the user receive admin alerts such a certificate expiration notifications and overages?
               require_2fa:
@@ -14982,36 +15264,43 @@ components:
                   - use_system_setting
                   - always_require
                   - never_require
+                example: always_require
                 type: string
                 x-ms-summary: 2FA required setting
               require_password_change:
                 default: true
                 description: Is a password change required upon next user login?
+                example: true
                 type: boolean
                 x-ms-summary: Is a password change required upon next user login?
               restapi_permission:
                 default: true
                 description: Can this user access the REST API?
+                example: true
                 type: boolean
                 x-ms-summary: Can this user access the REST API?
               self_managed:
                 default: true
                 description: Does this user manage it's own credentials or is it a shared/bot user?
+                example: true
                 type: boolean
                 x-ms-summary: Does this user manage it's own credentials or is it a shared/bot user?
               sftp_permission:
                 default: true
                 description: Can the user access with SFTP?
+                example: true
                 type: boolean
                 x-ms-summary: Can the user access with SFTP?
               site_admin:
                 default: true
                 description: Is the user an administrator for this site?
+                example: true
                 type: boolean
                 x-ms-summary: Is the user an administrator for this site?
               skip_welcome_screen:
                 default: true
                 description: Skip Welcome page in the UI?
+                example: true
                 type: boolean
                 x-ms-summary: Skip Welcome page in the UI?
               ssl_required:
@@ -15021,22 +15310,26 @@ components:
                   - use_system_setting
                   - always_require
                   - never_require
+                example: always_require
                 type: string
                 x-ms-summary: SSL required setting
               sso_strategy_id:
                 default: 1
                 description: SSO (Single Sign On) strategy ID for the user, if applicable.
+                example: 1
                 format: int32
                 type: integer
                 x-ms-summary: SSO (Single Sign On) strategy ID for the user, if applicable.
               subscribe_to_newsletter:
                 default: true
                 description: Is the user subscribed to the newsletter?
+                example: true
                 type: boolean
                 x-ms-summary: Is the user subscribed to the newsletter?
               time_zone:
                 default: Pacific Time (US & Canada)
                 description: User time zone
+                example: Pacific Time (US & Canada)
                 type: string
                 x-ms-summary: User time zone
               user_root:
@@ -15046,6 +15339,7 @@ components:
               username:
                 default: user
                 description: User's username
+                example: user
                 type: string
                 x-ms-summary: User's username
             type: object
@@ -15057,17 +15351,20 @@ components:
               expires_at:
                 default: 2000-01-01T01:00:00Z
                 description: API Key expiration date
+                example: 2000-01-01T01:00:00Z
                 format: date-time
                 type: string
                 x-ms-summary: API Key expiration date
               name:
                 default: My Main API Key
                 description: Internal name for the API Key.  For your use.
+                example: My Main API Key
                 type: string
                 x-ms-summary: Internal name for the API Key.  For your use.
               path:
                 default: shared/docs
                 description: Folder path restriction for this api key.
+                example: shared/docs
                 type: string
                 x-ms-summary: Folder path restriction for this api key.
               permission_set:
@@ -15079,6 +15376,7 @@ components:
                   - desktop_app
                   - sync_app
                   - office_integration
+                example: full
                 type: string
                 x-ms-summary: Permissions for this API Key.  Keys with the `desktop_app` permission set only have the ability to do the functions provided in our Desktop App (File and Share Link operations).  Additional permission sets may become available in the future, such as for a Site Admin to give a key with no administrator privileges.  If you have ideas for permission sets, please let us know.
               user_id:
@@ -15095,11 +15393,13 @@ components:
               body:
                 default: "[Legal body text]"
                 description: Body text of Clickwrap (supports Markdown formatting).
+                example: "[Legal body text]"
                 type: string
                 x-ms-summary: Body text of Clickwrap (supports Markdown formatting).
               name:
                 default: Example Site NDA for Files.com Use
                 description: Name of the Clickwrap agreement (used when selecting from multiple Clickwrap agreements.)
+                example: Example Site NDA for Files.com Use
                 type: string
                 x-ms-summary: Name of the Clickwrap agreement (used when selecting from multiple Clickwrap agreements.)
               use_with_bundles:
@@ -15163,11 +15463,13 @@ components:
               azure_blob_storage_account:
                 default: storage-account-name
                 description: Azure Blob Storage Account name
+                example: storage-account-name
                 type: string
                 x-ms-summary: Azure Blob Storage Account name
               azure_blob_storage_container:
                 default: container-name
                 description: Azure Blob Storage Container name
+                example: container-name
                 type: string
                 x-ms-summary: Azure Blob Storage Container name
               backblaze_b2_application_key:
@@ -15177,6 +15479,7 @@ components:
               backblaze_b2_bucket:
                 default: my-bucket
                 description: Backblaze B2 Cloud Storage Bucket name
+                example: my-bucket
                 type: string
                 x-ms-summary: Backblaze B2 Cloud Storage Bucket name
               backblaze_b2_key_id:
@@ -15186,11 +15489,13 @@ components:
               backblaze_b2_s3_endpoint:
                 default: s3.us-west-001.backblazeb2.com
                 description: Backblaze B2 Cloud Storage S3 Endpoint
+                example: s3.us-west-001.backblazeb2.com
                 type: string
                 x-ms-summary: Backblaze B2 Cloud Storage S3 Endpoint
               google_cloud_storage_bucket:
                 default: my-bucket
                 description: Google Cloud Storage bucket name
+                example: my-bucket
                 type: string
                 x-ms-summary: Google Cloud Storage bucket name
               google_cloud_storage_credentials_json:
@@ -15200,22 +15505,26 @@ components:
               google_cloud_storage_project_id:
                 default: my-project
                 description: Google Cloud Project ID
+                example: my-project
                 type: string
                 x-ms-summary: Google Cloud Project ID
               hostname:
                 default: remote-server.com
                 description: Hostname or IP address
+                example: remote-server.com
                 type: string
                 x-ms-summary: Hostname or IP address
               max_connections:
                 default: 1
                 description: Max number of parallel connections.  Ignored for S3 connections (we will parallelize these as much as possible).
+                example: 1
                 format: int32
                 type: integer
                 x-ms-summary: Max number of parallel connections.  Ignored for S3 connections (we will parallelize these as much as possible).
               name:
                 default: My Remote server
                 description: Internal name for your reference
+                example: My Remote server
                 type: string
                 x-ms-summary: Internal name for your reference
               one_drive_account_type:
@@ -15224,6 +15533,7 @@ components:
                 enum:
                   - personal
                   - business_other
+                example: personal
                 type: string
                 x-ms-summary: Either personal or business_other account types
               password:
@@ -15233,6 +15543,7 @@ components:
               port:
                 default: 1
                 description: Port for remote server.  Not needed for S3.
+                example: 1
                 format: int32
                 type: integer
                 x-ms-summary: Port for remote server.  Not needed for S3.
@@ -15247,16 +15558,19 @@ components:
               rackspace_container:
                 default: my-container
                 description: The name of the container (top level directory) where files will sync.
+                example: my-container
                 type: string
                 x-ms-summary: The name of the container (top level directory) where files will sync.
               rackspace_region:
                 default: dfw
                 description: Three letter airport code for Rackspace region. See https://support.rackspace.com/how-to/about-regions/
+                example: dfw
                 type: string
                 x-ms-summary: Three letter airport code for Rackspace region. See https://support.rackspace.com/how-to/about-regions/
               rackspace_username:
                 default: rackspaceuser
                 description: Rackspace username used to login to the Rackspace Cloud Control Panel.
+                example: rackspaceuser
                 type: string
                 x-ms-summary: Rackspace username used to login to the Rackspace Cloud Control Panel.
               reset_authentication:
@@ -15266,11 +15580,13 @@ components:
               s3_bucket:
                 default: my-bucket
                 description: S3 bucket name
+                example: my-bucket
                 type: string
                 x-ms-summary: S3 bucket name
               s3_region:
                 default: us-east-1
                 description: S3 region
+                example: us-east-1
                 type: string
                 x-ms-summary: S3 region
               server_certificate:
@@ -15279,11 +15595,13 @@ components:
                 enum:
                   - require_match
                   - allow_any
+                example: require_match
                 type: string
                 x-ms-summary: Remote server certificate
               server_host_key:
                 default: "[public key]"
                 description: Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
+                example: "[public key]"
                 type: string
                 x-ms-summary: Remote server SSH Host Key. If provided, we will require that the server host key matches the provided key. Uses OpenSSH format similar to what would go into ~/.ssh/known_hosts
               server_type:
@@ -15303,6 +15621,7 @@ components:
                   - dropbox
                   - google_drive
                   - azure
+                example: s3
                 type: string
                 x-ms-summary: Remote server type.
               ssl:
@@ -15313,6 +15632,7 @@ components:
                   - require
                   - require_implicit
                   - never
+                example: if_available
                 type: string
                 x-ms-summary: Should we require SSL?
               ssl_certificate:
@@ -15322,6 +15642,7 @@ components:
               username:
                 default: user
                 description: Remote server username.  Not needed for S3 buckets.
+                example: user
                 type: string
                 x-ms-summary: Remote server username.  Not needed for S3 buckets.
               wasabi_access_key:
@@ -15331,11 +15652,13 @@ components:
               wasabi_bucket:
                 default: us-west-1
                 description: Wasabi region
+                example: us-west-1
                 type: string
                 x-ms-summary: Wasabi region
               wasabi_region:
                 default: my-bucket
                 description: Wasabi Bucket name
+                example: my-bucket
                 type: string
                 x-ms-summary: Wasabi Bucket name
               wasabi_secret_key:
@@ -15351,31 +15674,37 @@ components:
               action:
                 default: test
                 description: action for test body
+                example: test
                 type: string
                 x-ms-summary: action for test body
               body:
                 default: test-param => testvalue
                 description: Additional body parameters.
+                example: test-param => testvalue
                 type: object
                 x-ms-summary: Additional body parameters.
               encoding:
                 default: RAW
                 description: HTTP encoding method.  Can be JSON, XML, or RAW (form data).
+                example: RAW
                 type: string
                 x-ms-summary: HTTP encoding method.  Can be JSON, XML, or RAW (form data).
               headers:
                 default: x-test-header => testvalue
                 description: Additional request headers.
+                example: x-test-header => testvalue
                 type: object
                 x-ms-summary: Additional request headers.
               method:
                 default: GET
                 description: HTTP method(GET or POST).
+                example: GET
                 type: string
                 x-ms-summary: HTTP method(GET or POST).
               url:
                 default: https://www.site.com/...
                 description: URL for testing the webhook.
+                example: https://www.site.com/...
                 type: string
                 x-ms-summary: URL for testing the webhook.
             required:
@@ -15390,6 +15719,7 @@ components:
               as2_partnership_name:
                 default: Test
                 description: AS2 Partnership Name
+                example: Test
                 type: string
                 x-ms-summary: AS2 Partnership Name
               public_key:
@@ -15417,6 +15747,7 @@ components:
               title:
                 default: My Main Key
                 description: Internal reference for key.
+                example: My Main Key
                 type: string
                 x-ms-summary: Internal reference for key.
               user_id:
@@ -16480,6 +16811,7 @@ components:
       x-docs: >
         Bundle recipients are people who have had a bundle shared with them.
     BundleRegistrationEntity:
+      description: List Bundle Registrations
       properties:
         code:
           description: Registration cookie code
@@ -16511,7 +16843,8 @@ components:
           example: account
           type: string
       type: object
-      x-docs: null
+      x-docs: >
+        BundleRegistrations record when a Bundle user fills out the form to access the bundle.
     ClickwrapEntity:
       description: Create Clickwrap
       properties:
@@ -17303,6 +17636,7 @@ components:
       x-docs: >
         Inbox recipients are people who have had an inbox shared with them.
     InboxRegistrationEntity:
+      description: List Inbox Registrations
       properties:
         code:
           description: Registration cookie code
@@ -17330,7 +17664,8 @@ components:
           example: account
           type: string
       type: object
-      x-docs: null
+      x-docs: >
+        InboxRegistrations record when an Inbox user fills out the form to access the inbox.
     InboxUploadEntity:
       description: List Inbox Uploads
       properties:
@@ -17386,7 +17721,10 @@ components:
           enum:
             - invoice
             - adjustment
-            - overage
+            - usage_overage
+            - user_overage
+            - addon_subscription
+            - misc_fee
           example: invoice
           type: string
         updated_at:
@@ -19978,8 +20316,14 @@ x-errors:
     title: Folder Must Not Be A File
     type: bad-request/folder-must-not-be-a-file
   - http-code: 400
+    title: Invalid Body
+    type: bad-request/invalid-body
+  - http-code: 400
     title: Invalid Cursor
     type: bad-request/invalid-cursor
+  - http-code: 400
+    title: Invalid Etags
+    type: bad-request/invalid-etags
   - http-code: 400
     title: Invalid Filter Combination
     type: bad-request/invalid-filter-combination
@@ -20002,11 +20346,23 @@ x-errors:
     title: Invalid Upload Offset
     type: bad-request/invalid-upload-offset
   - http-code: 400
+    title: Invalid Upload Part Gap
+    type: bad-request/invalid-upload-part-gap
+  - http-code: 400
+    title: Invalid Upload Part Size
+    type: bad-request/invalid-upload-part-size
+  - http-code: 400
+    title: Method Not Allowed
+    type: bad-request/method-not-allowed
+  - http-code: 400
     title: No Valid Input Params
     type: bad-request/no-valid-input-params
   - http-code: 400
     title: Operation On Non Scim Resource
     type: bad-request/operation-on-non-scim-resource
+  - http-code: 400
+    title: Part Number Too Large
+    type: bad-request/part-number-too-large
   - http-code: 400
     title: Reauthentication Needed Fields
     type: bad-request/reauthentication-needed-fields
@@ -20091,6 +20447,9 @@ x-errors:
   - http-code: 403
     title: Billing Permission Required
     type: not-authorized/billing-permission-required
+  - http-code: 403
+    title: Bundle Maximum Uses Reached
+    type: not-authorized/bundle-maximum-uses-reached
   - http-code: 403
     title: Cannot Login While Using Key
     type: not-authorized/cannot-login-while-using-key
@@ -20206,11 +20565,17 @@ x-errors:
     title: Destination Exists
     type: processing-failure/destination-exists
   - http-code: 422
+    title: Destination Folder Limited
+    type: processing-failure/destination-folder-limited
+  - http-code: 422
     title: Destination Parent Conflict
     type: processing-failure/destination-parent-conflict
   - http-code: 409
     title: Destination Parent Does Not Exist
     type: processing-failure/destination-parent-does-not-exist
+  - http-code: 422
+    title: Expired Public Key
+    type: processing-failure/expired-public-key
   - http-code: 422
     title: Failed To Change Password
     type: processing-failure/failed-to-change-password
@@ -20223,6 +20588,9 @@ x-errors:
   - http-code: 422
     title: File Pending Processing
     type: processing-failure/file-pending-processing
+  - http-code: 422
+    title: File Uploaded To Wrong Region
+    type: processing-failure/file-uploaded-to-wrong-region
   - http-code: 403
     title: Folder Locked
     type: processing-failure/folder-locked
@@ -20242,8 +20610,23 @@ x-errors:
     title: Invalid Bundle Code
     type: processing-failure/invalid-bundle-code
   - http-code: 422
+    title: Invalid File Type
+    type: processing-failure/invalid-file-type
+  - http-code: 422
+    title: Invalid Filename
+    type: processing-failure/invalid-filename
+  - http-code: 422
+    title: Invalid Range
+    type: processing-failure/invalid-range
+  - http-code: 422
     title: Model Save Error
     type: processing-failure/model-save-error
+  - http-code: 422
+    title: Multipart Uploads Required For Remotes
+    type: processing-failure/multipart-uploads-required-for-remotes
+  - http-code: 422
+    title: Multiple Processing Errors
+    type: processing-failure/multiple-processing-errors
   - http-code: 422
     title: Remote Server Error
     type: processing-failure/remote-server-error
@@ -20256,6 +20639,9 @@ x-errors:
   - http-code: 422
     title: Two Factor Authentication Code Already Sent
     type: processing-failure/two-factor-authentication-code-already-sent
+  - http-code: 422
+    title: Updates Not Allowed For Remotes
+    type: processing-failure/updates-not-allowed-for-remotes
   - http-code: 429
     title: Reauthentication Rate Limited
     type: rate-limited/reauthentication-rate-limited
