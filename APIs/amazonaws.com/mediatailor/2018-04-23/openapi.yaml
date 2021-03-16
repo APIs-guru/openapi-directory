@@ -874,58 +874,6 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/channel/{channelName}/programs':
-    get:
-      operationId: ListPrograms
-      description: Retrieves a list of programs on a specific channel.
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListProgramsResponse'
-      parameters:
-        - name: channelName
-          in: path
-          required: true
-          description: The identifier for the channel you are working on.
-          schema:
-            type: string
-        - name: maxResults
-          in: query
-          required: false
-          description: Upper bound on number of records to return. The maximum number of results is 100.
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 100
-        - name: nextToken
-          in: query
-          required: false
-          description: Pagination token from the GET list request. Use the token to fetch the next page of results.
-          schema:
-            type: string
-        - name: MaxResults
-          in: query
-          schema:
-            type: string
-          description: Pagination limit
-          required: false
-        - name: NextToken
-          in: query
-          schema:
-            type: string
-          description: Pagination token
-          required: false
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /sourceLocations:
     get:
       operationId: ListSourceLocations
@@ -1852,17 +1800,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: Pagination token returned by the GET list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
-    ListProgramsResponse:
-      type: object
-      properties:
-        Items:
-          allOf:
-            - $ref: '#/components/schemas/__listOfProgram'
-            - description: An array containing the programs for a channel.
-        NextToken:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: Pagination token from the list request. Use the token to fetch the next page of results.
     ListSourceLocationsResponse:
       type: object
       properties:
@@ -2561,14 +2498,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PlaybackConfiguration'
-    ListProgramsRequest:
-      type: object
-      title: ListProgramsRequest
-      properties: {}
-    __listOfProgram:
-      type: array
-      items:
-        $ref: '#/components/schemas/Program'
     ListSourceLocationsRequest:
       type: object
       title: ListSourceLocationsRequest
@@ -2667,48 +2596,6 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: 'The URL prefix for the parent manifest for the stream, minus the asset ID. The maximum length is 512 characters.'
       description: 'Creates a playback configuration. For information about MediaTailor configurations, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html">Working with configurations in AWS Elemental MediaTailor</a>.'
-    Program:
-      required:
-        - VodSourceName
-        - ChannelName
-        - SourceLocationName
-        - Arn
-        - ProgramName
-      type: object
-      properties:
-        AdBreaks:
-          allOf:
-            - $ref: '#/components/schemas/__listOfAdBreak'
-            - description: The ad break configuration settings.
-        Arn:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The ARN of the program.
-        ChannelName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the channel that the program belongs to.
-        CreationTime:
-          allOf:
-            - $ref: '#/components/schemas/__timestampUnix'
-            - description: The timestamp of when the program was created.
-        LastModifiedTime:
-          allOf:
-            - $ref: '#/components/schemas/__timestampUnix'
-            - description: The timestamp of when the program was last modified.
-        ProgramName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the program.
-        SourceLocationName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name of the source location.
-        VodSourceName:
-          allOf:
-            - $ref: '#/components/schemas/__string'
-            - description: The name that's used to refer to a VOD source.
-      description: Program configuration parameters.
     PutChannelPolicyRequest:
       required:
         - Policy

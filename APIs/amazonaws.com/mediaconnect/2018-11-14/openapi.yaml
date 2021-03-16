@@ -462,6 +462,12 @@ paths:
                         - xml:
                             name: maxLatency
                           description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+                    MinLatency:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: minLatency
+                          description: 'The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.'
                     Name:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -1544,6 +1550,9 @@ paths:
                 maxLatency:
                   description: The maximum latency in milliseconds for Zixi-based streams.
                   type: integer
+                minLatency:
+                  description: 'The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.'
+                  type: integer
                 port:
                   description: The port to use when content is distributed to this output.
                   type: integer
@@ -1556,6 +1565,7 @@ paths:
                     - rtp
                     - zixi-pull
                     - rist
+                    - srt-listener
                 remoteId:
                   description: The remote ID for the Zixi-pull stream.
                   type: string
@@ -1782,6 +1792,9 @@ paths:
                 maxLatency:
                   description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
                   type: integer
+                minLatency:
+                  description: 'The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.'
+                  type: integer
                 protocol:
                   description: The protocol that is used by the source.
                   type: string
@@ -1791,6 +1804,7 @@ paths:
                     - rtp
                     - zixi-pull
                     - rist
+                    - srt-listener
                 streamId:
                   description: The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
                   type: string
@@ -2348,6 +2362,12 @@ components:
             - xml:
                 name: maxLatency
               description: The maximum latency in milliseconds for Zixi-based streams.
+        MinLatency:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: minLatency
+              description: 'The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.'
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2452,6 +2472,12 @@ components:
             - xml:
                 name: maxLatency
               description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+        MinLatency:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: minLatency
+              description: 'The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.'
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2584,7 +2610,6 @@ components:
     Encryption:
       type: object
       required:
-        - Algorithm
         - RoleArn
       properties:
         Algorithm:
@@ -2654,6 +2679,7 @@ components:
         - rtp
         - zixi-pull
         - rist
+        - srt-listener
     State:
       type: string
       enum:
@@ -2927,6 +2953,7 @@ components:
       enum:
         - speke
         - static-key
+        - srt-password
     UpdateFlowOutputResponse:
       type: object
       properties:
@@ -3696,6 +3723,12 @@ components:
             - xml:
                 name: maxLatency
               description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+        MinLatency:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: minLatency
+              description: 'The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.'
         Protocol:
           allOf:
             - $ref: '#/components/schemas/Protocol'
@@ -4002,6 +4035,12 @@ components:
             - xml:
                 name: maxLatency
               description: The maximum latency in milliseconds for Zixi-based streams.
+        MinLatency:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: minLatency
+              description: 'The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.'
         Port:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -4089,6 +4128,12 @@ components:
             - xml:
                 name: maxLatency
               description: The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+        MinLatency:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: minLatency
+              description: 'The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.'
         Protocol:
           allOf:
             - $ref: '#/components/schemas/Protocol'

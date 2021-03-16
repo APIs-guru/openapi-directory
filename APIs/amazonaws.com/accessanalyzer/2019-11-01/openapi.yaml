@@ -418,7 +418,7 @@ paths:
   '/analyzer/{analyzerName}/archive-rule':
     put:
       operationId: CreateArchiveRule
-      description: Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.
+      description: '<p>Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.</p> <p>To learn about filter keys that you can use to create an archive rule, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html">Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>'
       responses:
         '200':
           description: Success
@@ -1737,6 +1737,96 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /policy/validation:
+    post:
+      operationId: ValidatePolicy
+      description: 'Requests the validation of a policy and returns a list of findings. The findings help you identify issues and provide actionable recommendations to resolve the issue and enable you to author functional policies that meet security best practices. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidatePolicyResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in the response.
+          schema:
+            type: integer
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used for pagination of results returned.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - policyDocument
+                - policyType
+              properties:
+                locale:
+                  description: The locale to use for localizing the findings.
+                  type: string
+                  enum:
+                    - DE
+                    - EN
+                    - ES
+                    - FR
+                    - IT
+                    - JA
+                    - KO
+                    - PT_BR
+                    - ZH_CN
+                    - ZH_TW
+                policyDocument:
+                  description: The JSON policy document to use as the content for the policy.
+                  type: string
+                policyType:
+                  description: '<p>The type of policy to validate. Identity policies grant permissions to IAM principals. Identity policies include managed and inline policies for IAM roles, users, and groups. They also include service-control policies (SCPs) that are attached to an AWS organization, organizational unit (OU), or an account.</p> <p>Resource policies grant permissions on AWS resources. Resource policies include trust policies for IAM roles and bucket policies for S3 buckets. You can provide a generic input such as identity policy or resource policy or a specific input such as managed policy or S3 bucket policy. </p>'
+                  type: string
+                  enum:
+                    - IDENTITY_POLICY
+                    - RESOURCE_POLICY
+                    - SERVICE_CONTROL_POLICY
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -2022,6 +2112,19 @@ components:
       description: The response to the request.
     FindingId:
       type: string
+    ValidatePolicyResponse:
+      type: object
+      required:
+        - findings
+      properties:
+        findings:
+          allOf:
+            - $ref: '#/components/schemas/ValidatePolicyFindingList'
+            - description: The list of findings in a policy returned by Access Analyzer based on its suite of policy checks.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token used for pagination of results returned.
     AccessPointArn:
       type: string
       pattern: 'arn:[^:]*:s3:[^:]*:[^:]*:accesspoint/.*$'
@@ -2850,6 +2953,8 @@ components:
       type: object
       properties: {}
       description: This configuration sets the Amazon S3 access point network origin to <code>Internet</code>.
+    IssueCode:
+      type: string
     IssuingAccount:
       type: string
     KmsConstraintsKey:
@@ -2932,6 +3037,8 @@ components:
       additionalProperties:
         $ref: '#/components/schemas/KmsKeyPolicy'
     KmsKeyPolicy:
+      type: string
+    LearnMoreLink:
       type: string
     Token:
       type: string
@@ -3038,6 +3145,57 @@ components:
       title: ListTagsForResourceRequest
       properties: {}
       description: Retrieves a list of tags applied to the specified resource.
+    Locale:
+      type: string
+      enum:
+        - DE
+        - EN
+        - ES
+        - FR
+        - IT
+        - JA
+        - KO
+        - PT_BR
+        - ZH_CN
+        - ZH_TW
+    PathElementList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PathElement'
+    Span:
+      type: object
+      required:
+        - end
+        - start
+      properties:
+        end:
+          allOf:
+            - $ref: '#/components/schemas/Position'
+            - description: The end position of the span (exclusive).
+        start:
+          allOf:
+            - $ref: '#/components/schemas/Position'
+            - description: The start position of the span (inclusive).
+      description: A span in a policy. The span consists of a start position (inclusive) and end position (exclusive).
+    Location:
+      type: object
+      required:
+        - path
+        - span
+      properties:
+        path:
+          allOf:
+            - $ref: '#/components/schemas/PathElementList'
+            - description: 'A path in a policy, represented as a sequence of path elements.'
+        span:
+          allOf:
+            - $ref: '#/components/schemas/Span'
+            - description: A span in a policy.
+      description: A location in a policy that is represented as a path through the JSON representation and a corresponding span.
+    LocationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Location'
     VpcConfiguration:
       type: object
       required:
@@ -3058,8 +3216,71 @@ components:
         vpcConfiguration:
           $ref: '#/components/schemas/VpcConfiguration'
       description: 'The proposed <code>InternetConfiguration</code> or <code>VpcConfiguration</code> to apply to the Amazon S3 Access point. You can make the access point accessible from the internet, or you can specify that all requests made through that access point must originate from a specific virtual private cloud (VPC). You can specify only one type of network configuration. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html">Creating access points</a>.'
+    Substring:
+      type: object
+      required:
+        - length
+        - start
+      properties:
+        length:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The length of the substring.
+        start:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The start index of the substring, starting from 0.'
+      description: A reference to a substring of a literal string in a JSON document.
+    PathElement:
+      type: object
+      properties:
+        index:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Refers to an index in a JSON array.
+        key:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Refers to a key in a JSON object.
+        substring:
+          allOf:
+            - $ref: '#/components/schemas/Substring'
+            - description: Refers to a substring of a literal string in a JSON object.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Refers to the value associated with a given key in a JSON object.
+      description: A single element in a path through the JSON representation of a policy.
+    PolicyDocument:
+      type: string
     PolicyName:
       type: string
+    PolicyType:
+      type: string
+      enum:
+        - IDENTITY_POLICY
+        - RESOURCE_POLICY
+        - SERVICE_CONTROL_POLICY
+    Position:
+      type: object
+      required:
+        - column
+        - line
+        - offset
+      properties:
+        column:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The column of the position, starting from 0.'
+        line:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The line of the position, starting from 1.'
+        offset:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The offset within the policy that corresponds to the position, starting from 0.'
+      description: A position in a policy.
     ReasonCode:
       type: string
       enum:
@@ -3208,6 +3429,66 @@ components:
             - $ref: '#/components/schemas/FindingStatusUpdate'
             - description: The state represents the action to take to update the finding Status. Use <code>ARCHIVE</code> to change an Active finding to an Archived finding. Use <code>ACTIVE</code> to change an Archived finding to an Active finding.
       description: Updates findings with the new values provided in the request.
+    ValidatePolicyFindingType:
+      type: string
+      enum:
+        - ERROR
+        - SECURITY_WARNING
+        - SUGGESTION
+        - WARNING
+    ValidatePolicyFinding:
+      type: object
+      required:
+        - findingDetails
+        - findingType
+        - issueCode
+        - learnMoreLink
+        - locations
+      properties:
+        findingDetails:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A localized message that explains the finding and provides guidance on how to address it.
+        findingType:
+          allOf:
+            - $ref: '#/components/schemas/ValidatePolicyFindingType'
+            - description: <p>The impact of the finding.</p> <p>Security warnings report when the policy allows access that we consider overly permissive.</p> <p>Errors report when a part of the policy is not functional.</p> <p>Warnings report non-security issues when a policy does not conform to policy writing best practices.</p> <p>Suggestions recommend stylistic improvements in the policy that do not impact access.</p>
+        issueCode:
+          allOf:
+            - $ref: '#/components/schemas/IssueCode'
+            - description: The issue code provides an identifier of the issue associated with this finding.
+        learnMoreLink:
+          allOf:
+            - $ref: '#/components/schemas/LearnMoreLink'
+            - description: A link to additional documentation about the type of finding.
+        locations:
+          allOf:
+            - $ref: '#/components/schemas/LocationList'
+            - description: The list of locations in the policy document that are related to the finding. The issue code provides a summary of an issue identified by the finding.
+      description: A finding in a policy. Each finding is an actionable recommendation that can be used to improve the policy.
+    ValidatePolicyFindingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ValidatePolicyFinding'
+    ValidatePolicyRequest:
+      type: object
+      required:
+        - policyDocument
+        - policyType
+      title: ValidatePolicyRequest
+      properties:
+        locale:
+          allOf:
+            - $ref: '#/components/schemas/Locale'
+            - description: The locale to use for localizing the findings.
+        policyDocument:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: The JSON policy document to use as the content for the policy.
+        policyType:
+          allOf:
+            - $ref: '#/components/schemas/PolicyType'
+            - description: '<p>The type of policy to validate. Identity policies grant permissions to IAM principals. Identity policies include managed and inline policies for IAM roles, users, and groups. They also include service-control policies (SCPs) that are attached to an AWS organization, organizational unit (OU), or an account.</p> <p>Resource policies grant permissions on AWS resources. Resource policies include trust policies for IAM roles and bucket policies for S3 buckets. You can provide a generic input such as identity policy or resource policy or a specific input such as managed policy or S3 bucket policy. </p>'
     VpcId:
       type: string
       pattern: '^vpc-([0-9a-f]){8}(([0-9a-f]){9})?$'
