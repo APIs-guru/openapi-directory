@@ -347,7 +347,7 @@ paths:
   /findings/import:
     post:
       operationId: BatchImportFindings
-      description: '<p>Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub.</p> <p>The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb.</p> <p>After a finding is created, <code>BatchImportFindings</code> cannot be used to update the following finding fields and objects, which Security Hub customers use to manage their investigation workflow.</p> <ul> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul> <p> <code>BatchImportFindings</code> can be used to update the following finding fields and objects only if they have not been updated using <code>BatchUpdateFindings</code>. After they are updated using <code>BatchUpdateFindings</code>, these fields cannot be updated using <code>BatchImportFindings</code>.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> </ul>'
+      description: '<p>Imports security findings generated from an integrated product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub.</p> <p>The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb.</p> <p>After a finding is created, <code>BatchImportFindings</code> cannot be used to update the following finding fields and objects, which Security Hub customers use to manage their investigation workflow.</p> <ul> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul> <p>Finding providers also should not use <code>BatchImportFindings</code> to update the following attributes.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> </ul> <p>Instead, finding providers use <code>FindingProviderFields</code> to provide values for these attributes.</p>'
       responses:
         '200':
           description: Success
@@ -394,6 +394,8 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/AwsSecurityFinding'
+                  minItems: 1
+                  maxItems: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -702,11 +704,13 @@ paths:
                     SeverityProduct:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The native severity as defined by the security-findings provider's solution that generated the finding.
+                        - deprecated: true
+                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated, use FindingProviiltersSeverityOriginal instead.'
                     SeverityNormalized:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The normalized severity of a finding.
+                        - deprecated: true
+                          description: 'The normalized severity of a finding.This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead.'
                     SeverityLabel:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -999,6 +1003,34 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/KeywordFilterList'
                         - description: A keyword for a finding.
+                    FindingProviderFieldsConfidence:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: '<p>The finding provider value for the finding confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify.</p> <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.</p>'
+                    FindingProviderFieldsCriticality:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: '<p>The finding provider value for the level of importance assigned to the resources associated with the findings.</p> <p>A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. </p>'
+                    FindingProviderFieldsRelatedFindingsId:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding identifier of a related finding that is identified by the finding provider.
+                    FindingProviderFieldsRelatedFindingsProductArn:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The ARN of the solution that generated a related finding that is identified by the finding provider.
+                    FindingProviderFieldsSeverityLabel:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding provider value for the severity label.
+                    FindingProviderFieldsSeverityOriginal:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding provider's original value for the severity.
+                    FindingProviderFieldsTypes:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: '<p>One or more finding types that the finding provider assigned to the finding. Uses the format of <code>namespace/category/classifier</code> that classify a finding.</p> <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications</p>'
                 GroupByAttribute:
                   description: 'The attribute used to group the findings for the insight. The grouping attribute identifies the type of item that the insight applies to. For example, if an insight is grouped by resource identifier, then the insight produces a list of resource identifiers.'
                   type: string
@@ -1461,11 +1493,13 @@ paths:
                     SeverityProduct:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The native severity as defined by the security-findings provider's solution that generated the finding.
+                        - deprecated: true
+                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated, use FindingProviiltersSeverityOriginal instead.'
                     SeverityNormalized:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The normalized severity of a finding.
+                        - deprecated: true
+                          description: 'The normalized severity of a finding.This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead.'
                     SeverityLabel:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1758,6 +1792,34 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/KeywordFilterList'
                         - description: A keyword for a finding.
+                    FindingProviderFieldsConfidence:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: '<p>The finding provider value for the finding confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify.</p> <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.</p>'
+                    FindingProviderFieldsCriticality:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: '<p>The finding provider value for the level of importance assigned to the resources associated with the findings.</p> <p>A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. </p>'
+                    FindingProviderFieldsRelatedFindingsId:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding identifier of a related finding that is identified by the finding provider.
+                    FindingProviderFieldsRelatedFindingsProductArn:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The ARN of the solution that generated a related finding that is identified by the finding provider.
+                    FindingProviderFieldsSeverityLabel:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding provider value for the severity label.
+                    FindingProviderFieldsSeverityOriginal:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding provider's original value for the severity.
+                    FindingProviderFieldsTypes:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: '<p>One or more finding types that the finding provider assigned to the finding. Uses the format of <code>namespace/category/classifier</code> that classify a finding.</p> <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications</p>'
                 GroupByAttribute:
                   description: The updated <code>GroupBy</code> attribute that defines this insight.
                   type: string
@@ -3007,11 +3069,13 @@ paths:
                     SeverityProduct:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The native severity as defined by the security-findings provider's solution that generated the finding.
+                        - deprecated: true
+                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated, use FindingProviiltersSeverityOriginal instead.'
                     SeverityNormalized:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The normalized severity of a finding.
+                        - deprecated: true
+                          description: 'The normalized severity of a finding.This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead.'
                     SeverityLabel:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3304,6 +3368,34 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/KeywordFilterList'
                         - description: A keyword for a finding.
+                    FindingProviderFieldsConfidence:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: '<p>The finding provider value for the finding confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify.</p> <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.</p>'
+                    FindingProviderFieldsCriticality:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: '<p>The finding provider value for the level of importance assigned to the resources associated with the findings.</p> <p>A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. </p>'
+                    FindingProviderFieldsRelatedFindingsId:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding identifier of a related finding that is identified by the finding provider.
+                    FindingProviderFieldsRelatedFindingsProductArn:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The ARN of the solution that generated a related finding that is identified by the finding provider.
+                    FindingProviderFieldsSeverityLabel:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding provider value for the severity label.
+                    FindingProviderFieldsSeverityOriginal:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding provider's original value for the severity.
+                    FindingProviderFieldsTypes:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: '<p>One or more finding types that the finding provider assigned to the finding. Uses the format of <code>namespace/category/classifier</code> that classify a finding.</p> <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications</p>'
                 SortCriteria:
                   description: The finding attributes used to sort the list of returned findings.
                   type: array
@@ -3418,11 +3510,13 @@ paths:
                     SeverityProduct:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The native severity as defined by the security-findings provider's solution that generated the finding.
+                        - deprecated: true
+                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated, use FindingProviiltersSeverityOriginal instead.'
                     SeverityNormalized:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
-                        - description: The normalized severity of a finding.
+                        - deprecated: true
+                          description: 'The normalized severity of a finding.This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead.'
                     SeverityLabel:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3715,6 +3809,34 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/KeywordFilterList'
                         - description: A keyword for a finding.
+                    FindingProviderFieldsConfidence:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: '<p>The finding provider value for the finding confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify.</p> <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.</p>'
+                    FindingProviderFieldsCriticality:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: '<p>The finding provider value for the level of importance assigned to the resources associated with the findings.</p> <p>A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. </p>'
+                    FindingProviderFieldsRelatedFindingsId:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding identifier of a related finding that is identified by the finding provider.
+                    FindingProviderFieldsRelatedFindingsProductArn:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The ARN of the solution that generated a related finding that is identified by the finding provider.
+                    FindingProviderFieldsSeverityLabel:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding provider value for the severity label.
+                    FindingProviderFieldsSeverityOriginal:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The finding provider's original value for the severity.
+                    FindingProviderFieldsTypes:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: '<p>One or more finding types that the finding provider assigned to the finding. Uses the format of <code>namespace/category/classifier</code> that classify a finding.</p> <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications</p>'
                 Note:
                   description: The updated note.
                   type: object
@@ -4497,10 +4619,8 @@ components:
         - ProductArn
         - GeneratorId
         - AwsAccountId
-        - Types
         - CreatedAt
         - UpdatedAt
-        - Severity
         - Title
         - Description
         - Resources
@@ -4645,6 +4765,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Action'
             - description: Provides details about an action that affects or that was taken on a resource.
+        FindingProviderFields:
+          allOf:
+            - $ref: '#/components/schemas/FindingProviderFields'
+            - description: 'In a <code>BatchImportFindings</code> request, finding providers use <code>FindingProviderFields</code> to provide and update their own values for confidence, criticality, related findings, severity, and types.'
       description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>'
     BatchUpdateFindingsResponse:
       type: object
@@ -9526,6 +9650,26 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The identifier of the VPC security group.
       description: 'A VPC security group that the cluster belongs to, if the cluster is in a VPC.'
+    AwsS3AccountPublicAccessBlockDetails:
+      type: object
+      properties:
+        BlockPublicAcls:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether to reject calls to update an S3 bucket if the calls include a public access control list (ACL).
+        BlockPublicPolicy:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether to reject calls to update the access policy for an S3 bucket or access point if the policy allows public access.
+        IgnorePublicAcls:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether Amazon S3 ignores public ACLs that are associated with an S3 bucket.
+        RestrictPublicBuckets:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only AWS service principals and authorized users within the S3 bucket owner's account.
+      description: provides information about the Amazon S3 Public Access Block configuration for accounts.
     AwsS3BucketServerSideEncryptionConfiguration:
       type: object
       properties:
@@ -9553,6 +9697,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsS3BucketServerSideEncryptionConfiguration'
             - description: The encryption rules that are applied to the S3 bucket.
+        PublicAccessBlockConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3AccountPublicAccessBlockDetails'
+            - description: Provides information about the Amazon S3 Public Access Block configuration for the S3 bucket.
       description: The details of an Amazon S3 bucket.
     AwsS3BucketServerSideEncryptionByDefault:
       type: object
@@ -9902,6 +10050,30 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: 'The type of patch operation performed. For Patch Manager, the values are <code>SCAN</code> and <code>INSTALL</code>. '
       description: Provides an overview of the patch compliance status for an instance against a selected compliance standard.
+    FindingProviderFields:
+      type: object
+      properties:
+        Confidence:
+          allOf:
+            - $ref: '#/components/schemas/RatioScale'
+            - description: '<p>A finding''s confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify.</p> <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.</p>'
+        Criticality:
+          allOf:
+            - $ref: '#/components/schemas/RatioScale'
+            - description: '<p>The level of importance assigned to the resources associated with the finding.</p> <p>A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.</p>'
+        RelatedFindings:
+          allOf:
+            - $ref: '#/components/schemas/RelatedFindingList'
+            - description: A list of findings that are related to the current finding.
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/FindingProviderSeverity'
+            - description: The severity of a finding.
+        Types:
+          allOf:
+            - $ref: '#/components/schemas/TypeList'
+            - description: '<p>One or more finding types in the format of <code>namespace/category/classifier</code> that classify a finding.</p> <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications</p>'
+      description: 'In a <code>BatchImportFindings</code> request, finding providers use <code>FindingProviderFields</code> to provide and update values for confidence, criticality, related findings, severity, and types.'
     AwsSecurityFindingFilters:
       type: object
       properties:
@@ -9944,11 +10116,13 @@ components:
         SeverityProduct:
           allOf:
             - $ref: '#/components/schemas/NumberFilterList'
-            - description: The native severity as defined by the security-findings provider's solution that generated the finding.
+            - deprecated: true
+              description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated, use FindingProviiltersSeverityOriginal instead.'
         SeverityNormalized:
           allOf:
             - $ref: '#/components/schemas/NumberFilterList'
-            - description: The normalized severity of a finding.
+            - deprecated: true
+              description: 'The normalized severity of a finding.This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead.'
         SeverityLabel:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -10241,6 +10415,34 @@ components:
           allOf:
             - $ref: '#/components/schemas/KeywordFilterList'
             - description: A keyword for a finding.
+        FindingProviderFieldsConfidence:
+          allOf:
+            - $ref: '#/components/schemas/NumberFilterList'
+            - description: '<p>The finding provider value for the finding confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify.</p> <p>Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.</p>'
+        FindingProviderFieldsCriticality:
+          allOf:
+            - $ref: '#/components/schemas/NumberFilterList'
+            - description: '<p>The finding provider value for the level of importance assigned to the resources associated with the findings.</p> <p>A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. </p>'
+        FindingProviderFieldsRelatedFindingsId:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterList'
+            - description: The finding identifier of a related finding that is identified by the finding provider.
+        FindingProviderFieldsRelatedFindingsProductArn:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterList'
+            - description: The ARN of the solution that generated a related finding that is identified by the finding provider.
+        FindingProviderFieldsSeverityLabel:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterList'
+            - description: The finding provider value for the severity label.
+        FindingProviderFieldsSeverityOriginal:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterList'
+            - description: The finding provider's original value for the severity.
+        FindingProviderFieldsTypes:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterList'
+            - description: '<p>One or more finding types that the finding provider assigned to the finding. Uses the format of <code>namespace/category/classifier</code> that classify a finding.</p> <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications</p>'
       description: '<p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p>'
     AwsSecurityFindingIdentifierList:
       type: array
@@ -10506,6 +10708,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/StandardsSubscriptionRequests'
             - description: The list of standards checks to enable.
+    BatchImportFindingsRequestFindingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsSecurityFinding'
+      minItems: 1
+      maxItems: 100
     BatchImportFindingsRequest:
       type: object
       required:
@@ -10514,7 +10722,7 @@ components:
       properties:
         Findings:
           allOf:
-            - $ref: '#/components/schemas/AwsSecurityFindingList'
+            - $ref: '#/components/schemas/BatchImportFindingsRequestFindingList'
             - description: 'A list of findings to import. To successfully import a finding, it must follow the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html">AWS Security Finding Format</a>. Maximum of 100 findings per request.'
     ImportFindingsErrorList:
       type: array
@@ -10631,6 +10839,30 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NonEmptyString'
+    Cell:
+      type: object
+      properties:
+        Column:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The column number of the column that contains the data. For a Microsoft Excel workbook, the column number corresponds to the alphabetical column identifiers. For example, a value of 1 for Column corresponds to the A column in the workbook.'
+        Row:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The row number of the row that contains the data.
+        ColumnName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the column that contains the data.
+        CellReference:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'For a Microsoft Excel workbook, provides the location of the cell, as an absolute cell reference, that contains the data. For example, Sheet2!C5 for cell C5 on Sheet2.'
+      description: 'An occurrence of sensitive data detected in a Microsoft Excel workbook, comma-separated value (CSV) file, or tab-separated value (TSV) file.'
+    Cells:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cell'
     CidrBlockAssociation:
       type: object
       properties:
@@ -10647,6 +10879,62 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: Information about the state of the IPv4 CIDR block.
       description: An IPv4 CIDR block association.
+    ClassificationStatus:
+      type: object
+      properties:
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The code that represents the status of the sensitive data detection.
+        Reason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A longer description of the current status of the sensitive data detection.
+      description: Provides details about the current status of the sensitive data detection.
+    SensitiveDataResultList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SensitiveDataResult'
+    CustomDataIdentifiersResult:
+      type: object
+      properties:
+        Detections:
+          allOf:
+            - $ref: '#/components/schemas/CustomDataIdentifiersDetectionsList'
+            - description: The list of detected instances of sensitive data.
+        TotalCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The total number of occurrences of sensitive data.
+      description: Contains an instance of sensitive data that was detected by a customer-defined identifier.
+    ClassificationResult:
+      type: object
+      properties:
+        MimeType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The type of content that the finding applies to.
+        SizeClassified:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The total size in bytes of the affected data.
+        AdditionalOccurrences:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether there are additional occurrences of sensitive data that are not included in the finding. This occurs when the number of occurrences exceeds the maximum that can be included.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ClassificationStatus'
+            - description: The current status of the sensitive data detection.
+        SensitiveData:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveDataResultList'
+            - description: Provides details about sensitive data that was identified based on built-in configuration.
+        CustomDataIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/CustomDataIdentifiersResult'
+            - description: Provides details about sensitive data that was identified based on customer-defined configuration.
+      description: Details about the sensitive data that was detected on the resource.
     ComplianceStatus:
       type: string
       enum:
@@ -10745,6 +11033,54 @@ components:
       type: integer
       minimum: 1
       maximum: 50
+    Occurrences:
+      type: object
+      properties:
+        LineRanges:
+          allOf:
+            - $ref: '#/components/schemas/Ranges'
+            - description: 'Occurrences of sensitive data detected in a non-binary text file or a Microsoft Word file. Non-binary text files include files such as HTML, XML, JSON, and TXT files.'
+        OffsetRanges:
+          allOf:
+            - $ref: '#/components/schemas/Ranges'
+            - description: Occurrences of sensitive data detected in a binary text file.
+        Pages:
+          allOf:
+            - $ref: '#/components/schemas/Pages'
+            - description: Occurrences of sensitive data in an Adobe Portable Document Format (PDF) file.
+        Records:
+          allOf:
+            - $ref: '#/components/schemas/Records'
+            - description: Occurrences of sensitive data in an Apache Avro object container or an Apache Parquet file.
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/Cells'
+            - description: 'Occurrences of sensitive data detected in Microsoft Excel workbooks, comma-separated value (CSV) files, or tab-separated value (TSV) files.'
+      description: The detected occurrences of sensitive data.
+    CustomDataIdentifiersDetections:
+      type: object
+      properties:
+        Count:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The total number of occurrences of sensitive data that were detected.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the custom identifier that was used to detect the sensitive data.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: he name of the custom identifier that detected the sensitive data.
+        Occurrences:
+          allOf:
+            - $ref: '#/components/schemas/Occurrences'
+            - description: Details about the sensitive data that was detected.
+      description: The list of detected instances of sensitive data.
+    CustomDataIdentifiersDetectionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomDataIdentifiersDetections'
     Cvss:
       type: object
       properties:
@@ -10765,6 +11101,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Cvss'
+    DataClassificationDetails:
+      type: object
+      properties:
+        DetailedResultsLocation:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The path to the folder or file that contains the sensitive data.
+        Result:
+          allOf:
+            - $ref: '#/components/schemas/ClassificationResult'
+            - description: The details about the sensitive data that was detected on the resource.
+      description: Provides details about sensitive data that was detected on a resource.
     DateRange:
       type: object
       properties:
@@ -10959,6 +11307,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Whether to enable the security standards that Security Hub has designated as automatically enabled. If you do not provide a value for <code>EnableDefaultStandards</code>, it is set to <code>true</code>. To not enable the automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.'
+    FindingProviderSeverity:
+      type: object
+      properties:
+        Label:
+          allOf:
+            - $ref: '#/components/schemas/SeverityLabel'
+            - description: The severity label assigned to the finding by the finding provider.
+        Original:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The finding provider's original value for the severity.
+      description: The severity assigned to the finding by the finding provider.
     GetEnabledStandardsRequest:
       type: object
       title: GetEnabledStandardsRequest
@@ -11414,6 +11774,50 @@ components:
             - $ref: '#/components/schemas/Double'
             - description: The equal-to condition to be applied to a single field when querying for findings.
       description: A number filter for querying findings.
+    Ranges:
+      type: array
+      items:
+        $ref: '#/components/schemas/Range'
+    Pages:
+      type: array
+      items:
+        $ref: '#/components/schemas/Page'
+    Records:
+      type: array
+      items:
+        $ref: '#/components/schemas/Record'
+    Range:
+      type: object
+      properties:
+        Start:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of lines (for a line range) or characters (for an offset range) from the beginning of the file to the end of the sensitive data.
+        End:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of lines (for a line range) or characters (for an offset range) from the beginning of the file to the end of the sensitive data.
+        StartColumn:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'In the line where the sensitive data starts, the column within the line where the sensitive data starts.'
+      description: Identifies where the sensitive data begins and ends.
+    Page:
+      type: object
+      properties:
+        PageNumber:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The page number of the page that contains the sensitive data.
+        LineRange:
+          allOf:
+            - $ref: '#/components/schemas/Range'
+            - description: 'An occurrence of sensitive data detected in a non-binary text file or a Microsoft Word file. Non-binary text files include files such as HTML, XML, JSON, and TXT files.'
+        OffsetRange:
+          allOf:
+            - $ref: '#/components/schemas/Range'
+            - description: An occurrence of sensitive data detected in a binary text file.
+      description: An occurrence of sensitive data in an Adobe Portable Document Format (PDF) file.
     Partition:
       type: string
       enum:
@@ -11494,6 +11898,18 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: A URL to a page or site that contains information about how to remediate a finding.
       description: A recommendation on how to remediate the issue identified in a finding.
+    Record:
+      type: object
+      properties:
+        JsonPath:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The path, as a JSONPath expression, to the field in the record that contains the data. If the field name is longer than 20 characters, it is truncated. If the path is longer than 250 characters, it is truncated.'
+        RecordIndex:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The record index, starting from 0, for the record that contains the data.'
+      description: An occurrence of sensitive data in an Apache Avro object container or an Apache Parquet file.
     ResourceDetails:
       type: object
       properties:
@@ -11545,6 +11961,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsS3BucketDetails'
             - description: Details about an Amazon S3 bucket related to a finding.
+        AwsS3AccountPublicAccessBlock:
+          allOf:
+            - $ref: '#/components/schemas/AwsS3AccountPublicAccessBlockDetails'
+            - description: Details about the Amazon S3 Public Access Block configuration for an account.
         AwsS3Object:
           allOf:
             - $ref: '#/components/schemas/AwsS3ObjectDetails'
@@ -11692,6 +12112,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FieldMap'
             - description: A list of AWS tags associated with a resource at the time the finding was processed.
+        DataClassification:
+          allOf:
+            - $ref: '#/components/schemas/DataClassificationDetails'
+            - description: Contains information about sensitive data that was detected on the resource.
         Details:
           allOf:
             - $ref: '#/components/schemas/ResourceDetails'
@@ -11709,6 +12133,42 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The reason that the account was not processed.
       description: Details about the account that was not processed.
+    SensitiveDataDetections:
+      type: object
+      properties:
+        Count:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The total number of occurrences of sensitive data that were detected.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The type of sensitive data that was detected. For example, the type might indicate that the data is an email address.'
+        Occurrences:
+          allOf:
+            - $ref: '#/components/schemas/Occurrences'
+            - description: Details about the sensitive data that was detected.
+      description: The list of detected instances of sensitive data.
+    SensitiveDataDetectionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SensitiveDataDetections'
+    SensitiveDataResult:
+      type: object
+      properties:
+        Category:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The category of sensitive data that was detected. For example, the category can indicate that the sensitive data involved credentials, financial information, or personal information.'
+        Detections:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveDataDetectionsList'
+            - description: The list of detected instances of sensitive data.
+        TotalCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The total number of occurrences of sensitive data.
+      description: Contains a detected instance of sensitive data that are based on built-in identifiers.
     SeverityRating:
       type: string
       enum:

@@ -1295,7 +1295,7 @@ paths:
         - name: AutomatedSnapshotRetentionPeriod
           in: query
           required: false
-          description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>Default: <code>1</code> </p> <p>Constraints: Must be a value from 0 to 35.</p>'
+          description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>You can''t disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p> <p>Default: <code>1</code> </p> <p>Constraints: Must be a value from 0 to 35.</p>'
           schema:
             type: integer
         - name: ManualSnapshotRetentionPeriod
@@ -9798,7 +9798,7 @@ paths:
         - name: AutomatedSnapshotRetentionPeriod
           in: query
           required: false
-          description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted.</p> <p>Default: Uses existing setting.</p> <p>Constraints: Must be a value from 0 to 35.</p>'
+          description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted.</p> <p>You can''t disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p> <p>Default: Uses existing setting.</p> <p>Constraints: Must be a value from 0 to 35.</p>'
           schema:
             type: integer
         - name: ManualSnapshotRetentionPeriod
@@ -12683,7 +12683,7 @@ paths:
         - name: AutomatedSnapshotRetentionPeriod
           in: query
           required: false
-          description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>Default: The value selected for the cluster from which the snapshot was taken.</p> <p>Constraints: Must be a value from 0 to 35.</p>'
+          description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>You can''t disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p> <p>Default: The value selected for the cluster from which the snapshot was taken.</p> <p>Constraints: Must be a value from 0 to 35.</p>'
           schema:
             type: integer
         - name: ManualSnapshotRetentionPeriod
@@ -14596,7 +14596,7 @@ components:
         ParameterValue:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The value of the parameter.
+            - description: 'The value of the parameter. If <code>ParameterName</code> is <code>wlm_json_configuration</code>, then the maximum size of <code>ParameterValue</code> is 8000 characters.'
         Description:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -15426,6 +15426,8 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: A boolean value indicating if the resize operation can be cancelled.
       description: Describes a resize operation.
+    LongOptional:
+      type: integer
     Cluster:
       type: object
       properties:
@@ -15621,6 +15623,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The namespace Amazon Resource Name (ARN) of the cluster.
+        TotalStorageCapacityInMegaBytes:
+          allOf:
+            - $ref: '#/components/schemas/LongOptional'
+            - description: 'The total storage capacity of the cluster in megabytes. '
       description: Describes a cluster.
     SensitiveString:
       type: string
@@ -15969,7 +15975,7 @@ components:
         AutomatedSnapshotRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>Default: <code>1</code> </p> <p>Constraints: Must be a value from 0 to 35.</p>'
+            - description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>You can''t disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p> <p>Default: <code>1</code> </p> <p>Constraints: Must be a value from 0 to 35.</p>'
         ManualSnapshotRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -16549,8 +16555,6 @@ components:
     DoubleOptional:
       type: number
       format: double
-    LongOptional:
-      type: integer
     DbGroupList:
       type: array
       items:
@@ -17887,7 +17891,7 @@ components:
         AutomatedSnapshotRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted.</p> <p>Default: Uses existing setting.</p> <p>Constraints: Must be a value from 0 to 35.</p>'
+            - description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted.</p> <p>You can''t disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p> <p>Default: Uses existing setting.</p> <p>Constraints: Must be a value from 0 to 35.</p>'
         ManualSnapshotRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -18151,6 +18155,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/UsageLimitBreachAction'
             - description: 'The new action that Amazon Redshift takes when the limit is reached. For more information about this parameter, see <a>UsageLimit</a>. '
+    NetworkInterface:
+      type: object
+      properties:
+        NetworkInterfaceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The network interface identifier. '
+        SubnetId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The subnet identifier. '
+        PrivateIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The IPv4 address of the network interface within the subnet. '
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Availability Zone. '
+      description: 'Describes a network interface. '
+    NetworkInterfaceList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/NetworkInterface'
+          - xml:
+              name: NetworkInterface
     NodeConfigurationOption:
       type: object
       properties:
@@ -18431,7 +18462,7 @@ components:
         AutomatedSnapshotRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>Default: The value selected for the cluster from which the snapshot was taken.</p> <p>Constraints: Must be a value from 0 to 35.</p>'
+            - description: '<p>The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with <a>CreateClusterSnapshot</a>. </p> <p>You can''t disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days.</p> <p>Default: The value selected for the cluster from which the snapshot was taken.</p> <p>Constraints: Must be a value from 0 to 35.</p>'
         ManualSnapshotRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -18797,6 +18828,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The VPC identifier that the endpoint is associated. '
+        NetworkInterfaces:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInterfaceList'
+            - description: 'One or more network interfaces of the endpoint. Also known as an interface endpoint. '
       description: The connection endpoint for connecting an Amazon Redshift cluster through the proxy.
     VpcSecurityGroupMembership:
       type: object
