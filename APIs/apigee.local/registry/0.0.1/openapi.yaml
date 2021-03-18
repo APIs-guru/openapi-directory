@@ -1003,6 +1003,7 @@ paths:
       summary: GetStatus returns the status of the service. GetStatus is for verifying open source deployments only and is not included in hosted versions of the API.
 components:
   schemas:
+    AnnotationsEntry: {}
     Api:
       description: An Api is a top-level description of an API. Apis are produced by producers and are commitments to provide services.
       properties:
@@ -1132,6 +1133,7 @@ components:
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:     service Foo {       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);     } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
+    LabelsEntry: {}
     ListApiSpecRevisionsResponse:
       description: Response message for ListApiSpecRevisionsResponse.
       properties:
