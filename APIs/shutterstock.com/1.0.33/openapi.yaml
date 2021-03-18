@@ -413,7 +413,7 @@ paths:
 
             --data-urlencode "id=L2w7h9VNFlkzpllSUunSYayenKjN" \
 
-            --data-urlencode "id=BeHx3UNXzMBB4dGsC9aa6VxnpcWl" 
+            --data-urlencode "id=BeHx3UNXzMBB4dGsC9aa6VxnpcWl"
         - lang: javascript--nodejs
           source: >
             const sstk = require("shutterstock-api");
@@ -7425,7 +7425,7 @@ paths:
         - customer_accessCode:
             - licenses.create
             - purchases.view
-          ldap_accessCode: []
+          #ldap_accessCode: []
       summary: License images
       tags:
         - images
@@ -9005,9 +9005,9 @@ paths:
         "403":
           description: Forbidden
       security:
-        - contributor_accessCode: []
-          customer_accessCode:
+        - customer_accessCode:
             - user.view
+        #- contributor_accessCode: []
       summary: Get user details
       tags:
         - users
@@ -11204,6 +11204,8 @@ paths:
         - videos
 components:
   schemas:
+    AssetUploadId: {}
+    AssetId: {}
     AccessTokenDetails:
       description: Access token details that are currently associated with this user
       properties:
