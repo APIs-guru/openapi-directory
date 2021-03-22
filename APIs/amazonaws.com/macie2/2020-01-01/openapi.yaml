@@ -2181,7 +2181,7 @@ paths:
                   description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
                   type: string
                 findingPublishingFrequency:
-                  description: 'The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values are:'
+                  description: 'The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). For more information, see <a href="https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:'
                   type: string
                   enum:
                     - FIFTEEN_MINUTES
@@ -2307,7 +2307,7 @@ paths:
               type: object
               properties:
                 findingPublishingFrequency:
-                  description: 'The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values are:'
+                  description: 'The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). For more information, see <a href="https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:'
                   type: string
                   enum:
                     - FIFTEEN_MINUTES
@@ -3179,6 +3179,143 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /findings-publication-configuration:
+    get:
+      operationId: GetFindingsPublicationConfiguration
+      description: Retrieves the configuration settings for publishing findings to AWS Security Hub.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFindingsPublicationConfigurationResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutFindingsPublicationConfiguration
+      description: Updates the configuration settings for publishing findings to AWS Security Hub.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutFindingsPublicationConfigurationResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientToken:
+                  description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
+                  type: string
+                securityHubConfiguration:
+                  description: 'Specifies configuration settings that determine which findings are published to AWS Security Hub automatically. For information about how Macie publishes findings to Security Hub, see <a href="https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html">Amazon Macie integration with Security Hub</a> in the <i>Amazon Macie User Guide</i>.'
+                  type: object
+                  properties:
+                    publishClassificationFindings:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - description: 'Specifies whether to publish sensitive data findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren''t suppressed by a findings filter. The default value is false.'
+                    publishPolicyFindings:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - description: 'Specifies whether to publish policy findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren''t suppressed by a findings filter. The default value is true.'
   /invitations/count:
     get:
       operationId: GetInvitationsCount
@@ -4572,6 +4709,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A map of key-value pairs that identifies the tags (keys and values) that are associated with the filter.
+    GetFindingsPublicationConfigurationResponse:
+      type: object
+      properties:
+        securityHubConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SecurityHubConfiguration'
+            - description: The configuration settings that determine which findings are published to AWS Security Hub.
     GetInvitationsCountResponse:
       type: object
       properties:
@@ -4820,6 +4964,11 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.
       description: 'Specifies an S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.'
+    PutFindingsPublicationConfigurationResponse:
+      type: object
+      properties: {}
+    __boolean:
+      type: boolean
     TagResourceResponse:
       type: object
       properties: {}
@@ -4874,8 +5023,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: (Deprecated) The AWS account ID for the account that sent the invitation. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.
-    __boolean:
-      type: boolean
     AccessControlList:
       type: object
       properties:
@@ -5408,7 +5555,7 @@ components:
         columnName:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: 'The name of the column that contains the data, if available.'
+            - description: 'The name of the column that contains the data, if available. This value is also null if Amazon Macie detects sensitive data in the name of any column in the file.'
         row:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -5804,7 +5951,7 @@ components:
         lineRanges:
           allOf:
             - $ref: '#/components/schemas/Ranges'
-            - description: '<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of: data in unstructured sections of an otherwise structured file, such as a comment in a file; and, data in a malformed file that Amazon Macie analyzes as plain text.</p>'
+            - description: '<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.</p>'
         offsetRanges:
           allOf:
             - $ref: '#/components/schemas/Ranges'
@@ -6013,7 +6160,7 @@ components:
         - FIFTEEN_MINUTES
         - ONE_HOUR
         - SIX_HOURS
-      description: 'The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values are:'
+      description: 'The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). For more information, see <a href="https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:'
     MacieStatus:
       type: string
       enum:
@@ -6035,7 +6182,7 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/MacieStatus'
-            - description: 'Specifies the status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED.'
+            - description: 'Specifies the new status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED.'
     EnableOrganizationAdminAccountRequest:
       type: object
       required:
@@ -6408,6 +6555,25 @@ components:
       type: object
       title: GetFindingsFilterRequest
       properties: {}
+    GetFindingsPublicationConfigurationRequest:
+      type: object
+      title: GetFindingsPublicationConfigurationRequest
+      properties: {}
+    SecurityHubConfiguration:
+      type: object
+      required:
+        - publishPolicyFindings
+        - publishClassificationFindings
+      properties:
+        publishClassificationFindings:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: 'Specifies whether to publish sensitive data findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren''t suppressed by a findings filter. The default value is false.'
+        publishPolicyFindings:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: 'Specifies whether to publish policy findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren''t suppressed by a findings filter. The default value is true.'
+      description: 'Specifies configuration settings that determine which findings are published to AWS Security Hub automatically. For information about how Macie publishes findings to Security Hub, see <a href="https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html">Amazon Macie integration with Security Hub</a> in the <i>Amazon Macie User Guide</i>.'
     SortCriteria:
       type: object
       properties:
@@ -7001,13 +7167,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClassificationExportConfiguration'
             - description: 'The location to store data classification results in, and the encryption settings to use when storing results in that location.'
+    PutFindingsPublicationConfigurationRequest:
+      type: object
+      title: PutFindingsPublicationConfigurationRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
+        securityHubConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SecurityHubConfiguration'
+            - description: The configuration settings that determine which findings to publish to AWS Security Hub.
     Record:
       type: object
       properties:
         jsonPath:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: '<p>The path, as a JSONPath expression, to the field in the record that contains the data.</p> <p>If the name of an element exceeds 20 characters, Amazon Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>'
+            - description: '<p>The path, as a JSONPath expression, to the field in the record that contains the data. If Amazon Macie detects sensitive data in the name of any element in the path, Macie omits this field.</p> <p>If the name of an element exceeds 20 characters, Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>'
         recordIndex:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -7331,7 +7509,7 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. This value is valid only if the job''s current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p> <p>If you specify this value and the job''s current status is RUNNING, Amazon Macie immediately begins to stop all processing tasks for the job. You can''t resume or restart a job after you cancel it.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job''s current status is USER_PAUSED.</p> <p>If you paused the job while it was actively running and you specify this value less than 30 days after you paused the job, Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other settings for the job.</p></li> <li><p>USER_PAUSED - Pauses the job temporarily. This value is valid only if the job''s current status is IDLE or RUNNING. If you specify this value and the job''s current status is RUNNING, Macie immediately begins to pause all processing tasks for the job.</p> <p>If you pause a one-time job and you don''t resume it within 30 days, the job expires and Macie cancels the job. If you pause a recurring job when its status is RUNNING and you don''t resume it within 30 days, the job run expires and Macie cancels the run. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
+            - description: '<p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. This value is valid only if the job''s current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p> <p>If you specify this value and the job''s current status is RUNNING, Amazon Macie immediately begins to stop all processing tasks for the job. You can''t resume or restart a job after you cancel it.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job''s current status is USER_PAUSED.</p> <p>If you paused the job while it was actively running and you specify this value less than 30 days after you paused the job, Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other settings for the job.</p></li> <li><p>USER_PAUSED - Pauses the job temporarily. This value is valid only if the job''s current status is IDLE, PAUSED, or RUNNING. If you specify this value and the job''s current status is RUNNING, Macie immediately begins to pause all processing tasks for the job.</p> <p>If you pause a one-time job and you don''t resume it within 30 days, the job expires and Macie cancels the job. If you pause a recurring job when its status is RUNNING and you don''t resume it within 30 days, the job run expires and Macie cancels the run. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
     UpdateFindingsFilterRequest:
       type: object
       title: UpdateFindingsFilterRequest
