@@ -4604,6 +4604,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
       tags:
         - customers
     get:
@@ -4623,6 +4628,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/Printer"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers.readonly
       tags:
         - customers
     parameters:
@@ -4669,6 +4683,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Printer"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
       tags:
         - customers
   "/admin/directory/v1/{parent}/chrome/printers":
@@ -4709,6 +4728,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListPrintersResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers.readonly
       tags:
         - customers
     parameters:
@@ -4745,6 +4773,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Printer"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
       tags:
         - customers
   "/admin/directory/v1/{parent}/chrome/printers:batchCreatePrinters":
@@ -4782,6 +4815,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/BatchCreatePrintersResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
       tags:
         - customers
   "/admin/directory/v1/{parent}/chrome/printers:batchDeletePrinters":
@@ -4819,6 +4857,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/BatchDeletePrintersResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
       tags:
         - customers
   "/admin/directory/v1/{parent}/chrome/printers:listPrinterModels":
@@ -4854,6 +4897,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListPrinterModelsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.chrome.printers.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.chrome.printers.readonly
       tags:
         - customers
     parameters:
@@ -7208,6 +7260,8 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/admin.chrome.printers: See, add, edit, and permanently delete the printers that your organization can use with Chrome
+            https://www.googleapis.com/auth/admin.chrome.printers.readonly: See the printers that your organization can use with Chrome
             https://www.googleapis.com/auth/admin.directory.customer: View and manage customer related information
             https://www.googleapis.com/auth/admin.directory.customer.readonly: View customer related information
             https://www.googleapis.com/auth/admin.directory.device.chromeos: View and manage your Chrome OS devices' metadata
@@ -7242,6 +7296,8 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/admin.chrome.printers: See, add, edit, and permanently delete the printers that your organization can use with Chrome
+            https://www.googleapis.com/auth/admin.chrome.printers.readonly: See the printers that your organization can use with Chrome
             https://www.googleapis.com/auth/admin.directory.customer: View and manage customer related information
             https://www.googleapis.com/auth/admin.directory.customer.readonly: View customer related information
             https://www.googleapis.com/auth/admin.directory.device.chromeos: View and manage your Chrome OS devices' metadata

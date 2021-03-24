@@ -662,16 +662,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: The client's current time in milliseconds since epoch.
-          in: query
-          name: currentTimeMillis
-          schema:
-            type: string
-        - description: When the operation was performed on the client.
-          in: query
-          name: modifiedTimeMillis
-          schema:
-            type: string
       responses:
         "200":
           description: Successful response
@@ -884,11 +874,6 @@ paths:
           in: path
           name: datasetId
           required: true
-          schema:
-            type: string
-        - description: The client's current time in milliseconds since epoch. Note that the minStartTimeNs and maxEndTimeNs properties in the request body are in nanoseconds instead of milliseconds.
-          in: query
-          name: currentTimeMillis
           schema:
             type: string
       requestBody:
@@ -1243,11 +1228,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: The client's current time in milliseconds since epoch.
-          in: query
-          name: currentTimeMillis
-          schema:
-            type: string
       responses:
         "200":
           description: Successful response
@@ -1288,11 +1268,6 @@ paths:
           in: path
           name: sessionId
           required: true
-          schema:
-            type: string
-        - description: The client's current time in milliseconds since epoch.
-          in: query
-          name: currentTimeMillis
           schema:
             type: string
       requestBody:

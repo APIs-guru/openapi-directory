@@ -141,17 +141,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: The standard list filter.
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like "displayName=tokyo", and is documented in more detail in [AIP-160](https://google.aip.dev/160).
           in: query
           name: filter
           schema:
             type: string
-        - description: The standard list page size.
+        - description: The maximum number of results to return. If not set, the service will select a default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: The standard list page token.
+        - description: A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page.
           in: query
           name: pageToken
           schema:
@@ -665,8 +665,6 @@ components:
     Binding:
       description: Associates `members` with a `role`.
       properties:
-        bindingId:
-          type: string
         condition:
           $ref: "#/components/schemas/Expr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the members in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
@@ -885,7 +883,7 @@ components:
           type: string
       type: object
     FirewallInfo:
-      description: For display only. Metadata associated with a Compute Engine firewall rule.
+      description: For display only. Metadata associated with a VPC firewall rule, an implied VPC firewall rule, or a hierarchical firewall policy rule.
       properties:
         action:
           description: "Possible values: ALLOW, DENY"
@@ -894,27 +892,38 @@ components:
           description: "Possible values: INGRESS, EGRESS"
           type: string
         displayName:
-          description: Name of a Compute Engine firewall rule.
+          description: The display name of the VPC firewall rule. This field is not applicable to hierarchical firewall policy rules.
+          type: string
+        firewallRuleType:
+          description: The firewall rule's type.
+          enum:
+            - FIREWALL_RULE_TYPE_UNSPECIFIED
+            - HIERARCHICAL_FIREWALL_POLICY_RULE
+            - VPC_FIREWALL_RULE
+            - IMPLIED_VPC_FIREWALL_RULE
           type: string
         networkUri:
-          description: URI of a Compute Engine network.
+          description: The URI of the VPC network that the firewall rule is associated with. This field is not applicable to hierarchical firewall policy rules.
+          type: string
+        policy:
+          description: The hierarchical firewall policy that this rule is associated with. This field is not applicable to VPC firewall rules.
           type: string
         priority:
-          description: Priority of the firewall rule.
+          description: The priority of the firewall rule.
           format: int32
           type: integer
         targetServiceAccounts:
-          description: Target service accounts of the firewall rule.
+          description: The target service accounts specified by the firewall rule.
           items:
             type: string
           type: array
         targetTags:
-          description: Target tags of the firewall rule.
+          description: The target tags defined by the VPC firewall rule. This field is not applicable to hierarchical firewall policy rules.
           items:
             type: string
           type: array
         uri:
-          description: URI of a Compute Engine firewall rule. Implied default rule does not have URI.
+          description: The URI of the VPC firewall rule. This field is not applicable to implied firewall rules or hierarchical firewall policy rules.
           type: string
       type: object
     ForwardInfo:
@@ -1236,10 +1245,10 @@ components:
           type: integer
       type: object
     ProbingDetails:
-      description: The details of probing from the latest run.
+      description: Results of active probing from the last run of the test.
       properties:
         abortCause:
-          description: Causes that the probing was aborted.
+          description: The reason probing was aborted.
           enum:
             - PROBING_ABORT_CAUSE_UNSPECIFIED
             - PERMISSION_DENIED
@@ -1247,15 +1256,15 @@ components:
           type: string
         endpointInfo:
           $ref: "#/components/schemas/EndpointInfo"
-          description: Derived from the test input. The actual source and destination endpoint where the probing was run.
+          description: The source and destination endpoints derived from the test input and used for active probing.
         error:
           $ref: "#/components/schemas/Status"
-          description: The details of an internal failure or a cancellation of reachability analysis.
+          description: Details about an internal failure or the cancellation of active probing.
         probingLatency:
           $ref: "#/components/schemas/LatencyDistribution"
-          description: One way probing latency distribution. The latency is measured as duration of packet traversal of Google Cloud network, from source to destination endpoint.
+          description: "Latency as measured by active probing in one direction: from the source to the destination endpoint."
         result:
-          description: The overall reachability result of the test.
+          description: The overall result of active probing.
           enum:
             - PROBING_RESULT_UNSPECIFIED
             - REACHABLE
@@ -1268,22 +1277,22 @@ components:
           format: int32
           type: integer
         successfulProbeCount:
-          description: Number of probes that reached destination.
+          description: Number of probes that reached the destination.
           format: int32
           type: integer
         verifyTime:
-          description: The time the reachability state was verified.
+          description: The time that reachability was assessed through active probing.
           format: google-datetime
           type: string
       type: object
     ReachabilityDetails:
-      description: The details of reachability state from the latest run.
+      description: Results of the configuration analysis from the last run of the test.
       properties:
         error:
           $ref: "#/components/schemas/Status"
           description: The details of a failure or a cancellation of reachability analysis.
         result:
-          description: The overall reachability result of the test.
+          description: The overall result of the test's configuration analysis.
           enum:
             - RESULT_UNSPECIFIED
             - REACHABLE
@@ -1297,7 +1306,7 @@ components:
             $ref: "#/components/schemas/Trace"
           type: array
         verifyTime:
-          description: The time the reachability state was verified.
+          description: The time of the configuration analysis.
           format: google-datetime
           type: string
       type: object
@@ -1411,7 +1420,7 @@ components:
           description: Display info of the final state "drop" and reason.
         endpoint:
           $ref: "#/components/schemas/EndpointInfo"
-          description: Display info of the source and destination under analysis. The endpiont info in an intermediate state may differ with the initial input, as it might be modified by state like NAT, or Connection Proxy.
+          description: Display info of the source and destination under analysis. The endpoint info in an intermediate state may differ with the initial input, as it might be modified by state like NAT, or Connection Proxy.
         firewall:
           $ref: "#/components/schemas/FirewallInfo"
           description: Display info of a Compute Engine firewall rule.
@@ -1492,7 +1501,7 @@ components:
           type: array
       type: object
     Trace:
-      description: "Trace represents one simulated packet forwarding path. - Each trace contains multiple ordered steps. - Each step is in a particular state and has an associated configuration. - State is categorized as a final or non-final state. - Each final state has a reason associated with it. - Each trace must end with a final state (the last step). |---------------------Trace----------------------| Step1(State) Step2(State) --- StepN(State(final)) "
+      description: Trace represents one simulated packet forwarding path. * Each trace contains multiple ordered Steps. * Each step is in a particular state with associated configuration. * State is categorized as final or non-final states. * Each final state has a reason associated. * Each trace must end with a final state (the last step). ``` |---------------------Trace----------------------| Step1(State) Step2(State) --- StepN(State(final)) ```
       properties:
         endpointInfo:
           $ref: "#/components/schemas/EndpointInfo"
@@ -1568,7 +1577,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1576,6 +1585,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

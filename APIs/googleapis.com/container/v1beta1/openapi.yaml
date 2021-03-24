@@ -2993,7 +2993,7 @@ components:
           type: string
       type: object
     Autopilot:
-      description: Autopilot is the configuration for Autopilot settings on the cluster. It is the official product name of what is previously known as AutoGKE
+      description: Autopilot is the configuration for Autopilot settings on the cluster.
       properties:
         enabled:
           description: Enable Autopilot
@@ -3115,7 +3115,7 @@ components:
           description: Configuration controlling RBAC group membership information.
         autopilot:
           $ref: "#/components/schemas/Autopilot"
-          description: Autopilot configuration for the cluster. It has the same semantics as AutoGKE and overrides the setting in autogke.
+          description: Autopilot configuration for the cluster.
         autoscaling:
           $ref: "#/components/schemas/ClusterAutoscaling"
           description: Cluster-level autoscaling configuration.

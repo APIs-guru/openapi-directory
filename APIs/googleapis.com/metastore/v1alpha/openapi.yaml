@@ -35,7 +35,7 @@ paths:
       description: Deletes a single service.
       operationId: metastore.projects.locations.services.delete
       parameters:
-        - description: Required. The relative resource name of the metastore service to delete, in the following form:"projects/{project_number}/locations/{location_id}/services/{service_id}".
+        - description: Required. The relative resource name of the metastore service to delete, in the following form:projects/{project_number}/locations/{location_id}/services/{service_id}.
           in: path
           name: name
           required: true
@@ -64,7 +64,7 @@ paths:
       description: Gets details of a single import.
       operationId: metastore.projects.locations.services.metadataImports.get
       parameters:
-        - description: Required. The relative resource name of the metadata import to retrieve, in the following form:"projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{import_id}".
+        - description: Required. The relative resource name of the metadata import to retrieve, in the following form:projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{import_id}.
           in: path
           name: name
           required: true
@@ -100,7 +100,7 @@ paths:
       description: Updates a single import. Only the description field of MetadataImport is supported to be updated.
       operationId: metastore.projects.locations.services.metadataImports.patch
       parameters:
-        - description: Immutable. The relative resource name of the metadata import, of the form:"projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{metadata_import_id}".
+        - description: Immutable. The relative resource name of the metadata import, of the form:projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{metadata_import_id}.
           in: path
           name: name
           required: true
@@ -146,17 +146,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: The standard list filter.
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like "displayName=tokyo", and is documented in more detail in AIP-160 (https://google.aip.dev/160).
           in: query
           name: filter
           schema:
             type: string
-        - description: The standard list page size.
+        - description: The maximum number of results to return. If not set, the service will select a default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: The standard list page token.
+        - description: A page token received from the next_page_token field in the response. Send that page token to receive the subsequent page.
           in: query
           name: pageToken
           schema:
@@ -244,7 +244,7 @@ paths:
       description: Lists imports in a service.
       operationId: metastore.projects.locations.services.metadataImports.list
       parameters:
-        - description: Required. The relative resource name of the service whose metadata imports to list, in the following form:"projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports".
+        - description: Required. The relative resource name of the service whose metadata imports to list, in the following form:projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports.
           in: path
           name: parent
           required: true
@@ -255,7 +255,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: Optional. Specify the ordering of results as described in Sorting Order. If not specified, the results will be sorted in the default order.
+        - description: Optional. Specify the ordering of results as described in Sorting Order (https://cloud.google.com/apis/design/design_patterns#sorting_order). If not specified, the results will be sorted in the default order.
           in: query
           name: orderBy
           schema:
@@ -300,7 +300,7 @@ paths:
       description: Creates a new MetadataImport in a given project and location.
       operationId: metastore.projects.locations.services.metadataImports.create
       parameters:
-        - description: Required. The relative resource name of the service in which to create a metastore import, in the following form:"projects/{project_number}/locations/{location_id}/services/{service_id}"
+        - description: Required. The relative resource name of the service in which to create a metastore import, in the following form:projects/{project_number}/locations/{location_id}/services/{service_id}.
           in: path
           name: parent
           required: true
@@ -340,7 +340,7 @@ paths:
       description: Lists services in a project and location.
       operationId: metastore.projects.locations.services.list
       parameters:
-        - description: Required. The relative resource name of the location of metastore services to list, in the following form:"projects/{project_number}/locations/{location_id}".
+        - description: Required. The relative resource name of the location of metastore services to list, in the following form:projects/{project_number}/locations/{location_id}.
           in: path
           name: parent
           required: true
@@ -351,7 +351,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: Optional. Specify the ordering of results as described in Sorting Order. If not specified, the results will be sorted in the default order.
+        - description: Optional. Specify the ordering of results as described in Sorting Order (https://cloud.google.com/apis/design/design_patterns#sorting_order). If not specified, the results will be sorted in the default order.
           in: query
           name: orderBy
           schema:
@@ -396,7 +396,7 @@ paths:
       description: Creates a metastore service in a project and location.
       operationId: metastore.projects.locations.services.create
       parameters:
-        - description: Required. The relative resource name of the location in which to create a metastore service, in the following form:"projects/{project_number}/locations/{location_id}".
+        - description: Required. The relative resource name of the location in which to create a metastore service, in the following form:projects/{project_number}/locations/{location_id}.
           in: path
           name: parent
           required: true
@@ -574,7 +574,7 @@ paths:
       description: Exports metadata from a service.
       operationId: metastore.projects.locations.services.exportMetadata
       parameters:
-        - description: Required. The relative resource name of the metastore service to run export, in the following form:"projects/{project_id}/locations/{location_id}/services/{service_id}
+        - description: Required. The relative resource name of the metastore service to run export, in the following form:projects/{project_id}/locations/{location_id}/services/{service_id}.
           in: path
           name: service
           required: true
@@ -764,7 +764,7 @@ components:
             - AVRO
           type: string
         destinationGcsFolder:
-          description: Required. A Cloud Storage URI of a folder that metadata are exported to, in the format gs:///. A sub-folder containing exported files will be created below it.
+          description: A Cloud Storage URI of a folder, in the format gs:///. A sub-folder containing exported files will be created below it.
           type: string
         requestId:
           description: Optional. A request ID. Specify a unique request ID to allow the server to ignore the request if it has completed. The server will ignore subsequent requests that provide a duplicate request ID for at least 60 minutes after the first request.For example, if an initial request times out, followed by another request with the same request ID, the server ignores the second request to prevent the creation of duplicate commitments.The request ID must be a valid UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier#Format). A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
@@ -796,7 +796,7 @@ components:
           type: object
         kerberosConfig:
           $ref: "#/components/schemas/KerberosConfig"
-          description: Information used to configure the Hive metastore service as a service principal in a Kerberos realm. To disable Kerberos, use the UpdateService method and specify this field's path ("hive_metastore_config.kerberos_config") in the request's update_mask while omitting this field from the request's service.
+          description: Information used to configure the Hive metastore service as a service principal in a Kerberos realm. To disable Kerberos, use the UpdateService method and specify this field's path (hive_metastore_config.kerberos_config) in the request's update_mask while omitting this field from the request's service.
         version:
           description: Immutable. The Hive metastore schema version.
           type: string
@@ -821,7 +821,7 @@ components:
           description: A Cloud Storage URI that specifies the path to a krb5.conf file. It is of the form gs://{bucket_name}/path/to/krb5.conf, although the file does not need to be named krb5.conf explicitly.
           type: string
         principal:
-          description: A Kerberos principal that exists in the both the keytab the KDC to authenticate as. A typical principal is of the form "primary/instance@REALM", but there is no exact format.
+          description: A Kerberos principal that exists in the both the keytab the KDC to authenticate as. A typical principal is of the form primary/instance@REALM, but there is no exact format.
           type: string
       type: object
     ListLocationsResponse:
@@ -946,7 +946,7 @@ components:
           readOnly: true
           type: string
         destinationGcsUri:
-          description: Output only. A Cloud Storage URI of a folder that metadata are exported to, in the form of gs:////, where ` is automatically generated.
+          description: Output only. A Cloud Storage URI of a folder that metadata are exported to, in the form of gs:////, where is automatically generated.
           readOnly: true
           type: string
         endTime:
@@ -985,7 +985,7 @@ components:
           description: The description of the metadata import.
           type: string
         name:
-          description: Immutable. The relative resource name of the metadata import, of the form:"projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{metadata_import_id}".
+          description: Immutable. The relative resource name of the metadata import, of the form:projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{metadata_import_id}.
           type: string
         state:
           description: Output only. The current state of the metadata import.
@@ -1075,7 +1075,7 @@ components:
       description: The details of a metadata restore operation.
       properties:
         backup:
-          description: Output only. The relative resource name of the metastore service backup to restore from, in the following form:projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}
+          description: Output only. The relative resource name of the metastore service backup to restore from, in the following form:projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}.
           readOnly: true
           type: string
         details:
@@ -1115,7 +1115,7 @@ components:
       description: A securely stored value.
       properties:
         cloudSecret:
-          description: The relative resource name of a Secret Manager secret version, in the following form:"projects/{project_number}/secrets/{secret_id}/versions/{version_id}".
+          description: The relative resource name of a Secret Manager secret version, in the following form:projects/{project_number}/secrets/{secret_id}/versions/{version_id}.
           type: string
       type: object
     Service:
@@ -1153,15 +1153,22 @@ components:
           description: Output only. The metadata management activities of the metastore service.
           readOnly: true
         name:
-          description: Immutable. The relative resource name of the metastore service, of the form:"projects/{project_number}/locations/{location_id}/services/{service_id}".
+          description: Immutable. The relative resource name of the metastore service, of the form:projects/{project_number}/locations/{location_id}/services/{service_id}.
           type: string
         network:
-          description: Immutable. The relative resource name of the VPC network on which the instance can be accessed. It is specified in the following form:"projects/{project_number}/global/networks/{network_id}".
+          description: Immutable. The relative resource name of the VPC network on which the instance can be accessed. It is specified in the following form:projects/{project_number}/global/networks/{network_id}.
           type: string
         port:
           description: "The TCP port at which the metastore service is reached. Default: 9083."
           format: int32
           type: integer
+        releaseChannel:
+          description: Immutable. The release channel of the service. If unspecified, defaults to STABLE.
+          enum:
+            - RELEASE_CHANNEL_UNSPECIFIED
+            - CANARY
+            - STABLE
+          type: string
         state:
           description: Output only. The current state of the metastore service.
           enum:
@@ -1250,7 +1257,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1258,6 +1265,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

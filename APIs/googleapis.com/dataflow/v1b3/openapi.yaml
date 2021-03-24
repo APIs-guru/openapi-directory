@@ -2787,297 +2787,6 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/{name}":
-    delete:
-      description: Deletes an existing Template. Do nothing if Template does not exist.
-      operationId: dataflow.projects.catalogTemplates.delete
-      parameters:
-        - description: "name includes project_id and display_name. Delete by project_id(pid1) and display_name(tid1). Format: projects/{pid1}/catalogTemplates/{tid1}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
-      tags:
-        - projects
-    get:
-      description: Get TemplateVersion using project_id and display_name with an optional version_id field. Get latest (has tag "latest") TemplateVersion if version_id not set.
-      operationId: dataflow.projects.catalogTemplates.get
-      parameters:
-        - description: "Resource name includes project_id and display_name. version_id is optional. Get the latest TemplateVersion if version_id not set. Get by project_id(pid1) and display_name(tid1): Format: projects/{pid1}/catalogTemplates/{tid1} Get by project_id(pid1), display_name(tid1), and version_id(vid1): Format: projects/{pid1}/catalogTemplates/{tid1@vid}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TemplateVersion"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1b3/{name}:commit":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Creates a new TemplateVersion (Important: not new Template) entry in the spanner table. Requires project_id and display_name (template)."
-      operationId: dataflow.projects.catalogTemplates.commit
-      parameters:
-        - description: "The location of the template, name includes project_id and display_name. Commit using project_id(pid1) and display_name(tid1). Format: projects/{pid1}/catalogTemplates/{tid1}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CommitTemplateVersionRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TemplateVersion"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
-      tags:
-        - projects
-  "/v1b3/{name}:label":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Updates the label of the TemplateVersion. Label can be duplicated in Template, so either add or remove the label in the TemplateVersion.
-      operationId: dataflow.projects.catalogTemplates.label
-      parameters:
-        - description: "Resource name includes project_id, display_name, and version_id. Updates by project_id(pid1), display_name(tid1), and version_id(vid1): Format: projects/{pid1}/catalogTemplates/{tid1@vid}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ModifyTemplateVersionLabelRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModifyTemplateVersionLabelResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
-      tags:
-        - projects
-  "/v1b3/{name}:tag":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Updates the tag of the TemplateVersion, and tag is unique in Template. If tag exists in another TemplateVersion in the Template, updates the tag to this TemplateVersion will remove it from the old TemplateVersion and add it to this TemplateVersion. If request is remove_only (remove_only = true), remove the tag from this TemplateVersion.
-      operationId: dataflow.projects.catalogTemplates.tag
-      parameters:
-        - description: "Resource name includes project_id, display_name, and version_id. Updates by project_id(pid1), display_name(tid1), and version_id(vid1): Format: projects/{pid1}/catalogTemplates/{tid1@vid}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ModifyTemplateVersionTagRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModifyTemplateVersionTagResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
-      tags:
-        - projects
-  "/v1b3/{parent}/templateVersions":
-    get:
-      description: List TemplateVersions using project_id and an optional display_name field. List all the TemplateVersions in the Template if display set. List all the TemplateVersions in the Project if display_name not set.
-      operationId: dataflow.projects.templateVersions.list
-      parameters:
-        - description: "parent includes project_id, and display_name is optional. List by project_id(pid1) and display_name(tid1). Format: projects/{pid1}/catalogTemplates/{tid1} List by project_id(pid1). Format: projects/{pid1}"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of TemplateVersions to return per page.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The page token, received from a previous ListTemplateVersions call. Provide this to retrieve the subsequent page.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTemplateVersionsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a new Template with TemplateVersion. Requires project_id(projects) and template display_name(catalogTemplates). The template display_name is set by the user.
-      operationId: dataflow.projects.catalogTemplates.templateVersions.create
-      parameters:
-        - description: "The parent project and template that the TemplateVersion will be created under. Create using project_id(pid1) and display_name(tid1). Format: projects/{pid1}/catalogTemplates/{tid1}"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateTemplateVersionRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TemplateVersion"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
-          Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
-      tags:
-        - projects
 components:
   parameters:
     _.xgafv:
@@ -3201,19 +2910,6 @@ components:
           $ref: "#/components/schemas/Position"
           description: A Position at which to split the work item.
       type: object
-    Artifact:
-      description: Job information for templates.
-      properties:
-        containerSpec:
-          $ref: "#/components/schemas/ContainerSpec"
-          description: Container image path set for flex Template.
-        jobGraphGcsPath:
-          description: job_graph_gcs_path set for legacy Template.
-          type: string
-        metadata:
-          $ref: "#/components/schemas/TemplateMetadata"
-          description: Metadata set for legacy Template.
-      type: object
     AutoscalingEvent:
       description: A structured message reporting an autoscaling decision made by the Dataflow service.
       properties:
@@ -3304,13 +3000,6 @@ components:
           description: Total active CPU time across all cores (ie., non-idle) in milliseconds since start-up.
           format: uint64
           type: string
-      type: object
-    CommitTemplateVersionRequest:
-      description: Commit will add a new TemplateVersion to an existing template.
-      properties:
-        templateVersion:
-          $ref: "#/components/schemas/TemplateVersion"
-          description: TemplateVersion obejct to create.
       type: object
     ComponentSource:
       description: Description of an interstitial value between transforms in an execution stage.
@@ -3554,13 +3243,6 @@ components:
           description: The runtime parameters to pass to the job.
           type: object
       type: object
-    CreateTemplateVersionRequest:
-      description: Creates a new Template with TemplateVersions.
-      properties:
-        templateVersion:
-          $ref: "#/components/schemas/TemplateVersion"
-          description: The TemplateVersion object to create.
-      type: object
     CustomSourceLocation:
       description: Identifies the location of a custom souce.
       properties:
@@ -3706,10 +3388,6 @@ components:
         residual:
           $ref: "#/components/schemas/DerivedSource"
           description: Residual part (returned to the pool of work). Specified relative to the previously-current source.
-      type: object
-    Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
-      properties: {}
       type: object
     Environment:
       description: Describes the environment in which a Dataflow Job runs.
@@ -4540,18 +4218,6 @@ components:
             $ref: "#/components/schemas/Snapshot"
           type: array
       type: object
-    ListTemplateVersionsResponse:
-      description: Respond a list of TemplateVersions.
-      properties:
-        nextPageToken:
-          description: A token that can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
-          type: string
-        templateVersions:
-          description: A list of TemplateVersions.
-          items:
-            $ref: "#/components/schemas/TemplateVersion"
-          type: array
-      type: object
     MapTask:
       description: MapTask consists of an ordered set of instructions, each of which describes one particular low-level operation for the worker to perform in order to accomplish the MapTask's WorkItem. Each instruction must appear in the list before any instructions which depends on its output.
       properties:
@@ -4647,51 +4313,6 @@ components:
           description: Timestamp associated with the metric value. Optional when workers are reporting work progress; it will be filled in responses from the metrics API.
           format: google-datetime
           type: string
-      type: object
-    ModifyTemplateVersionLabelRequest:
-      description: Either add the label to TemplateVersion or remove it from the TemplateVersion.
-      properties:
-        key:
-          description: The label key for update.
-          type: string
-        op:
-          description: Requests for add label to TemplateVersion or remove label from TemplateVersion.
-          enum:
-            - OPERATION_UNSPECIFIED
-            - ADD
-            - REMOVE
-          type: string
-        value:
-          description: The label value for update.
-          type: string
-      type: object
-    ModifyTemplateVersionLabelResponse:
-      description: Respond the labels in the TemplateVersion.
-      properties:
-        labels:
-          additionalProperties:
-            type: string
-          description: All the label in the TemplateVersion.
-          type: object
-      type: object
-    ModifyTemplateVersionTagRequest:
-      description: Add a tag to the current TemplateVersion. If tag exist in another TemplateVersion in the Template, remove the tag before add it to the current TemplateVersion. If remove_only set, remove the tag from the current TemplateVersion.
-      properties:
-        removeOnly:
-          description: The flag that indicates if the request is only for remove tag from TemplateVersion.
-          type: boolean
-        tag:
-          description: The tag for update.
-          type: string
-      type: object
-    ModifyTemplateVersionTagResponse:
-      description: Respond the current tags in the TemplateVersion.
-      properties:
-        tags:
-          description: All the tags in the TemplateVersion.
-          items:
-            type: string
-          type: array
       type: object
     MountedDataDisk:
       description: Describes mounted data disk.
@@ -5923,46 +5544,6 @@ components:
           items:
             $ref: "#/components/schemas/ParameterMetadata"
           type: array
-      type: object
-    TemplateVersion:
-      description: ///////////////////////////////////////////////////////////////////////////// //// Template Catalog is used to organize user TemplateVersions. //// TemplateVersions that have the same project_id and display_name are //// belong to the same Template. //// Templates with the same project_id belong to the same Project. //// TemplateVersion may have labels and multiple labels are allowed. //// Duplicated labels in the same `TemplateVersion` are not allowed. //// TemplateVersion may have tags and multiple tags are allowed. Duplicated //// tags in the same `Template` are not allowed!
-      properties:
-        artifact:
-          $ref: "#/components/schemas/Artifact"
-          description: Job graph and metadata if it is a legacy Template. Container image path and metadata if it is flex Template.
-        createTime:
-          description: Creation time of this TemplateVersion.
-          format: google-datetime
-          type: string
-        description:
-          description: Template description from the user.
-          type: string
-        displayName:
-          description: A customized name for Template. Multiple TemplateVersions per Template.
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          description: Labels for the Template Version. Labels can be duplicate within Template.
-          type: object
-        projectId:
-          description: A unique project_id. Multiple Templates per Project.
-          type: string
-        tags:
-          description: Alias for version_id, helps locate a TemplateVersion.
-          items:
-            type: string
-          type: array
-        type:
-          description: Either LEGACY or FLEX. This should match with the type of artifact.
-          enum:
-            - TEMPLATE_TYPE_UNSPECIFIED
-            - LEGACY
-            - FLEX
-          type: string
-        versionId:
-          description: An auto generated version_id for TemplateVersion.
-          type: string
       type: object
     TopologyConfig:
       description: Global topology of the streaming Dataflow job, including all computations and their sharded locations.

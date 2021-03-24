@@ -2144,7 +2144,7 @@ components:
           description: ETag of the resource.
           type: string
         id:
-          description: Identifier of the ACL rule.
+          description: Identifier of the Access Control List (ACL) rule. See Sharing calendars.
           type: string
         kind:
           default: calendar#aclRule
@@ -2165,7 +2165,7 @@ components:
             - "owner" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs.
           type: string
         scope:
-          description: The scope of the rule.
+          description: The extent to which calendar access is granted by this ACL rule.
           properties:
             type:
               description: >-

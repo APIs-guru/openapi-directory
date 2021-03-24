@@ -791,90 +791,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{parent}/callMatchers":
-    get:
-      description: Returns the list of all call matchers in the specified conversation.
-      operationId: dialogflow.projects.locations.conversations.callMatchers.list
-      parameters:
-        - description: "Required. The conversation to list all call matchers from. Format: `projects//locations//conversations/`."
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Optional. The maximum number of items to return in a single page. By default 100 and at most 1000.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Optional. The next_page_token value returned from a previous list request.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1ListCallMatchersResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/dialogflow
-          Oauth2c:
-            - https://www.googleapis.com/auth/dialogflow
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a call matcher that links incoming SIP calls to the specified conversation if they fulfill specified criteria.
-      operationId: dialogflow.projects.locations.conversations.callMatchers.create
-      parameters:
-        - description: "Required. Resource identifier of the conversation adding the call matcher. Format: `projects//locations//conversations/`."
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1CreateCallMatcherRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1CallMatcher"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/dialogflow
-          Oauth2c:
-            - https://www.googleapis.com/auth/dialogflow
-      tags:
-        - projects
   "/v2beta1/{parent}/contexts":
     delete:
       description: Deletes all active contexts in the specified session.
@@ -2406,7 +2322,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Adds a text (chat, for example), or audio (phone recording, for example) message from a participant into the conversation. Note: Always use agent versions for production traffic sent to virtual agents. See [Versions and environments(https://cloud.google.com/dialogflow/es/docs/agents-versions)."
+      description: "Adds a text (chat, for example), or audio (phone recording, for example) message from a participant into the conversation. Note: Always use agent versions for production traffic sent to virtual agents. See [Versions and environments](https://cloud.google.com/dialogflow/es/docs/agents-versions)."
       operationId: dialogflow.projects.locations.conversations.participants.analyzeContent
       parameters:
         - description: "Required. The name of the participant this text comes from. Format: `projects//locations//conversations//participants/`."
@@ -3405,7 +3321,7 @@ components:
           description: The generic information of the operation.
       type: object
     GoogleCloudDialogflowCxV3WebhookRequest:
-      description: The request message for a webhook call.
+      description: The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases.
       properties:
         detectIntentResponseId:
           description: Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
@@ -4368,7 +4284,7 @@ components:
           description: The generic information of the operation.
       type: object
     GoogleCloudDialogflowCxV3beta1WebhookRequest:
-      description: The request message for a webhook call.
+      description: The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases.
       properties:
         detectIntentResponseId:
           description: Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
@@ -5672,12 +5588,6 @@ components:
     GoogleCloudDialogflowV2beta1AnalyzeContentRequest:
       description: The request message for Participants.AnalyzeContent.
       properties:
-        audio:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1InputAudio"
-          description: The natural language speech audio to be processed.
-        audioInput:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1AudioInput"
-          description: The natural language speech audio to be processed.
         eventInput:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1EventInput"
           description: An input event to send to Dialogflow.
@@ -5694,9 +5604,6 @@ components:
         requestId:
           description: A unique identifier for this request. Restricted to 36 ASCII characters. A random UUID is recommended. This request is only idempotent if a `request_id` is provided.
           type: string
-        text:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1InputText"
-          description: The natural language text to be processed.
         textInput:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1TextInput"
           description: The natural language text to be processed.
@@ -5806,17 +5713,6 @@ components:
         uri:
           description: The article URI.
           type: string
-      type: object
-    GoogleCloudDialogflowV2beta1AudioInput:
-      description: Represents the natural language speech audio to be processed.
-      properties:
-        audio:
-          description: Required. The natural language speech audio to be processed. A single request can contain up to 1 minute of speech audio data. The transcribed text cannot contain more than 256 bytes.
-          format: byte
-          type: string
-        config:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1InputAudioConfig"
-          description: Required. Instructs the speech recognizer how to process the speech audio.
       type: object
     GoogleCloudDialogflowV2beta1AutomatedAgentConfig:
       description: Defines the Automated Agent to connect to a conversation.
@@ -5982,33 +5878,6 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1Intent"
           type: array
       type: object
-    GoogleCloudDialogflowV2beta1CallMatcher:
-      description: "Represents a call matcher that describes criteria for matching incoming SIP calls to a conversation. When Dialogflow get a SIP call from a third-party carrier, Dialogflow matches the call to an existing conversation by either: * Extracting the conversation id from the [Call-Info header](https://tools.ietf.org/html/rfc3261#section-20.9), e.g. `Call-Info: ;purpose=Goog-ContactCenter-Conversation`. * Or, if that doesn't work, matching incoming [SIP headers](https://tools.ietf.org/html/rfc3261#section-7.3) against any CallMatcher for the conversation. If an incoming SIP call without valid `Call-Info` header matches to zero or multiple conversations with `CallMatcher`, we reject it. A call matcher contains equality conditions for SIP headers that all have to be fulfilled in order for a SIP call to match. The matched SIP headers consist of well-known headers (`To`, `From`, `Call-ID`) and custom headers. A CallMatcher is only valid if it specifies: * At least 1 custom header, * or at least 2 well-known headers."
-      properties:
-        callIdHeader:
-          description: Value of the [`Call-ID` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.4) to match. If empty or unspecified, we don't match to the [`Call-ID` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.4).
-          type: string
-        customHeaders:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1CallMatcherCustomHeaders"
-          description: Custom SIP headers that must match.
-        fromHeader:
-          description: Value of the [`From` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.3) to match. If empty or unspecified, we don't match to the [`From` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.3).
-          type: string
-        name:
-          description: "Output only. The unique identifier of this call matcher. Format: `projects//locations//conversations//callMatchers/`."
-          readOnly: true
-          type: string
-        toHeader:
-          description: Value of the [`To` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.2) to match. If empty or unspecified, we don't match to the [`To` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.2).
-          type: string
-      type: object
-    GoogleCloudDialogflowV2beta1CallMatcherCustomHeaders:
-      description: Custom SIP headers. See the [description of headers in the RFC](https://tools.ietf.org/html/rfc3261#section-7.3).
-      properties:
-        ciscoGuid:
-          description: Cisco's proprietary `Cisco-Guid` header.
-          type: string
-      type: object
     GoogleCloudDialogflowV2beta1CompileSuggestionRequest:
       description: The request message for Participants.CompileSuggestion.
       properties:
@@ -6141,9 +6010,6 @@ components:
         humanAgentAssistantConfig:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfig"
           description: Configuration for agent assistance to use with this profile.
-        humanAgentHandoffConfig:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentHandoffConfig"
-          description: Configuration for connecting to a live agent.
         languageCode:
           description: Language code for the conversation profile. If not specified, the language is en-US. Language at ConversationProfile should be set for all non en-us languages.
           type: string
@@ -6167,13 +6033,6 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-      type: object
-    GoogleCloudDialogflowV2beta1CreateCallMatcherRequest:
-      description: The request message for Conversations.CreateCallMatcher.
-      properties:
-        callMatcher:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1CallMatcher"
-          description: Required. The call matcher to create.
       type: object
     GoogleCloudDialogflowV2beta1CreateMessageRequest:
       description: The request message to create one Message. Currently it is only used in BatchCreateMessagesRequest.
@@ -6438,7 +6297,7 @@ components:
       description: By default, your agent responds to a matched intent with a static response. As an alternative, you can provide a more dynamic response by using fulfillment. When you enable fulfillment for an intent, Dialogflow responds to that intent by calling a service that you define. For example, if an end-user wants to schedule a haircut on Friday, your service can check your database and respond to the end-user with availability information for Friday. For more information, see the [fulfillment guide](https://cloud.google.com/dialogflow/docs/fulfillment-overview).
       properties:
         displayName:
-          description: The human-readable name of the fulfillment, unique within the agent.
+          description: The human-readable name of the fulfillment, unique within the agent. This field is not used for Fulfillment in an Environment.
           type: string
         enabled:
           description: Whether fulfillment is enabled.
@@ -6452,7 +6311,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1FulfillmentGenericWebService"
           description: Configuration for a generic web service.
         name:
-          description: "Required. The unique identifier of the fulfillment. Supported formats: - `projects//agent/fulfillment` - `projects//locations//agent/fulfillment`"
+          description: "Required. The unique identifier of the fulfillment. Supported formats: - `projects//agent/fulfillment` - `projects//locations//agent/fulfillment` This field is not used for Fulfillment in an Environment."
           type: string
       type: object
     GoogleCloudDialogflowV2beta1FulfillmentFeature:
@@ -6505,9 +6364,6 @@ components:
     GoogleCloudDialogflowV2beta1HumanAgentAssistantConfig:
       description: Defines the Human Agent Assistant to connect to a conversation.
       properties:
-        endUserSuggestionConfig:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionConfig"
-          description: Configuration for agent assistance of end user participant.
         humanAgentSuggestionConfig:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionConfig"
           description: Configuration for agent assistance of human agent participant.
@@ -6528,9 +6384,6 @@ components:
     GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigMessageAnalysisConfig:
       description: Configuration for analyses to run on each conversation message.
       properties:
-        enableEntityExtraction:
-          description: Enable entity extraction in conversation messages on [agent assist stage](https://cloud.google.com/dialogflow/priv/docs/contact-center/basics#stages). If unspecified, defaults to false.
-          type: boolean
         enableSentimentAnalysis:
           description: "Enable sentiment analysis in conversation messages on [agent assist stage](https://cloud.google.com/dialogflow/priv/docs/contact-center/basics#stages). If unspecified, defaults to false. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user's attitude as positive, negative, or neutral: https://cloud.google.com/natural-language/docs/basics#sentiment_analysis For Participants.StreamingAnalyzeContent method, result will be in StreamingAnalyzeContentResponse.message.SentimentAnalysisResult. For Participants.AnalyzeContent method, result will be in AnalyzeContentResponse.message.SentimentAnalysisResult For Conversations.ListMessages method, result will be in ListMessagesResponse.messages.SentimentAnalysisResult If Pub/Sub notification is configured, result will be in ConversationEvent.new_message_payload.SentimentAnalysisResult."
           type: boolean
@@ -6653,39 +6506,6 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestionResult"
           type: array
       type: object
-    GoogleCloudDialogflowV2beta1HumanAgentHandoffConfig:
-      description: Defines the hand off to a live agent, typically on which external agent service provider to connect to a conversation.
-      properties:
-        livePersonConfig:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentHandoffConfigLivePersonConfig"
-          description: Uses LivePerson (https://www.liveperson.com).
-        salesforceLiveAgentConfig:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentHandoffConfigSalesforceLiveAgentConfig"
-          description: Uses Salesforce Live Agent.
-      type: object
-    GoogleCloudDialogflowV2beta1HumanAgentHandoffConfigLivePersonConfig:
-      description: Configuration specific to LivePerson (https://www.liveperson.com).
-      properties:
-        accountNumber:
-          description: Required. Account number of the LivePerson account to connect. This is the account number you input at the login page.
-          type: string
-      type: object
-    GoogleCloudDialogflowV2beta1HumanAgentHandoffConfigSalesforceLiveAgentConfig:
-      description: Configuration specific to Salesforce Live Agent.
-      properties:
-        buttonId:
-          description: Required. Live Agent chat button ID.
-          type: string
-        deploymentId:
-          description: Required. Live Agent deployment ID.
-          type: string
-        endpointDomain:
-          description: Required. Domain of the Live Agent endpoint for this agent. You can find the endpoint URL in the `Live Agent settings` page. For example if URL has the form https://d.la4-c2-phx.salesforceliveagent.com/..., you should fill in d.la4-c2-phx.salesforceliveagent.com.
-          type: string
-        organizationId:
-          description: Required. The organization ID of the Salesforce account.
-          type: string
-      type: object
     GoogleCloudDialogflowV2beta1ImportAgentRequest:
       description: The request message for Agents.ImportAgent.
       properties:
@@ -6742,17 +6562,6 @@ components:
             $ref: "#/components/schemas/GoogleRpcStatus"
           type: array
       type: object
-    GoogleCloudDialogflowV2beta1InputAudio:
-      description: Represents the natural language speech audio to be processed.
-      properties:
-        audio:
-          description: Required. The natural language speech audio to be processed. A single request can contain up to 1 minute of speech audio data. The transcribed text cannot contain more than 256 bytes.
-          format: byte
-          type: string
-        config:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1InputAudioConfig"
-          description: Required. Instructs the speech recognizer how to process the speech audio.
-      type: object
     GoogleCloudDialogflowV2beta1InputAudioConfig:
       description: Instructs the speech recognizer on how to process the audio content.
       properties:
@@ -6805,16 +6614,6 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SpeechContext"
           type: array
-      type: object
-    GoogleCloudDialogflowV2beta1InputText:
-      description: Represents the natural language text to be processed.
-      properties:
-        languageCode:
-          description: Required. The language of this conversational query. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes.
-          type: string
-        text:
-          description: Required. The UTF-8 encoded natural language text to be processed. Text length must not exceed 256 bytes.
-          type: string
       type: object
     GoogleCloudDialogflowV2beta1Intent:
       description: An intent categorizes an end-user's intention for one conversation turn. For each agent, you define many intents, where your combined intents can handle a complete conversation. When an end-user writes or says something, referred to as an end-user expression or end-user input, Dialogflow matches the end-user input to the best intent in your agent. Matching an intent is also known as intent classification. For more information, see the [intent guide](https://cloud.google.com/dialogflow/docs/intents-overview).
@@ -7685,18 +7484,6 @@ components:
           description: A token to retrieve next page of results. Or empty if there are no more results. Pass this value in the ListAnswerRecordsRequest.page_token field in the subsequent call to `ListAnswerRecords` method to retrieve the next page of results.
           type: string
       type: object
-    GoogleCloudDialogflowV2beta1ListCallMatchersResponse:
-      description: The response message for Conversations.ListCallMatchers.
-      properties:
-        callMatchers:
-          description: The list of call matchers. There is a maximum number of items returned based on the page_size field in the request.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1CallMatcher"
-          type: array
-        nextPageToken:
-          description: Token to retrieve the next page of results or empty if there are no more results in the list.
-          type: string
-      type: object
     GoogleCloudDialogflowV2beta1ListContextsResponse:
       description: The response message for Contexts.ListContexts.
       properties:
@@ -7952,7 +7739,9 @@ components:
             - OUTPUT_AUDIO_ENCODING_UNSPECIFIED
             - OUTPUT_AUDIO_ENCODING_LINEAR_16
             - OUTPUT_AUDIO_ENCODING_MP3
+            - OUTPUT_AUDIO_ENCODING_MP3_64_KBPS
             - OUTPUT_AUDIO_ENCODING_OGG_OPUS
+            - OUTPUT_AUDIO_ENCODING_MULAW
           type: string
         sampleRateHertz:
           description: The synthesis sample rate (in hertz) for this audio. If not provided, then the synthesizer will use the default sample rate based on the audio encoding. If this is different from the voice's natural sample rate, then the synthesizer will honor this request by converting to the desired sample rate (which might result in worse audio quality).
@@ -7986,6 +7775,9 @@ components:
         audioConfig:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1InputAudioConfig"
           description: Instructs the speech recognizer how to process the speech audio.
+        dtmf:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1TelephonyDtmfEvents"
+          description: The DTMF digits used to invoke intent and fill in parameter value.
         event:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1EventInput"
           description: The event to be processed.
@@ -8478,6 +8270,33 @@ components:
           format: double
           type: number
       type: object
+    GoogleCloudDialogflowV2beta1TelephonyDtmfEvents:
+      description: A wrapper of repeated TelephonyDtmf digits.
+      properties:
+        dtmfEvents:
+          description: A sequence of TelephonyDtmf digits.
+          items:
+            enum:
+              - TELEPHONY_DTMF_UNSPECIFIED
+              - DTMF_ONE
+              - DTMF_TWO
+              - DTMF_THREE
+              - DTMF_FOUR
+              - DTMF_FIVE
+              - DTMF_SIX
+              - DTMF_SEVEN
+              - DTMF_EIGHT
+              - DTMF_NINE
+              - DTMF_ZERO
+              - DTMF_A
+              - DTMF_B
+              - DTMF_C
+              - DTMF_D
+              - DTMF_STAR
+              - DTMF_POUND
+            type: string
+          type: array
+      type: object
     GoogleCloudDialogflowV2beta1TextInput:
       description: Represents the natural language text to be processed.
       properties:
@@ -8730,7 +8549,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/dialogflow: View, manage and query your Dialogflow agents
       type: oauth2
     Oauth2c:
@@ -8739,7 +8558,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/dialogflow: View, manage and query your Dialogflow agents
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

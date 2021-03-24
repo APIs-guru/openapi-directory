@@ -52,6 +52,11 @@ paths:
           name: apiVersion
           schema:
             type: string
+        - description: DryRun is a query string parameter which indicates that the server should run validation without persisting the request.
+          in: query
+          name: dryRun
+          schema:
+            type: string
         - description: Cloud Run currently ignores this parameter.
           in: query
           name: kind
@@ -241,6 +246,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: DryRun is a query string parameter which indicates that the server should run validation without persisting the request.
+          in: query
+          name: dryRun
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -274,6 +284,11 @@ paths:
         - description: Cloud Run currently ignores this parameter.
           in: query
           name: apiVersion
+          schema:
+            type: string
+        - description: DryRun is a query string parameter which indicates that the server should run validation without persisting the request.
+          in: query
+          name: dryRun
           schema:
             type: string
         - description: Cloud Run currently ignores this parameter.
@@ -344,6 +359,11 @@ paths:
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: DryRun is a query string parameter which indicates that the server should run validation without persisting the request.
+          in: query
+          name: dryRun
           schema:
             type: string
       requestBody:
@@ -663,6 +683,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: DryRun is a query string parameter which indicates that the server should run validation without persisting the request.
+          in: query
+          name: dryRun
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -696,6 +721,11 @@ paths:
         - description: Cloud Run currently ignores this parameter.
           in: query
           name: apiVersion
+          schema:
+            type: string
+        - description: DryRun is a query string parameter which indicates that the server should run validation without persisting the request.
+          in: query
+          name: dryRun
           schema:
             type: string
         - description: Cloud Run currently ignores this parameter.
@@ -768,6 +798,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: DryRun is a query string parameter which indicates that the server should run validation without persisting the request.
+          in: query
+          name: dryRun
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -798,17 +833,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: The standard list filter.
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like "displayName=tokyo", and is documented in more detail in [AIP-160](https://google.aip.dev/160).
           in: query
           name: filter
           schema:
             type: string
-        - description: The standard list page size.
+        - description: The maximum number of results to return. If not set, the service will select a default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: The standard list page token.
+        - description: A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page.
           in: query
           name: pageToken
           schema:
@@ -1038,6 +1073,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: DryRun is a query string parameter which indicates that the server should run validation without persisting the request.
+          in: query
+          name: dryRun
           schema:
             type: string
       requestBody:
@@ -1283,6 +1323,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: DryRun is a query string parameter which indicates that the server should run validation without persisting the request.
+          in: query
+          name: dryRun
           schema:
             type: string
       requestBody:
@@ -2678,7 +2723,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -2686,6 +2731,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

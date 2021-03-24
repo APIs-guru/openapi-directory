@@ -821,6 +821,7 @@ components:
             - FILTER_CHANNEL_GROUPING
             - FILTER_OM_SDK_AVAILABLE
             - FILTER_DATA_SOURCE
+            - FILTER_CM360_PLACEMENT_ID
           type: string
         value:
           description: Filter value.
@@ -1140,6 +1141,7 @@ components:
               - FILTER_CHANNEL_GROUPING
               - FILTER_OM_SDK_AVAILABLE
               - FILTER_DATA_SOURCE
+              - FILTER_CM360_PLACEMENT_ID
             type: string
           type: array
         includeInviteData:
@@ -1599,6 +1601,11 @@ components:
               - METRIC_VIRTUAL_PEOPLE_VIEWABLE_IMPRESSION_REACH_BY_DEMO
               - METRIC_VIRTUAL_PEOPLE_VIEWABLE_IMPRESSION_REACH_PERCENT
               - METRIC_VIRTUAL_PEOPLE_VIEWABLE_IMPRESSION_REACH_SHARE_PERCENT
+              - METRIC_ENGAGEMENT_RATE
+              - METRIC_CM360_POST_VIEW_REVENUE
+              - METRIC_CM360_POST_CLICK_REVENUE
+              - METRIC_CM360_POST_CLICK_REVENUE_CROSS_ENVIRONMENT
+              - METRIC_CM360_POST_VIEW_REVENUE_CROSS_ENVIRONMENT
             type: string
           type: array
         options:
@@ -1939,6 +1946,7 @@ components:
             - FILTER_CHANNEL_GROUPING
             - FILTER_OM_SDK_AVAILABLE
             - FILTER_DATA_SOURCE
+            - FILTER_CM360_PLACEMENT_ID
           type: string
         match:
           description: Indicates how the filter should be matched to the value.

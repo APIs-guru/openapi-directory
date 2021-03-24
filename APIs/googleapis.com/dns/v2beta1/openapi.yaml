@@ -43,7 +43,7 @@ tags:
 paths:
   "/dns/v2beta1/projects/{project}":
     get:
-      description: Fetch the representation of an existing Project.
+      description: Fetches the representation of an existing Project.
       operationId: dns.projects.get
       parameters:
         - description: Identifies the project addressed by this request.
@@ -97,7 +97,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones":
     get:
-      description: Enumerate ManagedZones that have been created but not yet deleted.
+      description: Enumerates ManagedZones that have been created but not yet deleted.
       operationId: dns.managedZones.list
       parameters:
         - description: Identifies the project addressed by this request.
@@ -160,7 +160,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create a new ManagedZone.
+      description: Creates a new ManagedZone.
       operationId: dns.managedZones.create
       parameters:
         - description: Identifies the project addressed by this request.
@@ -199,7 +199,7 @@ paths:
         - managedZones
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}":
     delete:
-      description: Delete a previously created ManagedZone.
+      description: Deletes a previously created ManagedZone.
       operationId: dns.managedZones.delete
       parameters:
         - description: Identifies the project addressed by this request.
@@ -234,7 +234,7 @@ paths:
       tags:
         - managedZones
     get:
-      description: Fetch the representation of an existing ManagedZone.
+      description: Fetches the representation of an existing ManagedZone.
       operationId: dns.managedZones.get
       parameters:
         - description: Identifies the project addressed by this request.
@@ -293,7 +293,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Apply a partial update to an existing ManagedZone.
+      description: Applies a partial update to an existing ManagedZone.
       operationId: dns.managedZones.patch
       parameters:
         - description: Identifies the project addressed by this request.
@@ -337,7 +337,7 @@ paths:
       tags:
         - managedZones
     put:
-      description: Update an existing ManagedZone.
+      description: Updates an existing ManagedZone.
       operationId: dns.managedZones.update
       parameters:
         - description: Identifies the project addressed by this request.
@@ -569,7 +569,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/dnsKeys":
     get:
-      description: Enumerate DnsKeys to a ResourceRecordSet collection.
+      description: Enumerates DnsKeys to a ResourceRecordSet collection.
       operationId: dns.dnsKeys.list
       parameters:
         - description: Identifies the project addressed by this request.
@@ -639,7 +639,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/dnsKeys/{dnsKeyId}":
     get:
-      description: Fetch the representation of an existing DnsKey.
+      description: Fetches the representation of an existing DnsKey.
       operationId: dns.dnsKeys.get
       parameters:
         - description: Identifies the project addressed by this request.
@@ -1063,7 +1063,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Apply a partial update to an existing Policy.
+      description: Applies a partial update to an existing Policy.
       operationId: dns.policies.patch
       parameters:
         - description: Identifies the project addressed by this request.
@@ -1098,7 +1098,7 @@ paths:
       tags:
         - policies
     put:
-      description: Update an existing Policy.
+      description: Updates an existing Policy.
       operationId: dns.policies.update
       parameters:
         - description: Identifies the project addressed by this request.
@@ -1255,7 +1255,7 @@ components:
           description: Type of resource.
           type: string
         nextPageToken:
-          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. This lets you retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a "snapshot" of collections larger than the maximum page size.
           type: string
       type: object
     DnsKey:
@@ -1483,7 +1483,7 @@ components:
           default: dns#managedZoneOperationsListResponse
           type: string
         nextPageToken:
-          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. This lets you retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         operations:
           description: The operation resources.
@@ -1557,7 +1557,7 @@ components:
           default: dns#managedZoneServiceDirectoryConfigNamespace
           type: string
         namespaceUrl:
-          description: The fully qualified URL of the namespace associated with the zone. This should be formatted like https://servicedirectory.googleapis.com/v1/projects/{project}/locations/{location}/namespaces/{namespace}
+          description: The fully qualified URL of the namespace associated with the zone. Format must be https://servicedirectory.googleapis.com/v1/projects/{project}/locations/{location}/namespaces/{namespace}
           type: string
       type: object
     ManagedZonesListResponse:
@@ -1574,7 +1574,7 @@ components:
             $ref: "#/components/schemas/ManagedZone"
           type: array
         nextPageToken:
-          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. This lets you the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
       type: object
     Operation:
@@ -1635,7 +1635,7 @@ components:
           description: Type of resource.
           type: string
         nextPageToken:
-          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. This lets you the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         policies:
           description: The policy resources.
@@ -1724,7 +1724,7 @@ components:
           type: string
       type: object
     Project:
-      description: A project resource. The project is a top level container for resources including Cloud DNS ManagedZones. Projects can be created only in the APIs console.
+      description: "A project resource. The project is a top level container for resources including Cloud DNS ManagedZones. Projects can be created only in the APIs console. Next tag: 7."
       properties:
         id:
           description: User assigned unique identifier for the resource (output only).

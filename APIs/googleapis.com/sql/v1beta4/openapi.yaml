@@ -2715,7 +2715,7 @@ components:
           $ref: "#/components/schemas/Settings"
           description: The user settings.
         state:
-          description: "The current serving state of the Cloud SQL instance. This can be one of the following. *SQL_INSTANCE_STATE_UNSPECIFIED*: The state of the instance is unknown. *RUNNABLE*: The instance is running, or has been stopped by owner. *SUSPENDED*: The instance is not available, for example due to problems with billing. for example due to problems with billing. *PENDING_DELETE*: The instance is being deleted. *PENDING_CREATE*: The instance is being created. *MAINTENANCE*: The instance is down for maintenance. *FAILED*: The instance creation failed."
+          description: "The current serving state of the Cloud SQL instance. This can be one of the following. *SQL_INSTANCE_STATE_UNSPECIFIED*: The state of the instance is unknown. *RUNNABLE*: The instance is running, or has been stopped by owner. *SUSPENDED*: The instance is not available, for example due to problems with billing. *PENDING_DELETE*: The instance is being deleted. *PENDING_CREATE*: The instance is being created. *MAINTENANCE*: The instance is down for maintenance. *FAILED*: The instance creation failed."
           enum:
             - SQL_INSTANCE_STATE_UNSPECIFIED
             - RUNNABLE
@@ -3033,7 +3033,7 @@ components:
           description: Whether Query Insights feature is enabled.
           type: boolean
         queryStringLength:
-          description: "Maximum query length stored in bytes. Default value: 1024 bytes. Range: 256-4500 bytes. Query length more than this field value will be truncated to this value. When unset, query length will be the default value."
+          description: "Maximum query length stored in bytes. Default value: 1024 bytes. Range: 256-4500 bytes. Query length more than this field value will be truncated to this value. When unset, query length will be the default value. Changing query length will restart the database."
           format: int32
           type: integer
         recordApplicationTags:
@@ -3870,7 +3870,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/sqlservice.admin: Manage your Google SQL Service instances
       type: oauth2
     Oauth2c:
@@ -3879,7 +3879,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/sqlservice.admin: Manage your Google SQL Service instances
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

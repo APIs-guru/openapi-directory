@@ -355,7 +355,7 @@ paths:
   "/v2/{parent}/agent":
     delete:
       description: Deletes the specified agent.
-      operationId: dialogflow.projects.deleteAgent
+      operationId: dialogflow.projects.locations.deleteAgent
       parameters:
         - description: "Required. The project that the agent to delete is associated with. Format: `projects/`."
           in: path
@@ -383,7 +383,7 @@ paths:
         - projects
     get:
       description: Retrieves the specified agent.
-      operationId: dialogflow.projects.getAgent
+      operationId: dialogflow.projects.locations.getAgent
       parameters:
         - description: "Required. The project that the agent to fetch is associated with. Format: `projects/`."
           in: path
@@ -423,7 +423,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates/updates the specified agent.
-      operationId: dialogflow.projects.setAgent
+      operationId: dialogflow.projects.locations.setAgent
       parameters:
         - description: "Required. The project of this agent. Format: `projects/`."
           in: path
@@ -462,7 +462,7 @@ paths:
   "/v2/{parent}/agent/validationResult":
     get:
       description: Gets agent validation result. Agent validation is performed during training time and is updated automatically when training is completed.
-      operationId: dialogflow.projects.agent.getValidationResult
+      operationId: dialogflow.projects.locations.agent.getValidationResult
       parameters:
         - description: "Required. The project that the agent is associated with. Format: `projects/`."
           in: path
@@ -520,7 +520,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Exports the specified agent to a ZIP file. Operation "
-      operationId: dialogflow.projects.agent.export
+      operationId: dialogflow.projects.locations.agent.export
       parameters:
         - description: "Required. The project that the agent to export is associated with. Format: `projects/`."
           in: path
@@ -566,7 +566,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Imports the specified agent from a ZIP file. Uploads new intents and entity types without deleting the existing ones. Intents and entity types with the same name are replaced with the new versions from ImportAgentRequest. After the import, the imported draft agent will be trained automatically (unless disabled in agent settings). However, once the import is done, training may not be completed yet. Please call TrainAgent and wait for the operation it returns in order to train explicitly. Operation An operation which tracks when importing is complete. It only tracks when the draft agent is updated not when it is done training.
-      operationId: dialogflow.projects.agent.import
+      operationId: dialogflow.projects.locations.agent.import
       parameters:
         - description: "Required. The project that the agent to import is associated with. Format: `projects/`."
           in: path
@@ -612,7 +612,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Restores the specified agent from a ZIP file. Replaces the current agent version with a new one. All the intents and entity types in the older version are deleted. After the restore, the restored draft agent will be trained automatically (unless disabled in agent settings). However, once the restore is done, training may not be completed yet. Please call TrainAgent and wait for the operation it returns in order to train explicitly. Operation An operation which tracks when restoring is complete. It only tracks when the draft agent is updated not when it is done training.
-      operationId: dialogflow.projects.agent.restore
+      operationId: dialogflow.projects.locations.agent.restore
       parameters:
         - description: "Required. The project that the agent to restore is associated with. Format: `projects/`."
           in: path
@@ -646,7 +646,7 @@ paths:
   "/v2/{parent}/agent:search":
     get:
       description: Returns the list of agents. Since there is at most one conversational agent per project, this method is useful primarily for listing all agents across projects the caller has access to. One can achieve that with a wildcard project collection id "-". Refer to [List Sub-Collections](https://cloud.google.com/apis/design/design_patterns#list_sub-collections).
-      operationId: dialogflow.projects.agent.search
+      operationId: dialogflow.projects.locations.agent.search
       parameters:
         - description: "Required. The project to list agents from. Format: `projects/`."
           in: path
@@ -709,7 +709,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Trains the specified agent. Operation "
-      operationId: dialogflow.projects.agent.train
+      operationId: dialogflow.projects.locations.agent.train
       parameters:
         - description: "Required. The project that the agent to train is associated with. Format: `projects/`."
           in: path
@@ -796,94 +796,10 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/callMatchers":
-    get:
-      description: Returns the list of all call matchers in the specified conversation.
-      operationId: dialogflow.projects.locations.conversations.callMatchers.list
-      parameters:
-        - description: "Required. The conversation to list all call matchers from. Format: `projects//locations//conversations/`."
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Optional. The maximum number of items to return in a single page. By default 100 and at most 1000.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Optional. The next_page_token value returned from a previous list request.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudDialogflowV2ListCallMatchersResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/dialogflow
-          Oauth2c:
-            - https://www.googleapis.com/auth/dialogflow
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a call matcher that links incoming SIP calls to the specified conversation if they fulfill specified criteria.
-      operationId: dialogflow.projects.locations.conversations.callMatchers.create
-      parameters:
-        - description: "Required. Resource identifier of the conversation adding the call matcher. Format: `projects//locations//conversations/`."
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudDialogflowV2CreateCallMatcherRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudDialogflowV2CallMatcher"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/dialogflow
-          Oauth2c:
-            - https://www.googleapis.com/auth/dialogflow
-      tags:
-        - projects
   "/v2/{parent}/contexts":
     delete:
       description: Deletes all active contexts in the specified session.
-      operationId: dialogflow.projects.agent.sessions.deleteContexts
+      operationId: dialogflow.projects.locations.agent.sessions.deleteContexts
       parameters:
         - description: "Required. The name of the session to delete all contexts from. Format: `projects//agent/sessions/` or `projects//agent/environments//users//sessions/`. If `Environment ID` is not specified we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user."
           in: path
@@ -911,7 +827,7 @@ paths:
         - projects
     get:
       description: Returns the list of all contexts in the specified session.
-      operationId: dialogflow.projects.agent.sessions.contexts.list
+      operationId: dialogflow.projects.locations.agent.sessions.contexts.list
       parameters:
         - description: "Required. The session to list all contexts from. Format: `projects//agent/sessions/` or `projects//agent/environments//users//sessions/`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user."
           in: path
@@ -961,7 +877,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a context. If the specified context already exists, overrides the context.
-      operationId: dialogflow.projects.agent.sessions.contexts.create
+      operationId: dialogflow.projects.locations.agent.sessions.contexts.create
       parameters:
         - description: "Required. The session to create a context for. Format: `projects//agent/sessions/` or `projects//agent/environments//users//sessions/`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user."
           in: path
@@ -1269,7 +1185,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Creates multiple new entities in the specified entity type. Operation "
-      operationId: dialogflow.projects.agent.entityTypes.entities.batchCreate
+      operationId: dialogflow.projects.locations.agent.entityTypes.entities.batchCreate
       parameters:
         - description: "Required. The name of the entity type to create entities in. Format: `projects//agent/entityTypes/`."
           in: path
@@ -1315,7 +1231,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Deletes entities in the specified entity type. Operation "
-      operationId: dialogflow.projects.agent.entityTypes.entities.batchDelete
+      operationId: dialogflow.projects.locations.agent.entityTypes.entities.batchDelete
       parameters:
         - description: "Required. The name of the entity type to delete entries for. Format: `projects//agent/entityTypes/`."
           in: path
@@ -1361,7 +1277,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Updates or creates multiple entities in the specified entity type. This method does not affect entities in the entity type that aren't explicitly specified in the request. Operation "
-      operationId: dialogflow.projects.agent.entityTypes.entities.batchUpdate
+      operationId: dialogflow.projects.locations.agent.entityTypes.entities.batchUpdate
       parameters:
         - description: "Required. The name of the entity type to update or create entities in. Format: `projects//agent/entityTypes/`."
           in: path
@@ -1395,7 +1311,7 @@ paths:
   "/v2/{parent}/entityTypes":
     get:
       description: Returns the list of all session entity types in the specified session. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.
-      operationId: dialogflow.projects.agent.sessions.entityTypes.list
+      operationId: dialogflow.projects.locations.agent.sessions.entityTypes.list
       parameters:
         - description: "Required. The session to list all session entity types from. Format: `projects//agent/sessions/` or `projects//agent/environments//users// sessions/`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user."
           in: path
@@ -1445,7 +1361,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a session entity type. If the specified session entity type already exists, overrides the session entity type. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.
-      operationId: dialogflow.projects.agent.sessions.entityTypes.create
+      operationId: dialogflow.projects.locations.agent.sessions.entityTypes.create
       parameters:
         - description: "Required. The session to create a session entity type for. Format: `projects//agent/sessions/` or `projects//agent/environments//users// sessions/`. If `Environment ID` is not specified, we assume default 'draft' environment. If `User ID` is not specified, we assume default '-' user."
           in: path
@@ -1496,7 +1412,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Deletes entity types in the specified agent. Operation "
-      operationId: dialogflow.projects.agent.entityTypes.batchDelete
+      operationId: dialogflow.projects.locations.agent.entityTypes.batchDelete
       parameters:
         - description: "Required. The name of the agent to delete all entities types for. Format: `projects//agent`."
           in: path
@@ -1542,7 +1458,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Updates/Creates multiple entity types in the specified agent. Operation "
-      operationId: dialogflow.projects.agent.entityTypes.batchUpdate
+      operationId: dialogflow.projects.locations.agent.entityTypes.batchUpdate
       parameters:
         - description: "Required. The name of the agent to update or create entity types in. Format: `projects//agent`."
           in: path
@@ -1576,7 +1492,7 @@ paths:
   "/v2/{parent}/environments":
     get:
       description: Returns the list of all non-draft environments of the specified agent.
-      operationId: dialogflow.projects.agent.environments.list
+      operationId: dialogflow.projects.locations.agent.environments.list
       parameters:
         - description: "Required. The agent to list all environments from. Format: `projects//agent`."
           in: path
@@ -1627,7 +1543,7 @@ paths:
   "/v2/{parent}/intents":
     get:
       description: Returns the list of all intents in the specified agent.
-      operationId: dialogflow.projects.agent.intents.list
+      operationId: dialogflow.projects.locations.agent.intents.list
       parameters:
         - description: "Required. The agent to list all intents from. Format: `projects//agent`."
           in: path
@@ -1690,7 +1606,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates an intent in the specified agent.
-      operationId: dialogflow.projects.agent.intents.create
+      operationId: dialogflow.projects.locations.agent.intents.create
       parameters:
         - description: "Required. The agent to create a intent for. Format: `projects//agent`."
           in: path
@@ -1749,7 +1665,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Deletes intents in the specified agent. Operation "
-      operationId: dialogflow.projects.agent.intents.batchDelete
+      operationId: dialogflow.projects.locations.agent.intents.batchDelete
       parameters:
         - description: "Required. The name of the agent to delete all entities types for. Format: `projects//agent`."
           in: path
@@ -1795,7 +1711,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Updates/Creates multiple intents in the specified agent. Operation "
-      operationId: dialogflow.projects.agent.intents.batchUpdate
+      operationId: dialogflow.projects.locations.agent.intents.batchUpdate
       parameters:
         - description: "Required. The name of the agent to update or create intents in. Format: `projects//agent`."
           in: path
@@ -2156,7 +2072,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Adds a text (chat, for example), or audio (phone recording, for example) message from a participant into the conversation. Note: Always use agent versions for production traffic sent to virtual agents. See [Versions and environments(https://cloud.google.com/dialogflow/es/docs/agents-versions)."
+      description: "Adds a text (chat, for example), or audio (phone recording, for example) message from a participant into the conversation. Note: Always use agent versions for production traffic sent to virtual agents. See [Versions and environments](https://cloud.google.com/dialogflow/es/docs/agents-versions)."
       operationId: dialogflow.projects.locations.conversations.participants.analyzeContent
       parameters:
         - description: "Required. The name of the participant this text comes from. Format: `projects//locations//conversations//participants/`."
@@ -2203,7 +2119,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Processes a natural language query and returns structured, actionable data as a result. This method is not idempotent, because it may cause contexts and session entity types to be updated, which in turn might affect results of future queries. Note: Always use agent versions for production traffic. See [Versions and environments](https://cloud.google.com/dialogflow/es/docs/agents-versions)."
-      operationId: dialogflow.projects.agent.sessions.detectIntent
+      operationId: dialogflow.projects.locations.agent.sessions.detectIntent
       parameters:
         - description: "Required. The name of the session this query is sent to. Format: `projects//agent/sessions/`, or `projects//agent/environments//users//sessions/`. If `Environment ID` is not specified, we assume default 'draft' environment (`Environment ID` might be referred to as environment name at some places). If `User ID` is not specified, we are using \"-\". It's up to the API caller to choose an appropriate `Session ID` and `User Id`. They can be a random number or some type of user and session identifiers (preferably hashed). The length of the `Session ID` and `User ID` must not exceed 36 characters. For more information, see the [API interactions guide](https://cloud.google.com/dialogflow/docs/api-overview). Note: Always use agent versions for production traffic. See [Versions and environments](https://cloud.google.com/dialogflow/es/docs/agents-versions)."
           in: path
@@ -3155,7 +3071,7 @@ components:
           description: The generic information of the operation.
       type: object
     GoogleCloudDialogflowCxV3WebhookRequest:
-      description: The request message for a webhook call.
+      description: The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases.
       properties:
         detectIntentResponseId:
           description: Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
@@ -4118,7 +4034,7 @@ components:
           description: The generic information of the operation.
       type: object
     GoogleCloudDialogflowCxV3beta1WebhookRequest:
-      description: The request message for a webhook call.
+      description: The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases.
       properties:
         detectIntentResponseId:
           description: Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
@@ -4333,9 +4249,6 @@ components:
     GoogleCloudDialogflowV2AnalyzeContentRequest:
       description: The request message for Participants.AnalyzeContent.
       properties:
-        audioInput:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2AudioInput"
-          description: The natural language speech audio to be processed.
         eventInput:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2EventInput"
           description: An input event to send to Dialogflow.
@@ -4462,17 +4375,6 @@ components:
         uri:
           description: The article URI.
           type: string
-      type: object
-    GoogleCloudDialogflowV2AudioInput:
-      description: Represents the natural language speech audio to be processed.
-      properties:
-        audio:
-          description: Required. The natural language speech audio to be processed. A single request can contain up to 1 minute of speech audio data. The transcribed text cannot contain more than 256 bytes.
-          format: byte
-          type: string
-        config:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2InputAudioConfig"
-          description: Required. Instructs the speech recognizer how to process the speech audio.
       type: object
     GoogleCloudDialogflowV2AutomatedAgentConfig:
       description: Defines the Automated Agent to connect to a conversation.
@@ -4603,33 +4505,6 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2Intent"
           type: array
       type: object
-    GoogleCloudDialogflowV2CallMatcher:
-      description: "Represents a call matcher that describes criteria for matching incoming SIP calls to a conversation. When Dialogflow get a SIP call from a third-party carrier, Dialogflow matches the call to an existing conversation by either: * Extracting the conversation id from the [Call-Info header](https://tools.ietf.org/html/rfc3261#section-20.9), e.g. `Call-Info: ;purpose=Goog-ContactCenter-Conversation`. * Or, if that doesn't work, matching incoming [SIP headers](https://tools.ietf.org/html/rfc3261#section-7.3) against any CallMatcher for the conversation. If an incoming SIP call without valid `Call-Info` header matches to zero or multiple conversations with `CallMatcher`, we reject it. A call matcher contains equality conditions for SIP headers that all have to be fulfilled in order for a SIP call to match. The matched SIP headers consist of well-known headers (`To`, `From`, `Call-ID`) and custom headers. A CallMatcher is only valid if it specifies: * At least 1 custom header, * or at least 2 well-known headers."
-      properties:
-        callIdHeader:
-          description: Value of the [`Call-ID` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.4) to match. If empty or unspecified, we don't match to the [`Call-ID` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.4).
-          type: string
-        customHeaders:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2CallMatcherCustomHeaders"
-          description: Custom SIP headers that must match.
-        fromHeader:
-          description: Value of the [`From` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.3) to match. If empty or unspecified, we don't match to the [`From` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.3).
-          type: string
-        name:
-          description: "Output only. The unique identifier of this call matcher. Format: `projects//locations//conversations//callMatchers/`."
-          readOnly: true
-          type: string
-        toHeader:
-          description: Value of the [`To` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.2) to match. If empty or unspecified, we don't match to the [`To` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.2).
-          type: string
-      type: object
-    GoogleCloudDialogflowV2CallMatcherCustomHeaders:
-      description: Custom SIP headers. See the [description of headers in the RFC](https://tools.ietf.org/html/rfc3261#section-7.3).
-      properties:
-        ciscoGuid:
-          description: Cisco's proprietary `Cisco-Guid` header.
-          type: string
-      type: object
     GoogleCloudDialogflowV2CompleteConversationRequest:
       description: The request message for Conversations.CompleteConversation.
       properties: {}
@@ -4738,9 +4613,6 @@ components:
         humanAgentAssistantConfig:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfig"
           description: Configuration for agent assistance to use with this profile.
-        humanAgentHandoffConfig:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentHandoffConfig"
-          description: Configuration for connecting to a live agent.
         languageCode:
           description: Language which represents the conversationProfile. If unspecified, the default language code en-us applies. Users need to create a ConversationProfile for each language they want to support.
           type: string
@@ -4748,7 +4620,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2LoggingConfig"
           description: Configuration for logging conversation lifecycle events.
         name:
-          description: "Optional. The unique identifier of this conversation profile. Format: `projects//locations//conversationProfiles/`."
+          description: "The unique identifier of this conversation profile. Format: `projects//locations//conversationProfiles/`."
           type: string
         newMessageEventNotificationConfig:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2NotificationConfig"
@@ -4764,13 +4636,6 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-      type: object
-    GoogleCloudDialogflowV2CreateCallMatcherRequest:
-      description: The request message for Conversations.CreateCallMatcher.
-      properties:
-        callMatcher:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2CallMatcher"
-          description: Required. The call matcher to create.
       type: object
     GoogleCloudDialogflowV2DetectIntentRequest:
       description: The request to detect user's intent.
@@ -5067,9 +4932,6 @@ components:
     GoogleCloudDialogflowV2HumanAgentAssistantConfig:
       description: Defines the Human Agent Assist to connect to a conversation.
       properties:
-        endUserSuggestionConfig:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionConfig"
-          description: Configuration for agent assistance of end user participant.
         humanAgentSuggestionConfig:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentAssistantConfigSuggestionConfig"
           description: Configuration for agent assistance of human agent participant.
@@ -5090,9 +4952,6 @@ components:
     GoogleCloudDialogflowV2HumanAgentAssistantConfigMessageAnalysisConfig:
       description: Configuration for analyses to run on each conversation message.
       properties:
-        enableEntityExtraction:
-          description: Enable entity extraction in conversation messages on [agent assist stage](https://cloud.google.com/dialogflow/priv/docs/contact-center/basics#stages). If unspecified, defaults to false.
-          type: boolean
         enableSentimentAnalysis:
           description: "Enable sentiment analysis in conversation messages on [agent assist stage](https://cloud.google.com/dialogflow/priv/docs/contact-center/basics#stages). If unspecified, defaults to false. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user's attitude as positive, negative, or neutral: https://cloud.google.com/natural-language/docs/basics#sentiment_analysis For Participants.StreamingAnalyzeContent method, result will be in StreamingAnalyzeContentResponse.message.SentimentAnalysisResult. For Participants.AnalyzeContent method, result will be in AnalyzeContentResponse.message.SentimentAnalysisResult For Conversations.ListMessages method, result will be in ListMessagesResponse.messages.SentimentAnalysisResult If Pub/Sub notification is configured, result will be in ConversationEvent.new_message_payload.SentimentAnalysisResult."
           type: boolean
@@ -5214,39 +5073,6 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2SuggestionResult"
           type: array
-      type: object
-    GoogleCloudDialogflowV2HumanAgentHandoffConfig:
-      description: Defines the hand off to a live agent, typically on which external agent service provider to connect to a conversation.
-      properties:
-        livePersonConfig:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentHandoffConfigLivePersonConfig"
-          description: Uses LivePerson (https://www.liveperson.com).
-        salesforceLiveAgentConfig:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2HumanAgentHandoffConfigSalesforceLiveAgentConfig"
-          description: Uses Salesforce Live Agent.
-      type: object
-    GoogleCloudDialogflowV2HumanAgentHandoffConfigLivePersonConfig:
-      description: Configuration specific to LivePerson (https://www.liveperson.com).
-      properties:
-        accountNumber:
-          description: Required. Account number of the LivePerson account to connect. This is the account number you input at the login page.
-          type: string
-      type: object
-    GoogleCloudDialogflowV2HumanAgentHandoffConfigSalesforceLiveAgentConfig:
-      description: Configuration specific to Salesforce Live Agent.
-      properties:
-        buttonId:
-          description: Required. Live Agent chat button ID.
-          type: string
-        deploymentId:
-          description: Required. Live Agent deployment ID.
-          type: string
-        endpointDomain:
-          description: Required. Domain of the Live Agent endpoint for this agent. You can find the endpoint URL in the `Live Agent settings` page. For example if URL has the form https://d.la4-c2-phx.salesforceliveagent.com/..., you should fill in d.la4-c2-phx.salesforceliveagent.com.
-          type: string
-        organizationId:
-          description: Required. The organization ID of the Salesforce account.
-          type: string
       type: object
     GoogleCloudDialogflowV2ImportAgentRequest:
       description: The request message for Agents.ImportAgent.
@@ -5956,18 +5782,6 @@ components:
           description: A token to retrieve next page of results. Or empty if there are no more results. Pass this value in the ListAnswerRecordsRequest.page_token field in the subsequent call to `ListAnswerRecords` method to retrieve the next page of results.
           type: string
       type: object
-    GoogleCloudDialogflowV2ListCallMatchersResponse:
-      description: The response message for Conversations.ListCallMatchers.
-      properties:
-        callMatchers:
-          description: The list of call matchers. There is a maximum number of items returned based on the page_size field in the request.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDialogflowV2CallMatcher"
-          type: array
-        nextPageToken:
-          description: Token to retrieve the next page of results or empty if there are no more results in the list.
-          type: string
-      type: object
     GoogleCloudDialogflowV2ListContextsResponse:
       description: The response message for Contexts.ListContexts.
       properties:
@@ -6203,7 +6017,9 @@ components:
             - OUTPUT_AUDIO_ENCODING_UNSPECIFIED
             - OUTPUT_AUDIO_ENCODING_LINEAR_16
             - OUTPUT_AUDIO_ENCODING_MP3
+            - OUTPUT_AUDIO_ENCODING_MP3_64_KBPS
             - OUTPUT_AUDIO_ENCODING_OGG_OPUS
+            - OUTPUT_AUDIO_ENCODING_MULAW
           type: string
         sampleRateHertz:
           description: The synthesis sample rate (in hertz) for this audio. If not provided, then the synthesizer will use the default sample rate based on the audio encoding. If this is different from the voice's natural sample rate, then the synthesizer will honor this request by converting to the desired sample rate (which might result in worse audio quality).
@@ -8139,7 +7955,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/dialogflow: View, manage and query your Dialogflow agents
       type: oauth2
     Oauth2c:
@@ -8148,7 +7964,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/dialogflow: View, manage and query your Dialogflow agents
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

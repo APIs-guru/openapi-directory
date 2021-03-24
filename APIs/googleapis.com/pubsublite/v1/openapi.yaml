@@ -268,6 +268,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: If true, the newly created subscription will only receive messages published after the subscription was created. Otherwise, the entire message backlog will be received on the subscription. Defaults to false.
+          in: query
+          name: skipBacklog
+          schema:
+            type: boolean
         - description: "Required. The ID to use for the subscription, which will become the final component of the subscription's name. This value is structured like: `my-sub-name`."
           in: query
           name: subscriptionId

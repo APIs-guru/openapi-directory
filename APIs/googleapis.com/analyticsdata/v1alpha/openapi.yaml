@@ -364,6 +364,9 @@ components:
     BatchRunPivotReportsResponse:
       description: The batch response containing multiple pivot reports.
       properties:
+        kind:
+          description: Identifies what kind of resource this message is. This `kind` is always the fixed string "analyticsData#batchRunPivotReports". Useful to distinguish between response types in JSON.
+          type: string
         pivotReports:
           description: Individual responses. Each response has a separate pivot report request.
           items:
@@ -385,6 +388,9 @@ components:
     BatchRunReportsResponse:
       description: The batch response containing multiple reports.
       properties:
+        kind:
+          description: Identifies what kind of resource this message is. This `kind` is always the fixed string "analyticsData#batchRunReports". Useful to distinguish between response types in JSON.
+          type: string
         reports:
           description: Individual responses. Each response has a separate report request.
           items:
@@ -787,7 +793,7 @@ components:
             type: string
           type: array
         limit:
-          description: "The number of rows to return in this pivot. If the `limit` parameter is unspecified, up to 10,000 rows are returned. The product of the `limit` for each `pivot` in a `RunPivotReportRequest` must not exceed 100,000. For example, a two pivot request with `limit: 1000` in each pivot will fail because the product is `1,000,000`."
+          description: "The number of rows to return in this pivot. The `limit` parameter is required. A `limit` of 10,000 is common for single pivot requests. The product of the `limit` for each `pivot` in a `RunPivotReportRequest` must not exceed 100,000. For example, a two pivot request with `limit: 1000` in each pivot will fail because the product is `1,000,000`."
           format: int64
           type: string
         metricAggregations:
@@ -861,6 +867,9 @@ components:
         concurrentRequests:
           $ref: "#/components/schemas/QuotaStatus"
           description: Standard Analytics Properties can send up to 10 concurrent requests; Analytics 360 Properties can use up to 50 concurrent requests.
+        potentiallyThresholdedRequestsPerHour:
+          $ref: "#/components/schemas/QuotaStatus"
+          description: Analytics Properties can send up to 120 requests with potentially thresholded dimensions per hour. In a batch request, each report request is individually counted for this quota if the request contains potentially thresholded dimensions.
         serverErrorsPerProjectPerHour:
           $ref: "#/components/schemas/QuotaStatus"
           description: Standard Analytics Properties and cloud project pairs can have up to 10 server errors per hour; Analytics 360 Properties and cloud project pairs can have up to 50 server errors per hour.
@@ -962,6 +971,9 @@ components:
           items:
             $ref: "#/components/schemas/DimensionHeader"
           type: array
+        kind:
+          description: Identifies what kind of resource this message is. This `kind` is always the fixed string "analyticsData#runPivotReport". Useful to distinguish between response types in JSON.
+          type: string
         metadata:
           $ref: "#/components/schemas/ResponseMetaData"
           description: Metadata for the report.
@@ -1035,6 +1047,9 @@ components:
           items:
             $ref: "#/components/schemas/DimensionHeader"
           type: array
+        kind:
+          description: Identifies what kind of resource this message is. This `kind` is always the fixed string "analyticsData#runRealtimeReport". Useful to distinguish between response types in JSON.
+          type: string
         maximums:
           description: If requested, the maximum values of metrics.
           items:
@@ -1140,6 +1155,9 @@ components:
           items:
             $ref: "#/components/schemas/DimensionHeader"
           type: array
+        kind:
+          description: Identifies what kind of resource this message is. This `kind` is always the fixed string "analyticsData#runReport". Useful to distinguish between response types in JSON.
+          type: string
         maximums:
           description: If requested, the maximum values of metrics.
           items:

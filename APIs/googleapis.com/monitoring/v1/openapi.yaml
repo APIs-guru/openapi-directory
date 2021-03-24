@@ -37,7 +37,7 @@ tags:
 paths:
   "/v1/{name}":
     delete:
-      description: Deletes an existing custom dashboard.This method requires the monitoring.dashboards.delete permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).
+      description: Deletes an existing custom dashboard.This method requires the monitoring.dashboards.delete permission on the specified dashboard. For more information, see Cloud Identity and Access Management (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.delete
       parameters:
         - description: "Required. The resource name of the Dashboard. The format is: projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID] "
@@ -69,7 +69,7 @@ paths:
       tags:
         - projects
     get:
-      description: Fetches a specific dashboard.This method requires the monitoring.dashboards.get permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).
+      description: Fetches a specific dashboard.This method requires the monitoring.dashboards.get permission on the specified dashboard. For more information, see Cloud Identity and Access Management (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.get
       parameters:
         - description: "Required. The resource name of the Dashboard. The format is one of: dashboards/[DASHBOARD_ID] (for system dashboards) projects/[PROJECT_ID_OR_NUMBER]/dashboards/[DASHBOARD_ID] (for custom dashboards)."
@@ -113,7 +113,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Replaces an existing custom dashboard with a new definition.This method requires the monitoring.dashboards.update permission on the specified dashboard. For more information, see Google Cloud IAM (https://cloud.google.com/iam).
+      description: Replaces an existing custom dashboard with a new definition.This method requires the monitoring.dashboards.update permission on the specified dashboard. For more information, see Cloud Identity and Access Management (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.patch
       parameters:
         - description: Immutable. The resource name of the dashboard.
@@ -151,7 +151,7 @@ paths:
         - projects
   "/v1/{parent}/dashboards":
     get:
-      description: Lists the existing dashboards.This method requires the monitoring.dashboards.list permission on the specified project. For more information, see Google Cloud IAM (https://cloud.google.com/iam).
+      description: Lists the existing dashboards.This method requires the monitoring.dashboards.list permission on the specified project. For more information, see Cloud Identity and Access Management (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.list
       parameters:
         - description: "Required. The scope of the dashboards to list. The format is: projects/[PROJECT_ID_OR_NUMBER] "

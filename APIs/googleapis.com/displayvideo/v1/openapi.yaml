@@ -523,6 +523,271 @@ paths:
             - https://www.googleapis.com/auth/display-video-mediaplanning
       tags:
         - advertisers
+  "/v1/advertisers/{advertiserId}/campaigns/{campaignId}/targetingTypes/{targetingType}/assignedTargetingOptions":
+    get:
+      description: Lists the targeting options assigned to a campaign for a specified targeting type.
+      operationId: displayvideo.advertisers.campaigns.targetingTypes.assignedTargetingOptions.list
+      parameters:
+        - description: Required. The ID of the advertiser the campaign belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the campaign to list assigned targeting options for.
+          in: path
+          name: campaignId
+          required: true
+          schema:
+            type: string
+        - description: "Required. Identifies the type of assigned targeting options to list. Supported targeting types: * `TARGETING_TYPE_AGE_RANGE` * `TARGETING_TYPE_AUTHORIZED_SELLER_STATUS` * `TARGETING_TYPE_CONTENT_INSTREAM_POSITION` * `TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_ENVIRONMENT` * `TARGETING_TYPE_EXCHANGE` * `TARGETING_TYPE_GENDER` * `TARGETING_TYPE_GEO_REGION` * `TARGETING_TYPE_HOUSEHOLD_INCOME` * `TARGETING_TYPE_INVENTORY_SOURCE` * `TARGETING_TYPE_INVENTORY_SOURCE_GROUP` * `TARGETING_TYPE_LANGUAGE` * `TARGETING_TYPE_ON_SCREEN_POSITION` * `TARGETING_TYPE_PARENTAL_STATUS` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION` * `TARGETING_TYPE_SUB_EXCHANGE` * `TARGETING_TYPE_THIRD_PARTY_VERIFIER` * `TARGETING_TYPE_VIEWABILITY`"
+          in: path
+          name: targetingType
+          required: true
+          schema:
+            enum:
+              - TARGETING_TYPE_UNSPECIFIED
+              - TARGETING_TYPE_CHANNEL
+              - TARGETING_TYPE_APP_CATEGORY
+              - TARGETING_TYPE_APP
+              - TARGETING_TYPE_URL
+              - TARGETING_TYPE_DAY_AND_TIME
+              - TARGETING_TYPE_AGE_RANGE
+              - TARGETING_TYPE_REGIONAL_LOCATION_LIST
+              - TARGETING_TYPE_PROXIMITY_LOCATION_LIST
+              - TARGETING_TYPE_GENDER
+              - TARGETING_TYPE_VIDEO_PLAYER_SIZE
+              - TARGETING_TYPE_USER_REWARDED_CONTENT
+              - TARGETING_TYPE_PARENTAL_STATUS
+              - TARGETING_TYPE_CONTENT_INSTREAM_POSITION
+              - TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION
+              - TARGETING_TYPE_DEVICE_TYPE
+              - TARGETING_TYPE_AUDIENCE_GROUP
+              - TARGETING_TYPE_BROWSER
+              - TARGETING_TYPE_HOUSEHOLD_INCOME
+              - TARGETING_TYPE_ON_SCREEN_POSITION
+              - TARGETING_TYPE_THIRD_PARTY_VERIFIER
+              - TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION
+              - TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION
+              - TARGETING_TYPE_ENVIRONMENT
+              - TARGETING_TYPE_CARRIER_AND_ISP
+              - TARGETING_TYPE_OPERATING_SYSTEM
+              - TARGETING_TYPE_DEVICE_MAKE_MODEL
+              - TARGETING_TYPE_KEYWORD
+              - TARGETING_TYPE_NEGATIVE_KEYWORD_LIST
+              - TARGETING_TYPE_VIEWABILITY
+              - TARGETING_TYPE_CATEGORY
+              - TARGETING_TYPE_INVENTORY_SOURCE
+              - TARGETING_TYPE_LANGUAGE
+              - TARGETING_TYPE_AUTHORIZED_SELLER_STATUS
+              - TARGETING_TYPE_GEO_REGION
+              - TARGETING_TYPE_INVENTORY_SOURCE_GROUP
+              - TARGETING_TYPE_EXCHANGE
+              - TARGETING_TYPE_SUB_EXCHANGE
+            type: string
+        - description: 'Allows filtering by assigned targeting option properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by the logical operator `OR`. * A restriction has the form of `{field} {operator} {value}`. * The operator must be `EQUALS (=)`. * Supported fields: - `assignedTargetingOptionId` - `inheritance` Examples: * AssignedTargetingOptions with ID 1 or 2 `assignedTargetingOptionId="1" OR assignedTargetingOptionId="2"` * AssignedTargetingOptions with inheritance status of NOT_INHERITED or INHERITED_FROM_PARTNER `inheritance="NOT_INHERITED" OR inheritance="INHERITED_FROM_PARTNER"` The length of this field should be no more than 500 characters.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'Field by which to sort the list. Acceptable values are: * `assignedTargetingOptionId` (default) The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `assignedTargetingOptionId desc`.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListCampaignAssignedTargetingOptions` method. If not specified, the first page of results will be returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCampaignAssignedTargetingOptionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/advertisers/{advertiserId}/campaigns/{campaignId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}":
+    get:
+      description: Gets a single targeting option assigned to a campaign.
+      operationId: displayvideo.advertisers.campaigns.targetingTypes.assignedTargetingOptions.get
+      parameters:
+        - description: Required. The ID of the advertiser the campaign belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the campaign the assigned targeting option belongs to.
+          in: path
+          name: campaignId
+          required: true
+          schema:
+            type: string
+        - description: "Required. Identifies the type of this assigned targeting option. Supported targeting types: * `TARGETING_TYPE_AGE_RANGE` * `TARGETING_TYPE_AUTHORIZED_SELLER_STATUS` * `TARGETING_TYPE_CONTENT_INSTREAM_POSITION` * `TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_ENVIRONMENT` * `TARGETING_TYPE_EXCHANGE` * `TARGETING_TYPE_GENDER` * `TARGETING_TYPE_GEO_REGION` * `TARGETING_TYPE_HOUSEHOLD_INCOME` * `TARGETING_TYPE_INVENTORY_SOURCE` * `TARGETING_TYPE_INVENTORY_SOURCE_GROUP` * `TARGETING_TYPE_LANGUAGE` * `TARGETING_TYPE_ON_SCREEN_POSITION` * `TARGETING_TYPE_PARENTAL_STATUS` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION` * `TARGETING_TYPE_SUB_EXCHANGE` * `TARGETING_TYPE_THIRD_PARTY_VERIFIER` * `TARGETING_TYPE_VIEWABILITY`"
+          in: path
+          name: targetingType
+          required: true
+          schema:
+            enum:
+              - TARGETING_TYPE_UNSPECIFIED
+              - TARGETING_TYPE_CHANNEL
+              - TARGETING_TYPE_APP_CATEGORY
+              - TARGETING_TYPE_APP
+              - TARGETING_TYPE_URL
+              - TARGETING_TYPE_DAY_AND_TIME
+              - TARGETING_TYPE_AGE_RANGE
+              - TARGETING_TYPE_REGIONAL_LOCATION_LIST
+              - TARGETING_TYPE_PROXIMITY_LOCATION_LIST
+              - TARGETING_TYPE_GENDER
+              - TARGETING_TYPE_VIDEO_PLAYER_SIZE
+              - TARGETING_TYPE_USER_REWARDED_CONTENT
+              - TARGETING_TYPE_PARENTAL_STATUS
+              - TARGETING_TYPE_CONTENT_INSTREAM_POSITION
+              - TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION
+              - TARGETING_TYPE_DEVICE_TYPE
+              - TARGETING_TYPE_AUDIENCE_GROUP
+              - TARGETING_TYPE_BROWSER
+              - TARGETING_TYPE_HOUSEHOLD_INCOME
+              - TARGETING_TYPE_ON_SCREEN_POSITION
+              - TARGETING_TYPE_THIRD_PARTY_VERIFIER
+              - TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION
+              - TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION
+              - TARGETING_TYPE_ENVIRONMENT
+              - TARGETING_TYPE_CARRIER_AND_ISP
+              - TARGETING_TYPE_OPERATING_SYSTEM
+              - TARGETING_TYPE_DEVICE_MAKE_MODEL
+              - TARGETING_TYPE_KEYWORD
+              - TARGETING_TYPE_NEGATIVE_KEYWORD_LIST
+              - TARGETING_TYPE_VIEWABILITY
+              - TARGETING_TYPE_CATEGORY
+              - TARGETING_TYPE_INVENTORY_SOURCE
+              - TARGETING_TYPE_LANGUAGE
+              - TARGETING_TYPE_AUTHORIZED_SELLER_STATUS
+              - TARGETING_TYPE_GEO_REGION
+              - TARGETING_TYPE_INVENTORY_SOURCE_GROUP
+              - TARGETING_TYPE_EXCHANGE
+              - TARGETING_TYPE_SUB_EXCHANGE
+            type: string
+        - description: Required. An identifier unique to the targeting type in this campaign that identifies the assigned targeting option being requested.
+          in: path
+          name: assignedTargetingOptionId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssignedTargetingOption"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/advertisers/{advertiserId}/campaigns/{campaignId}:bulkListCampaignAssignedTargetingOptions":
+    get:
+      description: Lists assigned targeting options of a campaign across targeting types.
+      operationId: displayvideo.advertisers.campaigns.bulkListCampaignAssignedTargetingOptions
+      parameters:
+        - description: Required. The ID of the advertiser the campaign belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the campaign to list assigned targeting options for.
+          in: path
+          name: campaignId
+          required: true
+          schema:
+            type: string
+        - description: 'Allows filtering by assigned targeting option properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by the logical operator `OR` on the same field. * A restriction has the form of `{field} {operator} {value}`. * The operator must be `EQUALS (=)`. * Supported fields: - `targetingType` - `inheritance` Examples: * AssignedTargetingOptions of targeting type TARGETING_TYPE_LANGUAGE or TARGETING_TYPE_GENDER `targetingType="TARGETING_TYPE_LANGUAGE" OR targetingType="TARGETING_TYPE_GENDER"` * AssignedTargetingOptions with inheritance status of NOT_INHERITED or INHERITED_FROM_PARTNER `inheritance="NOT_INHERITED" OR inheritance="INHERITED_FROM_PARTNER"` The length of this field should be no more than 500 characters.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'Field by which to sort the list. Acceptable values are: * `targetingType` (default) The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `targetingType desc`.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. The size must be an integer between `1` and `5000`. If unspecified, the default is `5000`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token that lets the client fetch the next page of results. Typically, this is the value of next_page_token returned from the previous call to `BulkListCampaignAssignedTargetingOptions` method. If not specified, the first page of results will be returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkListCampaignAssignedTargetingOptionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/advertisers/{advertiserId}/channels":
     get:
       description: Lists channels for a partner or advertiser.
@@ -704,7 +969,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `10000`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -839,6 +1104,54 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BulkEditSitesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+  "/v1/advertisers/{advertiserId}/channels/{channelId}/sites:replace":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Replaces all of the sites under a single channel. The operation will replace the sites under a channel with the sites provided in ReplaceSitesRequest.new_sites.
+      operationId: displayvideo.advertisers.channels.sites.replace
+      parameters:
+        - description: The ID of the advertiser that owns the parent channel.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the parent channel whose sites will be replaced.
+          in: path
+          name: channelId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplaceSitesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceSitesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -2183,6 +2496,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/advertisers/{advertiserId}/lineItems:generateDefault":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Creates a new line item with settings (including targeting) inherited from the insertion order. Returns the newly created line item if successful. There are default values based on the three fields: * The insertion order's InsertionOrderType * The insertion order's InsertionOrderAutomationType * The given line_item_type"
+      operationId: displayvideo.advertisers.lineItems.generateDefault
+      parameters:
+        - description: Required. The ID of the advertiser this line item belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateDefaultLineItemRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LineItem"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
   "/v1/advertisers/{advertiserId}/locationLists":
     get:
       description: Lists location lists based on a given advertiser id.
@@ -2938,7 +3293,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `1000`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -3063,6 +3418,54 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BulkEditNegativeKeywordsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+  "/v1/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListId}/negativeKeywords:replace":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Replaces all negative keywords in a single negative keyword list. The operation will replace the keywords in a negative keywords with keywords provided in ReplaceNegativeKeywordsRequest.new_negative_keywords.
+      operationId: displayvideo.advertisers.negativeKeywordLists.negativeKeywords.replace
+      parameters:
+        - description: Required. The ID of the DV360 advertiser to which the parent negative keyword list belongs.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the parent negative keyword list to which the negative keywords belong.
+          in: path
+          name: negativeKeywordListId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplaceNegativeKeywordsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceNegativeKeywordsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -4876,7 +5279,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `10000`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -5006,6 +5409,54 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BulkEditSitesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - partners
+  "/v1/partners/{partnerId}/channels/{channelId}/sites:replace":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Replaces all of the sites under a single channel. The operation will replace the sites under a channel with the sites provided in ReplaceSitesRequest.new_sites.
+      operationId: displayvideo.partners.channels.sites.replace
+      parameters:
+        - description: The ID of the partner that owns the parent channel.
+          in: path
+          name: partnerId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the parent channel whose sites will be replaced.
+          in: path
+          name: channelId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReplaceSitesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceSitesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -6269,6 +6720,21 @@ components:
         appId:
           description: Required. The ID of the app. Android's Play store app uses bundle ID, for example `com.google.android.gm`. Apple's App store app ID uses 9 digit string, for example `422689480`.
           type: string
+        appPlatform:
+          description: Indicates the platform of the targeted app. If this field is not specified, the app platform will be assumed to be mobile (i.e., Android or iOS), and we will derive the appropriate mobile platform from the app ID.
+          enum:
+            - APP_PLATFORM_UNSPECIFIED
+            - APP_PLATFORM_IOS
+            - APP_PLATFORM_ANDROID
+            - APP_PLATFORM_ROKU
+            - APP_PLATFORM_AMAZON_FIRETV
+            - APP_PLATFORM_PLAYSTATION
+            - APP_PLATFORM_APPLE_TV
+            - APP_PLATFORM_XBOX
+            - APP_PLATFORM_SAMSUNG_TV
+            - APP_PLATFORM_ANDROID_TV
+            - APP_PLATFORM_GENERIC_CTV
+          type: string
         displayName:
           description: Output only. The display name of the app.
           readOnly: true
@@ -6918,6 +7384,18 @@ components:
           type: array
         nextPageToken:
           description: A token identifying the next page of results. This value should be specified as the pageToken in a subsequent BulkListAdvertiserAssignedTargetingOptionsRequest to fetch the next page of results. This token will be absent if there are no more assigned_targeting_options to return.
+          type: string
+      type: object
+    BulkListCampaignAssignedTargetingOptionsResponse:
+      description: Response message for BulkListCampaignAssignedTargetingOptions.
+      properties:
+        assignedTargetingOptions:
+          description: The list of assigned targeting options. This list will be absent if empty.
+          items:
+            $ref: "#/components/schemas/AssignedTargetingOption"
+          type: array
+        nextPageToken:
+          description: A token identifying the next page of results. This value should be specified as the pageToken in a subsequent BulkListCampaignAssignedTargetingOptionsRequest to fetch the next page of results. This token will be absent if there are no more assigned_targeting_options to return.
           type: string
       type: object
     BulkListInsertionOrderAssignedTargetingOptionsResponse:
@@ -8666,6 +9144,33 @@ components:
           readOnly: true
           type: string
       type: object
+    GenerateDefaultLineItemRequest:
+      description: Request message for LineItemService.GenerateDefaultLineItem.
+      properties:
+        displayName:
+          description: Required. The display name of the line item. Must be UTF-8 encoded with a maximum size of 240 bytes.
+          type: string
+        insertionOrderId:
+          description: Required. The unique ID of the insertion order that the line item belongs to.
+          format: int64
+          type: string
+        lineItemType:
+          description: Required. The type of the line item.
+          enum:
+            - LINE_ITEM_TYPE_UNSPECIFIED
+            - LINE_ITEM_TYPE_DISPLAY_DEFAULT
+            - LINE_ITEM_TYPE_DISPLAY_MOBILE_APP_INSTALL
+            - LINE_ITEM_TYPE_VIDEO_DEFAULT
+            - LINE_ITEM_TYPE_VIDEO_MOBILE_APP_INSTALL
+            - LINE_ITEM_TYPE_DISPLAY_MOBILE_APP_INVENTORY
+            - LINE_ITEM_TYPE_VIDEO_MOBILE_APP_INVENTORY
+            - LINE_ITEM_TYPE_AUDIO_DEFAULT
+            - LINE_ITEM_TYPE_VIDEO_OVER_THE_TOP
+          type: string
+        mobileApp:
+          $ref: "#/components/schemas/MobileApp"
+          description: The mobile app promoted by the line item. This is applicable only when line_item_type is either `LINE_ITEM_TYPE_DISPLAY_MOBILE_APP_INSTALL` or `LINE_ITEM_TYPE_VIDEO_MOBILE_APP_INSTALL`.
+      type: object
     GeoRegionAssignedTargetingOptionDetails:
       description: Details for assigned geographic region targeting option. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_GEO_REGION`.
       properties:
@@ -9599,6 +10104,18 @@ components:
           description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListAssignedLocations` method to retrieve the next page of results.
           type: string
       type: object
+    ListCampaignAssignedTargetingOptionsResponse:
+      description: Response message for ListCampaignAssignedTargetingOptions.
+      properties:
+        assignedTargetingOptions:
+          description: The list of assigned targeting options. This list will be absent if empty.
+          items:
+            $ref: "#/components/schemas/AssignedTargetingOption"
+          type: array
+        nextPageToken:
+          description: A token identifying the next page of results. This value should be specified as the pageToken in a subsequent ListCampaignAssignedTargetingOptionsRequest to fetch the next page of results. This token will be absent if there are no more assigned_targeting_options to return.
+          type: string
+      type: object
     ListCampaignsResponse:
       properties:
         campaigns:
@@ -10525,6 +11042,50 @@ components:
           description: Required. ID of the regional location list. Should refer to the location_list_id field of a LocationList resource whose type is `TARGETING_LOCATION_TYPE_REGIONAL`.
           format: int64
           type: string
+      type: object
+    ReplaceNegativeKeywordsRequest:
+      description: Request message for NegativeKeywordService.ReplaceNegativeKeywords.
+      properties:
+        newNegativeKeywords:
+          description: The negative keywords that will replace the existing keywords in the negative keyword list, specified as a list of NegativeKeywords.
+          items:
+            $ref: "#/components/schemas/NegativeKeyword"
+          type: array
+      type: object
+    ReplaceNegativeKeywordsResponse:
+      description: Response message for NegativeKeywordService.ReplaceNegativeKeywords.
+      properties:
+        negativeKeywords:
+          description: The full list of negative keywords now present in the negative keyword list.
+          items:
+            $ref: "#/components/schemas/NegativeKeyword"
+          type: array
+      type: object
+    ReplaceSitesRequest:
+      description: Request message for SiteService.ReplaceSites.
+      properties:
+        advertiserId:
+          description: The ID of the advertiser that owns the parent channel.
+          format: int64
+          type: string
+        newSites:
+          description: The sites that will replace the existing sites assigned to the channel, specified as a list of Sites.
+          items:
+            $ref: "#/components/schemas/Site"
+          type: array
+        partnerId:
+          description: The ID of the partner that owns the parent channel.
+          format: int64
+          type: string
+      type: object
+    ReplaceSitesResponse:
+      description: Response message for SiteService.ReplaceSites.
+      properties:
+        sites:
+          description: The list of sites in the channel after replacing.
+          items:
+            $ref: "#/components/schemas/Site"
+          type: array
       type: object
     ReviewStatusInfo:
       description: Review statuses for the creative.

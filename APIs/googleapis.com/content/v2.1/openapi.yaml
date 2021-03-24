@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://shoppingcontent.googleapis.com/
+  - url: https://shoppingcontent.googleapis.com/content/v2.1
 info:
   contact:
     name: Google
@@ -61,7 +61,7 @@ tags:
   - name: settlementtransactions
   - name: shippingsettings
 paths:
-  /content/v2.1/accounts/authinfo:
+  /accounts/authinfo:
     get:
       description: Returns information about the authenticated user.
       operationId: content.accounts.authinfo
@@ -91,7 +91,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  /content/v2.1/accounts/batch:
+  /accounts/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -126,7 +126,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  "/content/v2.1/accounts/{accountId}/credentials":
+  "/accounts/{accountId}/credentials":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -168,7 +168,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  "/content/v2.1/accounts/{accountId}/labels":
+  "/accounts/{accountId}/labels":
     get:
       description: Lists the labels assigned to an account.
       operationId: content.accounts.labels.list
@@ -244,7 +244,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  "/content/v2.1/accounts/{accountId}/labels/{labelId}":
+  "/accounts/{accountId}/labels/{labelId}":
     delete:
       description: Deletes a label and removes it from all accounts to which it was assigned.
       operationId: content.accounts.labels.delete
@@ -318,7 +318,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  "/content/v2.1/accounts/{accountId}/returncarrier":
+  "/accounts/{accountId}/returncarrier":
     get:
       description: Lists available return carriers in the merchant account.
       operationId: content.accounts.returncarrier.list
@@ -384,7 +384,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  "/content/v2.1/accounts/{accountId}/returncarrier/{carrierAccountId}":
+  "/accounts/{accountId}/returncarrier/{carrierAccountId}":
     delete:
       description: Delete a return carrier in the merchant account.
       operationId: content.accounts.returncarrier.delete
@@ -458,7 +458,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  /content/v2.1/accountstatuses/batch:
+  /accountstatuses/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -493,7 +493,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accountstatuses
-  /content/v2.1/accounttax/batch:
+  /accounttax/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -528,7 +528,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounttax
-  /content/v2.1/datafeeds/batch:
+  /datafeeds/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -563,7 +563,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - datafeeds
-  /content/v2.1/datafeedstatuses/batch:
+  /datafeedstatuses/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -598,7 +598,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - datafeedstatuses
-  /content/v2.1/liasettings/batch:
+  /liasettings/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -633,7 +633,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - liasettings
-  /content/v2.1/liasettings/posdataproviders:
+  /liasettings/posdataproviders:
     get:
       description: Retrieves the list of POS data providers that have active settings for the all eiligible countries.
       operationId: content.liasettings.listposdataproviders
@@ -663,7 +663,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  /content/v2.1/localinventory/batch:
+  /localinventory/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -698,7 +698,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - localinventory
-  /content/v2.1/pos/batch:
+  /pos/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -733,7 +733,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - pos
-  /content/v2.1/products/batch:
+  /products/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -768,7 +768,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - products
-  /content/v2.1/productstatuses/batch:
+  /productstatuses/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -803,7 +803,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - productstatuses
-  /content/v2.1/regionalinventory/batch:
+  /regionalinventory/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -838,7 +838,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - regionalinventory
-  /content/v2.1/returnaddress/batch:
+  /returnaddress/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -873,7 +873,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - returnaddress
-  /content/v2.1/returnpolicy/batch:
+  /returnpolicy/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -908,7 +908,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - returnpolicy
-  /content/v2.1/shippingsettings/batch:
+  /shippingsettings/batch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -943,7 +943,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - shippingsettings
-  "/content/v2.1/{cssGroupId}/csses":
+  "/{cssGroupId}/csses":
     get:
       description: Lists CSS domains affiliated with a CSS group.
       operationId: content.csses.list
@@ -990,7 +990,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{cssGroupId}/csses/{cssDomainId}":
+  "/{cssGroupId}/csses/{cssDomainId}":
     get:
       description: Retrieves a single CSS domain by ID.
       operationId: content.csses.get
@@ -1033,7 +1033,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{cssGroupId}/csses/{cssDomainId}/updatelabels":
+  "/{cssGroupId}/csses/{cssDomainId}/updatelabels":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1081,7 +1081,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - csses
-  "/content/v2.1/{merchantId}/accounts":
+  "/{merchantId}/accounts":
     get:
       description: Lists the sub-accounts in your Merchant Center account.
       operationId: content.accounts.list
@@ -1170,7 +1170,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  "/content/v2.1/{merchantId}/accounts/{accountId}":
+  "/{merchantId}/accounts/{accountId}":
     delete:
       description: Deletes a Merchant Center sub-account.
       operationId: content.accounts.delete
@@ -1287,7 +1287,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  "/content/v2.1/{merchantId}/accounts/{accountId}/claimwebsite":
+  "/{merchantId}/accounts/{accountId}/claimwebsite":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1335,7 +1335,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  "/content/v2.1/{merchantId}/accounts/{accountId}/link":
+  "/{merchantId}/accounts/{accountId}/link":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1383,7 +1383,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  "/content/v2.1/{merchantId}/accounts/{accountId}/listlinks":
+  "/{merchantId}/accounts/{accountId}/listlinks":
     get:
       description: Returns the list of accounts linked to your Merchant Center account.
       operationId: content.accounts.listlinks
@@ -1436,7 +1436,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/accounts/{accountId}/updatelabels":
+  "/{merchantId}/accounts/{accountId}/updatelabels":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1484,7 +1484,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounts
-  "/content/v2.1/{merchantId}/accountstatuses":
+  "/{merchantId}/accountstatuses":
     get:
       description: Lists the statuses of the sub-accounts in your Merchant Center account.
       operationId: content.accountstatuses.list
@@ -1540,7 +1540,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/accountstatuses/{accountId}":
+  "/{merchantId}/accountstatuses/{accountId}":
     get:
       description: Retrieves the status of a Merchant Center account. No itemLevelIssues are returned for multi-client accounts.
       operationId: content.accountstatuses.get
@@ -1592,7 +1592,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/accounttax":
+  "/{merchantId}/accounttax":
     get:
       description: Lists the tax settings of the sub-accounts in your Merchant Center account.
       operationId: content.accounttax.list
@@ -1639,7 +1639,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/accounttax/{accountId}":
+  "/{merchantId}/accounttax/{accountId}":
     get:
       description: Retrieves the tax settings of the account.
       operationId: content.accounttax.get
@@ -1717,7 +1717,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - accounttax
-  "/content/v2.1/{merchantId}/buyongoogleprograms/{regionCode}":
+  "/{merchantId}/buyongoogleprograms/{regionCode}":
     get:
       description: Retrieves a status of BoG program for your Merchant Center account.
       operationId: content.buyongoogleprograms.get
@@ -1760,7 +1760,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/buyongoogleprograms/{regionCode}/onboard":
+  "/{merchantId}/buyongoogleprograms/{regionCode}/onboard":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1804,7 +1804,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - buyongoogleprograms
-  "/content/v2.1/{merchantId}/collections":
+  "/{merchantId}/collections":
     get:
       description: Lists the collections in your Merchant Center account. The response might contain fewer items than specified by page_size. Rely on next_page_token to determine if there are more items to be requested.
       operationId: content.collections.list
@@ -1880,7 +1880,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - collections
-  "/content/v2.1/{merchantId}/collections/{collectionId}":
+  "/{merchantId}/collections/{collectionId}":
     delete:
       description: Deletes a collection from your Merchant Center account.
       operationId: content.collections.delete
@@ -1949,7 +1949,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/collectionstatuses":
+  "/{merchantId}/collectionstatuses":
     get:
       description: Lists the statuses of the collections in your Merchant Center account.
       operationId: content.collectionstatuses.list
@@ -1996,7 +1996,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/collectionstatuses/{collectionId}":
+  "/{merchantId}/collectionstatuses/{collectionId}":
     get:
       description: Gets the status of a collection from your Merchant Center account.
       operationId: content.collectionstatuses.get
@@ -2039,7 +2039,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/datafeeds":
+  "/{merchantId}/datafeeds":
     get:
       description: Lists the configurations for datafeeds in your Merchant Center account.
       operationId: content.datafeeds.list
@@ -2115,7 +2115,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - datafeeds
-  "/content/v2.1/{merchantId}/datafeeds/{datafeedId}":
+  "/{merchantId}/datafeeds/{datafeedId}":
     delete:
       description: Deletes a datafeed configuration from your Merchant Center account.
       operationId: content.datafeeds.delete
@@ -2219,7 +2219,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - datafeeds
-  "/content/v2.1/{merchantId}/datafeeds/{datafeedId}/fetchNow":
+  "/{merchantId}/datafeeds/{datafeedId}/fetchNow":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2262,7 +2262,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - datafeeds
-  "/content/v2.1/{merchantId}/datafeedstatuses":
+  "/{merchantId}/datafeedstatuses":
     get:
       description: Lists the statuses of the datafeeds in your Merchant Center account.
       operationId: content.datafeedstatuses.list
@@ -2309,7 +2309,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/datafeedstatuses/{datafeedId}":
+  "/{merchantId}/datafeedstatuses/{datafeedId}":
     get:
       description: Retrieves the status of a datafeed from your Merchant Center account.
       operationId: content.datafeedstatuses.get
@@ -2362,7 +2362,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/liasettings":
+  "/{merchantId}/liasettings":
     get:
       description: Lists the LIA settings of the sub-accounts in your Merchant Center account.
       operationId: content.liasettings.list
@@ -2409,7 +2409,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/liasettings/{accountId}":
+  "/{merchantId}/liasettings/{accountId}":
     get:
       description: Retrieves the LIA settings of the account.
       operationId: content.liasettings.get
@@ -2487,7 +2487,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - liasettings
-  "/content/v2.1/{merchantId}/liasettings/{accountId}/accessiblegmbaccounts":
+  "/{merchantId}/liasettings/{accountId}/accessiblegmbaccounts":
     get:
       description: Retrieves the list of accessible Google My Business accounts.
       operationId: content.liasettings.getaccessiblegmbaccounts
@@ -2530,7 +2530,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/liasettings/{accountId}/requestgmbaccess":
+  "/{merchantId}/liasettings/{accountId}/requestgmbaccess":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2579,7 +2579,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - liasettings
-  "/content/v2.1/{merchantId}/liasettings/{accountId}/requestinventoryverification/{country}":
+  "/{merchantId}/liasettings/{accountId}/requestinventoryverification/{country}":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2628,7 +2628,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - liasettings
-  "/content/v2.1/{merchantId}/liasettings/{accountId}/setinventoryverificationcontact":
+  "/{merchantId}/liasettings/{accountId}/setinventoryverificationcontact":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2695,7 +2695,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - liasettings
-  "/content/v2.1/{merchantId}/liasettings/{accountId}/setposdataprovider":
+  "/{merchantId}/liasettings/{accountId}/setposdataprovider":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2754,7 +2754,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - liasettings
-  "/content/v2.1/{merchantId}/orderinvoices/{orderId}/createChargeInvoice":
+  "/{merchantId}/orderinvoices/{orderId}/createChargeInvoice":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2802,7 +2802,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orderinvoices
-  "/content/v2.1/{merchantId}/orderinvoices/{orderId}/createRefundInvoice":
+  "/{merchantId}/orderinvoices/{orderId}/createRefundInvoice":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2850,7 +2850,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orderinvoices
-  "/content/v2.1/{merchantId}/orderreports/disbursements":
+  "/{merchantId}/orderreports/disbursements":
     get:
       description: Retrieves a report for disbursements from your Merchant Center account.
       operationId: content.orderreports.listdisbursements
@@ -2907,7 +2907,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/orderreports/disbursements/{disbursementId}/transactions":
+  "/{merchantId}/orderreports/disbursements/{disbursementId}/transactions":
     get:
       description: Retrieves a list of transactions for a disbursement from your Merchant Center account.
       operationId: content.orderreports.listtransactions
@@ -2970,7 +2970,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/orderreturns":
+  "/{merchantId}/orderreturns":
     get:
       description: Lists order returns in your Merchant Center account.
       operationId: content.orderreturns.list
@@ -3099,7 +3099,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/orderreturns/createOrderReturn":
+  "/{merchantId}/orderreturns/createOrderReturn":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3141,7 +3141,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orderreturns
-  "/content/v2.1/{merchantId}/orderreturns/{returnId}":
+  "/{merchantId}/orderreturns/{returnId}":
     get:
       description: Retrieves an order return from your Merchant Center account.
       operationId: content.orderreturns.get
@@ -3184,7 +3184,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/orderreturns/{returnId}/acknowledge":
+  "/{merchantId}/orderreturns/{returnId}/acknowledge":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3232,7 +3232,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orderreturns
-  "/content/v2.1/{merchantId}/orderreturns/{returnId}/process":
+  "/{merchantId}/orderreturns/{returnId}/process":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3280,7 +3280,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orderreturns
-  "/content/v2.1/{merchantId}/orders":
+  "/{merchantId}/orders":
     get:
       description: Lists the orders in your Merchant Center account.
       operationId: content.orders.list
@@ -3368,7 +3368,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/orders/{orderId}":
+  "/{merchantId}/orders/{orderId}":
     get:
       description: Retrieves an order from your Merchant Center account.
       operationId: content.orders.get
@@ -3411,7 +3411,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/orders/{orderId}/acknowledge":
+  "/{merchantId}/orders/{orderId}/acknowledge":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3459,7 +3459,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/cancel":
+  "/{merchantId}/orders/{orderId}/cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3507,7 +3507,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/cancelLineItem":
+  "/{merchantId}/orders/{orderId}/cancelLineItem":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3555,7 +3555,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/inStoreRefundLineItem":
+  "/{merchantId}/orders/{orderId}/inStoreRefundLineItem":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3603,7 +3603,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/refunditem":
+  "/{merchantId}/orders/{orderId}/refunditem":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3651,7 +3651,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/refundorder":
+  "/{merchantId}/orders/{orderId}/refundorder":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3699,7 +3699,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/rejectReturnLineItem":
+  "/{merchantId}/orders/{orderId}/rejectReturnLineItem":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3747,7 +3747,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/returnRefundLineItem":
+  "/{merchantId}/orders/{orderId}/returnRefundLineItem":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3795,7 +3795,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/setLineItemMetadata":
+  "/{merchantId}/orders/{orderId}/setLineItemMetadata":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3843,7 +3843,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/shipLineItems":
+  "/{merchantId}/orders/{orderId}/shipLineItems":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3891,7 +3891,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/testreturn":
+  "/{merchantId}/orders/{orderId}/testreturn":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3939,7 +3939,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/updateLineItemShippingDetails":
+  "/{merchantId}/orders/{orderId}/updateLineItemShippingDetails":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3987,7 +3987,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/updateMerchantOrderId":
+  "/{merchantId}/orders/{orderId}/updateMerchantOrderId":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4035,7 +4035,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/orders/{orderId}/updateShipment":
+  "/{merchantId}/orders/{orderId}/updateShipment":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4083,7 +4083,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/ordersbymerchantid/{merchantOrderId}":
+  "/{merchantId}/ordersbymerchantid/{merchantOrderId}":
     get:
       description: Retrieves an order using merchant order ID.
       operationId: content.orders.getbymerchantorderid
@@ -4126,7 +4126,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/ordertrackingsignals":
+  "/{merchantId}/ordertrackingsignals":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4168,7 +4168,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - ordertrackingsignals
-  "/content/v2.1/{merchantId}/pos/{targetMerchantId}/inventory":
+  "/{merchantId}/pos/{targetMerchantId}/inventory":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4216,7 +4216,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - pos
-  "/content/v2.1/{merchantId}/pos/{targetMerchantId}/sale":
+  "/{merchantId}/pos/{targetMerchantId}/sale":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4264,7 +4264,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - pos
-  "/content/v2.1/{merchantId}/pos/{targetMerchantId}/store":
+  "/{merchantId}/pos/{targetMerchantId}/store":
     get:
       description: Lists the stores of the target merchant.
       operationId: content.pos.list
@@ -4342,7 +4342,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - pos
-  "/content/v2.1/{merchantId}/pos/{targetMerchantId}/store/{storeCode}":
+  "/{merchantId}/pos/{targetMerchantId}/store/{storeCode}":
     delete:
       description: Deletes a store for the given merchant.
       operationId: content.pos.delete
@@ -4423,7 +4423,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/products":
+  "/{merchantId}/products":
     get:
       description: Lists the products in your Merchant Center account. The response might contain fewer items than specified by maxResults. Rely on nextPageToken to determine if there are more items to be requested.
       operationId: content.products.list
@@ -4504,7 +4504,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - products
-  "/content/v2.1/{merchantId}/products/{productId}":
+  "/{merchantId}/products/{productId}":
     delete:
       description: Deletes a product from your Merchant Center account.
       operationId: content.products.delete
@@ -4578,7 +4578,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/products/{productId}/localinventory":
+  "/{merchantId}/products/{productId}/localinventory":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4626,7 +4626,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - localinventory
-  "/content/v2.1/{merchantId}/products/{productId}/regionalinventory":
+  "/{merchantId}/products/{productId}/regionalinventory":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4674,7 +4674,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - regionalinventory
-  "/content/v2.1/{merchantId}/productstatuses":
+  "/{merchantId}/productstatuses":
     get:
       description: Lists the statuses of the products in your Merchant Center account.
       operationId: content.productstatuses.list
@@ -4730,7 +4730,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/productstatuses/{productId}":
+  "/{merchantId}/productstatuses/{productId}":
     get:
       description: Gets the status of a product from your Merchant Center account.
       operationId: content.productstatuses.get
@@ -4782,7 +4782,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/productstatuses/{productId}/repricingreports":
+  "/{merchantId}/productstatuses/{productId}/repricingreports":
     get:
       description: Lists the metrics report for a given Repricing product.
       operationId: content.productstatuses.repricingreports.list
@@ -4850,7 +4850,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/pubsubnotificationsettings":
+  "/{merchantId}/pubsubnotificationsettings":
     get:
       description: Retrieves a Merchant Center account's pubsub notification settings.
       operationId: content.pubsubnotificationsettings.get
@@ -4916,7 +4916,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - pubsubnotificationsettings
-  "/content/v2.1/{merchantId}/regions":
+  "/{merchantId}/regions":
     get:
       description: Lists the regions in your Merchant Center account.
       operationId: content.regions.list
@@ -4997,7 +4997,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - regions
-  "/content/v2.1/{merchantId}/regions/{regionId}":
+  "/{merchantId}/regions/{regionId}":
     delete:
       description: Deletes a region definition from your Merchant Center account.
       operationId: content.regions.delete
@@ -5106,7 +5106,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - regions
-  "/content/v2.1/{merchantId}/reports/search":
+  "/{merchantId}/reports/search":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -5148,7 +5148,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - reports
-  "/content/v2.1/{merchantId}/repricingrules":
+  "/{merchantId}/repricingrules":
     get:
       description: Lists the repricing rules in your Merchant Center account.
       operationId: content.repricingrules.list
@@ -5239,7 +5239,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - repricingrules
-  "/content/v2.1/{merchantId}/repricingrules/{ruleId}":
+  "/{merchantId}/repricingrules/{ruleId}":
     delete:
       description: Deletes a repricing rule in your Merchant Center account.
       operationId: content.repricingrules.delete
@@ -5343,7 +5343,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - repricingrules
-  "/content/v2.1/{merchantId}/repricingrules/{ruleId}/repricingreports":
+  "/{merchantId}/repricingrules/{ruleId}/repricingreports":
     get:
       description: Lists the metrics report for a given Repricing rule.
       operationId: content.repricingrules.repricingreports.list
@@ -5406,7 +5406,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/returnaddress":
+  "/{merchantId}/returnaddress":
     get:
       description: Lists the return addresses of the Merchant Center account.
       operationId: content.returnaddress.list
@@ -5487,7 +5487,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - returnaddress
-  "/content/v2.1/{merchantId}/returnaddress/{returnAddressId}":
+  "/{merchantId}/returnaddress/{returnAddressId}":
     delete:
       description: Deletes a return address for the given Merchant Center account.
       operationId: content.returnaddress.delete
@@ -5556,7 +5556,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/returnpolicy":
+  "/{merchantId}/returnpolicy":
     get:
       description: Lists the return policies of the Merchant Center account.
       operationId: content.returnpolicy.list
@@ -5622,7 +5622,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - returnpolicy
-  "/content/v2.1/{merchantId}/returnpolicy/{returnPolicyId}":
+  "/{merchantId}/returnpolicy/{returnPolicyId}":
     delete:
       description: Deletes a return policy for the given Merchant Center account.
       operationId: content.returnpolicy.delete
@@ -5691,7 +5691,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/returnpolicyonline":
+  "/{merchantId}/returnpolicyonline":
     get:
       description: Lists all existing return policies.
       operationId: content.returnpolicyonline.list
@@ -5757,7 +5757,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - returnpolicyonline
-  "/content/v2.1/{merchantId}/returnpolicyonline/{returnPolicyId}":
+  "/{merchantId}/returnpolicyonline/{returnPolicyId}":
     delete:
       description: Deletes an existing return policy.
       operationId: content.returnpolicyonline.delete
@@ -5861,7 +5861,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - returnpolicyonline
-  "/content/v2.1/{merchantId}/settlementreports":
+  "/{merchantId}/settlementreports":
     get:
       description: Retrieves a list of settlement reports from your Merchant Center account.
       operationId: content.settlementreports.list
@@ -5918,7 +5918,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/settlementreports/{settlementId}":
+  "/{merchantId}/settlementreports/{settlementId}":
     get:
       description: Retrieves a settlement report from your Merchant Center account.
       operationId: content.settlementreports.get
@@ -5961,7 +5961,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/settlementreports/{settlementId}/transactions":
+  "/{merchantId}/settlementreports/{settlementId}/transactions":
     get:
       description: Retrieves a list of transactions for the settlement.
       operationId: content.settlementtransactions.list
@@ -6023,7 +6023,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/shippingsettings":
+  "/{merchantId}/shippingsettings":
     get:
       description: Lists the shipping settings of the sub-accounts in your Merchant Center account.
       operationId: content.shippingsettings.list
@@ -6070,7 +6070,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/shippingsettings/{accountId}":
+  "/{merchantId}/shippingsettings/{accountId}":
     get:
       description: Retrieves the shipping settings of the account.
       operationId: content.shippingsettings.get
@@ -6148,7 +6148,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - shippingsettings
-  "/content/v2.1/{merchantId}/supportedCarriers":
+  "/{merchantId}/supportedCarriers":
     get:
       description: Retrieves supported carriers and carrier services for an account.
       operationId: content.shippingsettings.getsupportedcarriers
@@ -6185,7 +6185,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/supportedHolidays":
+  "/{merchantId}/supportedHolidays":
     get:
       description: Retrieves supported holidays for an account.
       operationId: content.shippingsettings.getsupportedholidays
@@ -6222,7 +6222,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/supportedPickupServices":
+  "/{merchantId}/supportedPickupServices":
     get:
       description: Retrieves supported pickup services for an account.
       operationId: content.shippingsettings.getsupportedpickupservices
@@ -6259,7 +6259,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/content/v2.1/{merchantId}/testorders":
+  "/{merchantId}/testorders":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6301,7 +6301,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/testorders/{orderId}/advance":
+  "/{merchantId}/testorders/{orderId}/advance":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6344,7 +6344,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/testorders/{orderId}/cancelByCustomer":
+  "/{merchantId}/testorders/{orderId}/cancelByCustomer":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6392,7 +6392,7 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - orders
-  "/content/v2.1/{merchantId}/testordertemplates/{templateName}":
+  "/{merchantId}/testordertemplates/{templateName}":
     get:
       description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
       operationId: content.orders.gettestordertemplate
@@ -12188,13 +12188,13 @@ components:
         commission:
           $ref: "#/components/schemas/SettlementTransactionAmountCommission"
         description:
-          description: 'The description of the event. Acceptable values are: - "`taxWithhold`" - "`principal`" - "`principalAdjustment`" - "`shippingFee`" - "`merchantRemittedSalesTax`" - "`googleRemittedSalesTax`" - "`merchantCoupon`" - "`merchantCouponTax`" - "`merchantRemittedDisposalTax`" - "`googleRemittedDisposalTax`" - "`merchantRemittedRedemptionFee`" - "`googleRemittedRedemptionFee`" - "`eeeEcoFee`" - "`furnitureEcoFee`" - "`copyPrivateFee`" - "`eeeEcoFeeCommission`" - "`furnitureEcoFeeCommission`" - "`copyPrivateFeeCommission`" - "`principalRefund`" - "`principalRefundTax`" - "`itemCommission`" - "`adjustmentCommission`" - "`shippingFeeCommission`" - "`commissionRefund`" - "`damaged`" - "`damagedOrDefectiveItem`" - "`expiredItem`" - "`faultyItem`" - "`incorrectItemReceived`" - "`itemMissing`" - "`qualityNotExpected`" - "`receivedTooLate`" - "`storePackageMissing`" - "`transitPackageMissing`" - "`unsuccessfulDeliveryUndeliverable`" - "`wrongChargeInStore`" - "`wrongItem`" - "`returns`" - "`undeliverable`" - "`refundFromMerchant`" - "`returnLabelShippingFee`" - "`pspFee`" '
+          description: 'The description of the event. Acceptable values are: - "`taxWithhold`" - "`principal`" - "`principalAdjustment`" - "`shippingFee`" - "`merchantRemittedSalesTax`" - "`googleRemittedSalesTax`" - "`merchantCoupon`" - "`merchantCouponTax`" - "`merchantRemittedDisposalTax`" - "`googleRemittedDisposalTax`" - "`merchantRemittedRedemptionFee`" - "`googleRemittedRedemptionFee`" - "`eeeEcoFee`" - "`furnitureEcoFee`" - "`copyPrivateFee`" - "`eeeEcoFeeCommission`" - "`furnitureEcoFeeCommission`" - "`copyPrivateFeeCommission`" - "`principalRefund`" - "`principalRefundTax`" - "`itemCommission`" - "`adjustmentCommission`" - "`shippingFeeCommission`" - "`commissionRefund`" - "`damaged`" - "`damagedOrDefectiveItem`" - "`expiredItem`" - "`faultyItem`" - "`incorrectItemReceived`" - "`itemMissing`" - "`qualityNotExpected`" - "`receivedTooLate`" - "`storePackageMissing`" - "`transitPackageMissing`" - "`unsuccessfulDeliveryUndeliverable`" - "`wrongChargeInStore`" - "`wrongItem`" - "`returns`" - "`undeliverable`" - "`issueRelatedRefundAndReplacementAmountDescription`" - "`refundFromMerchant`" - "`returnLabelShippingFee`" - "`lumpSumCorrection`" - "`pspFee`" '
           type: string
         transactionAmount:
           $ref: "#/components/schemas/Price"
           description: The amount that contributes to the line item price.
         type:
-          description: 'The type of the amount. Acceptable values are: - "`itemPrice`" - "`orderPrice`" - "`refund`" - "`earlyRefund`" - "`courtesyRefund`" - "`returnRefund`" - "`returnLabelShippingFeeAmount`" '
+          description: 'The type of the amount. Acceptable values are: - "`itemPrice`" - "`orderPrice`" - "`refund`" - "`earlyRefund`" - "`courtesyRefund`" - "`returnRefund`" - "`returnLabelShippingFeeAmount`" - "`lumpSumCorrectionAmount`" '
           type: string
       type: object
     SettlementTransactionAmountCommission:

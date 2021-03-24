@@ -84,6 +84,7 @@ tags:
   - name: regionHealthCheckServices
   - name: regionInstanceGroupManagers
   - name: regionInstanceGroups
+  - name: regionInstances
   - name: regionNetworkEndpointGroups
   - name: regionNotificationEndpoints
   - name: regionOperations
@@ -164,7 +165,7 @@ paths:
           name: parentId
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -1067,7 +1068,7 @@ paths:
           name: parentId
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -1225,7 +1226,7 @@ paths:
           name: parentId
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -2041,7 +2042,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -2130,7 +2131,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -2219,7 +2220,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -2308,7 +2309,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -2397,7 +2398,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -2486,7 +2487,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -2575,7 +2576,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -2664,7 +2665,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -2753,7 +2754,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -2842,7 +2843,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -2931,7 +2932,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3020,7 +3021,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3109,7 +3110,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3198,7 +3199,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3287,7 +3288,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3376,7 +3377,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3465,7 +3466,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3554,7 +3555,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3643,7 +3644,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3732,7 +3733,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3821,7 +3822,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3910,7 +3911,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -3999,7 +4000,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -4088,7 +4089,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -4115,6 +4116,95 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - routers
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/aggregated/serviceAttachments":
+    get:
+      description: Retrieves the list of all ServiceAttachment resources, regional and global, available to the specified project.
+      operationId: compute.serviceAttachments.aggregatedList
+      parameters:
+        - description: Name of the project scoping this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: >-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+
+
+            You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+          in: query
+          name: includeAllScopes
+          schema:
+            type: boolean
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: >-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+
+            You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+
+            Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceAttachmentAggregatedList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - serviceAttachments
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -4177,7 +4267,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -4266,7 +4356,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -4350,7 +4440,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -4439,7 +4529,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -4528,7 +4618,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -4617,7 +4707,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -4706,7 +4796,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -4795,7 +4885,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -4884,7 +4974,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -4973,7 +5063,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -5062,7 +5152,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -5389,7 +5479,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -5469,7 +5559,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -5791,7 +5881,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -6187,6 +6277,158 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendBuckets
+  "/projects/{project}/global/backendBuckets/{resource}/getIamPolicy":
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.backendBuckets.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - backendBuckets
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/global/backendBuckets/{resource}/setIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.backendBuckets.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GlobalSetPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - backendBuckets
+  "/projects/{project}/global/backendBuckets/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.backendBuckets.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - backendBuckets
   "/projects/{project}/global/backendServices":
     get:
       description: Retrieves the list of BackendService resources available to the specified project.
@@ -6236,7 +6478,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -6700,7 +6942,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Sets the security policy for the specified backend service.
+      description: Sets the Google Cloud Armor security policy for the specified backend service. For more information, see Google Cloud Armor Overview
       operationId: compute.backendServices.setSecurityPolicy
       parameters:
         - description: Project ID for this request.
@@ -6851,7 +7093,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -7173,7 +7415,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -7549,7 +7791,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -7982,7 +8224,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -8358,7 +8600,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -8734,7 +8976,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -9110,7 +9352,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -9711,7 +9953,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -10085,7 +10327,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -10216,7 +10458,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -10634,6 +10876,58 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/global/licenseCodes/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+      operationId: compute.licenseCodes.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - licenseCodes
   "/projects/{project}/global/licenses":
     get:
       description: Retrieves the list of licenses available in the specified project. This method does not get any licenses that belong to other projects, including licenses attached to publicly-available images, like Debian 9. If you want to get a list of publicly-available licenses, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
@@ -10683,7 +10977,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -10968,6 +11262,58 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - licenses
+  "/projects/{project}/global/licenses/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+      operationId: compute.licenses.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - licenses
   "/projects/{project}/global/machineImages":
     get:
       description: Retrieves a list of machine images that are contained within the specified project.
@@ -11017,7 +11363,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -11396,7 +11742,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -11752,7 +12098,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -11828,7 +12174,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -12232,7 +12578,7 @@ paths:
           name: region
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -12543,7 +12889,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -12759,7 +13105,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -13032,7 +13378,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -13305,7 +13651,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -13579,7 +13925,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -13713,7 +14059,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -14248,7 +14594,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -14674,7 +15020,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -14948,7 +15294,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -15077,7 +15423,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -15357,7 +15703,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -15435,6 +15781,58 @@ paths:
             - https://www.googleapis.com/auth/compute
           Oauth2c:
             - https://www.googleapis.com/auth/compute
+      tags:
+        - targetGrpcProxies
+  "/projects/{project}/global/targetGrpcProxies/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.targetGrpcProxies.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
       tags:
         - targetGrpcProxies
   "/projects/{project}/global/targetGrpcProxies/{targetGrpcProxy}":
@@ -15630,7 +16028,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -15955,7 +16353,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -16400,7 +16798,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -16914,7 +17312,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -16992,6 +17390,58 @@ paths:
             - https://www.googleapis.com/auth/compute
           Oauth2c:
             - https://www.googleapis.com/auth/compute
+      tags:
+        - targetTcpProxies
+  "/projects/{project}/global/targetTcpProxies/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.targetTcpProxies.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
       tags:
         - targetTcpProxies
   "/projects/{project}/global/targetTcpProxies/{targetTcpProxy}":
@@ -17256,7 +17706,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -17752,7 +18202,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -17937,7 +18387,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -18074,7 +18524,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -18444,7 +18894,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -18860,7 +19310,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -19335,7 +19785,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -19540,6 +19990,64 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionCommitments
+  "/projects/{project}/regions/{region}/commitments/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionCommitments.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionCommitments
   "/projects/{project}/regions/{region}/diskTypes":
     get:
       description: Retrieves a list of regional disk types available to the specified project.
@@ -19595,7 +20103,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -19738,7 +20246,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -20489,7 +20997,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -20982,7 +21490,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -21230,6 +21738,64 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionHealthCheckServices
+  "/projects/{project}/regions/{region}/healthCheckServices/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionHealthCheckServices.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionHealthCheckServices
   "/projects/{project}/regions/{region}/healthChecks":
     get:
       description: Retrieves the list of HealthCheck resources available to the specified project.
@@ -21285,7 +21851,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -21590,6 +22156,64 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionHealthChecks
+  "/projects/{project}/regions/{region}/healthChecks/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionHealthChecks.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionHealthChecks
   "/projects/{project}/regions/{region}/instanceGroupManagers":
     get:
       description: Retrieves the list of managed instance groups that are contained within the specified region.
@@ -21645,7 +22269,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -22335,7 +22959,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -22439,7 +23063,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -22535,7 +23159,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -23153,7 +23777,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -23310,7 +23934,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -23466,6 +24090,66 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionInstanceGroups
+  "/projects/{project}/regions/{region}/instances/bulkInsert":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates multiple instances in a given region. Count specifies the number of instances to create.
+      operationId: compute.regionInstances.bulkInsert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BulkInsertInstanceResource"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstances
   "/projects/{project}/regions/{region}/interconnectAttachments":
     get:
       description: Retrieves the list of interconnect attachments contained within the specified region.
@@ -23521,7 +24205,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -23953,7 +24637,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -24199,7 +24883,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -24615,7 +25299,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -24806,6 +25490,64 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/regions/{region}/notificationEndpoints/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionNotificationEndpoints.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionNotificationEndpoints
   "/projects/{project}/regions/{region}/operations":
     get:
       description: Retrieves a list of Operation resources contained within the specified region.
@@ -24861,7 +25603,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -25101,7 +25843,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -25462,7 +26204,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -25765,7 +26507,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -26181,7 +26923,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -26610,7 +27352,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -26811,7 +27553,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -26895,6 +27637,176 @@ paths:
             - https://www.googleapis.com/auth/compute
           Oauth2c:
             - https://www.googleapis.com/auth/compute
+      tags:
+        - serviceAttachments
+  "/projects/{project}/regions/{region}/serviceAttachments/{resource}/getIamPolicy":
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.serviceAttachments.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - serviceAttachments
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/regions/{region}/serviceAttachments/{resource}/setIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.serviceAttachments.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegionSetPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - serviceAttachments
+  "/projects/{project}/regions/{region}/serviceAttachments/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.serviceAttachments.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
       tags:
         - serviceAttachments
   "/projects/{project}/regions/{region}/serviceAttachments/{serviceAttachment}":
@@ -27057,7 +27969,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -27141,6 +28053,64 @@ paths:
             - https://www.googleapis.com/auth/compute
           Oauth2c:
             - https://www.googleapis.com/auth/compute
+      tags:
+        - regionSslCertificates
+  "/projects/{project}/regions/{region}/sslCertificates/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource and region.
+      operationId: compute.regionSslCertificates.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionSslCertificates
   "/projects/{project}/regions/{region}/sslCertificates/{sslCertificate}":
@@ -27303,7 +28273,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -27913,7 +28883,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -27997,6 +28967,64 @@ paths:
             - https://www.googleapis.com/auth/compute
           Oauth2c:
             - https://www.googleapis.com/auth/compute
+      tags:
+        - regionTargetHttpProxies
+  "/projects/{project}/regions/{region}/targetHttpProxies/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionTargetHttpProxies.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionTargetHttpProxies
   "/projects/{project}/regions/{region}/targetHttpProxies/{targetHttpProxy}":
@@ -28225,7 +29253,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -28309,6 +29337,64 @@ paths:
             - https://www.googleapis.com/auth/compute
           Oauth2c:
             - https://www.googleapis.com/auth/compute
+      tags:
+        - regionTargetHttpsProxies
+  "/projects/{project}/regions/{region}/targetHttpsProxies/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionTargetHttpsProxies.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionTargetHttpsProxies
   "/projects/{project}/regions/{region}/targetHttpsProxies/{targetHttpsProxy}":
@@ -28603,7 +29689,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -29300,7 +30386,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -29670,7 +30756,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -29747,6 +30833,64 @@ paths:
             - https://www.googleapis.com/auth/compute
           Oauth2c:
             - https://www.googleapis.com/auth/compute
+      tags:
+        - regionUrlMaps
+  "/projects/{project}/regions/{region}/urlMaps/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionUrlMaps.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionUrlMaps
   "/projects/{project}/regions/{region}/urlMaps/{urlMap}":
@@ -30119,7 +31263,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -30269,6 +31413,64 @@ paths:
             - https://www.googleapis.com/auth/compute
           Oauth2c:
             - https://www.googleapis.com/auth/compute
+      tags:
+        - vpnGateways
+  "/projects/{project}/regions/{region}/vpnGateways/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.vpnGateways.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
       tags:
         - vpnGateways
   "/projects/{project}/regions/{region}/vpnGateways/{vpnGateway}":
@@ -30484,7 +31686,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -31202,7 +32404,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -31339,7 +32541,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -31482,7 +32684,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -31898,7 +33100,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -32041,7 +33243,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -32797,7 +33999,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -33487,7 +34689,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -33591,7 +34793,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -33687,7 +34889,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -34387,7 +35589,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -34717,7 +35919,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -34998,7 +36200,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -35096,6 +36298,66 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Instance"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - instances
+  "/projects/{project}/zones/{zone}/instances/bulkInsert":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates multiple instances. Count specifies the number of instances to create.
+      operationId: compute.instances.bulkInsert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BulkInsertInstanceResource"
       responses:
         "200":
           content:
@@ -35934,7 +37196,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -38022,7 +39284,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -38165,7 +39427,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -38557,7 +39819,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -38702,7 +39964,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -39157,7 +40419,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -39475,7 +40737,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -39618,7 +40880,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -39858,7 +41120,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -40340,7 +41602,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
           in: query
           name: returnPartialSuccess
           schema:
@@ -41022,7 +42284,7 @@ components:
             - STANDARD
           type: string
         prefixLength:
-          description: The prefix length if the resource reprensents an IP range.
+          description: The prefix length if the resource represents an IP range.
           format: int32
           type: integer
         purpose:
@@ -41037,17 +42299,18 @@ components:
 
             - `NAT_AUTO` for addresses that are external IP addresses automatically reserved for Cloud NAT. 
 
-            - `IPSEC_INTERCONNECT` for addresses created from a private IP range that are reserved for a VLAN attachment in an IPsec encrypted Interconnect configuration. These addresses are regional resources.
+            - `IPSEC_INTERCONNECT` for addresses created from a private IP range that are reserved for a VLAN attachment in an IPsec-encrypted Cloud Interconnect configuration. These addresses are regional resources.
           enum:
             - DNS_RESOLVER
             - GCE_ENDPOINT
+            - IPSEC_INTERCONNECT
             - NAT_AUTO
             - PRIVATE_SERVICE_CONNECT
             - SHARED_LOADBALANCER_VIP
             - VPC_PEERING
           type: string
         region:
-          description: "[Output Only] The URL of the region where the regional address resides. This field is not applicable to global addresses. You must specify this field as part of the HTTP request URL."
+          description: "[Output Only] The URL of the region where a regional address resides. For regional addresses, you must specify the region as a path parameter in the HTTP request URL. This field is not applicable to global addresses."
           type: string
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
@@ -41321,6 +42584,9 @@ components:
           items:
             $ref: "#/components/schemas/AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk"
           type: array
+        locationHint:
+          description: An opaque location hint used to place the allocation close to other resources. This field is for use by internal tools that use the public API.
+          type: string
         machineType:
           description: Specifies type of machine (name only) which has fixed number of vCPUs and fixed amount of memory. This also includes specifying custom machine type following custom-NUMBER_OF_CPUS-AMOUNT_OF_MEMORY pattern.
           type: string
@@ -41922,6 +43188,8 @@ components:
             - NOT_ENOUGH_QUOTA_AVAILABLE
             - REGION_RESOURCE_STOCKOUT
             - SCALING_TARGET_DOES_NOT_EXIST
+            - SCHEDULED_INSTANCES_GREATER_THAN_AUTOSCALER_MAX
+            - SCHEDULED_INSTANCES_LESS_THAN_AUTOSCALER_MIN
             - UNKNOWN
             - UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION
             - ZONE_RESOURCE_STOCKOUT
@@ -42346,7 +43614,7 @@ components:
             - USE_ORIGIN_HEADERS
           type: string
         clientTtl:
-          description: Specifies a separate client (e.g. browser client) TTL, separate from the TTL for Cloud CDN's edge caches. Leaving this empty will use the same cache TTL for both Cloud CDN and the client-facing response. The maximum allowed value is 86400s (1 day).
+          description: Specifies a separate client (e.g. browser client) maximum TTL. This is used to clamp the max-age (or Expires) value sent to the client. With FORCE_CACHE_ALL, the lesser of client_ttl and default_ttl is used for the response max-age directive, along with a "public" directive. For cacheable content in CACHE_ALL_STATIC mode, client_ttl clamps the max-age from the origin (if specified), or else sets the response max-age directive to the lesser of the client_ttl and default_ttl, and also ensures a "public" cache-control directive is present. If a client TTL is not specified, a default value (1 hour) will be used. The maximum allowed value is 86400s (1 day).
           format: int32
           type: integer
         defaultTtl:
@@ -42393,7 +43661,7 @@ components:
       description: Specify CDN TTLs for response error codes.
       properties:
         code:
-          description: The HTTP status code to define a TTL against. Only HTTP status codes 300, 301, 308, 404, 405, 410, 421, 451 and 501 are can be specified as values, and you cannot specify a status code more than once.
+          description: The HTTP status code to define a TTL against. Only HTTP status codes 300, 301, 302, 307, 308, 404, 405, 410, 421, 451 and 501 are can be specified as values, and you cannot specify a status code more than once.
           format: int32
           type: integer
         ttl:
@@ -42511,7 +43779,7 @@ components:
           type: array
         cdnPolicy:
           $ref: "#/components/schemas/BackendServiceCdnPolicy"
-          description: Cloud CDN configuration for this BackendService. Not available for Internal TCP/UDP Load Balancing and Network Load Balancing.
+          description: Cloud CDN configuration for this BackendService. Only available for  external HTTP(S) Load Balancing.
         circuitBreakers:
           $ref: "#/components/schemas/CircuitBreakers"
           description: >-
@@ -42639,6 +43907,14 @@ components:
         logConfig:
           $ref: "#/components/schemas/BackendServiceLogConfig"
           description: This field denotes the logging options for the load balancer traffic served by this backend service. If logging is enabled, logs will be exported to Stackdriver.
+        maxStreamDuration:
+          $ref: "#/components/schemas/Duration"
+          description: >-
+            Specifies the default maximum duration (timeout) for streams to this service. Duration is computed from the beginning of the stream until the response has been completely processed, including all retries. A stream that does not complete in this duration is closed.
+
+            If not specified, there will be no timeout limit, i.e. the maximum duration is infinite.
+
+            This field is only allowed when the loadBalancingScheme of the backend service is INTERNAL_SELF_MANAGED.
         name:
           description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
@@ -42665,7 +43941,7 @@ components:
             Deprecated in favor of portName. The TCP port to connect on the backend. The default value is 80.
 
 
-            This cannot be used if the loadBalancingScheme is INTERNAL (Internal TCP/UDP Load Balancing).
+            Backend services for Internal TCP/UDP Load Balancing and Network Load Balancing require you omit port.
           format: int32
           type: integer
         portName:
@@ -42736,6 +44012,8 @@ components:
             - HTTP_COOKIE
             - NONE
           type: string
+        subsetting:
+          $ref: "#/components/schemas/Subsetting"
         timeoutSec:
           description: The backend service timeout has a different meaning depending on the type of load balancer. For more information see,  Backend service settings The default is 30 seconds. The full range of timeout values allowed is 1 - 2,147,483,647 seconds.
           format: int32
@@ -42850,7 +44128,7 @@ components:
             - USE_ORIGIN_HEADERS
           type: string
         clientTtl:
-          description: Specifies a separate client (e.g. browser client) TTL, separate from the TTL for Cloud CDN's edge caches. Leaving this empty will use the same cache TTL for both Cloud CDN and the client-facing response. The maximum allowed value is 86400s (1 day).
+          description: Specifies a separate client (e.g. browser client) maximum TTL. This is used to clamp the max-age (or Expires) value sent to the client. With FORCE_CACHE_ALL, the lesser of client_ttl and default_ttl is used for the response max-age directive, along with a "public" directive. For cacheable content in CACHE_ALL_STATIC mode, client_ttl clamps the max-age from the origin (if specified), or else sets the response max-age directive to the lesser of the client_ttl and default_ttl, and also ensures a "public" cache-control directive is present. If a client TTL is not specified, a default value (1 hour) will be used. The maximum allowed value is 86400s (1 day).
           format: int32
           type: integer
         defaultTtl:
@@ -42897,7 +44175,7 @@ components:
       description: Specify CDN TTLs for response error codes.
       properties:
         code:
-          description: The HTTP status code to define a TTL against. Only HTTP status codes 300, 301, 308, 404, 405, 410, 421, 451 and 501 are can be specified as values, and you cannot specify a status code more than once.
+          description: The HTTP status code to define a TTL against. Only HTTP status codes 300, 301, 302, 307, 308, 404, 405, 410, 421, 451 and 501 are can be specified as values, and you cannot specify a status code more than once.
           format: int32
           type: integer
         ttl:
@@ -43367,6 +44645,53 @@ components:
           type: array
         role:
           description: Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          type: string
+      type: object
+    BulkInsertInstanceResource:
+      properties:
+        count:
+          description: The maximum number of instances to create.
+          format: int64
+          type: string
+        instanceProperties:
+          $ref: "#/components/schemas/InstanceProperties"
+          description: The instance properties defining the VM instances to be created. Required if sourceInstanceTemplate is not provided.
+        locationPolicy:
+          $ref: "#/components/schemas/LocationPolicy"
+        minCount:
+          description: The minimum number of instances to create. If no min_count is specified then count is used as the default value. If min_count instances cannot be created, then no instances will be created.
+          format: int64
+          type: string
+        namePattern:
+          description: "The string pattern used for the names of the VMs. Either name_pattern or predefined_names must be set. The pattern should contain one consecutive sequence of placeholder hash characters (#) with each character corresponding to one digit of the generated instance name. Example: name_pattern of inst-#### will generate instance names like inst-0001, inst-0002, ... . If there already exist instance(s) whose names match the name pattern in the same project and zone, then the generated instance numbers will start after the biggest existing number. For example, if there exists an instance with name inst-0050, then instance names generated using the pattern inst-#### will be inst-0051, inst-0052, etc. The name pattern placeholder #...# can contain up to 18 characters."
+          type: string
+        perInstanceProperties:
+          additionalProperties:
+            $ref: "#/components/schemas/BulkInsertInstanceResourcePerInstanceProperties"
+          description: Per-instance properties to be set on individual instances. Keys of this map specify requested instance names. Can be empty if name_pattern is used.
+          type: object
+        sourceInstanceTemplate:
+          description: >-
+            Specifies the instance template from which to create instances. You may combine sourceInstanceTemplate with instanceProperties to override specific values from an existing instance template. Bulk API follows the semantics of JSON Merge Patch described by RFC 7396.
+
+
+            It can be a full or partial URL. For example, the following are all valid URLs to an instance template:  
+
+            - https://www.googleapis.com/compute/v1/projects/project/global/instanceTemplates/instanceTemplate 
+
+            - projects/project/global/instanceTemplates/instanceTemplate 
+
+            - global/instanceTemplates/instanceTemplate  
+
+
+            This field is optional.
+          type: string
+      type: object
+    BulkInsertInstanceResourcePerInstanceProperties:
+      description: Per-instance properties to be set on individual instances. To be extended in the future.
+      properties:
+        name:
+          description: This field is only temporary. It will be removed. Do not use it.
           type: string
       type: object
     CacheInvalidationRule:
@@ -44062,11 +45387,17 @@ components:
           description: >-
             The source disk used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values:  
 
-            - https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk 
+            - https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk  
 
-            - projects/project/zones/zone/disks/disk 
+            - https://www.googleapis.com/compute/v1/projects/project/regions/region/disks/disk  
 
-            - zones/zone/disks/disk
+            - projects/project/zones/zone/disks/disk  
+
+            - projects/project/regions/region/disks/disk  
+
+            - zones/zone/disks/disk  
+
+            - regions/region/disks/disk
           type: string
         sourceDiskId:
           description: "[Output Only] The unique ID of the disk used to create this disk. This value identifies the exact disk that was used to create this persistent disk. For example, if you created the persistent disk from a disk that was later deleted and recreated under the same name, the source disk ID would identify the exact version of the disk that was used."
@@ -45299,7 +46630,7 @@ components:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
         displayName:
-          description: User-provided name of the Organization firewall plicy. The name should be unique in the organization in which the firewall policy is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          description: Depreacted, please use short name instead. User-provided name of the Organization firewall plicy. The name should be unique in the organization in which the firewall policy is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
         fingerprint:
@@ -45339,6 +46670,10 @@ components:
         selfLinkWithId:
           description: "[Output Only] Server-defined URL for this resource with the resource id."
           type: string
+        shortName:
+          description: User-provided name of the Organization firewall plicy. The name should be unique in the organization in which the firewall policy is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+          type: string
       type: object
     FirewallPolicyAssociation:
       properties:
@@ -45346,13 +46681,16 @@ components:
           description: The target that the firewall policy is attached to.
           type: string
         displayName:
-          description: "[Output Only] The display name of the firewall policy of the association."
+          description: "[Output Only] Deprecated, please use short name instead. The display name of the firewall policy of the association."
           type: string
         firewallPolicyId:
           description: "[Output Only] The firewall policy ID of the association."
           type: string
         name:
           description: The name for an association.
+          type: string
+        shortName:
+          description: "[Output Only] The short name of the firewall policy of the association."
           type: string
       type: object
     FirewallPolicyList:
@@ -45431,7 +46769,7 @@ components:
           description: The Action to perform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.
           type: string
         description:
-          description: An optional description of this resource. Provide this property when you create the resource.
+          description: An optional description for this resource.
           type: string
         direction:
           description: The direction in which this rule applies.
@@ -45579,6 +46917,9 @@ components:
 
 
             Must be set to `0.0.0.0` when the target is targetGrpcProxy that has validateForProxyless field set to true.
+
+
+            For Private Service Connect forwarding rules that forward traffic to Google APIs, IP address must be provided.
           type: string
         IPProtocol:
           description: >-
@@ -45723,6 +47064,9 @@ components:
 
 
             For Internal TCP/UDP Load Balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used.
+
+
+            For Private Service Connect forwarding rules that forward traffic to Google APIs, a network must be provided.
           type: string
         networkTier:
           description: >-
@@ -45777,6 +47121,10 @@ components:
           items:
             type: string
           type: array
+        pscConnectionId:
+          description: "[Output Only] The PSC connection id of the PSC Forwarding Rule."
+          format: uint64
+          type: string
         region:
           description: "[Output Only] URL of the region where the regional forwarding rule resides. This field is not applicable to global forwarding rules. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
           type: string
@@ -45821,7 +47169,6 @@ components:
             If the network specified is in auto subnet mode, this field is optional. However, if the network is in custom subnet mode, a subnetwork must be specified.
           type: string
         target:
-          description: The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
           type: string
       type: object
     ForwardingRuleAggregatedList:
@@ -45988,6 +47335,9 @@ components:
           type: string
         service:
           description: Service Directory service to register the forwarding rule under.
+          type: string
+        serviceDirectoryRegion:
+          description: '[Optional] Service Directory region to register this global forwarding rule under. Default to "us-central1". Only used for PSC for Google APIs. All PSC for Google APIs Forwarding Rules on the same network should use the same Service Directory region.'
           type: string
       type: object
     ForwardingRulesScopedList:
@@ -46396,7 +47746,7 @@ components:
           $ref: "#/components/schemas/HealthCheckLogConfig"
           description: Configure logging on this health check.
         name:
-          description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. For example, a name that is 1-63 characters long, matches the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?`, and otherwise complies with RFC1035. This regular expression describes a name where the first character is a lowercase letter, and all following characters are a dash, lowercase letter, or digit, except the last character, which isn't a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
         region:
@@ -46837,7 +48187,7 @@ components:
           description: URL of the instance resource.
           type: string
         ipAddress:
-          description: A forwarding rule IP address assigned to this instance.
+          description: For target pool based Network Load Balancing, it indicates the forwarding rule's IP address assigned to this instance. For other types of load balancing, the field indicates VM internal ip.
           type: string
         port:
           description: The named port of the instance group, not necessarily the port that is health-checked.
@@ -47334,6 +48684,14 @@ components:
             timeout and retry_policy will be ignored by clients that are configured with a fault_injection_policy.
 
             Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
+        maxStreamDuration:
+          $ref: "#/components/schemas/Duration"
+          description: >-
+            Specifies the maximum duration (timeout) for streams on the selected route. Unlike the timeout field where the timeout duration starts from the time the request has been fully processed (i.e. end-of-stream), the duration in this field is computed from the beginning of the stream until the response has been completely processed, including all retries. A stream that does not complete in this duration is closed.
+
+            If not specified, will use the largest maxStreamDuration among all backend services associated with the route.
+
+            This field is only allowed if the Url map is used with backend services with loadBalancingScheme set to INTERNAL_SELF_MANAGED.
         requestMirrorPolicy:
           $ref: "#/components/schemas/RequestMirrorPolicy"
           description: >-
@@ -47735,6 +49093,9 @@ components:
               description: The full Google Cloud Storage URL where the disk image is stored. You must provide either this property or the sourceDisk property but not both.
               type: string
           type: object
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
@@ -48034,6 +49395,15 @@ components:
           items:
             $ref: "#/components/schemas/NetworkInterface"
           type: array
+        networkPerformanceConfig:
+          $ref: "#/components/schemas/NetworkPerformanceConfig"
+        postKeyRevocationActionType:
+          description: PostKeyRevocationActionType of the instance.
+          enum:
+            - NOOP
+            - POST_KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED
+            - SHUTDOWN
+          type: string
         privateIpv6GoogleAccess:
           description: The private IPv6 google access type for the VM. If not specified, use  INHERIT_FROM_SUBNETWORK as default.
           enum:
@@ -48082,7 +49452,7 @@ components:
           type: string
         sourceMachineImageEncryptionKey:
           $ref: "#/components/schemas/CustomerEncryptionKey"
-          description: Source GMI encryption key when creating an instance from GMI.
+          description: Source machine image encryption key when creating an instance from a machine image.
         startRestricted:
           description: "[Output Only] Whether a VM has been restricted for start because Compute Engine has detected suspicious activity."
           type: boolean
@@ -49565,6 +50935,8 @@ components:
           items:
             $ref: "#/components/schemas/NetworkInterface"
           type: array
+        networkPerformanceConfig:
+          $ref: "#/components/schemas/NetworkPerformanceConfig"
         postKeyRevocationActionType:
           description: PostKeyRevocationActionType of the instance.
           enum:
@@ -49780,7 +51152,7 @@ components:
     InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy:
       properties:
         displayName:
-          description: "[Output Only] The display name of the firewall policy."
+          description: "[Output Only] Deprecated, please use short name instead. The display name of the firewall policy."
           type: string
         name:
           description: "[Output Only] The name of the firewall policy."
@@ -49790,6 +51162,9 @@ components:
           items:
             $ref: "#/components/schemas/FirewallPolicyRule"
           type: array
+        shortName:
+          description: "[Output Only] The short name of the firewall policy."
+          type: string
         type:
           description: "[Output Only] The type of the firewall policy."
           enum:
@@ -50198,6 +51573,17 @@ components:
             - AVAILABILITY_DOMAIN_2
             - AVAILABILITY_DOMAIN_ANY
           type: string
+        encryption:
+          description: >-
+            Indicates the user-supplied encryption option of this interconnect attachment: 
+
+            - NONE is the default value, which means that the attachment carries unencrypted traffic. VMs can send traffic to, or receive traffic from, this type of attachment. 
+
+            - IPSEC indicates that the attachment carries only traffic encrypted by an IPsec device such as an HA VPN gateway. VMs cannot directly send traffic to, or receive traffic from, such an attachment. To use IPsec-encrypted Cloud Interconnect, create the attachment using this option.
+          enum:
+            - IPSEC
+            - NONE
+          type: string
         googleReferenceId:
           description: "[Output Only] Google reference ID, to be used when raising support tickets with Google or otherwise to debug backend connectivity issues. [Deprecated] This field is not used."
           type: string
@@ -50208,6 +51594,11 @@ components:
         interconnect:
           description: URL of the underlying Interconnect object that this attachment's traffic will traverse through.
           type: string
+        ipsecInternalAddresses:
+          description: URL of addresses that have been reserved for the interconnect attachment, Used only for interconnect attachment that has the encryption option as IPSEC. The addresses must be RFC 1918 IP address ranges. When creating HA VPN gateway over the interconnect attachment, if the attachment is configured to use an RFC 1918 IP address, then the VPN gateway?s IP address will be allocated from the IP address range specified here. For example, if the HA VPN gateway?s interface 0 is paired to this interconnect attachment, then an RFC 1918 IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this interconnect attachment. If this field is not specified for interconnect attachment that has encryption option as IPSEC, later on when creating HA VPN gateway on this interconnect attachment, the HA VPN gateway's IP address will be allocated from regional external IP address pool.
+          items:
+            type: string
+          type: array
         kind:
           default: compute#interconnectAttachment
           description: "[Output Only] Type of the resource. Always compute#interconnectAttachment for interconnect attachments."
@@ -51169,6 +52560,24 @@ components:
           description: "Specifies the desired disk type on the node. This disk type must be a local storage type (e.g.: local-ssd). Note that for nodeTemplates, this should be the name of the disk type and not its URL."
           type: string
       type: object
+    LocationPolicy:
+      description: Configuration for location policy among multiple possible locations (e.g. preferences for zone selection among zones in a single region).
+      properties:
+        locations:
+          additionalProperties:
+            $ref: "#/components/schemas/LocationPolicyLocation"
+          description: "Location configurations mapped by location name. Currently only zone names are supported and must be represented as valid internal URLs, like: zones/us-central1-a."
+          type: object
+      type: object
+    LocationPolicyLocation:
+      properties:
+        preference:
+          enum:
+            - ALLOW
+            - DENY
+            - PREFERENCE_UNSPECIFIED
+          type: string
+      type: object
     LogConfig:
       description: Specifies what kind of log the caller must write
       properties:
@@ -51285,6 +52694,9 @@ components:
           description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         selfLink:
           description: "[Output Only] The URL for this machine image. The server defines this URL."
           type: string
@@ -52498,7 +53910,7 @@ components:
             $ref: "#/components/schemas/AliasIpRange"
           type: array
         fingerprint:
-          description: Fingerprint hash of contents stored in this network interface. This field will be ignored when inserting an Instance or adding a NetworkInterface. An up-to-date fingerprint must be provided in order to update the NetworkInterface, otherwise the request will fail with error 412 conditionNotMet.
+          description: Fingerprint hash of contents stored in this network interface. This field will be ignored when inserting an Instance or adding a NetworkInterface. An up-to-date fingerprint must be provided in order to update the NetworkInterface. The request will fail with error 400 Bad Request if the fingerprint is not provided, or 412 Precondition Failed if the fingerprint is out of date.
           format: byte
           type: string
         ipv6Address:
@@ -52657,6 +54069,14 @@ components:
           description: "[Output Only] Details about the current state of the peering."
           type: string
       type: object
+    NetworkPerformanceConfig:
+      properties:
+        totalEgressBandwidthTier:
+          enum:
+            - DEFAULT
+            - TIER_1
+          type: string
+      type: object
     NetworkRoutingConfig:
       description: A routing configuration attached to a network resource. The message includes the list of routers associated with the network, and a flag indicating the type of routing behavior to enforce network-wide.
       properties:
@@ -52703,7 +54123,7 @@ components:
     NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy:
       properties:
         displayName:
-          description: "[Output Only] The display name of the firewall policy."
+          description: "[Output Only] Deprecated, please use short name instead. The display name of the firewall policy."
           type: string
         name:
           description: "[Output Only] The name of the firewall policy."
@@ -52713,6 +54133,9 @@ components:
           items:
             $ref: "#/components/schemas/FirewallPolicyRule"
           type: array
+        shortName:
+          description: "[Output Only] The short name of the firewall policy."
+          type: string
         type:
           description: "[Output Only] The type of the firewall policy."
           enum:
@@ -52771,6 +54194,9 @@ components:
         kind:
           default: compute#nodeGroup
           description: "[Output Only] The type of the resource. Always compute#nodeGroup for node group."
+          type: string
+        locationHint:
+          description: An opaque location hint used to place the Node close to other resources. This field is for use by internal tools that use the public API. The location hint here on the NodeGroup overrides any location_hint present in the NodeTemplate.
           type: string
         maintenancePolicy:
           description: "Specifies how to handle instances when a node in the group undergoes maintenance. Set to one of: DEFAULT, RESTART_IN_PLACE, or MIGRATE_WITHIN_NODE_GROUP. The default value is DEFAULT. For more information, see  Maintenance policies."
@@ -53016,6 +54442,9 @@ components:
         nodeType:
           description: The type of this node.
           type: string
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         serverBinding:
           $ref: "#/components/schemas/ServerBinding"
           description: Binding properties for the physical server.
@@ -53951,6 +55380,9 @@ components:
           type: string
         name:
           description: "[Output Only] Name of the operation."
+          type: string
+        operationGroupId:
+          description: "[Output Only] An ID that represents a group of operations, such as when a group of operations results from a `bulkInsert` API request."
           type: string
         operationType:
           description: "[Output Only] The type of operation, such as `insert`, `update`, or `delete`, and so on."
@@ -55509,11 +56941,14 @@ components:
             - AUTOSCALERS
             - BACKEND_BUCKETS
             - BACKEND_SERVICES
+            - C2D_CPUS
             - C2_CPUS
             - COMMITMENTS
             - COMMITTED_A2_CPUS
+            - COMMITTED_C2D_CPUS
             - COMMITTED_C2_CPUS
             - COMMITTED_CPUS
+            - COMMITTED_E2_CPUS
             - COMMITTED_LICENSES
             - COMMITTED_LOCAL_SSD_TOTAL_GB
             - COMMITTED_MEMORY_OPTIMIZED_CPUS
@@ -56473,6 +57908,9 @@ components:
           description: The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
         selfLink:
           description: "[Output Only] Server-defined fully-qualified URL for this resource."
           type: string
@@ -56837,6 +58275,9 @@ components:
           description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
           format: uint64
           type: string
+        instanceSchedulePolicy:
+          $ref: "#/components/schemas/ResourcePolicyInstanceSchedulePolicy"
+          description: Resource policy for scheduling instance operations.
         kind:
           default: compute#resourcePolicy
           description: "[Output Only] Type of the resource. Always compute#resource_policies for resource policies."
@@ -56847,6 +58288,9 @@ components:
           type: string
         region:
           type: string
+        resourceStatus:
+          $ref: "#/components/schemas/ResourcePolicyResourceStatus"
+          description: "[Output Only] The system status of the resource policy."
         selfLink:
           description: "[Output Only] Server-defined fully-qualified URL for this resource."
           type: string
@@ -56858,6 +58302,7 @@ components:
           enum:
             - CREATING
             - DELETING
+            - EXPIRED
             - INVALID
             - READY
           type: string
@@ -56989,6 +58434,32 @@ components:
           description: 'Time within the window to start the operations. It must be in format "HH:MM", where HH : [00-23] and MM : [00-00] GMT.'
           type: string
       type: object
+    ResourcePolicyInstanceSchedulePolicy:
+      description: An InstanceSchedulePolicy specifies when and how frequent certain operations are performed on the instance.
+      properties:
+        expirationTime:
+          description: The expiration time of the schedule. The timestamp is an RFC3339 string.
+          type: string
+        startTime:
+          description: The start time of the schedule. The timestamp is an RFC3339 string.
+          type: string
+        timeZone:
+          description: "Specifies the time zone to be used in interpreting Schedule.schedule. The value of this field must be a time zone name from the tz database: http://en.wikipedia.org/wiki/Tz_database."
+          type: string
+        vmStartSchedule:
+          $ref: "#/components/schemas/ResourcePolicyInstanceSchedulePolicySchedule"
+          description: Specifies the schedule for starting instances.
+        vmStopSchedule:
+          $ref: "#/components/schemas/ResourcePolicyInstanceSchedulePolicySchedule"
+          description: Specifies the schedule for stopping instances.
+      type: object
+    ResourcePolicyInstanceSchedulePolicySchedule:
+      description: Schedule for an instance operation.
+      properties:
+        schedule:
+          description: Specifies the frequency for the operation, using the unix-cron format.
+          type: string
+      type: object
     ResourcePolicyList:
       properties:
         etag:
@@ -57062,6 +58533,22 @@ components:
               description: "[Output Only] A human-readable description of the warning code."
               type: string
           type: object
+      type: object
+    ResourcePolicyResourceStatus:
+      description: Contains output only fields. Use this sub-message for all output fields set on ResourcePolicy. The internal structure of this "status" field should mimic the structure of ResourcePolicy proto specification.
+      properties:
+        instanceSchedulePolicy:
+          $ref: "#/components/schemas/ResourcePolicyResourceStatusInstanceSchedulePolicyStatus"
+          description: "[Output Only] Specifies a set of output values reffering to the instance_schedule_policy system status. This field should have the same name as corresponding policy field."
+      type: object
+    ResourcePolicyResourceStatusInstanceSchedulePolicyStatus:
+      properties:
+        lastRunStartTime:
+          description: "[Output Only] The last time the schedule successfully ran. The timestamp is an RFC3339 string."
+          type: string
+        nextRunStartTime:
+          description: "[Output Only] The next time the schedule is planned to run. The actual time might be slightly different. The timestamp is an RFC3339 string."
+          type: string
       type: object
     ResourcePolicySnapshotSchedulePolicy:
       description: A snapshot schedule policy specifies when and how frequently snapshots are to be created for the target disk. Also specifies how many and how long these scheduled snapshots should be retained.
@@ -57376,6 +58863,9 @@ components:
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
+        encryptedInterconnectRouter:
+          description: Field to indicate if a router is dedicated to use with encrypted Interconnect Attachment (IPsec-encrypted Cloud Interconnect feature).
+          type: boolean
         id:
           description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
           format: uint64
@@ -57531,7 +59021,7 @@ components:
 
             BGP will use the smaller of either the local hold time value or the peer's hold time value as the hold time for the BGP connection between the two peers.
 
-            If set, this value must be between 1 and 120. The default is 20.
+            If set, this value must be between 20 and 60. The default is 20.
           format: uint32
           type: integer
       type: object
@@ -57549,9 +59039,7 @@ components:
 
             - ALL_SUBNETS: Advertises all available subnets, including peer VPC subnets. 
 
-            - ALL_VPC_SUBNETS: Advertises the router's own VPC subnets. 
-
-            - ALL_PEER_VPC_SUBNETS: Advertises peer subnets of the router's VPC network. Note that this field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in the "bgp" message). These groups are advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.
+            - ALL_VPC_SUBNETS: Advertises the router's own VPC subnets. Note that this field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in the "bgp" message). These groups are advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.
           items:
             enum:
               - ALL_SUBNETS
@@ -57610,6 +59098,9 @@ components:
           type: integer
         peerIpAddress:
           description: IP address of the BGP interface outside Google Cloud Platform. Only IPv4 is supported.
+          type: string
+        routerApplianceInstance:
+          description: URI of the VM instance that is used as third-party router appliances such as Next Gen Firewalls, Virtual Routers, or Router Appliances. The VM instance must be located in zones contained in the same region as this Cloud Router. The VM instance is the peer side of the BGP session.
           type: string
       type: object
     RouterBgpPeerBfd:
@@ -57685,6 +59176,16 @@ components:
         name:
           description: Name of this interface entry. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+          type: string
+        privateIpAddress:
+          description: The regional private internal IP address that is used to establish BGP sessions to a VM instance acting as a third-party Router Appliance, such as a Next Gen Firewall, a Virtual Router, or an SD-WAN VM.
+          type: string
+        redundantInterface:
+          description: Name of the interface that will be redundant with the current interface you are creating. The redundantInterface must belong to the same Cloud Router as the interface here. To establish the BGP session to a Router Appliance VM, you must create two BGP peers. The two BGP peers must be attached to two separate interfaces that are redundant with each other. The redundant_interface must be 1-63 characters long, and comply with RFC1035. Specifically, the redundant_interface must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+          type: string
+        subnetwork:
+          description: The URL of the subnetwork resource that this interface belongs to, which must be in the same region as the Cloud Router. When you establish a BGP session to a VM instance using this interface, the VM instance must belong to the same subnetwork as the subnetwork specified here.
           type: string
       type: object
     RouterList:
@@ -57923,6 +59424,9 @@ components:
           type: integer
         peerIpAddress:
           description: IP address of the remote BGP interface.
+          type: string
+        routerApplianceInstance:
+          description: "[Output only] URI of the VM instance that is used as third-party router appliances such as Next Gen Firewalls, Virtual Routers, or Router Appliances. The VM instance is the peer side of the BGP session."
           type: string
         state:
           description: BGP state as specified in RFC1771.
@@ -58227,7 +59731,7 @@ components:
           type: string
       type: object
     Scheduling:
-      description: "Sets the scheduling options for an Instance. NextID: 13"
+      description: "Sets the scheduling options for an Instance. NextID: 20"
       properties:
         automaticRestart:
           description: >-
@@ -58685,7 +60189,7 @@ components:
         Represents a ServiceAttachment resource.
 
 
-        A service attachment represents a service that a producer has exposed. It encapsulates the load balancer which fronts the service runs and a list of NAT IP ranges that the producers uses to represent the consumers connecting to the service.
+        A service attachment represents a service that a producer has exposed. It encapsulates the load balancer which fronts the service runs and a list of NAT IP ranges that the producers uses to represent the consumers connecting to the service. next tag = 17
       properties:
         connectionPreference:
           description: The connection preference of service attachment. The value can be set to ACCEPT_AUTOMATIC. An ACCEPT_AUTOMATIC service attachment is one that always accepts the connection from consumer forwarding rules.
@@ -58734,6 +60238,85 @@ components:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
       type: object
+    ServiceAttachmentAggregatedList:
+      description: Contains a list of ServiceAttachmentsScopedList.
+      properties:
+        id:
+          description: "[Output Only] Unique identifier for the resource; defined by the server."
+          type: string
+        items:
+          additionalProperties:
+            $ref: "#/components/schemas/ServiceAttachmentsScopedList"
+            description: Name of the scope containing this set of ServiceAttachments.
+          description: A list of ServiceAttachmentsScopedList resources.
+          type: object
+        kind:
+          default: compute#serviceAttachmentAggregatedList
+          description: Type of resource.
+          type: string
+        nextPageToken:
+          description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
+          type: string
+        selfLink:
+          description: "[Output Only] Server-defined URL for this resource."
+          type: string
+        unreachables:
+          description: "[Output Only] Unreachable resources."
+          items:
+            type: string
+          type: array
+        warning:
+          description: "[Output Only] Informational warning message."
+          properties:
+            code:
+              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - PARTIAL_SUCCESS
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: >-
+                [Output Only] Metadata about this warning in key: value format. For example:
+
+                "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+              items:
+                properties:
+                  key:
+                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
+                    type: string
+                  value:
+                    description: "[Output Only] A warning data value corresponding to the key."
+                    type: string
+                type: object
+              type: array
+            message:
+              description: "[Output Only] A human-readable description of the warning code."
+              type: string
+          type: object
+      type: object
     ServiceAttachmentConsumerForwardingRule:
       description: "[Output Only] A consumer forwarding rule connected to this service attachment."
       properties:
@@ -58743,9 +60326,9 @@ components:
         status:
           description: The status of the forwarding rule.
           enum:
-            - ACTIVE
-            - INACTIVE
+            - ACCEPTED
             - PENDING
+            - REJECTED
             - STATUS_UNSPECIFIED
           type: string
       type: object
@@ -58771,6 +60354,65 @@ components:
           type: string
         warning:
           description: "[Output Only] Informational warning message."
+          properties:
+            code:
+              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - PARTIAL_SUCCESS
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: >-
+                [Output Only] Metadata about this warning in key: value format. For example:
+
+                "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+              items:
+                properties:
+                  key:
+                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
+                    type: string
+                  value:
+                    description: "[Output Only] A warning data value corresponding to the key."
+                    type: string
+                type: object
+              type: array
+            message:
+              description: "[Output Only] A human-readable description of the warning code."
+              type: string
+          type: object
+      type: object
+    ServiceAttachmentsScopedList:
+      properties:
+        resources:
+          description: A list of ServiceAttachments contained in this scope.
+          items:
+            $ref: "#/components/schemas/ServiceAttachment"
+          type: array
+        warning:
+          description: Informational warning which replaces the list of service attachments when the list is empty.
           properties:
             code:
               description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
@@ -59800,7 +61442,7 @@ components:
           format: uint64
           type: string
         ipCidrRange:
-          description: The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 100.64.0.0/10. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported. This field is set at resource creation time. This may be a RFC 1918 IP range, or a privately routed, non-RFC 1918 IP range, not belonging to Google. The range can be expanded after creation using expandIpCidrRange.
+          description: The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 100.64.0.0/10. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported. This field is set at resource creation time. The range can be any range listed in the Valid ranges list. The range can be expanded after creation using expandIpCidrRange.
           type: string
         ipv6CidrRange:
           description: "[Output Only] The range of internal IPv6 addresses that are owned by this subnetwork."
@@ -60056,7 +61698,7 @@ components:
       description: Represents a secondary IP range of a subnetwork.
       properties:
         ipCidrRange:
-          description: The range of IP addresses belonging to this subnetwork secondary range. Provide this property when you create the subnetwork. Ranges must be unique and non-overlapping with all primary and secondary IP ranges within a network. Only IPv4 is supported. This may be a RFC 1918 IP range, or a privately, non-RFC 1918 IP range, not belonging to Google.
+          description: The range of IP addresses belonging to this subnetwork secondary range. Provide this property when you create the subnetwork. Ranges must be unique and non-overlapping with all primary and secondary IP ranges within a network. Only IPv4 is supported. The range can be any range listed in the Valid ranges list.
           type: string
         rangeName:
           description: The name associated with this subnetwork secondary range, used when adding an alias IP range to a VM instance. The name must be 1-63 characters long, and comply with RFC1035. The name must be unique within the subnetwork.
@@ -60131,6 +61773,15 @@ components:
       properties:
         privateIpGoogleAccess:
           type: boolean
+      type: object
+    Subsetting:
+      description: Subsetting options to make L4 ILB support any number of backend instances
+      properties:
+        policy:
+          enum:
+            - CONSISTENT_HASH_SUBSETTING
+            - NONE
+          type: string
       type: object
     TCPHealthCheck:
       properties:
@@ -60699,6 +62350,10 @@ components:
           type: string
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
+          type: string
+        fingerprint:
+          description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a TargetHttpsProxy. An up-to-date fingerprint must be provided in order to patch the TargetHttpsProxy; otherwise, the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve the TargetHttpsProxy.
+          format: byte
           type: string
         httpFilters:
           description: >-
@@ -63064,6 +64719,9 @@ components:
           description: The numeric ID of this VPN gateway interface.
           format: uint32
           type: integer
+        interconnectAttachment:
+          description: URL of the interconnect attachment resource. When the value of this field is present, the VPN Gateway will be used for IPsec-encrypted Cloud Interconnect; all Egress or Ingress traffic for this VPN Gateway interface will go through the specified interconnect attachment resource.
+          type: string
         ipAddress:
           description: "[Output Only] The external IP address for this VPN gateway interface."
           type: string
@@ -63772,7 +65430,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/compute: View and manage your Google Compute Engine resources
             https://www.googleapis.com/auth/compute.readonly: View your Google Compute Engine resources
             https://www.googleapis.com/auth/devstorage.full_control: Manage your data and permissions in Google Cloud Storage
@@ -63785,7 +65443,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/compute: View and manage your Google Compute Engine resources
             https://www.googleapis.com/auth/compute.readonly: View your Google Compute Engine resources
             https://www.googleapis.com/auth/devstorage.full_control: Manage your data and permissions in Google Cloud Storage

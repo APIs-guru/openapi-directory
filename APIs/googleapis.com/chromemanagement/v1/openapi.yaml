@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Chrome Management API is a suite of services that allows Chrome administrators to view, manage and gain insights on their Chrome OS The Chrome Management API is a suite of services that allows GSuite domain administrators to view, manage and gain insights on their Chrome OS and Chrome Browser devices and users.
+  description: The Chrome Management API is a suite of services that allows Chrome administrators to view, manage and gain insights on their Chrome OS and Chrome Browser devices.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -181,7 +181,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: "Field used to order results. Supported order by fields: * machine_name * device_id"
+        - description: "Field used to order results. Supported order by fields: * machine * device_id"
           in: query
           name: orderBy
           schema:

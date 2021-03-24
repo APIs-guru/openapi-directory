@@ -2950,7 +2950,7 @@ components:
           type: string
       type: object
     Autopilot:
-      description: Autopilot is the configuration for Autopilot settings on the cluster. It is the official product name of what is previously known as AutoGKE
+      description: Autopilot is the configuration for Autopilot settings on the cluster.
       properties:
         enabled:
           description: Enable Autopilot
@@ -3062,7 +3062,7 @@ components:
           description: Configuration controlling RBAC group membership information.
         autopilot:
           $ref: "#/components/schemas/Autopilot"
-          description: Autopilot configuration for the cluster. It has the same semantics as AutoGKE and overrides the setting in autogke.
+          description: Autopilot configuration for the cluster.
         autoscaling:
           $ref: "#/components/schemas/ClusterAutoscaling"
           description: Cluster-level autoscaling configuration.
@@ -4031,7 +4031,7 @@ components:
       description: This operation resource represents operations that may have happened or are happening on the cluster. All fields are output only.
       properties:
         clusterConditions:
-          description: Which conditions caused the current cluster state.
+          description: Which conditions caused the current cluster state. Deprecated. Use field error instead.
           items:
             $ref: "#/components/schemas/StatusCondition"
           type: array
@@ -4041,6 +4041,9 @@ components:
         endTime:
           description: "[Output only] The time the operation completed, in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format."
           type: string
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error result of the operation in case of failure.
         location:
           description: "[Output only] The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available) or [region](https://cloud.google.com/compute/docs/regions-zones/regions-zones#available) in which the cluster resides."
           type: string
@@ -4048,7 +4051,7 @@ components:
           description: The server-assigned ID for the operation.
           type: string
         nodepoolConditions:
-          description: Which conditions caused the current node pool state.
+          description: Which conditions caused the current node pool state. Deprecated. Use field error instead.
           items:
             $ref: "#/components/schemas/StatusCondition"
           type: array
@@ -4093,7 +4096,7 @@ components:
             - ABORTING
           type: string
         statusMessage:
-          description: Output only. If an error has occurred, a textual description of the error.
+          description: Output only. If an error has occurred, a textual description of the error. Deprecated. Use the field error instead.
           readOnly: true
           type: string
         targetLink:
@@ -4609,11 +4612,50 @@ components:
           description: Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
+    Status:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
     StatusCondition:
       description: StatusCondition describes why a cluster or a node pool has a certain status (e.g., ERROR or DEGRADED).
       properties:
+        canonicalCode:
+          description: Canonical code of the condition.
+          enum:
+            - OK
+            - CANCELLED
+            - UNKNOWN
+            - INVALID_ARGUMENT
+            - DEADLINE_EXCEEDED
+            - NOT_FOUND
+            - ALREADY_EXISTS
+            - PERMISSION_DENIED
+            - UNAUTHENTICATED
+            - RESOURCE_EXHAUSTED
+            - FAILED_PRECONDITION
+            - ABORTED
+            - OUT_OF_RANGE
+            - UNIMPLEMENTED
+            - INTERNAL
+            - UNAVAILABLE
+            - DATA_LOSS
+          type: string
         code:
-          description: Machine-friendly representation of the condition
+          description: Machine-friendly representation of the condition Deprecated. Use canonical_code instead.
           enum:
             - UNKNOWN
             - GCE_STOCKOUT

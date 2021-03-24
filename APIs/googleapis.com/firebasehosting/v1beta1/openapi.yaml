@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Firebase Hosting REST API enables programmatic and customizable deployments to your Firebase-hosted sites. Use this REST API to deploy new or updated hosting configurations and content files.
+  description: The Firebase Hosting REST API enables programmatic and customizable management and deployments to your Firebase-hosted sites. Use this REST API to create and manage channels and sites as well as to deploy new or updated hosting configurations and content files.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -41,7 +41,7 @@ paths:
       description: Deletes the specified version.
       operationId: firebasehosting.sites.versions.delete
       parameters:
-        - description: "Required. The fully-qualified identifier for the version, in the format: sites/SITE_NAME/versions/VERSION_ID"
+        - description: "Required. The fully-qualified resource name for the version, in the format: sites/SITE_ID/versions/VERSION_ID"
           in: path
           name: name
           required: true
@@ -117,7 +117,7 @@ paths:
       description: " Updates the specified metadata for the specified version. This method will fail with `FAILED_PRECONDITION` in the event of an invalid state transition. The supported [state](../sites.versions#versionstatus) transitions for a version are from `CREATED` to `FINALIZED`. Use [`DeleteVersion`](delete) to set the status of a version to `DELETED`."
       operationId: firebasehosting.sites.versions.patch
       parameters:
-        - description: "The fully-qualified identifier for the version, in the format: sites/ SITE_NAME/versions/VERSION_ID This name is provided in the response body when you call [`CreateVersion`](sites.versions/create)."
+        - description: "The fully-qualified resource name for the version, in the format: sites/ SITE_ID/versions/VERSION_ID This name is provided in the response body when you call [`CreateVersion`](sites.versions/create)."
           in: path
           name: name
           required: true
@@ -189,7 +189,7 @@ paths:
       description: Lists the channels for the specified site. All sites have a default `live` channel.
       operationId: firebasehosting.sites.channels.list
       parameters:
-        - description: "Required. The site for which to list channels, in the format: sites/ SITE_NAME"
+        - description: "Required. The site for which to list channels, in the format: sites/SITE_ID"
           in: path
           name: parent
           required: true
@@ -247,7 +247,7 @@ paths:
       description: Creates a new channel in the specified site.
       operationId: firebasehosting.sites.channels.create
       parameters:
-        - description: "Required. The site in which to create this channel, in the format: sites/ SITE_NAME"
+        - description: "Required. The site in which to create this channel, in the format: sites/ SITE_ID"
           in: path
           name: parent
           required: true
@@ -378,7 +378,7 @@ paths:
       description: Lists the remaining files to be uploaded for the specified version.
       operationId: firebasehosting.sites.versions.files.list
       parameters:
-        - description: "Required. The version for which to list files, in the format: sites/ SITE_NAME/versions/VERSION_ID"
+        - description: "Required. The version for which to list files, in the format: sites/SITE_ID /versions/VERSION_ID"
           in: path
           name: parent
           required: true
@@ -446,7 +446,7 @@ paths:
       description: Lists the releases that have been created for the specified site or channel. When used to list releases for a site, this list includes releases for both the default `live` channel and any active preview channels for the specified site.
       operationId: firebasehosting.sites.releases.list
       parameters:
-        - description: "Required. The site or channel for which to list releases, in either of the following formats: - sites/SITE_NAME - sites/SITE_NAME/channels/CHANNEL_ID "
+        - description: "Required. The site or channel for which to list releases, in either of the following formats: - sites/SITE_ID - sites/SITE_ID/channels/CHANNEL_ID "
           in: path
           name: parent
           required: true
@@ -504,13 +504,13 @@ paths:
       description: Creates a new release, which makes the content of the specified version actively display on the appropriate URL(s).
       operationId: firebasehosting.sites.releases.create
       parameters:
-        - description: "Required. The site or channel to which the release belongs, in either of the following formats: - sites/SITE_NAME - sites/SITE_NAME/channels/CHANNEL_ID"
+        - description: "Required. The site or channel to which the release belongs, in either of the following formats: - sites/SITE_ID - sites/SITE_ID/channels/CHANNEL_ID"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: " The unique identifier for a version, in the format: sites/SITE_NAME /versions/VERSION_ID The SITE_NAME in this version identifier must match the SITE_NAME in the `parent` parameter. This query parameter must be empty if the `type` field in the request body is `SITE_DISABLE`."
+        - description: " The unique identifier for a version, in the format: sites/SITE_ID/versions/ VERSION_ID The SITE_ID in this version identifier must match the SITE_ID in the `parent` parameter. This query parameter must be empty if the `type` field in the request body is `SITE_DISABLE`."
           in: query
           name: versionName
           schema:
@@ -540,16 +540,16 @@ paths:
         - sites
   "/v1beta1/{parent}/sites":
     get:
-      description: Lists each Site associated with the specified parent Project. Sites are returned in a consistent, but undefined, order to facilitate pagination. Site data might be out of sync by a few seconds. If you require up-to-date data, use GetSite.
+      description: Lists each Hosting Site associated with the specified parent Firebase project.
       operationId: firebasehosting.projects.sites.list
       parameters:
-        - description: "Required. The Project that owns the sites to list, e.g.: `projects/{project-number}`."
+        - description: "Required. The Firebase project for which to list sites, in the format: projects/PROJECT_IDENTIFIER Refer to the `Site` [`name`](../projects#Site.FIELDS.name) field for details about PROJECT_IDENTIFIER values."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Optional. The maximum number of sites to return in the response. The server may return fewer Sites at its discretion. If you don't specify a value or specify one that's too large, the server can select its own value.
+        - description: Optional. The maximum number of sites to return. The service may return a lower number if fewer sites exist than this maximum number. If unspecified, defaults to 40.
           in: query
           name: pageSize
           schema:
@@ -598,16 +598,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new Site. Sites take several minutes to propagate through Firebase systems.
+      description: Creates a new Hosting Site in the specified parent Firebase project. Note that Hosting sites can take several minutes to propagate through Firebase systems.
       operationId: firebasehosting.projects.sites.create
       parameters:
-        - description: "Required. The parent Project of a Site, e.g.: `projects/{project-number}`."
+        - description: "Required. The Firebase project in which to create a Hosting site, in the format: projects/PROJECT_IDENTIFIER Refer to the `Site` [`name`](../projects#Site.FIELDS.name) field for details about PROJECT_IDENTIFIER values."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Required. Immutable. A globally unique ID to identify the Site. The ID must also be a valid domain name label.
+        - description: Required. Immutable. A globally unique identifier for the Hosting site. This identifier is used to construct the Firebase-provisioned subdomains for the site, so it must also be a valid domain name label.
           in: query
           name: siteId
           schema:
@@ -640,7 +640,7 @@ paths:
       description: Lists the versions that have been created for the specified site. This list includes versions for both the default `live` channel and any active preview channels for the specified site.
       operationId: firebasehosting.sites.versions.list
       parameters:
-        - description: "Required. The site or channel for which to list versions, in either of the following formats: - sites/SITE_NAME - sites/SITE_NAME/channels/CHANNEL_ID "
+        - description: "Required. The site or channel for which to list versions, in either of the following formats: - sites/SITE_ID - sites/SITE_ID/channels/CHANNEL_ID "
           in: path
           name: parent
           required: true
@@ -703,7 +703,7 @@ paths:
       description: Creates a new version for the specified site.
       operationId: firebasehosting.sites.versions.create
       parameters:
-        - description: "Required. The site in which to create the version, in the format: sites/ SITE_NAME"
+        - description: "Required. The site in which to create the version, in the format: sites/ SITE_ID"
           in: path
           name: parent
           required: true
@@ -759,7 +759,7 @@ paths:
       description: Creates a new version on the specified target site using the content of the specified version.
       operationId: firebasehosting.sites.versions.clone
       parameters:
-        - description: "Required. The target site for the cloned version, in the format: sites/ SITE_NAME"
+        - description: "Required. The target site for the cloned version, in the format: sites/ SITE_ID"
           in: path
           name: parent
           required: true
@@ -805,7 +805,7 @@ paths:
       description: " Adds content files to the specified version. Each file must be under 2 GB."
       operationId: firebasehosting.sites.versions.populateFiles
       parameters:
-        - description: "Required. The version to which to add files, in the format: sites/SITE_NAME /versions/VERSION_ID"
+        - description: "Required. The version to which to add files, in the format: sites/SITE_ID /versions/VERSION_ID"
           in: path
           name: parent
           required: true
@@ -958,7 +958,7 @@ components:
           description: Text labels used for extra metadata and/or filtering.
           type: object
         name:
-          description: "The fully-qualified identifier for the channel, in the format: sites/ SITE_NAME/channels/CHANNEL_ID"
+          description: "The fully-qualified resource name for the channel, in the format: sites/ SITE_ID/channels/CHANNEL_ID"
           type: string
         release:
           $ref: "#/components/schemas/Release"
@@ -994,7 +994,7 @@ components:
           $ref: "#/components/schemas/PathFilter"
           description: If provided, only paths that match one or more RegEx values in this list will be included in the new version.
         sourceVersion:
-          description: "Required. The unique identifier for the version to be cloned, in the format: sites/SITE_NAME/versions/VERSION_ID"
+          description: "Required. The unique identifier for the version to be cloned, in the format: sites/SITE_ID/versions/VERSION_ID"
           type: string
       type: object
     CloudRunRewrite:
@@ -1160,13 +1160,12 @@ components:
           type: array
       type: object
     ListSitesResponse:
-      description: The response from ListSites.
       properties:
         nextPageToken:
-          description: A token returned when the list of results is too large to fit in a single response. If the string is empty, the response is the last or only page of results. Use the token in a follow-up call to `ListSites` to find the next group of Sites. Page tokens are short-lived and should not be stored.
+          description: The pagination token, if more results exist beyond the ones in this response. Include this token in your next call to `ListSites`. Page tokens are short-lived and should not be stored.
           type: string
         sites:
-          description: A list of Site objects from the parent Firebase Project.
+          description: A list of Site objects associated with the specified Firebase project.
           items:
             $ref: "#/components/schemas/Site"
           type: array
@@ -1241,7 +1240,7 @@ components:
             type: string
           type: array
         uploadUrl:
-          description: 'The URL to which the files should be uploaded, in the format: "https://upload-firebasehosting.googleapis.com/upload/sites/SITE_NAME /versions/VERSION_ID/files" Perform a multipart `POST` of the Gzipped file contents to the URL using a forward slash and the hash of the file appended to the end.'
+          description: 'The URL to which the files should be uploaded, in the format: "https://upload-firebasehosting.googleapis.com/upload/sites/SITE_ID /versions/VERSION_ID/files" Perform a multipart `POST` of the Gzipped file contents to the URL using a forward slash and the hash of the file appended to the end.'
           type: string
       type: object
     PreviewConfig:
@@ -1279,7 +1278,7 @@ components:
           description: The deploy description when the release was created. The value can be up to 512 characters.
           type: string
         name:
-          description: "Output only. The unique identifier for the release, in either of the following formats: - sites/SITE_NAME/releases/RELEASE_ID - sites/SITE_NAME/channels/CHANNEL_ID/releases/RELEASE_ID This name is provided in the response body when you call [`releases.create`](sites.releases/create) or [`channels.releases.create`](sites.channels.releases/create)."
+          description: "Output only. The unique identifier for the release, in either of the following formats: - sites/SITE_ID/releases/RELEASE_ID - sites/SITE_ID/channels/CHANNEL_ID/releases/RELEASE_ID This name is provided in the response body when you call [`releases.create`](sites.releases/create) or [`channels.releases.create`](sites.channels.releases/create)."
           type: string
         releaseTime:
           description: Output only. The time at which the version is set to be public.
@@ -1361,26 +1360,26 @@ components:
           type: string
       type: object
     Site:
-      description: A `Site` represents a Firebase Hosting Site.
+      description: A `Site` represents a Firebase Hosting site.
       properties:
         appId:
-          description: Optional. The ID of a Web App associated with the Site.
+          description: Optional. The [ID of a Web App](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.webApps#WebApp.FIELDS.app_id) associated with the Hosting site.
           type: string
         defaultUrl:
-          description: Output only. The default URL for this Hosting Site.
+          description: Output only. The default URL for the Hosting site.
           readOnly: true
           type: string
         labels:
           additionalProperties:
             type: string
-          description: Optional. User-specified labels for the Hosting Site.
+          description: Optional. User-specified labels for the Hosting site.
           type: object
         name:
-          description: "Output only. The fully qualified resource name of the Hosting Site, e.g.: `projects/{project-number}/sites/{site-id}`."
+          description: "Output only. The fully-qualified resource name of the Hosting site, in the format: projects/PROJECT_IDENTIFIER/sites/SITE_ID PROJECT_IDENTIFIER: the Firebase project's [`ProjectNumber`](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects#FirebaseProject.FIELDS.project_number) ***(recommended)*** or its [`ProjectId`](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects#FirebaseProject.FIELDS.project_id). Learn more about using project identifiers in Google's [AIP 2510 standard](https://google.aip.dev/cloud/2510)."
           readOnly: true
           type: string
         type:
-          description: Output only. The Hosting site type. There will always be a single DEFAULT_SITE, which is created when Hosting is provisioned. All additional sites are USER_SITE.
+          description: Output only. The type of Hosting site. Every Firebase project has a `DEFAULT_SITE`, which is created when Hosting is provisioned for the project. All additional sites are `USER_SITE`.
           enum:
             - TYPE_UNSPECIFIED
             - DEFAULT_SITE
@@ -1454,7 +1453,7 @@ components:
           description: The labels used for extra metadata and/or filtering.
           type: object
         name:
-          description: "The fully-qualified identifier for the version, in the format: sites/ SITE_NAME/versions/VERSION_ID This name is provided in the response body when you call [`CreateVersion`](sites.versions/create)."
+          description: "The fully-qualified resource name for the version, in the format: sites/ SITE_ID/versions/VERSION_ID This name is provided in the response body when you call [`CreateVersion`](sites.versions/create)."
           type: string
         preview:
           $ref: "#/components/schemas/PreviewConfig"

@@ -850,7 +850,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a session entity type. If the specified session entity type already exists, overrides the session entity type.
+      description: Creates a session entity type.
       operationId: dialogflow.projects.locations.agents.sessions.entityTypes.create
       parameters:
         - description: "Required. The session to create a session entity type for. Format: `projects//locations//agents//sessions/` or `projects//locations//agents//environments//sessions/`. If `Environment ID` is not specified, we assume default 'draft' environment."
@@ -3418,13 +3418,13 @@ components:
           description: If natural language text was provided as input, this field will contain a copy of the text.
           type: string
         transcript:
-          description: If natural language speech audio was provided as input, this field will contain the trascript for the audio.
+          description: If natural language speech audio was provided as input, this field will contain the transcript for the audio.
           type: string
         triggerEvent:
           description: If an event was provided as input, this field will contain a copy of the event name.
           type: string
         triggerIntent:
-          description: If an intent was provided as input, this field will contain a copy of the intent identifier.
+          description: "If an intent was provided as input, this field will contain a copy of the intent identifier. Format: `projects//locations//agents//intents/`."
           type: string
       type: object
     GoogleCloudDialogflowCxV3NluSettings:
@@ -3642,13 +3642,13 @@ components:
           description: If natural language text was provided as input, this field will contain a copy of the text.
           type: string
         transcript:
-          description: If natural language speech audio was provided as input, this field will contain the trascript for the audio.
+          description: If natural language speech audio was provided as input, this field will contain the transcript for the audio.
           type: string
         triggerEvent:
           description: If an event was provided as input, this field will contain the name of the event.
           type: string
         triggerIntent:
-          description: If an intent was provided as input, this field will contain a copy of the intent identifier.
+          description: "If an intent was provided as input, this field will contain a copy of the intent identifier. Format: `projects//locations//agents//intents/`."
           type: string
         webhookPayloads:
           description: The list of webhook payload in WebhookResponse.payload, in the order of call sequence. If some webhook call fails or doesn't return any payload, an empty `Struct` would be used instead.
@@ -4379,7 +4379,7 @@ components:
           type: string
       type: object
     GoogleCloudDialogflowCxV3WebhookRequest:
-      description: The request message for a webhook call.
+      description: The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases.
       properties:
         detectIntentResponseId:
           description: Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
@@ -5342,7 +5342,7 @@ components:
           description: The generic information of the operation.
       type: object
     GoogleCloudDialogflowCxV3beta1WebhookRequest:
-      description: The request message for a webhook call.
+      description: The request message for a webhook call. The request is sent as a JSON object and the field names will be presented in camel cases.
       properties:
         detectIntentResponseId:
           description: Always present. The unique identifier of the DetectIntentResponse that will be returned to the API caller.
@@ -8019,7 +8019,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/dialogflow: View, manage and query your Dialogflow agents
       type: oauth2
     Oauth2c:
@@ -8028,7 +8028,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/dialogflow: View, manage and query your Dialogflow agents
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
