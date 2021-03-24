@@ -1442,7 +1442,7 @@ components:
     ExperimentActionParameter:
       type: string
       pattern: '[\S]+'
-      maxLength: 64
+      maxLength: 1024
     ExperimentActionParameterName:
       type: string
       pattern: '[\S]+'
@@ -1630,7 +1630,7 @@ components:
     ExperimentTemplateActionParameter:
       type: string
       pattern: '[\S]+'
-      maxLength: 64
+      maxLength: 1024
     ExperimentTemplateActionParameterName:
       type: string
       pattern: '[\S]+'

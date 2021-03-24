@@ -2196,6 +2196,12 @@ paths:
           description: A pagination token to request the next page of results.
           schema:
             type: string
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3272,7 +3278,9 @@ components:
             - $ref: '#/components/schemas/VpcConfiguration'
             - description: '<p>If you include this field, Amazon S3 restricts access to this access point to requests from the specified virtual private cloud (VPC).</p> <note> <p>This is required for creating an access point for Amazon S3 on Outposts buckets.</p> </note>'
         PublicAccessBlockConfiguration:
-          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+            - description: ' The <code>PublicAccessBlock</code> configuration that you want to apply to the access point. '
     CreateBucketConfiguration:
       type: object
       properties:
@@ -4154,7 +4162,7 @@ components:
         Actions:
           allOf:
             - $ref: '#/components/schemas/ObjectLambdaTransformationConfigurationActionsList'
-            - description: A container for the action of an Object Lambda Access Point configuration.
+            - description: A container for the action of an Object Lambda Access Point configuration. Valid input is <code>GetObject</code>.
         ContentTransformation:
           allOf:
             - $ref: '#/components/schemas/ObjectLambdaContentTransformation'

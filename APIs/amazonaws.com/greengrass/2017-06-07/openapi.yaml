@@ -1089,6 +1089,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - Name
               properties:
                 InitialVersion:
                   description: Information about a group version.
@@ -5617,6 +5619,8 @@ components:
       description: Information about a group version.
     CreateGroupRequest:
       type: object
+      required:
+        - Name
       title: CreateGroupRequest
       properties:
         InitialVersion:

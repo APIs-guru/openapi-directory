@@ -1424,16 +1424,6 @@ paths:
           description: The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is created.
           schema:
             type: boolean
-        - name: AquaConfigurationStatus
-          in: query
-          required: false
-          description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
-          schema:
-            type: string
-            enum:
-              - enabled
-              - disabled
-              - auto
         - name: Action
           in: query
           required: true
@@ -9615,113 +9605,6 @@ paths:
             type: string
             enum:
               - '2012-12-01'
-  /#Action=ModifyAquaConfiguration:
-    get:
-      x-aws-operation-name: ModifyAquaConfiguration
-      operationId: GET_ModifyAquaConfiguration
-      description: 'Modifies whether a cluster can use AQUA (Advanced Query Accelerator). '
-      responses:
-        '200':
-          description: Success
-          content:
-            text/xml:
-              schema:
-                $ref: '#/components/schemas/ModifyAquaOutputMessage'
-        '480':
-          description: ClusterNotFoundFault
-          content:
-            text/xml:
-              schema:
-                $ref: '#/components/schemas/ClusterNotFoundFault'
-        '481':
-          description: UnsupportedOperationFault
-          content:
-            text/xml:
-              schema:
-                $ref: '#/components/schemas/UnsupportedOperationFault'
-      parameters:
-        - name: ClusterIdentifier
-          in: query
-          required: true
-          description: The identifier of the cluster to be modified.
-          schema:
-            type: string
-            maxLength: 2147483647
-        - name: AquaConfigurationStatus
-          in: query
-          required: false
-          description: <p>The new value of AQUA configuration status. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
-          schema:
-            type: string
-            enum:
-              - enabled
-              - disabled
-              - auto
-        - name: Action
-          in: query
-          required: true
-          schema:
-            type: string
-            enum:
-              - ModifyAquaConfiguration
-        - name: Version
-          in: query
-          required: true
-          schema:
-            type: string
-            enum:
-              - '2012-12-01'
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-    post:
-      x-aws-operation-name: ModifyAquaConfiguration
-      operationId: POST_ModifyAquaConfiguration
-      description: 'Modifies whether a cluster can use AQUA (Advanced Query Accelerator). '
-      responses:
-        '200':
-          description: Success
-          content:
-            text/xml:
-              schema:
-                $ref: '#/components/schemas/ModifyAquaOutputMessage'
-        '480':
-          description: ClusterNotFoundFault
-          content:
-            text/xml:
-              schema:
-                $ref: '#/components/schemas/ClusterNotFoundFault'
-        '481':
-          description: UnsupportedOperationFault
-          content:
-            text/xml:
-              schema:
-                $ref: '#/components/schemas/UnsupportedOperationFault'
-      requestBody:
-        content:
-          text/xml:
-            schema:
-              $ref: '#/components/schemas/ModifyAquaInputMessage'
-      parameters:
-        - name: Action
-          in: query
-          required: true
-          schema:
-            type: string
-            enum:
-              - ModifyAquaConfiguration
-        - name: Version
-          in: query
-          required: true
-          schema:
-            type: string
-            enum:
-              - '2012-12-01'
   /#Action=ModifyCluster:
     get:
       x-aws-operation-name: ModifyCluster
@@ -12873,16 +12756,6 @@ paths:
           description: The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is restored.
           schema:
             type: boolean
-        - name: AquaConfigurationStatus
-          in: query
-          required: false
-          description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
-          schema:
-            type: string
-            enum:
-              - enabled
-              - disabled
-              - auto
         - name: Action
           in: query
           required: true
@@ -14678,13 +14551,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReservedNodeOfferingList'
             - description: Returns an array of <a>ReservedNodeOffering</a> objects.
-    ModifyAquaOutputMessage:
-      type: object
-      properties:
-        AquaConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/AquaConfiguration'
-            - description: 'The updated AQUA configuration of the cluster. '
     ModifyClusterResult:
       type: object
       properties:
@@ -14960,30 +14826,6 @@ components:
         - restore-cluster
         - recommend-node-config
         - resize-cluster
-    AquaStatus:
-      type: string
-      enum:
-        - enabled
-        - disabled
-        - applying
-    AquaConfigurationStatus:
-      type: string
-      enum:
-        - enabled
-        - disabled
-        - auto
-    AquaConfiguration:
-      type: object
-      properties:
-        AquaStatus:
-          allOf:
-            - $ref: '#/components/schemas/AquaStatus'
-            - description: <p>The value indicates the status of AQUA on the cluster. Possible values include the following.</p> <ul> <li> <p>enabled - AQUA is enabled.</p> </li> <li> <p>disabled - AQUA is not enabled. </p> </li> <li> <p>applying - AQUA status is being applied. </p> </li> </ul>
-        AquaConfigurationStatus:
-          allOf:
-            - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
-      description: The AQUA (Advanced Query Accelerator) configuration of the cluster.
     ClusterAssociatedToSchedule:
       type: object
       properties:
@@ -15785,10 +15627,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/LongOptional'
             - description: 'The total storage capacity of the cluster in megabytes. '
-        AquaConfiguration:
-          allOf:
-            - $ref: '#/components/schemas/AquaConfiguration'
-            - description: The AQUA (Advanced Query Accelerator) configuration of the cluster.
       description: Describes a cluster.
     SensitiveString:
       type: string
@@ -16210,10 +16048,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is created.
-        AquaConfigurationStatus:
-          allOf:
-            - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
       description: <p/>
     CreateClusterParameterGroupMessage:
       type: object
@@ -17952,20 +17786,6 @@ components:
       enum:
         - standard
         - high-performance
-    ModifyAquaInputMessage:
-      type: object
-      required:
-        - ClusterIdentifier
-      title: ModifyAquaInputMessage
-      properties:
-        ClusterIdentifier:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The identifier of the cluster to be modified.
-        AquaConfigurationStatus:
-          allOf:
-            - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The new value of AQUA configuration status. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
     ModifyClusterDbRevisionMessage:
       type: object
       required:
@@ -18683,10 +18503,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is restored.
-        AquaConfigurationStatus:
-          allOf:
-            - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
       description: <p/>
     RestoreTableFromClusterSnapshotMessage:
       type: object
