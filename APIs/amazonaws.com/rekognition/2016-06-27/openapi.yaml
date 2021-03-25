@@ -117,7 +117,7 @@ paths:
   /#X-Amz-Target=RekognitionService.CompareFaces:
     post:
       operationId: CompareFaces
-      description: '<p>Compares a face in the <i>source</i> input image with each of the 100 largest faces detected in the <i>target</i> input image. </p> <note> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> </note> <p>You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn''t supported. The image must be formatted as a PNG or JPEG file. </p> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don''t match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use <code>QualityFilter</code> to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>. </p> <p>If the image doesn''t contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <p>If no faces are detected in the source or target images, <code>CompareFaces</code> returns an <code>InvalidParameterException</code> error. </p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn''t persist.</p> </note> <p>For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>'
+      description: '<p>Compares a face in the <i>source</i> input image with each of the 100 largest faces detected in the <i>target</i> input image. </p> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> <note> <p>CompareFaces uses machine learning algorithms, which are probabilistic. A false negative is an incorrect prediction that a face in the target image has a low similarity confidence score when compared to the face in the source image. To reduce the probability of false negatives, we recommend that you compare the target image against multiple source images. If you plan to use <code>CompareFaces</code> to make a decision that impacts an individual''s rights, privacy, or access to services, we recommend that you pass the result to a human for review and further validation before taking action.</p> </note> <p>You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn''t supported. The image must be formatted as a PNG or JPEG file. </p> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don''t match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use <code>QualityFilter</code> to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>. </p> <p>If the image doesn''t contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <p>If no faces are detected in the source or target images, <code>CompareFaces</code> returns an <code>InvalidParameterException</code> error. </p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn''t persist.</p> </note> <p>For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -242,6 +242,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       requestBody:
         required: true
         content:
@@ -398,6 +404,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '488':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       requestBody:
         required: true
         content:
@@ -473,6 +485,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '487':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       requestBody:
         required: true
         content:
@@ -2787,6 +2805,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=RekognitionService.ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: ' Returns a list of tags in an Amazon Rekognition collection, stream processor, or Custom Labels model. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - RekognitionService.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=RekognitionService.RecognizeCelebrities:
     post:
       operationId: RecognizeCelebrities
@@ -4038,6 +4125,150 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=RekognitionService.TagResource:
+    post:
+      operationId: TagResource
+      description: ' Adds one or more key-value tags to an Amazon Rekognition collection, stream processor, or Custom Labels model. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - RekognitionService.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=RekognitionService.UntagResource:
+    post:
+      operationId: UntagResource
+      description: ' Removes one or more tags from an Amazon Rekognition collection, stream processor, or Custom Labels model. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - RekognitionService.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -4189,7 +4420,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/CollectionId'
             - description: ID for the collection that you are creating.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' A set of tags (key-value pairs) that you want to attach to the collection. '
     ResourceAlreadyExistsException: {}
+    ServiceQuotaExceededException: {}
     CreateProjectResponse:
       type: object
       properties:
@@ -4246,6 +4482,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TestingData'
             - description: The dataset to use for testing.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' A set of tags (key-value pairs) that you want to attach to the model. '
     ResourceNotFoundException: {}
     CreateStreamProcessorResponse:
       type: object
@@ -4284,6 +4524,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
             - description: ARN of the IAM role that allows access to the stream processor.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' A set of tags (key-value pairs) that you want to attach to the stream processor. '
     DeleteCollectionResponse:
       type: object
       example:
@@ -5245,7 +5489,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/QualityFilter'
             - description: '<p>A filter that specifies a quality bar for how much filtering is done to identify faces. Filtered faces aren''t indexed. If you specify <code>AUTO</code>, Amazon Rekognition chooses the quality bar. If you specify <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>, filtering removes all faces that don’t meet the chosen quality bar. The default value is <code>AUTO</code>. The quality bar is based on a variety of common use cases. Low-quality detections can occur for a number of reasons. Some examples are an object that''s misidentified as a face, a face that''s too blurry, or a face with a pose that''s too extreme to use. If you specify <code>NONE</code>, no filtering is performed. </p> <p>To use quality filtering, the collection you are using must be associated with version 3 of the face model or higher.</p>'
-    ServiceQuotaExceededException: {}
     ListCollectionsResponse:
       type: object
       example:
@@ -5422,6 +5665,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: 'Maximum number of stream processors you want Amazon Rekognition Video to return in the response. The default is 1000. '
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' A list of key-value tags assigned to the resource. '
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: ListTagsForResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: ' Amazon Resource Name (ARN) of the model, collection, or stream processor that contains the tags that you want a list of. '
     RecognizeCelebritiesResponse:
       type: object
       properties:
@@ -5909,6 +6169,42 @@ components:
           allOf:
             - $ref: '#/components/schemas/StreamProcessorName'
             - description: The name of a stream processor created by <a>CreateStreamProcessor</a>.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: ' Amazon Resource Name (ARN) of the model, collection, or stream processor that you want to assign the tags to. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The key-value tags to assign to the resource. '
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceArn
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: ' Amazon Resource Name (ARN) of the model, collection, or stream processor that you want to remove the tags from. '
+        TagKeys:
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: ' A list of the tags that you want to remove. '
     UInteger:
       type: integer
       minimum: 0
@@ -6399,6 +6695,12 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: 'True if the PPE covers the corresponding body part, otherwise false.'
       description: 'Information about an item of Personal Protective Equipment covering a corresponding body part. For more information, see <a>DetectProtectiveEquipment</a>.'
+    TagMap:
+      type: object
+      minProperties: 0
+      maxProperties: 200
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     ProjectName:
       type: string
       pattern: '[a-zA-Z0-9_.\-]+'
@@ -6659,7 +6961,7 @@ components:
         PersonsWithoutRequiredEquipment:
           allOf:
             - $ref: '#/components/schemas/ProtectiveEquipmentPersonIds'
-            - description: 'An array of IDs for persons who are not wearing all of the types of PPE specified in the RequiredEquipmentTypes field of the detected personal protective equipment. '
+            - description: 'An array of IDs for persons who are not wearing all of the types of PPE specified in the <code>RequiredEquipmentTypes</code> field of the detected personal protective equipment. '
         PersonsIndeterminate:
           allOf:
             - $ref: '#/components/schemas/ProtectiveEquipmentPersonIds'
@@ -6671,7 +6973,7 @@ components:
         MinConfidence:
           allOf:
             - $ref: '#/components/schemas/Percent'
-            - description: Sets confidence of word detection. Words with detection confidence below this will be excluded from the result. Values should be between 0.5 and 1 as Text in Video will not return any result below 0.5.
+            - description: Sets the confidence of word detection. Words with detection confidence below this will be excluded from the result. Values should be between 50 and 100 as Text in Video will not return any result below 50.
         MinBoundingBoxHeight:
           allOf:
             - $ref: '#/components/schemas/BoundingBoxHeight'
@@ -7263,6 +7565,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/StreamProcessor'
+    ResourceArn:
+      type: string
+      minLength: 20
+      maxLength: 2048
     MaxFaces:
       type: integer
       minimum: 1
@@ -7670,6 +7976,22 @@ components:
             - $ref: '#/components/schemas/StreamProcessorStatus'
             - description: Current status of the Amazon Rekognition stream processor.
       description: 'An object that recognizes faces in a streaming video. An Amazon Rekognition stream processor is created by a call to <a>CreateStreamProcessor</a>. The request parameters for <code>CreateStreamProcessor</code> describe the Kinesis video stream source for the streaming video, face recognition parameters, and where to stream the analysis resullts. '
+    TagKey:
+      type: string
+      pattern: '^(?!aws:)[\p{L}\p{Z}\p{N}_.:/=+\-@]*$'
+      minLength: 1
+      maxLength: 128
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
+    TagValue:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      minLength: 0
+      maxLength: 256
     TechnicalCueType:
       type: string
       enum:

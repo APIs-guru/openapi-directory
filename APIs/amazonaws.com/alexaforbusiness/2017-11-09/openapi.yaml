@@ -4751,6 +4751,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether PSTN calling is enabled.
+        DataRetentionOptIn:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether data retention of the profile is enabled.
         MeetingRoomConfiguration:
           allOf:
             - $ref: '#/components/schemas/CreateMeetingRoomConfiguration'
@@ -6491,6 +6495,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether the PSTN setting of the room profile is enabled.
+        DataRetentionOptIn:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether data retention of the profile is enabled.
         MeetingRoomConfiguration:
           allOf:
             - $ref: '#/components/schemas/UpdateMeetingRoomConfiguration'
@@ -7858,6 +7866,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: The PSTN setting of a room profile.
+        DataRetentionOptIn:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether data retention of the profile is enabled.
         AddressBookArn:
           allOf:
             - $ref: '#/components/schemas/Arn'

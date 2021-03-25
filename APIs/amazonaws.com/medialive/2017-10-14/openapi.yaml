@@ -13890,6 +13890,12 @@ components:
             - xml:
                 name: colorSpace
               description: Specifies the color space of an input. This setting works in tandem with colorSpaceUsage and a video description's colorSpaceSettingsChoice to determine if any conversion will be performed.
+        ColorSpaceSettings:
+          allOf:
+            - $ref: '#/components/schemas/VideoSelectorColorSpaceSettings'
+            - xml:
+                name: colorSpaceSettings
+              description: Color space settings
         ColorSpaceUsage:
           allOf:
             - $ref: '#/components/schemas/VideoSelectorColorSpaceUsage'
@@ -16588,9 +16594,20 @@ components:
       type: string
       enum:
         - FOLLOW
+        - HDR10
+        - HLG_2020
         - REC_601
         - REC_709
       description: Video Selector Color Space
+    VideoSelectorColorSpaceSettings:
+      type: object
+      properties:
+        Hdr10Settings:
+          allOf:
+            - $ref: '#/components/schemas/Hdr10Settings'
+            - xml:
+                name: hdr10Settings
+      description: Video Selector Color Space Settings
     VideoSelectorColorSpaceUsage:
       type: string
       enum:
