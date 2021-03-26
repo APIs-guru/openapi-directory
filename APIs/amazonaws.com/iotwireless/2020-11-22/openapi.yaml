@@ -191,7 +191,7 @@ paths:
                   minLength: 1
                   maxLength: 64
                 Tags:
-                  description: The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+                  description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -771,7 +771,7 @@ paths:
                   minLength: 20
                   maxLength: 2048
                 Tags:
-                  description: The tags to attach to the new destination. Tags are metadata that can be used to manage a resource.
+                  description: The tags to attach to the new destination. Tags are metadata that you can use to manage a resource.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -987,7 +987,7 @@ paths:
                         - $ref: '#/components/schemas/Supports32BitFCnt'
                         - description: The Supports32BitFCnt value.
                 Tags:
-                  description: The tags to attach to the new device profile Tags are metadata that can be used to manage a resource.
+                  description: The tags to attach to the new device profile. Tags are metadata that you can use to manage a resource.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -1131,7 +1131,7 @@ paths:
                         - $ref: '#/components/schemas/AddGwMetadata'
                         - description: The AddGWMetaData value.
                 Tags:
-                  description: The tags to attach to the new service profile. Tags are metadata that can be used to manage a resource.
+                  description: The tags to attach to the new service profile. Tags are metadata that you can use to manage a resource.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -1328,6 +1328,13 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/AbpV1_0_x'
                         - description: LoRaWAN object for create APIs
+                Tags:
+                  description: The tags to attach to the new wireless device. Tags are metadata that you can use to manage a resource.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1501,7 +1508,7 @@ paths:
                         - $ref: '#/components/schemas/RfRegion'
                         - description: The frequency band (RFRegion) value.
                 Tags:
-                  description: The tags to attach to the new wireless gateway. Tags are metadata that can be used to manage a resource.
+                  description: The tags to attach to the new wireless gateway. Tags are metadata that you can use to manage a resource.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -1844,7 +1851,7 @@ paths:
                   minLength: 1
                   maxLength: 64
                 Tags:
-                  description: The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+                  description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -3269,7 +3276,7 @@ paths:
         - name: resourceArn
           in: query
           required: true
-          description: The ARN of the resource for which to list tags.
+          description: The ARN of the resource for which you want to list tags.
           schema:
             type: string
             minLength: 1
@@ -3347,7 +3354,7 @@ paths:
                 - Tags
               properties:
                 Tags:
-                  description: Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
+                  description: Adds to or modifies the tags of the given resource. Tags are metadata that you can use to manage a resource.
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -4225,7 +4232,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+            - description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
     ListWirelessDevicesResponse:
       type: object
       properties:
@@ -4402,7 +4409,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+            - description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
     PartnerAccountArn:
       type: string
     WirelessDeviceId:
@@ -4512,7 +4519,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the new destination. Tags are metadata that can be used to manage a resource.
+            - description: The tags to attach to the new destination. Tags are metadata that you can use to manage a resource.
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
@@ -4617,7 +4624,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the new device profile Tags are metadata that can be used to manage a resource.
+            - description: The tags to attach to the new device profile. Tags are metadata that you can use to manage a resource.
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
@@ -4650,7 +4657,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the new service profile. Tags are metadata that can be used to manage a resource.
+            - description: The tags to attach to the new service profile. Tags are metadata that you can use to manage a resource.
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
@@ -4728,6 +4735,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LoRaWANDevice'
             - description: The device configuration information to use to create the wireless device.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to attach to the new wireless device. Tags are metadata that you can use to manage a resource.
     WirelessDeviceArn:
       type: string
     WirelessGatewayName:
@@ -4766,7 +4777,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: The tags to attach to the new wireless gateway. Tags are metadata that can be used to manage a resource.
+            - description: The tags to attach to the new wireless gateway. Tags are metadata that you can use to manage a resource.
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
@@ -4818,7 +4829,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+            - description: The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
     WirelessGatewayTaskDefinitionId:
       type: string
       pattern: '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
@@ -5497,7 +5508,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
+            - description: Adds to or modifies the tags of the given resource. Tags are metadata that you can use to manage a resource.
     TestWirelessDeviceRequest:
       type: object
       title: TestWirelessDeviceRequest

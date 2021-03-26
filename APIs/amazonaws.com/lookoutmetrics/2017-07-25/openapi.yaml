@@ -3857,7 +3857,7 @@ components:
       maxLength: 63
     RDSDatabaseName:
       type: string
-      pattern: '[a-zA-Z0-9_]+'
+      pattern: '[a-zA-Z0-9_.]+'
       minLength: 1
       maxLength: 64
     TableName:
@@ -3887,7 +3887,7 @@ components:
       maxLength: 63
     RedshiftDatabaseName:
       type: string
-      pattern: '[a-z0-9]+'
+      pattern: '[a-zA-Z0-9_.]+'
       minLength: 1
       maxLength: 100
     SampleRow:
