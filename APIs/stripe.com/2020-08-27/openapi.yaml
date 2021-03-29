@@ -879,6 +879,22 @@ paths:
                           type: string
                       title: branding_settings_specs
                       type: object
+                    card_issuing:
+                      properties:
+                        tos_acceptance:
+                          properties:
+                            date:
+                              format: unix-time
+                              type: integer
+                            ip:
+                              type: string
+                            user_agent:
+                              maxLength: 5000
+                              type: string
+                          title: settings_terms_of_service_specs
+                          type: object
+                      title: card_issuing_settings_specs
+                      type: object
                     card_payments:
                       properties:
                         decline_on:
@@ -4145,6 +4161,22 @@ paths:
                           type: string
                       title: branding_settings_specs
                       type: object
+                    card_issuing:
+                      properties:
+                        tos_acceptance:
+                          properties:
+                            date:
+                              format: unix-time
+                              type: integer
+                            ip:
+                              type: string
+                            user_agent:
+                              maxLength: 5000
+                              type: string
+                          title: settings_terms_of_service_specs
+                          type: object
+                      title: card_issuing_settings_specs
+                      type: object
                     card_payments:
                       properties:
                         decline_on:
@@ -5027,6 +5059,22 @@ paths:
                           maxLength: 5000
                           type: string
                       title: branding_settings_specs
+                      type: object
+                    card_issuing:
+                      properties:
+                        tos_acceptance:
+                          properties:
+                            date:
+                              format: unix-time
+                              type: integer
+                            ip:
+                              type: string
+                            user_agent:
+                              maxLength: 5000
+                              type: string
+                          title: settings_terms_of_service_specs
+                          type: object
+                      title: card_issuing_settings_specs
                       type: object
                     card_payments:
                       properties:
@@ -11054,6 +11102,9 @@ paths:
               shipping_address_collection:
                 explode: true
                 style: deepObject
+              shipping_rates:
+                explode: true
+                style: deepObject
               subscription_data:
                 explode: true
                 style: deepObject
@@ -11273,6 +11324,7 @@ paths:
                     - sk
                     - sl
                     - sv
+                    - th
                     - tr
                     - zh
                     - zh-HK
@@ -11677,6 +11729,11 @@ paths:
                     - allowed_countries
                   title: shipping_address_collection_params
                   type: object
+                shipping_rates:
+                  description: The shipping rate to apply to this Session. Currently, only up to one may be specified
+                  items:
+                    type: string
+                  type: array
                 submit_type:
                   description: >-
                     Describes the type of transaction being performed by Checkout in order to customize
@@ -32795,12 +32852,6 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
-              attributes:
-                explode: true
-                style: deepObject
-              deactivate_on:
-                explode: true
-                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -32819,22 +32870,6 @@ paths:
                 active:
                   description: Whether the product is currently available for purchase. Defaults to `true`.
                   type: boolean
-                attributes:
-                  description: A list of up to 5 alphanumeric attributes. Should only be set if type=`good`.
-                  items:
-                    maxLength: 5000
-                    type: string
-                  type: array
-                caption:
-                  description: A short one-line description of the product, meant to be displayable to the customer. May only be set if type=`good`.
-                  maxLength: 5000
-                  type: string
-                deactivate_on:
-                  description: An array of Connect application names or identifiers that should not be able to order the SKUs for this product. May only be set if type=`good`.
-                  items:
-                    maxLength: 5000
-                    type: string
-                  type: array
                 description:
                   description: The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
                   maxLength: 40000
@@ -32864,7 +32899,7 @@ paths:
                   maxLength: 5000
                   type: string
                 package_dimensions:
-                  description: The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own `package_dimensions`. May only be set if type=`good`.
+                  description: The dimensions of this product for shipping purposes.
                   properties:
                     height:
                       type: number
@@ -32882,7 +32917,7 @@ paths:
                   title: package_dimensions_specs
                   type: object
                 shippable:
-                  description: Whether this product is shipped (i.e., physical goods). Defaults to `true`. May only be set if type=`good`.
+                  description: Whether this product is shipped (i.e., physical goods).
                   type: boolean
                 statement_descriptor:
                   description: >-
@@ -32898,7 +32933,7 @@ paths:
                   maxLength: 12
                   type: string
                 url:
-                  description: A URL of a publicly-accessible webpage for this product. May only be set if type=`good`.
+                  description: A URL of a publicly-accessible webpage for this product.
                   maxLength: 5000
                   type: string
               required:
@@ -33011,12 +33046,6 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
-              attributes:
-                explode: true
-                style: deepObject
-              deactivate_on:
-                explode: true
-                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -33035,26 +33064,6 @@ paths:
                 active:
                   description: Whether the product is available for purchase.
                   type: boolean
-                attributes:
-                  anyOf:
-                    - items:
-                        maxLength: 5000
-                        type: string
-                      type: array
-                    - enum:
-                        - ""
-                      type: string
-                  description: A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g., `["color", "size"]`). If a value for `attributes` is specified, the list specified will replace the existing attributes list on this product. Any attributes not present after the update will be deleted from the SKUs for this product.
-                caption:
-                  description: A short one-line description of the product, meant to be displayable to the customer. May only be set if `type=good`.
-                  maxLength: 5000
-                  type: string
-                deactivate_on:
-                  description: An array of Connect application names or identifiers that should not be able to order the SKUs for this product. May only be set if `type=good`.
-                  items:
-                    maxLength: 5000
-                    type: string
-                  type: array
                 description:
                   description: The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
                   maxLength: 40000
@@ -33108,9 +33117,9 @@ paths:
                     - enum:
                         - ""
                       type: string
-                  description: The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own `package_dimensions`. May only be set if `type=good`.
+                  description: The dimensions of this product for shipping purposes.
                 shippable:
-                  description: Whether this product is shipped (i.e., physical goods). Defaults to `true`. May only be set if `type=good`.
+                  description: Whether this product is shipped (i.e., physical goods).
                   type: boolean
                 statement_descriptor:
                   description: >-
@@ -33126,7 +33135,7 @@ paths:
                   maxLength: 12
                   type: string
                 url:
-                  description: A URL of a publicly-accessible webpage for this product. May only be set if `type=good`.
+                  description: A URL of a publicly-accessible webpage for this product.
                   type: string
               type: object
         required: false
@@ -44369,7 +44378,7 @@ components:
           description: Whether account details have been submitted. Standard accounts cannot receive payouts before this is true.
           type: boolean
         email:
-          description: The primary user's email address.
+          description: "An email address associated with the account. You can treat this as metadata: it is not used for authentication or messaging account holders."
           maxLength: 5000
           nullable: true
           type: string
@@ -44719,7 +44728,17 @@ components:
             type: string
           type: array
         disabled_reason:
-          description: If the capability is disabled, this string describes why. Possible values are `requirement.fields_needed`, `pending.onboarding`, `pending.review`, `rejected_fraud`, or `rejected.other`.
+          description: >-
+            If the capability is disabled, this string describes why. Possible values are `requirement.fields_needed`, `pending.onboarding`, `pending.review`, `rejected_fraud`, `rejected.unsupported_business` or `rejected.other`.
+
+
+            `rejected.unsupported_business` means that the account's business is not supported by the capability. For example, payment methods may restrict the businesses they support in their terms of service:
+
+
+            - [Afterpay Clearpay's terms of service](/afterpay-clearpay/legal#restricted-businesses)
+
+
+            If you believe that the rejection is in error, please contact support@stripe.com for assistance.
           maxLength: 5000
           nullable: true
           type: string
@@ -44756,6 +44775,15 @@ components:
       type: object
       x-expandableFields:
         - errors
+    account_card_issuing_settings:
+      description: ""
+      properties:
+        tos_acceptance:
+          $ref: "#/components/schemas/card_issuing_account_terms_of_service"
+      title: AccountCardIssuingSettings
+      type: object
+      x-expandableFields:
+        - tos_acceptance
     account_card_payments_settings:
       description: ""
       properties:
@@ -44976,6 +45004,9 @@ components:
             - verification_failed_other
             - verification_failed_tax_id_match
             - verification_failed_tax_id_not_issued
+            - verification_missing_executives
+            - verification_missing_owners
+            - verification_requires_additional_memorandum_of_associations
           type: string
           x-stripeBypassValidation: true
         reason:
@@ -45010,6 +45041,8 @@ components:
           $ref: "#/components/schemas/account_bacs_debit_payments_settings"
         branding:
           $ref: "#/components/schemas/account_branding_settings"
+        card_issuing:
+          $ref: "#/components/schemas/account_card_issuing_settings"
         card_payments:
           $ref: "#/components/schemas/account_card_payments_settings"
         dashboard:
@@ -45030,6 +45063,7 @@ components:
       x-expandableFields:
         - bacs_debit_payments
         - branding
+        - card_issuing
         - card_payments
         - dashboard
         - payments
@@ -46404,6 +46438,25 @@ components:
       type: object
       x-expandableFields:
         - card_present
+    card_issuing_account_terms_of_service:
+      description: ""
+      properties:
+        date:
+          description: The Unix timestamp marking when the account representative accepted the service agreement.
+          nullable: true
+          type: integer
+        ip:
+          description: The IP address from which the account representative accepted the service agreement.
+          maxLength: 5000
+          nullable: true
+          type: string
+        user_agent:
+          description: The user agent of the browser from which the account representative accepted the service agreement.
+          maxLength: 5000
+          type: string
+      title: CardIssuingAccountTermsOfService
+      type: object
+      x-expandableFields: []
     card_mandate_payment_method_details:
       description: ""
       properties: {}
@@ -46992,6 +47045,7 @@ components:
             - sk
             - sl
             - sv
+            - th
             - tr
             - zh
             - zh-HK
@@ -49890,6 +49944,7 @@ components:
             - $ref: "#/components/schemas/customer"
             - $ref: "#/components/schemas/deleted_customer"
           description: The ID of the customer who will be billed.
+          nullable: true
           x-expansionResources:
             oneOf:
               - $ref: "#/components/schemas/customer"
@@ -50196,7 +50251,6 @@ components:
         - attempted
         - created
         - currency
-        - customer
         - default_tax_rates
         - lines
         - livemode
@@ -57760,6 +57814,10 @@ components:
         amount_discount:
           description: This is the sum of all the line item discounts.
           type: integer
+        amount_shipping:
+          description: This is the sum of all the line item shipping amounts.
+          nullable: true
+          type: integer
         amount_tax:
           description: This is the sum of all the line item tax amounts.
           type: integer
@@ -58876,7 +58934,7 @@ components:
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
           type: object
         nickname:
-          description: A brief description of the plan, hidden from customers.
+          description: A brief description of the price, hidden from customers.
           maxLength: 5000
           nullable: true
           type: string
@@ -58994,28 +59052,10 @@ components:
         active:
           description: Whether the product is currently available for purchase.
           type: boolean
-        attributes:
-          description: A list of up to 5 attributes that each SKU can provide values for (e.g., `["color", "size"]`).
-          items:
-            maxLength: 5000
-            type: string
-          nullable: true
-          type: array
-        caption:
-          description: A short one-line description of the product, meant to be displayable to the customer. Only applicable to products of `type=good`.
-          maxLength: 5000
-          nullable: true
-          type: string
         created:
           description: Time at which the object was created. Measured in seconds since the Unix epoch.
           format: unix-time
           type: integer
-        deactivate_on:
-          description: An array of connect application identifiers that cannot purchase this product. Only applicable to products of `type=good`.
-          items:
-            maxLength: 5000
-            type: string
-          type: array
         description:
           description: The product's description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
           maxLength: 5000
@@ -59052,10 +59092,10 @@ components:
         package_dimensions:
           anyOf:
             - $ref: "#/components/schemas/package_dimensions"
-          description: The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own `package_dimensions`. Only applicable to products of `type=good`.
+          description: The dimensions of this product for shipping purposes.
           nullable: true
         shippable:
-          description: Whether this product is a shipped good. Only applicable to products of `type=good`.
+          description: Whether this product is shipped (i.e., physical goods).
           nullable: true
           type: boolean
         statement_descriptor:
@@ -59073,7 +59113,7 @@ components:
           format: unix-time
           type: integer
         url:
-          description: A URL of a publicly-accessible webpage for this product. Only applicable to products of `type=good`.
+          description: A URL of a publicly-accessible webpage for this product.
           maxLength: 2048
           nullable: true
           type: string

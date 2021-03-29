@@ -3320,7 +3320,7 @@ paths:
   /v3/search/images/creative/by-image:
     get:
       description: >
-        Allows searching for similar creative images by passing the URL to an existing image.
+        Allows searching for similar creative images by passing the URL to an existing image. All responses will have the exclude_nudity filter automatically applied.
 
 
         Before calling the search by image endpoint, an image must be uploaded to a specific AWS S3 bucket. The bucket name is `search-by-image.s3.amazonaws.com`.
@@ -4159,6 +4159,13 @@ paths:
               \                    Product ID can be obtained from the GET /products response."
             nullable: true
             type: string
+        - description: Exclude videos that are only available for editorial (non-commercial) use. Default value is false.
+          in: query
+          name: exclude_editorial_use_only
+          schema:
+            description: Exclude videos that are only available for editorial (non-commercial) use. Default value is false.
+            nullable: true
+            type: boolean
         - in: query
           name: format_available
           schema:

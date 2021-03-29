@@ -97,7 +97,8 @@ paths:
                         type: AttendancePeriod
                       - attributes:
                           break: 60
-                          comment: null
+                          comment:
+                            $ref: "#/components/schemas/UpdateAttendancePeriodRequest/example/comment"
                           date: 2017-01-18
                           employee: 325660
                           end_time: 18:30
@@ -152,7 +153,8 @@ paths:
                           date: 2017-01-01
                           employee: 1234
                           end_time: 18:00
-                          error_msg: null
+                          error_msg:
+                            $ref: "#/components/schemas/UpdateAttendancePeriodRequest/example/comment"
                           id: 1
                           start_time: 09:00
                           success: true
@@ -162,7 +164,8 @@ paths:
                           employee: 1234
                           end_time: 18:00
                           error_msg: Existing overlapping attendances periods
-                          id: null
+                          id:
+                            $ref: "#/components/schemas/UpdateAttendancePeriodRequest/example/comment"
                           start_time: 09:00
                           success: false
                       message: Error when trying to insert Attendances periods rows
@@ -282,7 +285,8 @@ paths:
                                 type: TimeOffType
                           contract_end_date:
                             label: Contract ends
-                            value: null
+                            value:
+                              $ref: "#/components/schemas/UpdateAttendancePeriodRequest/example/comment"
                           cost_centers:
                             label: Cost center
                             value:
@@ -390,7 +394,8 @@ paths:
                               type: Employee
                           termination_date:
                             label: Termination date
-                            value: null
+                            value:
+                              $ref: "#/components/schemas/UpdateAttendancePeriodRequest/example/comment"
                           termination_reason:
                             label: Termination reason
                             value: ""
@@ -521,7 +526,8 @@ paths:
                               type: TimeOffType
                         contract_end_date:
                           label: Contract ends
-                          value: null
+                          value:
+                            $ref: "#/components/schemas/UpdateAttendancePeriodRequest/example/comment"
                         cost_centers:
                           label: Cost center
                           value:
@@ -626,7 +632,8 @@ paths:
                             type: Employee
                         termination_date:
                           label: Termination date
-                          value: null
+                          value:
+                            $ref: "#/components/schemas/UpdateAttendancePeriodRequest/example/comment"
                         termination_reason:
                           label: Termination reason
                           value: ""
@@ -1497,7 +1504,8 @@ components:
       example:
         attendances:
           - break: 120
-            comment: null
+            comment:
+              $ref: "#/components/schemas/UpdateAttendancePeriodRequest/example/comment"
             date: 2017-01-18
             employee: 1234
             end_time: 18:00

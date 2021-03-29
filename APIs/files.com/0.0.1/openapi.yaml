@@ -121,6 +121,8 @@ tags:
     name: user_cipher_uses
   - description: Operations about user_requests
     name: user_requests
+  - description: Operations about webhook_tests
+    name: webhook_tests
 paths:
   /api_key:
     delete:
@@ -132,13 +134,15 @@ paths:
           required: false
           schema:
             type: string
-          x-ms-summary: null
+          x-ms-summary:
+            $ref: "#/components/schemas/UserEntity/x-docs"
         - in: query
           name: api_key
           required: false
           schema:
             type: object
-          x-ms-summary: null
+          x-ms-summary:
+            $ref: "#/components/schemas/UserEntity/x-docs"
       responses:
         "204":
           description: No body.
@@ -188,13 +192,15 @@ paths:
           required: false
           schema:
             type: string
-          x-ms-summary: null
+          x-ms-summary:
+            $ref: "#/components/schemas/UserEntity/x-docs"
         - in: query
           name: api_key
           required: false
           schema:
             type: object
-          x-ms-summary: null
+          x-ms-summary:
+            $ref: "#/components/schemas/UserEntity/x-docs"
       responses:
         "200":
           content:
@@ -5032,6 +5038,54 @@ paths:
         - user/groups
         - users/:user_id/groups
         - groups/:group_id/users
+    post:
+      description: Create Group User
+      operationId: PostGroupUsers
+      requestBody:
+        $ref: "#/components/requestBodies/PatchGroupUsersId"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupUserEntity"
+          description: The GroupUsers object.
+          x-ms-summary: The GroupUsers object.
+        "400":
+          description: Bad Request
+          x-ms-summary: Bad Request
+        "401":
+          description: Unauthorized
+          x-ms-summary: Unauthorized
+        "403":
+          description: Forbidden
+          x-ms-summary: Forbidden
+        "404":
+          description: Not Found
+          x-ms-summary: Not Found
+        "405":
+          description: Method Not Allowed
+          x-ms-summary: Method Not Allowed
+        "409":
+          description: Conflict
+          x-ms-summary: Conflict
+        "412":
+          description: Precondition Failed
+          x-ms-summary: Precondition Failed
+        "422":
+          description: Unprocessable Entity
+          x-ms-summary: Unprocessable Entity
+        "423":
+          description: Locked
+          x-ms-summary: Locked
+        "429":
+          description: Too Many Requests
+          x-ms-summary: Too Many Requests
+      summary: Create Group User
+      tags:
+        - group_users
+      x-authentication:
+        - site
   "/group_users/{id}":
     delete:
       description: Delete Group User
@@ -5115,29 +5169,7 @@ paths:
             type: integer
           x-ms-summary: Group User ID.
       requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              properties:
-                admin:
-                  description: Is the user a group administrator?
-                  type: boolean
-                  x-ms-summary: Is the user a group administrator?
-                group_id:
-                  description: Group ID to add user to.
-                  format: int32
-                  type: integer
-                  x-ms-summary: Group ID to add user to.
-                user_id:
-                  description: User ID to add to group.
-                  format: int32
-                  type: integer
-                  x-ms-summary: User ID to add to group.
-              required:
-                - group_id
-                - user_id
-              type: object
-        required: true
+        $ref: "#/components/requestBodies/PatchGroupUsersId"
       responses:
         "200":
           content:
@@ -10959,13 +10991,15 @@ paths:
           required: false
           schema:
             type: string
-          x-ms-summary: null
+          x-ms-summary:
+            $ref: "#/components/schemas/UserEntity/x-docs"
         - in: query
           name: session
           required: false
           schema:
             type: object
-          x-ms-summary: null
+          x-ms-summary:
+            $ref: "#/components/schemas/UserEntity/x-docs"
       responses:
         "204":
           description: No body.
@@ -11201,13 +11235,15 @@ paths:
           required: false
           schema:
             type: string
-          x-ms-summary: null
+          x-ms-summary:
+            $ref: "#/components/schemas/UserEntity/x-docs"
         - in: query
           name: site
           required: false
           schema:
             type: object
-          x-ms-summary: null
+          x-ms-summary:
+            $ref: "#/components/schemas/UserEntity/x-docs"
       responses:
         "200":
           content:
@@ -11383,7 +11419,8 @@ paths:
                 icon128_file:
                   format: binary
                   type: string
-                  x-ms-summary: null
+                  x-ms-summary:
+                    $ref: "#/components/schemas/UserEntity/x-docs"
                 icon16_delete:
                   description: If true, will delete the file stored in icon16
                   type: boolean
@@ -11391,7 +11428,8 @@ paths:
                 icon16_file:
                   format: binary
                   type: string
-                  x-ms-summary: null
+                  x-ms-summary:
+                    $ref: "#/components/schemas/UserEntity/x-docs"
                 icon32_delete:
                   description: If true, will delete the file stored in icon32
                   type: boolean
@@ -11399,7 +11437,8 @@ paths:
                 icon32_file:
                   format: binary
                   type: string
-                  x-ms-summary: null
+                  x-ms-summary:
+                    $ref: "#/components/schemas/UserEntity/x-docs"
                 icon48_delete:
                   description: If true, will delete the file stored in icon48
                   type: boolean
@@ -11407,7 +11446,8 @@ paths:
                 icon48_file:
                   format: binary
                   type: string
-                  x-ms-summary: null
+                  x-ms-summary:
+                    $ref: "#/components/schemas/UserEntity/x-docs"
                 immutable_files:
                   description: Are files protected from modification?
                   type: boolean
@@ -11504,7 +11544,8 @@ paths:
                 logo_file:
                   format: binary
                   type: string
-                  x-ms-summary: null
+                  x-ms-summary:
+                    $ref: "#/components/schemas/UserEntity/x-docs"
                 max_prior_passwords:
                   description: Number of prior passwords to disallow
                   format: int32
@@ -12119,13 +12160,15 @@ paths:
           required: false
           schema:
             type: string
-          x-ms-summary: null
+          x-ms-summary:
+            $ref: "#/components/schemas/UserEntity/x-docs"
         - in: query
           name: site
           required: false
           schema:
             type: object
-          x-ms-summary: null
+          x-ms-summary:
+            $ref: "#/components/schemas/UserEntity/x-docs"
       responses:
         "200":
           content:
@@ -14933,6 +14976,55 @@ paths:
       x-path_aliases:
         - user/public_keys
         - users/:user_id/public_keys
+  /webhook_tests:
+    post:
+      description: Create Webhook Test
+      operationId: PostWebhookTests
+      requestBody:
+        $ref: "#/components/requestBodies/PostSiteTestWebhook"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WebhookTestEntity"
+          description: The WebhookTests object.
+          x-ms-summary: The WebhookTests object.
+        "400":
+          description: Bad Request
+          x-ms-summary: Bad Request
+        "401":
+          description: Unauthorized
+          x-ms-summary: Unauthorized
+        "403":
+          description: Forbidden
+          x-ms-summary: Forbidden
+        "404":
+          description: Not Found
+          x-ms-summary: Not Found
+        "405":
+          description: Method Not Allowed
+          x-ms-summary: Method Not Allowed
+        "409":
+          description: Conflict
+          x-ms-summary: Conflict
+        "412":
+          description: Precondition Failed
+          x-ms-summary: Precondition Failed
+        "422":
+          description: Unprocessable Entity
+          x-ms-summary: Unprocessable Entity
+        "423":
+          description: Locked
+          x-ms-summary: Locked
+        "429":
+          description: Too Many Requests
+          x-ms-summary: Too Many Requests
+      summary: Create Webhook Test
+      tags:
+        - webhook_tests
+      x-authentication:
+        - folder_admin
 components:
   requestBodies:
     PatchAutomationsId:
@@ -15052,6 +15144,30 @@ components:
                 x-ms-summary: Comment body.
             required:
               - body
+            type: object
+      required: true
+    PatchGroupUsersId:
+      content:
+        multipart/form-data:
+          schema:
+            properties:
+              admin:
+                description: Is the user a group administrator?
+                type: boolean
+                x-ms-summary: Is the user a group administrator?
+              group_id:
+                description: Group ID to add user to.
+                format: int32
+                type: integer
+                x-ms-summary: Group ID to add user to.
+              user_id:
+                description: User ID to add to group.
+                format: int32
+                type: integer
+                x-ms-summary: User ID to add to group.
+            required:
+              - group_id
+              - user_id
             type: object
       required: true
     PatchGroupsId:
@@ -15844,7 +15960,8 @@ components:
           format: date-time
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     ActionEntity:
       description: List site full action history.
       properties:
@@ -16192,7 +16309,8 @@ components:
           properties: {}
           type: object
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     AutomationEntity:
       description: List Automations
       properties:
@@ -16403,6 +16521,17 @@ components:
         If the parameter `source` exists, the automation will only fire on files matching the source (wildcards allowed).
 
         If the parameter `limit` exists, the automation will only copy the newest `limit` files.
+
+
+
+        ### Move File
+
+
+        Moves files in the folder named by `path` to the path specified in `destination`.
+
+        If the parameter `source` exists, the automation will only fire on files matching the source (wildcards allowed).
+
+        If the parameter `limit` exists, the automation will only move the newest `limit` files.
 
 
 
@@ -16629,7 +16758,8 @@ components:
           format: date-time
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     BehaviorEntity:
       description: List Behaviors
       properties:
@@ -16688,7 +16818,8 @@ components:
           example: a/b/test.txt
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     BundleEntity:
       description: Create Bundle
       properties:
@@ -16926,7 +17057,8 @@ components:
             type: string
           type: array
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     ExternalEventEntity:
       description: List External Events
       properties:
@@ -16972,7 +17104,8 @@ components:
           example: enqueued
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     FileCommentEntity:
       description: List File Comments by path
       properties:
@@ -17081,7 +17214,8 @@ components:
           example: file
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     FileUploadPartEntity:
       description: Begin file upload
       properties:
@@ -17150,7 +17284,8 @@ components:
           example: ""
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     FormFieldEntity:
       properties:
         default_option:
@@ -17196,7 +17331,8 @@ components:
           example: true
           type: boolean
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     FormFieldSetEntity:
       description: Create Form Field Set
       properties:
@@ -17231,6 +17367,18 @@ components:
           example: 1
           format: int32
           type: integer
+        skip_company:
+          description: Any associated InboxRegistrations or BundleRegistrations can be saved without providing company
+          example: true
+          type: boolean
+        skip_email:
+          description: Any associated InboxRegistrations or BundleRegistrations can be saved without providing email
+          example: true
+          type: boolean
+        skip_name:
+          description: Any associated InboxRegistrations or BundleRegistrations can be saved without providing name
+          example: true
+          type: boolean
         title:
           description: Title to be displayed
           example: Sample Form Title
@@ -17298,7 +17446,7 @@ components:
 
         Files.com's Group Admin feature allows you to define Group Admins, who then have access to add and remove users within their groups.
     GroupUserEntity:
-      description: List Group Users
+      description: Create Group User
       properties:
         admin:
           description: Is this user an administrator of this group?
@@ -17330,6 +17478,13 @@ components:
       type: object
       x-docs: >
         A GroupUser describes the membership of a User within a Group.
+
+
+        ## Creating GroupUsers
+
+        GroupUsers can be created via the normal `create` action. When using the `update` action, if the
+
+        GroupUser record does not exist for the given user/group IDs it will be created.
     HistoryExportEntity:
       description: Show History Export
       properties:
@@ -17438,33 +17593,12 @@ components:
           type: string
       type: object
       x-docs: >
-        The History Export resource on the API is used to export historical action (history) logs.  We store recent
-
-        action logs in a separate location from archived logs.  This API is used to query historical logs that
-
-        aren't available in the regular History API because they've aged out.
+        The History Export resource on the API is used to export historical action (history) logs.
 
 
         All queries against the archive must be submitted as Exports.  (Even our Web UI creates an Export behind
 
         the scenes.)
-
-
-        Actions that are less than 24 hours old may not be available in this API.  (But, they may also be made available
-
-        earlier on a best-effort basis.)  Thus, if you want to see all history for a given file or folder, you should
-
-        query both this API and the "live" History API.
-
-
-        That's exactly what our Web UI does.
-
-
-        The best practice that we follow and recommend when doing a query against both APIs is to use a value of yesterday's
-
-        midnight Eastern time as the `end_at` for queries against the HistoryExport API and as the `start_at` for
-
-        queries against the History API. This ensures that you retrieve all entries, with no overlap.
 
 
         We use Amazon Athena behind the scenes for processing these queries, and as such, have powerful
@@ -17491,6 +17625,18 @@ components:
         about your use case.  We may decide to change the backend data schema to match your use case more closely, and
 
         we may also need to charge an additional cost per query.
+
+
+        ## Examples History Queries
+
+
+        * History for a user: `{ "query_user_id": 123 }`
+
+        * History for a range of time: `{ "start_at": "2021-03-18 12:00:00", "end_at": "2021-03-19 12:00:00" }`
+
+        * History of logins and failed logins: `{ "query_action": "login,failedlogin" }`
+
+        * A Complex query: `{ "query_folder": "uploads", "query_action": "create,copy,move", "start_at": "2021-03-18 12:00:00", "end_at": "2021-03-19 12:00:00" }`
     HistoryExportResultEntity:
       description: List History Export Results
       properties:
@@ -17595,7 +17741,8 @@ components:
           example: jerry
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     ImageEntity:
       properties:
         name:
@@ -17607,7 +17754,8 @@ components:
           example: https://mysite.files.com/.../my_image.png
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     InboxRecipientEntity:
       description: List Inbox Recipients
       properties:
@@ -17681,7 +17829,8 @@ components:
           example: a/b/test.txt
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     InvoiceLineItemEntity:
       properties:
         amount:
@@ -17733,7 +17882,8 @@ components:
           format: date-time
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     IpAddressEntity:
       description: List IP Addresses associated with the current site
       properties:
@@ -17999,7 +18149,8 @@ components:
           format: date-time
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     PermissionEntity:
       description: List Permissions
       properties:
@@ -19203,7 +19354,8 @@ components:
           example: ""
           type: string
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     StyleEntity:
       description: Show Style
       properties:
@@ -19251,7 +19403,8 @@ components:
           items: {}
           type: array
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     UsageSnapshotEntity:
       description: List Usage Snapshots
       properties:
@@ -19281,6 +19434,11 @@ components:
           format: date-time
           type: string
         high_water_storage:
+          description: Site usage report highest usage in time period
+          example: 1
+          format: double
+          type: number
+        high_water_user_count:
           description: Site usage report highest usage in time period
           example: 1
           format: double
@@ -19320,7 +19478,8 @@ components:
           example: {}
           type: object
       type: object
-      x-docs: null
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     UserCipherUseEntity:
       description: List User Cipher Uses
       properties:
@@ -19613,6 +19772,31 @@ components:
       type: object
       x-docs: >
         User Requests allow anonymous users to place a request for access on the login screen to the site administrator.
+    WebhookTestEntity:
+      description: Create Webhook Test
+      properties:
+        code:
+          description: Status HTTP code
+          example: 200
+          format: int32
+          type: integer
+        data:
+          $ref: "#/components/schemas/AutoEntity"
+        message:
+          description: Error message
+          example: ""
+          type: string
+        status:
+          description: Status message
+          example: ""
+          type: string
+        success:
+          description: The success status of the webhook test
+          example: true
+          type: boolean
+      type: object
+      x-docs:
+        $ref: "#/components/schemas/UserEntity/x-docs"
     patchFormFieldSets:
       description: Update Form Field Set
       properties:
@@ -19643,6 +19827,15 @@ components:
                 type: boolean
             type: object
           type: array
+        skip_company:
+          description: Skip validating company
+          type: boolean
+        skip_email:
+          description: Skip validating form email
+          type: boolean
+        skip_name:
+          description: Skip validating form name
+          type: boolean
         title:
           default: Sample Form Title
           description: Title to be displayed
@@ -19678,6 +19871,15 @@ components:
                 type: boolean
             type: object
           type: array
+        skip_company:
+          description: Skip validating company
+          type: boolean
+        skip_email:
+          description: Skip validating form email
+          type: boolean
+        skip_name:
+          description: Skip validating form name
+          type: boolean
         title:
           default: Sample Form Title
           description: Title to be displayed
@@ -20687,3 +20889,19 @@ x-regions:
     name: ap-northeast-1
   - description: Singapore
     name: ap-southeast-1
+x-site_attribute_requirements:
+  allowed_countries: feature_bundle_power
+  bundle_password_required: feature_bundle_power
+  custom_namespace: feature_bundle_power
+  disallowed_countries: feature_bundle_power
+  domain: feature_bundle_power
+  folder_permissions_groups_only: feature_bundle_power
+  require_2fa: feature_bundle_power
+  smtp_address: feature_bundle_premier
+  smtp_authentication: feature_bundle_premier
+  smtp_from: feature_bundle_premier
+  smtp_password: feature_bundle_premier
+  smtp_port: feature_bundle_premier
+  smtp_username: feature_bundle_premier
+  tls_disabled: feature_bundle_premier
+  user_requests_enabled: feature_bundle_power

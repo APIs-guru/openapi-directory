@@ -52,17 +52,20 @@ paths:
                         - application/ld+json
                         - text/turtle
                       description: Retrieve a description of an LDP resource or container
-                      encoding_types: null
+                      encoding_types:
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                       http_method: GET
                       name: LDP Read - Retrieve a resource description
                       parameters:
                         - description: The URL of an LDPR or LDPC. LDPCs must be terminated by /
                           display_name: Resource URL
                           parameter_name: ldpResourceUri
-                          permitted_values: null
+                          permitted_values:
+                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                           required: 1
                           type: uri
-                      url: null
+                      url:
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                       url_template: (ldpResourceUri)
                   - action_id: update
                     description: Update an LDP RDF resource
@@ -78,27 +81,32 @@ paths:
                         - description: The URL of an LDPR or LDPC. LDPCs must be terminated by /
                           display_name: Resource URL
                           parameter_name: ldpResourceUri
-                          permitted_values: null
+                          permitted_values:
+                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                           required: 1
                           type: uri
-                      url: null
+                      url:
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                       url_template: (ldpResourceUri)
                   - action_id: delete
                     description: Delete an LDP resource
                     entry_point:
                       content_types: ""
                       description: Deletes an LDP resource or container
-                      encoding_types: null
+                      encoding_types:
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                       http_method: DELETE
                       name: LDP Delete - Delete an LDP resource
                       parameters:
                         - description: The URL of an LDPR or LDPC. LDPCs must be terminated by /
                           display_name: Resource URL
                           parameter_name: ldpResourceUri
-                          permitted_values: null
+                          permitted_values:
+                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                           required: 1
                           type: uri
-                      url: null
+                      url:
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                       url_template: (ldpResourceUri)
                   - action_id: create
                     description: Create an LDP RDF resource
@@ -114,16 +122,19 @@ paths:
                         - description: The suggested name (slug) for the new resource
                           display_name: Suggested name
                           parameter_name: Slug
-                          permitted_values: null
+                          permitted_values:
+                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                           required: 1
                           type: header
                         - description: The URL of an LDPR or LDPC. LDPCs must be terminated by /
                           display_name: Resource URL
                           parameter_name: ldpResourceUri
-                          permitted_values: null
+                          permitted_values:
+                            $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                           required: 1
                           type: uri
-                      url: null
+                      url:
+                        $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                       url_template: (ldpResourceUri)
                 status: success
               schema:
@@ -187,20 +198,23 @@ paths:
                       \    day due to time restrictions on when that product may be utilized.
 
                       \   "
-                    encoding_types: null
+                    encoding_types:
+                      $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                     http_method: GET
                     name: Products — Uber products at a given location
                     parameters:
                       - description: Longitude component of location
                         display_name: Longitude
                         parameter_name: longitude
-                        permitted_values: null
+                        permitted_values:
+                          $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                         required: 1
                         type: query
                       - description: Latitude component of location
                         display_name: Latitude
                         parameter_name: latitude
-                        permitted_values: null
+                        permitted_values:
+                          $ref: "#/paths/~1api~1v1~1services/get/responses/200/content/application~1json/example/response/1/description"
                         required: 1
                         type: query
                     url: https://sandbox-api.uber.com/v1/products

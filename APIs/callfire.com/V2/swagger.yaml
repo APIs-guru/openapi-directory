@@ -8265,6 +8265,9 @@ definitions:
         description: "~"
         format: int64
         type: integer
+      adminClient:
+        description: "~"
+        type: boolean
       adminToken:
         $ref: "#/definitions/AuthToken"
         description: "~"
@@ -8279,6 +8282,9 @@ definitions:
           - CALLFIRE
           - TESLA
         type: string
+      ezSpaClient:
+        description: "~"
+        type: boolean
       session:
         $ref: "#/definitions/OAuthSession"
         description: "~"

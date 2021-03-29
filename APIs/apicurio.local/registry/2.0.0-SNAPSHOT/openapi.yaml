@@ -19,7 +19,7 @@ info:
 
     - AsyncAPI specification
 
-    - Google protocol buffers (schema and file descriptor)
+    - Google protocol buffers
 
     - GraphQL schema
 
@@ -445,8 +445,6 @@ paths:
 
         * Protobuf (`PROTOBUF`)
 
-        * Protobuf File Descriptor (`PROTOBUF_FD`)
-
         * JSON Schema (`JSON`)
 
         * Kafka Connect (`KCONNECT`)
@@ -532,8 +530,6 @@ paths:
             * Avro (`AVRO`)
 
             * Protobuf (`PROTOBUF`)
-
-            * Protobuf File Descriptor (`PROTOBUF_FD`)
 
             * JSON Schema (`JSON`)
 
@@ -624,8 +620,6 @@ paths:
           * Avro (`AVRO`)
 
           * Protobuf (`PROTOBUF`)
-
-          * Protobuf File Descriptor (`PROTOBUF_FD`)
 
           * JSON Schema (`JSON`)
 
@@ -788,6 +782,17 @@ paths:
 
         (and therefore official) version of the artifact.
       operationId: updateArtifact
+      parameters:
+        - description: >-
+            Specifies the version number of this new version of the artifact content.  This would typically
+
+            be a simple integer or a SemVer value.  If not provided, the server will assign a version number
+
+            automatically.
+          in: header
+          name: X-Registry-Version
+          schema:
+            type: string
       requestBody:
         content:
           "*/*":
@@ -835,8 +840,6 @@ paths:
           * Avro (`AVRO`)
 
           * Protobuf (`PROTOBUF`)
-
-          * Protobuf File Descriptor (`PROTOBUF_FD`)
 
           * JSON Schema (`JSON`)
 
@@ -1373,8 +1376,6 @@ paths:
 
           * Protobuf (`PROTOBUF`)
 
-          * Protobuf File Descriptor (`PROTOBUF_FD`)
-
           * JSON Schema (`JSON`)
 
           * Kafka Connect (`KCONNECT`)
@@ -1550,8 +1551,6 @@ paths:
           * Avro (`AVRO`)
 
           * Protobuf (`PROTOBUF`)
-
-          * Protobuf File Descriptor (`PROTOBUF_FD`)
 
           * JSON Schema (`JSON`)
 
@@ -2361,8 +2360,7 @@ components:
           description: ""
         version:
           description: ""
-          format: int64
-          type: integer
+          type: string
       required:
         - id
         - createdBy
@@ -2418,7 +2416,6 @@ components:
       enum:
         - AVRO
         - PROTOBUF
-        - PROTOBUF_FD
         - JSON
         - OPENAPI
         - ASYNCAPI
@@ -2710,8 +2707,7 @@ components:
           description: ""
         version:
           description: ""
-          format: int64
-          type: integer
+          type: string
       required:
         - createdBy
         - createdOn
@@ -2830,8 +2826,7 @@ components:
           $ref: "#/components/schemas/ArtifactType"
           description: ""
         version:
-          format: int64
-          type: integer
+          type: string
       required:
         - createdOn
         - createdBy

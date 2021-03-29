@@ -5165,22 +5165,22 @@ components:
       properties:
         fault:
           additionalProperties: false
-          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          description: A list of values that helps identify this response back to logs, so we can easily find faults.
           nullable: false
           properties:
             errors:
-              description: List of errors that may assist you in resolving the issues
+              description: List of errors that may assist you in resolving the issues.
               items:
                 additionalProperties: false
-                description: Details about the error that may assist you in resolving the issue
+                description: Details about the error that may assist you in resolving the issue.
                 nullable: false
                 properties:
                   description:
-                    description: Specific details about the error that may assist you in resolving the issue
+                    description: Specific details about the error that may assist you in resolving the issue.
                     nullable: false
                     type: string
                   errorCode:
-                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error.
                     enum:
                       - FULFILMENT_TIME_BANDS_INVALID
                       - FULFILMENT_TIME_BANDS_NOT_FOUND
@@ -5193,11 +5193,11 @@ components:
               nullable: false
               type: array
             faultId:
-              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault.
               nullable: false
               type: string
             traceId:
-              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated.
               nullable: false
               type: string
           required:
@@ -6064,22 +6064,22 @@ components:
       properties:
         fault:
           additionalProperties: false
-          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          description: A list of values that helps identify this response back to logs, so we can easily find faults.
           nullable: false
           properties:
             errors:
-              description: List of errors that may assist you in resolving the issues
+              description: List of errors that may assist you in resolving the issues.
               items:
                 additionalProperties: false
-                description: Details about the error that may assist you in resolving the issue
+                description: Details about the error that may assist you in resolving the issue.
                 nullable: false
                 properties:
                   description:
-                    description: Specific details about the error that may assist you in resolving the issue
+                    description: Specific details about the error that may assist you in resolving the issue.
                     nullable: false
                     type: string
                   errorCode:
-                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error.
                     enum:
                       - TENANT_NOT_SUPPORTED
                       - CHECKOUT_NOT_FOUND
@@ -6092,11 +6092,11 @@ components:
               nullable: false
               type: array
             faultId:
-              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault.
               nullable: false
               type: string
             traceId:
-              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated.
               nullable: false
               type: string
           required:
@@ -6110,22 +6110,22 @@ components:
       properties:
         fault:
           additionalProperties: false
-          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          description: A list of values that helps identify this response back to logs, so we can easily find faults .
           nullable: false
           properties:
             errors:
-              description: List of errors that may assist you in resolving the issues
+              description: List of errors that may assist you in resolving the issues.
               items:
                 additionalProperties: false
-                description: Details about the error that may assist you in resolving the issue
+                description: Details about the error that may assist you in resolving the issue.
                 nullable: false
                 properties:
                   description:
-                    description: Specific details about the error that may assist you in resolving the issue
+                    description: Specific details about the error that may assist you in resolving the issue.
                     nullable: false
                     type: string
                   errorCode:
-                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error.
                     enum:
                       - CHECKOUT_INVALID
                     nullable: false
@@ -6137,11 +6137,11 @@ components:
               nullable: false
               type: array
             faultId:
-              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault.
               nullable: false
               type: string
             traceId:
-              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated.
               nullable: false
               type: string
           required:
@@ -6176,17 +6176,17 @@ components:
       properties:
         fault:
           additionalProperties: false
-          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          description: A list of values that helps identify this response back to logs, so we can easily find faults.
           nullable: false
           properties:
             errors:
-              description: List of errors that may assist you in resolving the issues
+              description: List of errors that may assist you in resolving the issues.
               items:
                 additionalProperties: false
                 nullable: false
                 properties:
                   description:
-                    description: Specific details about the error that may assist you in resolving the issue
+                    description: Specific details about the error that may assist you in resolving the issue.
                     nullable: false
                     type: string
                 required:
@@ -6195,11 +6195,11 @@ components:
               nullable: false
               type: array
             faultId:
-              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault.
               nullable: false
               type: string
             traceId:
-              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated.
               nullable: false
               type: string
           required:
@@ -6213,22 +6213,22 @@ components:
       properties:
         fault:
           additionalProperties: false
-          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          description: A list of values that helps identify this response back to logs, so we can easily find faults.
           nullable: false
           properties:
             errors:
-              description: List of errors that may assist you in resolving the issues
+              description: List of errors that may assist you in resolving the issues.
               items:
                 additionalProperties: false
-                description: Details about the error that may assist you in resolving the issue
+                description: Details about the error that may assist you in resolving the issue.
                 nullable: false
                 properties:
                   description:
-                    description: Specific details about the error that may assist you in resolving the issue
+                    description: Specific details about the error that may assist you in resolving the issue.
                     nullable: false
                     type: string
                   errorCode:
-                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error.
                     enum:
                       - TENANT_INVALID
                       - CHECKOUT_ID_INVALID
@@ -6241,11 +6241,11 @@ components:
               nullable: false
               type: array
             faultId:
-              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault.
               nullable: false
               type: string
             traceId:
-              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated.
               nullable: false
               type: string
           required:
@@ -6255,104 +6255,146 @@ components:
           type: object
       type: object
     CheckoutGetResponse:
+      description: Properties apply to all supported country codes, except where specified.
       properties:
         customer:
-          description: Details of the customer creating a checkout
+          description: >
+            Details of the customer making the purchase.
+
+
+            Details of the customer will need to be submitted to the service. No default values will be set.
           nullable: false
           properties:
             firstName:
-              description: Customer's first name
+              description: >
+                Customer's first name. 
+
+
+                Also known as Given Name(s).
+              maxLength: 100
+              minLength: 1
               nullable: true
               type: string
             lastName:
-              description: Customer's last name
+              description: >
+                Customer's last name (Optional).
+
+
+                Also known as Family Name.
+              maxLength: 100
+              minLength: 0
               nullable: true
               type: string
             phoneNumber:
-              description: Customer's phone number
+              description: Customer's phone number represented in E.164 format.
+              maxLength: 16
+              minLength: 3
               nullable: true
+              pattern: ^\+[1-9]\d{1,14}$
               type: string
           type: object
         fulfilment:
-          description: Details required to for an order to be fulfilled
+          description: How and when the items will be received by the customer.
           nullable: false
           properties:
             address:
-              description: The address where the customer would like to receive the order
-              nullable: false
+              description: >
+                The postal address where the customer wants to receive the order.
+
+
+                This only applies to purchases with a delivery service type.
+              nullable: true
               properties:
                 administrativeArea:
-                  description: Administrative area for where the customer would like to receive the order. Alternative names include County, State, Provence and Prefecture.
+                  description: >
+                    Geographical region of this address. 
+
+
+                    Also known as County or State.
+
+
+                    Set in Australia (AU) only for an order to be fulfilled.
+                  maxLength: 50
+                  minLength: 1
                   nullable: true
                   type: string
                 lines:
-                  description: Ordered list of address parts where the customer would like to receive the order
+                  description: One or more lines representing the street address.
                   items:
-                    description: Part of the address where the customer would like to receive the order
+                    description: Represents part of a street address.
+                    maxLength: 100
+                    minLength: 1
                     nullable: false
                     type: string
-                  maxItems: 8
+                  maxItems: 4
                   minItems: 0
                   nullable: false
                   type: array
                 locality:
-                  description: Locality for where the customer would like to receive the order. Alternative names include Town and City.
+                  description: >
+                    The locality of this address.
+
+
+                    Also known as Town or City.
+                  maxLength: 50
+                  minLength: 1
                   nullable: true
                   type: string
                 postalCode:
-                  description: Postcode for where the customer would like to receive the order
+                  description: Postal code of this address.
+                  maxLength: 50
+                  minLength: 1
                   nullable: true
                   type: string
-              required:
-                - lines
               type: object
             time:
-              description: An individual time-band that can be chosen by the customer
-              nullable: false
+              description: Time the customer wants to receive the order i.e. when order is fulfilled.
+              nullable: true
               properties:
                 from:
-                  description: Earliest time within time-band (ISO 8601 Date Time UTC)
+                  description: Earliest time the customer wants the order to be fulfilled represented in ISO 8601 UTC (Zulu Time).
                   nullable: false
                   type: string
                 to:
-                  description: Latest time within time-band (ISO 8601 Date Time UTC). This time is greater than or equal to the from time.
+                  description: >
+                    Latest time the customer wants the order to be fulfilled represented in ISO 8601 UTC (Zulu Time). 
+
+
+                    This time must be greater than or equal to the from time.
                   nullable: false
                   type: string
               required:
                 - from
                 - to
               type: object
-          required:
-            - times
-            - address
           type: object
         isFulfillable:
-          description: Whether we are able to process the checkout
+          description: Whether the proposed order can be placed.
           nullable: false
           type: boolean
         issues:
-          description: Information about the current issues of a checkout
+          description: One or more issues associated the proposed order, that may impact whether it can be placed.
           items:
             $ref: "#/components/schemas/CheckoutIssue"
-            description: Information about a single issue of a checkout
+            description: Represents a single issue associated with the proposed order.
             nullable: false
-          maxItems: 10
+          maxItems: 18
           minItems: 0
           nullable: false
           type: array
         restaurant:
-          description: The restaurant associated with the checkout
+          description: The restaurant selling the items to be purchased.
           nullable: false
           properties:
             id:
-              description: Unique identifier for a restaurant
+              description: Unique identifier for the restaurant.
               nullable: false
               type: string
           required:
             - id
           type: object
         serviceType:
-          description: The dispatch method for the order
+          description: How the order will be dispatched.
           enum:
             - delivery
             - collection
@@ -6363,7 +6405,6 @@ components:
         - serviceType
         - customer
         - fulfilment
-        - notes
         - isFulfillable
         - issues
       type: object
@@ -6380,7 +6421,6 @@ components:
           FULFILMENT_TIME_UNAVAILABLE: "#/components/schemas/CheckoutIssue_FulfilmentTimeUnavailable"
           GEOLOCATION_REQUIRED: "#/components/schemas/CheckoutIssue_GeolocationRequired"
           ITEMS_UNORDERABLE: "#/components/schemas/CheckoutIssue_ItemsUnorderable"
-          LAST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_LastNameRequired"
           LOCALITY_REQUIRED: "#/components/schemas/CheckoutIssue_LocalityRequired"
           LOCATION_UNDELIVERABLE: "#/components/schemas/CheckoutIssue_LocationUndeliverable"
           MINIMUM_ORDER_VALUE_NOT_MET: "#/components/schemas/CheckoutIssue_MinimumOrderValueNotMet"
@@ -6402,7 +6442,6 @@ components:
             - LOCATION_UNDELIVERABLE
             - AGE_VERIFICATION_FAILED
             - FIRST_NAME_REQUIRED
-            - LAST_NAME_REQUIRED
             - PHONE_NUMBER_REQUIRED
             - DATE_OF_BIRTH_REQUIRED
             - FULFILMENT_TIME_REQUIRED
@@ -6420,125 +6459,173 @@ components:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: The collection of items are not orderable in their current state. Items need to be added.
           type: object
+      properties:
+        code:
+          description: The collection of items are not orderable in their current state. Items need to be added.
     CheckoutIssue_AddressLinesRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: Indicates that the fulfilment address lines is required to fulfil an order.
           type: object
+      properties:
+        code:
+          description: Indicates that the fulfilment address lines is required to fulfil an order.
     CheckoutIssue_AdministrativeAreaRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: Indicates that the fulfilment address administrative area is required to fulfil an order.
           type: object
+      properties:
+        code:
+          description: >
+            Indicates that the fulfilment address administrative area is required to fulfil an order.
+
+
+            Occurs in Australia (AU) only.
     CheckoutIssue_AgeVerificationFailed:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: The order cannot proceed because the customer has failed the required age verification check.
           type: object
+      properties:
+        code:
+          description: >
+            The order cannot proceed because the customer has failed the required age verification check.
+
+
+            Occurs in Australia (AU) and New Zealand (NZ) only.
     CheckoutIssue_DateOfBirthRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: Indicates that the customer's date of birth is required to fulfil an order.
           type: object
+      properties:
+        code:
+          description: >
+            Indicates that the customer's date of birth is required to fulfil an order.
+
+
+            Occurs in Australia (AU) and New Zealand (NZ) only.
     CheckoutIssue_FirstNameRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: Indicates that the customer's first name is required to fulfil an order.
           type: object
+      properties:
+        code:
+          description: Indicates that the customer's first name is required to fulfil an order.
     CheckoutIssue_FulfilmentTimeRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: Indicates that a fulfilment time is required to fulfil an order.
           type: object
+      properties:
+        code:
+          description: Indicates that a fulfilment time is required to fulfil an order.
     CheckoutIssue_FulfilmentTimeUnavailable:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: The selected fulfilment time is no longer available. A new fulfilment time may be available for selection.
           type: object
+      properties:
+        code:
+          description: The selected fulfilment time is no longer available. A new fulfilment time may be available for selection.
     CheckoutIssue_GeolocationRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: Indicates that the fulfilment geolocation is required to fulfil an order.
           type: object
+      properties:
+        code:
+          description: >
+            Indicates that the fulfilment geolocation is required to fulfil an order.
+
+
+            Occurs in Australia (AU) and New Zealand (NZ) only.
     CheckoutIssue_ItemsUnorderable:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
+          type: object
+      properties:
+        code:
           description: The collection of items are not orderable.
-          type: object
-    CheckoutIssue_LastNameRequired:
-      allOf:
-        - $ref: "#/components/schemas/CheckoutIssue"
-        - additionalProperties: false
-          description: Indicates that the customer's last name is required to fulfil an order.
-          type: object
     CheckoutIssue_LocalityRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: Indicates that the fulfilment address locality is required to fulfil an order.
           type: object
+      properties:
+        code:
+          description: Indicates that the fulfilment address locality is required to fulfil an order.
     CheckoutIssue_LocationUndeliverable:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: The restaurant is unable to deliver to this location.
           type: object
+      properties:
+        code:
+          description: The restaurant is unable to deliver to this location.
     CheckoutIssue_MinimumOrderValueNotMet:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: The checkout does not meet the minimum order value.
           properties:
             additionalSpendRequired:
-              description: The amount the customer needs to spend to meet minimum order value. This is in the smallest unit of local currency (e.g. pence).
+              description: The amount the customer needs to spend to meet minimum order value. This is in the smallest unit of local currency e.g. pence.
               format: integer
               nullable: false
               type: number
             currency:
-              description: The currency in which the value amounts are returned in (ISO-4217 format)
+              description: The currency in which the value amounts are returned represented in ISO 4217 format.
               nullable: false
               type: string
             minimumOrderValue:
-              description: The minimum order value required to complete an order. This is in the smallest unit of local currency (e.g. pence).
+              description: The minimum order value required to complete an order. This is in the smallest unit of local currency e.g. pence.
               format: integer
               nullable: false
               type: number
+          required:
+            - currency
+            - minimumOrderValue
+            - additionalSpendRequired
           type: object
+      properties:
+        code:
+          description: The checkout does not meet the minimum order value.
     CheckoutIssue_PhoneNumberRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: Indicates that the customer's phone number is required to fulfil an order.
           type: object
+      properties:
+        code:
+          description: Indicates that the customer's phone number is required to fulfil an order.
     CheckoutIssue_PostalCodeRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: Indicates that the fulfilment postal code is required to fulfil an order.
           type: object
+      properties:
+        code:
+          description: Indicates that the fulfilment postal code is required to fulfil an order.
     CheckoutIssue_RestaurantNotTakingOrders:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: The restaurant being ordered from is no longer taking orders. Either the restaurant is not offline or is no longer available on the platform.
           type: object
+      properties:
+        code:
+          description: The restaurant being ordered from is no longer taking orders. Either the restaurant is not offline or is no longer available on the platform.
     CheckoutIssue_ServiceTypeUnavailable:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
-          description: The selected service type is not available. The restaurant may still be available to order from with a different service type.
           type: object
+      properties:
+        code:
+          description: The selected service type is not available. The restaurant may still be available to order from with a different service type.
     CheckoutRequest:
       description: Details needed to make a payment.
       properties:
@@ -6595,25 +6682,26 @@ components:
       properties:
         fault:
           additionalProperties: false
-          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          description: A list of values that helps identify this response back to logs, so we can easily find faults.
           nullable: false
           properties:
             errors:
-              description: List of errors that may assist you in resolving the issues
+              description: List of errors that may assist you in resolving the issues.
               items:
                 additionalProperties: false
-                description: Details about the error that may assist you in resolving the issue
+                description: Details about the error that may assist you in resolving the issue.
                 nullable: false
                 properties:
                   description:
-                    description: Specific details about the error that may assist you in resolving the issue
+                    description: Specific details about the error that may assist you in resolving the issue.
                     nullable: false
                     type: string
                   errorCode:
-                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error.
                     enum:
                       - TENANT_INVALID
                       - CHECKOUT_ID_INVALID
+                      - INVALID_PATCH_REQUEST
                       - FIRST_NAME_INVALID
                       - LAST_NAME_INVALID
                       - PHONE_NUMBER_INVALID
@@ -6634,11 +6722,11 @@ components:
               nullable: false
               type: array
             faultId:
-              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault.
               nullable: false
               type: string
             traceId:
-              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated.
               nullable: false
               type: string
           required:
@@ -6648,76 +6736,125 @@ components:
           type: object
       type: object
     CheckoutUpdateRequest:
+      description: >
+        Properties apply to all supported country codes, except where specified.
+
+
+        We do not support a PATCH request on the root path and a 400 status code will be returned.
       properties:
         customer:
-          description: Details of the customer creating a checkout
+          description: Details of the customer making the purchase.
           nullable: true
           properties:
             dateOfBirth:
-              description: Customer's date of birth (ISO 8601 Date)
+              description: >
+                Customer's date of birth represented in ISO 8601 format. If a time is submitted, it will be ignored.
+
+
+                Required in Australia (AU) and New Zealand (NZ) only for fulfilling an order that contain items being purchased that require age verification.
               nullable: true
               type: string
             firstName:
-              description: Customer's first name
+              description: >
+                Customer's first name. 
+
+
+                Also known as Given Name(s).
+              maxLength: 100
+              minLength: 1
               nullable: true
               type: string
             lastName:
-              description: Customer's last name
+              description: >
+                Customer's last name (Optional). 
+
+
+                Also known as Family Name.
+              maxLength: 100
+              minLength: 0
               nullable: true
               type: string
             phoneNumber:
-              description: Customer's phone number
+              description: Customer's phone number represented in E.164 format.
+              maxLength: 16
+              minLength: 3
               nullable: true
+              pattern: ^\+[1-9]\d{1,14}$
               type: string
           type: object
         fulfilment:
-          description: Details required to for an order to be fulfilled
+          description: How and when the items will be received by the customer.
           nullable: true
           properties:
             location:
-              description: The destinaton for where the customer would like to receive the order
+              description: >
+                The destination the customer wants to receive the order.
+
+
+                This only applies to purchases with a delivery service type.
               nullable: true
               properties:
                 address:
-                  description: The address where the customer would like to receive the order
+                  description: The postal address where the customer wants to receive the order.
                   nullable: true
                   properties:
                     administrativeArea:
-                      description: Administrative area for where the customer would like to receive the order. Alternative names include County, State, Provence and Prefecture.
+                      description: >
+                        Geographical region of this address. 
+
+
+                        Also known as County or State.
+
+
+                        Required in Australia (AU) only for an order to be fulfilled.
+                      maxLength: 50
+                      minLength: 1
                       nullable: true
                       type: string
                     lines:
-                      description: Ordered list of address parts where the customer would like to receive the order
+                      description: One or more lines representing the street address.
                       items:
-                        description: Part of the address where the customer would like to receive the order
+                        description: Represents part of a street address.
+                        maxLength: 100
+                        minLength: 1
                         nullable: false
                         type: string
-                      maxItems: 8
-                      minItems: 0
-                      nullable: false
+                      maxItems: 4
+                      minItems: 1
+                      nullable: true
                       type: array
                     locality:
-                      description: Locality for where the customer would like to receive the order. Alternative names include Town and City.
-                      nullable: false
-                      type: string
-                    postalCode:
-                      description: Postcode for where the customer would like to receive the order
+                      description: >
+                        The locality of this address.
+
+
+                        Also known as Town or City.
+                      maxLength: 50
+                      minLength: 1
                       nullable: true
                       type: string
-                  required:
-                    - lines
+                    postalCode:
+                      description: Postal code of this address.
+                      maxLength: 50
+                      minLength: 1
+                      nullable: true
+                      type: string
                   type: object
                 geolocation:
-                  description: The coordinates for where the customer would like to receive the order
+                  description: >
+                    The coordinates of a geographical location where the customer wants to receive the order.
+
+
+                    Required in Australia (AU) and New Zealand (NZ) only to for an order to be fulfilled.
                   nullable: true
                   properties:
                     latitude:
-                      description: The latitude for where the customer would like to receive the order
+                      description: The latitude of the geographical location.
                       format: decimal
                       nullable: false
                       type: number
                     longitude:
-                      description: The longitude for where the customer would like to receive the order
+                      description: The longitude of the geographical location.
                       format: decimal
                       nullable: false
                       type: number
@@ -6727,15 +6864,19 @@ components:
                   type: object
               type: object
             time:
-              description: Time-band for when the customer would like the order to be fulfilled (ready for collection/delivered)
+              description: Time the customer wants to receive the order i.e. when order is fulfilled.
               nullable: true
               properties:
                 from:
-                  description: Earliest time the customer wants the order to be fulfilled (ISO 8601 Date Time UTC)
+                  description: Earliest time the customer wants the order to be fulfilled represented in ISO 8601 UTC (Zulu Time).
                   nullable: false
                   type: string
                 to:
-                  description: Latest time the customer wants the order to be fulfilled (ISO 8601 Date Time UTC). This time must be greater than or equal to the from time.
+                  description: >
+                    Latest time the customer wants the order to be fulfilled represented in ISO 8601 UTC (Zulu Time). 
+
+
+                    This time must be greater than or equal to the from time.
                   nullable: false
                   type: string
               required:
@@ -6744,19 +6885,19 @@ components:
               type: object
           type: object
         notes:
-          description: Notes that the customer wants to submit as part of their order
+          description: Instructions about the order that the customer wants to submit.
           items:
-            description: Note that the customer wants to submit as part of their order
+            description: Instructions about the order that the customer wants to submit.
             nullable: false
             properties:
               note:
-                description: The note the customer wants to submit as part of their order
+                description: The contents of the note.
                 maxLength: 250
                 minLength: 0
                 nullable: false
                 type: string
               type:
-                description: The type of note that the customer wants to submit as part of their order
+                description: The type of note.
                 enum:
                   - delivery
                 nullable: false
@@ -6773,16 +6914,16 @@ components:
     CheckoutUpdateResponse:
       properties:
         isFulfillable:
-          description: Whether we are able to process the checkout
+          description: Whether the proposed order can be placed.
           nullable: false
           type: boolean
         issues:
-          description: Information about the current issues of a checkout
+          description: One or more issues associated the proposed order, that may impact whether it can be placed.
           items:
             $ref: "#/components/schemas/CheckoutIssue"
-            description: Information about a single issue of a checkout
+            description: Represents a single issue associated with the proposed order.
             nullable: false
-          maxItems: 10
+          maxItems: 18
           minItems: 0
           nullable: false
           type: array
@@ -6922,12 +7063,14 @@ components:
               totalClaimedAccepted: 4000
             restaurantResponse:
               decision: Accepted
-              justification: null
+              justification:
+                $ref: "#/components/schemas/ValidationError/example/customState"
             state: Closed
             submittedDate: 2020-05-20T14:22:11.1053368+00:00
             totalClaimed: 4000
           - affectedItems:
-              - additionalContext: null
+              - additionalContext:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
                 decision: Open
                 id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
                 name: Potato skin
@@ -6935,7 +7078,8 @@ components:
                 reference: productid%4t56574596
                 totalClaimed: 1900
                 unitPrice: 2000
-              - additionalContext: null
+              - additionalContext:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
                 decision: Open
                 id: 123iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
                 name: Pizza
@@ -6949,8 +7093,10 @@ components:
             id: 2f749442-a62a-abcd-8623-04202878e034
             issueType: Damaged
             orderId: r23tqoxdoeupdx9w8evorw
-            resolution: null
-            restaurantResponse: null
+            resolution:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            restaurantResponse:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             state: Open
             submittedDate: 2020-05-20T14:22:11.1053368+00:00
             totalClaimed: 3800
@@ -6979,7 +7125,8 @@ components:
                 - decision: Rejected
                   id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
               justification:
-                comments: null
+                comments:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
                 reason: OrderWasHot
             state: Closed
             submittedDate: 2020-05-20T14:22:11.1053368+00:00
@@ -7008,7 +7155,8 @@ components:
               items:
                 - decision: Accepted
                   id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
-              justification: null
+              justification:
+                $ref: "#/components/schemas/ValidationError/example/customState"
             state: Closed
             submittedDate: 2020-05-20T14:22:11.1053368+00:00
             totalClaimed: 1900
@@ -7046,7 +7194,8 @@ components:
                   id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc1
                 - decision: Rejected
                   id: NJ7iYXNrZXRJdGVtLTM2NTc0GTk2LTMwNDY2LXMzOWJxb3hkb2V1cGR4OXc4ZXZvcnc3
-              justification: null
+              justification:
+                $ref: "#/components/schemas/ValidationError/example/customState"
             state: Closed
             submittedDate: 2020-05-20T14:22:11.1053368+00:00
             totalClaimed: 1900
@@ -8789,8 +8938,8 @@ components:
         - None
         - ReferredByWeb
       type: string
-      x-api-version-from: 0
-    ConsumerOrdersPlacementRequest:
+      x-api-version-from: 1
+    ConsumerOrdersPlacementRequestV1:
       additionalProperties: false
       description: An object representing the request to place an order for a given basket Id.
       example:
@@ -8847,6 +8996,34 @@ components:
         - deviceName
       type: object
       x-api-version-from: 1
+      x-api-version-to: 1
+    ConsumerOrdersPlacementRequestV2:
+      additionalProperties: false
+      description: An object representing the request to place an order for a given basket Id.
+      example:
+        basketId: basket_gh23i_PS4_
+        customerNotes:
+          NoteForDriver: Call me when you get here
+          NoteForRestaurant: No mayonnaise
+        referralState: ReferredByWeb
+      properties:
+        basketId:
+          description: The basket Id.
+          type: string
+        customerNotes:
+          additionalProperties:
+            type: string
+          description: Dictionary of the customer notes to add to the order. The keys of the dictionary are the notes capabilities that the restaurant has.
+          nullable: true
+          type: object
+        referralState:
+          allOf:
+            - $ref: "#/components/schemas/ConsumerOrdersPlacementReferralState"
+          description: Order referral source
+      required:
+        - basketId
+      type: object
+      x-api-version-from: 2
     ConsumerOrdersPlacementResponse:
       additionalProperties: false
       description: An order placement response.
@@ -9600,16 +9777,19 @@ components:
           helpData_helpSessionId: helpsessionid
           helpData_isPilot: 32
           trData_menuType: collection
-          trData_trId: null
+          trData_trId:
+            $ref: "#/components/schemas/ValidationError/example/customState"
           transactionData_dateDiff: -1800
           transactionData_nTotalItems: 0
           transactionData_newTransactionId: orderid
-          transactionData_orderDelay: null
+          transactionData_orderDelay:
+            $ref: "#/components/schemas/ValidationError/example/customState"
           transactionData_orderStatus: Accepted
         experimentEvents:
           - id: EX-1742
             name: bandit_exp_new_carousels_2
-            parentId: null
+            parentId:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             platform: optimizely_fullstack
             variantName: variant_d
             version: 1
@@ -9620,13 +9800,18 @@ components:
             buttonEvent:
               action: click_call_restaurant
               category: engagement
-              label: null
-              value: null
+              label:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              value:
+                $ref: "#/components/schemas/ValidationError/example/customState"
             buttonType: Primary
-            data: null
-            department: null
+            data:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            department:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             id: CallRestaurant
-            notes: null
+            notes:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             postText: []
             preText: []
             title: Call the restaurant
@@ -9637,12 +9822,16 @@ components:
                 action: click_cancel_order
                 category: engagement
                 label: helpflow
-                value: null
+                value:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
               buttonType: Secondary
-              data: null
-              department: null
+              data:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              department:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               id: Cancel
-              notes: null
+              notes:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               postText: []
               preText: []
               title: I want to cancel my order
@@ -9652,28 +9841,38 @@ components:
                 action: click_bad_item
                 category: engagement
                 label: helpflow
-                value: null
+                value:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
               buttonType: Secondary
-              data: null
-              department: null
+              data:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              department:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               id: BadItem
-              notes: null
+              notes:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               postText: []
               preText: []
               title: I'm unhappy with my order
               type: ChapiGet
         topLevelActions:
-          - action: null
+          - action:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             buttonEvent:
               action: click_open_chatbot
               category: engagement
-              label: null
-              value: null
+              label:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              value:
+                $ref: "#/components/schemas/ValidationError/example/customState"
             buttonType: Primary
-            data: null
-            department: null
+            data:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            department:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             id: StartChatBot
-            notes: null
+            notes:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             postText: []
             preText: []
             title: Chat to us
@@ -9682,13 +9881,18 @@ components:
             buttonEvent:
               action: click_email_justeat
               category: engagement
-              label: null
-              value: null
+              label:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              value:
+                $ref: "#/components/schemas/ValidationError/example/customState"
             buttonType: Secondary
-            data: null
-            department: null
+            data:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            department:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             id: EmailJustEat
-            notes: null
+            notes:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             postText: []
             preText: []
             title: Email our happy helpers
@@ -9697,13 +9901,18 @@ components:
             buttonEvent:
               action: click_call_justeat
               category: engagement
-              label: null
-              value: null
+              label:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              value:
+                $ref: "#/components/schemas/ValidationError/example/customState"
             buttonType: Secondary
-            data: null
-            department: null
+            data:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            department:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             id: PhoneJustEat
-            notes: null
+            notes:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             postText: []
             preText: []
             title: Phone a human
@@ -9757,11 +9966,13 @@ components:
           helpData_helpSessionId: helpsessionid
           helpData_isPilot: 32
           trData_menuType: collection
-          trData_trId: null
+          trData_trId:
+            $ref: "#/components/schemas/ValidationError/example/customState"
           transactionData_dateDiff: -1800
           transactionData_nTotalItems: 0
           transactionData_newTransactionId: orderid
-          transactionData_orderDelay: null
+          transactionData_orderDelay:
+            $ref: "#/components/schemas/ValidationError/example/customState"
           transactionData_orderStatus: Accepted
         helpSessionId: helpsessionid
         order:
@@ -9783,13 +9994,18 @@ components:
             buttonEvent:
               action: click_call_restaurant
               category: engagement
-              label: null
-              value: null
+              label:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              value:
+                $ref: "#/components/schemas/ValidationError/example/customState"
             buttonType: Primary
-            data: null
-            department: null
+            data:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            department:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             id: CallRestaurant
-            notes: null
+            notes:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             postText: []
             preText: []
             title: Call the restaurant
@@ -9800,12 +10016,16 @@ components:
                 action: click_cancel_order
                 category: engagement
                 label: helpflow
-                value: null
+                value:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
               buttonType: Secondary
-              data: null
-              department: null
+              data:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              department:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               id: Cancel
-              notes: null
+              notes:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               postText: []
               preText: []
               title: I want to cancel my order
@@ -9815,12 +10035,16 @@ components:
                 action: click_bad_item
                 category: engagement
                 label: helpflow
-                value: null
+                value:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
               buttonType: Secondary
-              data: null
-              department: null
+              data:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              department:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               id: BadItem
-              notes: null
+              notes:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               postText: []
               preText: []
               title: I'm unhappy with my order
@@ -9830,17 +10054,23 @@ components:
           telephone: +44 1234 123123
           thumbnail: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRnTQ8sfP8yxicqMBoAymdKzrpjhtwSeCIXdpqhZ7Hrj8FLBfB
         topLevelActions:
-          - action: null
+          - action:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             buttonEvent:
               action: click_open_chatbot
               category: engagement
-              label: null
-              value: null
+              label:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              value:
+                $ref: "#/components/schemas/ValidationError/example/customState"
             buttonType: Primary
-            data: null
-            department: null
+            data:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            department:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             id: StartChatBot
-            notes: null
+            notes:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             postText: []
             preText: []
             title: Chat to us
@@ -9849,13 +10079,18 @@ components:
             buttonEvent:
               action: click_email_justeat
               category: engagement
-              label: null
-              value: null
+              label:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              value:
+                $ref: "#/components/schemas/ValidationError/example/customState"
             buttonType: Secondary
-            data: null
-            department: null
+            data:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            department:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             id: EmailJustEat
-            notes: null
+            notes:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             postText: []
             preText: []
             title: Email our happy helpers
@@ -9864,13 +10099,18 @@ components:
             buttonEvent:
               action: click_call_justeat
               category: engagement
-              label: null
-              value: null
+              label:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              value:
+                $ref: "#/components/schemas/ValidationError/example/customState"
             buttonType: Secondary
-            data: null
-            department: null
+            data:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            department:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             id: PhoneJustEat
-            notes: null
+            notes:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             postText: []
             preText: []
             title: Phone a human
@@ -10170,7 +10410,8 @@ components:
         deliveryMinutes: 5
         unboundedZone:
           items:
-            - coordinates: null
+            - coordinates:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               items:
                 - latitude: 57.159200668
                   longitude: -2.08593559299993
@@ -10535,25 +10776,33 @@ components:
                   label: confirm_charged
                   value: 550
                 buttonType: Primary
-                data: null
-                department: null
+                data:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
+                department:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
                 id: ConfirmCancel
-                notes: null
+                notes:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
                 postText: []
                 preText: []
                 title: Cancel order - pay £5.50
                 type: ChapiPost
-              - action: null
+              - action:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
                 buttonEvent:
                   action: form_cancel_order
                   category: engagement
                   label: close
-                  value: null
+                  value:
+                    $ref: "#/components/schemas/ValidationError/example/customState"
                 buttonType: Secondary
-                data: null
-                department: null
+                data:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
+                department:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
                 id: EndFlow
-                notes: null
+                notes:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
                 postText: []
                 preText: []
                 title: Keep my order
@@ -10562,17 +10811,22 @@ components:
               - You will need to pay for 50% of your order. This charge will come to £5.50.
               - We are unable to offer a full refund because the restaurant has already started preparing your food.
             closeButton:
-              action: null
+              action:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               buttonEvent:
                 action: form_cancel_order
                 category: engagement
                 label: close
-                value: null
+                value:
+                  $ref: "#/components/schemas/ValidationError/example/customState"
               buttonType: CloseButton
-              data: null
-              department: null
+              data:
+                $ref: "#/components/schemas/ValidationError/example/customState"
+              department:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               id: EndFlow
-              notes: null
+              notes:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               postText: []
               preText: []
               title: Close
@@ -10583,7 +10837,8 @@ components:
                 transactionData_dateDiff: -3600
                 transactionData_delay: -1800
             header: Are you sure you want to cancel this order?
-            iconType: null
+            iconType:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             title: Cancel order
           type: TextAndActions
       properties:
@@ -10759,12 +11014,16 @@ components:
             nullable: false
             properties:
               from:
-                description: Start time in time band (ISO-8601 Date Time UTC).
+                description: Start time represented in ISO 8601 UTC (Zulu Time).
                 format: date-time
                 nullable: false
                 type: string
               to:
-                description: End time in time band (ISO-8601 Date Time UTC). This time is greater than or equal to the from time.
+                description: >
+                  End time represented in ISO 8601 UTC (Zulu Time).
+
+
+                  This time can be equal to the from time.
                 format: date-time
                 nullable: false
                 type: string
@@ -10773,6 +11032,7 @@ components:
               - to
             type: object
           maxItems: 576
+          minItems: 0
           nullable: false
           type: array
       required:
@@ -10824,7 +11084,8 @@ components:
             - deliveryMinutes: 5
               unboundedZone:
                 items:
-                  - coordinates: null
+                  - coordinates:
+                      $ref: "#/components/schemas/ValidationError/example/customState"
                     items:
                       - latitude: 57.159200668
                         longitude: -2.08593559299993
@@ -10838,7 +11099,8 @@ components:
             - deliveryMinutes: 7
               unboundedZone:
                 items:
-                  - coordinates: null
+                  - coordinates:
+                      $ref: "#/components/schemas/ValidationError/example/customState"
                     items:
                       - latitude: 57.159200668
                         longitude: -2.08593559299993
@@ -12404,9 +12666,9 @@ components:
           MenuItemId: "123"
           MenuItemName: Cheese Pizza
           OptionGroups:
-            - null
+            - $ref: "#/components/schemas/ValidationError/example/customState"
           PreferenceGroups:
-            - null
+            - $ref: "#/components/schemas/ValidationError/example/customState"
           ReceiptNumber: 321a
           Variations:
             - Id: "32"
@@ -15400,7 +15662,8 @@ components:
         Id: "111"
         IsOffline: false
         Name: Coca-Cola 0.33L
-        NextAvailableAt: null
+        NextAvailableAt:
+          $ref: "#/components/schemas/ValidationError/example/customState"
         Price:
           CurrencyCode: GBP
           Value: 99
@@ -15450,7 +15713,8 @@ components:
             Id: "111"
             IsOffline: false
             Name: Coca-Cola 0.33L
-            NextAvailableAt: null
+            NextAvailableAt:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             Price:
               CurrencyCode: GBP
               Value: 99
@@ -15460,7 +15724,8 @@ components:
             Id: "112"
             IsOffline: false
             Name: Coca-Cola 1.5L
-            NextAvailableAt: null
+            NextAvailableAt:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             Price:
               CurrencyCode: GBP
               Value: 199
@@ -17486,8 +17751,10 @@ components:
             inspectionDate: 02-01-2021
             rate: 1
           fourth:
-            ? inspectionDate
-            ? rate
+            inspectionDate:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            rate:
+              $ref: "#/components/schemas/ValidationError/example/customState"
           second:
             inspectionDate: 02-01-2021
             rate: 1
@@ -17636,6 +17903,45 @@ components:
           description: type of primitive
           type: string
       type: object
+    RichMediaImagePublishRequest:
+      example:
+        imageType: DishImage
+        images:
+          - imageContext:
+              dishKey: pizza
+              restaurantKey: burgers&pizza
+              tenant: uk
+            imageSourceUrl: https://test.test/image01.jpg
+          - imageContext:
+              dishKey: burger
+              restaurantKey: burgers&pizza
+              tenant: uk
+            imageSourceUrl: https://test.test/image02.jpg
+      nullable: false
+      properties:
+        imageType:
+          description: Image type of published images. Must match an image type defined in the metadata for your client.
+          type: string
+        images:
+          description: The array of images to publish.
+          items:
+            properties:
+              imageContext:
+                additionalProperties:
+                  type: string
+                description: Image context in dictionary format. Can contain additional data that will be published alongside the image.
+                type: object
+              sourceImageUrl:
+                description: Source image URL. The remote HTTP or HTTPS URL address of an existing image or a private S3 object URL in a whitelisted bucket.
+                type: string
+            type: object
+          maxItems: 500
+          minItems: 1
+          type: array
+      required:
+        - imageType
+        - images
+      type: object
     SearchByConsumerResponse:
       properties:
         cards:
@@ -17699,7 +18005,8 @@ components:
           Longitude: 0
           Postcode: EC4
           ResultCount: 1
-          SearchedTerms: null
+          SearchedTerms:
+            $ref: "#/components/schemas/ValidationError/example/customState"
           TagDetails:
             - BackgroundColour: "#E6F6C5"
               Colour: "#04822C"
@@ -17717,7 +18024,8 @@ components:
             Badges: []
             BrandName: ""
             City: London
-            CollectionMenuId: null
+            CollectionMenuId:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             CuisineTypes:
               - Id: 2
                 IsTopCuisine: false
@@ -17735,22 +18043,28 @@ components:
             DeliveryChargeBands: []
             DeliveryCost: 0.12
             DeliveryEtaMinutes:
-              Approximate: null
+              Approximate:
+                $ref: "#/components/schemas/ValidationError/example/customState"
               RangeLower: 10
               RangeUpper: 25
             DeliveryMenuId: 224651
             DeliveryOpeningTime: 2019-11-18T01:00:00Z
             DeliveryOpeningTimeLocal: 2019-11-18T01:00:00
-            DeliveryOpeningTimeUtc: null
+            DeliveryOpeningTimeUtc:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             DeliveryStartTime: 2019-11-18T01:00:00Z
-            DeliveryTime: null
-            DeliveryTimeMinutes: null
+            DeliveryTime:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            DeliveryTimeMinutes:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             DeliveryWorkingTimeMinutes: 10
-            DeliveryZipcode: null
+            DeliveryZipcode:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             Description: ""
             DriveDistance: 0
             DriveInfoCalculated: true
-            HygieneRating: null
+            HygieneRating:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             Id: 102215
             IsBrand: false
             IsCloseBy: true
@@ -17788,7 +18102,8 @@ components:
             OpeningTime: 2019-11-19T01:00:00Z
             OpeningTimeIso: 2019-11-19T01:00:00
             OpeningTimeLocal: 2019-11-19T01:00:00
-            OpeningTimeUtc: null
+            OpeningTimeUtc:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             OpeningTimes: []
             Postcode: EC4M 7RF
             Rating:
@@ -17809,10 +18124,13 @@ components:
             SendsOnItsWayNotifications: false
             ServiceableAreas: []
             ShowSmiley: false
-            SmileyDate: null
+            SmileyDate:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             SmileyElite: false
-            SmileyResult: null
-            SmileyUrl: null
+            SmileyResult:
+              $ref: "#/components/schemas/ValidationError/example/customState"
+            SmileyUrl:
+              $ref: "#/components/schemas/ValidationError/example/customState"
             SponsoredPosition: 0
             Tags: []
             UniqueName: test_dp-london-london
@@ -18897,7 +19215,8 @@ components:
               Msg: No International Permission.
             resource_sid: CAxxxx
             service_sid: SSxxxx
-            webhook: null
+            webhook:
+              $ref: "#/components/schemas/ValidationError/example/customState"
           type: string
         payloadType:
           description: Type of the payload
@@ -19555,16 +19874,19 @@ components:
     ValidationError:
       additionalProperties: false
       example:
-        attemptedValue: null
+        attemptedValue:
+          $ref: "#/components/schemas/ValidationError/example/customState"
         customState: null
         errorCode: NotEmptyValidator
         errorMessage: TestProperty is empty
         formattedMessageArguments: []
         formattedMessagePlaceholderValues:
           PropertyName: User Role
-          PropertyValue: null
+          PropertyValue:
+            $ref: "#/components/schemas/ValidationError/example/customState"
         propertyName: TestProperty
-        resourceName: null
+        resourceName:
+          $ref: "#/components/schemas/ValidationError/example/customState"
         severity: 0
       properties:
         attemptedValue:
@@ -21463,7 +21785,8 @@ components:
       type: object
     delivery-eta-minutes:
       example:
-        Approximate: null
+        Approximate:
+          $ref: "#/components/schemas/ValidationError/example/customState"
         RangeLower: 35
         RangeUpper: 50
       nullable: true

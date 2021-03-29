@@ -685,7 +685,8 @@ paths:
               audioRecordingEnabled: false
               motionBasedRetentionEnabled: false
               motionDetectorVersion: 2
-              profileId: null
+              profileId:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               quality: Standard
               resolution: 720
               restrictedBandwidthModeEnabled: false
@@ -711,7 +712,8 @@ paths:
               audioRecordingEnabled: false
               motionBasedRetentionEnabled: false
               motionDetectorVersion: 2
-              profileId: null
+              profileId:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               quality: Standard
               resolution: 720
               restrictedBandwidthModeEnabled: false
@@ -758,7 +760,8 @@ paths:
               audioRecordingEnabled: false
               motionBasedRetentionEnabled: false
               motionDetectorVersion: 2
-              profileId: null
+              profileId:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               quality: Standard
               resolution: 720
               restrictedBandwidthModeEnabled: false
@@ -1242,7 +1245,8 @@ paths:
                 ip: 1.2.3.4
                 mac: 22:33:44:55:66:77
                 mdnsName: Miles's phone
-                switchport: null
+                switchport:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 usage:
                   recv: 61
                   sent: 138
@@ -3497,7 +3501,8 @@ paths:
                   description: test description
                   ip: 1.23.45.67
                 - default: false
-                  description: null
+                  description:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   ip: 9.8.7.6
           schema:
             type: object
@@ -3558,7 +3563,8 @@ paths:
                   description: test description
                   ip: 1.23.45.67
                 - default: false
-                  description: null
+                  description:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   ip: 9.8.7.6
           schema:
             type: object
@@ -5849,7 +5855,8 @@ paths:
                       value:
                         id: meraki:layer7/application/133
                         name: Battle.net
-                  dscpTagValue: null
+                  dscpTagValue:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   perClientBandwidthLimits:
                     bandwidthLimits:
                       limitDown: 1000000
@@ -5899,7 +5906,8 @@ paths:
                       value:
                         id: meraki:layer7/application/133
                         name: Battle.net
-                  dscpTagValue: null
+                  dscpTagValue:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   perClientBandwidthLimits:
                     bandwidthLimits:
                       limitDown: 1000000
@@ -6009,7 +6017,8 @@ paths:
                       value:
                         id: meraki:layer7/application/133
                         name: Battle.net
-                  dscpTagValue: null
+                  dscpTagValue:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   perClientBandwidthLimits:
                     bandwidthLimits:
                       limitDown: 1000000
@@ -6737,8 +6746,10 @@ paths:
           examples:
             application/json:
               - applianceIp: 192.168.1.2
-                dhcpBootFilename: null
-                dhcpBootNextServer: null
+                dhcpBootFilename:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                dhcpBootNextServer:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 dhcpBootOptionsEnabled: false
                 dhcpHandling: Run a DHCP server
                 dhcpLeaseTime: 1 day
@@ -6811,8 +6822,10 @@ paths:
           examples:
             application/json:
               applianceIp: 192.168.1.2
-              dhcpBootFilename: null
-              dhcpBootNextServer: null
+              dhcpBootFilename:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+              dhcpBootNextServer:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               dhcpBootOptionsEnabled: false
               dhcpHandling: Run a DHCP server
               dhcpLeaseTime: 1 day
@@ -6926,8 +6939,10 @@ paths:
           examples:
             application/json:
               applianceIp: 192.168.1.2
-              dhcpBootFilename: null
-              dhcpBootNextServer: null
+              dhcpBootFilename:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+              dhcpBootNextServer:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               dhcpBootOptionsEnabled: false
               dhcpHandling: Run a DHCP server
               dhcpLeaseTime: 1 day
@@ -6973,8 +6988,10 @@ paths:
           schema:
             example:
               applianceIp: 192.168.1.2
-              dhcpBootFilename: null
-              dhcpBootNextServer: null
+              dhcpBootFilename:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+              dhcpBootNextServer:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               dhcpBootOptionsEnabled: false
               dhcpHandling: Run a DHCP server
               dhcpLeaseTime: 1 day
@@ -7098,8 +7115,10 @@ paths:
           examples:
             application/json:
               applianceIp: 192.168.1.2
-              dhcpBootFilename: null
-              dhcpBootNextServer: null
+              dhcpBootFilename:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+              dhcpBootNextServer:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               dhcpBootOptionsEnabled: false
               dhcpHandling: Run a DHCP server
               dhcpLeaseTime: 1 day
@@ -7672,7 +7691,8 @@ paths:
                 name: Sample quality retention profile
                 networkId: N_24329156
                 restrictedBandwidthModeEnabled: true
-                scheduleId: null
+                scheduleId:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 videoSettings:
                   MV12/MV22/MV72:
                     quality: High
@@ -7852,7 +7872,8 @@ paths:
               name: Sample quality retention profile
               networkId: N_24329156
               restrictedBandwidthModeEnabled: true
-              scheduleId: null
+              scheduleId:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               videoSettings:
                 MV12/MV22/MV72:
                   quality: High
@@ -7920,7 +7941,8 @@ paths:
               name: Sample quality retention profile
               networkId: N_24329156
               restrictedBandwidthModeEnabled: true
-              scheduleId: null
+              scheduleId:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               videoSettings:
                 MV12/MV22/MV72:
                   quality: High
@@ -8101,7 +8123,8 @@ paths:
               name: Sample quality retention profile
               networkId: N_24329156
               restrictedBandwidthModeEnabled: true
-              scheduleId: null
+              scheduleId:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               videoSettings:
                 MV12/MV22/MV72:
                   quality: High
@@ -8169,7 +8192,8 @@ paths:
                   description: test description
                   ip: 1.23.45.67
                 - default: false
-                  description: null
+                  description:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   ip: 9.8.7.6
           schema:
             type: object
@@ -8208,7 +8232,8 @@ paths:
                       description: Boolean indicating whether this is the default testing destination (true) or not (false). Defaults to false. Only one default is allowed
                       type: boolean
                     description:
-                      default: null
+                      default:
+                        $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                       description: Description of the testing destination. Optional, defaults to null
                       type: string
                     ip:
@@ -8232,7 +8257,8 @@ paths:
                   description: test description
                   ip: 1.23.45.67
                 - default: false
-                  description: null
+                  description:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   ip: 9.8.7.6
           schema:
             type: object
@@ -8507,7 +8533,8 @@ paths:
                 smInstalled: true
                 ssid: My SSID
                 status: Online
-                switchport: null
+                switchport:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 usage:
                   recv: 61
                   sent: 138
@@ -9047,7 +9074,8 @@ paths:
           description: Successful operation
           examples:
             application/json:
-              cdp: null
+              cdp:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               clientVpnConnections:
                 - connectedAt: 1522613355
                   disconnectedAt: 1522613360
@@ -9078,7 +9106,8 @@ paths:
               smInstalled: true
               ssid: My SSID
               status: Online
-              switchport: null
+              switchport:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               user: "null"
               vlan: "255"
               wirelessCapabilities: 802.11ac - 2.4 and 5 GHz
@@ -9628,7 +9657,8 @@ paths:
                   ssidName: My SSID
                   ssidNumber: 1
                   type: association
-              message: null
+              message:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               pageEndAt: 2018-02-11T00:00:00.090210Z
               pageStartAt: 2018-02-11T00:00:00.090210Z
           headers:
@@ -10303,8 +10333,10 @@ paths:
                           value:
                             id: meraki:layer7/application/133
                             name: Battle.net
-                      dscpTagValue: null
-                      pcpTagValue: null
+                      dscpTagValue:
+                        $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                      pcpTagValue:
+                        $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                       perClientBandwidthLimits:
                         bandwidthLimits:
                           limitDown: 1000000
@@ -10454,8 +10486,10 @@ paths:
                         value:
                           id: meraki:layer7/application/133
                           name: Battle.net
-                    dscpTagValue: null
-                    pcpTagValue: null
+                    dscpTagValue:
+                      $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                    pcpTagValue:
+                      $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                     perClientBandwidthLimits:
                       bandwidthLimits:
                         limitDown: 1000000
@@ -10967,8 +11001,10 @@ paths:
                         value:
                           id: meraki:layer7/application/133
                           name: Battle.net
-                    dscpTagValue: null
-                    pcpTagValue: null
+                    dscpTagValue:
+                      $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                    pcpTagValue:
+                      $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                     perClientBandwidthLimits:
                       bandwidthLimits:
                         limitDown: 1000000
@@ -11143,8 +11179,10 @@ paths:
                         value:
                           id: meraki:layer7/application/133
                           name: Battle.net
-                    dscpTagValue: null
-                    pcpTagValue: null
+                    dscpTagValue:
+                      $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                    pcpTagValue:
+                      $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                     perClientBandwidthLimits:
                       bandwidthLimits:
                         limitDown: 1000000
@@ -11297,8 +11335,10 @@ paths:
                         value:
                           id: meraki:layer7/application/133
                           name: Battle.net
-                    dscpTagValue: null
-                    pcpTagValue: null
+                    dscpTagValue:
+                      $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                    pcpTagValue:
+                      $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                     perClientBandwidthLimits:
                       bandwidthLimits:
                         limitDown: 1000000
@@ -11808,8 +11848,10 @@ paths:
                         value:
                           id: meraki:layer7/application/133
                           name: Battle.net
-                    dscpTagValue: null
-                    pcpTagValue: null
+                    dscpTagValue:
+                      $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                    pcpTagValue:
+                      $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                     perClientBandwidthLimits:
                       bandwidthLimits:
                         limitDown: 1000000
@@ -12583,7 +12625,8 @@ paths:
           description: Successful operation
           examples:
             application/json:
-              completedAt: null
+              completedAt:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               createdAt: 1524692227
               datasets: "['usage', 'events']"
               id: "1234"
@@ -13806,25 +13849,35 @@ paths:
           examples:
             application/json:
               - appId: "1234"
-                bundleSize: null
+                bundleSize:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 createdAt: 2018-02-11T00:00:00Z
                 deviceId: "1234"
-                dynamicSize: null
+                dynamicSize:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 id: "1284392014819"
                 identifier: com.test.app
                 installedAt: 2018-05-12T00:00:00Z
-                iosRedemptionCode: null
+                iosRedemptionCode:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 isManaged: true
-                itunesId: null
-                licenseKey: null
+                itunesId:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                licenseKey:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 name: My app
                 path: /Path/to/app.app
-                redemptionCode: null
-                shortVersion: null
-                status: null
-                toInstall: null
+                redemptionCode:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                shortVersion:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                status:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                toInstall:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 toUninstall: false
-                uninstalledAt: null
+                uninstalledAt:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 updatedAt: 2018-05-12T00:00:00Z
                 vendor: Apple
                 version: "0.1"
@@ -13913,7 +13966,8 @@ paths:
                   - tag1
                   - tag2
                   - tag3
-                targetGroupId: null
+                targetGroupId:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
           schema:
             type: object
       summary: List all profiles in a network
@@ -14271,25 +14325,35 @@ paths:
           examples:
             application/json:
               - appId: "1234"
-                bundleSize: null
+                bundleSize:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 createdAt: 2018-02-11T00:00:00Z
                 deviceId: "1234"
-                dynamicSize: null
+                dynamicSize:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 id: "1284392014819"
                 identifier: com.test.app
                 installedAt: 2018-05-12T00:00:00Z
-                iosRedemptionCode: null
+                iosRedemptionCode:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 isManaged: true
-                itunesId: null
-                licenseKey: null
+                itunesId:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                licenseKey:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 name: My app
                 path: /Path/to/app.app
-                redemptionCode: null
-                shortVersion: null
-                status: null
-                toInstall: null
+                redemptionCode:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                shortVersion:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                status:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                toInstall:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 toUninstall: false
-                uninstalledAt: null
+                uninstalledAt:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 updatedAt: 2018-05-12T00:00:00Z
                 vendor: Apple
                 version: "0.1"
@@ -16139,12 +16203,14 @@ paths:
           examples:
             application/json:
               - dscp: 0
-                dstPort: null
+                dstPort:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 dstPortRange: 3000-3100
                 id: "1284392014819"
                 protocol: TCP
                 srcPort: 2000
-                srcPortRange: null
+                srcPortRange:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 vlan: 100
           schema:
             type: object
@@ -16171,7 +16237,8 @@ paths:
               dstPortRange: 3000-3100
               protocol: TCP
               srcPort: 2000
-              srcPortRange: null
+              srcPortRange:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               vlan: 100
             properties:
               dscp:
@@ -16208,12 +16275,14 @@ paths:
           examples:
             application/json:
               dscp: 0
-              dstPort: null
+              dstPort:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               dstPortRange: 3000-3100
               id: "1284392014819"
               protocol: TCP
               srcPort: 2000
-              srcPortRange: null
+              srcPortRange:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               vlan: 100
           schema:
             type: object
@@ -16327,12 +16396,14 @@ paths:
           examples:
             application/json:
               dscp: 0
-              dstPort: null
+              dstPort:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               dstPortRange: 3000-3100
               id: "1284392014819"
               protocol: TCP
               srcPort: 2000
-              srcPortRange: null
+              srcPortRange:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               vlan: 100
           schema:
             type: object
@@ -16358,11 +16429,13 @@ paths:
           schema:
             example:
               dscp: 0
-              dstPort: null
+              dstPort:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               dstPortRange: 3000-3100
               protocol: TCP
               srcPort: 2000
-              srcPortRange: null
+              srcPortRange:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               vlan: 100
             properties:
               dscp:
@@ -16397,12 +16470,14 @@ paths:
           examples:
             application/json:
               dscp: 0
-              dstPort: null
+              dstPort:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               dstPortRange: 3000-3100
               id: "1284392014819"
               protocol: TCP
               srcPort: 2000
-              srcPortRange: null
+              srcPortRange:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               vlan: 100
           schema:
             type: object
@@ -18208,7 +18283,8 @@ paths:
             application/json:
               - activeTime: 77000
                 application: Gmail
-                destination: null
+                destination:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 flows: 300
                 numClients: 7
                 port: 443
@@ -20421,7 +20497,8 @@ paths:
                   maxPower: 30
                   minBitrate: 12
                   minPower: 8
-                  rxsop: null
+                  rxsop:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   validAutoChannels:
                     - 36
                     - 40
@@ -20457,7 +20534,8 @@ paths:
                   maxPower: 30
                   minBitrate: 11
                   minPower: 5
-                  rxsop: null
+                  rxsop:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   validAutoChannels:
                     - 1
                     - 6
@@ -20583,7 +20661,8 @@ paths:
                 maxPower: 30
                 minBitrate: 12
                 minPower: 8
-                rxsop: null
+                rxsop:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 validAutoChannels:
                   - 36
                   - 40
@@ -20619,7 +20698,8 @@ paths:
                 maxPower: 30
                 minBitrate: 11
                 minPower: 5
-                rxsop: null
+                rxsop:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 validAutoChannels:
                   - 1
                   - 6
@@ -20679,7 +20759,8 @@ paths:
                 maxPower: 30
                 minBitrate: 12
                 minPower: 8
-                rxsop: null
+                rxsop:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 validAutoChannels:
                   - 36
                   - 40
@@ -20715,7 +20796,8 @@ paths:
                 maxPower: 30
                 minBitrate: 11
                 minPower: 5
-                rxsop: null
+                rxsop:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 validAutoChannels:
                   - 1
                   - 6
@@ -20841,7 +20923,8 @@ paths:
                 maxPower: 30
                 minBitrate: 12
                 minPower: 8
-                rxsop: null
+                rxsop:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 validAutoChannels:
                   - 36
                   - 40
@@ -20877,7 +20960,8 @@ paths:
                 maxPower: 30
                 minBitrate: 11
                 minPower: 5
-                rxsop: null
+                rxsop:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 validAutoChannels:
                   - 1
                   - 6
@@ -22121,13 +22205,15 @@ paths:
             application/json:
               redirectUrl: https://example.com
               splashImage:
-                ? md5
+                md5:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               splashLogo:
                 extension: jpg
                 md5: abcd1234
               splashPage: Click-through splash page
               splashPrepaidFront:
-                ? md5
+                md5:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               splashUrl: https://www.custom_splash_url.com
               ssidNumber: 0
               useRedirectUrl: true
@@ -22160,13 +22246,15 @@ paths:
             example:
               redirectUrl: https://example.com
               splashImage:
-                ? md5
+                md5:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               splashLogo:
                 extension: jpg
                 md5: abcd1234
               splashPage: Click-through splash page
               splashPrepaidFront:
-                ? md5
+                md5:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               splashUrl: https://www.custom_splash_url.com
               useRedirectUrl: true
               useSplashUrl: true
@@ -22271,13 +22359,15 @@ paths:
             application/json:
               redirectUrl: https://example.com
               splashImage:
-                ? md5
+                md5:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               splashLogo:
                 extension: jpg
                 md5: abcd1234
               splashPage: Click-through splash page
               splashPrepaidFront:
-                ? md5
+                md5:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               splashUrl: https://www.custom_splash_url.com
               ssidNumber: 0
               useRedirectUrl: true
@@ -22333,8 +22423,10 @@ paths:
                       value:
                         id: meraki:layer7/application/133
                         name: Battle.net
-                  dscpTagValue: null
-                  pcpTagValue: null
+                  dscpTagValue:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                  pcpTagValue:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   perClientBandwidthLimits:
                     bandwidthLimits:
                       limitDown: 1000000
@@ -22389,8 +22481,10 @@ paths:
                       value:
                         id: meraki:layer7/application/133
                         name: Battle.net
-                  dscpTagValue: null
-                  pcpTagValue: null
+                  dscpTagValue:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                  pcpTagValue:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   perClientBandwidthLimits:
                     bandwidthLimits:
                       limitDown: 1000000
@@ -22503,8 +22597,10 @@ paths:
                       value:
                         id: meraki:layer7/application/133
                         name: Battle.net
-                  dscpTagValue: null
-                  pcpTagValue: null
+                  dscpTagValue:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
+                  pcpTagValue:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   perClientBandwidthLimits:
                     bandwidthLimits:
                       limitDown: 1000000
@@ -26054,7 +26150,8 @@ paths:
                     licenseKey: Z21234567890
                     licenseType: MX64-ENT
                     orderNumber: 4C1234567
-                seatCount: null
+                seatCount:
+                  $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                 state: active
                 totalDurationInDays: 425
           headers:
@@ -26108,7 +26205,8 @@ paths:
               resultingLicenses:
                 - activationDate: 2019-09-01T15:01:46Z
                   claimDate: 2019-08-29T12:40:10Z
-                  deviceSerial: null
+                  deviceSerial:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   durationInDays: 365
                   expirationDate: 2020-08-31T15:01:46Z
                   id: "1234"
@@ -26282,7 +26380,8 @@ paths:
               resultingLicenses:
                 - activationDate: 2019-09-01T15:01:46Z
                   claimDate: 2019-08-29T12:40:10Z
-                  deviceSerial: null
+                  deviceSerial:
+                    $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
                   durationInDays: 365
                   expirationDate: 2020-08-31T15:01:46Z
                   id: "1234"
@@ -26335,7 +26434,8 @@ paths:
                   licenseKey: Z21234567890
                   licenseType: MX64-ENT
                   orderNumber: 4C1234567
-              seatCount: null
+              seatCount:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               state: active
               totalDurationInDays: 425
           schema:
@@ -26387,7 +26487,8 @@ paths:
                   licenseKey: Z21234567890
                   licenseType: MX64-ENT
                   orderNumber: 4C1234567
-              seatCount: null
+              seatCount:
+                $ref: "#/paths/~1networks~1{networkId}~1switch~1qosRules/post/parameters/1/schema/example/dstPort"
               state: active
               totalDurationInDays: 425
           schema:

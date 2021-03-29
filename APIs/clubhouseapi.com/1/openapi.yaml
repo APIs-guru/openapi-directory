@@ -107,10 +107,13 @@ paths:
                     refresh_token: <jwt>
                     success: true
                     user_profile:
-                      name: null
-                      photo_url: null
+                      name:
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
+                      photo_url:
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       user_id: 1234
-                      username: null
+                      username:
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
           description: success
       summary: Call phone number auth.
   /create_channel:
@@ -121,16 +124,21 @@ paths:
             examples:
               openNoTopic:
                 value:
-                  club_id: null
-                  event_id: null
+                  club_id:
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
+                  event_id:
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   is_private: false
                   is_social_mode: false
-                  topic: null
+                  topic:
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   user_ids: []
               socialWithTopic:
                 value:
-                  club_id: null
-                  event_id: null
+                  club_id:
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
+                  event_id:
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   is_private: false
                   is_social_mode: true
                   topic: topic
@@ -180,9 +188,11 @@ paths:
                 empty:
                   value:
                     count: 0
-                    next: null
+                    next:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     notifications: []
-                    previous: null
+                    previous:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: Returns a list of actionable notifications.
       summary: get actionable notifications (the bell again)
@@ -253,7 +263,8 @@ paths:
                             photo_url: https://clubhouseprod.s3.amazonaws.com:443/<user_id>_<guid>_thumbnail_250x250
                             time_joined_as_speaker: 2021-01-20T00:00:00.000000+00:00
                             user_id: 1234
-                        welcome_for_user_profile: null
+                        welcome_for_user_profile:
+                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     events: []
                     success: true
           description: list of channels
@@ -276,7 +287,8 @@ paths:
               examples:
                 club:
                   value:
-                    added_by_user_profile: null
+                    added_by_user_profile:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     club:
                       club_id: 123
                       description: Example
@@ -286,7 +298,8 @@ paths:
                       num_followers: 456
                       num_members: 123
                       photo_url: https://clubhouseprod.s3.amazonaws.com:443/club_<club_id>_<guid>_thumbnail_250x250
-                    invite_link: null
+                    invite_link:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     is_admin: false
                     is_follower: false
                     is_member: false
@@ -329,8 +342,10 @@ paths:
                         num_members: 123
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/club_<club_id>_<guid>_thumbnail_250x250
                     count: 1
-                    next: null
-                    previous: null
+                    next:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
+                    previous:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: returns list of clubs with pagination
       summary: looks up clubs by topic.
@@ -380,8 +395,10 @@ paths:
                   value:
                     count: 0
                     events: []
-                    next: null
-                    previous: null
+                    next:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
+                    previous:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: a list of events
       summary: the Upcoming for You page
@@ -413,14 +430,17 @@ paths:
                         num_members: 123
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/club_<club_id>_<guid>_thumbnail_250x250
                     count: 2
-                    next: null
-                    previous: null
+                    next:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
+                    previous:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
                     users:
                       - bio: Bio
                         name: John Smith
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/<user_id>_<uuid>_thumbnail_250x250
-                        twitter: null
+                        twitter:
+                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                         user_id: 12345
                         username: johnsmith
           description: returns list of users and clubs
@@ -447,9 +467,11 @@ paths:
                   value:
                     count: 0
                     disabled: false
-                    next: null
+                    next:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     notifications: []
-                    previous: null
+                    previous:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: Returns a list of notifications.
       summary: get notifications (the bell icon)
@@ -513,7 +535,8 @@ paths:
                           rules:
                             - desc: Description
                               title: Rule
-                      displayname: null
+                      displayname:
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       follows_me: false
                       has_verified_email: true
                       instagram: _junhoyeo
@@ -526,7 +549,8 @@ paths:
                       mutual_follows: []
                       mutual_follows_count: 0
                       name: Junho Yeo
-                      notification_type: null
+                      notification_type:
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       num_followers: 103
                       num_following: 98
                       photo_url: https://clubhouseprod.s3.amazonaws.com:443/<user_id>_<guid>
@@ -535,7 +559,8 @@ paths:
                         - abbreviated_title: Startups
                           id: 107
                           title: 🦄 Startups
-                      twitter: null
+                      twitter:
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       user_id: 4075733
                       username: junhoyeo
           description: returns user profile info
@@ -622,7 +647,8 @@ paths:
                   value:
                     count: 59
                     next: 2
-                    previous: null
+                    previous:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
                     users:
                       - bio: Example bio
@@ -641,7 +667,8 @@ paths:
             examples:
               noContacts:
                 value:
-                  club_id: null
+                  club_id:
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   contacts: []
                   upload_contacts: true
             schema:
@@ -678,7 +705,8 @@ paths:
                       - bio: ""
                         name: John Smith
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/<user_id>_<uuid>_thumbnail_250x250
-                        twitter: null
+                        twitter:
+                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                         user_id: "1234"
                         username: johnsmith
           description: Returns a list of users. Bios truncated to 80 chars.
@@ -692,7 +720,8 @@ paths:
             examples:
               hasContact:
                 value:
-                  club_id: null
+                  club_id:
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   contacts:
                     - phone_number: "+11234567890"
                   upload_contacts: false
@@ -722,7 +751,8 @@ paths:
             examples:
               startingPrivateRoom:
                 value:
-                  ? channel
+                  channel:
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
             schema:
               type: object
       responses:
@@ -734,8 +764,10 @@ paths:
                   value:
                     clubs: []
                     count: 0
-                    next: null
-                    previous: null
+                    next:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
+                    previous:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
                     users: []
           description: Returns a list of actionable notifications.
@@ -791,8 +823,10 @@ paths:
                 users:
                   value:
                     count: 1
-                    next: null
-                    previous: null
+                    next:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
+                    previous:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
                     users:
                       - bio: John Example is an exemplary user object
@@ -850,7 +884,8 @@ paths:
             examples:
               jsonObject:
                 value:
-                  message: null
+                  message:
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   name: John Smith
                   phone_number: "+11234567890"
             schema:
@@ -918,7 +953,8 @@ paths:
                     pubnub_enable: true
                     pubnub_heartbeat_interval: 29
                     pubnub_heartbeat_value: 60
-                    pubnub_origin: null
+                    pubnub_origin:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     pubnub_token: <pubnub_token>
                     rtm_token: <rtm_token>
                     success: true
@@ -947,10 +983,12 @@ paths:
                         name: The currently joining user
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/<user_id>_<guid>_thumbnail_250x250
                         skintone: 3
-                        time_joined_as_speaker: null
+                        time_joined_as_speaker:
+                          $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                         user_id: 1234
                         username: currentuser
-                    welcome_for_user_profile: null
+                    welcome_for_user_profile:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
           description: stuff needed to actually join a channel
         "400":
           content:
@@ -1015,11 +1053,13 @@ paths:
                     access_token: <jwt>
                     actionable_notifications_count: 0
                     auth_token: <auth_token>
-                    blocked_ids: null
+                    blocked_ids:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     email: null
                     feature_flags:
                       - ""
-                    following_ids: null
+                    following_ids:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     has_unread_notifications: false
                     is_admin: false
                     notifications_enabled: false
@@ -1027,10 +1067,13 @@ paths:
                     refresh_token: <jwt>
                     success: true
                     user_profile:
-                      name: null
-                      photo_url: null
+                      name:
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
+                      photo_url:
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                       user_id: 1234
-                      username: null
+                      username:
+                        $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
           description: the response
         "403":
           content:
@@ -1145,8 +1188,10 @@ paths:
                         num_members: 5678
                         photo_url: https://clubhouseprod.s3.amazonaws.com:443/club_<club_id>_<uuid>_thumbnail_250x250
                     count: 1
-                    next: null
-                    previous: null
+                    next:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
+                    previous:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: Returns a list of clubs.
       summary: search clubs.
@@ -1172,8 +1217,10 @@ paths:
                 successful:
                   value:
                     count: 1
-                    next: null
-                    previous: null
+                    next:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
+                    previous:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
                     users:
                       - bio: Bio!
@@ -1215,7 +1262,8 @@ paths:
                     success: true
                 success:
                   value:
-                    error_message: null
+                    error_message:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     is_blocked: false
                     success: true
                 throttled:
@@ -1232,7 +1280,8 @@ paths:
             examples:
               onboardingSetting:
                 value:
-                  apn_token: null
+                  apn_token:
+                    $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                   enable_trending: -1
                   frequency: -1
                   is_sandbox: false
@@ -1269,7 +1318,8 @@ paths:
               examples:
                 success:
                   value:
-                    error_message: null
+                    error_message:
+                      $ref: "#/paths/~1me/post/responses/200/content/application~1json/examples/examples/value/email"
                     success: true
           description: username successfully set
         "400":

@@ -1,6 +1,4 @@
 openapi: 3.0.1
-servers:
-  - url: https://randommer.io:80
 info:
   title: Randommer API
   version: v1
@@ -19,8 +17,6 @@ paths:
           in: query
           name: type
           schema:
-            description: ""
-            nullable: true
             type: string
         - description: Enter your key
           in: header
@@ -76,7 +72,6 @@ paths:
           schema:
             default: en
             maxLength: 100
-            nullable: true
             type: string
         - description: Enter your key
           in: header
@@ -102,7 +97,6 @@ paths:
           name: quantity
           required: true
           schema:
-            description: ""
             format: int32
             maximum: 5000
             minimum: 1
@@ -126,7 +120,6 @@ paths:
           name: startingWords
           required: true
           schema:
-            description: ""
             maxLength: 100
             type: string
         - description: Enter your key
@@ -162,7 +155,6 @@ paths:
           name: CountryCode
           required: true
           schema:
-            description: ""
             maxLength: 2
             type: string
         - description: ""
@@ -170,7 +162,6 @@ paths:
           name: Quantity
           required: true
           schema:
-            description: ""
             format: int32
             maximum: 1000
             minimum: 1
@@ -194,16 +185,13 @@ paths:
           name: telephone
           required: true
           schema:
-            description: ""
             maxLength: 25
             type: string
         - description: ""
           in: query
           name: CountryCode
           schema:
-            description: ""
             maxLength: 2
-            nullable: true
             type: string
         - description: Enter your key
           in: header
@@ -313,7 +301,6 @@ paths:
           name: number
           required: true
           schema:
-            description: ""
             format: int32
             maximum: 2147483647
             minimum: 1
@@ -337,7 +324,6 @@ paths:
           name: length
           required: true
           schema:
-            description: ""
             format: int32
             maximum: 250
             minimum: 3
@@ -347,21 +333,18 @@ paths:
           name: hasDigits
           required: true
           schema:
-            description: ""
             type: boolean
         - description: ""
           in: query
           name: hasUppercase
           required: true
           schema:
-            description: ""
             type: boolean
         - description: ""
           in: query
           name: hasSpecial
           required: true
           schema:
-            description: ""
             type: boolean
         - description: Enter your key
           in: header
@@ -392,15 +375,11 @@ paths:
           in: query
           name: find
           schema:
-            description: ""
-            nullable: true
             type: string
         - description: ""
           in: query
           name: replace
           schema:
-            description: ""
-            nullable: true
             type: string
         - description: Enter your key
           in: header

@@ -8,17 +8,23 @@ servers:
 info:
   contact:
     name: eBay Inc,
+    x-twitter: ebay
   description: The <b>Account API</b> gives sellers the ability to configure their eBay seller accounts, including the seller's policies (the Fulfillment Policy, Payment Policy, and Return Policy), opt in and out of eBay seller programs, configure sales tax tables, and get account information.  <br><br>For details on the availability of the methods in this API, see <a href="/api-docs/sell/account/overview.html#requirements">Account API requirements and restrictions</a>.
   license:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
   title: Account API
   version: v1.6.1
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    backgroundColor: "#FFFFFF"
+    url: https://twitter.com/ebay/profile_image?size=original
   x-origin:
     - format: openapi
       url: https://developer.ebay.com/api-docs/master/sell/account/openapi/3/sell_account_v1_oas3.json
       version: "3.0"
-  x-providerName: api.ebay.com
+  x-providerName: ebay.com
   x-serviceName: sell-account
 paths:
   /fulfillment_policy:

@@ -461,7 +461,7 @@ paths:
           name: superscheme
           required: true
           type: string
-        - description: PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<peppol_schemes_list>>.
+        - description: PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<_peppol_participant_identifier_list>>.
           in: path
           name: scheme
           required: true
@@ -498,7 +498,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/PurchaseInvoiceUbl"
+            $ref: "#/definitions/PurchaseInvoice"
         "401":
           description: Unauthorized
         "403":
@@ -4594,7 +4594,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<_peppol_schemes_list>> for a list.
+        description: The scheme of the identifier. See <<_peppol_participant_identifier_list>> for a list.
         maxLength: 64
         minLength: 2
         title: Type
@@ -4614,7 +4614,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<_peppol_schemes_list>> for a list.
+        description: The scheme of the identifier. See <<_peppol_participant_identifier_list>> for a list.
         maxLength: 64
         minLength: 2
         title: Type
@@ -4650,7 +4650,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<_peppol_schemes_list>> for a list.
+        description: The scheme of the identifier. See <<_peppol_participant_identifier_list>> for a list.
         minLength: 3
         title: Scheme
         type: string
@@ -4971,9 +4971,13 @@ definitions:
         items:
           $ref: "#/definitions/PurchaseInvoiceInvoiceLineAllowanceCharge"
         type: array
+      amount_excluding_tax:
+        description: The amount excluding Tax. This is equal to quantity x price_amount + ∑ allowance_charges.
+        title: Amount Excluding Tax
+        type: number
       amount_excluding_vat:
-        description: The amount excluding VAT. This is equal to quantity x price_amount + allowance_charge. This property is redundant and provided only to make invoice processing more easy. You can also choose to only store this property, instead of the underlying fields.
-        title: Amount Excluding VAT
+        description: DEPRECTATED - use amount_excluding_tax The amount excluding VAT.
+        title: DEPRECTATED - use amount_excluding_tax Amount Excluding VAT
         type: number
       description:
         description: The description for the invoice line.
@@ -5259,7 +5263,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<_peppol_schemes_list>> for a list.
+        description: The scheme of the identifier. See <<_peppol_participant_identifier_list>> for a list.
         minLength: 3
         title: Scheme
         type: string

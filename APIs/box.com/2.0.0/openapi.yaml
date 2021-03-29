@@ -4129,8 +4129,10 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name: null
-                      vanity_url: null
+                      vanity_name:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_url:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
                     type: file
               schema:
                 $ref: "#/components/schemas/File"
@@ -4250,8 +4252,10 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name: null
-                      vanity_url: null
+                      vanity_name:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_url:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
                     type: file
               schema:
                 $ref: "#/components/schemas/File"
@@ -4339,7 +4343,8 @@ paths:
                     By setting this value to `null`, the shared link
 
                     is removed from the file.
-                  example: null
+                  example:
+                    $ref: "#/components/schemas/FileConflict/x-box-tag"
                   nullable: true
                   type: object
               type: object
@@ -4352,7 +4357,8 @@ paths:
                   value:
                     etag: "1"
                     id: "12345"
-                    shared_link: null
+                    shared_link:
+                      $ref: "#/components/schemas/FileConflict/x-box-tag"
                     type: file
               schema:
                 $ref: "#/components/schemas/File"
@@ -4554,8 +4560,10 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name: null
-                      vanity_url: null
+                      vanity_name:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_url:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
                     type: file
               schema:
                 $ref: "#/components/schemas/File"
@@ -7681,7 +7689,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ClientError"
           description: An unexpected client error.
-      summary: List folder locks on folder
+      summary: List folder locks
       tags:
         - Folder Locks
       x-box-enable-explorer: true
@@ -7783,7 +7791,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ClientError"
           description: An unexpected client error.
-      summary: Create folder lock on folder
+      summary: Create folder lock
       tags:
         - Folder Locks
       x-box-enable-explorer: true
@@ -9329,8 +9337,10 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name: null
-                      vanity_url: null
+                      vanity_name:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_url:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
                     type: folder
               schema:
                 $ref: "#/components/schemas/Folder"
@@ -9456,8 +9466,10 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name: null
-                      vanity_url: null
+                      vanity_name:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_url:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
                     type: folder
               schema:
                 $ref: "#/components/schemas/Folder"
@@ -9551,7 +9563,8 @@ paths:
                     By setting this value to `null`, the shared link
 
                     is removed from the folder.
-                  example: null
+                  example:
+                    $ref: "#/components/schemas/FileConflict/x-box-tag"
                   nullable: true
                   type: object
               type: object
@@ -9564,7 +9577,8 @@ paths:
                   value:
                     etag: "1"
                     id: "12345"
-                    shared_link: null
+                    shared_link:
+                      $ref: "#/components/schemas/FileConflict/x-box-tag"
                     type: folder
               schema:
                 $ref: "#/components/schemas/Folder"
@@ -9758,8 +9772,10 @@ paths:
                       preview_count: 0
                       unshared_at: 2020-09-21T10:34:41-07:00
                       url: https://app.box.com/s/kwio6b4ovt1264rnfbyqo1
-                      vanity_name: null
-                      vanity_url: null
+                      vanity_name:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
+                      vanity_url:
+                        $ref: "#/components/schemas/FileConflict/x-box-tag"
                     type: folder
               schema:
                 $ref: "#/components/schemas/Folder"
@@ -12618,7 +12634,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ClientError"
           description: An unexpected client error.
-      summary: List collaborations for group
+      summary: List group collaborations
       tags:
         - Collaborations (List)
       x-box-tag: list_collaborations
@@ -14084,6 +14100,59 @@ paths:
                 $ref: "#/components/schemas/ClientError"
           description: An unexpected client error.
       summary: Query files/folders by metadata
+      tags:
+        - Search
+      x-box-enable-explorer: true
+      x-box-sanitized: true
+      x-box-tag: search
+  /metadata_query_indices:
+    get:
+      description: Retrieves the metadata query indices for a given scope and template key.
+      operationId: get_metadata_query_indices
+      parameters:
+        - description: The scope of the metadata template
+          example: global
+          in: query
+          name: scope
+          required: true
+          schema:
+            enum:
+              - global
+              - enterprise
+            type: string
+        - description: The name of the metadata template
+          example: properties
+          in: query
+          name: template_key
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MetadataQueryIndices"
+          description: Returns a collection of metadata query indices for scope and template key.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returns an error when any of the parameters are not in a valid format.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returns an error when the scope and template combination cannot be found.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: List metadata query indices
       tags:
         - Search
       x-box-enable-explorer: true
@@ -18994,7 +19063,8 @@ paths:
                     Set this to `null` to roll the user out of the enterprise
 
                     and make them a free user
-                  example: null
+                  example:
+                    $ref: "#/components/schemas/FileConflict/x-box-tag"
                   nullable: true
                   type: string
                 is_exempt_from_device_limits:
@@ -24901,7 +24971,7 @@ components:
         Groups contain a set of users, and can be used in place of
 
         users in some operations, such as collaborations.
-      title: Group
+      title: Group (Full)
       type: object
       x-box-resource-id: group--full
       x-box-variant: full
@@ -26306,6 +26376,72 @@ components:
         - ancestor_folder_id
       title: Metadata query search request
       type: object
+    MetadataQueryIndex:
+      description: A metadata query index
+      properties:
+        fields:
+          description: A list of template fields which make up the index.
+          items:
+            allOf:
+              - properties:
+                  key:
+                    description: The metadata template field key.
+                    example: vendor name
+                    type: string
+                  sort_direction:
+                    description: The sort direction of the field.
+                    enum:
+                      - asc
+                      - desc
+                    example: asc
+                    type: string
+            description: The field which makes up the index.
+            type: object
+          type: array
+        id:
+          description: The ID of the metadata query index.
+          example: "-9876"
+          type: string
+        status:
+          description: The status of the metadata query index
+          enum:
+            - building
+            - active
+            - disabled
+          example: active
+          nullable: false
+          type: string
+        type:
+          description: Value is always `metadata_query_index`
+          example: metadata_query_index
+          nullable: false
+          type: string
+      title: Metadata query index
+      type: object
+      x-box-resource-id: metadata_query_index
+      x-box-tag: search
+    MetadataQueryIndices:
+      description: A collection of metadata query indices.
+      properties:
+        entries:
+          description: A collection of metadata query indices.
+          items:
+            $ref: "#/components/schemas/MetadataQueryIndex"
+          type: array
+        limit:
+          default: 100
+          description: The limit that was used for this request.
+          example: 100
+          format: int64
+          type: integer
+        next_marker:
+          description: The marker for the start of the next page of results.
+          example: 0!-M7487OpVfBTNBV-XsQjU50gQFlbFFu5nArMWD7Ck61GH_Qo40M1S2xN5zWZPBzEjaQS1SOjJiQoo5BsXEl1bCVLRZ2pTqo4SKp9tyqzWQK2L51KR_nC1EgF5I_TJSFw7uO2Bx4HweGETOjh5_2oPSWw5iMkM-OvGApeR0lGFO48FDKoyzJyLgz5aogxoKd8VE09CesOOnTnmZvrW0puylDc-hFjY5YLmWFBKox3SOWiSDwKFkmZGNHyjEzza1nSwbZg6CYsAdGsDwGJhuCeTNsFzP5Mo5qx9wMloS0lSPuf2CcBInbIJzl2CKlXF3FvqhANttpm2nzdBTQRSoJyJnjVBpf4Q_HjV2eb4KIZBBlLy067UCVdv2AAWQFd5E2i6s1YiGRTtgMEZntOSUYD4IYLMWWm5Ra7ke_SP32SL3GSjbBQYIyCVQ..
+          type: string
+      title: Metadata query indices
+      type: object
+      x-box-resource-id: metadata_query_indices
+      x-box-tag: search
     MetadataQueryResults:
       description: A page of files and folders that matched the metadata query.
       properties:
@@ -29456,10 +29592,28 @@ components:
                 - $ref: "#/components/schemas/Folder--Mini"
                 - description: The parent object the web link belongs to
             path_collection:
-              description: The path of folders to this link, starting at the root
-              items:
-                $ref: "#/components/schemas/Folder--Mini"
-              type: array
+              allOf:
+                - description: A list of parent folders for an item.
+                  properties:
+                    entries:
+                      description: The parent folders for this item
+                      items:
+                        $ref: "#/components/schemas/Folder--Mini"
+                      nullable: false
+                      type: array
+                    total_count:
+                      description: The number of folders in this list.
+                      example: 1
+                      format: int64
+                      nullable: false
+                      type: integer
+                  title: Path collection
+                  type: object
+                - description: >-
+                    The tree of folders that this web link is contained in,
+
+                    starting at the root.
+                - nullable: false
             purged_at:
               description: When this file will be permanently deleted.
               example: 2012-12-12T10:53:43-08:00

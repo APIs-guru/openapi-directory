@@ -72,8 +72,6 @@ tags:
     name: Notifications
   - description: Background jobs performed over a batch of phone numbers
     name: Number Background Jobs
-  - description: Background jobs performed over a phone-numbers block's phone numbers
-    name: Number Blocks Background Jobs
   - description: Configure your phone numbers
     name: Number Configurations
   - description: Look up phone number data
@@ -5232,108 +5230,6 @@ paths:
       tags:
         - Outbound Voice Profiles
       x-latency-category: responsive
-  /phone_number_blocks/jobs:
-    get:
-      operationId: listPhoneNumberBlocksJobs
-      parameters:
-        - description: Filter the phone number blocks jobs by type.
-          in: query
-          name: filter[type]
-          schema:
-            description: Identifies the type of the background job.
-            enum:
-              - delete_phone_number_block
-            example: delete_phone_number_block
-            type: string
-        - description: Filter the phone number blocks jobs by status.
-          in: query
-          name: filter[status]
-          schema:
-            description: Identifies the status of the background job.
-            enum:
-              - pending
-              - in_progress
-              - completed
-              - failed
-            example: in_progress
-            type: string
-        - $ref: "#/components/parameters/PageNumber"
-        - $ref: "#/components/parameters/PageSize"
-        - description: Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
-          in: query
-          name: sort
-          required: false
-          schema:
-            enum:
-              - created_at
-            example: created_at
-            type: string
-      responses:
-        "200":
-          $ref: "#/components/responses/ListPhoneNumberBlocksJobsResponse"
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Lists the phone number blocks jobs
-      tags:
-        - Number Blocks Background Jobs
-      x-group-parameters: "true"
-      x-latency-category: responsive
-  /phone_number_blocks/jobs/delete_phone_number_block:
-    post:
-      description: Creates a new background job to delete all the phone numbers associated with the given block. We will only consider the phone number block as deleted after all phone numbers associated with it are removed, so multiple executions of this job may be necessary in case some of the phone numbers present errors during the deletion process.
-      operationId: createPhoneNumberBlocksJobDeletePhoneNumberBlock
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PhoneNumberBlocksJobDeletePhoneNumberBlockRequest"
-        required: true
-      responses:
-        "202":
-          content:
-            application/json:
-              schema:
-                properties:
-                  data:
-                    $ref: "#/components/schemas/PhoneNumberBlocksJob"
-                title: Phone Number Blocks Job Delete Phone Number Block
-                type: object
-          description: Phone number blocks job delete phone numbers requested.
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Deletes all numbers associated with a phone number block
-      tags:
-        - Number Blocks Background Jobs
-      x-group-parameters: "true"
-      x-latency-category: background
-  "/phone_number_blocks/jobs/{id}":
-    get:
-      operationId: retrievePhoneNumberBlocksJob
-      parameters:
-        - description: Identifies the Phone Number Blocks Job.
-          in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  data:
-                    $ref: "#/components/schemas/PhoneNumberBlocksJob"
-                title: Phone Number Blocks Job
-                type: object
-          description: Phone number blocks job details.
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Retrieves a phone number blocks job
-      tags:
-        - Number Blocks Background Jobs
-      x-group-parameters: "true"
-      x-latency-category: responsive
   /phone_number_regulatory_requirements:
     get:
       description: Gets a paginated list of phone number regulatory requirements.
@@ -6347,7 +6243,7 @@ paths:
       security:
         - bearerAuth: []
       tags:
-        - Mdr Detail Reports
+        - MDR Detail Reports
       x-latency-category: interactive
     post:
       description: Submit a request for new messaging detail report. Messaging detail report pulls all raw messaging data according to defined filters.
@@ -6369,7 +6265,7 @@ paths:
       security:
         - bearerAuth: []
       tags:
-        - Submit Mdr Detail Report Request
+        - MDR Detail Reports
       x-latency-category: background
   "/reports/batch_mdr_reports/{id}":
     delete:
@@ -6394,7 +6290,7 @@ paths:
       security:
         - bearerAuth: []
       tags:
-        - Delete Mdr Detail Report
+        - MDR Detail Reports
       x-latency-category: interactive
     get:
       description: Fetch single messaging detail report by id.
@@ -6418,8 +6314,67 @@ paths:
       security:
         - bearerAuth: []
       tags:
-        - Mdr Detail Report
+        - MDR Detail Reports
       x-latency-category: interactive
+  /reports/cdr_usage_reports/sync:
+    get:
+      description: "Generate and fetch voice usage report synchronously. This endpoint will both generate and fetch the voice report over a specified time period. No polling is necessary but the response may take up to a couple of minutes. "
+      operationId: getUsageReportSync
+      parameters:
+        - in: query
+          name: start_date
+          schema:
+            example: 2020-07-01T00:00:00-06:00
+            format: date-time
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            example: 2020-07-01T00:00:00-06:00
+            format: date-time
+            type: string
+        - in: query
+          name: aggregation_type
+          required: true
+          schema:
+            enum:
+              - NO_AGGREGATION
+              - CONNECTION
+              - TAG
+              - BILLING_GROUP
+            example: no_aggregation
+            type: string
+        - in: query
+          name: product_breakdown
+          required: true
+          schema:
+            enum:
+              - NO_BREAKDOWN
+              - DID_VS_TOLL_FREE
+              - COUNTRY
+              - DID_VS_TOLL_FREE_PER_COUNTRY
+            example: no_breakdown
+            type: string
+        - in: query
+          name: connections
+          schema:
+            example: 1234567890123
+            items:
+              example: 1234567890123
+              type: number
+            type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CdrGetSyncUsageReportResponse"
+          description: Successful
+      security:
+        - bearerAuth: []
+      tags:
+        - CDR Usage Reports
+      x-latency-category: background
   /reports/mdr_usage_reports:
     get:
       description: Fetch all messaging usage reports. Usage reports are aggregated messaging data for specified time period and breakdown
@@ -6449,7 +6404,7 @@ paths:
       security:
         - bearerAuth: []
       tags:
-        - Mdr Usage Reports
+        - MDR Usage Reports
       x-latency-category: interactive
     post:
       description: "Submit request for new new messaging usage report. This endpoint will pull and aggregate messaging data in specified time period. "
@@ -6471,7 +6426,54 @@ paths:
       security:
         - bearerAuth: []
       tags:
-        - Submit Mdr Usage Report Request
+        - MDR Usage Reports
+      x-latency-category: background
+  /reports/mdr_usage_reports/sync:
+    get:
+      description: "Generate and fetch messaging usage report synchronously. This endpoint will both generate and fetch the messaging report over a specified time period. No polling is necessary but the response may take up to a couple of minutes. "
+      operationId: getUsageReportSync_1
+      parameters:
+        - in: query
+          name: start_date
+          schema:
+            example: 2020-07-01T00:00:00-06:00
+            format: date-time
+            type: string
+        - in: query
+          name: end_date
+          schema:
+            example: 2020-07-01T00:00:00-06:00
+            format: date-time
+            type: string
+        - in: query
+          name: aggregation_type
+          required: true
+          schema:
+            enum:
+              - NO_AGGREGATION
+              - PROFILE
+              - TAGS
+            example: profile
+            type: string
+        - in: query
+          name: profiles
+          schema:
+            example: My profile
+            items:
+              example: My profile
+              type: string
+            type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MdrGetSyncUsageReportResponse"
+          description: Successful
+      security:
+        - bearerAuth: []
+      tags:
+        - MDR Usage Reports
       x-latency-category: background
   "/reports/mdr_usage_reports/{id}":
     delete:
@@ -6496,7 +6498,7 @@ paths:
       security:
         - bearerAuth: []
       tags:
-        - Mdr Delete Usage Report
+        - MDR Usage Reports
       x-latency-category: interactive
     get:
       description: Fetch a single messaging usage report by id
@@ -6520,7 +6522,7 @@ paths:
       security:
         - bearerAuth: []
       tags:
-        - Mdr Usage Report By Id
+        - MDR Usage Reports
       x-latency-category: interactive
   /reports/mdrs:
     get:
@@ -6603,7 +6605,7 @@ paths:
       security:
         - bearerAuth: []
       tags:
-        - Reporting
+        - MDR Detail Reports
       x-latency-category: interactive
   /short_codes:
     get:
@@ -7881,7 +7883,8 @@ components:
       in: query
       name: filter[connection_name][contains]
       schema:
-        default: null
+        default:
+          $ref: "#/components/schemas/WebhookTimeoutSecs/default"
         type: string
     FilterCustomerReferenceContains:
       description: If present, addresses with <code>customer_reference</code> containing the given value will be returned. Matching is not case-sensitive.
@@ -9053,20 +9056,6 @@ components:
             title: List Participants Response
             type: object
       description: Successful response with a list of conference participants.
-    ListPhoneNumberBlocksJobsResponse:
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                items:
-                  $ref: "#/components/schemas/PhoneNumberBlocksJob"
-                type: array
-              meta:
-                $ref: "#/components/schemas/PaginationMeta"
-            title: List Phone Number Blocks Background Jobs Response
-            type: object
-      description: Successful response with a list of phone number blocks background jobs.
     ListPhoneNumberRegulatoryRequirementsResponse:
       content:
         application/json:
@@ -9914,7 +9903,8 @@ components:
     BillingGroup:
       example:
         created_at: 2019-10-15T10:07:15.527Z
-        deleted_at: null
+        deleted_at:
+          $ref: "#/components/schemas/WebhookTimeoutSecs/default"
         id: f5586561-8ff0-4291-a0ac-84fe544797bd
         name: My billing group name
         organization_id: f1486bae-f067-460c-ad43-73a92848f902
@@ -9928,7 +9918,8 @@ components:
           type: string
         deleted_at:
           description: ISO 8601 formatted date indicating when the resource was removed.
-          example: null
+          example:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           format: date-time
           type: string
         id:
@@ -10319,7 +10310,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           example: 25
           maximum: 30
           minimum: 0
@@ -10330,12 +10322,14 @@ components:
     CallControlApplicationInbound:
       properties:
         channel_limit:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
           example: 10
           type: integer
         sip_subdomain:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: 'Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.'
           example: example
           type: string
@@ -10352,7 +10346,8 @@ components:
     CallControlApplicationOutbound:
       properties:
         channel_limit:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: When set, this will limit the total number of outbound calls to phone numbers associated with this connection.
           example: 10
           type: integer
@@ -11996,7 +11991,8 @@ components:
       properties:
         error_code:
           description: Unused
-          example: null
+          example:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           type: string
         mobile_country_code:
           description: Region code that matches the specific country calling code if the requested phone number type is mobile
@@ -12026,6 +12022,72 @@ components:
             - voicemail
             - unknown
           example: voip
+          type: string
+      type: object
+    CdrGetSyncUsageReportResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/CdrUsageReportResponse"
+      type: object
+    CdrUsageReportResponse:
+      properties:
+        aggregation_type:
+          enum:
+            - NO_AGGREGATION
+            - CONNECTION
+            - TAG
+            - BILLING_GROUP
+          type: string
+        connections:
+          example: "[1234567890L, 9876543210L]"
+          items:
+            format: int64
+            type: integer
+          properties:
+            empty:
+              type: boolean
+          type: array
+        created_at:
+          example: 2018-02-02T22:25:27.521Z
+          format: date-time
+          type: string
+        end_time:
+          example: 2018-02-02T22:25:27.521Z
+          format: date-time
+          type: string
+        id:
+          description: Identifies the resource
+          format: uuid
+          type: string
+        product_breakdown:
+          enum:
+            - NO_BREAKDOWN
+            - DID_VS_TOLL_FREE
+            - COUNTRY
+            - DID_VS_TOLL_FREE_PER_COUNTRY
+          type: string
+        record_type:
+          example: cdr_usage_report
+          type: string
+        report_url:
+          example: http://portal.telnyx.com/downloads/report_name_8hvb45Gu.csv
+          type: string
+        result:
+          type: object
+        start_time:
+          example: 2018-02-02T22:25:27.521Z
+          format: date-time
+          type: string
+        status:
+          enum:
+            - PENDING
+            - COMPLETE
+            - FAILED
+            - EXPIRED
+          type: string
+        updated_at:
+          example: 2018-02-02T22:25:27.521Z
+          format: date-time
           type: string
       type: object
     CnamListing:
@@ -13351,7 +13413,8 @@ components:
           nullable: true
           type: string
         webhook_event_url:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: The URL where webhooks related to this connection will be sent.
           example: https://example.com
           format: url
@@ -13506,7 +13569,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Specifies how many seconds to wait before timing out a webhook.
           example: 25
           maximum: 30
@@ -13687,7 +13751,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Specifies how many seconds to wait before timing out a webhook.
           example: 25
           maximum: 30
@@ -13725,12 +13790,14 @@ components:
         inbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the number of concurrent inbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
             sip_subdomain:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: 'Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.'
               example: example
               type: string
@@ -13746,7 +13813,8 @@ components:
         outbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the number of concurrent outbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
@@ -13852,7 +13920,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Specifies how many seconds to wait before timing out a webhook.
           example: 25
           maximum: 30
@@ -13920,7 +13989,8 @@ components:
             - E.164-national
           type: string
         channel_limit:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
           type: integer
         codecs:
@@ -14114,7 +14184,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Specifies how many seconds to wait before timing out a webhook.
           example: 25
           maximum: 30
@@ -14646,7 +14717,8 @@ components:
           - AU
       properties:
         billing_group_id:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
           example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
           format: uuid
@@ -14810,12 +14882,14 @@ components:
         inbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
             sip_subdomain:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: 'Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.'
               example: example
               type: string
@@ -14831,7 +14905,8 @@ components:
         outbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the total number of outbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
@@ -14839,7 +14914,8 @@ components:
               $ref: "#/components/schemas/OutboundVoiceProfileId"
           type: object
         status_callback:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: URL for Telnyx to send requests to containing information about call progress events.
           example: https://example.com
           format: url
@@ -14853,7 +14929,8 @@ components:
           example: get
           type: string
         voice_fallback_url:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: URL to which Telnyx will deliver your XML Translator webhooks if we get an error response from your voice_url.
           example: https://fallback.example.com
           format: url
@@ -14921,7 +14998,8 @@ components:
           example: true
           type: boolean
         messaging_template:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Optionally sets a messaging text template when sending the verification code. Uses `{code}` to template in the actual verification code.
           example: "Hello, this is the Acme Inc verification code you requested: {code}."
           nullable: true
@@ -15048,7 +15126,8 @@ components:
         rtcp_settings:
           $ref: "#/components/schemas/ConnectionRtcpSettings"
         sip_uri_calling_preference:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: This feature enables inbound SIP URI calls to your Credential Auth Connection. If enabled for all (unrestricted) then anyone who calls the SIP URI <your-username>@telnyx.com will be connected to your Connection. You can also choose to allow only calls that are originated on any Connections under your account (internal).
           enum:
             - disabled
@@ -15085,7 +15164,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Specifies how many seconds to wait before timing out a webhook.
           example: 25
           maximum: 30
@@ -15119,7 +15199,8 @@ components:
             - E.164-national
           type: string
         channel_limit:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
           type: integer
         codecs:
@@ -15204,7 +15285,8 @@ components:
           description: Forces all SIP calls originated on this connection to be "parked" instead of "bridged" to the destination specified on the URI. Parked calls will return ringback to the caller and will await for a Call Control command to define which action will be taken next.
           type: boolean
         channel_limit:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: When set, this will limit the total number of outbound calls to phone numbers associated with this connection.
           type: integer
         generate_ringback_tone:
@@ -15488,12 +15570,14 @@ components:
         inbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the number of concurrent inbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
             sip_subdomain:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: 'Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.'
               example: example
               type: string
@@ -15509,7 +15593,8 @@ components:
         outbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the number of concurrent outbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
@@ -16131,7 +16216,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Specifies how many seconds to wait before timing out a webhook.
           example: 25
           maximum: 30
@@ -16400,6 +16486,15 @@ components:
             - successful
           type: string
       type: object
+    ImmutableSetLong:
+      example: "[1234567890L, 9876543210L]"
+      items:
+        format: int64
+        type: integer
+      properties:
+        empty:
+          type: boolean
+      type: array
     InboundFqdn:
       example:
         ani_number_format: +E.164
@@ -16429,7 +16524,8 @@ components:
             - E.164-national
           type: string
         channel_limit:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
           nullable: true
           type: integer
@@ -16446,7 +16542,8 @@ components:
             type: string
           type: array
         default_routing_method:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Default routing method to be used when a number is associated with the connection. Must be one of the routing method types or null, other values are not allowed.
           enum:
             - sequential
@@ -16490,7 +16587,8 @@ components:
             - Australia
           type: string
         sip_subdomain:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: 'Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.'
           nullable: true
           type: string
@@ -16544,7 +16642,8 @@ components:
             - E.164-national
           type: string
         channel_limit:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
           example: 10
           type: integer
@@ -16647,8 +16746,10 @@ components:
         id: bf6307bd-884d-4c1f-b6ea-c62b8c495d3c
         occurred_at: date-time
         payload:
-          completed_at: null
-          cost: null
+          completed_at:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
+          cost:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           direction: inbound
           encoding: GSM-7
           errors: []
@@ -16662,7 +16763,8 @@ components:
           parts: 1
           received_at: 2019-01-23T18:10:02.574Z
           record_type: message
-          sent_at: null
+          sent_at:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           subject: From Telnyx!
           tags:
             - Greetings
@@ -16673,7 +16775,8 @@ components:
               phone_number: "+18445550001"
               status: delivered
           type: SMS
-          valid_until: null
+          valid_until:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           webhook_failover_url: https://backup.example.com/hooks
           webhook_url: https://www.example.com/hooks
         record_type: event
@@ -16708,8 +16811,10 @@ components:
       type: object
     InboundMessagePayload:
       example:
-        completed_at: null
-        cost: null
+        completed_at:
+          $ref: "#/components/schemas/WebhookTimeoutSecs/default"
+        cost:
+          $ref: "#/components/schemas/WebhookTimeoutSecs/default"
         direction: inbound
         encoding: GSM-7
         errors: []
@@ -16724,7 +16829,8 @@ components:
         parts: 1
         received_at: 2019-01-23T18:10:02.574Z
         record_type: message
-        sent_at: null
+        sent_at:
+          $ref: "#/components/schemas/WebhookTimeoutSecs/default"
         subject: From Telnyx!
         tags:
           - Greetings
@@ -16735,7 +16841,8 @@ components:
             phone_number: "+18445550001"
             status: delivered
         type: SMS
-        valid_until: null
+        valid_until:
+          $ref: "#/components/schemas/WebhookTimeoutSecs/default"
         webhook_failover_url: https://backup.example.com/hooks
         webhook_url: https://www.example.com/hooks
       properties:
@@ -17126,7 +17233,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Specifies how many seconds to wait before timing out a webhook.
           example: 25
           maximum: 30
@@ -17550,6 +17658,11 @@ components:
         meta:
           $ref: "#/components/schemas/PaginationMeta"
       type: object
+    MdrGetSyncUsageReportResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/MdrUsageReportResponse"
+      type: object
     MdrGetUsageReportsByIdResponse:
       properties:
         data:
@@ -17646,6 +17759,9 @@ components:
       type: object
     MdrUsageRecord:
       properties:
+        carrier_passthrough_fee:
+          example: "0"
+          type: string
         connection:
           example: all
           type: string
@@ -18458,7 +18574,8 @@ components:
           type: string
         fraud:
           description: Unused
-          example: null
+          example:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           type: string
         national_format:
           description: Hyphen-separated national number, preceded by the national destination code (NDC), with a 0 prefix, if an NDC is found
@@ -18836,7 +18953,8 @@ components:
           description: Forces all SIP calls originated on this connection to be "parked" instead of "bridged" to the destination specified on the URI. Parked calls will return ringback to the caller and will await for a Call Control command to define which action will be taken next.
           type: boolean
         channel_limit:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: When set, this will limit the total number of outbound calls to phone numbers associated with this connection.
           type: integer
         generate_ringback_tone:
@@ -18855,10 +18973,12 @@ components:
           example: tech-prefixp-charge-info
           type: string
         ip_authentication_token:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           type: string
         localization:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: A 2-character country code specifying the country whose national dialing rules should be used. For example, if set to `US` then any US number can be dialed without preprending +1 to the number. When left blank, Telnyx will try US and GB dialing rules, in that order, by default.
           type: string
         outbound_voice_profile_id:
@@ -18886,8 +19006,10 @@ components:
         id: 86f58db9-0fe3-4adc-9d1f-46e66e6e9323
         occurred_at: date-time
         payload:
-          completed_at: null
-          cost: null
+          completed_at:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
+          cost:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           direction: outbound
           encoding: GSM-7
           errors: []
@@ -18897,15 +19019,19 @@ components:
             phone_number: "+18445550001"
           id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
           media:
-            - content_type: null
-              sha256: null
-              size: null
+            - content_type:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
+              sha256:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
+              size:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               url: https://pbs.twimg.com/profile_images/1142168442042118144/AW3F4fFD_400x400.png
           messaging_profile_id: dd50eba1-a0c0-4563-9925-b25e842a7cb6
           parts: 1
           received_at: 2019-01-23T18:10:02.574Z
           record_type: message
-          sent_at: null
+          sent_at:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           subject: From Telnyx!
           tags:
             - Greetings
@@ -18916,7 +19042,8 @@ components:
               phone_number: "+18665550001"
               status: queued
           type: MMS
-          valid_until: null
+          valid_until:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           webhook_failover_url: https://backup.example.com/hooks
           webhook_url: https://www.example.com/hooks
         record_type: event
@@ -18951,8 +19078,10 @@ components:
       type: object
     OutboundMessagePayload:
       example:
-        completed_at: null
-        cost: null
+        completed_at:
+          $ref: "#/components/schemas/WebhookTimeoutSecs/default"
+        cost:
+          $ref: "#/components/schemas/WebhookTimeoutSecs/default"
         direction: outbound
         encoding: GSM-7
         errors: []
@@ -18962,15 +19091,19 @@ components:
           phone_number: "+18445550001"
         id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
         media:
-          - content_type: null
-            sha256: null
-            size: null
+          - content_type:
+              $ref: "#/components/schemas/WebhookTimeoutSecs/default"
+            sha256:
+              $ref: "#/components/schemas/WebhookTimeoutSecs/default"
+            size:
+              $ref: "#/components/schemas/WebhookTimeoutSecs/default"
             url: https://pbs.twimg.com/profile_images/1142168442042118144/AW3F4fFD_400x400.png
         messaging_profile_id: dd50eba1-a0c0-4563-9925-b25e842a7cb6
         parts: 1
         received_at: 2019-01-23T18:10:02.574Z
         record_type: message
-        sent_at: null
+        sent_at:
+          $ref: "#/components/schemas/WebhookTimeoutSecs/default"
         subject: From Telnyx!
         tags:
           - Greetings
@@ -18981,7 +19114,8 @@ components:
             phone_number: "+18665550001"
             status: queued
         type: MMS
-        valid_until: null
+        valid_until:
+          $ref: "#/components/schemas/WebhookTimeoutSecs/default"
         webhook_failover_url: https://backup.example.com/hooks
         webhook_url: https://www.example.com/hooks
       properties:
@@ -19186,7 +19320,8 @@ components:
           - AU
       properties:
         billing_group_id:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
           example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
           format: uuid
@@ -19470,105 +19605,6 @@ components:
             - success
             - failure
           readOnly: true
-          type: string
-    PhoneNumberBlocksJob:
-      example:
-        created_at: 2020-10-23T18:10:00.000Z
-        etc: 2020-10-30T18:10:00.000Z
-        failed_operations: []
-        id: 42587e44-3a3e-46de-9255-0c9a7a1d1ec7
-        record_type: phone_numbers_job
-        status: pending
-        successful_operations: []
-        type: delete_phone_number_block
-        updated_at: 2020-10-23T18:10:01.000Z
-      properties:
-        created_at:
-          description: ISO 8601 formatted date indicating when the resource was created.
-          readOnly: true
-          type: string
-        etc:
-          description: ISO 8601 formatted date indicating when the estimated time of completion of the background job.
-          format: date-time
-          readOnly: true
-          type: string
-        failed_operations:
-          items:
-            $ref: "#/components/schemas/PhoneNumberBlocksJobFailedOperation"
-          readOnly: true
-          type: array
-        id:
-          description: Identifies the resource.
-          example: 42587e44-3a3e-46de-9255-0c9a7a1d1ec7
-          format: uuid
-          readOnly: true
-          type: string
-        record_type:
-          description: Identifies the type of the resource.
-          example: phone_number_block_job
-          readOnly: true
-          type: string
-        status:
-          default: pending
-          description: Indicates the completion status of the background operation.
-          enum:
-            - pending
-            - in_progress
-            - completed
-            - failed
-          example: pending
-          readOnly: true
-          type: string
-        successful_operations:
-          items:
-            $ref: "#/components/schemas/PhoneNumberBlocksJobSuccessfulOperation"
-            description: The phone numbers successfully updated.
-          readOnly: true
-          type: array
-        type:
-          description: Identifies the type of the background job.
-          enum:
-            - delete_phone_number_block
-          example: delete_phone_number_block
-          readOnly: true
-          type: string
-        updated_at:
-          description: ISO 8601 formatted date indicating when the resource was updated.
-          readOnly: true
-          type: string
-      type: object
-    PhoneNumberBlocksJobDeletePhoneNumberBlockRequest:
-      example:
-        phone_number_block_id: f3946371-7199-4261-9c3d-81a0d7935146
-      properties:
-        phone_number_block_id:
-          type: string
-      required:
-        - phone_number_block_id
-      type: object
-    PhoneNumberBlocksJobFailedOperation:
-      properties:
-        errors:
-          items:
-            $ref: "#/components/schemas/Error"
-          type: array
-        id:
-          description: The phone number's ID
-          format: int64
-          type: string
-        phone_number:
-          description: The phone number in e164 format.
-          format: e164
-          type: string
-    PhoneNumberBlocksJobSuccessfulOperation:
-      properties:
-        id:
-          description: The phone number's ID
-          format: int64
-          type: string
-        phone_number:
-          description: The phone number in e164 format.
-          format: e164
           type: string
     PhoneNumberDeletedDetailed:
       example:
@@ -19894,7 +19930,8 @@ components:
         eligible_messaging_products:
           - A2P
         features:
-          mms: null
+          mms:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           sms:
             domestic_two_way: true
             international_inbound: true
@@ -20430,7 +20467,8 @@ components:
           example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
           type: string
         portout_id:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Identifies the associated port request
           example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
           type: string
@@ -21077,7 +21115,8 @@ components:
           readOnly: true
           type: string
         ip:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: The provisioned IP address. This attribute will only be available when underlying resource status is in a "provisioned" status.
           example: 192.168.0.0
           readOnly: true
@@ -21110,15 +21149,19 @@ components:
       description: The current status or failure details of the SIM card's public IP.
       properties:
         error_code:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: This attribute is an <a href="https://developers.telnyx.com/docs/api/v2/overview#errors">error code</a> related to the failure reason.
-          example: null
+          example:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           readOnly: true
           type: string
         error_description:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: This attribute provides a human-readable explanation of why a failure happened.
-          example: null
+          example:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           readOnly: true
           type: string
         value:
@@ -21561,7 +21604,8 @@ components:
           example: premium
           type: string
         stop:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: When specified, it stops the current audio being played.  Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
           example: current
           type: string
@@ -21840,12 +21884,14 @@ components:
         inbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
             sip_subdomain:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: 'Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.'
               example: example
               type: string
@@ -21861,7 +21907,8 @@ components:
         outbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the total number of outbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
@@ -21873,7 +21920,8 @@ components:
           example: texml_application
           type: string
         status_callback:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: URL for Telnyx to send requests to containing information about call progress events.
           example: https://example.com
           format: url
@@ -21889,7 +21937,8 @@ components:
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         voice_fallback_url:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: URL to which Telnyx will deliver your XML Translator webhooks if we get an error response from your voice_url.
           example: https://fallback.example.com
           format: url
@@ -21931,7 +21980,8 @@ components:
           call_control_id: v2:7subYr8fLrXmaAXm8egeAMpoSJ72J3SGPUuome81-hQuaKRf9b7hKA
           call_leg_id: 5ca81340-5beb-11eb-ae45-02420a0f8b69
           call_session_id: 5ca81eee-5beb-11eb-ba6c-02420a0f8b69
-          client_state: null
+          client_state:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           connection_id: "1240401930086254526"
           transcription_data:
             confidence: 0.977219
@@ -22340,7 +22390,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Specifies how many seconds to wait before timing out a webhook.
           example: 25
           maximum: 30
@@ -22500,7 +22551,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Specifies how many seconds to wait before timing out a webhook.
           example: 25
           maximum: 30
@@ -22534,12 +22586,14 @@ components:
         inbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the number of concurrent inbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
             sip_subdomain:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: 'Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.'
               example: example
               type: string
@@ -22555,7 +22609,8 @@ components:
         outbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the number of concurrent outbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
@@ -22660,7 +22715,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Specifies how many seconds to wait before timing out a webhook.
           example: 25
           maximum: 30
@@ -22804,7 +22860,8 @@ components:
           format: url
           type: string
         webhook_timeout_secs:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Specifies how many seconds to wait before timing out a webhook.
           example: 25
           maximum: 30
@@ -23051,7 +23108,8 @@ components:
           - AU
       properties:
         billing_group_id:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: The ID of the billing group associated with the outbound proflile. Defaults to null (for no group assigned).
           example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
           format: uuid
@@ -23252,12 +23310,14 @@ components:
         inbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the total number of inbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
             sip_subdomain:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: 'Specifies a subdomain that can be used to receive Inbound calls to a Connection, in the same way a phone number is used, from a SIP endpoint. Example: the subdomain "example.sip.telnyx.com" can be called from any SIP endpoint by using the SIP URI "sip:@example.sip.telnyx.com" where the user part can be any alphanumeric value. Please note TLS encrypted calls are not allowed for subdomain calls.'
               example: example
               type: string
@@ -23273,7 +23333,8 @@ components:
         outbound:
           properties:
             channel_limit:
-              default: null
+              default:
+                $ref: "#/components/schemas/WebhookTimeoutSecs/default"
               description: When set, this will limit the total number of outbound calls to phone numbers associated with this connection.
               example: 10
               type: integer
@@ -23281,7 +23342,8 @@ components:
               $ref: "#/components/schemas/OutboundVoiceProfileId"
           type: object
         status_callback:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: URL for Telnyx to send requests to containing information about call progress events.
           example: https://example.com
           format: url
@@ -23295,7 +23357,8 @@ components:
           example: get
           type: string
         voice_fallback_url:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: URL to which Telnyx will deliver your XML Translator webhooks if we get an error response from your voice_url.
           example: https://fallback.example.com
           format: url
@@ -23331,7 +23394,8 @@ components:
           example: true
           type: boolean
         messaging_template:
-          default: null
+          default:
+            $ref: "#/components/schemas/WebhookTimeoutSecs/default"
           description: Optionally sets a messaging text template when sending the verification code. Uses `{code}` to template in the actual verification code.
           example: "Hello, this is the Acme Inc verification code you requested: {code}."
           nullable: true
@@ -23501,6 +23565,10 @@ components:
       type: object
     ValidateAddressResult:
       properties:
+        errors:
+          items:
+            $ref: "#/components/schemas/Error"
+          type: array
         record_type:
           description: Identifies the type of the resource.
           example: address_validation
@@ -23815,7 +23883,8 @@ components:
               title: Could not resolve name
           finished_at: 2020-08-10T14:00:05.000Z
           http:
-            reponse: null
+            reponse:
+              $ref: "#/components/schemas/WebhookTimeoutSecs/default"
             request:
               headers:
                 - "Accept: */*"

@@ -970,6 +970,16 @@ paths:
       operationId: get_posts
       parameters:
         - description: >
+            How to sort the posts that are returned.  One of: date, active, distance <br /><br />
+
+            Date sorting will sort posts from newest to oldest. Active sorting will sort active posts before satisfied, withdrawn and expired posts and then sort by date. Distance sorting will sort the closest posts first.
+          in: query
+          name: sort_by
+          required: false
+          schema:
+            default: date
+            type: string
+        - description: >
             A comma separated list of the post types to return.  The available post types are: offer, taken, wanted, received, admin
           in: query
           name: types
@@ -1562,7 +1572,7 @@ paths:
           schema:
             type: string
         - description: >
-            How to sort the posts that are returned.  One of: relevance, date <br /><br /> Setting sort_by to date will sort posts from newest to oldest.
+            How to sort the posts that are returned.  One of: relevance, date, active, distance <br /><br /> Relevance sorting will sort the posts that best match the search query first. Date sorting will sort posts from newest to oldest. Active sorting will sort active posts before satisfied, withdrawn and expired posts and then sort by date. Distance sorting will sort the closest posts first.
           in: query
           name: sort_by
           required: false
@@ -2850,6 +2860,16 @@ paths:
       operationId: get_current_user_posts
       parameters:
         - description: >
+            How to sort the posts that are returned.  One of: date, active, distance <br /><br />
+
+            Date sorting will sort posts from newest to oldest. Active sorting will sort active posts before satisfied, withdrawn and expired posts and then sort by date. Distance sorting will sort the closest posts first.
+          in: query
+          name: sort_by
+          required: false
+          schema:
+            default: date
+            type: string
+        - description: >
             A comma separated list of the post types to return.  The available post types are: offer, taken, wanted, received, admin
           in: query
           name: types
@@ -3008,7 +3028,7 @@ paths:
           schema:
             type: string
         - description: >
-            How to sort the posts that are returned.  One of: relevance, date <br /><br /> Setting sort_by to date will sort posts from newest to oldest.
+            How to sort the posts that are returned.  One of: relevance, date, active, distance <br /><br /> Relevance sorting will sort the posts that best match the search query first. Date sorting will sort posts from newest to oldest. Active sorting will sort active posts before satisfied, withdrawn and expired posts and then sort by date. Distance sorting will sort the closest posts first.
           in: query
           name: sort_by
           required: false
@@ -3421,6 +3441,16 @@ paths:
           schema:
             type: string
         - description: >
+            How to sort the posts that are returned.  One of: date, active, distance <br /><br />
+
+            Date sorting will sort posts from newest to oldest. Active sorting will sort active posts before satisfied, withdrawn and expired posts and then sort by date. Distance sorting will sort the closest posts first.
+          in: query
+          name: sort_by
+          required: false
+          schema:
+            default: date
+            type: string
+        - description: >
             A comma separated list of the post types to return.  The available post types are: offer, taken, wanted, received, admin
           in: query
           name: types
@@ -3584,7 +3614,7 @@ paths:
           schema:
             type: string
         - description: >
-            How to sort the posts that are returned.  One of: relevance, date <br /><br /> Setting sort_by to date will sort posts from newest to oldest.
+            How to sort the posts that are returned.  One of: relevance, date, active, distance <br /><br /> Relevance sorting will sort the posts that best match the search query first. Date sorting will sort posts from newest to oldest. Active sorting will sort active posts before satisfied, withdrawn and expired posts and then sort by date. Distance sorting will sort the closest posts first.
           in: query
           name: sort_by
           required: false
@@ -3856,8 +3886,10 @@ components:
         user:
           about_me: Just an old fisherman looking to reuse more.
           country: GB
-          firstname: null
-          lastname: null
+          firstname:
+            $ref: "#/components/schemas/Post/example/footer"
+          lastname:
+            $ref: "#/components/schemas/Post/example/footer"
           member_since: 2017-01-27T06:35:55
           profile_image: https://lh3.googleusercontent.com/-1qVLzuOCyYg/AAAAAAAAAAI/AAAAAAAAAAA/0aGNzRAO61c/s64-c/100783935580725962164.jpg
           user_id: 2946512
@@ -4423,12 +4455,15 @@ components:
         content: >
           Panasonic microwave oven in good working order 800 W power and turntable inside Has all the normal microwave functions plus grill elements for browning Comes with original instructions booklet It's an old microwave and could do with a bit of a clean, but still works very well
         date: 2018-02-18T17:11:38
-        footer: null
+        footer:
+          $ref: "#/components/schemas/Post/example/footer"
         group_id: 81
         latitude: 42.961404
         longitude: -88.012586
-        outcome: null
-        photos: null
+        outcome:
+          $ref: "#/components/schemas/Post/example/footer"
+        photos:
+          $ref: "#/components/schemas/Post/example/footer"
         post_id: 25997431
         search_content: Panasonic <span class="highlight">microwave</span> oven in good working order 800 W power and turntable
         search_title: <span class="highlight">Microwave</span> Oven (Greenfield)
@@ -4464,8 +4499,10 @@ components:
         user:
           about_me: Just an old fisherman looking to reuse more.
           country: GB
-          firstname: null
-          lastname: null
+          firstname:
+            $ref: "#/components/schemas/Post/example/footer"
+          lastname:
+            $ref: "#/components/schemas/Post/example/footer"
           member_since: 2017-01-27T06:35:55
           profile_image: https://lh3.googleusercontent.com/-1qVLzuOCyYg/AAAAAAAAAAI/AAAAAAAAAAA/0aGNzRAO61c/s64-c/100783935580725962164.jpg
           user_id: 2946512
@@ -4506,8 +4543,10 @@ components:
           percent_positive: 87.5
           restriction: no-recent-messages
           score: 7
-        firstname: null
-        lastname: null
+        firstname:
+          $ref: "#/components/schemas/Post/example/footer"
+        lastname:
+          $ref: "#/components/schemas/Post/example/footer"
         member_since: 2017-01-27T06:35:55
         profile_image: https://lh3.googleusercontent.com/-1qVLzuOCyYg/AAAAAAAAAAI/AAAAAAAAAAA/0aGNzRAO61c/s64-c/100783935580725962164.jpg
         reply_time: 4850

@@ -7425,7 +7425,6 @@ paths:
         - customer_accessCode:
             - licenses.create
             - purchases.view
-          #ldap_accessCode: []
       summary: License images
       tags:
         - images
@@ -9007,7 +9006,6 @@ paths:
       security:
         - customer_accessCode:
             - user.view
-        #- contributor_accessCode: []
       summary: Get user details
       tags:
         - users

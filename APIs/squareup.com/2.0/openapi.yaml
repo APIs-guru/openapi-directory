@@ -76,7 +76,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE_IN_PERSON
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/oauth2/clients/{client_id}/access-token/renew":
     post:
       description: >-
@@ -147,7 +147,7 @@ paths:
         - OAuth
       x-is-deprecated: true
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /oauth2/revoke:
     post:
       description: >-
@@ -203,7 +203,7 @@ paths:
       tags:
         - OAuth
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /oauth2/token:
     post:
       description: >-
@@ -251,7 +251,7 @@ paths:
       tags:
         - OAuth
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v1/me/employees:
     get:
       description: Provides summary information for all of a business's employees.
@@ -332,7 +332,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: >-2
          Use the CreateEmployee endpoint to add an employee to a Square
@@ -367,7 +367,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v1/me/employees/{employee_id}":
     get:
       description: Provides the details for a single employee.
@@ -395,7 +395,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: ""
       operationId: UpdateEmployee
@@ -424,7 +424,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v1/me/roles:
     get:
       description: Provides summary information for all of a business's employee roles.
@@ -469,7 +469,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: >-
         Creates an employee role you can then assign to employees.
@@ -518,7 +518,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v1/me/roles/{role_id}":
     get:
       description: Provides the details for a single employee role.
@@ -546,7 +546,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: Modifies the details of an employee role.
       operationId: UpdateEmployeeRole
@@ -584,7 +584,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v1/{location_id}/orders":
     get:
       description: Provides summary information for a merchant's online store orders.
@@ -635,7 +635,7 @@ paths:
       x-oauthpermissions:
         - ORDERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
       x-visibility: SDK_ONLY
   "/v1/{location_id}/orders/{order_id}":
     get:
@@ -670,7 +670,7 @@ paths:
       x-oauthpermissions:
         - ORDERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
       x-visibility: SDK_ONLY
     put:
       description: "Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:"
@@ -715,7 +715,7 @@ paths:
       x-oauthpermissions:
         - ORDERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
       x-visibility: SDK_ONLY
   "/v1/{location_id}/payments":
     get:
@@ -805,7 +805,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v1/{location_id}/payments/{payment_id}":
     get:
       description: Provides comprehensive information for a single payment.
@@ -839,7 +839,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v1/{location_id}/refunds":
     get:
       description: Provides the details for all refunds initiated by a merchant or any of the merchant's mobile staff during a date range. Date ranges cannot exceed one year in length.
@@ -902,7 +902,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: >-
         Issues a refund for a previously processed payment. You must issue
@@ -961,7 +961,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v1/{location_id}/settlements":
     get:
       description: >-
@@ -1040,7 +1040,7 @@ paths:
       x-oauthpermissions:
         - SETTLEMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v1/{location_id}/settlements/{settlement_id}":
     get:
       description: >-
@@ -1104,25 +1104,25 @@ paths:
       x-oauthpermissions:
         - SETTLEMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/apple-pay/domains:
     post:
       description: >-
-        Activates a domain for use with Web Apple Pay and Square. A validation
+        Activates a domain for use with Apple Pay on the Web and Square. A validation
 
-        will be performed on this domain by Apple to ensure is it properly set up as
+        is performed on this domain by Apple to ensure that it is properly set up as
 
         an Apple Pay enabled domain.
 
 
         This endpoint provides an easy way for platform developers to bulk activate
 
-        Web Apple Pay with Square for merchants using their platform.
+        Apple Pay on the Web with Square for merchants using their platform.
 
 
-        To learn more about Apple Pay on Web see the Apple Pay section in the
+        To learn more about Web Apple Pay, see
 
-        [Square Payment Form Walkthrough](/docs/payment-form/payment-form-walkthrough).
+        [Add the Apple Pay on the Web Button](/docs/payment-form/add-digital-wallets/apple-pay).
       operationId: RegisterDomain
       requestBody:
         content:
@@ -1149,7 +1149,7 @@ paths:
         - ApplePay
       x-oauthpermissions: []
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/bank-accounts:
     get:
       description: Returns a list of [BankAccount](#type-bankaccount) objects linked to a Square account.
@@ -1205,7 +1205,7 @@ paths:
       x-oauthpermissions:
         - BANK_ACCOUNTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/bank-accounts/by-v1-id/{v1_bank_account_id}":
     get:
       description: Returns details of a [BankAccount](#type-bankaccount) identified by V1 bank account ID.
@@ -1236,7 +1236,7 @@ paths:
       x-oauthpermissions:
         - BANK_ACCOUNTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/bank-accounts/{bank_account_id}":
     get:
       description: >-
@@ -1267,7 +1267,7 @@ paths:
       x-oauthpermissions:
         - BANK_ACCOUNTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/bookings:
     post:
       description: Creates a booking.
@@ -1300,7 +1300,7 @@ paths:
       x-oauthpermissions:
         - APPOINTMENTS_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/bookings/availability/search:
     post:
       description: Searches for availabilities for booking.
@@ -1333,7 +1333,7 @@ paths:
       x-oauthpermissions:
         - APPOINTMENTS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/bookings/business-booking-profile:
     get:
       description: Retrieves a seller's booking profile.
@@ -1355,7 +1355,7 @@ paths:
       x-oauthpermissions:
         - APPOINTMENTS_BUSINESS_SETTINGS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/bookings/team-member-booking-profiles:
     get:
       description: Lists booking profiles for team members.
@@ -1406,7 +1406,7 @@ paths:
       x-oauthpermissions:
         - APPOINTMENTS_BUSINESS_SETTINGS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/bookings/team-member-booking-profiles/{team_member_id}":
     get:
       description: Retrieves a team member's booking profile.
@@ -1436,7 +1436,7 @@ paths:
       x-oauthpermissions:
         - APPOINTMENTS_BUSINESS_SETTINGS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/bookings/{booking_id}":
     get:
       description: Retrieves a booking.
@@ -1466,7 +1466,7 @@ paths:
       x-oauthpermissions:
         - APPOINTMENTS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: Updates a booking.
       operationId: UpdateBooking
@@ -1506,7 +1506,7 @@ paths:
       x-oauthpermissions:
         - APPOINTMENTS_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/bookings/{booking_id}/cancel":
     post:
       description: Cancels an existing booking.
@@ -1547,7 +1547,7 @@ paths:
       x-oauthpermissions:
         - APPOINTMENTS_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/cash-drawers/shifts:
     get:
       description: >-
@@ -1614,7 +1614,7 @@ paths:
       x-oauthpermissions:
         - CASH_DRAWER_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/cash-drawers/shifts/{shift_id}":
     get:
       description: >-
@@ -1651,7 +1651,7 @@ paths:
       x-oauthpermissions:
         - CASH_DRAWER_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/cash-drawers/shifts/{shift_id}/events":
     get:
       description: Provides a paginated list of events for a single cash drawer shift.
@@ -1700,7 +1700,7 @@ paths:
       x-oauthpermissions:
         - CASH_DRAWER_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/catalog/batch-delete:
     post:
       description: >-
@@ -1750,7 +1750,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/catalog/batch-retrieve:
     post:
       description: >-
@@ -1793,7 +1793,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/catalog/batch-upsert:
     post:
       description: >-
@@ -1842,7 +1842,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/catalog/info:
     get:
       description: >-
@@ -1866,7 +1866,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/catalog/list:
     get:
       description: >-
@@ -1883,7 +1883,7 @@ paths:
 
         __Important:__ ListCatalog does not return deleted catalog items. To retrieve
 
-        deleted catalog items, use [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects) 
+        deleted catalog items, use [SearchCatalogObjects](#endpoint-Catalog-SearchCatalogObjects)
 
         and set the `include_deleted_objects` attribute value to `true`.
       operationId: ListCatalog
@@ -1944,7 +1944,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/catalog/object:
     post:
       description: Creates or updates the target [CatalogObject](#type-catalogobject).
@@ -1976,7 +1976,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/catalog/object/{object_id}":
     delete:
       description: >-
@@ -2020,7 +2020,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     get:
       description: >-
         Returns a single [CatalogItem](#type-catalogitem) as a
@@ -2096,7 +2096,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/catalog/search:
     post:
       description: >-
@@ -2145,7 +2145,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/catalog/search-catalog-items:
     post:
       description: >-
@@ -2195,7 +2195,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/catalog/update-item-modifier-lists:
     post:
       description: >-
@@ -2232,7 +2232,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/catalog/update-item-taxes:
     post:
       description: >-
@@ -2269,7 +2269,7 @@ paths:
       x-oauthpermissions:
         - ITEMS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/customers:
     get:
       description: >-
@@ -2333,7 +2333,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: >-
         Creates a new customer for a business, which can have associated cards on file.
@@ -2381,7 +2381,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/customers/groups:
     get:
       description: Retrieves the list of customer groups of a business.
@@ -2415,7 +2415,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: >-
         Creates a new customer group for a business. 
@@ -2450,7 +2450,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/customers/groups/{group_id}":
     delete:
       description: Deletes a customer group as identified by the `group_id` value.
@@ -2478,7 +2478,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     get:
       description: Retrieves a specific customer group as identified by the `group_id` value.
       operationId: RetrieveCustomerGroup
@@ -2505,7 +2505,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: Updates a customer group as identified by the `group_id` value.
       operationId: UpdateCustomerGroup
@@ -2545,7 +2545,7 @@ paths:
         - CUSTOMERS_WRITE
         - CUSTOMERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/customers/search:
     post:
       description: >-
@@ -2592,7 +2592,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/customers/segments:
     get:
       description: Retrieves the list of customer segments of a business.
@@ -2626,7 +2626,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/customers/segments/{segment_id}":
     get:
       description: Retrieves a specific customer segment as identified by the `segment_id` value.
@@ -2654,7 +2654,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/customers/{customer_id}":
     delete:
       description: >-
@@ -2687,7 +2687,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     get:
       description: Returns details for a single customer.
       operationId: RetrieveCustomer
@@ -2714,7 +2714,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: >-
         Updates the details of an existing customer. When two profiles are merged
@@ -2766,7 +2766,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/customers/{customer_id}/cards":
     post:
       description: >-
@@ -2813,7 +2813,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/customers/{customer_id}/cards/{card_id}":
     delete:
       description: Removes a card on file from a customer.
@@ -2847,7 +2847,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/customers/{customer_id}/groups/{group_id}":
     delete:
       description: >-
@@ -2887,7 +2887,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: >-
         Adds a group membership to a customer. 
@@ -2926,7 +2926,7 @@ paths:
       x-oauthpermissions:
         - CUSTOMERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/devices/codes:
     get:
       description: Lists all DeviceCodes associated with the merchant.
@@ -2987,7 +2987,7 @@ paths:
       x-oauthpermissions:
         - DEVICE_CREDENTIAL_MANAGEMENT
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: >-
         Creates a DeviceCode that can be used to login to a Square Terminal device to enter the connected
@@ -3021,7 +3021,7 @@ paths:
       x-oauthpermissions:
         - DEVICE_CREDENTIAL_MANAGEMENT
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/devices/codes/{id}":
     get:
       description: Retrieves DeviceCode with the associated ID.
@@ -3049,7 +3049,7 @@ paths:
       x-oauthpermissions:
         - DEVICE_CREDENTIAL_MANAGEMENT
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/disputes:
     get:
       description: Returns a list of disputes associated with a particular account.
@@ -3106,7 +3106,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/disputes/{dispute_id}":
     get:
       description: Returns details about a specific dispute.
@@ -3136,7 +3136,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/disputes/{dispute_id}/accept":
     post:
       description: >-
@@ -3174,7 +3174,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/disputes/{dispute_id}/evidence":
     get:
       description: Returns a list of evidence associated with a dispute.
@@ -3204,7 +3204,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/disputes/{dispute_id}/evidence/{evidence_id}":
     delete:
       description: >-
@@ -3247,7 +3247,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     get:
       description: >-
         Returns the specific evidence metadata associated with a specific dispute.
@@ -3289,7 +3289,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/disputes/{dispute_id}/evidence_text":
     post:
       description: Uploads text to use as evidence for a dispute challenge.
@@ -3330,7 +3330,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/disputes/{dispute_id}/submit-evidence":
     post:
       description: >-
@@ -3370,7 +3370,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/employees:
     get:
       description: ""
@@ -3420,7 +3420,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/employees/{id}":
     get:
       description: ""
@@ -3449,7 +3449,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/inventory/adjustment/{adjustment_id}":
     get:
       description: >-
@@ -3480,7 +3480,7 @@ paths:
       x-oauthpermissions:
         - INVENTORY_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/inventory/batch-change:
     post:
       description: >-
@@ -3520,7 +3520,7 @@ paths:
       x-oauthpermissions:
         - INVENTORY_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/inventory/batch-retrieve-changes:
     post:
       description: >-
@@ -3565,7 +3565,7 @@ paths:
       x-oauthpermissions:
         - INVENTORY_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/inventory/batch-retrieve-counts:
     post:
       description: >-
@@ -3616,7 +3616,7 @@ paths:
       x-oauthpermissions:
         - INVENTORY_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/inventory/physical-count/{physical_count_id}":
     get:
       description: >-
@@ -3650,7 +3650,7 @@ paths:
       x-oauthpermissions:
         - INVENTORY_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/inventory/{catalog_object_id}":
     get:
       description: >-
@@ -3706,7 +3706,7 @@ paths:
       x-oauthpermissions:
         - INVENTORY_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/inventory/{catalog_object_id}/changes":
     get:
       description: >-
@@ -3772,7 +3772,7 @@ paths:
       x-oauthpermissions:
         - INVENTORY_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/invoices:
     get:
       description: >-
@@ -3832,7 +3832,7 @@ paths:
       x-oauthpermissions:
         - INVOICES_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: >-
         Creates a draft [invoice](#type-invoice) 
@@ -3874,7 +3874,7 @@ paths:
         - ORDERS_WRITE
         - INVOICES_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/invoices/search:
     post:
       description: >-
@@ -3919,7 +3919,7 @@ paths:
       x-oauthpermissions:
         - INVOICES_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/invoices/{invoice_id}":
     delete:
       description: >-
@@ -3968,7 +3968,7 @@ paths:
         - ORDERS_WRITE
         - INVOICES_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     get:
       description: Retrieves an invoice by invoice ID.
       operationId: GetInvoice
@@ -3997,7 +3997,7 @@ paths:
       x-oauthpermissions:
         - INVOICES_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: >-
         Updates an invoice by modifying fields, clearing fields, or both. For most updates, you can use a sparse 
@@ -4046,7 +4046,7 @@ paths:
         - ORDERS_WRITE
         - INVOICES_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/invoices/{invoice_id}/cancel":
     post:
       description: >-
@@ -4095,7 +4095,7 @@ paths:
         - ORDERS_WRITE
         - INVOICES_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/invoices/{invoice_id}/publish":
     post:
       description: >-
@@ -4157,7 +4157,7 @@ paths:
         - ORDERS_WRITE
         - INVOICES_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/labor/break-types:
     get:
       description: Returns a paginated list of `BreakType` instances for a business.
@@ -4203,7 +4203,7 @@ paths:
       x-oauthpermissions:
         - TIMECARDS_SETTINGS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: >-
         Creates a new `BreakType`.
@@ -4258,7 +4258,7 @@ paths:
       x-oauthpermissions:
         - TIMECARDS_SETTINGS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/labor/break-types/{id}":
     delete:
       description: >-
@@ -4290,7 +4290,7 @@ paths:
       x-oauthpermissions:
         - TIMECARDS_SETTINGS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     get:
       description: Returns a single `BreakType` specified by id.
       operationId: GetBreakType
@@ -4317,7 +4317,7 @@ paths:
       x-oauthpermissions:
         - TIMECARDS_SETTINGS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: Updates an existing `BreakType`.
       operationId: UpdateBreakType
@@ -4357,7 +4357,7 @@ paths:
         - TIMECARDS_SETTINGS_WRITE
         - TIMECARDS_SETTINGS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/labor/employee-wages:
     get:
       description: Returns a paginated list of `EmployeeWage` instances for a business.
@@ -4404,7 +4404,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/labor/employee-wages/{id}":
     get:
       description: Returns a single `EmployeeWage` specified by id.
@@ -4434,7 +4434,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/labor/shifts:
     post:
       description: >-
@@ -4498,7 +4498,7 @@ paths:
       x-oauthpermissions:
         - TIMECARDS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/labor/shifts/search:
     post:
       description: >-
@@ -4556,7 +4556,7 @@ paths:
       x-oauthpermissions:
         - TIMECARDS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/labor/shifts/{id}":
     delete:
       description: Deletes a `Shift`.
@@ -4584,7 +4584,7 @@ paths:
       x-oauthpermissions:
         - TIMECARDS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     get:
       description: Returns a single `Shift` specified by id.
       operationId: GetShift
@@ -4611,7 +4611,7 @@ paths:
       x-oauthpermissions:
         - TIMECARDS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: >-
         Updates an existing `Shift`.
@@ -4662,7 +4662,7 @@ paths:
         - TIMECARDS_WRITE
         - TIMECARDS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/labor/team-member-wages:
     get:
       description: Returns a paginated list of `TeamMemberWage` instances for a business.
@@ -4708,7 +4708,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/labor/team-member-wages/{id}":
     get:
       description: Returns a single `TeamMemberWage` specified by id.
@@ -4736,7 +4736,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/labor/workweek-configs:
     get:
       description: Returns a list of `WorkweekConfig` instances for a business.
@@ -4770,7 +4770,7 @@ paths:
       x-oauthpermissions:
         - TIMECARDS_SETTINGS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/labor/workweek-configs/{id}":
     put:
       description: Updates a `WorkweekConfig`.
@@ -4811,7 +4811,7 @@ paths:
         - TIMECARDS_SETTINGS_WRITE
         - TIMECARDS_SETTINGS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/locations:
     get:
       description: >-
@@ -4840,7 +4840,7 @@ paths:
       x-oauthpermissions:
         - MERCHANT_PROFILE_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: Creates a location.
       operationId: CreateLocation
@@ -4872,7 +4872,7 @@ paths:
       x-oauthpermissions:
         - MERCHANT_PROFILE_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/locations/{location_id}":
     get:
       description: >-
@@ -4908,7 +4908,7 @@ paths:
       x-oauthpermissions:
         - MERCHANT_PROFILE_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: Updates a location.
       operationId: UpdateLocation
@@ -4948,13 +4948,13 @@ paths:
       x-oauthpermissions:
         - MERCHANT_PROFILE_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/locations/{location_id}/checkouts":
     post:
       description: >-
-        Links a `checkoutId` to a `checkout_page_url` that customers will
+        Links a `checkoutId` to a `checkout_page_url` that customers are
 
-        be directed to in order to provide their payment information using a
+        directed to in order to provide their payment information using a
 
         payment processing workflow hosted on connect.squareup.com.
       operationId: CreateCheckout
@@ -4994,7 +4994,7 @@ paths:
         - PAYMENTS_WRITE
         - ORDERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/locations/{location_id}/refunds":
     get:
       description: >-
@@ -5093,7 +5093,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/locations/{location_id}/transactions":
     get:
       description: >-
@@ -5186,7 +5186,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: >-
         Charges a card represented by a card nonce or a customer's card on file.
@@ -5260,7 +5260,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/locations/{location_id}/transactions/{transaction_id}":
     get:
       description: Retrieves details for a single transaction.
@@ -5297,7 +5297,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/locations/{location_id}/transactions/{transaction_id}/capture":
     post:
       description: >-
@@ -5343,7 +5343,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/locations/{location_id}/transactions/{transaction_id}/refund":
     post:
       description: >-
@@ -5405,7 +5405,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/locations/{location_id}/transactions/{transaction_id}/void":
     post:
       description: >-
@@ -5451,7 +5451,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: DEPRECATED
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/loyalty/accounts:
     post:
       description: Creates a loyalty account.
@@ -5484,7 +5484,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/loyalty/accounts/search:
     post:
       description: >-
@@ -5524,7 +5524,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/loyalty/accounts/{account_id}":
     get:
       description: Retrieves a loyalty account.
@@ -5554,7 +5554,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/loyalty/accounts/{account_id}/accumulate":
     post:
       description: >-
@@ -5613,7 +5613,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/loyalty/accounts/{account_id}/adjust":
     post:
       description: >-
@@ -5662,7 +5662,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/loyalty/events/search:
     post:
       description: >-
@@ -5705,7 +5705,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/loyalty/programs:
     get:
       description: >-
@@ -5730,7 +5730,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/loyalty/programs/{program_id}/calculate":
     post:
       description: >-
@@ -5786,7 +5786,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/loyalty/rewards:
     post:
       description: >-
@@ -5832,7 +5832,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/loyalty/rewards/search:
     post:
       description: >-
@@ -5874,7 +5874,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/loyalty/rewards/{reward_id}":
     delete:
       description: >-
@@ -5919,7 +5919,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     get:
       description: Retrieves a loyalty reward.
       operationId: RetrieveLoyaltyReward
@@ -5948,7 +5948,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/loyalty/rewards/{reward_id}/redeem":
     post:
       description: >-
@@ -6007,7 +6007,7 @@ paths:
       x-oauthpermissions:
         - LOYALTY_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/merchants:
     get:
       description: >-
@@ -6048,7 +6048,7 @@ paths:
       x-oauthpermissions:
         - MERCHANT_PROFILE_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/merchants/{merchant_id}":
     get:
       description: Retrieve a `Merchant` object for the given `merchant_id`.
@@ -6079,7 +6079,7 @@ paths:
       x-oauthpermissions:
         - MERCHANT_PROFILE_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/orders:
     post:
       description: >-
@@ -6122,7 +6122,7 @@ paths:
       x-oauthpermissions:
         - ORDERS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/orders/batch-retrieve:
     post:
       description: >-
@@ -6158,7 +6158,7 @@ paths:
       x-oauthpermissions:
         - ORDERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/orders/calculate:
     post:
       description: Calculates an [Order](#type-order).
@@ -6189,7 +6189,7 @@ paths:
       x-is-beta: true
       x-oauthpermissions: []
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/orders/search:
     post:
       description: >-
@@ -6247,7 +6247,7 @@ paths:
       x-oauthpermissions:
         - ORDERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/orders/{order_id}":
     get:
       description: Retrieves an [Order](#type-order) by ID.
@@ -6274,7 +6274,7 @@ paths:
       x-oauthpermissions:
         - ORDERS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: >-
         Updates an open [Order](#type-order) by adding, replacing, or deleting
@@ -6337,7 +6337,7 @@ paths:
       x-oauthpermissions:
         - ORDERS_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/orders/{order_id}/pay":
     post:
       description: >-
@@ -6404,7 +6404,7 @@ paths:
         - PAYMENTS_WRITE
         - ORDERS_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/payments:
     get:
       description: >-
@@ -6516,28 +6516,23 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: >-
-        Charges a payment source (for example, a card 
+        Creates a payment using the provided source. You can use this endpoint 
 
-        represented by customer's card on file or a card nonce). In addition 
+        to charge a card (credit/debit card or    
 
-        to the payment source, the request must include the 
+        Square gift card) or record a payment that the seller received outside of Square 
 
-        amount to accept for the payment.
+        (cash payment from a buyer or a payment that an external entity 
 
-
-        There are several optional parameters that you can include in the request 
-
-        (for example, tip money, whether to autocomplete the payment, or a reference ID 
-
-        to correlate this payment with another system). 
+        procesed on behalf of the seller).
 
 
-        The `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission is required
+        The endpoint creates a 
 
-        to enable application fees.
+        `Payment` object and returns it in the response.
       operationId: CreatePayment
       requestBody:
         content:
@@ -6566,7 +6561,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/payments/cancel:
     post:
       description: >-
@@ -6586,7 +6581,7 @@ paths:
         canceling the payment, you can submit your `CreatePayment` request again.
 
 
-        Note that if no payment with the specified idempotency key is found, no action is taken and the endpoint 
+        Note that if no payment with the specified idempotency key is found, no action is taken and the endpoint
 
         returns successfully.
       operationId: CancelPaymentByIdempotencyKey
@@ -6617,7 +6612,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/payments/{payment_id}":
     get:
       description: Retrieves details for a specific payment.
@@ -6645,16 +6640,59 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
+    put:
+      description: >-
+        Updates a payment with the APPROVED status.
+
+        You can update the `amount_money` and `tip_money` using this endpoint.
+      operationId: UpdatePayment
+      parameters:
+        - description: The ID of the payment to update.
+          in: path
+          name: payment_id
+          required: true
+          schema:
+            type: string
+          x-is-beta: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePaymentRequest"
+        description: >-
+          An object containing the fields to POST for the request.
+
+
+          See the corresponding object definition for field details.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdatePaymentResponse"
+          description: Success
+      security:
+        - oauth2:
+            - PAYMENTS_WRITE
+      summary: UpdatePayment
+      tags:
+        - Payments
+      x-is-beta: true
+      x-oauthpermissions:
+        - PAYMENTS_WRITE
+      x-release-status: BETA
+      x-sq-version: 2021-03-17
   "/v2/payments/{payment_id}/cancel":
     post:
       description: >-
-        Cancels (voids) a payment. If you set `autocomplete` to `false` when creating a payment, 
+        Cancels (voids) a payment. You can use this endpoint to cancel a payment with 
 
-        you can cancel the payment using this endpoint.
+        the APPROVED `status`.
       operationId: CancelPayment
       parameters:
-        - description: The `payment_id` identifying the payment to be canceled.
+        - description: The ID of the payment to cancel.
           in: path
           name: payment_id
           required: true
@@ -6676,18 +6714,16 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/payments/{payment_id}/complete":
     post:
       description: >-
         Completes (captures) a payment.
 
+        By default, payments are set to complete immediately after they are created.
 
-        By default, payments are set to complete immediately after they are created. 
 
-        If you set `autocomplete` to `false` when creating a payment, you can complete (capture) 
-
-        the payment using this endpoint.
+        You can use this endpoint to complete a payment with the APPROVED `status`.
       operationId: CompletePayment
       parameters:
         - description: The unique ID identifying the payment to be completed.
@@ -6712,7 +6748,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/refunds:
     get:
       description: >-
@@ -6832,12 +6868,16 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     post:
       description: >-
-        Refunds a payment. You can refund the entire payment amount or a 
+        Refunds a payment. You can refund the entire payment amount or a
 
-        portion of it.
+        portion of it. You can use this endpoint to refund a card payment or record a 
+
+        refund of a cash or external payment. For more information, see
+
+        [Refund Payment](https://developer.squareup.com/docs/payments-api/refund-payments).
       operationId: RefundPayment
       requestBody:
         content:
@@ -6866,7 +6906,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/refunds/{refund_id}":
     get:
       description: Retrieves a specific refund using the `refund_id`.
@@ -6894,7 +6934,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/subscriptions:
     post:
       description: >-
@@ -6947,7 +6987,7 @@ paths:
         - ORDERS_WRITE
         - INVOICES_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/subscriptions/search:
     post:
       description: >-
@@ -7009,7 +7049,7 @@ paths:
       x-oauthpermissions:
         - SUBSCRIPTIONS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/subscriptions/{subscription_id}":
     get:
       description: Retrieves a subscription.
@@ -7039,7 +7079,7 @@ paths:
       x-oauthpermissions:
         - SUBSCRIPTIONS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: >-
         Updates a subscription. You can set, modify, and clear the 
@@ -7092,7 +7132,7 @@ paths:
         - ORDERS_WRITE
         - INVOICES_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/subscriptions/{subscription_id}/cancel":
     post:
       description: >-
@@ -7125,7 +7165,7 @@ paths:
       x-oauthpermissions:
         - SUBSCRIPTIONS_WRITE
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/subscriptions/{subscription_id}/events":
     get:
       description: >-
@@ -7184,7 +7224,7 @@ paths:
       x-oauthpermissions:
         - SUBSCRIPTIONS_READ
       x-release-status: BETA
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/team-members:
     post:
       description: >-
@@ -7226,7 +7266,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/team-members/bulk-create:
     post:
       description: >-
@@ -7268,7 +7308,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/team-members/bulk-update:
     post:
       description: >-
@@ -7309,7 +7349,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/team-members/search:
     post:
       description: >-
@@ -7348,7 +7388,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/team-members/{team_member_id}":
     get:
       description: >-
@@ -7379,7 +7419,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: >-
         Updates a single `TeamMember` object. The `TeamMember` will be returned on successful updates.
@@ -7420,7 +7460,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/team-members/{team_member_id}/wage-setting":
     get:
       description: >-
@@ -7453,7 +7493,7 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
     put:
       description: >-
         Creates or updates a `WageSetting` object. The object is created if a
@@ -7500,10 +7540,13 @@ paths:
       x-oauthpermissions:
         - EMPLOYEES_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/terminals/checkouts:
     post:
-      description: Creates a new Terminal checkout request and sends it to the specified device to take a payment for the requested amount.
+      description: >-
+        Creates a Terminal checkout request and sends it to the specified device to take a payment
+
+        for the requested amount.
       operationId: CreateTerminalCheckout
       requestBody:
         content:
@@ -7532,7 +7575,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/terminals/checkouts/search:
     post:
       description: Retrieves a filtered list of Terminal checkout requests created by the account making the request.
@@ -7564,13 +7607,13 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/terminals/checkouts/{checkout_id}":
     get:
-      description: Retrieves a Terminal checkout request by checkout_id.
+      description: Retrieves a Terminal checkout request by `checkout_id`.
       operationId: GetTerminalCheckout
       parameters:
-        - description: Unique ID for the desired `TerminalCheckout`
+        - description: The unique ID for the desired `TerminalCheckout`.
           in: path
           name: checkout_id
           required: true
@@ -7592,13 +7635,13 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/terminals/checkouts/{checkout_id}/cancel":
     post:
       description: Cancels a Terminal checkout request if the status of the request permits it.
       operationId: CancelTerminalCheckout
       parameters:
-        - description: Unique ID for the desired `TerminalCheckout`
+        - description: The unique ID for the desired `TerminalCheckout`.
           in: path
           name: checkout_id
           required: true
@@ -7620,7 +7663,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/terminals/refunds:
     post:
       description: Creates a request to refund an Interac payment completed on a Square Terminal.
@@ -7652,10 +7695,10 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   /v2/terminals/refunds/search:
     post:
-      description: Retrieves a filtered list of Terminal Interac refund requests created by the seller making the request.
+      description: Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request.
       operationId: SearchTerminalRefunds
       requestBody:
         content:
@@ -7684,13 +7727,13 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/terminals/refunds/{terminal_refund_id}":
     get:
-      description: Retrieves an Interac terminal refund object by ID.
+      description: Retrieves an Interac Terminal refund object by ID.
       operationId: GetTerminalRefund
       parameters:
-        - description: Unique ID for the desired `TerminalRefund`
+        - description: The unique ID for the desired `TerminalRefund`.
           in: path
           name: terminal_refund_id
           required: true
@@ -7712,13 +7755,13 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_READ
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
   "/v2/terminals/refunds/{terminal_refund_id}/cancel":
     post:
-      description: Cancels an Interac terminal refund request by refund request ID if the status of the request permits it.
+      description: Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it.
       operationId: CancelTerminalRefund
       parameters:
-        - description: Unique ID for the desired `TerminalRefund`
+        - description: The unique ID for the desired `TerminalRefund`.
           in: path
           name: terminal_refund_id
           required: true
@@ -7740,7 +7783,7 @@ paths:
       x-oauthpermissions:
         - PAYMENTS_WRITE
       x-release-status: PUBLIC
-      x-sq-version: 2021-02-26
+      x-sq-version: 2021-03-17
 components:
   requestBodies:
     V1Employee:
@@ -7771,7 +7814,7 @@ components:
             amount: 2000
             currency: USD
           brand_dispute_id: "100000282394"
-          card_brand: visa
+          card_brand: VISA
           created_at: 2018-10-18T15:59:13.613Z
           dispute_id: XDgyFu7yo1E2S5lQGGpYn
           disputed_payments:
@@ -8081,7 +8124,7 @@ components:
       x-is-beta: true
       x-release-status: BETA
     BalancePaymentDetails:
-      description: Reflects the current status of a balance payment.
+      description: Reflects the current status of a balance payment. Contains only non-confidential information.
       properties:
         account_id:
           description: The ID of the account used to fund the payment.
@@ -10077,7 +10120,10 @@ components:
       x-is-beta: true
       x-release-status: BETA
     CancelPaymentByIdempotencyKeyRequest:
-      description: Specifies the idempotency key of a payment to cancel.
+      description: >-
+        Describes a request to cancel a payment using 
+
+        [CancelPaymentByIdempotencyKey](#endpoint-payments-cancelpaymentbyidempotencykey).
       example:
         request_body:
           idempotency_key: a7e36d40-d24b-11e8-b568-0800200c9a66
@@ -10093,9 +10139,9 @@ components:
       x-release-status: PUBLIC
     CancelPaymentByIdempotencyKeyResponse:
       description: >-
-        The return value from the
+        Defines the response returned by 
 
-        [CancelPaymentByIdempotencyKey](#endpoint-payments-cancelpaymentbyidempotencykey) endpoint.
+        [CancelPaymentByIdempotencyKey](#endpoint-payments-cancelpaymentbyidempotencykey).
 
         On success, `errors` is empty.
       example: {}
@@ -10109,16 +10155,22 @@ components:
       x-release-status: PUBLIC
     CancelPaymentRequest:
       description: >-
-        Cancels (voids) a payment before it has been completed.
+        Describes the request to cancel (void) a payment using 
 
-        Note: Only payments created with `autocomplete` set to `false` can be canceled.
+        [CancelPayment](#endpoint-payments-cancelpayment). 
+
+        You can only cancel a payment that is approved (not completed).
+
+        For more information, see 
+
+        [Delayed capture of a payment](https://developer.squareup.com/docs/payments-api/take-payments/card-payments#delayed-capture-of-a-card-payment).
       example:
         request_body: {}
       properties: {}
       type: object
       x-release-status: PUBLIC
     CancelPaymentResponse:
-      description: The return value from the [CancelPayment](#endpoint-payments-cancelpayment) endpoint.
+      description: Defines the response returned by [CancelPayment](#endpoint-payments-cancelpayment).
       example:
         payment:
           amount_money:
@@ -10126,6 +10178,9 @@ components:
             currency: USD
           app_fee_money:
             amount: 10
+            currency: USD
+          approved_money:
+            amount: 200
             currency: USD
           card_details:
             auth_result_code: eWZBDh
@@ -10159,6 +10214,7 @@ components:
             amount: 200
             currency: USD
           updated_at: 2018-10-17T20:38:57.693Z
+          version_token: lAITJ6l8I8tFu62mCf2W4sxJQxN9FOaH5zwfsdPf7Dm6o
       properties:
         errors:
           description: Information about errors encountered during the request.
@@ -10239,7 +10295,7 @@ components:
         checkout:
           $ref: "#/components/schemas/TerminalCheckout"
         errors:
-          description: Information on errors encountered during the request.
+          description: Information about errors encountered during the request.
           items:
             $ref: "#/components/schemas/Error"
           type: array
@@ -10281,7 +10337,7 @@ components:
           updated_at: 2020-10-21T22:47:30.096Z
       properties:
         errors:
-          description: Information on errors encountered during the request.
+          description: Information about errors encountered during the request.
           items:
             $ref: "#/components/schemas/Error"
           type: array
@@ -10450,7 +10506,7 @@ components:
           name: FELICA
       x-release-status: PUBLIC
     CardPaymentDetails:
-      description: Reflects the current status of a card payment.
+      description: Reflects the current status of a card payment. Contains only non-confidential information.
       properties:
         application_cryptogram:
           description: For EMV payments, the cryptogram generated for the payment.
@@ -10871,6 +10927,20 @@ components:
 
             See [CashDrawerShiftState](#type-cashdrawershiftstate) for possible values
           type: string
+      type: object
+      x-release-status: PUBLIC
+    CashPaymentDetails:
+      description: >-
+        Stores details about a cash payment. Contains only non-confidential information. For more information, see 
+
+        [Take Cash Payments](https://developer.squareup.com/docs/payments-api/take-payments/cash-payments).
+      properties:
+        buyer_supplied_money:
+          $ref: "#/components/schemas/Money"
+        change_back_money:
+          $ref: "#/components/schemas/Money"
+      required:
+        - buyer_supplied_money
       type: object
       x-release-status: PUBLIC
     CatalogCategory:
@@ -11824,11 +11894,11 @@ components:
             The universal product code (UPC) of the item variation, if any. This is a searchable attribute for use in applicable query filters.
 
 
-            The value of this attribute should be a number of 12-14 digits long.  This restriction is enforced on the Square Seller Dashboard, 
+            The value of this attribute should be a number of 12-14 digits long.  This restriction is enforced on the Square Seller Dashboard,
 
-            Square Point of Sale or Retail Point of Sale apps, where this attribute shows in the GTIN field. If a non-compliant UPC value is assigned 
+            Square Point of Sale or Retail Point of Sale apps, where this attribute shows in the GTIN field. If a non-compliant UPC value is assigned
 
-            to this attribute using the API, the value is not editable on the Seller Dashboard, Square Point of Sale or Retail Point of Sale apps 
+            to this attribute using the API, the value is not editable on the Seller Dashboard, Square Point of Sale or Retail Point of Sale apps
 
             unless it is updated to fit the expected format.
           type: string
@@ -13375,7 +13445,9 @@ components:
       x-release-status: PUBLIC
     CompletePaymentRequest:
       description: >-
-        Completes (captures) a payment.
+        Describes a request to complete (capture) a payment using 
+
+        [CompletePayment](#endpoint-payments-completepayment).
 
 
         By default, payments are set to `autocomplete` immediately after they are created.
@@ -13387,7 +13459,7 @@ components:
       type: object
       x-release-status: PUBLIC
     CompletePaymentResponse:
-      description: The return value from a [CompletePayment](#endpoint-payments-completepayment) call.
+      description: Defines the response returned by[CompletePayment](#endpoint-payments-completepayment).
       example:
         payment:
           amount_money:
@@ -13395,6 +13467,9 @@ components:
             currency: USD
           app_fee_money:
             amount: 10
+            currency: USD
+          approved_money:
+            amount: 200
             currency: USD
           card_details:
             auth_result_code: MhIjEN
@@ -13430,6 +13505,7 @@ components:
             amount: 200
             currency: USD
           updated_at: 2019-07-10T13:40:05.982Z
+          version_token: 7knzZI16u3QBh2xXD7FH4GFwESqgam7Z9w2Ya0aSD9i6o
       properties:
         errors:
           description: Information about errors encountered during the request.
@@ -14317,7 +14393,7 @@ components:
       description: >-
         Defines the parameters that can be included in the body of
 
-        a request to the __CreateCheckout__ endpoint.
+        a request to the `CreateCheckout` endpoint.
       example:
         request_body:
           additional_recipients:
@@ -14381,60 +14457,54 @@ components:
       properties:
         additional_recipients:
           description: >-
-            The basic primitive of multi-party transaction. The value is optional.
+            The basic primitive of a multi-party transaction. The value is optional.
 
             The transaction facilitated by you can be split from here.
 
 
-            If you provide this value, the `amount_money` value in your additional_recipients
+            If you provide this value, the `amount_money` value in your `additional_recipients` field
 
-            must not be more than 90% of the `total_money` calculated by Square for your order.
+            cannot be more than 90% of the `total_money` calculated by Square for your order.
 
-            The `location_id` must be the valid location of the app owner merchant.
+            The `location_id` must be a valid seller location where the checkout is occurring.
 
 
             This field requires `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission.
 
 
-            This field is currently not supported in sandbox.
+            This field is currently not supported in the Square Sandbox.
           items:
             $ref: "#/components/schemas/ChargeRequestAdditionalRecipient"
           type: array
         ask_for_shipping_address:
           description: >-
-            If `true`, Square Checkout will collect shipping information on your
+            If `true`, Square Checkout collects shipping information on your behalf and stores 
 
-            behalf and store that information with the transaction information in your
-
-            Square Dashboard.
+            that information with the transaction information in the Square Seller Dashboard.
 
 
             Default: `false`.
           type: boolean
         idempotency_key:
           description: >-
-            A unique string that identifies this checkout among others
+            A unique string that identifies this checkout among others you have created. It can be
 
-            you've created. It can be any valid string but must be unique for every
-
-            order sent to Square Checkout for a given location ID.
+            any valid string but must be unique for every order sent to Square Checkout for a given location ID.
 
 
-            The idempotency key is used to avoid processing the same order more than
+            The idempotency key is used to avoid processing the same order more than once. If you are 
 
-            once. If you're unsure whether a particular checkout was created
+            unsure whether a particular checkout was created successfully, you can attempt it again with
 
-            successfully, you can reattempt it with the same idempotency key and all the
-
-            same other parameters without worrying about creating duplicates.
+            the same idempotency key and all the same other parameters without worrying about creating duplicates.
 
 
-            We recommend using a random number/string generator native to the language
+            You should use a random number/string generator native to the language
 
             you are working in to generate strings for your idempotency keys.
 
 
-            See the [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency) guide for more information.
+            For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
           maxLength: 192
           minLength: 1
           type: string
@@ -14442,12 +14512,12 @@ components:
           description: >-
             The email address to display on the Square Checkout confirmation page
 
-            and confirmation email that the buyer can use to contact the merchant.
+            and confirmation email that the buyer can use to contact the seller.
 
 
-            If this value is not set, the confirmation page and email will display the
+            If this value is not set, the confirmation page and email display the
 
-            primary email address associated with the merchant's Square account.
+            primary email address associated with the seller's Square account.
 
 
             Default: none; only exists if explicitly set.
@@ -14455,7 +14525,7 @@ components:
           type: string
         note:
           description: >-
-            An optional note to associate with the checkout object.
+            An optional note to associate with the `checkout` object.
 
 
             This value cannot exceed 60 characters.
@@ -14465,7 +14535,7 @@ components:
           $ref: "#/components/schemas/CreateOrderRequest"
         pre_populate_buyer_email:
           description: >-
-            If provided, the buyer's email is pre-populated on the checkout page
+            If provided, the buyer's email is prepopulated on the checkout page
 
             as an editable text field.
 
@@ -14477,11 +14547,11 @@ components:
           $ref: "#/components/schemas/Address"
         redirect_url:
           description: >-
-            The URL to redirect to after checkout is completed with `checkoutId`,
+            The URL to redirect to after the checkout is completed with `checkoutId`,
 
             Square's `orderId`, `transactionId`, and `referenceId` appended as URL
 
-            parameters. For example, if the provided redirect_url is
+            parameters. For example, if the provided redirect URL is
 
             `http://www.example.com/order-complete`, a successful transaction redirects
 
@@ -14491,9 +14561,9 @@ components:
             <pre><code>http://www.example.com/order-complete?checkoutId=xxxxxx&amp;orderId=xxxxxx&amp;referenceId=xxxxxx&amp;transactionId=xxxxxx</code></pre>
 
 
-            If you do not provide a redirect URL, Square Checkout will display an order
+            If you do not provide a redirect URL, Square Checkout displays an order
 
-            confirmation page on your behalf; however Square strongly recommends that
+            confirmation page on your behalf; however, it is strongly recommended that
 
             you provide a redirect URL so you can verify the transaction results and
 
@@ -14519,7 +14589,7 @@ components:
       description: >-
         Defines the fields that are included in the response body of
 
-        a request to the __CreateCheckout__ endpoint.
+        a request to the `CreateCheckout` endpoint.
       example:
         checkout:
           additional_recipients:
@@ -14975,6 +15045,7 @@ components:
           dispute_id: bVTprrwk0gygTLZ96VX1oB
           evidence_id: TOomLInj6iWmP3N8qfCXrB
           evidence_text: 1Z8888888888888888
+          evidence_type: TRACKING_NUMBER
           uploaded_at: 2018-10-18T16:01:10.000Z
       properties:
         errors:
@@ -14991,15 +15062,15 @@ components:
       description: Describes a `CreateInvoice` request.
       example:
         request_body:
-          custom_fields:
-            - label: Event Reference Number
-              placement: ABOVE_LINE_ITEMS
-              value: "Ref. #1234"
-            - label: Terms of Service
-              placement: BELOW_LINE_ITEMS
-              value: The terms of service are...
           idempotency_key: ce3748f9-5fc1-4762-aa12-aae5e843f1f4
           invoice:
+            custom_fields:
+              - label: Event Reference Number
+                placement: ABOVE_LINE_ITEMS
+                value: "Ref. #1234"
+              - label: Terms of Service
+                placement: BELOW_LINE_ITEMS
+                value: The terms of service are...
             delivery_method: EMAIL
             description: We appreciate your business!
             invoice_number: inv-100
@@ -15549,20 +15620,9 @@ components:
       x-release-status: PUBLIC
     CreatePaymentRequest:
       description: >-
-        Creates a payment from a provided source (such as a nonce or a card on file).
+        Describes a request to create a payment using 
 
-
-        The `PAYMENTS_WRITE_ADDITIONAL_RECIPIENTS` OAuth permission is required
-
-        to enable application fees.
-
-
-        For more information, see [Payments and Refunds APIs Overview](/payments-api/overview).
-
-
-        For information about application fees in a payment, see
-
-        [Take Payments and Collect Fees](/payments-api/take-payments-and-collect-fees).
+        [CreatePayment](#endpoint-payments-createpayment).
       example:
         request_body:
           amount_money:
@@ -15624,6 +15684,8 @@ components:
           description: The buyer's email address.
           maxLength: 255
           type: string
+        cash_details:
+          $ref: "#/components/schemas/CashPaymentDetails"
         customer_id:
           description: >-
             The `Customer` ID of the customer associated with the payment.
@@ -15659,6 +15721,8 @@ components:
           type: string
           x-is-beta: true
           x-release-status: BETA
+        external_details:
+          $ref: "#/components/schemas/ExternalPaymentDetails"
         idempotency_key:
           description: >-
             A unique string that identifies this `CreatePayment` request. Keys can be any valid string
@@ -15712,9 +15776,17 @@ components:
           $ref: "#/components/schemas/Address"
         source_id:
           description: >-
-            The ID for the source of funds for this payment. This can be a nonce
+            The ID for the source of funds for this payment. This can be a payment token 
 
-            generated by the Square payment form or a card on file made with the Customers API.
+            (card nonce) generated by the Square payment form or a card on file made with the 
+
+            Customers API. If recording a payment that the seller 
+
+            received outside of Square, specify either "CASH" or "EXTERNAL". 
+
+            For more information, see 
+
+            [Take Payments](https://developer.squareup.com/docs/payments-api/take-payments).
           minLength: 1
           type: string
         statement_description_identifier:
@@ -15756,12 +15828,10 @@ components:
       x-release-status: PUBLIC
     CreatePaymentResponse:
       description: >-
-        Defines the fields that are included in the response body of
-
-        a request to the [CreatePayment](#endpoint-payments-createpayment) endpoint.
+        Defines the response returned by [CreatePayment](#endpoint-payments-createpayment).
 
 
-        Note: If there are errors processing the request, the payment field might not be
+        If there are errors processing the request, the `payment` field might not be
 
         present, or it might be present with a status of `FAILED`.
       example:
@@ -15771,6 +15841,9 @@ components:
             currency: USD
           app_fee_money:
             amount: 10
+            currency: USD
+          approved_money:
+            amount: 200
             currency: USD
           card_details:
             auth_result_code: nsAyY2
@@ -15806,6 +15879,7 @@ components:
             amount: 200
             currency: USD
           updated_at: 2019-07-10T13:23:49.446Z
+          version_token: H8Vnk5Z11SKcueuRti79jGpszSEsSVdhKRrSKCOzILG6o
       properties:
         errors:
           description: Information about errors encountered during the request.
@@ -16252,6 +16326,7 @@ components:
               allow_tipping: false
           id: 08YceKh7B3ZqO
           note: A brief note
+          payment_type: CARD_PRESENT
           reference_id: id11572
           status: PENDING
           updated_at: 2020-04-06T16:39:32.545Z
@@ -16259,7 +16334,7 @@ components:
         checkout:
           $ref: "#/components/schemas/TerminalCheckout"
         errors:
-          description: Information on errors encountered during the request.
+          description: Information about errors encountered during the request.
           items:
             $ref: "#/components/schemas/Error"
           type: array
@@ -16322,7 +16397,7 @@ components:
           updated_at: 2020-09-29T15:21:46.771Z
       properties:
         errors:
-          description: Information on errors encountered during the request.
+          description: Information about errors encountered during the request.
           items:
             $ref: "#/components/schemas/Error"
           type: array
@@ -17699,7 +17774,7 @@ components:
             Match a `DeviceCode.device_id` value with `device_id` to get the associated device code.
           type: string
         skip_receipt_screen:
-          description: Instruct the device to skip the receipt screen. Defaults to false.
+          description: Instructs the device to skip the receipt screen. Defaults to false.
           type: boolean
         tip_settings:
           $ref: "#/components/schemas/TipSettings"
@@ -18990,6 +19065,59 @@ components:
           name: MOST_EXPENSIVE
       x-is-beta: true
       x-release-status: BETA
+    ExternalPaymentDetails:
+      description: >-
+        Stores details about an external payment. Contains only non-confidential information.
+
+        For more information, see 
+
+        [Take External Payments](https://developer.squareup.com/docs/payments-api/take-payments/external-payments).
+      properties:
+        source:
+          description: >-
+            A description of the external payment source. For example, 
+
+            "Food Delivery Service".
+          maxLength: 255
+          type: string
+        source_fee_money:
+          $ref: "#/components/schemas/Money"
+        source_id:
+          description: An ID to associate the payment to its originating source.
+          maxLength: 255
+          type: string
+        type:
+          description: >-
+            The type of external payment the seller received. It can be one of the following:
+
+            - CHECK - Paid using a physical check.
+
+            - BANK_TRANSFER - Paid using ACH or another bank transfer.
+
+            - OTHER\_GIFT\_CARD - Paid using a non-Square gift card.
+
+            - CRYPTO - Paid using a crypto currency.
+
+            - SQUARE_CASH - Paid using Square Cash App.
+
+            - SOCIAL - Paid using peer-to-peer payment applications.
+
+            - EXTERNAL - A third-party application gathered this payment outside of Square.
+
+            - EMONEY - Paid using an E-money provider.
+
+            - CARD - A credit or debit card that Square does not support.
+
+            - STORED_BALANCE - Use for house accounts, store credit, and so forth.
+
+            - OTHER - A type not listed here.
+          maxLength: 50
+          type: string
+      required:
+        - type
+        - source
+      type: object
+      x-release-status: PUBLIC
     FilterValue:
       description: >-
         A filter to select resources based on an exact field value. For any given
@@ -19254,7 +19382,10 @@ components:
       x-is-beta: true
       x-release-status: BETA
     GetPaymentRefundRequest:
-      description: Retrieves a specific `Refund` using the `refund_id`.
+      description: >-
+        Describes a request to retrieve a refund using 
+
+        [GetPaymentRefund](#endpoint-payments-getpaymentrefund).
       example:
         request_body: {}
       properties: {}
@@ -19262,9 +19393,7 @@ components:
       x-release-status: PUBLIC
     GetPaymentRefundResponse:
       description: >-
-        Defines the fields that are included in the response body of
-
-        a request to the [GetRefund](#endpoint-refunds-getpaymentrefund) endpoint.
+        Defines the response returned by [GetRefund](#endpoint-refunds-getpaymentrefund).
 
 
         Note: If there are errors processing the request, the refund field might not be
@@ -19299,17 +19428,17 @@ components:
       type: object
       x-release-status: PUBLIC
     GetPaymentRequest:
-      description: Retrieve details for a specific payment.
+      description: >-
+        Describes a request to retrieve a payment using 
+
+        [GetPayment](#endpoint-payments-getpayment).
       example:
         request_body: {}
       properties: {}
       type: object
       x-release-status: PUBLIC
     GetPaymentResponse:
-      description: >-
-        Defines the fields that are included in the response body of
-
-        a request to the [GetPayment](#endpoint-payments-getpayment) endpoint.
+      description: Defines the response returned by [GetPayment](#endpoint-payments-getpayment).
       example:
         payment:
           amount_money:
@@ -19317,6 +19446,9 @@ components:
             currency: USD
           app_fee_money:
             amount: 10
+            currency: USD
+          approved_money:
+            amount: 200
             currency: USD
           card_details:
             auth_result_code: nsAyY2
@@ -19358,6 +19490,7 @@ components:
             amount: 200
             currency: USD
           updated_at: 2019-07-10T13:23:49.446Z
+          version_token: hj8JqHWu9R1Kkfu63UuIUmYc7zm6YFOt92g8d2fb9fz6o
       properties:
         errors:
           description: Information about errors encountered during the request.
@@ -19479,7 +19612,7 @@ components:
         checkout:
           $ref: "#/components/schemas/TerminalCheckout"
         errors:
-          description: Information on errors encountered during the request.
+          description: Information about errors encountered during the request.
           items:
             $ref: "#/components/schemas/Error"
           type: array
@@ -19521,7 +19654,7 @@ components:
           updated_at: 2020-09-29T15:21:48.675Z
       properties:
         errors:
-          description: Information on errors encountered during the request.
+          description: Information about errors encountered during the request.
           items:
             $ref: "#/components/schemas/Error"
           type: array
@@ -20181,7 +20314,11 @@ components:
           type: string
           x-read-only: true
         timezone:
-          description: The time zone of the date values (for example, `due_date`) specified in the invoice.
+          description: >-
+            The time zone used to interpret calendar dates on the invoice, such as `due_date`. When an invoice is created, this field is set to the `timezone` specified for the seller location. The value cannot be changed.
+
+
+            For example, a payment `due_date` of 2021-03-09 with a `timezone` of America/Los\_Angeles becomes overdue at midnight on March 9 in America/Los\_Angeles (which equals a UTC timestamp of 2021-03-10T08:00:00Z).
           type: string
           x-read-only: true
         title:
@@ -20280,9 +20417,10 @@ components:
       enum:
         - EMAIL
         - SHARE_MANUALLY
+        - SMS
       type: string
       x-enum-elements:
-        - description: Directs Square to send the invoice, reminders, and receipts to the customer using email.
+        - description: Directs Square to send invoices, reminders, and receipts to the customer using email.
           name: EMAIL
         - description: >-
             Directs Square to take no action on the invoice. In this case, the seller
@@ -20293,6 +20431,12 @@ components:
 
             The seller might also share the URL of the Square-hosted invoice page (`public_url`) with the customer to request payment.
           name: SHARE_MANUALLY
+        - description: >-
+            Directs Square to send invoices and receipts to the customer using SMS (text message).
+
+
+            You cannot set `SMS` as a delivery method using the Invoices API, but you can change an `SMS` delivery method to `EMAIL` or `SHARE_MANUALLY`.
+          name: SMS
       x-is-beta: true
       x-release-status: BETA
     InvoiceFilter:
@@ -20434,9 +20578,10 @@ components:
           $ref: "#/components/schemas/Money"
         due_date:
           description: >-
-            The due date (in the invoice location's time zone) for the payment request, in `YYYY-MM-DD` format. 
+            The due date (in the invoice's time zone) for the payment request, in `YYYY-MM-DD` format. This field is required to create a payment request.
 
-            After this date, the invoice becomes overdue. This field is required to create a payment request.
+
+            After this date, the invoice becomes overdue. For example, a payment `due_date` of 2021-03-09 with a `timezone` of America/Los\_Angeles becomes overdue at midnight on March 9 in America/Los\_Angeles (which equals a UTC timestamp of 2021-03-10T08:00:00Z).
           type: string
         fixed_amount_requested_money:
           $ref: "#/components/schemas/Money"
@@ -20566,17 +20711,17 @@ components:
         - CHARGE_CARD_ON_FILE
         - SHARE_MANUALLY
         - CHARGE_BANK_ON_FILE
+        - SMS
+        - SMS_CHARGE_CARD_ON_FILE
+        - SMS_CHARGE_BANK_ON_FILE
       type: string
       x-enum-elements:
         - description: >-
-            Directs Square to email the invoice to the customer after the invoice is published 
+            Directs Square to send invoices, reminders, and receipts to the customer using email. Square sends the invoice after it is published 
 
             (either immediately or at the `scheduled_at` time, if specified in the `invoice`.
           name: EMAIL
-        - description: >-
-            Directs Square to charge the card on file on the `due_date` specified in the payment request, 
-
-            after the invoice is published.
+        - description: Directs Square to charge the card on file on the `due_date` specified in the payment request and to use email to send invoices, reminders, and receipts.
           name: CHARGE_CARD_ON_FILE
         - description: >-
             Directs Square to take no specific action on the invoice. In this case, the seller 
@@ -20590,15 +20735,33 @@ components:
         - description: >-
             Directs Square to charge the bank account on file on the `due_date` specified in the
 
-            payment request, after the invoice is published.
+            payment request and to use email to send invoices, reminders, and receipts.
 
 
-            This payment method applies only to recurring invoices that sellers create in the Seller Dashboard or other
+            The bank on file payment method applies only to recurring invoices that sellers create in the Seller Dashboard or other
 
-            Square first-party application. The bank account is provided by the customer during the payment flow. You 
+            Square first-party applications. The bank account is provided by the customer during the payment flow. You 
 
-            cannot set `CHARGE_BANK_ON_FILE` as a payment source using the Invoices API.
+            cannot set `CHARGE_BANK_ON_FILE` as a request method using the Invoices API.
           name: CHARGE_BANK_ON_FILE
+        - description: >-
+            Directs Square to send invoices and receipts to the customer using SMS (text message). Square sends the invoice after it is published (either immediately or at the `scheduled_at` time, if specified in the `invoice`. 
+
+
+            You cannot set `SMS` as a request method using the Invoices API.
+          name: SMS
+        - description: >-
+            Directs Square to charge the card on file on the `due_date` specified in the payment request and to use SMS (text message) to send invoices and receipts. 
+
+
+            You cannot set `SMS_CHARGE_CARD_ON_FILE` as a request method using the Invoices API.
+          name: SMS_CHARGE_CARD_ON_FILE
+        - description: >-
+            Directs Square to charge the bank account on file on the `due_date` specified in the payment request and to use SMS (text message) to send invoices and receipts. 
+
+
+            The bank on file payment method applies only to recurring invoices that sellers create in the Seller Dashboard or other Square first-party applications. The bank account is provided by the customer during the payment flow. You cannot set `SMS_CHARGE_BANK_ON_FILE` as a request method using the Invoices API.
+          name: SMS_CHARGE_BANK_ON_FILE
       x-is-deprecated: true
       x-release-status: DEPRECATED
     InvoiceRequestType:
@@ -21581,6 +21744,21 @@ components:
       x-release-status: BETA
     ListDisputeEvidenceResponse:
       description: Defines the fields in a `ListDisputeEvidence` response.
+      example:
+        cursor: G1aSTRm48CLjJsg6Sg3hQN1b1OMaoVuG
+        evidence:
+          - dispute_id: bVTprrwk0gygTLZ96VX1oB
+            evidence_id: TOomLInj6iWmP3N8qfCXrB
+            evidence_text: 1Z8888888888888888
+            evidence_type: TRACKING_NUMBER
+            uploaded_at: 2018-10-18T16:01:10.000Z
+          - dispute_id: bVTprrwk0gygTLZ96VX1oB
+            evidence_file:
+              filename: evidence.tiff
+              filetype: image/tiff
+            evidence_id: TOomLInj6iWmP3N8qfCXrB
+            evidence_type: GENERIC_EVIDENCE
+            uploaded_at: 2018-10-18T16:01:10.000Z
       properties:
         errors:
           description: Information about errors encountered during the request.
@@ -21640,7 +21818,7 @@ components:
               amount: 1000
               currency: USD
             brand_dispute_id: "100000809947"
-            card_brand: visa
+            card_brand: VISA
             created_at: 2018-10-12T02:20:25.577Z
             dispute_id: OnY1AZwhSi775rbNIK4gv
             disputed_payments:
@@ -22040,7 +22218,9 @@ components:
       x-release-status: PUBLIC
     ListPaymentRefundsRequest:
       description: >-
-        Retrieves a list of refunds for the account making the request.
+        Describes a request to list refunds using 
+
+        [ListPaymentRefunds](#endpoint-payments-listpaymentrefunds).
 
 
         The maximum results per page is 100.
@@ -22121,9 +22301,7 @@ components:
       x-release-status: PUBLIC
     ListPaymentRefundsResponse:
       description: >-
-        Defines the fields that are included in the response body of
-
-        a request to the [ListPaymentRefunds](#endpoint-refunds-listpaymentrefunds) endpoint.
+        Defines the response returned by [ListPaymentRefunds](#endpoint-refunds-listpaymentrefunds).
 
 
         Either `errors` or `refunds` is present in a given response (never both).
@@ -22186,7 +22364,9 @@ components:
       x-release-status: PUBLIC
     ListPaymentsRequest:
       description: >-
-        Retrieves a list of payments taken by the account making the request.
+        Describes a request to list payments using 
+
+        [ListPayments](#endpoint-payments-listpayments).
 
 
         The maximum results per page is 100.
@@ -22257,16 +22437,21 @@ components:
       type: object
       x-release-status: PUBLIC
     ListPaymentsResponse:
-      description: >-
-        Defines the fields that are included in the response body of
-
-        a request to the [ListPayments](#endpoint-payments-listpayments) endpoint.
+      description: Defines the response returned by [ListPayments](#endpoint-payments-listpayments).
       example:
         cursor: 2TTnuq0yRYDdBRSFF2XuFkgO1Bclt4ZHNI7YrFNeyZ6rL1WZXkdnLn10H8fBIwFKdKW1Af6ifRa
         payments:
           - amount_money:
               amount: 1000
               currency: USD
+            approved_money:
+              amount: 1000
+              currency: USD
+            capabilities:
+              - EDIT_AMOUNT_UP
+              - EDIT_AMOUNT_DOWN
+              - EDIT_TIP_AMOUNT_UP
+              - EDIT_TIP_AMOUNT_DOWN
             card_details:
               auth_result_code: NQbV3A
               avs_status: AVS_ACCEPTED
@@ -22291,7 +22476,11 @@ components:
               amount: 1000
               currency: USD
             updated_at: 2019-07-09T14:36:13.883Z
+            version_token: v6orqdHcW2TwuzCQRdF6a4ktbG8T8nbDcBx8eyrkoZl6o
           - amount_money:
+              amount: 1000
+              currency: USD
+            approved_money:
               amount: 1000
               currency: USD
             card_details:
@@ -22326,6 +22515,7 @@ components:
               amount: 1000
               currency: USD
             updated_at: 2019-07-08T01:13:58.508Z
+            version_token: pE0wanQBErcnO4ubL49pHCV1yAs4BUScWXb8fVvkRqa6o
       properties:
         cursor:
           description: >-
@@ -26801,6 +26991,8 @@ components:
           $ref: "#/components/schemas/Money"
         app_fee_money:
           $ref: "#/components/schemas/Money"
+        approved_money:
+          $ref: "#/components/schemas/Money"
         billing_address:
           $ref: "#/components/schemas/Address"
         buyer_email_address:
@@ -26808,8 +27000,27 @@ components:
           maxLength: 255
           type: string
           x-read-only: true
+        capabilities:
+          description: >-
+            Actions that can be performed on this payment:
+
+            - `EDIT_AMOUNT_UP` - The payment amount can be edited up.
+
+            - `EDIT_AMOUNT_DOWN` - The payment amount can be edited down.
+
+            - `EDIT_TIP_AMOUNT_UP` - The tip amount can be edited up.
+
+            - `EDIT_TIP_AMOUNT_DOWN` - The tip amount can be edited down.
+          items:
+            type: string
+          type: array
+          x-is-beta: true
+          x-read-only: true
+          x-release-status: BETA
         card_details:
           $ref: "#/components/schemas/CardPaymentDetails"
+        cash_details:
+          $ref: "#/components/schemas/CashPaymentDetails"
         created_at:
           description: The timestamp of when the payment was created, in RFC 3339 format.
           maxLength: 32
@@ -26882,6 +27093,8 @@ components:
           maxLength: 192
           type: string
           x-read-only: true
+        external_details:
+          $ref: "#/components/schemas/ExternalPaymentDetails"
         id:
           description: A unique ID for the payment.
           maxLength: 192
@@ -26949,7 +27162,7 @@ components:
             The source type for this payment.
 
 
-            Current values include `CARD`.
+            Current values include `CARD`, `CASH`, or `EXTERNAL`.
           maxLength: 50
           type: string
           x-read-only: true
@@ -26983,6 +27196,14 @@ components:
           maxLength: 32
           type: string
           x-read-only: true
+        version_token:
+          description: >-
+            Used for optimistic concurrency. This opaque token identifies a specific version of the
+
+            `Payment` object.
+          type: string
+          x-is-beta: true
+          x-release-status: BETA
       type: object
       x-release-status: PUBLIC
     PaymentOptions:
@@ -26990,7 +27211,7 @@ components:
       properties:
         autocomplete:
           description: >-
-            Indicates whether the Payment objects created from this `TerminalCheckout` will automatically be
+            Indicates whether the `Payment` objects created from this `TerminalCheckout` are automatically
 
             `COMPLETED` or left in an `APPROVED` state for later modification.
           type: boolean
@@ -27329,7 +27550,7 @@ components:
       type: object
       x-release-status: PUBLIC
     RefundPaymentRequest:
-      description: Refunds a payment.
+      description: Describes a request to refund a payment using [RefundPayment](#endpoint-payments-refundpayment).
       example:
         request_body:
           amount_money:
@@ -27367,14 +27588,14 @@ components:
       x-release-status: PUBLIC
     RefundPaymentResponse:
       description: >-
-        Defines the fields that are included in the response body of
+        Defines the response returned by 
 
-        a request to the [RefundPayment](#endpoint-refunds-refundpayment) endpoint.
+        [RefundPayment](#endpoint-payments-refundpayment).
 
 
-        Note: If there are errors processing the request, the refund field might not be
+        If there are errors processing the request, the `refund` field might not be
 
-        present or it might be present in a FAILED state.
+        present, or it might be present with a status of `FAILED`.
       example:
         refund:
           amount_money:
@@ -27445,7 +27666,7 @@ components:
         a request to the [RegisterDomain](#endpoint-registerdomain) endpoint.
 
 
-        Either `errors` or `status` will be present in a given response (never both).
+        Either `errors` or `status` are present in a given response (never both).
       example:
         status: VERIFIED
       properties:
@@ -27456,7 +27677,7 @@ components:
           type: array
         status:
           description: >-
-            Status of the domain registration.
+            The status of the domain registration.
 
 
             See `RegisterDomainResponseStatus` for possible values.
@@ -27473,7 +27694,7 @@ components:
         python: /sdk_samples/ApplePay/RegisterDomain/RegisterDomainResponse.python
         ruby: /sdk_samples/ApplePay/RegisterDomain/RegisterDomainResponse.ruby
     RegisterDomainResponseStatus:
-      description: The status of domain registration.
+      description: The status of the domain registration.
       enum:
         - PENDING
         - VERIFIED
@@ -28005,6 +28226,7 @@ components:
             filename: evidence.tiff
             filetype: image/tiff
           evidence_id: TOomLInj6iWmP3N8qfCXrB
+          evidence_type: GENERIC_EVIDENCE
           uploaded_at: 2018-10-18T16:01:10.000Z
       properties:
         errors:
@@ -28033,7 +28255,7 @@ components:
             amount: 2000
             currency: USD
           brand_dispute_id: "100000282394"
-          card_brand: visa
+          card_brand: VISA
           created_at: 2018-10-18T15:59:13.613Z
           dispute_id: XDgyFu7yo1E2S5lQGGpYn
           disputed_payments:
@@ -29252,7 +29474,7 @@ components:
                 name: Varietal
                 selection_uid_values:
                   - MERLOT_SELECTION_ID
-                  - null
+                  - $ref: "#/components/schemas/CreateLocationRequest/example/request_body/location/facebook_url"
                 type: SELECTION
               VINTAGE:
                 custom_attribute_definition_id: EI7IJQDUKYSHULREPIPH6HNU
@@ -30866,12 +31088,12 @@ components:
           description: >-
             A pagination cursor returned by a previous call to this endpoint.
 
-            Provide this to retrieve the next set of results for the original query.
+            Provide this cursor to retrieve the next set of results for the original query.
 
             See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
           type: string
         limit:
-          description: Limit the number of results returned for a single request.
+          description: Limits the number of results returned for a single request.
           maximum: 100
           minimum: 1
           type: integer
@@ -30922,7 +31144,7 @@ components:
         cursor: RiTJqBoTuXlbLmmrPvEkX9iG7XnQ4W4RjGnH
       properties:
         checkouts:
-          description: The requested search result of `TerminalCheckout`s.
+          description: The requested search result of `TerminalCheckout` objects.
           items:
             $ref: "#/components/schemas/TerminalCheckout"
           type: array
@@ -30936,7 +31158,7 @@ components:
             See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
           type: string
         errors:
-          description: Information on errors encountered during the request.
+          description: Information about errors encountered during the request.
           items:
             $ref: "#/components/schemas/Error"
           type: array
@@ -30955,10 +31177,10 @@ components:
           description: >-
             A pagination cursor returned by a previous call to this endpoint.
 
-            Provide this to retrieve the next set of results for the original query.
+            Provide this cursor to retrieve the next set of results for the original query.
           type: string
         limit:
-          description: Limit the number of results returned for a single request.
+          description: Limits the number of results returned for a single request.
           maximum: 100
           minimum: 1
           type: integer
@@ -31004,12 +31226,12 @@ components:
             See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
           type: string
         errors:
-          description: Information on errors encountered during the request.
+          description: Information about errors encountered during the request.
           items:
             $ref: "#/components/schemas/Error"
           type: array
         refunds:
-          description: The requested search result of `TerminalRefund`s.
+          description: The requested search result of `TerminalRefund` objects.
           items:
             $ref: "#/components/schemas/TerminalRefund"
           type: array
@@ -31352,7 +31574,7 @@ components:
             amount: 2000
             currency: USD
           brand_dispute_id: "100000399240"
-          card_brand: visa
+          card_brand: VISA
           created_at: 2018-10-18T16:02:15.313Z
           dispute_id: EAZoK70gX3fyvibecLwIGB
           disputed_payments:
@@ -32006,6 +32228,10 @@ components:
       properties:
         amount_money:
           $ref: "#/components/schemas/Money"
+        app_id:
+          description: The ID of the application that created the checkout.
+          type: string
+          x-read-only: true
         cancel_reason:
           description: >-
             Present if the status is `CANCELED`.
@@ -32014,14 +32240,14 @@ components:
           type: string
           x-read-only: true
         created_at:
-          description: The time when the `TerminalCheckout` was created as an RFC 3339 timestamp.
+          description: The time when the `TerminalCheckout` was created, as an RFC 3339 timestamp.
           type: string
           x-read-only: true
         deadline_duration:
           description: >-
-            The duration as an RFC 3339 duration, after which the checkout will be automatically canceled.
+            An RFC 3339 duration, after which the checkout is automatically canceled.
 
-            TerminalCheckouts that are `PENDING` will be automatically `CANCELED` and have a cancellation reason
+            A `TerminalCheckout` that is `PENDING` is automatically `CANCELED` and has a cancellation reason
 
             of `TIMED_OUT`.
 
@@ -32034,28 +32260,38 @@ components:
         device_options:
           $ref: "#/components/schemas/DeviceCheckoutOptions"
         id:
-          description: A unique ID for this `TerminalCheckout`
+          description: A unique ID for this `TerminalCheckout`.
           maxLength: 255
           minLength: 10
           type: string
           x-read-only: true
+        location_id:
+          description: The location of the device where the `TerminalCheckout` was directed.
+          type: string
+          x-read-only: true
         note:
-          description: An optional note to associate with the checkout, as well any payments used to complete the checkout.
+          description: An optional note to associate with the checkout, as well as with any payments used to complete the checkout.
           maxLength: 250
           type: string
         payment_ids:
-          description: A list of ids for payments created by this `TerminalCheckout`.
+          description: A list of IDs for payments created by this `TerminalCheckout`.
           items:
             type: string
           type: array
           x-read-only: true
+        payment_type:
+          description: >-
+            The type of payment the terminal should attempt to capture from. Defaults to `CARD_PRESENT`.
+
+            See [TerminalCheckoutPaymentType](#type-terminalcheckoutpaymenttype) for possible values
+          type: string
         reference_id:
           description: >-
-            An optional user-defined reference ID which can be used to associate
+            An optional user-defined reference ID that can be used to associate
 
             this `TerminalCheckout` to another entity in an external system. For example, an order
 
-            ID generated by a third-party shopping cart. Will also be associated with any payments
+            ID generated by a third-party shopping cart. The ID is also associated with any payments
 
             used to complete the checkout.
           maxLength: 40
@@ -32068,13 +32304,40 @@ components:
           type: string
           x-read-only: true
         updated_at:
-          description: The time when the `TerminalCheckout` was last updated as an RFC 3339 timestamp.
+          description: The time when the `TerminalCheckout` was last updated, as an RFC 3339 timestamp.
           type: string
           x-read-only: true
       required:
         - amount_money
         - device_options
       type: object
+      x-release-status: PUBLIC
+    TerminalCheckoutPaymentType:
+      description: ""
+      enum:
+        - CARD_PRESENT
+        - MANUAL_CARD_ENTRY
+        - FELICA_ID
+        - FELICA_QUICPAY
+        - FELICA_TRANSPORTATION_GROUP
+        - FELICA_ALL
+      type: string
+      x-enum-elements:
+        - description: Accept credit card or debit card payments via tap, dip or swipe.
+          name: CARD_PRESENT
+        - description: Launches the manual credit or debit card entry screen for the buyer to complete.
+          name: MANUAL_CARD_ENTRY
+        - description: Launches the iD checkout screen for the buyer to complete.
+          name: FELICA_ID
+        - description: Launches the QUICPay checkout screen for the buyer to complete.
+          name: FELICA_QUICPAY
+        - description: Launches the Transportation Group checkout screen for the buyer to complete.
+          name: FELICA_TRANSPORTATION_GROUP
+        - description: >-
+            Launches a checkout screen for the buyer on the Square Terminal that
+
+            allows them to select a specific FeliCa brand or select the check balance screen.
+          name: FELICA_ALL
       x-release-status: PUBLIC
     TerminalCheckoutQuery:
       description: ""
@@ -32092,13 +32355,13 @@ components:
           $ref: "#/components/schemas/TimeRange"
         device_id:
           description: >-
-            `TerminalCheckout`s associated with a specific device. If no device is specified then all
+            The `TerminalCheckout` objects associated with a specific device. If no device is specified, then all
 
-            `TerminalCheckout`s for the merchant will be displayed.
+            `TerminalCheckout` objects for the merchant are displayed.
           type: string
         status:
           description: >-
-            Filtered results with the desired status of the `TerminalCheckout`
+            Filtered results with the desired status of the `TerminalCheckout`.
 
             Options: PENDING, IN_PROGRESS, CANCELED, COMPLETED
           type: string
@@ -32111,9 +32374,9 @@ components:
           description: >-
             The order in which results are listed.
 
-            - `ASC` - oldest to newest
+            - `ASC` - Oldest to newest.
 
-            - `DESC` - newest to oldest (default).
+            - `DESC` - Newest to oldest (default).
           type: string
       type: object
       x-release-status: PUBLIC
@@ -32122,6 +32385,10 @@ components:
       properties:
         amount_money:
           $ref: "#/components/schemas/Money"
+        app_id:
+          description: The ID of the application that created the refund.
+          type: string
+          x-read-only: true
         cancel_reason:
           description: >-
             Present if the status is `CANCELED`.
@@ -32130,41 +32397,45 @@ components:
           type: string
           x-read-only: true
         created_at:
-          description: The time when the `TerminalRefund` was created as an RFC 3339 timestamp.
+          description: The time when the `TerminalRefund` was created, as an RFC 3339 timestamp.
           type: string
           x-read-only: true
         deadline_duration:
           description: >-
-            The duration as an RFC 3339 duration, after which the refund will be automatically canceled.
+            The RFC 3339 duration, after which the refund is automatically canceled.
 
-            TerminalRefunds that are `PENDING` will be automatically `CANCELED` and have a cancellation reason
+            A `TerminalRefund` that is `PENDING` is automatically `CANCELED` and has a cancellation reason
 
-            of `TIMED_OUT`
+            of `TIMED_OUT`.
 
 
-            Default: 5 minutes from creation
+            Default: 5 minutes from creation.
 
 
             Maximum: 5 minutes
           type: string
         device_id:
           description: >-
-            The unique Id of the device intended for this `TerminalRefund`.
+            The unique ID of the device intended for this `TerminalRefund`.
 
             The Id can be retrieved from /v2/devices api.
           type: string
         id:
-          description: A unique ID for this `TerminalRefund`
+          description: A unique ID for this `TerminalRefund`.
           maxLength: 255
           minLength: 10
           type: string
           x-read-only: true
+        location_id:
+          description: The location of the device where the `TerminalRefund` was directed.
+          type: string
+          x-read-only: true
         order_id:
-          description: The reference to the Square order id for the payment identified by the `payment_id`.
+          description: The reference to the Square order ID for the payment identified by the `payment_id`.
           type: string
           x-read-only: true
         payment_id:
-          description: Unique ID of the payment being refunded.
+          description: The unique ID of the payment being refunded.
           minLength: 1
           type: string
         reason:
@@ -32182,11 +32453,11 @@ components:
           description: >-
             The status of the `TerminalRefund`.
 
-            Options: `PENDING`, `IN_PROGRESS`, `CANCELED`, `COMPLETED`
+            Options: `PENDING`, `IN_PROGRESS`, `CANCELED`, or `COMPLETED`.
           type: string
           x-read-only: true
         updated_at:
-          description: The time when the `TerminalRefund` was last updated as an RFC 3339 timestamp.
+          description: The time when the `TerminalRefund` was last updated, as an RFC 3339 timestamp.
           type: string
           x-read-only: true
       required:
@@ -32210,15 +32481,15 @@ components:
           $ref: "#/components/schemas/TimeRange"
         device_id:
           description: >-
-            `TerminalRefund`s associated with a specific device. If no device is specified then all
+            `TerminalRefund` objects associated with a specific device. If no device is specified, then all
 
-            `TerminalRefund`s for the signed in account will be displayed.
+            `TerminalRefund` objects for the signed-in account are displayed.
           type: string
         status:
           description: >-
-            Filtered results with the desired status of the `TerminalRefund`
+            Filtered results with the desired status of the `TerminalRefund`.
 
-            Options: `PENDING`, `IN_PROGRESS`, `CANCEL_REQUESTED`, `CANCELED`, `COMPLETED`
+            Options: `PENDING`, `IN_PROGRESS`, `CANCEL_REQUESTED`, `CANCELED`, or `COMPLETED`.
           type: string
       type: object
       x-release-status: PUBLIC
@@ -32229,9 +32500,9 @@ components:
           description: >-
             The order in which results are listed.
 
-            - `ASC` - oldest to newest
+            - `ASC` - Oldest to newest.
 
-            - `DESC` - newest to oldest (default).
+            - `DESC` - Newest to oldest (default).
           type: string
       type: object
       x-release-status: PUBLIC
@@ -32272,7 +32543,7 @@ components:
           type: boolean
         separate_tip_screen:
           description: >-
-            Indicates whether tip options should be presented on their own screen before presenting
+            Indicates whether tip options should be presented on the screen before presenting
 
             the signature screen during card payment. Defaults to false.
           type: boolean
@@ -32280,26 +32551,26 @@ components:
           description: >-
             Enables the "Smart Tip Amounts" behavior.
 
-            Exact tipping options depend on the region the Square seller is active in.
+            Exact tipping options depend on the region in which the Square seller is active.
 
 
-            In the United States and Canada, tipping options will be presented in whole dollar amounts for
+            In the United States and Canada, tipping options are presented in whole dollar amounts for
 
-            payments under 10 USD/CAD respectively.
+            payments under $10 USD/CAD respectively.
 
 
-            If set to true, the tip_percentages settings is ignored.
+            If set to true, the `tip_percentages` settings is ignored.
 
             Defaults to false.
 
 
-            To learn more about smart tipping, see [Accept Tips with the Square App](https://squareup.com/help/us/en/article/5069-accept-tips-with-the-square-app)
+            To learn more about smart tipping, see [Accept Tips with the Square App](https://squareup.com/help/us/en/article/5069-accept-tips-with-the-square-app).
           type: boolean
         tip_percentages:
           description: >-
-            A list of tip percentages that should be presented during the checkout flow. Specified as
+            A list of tip percentages that should be presented during the checkout flow, specified as
 
-            up to 3 non-negative integers from 0 to 100 (inclusive). Defaults to [15, 20, 25]
+            up to 3 non-negative integers from 0 to 100 (inclusive). Defaults to 15, 20, and 25.
           items:
             type: integer
           type: array
@@ -32896,7 +33167,8 @@ components:
                   end_local_time: 17:00
                   start_local_time: 09:00
             description: Updated description
-            facebook_url: null
+            facebook_url:
+              $ref: "#/components/schemas/CreateLocationRequest/example/request_body/location/facebook_url"
             instagram_username: instagram
             name: Updated nickname
             twitter_username: twitter
@@ -33100,6 +33372,108 @@ components:
       type: object
       x-is-beta: true
       x-release-status: BETA
+    UpdatePaymentRequest:
+      description: >-
+        Describes a request to update a payment using 
+
+        [UpdatePayment](#endpoint-payments-updatepayment).
+      example:
+        request_body:
+          idempotency_key: 3d3c3b22-9572-4fc6-1111-e4d2f41b4122
+          payment:
+            amount_money:
+              amount: 1000
+              currency: USD
+            tip_money:
+              amount: 300
+              currency: USD
+            version_token: Z3okDzm2VRv5m5nE3WGx381ItTNhvjkB4VapByyz54h6o
+      properties:
+        idempotency_key:
+          description: >-
+            A unique string that identifies this `UpdatePayment` request. Keys can be any valid string
+
+            but must be unique for every `UpdatePayment` request.
+
+
+            The maximum is 45 characters.
+
+
+            For more information, see [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency).
+          maxLength: 45
+          minLength: 1
+          type: string
+        payment:
+          $ref: "#/components/schemas/Payment"
+      required:
+        - idempotency_key
+      type: object
+      x-is-beta: true
+      x-release-status: BETA
+    UpdatePaymentResponse:
+      description: >-
+        Defines the response returned by 
+
+        [UpdatePayment](#endpoint-payments-update).
+      example:
+        payment:
+          amount_money:
+            amount: 1000
+            currency: USD
+          approved_money:
+            amount: 1000
+            currency: USD
+          capabilities:
+            - EDIT_AMOUNT_UP
+            - EDIT_AMOUNT_DOWN
+            - EDIT_TIP_AMOUNT_UP
+            - EDIT_TIP_AMOUNT_DOWN
+          card_details:
+            auth_result_code: ajM2ZF
+            avs_status: AVS_ACCEPTED
+            card:
+              bin: "411111"
+              card_brand: VISA
+              card_type: CREDIT
+              exp_month: 2
+              exp_year: 2022
+              fingerprint: sq-1-n_BL15KP87ClDa4-h2nXOI0fp5VnxNH6hfhzqhptTfAgxgLuGFcg6jIPngDz4IkkTQ
+              last_4: "1111"
+            card_payment_timeline:
+              authorized_at: 2021-02-24T03:33:43.681Z
+            cvv_status: CVV_ACCEPTED
+            entry_method: KEYED
+            statement_description: SQ *MY BUSINESS GOSQ.COM
+            status: AUTHORIZED
+          created_at: 2021-03-02T19:53:31.055Z
+          delay_action: CANCEL
+          delay_duration: PT168H
+          delayed_until: 2021-03-09T19:53:31.055Z
+          id: XllelosAAfmkf9mOa0YB4PqSZACZY
+          location_id: XTI0H92143A39
+          order_id: B6qiKWus1d3TBoN2Qn5kfDiWZlfZY
+          receipt_number: Xlle
+          source_type: CARD
+          status: APPROVED
+          tip_money:
+            amount: 300
+            currency: USD
+          total_money:
+            amount: 1300
+            currency: USD
+          updated_at: 2021-03-02T19:53:31.164Z
+          version_token: 9TKsTawsWZvdZZD5uhAZFWfd3chxFXB49cgFpD2Kujf6o
+      properties:
+        errors:
+          description: Any errors that occurred during the request.
+          items:
+            $ref: "#/components/schemas/Error"
+          type: array
+        payment:
+          $ref: "#/components/schemas/Payment"
+      type: object
+      x-is-beta: true
+      x-release-status: BETA
     UpdateShiftRequest:
       description: A request to update a `Shift` object.
       example:
@@ -33186,7 +33560,8 @@ components:
             price_override_money:
               amount: 2000
               currency: USD
-            tax_percentage: null
+            tax_percentage:
+              $ref: "#/components/schemas/CreateLocationRequest/example/request_body/location/facebook_url"
             version: 1594155459464
       properties:
         subscription:

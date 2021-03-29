@@ -1,0 +1,2341 @@
+openapi: 3.0.1
+servers:
+  - url: https://api.portfoliooptimizer.io/v1
+info:
+  contact:
+    email: contact@portfoliooptimizer.io
+    url: https://portfoliooptimizer.io/contact/
+  description: The Portfolio Optimizer Web API allows to optimize investment portfolios using mathematical algorithms
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://portfoliooptimizer.io/terms-of-service
+  title: Portfolio Optimizer
+  version: 1.0.9
+  x-apisguru-categories:
+    - financial
+  x-logo:
+    url: https://portfoliooptimizer.io/assets/images/88x88.png
+  x-origin:
+    - format: openapi
+      url: https://docs.portfoliooptimizer.io/openapi/portfoliooptimizer.yaml
+      version: "3.0"
+  x-providerName: portfoliooptimizer.io
+externalDocs:
+  description: External documentation
+  url: https://docs.portfoliooptimizer.io/
+security:
+  - ApiKeyAuth: []
+tags:
+  - externalDocs:
+      description: External documentation
+      url: https://docs.portfoliooptimizer.io/#assets-returns
+    name: Assets Returns
+  - externalDocs:
+      description: External documentation
+      url: https://docs.portfoliooptimizer.io/#assets-correlation
+    name: Assets Correlation
+  - externalDocs:
+      description: External documentation
+      url: https://docs.portfoliooptimizer.io/#assets-covariance
+    name: Assets Covariance
+  - externalDocs:
+      description: External documentation
+      url: https://docs.portfoliooptimizer.io/#assets-variances
+    name: Assets Variances
+  - externalDocs:
+      description: External documentation
+      url: https://docs.portfoliooptimizer.io/#assets-volatilities
+    name: Assets Volatilities
+  - externalDocs:
+      description: External documentation
+      url: https://docs.portfoliooptimizer.io/#portfolio-generation
+    name: Portfolio Generation
+  - externalDocs:
+      description: External documentation
+      url: https://docs.portfoliooptimizer.io/#portfolio-optimization
+    name: Portfolio Optimization
+  - externalDocs:
+      description: External documentation
+      url: https://docs.portfoliooptimizer.io/#portfolio-construction
+    name: Portfolio Construction
+  - externalDocs:
+      description: External documentation
+      url: https://docs.portfoliooptimizer.io/#portfolio-analysis
+    name: Portfolio Analysis
+paths:
+  /assets/correlation/matrix:
+    post:
+      description: Computes the correlation matrix of assets [from their returns](https://docs.portfoliooptimizer.io/#correlation-matrix-from-returns) or [from their covariance matrix](https://docs.portfoliooptimizer.io/#correlation-matrix-from-covariance-matrix).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From covariance matrix:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.01
+                      - -0.0025
+                    - - -0.0025
+                      - 0.0025
+              From returns:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                From covariance matrix:
+                  value:
+                    assetsCorrelationMatrix:
+                      - - 1
+                        - -0.4999999999999999
+                      - - -0.4999999999999999
+                        - 1
+                From returns:
+                  value:
+                    assetsCorrelationMatrix:
+                      - - 1
+                        - 0.9999999999999999
+                      - - 0.9999999999999999
+                        - 1
+          description: OK
+      summary: Correlation Matrix
+      tags:
+        - Assets Correlation
+      x-codegen-request-body-name: body
+  /assets/correlation/matrix/nearest:
+    post:
+      description: Computes the nearest correlation matrix to an approximate correlation matrix.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Nearest correlation matrix:
+                value:
+                  assets: 3
+                  assetsApproximateCorrelationMatrix:
+                    - - 1
+                      - 1
+                      - 0
+                    - - 1
+                      - 1
+                      - 1
+                    - - 0
+                      - 1
+                      - 1
+              Nearest correlation matrix with fixed a correlation:
+                value:
+                  assets: 3
+                  assetsApproximateCorrelationMatrix:
+                    - - 1
+                      - 0.5
+                      - 0.9
+                    - - 0.5
+                      - 1
+                      - -0.2
+                    - - 0.9
+                      - -0.2
+                      - 1
+                  assetsFixedCorrelations:
+                    - - 2
+                      - 3
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsApproximateCorrelationMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsFixedCorrelations:
+                  items:
+                    items:
+                      type: integer
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Nearest correlation matrix:
+                  value:
+                    assetsCorrelationMatrix:
+                      - - 1
+                        - 0.7606306078350177
+                        - 0.15733356650676536
+                      - - 0.7606306078350177
+                        - 1
+                        - 0.7606306078350177
+                      - - 0.15733356650676536
+                        - 0.7606306078350177
+                        - 1
+                Nearest correlation matrix with fixed a correlation:
+                  value:
+                    assetsCorrelationMatrix:
+                      - - 1
+                        - 0.4314569968899409
+                        - 0.7974943959465133
+                      - - 0.4314569968899409
+                        - 1
+                        - -0.2
+                      - - 0.7974943959465133
+                        - -0.2
+                        - 1
+          description: OK
+      summary: Nearest Correlation Matrix
+      tags:
+        - Assets Correlation
+      x-codegen-request-body-name: body
+  /assets/correlation/matrix/validation:
+    post:
+      description: Validates whether a matrix is a correlation matrix.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#correlation-matrix-validation
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCorrelationMatrix:
+                    - - 1
+                      - -0.00035
+                    - - -0.00035
+                      - 1
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCorrelationMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    message: valid correlation matrix
+          description: OK
+      summary: Correlation Matrix Validation
+      tags:
+        - Assets Correlation
+      x-codegen-request-body-name: body
+  /assets/covariance/matrix:
+    post:
+      description: Computes the covariance matrix of assets [from their returns](https://docs.portfoliooptimizer.io/#covariance-matrix-from-returns) or [from their correlation matrix and their volatilities](https://docs.portfoliooptimizer.io/#covariance-matrix-from-correlation-matrix-and-standard-deviations) (i.e., standard deviations) or [from their correlation matrix and their variances](https://docs.portfoliooptimizer.io/#covariance-matrix-from-correlation-matrix-and-variances).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From correlation matrix and standard deviations:
+                value:
+                  assets: 2
+                  assetsCorrelationMatrix:
+                    - - 1
+                      - -0.5
+                    - - -0.5
+                      - 1
+                  assetsVolatilities:
+                    - 0.1
+                    - 0.05
+              From correlation matrix and variances:
+                value:
+                  assets: 2
+                  assetsCorrelationMatrix:
+                    - - 1
+                      - -0.5
+                    - - -0.5
+                      - 1
+                  assetsVariances:
+                    - 0.01
+                    - 0.0025
+              From returns:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCorrelationMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsVariances:
+                  items:
+                    type: number
+                  type: array
+                assetsVolatilities:
+                  items:
+                    type: number
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                From correlation matrix and standard deviations:
+                  value:
+                    assetsCovarianceMatrix:
+                      - - 0.010000000000000002
+                        - -0.0025000000000000005
+                      - - -0.0025000000000000005
+                        - 0.0025000000000000005
+                From correlation matrix and variances:
+                  value:
+                    assetsCovarianceMatrix:
+                      - - 0.010000000000000002
+                        - -0.0025000000000000005
+                      - - -0.0025000000000000005
+                        - 0.0025000000000000005
+                From returns:
+                  value:
+                    assetsCovarianceMatrix:
+                      - - 0.00035
+                        - 0.00035
+                      - - 0.00035
+                        - 0.00035
+          description: OK
+      summary: Covariance Matrix
+      tags:
+        - Assets Covariance
+      x-codegen-request-body-name: body
+  /assets/covariance/matrix/sample:
+    post:
+      description: Computes the sample covariance matrix of assets returns.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#sample-covariance-matrix-from-returns
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0.01
+                      - 0.02
+                      - 0.01
+                    - - -0.02
+                      - -0.02
+                      - -0.04
+                      - -0.02
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsCovarianceMatrix:
+                      - - 0.000025
+                        - -0.00005
+                      - - -0.00005
+                        - 0.0001
+          description: OK
+      summary: Sample Covariance Matrix
+      tags:
+        - Assets Covariance
+      x-codegen-request-body-name: body
+  /assets/covariance/matrix/validation:
+    post:
+      description: Validates whether a matrix is a covariance matrix.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#covariance-matrix-validation
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.00035
+                      - -0.00035
+                    - - -0.00035
+                      - 0.00035
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    message: valid covariance matrix
+          description: OK
+      summary: Covariance Matrix Validation
+      tags:
+        - Assets Covariance
+      x-codegen-request-body-name: body
+  /assets/returns/arithmetic:
+    post:
+      description: Computes the arithmetic returns of assets.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#arithmetic-returns
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsPrices:
+                    - - 1
+                      - 2
+                    - - 2
+                      - 3
+                      - 6
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsPrices:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsReturns:
+                      - - 1
+                      - - 0.5
+                        - 1
+          description: OK
+      summary: Arithmetic Returns
+      tags:
+        - Assets Returns
+      x-codegen-request-body-name: body
+  /assets/returns/average:
+    post:
+      description: Computes the average returns of assets.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#average-returns
+      requestBody:
+        content:
+          application/json:
+            example:
+              assets: 2
+              assetsReturns:
+                - - 0.1
+                  - -0.05
+                - - 0
+                  - -0.01
+                  - 0.01
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                assetsReturns:
+                  - 0.025
+                  - 0
+          description: OK
+      summary: Average Returns
+      tags:
+        - Assets Returns
+      x-codegen-request-body-name: body
+  /assets/returns/logarithmic:
+    post:
+      description: Computes the logarithmic returns of assets.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#logarithmic-returns
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsPrices:
+                    - - 1
+                      - 2
+                    - - 2
+                      - 3
+                      - 6
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsPrices:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsReturns:
+                      - - 0.6931471805599453
+                      - - 0.4054651081081644
+                        - 0.6931471805599453
+          description: OK
+      summary: Logarithmic Returns
+      tags:
+        - Assets Returns
+      x-codegen-request-body-name: body
+  /assets/variances:
+    post:
+      description: Computes the variances of assets [from their returns](https://docs.portfoliooptimizer.io/#variances-from-returns) or [from their covariance matrix](https://docs.portfoliooptimizer.io/#variances-from-covariance-matrix) or [from their volatilities](https://docs.portfoliooptimizer.io/#variances-from-volatilities).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From covariance matrix:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.01
+                      - -0.0025
+                    - - -0.0025
+                      - 0.0025
+              From returns:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+              From volatilities:
+                value:
+                  assets: 2
+                  assetsVolatilities:
+                    - 0.1
+                    - 0.05
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsVolatilities:
+                  items:
+                    type: number
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                From covariance matrix:
+                  value:
+                    assetsVariances:
+                      - 0.01
+                      - 0.0025
+                From returns:
+                  value:
+                    assetsVariances:
+                      - 0.00035
+                      - 0.00035
+                From volatilities:
+                  value:
+                    assetsVariances:
+                      - 0.010000000000000002
+                      - 0.0025000000000000005
+          description: OK
+      summary: Variances
+      tags:
+        - Assets Variances
+      x-codegen-request-body-name: body
+  /assets/variances/sample:
+    post:
+      description: Computes the sample variances of assets from their returns.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#sample-variances-from-returns
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0.01
+                      - 0.02
+                      - 0.01
+                    - - -0.02
+                      - -0.02
+                      - -0.04
+                      - -0.02
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsVariances:
+                      - 0.000025
+                      - 0.0001
+          description: OK
+      summary: Sample variances
+      tags:
+        - Assets Variances
+      x-codegen-request-body-name: body
+  /assets/volatilities:
+    post:
+      description: Computes the volatilities (i.e., standard deviations) of assets [from their returns](https://docs.portfoliooptimizer.io/#volatilities-from-returns) or [from their covariance matrix](https://docs.portfoliooptimizer.io/#volatilities-from-covariance-matrix) or [from their variances](https://docs.portfoliooptimizer.io/#volatilities-from-variances).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From covariance matrix:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.01
+                      - -0.0025
+                    - - -0.0025
+                      - 0.0025
+              From returns:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+                    - - 0.01
+                      - 0
+                      - 0.02
+                      - -0.03
+              From variances:
+                value:
+                  assets: 2
+                  assetsVariances:
+                    - 0.01
+                    - 0.0025
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsVariances:
+                  items:
+                    type: number
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                From covariance matrix:
+                  value:
+                    assetsVolatilities:
+                      - 0.1
+                      - 0.05
+                From returns:
+                  value:
+                    assetsVolatilities:
+                      - 0.01870828693386971
+                      - 0.01870828693386971
+                From variances:
+                  value:
+                    assetsVolatilities:
+                      - 0.1
+                      - 0.05
+          description: OK
+      summary: Volatilities
+      tags:
+        - Assets Volatilities
+      x-codegen-request-body-name: body
+  /assets/volatilities/sample:
+    post:
+      description: Computes the sample volatilities (i.e., sample standard deviations) of assets from their returns.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#sample-volatilities-from-returns
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsReturns:
+                    - - 0.01
+                      - 0.01
+                      - 0.02
+                      - 0.01
+                    - - -0.02
+                      - -0.02
+                      - -0.04
+                      - -0.02
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsVolatilities:
+                      - 0.005
+                      - 0.01
+          description: OK
+      summary: Sample volatilities
+      tags:
+        - Assets Volatilities
+      x-codegen-request-body-name: body
+  /portfolio/analysis/contributions/return:
+    post:
+      description: Performs a return contribution analysis of one or several portfolio(s).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsGroups:
+                    - - 1
+                      - 2
+                    - - 3
+                  assetsReturns:
+                    - 0.01
+                    - -0.01
+                    - 0.025
+                  assetsWeights:
+                    - - 0.5
+                      - 0.25
+                      - 0.25
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsGroups:
+                  items:
+                    items:
+                      type: integer
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsWeights:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioGroupsReturnContributions:
+                          - 0.0025
+                          - 0.00625
+                        portfolioReturnContributions:
+                          - 0.005
+                          - -0.0025
+                          - 0.00625
+          description: OK
+      summary: Portfolio Return Contributions
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/analysis/contributions/risk:
+    post:
+      description: Performs a risk contribution analysis of one or several portfolio(s).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsCovarianceMatrix:
+                    - - 0.0001
+                      - 0
+                      - 0
+                    - - 0
+                      - 0.0001
+                      - 0
+                    - - 0
+                      - 0
+                      - 0.04
+                  assetsWeights:
+                    - - 0.5
+                      - 0.25
+                      - 0.25
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsGroups:
+                  items:
+                    items:
+                      type: integer
+                    type: array
+                  type: array
+                assetsWeights:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioRiskContributions:
+                          - 0.0004969039949999533
+                          - 0.00012422599874998834
+                          - 0.049690399499995326
+          description: OK
+      summary: Portfolio Risk Contributions
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/analysis/drawdowns:
+    post:
+      description: Computes the drawdown function - also called the underwater equity curve -, as well as the worst 10 drawdowns of one or several portfolio(s).
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#portfolio-drawdowns
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  portfoliosValues:
+                    - - 100
+                      - 95
+                      - 100
+                      - 90
+                      - 85
+                      - 70
+            schema:
+              properties:
+                portfoliosValues:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioDrawdowns:
+                          - 0
+                          - 0.05
+                          - 0
+                          - 0.1
+                          - 0.15
+                          - 0.3
+                        portfolioWorstDrawdowns:
+                          - drawdownBottom: 6
+                            drawdownDepth: 0.3
+                            drawdownEnd: 0
+                            drawdownStart: 3
+                          - drawdownBottom: 2
+                            drawdownDepth: 0.05
+                            drawdownEnd: 3
+                            drawdownStart: 1
+          description: OK
+      summary: Portfolio Drawdowns
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/analysis/mean-variance:
+    post:
+      description: Computes the return and the volatility of one or several portfolio(s) [from assets returns and covariance matrix](https://docs.portfoliooptimizer.io/#portfolio-mean-variance-from-assets-returns-and-covariance-matrix) or [from portfolio values](https://docs.portfoliooptimizer.io/#portfolio-mean-variance-from-portfolio-values).
+      requestBody:
+        content:
+          application/json:
+            examples:
+              From assets returns and covariance matrix:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  assetsReturns:
+                    - 0.01
+                    - 0.05
+                  assetsWeights:
+                    - - 1
+                      - 0
+                    - - 0
+                      - 1
+              From portfolio values:
+                value:
+                  portfoliosValues:
+                    - - 100
+                      - 95
+                      - 100
+                      - 90
+                      - 85
+                      - 70
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsWeights:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                portfoliosValues:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioReturn: 0.01
+                        portfolioVolatility: 0.05
+                      - portfolioReturn: 0.05
+                        portfolioVolatility: 0.1
+          description: OK
+      summary: Portfolio Mean-Variance
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/analysis/mean-variance/efficient-frontier:
+    post:
+      description: Computes the (discretized) mean-variance efficient frontier associated to a list of assets.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#mean-variance-efficient-frontier
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  assetsReturns:
+                    - 0.01
+                    - 0.05
+                  constraints:
+                    minimumAssetsWeights:
+                      - 0.2
+                      - 0
+                  portfolios: 3
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                constraints:
+                  properties:
+                    maximumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    maximumPortfolioExposure:
+                      type: number
+                    minimumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    minimumPortfolioExposure:
+                      type: number
+                  type: object
+                portfolios:
+                  type: integer
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    efficientFrontierPortfolios:
+                      - assetsWeights:
+                          - 0.8260869565217391
+                          - 0.17391304347826086
+                        portfolioReturn: 0.016956521739130433
+                        portfolioVolatility: 0.0463915284620315
+                      - assetsWeights:
+                          - 0.5130434782608696
+                          - 0.48695652173913045
+                        portfolioReturn: 0.02947826086956522
+                        portfolioVolatility: 0.05726369211623199
+                      - assetsWeights:
+                          - 0.2
+                          - 0.8
+                        portfolioReturn: 0.04200000000000001
+                        portfolioVolatility: 0.08160882305241265
+          description: OK
+      summary: Mean-Variance Efficient Frontier
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/analysis/mean-variance/minimum-variance-frontier:
+    post:
+      description: Computes the (discretized) mean-variance minimum variance frontier associated to a list of assets.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#mean-variance-minimum-variance-frontier
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  assetsReturns:
+                    - 0.01
+                    - 0.05
+                  constraints:
+                    minimumAssetsWeights:
+                      - 0.2
+                      - 0
+                  portfolios: 4
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                constraints:
+                  properties:
+                    maximumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    maximumPortfolioExposure:
+                      type: number
+                    minimumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    minimumPortfolioExposure:
+                      type: number
+                  type: object
+                portfolios:
+                  type: integer
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    minimumVarianceFrontierPortfolios:
+                      - assetsWeights:
+                          - 1
+                          - 0
+                        portfolioReturn: 0.01
+                        portfolioVolatility: 0.05
+                      - assetsWeights:
+                          - 0.7333333333333333
+                          - 0.2666666666666667
+                        portfolioReturn: 0.02066666666666667
+                        portfolioVolatility: 0.04744587559642156
+                      - assetsWeights:
+                          - 0.4666666666666667
+                          - 0.5333333333333333
+                        portfolioReturn: 0.03133333333333334
+                        portfolioVolatility: 0.06031399321697891
+                      - assetsWeights:
+                          - 0.2
+                          - 0.8
+                        portfolioReturn: 0.04200000000000001
+                        portfolioVolatility: 0.08160882305241265
+          description: OK
+      summary: Mean-Variance Minimum Variance Frontier
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/construction/investable:
+    post:
+      description: Computes an investable portfolio as close as possible to a desired portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#investable-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example (groups weights):
+                value:
+                  assets: 4
+                  assetsGroupsWeights:
+                    assetsGroups:
+                      - - 1
+                        - 2
+                      - - 3
+                        - 4
+                    weights:
+                      - 0.4
+                      - 0.4
+                  assetsPrices:
+                    - 10
+                    - 25
+                    - 100
+                    - 500
+                  assetsWeights:
+                    - 0.2
+                    - null
+                    - $ref: "#/paths/~1portfolio~1construction~1investable/post/requestBody/content/application~1json/examples/Example (groups weights)/value/assetsWeights/1"
+                    - $ref: "#/paths/~1portfolio~1construction~1investable/post/requestBody/content/application~1json/examples/Example (groups weights)/value/assetsWeights/1"
+                  portfolioValue: 10000
+              Example (no groups weights):
+                value:
+                  assets: 3
+                  assetsPrices:
+                    - 10
+                    - 25
+                    - 500
+                  assetsWeights:
+                    - 0.05
+                    - 0.6
+                    - 0.35
+                  portfolioValue: 10000
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsGroupsWeights:
+                  properties:
+                    assetsGroups:
+                      items:
+                        items:
+                          type: integer
+                        type: array
+                      type: array
+                    weights:
+                      items:
+                        type: number
+                      type: array
+                  type: object
+                assetsMinimumLots:
+                  items:
+                    type: number
+                  type: array
+                assetsMinimumNotionalValues:
+                  items:
+                    type: number
+                  type: array
+                assetsPrices:
+                  items:
+                    type: number
+                  type: array
+                assetsSizeLots:
+                  items:
+                    type: number
+                  type: array
+                assetsWeights:
+                  items:
+                    type: number
+                  type: array
+                maximumAssetsGroupsWeights:
+                  properties:
+                    assetsGroups:
+                      items:
+                        items:
+                          type: integer
+                        type: array
+                      type: array
+                    maximumWeights:
+                      items:
+                        type: number
+                      type: array
+                  type: object
+                portfolioValue:
+                  type: number
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example (groups weights):
+                  value:
+                    assetsPositions:
+                      - 200
+                      - 80
+                      - 20
+                      - 4
+                    assetsWeights:
+                      - 0.2
+                      - 0.2
+                      - 0.2
+                      - 0.2
+                Example (no groups weights):
+                  value:
+                    assetsPositions:
+                      - 50
+                      - 240
+                      - 7
+                    assetsWeights:
+                      - 0.05
+                      - 0.6
+                      - 0.35
+          description: OK
+      summary: Investable Portfolio
+      tags:
+        - Portfolio Construction
+      x-codegen-request-body-name: body
+  /portfolio/generation/multi-period/constant-rebalancing:
+    post:
+      description: Computes one or several multi-period portfolio(s) values, the portfolio(s) being rebalanced toward constant portfolio weights at each time period.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#constant-rebalancing-portfolio-values
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsPrices:
+                    - - 100
+                      - 105
+                      - 110
+                    - - 15
+                      - 12.5
+                      - 11.25
+                    - - 0.5
+                      - 0.51
+                      - 0.49
+                  assetsWeights:
+                    - - 0.5
+                      - 0.5
+                      - 0
+                    - - 0
+                      - 0.5
+                      - 0.5
+                    - - 0.5
+                      - 0
+                      - 0.5
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsPrices:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsWeights:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioValues:
+                          - 100
+                          - 94.16666666666667
+                          - 91.70039682539684
+                      - portfolioValues:
+                          - 100
+                          - 92.66666666666667
+                          - 86.21633986928106
+                      - portfolioValues:
+                          - 100
+                          - 103.5
+                          - 103.93487394957984
+          description: OK
+      summary: Constant Rebalancing Portfolio Values
+      tags:
+        - Portfolio Generation
+      x-codegen-request-body-name: body
+  /portfolio/generation/multi-period/no-rebalancing:
+    post:
+      description: Computes one or several multi-period portfolio(s) values, the portfolio(s) never being rebalanced.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#no-rebalancing-portfolio-values-(buy-and-hold-portfolio-values)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsInitialWeights:
+                    - - 1
+                      - 0
+                      - 0
+                    - - 0
+                      - 1
+                      - 0
+                    - - 0
+                      - 0
+                      - 1
+                  assetsPrices:
+                    - - 100
+                      - 105
+                      - 110
+                    - - 15
+                      - 12.5
+                      - 11.25
+                    - - 0.5
+                      - 0.51
+                      - 0.49
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsInitialWeights:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsPrices:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioValues:
+                          - 100
+                          - 105
+                          - 110
+                      - portfolioValues:
+                          - 100
+                          - 83.33333333333334
+                          - 75
+                      - portfolioValues:
+                          - 100
+                          - 102
+                          - 98
+          description: OK
+      summary: No Rebalancing Portfolio Values (Buy and Hold Portfolio Values)
+      tags:
+        - Portfolio Generation
+      x-codegen-request-body-name: body
+  /portfolio/generation/multi-period/random-rebalancing:
+    post:
+      description: Computes one or several multi-period portfolio(s) values, the portfolio(s) being rebalanced toward random portfolio weights at each time period.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#random-rebalancing-portfolio-values
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsPrices:
+                    - - 100
+                      - 105
+                      - 110
+                    - - 15
+                      - 12.5
+                      - 11.25
+                    - - 0.5
+                      - 0.51
+                      - 0.49
+                  portfolios: 2
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsPrices:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - portfolioValues:
+                          - 100
+                          - 90.8178403620342
+                          - 84.65407625993741
+                      - portfolioValues:
+                          - 100
+                          - 102.43258698946813
+                          - 101.32419718013273
+          description: OK
+      summary: Random Rebalancing Portfolio Values
+      tags:
+        - Portfolio Generation
+      x-codegen-request-body-name: body
+  /portfolio/generation/random:
+    post:
+      description: Computes one or several random portfolio(s) weights.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#random-portfolio-weights
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  portfolios: 2
+            schema:
+              properties:
+                assets:
+                  type: integer
+                constraints:
+                  properties:
+                    maximumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    maximumPortfolioExposure:
+                      type: number
+                    minimumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    minimumPortfolioExposure:
+                      type: number
+                  type: object
+                portfolios:
+                  type: integer
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    portfolios:
+                      - assetsWeights:
+                          - 0.11429744284625785
+                          - 0.0038592674702259393
+                          - 0.8818432896835162
+                      - assetsWeights:
+                          - 0.546026607601722
+                          - 0.07707923859010406
+                          - 0.376894153808174
+          description: OK
+      summary: Random Portfolio Weights
+      tags:
+        - Portfolio Generation
+      x-codegen-request-body-name: body
+  /portfolio/optimization/equal-risk-contributions:
+    post:
+      description: Computes the weights of the assets composing an equal risk contributions portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#inverse-volatility-weighted-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  constraints:
+                    maximumAssetsWeights:
+                      - 0.4
+                      - 1
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                constraints:
+                  properties:
+                    maximumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    minimumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                  type: object
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.4
+                      - 0.5999975015091795
+          description: OK
+      summary: Equal Risk Contributions Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/equal-sharpe-ratio-contributions:
+    post:
+      description: Computes the weights of the assets composing an equal Sharpe Ratio contributions portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#equal-sharpe-ratio-contributions-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.05
+                      - 0.02
+                    - - 0.02
+                      - 0.07
+                  assetsReturns:
+                    - 0.05
+                    - 0.1
+                  riskFreeRate: 0
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    type: number
+                  type: array
+                riskFreeRate:
+                  type: number
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.6666666666666666
+                      - 0.3333333333333333
+          description: OK
+      summary: Equal Sharpe Ratio Contributions Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/equal-weighted:
+    post:
+      description: Computes the weights of the assets composing an equal weighted portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#equal-weighted-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+            schema:
+              properties:
+                assets:
+                  type: integer
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.5
+                      - 0.5
+          description: OK
+      summary: Equal Weighted Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/inverse-variance-weighted:
+    post:
+      description: Computes the weights of the assets composing an inverse variance weighted portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#inverse-variance-weighted-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsVariances:
+                    - 1
+                    - 0.5
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsVariances:
+                  items:
+                    type: number
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.3333333333333333
+                      - 0.6666666666666666
+          description: OK
+      summary: Inverse Variance Weighted Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/inverse-volatility-weighted:
+    post:
+      description: Computes the weights of the assets composing an inverse volatility weighted portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#inverse-volatility-weighted-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsVolatilities:
+                    - 0.05
+                    - 0.1
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsVolatilities:
+                  items:
+                    type: number
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.6666666666666666
+                      - 0.3333333333333333
+          description: OK
+      summary: Inverse Volatility Weighted Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/market-capitalization-weighted:
+    post:
+      description: Computes the weights of the assets composing a market capitalization weighted portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#market-capitalization-weighted-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsMarketCapitalizations:
+                    - 1
+                    - 2
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsMarketCapitalizations:
+                  items:
+                    type: number
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.3333333333333333
+                      - 0.6666666666666666
+          description: OK
+      summary: Market Capitalization Weighted Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/maximum-decorrelation:
+    post:
+      description: Computes the weights of the assets composing the maximum decorrelation portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#maximum-decorrelation-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsCorrelationMatrix:
+                    - - 1
+                      - 0.9
+                      - 0.85
+                    - - 0.9
+                      - 1
+                      - 0.7
+                    - - 0.85
+                      - 0.7
+                      - 1
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCorrelationMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                constraints:
+                  properties:
+                    maximumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    maximumPortfolioExposure:
+                      type: number
+                    minimumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    minimumPortfolioExposure:
+                      type: number
+                  type: object
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0
+                      - 0.5
+                      - 0.5
+          description: OK
+      summary: Maximum Decorrelation Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/maximum-sharpe-ratio:
+    post:
+      description: Computes the weights of the assets composing the maximum Sharpe Ratio portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#maximum-sharpe-ratio-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.05
+                      - 0.02
+                    - - 0.02
+                      - 0.07
+                  assetsReturns:
+                    - 0.05
+                    - 0.1
+                  riskFreeRate: 0
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    type: number
+                  type: array
+                constraints:
+                  properties:
+                    maximumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    maximumPortfolioExposure:
+                      type: number
+                    minimumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    minimumPortfolioExposure:
+                      type: number
+                  type: object
+                riskFreeRate:
+                  type: number
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.27272727272727276
+                      - 0.7272727272727273
+          description: OK
+      summary: Maximum Sharpe Ratio Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/mean-variance:
+    post:
+      description: Computes the weights of the assets composing an efficient mean-variance portfolio - that is, a portfolio belonging to the mean-variance efficient frontier.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#mean-variance-efficient-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 1
+                      - 0.3
+                    - - 0.3
+                      - 1
+                  assetsReturns:
+                    - 0.1
+                    - 0.2
+                  constraints:
+                    portfolioReturn: 0.15
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsReturns:
+                  items:
+                    type: number
+                  type: array
+                constraints:
+                  properties:
+                    maximumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    maximumPortfolioExposure:
+                      type: number
+                    minimumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    minimumPortfolioExposure:
+                      type: number
+                  type: object
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.5
+                      - 0.5
+          description: OK
+      summary: Mean-Variance Efficient Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/minimum-correlation:
+    post:
+      description: Computes the weights of the assets composing the minimum correlation portfolio, using the Minimum Correlation Algorithm discovered by David Varadi.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#minimum-correlation-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 3
+                  assetsCorrelationMatrix:
+                    - - 1
+                      - 0.9
+                      - 0.85
+                    - - 0.9
+                      - 1
+                      - 0.7
+                    - - 0.85
+                      - 0.7
+                      - 1
+                  assetsVolatilities:
+                    - 0.14
+                    - 0.18
+                    - 0.22
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCorrelationMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                assetsVolatilities:
+                  items:
+                    type: number
+                  type: array
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.21059806981924115
+                      - 0.3087866303991204
+                      - 0.48061529978163836
+          description: OK
+      summary: Minimum Correlation Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/minimum-variance:
+    post:
+      description: Computes the weights of the assets composing the minimum variance portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#minimum-variance-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.0025
+                      - 0.0005
+                    - - 0.0005
+                      - 0.01
+                  constraints:
+                    maximumAssetsWeights:
+                      - 0.4
+                      - 1
+                    maximumPortfolioExposure: 0.5
+                    minimumPortfolioExposure: 0.5
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                constraints:
+                  properties:
+                    maximumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    maximumPortfolioExposure:
+                      type: number
+                    minimumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    minimumPortfolioExposure:
+                      type: number
+                  type: object
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.4
+                      - 0.09999999999998999
+          description: OK
+      summary: Minimum Variance Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+  /portfolio/optimization/most-diversified:
+    post:
+      description: Computes the weights of the assets composing the most diversified portfolio.
+      externalDocs:
+        url: https://docs.portfoliooptimizer.io/#most-diversified-portfolio
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  assets: 2
+                  assetsCovarianceMatrix:
+                    - - 0.04
+                      - 0.01
+                    - - 0.01
+                      - 0.01
+            schema:
+              properties:
+                assets:
+                  type: integer
+                assetsCovarianceMatrix:
+                  items:
+                    items:
+                      type: number
+                    type: array
+                  type: array
+                constraints:
+                  properties:
+                    maximumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    maximumPortfolioExposure:
+                      type: number
+                    minimumAssetsWeights:
+                      items:
+                        type: number
+                      type: array
+                    minimumPortfolioExposure:
+                      type: number
+                  type: object
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    assetsWeights:
+                      - 0.33333333333333337
+                      - 0.6666666666666666
+          description: OK
+      summary: Most Diversified Portfolio
+      tags:
+        - Portfolio Optimization
+      x-codegen-request-body-name: body
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-Key
+      type: apiKey

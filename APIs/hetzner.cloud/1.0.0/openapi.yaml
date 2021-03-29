@@ -989,11 +989,11 @@ paths:
                             properties:
                               id:
                                 description: ID of resource referenced
-                                example: 42
+                                example: 4711
                                 type: integer
                               type:
                                 description: Type of resource referenced
-                                example: server
+                                example: load_balancer
                                 type: string
                             required:
                               - id
@@ -1115,11 +1115,11 @@ paths:
                           properties:
                             id:
                               description: ID of resource referenced
-                              example: 42
+                              example: 4711
                               type: integer
                             type:
                               description: Type of resource referenced
-                              example: server
+                              example: load_balancer
                               type: string
                           required:
                             - id
@@ -1230,11 +1230,11 @@ paths:
                           properties:
                             id:
                               description: ID of resource referenced
-                              example: 42
+                              example: 4711
                               type: integer
                             type:
                               description: Type of resource referenced
-                              example: server
+                              example: load_balancer
                               type: string
                           required:
                             - id
@@ -1318,8 +1318,8 @@ paths:
                   not_valid_after: 2019-07-08T09:59:59+00:00
                   not_valid_before: 2019-01-08T10:00:00+00:00
                   used_by:
-                    - id: 42
-                      type: server
+                    - id: 4711
+                      type: load_balancer
               schema:
                 properties:
                   certificate:
@@ -1374,11 +1374,11 @@ paths:
                           properties:
                             id:
                               description: ID of resource referenced
-                              example: 42
+                              example: 4711
                               type: integer
                             type:
                               description: Type of resource referenced
-                              example: server
+                              example: load_balancer
                               type: string
                           required:
                             - id
@@ -3420,7 +3420,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -4872,7 +4873,8 @@ paths:
                       properties:
                         bound_to:
                           description: ID of Server the Image is bound to. Only set for Images of type `backup`.
-                          example: null
+                          example:
+                            $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                           nullable: true
                           type: integer
                         created:
@@ -5030,7 +5032,8 @@ paths:
                     properties:
                       bound_to:
                         description: ID of Server the Image is bound to. Only set for Images of type `backup`.
-                        example: null
+                        example:
+                          $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                         nullable: true
                         type: integer
                       created:
@@ -5191,7 +5194,8 @@ paths:
             application/json:
               example:
                 image:
-                  bound_to: null
+                  bound_to:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   created: 2016-01-30T23:50:00+00:00
                   created_from:
                     id: 1
@@ -5217,7 +5221,8 @@ paths:
                     properties:
                       bound_to:
                         description: ID of Server the Image is bound to. Only set for Images of type `backup`.
-                        example: null
+                        example:
+                          $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                         nullable: true
                         type: integer
                       created:
@@ -6982,7 +6987,8 @@ paths:
                         - health_status:
                             - listen_port: 443
                               status: healthy
-                          label_selector: null
+                          label_selector:
+                            $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                           server:
                             id: 80
                           type: server
@@ -8167,7 +8173,8 @@ paths:
                         - health_status:
                             - listen_port: 443
                               status: healthy
-                          label_selector: null
+                          label_selector:
+                            $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                           server:
                             id: 80
                           type: server
@@ -9670,7 +9677,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -9918,7 +9926,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -10045,7 +10054,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -10159,7 +10169,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -11872,7 +11883,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -12017,7 +12029,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -12413,7 +12426,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -12542,7 +12556,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -13428,7 +13443,8 @@ paths:
                           properties:
                             bound_to:
                               description: ID of Server the Image is bound to. Only set for Images of type `backup`.
-                              example: null
+                              example:
+                                $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                               nullable: true
                               type: integer
                             created:
@@ -14008,7 +14024,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 1
                   progress: 0
                   resources:
@@ -14021,7 +14038,8 @@ paths:
                     error:
                       code: action_failed
                       message: Action failed
-                    finished: null
+                    finished:
+                      $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                     id: 13
                     progress: 0
                     resources:
@@ -14061,7 +14079,8 @@ paths:
                         - 3
                   id: 42
                   image:
-                    bound_to: null
+                    bound_to:
+                      $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                     created: 2016-01-30T23:50:00+00:00
                     created_from:
                       id: 1
@@ -14417,7 +14436,8 @@ paths:
                         properties:
                           bound_to:
                             description: ID of Server the Image is bound to. Only set for Images of type `backup`.
-                            example: null
+                            example:
+                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                             nullable: true
                             type: integer
                           created:
@@ -15106,7 +15126,8 @@ paths:
                         properties:
                           bound_to:
                             description: ID of Server the Image is bound to. Only set for Images of type `backup`.
-                            example: null
+                            example:
+                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                             nullable: true
                             type: integer
                           created:
@@ -15715,7 +15736,8 @@ paths:
                         properties:
                           bound_to:
                             description: ID of Server the Image is bound to. Only set for Images of type `backup`.
-                            example: null
+                            example:
+                              $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                             nullable: true
                             type: integer
                           created:
@@ -16354,7 +16376,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -16513,7 +16536,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -16647,7 +16671,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -16784,7 +16809,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -17064,7 +17090,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -17218,7 +17245,8 @@ paths:
                   started: 2016-01-30T23:55:00+00:00
                   status: success
                 image:
-                  bound_to: null
+                  bound_to:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   created: 2016-01-30T23:50:00+00:00
                   created_from:
                     id: 1
@@ -17229,7 +17257,8 @@ paths:
                   id: 4711
                   image_size: 2.3
                   labels: {}
-                  name: null
+                  name:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   os_flavor: ubuntu
                   os_version: "20.04"
                   protection:
@@ -17317,7 +17346,8 @@ paths:
                     properties:
                       bound_to:
                         description: ID of Server the Image is bound to. Only set for Images of type `backup`.
-                        example: null
+                        example:
+                          $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                         nullable: true
                         type: integer
                       created:
@@ -17474,7 +17504,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -17588,7 +17619,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -17823,7 +17855,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -18199,7 +18232,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -18311,7 +18345,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -18423,7 +18458,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -18556,7 +18592,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -18564,7 +18601,8 @@ paths:
                       type: server
                   started: 2016-01-30T23:50:00+00:00
                   status: running
-                root_password: null
+                root_password:
+                  $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
               schema:
                 properties:
                   action:
@@ -18793,7 +18831,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -18912,7 +18951,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -19030,7 +19070,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -19870,11 +19911,11 @@ paths:
         #### Call specific error codes
 
 
-        | Code                                | Description                                                          |
+        | Code                                | Description                                         |
 
-        |-------------------------------------|----------------------------------------------------------------------|
+        |-------------------------------------|-----------------------------------------------------|
 
-        | `no_space_left_in_location`         | There is no volume space left in the given location                    |
+        | `no_space_left_in_location`         | There is no volume space left in the given location |
       requestBody:
         content:
           application/json:
@@ -19932,7 +19973,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -19947,7 +19989,8 @@ paths:
                     error:
                       code: action_failed
                       message: Action failed
-                    finished: null
+                    finished:
+                      $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                     id: 13
                     progress: 0
                     resources:
@@ -20776,7 +20819,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -21014,7 +21058,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:
@@ -21138,7 +21183,8 @@ paths:
                   error:
                     code: action_failed
                     message: Action failed
-                  finished: null
+                  finished:
+                    $ref: "#/paths/~1images~1{id}/put/responses/200/content/application~1json/example/image/name"
                   id: 13
                   progress: 0
                   resources:

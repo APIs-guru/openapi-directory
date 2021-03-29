@@ -1471,6 +1471,37 @@ paths:
       summary: Create a Project
       tags:
         - Project
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: Update a Project
+      operationId: Project_Put
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateProjectModel"
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ProjectDetails"
+      security:
+        - oauth2:
+            - write_projects
+      summary: Update an Project
+      tags:
+        - Project
   /api/Project/Lookup:
     get:
       consumes: []
@@ -2014,6 +2045,12 @@ paths:
       description: Groups Tasks by Section. Default sort is by Section Title followed by Task Title
       operationId: TaskLookup
       parameters:
+        - description: (optional) The ProjectID to use when filtering Tasks
+          format: int32
+          in: query
+          name: projectID
+          required: true
+          type: integer
         - description: Number of items per page (max 1000)
           format: int32
           in: query
@@ -2024,12 +2061,6 @@ paths:
           format: int32
           in: query
           name: pageNumber
-          required: false
-          type: integer
-        - description: (optional) The ProjectID to use when filtering Tasks
-          format: int32
-          in: query
-          name: projectID
           required: false
           type: integer
         - description: (optional) true/false to hide completed tasks. Defaults false
@@ -3979,7 +4010,7 @@ definitions:
       Merchant:
         description: The name of the merchant.
         type: string
-      MerchantTaxNumer:
+      MerchantTaxNumber:
         description: A Tax number identifier for the merchant.
         type: string
       Notes:
@@ -5413,6 +5444,54 @@ definitions:
     required:
       - ExpenseID
       - FieldsToUpdate
+    type: object
+  UpdateProjectModel:
+    properties:
+      BudgetAmount:
+        format: double
+        type: number
+      BudgetHours:
+        format: double
+        type: number
+      EndDate:
+        format: date-time
+        type: string
+      FieldsToUpdate:
+        description: ""
+        items:
+          type: string
+        type: array
+      ProjectBillableTypeCode:
+        description: "The billing method of the project. (string, optional) Possible values: CategoryHourly, NoRate, NotBillable, PersonHourly, ProjectHourly"
+        type: string
+      ProjectBudgetTypeCode:
+        description: "The project budgeting type. (string, optional) Possible values: NoBudget, PersonHours, ProjectFees, ProjectHours, CategoryHours"
+        type: string
+      ProjectCategoryIDFK:
+        format: int32
+        type: integer
+      ProjectID:
+        description: The ID of the Project to update
+        format: int32
+        type: integer
+      ProjectNotes:
+        description: (optional) Any descriptive notes about the project. (2000 characters max)
+        type: string
+      ProjectStatusCode:
+        description: "Update the project status (string, optional): (Possible values: NotStarted, InProgress, Complete, OnHold)"
+        type: string
+      ProjectTitle:
+        description: (optional) An updated project title. (255 characters max)
+        type: string
+      StartDate:
+        format: date-time
+        type: string
+      TimesheetApprovalRequiredbyDefault:
+        description: Whether timesheet approval should be required by default for newly added project members.
+        type: boolean
+      isTaskRequiredOnTimesheet:
+        description: Whether timesheets entered against this project require a task to be selected.
+        type: boolean
     type: object
   UpdateTask:
     properties:

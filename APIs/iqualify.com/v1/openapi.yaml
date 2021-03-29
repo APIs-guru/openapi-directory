@@ -573,6 +573,8 @@ paths:
                   $ref: "#/components/examples/InvalidContentError"
                 MissingInfoError:
                   $ref: "#/components/examples/MissingInfoError"
+                OfferingIncompatibleDatesError:
+                  $ref: "#/components/examples/OfferingIncompatibleDatesError"
                 SchemaFormatError:
                   $ref: "#/components/examples/SchemaFormatError"
                 SchemaRequiredError:
@@ -786,6 +788,8 @@ paths:
                   $ref: "#/components/examples/MissingInfoError"
                 ObjectExistsError:
                   $ref: "#/components/examples/ObjectExistsError"
+                OfferingIncompatibleDatesError:
+                  $ref: "#/components/examples/OfferingIncompatibleDatesError"
                 SchemaFormatError:
                   $ref: "#/components/examples/SchemaFormatError"
                 SchemaTypeError:
@@ -3967,7 +3971,6 @@ components:
           type: boolean
       required:
         - start
-        - end
       type: object
     OfferingResponse:
       properties:

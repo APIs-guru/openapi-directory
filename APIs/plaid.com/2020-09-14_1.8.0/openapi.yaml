@@ -63,8 +63,10 @@ paths:
                           available: 100
                           current: 110
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -72,11 +74,13 @@ paths:
                         type: depository
                       - account_id: dVzbVMLjrxTnLjX4G66XUp5GLklm4oiZy88yK
                         balances:
-                          available: null
+                          available:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                           current: 410
                           iso_currency_code: USD
                           limit: 2000
-                          unofficial_currency_code: null
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "3333"
                         name: Plaid Credit Card
                         official_name: Plaid Diamond 12.5% APR Interest Credit Card
@@ -84,14 +88,18 @@ paths:
                         type: credit
                       - account_id: Pp1Vpkl9w8sajvK6oEEKtr7vZxBnGpf7LxxLE
                         balances:
-                          available: null
+                          available:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                           current: 65262
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "7777"
                         name: Plaid Student Loan
-                        official_name: null
+                        official_name:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         subtype: student
                         type: loan
                     item:
@@ -104,8 +112,10 @@ paths:
                         - auth
                         - liabilities
                         - transactions
-                      consent_expiration_time: null
-                      error: null
+                      consent_expiration_time:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      error:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       institution_id: ins_3
                       item_id: eVBnVMp7zdTJLkRNr33Rs6zr7KNJqBFL9DrE6
                       update_type: background
@@ -151,8 +161,10 @@ paths:
                           available: 100
                           current: 110
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -160,26 +172,34 @@ paths:
                         type: depository
                       - account_id: 6PdjjRP6LmugpBy5NgQvUqpRXMWxzktg3rwrk
                         balances:
-                          available: null
+                          available:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                           current: 23631.9805
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "6666"
                         name: Plaid 401k
-                        official_name: null
+                        official_name:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         subtype: 401k
                         type: investment
                       - account_id: XMBvvyMGQ1UoLbKByoMqH3nXMj84ALSdE5B58
                         balances:
-                          available: null
+                          available:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                           current: 65262
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "7777"
                         name: Plaid Student Loan
-                        official_name: null
+                        official_name:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         subtype: student
                         type: loan
                     item:
@@ -191,8 +211,10 @@ paths:
                       billed_products:
                         - assets
                         - auth
-                      consent_expiration_time: null
-                      error: null
+                      consent_expiration_time:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      error:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       institution_id: ins_117650
                       item_id: DWVAAPWq4RHGlEaNyGKRTAnPLaEmo8Cvq7na6
                       update_type: background
@@ -404,22 +426,27 @@ paths:
                                 available: 200
                                 current: 210
                                 iso_currency_code: USD
-                                limit: null
-                                unofficial_currency_code: null
+                                limit:
+                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                unofficial_currency_code:
+                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
                               days_available: 3
                               historical_balances:
                                 - current: 210
                                   date: 2020-06-04
                                   iso_currency_code: USD
-                                  unofficial_currency_code: null
+                                  unofficial_currency_code:
+                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
                                 - current: 210
                                   date: 2020-06-03
                                   iso_currency_code: USD
-                                  unofficial_currency_code: null
+                                  unofficial_currency_code:
+                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
                                 - current: 210
                                   date: 2020-06-02
                                   iso_currency_code: USD
-                                  unofficial_currency_code: null
+                                  unofficial_currency_code:
+                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
                               mask: "1111"
                               name: Plaid Saving
                               official_name: Plaid Silver Standard 0.1% Interest Saving
@@ -461,22 +488,27 @@ paths:
                                     - data: "1112225555"
                                       primary: false
                                       type: mobile
-                              ownership_type: null
+                              ownership_type:
+                                $ref: "#/components/schemas/AccountSubtype/enum/65"
                               subtype: savings
                               transactions: []
                               type: depository
                             - account_id: BxBXxLj1m4HMXBm9WZJyUg9XLd4rKEhw8Pb1J
                               balances:
-                                available: null
+                                available:
+                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
                                 current: 56302.06
                                 iso_currency_code: USD
-                                limit: null
-                                unofficial_currency_code: null
+                                limit:
+                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                unofficial_currency_code:
+                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
                               days_available: 3
                               historical_balances: []
                               mask: "8888"
                               name: Plaid Mortgage
-                              official_name: null
+                              official_name:
+                                $ref: "#/components/schemas/AccountSubtype/enum/65"
                               owners:
                                 - addresses:
                                     - data:
@@ -515,31 +547,38 @@ paths:
                                     - data: "1112225555"
                                       primary: false
                                       type: mobile
-                              ownership_type: null
+                              ownership_type:
+                                $ref: "#/components/schemas/AccountSubtype/enum/65"
                               subtype: mortgage
                               transactions: []
                               type: loan
                             - account_id: dVzbVMLjrxTnLjX4G66XUp5GLklm4oiZy88yK
                               balances:
-                                available: null
+                                available:
+                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
                                 current: 410
                                 iso_currency_code: USD
-                                limit: null
-                                unofficial_currency_code: null
+                                limit:
+                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
+                                unofficial_currency_code:
+                                  $ref: "#/components/schemas/AccountSubtype/enum/65"
                               days_available: 3
                               historical_balances:
                                 - current: 410
                                   date: 2020-06-04
                                   iso_currency_code: USD
-                                  unofficial_currency_code: null
+                                  unofficial_currency_code:
+                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
                                 - current: 410
                                   date: 2020-06-03
                                   iso_currency_code: USD
-                                  unofficial_currency_code: null
+                                  unofficial_currency_code:
+                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
                                 - current: 410
                                   date: 2020-06-02
                                   iso_currency_code: USD
-                                  unofficial_currency_code: null
+                                  unofficial_currency_code:
+                                    $ref: "#/components/schemas/AccountSubtype/enum/65"
                               mask: "3333"
                               name: Plaid Credit Card
                               official_name: Plaid Diamond 12.5% APR Interest Credit Card
@@ -581,7 +620,8 @@ paths:
                                     - data: "1112225555"
                                       primary: false
                                       type: mobile
-                              ownership_type: null
+                              ownership_type:
+                                $ref: "#/components/schemas/AccountSubtype/enum/65"
                               subtype: credit card
                               transactions: []
                               type: credit
@@ -731,8 +771,10 @@ paths:
                           available: 100
                           current: 110
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "9606"
                         name: Plaid Checking
                         official_name: Plaid Gold Checking
@@ -747,8 +789,10 @@ paths:
                       billed_products:
                         - assets
                         - auth
-                      consent_expiration_time: null
-                      error: null
+                      consent_expiration_time:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      error:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       institution_id: ins_117650
                       item_id: DWVAAPWq4RHGlEaNyGKRTAnPLaEmo8Cvq7na6
                       update_type: background
@@ -888,7 +932,8 @@ paths:
                       custom_tag: my tag
                       description: Testing2
                       direction: outbound
-                      failure_reason: null
+                      failure_reason:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       id: 460cbe92-2dcc-8eae-5ad6-b37d0ec90fd9
                       iso_currency_code: USD
                       metadata:
@@ -943,8 +988,10 @@ paths:
                         direction: outbound
                         event_id: 1
                         event_type: receiver_pending
-                        failure_reason: null
-                        origination_account_id: null
+                        failure_reason:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        origination_account_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         receiver_details:
                           available_balance: positive
                         timestamp: 2020-08-06T17:27:15Z
@@ -989,9 +1036,12 @@ paths:
                         direction: outbound
                         event_id: 1
                         event_type: pending
-                        failure_reason: null
-                        origination_account_id: null
-                        receiver_details: null
+                        failure_reason:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        origination_account_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        receiver_details:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         timestamp: 2020-08-06T17:27:15Z
                     request_id: mdqfuVxeoza6mhu
               schema:
@@ -1280,7 +1330,8 @@ paths:
                 example-1:
                   value:
                     account_has_multiple_allocations: true
-                    amount_allocated: null
+                    amount_allocated:
+                      $ref: "#/components/schemas/AccountSubtype/enum/65"
                     date_completed: 2019-11-01
                     date_created: 2019-11-01
                     deposit_switch_id: LjDyMfMkVpqLmEm1VR7bQikR3BX5hEMdRAkq1
@@ -1394,8 +1445,10 @@ paths:
                           available: 100
                           current: 110
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -1444,8 +1497,10 @@ paths:
                           available: 200
                           current: 210
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "1111"
                         name: Plaid Saving
                         official_name: Plaid Silver Standard 0.1% Interest Saving
@@ -1499,8 +1554,10 @@ paths:
                         - identity
                         - liabilities
                         - transactions
-                      consent_expiration_time: null
-                      error: null
+                      consent_expiration_time:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      error:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       institution_id: ins_3
                       item_id: eVBnVMp7zdTJLkRNr33Rs6zr7KNJqBFL9DrE6
                       update_type: background
@@ -1587,7 +1644,8 @@ paths:
               examples:
                 example-1:
                   value:
-                    account_id: null
+                    account_id:
+                      $ref: "#/components/schemas/AccountSubtype/enum/65"
                     employee:
                       address:
                         city: SAN FRANCISCO
@@ -1608,7 +1666,8 @@ paths:
                     request_id: snygYZ9fR3vXuam
                     ytd_earnings:
                       gross_earnings: 59375
-                      net_earnings: null
+                      net_earnings:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
               schema:
                 $ref: "#/components/schemas/IncomeVerificationPaystubGetResponse"
           description: OK
@@ -1824,7 +1883,8 @@ paths:
                             success: 0.9
                           last_status_change: 2019-02-15T15:53:00Z
                           status: HEALTHY
-                        logo: null
+                        logo:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         primary_color: "#004966"
                         transactions_updates:
                           breakdown:
@@ -1918,8 +1978,10 @@ paths:
                           available: 43200
                           current: 43200
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "4444"
                         name: Plaid Money Market
                         official_name: Plaid Platinum Standard 1.85% Interest Money Market
@@ -1927,92 +1989,114 @@ paths:
                         type: depository
                       - account_id: JqMLm4rJwpF6gMPJwBqdh9ZjjPvvpDcb7kDK1
                         balances:
-                          available: null
+                          available:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                           current: 320.76
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "5555"
                         name: Plaid IRA
-                        official_name: null
+                        official_name:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         subtype: ira
                         type: investment
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         balances:
-                          available: null
+                          available:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                           current: 23631.9805
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "6666"
                         name: Plaid 401k
-                        official_name: null
+                        official_name:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         subtype: 401k
                         type: investment
                     holdings:
                       - account_id: JqMLm4rJwpF6gMPJwBqdh9ZjjPvvpDcb7kDK1
                         cost_basis: 1
                         institution_price: 1
-                        institution_price_as_of: null
+                        institution_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         institution_value: 0.01
                         iso_currency_code: USD
                         quantity: 0.01
                         security_id: d6ePmbPxgWCWmMVv66q9iPV94n91vMtov5Are
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         cost_basis: 1.5
                         institution_price: 2.11
-                        institution_price_as_of: null
+                        institution_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         institution_value: 2.11
                         iso_currency_code: USD
                         quantity: 1
                         security_id: KDwjlXj1Rqt58dVvmzRguxJybmyQL8FgeWWAy
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         cost_basis: 10
                         institution_price: 10.42
-                        institution_price_as_of: null
+                        institution_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         institution_value: 20.84
                         iso_currency_code: USD
                         quantity: 2
                         security_id: NDVQrXQoqzt5v3bAe8qRt4A7mK7wvZCLEBBJk
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - account_id: JqMLm4rJwpF6gMPJwBqdh9ZjjPvvpDcb7kDK1
                         cost_basis: 0.01
                         institution_price: 0.011
-                        institution_price_as_of: null
+                        institution_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         institution_value: 110
                         iso_currency_code: USD
                         quantity: 10000
                         security_id: 8E4L9XLl6MudjEpwPAAgivmdZRdBPJuvMPlPb
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         cost_basis: 23
                         institution_price: 27
-                        institution_price_as_of: null
+                        institution_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         institution_value: 636.309
                         iso_currency_code: USD
                         quantity: 23.567
                         security_id: JDdP7XPMklt5vwPmDN45t3KAoWAPmjtpaW7DP
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         cost_basis: 15
                         institution_price: 13.73
-                        institution_price_as_of: null
+                        institution_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         institution_value: 1373.6865
                         iso_currency_code: USD
                         quantity: 100.05
                         security_id: nnmo8doZ4lfKNEDe3mPJipLGkaGw3jfPrpxoN
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - account_id: k67E4xKvMlhmleEa4pg9hlwGGNnnEeixPolGm
                         cost_basis: 1
                         institution_price: 1
-                        institution_price_as_of: null
+                        institution_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         institution_value: 12345.67
                         iso_currency_code: USD
                         quantity: 12345.67
                         security_id: d6ePmbPxgWCWmMVv66q9iPV94n91vMtov5Are
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                     item:
                       available_products:
                         - balance
@@ -2023,8 +2107,10 @@ paths:
                         - assets
                         - auth
                         - investments
-                      consent_expiration_time: null
-                      error: null
+                      consent_expiration_time:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      error:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       institution_id: ins_3
                       item_id: 4z9LPae1nRHWy8pvg9jrsgbRP4ZNQvIdbLq7g
                       update_type: background
@@ -2032,95 +2118,135 @@ paths:
                     request_id: l68wb8zpS0hqmsJ
                     securities:
                       - close_price: 0.011
-                        close_price_as_of: null
-                        cusip: null
-                        institution_id: null
-                        institution_security_id: null
+                        close_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        cusip:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        institution_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        institution_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         is_cash_equivalent: false
-                        isin: null
+                        isin:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         iso_currency_code: USD
                         name: Nflx Feb 01'18 $355 Call
-                        proxy_security_id: null
+                        proxy_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         security_id: 8E4L9XLl6MudjEpwPAAgivmdZRdBPJuvMPlPb
-                        sedol: null
+                        sedol:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         ticker_symbol: NFLX180201C00355000
                         type: derivative
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - close_price: 27
-                        close_price_as_of: null
+                        close_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         cusip: "577130834"
-                        institution_id: null
-                        institution_security_id: null
+                        institution_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        institution_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         is_cash_equivalent: false
                         isin: US5771308344
                         iso_currency_code: USD
                         name: Matthews Pacific Tiger Fund Insti Class
-                        proxy_security_id: null
+                        proxy_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         security_id: JDdP7XPMklt5vwPmDN45t3KAoWAPmjtpaW7DP
-                        sedol: null
+                        sedol:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         ticker_symbol: MIPTX
                         type: mutual fund
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - close_price: 2.11
-                        close_price_as_of: null
+                        close_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         cusip: 00448Q201
-                        institution_id: null
-                        institution_security_id: null
+                        institution_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        institution_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         is_cash_equivalent: false
                         isin: US00448Q2012
                         iso_currency_code: USD
                         name: Achillion Pharmaceuticals Inc.
-                        proxy_security_id: null
+                        proxy_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         security_id: KDwjlXj1Rqt58dVvmzRguxJybmyQL8FgeWWAy
-                        sedol: null
+                        sedol:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         ticker_symbol: ACHN
                         type: equity
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - close_price: 10.42
-                        close_price_as_of: null
+                        close_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         cusip: "258620103"
-                        institution_id: null
-                        institution_security_id: null
+                        institution_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        institution_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         is_cash_equivalent: false
                         isin: US2586201038
                         iso_currency_code: USD
                         name: DoubleLine Total Return Bond Fund
-                        proxy_security_id: null
+                        proxy_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         security_id: NDVQrXQoqzt5v3bAe8qRt4A7mK7wvZCLEBBJk
-                        sedol: null
+                        sedol:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         ticker_symbol: DBLTX
                         type: mutual fund
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - close_price: 1
-                        close_price_as_of: null
-                        cusip: null
-                        institution_id: null
-                        institution_security_id: null
+                        close_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        cusip:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        institution_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        institution_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         is_cash_equivalent: true
-                        isin: null
+                        isin:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         iso_currency_code: USD
                         name: U S Dollar
-                        proxy_security_id: null
+                        proxy_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         security_id: d6ePmbPxgWCWmMVv66q9iPV94n91vMtov5Are
-                        sedol: null
+                        sedol:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         ticker_symbol: USD
                         type: cash
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - close_price: 13.73
-                        close_price_as_of: null
-                        cusip: null
+                        close_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        cusip:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         institution_id: ins_3
                         institution_security_id: NHX105509
                         is_cash_equivalent: false
-                        isin: null
+                        isin:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         iso_currency_code: USD
                         name: NH PORTFOLIO 1055 (FIDELITY INDEX)
-                        proxy_security_id: null
+                        proxy_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         security_id: nnmo8doZ4lfKNEDe3mPJipLGkaGw3jfPrpxoN
-                        sedol: null
+                        sedol:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         ticker_symbol: NHX105509
                         type: etf
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
               schema:
                 $ref: "#/components/schemas/InvestmentsHoldingsGetResponse"
           description: OK
@@ -2159,8 +2285,10 @@ paths:
                           available: 100
                           current: 110
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -2168,32 +2296,41 @@ paths:
                         type: depository
                       - account_id: KqZZMoZmBWHJlz7yKaZjHZb78VNpaxfVa7e5z
                         balances:
-                          available: null
+                          available:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                           current: 320.76
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "5555"
                         name: Plaid IRA
-                        official_name: null
+                        official_name:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         subtype: ira
                         type: investment
                       - account_id: rz99ex9ZQotvnjXdgQLEsR81e3ArPgulVWjGj
                         balances:
-                          available: null
+                          available:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                           current: 23631.9805
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "6666"
                         name: Plaid 401k
-                        official_name: null
+                        official_name:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         subtype: 401k
                         type: investment
                     investment_transactions:
                       - account_id: rz99ex9ZQotvnjXdgQLEsR81e3ArPgulVWjGj
                         amount: -8.72
-                        cancel_transaction_id: null
+                        cancel_transaction_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         date: 2020-05-29
                         fees: 0
                         investment_transaction_id: oq99Pz97joHQem4BNjXECev1E4B6L6sRzwANW
@@ -2204,10 +2341,12 @@ paths:
                         security_id: eW4jmnjd6AtjxXVrjmj6SX1dNEdZp3Cy8RnRQ
                         subtype: dividend
                         type: cash
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - account_id: rz99ex9ZQotvnjXdgQLEsR81e3ArPgulVWjGj
                         amount: -1289.01
-                        cancel_transaction_id: null
+                        cancel_transaction_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         date: 2020-05-28
                         fees: 7.99
                         investment_transaction_id: pK99jB9e7mtwjA435GpVuMvmWQKVbVFLWme57
@@ -2218,10 +2357,12 @@ paths:
                         security_id: JDdP7XPMklt5vwPmDN45t3KAoWAPmjtpaW7DP
                         subtype: sell
                         type: sell
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - account_id: rz99ex9ZQotvnjXdgQLEsR81e3ArPgulVWjGj
                         amount: 7.7
-                        cancel_transaction_id: null
+                        cancel_transaction_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         date: 2020-05-27
                         fees: 7.99
                         investment_transaction_id: LKoo1ko93wtreBwM7yQnuQ3P5DNKbKSPRzBNv
@@ -2232,7 +2373,8 @@ paths:
                         security_id: NDVQrXQoqzt5v3bAe8qRt4A7mK7wvZCLEBBJk
                         subtype: buy
                         type: buy
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                     item:
                       available_products:
                         - assets
@@ -2242,8 +2384,10 @@ paths:
                       billed_products:
                         - auth
                         - investments
-                      consent_expiration_time: null
-                      error: null
+                      consent_expiration_time:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      error:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       institution_id: ins_12
                       item_id: 8Mqq5rqQ7Pcxq9MGDv3JULZ6yzZDLMCwoxGDq
                       update_type: background
@@ -2251,50 +2395,68 @@ paths:
                     request_id: iv4q3ZlytOOthkv
                     securities:
                       - close_price: 27
-                        close_price_as_of: null
+                        close_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         cusip: "577130834"
-                        institution_id: null
-                        institution_security_id: null
+                        institution_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        institution_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         is_cash_equivalent: false
                         isin: US5771308344
                         iso_currency_code: USD
                         name: Matthews Pacific Tiger Fund Insti Class
-                        proxy_security_id: null
+                        proxy_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         security_id: JDdP7XPMklt5vwPmDN45t3KAoWAPmjtpaW7DP
-                        sedol: null
+                        sedol:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         ticker_symbol: MIPTX
                         type: mutual fund
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - close_price: 10.42
-                        close_price_as_of: null
+                        close_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         cusip: "258620103"
-                        institution_id: null
-                        institution_security_id: null
+                        institution_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        institution_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         is_cash_equivalent: false
                         isin: US2586201038
                         iso_currency_code: USD
                         name: DoubleLine Total Return Bond Fund
-                        proxy_security_id: null
+                        proxy_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         security_id: NDVQrXQoqzt5v3bAe8qRt4A7mK7wvZCLEBBJk
-                        sedol: null
+                        sedol:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         ticker_symbol: DBLTX
                         type: mutual fund
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       - close_price: 34.73
-                        close_price_as_of: null
+                        close_price_as_of:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         cusip: 84470P109
-                        institution_id: null
-                        institution_security_id: null
+                        institution_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        institution_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         is_cash_equivalent: false
                         isin: US84470P1093
                         iso_currency_code: USD
                         name: Southside Bancshares Inc.
-                        proxy_security_id: null
+                        proxy_security_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         security_id: eW4jmnjd6AtjxXVrjmj6SX1dNEdZp3Cy8RnRQ
-                        sedol: null
+                        sedol:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         ticker_symbol: SBSI
                         type: equity
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                     total_investment_transactions: 3
               schema:
                 $ref: "#/components/schemas/InvestmentsTransactionsGetResponse"
@@ -2360,8 +2522,10 @@ paths:
                       billed_products:
                         - identity
                         - transactions
-                      consent_expiration_time: null
-                      error: null
+                      consent_expiration_time:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      error:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       institution_id: ins_109508
                       item_id: Ed6bjNrDLJfGvZWwnkQlfxwoNz54B5C97ejBr
                       update_type: background
@@ -2549,8 +2713,10 @@ paths:
                       billed_products:
                         - assets
                         - auth
-                      consent_expiration_time: null
-                      error: null
+                      consent_expiration_time:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      error:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       institution_id: ins_117650
                       item_id: DWVAAPWq4RHGlEaNyGKRTAnPLaEmo8Cvq7na6
                       update_type: background
@@ -2594,8 +2760,10 @@ paths:
                           available: 100
                           current: 110
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -2603,11 +2771,13 @@ paths:
                         type: depository
                       - account_id: dVzbVMLjrxTnLjX4G66XUp5GLklm4oiZy88yK
                         balances:
-                          available: null
+                          available:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                           current: 410
                           iso_currency_code: USD
                           limit: 2000
-                          unofficial_currency_code: null
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "3333"
                         name: Plaid Credit Card
                         official_name: Plaid Diamond 12.5% APR Interest Credit Card
@@ -2615,26 +2785,34 @@ paths:
                         type: credit
                       - account_id: Pp1Vpkl9w8sajvK6oEEKtr7vZxBnGpf7LxxLE
                         balances:
-                          available: null
+                          available:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                           current: 65262
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "7777"
                         name: Plaid Student Loan
-                        official_name: null
+                        official_name:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         subtype: student
                         type: loan
                       - account_id: BxBXxLj1m4HMXBm9WZJyUg9XLd4rKEhw8Pb1J
                         balances:
-                          available: null
+                          available:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                           current: 56302.06
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "8888"
                         name: Plaid Mortgage
-                        official_name: null
+                        official_name:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         subtype: mortgage
                         type: loan
                     item:
@@ -2647,8 +2825,10 @@ paths:
                         - identity
                         - liabilities
                         - transactions
-                      consent_expiration_time: null
-                      error: null
+                      consent_expiration_time:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      error:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       institution_id: ins_3
                       item_id: eVBnVMp7zdTJLkRNr33Rs6zr7KNJqBFL9DrE6
                       update_type: background
@@ -2825,7 +3005,8 @@ paths:
                       initial_products:
                         - auth
                       language: en
-                      redirect_uri: null
+                      redirect_uri:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       webhook: https://www.example.com/webhook
                     request_id: u0ydFs493XjyTYn
               schema:
@@ -3130,7 +3311,8 @@ paths:
                       balances:
                         available: 100
                         current: 110
-                        limit: null
+                        limit:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       mask: "0000"
                       name: Plaid Checking
                       official_name: Plaid Gold Checking
@@ -3194,7 +3376,8 @@ paths:
                       balances:
                         available: 100
                         current: 110
-                        limit: null
+                        limit:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       mask: "0000"
                       name: Plaid Checking
                       official_name: Plaid Gold Checking
@@ -3232,8 +3415,10 @@ paths:
                         available: 100
                         current: 110
                         iso_currency_code: USD
-                        limit: null
-                        unofficial_currency_code: null
+                        limit:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                       mask: "0000"
                       name: Plaid Checking
                       official_name: Plaid Gold Standard 0% Interest Checking
@@ -3573,8 +3758,10 @@ paths:
                           available: 110
                           current: 110
                           iso_currency_code: USD
-                          limit: null
-                          unofficial_currency_code: null
+                          limit:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          unofficial_currency_code:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         mask: "0000"
                         name: Plaid Checking
                         official_name: Plaid Gold Standard 0% Interest Checking
@@ -3590,8 +3777,10 @@ paths:
                         - auth
                         - liabilities
                         - transactions
-                      consent_expiration_time: null
-                      error: null
+                      consent_expiration_time:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
+                      error:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       institution_id: ins_3
                       item_id: eVBnVMp7zdTJLkRNr33Rs6zr7KNJqBFL9DrE6
                       update_type: background
@@ -3600,16 +3789,19 @@ paths:
                     total_transactions: 1
                     transactions:
                       - account_id: BxBXxLj1m4HMXBm9WZZmCWVbPjX16EHwv99vp
-                        account_owner: null
+                        account_owner:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         amount: 2307.21
                         authorized_date: 2017-01-27
-                        authorized_datetime: null
+                        authorized_datetime:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         category:
                           - Shops
                           - Computers and Electronics
                         category_id: "19013000"
                         date: 2017-01-29
-                        datetime: null
+                        datetime:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         iso_currency_code: USD
                         location:
                           address: 300 Post St
@@ -3624,20 +3816,31 @@ paths:
                         name: Apple Store
                         payment_channel: in store
                         payment_meta:
-                          ? by_order_of
-                          ? payee
-                          ? payer
-                          ? payment_method
-                          ? payment_processor
-                          ? ppd_id
-                          ? reason
-                          ? reference_number
+                          by_order_of:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          payee:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          payer:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          payment_method:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          payment_processor:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          ppd_id:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          reason:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
+                          reference_number:
+                            $ref: "#/components/schemas/AccountSubtype/enum/65"
                         pending: false
-                        pending_transaction_id: null
-                        transaction_code: null
+                        pending_transaction_id:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
+                        transaction_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
                         transaction_id: lPNjeW1nR6CDn5okmGQ6hEpMo4lLNoSrzqDje
                         transaction_type: place
-                        unofficial_currency_code: null
+                        unofficial_currency_code:
+                          $ref: "#/components/schemas/AccountSubtype/enum/65"
               schema:
                 $ref: "#/components/schemas/TransactionsGetResponse"
           description: OK
@@ -3714,7 +3917,8 @@ paths:
                       alg: ES256
                       created_at: 1560466150
                       crv: P-256
-                      expired_at: null
+                      expired_at:
+                        $ref: "#/components/schemas/AccountSubtype/enum/65"
                       kid: bfbd5111-8e33-4643-8ced-b2e642a72f3c
                       kty: EC
                       use: sig
@@ -4703,7 +4907,8 @@ components:
         example-1:
           asset_report_id: 47dfc92b-bba3-4583-809e-ce871b321f05
           error:
-            display_message: null
+            display_message:
+              $ref: "#/components/schemas/AccountSubtype/enum/65"
             error_code: PRODUCT_NOT_ENABLED
             error_message: "the 'assets' product is not enabled for the following access tokens: access-sandbox-fb88b20c-7b74-4197-8d01-0ab122dad0bc. please ensure that 'assets' is included in the 'product' array when initializing Link and create the Item(s) again."
             error_type: ASSET_REPORT_ERROR
@@ -5621,7 +5826,8 @@ components:
       type: object
       x-examples:
         example-1:
-          error: null
+          error:
+            $ref: "#/components/schemas/AccountSubtype/enum/65"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_transactions: 3
           webhook_code: DEFAULT_UPDATE
@@ -6238,7 +6444,8 @@ components:
       type: object
       x-examples:
         example-1:
-          error: null
+          error:
+            $ref: "#/components/schemas/AccountSubtype/enum/65"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_transactions: 231
           webhook_code: HISTORICAL_UPDATE
@@ -6320,7 +6527,8 @@ components:
       type: object
       x-examples:
         example-1:
-          error: null
+          error:
+            $ref: "#/components/schemas/AccountSubtype/enum/65"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_holdings: 19
           updated_holdings: 0
@@ -6672,7 +6880,8 @@ components:
       type: object
       x-examples:
         example-1:
-          error: null
+          error:
+            $ref: "#/components/schemas/AccountSubtype/enum/65"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_transactions: 19
           webhook_code: INITIAL_UPDATE
@@ -7368,7 +7577,8 @@ components:
       x-examples:
         example-1:
           canceled_investments_transactions: 0
-          error: null
+          error:
+            $ref: "#/components/schemas/AccountSubtype/enum/65"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_investments_transactions: 16
           webhook_code: DEFAULT_UPDATE
@@ -7599,7 +7809,8 @@ components:
       x-examples:
         example-1:
           error:
-            display_message: null
+            display_message:
+              $ref: "#/components/schemas/AccountSubtype/enum/65"
             error_code: ITEM_LOGIN_REQUIRED
             error_message: the login details of this item have changed (credentials, MFA, or required user action) and a user login is required to update this information. use Link's update mode to restore the item to a good state
             error_type: ITEM_ERROR
@@ -7715,7 +7926,8 @@ components:
       type: object
       x-examples:
         example-1:
-          error: null
+          error:
+            $ref: "#/components/schemas/AccountSubtype/enum/65"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           webhook_code: PRODUCT_READY
           webhook_type: INCOME
@@ -9567,7 +9779,8 @@ components:
         example-1:
           adjusted_reference: Account Funding 99
           adjusted_start_date: 2017-09-15
-          error: null
+          error:
+            $ref: "#/components/schemas/AccountSubtype/enum/65"
           new_payment_status: PAYMENT_STATUS_INITIATED
           old_payment_status: PAYMENT_STATUS_PROCESSING
           original_reference: Account Funding 99744
@@ -9980,7 +10193,8 @@ components:
       type: object
       x-examples:
         example-1:
-          display_message: null
+          display_message:
+            $ref: "#/components/schemas/AccountSubtype/enum/65"
           error_code: RECAPTCHA_REQUIRED
           error_message: This request requires additional verification. Please resubmit the request after completing the challenge
           error_type: RECAPTCHA_ERROR
@@ -10955,7 +11169,7 @@ components:
         - purchase
         - standing order
         - transfer
-        - null
+        - $ref: "#/components/schemas/AccountSubtype/enum/65"
       nullable: true
       title: transaction_code
       type: string
@@ -11138,7 +11352,8 @@ components:
       type: object
       x-examples:
         example-1:
-          error: null
+          error:
+            $ref: "#/components/schemas/AccountSubtype/enum/65"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           removed_transactions:
             - yBVBEwrPyJs8GvR77N7QTxnGg6wG74H7dEDN6
@@ -11409,7 +11624,8 @@ components:
       x-examples:
         example-1:
           cause:
-            display_message: null
+            display_message:
+              $ref: "#/components/schemas/AccountSubtype/enum/65"
             error_code: PRODUCTS_NOT_SUPPORTED
             error_message: "The following products are not supported by this institution: Identity"
             error_type: ITEM_ERROR
@@ -11443,7 +11659,8 @@ components:
       type: object
       x-examples:
         example-1:
-          error: null
+          error:
+            $ref: "#/components/schemas/AccountSubtype/enum/65"
           item_id: wz666MBjYWTp2PDzzggYhM6oWWmBb
           new_webhook_url: https://plaid.com/example/webhook
           webhook_code: WEBHOOK_UPDATE_ACKNOWLEDGED

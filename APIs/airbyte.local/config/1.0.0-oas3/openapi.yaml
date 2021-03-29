@@ -544,6 +544,29 @@ paths:
       summary: Health Check
       tags:
         - health
+  /v1/jobs/cancel:
+    post:
+      operationId: cancelJob
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JobIdRequestBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobInfoRead"
+          description: Successful operation
+        "404":
+          description: Job not found
+        "422":
+          $ref: "#/components/responses/InvalidInput"
+      summary: Cancels a job
+      tags:
+        - jobs
   /v1/jobs/get:
     post:
       operationId: getJobInfo
@@ -1278,7 +1301,6 @@ components:
           type: array
         destinationSyncMode:
           $ref: "#/components/schemas/DestinationSyncMode"
-          default: append
         primaryKey:
           description: Paths to the fields that will be used as primary key. This field is REQUIRED if `destination_sync_mode` is `*_dedup`. Otherwise it is ignored.
           items:
@@ -1290,7 +1312,9 @@ components:
           type: boolean
         syncMode:
           $ref: "#/components/schemas/SyncMode"
-          default: full_refresh
+      required:
+        - syncMode
+        - destinationSyncMode
       type: object
     AttemptInfoRead:
       properties:
@@ -1339,7 +1363,7 @@ components:
     CheckConnectionRead:
       properties:
         jobInfo:
-          $ref: "#/components/schemas/JobInfoRead"
+          $ref: "#/components/schemas/SynchronousJobRead"
         message:
           type: string
         status:
@@ -1570,9 +1594,11 @@ components:
           $ref: "#/components/schemas/DestinationDefinitionId"
         documentationUrl:
           type: string
+        jobInfo:
+          $ref: "#/components/schemas/SynchronousJobRead"
       required:
         - destinationDefinitionId
-        - connectionSpecification
+        - jobInfo
       type: object
     DestinationDefinitionUpdate:
       properties:
@@ -1898,11 +1924,13 @@ components:
           $ref: "#/components/schemas/SourceDefinitionSpecification"
         documentationUrl:
           type: string
+        jobInfo:
+          $ref: "#/components/schemas/SynchronousJobRead"
         sourceDefinitionId:
           $ref: "#/components/schemas/SourceDefinitionId"
       required:
         - sourceDefinitionId
-        - connectionSpecification
+        - jobInfo
       type: object
     SourceDefinitionUpdate:
       description: Update the SourceDefinition. Currently, the only allowed attribute to update is the default docker image version.
@@ -1921,7 +1949,7 @@ components:
         catalog:
           $ref: "#/components/schemas/AirbyteCatalog"
         jobInfo:
-          $ref: "#/components/schemas/JobInfoRead"
+          $ref: "#/components/schemas/SynchronousJobRead"
       required:
         - jobInfo
       type: object
@@ -2005,6 +2033,33 @@ components:
         - full_refresh
         - incremental
       type: string
+    SynchronousJobRead:
+      properties:
+        configId:
+          description: only present if a config id was provided.
+          type: string
+        configType:
+          $ref: "#/components/schemas/JobConfigType"
+        createdAt:
+          format: int64
+          type: integer
+        endedAt:
+          format: int64
+          type: integer
+        id:
+          format: uuid
+          type: string
+        logs:
+          $ref: "#/components/schemas/LogRead"
+        succeeded:
+          type: boolean
+      required:
+        - id
+        - configType
+        - createdAt
+        - endedAt
+        - succeeded
+      type: object
     WbConnectionRead:
       properties:
         connectionId:
@@ -2015,10 +2070,12 @@ components:
           $ref: "#/components/schemas/DestinationId"
         isSyncing:
           type: boolean
-        lastSync:
-          description: epoch time of last sync. null if no sync has taken place.
+        latestSyncJobCreatedAt:
+          description: epoch time of the latest sync job. null if no sync job has taken place.
           format: int64
           type: integer
+        latestSyncJobStatus:
+          $ref: "#/components/schemas/JobStatus"
         name:
           type: string
         prefix:

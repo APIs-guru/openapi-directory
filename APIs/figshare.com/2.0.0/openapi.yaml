@@ -1257,6 +1257,59 @@ paths:
       summary: Private Article Reserve Handle
       tags:
         - articles
+  "/account/articles/{article_id}/versions/{version_id}/update_thumb":
+    put:
+      description: For a given public article version update the article thumb by choosing one of the associated files
+      operationId: article_version_update_thumb
+      parameters:
+        - description: Article unique identifier
+          in: path
+          name: article_id
+          required: true
+          schema:
+            format: int64
+            minimum: 1
+            type: integer
+        - description: Article version identifier
+          in: path
+          name: version_id
+          required: true
+          schema:
+            format: int64
+            minimum: 1
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileId"
+        description: File ID
+        required: true
+      responses:
+        "205":
+          description: Reset Content
+          headers:
+            Location:
+              description: Location for article version details
+              schema:
+                format: link
+                type: string
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+      security:
+        - OAuth2:
+            - all
+      summary: Article Version Update Thumb
+      tags:
+        - articles
   /account/authors/search:
     post:
       description: Search for authors
@@ -5637,7 +5690,8 @@ components:
       properties:
         group_resource_id:
           description: Group resource id
-          example: null
+          example:
+            $ref: "#/components/schemas/Institution/properties/domain/example"
           nullable: true
           type: string
       type: object
@@ -6804,6 +6858,15 @@ components:
         size:
           description: File size in bytes
           example: 70
+          format: int64
+          type: integer
+      type: object
+      x-tag: articles
+    FileId:
+      properties:
+        file_id:
+          description: File ID
+          example: 123
           format: int64
           type: integer
       type: object

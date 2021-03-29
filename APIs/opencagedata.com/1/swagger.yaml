@@ -122,6 +122,10 @@ paths:
           description: Invalid request
           schema:
             $ref: "#/definitions/Response"
+        "401":
+          description: Unable to authenticate
+          schema:
+            $ref: "#/definitions/Response"
         "402":
           description: Valid request but quota exceeded
           schema:
@@ -138,8 +142,16 @@ paths:
           description: Method not allowed
           schema:
             $ref: "#/definitions/Response"
+        "408":
+          description: Timeout; you can try again
+          schema:
+            $ref: "#/definitions/Response"
         "410":
           description: Request too long
+          schema:
+            $ref: "#/definitions/Response"
+        "426":
+          description: Upgrade required
           schema:
             $ref: "#/definitions/Response"
         "429":

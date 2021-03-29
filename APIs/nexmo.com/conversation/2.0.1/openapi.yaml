@@ -883,6 +883,33 @@ components:
       properties:
         from:
           oneOf:
+            - $ref: "#/components/schemas/channel/properties/to/oneOf/0"
+            - description: Connect to a Phone (PSTN) number
+              properties:
+                number:
+                  $ref: "#/components/schemas/channel/properties/to/oneOf/1/properties/number"
+                type:
+                  description: The type of connection. Must be `phone`
+                  example: phone
+                  type: string
+              required:
+                - number
+                - type
+              type: object
+            - $ref: "#/components/schemas/channel/properties/to/oneOf/2"
+            - $ref: "#/components/schemas/channel/properties/to/oneOf/3"
+            - $ref: "#/components/schemas/channel/properties/to/oneOf/4"
+        leg_id:
+          $ref: "#/components/schemas/leg_id"
+        leg_ids:
+          description: Leg ids associated with this Channel. The first item in the array represents the main active Leg. The second item, if exists, represents a screen-share Leg.
+          items:
+            properties:
+              leg_id:
+                $ref: "#/components/schemas/leg_id"
+          type: array
+        to:
+          oneOf:
             - description: Connect to an App User
               properties:
                 type:
@@ -899,6 +926,10 @@ components:
               type: object
             - description: Connect to a Phone (PSTN) number
               properties:
+                dtmfAnswer:
+                  description: Provide [DTMF digits](https://developer.nexmo.com/voice/voice-api/guides/dtmf) to send when the call is answered
+                  example: p*123#
+                  type: string
                 number:
                   description: The phone number to connect to
                   example: "14155550100"
@@ -971,42 +1002,6 @@ components:
                 - type
                 - extension
               type: object
-        leg_id:
-          $ref: "#/components/schemas/leg_id"
-        leg_ids:
-          description: Leg ids associated with this Channel. The first item in the array represents the main active Leg. The second item, if exists, represents a screen-share Leg.
-          items:
-            properties:
-              leg_id:
-                $ref: "#/components/schemas/leg_id"
-          type: array
-        to:
-          oneOf:
-            - $ref: "#/components/schemas/channel/properties/from/oneOf/0"
-            - description: Connect to a Phone (PSTN) number
-              properties:
-                dtmfAnswer:
-                  description: Provide [DTMF digits](https://developer.nexmo.com/voice/voice-api/guides/dtmf) to send when the call is answered
-                  example: p*123#
-                  type: string
-                number:
-                  description: The phone number to connect to
-                  example: "14155550100"
-                  maxLength: 15
-                  minLength: 7
-                  pattern: \d{7,15}
-                  type: string
-                type:
-                  description: The type of connection. Must be `phone`
-                  example: phone
-                  type: string
-              required:
-                - number
-                - type
-              type: object
-            - $ref: "#/components/schemas/channel/properties/from/oneOf/2"
-            - $ref: "#/components/schemas/channel/properties/from/oneOf/3"
-            - $ref: "#/components/schemas/channel/properties/from/oneOf/4"
         type:
           $ref: "#/components/schemas/channel_type"
       type: object

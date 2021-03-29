@@ -843,7 +843,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -943,7 +944,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -955,7 +957,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: Cannot create more than 100 API Keys
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -994,7 +997,8 @@ paths:
             application/json:
               examples:
                 response:
-                  ? value
+                  value:
+                    $ref: "#/components/schemas/credentials/example/address2"
               schema:
                 nullable: true
           description: ""
@@ -1005,7 +1009,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: unable to find API Key
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -1051,7 +1056,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -1063,7 +1069,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: unable to find API Key
               schema:
                 type: object
@@ -1132,7 +1139,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -1195,7 +1203,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: expected JSON request body with 'name' property
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -1213,7 +1222,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: unable to find API Key to update
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -1254,13 +1264,15 @@ paths:
                     - description: Our monthly newsletter.
                       id: 100
                       is_default: true
-                      last_email_sent_at: null
+                      last_email_sent_at:
+                        $ref: "#/components/schemas/credentials/example/address2"
                       name: Newsletters
                       unsubscribes: 400
                     - description: Emails triggered by user-defined rules.
                       id: 101
                       is_default: false
-                      last_email_sent_at: null
+                      last_email_sent_at:
+                        $ref: "#/components/schemas/credentials/example/address2"
                       name: Alerts
                       unsubscribes: 1
               schema:
@@ -1407,7 +1419,8 @@ paths:
                     description: Our monthly newsletter.
                     id: 100
                     is_default: true
-                    last_email_sent_at: null
+                    last_email_sent_at:
+                      $ref: "#/components/schemas/credentials/example/address2"
                     name: Newsletters
                     unsubscribes: 400
               schema:
@@ -2216,9 +2229,11 @@ paths:
                         message: suppression_group_id does not exist
                       - field: unsubscribes
                         message: Either suppression_group_id or custom_unsubscribe_url may be set/used, but not both. Please remove one before setting the other.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: The JSON you have submitted cannot be parsed.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: You've reached your limit of 250 campaigns. Please delete one or more and try again.
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -2291,7 +2306,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 type: object
@@ -2386,7 +2402,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 type: object
@@ -2398,7 +2415,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: not found
               schema:
                 type: object
@@ -2520,7 +2538,8 @@ paths:
                         message: suppression_group_id does not exist
                       - field: unsubscribes
                         message: Either suppression_group_id or custom_unsubscribe_url may be set/used, but not both. Please remove one before setting the other.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: The JSON you have submitted cannot be parsed.
               schema:
                 type: object
@@ -2557,7 +2576,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -2569,7 +2589,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: You may only update a campaign when it is in draft mode.
               schema:
                 type: object
@@ -2581,7 +2602,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: not found
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -2623,13 +2645,17 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: This campaign is already In Progress.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: This campaign is already Sent.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: This campaign is already Paused.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: This campaign is already Canceled.
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -2648,7 +2674,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: not found
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -2693,7 +2720,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: not found
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -2764,9 +2792,11 @@ paths:
                     errors:
                       - field: send_at
                         message: Please choose a future time for sending your campaign.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: The JSON you have submitted cannot be parsed.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: You do not have enough credits to send this campaign. Upgrade your plan to send https://app.sendgrid.com/settings/billing
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -2795,7 +2825,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: not found
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -2878,7 +2909,8 @@ paths:
                         message: An [unsubscribe] tag in both your html and plain content is required to send a campaign.
                       - field: suppression_group_id
                         message: Either a suppression_group_id or custom_unsubscribe_url is required to send a campaign.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: "You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing"
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -2907,7 +2939,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -2919,7 +2952,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: You cannot POST to a campaign that has already sent or scheduled. However you can update a scheduled campaign with a PATCH.
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -2931,7 +2965,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: not found
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -3004,7 +3039,8 @@ paths:
                         message: An [unsubscribe] tag in both your html and plain content is required to send a campaign.
                       - field: suppression_group_id
                         message: Either a suppression_group_id or custom_unsubscribe_url is required to send a campaign.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: "You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing"
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -3029,7 +3065,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -3041,7 +3078,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: You may only send a campaign when it is in draft mode.
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -3053,7 +3091,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: not found
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -3119,9 +3158,11 @@ paths:
                     errors:
                       - field: send_at
                         message: Please choose a future time for sending your campaign.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: The JSON you have submitted cannot be parsed.
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: "You do not have enough credits to send this campaign. Upgrade your plan to send more: https://app.sendgrid.com/settings/billing"
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -3144,7 +3185,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: not found
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -3772,7 +3814,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -3831,7 +3874,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: Returned if request body is invalid JSON
                       - field: type
                         message: Returned if custom field type is invalid or not provided
@@ -3892,7 +3936,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -3953,7 +3998,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4017,7 +4063,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: list id was invalid
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4029,7 +4076,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4117,7 +4165,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: Returned if request body is invalid JSON
                       - field: name
                         message: Returned if list name is not a string
@@ -4138,7 +4187,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4199,7 +4249,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4265,7 +4316,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4277,7 +4329,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: List ID does not exist
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4421,11 +4474,13 @@ paths:
                           - id: 6234
                             name: age
                             type: number
-                            value: null
+                            value:
+                              $ref: "#/components/schemas/credentials/example/address2"
                           - id: 6233
                             name: country
                             type: text
-                            value: null
+                            value:
+                              $ref: "#/components/schemas/credentials/example/address2"
                           - id: 6235
                             name: fname
                             type: text
@@ -4437,7 +4492,8 @@ paths:
                           - id: 6240
                             name: lname
                             type: text
-                            value: null
+                            value:
+                              $ref: "#/components/schemas/credentials/example/address2"
                         email: example@example.com
                         first_name: Example
                         id: ZGVWfyZWsuYmFpbmVzQHNlbmRmCmLkLmNv==
@@ -4539,9 +4595,11 @@ paths:
                         message: list_id is invalid
                       - field: recipient_id
                         message: no valid recipients were provided
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: no recipients were added
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: request body is invalid JSON
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4560,7 +4618,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4639,7 +4698,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4721,7 +4781,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4793,7 +4854,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4862,7 +4924,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4924,7 +4987,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: Request body is not valid json
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -4936,7 +5000,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5018,7 +5083,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: Request body is not valid json
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5030,7 +5096,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5071,7 +5138,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5109,7 +5177,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5164,12 +5233,16 @@ paths:
                             type: text
                             value: Fluffy
                         email: jones@example.com
-                        first_name: null
+                        first_name:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         id: YUBh
-                        last_clicked: null
-                        last_emailed: null
+                        last_clicked:
+                          $ref: "#/components/schemas/credentials/example/address2"
+                        last_emailed:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         last_name: Jones
-                        last_opened: null
+                        last_opened:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         updated_at: 1422313790
               schema:
                 properties:
@@ -5201,7 +5274,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5237,7 +5311,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: recipient not found
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5249,7 +5324,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5261,7 +5337,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: recipient_id is not valid
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5300,7 +5377,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5362,7 +5440,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: recipient ID is invalid
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5374,7 +5453,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5386,7 +5466,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: recipient id not found
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5458,7 +5539,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5521,7 +5603,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5662,7 +5745,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5726,7 +5810,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5803,7 +5888,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5931,7 +6017,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -5977,12 +6064,16 @@ paths:
                             type: text
                             value: Indiana
                         email: jones@example.com
-                        first_name: null
+                        first_name:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         id: YUBh
-                        last_clicked: null
-                        last_emailed: null
+                        last_clicked:
+                          $ref: "#/components/schemas/credentials/example/address2"
+                        last_emailed:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         last_name: Jones
-                        last_opened: null
+                        last_opened:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         updated_at: 1422313790
               schema:
                 properties:
@@ -6013,7 +6104,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -6926,7 +7018,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: one or more subusers do not belong to this user
               schema:
                 $ref: "#/components/schemas/errors"
@@ -7219,7 +7312,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: ip pool not found
               schema:
                 properties:
@@ -7311,7 +7405,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: resource not found
               schema:
                 properties:
@@ -7501,7 +7596,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: resource not found
               schema:
                 properties:
@@ -7552,7 +7648,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: resource not found
               schema:
                 properties:
@@ -7600,7 +7697,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: resource not found
               schema:
                 properties:
@@ -7651,7 +7749,8 @@ paths:
                     pools:
                       - test1
                     rdns: o1.em.example.com
-                    start_date: null
+                    start_date:
+                      $ref: "#/components/schemas/credentials/example/address2"
                     subusers:
                       - subuser1
                       - subuser2
@@ -7741,7 +7840,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -7783,7 +7883,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: invalid batch id
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -7795,7 +7896,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -8417,7 +8519,8 @@ paths:
                 response:
                   value:
                     enabled: false
-                    hard_bounces: null
+                    hard_bounces:
+                      $ref: "#/components/schemas/credentials/example/address2"
                     soft_bounces: 1234
               schema:
                 $ref: "#/components/schemas/mail_settings_bounce_purge"
@@ -8452,8 +8555,10 @@ paths:
                 response:
                   value:
                     enabled: false
-                    hard_bounces: null
-                    soft_bounces: null
+                    hard_bounces:
+                      $ref: "#/components/schemas/credentials/example/address2"
+                    soft_bounces:
+                      $ref: "#/components/schemas/credentials/example/address2"
               schema:
                 $ref: "#/components/schemas/mail_settings_bounce_purge"
           description: ""
@@ -8548,7 +8653,8 @@ paths:
               examples:
                 response:
                   value:
-                    email: null
+                    email:
+                      $ref: "#/components/schemas/credentials/example/address2"
                     enabled: false
               schema:
                 $ref: "#/components/schemas/mail_settings_forward_bounce"
@@ -9620,7 +9726,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 properties:
@@ -10745,7 +10852,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -10837,7 +10945,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -11421,7 +11530,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -11487,7 +11597,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -11566,7 +11677,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -11597,7 +11709,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -11609,7 +11722,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: No monitor settings for this user
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -11639,7 +11753,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -11651,7 +11766,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: No monitor settings for this user
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -11692,7 +11808,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: User already has a monitor
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -11704,7 +11821,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -11750,7 +11868,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -12122,7 +12241,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -12201,7 +12321,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -12254,7 +12375,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -14731,7 +14853,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -14772,7 +14895,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -14832,7 +14956,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: max limit reached
                       - field: batch_id
                         message: invalid batch id
@@ -14853,7 +14978,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 type: object
@@ -14887,7 +15013,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -14899,7 +15026,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: batch id not found
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -14940,7 +15068,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -15005,7 +15134,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: authorization required
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -15017,7 +15147,8 @@ paths:
                 response:
                   value:
                     errors:
-                      - field: null
+                      - field:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         message: batch id not found
               schema:
                 $ref: "#/components/schemas/global_ErrorResponse"
@@ -16587,16 +16718,19 @@ paths:
                     valid: true
                     validation_results:
                       dkim1:
-                        reason: null
+                        reason:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         valid: true
                       dkim2:
-                        reason: null
+                        reason:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         valid: true
                       mail_cname:
                         reason: Expected your MX record to be "mx.sendgrid.net" but found "example.com".
                         valid: false
                       spf:
-                        reason: null
+                        reason:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         valid: true
               schema:
                 properties:
@@ -16978,7 +17112,8 @@ paths:
                     valid: true
                     validation_results:
                       a_record:
-                        reason: null
+                        reason:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         valid: true
               schema:
                 properties:
@@ -17564,7 +17699,8 @@ paths:
                         reason: Expected CNAME to match "sendgrid.net." but found "example.com.".
                         valid: false
                       owner_cname:
-                        reason: null
+                        reason:
+                          $ref: "#/components/schemas/credentials/example/address2"
                         valid: true
               schema:
                 properties:
@@ -18922,7 +19058,8 @@ components:
     mail_settings_bounce_purge:
       example:
         enabled: false
-        hard_bounces: null
+        hard_bounces:
+          $ref: "#/components/schemas/credentials/example/address2"
         soft_bounces: 1234
       properties:
         enabled:
@@ -18957,7 +19094,8 @@ components:
       type: object
     mail_settings_forward_bounce:
       example:
-        email: null
+        email:
+          $ref: "#/components/schemas/credentials/example/address2"
         enabled: false
       properties:
         email:

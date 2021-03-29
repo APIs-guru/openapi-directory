@@ -43,7 +43,6 @@ paths:
 
         ***Note*** - The credit balance is expressed as a value with a single decimal place.
       operationId: getCreditBalance
-      parameters: []
       produces:
         - application/json
       responses:
@@ -56,7 +55,22 @@ paths:
               timeStamp: "20170120152253514"
               version: "1.0"
           schema:
-            $ref: "#/definitions/creditBalanceResponse"
+            properties:
+              creditBalance:
+                description: The current remaining credit balance for the account. Contains a single decimal place
+                format: double
+                type: number
+              statusCode:
+                description: The http status code returned - reflected in the body for convenience
+                type: integer
+              timeStamp:
+                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                type: string
+              version:
+                description: The current version of the API of the endpoint that was called
+                type: string
+            title: creditBalanceResponse
+            type: object
         "401":
           description: Unauthorized
           examples:
@@ -128,14 +142,55 @@ paths:
           name: creditTransferDetails
           required: true
           schema:
-            $ref: "#/definitions/creditTransferDetails"
+            example:
+              receivingAccountNumber: 10345
+              sendingAccountNumber: 7564
+              transferQuantity: 100
+            properties:
+              receivingAccountNumber:
+                description: The WinSMS account number of the account to which credits will be added.
+                example: 10345
+                type: integer
+              sendingAccountNumber:
+                description: The WinSMS account number of the account from which credits will be deducted.
+                example: 7564
+                type: integer
+              transferQuantity:
+                description: The number of credits to transfer from the sending account to the receiving account.
+                example: 100
+                type: integer
+            required:
+              - sendingAccountNumber
+              - receivingAccountNumber
+              - transferQuantity
+            title: creditTransferDetails
+            type: object
       produces:
         - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/creditTransferResponse"
+            example:
+              statusCode: 200
+              timeStamp: "20170120152253515"
+              transferSuccessful: true
+              version: "1.0"
+            properties:
+              statusCode:
+                description: The http status code returned - reflected in the body for convenience
+                type: integer
+              timeStamp:
+                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                type: string
+              transferSuccessful:
+                description: A boolean value indictating whether the credits were successfully transfered from the sending account into the receiving account.
+                type: boolean
+              version:
+                description: The current version of the API of the endpoint that was called
+                type: string
+            title: creditTransferResponse
+            type: object
         "400":
           description: Bad Request
           examples:
@@ -253,7 +308,77 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/shortcodeMessageResponse"
+            example:
+              resultsLimit: 100
+              resultsOffset: 3400
+              resultsTotalAvailable: 3402
+              shortcodeMessages:
+                - incomingApiMessageId: 58324
+                  messageText: Win Big
+                  mobileNumber: "27444444444"
+                  receiveTime: "201707252208"
+                - incomingApiMessageId: 58336
+                  messageText: Savings for me
+                  mobileNumber: "27555555555"
+                  receiveTime: "201707270952"
+              statusCode: 200
+              timeStamp: "20170117054658978"
+              version: "1.0"
+            properties:
+              resultsLimit:
+                description: >
+                  The number of items returned in the results. This is the value specified in the ***limit*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 100.
+                type: integer
+              resultsOffset:
+                description: >
+                  The number of items skipped before the results were returned. This is the value specified in the ***offset*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 0.
+                type: integer
+              resultsTotalAvailable:
+                description: >
+                  The total number of results available for retrieval. The ***offset*** and ***limit*** properties specify which of the total available results have been returned.
+                type: integer
+              shortcodeMessages:
+                description: >
+                  An array of ***shortcodeMessage*** objects containing properties of each incoming shortcode message received by WinSMS.
+                items:
+                  example:
+                    incomingApiMessageId: 58324
+                    messageText: Win Big
+                    mobileNumber: "27444444444"
+                    receiveTime: "201707252208"
+                  properties:
+                    incomingApiMessageId:
+                      description: The unique API message id assigned to this incoming message.
+                      example: 58324
+                      type: number
+                    messageText:
+                      description: The text of the incoming SMS message.
+                      example: Hello, I'm responding to your advert.
+                      type: string
+                    mobileNumber:
+                      description: The mobile number that sent the SMS message, displayed using the international E164 (without the plus) format
+                      example: "27444444444"
+                      type: string
+                    receiveTime:
+                      description: The date and time the message was received by WinSMS, in the format YYYYMMDDHHmm.
+                      example: "201707270952"
+                      type: string
+                  title: shortcodeMessage
+                  type: object
+                maxItems: 1000
+                minItems: 1
+                type: array
+              statusCode:
+                description: The http status code returned - reflected in the body for convenience
+                type: integer
+              timeStamp:
+                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                type: string
+              version:
+                description: The current version of the API of the endpoint that was called
+                type: string
+            title: shortcodeMessageResponse
+            type: object
         "401":
           description: Unauthorized
           examples:
@@ -340,7 +465,89 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/incomingMessageResponse"
+            example:
+              incomingMessages:
+                - incomingApiMessageId: 58324
+                  messageText: Thank you for the holiday wishes. Stay safe
+                  mobileNumber: "27444444444"
+                  outgoingApiMessageId: 2316
+                  receiveTime: "201707252208"
+                - incomingApiMessageId: 58336
+                  messageText: That is much appreciated. Happy holidays to you too
+                  mobileNumber: "27555555555"
+                  outgoingApiMessageId: 2316
+                  receiveTime: "201707270952"
+              resultsLimit: 100
+              resultsOffset: 3400
+              resultsTotalAvailable: 3402
+              statusCode: 200
+              timeStamp: "20170117054658978"
+              version: "1.0"
+            properties:
+              incomingMessages:
+                description: >
+                  An array of ***incomingMessage*** objects containing properties of each incoming message.
+                items:
+                  example:
+                    incomingApiMessageId: 58324
+                    messageText: Thank you for the holiday wishes. Stay safe
+                    mobileNumber: "27444444444"
+                    outgoingApiMessageId: 2316
+                    receiveTime: "201707252208"
+                  properties:
+                    incomingApiMessageId:
+                      description: >
+                        The unique API message id assigned to this incoming message.
+                      example: 58324
+                      type: number
+                    messageText:
+                      description: >
+                        The text of the incoming SMS message.
+                      example: Hello, I'm responding to your SMS invitation
+                      type: string
+                    mobileNumber:
+                      description: >
+                        The mobile number that sent the SMS message, displayed using the international E164 (without the plus) format
+                      example: "27444444444"
+                      type: string
+                    outgoingApiMessageId:
+                      description: >
+                        The API message id of the most recent message sent to the mobile number that responded.
+                      example: 2316
+                      type: number
+                    receiveTime:
+                      description: >
+                        The date and time the message was received by WinSMS, in the format YYYYMMDDHHmm.
+                      example: "201707270952"
+                      type: string
+                  title: incomingMessage
+                  type: object
+                maxItems: 1000
+                minItems: 1
+                type: array
+              resultsLimit:
+                description: >
+                  The number of items returned in the results. This is the value specified in the ***limit*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 100.
+                type: integer
+              resultsOffset:
+                description: >
+                  The number of items skipped before the results were returned. This is the value specified in the ***offset*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 0.
+                type: integer
+              resultsTotalAvailable:
+                description: >
+                  The total number of results available for retrieval. The ***offset*** and ***limit*** properties specify which of the total available results have been returned.
+                type: integer
+              statusCode:
+                description: The http status code returned - reflected in the body for convenience
+                type: integer
+              timeStamp:
+                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                type: string
+              version:
+                description: The current version of the API of the endpoint that was called
+                type: string
+            title: incomingMessageResponse
+            type: object
         "401":
           description: Unauthorized
           examples:
@@ -398,14 +605,71 @@ paths:
     get:
       description: Get a list of all opt-out SMS messages received by the account, as well as all manually added opt-out numbers.<br>
       operationId: getOptoutMessages
-      parameters: []
       produces:
         - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/optoutMessageResponse"
+            example:
+              incomingOptoutMessages:
+                - incomingApiMessageId: 58324
+                  messageText: STOP
+                  mobileNumber: "27444444444"
+                  receiveTime: "201707252208"
+                - incomingApiMessageId:
+                    $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                  messageText: "* MANUALLY ADDED BY USER *"
+                  mobileNumber: "27555555555"
+                  receiveTime: "201707270952"
+              statusCode: 200
+              timeStamp: "20170117054658978"
+              version: "1.0"
+            properties:
+              incomingOptoutMessages:
+                description: >
+                  An array of ***incomingOptoutMessage*** objects containing properties of each opt-out message received.
+                items:
+                  example:
+                    incomingApiMessageId: 58324
+                    messageText: STOP
+                    mobileNumber: "27444444444"
+                    receiveTime: "201707252208"
+                  properties:
+                    incomingApiMessageId:
+                      description: >
+                        The unique API message id assigned to this incoming opt-out message.
+                      example: 58324
+                      type: number
+                    messageText:
+                      description: >
+                        The text of the opt-out SMS message.
+                      example: STOP
+                      type: string
+                    mobileNumber:
+                      description: >
+                        The mobile number that sent the opt-out SMS message, displayed using the international E164 (without the plus) format
+                      example: "27444444444"
+                      type: string
+                    receiveTime:
+                      description: >
+                        The date and time the message was received by WinSMS, in the format YYYYMMDDHHmm.
+                      example: "201707270952"
+                      type: string
+                  title: incomingOptoutMessage
+                  type: object
+                type: array
+              statusCode:
+                description: The http status code returned - reflected in the body for convenience
+                type: integer
+              timeStamp:
+                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                type: string
+              version:
+                description: The current version of the API of the endpoint that was called
+                type: string
+            title: optoutMessageResponse
+            type: object
         "401":
           description: Unauthorized
           examples:
@@ -464,14 +728,220 @@ paths:
           name: newMessageDetails
           required: true
           schema:
-            $ref: "#/definitions/newMessageDetails"
+            example:
+              maxSegments: 3
+              message: Happy holidays from all at TelAmeriCorp.
+              recipients:
+                - clientMessageId: clientId-3023
+                  mobileNumber: "27444444444"
+                - mobileNumber: "27555555555"
+                - clientMessageId: clientId-3024
+                  mobileNumber: "276666666666"
+              scheduledTime: "201712251430"
+            properties:
+              maxSegments:
+                default: 1
+                description: >
+                  ***Optional*** - The maximum [GSM Encoded segment count]("https://support.winsms.co.za/rest/GSM") that the message is allowed to utilise.
+
+
+                  This defaults to 1, allowing for a maximum GSM Encoded message length of 160 characters.
+
+
+                  The maximum value is 6, which allows for a GSM Encoded message length of 918 characters.
+
+
+                  If you intend to send a message longer than 160 characters, this value should be specified.
+                example: 3
+                maximum: 6
+                minimum: 1
+                type: integer
+              message:
+                description: The SMS text to be sent.
+                example: Happy holidays from all at TelAmeriCorp.
+                type: string
+              recipients:
+                description: An array of messageRecipientDetails objects.
+                items:
+                  example:
+                    clientMessageId: clientId-3023
+                    mobileNumber: "27444444444"
+                  properties:
+                    clientMessageId:
+                      description: >
+                        ***Optional*** - A parameter to identify an individual SMS message recipient on your system. The clientMessageId parameter is NOT saved by the WinSMS API. 
+
+
+                        The value of the clientMessageId parameter is returned in the ***submittedRecipientResult*** object of the response, allowing you to match a sent message to a returned message result status.
+                      example: clientId-3023
+                      type: string
+                    mobileNumber:
+                      description: A recipient mobile number, using the international E164 (without the plus) format.
+                      example: "27444444444"
+                      type: string
+                  required:
+                    - mobileNumber
+                  title: messageRecipientDetails
+                  type: object
+                maxItems: 1000
+                minItems: 1
+                type: array
+              scheduledTime:
+                description: >
+                  ***Optional*** - The date and time that an SMS should be delivered. If not specified, or is set for a date/time prior to the current date/time, the SMS message will be sent immediately.
+
+
+                  If specified, this value should have the format YYYYMMDDHHmm.
+                example: "201712251430"
+                type: string
+            required:
+              - message
+              - recipients
+            title: newMessageDetails
+            type: object
       produces:
         - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/newMessageResponse"
+            example:
+              recipients:
+                - acceptError: ""
+                  accepted: true
+                  apiMessageId: 2316
+                  clientMessageId: clientId-3023
+                  creditCost: 1
+                  mobileNumber: "27444444444"
+                  newCreditBalance: 188.6
+                  scheduledTime: "201712251430"
+                - acceptError: ""
+                  accepted: true
+                  apiMessageId: 2317
+                  clientMessageId:
+                    $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                  creditCost: 1
+                  mobileNumber: "27555555555"
+                  newCreditBalance: 187.6
+                  scheduledTime: "201712251430"
+                - acceptError: BADDEST
+                  accepted: false
+                  apiMessageId: null
+                  clientMessageId: clientId-3024
+                  creditCost: 0
+                  mobileNumber: "276666666666"
+                  newCreditBalance: 187.6
+                  scheduledTime:
+                    $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+              statusCode: 200
+              timeStamp: "20170117054658978"
+              version: "1.0"
+            properties:
+              recipients:
+                description: An array of messageRecipientResponse objects
+                items:
+                  example:
+                    acceptError: ""
+                    accepted: true
+                    apiMessageId: 2316
+                    clientMessageId: clientId-3023
+                    creditCost: 1
+                    mobileNumber: "27444444444"
+                    newCreditBalance: 188.6
+                    scheduledTime: "201712251430"
+                  properties:
+                    acceptError:
+                      description: >-
+                        If the ***accepted*** value is **false**, this will contain the reason that delivery to the recipient was declined by the API. If the recipient was accepted, this value will be blank. Possible values-
+
+                        | Value | Description |
+
+                        |-------|-------------|
+
+                        |INSUFFICIENT CREDITS | The User Account has insufficient credits to send the message |
+
+                        |ACCOUNTLOCKED | The specified User Account is locked |
+
+                        |TRIALNOT2SELF | Trial Account Restriction – Message not to own number. <a href="https://support.winsms.co.za/trial-account-restrictions/" target="_blank">More Info</a> |
+
+                        |TOOLONG | The <a href="https://en.wikipedia.org/wiki/GSM_03.38#GSM_7-bit_default_alphabet_and_extension_table_of_3GPP_TS_23.038_/_GSM_03.38" target="_blank">GSM 7-bit encoded</a> message length exceeded 918 characters |
+
+                        |BADDEST | An invalid mobile number was supplied, or the recipient has been blacklisted from receiving messages |
+
+                        |OPTEDOUT | The recipient has opted out from receiving any further messages from the user |
+
+                        |WASPADNC | The number is on the <a href="https://dnc.org.za/about" target="_blank">WASPA Do Not Contact List</a> and your WinSMS account is not set to bypass the WASPA DNC list |
+
+                        | &nbsp; | &nbsp; |
+
+                        <p>&nbsp;</p>
+                      example: BADDEST
+                      type: string
+                    accepted:
+                      description: >
+                        A boolean value indicating whether the API accepted the recipient for SMS delivery. This will be **false** If you have insufficient credits or the recipient mobile number supplied is not valid.
+                      example: true
+                      type: boolean
+                    apiMessageId:
+                      description: >
+                        The WinSMS Message Id assigned to the specific message recipient. This Id can be used to obtain the status of the message, and to delete the message if it was scheduled. If the API did not accept the recipient for delivery, the value will be **null**.
+                      example: 2316
+                      type: integer
+                    clientMessageId:
+                      description: >
+                        If the optional ***clientMessageId*** value was specified in the recipient object for the recipient, it will be returned here. If not, ***clientMessageId*** will be **null**.
+                      example: clientId-3023
+                      type: string
+                    creditCost:
+                      description: >
+                        The number of credits deducted from your account for the SMS to this recipient.
+
+
+                        The credit cost is based on the destination country of the recipient and the length (number of segments) of the message.
+
+
+                        This credit cost will be reimbursed if the message is scheduled and subsequently deleted.
+
+
+                        If the recipient is not accepted for delivery, the ***creditCost*** value will be **null**.
+                      example: 1.3
+                      format: double
+                      type: number
+                    mobileNumber:
+                      description: >
+                        The mobile number specified as the ***mobileNumber*** value of the recipient object of the request.
+                      example: "27824444444"
+                      type: string
+                    newCreditBalance:
+                      description: >
+                        The number of WinSMS credits remaining in your account after processing this recipient.
+                      example: 188.6
+                      format: double
+                      type: number
+                    scheduledTime:
+                      description: >
+                        The date and time that the message was scheduled for delivery to the recipient.
+
+
+                        If no ***scheduledTime*** value was specified in the request, or the recipient was not accepted for delivery, this value will be **null**.
+                      example: "201712251430"
+                      type: string
+                  title: messageRecipientResponse
+                  type: object
+                maxItems: 1000
+                minItems: 1
+                type: array
+              statusCode:
+                description: The http status code returned - reflected in the body for convenience
+                type: integer
+              timeStamp:
+                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                type: string
+              version:
+                description: The current version of the API of the endpoint that was called
+                type: string
+            title: newMessageResponse
+            type: object
         "400":
           description: Bad Request
           examples:
@@ -570,14 +1040,255 @@ paths:
           name: multiMessageDetails
           required: true
           schema:
-            $ref: "#/definitions/multiMessageDetails"
+            example:
+              messages:
+                - maxSegments: 3
+                  message: Happy holidays from all at TelAmeriCorp.
+                  recipients:
+                    - clientMessageId: clientId-3023
+                      mobileNumber: "27444444444"
+                    - mobileNumber: "27555555555"
+                    - clientMessageId: clientId-3024
+                      mobileNumber: "276666666666"
+                  scheduledTime: "201712251430"
+                - maxSegments: 1
+                  message: TelAmeriCorp flash sale - call now for details
+                  recipients:
+                    - clientMessageId: clientId-0015
+                      mobileNumber: "27333333333"
+                    - mobileNumber: "27222222222"
+                  scheduledTime: "201801010900"
+            properties:
+              messages:
+                items:
+                  properties:
+                    maxSegments:
+                      default: 1
+                      description: >
+                        ***Optional*** - The maximum [GSM Encoded segment count]("https://support.winsms.co.za/rest/GSM") that the message is allowed to utilise.
+
+
+                        This defaults to 1, allowing for a maximum GSM Encoded message length of 160 characters.
+
+
+                        The maximum value is 6, which allows for a GSM Encoded message length of 918 characters.
+
+
+                        If you intend to send a message longer than 160 characters, this value should be specified.
+                      example: 3
+                      maximum: 6
+                      minimum: 1
+                      type: integer
+                    message:
+                      description: The SMS text to be sent.
+                      example: Happy holidays from all at TelAmeriCorp.
+                      type: string
+                    recipients:
+                      description: An array of messageRecipientDetails objects.
+                      items:
+                        example:
+                          clientMessageId: clientId-3023
+                          mobileNumber: "27444444444"
+                        properties:
+                          clientMessageId:
+                            description: >
+                              ***Optional*** - A parameter to identify an individual SMS message recipient on your system. The clientMessageId parameter is NOT saved by the WinSMS API. 
+
+
+                              The value of the clientMessageId parameter is returned in the ***submittedRecipientResult*** object of the response, allowing you to match a sent message to a returned message result status.
+                            example: clientId-3023
+                            type: string
+                          mobileNumber:
+                            description: A recipient mobile number, using the international E164 (without the plus) format.
+                            example: "27444444444"
+                            type: string
+                        required:
+                          - mobileNumber
+                        title: messageRecipientDetails
+                        type: object
+                      maxItems: 1000
+                      minItems: 1
+                      type: array
+                    scheduledTime:
+                      description: >
+                        ***Optional*** - The date and time that an SMS should be delivered. If not specified, or is set for a date/time prior to the current date/time, the SMS message will be sent immediately.
+
+
+                        If specified, this value should have the format YYYYMMDDHHmm.
+                      example: "201712251430"
+                      type: string
+                  required:
+                    - message
+                    - recipients
+                  title: messageDetails
+                  type: object
+                type: array
+            title: multiMessageDetails
+            type: object
       produces:
         - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/multiMessageResponse"
+            example:
+              messages:
+                - message: Happy holidays from all at TelAmeriCorp.
+                  recipients:
+                    - acceptError: ""
+                      accepted: true
+                      apiMessageId: 2316
+                      clientMessageId: clientId-3023
+                      creditCost: 1
+                      mobileNumber: "27444444444"
+                      newCreditBalance: 188.6
+                      scheduledTime: "201712251430"
+                    - acceptError: ""
+                      accepted: true
+                      apiMessageId: 2317
+                      clientMessageId:
+                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                      creditCost: 1
+                      mobileNumber: "27555555555"
+                      newCreditBalance: 187.6
+                      scheduledTime: "201712251430"
+                    - acceptError: BADDEST
+                      accepted: false
+                      apiMessageId:
+                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                      clientMessageId: clientId-3024
+                      creditCost: 0
+                      mobileNumber: "276666666666"
+                      newCreditBalance: 187.6
+                      scheduledTime:
+                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                - message: TelAmeriCorp flash sale - call now for details
+                  recipients:
+                    - acceptError: ""
+                      accepted: true
+                      apiMessageId: 2318
+                      clientMessageId: clientId-0015
+                      creditCost: 1
+                      mobileNumber: "27333333333"
+                      newCreditBalance: 186.6
+                      scheduledTime: "201801010900"
+                    - acceptError: ""
+                      accepted: true
+                      apiMessageId: 2319
+                      clientMessageId:
+                        $ref: "#/paths/~1sms~1outgoing~1send/post/responses/200/schema/example/recipients/2/apiMessageId"
+                      creditCost: 1
+                      mobileNumber: "27222222222"
+                      newCreditBalance: 185.6
+                      scheduledTime: "201801010900"
+              statusCode: 200
+              timeStamp: "20170117054658978"
+              version: "1.0"
+            properties:
+              messages:
+                description: An array of messageDetailsResponse objects
+                items:
+                  properties:
+                    message:
+                      description: >
+                        The message text that was sent.
+                      type: string
+                    recipients:
+                      description: An array of messageRecipientResponse objects
+                      items:
+                        example:
+                          acceptError: ""
+                          accepted: true
+                          apiMessageId: 2316
+                          clientMessageId: clientId-3023
+                          creditCost: 1
+                          mobileNumber: "27444444444"
+                          newCreditBalance: 188.6
+                          scheduledTime: "201712251430"
+                        properties:
+                          acceptError:
+                            description: >
+                              If the ***accepted*** value is **false**, this will contain the reason that delivery to the recipient was declined by the API. If the recipient was accepted, this value will be blank. Possible values-
+                                | Value | Description |
+                                |-------|-------------|
+                                |INSUFFICIENT&nbsp;CREDITS | The User Account has insufficient credits to send the message |
+                                |ACCOUNTLOCKED | The specified User Account is locked
+                                |TRIALNOT2SELF | Trial Account Restriction – Message not to own number. <a href="https://support.winsms.co.za/trial-account-restrictions/" target="_blank">More Info</a> |
+                                |TOOLONG | The <a href="https://en.wikipedia.org/wiki/GSM_03.38#GSM_7-bit_default_alphabet_and_extension_table_of_3GPP_TS_23.038_/_GSM_03.38" target="_blank">GSM 7-bit encoded</a> message length exceeded 918 characters |
+                                |BADDEST | An invalid mobile number was supplied, or the recipient has been blacklisted from receiving messages |
+                                |OPTEDOUT | The recipient has opted out from receiving any further messages from the user |
+                                |WASPADNC | The number is on the <a href="https://dnc.org.za/about" target="_blank">WASPA Do Not Contact List</a> and your WinSMS account is not set to bypass the WASPA DNC list |
+                                | &nbsp; | &nbsp; |
+                            example: BADDEST
+                            type: string
+                          accepted:
+                            description: >
+                              A boolean value indicating whether the API accepted the recipient for SMS delivery. This will be **false** If you have insufficient credits or the recipient mobile number supplied is not valid.
+                            example: true
+                            type: boolean
+                          apiMessageId:
+                            description: >
+                              The WinSMS Message Id assigned to the specific message recipient. This Id can be used to obtain the status of the message, and to delete the message if it was scheduled. If the API did not accept the recipient for delivery, the value will be **null**.
+                            example: 2316
+                            type: integer
+                          clientMessageId:
+                            description: >
+                              If the optional ***clientMessageId*** value was specified in the recipient object for the recipient, it will be returned here. If not, ***clientMessageId*** will be **null**.
+                            example: clientId-3023
+                            type: string
+                          creditCost:
+                            description: >
+                              The number of credits deducted from your account for the SMS to this recipient.
+
+
+                              The credit cost is based on the destination country of the recipient and the length (number of segments) of the message.
+
+
+                              This credit cost will be reimbursed if the message is scheduled and subsequently deleted.
+
+
+                              If the recipient is not accepted for delivery, the ***creditCost*** value will be **null**.
+                            example: 1.3
+                            format: double
+                            type: number
+                          mobileNumber:
+                            description: >
+                              The mobile number specified as the ***mobileNumber*** value of the recipient object of the request.
+                            example: "27824444444"
+                            type: string
+                          newCreditBalance:
+                            description: >
+                              The number of WinSMS credits remaining in your account after processing this recipient.
+                            example: 188.6
+                            format: double
+                            type: number
+                          scheduledTime:
+                            description: >
+                              The date and time that the message was scheduled for delivery to the recipient.
+
+
+                              If no ***scheduledTime*** value was specified in the request, or the recipient was not accepted for delivery, this value will be **null**.
+                            example: "201712251430"
+                            type: string
+                        title: messageRecipientResponse
+                        type: object
+                      maxItems: 1000
+                      minItems: 1
+                      type: array
+                  title: messageDetailsResponse
+                  type: object
+                type: array
+              statusCode:
+                description: The http status code returned - reflected in the body for convenience
+                type: integer
+              timeStamp:
+                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                type: string
+              version:
+                description: The current version of the API of the endpoint that was called
+                type: string
+            title: multiMessageResponse
+            type: object
         "400":
           description: Bad Request
           examples:
@@ -693,7 +1404,103 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/messageStatusResponse"
+            example:
+              messageStatuses:
+                - apiMessageId: 2316
+                  creditCost: 1
+                  mobileNumber: "27444444444"
+                  statusDelivered: true
+                  statusErrorCode: 0
+                  statusTime: "201712251431"
+                - apiMessageId: 2317
+                  creditCost: 1
+                  mobileNumber: "27555555555"
+                  statusDelivered: false
+                  statusErrorCode: BADDEST
+                  statusTime: "201712251432"
+              statusCode: 200
+              timeStamp: "20170117054658978"
+              version: "1.0"
+            properties:
+              messageStatuses:
+                description: >
+                  An array of ***messageStatus*** objects detailing the delivery status of each message
+                items:
+                  example:
+                    apiMessageId: 2316
+                    creditCost: 1
+                    mobileNumber: "27444444444"
+                    statusDelivered: true
+                    statusErrorCode: 0
+                    statusTime: "201712251431"
+                  properties:
+                    apiMessageId:
+                      description: The WinSMS API Message Id identifying the SMS message.
+                      example: 2316
+                      type: integer
+                    creditCost:
+                      description: >
+                        The number of credits deducted from your account for the SMS to this recipient.
+
+
+
+                        If delivery to the recipient is unsuccessful, under certain conditions, this may be 0.
+                      example: 1.3
+                      format: double
+                      type: number
+                    mobileNumber:
+                      description: The mobile number of the recipient of the SMS message, using the international E164 (without the plus) format
+                      example: "27824444444"
+                      type: string
+                    statusDelivered:
+                      description: A boolean value indicating whether an SMS message was successfully delivered to the recipient's mobile number
+                      example: true
+                      type: boolean
+                    statusErrorCode:
+                      description: >
+                        If the SMS message was successfully delivered, this value will be blank.
+
+                        If the ***statusDelivered*** value is false, this will contain a string indicating the current status of the SMS message. Possible values-
+
+                        | Value | Description | Type |
+
+                        |-------|-------------|------|
+
+                        | SENT| The message has been sent to the recipient, but no delivery report has been received | Temporary |
+
+                        | NOTFOUND | Either an incorrect MessageID was sent in the request, or the message was sent more than 90 days previously | Permanent |
+
+                        | INQUEUE | Message is queued for sending | Temporary |
+
+                        | SENDINGFAILED | The message was not transmitted, due to e.g. an invalid destination number or insufficient credits | Permanent |
+
+                        | FAILED | The message was sent but could not be delivered to the recipient due to e.g. no such subscriber, subscriber's phone offline | Permanent |
+                      example: FAILED
+                      type: string
+                    statusTime:
+                      description: >
+                        The date and time of the last status update for this message, in the format YYYYMMDDHHmm.
+
+
+                        If the message was delivered (**statusDelivered = true**) then this is a final status time. If the message is still awaiting delivery, this time might change when updates are received.
+                      example: "201712251431"
+                      type: string
+                  title: messageStatus
+                  type: object
+                maxItems: 1000
+                minItems: 1
+                type: array
+              statusCode:
+                description: The http status code returned - reflected in the body for convenience
+                type: integer
+              timeStamp:
+                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                type: string
+              version:
+                description: The current version of the API of the endpoint that was called
+                type: string
+            title: messageStatusResponse
+            type: object
         "400":
           description: Bad Request
           examples:
@@ -809,7 +1616,89 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/scheduledMessageResponse"
+            example:
+              resultsLimit: 100
+              resultsOffset: 3400
+              resultsTotalAvailable: 3402
+              scheduledMessages:
+                - apiMessageId: 2316
+                  creditCost: 1
+                  mobileNumber: "27444444444"
+                  scheduledSendTime: "201712251430"
+                  submitTime: "201710220850"
+                - apiMessageId: 2317
+                  creditCost: 1
+                  mobileNumber: "27555555555"
+                  scheduledSendTime: "201712251430"
+                  submitTime: "201710220850"
+              statusCode: 200
+              timeStamp: "20170117054658978"
+              version: "1.0"
+            properties:
+              resultsLimit:
+                description: >
+                  The number of items returned in the results. This is the value specified in the ***limit*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 100.
+                type: integer
+              resultsOffset:
+                description: >
+                  The number of items skipped before the results were returned. This is the value specified in the ***offset*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 0.
+                type: integer
+              resultsTotalAvailable:
+                description: >
+                  The total number of results available for retrieval. The ***offset*** and ***limit*** properties specify which of the total available results have been returned.
+                type: integer
+              scheduledMessages:
+                description: >
+                  An array of ***scheduledMessage*** objects containing properties of each unsent scheduled message.
+                items:
+                  example:
+                    apiMessageId: 2316
+                    creditCost: 1
+                    mobileNumber: "27444444444"
+                    scheduledSendTime: "201712251430"
+                    submitTime: "201710220850"
+                  properties:
+                    apiMessageId:
+                      description: The WinSMS API Message Id identifying the SMS message.
+                      example: 2316
+                      type: integer
+                    creditCost:
+                      description: >
+                        The number of credits deducted from your account for the SMS to this recipient.
+
+
+                        This is the number of credits that will be refunded if you delete this scheduled message.
+                      example: 1.3
+                      format: double
+                      type: number
+                    mobileNumber:
+                      description: The mobile number of the recipient of the SMS message, using the international E164 (without the plus) format
+                      example: "27824444444"
+                      type: string
+                    scheduledSendTime:
+                      description: The date and time the message is scheduled to be delivered to the recipient, in the format YYYYMMDDHHmm.
+                      example: "201812250930"
+                      type: string
+                    submitTime:
+                      description: The date and time the message was originally submitted for scheduled delivery, in the format YYYYMMDDHHmm.
+                      example: "201712251431"
+                      type: string
+                  title: scheduledMessage
+                  type: object
+                maxItems: 1000
+                minItems: 1
+                type: array
+              statusCode:
+                description: The http status code returned - reflected in the body for convenience
+                type: integer
+              timeStamp:
+                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                type: string
+              version:
+                description: The current version of the API of the endpoint that was called
+                type: string
+            title: scheduledMessageResponse
+            type: object
         "401":
           description: Unauthorized
           examples:
@@ -892,7 +1781,78 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/deleteScheduledResponse"
+            example:
+              deletedMessageStatuses:
+                - apiMessageId: 2316
+                  creditCost: 1
+                  deleteError: ""
+                  deleted: true
+                  mobileNumber: "27444444444"
+                - apiMessageId: 2317
+                  creditCost: 0
+                  deleteError: NOTFOUND
+                  deleted: false
+                  mobileNumber: "27555555555"
+              statusCode: 200
+              timeStamp: "20170117054658978"
+              version: "1.0"
+            properties:
+              deletedMessageStatuses:
+                description: >
+                  An array of ***deletedMessageStatus*** objects detailing the deleted status of each message requested for deletion.
+                items:
+                  example:
+                    apiMessageId: 2316
+                    creditCost: 1
+                    deleteError: ""
+                    deleted: true
+                    mobileNumber: "27444444444"
+                  properties:
+                    apiMessageId:
+                      description: >
+                        The WinSMS API Message Id identifying the SMS message.
+                      example: 2316
+                      type: integer
+                    creditCost:
+                      description: >
+                        The number of credits refunded to your account after deleting the scheduled message.
+
+
+                        If the deletion was unsuccessful, this value will be 0.
+                      example: 1.3
+                      format: double
+                      type: number
+                    deleteError:
+                      description: >
+                        If the ***deleted*** value is false, this will contain an error code indicating the reason for the failure. If the scheduled SMS message was successfully deleted, this value will be blank.
+                      example: NOTFOUND
+                      type: string
+                    deleted:
+                      description: >
+                        A boolean value indicating whether a scheduled SMS message was successfully deleted
+                      example: true
+                      type: boolean
+                    mobileNumber:
+                      description: >
+                        The mobile number of the recipient of the SMS message, using the international E164 (without the plus) format
+                      example: "27824444444"
+                      type: string
+                  title: deletedMessageStatus
+                  type: object
+                maxItems: 1000
+                minItems: 1
+                type: array
+              statusCode:
+                description: The http status code returned - reflected in the body for convenience
+                type: integer
+              timeStamp:
+                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                type: string
+              version:
+                description: The current version of the API of the endpoint that was called
+                type: string
+            title: deleteScheduledResponse
+            type: object
         "400":
           description: Bad Request
           examples:
@@ -980,14 +1940,78 @@ paths:
     get:
       description: Get a list of all the Sub Accounts owned by the Main Account.
       operationId: getSubAccounts
-      parameters: []
       produces:
         - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/subAccountsResponse"
+            example:
+              statusCode: 200
+              subAccounts:
+                - accountNumber: 58324
+                  creditBalance: 201.4
+                  firstName: Jon
+                  loginName: jon@castleblack.com
+                  surname: Snow
+                - accountNumber: 98676
+                  creditBalance: 1936
+                  firstName: Daenerys
+                  loginName: khaleesi
+                  surname: Targaryen
+              timeStamp: "20170117054658978"
+              version: "1.0"
+            properties:
+              statusCode:
+                description: The http status code returned - reflected in the body for convenience
+                type: integer
+              subAccounts:
+                description: >
+                  An array of ***subAccount*** objects containing properties of each Sub Account owned by the Main Account.
+                items:
+                  example:
+                    accountNumber: 58324
+                    creditBalance: 201.4
+                    firstName: Jon
+                    loginName: jon@castleblack.com
+                    surname: Snow
+                  properties:
+                    accountNumber:
+                      description: >
+                        The WinSMS account number of the Sub Account. This is supplied as an integer, without the leading 'W' displayed in the WinSMS Client Zone.
+                      example: 58324
+                      type: integer
+                    creditBalance:
+                      description: >
+                        The remaining credit balance for the Sub Account.
+                      example: 201.4
+                      type: number
+                    firstName:
+                      description: >
+                        The first name of the user that the Sub Account is registered to.
+                      example: Jon
+                      type: string
+                    loginName:
+                      description: >
+                        The login name of the user that the Sub Account is registered to.
+                      example: jon@castleblack.com
+                      type: string
+                    surname:
+                      description: >
+                        The surname of the user that the Sub Account is registered to.
+                      example: Snow
+                      type: string
+                  title: subAccount
+                  type: object
+                type: array
+              timeStamp:
+                description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
+                type: string
+              version:
+                description: The current version of the API of the endpoint that was called
+                type: string
+            title: subAccountsResponse
+            type: object
         "401":
           description: Unauthorized
           examples:
@@ -1032,116 +2056,6 @@ paths:
       tags:
         - subaccounts
 definitions:
-  creditBalanceResponse:
-    properties:
-      creditBalance:
-        description: The current remaining credit balance for the account. Contains a single decimal place
-        format: double
-        type: number
-      statusCode:
-        description: The http status code returned - reflected in the body for convenience
-        type: integer
-      timeStamp:
-        description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
-        type: string
-      version:
-        description: The current version of the API of the endpoint that was called
-        type: string
-    type: object
-  creditTransferDetails:
-    example:
-      receivingAccountNumber: 10345
-      sendingAccountNumber: 7564
-      transferQuantity: 100
-    properties:
-      receivingAccountNumber:
-        description: The WinSMS account number of the account to which credits will be added.
-        example: 10345
-        type: integer
-      sendingAccountNumber:
-        description: The WinSMS account number of the account from which credits will be deducted.
-        example: 7564
-        type: integer
-      transferQuantity:
-        description: The number of credits to transfer from the sending account to the receiving account.
-        example: 100
-        type: integer
-    required:
-      - receivingAccountNumber
-      - sendingAccountNumber
-      - transferQuantity
-    title: creditTransferDetails
-    type: object
-  creditTransferResponse:
-    example: "{timeStamp=20170120152253515, version=1.0, statusCode=200, transferSuccessful=true}"
-    properties:
-      statusCode:
-        description: The http status code returned - reflected in the body for convenience
-        type: integer
-      timeStamp:
-        description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
-        type: string
-      transferSuccessful:
-        description: A boolean value indictating whether the credits were successfully transfered from the sending account into the receiving account.
-        type: boolean
-      version:
-        description: The current version of the API of the endpoint that was called
-        type: string
-    type: object
-  deleteScheduledResponse:
-    example: "{timeStamp=20170117054658978, version=1.0, statusCode=200, deletedMessageStatuses=[{apiMessageId=2316, mobileNumber=27444444444, deleted=true, deleteError=, creditCost=1}, {apiMessageId=2317, mobileNumber=27555555555, deleted=false, deleteError=NOTFOUND, creditCost=0}]}"
-    properties:
-      deletedMessageStatuses:
-        description: >
-          An array of ***deletedMessageStatus*** objects detailing the deleted status of each message requested for deletion.
-        items:
-          $ref: "#/definitions/deletedMessageStatus"
-        maxItems: 1000
-        minItems: 1
-        type: array
-      statusCode:
-        description: The http status code returned - reflected in the body for convenience
-        type: integer
-      timeStamp:
-        description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
-        type: string
-      version:
-        description: The current version of the API of the endpoint that was called
-        type: string
-    type: object
-  deletedMessageStatus:
-    example: '{"apiMessageId":2316,"mobileNumber":"27444444444","deleted":true,"deleteError":"","creditCost":1}'
-    properties:
-      apiMessageId:
-        description: >
-          The WinSMS API Message Id identifying the SMS message.
-        example: 2316
-        type: integer
-      creditCost:
-        description: >
-          The number of credits refunded to your account after deleting the scheduled message.
-
-
-          If the deletion was unsuccessful, this value will be 0.
-        example: 1.3
-        format: double
-        type: number
-      deleteError:
-        description: >
-          If the ***deleted*** value is false, this will contain an error code indicating the reason for the failure. If the scheduled SMS message was successfully deleted, this value will be blank.
-        example: NOTFOUND
-        type: string
-      deleted:
-        description: >
-          A boolean value indicating whether a scheduled SMS message was successfully deleted
-        example: true
-        type: boolean
-      mobileNumber:
-        description: >
-          The mobile number of the recipient of the SMS message, using the international E164 (without the plus) format
-        example: "27824444444"
-        type: string
-    type: object
   errorDetails:
     example:
       errorMessage: >
@@ -1167,595 +2081,4 @@ definitions:
           The current version of the API of the endpoint that was called
         type: string
     title: errorDetails
-    type: object
-  incomingMessage:
-    example: '{"incomingApiMessageId":58324,"mobileNumber":"27444444444","receiveTime":"201707252208","messageText":"Thank you for the holiday wishes. Stay safe","outgoingApiMessageId":2316}'
-    properties:
-      incomingApiMessageId:
-        description: >
-          The unique API message id assigned to this incoming message.
-        example: 58324
-        type: number
-      messageText:
-        description: >
-          The text of the incoming SMS message.
-        example: Hello, I'm responding to your SMS invitation
-        type: string
-      mobileNumber:
-        description: >
-          The mobile number that sent the SMS message, displayed using the international E164 (without the plus) format
-        example: "27444444444"
-        type: string
-      outgoingApiMessageId:
-        description: >
-          The API message id of the most recent message sent to the mobile number that responded.
-        example: 2316
-        type: number
-      receiveTime:
-        description: >
-          The date and time the message was received by WinSMS, in the format YYYYMMDDHHmm.
-        example: "201707270952"
-        type: string
-    type: object
-  incomingMessageResponse:
-    example: "{timeStamp=20170117054658978, version=1.0, statusCode=200, resultsOffset=3400, resultsLimit=100, resultsTotalAvailable=3402, incomingMessages=[{incomingApiMessageId=58324, mobileNumber=27444444444, receiveTime=201707252208, messageText=Thank you for the holiday wishes. Stay safe, outgoingApiMessageId=2316}, {incomingApiMessageId=58336, mobileNumber=27555555555, receiveTime=201707270952, messageText=That is much appreciated. Happy holidays to you too, outgoingApiMessageId=2316}]}"
-    properties:
-      incomingMessages:
-        description: >
-          An array of ***incomingMessage*** objects containing properties of each incoming message.
-        items:
-          $ref: "#/definitions/incomingMessage"
-        maxItems: 1000
-        minItems: 1
-        type: array
-      resultsLimit:
-        description: >
-          The number of items returned in the results. This is the value specified in the ***limit*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 100.
-        type: integer
-      resultsOffset:
-        description: >
-          The number of items skipped before the results were returned. This is the value specified in the ***offset*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 0.
-        type: integer
-      resultsTotalAvailable:
-        description: >
-          The total number of results available for retrieval. The ***offset*** and ***limit*** properties specify which of the total available results have been returned.
-        type: integer
-      statusCode:
-        description: The http status code returned - reflected in the body for convenience
-        type: integer
-      timeStamp:
-        description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
-        type: string
-      version:
-        description: The current version of the API of the endpoint that was called
-        type: string
-    type: object
-  incomingOptoutMessage:
-    example: '{"incomingApiMessageId":58324,"mobileNumber":"27444444444","receiveTime":"201707252208","messageText":"STOP"}'
-    properties:
-      incomingApiMessageId:
-        description: >
-          The unique API message id assigned to this incoming opt-out message.
-        example: 58324
-        type: number
-      messageText:
-        description: >
-          The text of the opt-out SMS message.
-        example: STOP
-        type: string
-      mobileNumber:
-        description: >
-          The mobile number that sent the opt-out SMS message, displayed using the international E164 (without the plus) format
-        example: "27444444444"
-        type: string
-      receiveTime:
-        description: >
-          The date and time the message was received by WinSMS, in the format YYYYMMDDHHmm.
-        example: "201707270952"
-        type: string
-    type: object
-  messageDetails:
-    properties:
-      maxSegments:
-        description: >
-          ***Optional*** - The maximum [GSM Encoded segment count]("https://support.winsms.co.za/rest/GSM") that the message is allowed to utilise.
-
-
-          This defaults to 1, allowing for a maximum GSM Encoded message length of 160 characters.
-
-
-          The maximum value is 6, which allows for a GSM Encoded message length of 918 characters.
-
-
-          If you intend to send a message longer than 160 characters, this value should be specified.
-        example: 3
-        maximum: 6
-        minimum: 1
-        type: integer
-      message:
-        description: The SMS text to be sent.
-        example: Happy holidays from all at TelAmeriCorp.
-        type: string
-      recipients:
-        description: An array of messageRecipientDetails objects.
-        items:
-          $ref: "#/definitions/messageRecipientDetails"
-        maxItems: 1000
-        minItems: 1
-        type: array
-      scheduledTime:
-        description: >
-          ***Optional*** - The date and time that an SMS should be delivered. If not specified, or is set for a date/time prior to the current date/time, the SMS message will be sent immediately.
-
-
-          If specified, this value should have the format YYYYMMDDHHmm.
-        example: "201712251430"
-        type: string
-    required:
-      - message
-      - recipients
-    type: object
-  messageDetailsResponse:
-    properties:
-      message:
-        description: >
-          The message text that was sent.
-        type: string
-      recipients:
-        description: An array of messageRecipientResponse objects
-        items:
-          $ref: "#/definitions/messageRecipientResponse"
-        maxItems: 1000
-        minItems: 1
-        type: array
-    type: object
-  messageRecipientDetails:
-    example: '{"mobileNumber":"27444444444","clientMessageId":"clientId-3023"}'
-    properties:
-      clientMessageId:
-        description: >
-          ***Optional*** - A parameter to identify an individual SMS message recipient on your system. The clientMessageId parameter is NOT saved by the WinSMS API. 
-
-
-          The value of the clientMessageId parameter is returned in the ***submittedRecipientResult*** object of the response, allowing you to match a sent message to a returned message result status.
-        example: clientId-3023
-        type: string
-      mobileNumber:
-        description: A recipient mobile number, using the international E164 (without the plus) format.
-        example: "27444444444"
-        type: string
-    required:
-      - mobileNumber
-    type: object
-  messageRecipientResponse:
-    example: '{"clientMessageId":"clientId-3023","mobileNumber":"27444444444","accepted":true,"acceptError":"","apiMessageId":2316,"scheduledTime":"201712251430","creditCost":1,"newCreditBalance":188.6}'
-    properties:
-      acceptError:
-        description: >
-          If the ***accepted*** value is **false**, this will contain the reason that delivery to the recipient was declined by the API. If the recipient was accepted, this value will be blank.
-        example: BADDEST
-        type: string
-      accepted:
-        description: >
-          A boolean value indicating whether the API accepted the recipient for SMS delivery. This will be **false** If you have insufficient credits or the recipient mobile number supplied is not valid.
-        example: true
-        type: boolean
-      apiMessageId:
-        description: >
-          The WinSMS Message Id assigned to the specific message recipient. This Id can be used to obtain the status of the message, and to delete the message if it was scheduled. If the API did not accept the recipient for delivery, the value will be **null**.
-        example: 2316
-        type: integer
-      clientMessageId:
-        description: >
-          If the optional ***clientMessageId*** value was specified in the recipient object for the recipient, it will be returned here. If not, ***clientMessageId*** will be **null**.
-        example: clientId-3023
-        type: string
-      creditCost:
-        description: >
-          The number of credits deducted from your account for the SMS to this recipient.
-
-
-          The credit cost is based on the destination country of the recipient and the length (number of segments) of the message.
-
-
-          This credit cost will be reimbursed if the message is scheduled and subsequently deleted.
-
-
-          If the recipient is not accepted for delivery, the ***creditCost*** value will be **null**.
-        example: 1.3
-        format: double
-        type: number
-      mobileNumber:
-        description: >
-          The mobile number specified as the ***mobileNumber*** value of the recipient object of the request.
-        example: "27824444444"
-        type: string
-      newCreditBalance:
-        description: >
-          The number of WinSMS credits remaining in your account after processing this recipient.
-        example: 188.6
-        format: double
-        type: number
-      scheduledTime:
-        description: >
-          The date and time that the message was scheduled for delivery to the recipient.
-
-
-          If no ***scheduledTime*** value was specified in the request, or the recipient was not accepted for delivery, this value will be **null**.
-        example: "201712251430"
-        type: string
-    type: object
-  messageStatus:
-    example: '{"apiMessageId":2316,"mobileNumber":"27444444444","statusDelivered":true,"statusErrorCode":0,"statusTime":"201712251431","creditCost":1}'
-    properties:
-      apiMessageId:
-        description: The WinSMS API Message Id identifying the SMS message.
-        example: 2316
-        type: integer
-      creditCost:
-        description: >
-          The number of credits deducted from your account for the SMS to this recipient.
-
-
-
-          If delivery to the recipient is unsuccessful, under certain conditions, this may be 0.
-        example: 1.3
-        format: double
-        type: number
-      mobileNumber:
-        description: The mobile number of the recipient of the SMS message, using the international E164 (without the plus) format
-        example: "27824444444"
-        type: string
-      statusDelivered:
-        description: A boolean value indicating whether an SMS message was successfully delivered to the recipient's mobile number
-        example: true
-        type: boolean
-      statusErrorCode:
-        description: >
-          If the SMS message was successfully delivered, this value will be blank.
-
-          If the ***statusDelivered*** value is false, this will contain a string indicating the current status of the SMS message. Possible values-
-
-          | Value | Description | Type |
-
-          |-------|-------------|------|
-
-          | SENT| The message has been sent to the recipient, but no delivery report has been received | Temporary |
-
-          | NOTFOUND | Either an incorrect MessageID was sent in the request, or the message was sent more than 90 days previously | Permanent |
-
-          | INQUEUE | Message is queued for sending | Temporary |
-
-          | SENDINGFAILED | The message was not transmitted, due to e.g. an invalid destination number or insufficient credits | Permanent |
-
-          | FAILED | The message was sent but could not be delivered to the recipient due to e.g. no such subscriber, subscriber's phone offline | Permanent |
-        example: FAILED
-        type: string
-      statusTime:
-        description: >
-          The date and time of the last status update for this message, in the format YYYYMMDDHHmm.
-
-
-          If the message was delivered (**statusDelivered = true**) then this is a final status time. If the message is still awaiting delivery, this time might change when updates are received.
-        example: "201712251431"
-        type: string
-    type: object
-  messageStatusResponse:
-    example: "{timeStamp=20170117054658978, version=1.0, statusCode=200, messageStatuses=[{apiMessageId=2316, mobileNumber=27444444444, statusDelivered=true, statusErrorCode=0, statusTime=201712251431, creditCost=1}, {apiMessageId=2317, mobileNumber=27555555555, statusDelivered=false, statusErrorCode=BADDEST, statusTime=201712251432, creditCost=1}]}"
-    properties:
-      messageStatuses:
-        description: >
-          An array of ***messageStatus*** objects detailing the delivery status of each message
-        items:
-          $ref: "#/definitions/messageStatus"
-        maxItems: 1000
-        minItems: 1
-        type: array
-      statusCode:
-        description: The http status code returned - reflected in the body for convenience
-        type: integer
-      timeStamp:
-        description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
-        type: string
-      version:
-        description: The current version of the API of the endpoint that was called
-        type: string
-    type: object
-  multiMessageDetails:
-    example:
-      messages:
-        - maxSegments: 3
-          message: Happy holidays from all at TelAmeriCorp.
-          recipients:
-            - clientMessageId: clientId-3023
-              mobileNumber: "27444444444"
-            - mobileNumber: "27555555555"
-            - clientMessageId: clientId-3024
-              mobileNumber: "276666666666"
-          scheduledTime: "201712251430"
-        - maxSegments: 1
-          message: TelAmeriCorp flash sale - call now for details
-          recipients:
-            - clientMessageId: clientId-0015
-              mobileNumber: "27333333333"
-            - mobileNumber: "27222222222"
-          scheduledTime: "201801010900"
-    properties:
-      messages:
-        items:
-          $ref: "#/definitions/messageDetails"
-        type: array
-    title: multiMessageDetails
-    type: object
-  multiMessageResponse:
-    example: "{timeStamp=20170117054658978, version=1.0, statusCode=200, messages=[{message=Happy holidays from all at TelAmeriCorp., recipients=[{clientMessageId=clientId-3023, mobileNumber=27444444444, accepted=true, acceptError=, apiMessageId=2316, scheduledTime=201712251430, creditCost=1, newCreditBalance=188.6}, {mobileNumber=27555555555, accepted=true, acceptError=, apiMessageId=2317, scheduledTime=201712251430, creditCost=1, newCreditBalance=187.6}, {clientMessageId=clientId-3024, mobileNumber=276666666666, accepted=false, acceptError=BADDEST, creditCost=0, newCreditBalance=187.6}]}, {message=TelAmeriCorp flash sale - call now for details, recipients=[{clientMessageId=clientId-0015, mobileNumber=27333333333, accepted=true, acceptError=, apiMessageId=2318, scheduledTime=201801010900, creditCost=1, newCreditBalance=186.6}, {mobileNumber=27222222222, accepted=true, acceptError=, apiMessageId=2319, scheduledTime=201801010900, creditCost=1, newCreditBalance=185.6}]}]}"
-    properties:
-      messages:
-        description: An array of messageDetailsResponse objects
-        items:
-          $ref: "#/definitions/messageDetailsResponse"
-        type: array
-      statusCode:
-        description: The http status code returned - reflected in the body for convenience
-        type: integer
-      timeStamp:
-        description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
-        type: string
-      version:
-        description: The current version of the API of the endpoint that was called
-        type: string
-    type: object
-  newMessageDetails:
-    example:
-      maxSegments: 3
-      message: Happy holidays from all at TelAmeriCorp.
-      recipients:
-        - clientMessageId: clientId-3023
-          mobileNumber: "27444444444"
-        - mobileNumber: "27555555555"
-        - clientMessageId: clientId-3024
-          mobileNumber: "276666666666"
-      scheduledTime: "201712251430"
-    properties:
-      maxSegments:
-        description: >
-          ***Optional*** - The maximum [GSM Encoded segment count]("https://support.winsms.co.za/rest/GSM") that the message is allowed to utilise.
-
-
-          This defaults to 1, allowing for a maximum GSM Encoded message length of 160 characters.
-
-
-          The maximum value is 6, which allows for a GSM Encoded message length of 918 characters.
-
-
-          If you intend to send a message longer than 160 characters, this value should be specified.
-        example: 3
-        maximum: 6
-        minimum: 1
-        type: integer
-      message:
-        description: The SMS text to be sent.
-        example: Happy holidays from all at TelAmeriCorp.
-        type: string
-      recipients:
-        description: An array of messageRecipientDetails objects.
-        items:
-          $ref: "#/definitions/messageRecipientDetails"
-        maxItems: 1000
-        minItems: 1
-        type: array
-      scheduledTime:
-        description: >
-          ***Optional*** - The date and time that an SMS should be delivered. If not specified, or is set for a date/time prior to the current date/time, the SMS message will be sent immediately.
-
-
-          If specified, this value should have the format YYYYMMDDHHmm.
-        example: "201712251430"
-        type: string
-    required:
-      - message
-      - recipients
-    title: newMessageDetails
-    type: object
-  newMessageResponse:
-    example: "{timeStamp=20170117054658978, version=1.0, statusCode=200, recipients=[{clientMessageId=clientId-3023, mobileNumber=27444444444, accepted=true, acceptError=, apiMessageId=2316, scheduledTime=201712251430, creditCost=1, newCreditBalance=188.6}, {mobileNumber=27555555555, accepted=true, acceptError=, apiMessageId=2317, scheduledTime=201712251430, creditCost=1, newCreditBalance=187.6}, {clientMessageId=clientId-3024, mobileNumber=276666666666, accepted=false, acceptError=BADDEST, creditCost=0, newCreditBalance=187.6}]}"
-    properties:
-      recipients:
-        description: An array of messageRecipientResponse objects
-        items:
-          $ref: "#/definitions/messageRecipientResponse"
-        maxItems: 1000
-        minItems: 1
-        type: array
-      statusCode:
-        description: The http status code returned - reflected in the body for convenience
-        type: integer
-      timeStamp:
-        description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
-        type: string
-      version:
-        description: The current version of the API of the endpoint that was called
-        type: string
-    type: object
-  optoutMessageResponse:
-    example: "{timeStamp=20170117054658978, version=1.0, statusCode=200, incomingOptoutMessages=[{incomingApiMessageId=58324, mobileNumber=27444444444, receiveTime=201707252208, messageText=STOP}, {mobileNumber=27555555555, receiveTime=201707270952, messageText=* MANUALLY ADDED BY USER *}]}"
-    properties:
-      incomingOptoutMessages:
-        description: >
-          An array of ***incomingOptoutMessage*** objects containing properties of each opt-out message received.
-        items:
-          $ref: "#/definitions/incomingOptoutMessage"
-        type: array
-      statusCode:
-        description: The http status code returned - reflected in the body for convenience
-        type: integer
-      timeStamp:
-        description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
-        type: string
-      version:
-        description: The current version of the API of the endpoint that was called
-        type: string
-    type: object
-  scheduledMessage:
-    example: '{"apiMessageId":2316,"mobileNumber":"27444444444","submitTime":"201710220850","scheduledSendTime":"201712251430","creditCost":1}'
-    properties:
-      apiMessageId:
-        description: The WinSMS API Message Id identifying the SMS message.
-        example: 2316
-        type: integer
-      creditCost:
-        description: >
-          The number of credits deducted from your account for the SMS to this recipient.
-
-
-          This is the number of credits that will be refunded if you delete this scheduled message.
-        example: 1.3
-        format: double
-        type: number
-      mobileNumber:
-        description: The mobile number of the recipient of the SMS message, using the international E164 (without the plus) format
-        example: "27824444444"
-        type: string
-      scheduledSendTime:
-        description: The date and time the message is scheduled to be delivered to the recipient, in the format YYYYMMDDHHmm.
-        example: "201812250930"
-        type: string
-      submitTime:
-        description: The date and time the message was originally submitted for scheduled delivery, in the format YYYYMMDDHHmm.
-        example: "201712251431"
-        type: string
-    type: object
-  scheduledMessageResponse:
-    example: "{timeStamp=20170117054658978, version=1.0, statusCode=200, resultsOffset=3400, resultsLimit=100, resultsTotalAvailable=3402, scheduledMessages=[{apiMessageId=2316, mobileNumber=27444444444, submitTime=201710220850, scheduledSendTime=201712251430, creditCost=1}, {apiMessageId=2317, mobileNumber=27555555555, submitTime=201710220850, scheduledSendTime=201712251430, creditCost=1}]}"
-    properties:
-      resultsLimit:
-        description: >
-          The number of items returned in the results. This is the value specified in the ***limit*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 100.
-        type: integer
-      resultsOffset:
-        description: >
-          The number of items skipped before the results were returned. This is the value specified in the ***offset*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 0.
-        type: integer
-      resultsTotalAvailable:
-        description: >
-          The total number of results available for retrieval. The ***offset*** and ***limit*** properties specify which of the total available results have been returned.
-        type: integer
-      scheduledMessages:
-        description: >
-          An array of ***scheduledMessage*** objects containing properties of each unsent scheduled message.
-        items:
-          $ref: "#/definitions/scheduledMessage"
-        maxItems: 1000
-        minItems: 1
-        type: array
-      statusCode:
-        description: The http status code returned - reflected in the body for convenience
-        type: integer
-      timeStamp:
-        description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
-        type: string
-      version:
-        description: The current version of the API of the endpoint that was called
-        type: string
-    type: object
-  shortcodeMessage:
-    example: '{"incomingApiMessageId":58324,"mobileNumber":"27444444444","receiveTime":"201707252208","messageText":"Win Big"}'
-    properties:
-      incomingApiMessageId:
-        description: The unique API message id assigned to this incoming message.
-        example: 58324
-        type: number
-      messageText:
-        description: The text of the incoming SMS message.
-        example: Hello, I'm responding to your advert.
-        type: string
-      mobileNumber:
-        description: The mobile number that sent the SMS message, displayed using the international E164 (without the plus) format
-        example: "27444444444"
-        type: string
-      receiveTime:
-        description: The date and time the message was received by WinSMS, in the format YYYYMMDDHHmm.
-        example: "201707270952"
-        type: string
-    type: object
-  shortcodeMessageResponse:
-    example: "{timeStamp=20170117054658978, version=1.0, statusCode=200, resultsOffset=3400, resultsLimit=100, resultsTotalAvailable=3402, shortcodeMessages=[{incomingApiMessageId=58324, mobileNumber=27444444444, receiveTime=201707252208, messageText=Win Big}, {incomingApiMessageId=58336, mobileNumber=27555555555, receiveTime=201707270952, messageText=Savings for me}]}"
-    properties:
-      resultsLimit:
-        description: >
-          The number of items returned in the results. This is the value specified in the ***limit*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 100.
-        type: integer
-      resultsOffset:
-        description: >
-          The number of items skipped before the results were returned. This is the value specified in the ***offset*** parameter sent to the endpoint. If the parameter was not specified, this defaults to 0.
-        type: integer
-      resultsTotalAvailable:
-        description: >
-          The total number of results available for retrieval. The ***offset*** and ***limit*** properties specify which of the total available results have been returned.
-        type: integer
-      shortcodeMessages:
-        description: >
-          An array of ***shortcodeMessage*** objects containing properties of each incoming shortcode message received by WinSMS.
-        items:
-          $ref: "#/definitions/shortcodeMessage"
-        maxItems: 1000
-        minItems: 1
-        type: array
-      statusCode:
-        description: The http status code returned - reflected in the body for convenience
-        type: integer
-      timeStamp:
-        description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
-        type: string
-      version:
-        description: The current version of the API of the endpoint that was called
-        type: string
-    type: object
-  subAccount:
-    example: '{"accountNumber":58324,"loginName":"jon@castleblack.com","firstName":"Jon","surname":"Snow","creditBalance":201.4}'
-    properties:
-      accountNumber:
-        description: >
-          The WinSMS account number of the Sub Account. This is supplied as an integer, without the leading 'W' displayed in the WinSMS Client Zone.
-        example: 58324
-        type: integer
-      creditBalance:
-        description: >
-          The remaining credit balance for the Sub Account.
-        example: 201.4
-        type: number
-      firstName:
-        description: >
-          The first name of the user that the Sub Account is registered to.
-        example: Jon
-        type: string
-      loginName:
-        description: >
-          The login name of the user that the Sub Account is registered to.
-        example: jon@castleblack.com
-        type: string
-      surname:
-        description: >
-          The surname of the user that the Sub Account is registered to.
-        example: Snow
-        type: string
-    type: object
-  subAccountsResponse:
-    example: "{timeStamp=20170117054658978, version=1.0, statusCode=200, subAccounts=[{accountNumber=58324, loginName=jon@castleblack.com, firstName=Jon, surname=Snow, creditBalance=201.4}, {accountNumber=98676, loginName=khaleesi, firstName=Daenerys, surname=Targaryen, creditBalance=1936}]}"
-    properties:
-      statusCode:
-        description: The http status code returned - reflected in the body for convenience
-        type: integer
-      subAccounts:
-        description: >
-          An array of ***subAccount*** objects containing properties of each Sub Account owned by the Main Account.
-        items:
-          $ref: "#/definitions/subAccount"
-        type: array
-      timeStamp:
-        description: The date/time the request was processed, in the format YYYYMMDDhhmmssSSS
-        type: string
-      version:
-        description: The current version of the API of the endpoint that was called
-        type: string
     type: object

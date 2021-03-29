@@ -358,7 +358,8 @@ paths:
                     example: Found errors validating 1 of your submitted parameters.
                     type: string
                   instance:
-                    example: null
+                    example:
+                      $ref: "#/paths/~1messenger/post/responses/400/content/application~1json/schema/properties/instance/example"
                     type: string
                   invalid_params:
                     items:

@@ -318,7 +318,8 @@ paths:
                 example:
                   domain:
                     aliases: []
-                    boughtAt: null
+                    boughtAt:
+                      $ref: "#/paths/~1v4~1domains/get/responses/200/content/application~1json/schema/example/domains/0/txtVerifiedAt"
                     cdnEnabled: false
                     certs: []
                     createdAt: 1544658552174
@@ -327,7 +328,8 @@ paths:
                       email: demo@zeit.co
                       id: ZspSRT4ljIEEmMHgoDwKWDei
                       username: zeit_user
-                    expiresAt: null
+                    expiresAt:
+                      $ref: "#/paths/~1v4~1domains/get/responses/200/content/application~1json/schema/example/domains/0/txtVerifiedAt"
                     id: EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
                     intendedNameservers:
                       - a.zeit-world.co.uk
@@ -338,10 +340,12 @@ paths:
                     nameservers:
                       - ns1.nameserver.net
                       - ns2.nameserver.net
-                    nsVerifiedAt: null
+                    nsVerifiedAt:
+                      $ref: "#/paths/~1v4~1domains/get/responses/200/content/application~1json/schema/example/domains/0/txtVerifiedAt"
                     serviceType: external
                     suffix: false
-                    txtVerifiedAt: null
+                    txtVerifiedAt:
+                      $ref: "#/paths/~1v4~1domains/get/responses/200/content/application~1json/schema/example/domains/0/txtVerifiedAt"
                     verificationRecord: YMc9dEJKbAncYtTqSH8dp1j5NXycfEzyjkzBJ3m3UGwR43
                     verified: false
                 properties:

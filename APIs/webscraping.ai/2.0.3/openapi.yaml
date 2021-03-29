@@ -69,52 +69,6 @@ paths:
       summary: Page HTML by URL
       tags:
         - HTML
-    post:
-      description: Returns just HTML on success, JSON on error. Request body will be passed to the target page.
-      operationId: postHTML
-      parameters:
-        - $ref: "#/components/parameters/postUrl"
-        - $ref: "#/components/parameters/headers"
-        - $ref: "#/components/parameters/timeout"
-        - $ref: "#/components/parameters/js"
-        - $ref: "#/components/parameters/proxy"
-      requestBody:
-        $ref: "#/components/requestBodies/Body"
-      responses:
-        "200":
-          content:
-            text/html:
-              example: >-
-                <html><head>
-                    <title>Example Domain</title>
-                </head>
-
-
-                <body>
-
-                <div>
-                    <h1>Example Domain</h1>
-                </body></html>
-              schema:
-                type: string
-          description: Success
-        "400":
-          $ref: "#/components/responses/400"
-        "402":
-          $ref: "#/components/responses/402"
-        "403":
-          $ref: "#/components/responses/403"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
-        "502":
-          $ref: "#/components/responses/502"
-        "504":
-          $ref: "#/components/responses/504"
-      summary: Page HTML by URL with POST request to the target page
-      tags:
-        - HTML
   /selected:
     get:
       description: Returns just HTML on success, JSON on error
@@ -154,48 +108,6 @@ paths:
         "504":
           $ref: "#/components/responses/504"
       summary: HTML of a selected page area by URL and CSS selector
-      tags:
-        - Selected HTML
-    post:
-      description: Returns just HTML on success, JSON on error. Request body will be passed to the target page.
-      operationId: postSelected
-      parameters:
-        - description: CSS selector (null by default, returns whole page HTML)
-          example: h1
-          in: query
-          name: selector
-          schema:
-            type: string
-        - $ref: "#/components/parameters/postUrl"
-        - $ref: "#/components/parameters/headers"
-        - $ref: "#/components/parameters/timeout"
-        - $ref: "#/components/parameters/js"
-        - $ref: "#/components/parameters/proxy"
-      requestBody:
-        $ref: "#/components/requestBodies/Body"
-      responses:
-        "200":
-          content:
-            text/html:
-              example: <a href="https://www.iana.org/domains/example">More information...</a>
-              schema:
-                type: string
-          description: Success
-        "400":
-          $ref: "#/components/responses/400"
-        "402":
-          $ref: "#/components/responses/402"
-        "403":
-          $ref: "#/components/responses/403"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
-        "502":
-          $ref: "#/components/responses/502"
-        "504":
-          $ref: "#/components/responses/504"
-      summary: HTML of a selected page areas by URL and CSS selector, with POST request to the target page
       tags:
         - Selected HTML
   /selected-multiple:
@@ -242,53 +154,6 @@ paths:
         "504":
           $ref: "#/components/responses/504"
       summary: HTML of multiple page areas by URL and CSS selectors
-      tags:
-        - Selected HTML
-    post:
-      description: Always returns JSON. Request body will be passed to the target page.
-      operationId: postSelectedMultiple
-      parameters:
-        - description: Multiple CSS selectors (null by default, returns whole page HTML)
-          example:
-            - h1
-          in: query
-          name: selectors
-          schema:
-            items:
-              type: string
-            type: array
-        - $ref: "#/components/parameters/postUrl"
-        - $ref: "#/components/parameters/headers"
-        - $ref: "#/components/parameters/timeout"
-        - $ref: "#/components/parameters/js"
-        - $ref: "#/components/parameters/proxy"
-      requestBody:
-        $ref: "#/components/requestBodies/Body"
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                - <a href='/test'>some link</a>
-                - Hello
-              schema:
-                $ref: "#/components/schemas/SelectedAreas"
-          description: Success
-        "400":
-          $ref: "#/components/responses/400"
-        "402":
-          $ref: "#/components/responses/402"
-        "403":
-          $ref: "#/components/responses/403"
-        "429":
-          $ref: "#/components/responses/429"
-        "500":
-          $ref: "#/components/responses/500"
-        "502":
-          $ref: "#/components/responses/502"
-        "504":
-          $ref: "#/components/responses/504"
-      summary: HTML of multiple page areas by URL and CSS selectors, with POST request to the target page
       tags:
         - Selected HTML
 components:

@@ -45,6 +45,8 @@ tags:
     name: Metering (Decorator)
   - description: Tariff information for the German market region. Provides base price and energy price information for private households (Standardlastprofil H0, SLP H0 Tarifinformation).
     name: Tariff (Price API)
+  - description: Access to status information of an existing metering change and allocation process.
+    name: WiM (Wechselprozesse im Messwesen Strom - Status API)
   - description: Helper services and endpoints for smarthome and home automation systems.
     name: SmartHome
 paths:
@@ -475,6 +477,34 @@ paths:
       summary: Energy Tariff information
       tags:
         - Tariff (Price API)
+  /wim/status:
+    get:
+      description: >
+        Access to status information of an existing metering change and allocation process.
+      operationId: wimstatus
+      parameters:
+        - description: VID key of the process.
+          in: query
+          name: vid
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                x-wim_started:
+                  description: Starting time of process
+                  example: 1615914297977
+                  type: integer
+                x-wim_status:
+                  description: Latest Status
+                  example: Erfolgreiche Prüfung
+                  type: string
+          description: Success
+      summary: WiM Proess Informtion
+      tags:
+        - WiM (Wechselprozesse im Messwesen Strom - Status API)
 components:
   schemas:
     Balance:

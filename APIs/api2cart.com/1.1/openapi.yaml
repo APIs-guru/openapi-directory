@@ -5014,6 +5014,16 @@ paths:
           required: false
           schema:
             type: string
+        - description: Retrieves orders specified by order statuses
+          explode: false
+          in: query
+          name: order_status_ids
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
         - description: Retrieve entities to their creation date
           in: query
           name: created_to

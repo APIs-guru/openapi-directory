@@ -4178,14 +4178,16 @@ definitions:
                 href: /api/v2/users/lacuna/production/Abbie_Braun/flags/alternate.page
                 type: application/json
             _value: false,
-            setting: null
+            setting:
+              $ref: "#/definitions/UserFlagSetting/properties/setting/example"
           sort.order:
             _links:
               _value: true
               self:
                 href: /api/v2/users/lacuna/production/Abbie_Braun/flags/sort.order
                 type: application/json
-              setting: null
+              setting:
+                $ref: "#/definitions/UserFlagSetting/properties/setting/example"
         type: object
     type: object
   UserRecord:

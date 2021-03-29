@@ -94,15 +94,19 @@ paths:
                   value:
                     combined_submission:
                       actions: []
-                      download_url: null
+                      download_url:
+                        $ref: "#/components/examples/example1/value"
                       expired: false
-                      expires_at: null
+                      expires_at:
+                        $ref: "#/components/examples/example1/value"
                       id: com_000000000000000001
                       metadata:
                         bar: baz
                         foo: 123
-                      pdf_hash: null
-                      processed_at: null
+                      pdf_hash:
+                        $ref: "#/components/examples/example1/value"
+                      processed_at:
+                        $ref: "#/components/examples/example1/value"
                       source_pdfs: []
                       state: pending
                       submission_ids:
@@ -263,7 +267,8 @@ paths:
                           s3_region: us-east-1
                           s3_url: https://docspring-custom-s3-test.s3.amazonaws.com/acc_1234/2018/combined_submissions/20181005090010-com_1234.pdf
                         state: processed
-                    download_url: null
+                    download_url:
+                      $ref: "#/components/examples/example1/value"
                     expired: true
                     expires_at: 2018-10-20T13:00:00Z
                     id: com_000000000000000001
@@ -617,15 +622,19 @@ paths:
                             s3_region: us-east-1
                             s3_url: https://docspring-custom-s3-test.s3.amazonaws.com/acc_1234/2018/combined_submissions/20181005090010-com_1234.pdf
                           state: processed
-                      download_url: null
+                      download_url:
+                        $ref: "#/components/examples/example1/value"
                       expired: false
-                      expires_at: null
+                      expires_at:
+                        $ref: "#/components/examples/example1/value"
                       id: com_000000000000000002
                       metadata:
                         bar: baz
                         foo: 123
-                      pdf_hash: null
-                      processed_at: null
+                      pdf_hash:
+                        $ref: "#/components/examples/example1/value"
+                      processed_at:
+                        $ref: "#/components/examples/example1/value"
                       source_pdfs:
                         - id: sub_000000000000000001
                           type: submission
@@ -866,14 +875,17 @@ paths:
                 response:
                   value:
                     auth_phone_number_hash: fdcc3985b0698d655137019b1e776171081369f0aad125b8c7f57af2b8225490
-                    auth_provider: null
+                    auth_provider:
+                      $ref: "#/components/examples/example1/value"
                     auth_second_factor_type: phone_number
-                    auth_session_id_hash: null
+                    auth_session_id_hash:
+                      $ref: "#/components/examples/example1/value"
                     auth_session_started_at: 2018-10-23T13:00:00Z
                     auth_type: password
                     auth_user_id_hash: 8ae0e445664ca53407906db8638d8ba07a2383f656383a4427bed1ab645ca29a
                     auth_username_hash: b7c141423f7030a6a771563ee0731192ea871146653a3d0cf8f8b78ca8f9699b
-                    completed_at: null
+                    completed_at:
+                      $ref: "#/components/examples/example1/value"
                     data:
                       description: Great PDF, good job!
                     email: jdoe@example.com
@@ -888,7 +900,8 @@ paths:
                     sort_order: 0
                     state: pending
                     user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36
-                    viewed_at: null
+                    viewed_at:
+                      $ref: "#/components/examples/example1/value"
               schema:
                 $ref: "#/components/schemas/submission_data_request"
           description: completed submission data request found
@@ -1001,15 +1014,19 @@ paths:
                 response:
                   value:
                     data_request:
-                      auth_phone_number_hash: null
+                      auth_phone_number_hash:
+                        $ref: "#/components/examples/example1/value"
                       auth_provider: google
                       auth_second_factor_type: none
                       auth_session_id_hash: 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
                       auth_session_started_at: 2018-10-23T13:00:00Z
                       auth_type: oauth
-                      auth_user_id_hash: null
-                      auth_username_hash: null
-                      completed_at: null
+                      auth_user_id_hash:
+                        $ref: "#/components/examples/example1/value"
+                      auth_username_hash:
+                        $ref: "#/components/examples/example1/value"
+                      completed_at:
+                        $ref: "#/components/examples/example1/value"
                       data:
                         description: Great PDF, good job!
                       email: jdoe@example.com
@@ -1024,7 +1041,8 @@ paths:
                       sort_order: 0
                       state: pending
                       user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36
-                      viewed_at: null
+                      viewed_at:
+                        $ref: "#/components/examples/example1/value"
                     status: success
               schema:
                 properties:
@@ -1178,11 +1196,13 @@ paths:
                       path: /Folder 2
                     - id: fld_000000000000000002
                       name: Folder 2
-                      parent_folder_id: null
+                      parent_folder_id:
+                        $ref: "#/components/examples/example1/value"
                       path: /
                     - id: fld_000000000000000001
                       name: Folder 1
-                      parent_folder_id: null
+                      parent_folder_id:
+                        $ref: "#/components/examples/example1/value"
                       path: /
               schema:
                 items:
@@ -1249,7 +1269,8 @@ paths:
                   value:
                     id: fld_0000000000000000n1
                     name: Folder 3
-                    parent_folder_id: null
+                    parent_folder_id:
+                      $ref: "#/components/examples/example1/value"
                     path: /
               schema:
                 properties:
@@ -1322,7 +1343,8 @@ paths:
                   value:
                     id: fld_000000000000000001
                     name: Folder 1
-                    parent_folder_id: null
+                    parent_folder_id:
+                      $ref: "#/components/examples/example1/value"
                     path: /
               schema:
                 properties:
@@ -1466,7 +1488,8 @@ paths:
                   value:
                     id: fld_000000000000000001
                     name: Folder 3
-                    parent_folder_id: null
+                    parent_folder_id:
+                      $ref: "#/components/examples/example1/value"
                     path: /
           description: successful rename
         "401":
@@ -1512,7 +1535,8 @@ paths:
                     metadata:
                       submission_number: 2
                     template_id: tpl_000000000000000001
-                template_id: null
+                template_id:
+                  $ref: "#/components/examples/example1/value"
                 test: true
               properties:
                 metadata:
@@ -1564,7 +1588,8 @@ paths:
                       metadata:
                         job_id: 54321
                       pending_count: 0
-                      processed_at: null
+                      processed_at:
+                        $ref: "#/components/examples/example1/value"
                       state: error
                       total_count: 2
                     submissions:
@@ -1576,18 +1601,24 @@ paths:
                           actions: []
                           batch_id: sbb_000000000000000001
                           data_requests: []
-                          download_url: null
-                          editable: null
+                          download_url:
+                            $ref: "#/components/examples/example1/value"
+                          editable:
+                            $ref: "#/components/examples/example1/value"
                           expired: false
-                          expires_at: null
+                          expires_at:
+                            $ref: "#/components/examples/example1/value"
                           id: sub_000000000000000001
                           json_schema_errors:
                             - The root object did not contain a required property of 'title'
                           metadata:
                             submission_number: 2
-                          pdf_hash: null
-                          permanent_download_url: null
-                          processed_at: null
+                          pdf_hash:
+                            $ref: "#/components/examples/example1/value"
+                          permanent_download_url:
+                            $ref: "#/components/examples/example1/value"
+                          processed_at:
+                            $ref: "#/components/examples/example1/value"
                           state: invalid_data
                           template_id: tpl_000000000000000001
                           test: true
@@ -1684,7 +1715,8 @@ paths:
                       metadata:
                         job_id: 54321
                       pending_count: 2
-                      processed_at: null
+                      processed_at:
+                        $ref: "#/components/examples/example1/value"
                       state: pending
                       total_count: 2
                     submissions:
@@ -1693,17 +1725,23 @@ paths:
                           actions: []
                           batch_id: sbb_000000000000000001
                           data_requests: []
-                          download_url: null
-                          editable: null
+                          download_url:
+                            $ref: "#/components/examples/example1/value"
+                          editable:
+                            $ref: "#/components/examples/example1/value"
                           expired: false
-                          expires_at: null
+                          expires_at:
+                            $ref: "#/components/examples/example1/value"
                           id: sub_000000000000000001
                           json_schema_errors: []
                           metadata:
                             submission_number: 1
-                          pdf_hash: null
-                          permanent_download_url: null
-                          processed_at: null
+                          pdf_hash:
+                            $ref: "#/components/examples/example1/value"
+                          permanent_download_url:
+                            $ref: "#/components/examples/example1/value"
+                          processed_at:
+                            $ref: "#/components/examples/example1/value"
                           state: pending
                           template_id: tpl_000000000000000001
                           test: false
@@ -1713,17 +1751,23 @@ paths:
                           actions: []
                           batch_id: sbb_000000000000000001
                           data_requests: []
-                          download_url: null
-                          editable: null
+                          download_url:
+                            $ref: "#/components/examples/example1/value"
+                          editable:
+                            $ref: "#/components/examples/example1/value"
                           expired: false
-                          expires_at: null
+                          expires_at:
+                            $ref: "#/components/examples/example1/value"
                           id: sub_000000000000000002
                           json_schema_errors: []
                           metadata:
                             submission_number: 2
-                          pdf_hash: null
-                          permanent_download_url: null
-                          processed_at: null
+                          pdf_hash:
+                            $ref: "#/components/examples/example1/value"
+                          permanent_download_url:
+                            $ref: "#/components/examples/example1/value"
+                          processed_at:
+                            $ref: "#/components/examples/example1/value"
                           state: pending
                           template_id: tpl_000000000000000001
                           test: true
@@ -1860,7 +1904,8 @@ paths:
                     metadata:
                       qux: abc
                     pending_count: 0
-                    processed_at: null
+                    processed_at:
+                      $ref: "#/components/examples/example1/value"
                     state: error
                     submissions:
                       - actions: []
@@ -1869,13 +1914,15 @@ paths:
                         download_url: https://example.com/submissions/submission.pdf
                         editable: false
                         expired: false
-                        expires_at: null
+                        expires_at:
+                          $ref: "#/components/examples/example1/value"
                         id: sub_000000000000000001
                         json_schema_errors: []
                         metadata: {}
                         pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
                         permanent_download_url: http://app.docspring.local/submissions/sub_000000000000000001/download
-                        processed_at: null
+                        processed_at:
+                          $ref: "#/components/examples/example1/value"
                         state: processed
                         template_id: tpl_000000000000000001
                         test: false
@@ -1886,13 +1933,15 @@ paths:
                         download_url: https://example.com/submissions/submission.pdf
                         editable: false
                         expired: false
-                        expires_at: null
+                        expires_at:
+                          $ref: "#/components/examples/example1/value"
                         id: sub_000000000000000002
                         json_schema_errors: []
                         metadata: {}
                         pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
                         permanent_download_url: http://app.docspring.local/submissions/sub_000000000000000002/download
-                        processed_at: null
+                        processed_at:
+                          $ref: "#/components/examples/example1/value"
                         state: processed
                         template_id: tpl_000000000000000001
                         test: false
@@ -1991,9 +2040,11 @@ paths:
                           s3_region: us-east-1
                           s3_url: https://docspring-custom-s3-test.s3.amazonaws.com/templates/tpl_eGc5CmFbPnCCmerqsx/sub_gzYpKDYFqEHxzca4kK.pdf
                         state: processed
-                    batch_id: null
+                    batch_id:
+                      $ref: "#/components/examples/example1/value"
                     data_requests: []
-                    download_url: null
+                    download_url:
+                      $ref: "#/components/examples/example1/value"
                     editable: false
                     expired: true
                     expires_at: 2018-10-20T13:00:00Z
@@ -2003,7 +2054,8 @@ paths:
                       qux: abc
                       user_id: 42
                     pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
-                    permanent_download_url: null
+                    permanent_download_url:
+                      $ref: "#/components/examples/example1/value"
                     processed_at: 2020-05-14T02:00:00Z
                     state: processed
                     template_id: tpl_000000000000000001
@@ -2083,7 +2135,8 @@ paths:
                           s3_region: us-east-1
                           s3_url: https://docspring-custom-s3-test.s3.amazonaws.com/templates/tpl_eGc5CmFbPnCCmerqsx/sub_gzYpKDYFqEHxzca4kK.pdf
                         state: processed
-                    batch_id: null
+                    batch_id:
+                      $ref: "#/components/examples/example1/value"
                     data:
                       description: This PDF is great!
                       title: Test PDF
@@ -2100,7 +2153,8 @@ paths:
                     pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
                     permanent_download_url: http://app.docspring.local/submissions/sub_000000000000000001/download
                     processed_at: 2020-05-14T02:00:00Z
-                    referrer: null
+                    referrer:
+                      $ref: "#/components/examples/example1/value"
                     source: api
                     state: processed
                     template_id: tpl_000000000000000001
@@ -2181,7 +2235,8 @@ paths:
                 response:
                   value:
                     - allow_additional_properties: false
-                      description: null
+                      description:
+                        $ref: "#/components/examples/example1/value"
                       document_filename: test-document.pdf
                       document_processed: true
                       document_state: pending
@@ -2206,16 +2261,22 @@ paths:
                       permanent_document_url: http://app.docspring.local/templates/tpl_000000000000000011/original_pdf?token=123456789abcdef
                       public_submissions: false
                       public_web_form: false
-                      redirect_url: null
-                      slack_webhook_url: null
+                      redirect_url:
+                        $ref: "#/components/examples/example1/value"
+                      slack_webhook_url:
+                        $ref: "#/components/examples/example1/value"
                       template_type: pdf
-                      webhook_url: null
+                      webhook_url:
+                        $ref: "#/components/examples/example1/value"
                     - allow_additional_properties: false
-                      description: null
-                      document_filename: null
+                      description:
+                        $ref: "#/components/examples/example1/value"
+                      document_filename:
+                        $ref: "#/components/examples/example1/value"
                       document_processed: false
                       document_state: pending
-                      document_url: null
+                      document_url:
+                        $ref: "#/components/examples/example1/value"
                       editable_submissions: false
                       expiration_interval: days
                       expire_after: 7
@@ -2224,18 +2285,25 @@ paths:
                       locked: false
                       name: Template 3
                       page_count: 1
-                      page_dimensions: null
-                      parent_folder_id: null
+                      page_dimensions:
+                        $ref: "#/components/examples/example1/value"
+                      parent_folder_id:
+                        $ref: "#/components/examples/example1/value"
                       path: /
-                      permanent_document_url: null
+                      permanent_document_url:
+                        $ref: "#/components/examples/example1/value"
                       public_submissions: false
                       public_web_form: false
-                      redirect_url: null
-                      slack_webhook_url: null
+                      redirect_url:
+                        $ref: "#/components/examples/example1/value"
+                      slack_webhook_url:
+                        $ref: "#/components/examples/example1/value"
                       template_type: html
-                      webhook_url: null
+                      webhook_url:
+                        $ref: "#/components/examples/example1/value"
                     - allow_additional_properties: false
-                      description: null
+                      description:
+                        $ref: "#/components/examples/example1/value"
                       document_filename: test-document.pdf
                       document_processed: true
                       document_state: pending
@@ -2255,17 +2323,22 @@ paths:
                           - 612
                         - - 612
                           - 792
-                      parent_folder_id: null
+                      parent_folder_id:
+                        $ref: "#/components/examples/example1/value"
                       path: /
                       permanent_document_url: http://app.docspring.local/templates/tpl_000000000000000002/original_pdf?token=123456789abcdef
                       public_submissions: false
                       public_web_form: false
-                      redirect_url: null
-                      slack_webhook_url: null
+                      redirect_url:
+                        $ref: "#/components/examples/example1/value"
+                      slack_webhook_url:
+                        $ref: "#/components/examples/example1/value"
                       template_type: pdf
-                      webhook_url: null
+                      webhook_url:
+                        $ref: "#/components/examples/example1/value"
                     - allow_additional_properties: false
-                      description: null
+                      description:
+                        $ref: "#/components/examples/example1/value"
                       document_filename: blank_pdf.pdf
                       document_processed: true
                       document_state: processed
@@ -2281,15 +2354,19 @@ paths:
                       page_dimensions:
                         - - 612
                           - 792
-                      parent_folder_id: null
+                      parent_folder_id:
+                        $ref: "#/components/examples/example1/value"
                       path: /
                       permanent_document_url: http://app.docspring.local/templates/tpl_000000000000000001/original_pdf?token=123456789abcdef
                       public_submissions: false
                       public_web_form: false
-                      redirect_url: null
-                      slack_webhook_url: null
+                      redirect_url:
+                        $ref: "#/components/examples/example1/value"
+                      slack_webhook_url:
+                        $ref: "#/components/examples/example1/value"
                       template_type: pdf
-                      webhook_url: null
+                      webhook_url:
+                        $ref: "#/components/examples/example1/value"
               schema:
                 items:
                   properties:
@@ -2422,7 +2499,8 @@ paths:
                 response:
                   value:
                     allow_additional_properties: false
-                    description: null
+                    description:
+                      $ref: "#/components/examples/example1/value"
                     document_filename: fw8ben.pdf
                     document_processed: false
                     document_state: pending
@@ -2435,16 +2513,21 @@ paths:
                     locked: false
                     name: Test Template
                     page_count: 0
-                    page_dimensions: null
+                    page_dimensions:
+                      $ref: "#/components/examples/example1/value"
                     parent_folder_id: fld_000000000000000001
                     path: /Folder
-                    permanent_document_url: null
+                    permanent_document_url:
+                      $ref: "#/components/examples/example1/value"
                     public_submissions: false
                     public_web_form: false
-                    redirect_url: null
-                    slack_webhook_url: null
+                    redirect_url:
+                      $ref: "#/components/examples/example1/value"
+                    slack_webhook_url:
+                      $ref: "#/components/examples/example1/value"
                     template_type: pdf
-                    webhook_url: null
+                    webhook_url:
+                      $ref: "#/components/examples/example1/value"
               schema:
                 properties:
                   allow_additional_properties:
@@ -2542,7 +2625,8 @@ paths:
                 response:
                   value:
                     allow_additional_properties: false
-                    description: null
+                    description:
+                      $ref: "#/components/examples/example1/value"
                     document_filename: test-document.pdf
                     document_processed: true
                     document_state: pending
@@ -2567,10 +2651,13 @@ paths:
                     permanent_document_url: http://app.docspring.local/templates/tpl_000000000000000011/original_pdf?token=123456789abcdef
                     public_submissions: false
                     public_web_form: false
-                    redirect_url: null
-                    slack_webhook_url: null
+                    redirect_url:
+                      $ref: "#/components/examples/example1/value"
+                    slack_webhook_url:
+                      $ref: "#/components/examples/example1/value"
                     template_type: pdf
-                    webhook_url: null
+                    webhook_url:
+                      $ref: "#/components/examples/example1/value"
               schema:
                 properties:
                   allow_additional_properties:
@@ -3224,7 +3311,8 @@ paths:
                 response:
                   value:
                     allow_additional_properties: false
-                    description: null
+                    description:
+                      $ref: "#/components/examples/example1/value"
                     document_filename: blank_pdf.pdf
                     document_processed: true
                     document_state: processed
@@ -3245,10 +3333,13 @@ paths:
                     permanent_document_url: http://app.docspring.local/templates/tpl_00000000000000new1/original_pdf?token=123456789abcdef
                     public_submissions: false
                     public_web_form: false
-                    redirect_url: null
-                    slack_webhook_url: null
+                    redirect_url:
+                      $ref: "#/components/examples/example1/value"
+                    slack_webhook_url:
+                      $ref: "#/components/examples/example1/value"
                     template_type: pdf
-                    webhook_url: null
+                    webhook_url:
+                      $ref: "#/components/examples/example1/value"
               schema:
                 properties:
                   allow_additional_properties:
@@ -3375,7 +3466,8 @@ paths:
                 response:
                   value:
                     allow_additional_properties: false
-                    description: null
+                    description:
+                      $ref: "#/components/examples/example1/value"
                     document_filename: blank_pdf.pdf
                     document_processed: true
                     document_state: processed
@@ -3396,10 +3488,13 @@ paths:
                     permanent_document_url: http://app.docspring.local/templates/tpl_000000000000000001/original_pdf?token=123456789abcdef
                     public_submissions: false
                     public_web_form: false
-                    redirect_url: null
-                    slack_webhook_url: null
+                    redirect_url:
+                      $ref: "#/components/examples/example1/value"
+                    slack_webhook_url:
+                      $ref: "#/components/examples/example1/value"
                     template_type: pdf
-                    webhook_url: null
+                    webhook_url:
+                      $ref: "#/components/examples/example1/value"
               schema:
                 properties:
                   allow_additional_properties:
@@ -3692,20 +3787,27 @@ paths:
                     status: success
                     submission:
                       actions: []
-                      batch_id: null
+                      batch_id:
+                        $ref: "#/components/examples/example1/value"
                       data_requests: []
-                      download_url: null
-                      editable: null
+                      download_url:
+                        $ref: "#/components/examples/example1/value"
+                      editable:
+                        $ref: "#/components/examples/example1/value"
                       expired: false
-                      expires_at: null
+                      expires_at:
+                        $ref: "#/components/examples/example1/value"
                       id: sub_000000000000000001
                       json_schema_errors: []
                       metadata:
                         bar: baz
                         foo: 123
-                      pdf_hash: null
-                      permanent_download_url: null
-                      processed_at: null
+                      pdf_hash:
+                        $ref: "#/components/examples/example1/value"
+                      permanent_download_url:
+                        $ref: "#/components/examples/example1/value"
+                      processed_at:
+                        $ref: "#/components/examples/example1/value"
                       state: pending
                       template_id: tpl_000000000000000001
                       test: false
@@ -3762,21 +3864,28 @@ paths:
                     status: error
                     submission:
                       actions: []
-                      batch_id: null
+                      batch_id:
+                        $ref: "#/components/examples/example1/value"
                       data_requests: []
-                      download_url: null
-                      editable: null
+                      download_url:
+                        $ref: "#/components/examples/example1/value"
+                      editable:
+                        $ref: "#/components/examples/example1/value"
                       expired: false
-                      expires_at: null
+                      expires_at:
+                        $ref: "#/components/examples/example1/value"
                       id: sub_000000000000000001
                       json_schema_errors:
                         - The root object did not contain a required property of 'description'
                       metadata:
                         bar: baz
                         foo: 123
-                      pdf_hash: null
-                      permanent_download_url: null
-                      processed_at: null
+                      pdf_hash:
+                        $ref: "#/components/examples/example1/value"
+                      permanent_download_url:
+                        $ref: "#/components/examples/example1/value"
+                      processed_at:
+                        $ref: "#/components/examples/example1/value"
                       state: invalid_data
                       template_id: tpl_000000000000000001
                       test: false
@@ -3904,19 +4013,26 @@ paths:
                     - status: success
                       submission:
                         actions: []
-                        batch_id: null
+                        batch_id:
+                          $ref: "#/components/examples/example1/value"
                         data_requests: []
-                        download_url: null
-                        editable: null
+                        download_url:
+                          $ref: "#/components/examples/example1/value"
+                        editable:
+                          $ref: "#/components/examples/example1/value"
                         expired: false
-                        expires_at: null
+                        expires_at:
+                          $ref: "#/components/examples/example1/value"
                         id: sub_000000000000000001
                         json_schema_errors: []
                         metadata:
                           submission_number: 1
-                        pdf_hash: null
-                        permanent_download_url: null
-                        processed_at: null
+                        pdf_hash:
+                          $ref: "#/components/examples/example1/value"
+                        permanent_download_url:
+                          $ref: "#/components/examples/example1/value"
+                        processed_at:
+                          $ref: "#/components/examples/example1/value"
                         state: pending
                         template_id: tpl_000000000000000001
                         test: false
@@ -3924,19 +4040,26 @@ paths:
                     - status: success
                       submission:
                         actions: []
-                        batch_id: null
+                        batch_id:
+                          $ref: "#/components/examples/example1/value"
                         data_requests: []
-                        download_url: null
-                        editable: null
+                        download_url:
+                          $ref: "#/components/examples/example1/value"
+                        editable:
+                          $ref: "#/components/examples/example1/value"
                         expired: false
-                        expires_at: null
+                        expires_at:
+                          $ref: "#/components/examples/example1/value"
                         id: sub_000000000000000002
                         json_schema_errors: []
                         metadata:
                           submission_number: 2
-                        pdf_hash: null
-                        permanent_download_url: null
-                        processed_at: null
+                        pdf_hash:
+                          $ref: "#/components/examples/example1/value"
+                        permanent_download_url:
+                          $ref: "#/components/examples/example1/value"
+                        processed_at:
+                          $ref: "#/components/examples/example1/value"
                         state: pending
                         template_id: tpl_000000000000000001
                         test: false
@@ -3994,20 +4117,27 @@ paths:
                       status: error
                       submission:
                         actions: []
-                        batch_id: null
+                        batch_id:
+                          $ref: "#/components/examples/example1/value"
                         data_requests: []
-                        download_url: null
-                        editable: null
+                        download_url:
+                          $ref: "#/components/examples/example1/value"
+                        editable:
+                          $ref: "#/components/examples/example1/value"
                         expired: false
-                        expires_at: null
+                        expires_at:
+                          $ref: "#/components/examples/example1/value"
                         id: sub_000000000000000001
                         json_schema_errors:
                           - The root object did not contain a required property of 'description'
                         metadata:
                           submission_number: 1
-                        pdf_hash: null
-                        permanent_download_url: null
-                        processed_at: null
+                        pdf_hash:
+                          $ref: "#/components/examples/example1/value"
+                        permanent_download_url:
+                          $ref: "#/components/examples/example1/value"
+                        processed_at:
+                          $ref: "#/components/examples/example1/value"
                         state: invalid_data
                         template_id: tpl_000000000000000001
                         test: false
@@ -4017,20 +4147,27 @@ paths:
                       status: error
                       submission:
                         actions: []
-                        batch_id: null
+                        batch_id:
+                          $ref: "#/components/examples/example1/value"
                         data_requests: []
-                        download_url: null
-                        editable: null
+                        download_url:
+                          $ref: "#/components/examples/example1/value"
+                        editable:
+                          $ref: "#/components/examples/example1/value"
                         expired: false
-                        expires_at: null
+                        expires_at:
+                          $ref: "#/components/examples/example1/value"
                         id: sub_000000000000000002
                         json_schema_errors:
                           - The root object did not contain a required property of 'title'
                         metadata:
                           submission_number: 2
-                        pdf_hash: null
-                        permanent_download_url: null
-                        processed_at: null
+                        pdf_hash:
+                          $ref: "#/components/examples/example1/value"
+                        permanent_download_url:
+                          $ref: "#/components/examples/example1/value"
+                        processed_at:
+                          $ref: "#/components/examples/example1/value"
                         state: invalid_data
                         template_id: tpl_000000000000000001
                         test: false
@@ -4160,7 +4297,8 @@ paths:
                 response:
                   value:
                     allow_additional_properties: false
-                    description: null
+                    description:
+                      $ref: "#/components/examples/example1/value"
                     document_filename: fw8ben-presigned.pdf
                     document_processed: false
                     document_state: pending
@@ -4173,16 +4311,22 @@ paths:
                     locked: false
                     name: Test Template Presigned
                     page_count: 0
-                    page_dimensions: null
-                    parent_folder_id: null
+                    page_dimensions:
+                      $ref: "#/components/examples/example1/value"
+                    parent_folder_id:
+                      $ref: "#/components/examples/example1/value"
                     path: /
-                    permanent_document_url: null
+                    permanent_document_url:
+                      $ref: "#/components/examples/example1/value"
                     public_submissions: false
                     public_web_form: false
-                    redirect_url: null
-                    slack_webhook_url: null
+                    redirect_url:
+                      $ref: "#/components/examples/example1/value"
+                    slack_webhook_url:
+                      $ref: "#/components/examples/example1/value"
                     template_type: pdf
-                    webhook_url: null
+                    webhook_url:
+                      $ref: "#/components/examples/example1/value"
               schema:
                 properties:
                   allow_additional_properties:
@@ -4349,10 +4493,12 @@ paths:
                   value:
                     allow_additional_properties: false
                     description: HTML template created via API
-                    document_filename: null
+                    document_filename:
+                      $ref: "#/components/examples/example1/value"
                     document_processed: false
                     document_state: pending
-                    document_url: null
+                    document_url:
+                      $ref: "#/components/examples/example1/value"
                     editable_submissions: false
                     expiration_interval: days
                     expire_after: 7
@@ -4361,16 +4507,22 @@ paths:
                     locked: false
                     name: Test HTML Template
                     page_count: 1
-                    page_dimensions: null
-                    parent_folder_id: null
+                    page_dimensions:
+                      $ref: "#/components/examples/example1/value"
+                    parent_folder_id:
+                      $ref: "#/components/examples/example1/value"
                     path: /
-                    permanent_document_url: null
+                    permanent_document_url:
+                      $ref: "#/components/examples/example1/value"
                     public_submissions: false
                     public_web_form: false
-                    redirect_url: null
-                    slack_webhook_url: null
+                    redirect_url:
+                      $ref: "#/components/examples/example1/value"
+                    slack_webhook_url:
+                      $ref: "#/components/examples/example1/value"
                     template_type: html
-                    webhook_url: null
+                    webhook_url:
+                      $ref: "#/components/examples/example1/value"
               schema:
                 properties:
                   allow_additional_properties:
@@ -4527,6 +4679,9 @@ paths:
       tags:
         - PDF
 components:
+  examples:
+    example1:
+      ? value
   schemas:
     authentication_error:
       properties:

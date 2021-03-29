@@ -2856,7 +2856,8 @@ paths:
                     properties:
                       groupCategories:
                         description: Group tree
-                        example: null
+                        example:
+                          $ref: "#/paths/~1rules~1tree/get/responses/200/content/application~1json/schema/properties/data/properties/ruleCategories/example"
                         type: object
                     required:
                       - groupCategories
@@ -3776,6 +3777,11 @@ paths:
             # Removing the key "env_type" and changing "shell" and use default policy mode
 
             curl --header "X-API-Token: yourToken" --request POST https://rudder.example.com/rudder/api/latest/nodes/17dadf50-6056-4c8b-a935-6b97d14b89a7 --data "properties=shell=/bin/false" -d "properties=env_type=" -d "policyMode=default"
+
+
+            # Reset the key status to accept next inventory with its new key
+
+            curl --header "X-API-Token: yourToken" --request POST -H "Content-Type: application/json" 'https://rudder.example.com/rudder/api/latest/nodes/root' -d '{"agentKey":{"status":"undefined"}}'
   "/nodes/{nodeId}/applyPolicy":
     post:
       description: This API allows to trigger an agent run on the target node. Response is a stream of the actual agent run on the node.
@@ -6821,13 +6827,13 @@ components:
       description: Information about agent key or certificate
       properties:
         status:
-          description: Certification status of the security token (reset to `undefined` to trust a new certificate). If "certified", inventory signature check will be enforced
+          description: Certification status of the security token (reset to `undefined` to trust a new certificate). If `certified`, inventory signature check will be enforced
           enum:
             - certified
             - undefined
           type: string
         value:
-          description: Certificate (or public key for <6.0 agents) used by the agent. Be careful write a "\n" after header line and before footer line, JSON does not keep formating in string.
+          description: Certificate (or public key for <6.0 agents) used by the agent. Be careful write a "\n" after header line and before footer line, JSON does not keep formatting in string.
           example: >-
             -----BEGIN CERTIFICATE-----
 

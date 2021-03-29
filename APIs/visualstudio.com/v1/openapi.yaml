@@ -2977,6 +2977,8 @@ components:
         containerImage:
           nullable: true
           type: string
+        createAsPrebuild:
+          type: boolean
         devContainerJson:
           nullable: true
           type: string
@@ -2994,6 +2996,8 @@ components:
           type: string
         hasDevcontainerJson:
           type: boolean
+        identity:
+          $ref: "#/components/schemas/IdentityBody"
         label:
           nullable: true
           type: string
@@ -3070,6 +3074,8 @@ components:
           type: boolean
         unifiedContainerImplementation:
           type: boolean
+        usePrebuild:
+          type: boolean
       type: object
     GitConfigOptionsBody:
       additionalProperties: false
@@ -3120,6 +3126,19 @@ components:
           type: string
         timeStamp:
           format: date-time
+          type: string
+      type: object
+    IdentityBody:
+      additionalProperties: false
+      properties:
+        displayName:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        userName:
+          nullable: true
           type: string
       type: object
     IssueDelegatePlanAccessTokenBody:

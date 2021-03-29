@@ -329,7 +329,7 @@ paths:
                 $ref: "#/components/schemas/Account"
           description: Rev.ai Account
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          $ref: "#/paths/~1jobs/get/responses/401"
       summary: Get Account
       tags:
         - Account
@@ -424,18 +424,7 @@ paths:
                 type: https://www.rev.ai/api/v1/errors/invalid-parameters
               schema:
                 allOf:
-                  - description: Problem details object returned on errors
-                    properties:
-                      status:
-                        description: HTTP status code of the error
-                        type: integer
-                      title:
-                        description: Short, human-readable summary of the problem type
-                        type: string
-                      type:
-                        description: URI that identifies the problem
-                        type: string
-                    type: object
+                  - $ref: "#/components/responses/JobNotFound/content/application~1problem+json/schema"
                   - properties:
                       parameters:
                         description: Invalid properties object where each property is the key, mapped to a list of reasons why the property is invalid
@@ -443,7 +432,25 @@ paths:
                     type: object
           description: Bad Request
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          content:
+            application/problem+json:
+              example:
+                status: 401
+                title: Authorization has been denied for this request
+              schema:
+                properties:
+                  status:
+                    description: HTTP status code of the error
+                    type: integer
+                  title:
+                    description: Short, human-readable summary of the problem type
+                    type: string
+          description: >
+            Request Unauthorized
+
+            ***
+
+            Caused by an old or invalid [access token](#section/Authentication/Access-Token), try regenerating your token on your [access token page](https://rev.ai/access_token).
       summary: Get List of Jobs
       tags:
         - Jobs
@@ -561,7 +568,7 @@ paths:
                 type: https://www.rev.ai/api/v1/errors/invalid-parameters
               schema:
                 allOf:
-                  - $ref: "#/components/responses/JobNotFound/content/application~1problem%2Bjson/schema"
+                  - $ref: "#/components/responses/JobNotFound/content/application~1problem+json/schema"
                   - properties:
                       parameters:
                         description: Invalid properties object where each property is the key, mapped to a list of reasons why the property is invalid
@@ -569,7 +576,7 @@ paths:
                     type: object
           description: Bad Request
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          $ref: "#/paths/~1jobs/get/responses/401"
         "413":
           $ref: "#/components/responses/PayloadTooLarge"
       summary: Submit Transcription Job
@@ -700,7 +707,7 @@ paths:
         "204":
           description: Job was successfully deleted
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          $ref: "#/paths/~1jobs/get/responses/401"
         "404":
           $ref: "#/components/responses/JobNotFound"
         "409":
@@ -797,25 +804,7 @@ paths:
                 $ref: "#/components/schemas/Job"
           description: Transcription Job Details
         "401":
-          content:
-            application/problem+json:
-              example:
-                status: 401
-                title: Authorization has been denied for this request
-              schema:
-                properties:
-                  status:
-                    description: HTTP status code of the error
-                    type: integer
-                  title:
-                    description: Short, human-readable summary of the problem type
-                    type: string
-          description: >
-            Request Unauthorized
-
-            ***
-
-            Caused by an old or invalid [access token](#section/Authentication/Access-Token), try regenerating your token on your [access token page](https://rev.ai/access_token).
+          $ref: "#/paths/~1jobs/get/responses/401"
         "404":
           $ref: "#/components/responses/JobNotFound"
       summary: Get Job By Id
@@ -954,7 +943,7 @@ paths:
 
             ([SRT](https://en.wikipedia.org/wiki/SubRip))
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          $ref: "#/paths/~1jobs/get/responses/401"
         "404":
           $ref: "#/components/responses/JobNotFound"
         "405":
@@ -1302,7 +1291,7 @@ paths:
 
             Note: Transcript output format is required in the Accept header. Output can either be in Rev's JSON format or plaintext.
         "401":
-          $ref: "#/paths/~1jobs~1%7Bid%7D/get/responses/401"
+          $ref: "#/paths/~1jobs/get/responses/401"
         "404":
           $ref: "#/components/responses/JobNotFound"
         "406":
@@ -1453,7 +1442,7 @@ components:
             type: https://www.rev.ai/api/v1/errors/unsupported-output-format
           schema:
             allOf:
-              - $ref: "#/components/responses/JobNotFound/content/application~1problem%2Bjson/schema"
+              - $ref: "#/components/responses/JobNotFound/content/application~1problem+json/schema"
               - properties:
                   allowed_values:
                     description: Allowed values for this request
@@ -1482,7 +1471,7 @@ components:
             type: https://rev.ai/api/v1/errors/invalid-job-state
           schema:
             allOf:
-              - $ref: "#/components/responses/JobNotFound/content/application~1problem%2Bjson/schema"
+              - $ref: "#/components/responses/JobNotFound/content/application~1problem+json/schema"
               - properties:
                   allowed_values:
                     description: Allowed values for this request
@@ -1508,7 +1497,7 @@ components:
             type: https://rev.ai/api/v1/errors/invalid-job-properties
           schema:
             allOf:
-              - $ref: "#/components/responses/JobNotFound/content/application~1problem%2Bjson/schema"
+              - $ref: "#/components/responses/JobNotFound/content/application~1problem+json/schema"
               - properties:
                   detail:
                     description: Human-readable explanation specific to this occurrence of the problem
@@ -1528,7 +1517,7 @@ components:
             type: https://rev.ai/api/v1/errors/invalid-job-state
           schema:
             allOf:
-              - $ref: "#/components/responses/JobNotFound/content/application~1problem%2Bjson/schema"
+              - $ref: "#/components/responses/JobNotFound/content/application~1problem+json/schema"
               - properties:
                   allowed_values:
                     description: Allowed values for this request
@@ -1562,7 +1551,7 @@ components:
             type: https://www.rev.ai/api/v1/errors/unsupported-output-format
           schema:
             allOf:
-              - $ref: "#/components/responses/JobNotFound/content/application~1problem%2Bjson/schema"
+              - $ref: "#/components/responses/JobNotFound/content/application~1problem+json/schema"
               - properties:
                   allowed_values:
                     description: Allowed values for this request
@@ -1579,6 +1568,8 @@ components:
       description: Invalid Transcript Format
     JobNotFound:
       content:
+        application/problem json:
+          schema: {}
         application/problem+json:
           example:
             status: 404
