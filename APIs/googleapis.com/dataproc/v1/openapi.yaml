@@ -1588,6 +1588,9 @@ components:
         gceClusterConfig:
           $ref: "#/components/schemas/GceClusterConfig"
           description: Optional. The shared Compute Engine config settings for all instances in a cluster.
+        gkeClusterConfig:
+          $ref: "#/components/schemas/GkeClusterConfig"
+          description: Optional. BETA. The Kubernetes Engine config for Dataproc clusters deployed to Kubernetes. Setting this is considered mutually exclusive with Compute Engine-based options such as gce_cluster_config, master_config, worker_config, secondary_worker_config, and autoscaling_config.
         initializationActions:
           description: "Optional. Commands to execute on each node after config is completed. By default, executables are run on master and all worker nodes. You can test a node's role metadata to run an executable on a master or worker node, as shown below using curl (you can also use wget): ROLE=$(curl -H Metadata-Flavor:Google http://metadata/computeMetadata/v1/instance/attributes/dataproc-role) if [[ \"${ROLE}\" == 'Master' ]]; then ... master specific actions ... else ... worker specific actions ... fi "
           items:
@@ -1898,6 +1901,13 @@ components:
           format: int32
           type: integer
       type: object
+    GkeClusterConfig:
+      description: The GKE config for this cluster.
+      properties:
+        namespacedGkeDeploymentTarget:
+          $ref: "#/components/schemas/NamespacedGkeDeploymentTarget"
+          description: Optional. A target for the deployment.
+      type: object
     HadoopJob:
       description: A Dataproc job for running Apache Hadoop MapReduce (https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html) jobs on Apache Hadoop YARN (https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-site/YARN.html).
       properties:
@@ -1962,6 +1972,15 @@ components:
           additionalProperties:
             type: string
           description: 'Optional. Mapping of query variable names to values (equivalent to the Hive command: SET name="value";).'
+          type: object
+      type: object
+    IdentityConfig:
+      description: Identity related configuration, including service account based secure multi-tenancy user mappings.
+      properties:
+        userServiceAccountMapping:
+          additionalProperties:
+            type: string
+          description: Required. Map of user to service account.
           type: object
       type: object
     InjectCredentialsRequest:
@@ -2432,6 +2451,16 @@ components:
           description: "Required. Resource name of an existing Dataproc Metastore service.Example: projects/[project_id]/locations/[dataproc_region]/services/[service-name]"
           type: string
       type: object
+    NamespacedGkeDeploymentTarget:
+      description: A full, namespace-isolated deployment target for an existing GKE cluster.
+      properties:
+        clusterNamespace:
+          description: Optional. A namespace within the GKE cluster to deploy into.
+          type: string
+        targetGkeCluster:
+          description: "Optional. The target GKE cluster to deploy to. Format: 'projects/{project}/locations/{location}/clusters/{cluster_id}'"
+          type: string
+      type: object
     NodeGroupAffinity:
       description: Node Group Affinity for clusters using sole-tenant node groups.
       properties:
@@ -2685,6 +2714,9 @@ components:
     SecurityConfig:
       description: Security related configuration, including encryption, Kerberos, etc.
       properties:
+        identityConfig:
+          $ref: "#/components/schemas/IdentityConfig"
+          description: Optional. Identity related configuration, including service account based secure multi-tenancy user mappings.
         kerberosConfig:
           $ref: "#/components/schemas/KerberosConfig"
           description: Optional. Kerberos related configuration.

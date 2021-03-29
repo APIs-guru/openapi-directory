@@ -53,7 +53,6 @@ paths:
           required: true
           schema:
             enum:
-              - application_name_undefined
               - access_transparency
               - admin
               - calendar
@@ -182,7 +181,6 @@ paths:
           required: true
           schema:
             enum:
-              - application_name_unspecified
               - access_transparency
               - admin
               - calendar
@@ -418,7 +416,6 @@ paths:
           required: true
           schema:
             enum:
-              - entity_type_undefined
               - gplus_communities
             type: string
         - description: Represents the key of the object to filter the data with.
@@ -427,7 +424,6 @@ paths:
           required: true
           schema:
             enum:
-              - entityKeyUndefined
               - all
               - entityKey
             type: string

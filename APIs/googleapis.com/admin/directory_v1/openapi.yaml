@@ -73,7 +73,6 @@ paths:
           name: orderBy
           schema:
             enum:
-              - orderByUndefined
               - annotatedLocation
               - annotatedUser
               - lastSync
@@ -97,7 +96,6 @@ paths:
           name: projection
           schema:
             enum:
-              - PROJECTION_UNDEFINED
               - BASIC
               - FULL
             type: string
@@ -111,7 +109,6 @@ paths:
           name: sortOrder
           schema:
             enum:
-              - SORT_ORDER_UNDEFINED
               - ASCENDING
               - DESCENDING
             type: string
@@ -211,7 +208,6 @@ paths:
           name: projection
           schema:
             enum:
-              - PROJECTION_UNDEFINED
               - BASIC
               - FULL
             type: string
@@ -266,7 +262,6 @@ paths:
           name: projection
           schema:
             enum:
-              - PROJECTION_UNDEFINED
               - BASIC
               - FULL
             type: string
@@ -310,7 +305,6 @@ paths:
           name: projection
           schema:
             enum:
-              - PROJECTION_UNDEFINED
               - BASIC
               - FULL
             type: string
@@ -501,7 +495,6 @@ paths:
           name: orderBy
           schema:
             enum:
-              - orderByUndefined
               - deviceId
               - email
               - lastSync
@@ -521,7 +514,6 @@ paths:
           name: projection
           schema:
             enum:
-              - PROJECTION_UNDEFINED
               - BASIC
               - FULL
             type: string
@@ -535,7 +527,6 @@ paths:
           name: sortOrder
           schema:
             enum:
-              - SORT_ORDER_UNDEFINED
               - ASCENDING
               - DESCENDING
             type: string
@@ -621,7 +612,6 @@ paths:
           name: projection
           schema:
             enum:
-              - PROJECTION_UNDEFINED
               - BASIC
               - FULL
             type: string
@@ -728,7 +718,6 @@ paths:
           name: type
           schema:
             enum:
-              - typeUndefined
               - all
               - children
             type: string
@@ -1526,7 +1515,6 @@ paths:
           name: coordinatesSource
           schema:
             enum:
-              - COORDINATES_SOURCE_UNDEFINED
               - CLIENT_SPECIFIED
               - RESOLVED_FROM_ADDRESS
               - SOURCE_UNSPECIFIED
@@ -1644,7 +1632,6 @@ paths:
           name: coordinatesSource
           schema:
             enum:
-              - COORDINATES_SOURCE_UNDEFINED
               - CLIENT_SPECIFIED
               - RESOLVED_FROM_ADDRESS
               - SOURCE_UNSPECIFIED
@@ -1689,7 +1676,6 @@ paths:
           name: coordinatesSource
           schema:
             enum:
-              - COORDINATES_SOURCE_UNDEFINED
               - CLIENT_SPECIFIED
               - RESOLVED_FROM_ADDRESS
               - SOURCE_UNSPECIFIED
@@ -2773,7 +2759,6 @@ paths:
           name: orderBy
           schema:
             enum:
-              - orderByUndefined
               - email
             type: string
         - description: Token to specify next page in the list
@@ -2791,7 +2776,6 @@ paths:
           name: sortOrder
           schema:
             enum:
-              - SORT_ORDER_UNDEFINED
               - ASCENDING
               - DESCENDING
             type: string
@@ -3426,7 +3410,6 @@ paths:
           name: event
           schema:
             enum:
-              - eventUndefined
               - add
               - delete
               - makeAdmin
@@ -3445,7 +3428,6 @@ paths:
           name: orderBy
           schema:
             enum:
-              - orderByUndefined
               - email
               - familyName
               - givenName
@@ -3460,7 +3442,6 @@ paths:
           name: projection
           schema:
             enum:
-              - projectionUndefined
               - basic
               - custom
               - full
@@ -3480,7 +3461,6 @@ paths:
           name: sortOrder
           schema:
             enum:
-              - SORT_ORDER_UNDEFINED
               - ASCENDING
               - DESCENDING
             type: string
@@ -3489,7 +3469,6 @@ paths:
           name: viewType
           schema:
             enum:
-              - view_type_undefined
               - admin_view
               - domain_public
             type: string
@@ -3586,7 +3565,6 @@ paths:
           name: event
           schema:
             enum:
-              - eventTypeUnspecified
               - add
               - delete
               - makeAdmin
@@ -3605,7 +3583,6 @@ paths:
           name: orderBy
           schema:
             enum:
-              - orderByUnspecified
               - email
               - familyName
               - givenName
@@ -3620,7 +3597,6 @@ paths:
           name: projection
           schema:
             enum:
-              - projectionUnspecified
               - basic
               - custom
               - full
@@ -3640,7 +3616,6 @@ paths:
           name: sortOrder
           schema:
             enum:
-              - sortOrderUnspecified
               - ASCENDING
               - DESCENDING
             type: string
@@ -3720,7 +3695,6 @@ paths:
           name: projection
           schema:
             enum:
-              - projectionUndefined
               - basic
               - custom
               - full
@@ -3730,7 +3704,6 @@ paths:
           name: viewType
           schema:
             enum:
-              - view_type_undefined
               - admin_view
               - domain_public
             type: string
@@ -3932,7 +3905,6 @@ paths:
           name: event
           schema:
             enum:
-              - eventUndefined
               - add
               - delete
             type: string
@@ -5935,9 +5907,9 @@ components:
           type: string
         printer:
           $ref: "#/components/schemas/Printer"
-          description: Failed printers.
-        printerIds:
-          description: Ids of failed printers.
+          description: Failed printer.
+        printerId:
+          description: Id of a failed printer.
           type: string
       type: object
     Feature:

@@ -53,6 +53,7 @@ tags:
   - name: healthChecks
   - name: httpHealthChecks
   - name: httpsHealthChecks
+  - name: imageFamilyViews
   - name: images
   - name: instanceGroupManagers
   - name: instanceGroups
@@ -23263,7 +23264,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
     post:
       description: >-
-        Flags the specified instances in the managed instance group to be immediately recreated. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+        Flags the specified VM instances in the managed instance group to be immediately recreated. Each instance is recreated using the group's current configuration. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of each instance by checking its currentAction field; for more information, see Checking the status of managed instances.
 
 
         If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
@@ -33944,6 +33945,59 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - disks
+  "/projects/{project}/zones/{zone}/imageFamilyViews/{family}":
+    get:
+      description: Returns the latest image that is part of an image family, is not deprecated and is rolled out in the specified zone.
+      operationId: compute.imageFamilyViews.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name of the image family to search for.
+          in: path
+          name: family
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ImageFamilyView"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - imageFamilyViews
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
   "/projects/{project}/zones/{zone}/instanceGroupManagers":
     get:
       description: Retrieves a list of managed instance groups that are contained within the specified project and zone.
@@ -34993,7 +35047,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
     post:
       description: >-
-        Flags the specified instances in the managed instance group to be immediately recreated. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
+        Flags the specified VM instances in the managed instance group to be immediately recreated. Each instance is recreated using the group's current configuration. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of each instance by checking its currentAction field; for more information, see Checking the status of managed instances.
 
 
         If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
@@ -36378,7 +36432,7 @@ paths:
         - instances
   "/projects/{project}/zones/{zone}/instances/{instance}":
     delete:
-      description: Deletes the specified Instance resource. For more information, see Stopping or Deleting an Instance.
+      description: Deletes the specified Instance resource. For more information, see Deleting an instance.
       operationId: compute.instances.delete
       parameters:
         - description: Project ID for this request.
@@ -43993,7 +44047,7 @@ components:
             Type of session affinity to use. The default is NONE.
 
 
-            When the loadBalancingScheme is EXTERNAL: * For Network Load Balancing, the possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO. * For all other load balancers that use loadBalancingScheme=EXTERNAL, the possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. * You can use GENERATED_COOKIE if the protocol is HTTP, HTTP2, or HTTPS.
+            When the loadBalancingScheme is EXTERNAL: * For Network Load Balancing, the possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or  CLIENT_IP_PORT_PROTO. * For all other load balancers that use loadBalancingScheme=EXTERNAL, the possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. * You can use GENERATED_COOKIE if the protocol is HTTP, HTTP2, or HTTPS.
 
 
             When the loadBalancingScheme is INTERNAL, possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO.
@@ -44005,6 +44059,7 @@ components:
             Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           enum:
             - CLIENT_IP
+            - CLIENT_IP_NO_DESTINATION
             - CLIENT_IP_PORT_PROTO
             - CLIENT_IP_PROTO
             - GENERATED_COOKIE
@@ -48177,6 +48232,12 @@ components:
             type: string
           description: Metadata defined as annotations for network endpoint.
           type: object
+        forwardingRule:
+          description: URL of the forwarding rule associated with the health status of the instance.
+          type: string
+        forwardingRuleIp:
+          description: A forwarding rule IP address assigned to this instance.
+          type: string
         healthState:
           description: Health state of the instance.
           enum:
@@ -49181,6 +49242,12 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ImageFamilyView:
+      properties:
+        image:
+          $ref: "#/components/schemas/Image"
+          description: The latest image that is part of the specified image family in the requested location, and that is not deprecated.
       type: object
     ImageList:
       description: Contains a list of images.
@@ -51579,7 +51646,9 @@ components:
 
             - NONE is the default value, which means that the attachment carries unencrypted traffic. VMs can send traffic to, or receive traffic from, this type of attachment. 
 
-            - IPSEC indicates that the attachment carries only traffic encrypted by an IPsec device such as an HA VPN gateway. VMs cannot directly send traffic to, or receive traffic from, such an attachment. To use IPsec-encrypted Cloud Interconnect, create the attachment using this option.
+            - IPSEC indicates that the attachment carries only traffic encrypted by an IPsec device such as an HA VPN gateway. VMs cannot directly send traffic to, or receive traffic from, such an attachment. To use IPsec-encrypted Cloud Interconnect, create the attachment using this option. 
+
+            Not currently available in all Interconnect locations.
           enum:
             - IPSEC
             - NONE
@@ -51595,7 +51664,10 @@ components:
           description: URL of the underlying Interconnect object that this attachment's traffic will traverse through.
           type: string
         ipsecInternalAddresses:
-          description: URL of addresses that have been reserved for the interconnect attachment, Used only for interconnect attachment that has the encryption option as IPSEC. The addresses must be RFC 1918 IP address ranges. When creating HA VPN gateway over the interconnect attachment, if the attachment is configured to use an RFC 1918 IP address, then the VPN gateway?s IP address will be allocated from the IP address range specified here. For example, if the HA VPN gateway?s interface 0 is paired to this interconnect attachment, then an RFC 1918 IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this interconnect attachment. If this field is not specified for interconnect attachment that has encryption option as IPSEC, later on when creating HA VPN gateway on this interconnect attachment, the HA VPN gateway's IP address will be allocated from regional external IP address pool.
+          description: >-
+            URL of addresses that have been reserved for the interconnect attachment, Used only for interconnect attachment that has the encryption option as IPSEC. The addresses must be RFC 1918 IP address ranges. When creating HA VPN gateway over the interconnect attachment, if the attachment is configured to use an RFC 1918 IP address, then the VPN gateway?s IP address will be allocated from the IP address range specified here. For example, if the HA VPN gateway?s interface 0 is paired to this interconnect attachment, then an RFC 1918 IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this interconnect attachment. If this field is not specified for interconnect attachment that has encryption option as IPSEC, later on when creating HA VPN gateway on this interconnect attachment, the HA VPN gateway's IP address will be allocated from regional external IP address pool.
+
+            Not currently available in all Interconnect locations.
           items:
             type: string
           type: array
@@ -58864,7 +58936,10 @@ components:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
         encryptedInterconnectRouter:
-          description: Field to indicate if a router is dedicated to use with encrypted Interconnect Attachment (IPsec-encrypted Cloud Interconnect feature).
+          description: >-
+            Field to indicate if a router is dedicated to use with encrypted Interconnect Attachment (IPsec-encrypted Cloud Interconnect feature).
+
+            Not currently available in all Interconnect locations.
           type: boolean
         id:
           description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
@@ -59997,7 +60072,7 @@ components:
       description: Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny).
       properties:
         action:
-          description: The Action to preform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.
+          description: The Action to perform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.
           type: string
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
@@ -61682,7 +61757,7 @@ components:
           format: float
           type: number
         metadata:
-          description: Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is INCLUDE_ALL_METADATA.
+          description: Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is EXCLUDE_ALL_METADATA.
           enum:
             - CUSTOM_METADATA
             - EXCLUDE_ALL_METADATA
@@ -62920,6 +62995,7 @@ components:
             CLIENT_IP_PROTO: Connections from the same client IP with the same IP protocol will go to the same instance in the pool while that instance remains healthy.
           enum:
             - CLIENT_IP
+            - CLIENT_IP_NO_DESTINATION
             - CLIENT_IP_PORT_PROTO
             - CLIENT_IP_PROTO
             - GENERATED_COOKIE
@@ -64720,7 +64796,10 @@ components:
           format: uint32
           type: integer
         interconnectAttachment:
-          description: URL of the interconnect attachment resource. When the value of this field is present, the VPN Gateway will be used for IPsec-encrypted Cloud Interconnect; all Egress or Ingress traffic for this VPN Gateway interface will go through the specified interconnect attachment resource.
+          description: >-
+            URL of the interconnect attachment resource. When the value of this field is present, the VPN Gateway will be used for IPsec-encrypted Cloud Interconnect; all Egress or Ingress traffic for this VPN Gateway interface will go through the specified interconnect attachment resource.
+
+            Not currently available in all Interconnect locations.
           type: string
         ipAddress:
           description: "[Output Only] The external IP address for this VPN gateway interface."
@@ -64897,7 +64976,7 @@ components:
 
             - NO_INCOMING_PACKETS: No incoming packets from peer. 
 
-            - REJECTED: Tunnel configuration was rejected, can be result of being blacklisted. 
+            - REJECTED: Tunnel configuration was rejected, can be result of being denied access. 
 
             - ALLOCATING_RESOURCES: Cloud VPN is in the process of allocating all required resources. 
 

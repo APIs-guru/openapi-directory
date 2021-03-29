@@ -32,10 +32,10 @@ tags:
 paths:
   "/v1beta/{name}":
     delete:
-      description: Deletes a single service.
-      operationId: metastore.projects.locations.services.delete
+      description: Deletes a single backup.
+      operationId: metastore.projects.locations.services.backups.delete
       parameters:
-        - description: Required. The relative resource name of the metastore service to delete, in the following form:projects/{project_number}/locations/{location_id}/services/{service_id}.
+        - description: Required. The relative resource name of the backup to delete, in the following form:projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}.
           in: path
           name: name
           required: true
@@ -239,6 +239,102 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta/{parent}/backups":
+    get:
+      description: Lists backups in a service.
+      operationId: metastore.projects.locations.services.backups.list
+      parameters:
+        - description: Required. The relative resource name of the service whose backups to list, in the following form:projects/{project_number}/locations/{location_id}/services/{service_id}/backups.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The filter to apply to list results.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Specify the ordering of results as described in Sorting Order (https://cloud.google.com/apis/design/design_patterns#sorting_order). If not specified, the results will be sorted in the default order.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of backups to return. The response may contain less than the maximum number. If unspecified, no more than 500 backups are returned. The maximum value is 1000; values above 1000 are changed to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous DataprocMetastore.ListBackups call. Provide this token to retrieve the subsequent page.To retrieve the first page, supply an empty page token.When paginating, other parameters provided to DataprocMetastore.ListBackups must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListBackupsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Backup in a given project and location.
+      operationId: metastore.projects.locations.services.backups.create
+      parameters:
+        - description: Required. The relative resource name of the service in which to create a backup of the following form:projects/{project_number}/locations/{location_id}/services/{service_id}.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the backup, which is used as the final component of the backup's name.This value must be between 1 and 64 characters long, begin with a letter, end with a letter or number, and consist of alpha-numeric ASCII characters or hyphens.
+          in: query
+          name: backupId
+          schema:
+            type: string
+        - description: Optional. A request ID. Specify a unique request ID to allow the server to ignore the request if it has completed. The server will ignore subsequent requests that provide a duplicate request ID for at least 60 minutes after the first request.For example, if an initial request times out, followed by another request with the same request ID, the server ignores the second request to prevent the creation of duplicate commitments.The request ID must be a valid UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier#Format) A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Backup"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta/{parent}/metadataImports":
     get:
       description: Lists imports in a service.
@@ -599,6 +695,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta/{service}:restore":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Restores a service from a backup.
+      operationId: metastore.projects.locations.services.restore
+      parameters:
+        - description: Required. The relative resource name of the metastore service to run restore, in the following form:projects/{project_id}/locations/{location_id}/services/{service_id}.
+          in: path
+          name: service
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestoreServiceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -702,6 +840,40 @@ components:
             - ADMIN_READ
             - DATA_WRITE
             - DATA_READ
+          type: string
+      type: object
+    Backup:
+      description: The details of a backup resource.
+      properties:
+        createTime:
+          description: Output only. The time when the backup was started.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: The description of the backup.
+          type: string
+        endTime:
+          description: Output only. The time when the backup finished creating.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Immutable. The relative resource name of the backup, in the following form:projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}
+          type: string
+        serviceRevision:
+          $ref: "#/components/schemas/Service"
+          description: Output only. The revision of the service at the time of backup.
+          readOnly: true
+        state:
+          description: Output only. The current state of the backup.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - DELETING
+            - ACTIVE
+            - FAILED
+          readOnly: true
           type: string
       type: object
     Binding:
@@ -823,6 +995,23 @@ components:
         principal:
           description: A Kerberos principal that exists in the both the keytab the KDC to authenticate as. A typical principal is of the form primary/instance@REALM, but there is no exact format.
           type: string
+      type: object
+    ListBackupsResponse:
+      description: Response message for DataprocMetastore.ListBackups.
+      properties:
+        backups:
+          description: The backups of the specified service.
+          items:
+            $ref: "#/components/schemas/Backup"
+          type: array
+        nextPageToken:
+          description: A token that can be sent as page_token to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
       type: object
     ListLocationsResponse:
       description: The response message for Locations.ListLocations.
@@ -1049,6 +1238,40 @@ components:
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
           type: object
       type: object
+    OperationMetadata:
+      description: Represents the metadata of a long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the caller has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to Code.CANCELLED.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
     Policy:
       description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources.A Policy is a collection of bindings. A binding binds one or more members to a single role. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A role is a named list of permissions; each role can be an IAM predefined role or a user-created custom role.For some types of Google Cloud resources, a binding can also specify a condition, which is a logical expression that allows access to a resource only if the expression evaluates to true. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the IAM documentation (https://cloud.google.com/iam/help/conditions/resource-policies).JSON example: { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } YAML example: bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') - etag: BwWWja0YfJA= - version: 3 For a description of IAM and its features, see the IAM documentation (https://cloud.google.com/iam/docs/)."
       properties:
@@ -1109,6 +1332,23 @@ components:
             - FULL
             - METADATA_ONLY
           readOnly: true
+          type: string
+      type: object
+    RestoreServiceRequest:
+      description: Request message for DataprocMetastore.Restore.
+      properties:
+        backup:
+          description: Required. The relative resource name of the metastore service backup to restore from, in the following form:projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}.
+          type: string
+        requestId:
+          description: Optional. A request ID. Specify a unique request ID to allow the server to ignore the request if it has completed. The server will ignore subsequent requests that provide a duplicate request ID for at least 60 minutes after the first request.For example, if an initial request times out, followed by another request with the same request ID, the server ignores the second request to prevent the creation of duplicate commitments.The request ID must be a valid UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier#Format). A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+          type: string
+        restoreType:
+          description: Optional. The type of restore. If unspecified, defaults to METADATA_ONLY.
+          enum:
+            - RESTORE_TYPE_UNSPECIFIED
+            - FULL
+            - METADATA_ONLY
           type: string
       type: object
     Secret:

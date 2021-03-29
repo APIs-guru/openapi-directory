@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://gkehub.googleapis.com/$discovery/rest?version=v1alpha
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: gkehub
-  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster
 tags:
@@ -46,6 +46,11 @@ paths:
           name: force
           schema:
             type: boolean
+        - description: Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -104,6 +109,11 @@ paths:
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
           schema:
             type: string
         - description: Mask of fields to update.
@@ -346,6 +356,11 @@ paths:
         - description: The ID of the feature to create.
           in: query
           name: featureId
+          schema:
+            type: string
+        - description: Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes after the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
           schema:
             type: string
       requestBody:
@@ -812,6 +827,9 @@ components:
     ConfigManagementGitConfig:
       description: Git repo configuration for a single cluster.
       properties:
+        gcpServiceAccountEmail:
+          description: The GCP Service Account Email used for auth when secret_type is gcpServiceAccount.
+          type: string
         httpsProxy:
           description: URL for the HTTPS proxy to be used when communicating with the Git repo.
           type: string

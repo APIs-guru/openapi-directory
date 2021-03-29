@@ -1610,7 +1610,8 @@ components:
           $ref: "#/components/schemas/GoogleCloudChannelV1EduData"
           description: Edu information about the customer.
         isDomainVerified:
-          description: Whether the domain is verified.
+          description: Output only. Whether the domain is verified. This field is not returned for a Customer's cloud_identity_info resource. Partners can use the domains.get() method of the Workspace SDK's Directory API, or listen to the PRIMARY_DOMAIN_VERIFIED Pub/Sub event in to track domain verification of their resolve Workspace customers.
+          readOnly: true
           type: boolean
         languageCode:
           description: Language code.
@@ -1765,6 +1766,8 @@ components:
           description: Type of event which happened on the customer.
           enum:
             - TYPE_UNSPECIFIED
+            - PRIMARY_DOMAIN_CHANGED
+            - PRIMARY_DOMAIN_VERIFIED
           type: string
       type: object
     GoogleCloudChannelV1EduData:
@@ -2558,6 +2561,9 @@ components:
     GoogleCloudChannelV1Value:
       description: Data type and value of a parameter.
       properties:
+        boolValue:
+          description: Represents a boolean value.
+          type: boolean
         doubleValue:
           description: Represents a double value.
           format: double
@@ -2609,6 +2615,8 @@ components:
           description: Type of event which happened on the customer.
           enum:
             - TYPE_UNSPECIFIED
+            - PRIMARY_DOMAIN_CHANGED
+            - PRIMARY_DOMAIN_VERIFIED
           type: string
       type: object
     GoogleCloudChannelV1alpha1Entitlement:
@@ -2851,6 +2859,9 @@ components:
     GoogleCloudChannelV1alpha1Value:
       description: Data type and value of a parameter.
       properties:
+        boolValue:
+          description: Represents a boolean value.
+          type: boolean
         doubleValue:
           description: Represents a double value.
           format: double

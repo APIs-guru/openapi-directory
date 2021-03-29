@@ -5045,7 +5045,7 @@ components:
         operation:
           description: GraphQL operation name, along with operation type which will be used to associate quotas with. If no name is specified, the quota will be applied to all graphQL operations irrespective of their operation names in the payload.
           type: string
-        operationType:
+        operationTypes:
           description: Required. `query`, `mutation` and `subscription` are the three operation types offered by graphQL. Currently we support only `query` and `mutation`.
           items:
             type: string
@@ -5648,12 +5648,11 @@ components:
           description: "Compute Engine network used for Service Networking to be peered with Apigee runtime instances. See [Getting started with the Service Networking API](https://cloud.google.com/service-infrastructure/docs/service-networking/getting-started). Valid only when [RuntimeType](#RuntimeType) is set to `CLOUD`. The value must be set before the creation of a runtime instance and can be updated only when there are no runtime instances. For example: `default`. Apigee also supports shared VPC (that is, the host network project is not the same as the one that is peering with Apigee). See [Shared VPC overview](https://cloud.google.com/vpc/docs/shared-vpc). To use a shared VPC network, use the following format: `projects/{host-project-id}/{region}/networks/{network-name}`. For example: `projects/my-sharedvpc-host/global/networks/mynetwork` **Note:** Not supported for Apigee hybrid."
           type: string
         billingType:
-          description: Output only. Billing type of the Apigee organization. See [Apigee pricing](https://cloud.google.com/apigee/pricing).
+          description: Billing type of the Apigee organization. See [Apigee pricing](https://cloud.google.com/apigee/pricing).
           enum:
             - BILLING_TYPE_UNSPECIFIED
             - SUBSCRIPTION
             - EVALUATION
-          readOnly: true
           type: string
         caCertificate:
           description: Output only. Base64-encoded public certificate for the root CA of the Apigee organization. Valid only when [RuntimeType](#RuntimeType) is `CLOUD`.
@@ -6175,7 +6174,7 @@ components:
       description: Response for Schema call
       properties:
         dimensions:
-          description: List of schema fiels grouped as dimensions.
+          description: List of schema fields grouped as dimensions.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1SchemaSchemaElement"
           type: array
@@ -6185,7 +6184,7 @@ components:
             type: string
           type: array
         metrics:
-          description: List of schema fields grouped as dimensions. These are fields that can be used with an aggregate function such as sum, avg, min, max.
+          description: List of schema fields grouped as dimensions that can be used with an aggregate function such as `sum`, `avg`, `min`, and `max`.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1SchemaSchemaElement"
           type: array
@@ -6194,20 +6193,20 @@ components:
       description: Message type for the schema element
       properties:
         name:
-          description: Name of the field
+          description: Name of the field.
           type: string
         properties:
           $ref: "#/components/schemas/GoogleCloudApigeeV1SchemaSchemaProperty"
-          description: 'Property of the schema field E.g. { "createTime": "2016-02-26T10:23:09.592Z", "custom": "false", "type": "string" }'
+          description: 'Properties for the schema field. For example: { "createTime": "2016-02-26T10:23:09.592Z", "custom": "false", "type": "string" }'
       type: object
     GoogleCloudApigeeV1SchemaSchemaProperty:
-      description: Message type for schema property
+      description: Properties for the schema field.
       properties:
         createTime:
-          description: Creation time of the field
+          description: "Time the field was created in RFC3339 string form. For example: `2016-02-26T10:23:09.592Z`."
           type: string
         custom:
-          description: Custom is a flag signifying if the field was provided as part of the standard dataset or a custom field created by the customer
+          description: Flag that specifies whether the field is standard in the dataset or a custom field created by the customer. `true` indicates that it is a custom field.
           type: string
         type:
           description: Data type of the field.

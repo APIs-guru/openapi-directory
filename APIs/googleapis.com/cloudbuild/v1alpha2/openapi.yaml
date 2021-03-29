@@ -949,6 +949,9 @@ components:
         storageSource:
           $ref: "#/components/schemas/StorageSource"
           description: If provided, get the source from this location in Google Cloud Storage.
+        storageSourceManifest:
+          $ref: "#/components/schemas/StorageSourceManifest"
+          description: If provided, get the source from this manifest in Google Cloud Storage. This feature is in Preview.
       type: object
     SourceProvenance:
       description: Provenance of the source. Ways to find the original source, or verify that some source was used for this build.
@@ -965,6 +968,9 @@ components:
         resolvedStorageSource:
           $ref: "#/components/schemas/StorageSource"
           description: A copy of the build's `source.storage_source`, if exists, with any generations resolved.
+        resolvedStorageSourceManifest:
+          $ref: "#/components/schemas/StorageSourceManifest"
+          description: A copy of the build's `source.storage_source_manifest`, if exists, with any revisions resolved. This feature is in Preview.
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
@@ -996,6 +1002,20 @@ components:
           type: string
         object:
           description: Google Cloud Storage object containing the source. This object must be a gzipped archive file (`.tar.gz`) containing source to build.
+          type: string
+      type: object
+    StorageSourceManifest:
+      description: Location of the source manifest in Google Cloud Storage. This feature is in Preview.
+      properties:
+        bucket:
+          description: Google Cloud Storage bucket containing the source manifest (see [Bucket Name Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
+          type: string
+        generation:
+          description: Google Cloud Storage generation for the object. If the generation is omitted, the latest generation will be used.
+          format: int64
+          type: string
+        object:
+          description: Google Cloud Storage object containing the source manifest. This object must be a JSON file.
           type: string
       type: object
     TimeSpan:
@@ -1080,7 +1100,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1088,6 +1108,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

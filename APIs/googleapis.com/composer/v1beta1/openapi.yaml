@@ -730,6 +730,7 @@ components:
             - CREATE
             - DELETE
             - UPDATE
+            - CHECK
           type: string
         resource:
           description: Output only. The resource being operated on, as a [relative resource name]( /apis/design/resource_names#relative_resource_name).
@@ -851,7 +852,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -859,6 +860,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
