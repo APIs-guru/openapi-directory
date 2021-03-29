@@ -121,6 +121,108 @@ servers:
     description: The Amazon DocDB endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#Action=AddSourceIdentifierToSubscription:
+    get:
+      x-aws-operation-name: AddSourceIdentifierToSubscription
+      operationId: GET_AddSourceIdentifierToSubscription
+      description: Adds a source identifier to an existing event notification subscription.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AddSourceIdentifierToSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '481':
+          description: SourceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SourceNotFoundFault'
+      parameters:
+        - name: SubscriptionName
+          in: query
+          required: true
+          description: The name of the Amazon DocumentDB event notification subscription that you want to add a source identifier to.
+          schema:
+            type: string
+        - name: SourceIdentifier
+          in: query
+          required: true
+          description: '<p>The identifier of the event source to be added:</p> <ul> <li> <p>If the source type is an instance, a <code>DBInstanceIdentifier</code> must be provided.</p> </li> <li> <p>If the source type is a security group, a <code>DBSecurityGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a parameter group, a <code>DBParameterGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a snapshot, a <code>DBSnapshotIdentifier</code> must be provided.</p> </li> </ul>'
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AddSourceIdentifierToSubscription
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: AddSourceIdentifierToSubscription
+      operationId: POST_AddSourceIdentifierToSubscription
+      description: Adds a source identifier to an existing event notification subscription.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AddSourceIdentifierToSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '481':
+          description: SourceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SourceNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AddSourceIdentifierToSubscriptionMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AddSourceIdentifierToSubscription
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
   /#Action=AddTagsToResource:
     get:
       x-aws-operation-name: AddTagsToResource
@@ -1772,6 +1874,213 @@ paths:
             type: string
             enum:
               - '2014-10-31'
+  /#Action=CreateEventSubscription:
+    get:
+      x-aws-operation-name: CreateEventSubscription
+      operationId: GET_CreateEventSubscription
+      description: '<p>Creates an Amazon DocumentDB event notification subscription. This action requires a topic Amazon Resource Name (ARN) created by using the Amazon DocumentDB console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the Amazon SNS console.</p> <p>You can specify the type of source (<code>SourceType</code>) that you want to be notified of. You can also provide a list of Amazon DocumentDB sources (<code>SourceIds</code>) that trigger the events, and you can provide a list of event categories (<code>EventCategories</code>) for events that you want to be notified of. For example, you can specify <code>SourceType = db-instance</code>, <code>SourceIds = mydbinstance1, mydbinstance2</code> and <code>EventCategories = Availability, Backup</code>.</p> <p>If you specify both the <code>SourceType</code> and <code>SourceIds</code> (such as <code>SourceType = db-instance</code> and <code>SourceIdentifier = myDBInstance1</code>), you are notified of all the <code>db-instance</code> events for the specified source. If you specify a <code>SourceType</code> but do not specify a <code>SourceIdentifier</code>, you receive notice of the events for that source type for all your Amazon DocumentDB sources. If you do not specify either the <code>SourceType</code> or the <code>SourceIdentifier</code>, you are notified of events generated from all Amazon DocumentDB sources belonging to your customer account.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateEventSubscriptionResult'
+        '480':
+          description: EventSubscriptionQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EventSubscriptionQuotaExceededFault'
+        '481':
+          description: SubscriptionAlreadyExistFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionAlreadyExistFault'
+        '482':
+          description: SNSInvalidTopicFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSInvalidTopicFault'
+        '483':
+          description: SNSNoAuthorizationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSNoAuthorizationFault'
+        '484':
+          description: SNSTopicArnNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSTopicArnNotFoundFault'
+        '485':
+          description: SubscriptionCategoryNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionCategoryNotFoundFault'
+        '486':
+          description: SourceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SourceNotFoundFault'
+      parameters:
+        - name: SubscriptionName
+          in: query
+          required: true
+          description: '<p>The name of the subscription.</p> <p>Constraints: The name must be fewer than 255 characters.</p>'
+          schema:
+            type: string
+        - name: SnsTopicArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.
+          schema:
+            type: string
+        - name: SourceType
+          in: query
+          required: false
+          description: '<p>The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, you would set this parameter to <code>db-instance</code>. If this value is not specified, all events are returned.</p> <p>Valid values: <code>db-instance</code>, <code>db-cluster</code>, <code>db-parameter-group</code>, <code>db-security-group</code>, <code>db-snapshot</code>, <code>db-cluster-snapshot</code> </p>'
+          schema:
+            type: string
+        - name: EventCategories
+          in: query
+          required: false
+          description: ' A list of event categories for a <code>SourceType</code> that you want to subscribe to. '
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: EventCategory
+        - name: SourceIds
+          in: query
+          required: false
+          description: '<p>The list of identifiers of the event sources for which events are returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can''t end with a hyphen or contain two consecutive hyphens.</p> <p>Constraints:</p> <ul> <li> <p>If <code>SourceIds</code> are provided, <code>SourceType</code> must also be provided.</p> </li> <li> <p>If the source type is an instance, a <code>DBInstanceIdentifier</code> must be provided.</p> </li> <li> <p>If the source type is a security group, a <code>DBSecurityGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a parameter group, a <code>DBParameterGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a snapshot, a <code>DBSnapshotIdentifier</code> must be provided.</p> </li> </ul>'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: SourceId
+        - name: Enabled
+          in: query
+          required: false
+          description: ' A Boolean value; set to <code>true</code> to activate the subscription, set to <code>false</code> to create the subscription but not active it. '
+          schema:
+            type: boolean
+        - name: Tags
+          in: query
+          required: false
+          description: The tags to be assigned to the event subscription.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateEventSubscription
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateEventSubscription
+      operationId: POST_CreateEventSubscription
+      description: '<p>Creates an Amazon DocumentDB event notification subscription. This action requires a topic Amazon Resource Name (ARN) created by using the Amazon DocumentDB console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the Amazon SNS console.</p> <p>You can specify the type of source (<code>SourceType</code>) that you want to be notified of. You can also provide a list of Amazon DocumentDB sources (<code>SourceIds</code>) that trigger the events, and you can provide a list of event categories (<code>EventCategories</code>) for events that you want to be notified of. For example, you can specify <code>SourceType = db-instance</code>, <code>SourceIds = mydbinstance1, mydbinstance2</code> and <code>EventCategories = Availability, Backup</code>.</p> <p>If you specify both the <code>SourceType</code> and <code>SourceIds</code> (such as <code>SourceType = db-instance</code> and <code>SourceIdentifier = myDBInstance1</code>), you are notified of all the <code>db-instance</code> events for the specified source. If you specify a <code>SourceType</code> but do not specify a <code>SourceIdentifier</code>, you receive notice of the events for that source type for all your Amazon DocumentDB sources. If you do not specify either the <code>SourceType</code> or the <code>SourceIdentifier</code>, you are notified of events generated from all Amazon DocumentDB sources belonging to your customer account.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateEventSubscriptionResult'
+        '480':
+          description: EventSubscriptionQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EventSubscriptionQuotaExceededFault'
+        '481':
+          description: SubscriptionAlreadyExistFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionAlreadyExistFault'
+        '482':
+          description: SNSInvalidTopicFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSInvalidTopicFault'
+        '483':
+          description: SNSNoAuthorizationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSNoAuthorizationFault'
+        '484':
+          description: SNSTopicArnNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSTopicArnNotFoundFault'
+        '485':
+          description: SubscriptionCategoryNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionCategoryNotFoundFault'
+        '486':
+          description: SourceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SourceNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateEventSubscriptionMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateEventSubscription
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
   /#Action=DeleteDBCluster:
     get:
       x-aws-operation-name: DeleteDBCluster
@@ -2325,6 +2634,102 @@ paths:
             type: string
             enum:
               - DeleteDBSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+  /#Action=DeleteEventSubscription:
+    get:
+      x-aws-operation-name: DeleteEventSubscription
+      operationId: GET_DeleteEventSubscription
+      description: Deletes an Amazon DocumentDB event notification subscription.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteEventSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '481':
+          description: InvalidEventSubscriptionStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidEventSubscriptionStateFault'
+      parameters:
+        - name: SubscriptionName
+          in: query
+          required: true
+          description: The name of the Amazon DocumentDB event notification subscription that you want to delete.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteEventSubscription
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteEventSubscription
+      operationId: POST_DeleteEventSubscription
+      description: Deletes an Amazon DocumentDB event notification subscription.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteEventSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '481':
+          description: InvalidEventSubscriptionStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidEventSubscriptionStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteEventSubscriptionMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteEventSubscription
         - name: Version
           in: query
           required: true
@@ -3587,6 +3992,125 @@ paths:
             type: string
             enum:
               - DescribeEventCategories
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+  /#Action=DescribeEventSubscriptions:
+    get:
+      x-aws-operation-name: DescribeEventSubscriptions
+      operationId: GET_DescribeEventSubscriptions
+      description: '<p>Lists all the subscription descriptions for a customer account. The description for a subscription includes <code>SubscriptionName</code>, <code>SNSTopicARN</code>, <code>CustomerID</code>, <code>SourceType</code>, <code>SourceID</code>, <code>CreationTime</code>, and <code>Status</code>.</p> <p>If you specify a <code>SubscriptionName</code>, lists the description for that subscription.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EventSubscriptionsMessage'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+      parameters:
+        - name: SubscriptionName
+          in: query
+          required: false
+          description: The name of the Amazon DocumentDB event notification subscription that you want to describe.
+          schema:
+            type: string
+        - name: Filters
+          in: query
+          required: false
+          description: This parameter is not currently supported.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Filter'
+                - xml:
+                    name: Filter
+        - name: MaxRecords
+          in: query
+          required: false
+          description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeEventSubscriptions
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeEventSubscriptions
+      operationId: POST_DescribeEventSubscriptions
+      description: '<p>Lists all the subscription descriptions for a customer account. The description for a subscription includes <code>SubscriptionName</code>, <code>SNSTopicARN</code>, <code>CustomerID</code>, <code>SourceType</code>, <code>SourceID</code>, <code>CreationTime</code>, and <code>Status</code>.</p> <p>If you specify a <code>SubscriptionName</code>, lists the description for that subscription.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EventSubscriptionsMessage'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeEventSubscriptionsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeEventSubscriptions
         - name: Version
           in: query
           required: true
@@ -5181,6 +5705,179 @@ paths:
             type: string
             enum:
               - '2014-10-31'
+  /#Action=ModifyEventSubscription:
+    get:
+      x-aws-operation-name: ModifyEventSubscription
+      operationId: GET_ModifyEventSubscription
+      description: Modifies an existing Amazon DocumentDB event notification subscription.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyEventSubscriptionResult'
+        '480':
+          description: EventSubscriptionQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EventSubscriptionQuotaExceededFault'
+        '481':
+          description: SubscriptionNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '482':
+          description: SNSInvalidTopicFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSInvalidTopicFault'
+        '483':
+          description: SNSNoAuthorizationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSNoAuthorizationFault'
+        '484':
+          description: SNSTopicArnNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSTopicArnNotFoundFault'
+        '485':
+          description: SubscriptionCategoryNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionCategoryNotFoundFault'
+      parameters:
+        - name: SubscriptionName
+          in: query
+          required: true
+          description: The name of the Amazon DocumentDB event notification subscription.
+          schema:
+            type: string
+        - name: SnsTopicArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of the SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.
+          schema:
+            type: string
+        - name: SourceType
+          in: query
+          required: false
+          description: '<p>The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, set this parameter to <code>db-instance</code>. If this value is not specified, all events are returned.</p> <p>Valid values: <code>db-instance</code>, <code>db-parameter-group</code>, <code>db-security-group</code>, <code>db-snapshot</code> </p>'
+          schema:
+            type: string
+        - name: EventCategories
+          in: query
+          required: false
+          description: ' A list of event categories for a <code>SourceType</code> that you want to subscribe to.'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: EventCategory
+        - name: Enabled
+          in: query
+          required: false
+          description: ' A Boolean value; set to <code>true</code> to activate the subscription. '
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyEventSubscription
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyEventSubscription
+      operationId: POST_ModifyEventSubscription
+      description: Modifies an existing Amazon DocumentDB event notification subscription.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyEventSubscriptionResult'
+        '480':
+          description: EventSubscriptionQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EventSubscriptionQuotaExceededFault'
+        '481':
+          description: SubscriptionNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '482':
+          description: SNSInvalidTopicFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSInvalidTopicFault'
+        '483':
+          description: SNSNoAuthorizationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSNoAuthorizationFault'
+        '484':
+          description: SNSTopicArnNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SNSTopicArnNotFoundFault'
+        '485':
+          description: SubscriptionCategoryNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionCategoryNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ModifyEventSubscriptionMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyEventSubscription
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
   /#Action=RebootDBInstance:
     get:
       x-aws-operation-name: RebootDBInstance
@@ -5276,6 +5973,108 @@ paths:
             type: string
             enum:
               - RebootDBInstance
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+  /#Action=RemoveSourceIdentifierFromSubscription:
+    get:
+      x-aws-operation-name: RemoveSourceIdentifierFromSubscription
+      operationId: GET_RemoveSourceIdentifierFromSubscription
+      description: Removes a source identifier from an existing Amazon DocumentDB event notification subscription.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RemoveSourceIdentifierFromSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '481':
+          description: SourceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SourceNotFoundFault'
+      parameters:
+        - name: SubscriptionName
+          in: query
+          required: true
+          description: The name of the Amazon DocumentDB event notification subscription that you want to remove a source identifier from.
+          schema:
+            type: string
+        - name: SourceIdentifier
+          in: query
+          required: true
+          description: ' The source identifier to be removed from the subscription, such as the instance identifier for an instance, or the name of a security group. '
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RemoveSourceIdentifierFromSubscription
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: RemoveSourceIdentifierFromSubscription
+      operationId: POST_RemoveSourceIdentifierFromSubscription
+      description: Removes a source identifier from an existing Amazon DocumentDB event notification subscription.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RemoveSourceIdentifierFromSubscriptionResult'
+        '480':
+          description: SubscriptionNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubscriptionNotFoundFault'
+        '481':
+          description: SourceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SourceNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/RemoveSourceIdentifierFromSubscriptionMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RemoveSourceIdentifierFromSubscription
         - name: Version
           in: query
           required: true
@@ -6444,6 +7243,13 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AddSourceIdentifierToSubscriptionResult:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
+    SubscriptionNotFoundFault: {}
+    SourceNotFoundFault: {}
     Tag:
       type: object
       properties:
@@ -6531,6 +7337,17 @@ components:
     DBSubnetGroupAlreadyExistsFault: {}
     DBSubnetGroupQuotaExceededFault: {}
     DBSubnetQuotaExceededFault: {}
+    CreateEventSubscriptionResult:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
+    EventSubscriptionQuotaExceededFault: {}
+    SubscriptionAlreadyExistFault: {}
+    SNSInvalidTopicFault: {}
+    SNSNoAuthorizationFault: {}
+    SNSTopicArnNotFoundFault: {}
+    SubscriptionCategoryNotFoundFault: {}
     DeleteDBClusterResult:
       type: object
       properties:
@@ -6549,6 +7366,12 @@ components:
           $ref: '#/components/schemas/DBInstance'
     DBSnapshotAlreadyExistsFault: {}
     InvalidDBSubnetStateFault: {}
+    DeleteEventSubscriptionResult:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
+    InvalidEventSubscriptionStateFault: {}
     CertificateMessage:
       type: object
       properties:
@@ -6678,6 +7501,18 @@ components:
             - $ref: '#/components/schemas/EventCategoriesMapList'
             - description: A list of event category maps.
       description: Represents the output of <a>DescribeEventCategories</a>.
+    EventSubscriptionsMessage:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+        EventSubscriptionsList:
+          allOf:
+            - $ref: '#/components/schemas/EventSubscriptionsList'
+            - description: A list of event subscriptions.
+      description: Represents the output of <a>DescribeEventSubscriptions</a>.
     EventsMessage:
       type: object
       properties:
@@ -6807,11 +7642,21 @@ components:
         DBSubnetGroup:
           $ref: '#/components/schemas/DBSubnetGroup'
     SubnetAlreadyInUse: {}
+    ModifyEventSubscriptionResult:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
     RebootDBInstanceResult:
       type: object
       properties:
         DBInstance:
           $ref: '#/components/schemas/DBInstance'
+    RemoveSourceIdentifierFromSubscriptionResult:
+      type: object
+      properties:
+        EventSubscription:
+          $ref: '#/components/schemas/EventSubscription'
     RestoreDBClusterFromSnapshotResult:
       type: object
       properties:
@@ -6835,6 +7680,66 @@ components:
       properties:
         DBCluster:
           $ref: '#/components/schemas/DBCluster'
+    AddSourceIdentifierToSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+        - SourceIdentifier
+      title: AddSourceIdentifierToSubscriptionMessage
+      properties:
+        SubscriptionName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Amazon DocumentDB event notification subscription that you want to add a source identifier to.
+        SourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The identifier of the event source to be added:</p> <ul> <li> <p>If the source type is an instance, a <code>DBInstanceIdentifier</code> must be provided.</p> </li> <li> <p>If the source type is a security group, a <code>DBSecurityGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a parameter group, a <code>DBParameterGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a snapshot, a <code>DBSnapshotIdentifier</code> must be provided.</p> </li> </ul>'
+      description: 'Represents the input to <a>AddSourceIdentifierToSubscription</a>. '
+    EventSubscription:
+      type: object
+      properties:
+        CustomerAwsId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS customer account that is associated with the Amazon DocumentDB event notification subscription.
+        CustSubscriptionId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon DocumentDB event notification subscription ID.
+        SnsTopicArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The topic ARN of the Amazon DocumentDB event notification subscription.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The status of the Amazon DocumentDB event notification subscription.</p> <p>Constraints:</p> <p>Can be one of the following: <code>creating</code>, <code>modifying</code>, <code>deleting</code>, <code>active</code>, <code>no-permission</code>, <code>topic-not-exist</code> </p> <p>The <code>no-permission</code> status indicates that Amazon DocumentDB no longer has permission to post to the SNS topic. The <code>topic-not-exist</code> status indicates that the topic was deleted after the subscription was created.</p>'
+        SubscriptionCreationTime:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time at which the Amazon DocumentDB event notification subscription was created.
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The source type for the Amazon DocumentDB event notification subscription.
+        SourceIdsList:
+          allOf:
+            - $ref: '#/components/schemas/SourceIdsList'
+            - description: A list of source IDs for the Amazon DocumentDB event notification subscription.
+        EventCategoriesList:
+          allOf:
+            - $ref: '#/components/schemas/EventCategoriesList'
+            - description: A list of event categories for the Amazon DocumentDB event notification subscription.
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A Boolean value indicating whether the subscription is enabled. A value of <code>true</code> indicates that the subscription is enabled.
+        EventSubscriptionArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the event subscription.
+      description: Detailed information about an event to which you have subscribed.
     TagList:
       type: array
       items:
@@ -7602,6 +8507,56 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) for the DB subnet group.
       description: 'Detailed information about a subnet group. '
+    EventCategoriesList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: EventCategory
+    SourceIdsList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: SourceId
+    CreateEventSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+        - SnsTopicArn
+      title: CreateEventSubscriptionMessage
+      properties:
+        SubscriptionName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The name of the subscription.</p> <p>Constraints: The name must be fewer than 255 characters.</p>'
+        SnsTopicArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, you would set this parameter to <code>db-instance</code>. If this value is not specified, all events are returned.</p> <p>Valid values: <code>db-instance</code>, <code>db-cluster</code>, <code>db-parameter-group</code>, <code>db-security-group</code>, <code>db-snapshot</code>, <code>db-cluster-snapshot</code> </p>'
+        EventCategories:
+          allOf:
+            - $ref: '#/components/schemas/EventCategoriesList'
+            - description: ' A list of event categories for a <code>SourceType</code> that you want to subscribe to. '
+        SourceIds:
+          allOf:
+            - $ref: '#/components/schemas/SourceIdsList'
+            - description: '<p>The list of identifiers of the event sources for which events are returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can''t end with a hyphen or contain two consecutive hyphens.</p> <p>Constraints:</p> <ul> <li> <p>If <code>SourceIds</code> are provided, <code>SourceType</code> must also be provided.</p> </li> <li> <p>If the source type is an instance, a <code>DBInstanceIdentifier</code> must be provided.</p> </li> <li> <p>If the source type is a security group, a <code>DBSecurityGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a parameter group, a <code>DBParameterGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a snapshot, a <code>DBSnapshotIdentifier</code> must be provided.</p> </li> </ul>'
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: ' A Boolean value; set to <code>true</code> to activate the subscription, set to <code>false</code> to create the subscription but not active it. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to be assigned to the event subscription.
+      description: Represents the input to <a>CreateEventSubscription</a>.
     DBClusterMemberList:
       type: array
       items:
@@ -7953,6 +8908,17 @@ components:
             - $ref: '#/components/schemas/String'
             - description: '<p>The name of the database subnet group to delete.</p> <note> <p>You can''t delete the default subnet group.</p> </note> <p>Constraints:</p> <p>Must match the name of an existing <code>DBSubnetGroup</code>. Must not be default.</p> <p>Example: <code>mySubnetgroup</code> </p>'
       description: Represents the input to <a>DeleteDBSubnetGroup</a>.
+    DeleteEventSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+      title: DeleteEventSubscriptionMessage
+      properties:
+        SubscriptionName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Amazon DocumentDB event notification subscription that you want to delete.
+      description: Represents the input to <a>DeleteEventSubscription</a>.
     FilterList:
       type: array
       items:
@@ -8232,6 +9198,27 @@ components:
             - $ref: '#/components/schemas/FilterList'
             - description: This parameter is not currently supported.
       description: Represents the input to <a>DescribeEventCategories</a>.
+    DescribeEventSubscriptionsMessage:
+      type: object
+      title: DescribeEventSubscriptionsMessage
+      properties:
+        SubscriptionName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Amazon DocumentDB event notification subscription that you want to describe.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: This parameter is not currently supported.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      description: Represents the input to <a>DescribeEventSubscriptions</a>.
     SourceType:
       type: string
       enum:
@@ -8241,13 +9228,6 @@ components:
         - db-snapshot
         - db-cluster
         - db-cluster-snapshot
-    EventCategoriesList:
-      type: array
-      items:
-        allOf:
-          - $ref: '#/components/schemas/String'
-          - xml:
-              name: EventCategory
     DescribeEventsMessage:
       type: object
       title: DescribeEventsMessage
@@ -8403,6 +9383,13 @@ components:
           - $ref: '#/components/schemas/Event'
           - xml:
               name: Event
+    EventSubscriptionsList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/EventSubscription'
+          - xml:
+              name: EventSubscription
     FailoverDBClusterMessage:
       type: object
       title: FailoverDBClusterMessage
@@ -8600,6 +9587,33 @@ components:
             - $ref: '#/components/schemas/SubnetIdentifierList'
             - description: The Amazon EC2 subnet IDs for the subnet group.
       description: Represents the input to <a>ModifyDBSubnetGroup</a>.
+    ModifyEventSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+      title: ModifyEventSubscriptionMessage
+      properties:
+        SubscriptionName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Amazon DocumentDB event notification subscription.
+        SnsTopicArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, set this parameter to <code>db-instance</code>. If this value is not specified, all events are returned.</p> <p>Valid values: <code>db-instance</code>, <code>db-parameter-group</code>, <code>db-security-group</code>, <code>db-snapshot</code> </p>'
+        EventCategories:
+          allOf:
+            - $ref: '#/components/schemas/EventCategoriesList'
+            - description: ' A list of event categories for a <code>SourceType</code> that you want to subscribe to.'
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: ' A Boolean value; set to <code>true</code> to activate the subscription. '
+      description: Represents the input to <a>ModifyEventSubscription</a>.
     OrderableDBInstanceOption:
       type: object
       properties:
@@ -8704,6 +9718,22 @@ components:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: '<p> When <code>true</code>, the reboot is conducted through a Multi-AZ failover. </p> <p>Constraint: You can''t specify <code>true</code> if the instance is not configured for Multi-AZ.</p>'
       description: Represents the input to <a>RebootDBInstance</a>.
+    RemoveSourceIdentifierFromSubscriptionMessage:
+      type: object
+      required:
+        - SubscriptionName
+        - SourceIdentifier
+      title: RemoveSourceIdentifierFromSubscriptionMessage
+      properties:
+        SubscriptionName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Amazon DocumentDB event notification subscription that you want to remove a source identifier from.
+        SourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The source identifier to be removed from the subscription, such as the instance identifier for an instance, or the name of a security group. '
+      description: Represents the input to <a>RemoveSourceIdentifierFromSubscription</a>.
     RemoveTagsFromResourceMessage:
       type: object
       required:
