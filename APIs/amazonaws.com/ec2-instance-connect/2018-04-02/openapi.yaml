@@ -3,7 +3,7 @@ info:
   version: '2018-04-02'
   x-release: v4
   title: AWS EC2 Instance Connect
-  description: AWS EC2 Connect Service is a service that enables system administrators to publish temporary SSH keys to their EC2 instances in order to establish connections to their instances without leaving a permanent authentication option.
+  description: 'Amazon EC2 Instance Connect enables system administrators to publish one-time use SSH public keys to EC2, providing users a simple and secure way to connect to their instances.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -112,11 +112,12 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The EC2 Instance Connect endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   /#X-Amz-Target=AWSEC2InstanceConnectService.SendSSHPublicKey:
     post:
       operationId: SendSSHPublicKey
-      description: Pushes an SSH public key to a particular OS user on a given EC2 instance for 60 seconds.
+      description: 'Pushes an SSH public key to the specified EC2 instance for use by the specified user. The key remains for 60 seconds. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect.html">Connect to your Linux instance using EC2 Instance Connect</a> in the <i>Amazon EC2 User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -168,6 +169,93 @@ paths:
             type: string
             enum:
               - AWSEC2InstanceConnectService.SendSSHPublicKey
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEC2InstanceConnectService.SendSerialConsoleSSHPublicKey:
+    post:
+      operationId: SendSerialConsoleSSHPublicKey
+      description: 'Pushes an SSH public key to the specified EC2 instance. The key remains for 60 seconds, which gives you 60 seconds to establish a serial console connection to the instance using SSH. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-serial-console.html">EC2 Serial Console</a> in the <i>Amazon EC2 User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendSerialConsoleSSHPublicKeyResponse'
+        '480':
+          description: AuthException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthException'
+        '481':
+          description: SerialConsoleAccessDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SerialConsoleAccessDisabledException'
+        '482':
+          description: InvalidArgsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgsException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: EC2InstanceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EC2InstanceNotFoundException'
+        '486':
+          description: EC2InstanceTypeInvalidException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EC2InstanceTypeInvalidException'
+        '487':
+          description: SerialConsoleSessionLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SerialConsoleSessionLimitExceededException'
+        '488':
+          description: SerialConsoleSessionUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SerialConsoleSessionUnavailableException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendSerialConsoleSSHPublicKeyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEC2InstanceConnectService.SendSerialConsoleSSHPublicKey
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -237,11 +325,11 @@ components:
         RequestId:
           allOf:
             - $ref: '#/components/schemas/RequestId'
-            - description: The request ID as logged by EC2 Connect. Please provide this when contacting AWS Support.
+            - description: The ID of the request. Please provide this ID when contacting AWS Support for assistance.
         Success:
           allOf:
             - $ref: '#/components/schemas/Success'
-            - description: Indicates request success.
+            - description: Is true if the request succeeds and an error otherwise.
     SendSSHPublicKeyRequest:
       type: object
       required:
@@ -254,24 +342,58 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The EC2 instance you wish to publish the SSH key to.
+            - description: The ID of the EC2 instance.
         InstanceOSUser:
           allOf:
             - $ref: '#/components/schemas/InstanceOSUser'
-            - description: The OS user on the EC2 instance whom the key may be used to authenticate as.
+            - description: The OS user on the EC2 instance for whom the key can be used to authenticate.
         SSHPublicKey:
           allOf:
             - $ref: '#/components/schemas/SSHPublicKey'
-            - description: The public key to be published to the instance. To use it after publication you must have the matching private key.
+            - description: 'The public key material. To use the public key, you must have the matching private key.'
         AvailabilityZone:
           allOf:
             - $ref: '#/components/schemas/AvailabilityZone'
-            - description: The availability zone the EC2 instance was launched in.
+            - description: The Availability Zone in which the EC2 instance was launched.
     AuthException: {}
     InvalidArgsException: {}
     ServiceException: {}
     ThrottlingException: {}
     EC2InstanceNotFoundException: {}
+    SendSerialConsoleSSHPublicKeyResponse:
+      type: object
+      properties:
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/RequestId'
+            - description: The ID of the request. Please provide this ID when contacting AWS Support for assistance.
+        Success:
+          allOf:
+            - $ref: '#/components/schemas/Success'
+            - description: Is true if the request succeeds and an error otherwise.
+    SendSerialConsoleSSHPublicKeyRequest:
+      type: object
+      required:
+        - InstanceId
+        - SSHPublicKey
+      title: SendSerialConsoleSSHPublicKeyRequest
+      properties:
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The ID of the EC2 instance.
+        SerialPort:
+          allOf:
+            - $ref: '#/components/schemas/SerialPort'
+            - description: '<p>The serial port of the EC2 instance. Currently only port 0 is supported.</p> <p>Default: 0</p>'
+        SSHPublicKey:
+          allOf:
+            - $ref: '#/components/schemas/SSHPublicKey'
+            - description: 'The public key material. To use the public key, you must have the matching private key. For information about the supported key formats and lengths, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws">Requirements for key pairs</a> in the <i>Amazon EC2 User Guide</i>.'
+    SerialConsoleAccessDisabledException: {}
+    EC2InstanceTypeInvalidException: {}
+    SerialConsoleSessionLimitExceededException: {}
+    SerialConsoleSessionUnavailableException: {}
     AvailabilityZone:
       type: string
       pattern: '^(\w+-){2,3}\d+\w+$'
@@ -295,5 +417,9 @@ components:
       maxLength: 4096
     Success:
       type: boolean
+    SerialPort:
+      type: integer
+      minimum: 0
+      maximum: 0
 security:
   - hmac: []

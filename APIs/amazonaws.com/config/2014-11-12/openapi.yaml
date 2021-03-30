@@ -931,6 +931,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StarlingDoveService.DescribeAggregateComplianceByConformancePacks:
+    post:
+      operationId: DescribeAggregateComplianceByConformancePacks
+      description: '<p>Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.</p> <note> <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAggregateComplianceByConformancePacksResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidLimitException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLimitException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '483':
+          description: NoSuchConfigurationAggregatorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigurationAggregatorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAggregateComplianceByConformancePacksRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StarlingDoveService.DescribeAggregateComplianceByConformancePacks
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=StarlingDoveService.DescribeAggregationAuthorizations:
     post:
       operationId: DescribeAggregationAuthorizations
@@ -2198,6 +2255,63 @@ paths:
             type: string
             enum:
               - StarlingDoveService.GetAggregateConfigRuleComplianceSummary
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StarlingDoveService.GetAggregateConformancePackComplianceSummary:
+    post:
+      operationId: GetAggregateConformancePackComplianceSummary
+      description: '<p>Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions. You can filter based on AWS Account ID or AWS Region.</p> <note> <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAggregateConformancePackComplianceSummaryResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidLimitException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLimitException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '483':
+          description: NoSuchConfigurationAggregatorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoSuchConfigurationAggregatorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAggregateConformancePackComplianceSummaryRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StarlingDoveService.GetAggregateConformancePackComplianceSummary
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3649,7 +3763,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.PutOrganizationConformancePack:
     post:
       operationId: PutOrganizationConformancePack
-      description: '<p>Deploys conformance packs across member accounts in an AWS Organization.</p> <p>Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code> through the <code>EnableAWSServiceAccess</code> action and creates a service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization <code>register-delegate-admin</code> for <code>config-multiaccountsetup.amazonaws.com</code>.</p> <note> <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> <p>AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state.</p> <p>You can create 6 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization. </p> </note>'
+      description: '<p>Deploys conformance packs across member accounts in an AWS Organization.</p> <p>Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations <code>ListDelegatedAdministrator</code> permissions are added.</p> <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code> through the <code>EnableAWSServiceAccess</code> action and creates a service linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization <code>register-delegate-admin</code> for <code>config-multiaccountsetup.amazonaws.com</code>.</p> <note> <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p> <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. If you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p> <p>AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state.</p> <p>You can create 50 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization. </p> </note>'
       responses:
         '200':
           description: Success
@@ -4726,6 +4840,39 @@ components:
             - description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
     InvalidLimitException: {}
     InvalidNextTokenException: {}
+    DescribeAggregateComplianceByConformancePacksResponse:
+      type: object
+      properties:
+        AggregateComplianceByConformancePacks:
+          allOf:
+            - $ref: '#/components/schemas/AggregateComplianceByConformancePackList'
+            - description: Returns the <code>AggregateComplianceByConformancePack</code> object.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
+    DescribeAggregateComplianceByConformancePacksRequest:
+      type: object
+      required:
+        - ConfigurationAggregatorName
+      title: DescribeAggregateComplianceByConformancePacksRequest
+      properties:
+        ConfigurationAggregatorName:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationAggregatorName'
+            - description: The name of the configuration aggregator.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/AggregateConformancePackComplianceFilters'
+            - description: Filters the result by <code>AggregateConformancePackComplianceFilters</code> object.
+        Limit:
+          allOf:
+            - $ref: '#/components/schemas/Limit'
+            - description: 'The maximum number of conformance packs details returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
     DescribeAggregationAuthorizationsResponse:
       type: object
       properties:
@@ -5414,6 +5561,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/GroupByAPILimit'
             - description: 'The maximum number of evaluation results returned on each page. The default is 1000. You cannot specify a number greater than 1000. If you specify 0, AWS Config uses the default.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
+    GetAggregateConformancePackComplianceSummaryResponse:
+      type: object
+      properties:
+        AggregateConformancePackComplianceSummaries:
+          allOf:
+            - $ref: '#/components/schemas/AggregateConformancePackComplianceSummaryList'
+            - description: Returns a list of <code>AggregateConformancePackComplianceSummary</code> object.
+        GroupByKey:
+          allOf:
+            - $ref: '#/components/schemas/StringWithCharLimit256'
+            - description: Groups the result based on AWS Account ID or AWS Region.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
+    GetAggregateConformancePackComplianceSummaryRequest:
+      type: object
+      required:
+        - ConfigurationAggregatorName
+      title: GetAggregateConformancePackComplianceSummaryRequest
+      properties:
+        ConfigurationAggregatorName:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationAggregatorName'
+            - description: The name of the configuration aggregator.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/AggregateConformancePackComplianceSummaryFilters'
+            - description: Filters the results based on the <code>AggregateConformancePackComplianceSummaryFilters</code> object.
+        GroupByKey:
+          allOf:
+            - $ref: '#/components/schemas/AggregateConformancePackComplianceSummaryGroupKey'
+            - description: Groups the result based on AWS Account ID or AWS Region.
+        Limit:
+          allOf:
+            - $ref: '#/components/schemas/Limit'
+            - description: 'The maximum number of results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -6198,7 +6386,7 @@ components:
         DeliveryS3Bucket:
           allOf:
             - $ref: '#/components/schemas/DeliveryS3Bucket'
-            - description: <p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p> <note> <p>This field is optional.</p> </note>
+            - description: '<p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p> <note> <p>This field is optional. If used, it must be prefixed with <code>awsconfigconforms</code>.</p> </note>'
         DeliveryS3KeyPrefix:
           allOf:
             - $ref: '#/components/schemas/DeliveryS3KeyPrefix'
@@ -6587,6 +6775,55 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AggregateComplianceByConfigRule'
+    ConformancePackName:
+      type: string
+      pattern: '[a-zA-Z][-a-zA-Z0-9]*'
+      minLength: 1
+      maxLength: 256
+    AggregateConformancePackCompliance:
+      type: object
+      properties:
+        ComplianceType:
+          allOf:
+            - $ref: '#/components/schemas/ConformancePackComplianceType'
+            - description: The compliance status of the conformance pack.
+        CompliantRuleCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of compliant AWS Config Rules.
+        NonCompliantRuleCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of noncompliant AWS Config Rules.
+        TotalRuleCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'Total number of compliant rules, noncompliant rules, and the rules that do not have any applicable resources to evaluate upon resulting in insufficient data.'
+      description: 'Provides the number of compliant and noncompliant rules within a conformance pack. Also provides the total count of compliant rules, noncompliant rules, and the rules that do not have any applicable resources to evaluate upon resulting in insufficient data. '
+    AggregateComplianceByConformancePack:
+      type: object
+      properties:
+        ConformancePackName:
+          allOf:
+            - $ref: '#/components/schemas/ConformancePackName'
+            - description: The name of the conformance pack.
+        Compliance:
+          allOf:
+            - $ref: '#/components/schemas/AggregateConformancePackCompliance'
+            - description: The compliance status of the conformance pack.
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The 12-digit AWS account ID of the source account.
+        AwsRegion:
+          allOf:
+            - $ref: '#/components/schemas/AwsRegion'
+            - description: The source AWS Region from where the data is aggregated.
+      description: '<p>Provides aggregate compliance of the conformance pack. Indicates whether a conformance pack is compliant based on the name of the conformance pack, account ID, and region.</p> <p>A conformance pack is compliant if all of the rules in that conformance packs are compliant. It is noncompliant if any of the rules are not compliant.</p> <note> <p>If a conformance pack has rules that return INSUFFICIENT_DATA, the conformance pack returns INSUFFICIENT_DATA only if all the rules within that conformance pack return INSUFFICIENT_DATA. If some of the rules in a conformance pack are compliant and others return INSUFFICIENT_DATA, the conformance pack shows compliant.</p> </note>'
+    AggregateComplianceByConformancePackList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AggregateComplianceByConformancePack'
     StringWithCharLimit256:
       type: string
       minLength: 1
@@ -6623,6 +6860,79 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AggregateComplianceCount'
+    ConformancePackComplianceType:
+      type: string
+      enum:
+        - COMPLIANT
+        - NON_COMPLIANT
+        - INSUFFICIENT_DATA
+    Integer:
+      type: integer
+    AggregateConformancePackComplianceCount:
+      type: object
+      properties:
+        CompliantConformancePackCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Number of compliant conformance packs.
+        NonCompliantConformancePackCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Number of noncompliant conformance packs.
+      description: The number of conformance packs that are compliant and noncompliant.
+    AggregateConformancePackComplianceFilters:
+      type: object
+      properties:
+        ConformancePackName:
+          allOf:
+            - $ref: '#/components/schemas/ConformancePackName'
+            - description: The name of the conformance pack.
+        ComplianceType:
+          allOf:
+            - $ref: '#/components/schemas/ConformancePackComplianceType'
+            - description: The compliance status of the conformance pack.
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The 12-digit AWS account ID of the source account.
+        AwsRegion:
+          allOf:
+            - $ref: '#/components/schemas/AwsRegion'
+            - description: The source AWS Region from where the data is aggregated.
+      description: 'Filters the conformance packs based on an account ID, region, compliance type, and the name of the conformance pack.'
+    AggregateConformancePackComplianceSummary:
+      type: object
+      properties:
+        ComplianceSummary:
+          allOf:
+            - $ref: '#/components/schemas/AggregateConformancePackComplianceCount'
+            - description: 'Returns an <code>AggregateConformancePackComplianceCount</code> object. '
+        GroupName:
+          allOf:
+            - $ref: '#/components/schemas/StringWithCharLimit256'
+            - description: Groups the result based on AWS Account ID or AWS Region.
+      description: 'Provides a summary of compliance based on either account ID or region. '
+    AggregateConformancePackComplianceSummaryFilters:
+      type: object
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The 12-digit AWS account ID of the source account.
+        AwsRegion:
+          allOf:
+            - $ref: '#/components/schemas/AwsRegion'
+            - description: The source AWS Region from where the data is aggregated.
+      description: 'Filters the results based on account ID and region. '
+    AggregateConformancePackComplianceSummaryGroupKey:
+      type: string
+      enum:
+        - ACCOUNT_ID
+        - AWS_REGION
+    AggregateConformancePackComplianceSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AggregateConformancePackComplianceSummary'
     EvaluationResultIdentifier:
       type: object
       properties:
@@ -6769,6 +7079,7 @@ components:
         - 'AWS::SSM::PatchCompliance'
         - 'AWS::Shield::Protection'
         - 'AWS::ShieldRegional::Protection'
+        - 'AWS::Config::ConformancePackCompliance'
         - 'AWS::Config::ResourceCompliance'
         - 'AWS::ApiGateway::Stage'
         - 'AWS::ApiGateway::RestApi'
@@ -7087,8 +7398,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ComplianceByResource'
-    Integer:
-      type: integer
     ComplianceResourceTypes:
       type: array
       items:
@@ -7565,7 +7874,7 @@ components:
         resourceTypes:
           allOf:
             - $ref: '#/components/schemas/ResourceTypeList'
-            - description: '<p>A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, <code>AWS::EC2::Instance</code> or <code>AWS::CloudTrail::Trail</code>).</p> <p>To record all configuration changes, you must set the <code>allSupported</code> option to <code>false</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>resourceType Value</b> column in <a href="https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resource Types</a>.</p>'
+            - description: '<p>A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, <code>AWS::EC2::Instance</code> or <code>AWS::CloudTrail::Trail</code>).</p> <p>To record all configuration changes, you must set the <code>allSupported</code> option to <code>true</code>.</p> <p>If you set this option to <code>false</code>, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>resourceType Value</b> column in <a href="https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resource Types</a>.</p>'
       description: '<p>Specifies the types of AWS resource for which AWS Config records configuration changes.</p> <p>In the recording group, you specify whether all supported types or specific types of resources are recorded.</p> <p>By default, AWS Config records configuration changes for all supported types of regional resources that AWS Config discovers in the region in which it is running. Regional resources are tied to a region and can be used only in that region. Examples of regional resources are EC2 instances and EBS volumes.</p> <p>You can also have AWS Config record configuration changes for supported types of global resources (for example, IAM resources). Global resources are not tied to an individual region and can be used in all regions.</p> <important> <p>The configuration details for any global resource are the same in all regions. If you customize AWS Config in multiple regions to record global resources, it will create multiple configuration items each time a global resource changes: one configuration item for each region. These configuration items will contain identical data. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources, unless you want the configuration items to be available in multiple regions.</p> </important> <p>If you don''t want AWS Config to record all resources, you can specify which types of resources it will record with the <code>resourceTypes</code> parameter.</p> <p>For a list of supported resource types, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported Resource Types</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html">Selecting Which Resources AWS Config Records</a>.</p>'
     ConfigurationRecorder:
       type: object
@@ -7647,12 +7956,6 @@ components:
         $ref: '#/components/schemas/StringWithCharLimit64'
       minItems: 0
       maxItems: 10
-    ConformancePackComplianceType:
-      type: string
-      enum:
-        - COMPLIANT
-        - NON_COMPLIANT
-        - INSUFFICIENT_DATA
     ConformancePackComplianceFilters:
       type: object
       properties:
@@ -7663,7 +7966,7 @@ components:
         ComplianceType:
           allOf:
             - $ref: '#/components/schemas/ConformancePackComplianceType'
-            - description: <p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>
+            - description: <p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. <code>INSUFFICIENT_DATA</code> is not supported.</p>
       description: Filters the conformance pack by compliance types and AWS Config rule names.
     ConformancePackComplianceResourceIds:
       type: array
@@ -7671,11 +7974,6 @@ components:
         $ref: '#/components/schemas/StringWithCharLimit256'
       minItems: 0
       maxItems: 5
-    ConformancePackName:
-      type: string
-      pattern: '[a-zA-Z][-a-zA-Z0-9]*'
-      minLength: 1
-      maxLength: 256
     ConformancePackComplianceSummary:
       type: object
       required:
@@ -7689,7 +7987,7 @@ components:
         ConformancePackComplianceStatus:
           allOf:
             - $ref: '#/components/schemas/ConformancePackComplianceType'
-            - description: 'The status of the conformance pack. The allowed values are COMPLIANT and NON_COMPLIANT. '
+            - description: 'The status of the conformance pack. The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code> and <code>INSUFFICIENT_DATA</code>.'
       description: Summary includes the name and status of the conformance pack.
     ConformancePackComplianceSummaryList:
       type: array
@@ -7771,7 +8069,7 @@ components:
         ComplianceType:
           allOf:
             - $ref: '#/components/schemas/ConformancePackComplianceType'
-            - description: <p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>
+            - description: <p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. <code>INSUFFICIENT_DATA</code> is not supported.</p>
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/StringWithCharLimit256'
@@ -7792,7 +8090,7 @@ components:
         ComplianceType:
           allOf:
             - $ref: '#/components/schemas/ConformancePackComplianceType'
-            - description: 'The compliance type. The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. '
+            - description: The compliance type. The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. <code>INSUFFICIENT_DATA</code> is not supported.
         EvaluationResultIdentifier:
           $ref: '#/components/schemas/EvaluationResultIdentifier'
         ConfigRuleInvokedTime:
@@ -7843,6 +8141,12 @@ components:
         $ref: '#/components/schemas/ConformancePackName'
       minItems: 1
       maxItems: 5
+    ControlsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringWithCharLimit128'
+      minItems: 0
+      maxItems: 20
     ConformancePackRuleCompliance:
       type: object
       properties:
@@ -7853,7 +8157,11 @@ components:
         ComplianceType:
           allOf:
             - $ref: '#/components/schemas/ConformancePackComplianceType'
-            - description: <p>Compliance of the AWS Config rule</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>
+            - description: '<p>Compliance of the AWS Config rule.</p> <p>The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code>.</p>'
+        Controls:
+          allOf:
+            - $ref: '#/components/schemas/ControlsList'
+            - description: Controls for the conformance pack. A control is a process to prevent or detect problems while meeting objectives. A control can align with a specific compliance regime or map to internal controls defined by an organization.
       description: Compliance information of one or more AWS Config rules within a conformance pack. You can filter using AWS Config rule names and compliance types.
     ConformancePackRuleComplianceList:
       type: array
@@ -7932,6 +8240,10 @@ components:
         $ref: '#/components/schemas/ConformancePackStatusDetail'
       minItems: 0
       maxItems: 25
+    StringWithCharLimit128:
+      type: string
+      minLength: 1
+      maxLength: 128
     CosmosPageLimit:
       type: integer
       minimum: 0
@@ -8837,10 +9149,6 @@ components:
       type: string
       minLength: 1
       maxLength: 768
-    StringWithCharLimit128:
-      type: string
-      minLength: 1
-      maxLength: 128
     Owner:
       type: string
       enum:
