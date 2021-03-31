@@ -5151,7 +5151,7 @@ paths:
   /#X-Amz-Target=AWSGlue.GetResourcePolicies:
     post:
       operationId: GetResourcePolicies
-      description: '<p>Retrieves the security configurations for the resource policies set on individual resources, and also the account-level policy.</p> <p>This operation also returns the Data Catalog resource policy. However, if you enabled metadata encryption in Data Catalog settings, and you do not have permission on the AWS KMS key, the operation can''t return the Data Catalog resource policy.</p>'
+      description: '<p>Retrieves the resource policies set on individual resources by AWS Resource Access Manager during cross-account permission grants. Also retrieves the Data Catalog resource policy.</p> <p>If you enabled metadata encryption in Data Catalog settings, and you do not have permission on the AWS KMS key, the operation can''t return the Data Catalog resource policy.</p>'
       responses:
         '200':
           description: Success
@@ -12396,7 +12396,7 @@ components:
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/GlueResourceArn'
-            - description: 'The ARN of the AWS Glue resource for the resource policy to be retrieved. For more information about AWS Glue resource ARNs, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id">AWS Glue ARN string pattern</a> '
+            - description: 'The ARN of the AWS Glue resource for which to retrieve the resource policy. If not supplied, the Data Catalog resource policy is returned. Use <code>GetResourcePolicies</code> to view all existing resource policies. For more information see <a href="https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html">Specifying AWS Glue Resource ARNs</a>. '
     GetSchemaResponse:
       type: object
       properties:
@@ -13275,7 +13275,7 @@ components:
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/GlueResourceArn'
-            - description: 'The ARN of the AWS Glue resource for the resource policy to be set. For more information about AWS Glue resource ARNs, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id">AWS Glue ARN string pattern</a> '
+            - description: Do not use. For internal use only.
         PolicyHashCondition:
           allOf:
             - $ref: '#/components/schemas/HashString'
@@ -13283,11 +13283,11 @@ components:
         PolicyExistsCondition:
           allOf:
             - $ref: '#/components/schemas/ExistCondition'
-            - description: 'A value of <code>MUST_EXIST</code> is used to update a policy. A value of <code>NOT_EXIST</code> is used to create a new policy. If a value of <code>NONE</code> or a null value is used, the call will not depend on the existence of a policy.'
+            - description: 'A value of <code>MUST_EXIST</code> is used to update a policy. A value of <code>NOT_EXIST</code> is used to create a new policy. If a value of <code>NONE</code> or a null value is used, the call does not depend on the existence of a policy.'
         EnableHybrid:
           allOf:
             - $ref: '#/components/schemas/EnableHybridValues'
-            - description: <p>Allows you to specify if you want to use both resource-level and account/catalog-level resource policies. A resource-level policy is a policy attached to an individual resource such as a database or a table.</p> <p>The default value of <code>NO</code> indicates that resource-level policies cannot co-exist with an account-level policy. A value of <code>YES</code> means the use of both resource-level and account/catalog-level resource policies is allowed.</p>
+            - description: '<p>If <code>''TRUE''</code>, indicates that you are using both methods to grant cross-account access to Data Catalog resources:</p> <ul> <li> <p>By directly updating the resource policy with <code>PutResourePolicy</code> </p> </li> <li> <p>By using the <b>Grant permissions</b> command on the AWS Management Console.</p> </li> </ul> <p>Must be set to <code>''TRUE''</code> if you have already used the Management Console to grant cross-account access, otherwise the call fails. Default is ''FALSE''.</p>'
     PutSchemaVersionMetadataResponse:
       type: object
       properties:
@@ -16366,7 +16366,7 @@ components:
       description: A structure for a partition index.
     SchemaRegistryNameString:
       type: string
-      pattern: '[a-zA-Z0-9-_$#]+'
+      pattern: '[a-zA-Z0-9-_$#.]+'
       minLength: 1
       maxLength: 255
     GlueResourceArn:
@@ -18215,6 +18215,10 @@ components:
       pattern: '[a-zA-Z0-9+-=._./@]+'
       minLength: 1
       maxLength: 256
+    OtherMetadataValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OtherMetadataValueListItem'
     MetadataInfo:
       type: object
       properties:
@@ -18226,6 +18230,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreatedTimestamp'
             - description: The time at which the entry was created.
+        OtherMetadataValueList:
+          allOf:
+            - $ref: '#/components/schemas/OtherMetadataValueList'
+            - description: Other metadata belonging to the same metadata key.
       description: A structure containing metadata information for a schema version.
     MetadataInfoMap:
       type: object
@@ -18340,6 +18348,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Order'
+    OtherMetadataValueListItem:
+      type: object
+      properties:
+        MetadataValue:
+          allOf:
+            - $ref: '#/components/schemas/MetadataValueString'
+            - description: The metadata key’s corresponding value for the other metadata belonging to the same metadata key.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/CreatedTimestamp'
+            - description: The time at which the entry was created.
+      description: A structure containing other metadata for a schema version belonging to the same metadata key.
     ParametersMapValue:
       type: string
       maxLength: 512000

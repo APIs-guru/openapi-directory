@@ -228,6 +228,114 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.CancelBatchPredictionJob:
+    post:
+      operationId: CancelBatchPredictionJob
+      description: Cancels the specified batch prediction job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelBatchPredictionJobResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelBatchPredictionJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.CancelBatchPredictionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.CreateBatchPredictionJob:
+    post:
+      operationId: CreateBatchPredictionJob
+      description: Creates a batch prediction job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBatchPredictionJobResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBatchPredictionJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.CreateBatchPredictionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSHawksNestServiceFacade.CreateDetectorVersion:
     post:
       operationId: CreateDetectorVersion
@@ -505,6 +613,63 @@ paths:
             type: string
             enum:
               - AWSHawksNestServiceFacade.CreateVariable
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteBatchPredictionJob:
+    post:
+      operationId: DeleteBatchPredictionJob
+      description: Deletes a batch prediction job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBatchPredictionJobResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBatchPredictionJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteBatchPredictionJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1357,6 +1522,75 @@ paths:
             type: string
             enum:
               - AWSHawksNestServiceFacade.DescribeModelVersions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.GetBatchPredictionJobs:
+    post:
+      operationId: GetBatchPredictionJobs
+      description: 'Gets all batch prediction jobs or a specific job if you specify a job ID. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 1 and 50. To get the next page results, provide the pagination token from the GetBatchPredictionJobsResponse as part of your request. A null pagination token fetches the records from the beginning.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBatchPredictionJobsResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBatchPredictionJobsRequest'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.GetBatchPredictionJobs
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3437,6 +3671,66 @@ components:
           allOf:
             - $ref: '#/components/schemas/NameList'
             - description: The list of variable names to get.
+    CancelBatchPredictionJobResult:
+      type: object
+      properties: {}
+    CancelBatchPredictionJobRequest:
+      type: object
+      required:
+        - jobId
+      title: CancelBatchPredictionJobRequest
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The ID of the batch prediction job to cancel.
+    ResourceNotFoundException: {}
+    CreateBatchPredictionJobResult:
+      type: object
+      properties: {}
+    CreateBatchPredictionJobRequest:
+      type: object
+      required:
+        - jobId
+        - inputPath
+        - outputPath
+        - eventTypeName
+        - detectorName
+        - iamRoleArn
+      title: CreateBatchPredictionJobRequest
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The ID of the batch prediction job.
+        inputPath:
+          allOf:
+            - $ref: '#/components/schemas/s3BucketLocation'
+            - description: The Amazon S3 location of your training file.
+        outputPath:
+          allOf:
+            - $ref: '#/components/schemas/s3BucketLocation'
+            - description: The Amazon S3 location of your output file.
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The name of the event type.
+        detectorName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The name of the detector.
+        detectorVersion:
+          allOf:
+            - $ref: '#/components/schemas/wholeNumberVersionString'
+            - description: The detector version.
+        iamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/iamRoleArn'
+            - description: The ARN of the IAM role to use for this job request.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/tagList'
+            - description: A collection of key and value pairs.
     CreateDetectorVersionResult:
       type: object
       properties:
@@ -3487,7 +3781,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/tagList'
             - description: A collection of key and value pairs.
-    ResourceNotFoundException: {}
     CreateModelResult:
       type: object
       properties: {}
@@ -3656,6 +3949,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/tagList'
             - description: A collection of key and value pairs.
+    DeleteBatchPredictionJobResult:
+      type: object
+      properties: {}
+    DeleteBatchPredictionJobRequest:
+      type: object
+      required:
+        - jobId
+      title: DeleteBatchPredictionJobRequest
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The ID of the batch prediction job to delete.
     DeleteDetectorResult:
       type: object
       properties: {}
@@ -3908,6 +4214,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/modelsMaxPageSize'
             - description: The maximum number of results to return.
+    GetBatchPredictionJobsResult:
+      type: object
+      properties:
+        batchPredictions:
+          allOf:
+            - $ref: '#/components/schemas/BatchPredictionList'
+            - description: An array containing the details of each batch prediction job.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The next token for the subsequent request.
+    GetBatchPredictionJobsRequest:
+      type: object
+      title: GetBatchPredictionJobsRequest
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The batch prediction job for which to get the details.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/batchPredictionsMaxPageSize'
+            - description: The maximum number of objects to return for the request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The next token from the previous request.
     GetDetectorVersionResult:
       type: object
       properties:
@@ -4853,6 +5186,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: 'The variable type. For more information see <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types">Variable types</a>.'
+    AsyncJobStatus:
+      type: string
+      enum:
+        - IN_PROGRESS_INITIALIZING
+        - IN_PROGRESS
+        - CANCEL_IN_PROGRESS
+        - CANCELED
+        - COMPLETE
+        - FAILED
     string:
       type: string
     integer:
@@ -4924,6 +5266,105 @@ components:
       pattern: '^[0-9a-z_-]+$'
       minLength: 1
       maxLength: 64
+    time:
+      type: string
+      minLength: 11
+      maxLength: 30
+    s3BucketLocation:
+      type: string
+      pattern: '^s3:\/\/(.+)$'
+      minLength: 1
+      maxLength: 512
+    floatVersionString:
+      type: string
+      pattern: '^[1-9][0-9]{0,3}\.[0-9]{1,2}$'
+      minLength: 3
+      maxLength: 7
+    iamRoleArn:
+      type: string
+      pattern: '^arn\:aws[a-z-]{0,15}\:iam\:\:[0-9]{12}\:role\/[^\s]{2,64}$'
+      minLength: 1
+      maxLength: 256
+    fraudDetectorArn:
+      type: string
+      pattern: '^arn\:aws[a-z-]{0,15}\:frauddetector\:[a-z0-9-]{3,20}\:[0-9]{12}\:[^\s]{2,128}$'
+      minLength: 1
+      maxLength: 256
+    Integer:
+      type: integer
+    BatchPrediction:
+      type: object
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The job ID for the batch prediction.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AsyncJobStatus'
+            - description: The batch prediction status.
+        failureReason:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The reason a batch prediction job failed.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: Timestamp of when the batch prediction job started.
+        completionTime:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: Timestamp of when the batch prediction job comleted.
+        lastHeartbeatTime:
+          allOf:
+            - $ref: '#/components/schemas/time'
+            - description: Timestamp of most recent heartbeat indicating the batch prediction job was making progress.
+        inputPath:
+          allOf:
+            - $ref: '#/components/schemas/s3BucketLocation'
+            - description: The Amazon S3 location of your training file.
+        outputPath:
+          allOf:
+            - $ref: '#/components/schemas/s3BucketLocation'
+            - description: The Amazon S3 location of your output file.
+        eventTypeName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The name of the event type.
+        detectorName:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The name of the detector.
+        detectorVersion:
+          allOf:
+            - $ref: '#/components/schemas/floatVersionString'
+            - description: 'The detector version. '
+        iamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/iamRoleArn'
+            - description: The ARN of the IAM role to use for this job request.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/fraudDetectorArn'
+            - description: The ARN of batch prediction job.
+        processedRecordsCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of records processed by the batch prediction job.
+        totalRecordsCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The total number of records in the batch prediction job.
+      description: The batch prediction details.
+    BatchPredictionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchPrediction'
+    wholeNumberVersionString:
+      type: string
+      pattern: '^([1-9][0-9]*)$'
+      minLength: 1
+      maxLength: 5
     description:
       type: string
       minLength: 1
@@ -5066,21 +5507,11 @@ components:
             - $ref: '#/components/schemas/fieldValidationMessageList'
             - description: The field-specific model training validation messages.
       description: The model training validation messages.
-    wholeNumberVersionString:
-      type: string
-      pattern: '^([1-9][0-9]*)$'
-      minLength: 1
-      maxLength: 5
     sageMakerEndpointIdentifier:
       type: string
       pattern: '^[0-9A-Za-z_-]+$'
       minLength: 1
       maxLength: 63
-    floatVersionString:
-      type: string
-      pattern: '^[1-9][0-9]{0,3}\.[0-9]{1,2}$'
-      minLength: 3
-      maxLength: 7
     DetectorVersionMaxResults:
       type: integer
       minimum: 1000
@@ -5089,11 +5520,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DetectorVersionSummary'
-    fraudDetectorArn:
-      type: string
-      pattern: '^arn\:aws[a-z-]{0,15}\:frauddetector\:[a-z0-9-]{3,20}\:[0-9]{12}\:[^\s]{2,128}$'
-      minLength: 1
-      maxLength: 256
     modelsMaxPageSize:
       type: integer
       minimum: 1
@@ -5102,8 +5528,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ModelVersionDetail'
-    time:
-      type: string
     Detector:
       type: object
       properties:
@@ -5245,16 +5669,6 @@ components:
       minProperties: 1
       additionalProperties:
         $ref: '#/components/schemas/variableValue'
-    s3BucketLocation:
-      type: string
-      pattern: '^s3:\/\/(.+)$'
-      minLength: 1
-      maxLength: 512
-    iamRoleArn:
-      type: string
-      pattern: '^arn\:aws[a-z-]{0,15}\:iam\:\:[0-9]{12}\:role\/[^\s]{2,64}$'
-      minLength: 1
-      maxLength: 256
     ModelSource:
       type: string
       enum:
@@ -5412,6 +5826,10 @@ components:
             - $ref: '#/components/schemas/string'
             - description: The message type.
       description: The message details.
+    batchPredictionsMaxPageSize:
+      type: integer
+      minimum: 1
+      maximum: 50
     entityTypesMaxResults:
       type: integer
       minimum: 5

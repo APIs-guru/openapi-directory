@@ -1508,7 +1508,7 @@ paths:
     get:
       x-aws-operation-name: AssociateEnclaveCertificateIamRole
       operationId: GET_AssociateEnclaveCertificateIamRole
-      description: '<p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">AWS Certificate Manager for Nitro Enclaves</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>When the IAM role is associated with the ACM certificate, places the certificate, certificate chain, and encrypted private key in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy.</p> <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must grant it permission to call <code>kms:Decrypt</code> on AWS KMS CMK returned by the command. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy"> Grant the role permission to access the certificate and encryption key</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p>'
+      description: '<p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">AWS Certificate Manager for Nitro Enclaves</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted private key are placed in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy.</p> <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must grant it permission to call <code>kms:Decrypt</code> on the AWS KMS CMK returned by the command. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy"> Grant the role permission to access the certificate and encryption key</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1564,7 +1564,7 @@ paths:
     post:
       x-aws-operation-name: AssociateEnclaveCertificateIamRole
       operationId: POST_AssociateEnclaveCertificateIamRole
-      description: '<p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">AWS Certificate Manager for Nitro Enclaves</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>When the IAM role is associated with the ACM certificate, places the certificate, certificate chain, and encrypted private key in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy.</p> <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must grant it permission to call <code>kms:Decrypt</code> on AWS KMS CMK returned by the command. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy"> Grant the role permission to access the certificate and encryption key</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p>'
+      description: '<p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">AWS Certificate Manager for Nitro Enclaves</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted private key are placed in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy.</p> <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must grant it permission to call <code>kms:Decrypt</code> on the AWS KMS CMK returned by the command. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy"> Grant the role permission to access the certificate and encryption key</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -7673,6 +7673,107 @@ paths:
             type: string
             enum:
               - CreatePlacementGroup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=CreateReplaceRootVolumeTask:
+    get:
+      x-aws-operation-name: CreateReplaceRootVolumeTask
+      operationId: GET_CreateReplaceRootVolumeTask
+      description: '<p>Creates a root volume replacement task for an Amazon EC2 instance. The root volume can either be restored to its initial launch state, or it can be restored using a specific snapshot.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/">Replace a root volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateReplaceRootVolumeTaskResult'
+      parameters:
+        - name: InstanceId
+          in: query
+          required: true
+          description: The ID of the instance for which to replace the root volume.
+          schema:
+            type: string
+        - name: SnapshotId
+          in: query
+          required: false
+          description: 'The ID of the snapshot from which to restore the replacement root volume. If you want to restore the volume to the initial launch state, omit this parameter.'
+          schema:
+            type: string
+        - name: ClientToken
+          in: query
+          required: false
+          description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.'
+          schema:
+            type: string
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply to the root volume replacement task.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/TagSpecification'
+                - xml:
+                    name: item
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateReplaceRootVolumeTask
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateReplaceRootVolumeTask
+      operationId: POST_CreateReplaceRootVolumeTask
+      description: '<p>Creates a root volume replacement task for an Amazon EC2 instance. The root volume can either be restored to its initial launch state, or it can be restored using a specific snapshot.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/">Replace a root volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateReplaceRootVolumeTaskResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateReplaceRootVolumeTaskRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateReplaceRootVolumeTask
         - name: Version
           in: query
           required: true
@@ -23842,6 +23943,126 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  /#Action=DescribeReplaceRootVolumeTasks:
+    get:
+      x-aws-operation-name: DescribeReplaceRootVolumeTasks
+      operationId: GET_DescribeReplaceRootVolumeTasks
+      description: 'Describes a root volume replacement task. For more information, see <a href="https://docs.aws.amazon.com/">Replace a root volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeReplaceRootVolumeTasksResult'
+      parameters:
+        - name: ReplaceRootVolumeTaskId
+          in: query
+          required: false
+          description: The ID of the root volume replacement task to view.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/ReplaceRootVolumeTaskId'
+                - xml:
+                    name: ReplaceRootVolumeTaskId
+        - name: Filter
+          in: query
+          required: false
+          description: '<p>Filter to use:</p> <ul> <li> <p> <code>instance-id</code> - The ID of the instance for which the root volume replacement task was created.</p> </li> </ul>'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Filter'
+                - xml:
+                    name: Filter
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeReplaceRootVolumeTasks
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeReplaceRootVolumeTasks
+      operationId: POST_DescribeReplaceRootVolumeTasks
+      description: 'Describes a root volume replacement task. For more information, see <a href="https://docs.aws.amazon.com/">Replace a root volume</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeReplaceRootVolumeTasksResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeReplaceRootVolumeTasksRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeReplaceRootVolumeTasks
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   /#Action=DescribeReservedInstances:
     get:
       x-aws-operation-name: DescribeReservedInstances
@@ -30289,6 +30510,78 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  /#Action=DisableSerialConsoleAccess:
+    get:
+      x-aws-operation-name: DisableSerialConsoleAccess
+      operationId: GET_DisableSerialConsoleAccess
+      description: 'Disables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DisableSerialConsoleAccessResult'
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DisableSerialConsoleAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DisableSerialConsoleAccess
+      operationId: POST_DisableSerialConsoleAccess
+      description: 'Disables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DisableSerialConsoleAccessResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DisableSerialConsoleAccessRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DisableSerialConsoleAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   /#Action=DisableTransitGatewayRouteTablePropagation:
     get:
       x-aws-operation-name: DisableTransitGatewayRouteTablePropagation
@@ -31316,7 +31609,7 @@ paths:
     get:
       x-aws-operation-name: EnableEbsEncryptionByDefault
       operationId: GET_EnableEbsEncryptionByDefault
-      description: '<p>Enables EBS encryption by default for your account in the current Region.</p> <p>After you enable encryption by default, the EBS volumes that you create are are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can specify the default CMK for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a> or <a>ResetEbsDefaultKmsKeyId</a>.</p> <p>Enabling encryption by default has no effect on the encryption status of your existing volumes.</p> <p>After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances">Supported instance types</a>.</p>'
+      description: '<p>Enables EBS encryption by default for your account in the current Region.</p> <p>After you enable encryption by default, the EBS volumes that you create are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can specify the default CMK for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a> or <a>ResetEbsDefaultKmsKeyId</a>.</p> <p>Enabling encryption by default has no effect on the encryption status of your existing volumes.</p> <p>After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances">Supported instance types</a>.</p>'
       responses:
         '200':
           description: Success
@@ -31356,7 +31649,7 @@ paths:
     post:
       x-aws-operation-name: EnableEbsEncryptionByDefault
       operationId: POST_EnableEbsEncryptionByDefault
-      description: '<p>Enables EBS encryption by default for your account in the current Region.</p> <p>After you enable encryption by default, the EBS volumes that you create are are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can specify the default CMK for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a> or <a>ResetEbsDefaultKmsKeyId</a>.</p> <p>Enabling encryption by default has no effect on the encryption status of your existing volumes.</p> <p>After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances">Supported instance types</a>.</p>'
+      description: '<p>Enables EBS encryption by default for your account in the current Region.</p> <p>After you enable encryption by default, the EBS volumes that you create are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can specify the default CMK for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a> or <a>ResetEbsDefaultKmsKeyId</a>.</p> <p>Enabling encryption by default has no effect on the encryption status of your existing volumes.</p> <p>After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances">Supported instance types</a>.</p>'
       responses:
         '200':
           description: Success
@@ -31471,6 +31764,78 @@ paths:
             type: string
             enum:
               - EnableFastSnapshotRestores
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=EnableSerialConsoleAccess:
+    get:
+      x-aws-operation-name: EnableSerialConsoleAccess
+      operationId: GET_EnableSerialConsoleAccess
+      description: 'Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EnableSerialConsoleAccessResult'
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - EnableSerialConsoleAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: EnableSerialConsoleAccess
+      operationId: POST_EnableSerialConsoleAccess
+      description: 'Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EnableSerialConsoleAccessResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/EnableSerialConsoleAccessRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - EnableSerialConsoleAccess
         - name: Version
           in: query
           required: true
@@ -33662,6 +34027,78 @@ paths:
             type: string
             enum:
               - GetReservedInstancesExchangeQuote
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=GetSerialConsoleAccessStatus:
+    get:
+      x-aws-operation-name: GetSerialConsoleAccessStatus
+      operationId: GET_GetSerialConsoleAccessStatus
+      description: 'Retrieves the access status of your account to the EC2 serial console of all instances. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetSerialConsoleAccessStatusResult'
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetSerialConsoleAccessStatus
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetSerialConsoleAccessStatus
+      operationId: POST_GetSerialConsoleAccessStatus
+      description: 'Retrieves the access status of your account to the EC2 serial console of all instances. By default, access to the EC2 serial console is disabled for your account. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2 User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetSerialConsoleAccessStatusResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetSerialConsoleAccessStatusRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetSerialConsoleAccessStatus
         - name: Version
           in: query
           required: true
@@ -38683,7 +39120,7 @@ paths:
         - name: Iops
           in: query
           required: false
-          description: '<p>The target IOPS rate of the volume. This parameter is valid only for <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes.</p> <p>The following are the supported values for each volume type:</p> <ul> <li> <p> <code>gp3</code>: 3,000-16,000 IOPS</p> </li> <li> <p> <code>io1</code>: 100-64,000 IOPS</p> </li> <li> <p> <code>io2</code>: 100-64,000 IOPS</p> </li> </ul> <p>Default: If no IOPS value is specified, the existing value is retained.</p>'
+          description: '<p>The target IOPS rate of the volume. This parameter is valid only for <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes.</p> <p>The following are the supported values for each volume type:</p> <ul> <li> <p> <code>gp3</code>: 3,000-16,000 IOPS</p> </li> <li> <p> <code>io1</code>: 100-64,000 IOPS</p> </li> <li> <p> <code>io2</code>: 100-64,000 IOPS</p> </li> </ul> <p>Default: If no IOPS value is specified, the existing value is retained, unless a volume type is modified that supports different values.</p>'
           schema:
             type: integer
         - name: Throughput
@@ -48544,6 +48981,15 @@ components:
             - $ref: '#/components/schemas/PlacementGroup'
             - xml:
                 name: placementGroup
+    CreateReplaceRootVolumeTaskResult:
+      type: object
+      properties:
+        ReplaceRootVolumeTask:
+          allOf:
+            - $ref: '#/components/schemas/ReplaceRootVolumeTask'
+            - xml:
+                name: replaceRootVolumeTask
+              description: Information about the root volume replacement task.
     CreateReservedInstancesListingResult:
       type: object
       properties:
@@ -51159,6 +51605,23 @@ components:
             - xml:
                 name: regionInfo
               description: Information about the Regions.
+    DescribeReplaceRootVolumeTasksResult:
+      type: object
+      properties:
+        ReplaceRootVolumeTasks:
+          allOf:
+            - $ref: '#/components/schemas/ReplaceRootVolumeTasks'
+            - xml:
+                name: replaceRootVolumeTaskSet
+              description: Information about the root volume replacement task.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: nextToken
+              description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    ReplaceRootVolumeTaskId:
+      type: string
     DescribeReservedInstancesResult:
       type: object
       properties:
@@ -52216,6 +52679,15 @@ components:
             - xml:
                 name: unsuccessful
               description: Information about the snapshots for which fast snapshot restores could not be disabled.
+    DisableSerialConsoleAccessResult:
+      type: object
+      properties:
+        SerialConsoleAccessEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: serialConsoleAccessEnabled
+              description: 'If <code>true</code>, access to the EC2 serial console of all instances is enabled for your account. If <code>false</code>, access to the EC2 serial console of all instances is disabled for your account.'
     DisableTransitGatewayRouteTablePropagationResult:
       type: object
       properties:
@@ -52362,6 +52834,15 @@ components:
             - xml:
                 name: unsuccessful
               description: Information about the snapshots for which fast snapshot restores could not be enabled.
+    EnableSerialConsoleAccessResult:
+      type: object
+      properties:
+        SerialConsoleAccessEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: serialConsoleAccessEnabled
+              description: 'If <code>true</code>, access to the EC2 serial console of all instances is enabled for your account. If <code>false</code>, access to the EC2 serial console of all instances is disabled for your account.'
     EnableTransitGatewayRouteTablePropagationResult:
       type: object
       properties:
@@ -52837,6 +53318,15 @@ components:
                 name: validationFailureReason
               description: Describes the reason why the exchange cannot be completed.
       description: Contains the output of GetReservedInstancesExchangeQuote.
+    GetSerialConsoleAccessStatusResult:
+      type: object
+      properties:
+        SerialConsoleAccessEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: serialConsoleAccessEnabled
+              description: 'If <code>true</code>, access to the EC2 serial console of all instances is enabled for your account. If <code>false</code>, access to the EC2 serial console of all instances is disabled for your account.'
     GetTransitGatewayAttachmentPropagationsResult:
       type: object
       properties:
@@ -61715,6 +62205,74 @@ components:
                 name: tagSet
               description: Any tags applied to the placement group.
       description: Describes a placement group.
+    CreateReplaceRootVolumeTaskRequest:
+      type: object
+      required:
+        - InstanceId
+      title: CreateReplaceRootVolumeTaskRequest
+      properties:
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The ID of the instance for which to replace the root volume.
+        SnapshotId:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotId'
+            - description: 'The ID of the snapshot from which to restore the replacement root volume. If you want to restore the volume to the initial launch state, omit this parameter.'
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token, a randomly generated token is used for the request to ensure idempotency. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        TagSpecifications:
+          allOf:
+            - $ref: '#/components/schemas/TagSpecificationList'
+            - xml:
+                name: TagSpecification
+              description: The tags to apply to the root volume replacement task.
+    ReplaceRootVolumeTask:
+      type: object
+      properties:
+        ReplaceRootVolumeTaskId:
+          allOf:
+            - $ref: '#/components/schemas/ReplaceRootVolumeTaskId'
+            - xml:
+                name: replaceRootVolumeTaskId
+              description: The ID of the root volume replacement task.
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: instanceId
+              description: The ID of the instance for which the root volume replacement task was created.
+        TaskState:
+          allOf:
+            - $ref: '#/components/schemas/ReplaceRootVolumeTaskState'
+            - xml:
+                name: taskState
+              description: '<p>The state of the task. The task can be in one of the following states:</p> <ul> <li> <p> <code>pending</code> - the replacement volume is being created.</p> </li> <li> <p> <code>in-progress</code> - the original volume is being detached and the replacement volume is being attached.</p> </li> <li> <p> <code>succeeded</code> - the replacement volume has been successfully attached to the instance and the instance is available.</p> </li> <li> <p> <code>failing</code> - the replacement task is in the process of failing.</p> </li> <li> <p> <code>failed</code> - the replacement task has failed but the original root volume is still attached.</p> </li> <li> <p> <code>failing-detached</code> - the replacement task is in the process of failing. The instance might have no root volume attached.</p> </li> <li> <p> <code>failed-detached</code> - the replacement task has failed and the instance has no root volume attached.</p> </li> </ul>'
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: startTime
+              description: The time the task was started.
+        CompleteTime:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: completeTime
+              description: The time the task completed.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - xml:
+                name: tagSet
+              description: The tags assigned to the task.
+      description: Information about a root volume replacement task.
     PriceScheduleSpecificationList:
       type: array
       items:
@@ -68329,6 +68887,52 @@ components:
           - $ref: '#/components/schemas/Region'
           - xml:
               name: item
+    DescribeReplaceRootVolumeTasksMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ReplaceRootVolumeTaskIds:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/ReplaceRootVolumeTaskId'
+          - xml:
+              name: ReplaceRootVolumeTaskId
+    DescribeReplaceRootVolumeTasksRequest:
+      type: object
+      title: DescribeReplaceRootVolumeTasksRequest
+      properties:
+        ReplaceRootVolumeTaskIds:
+          allOf:
+            - $ref: '#/components/schemas/ReplaceRootVolumeTaskIds'
+            - xml:
+                name: ReplaceRootVolumeTaskId
+              description: The ID of the root volume replacement task to view.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - xml:
+                name: Filter
+              description: '<p>Filter to use:</p> <ul> <li> <p> <code>instance-id</code> - The ID of the instance for which the root volume replacement task was created.</p> </li> </ul>'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/DescribeReplaceRootVolumeTasksMaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next page of results.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    ReplaceRootVolumeTasks:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/ReplaceRootVolumeTask'
+          - xml:
+              name: item
     DescribeReservedInstancesListingsRequest:
       type: object
       title: DescribeReservedInstancesListingsRequest
@@ -70655,6 +71259,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    DisableSerialConsoleAccessRequest:
+      type: object
+      title: DisableSerialConsoleAccessRequest
+      properties:
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     DisableTransitGatewayRouteTablePropagationRequest:
       type: object
       required:
@@ -71569,6 +72181,14 @@ components:
             - xml:
                 name: SourceSnapshotId
               description: 'The IDs of one or more snapshots. For example, <code>snap-1234567890abcdef0</code>. You can specify a snapshot that was shared with you from another AWS account.'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    EnableSerialConsoleAccessRequest:
+      type: object
+      title: EnableSerialConsoleAccessRequest
+      properties:
         DryRun:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -73590,6 +74210,14 @@ components:
           - $ref: '#/components/schemas/TargetReservationValue'
           - xml:
               name: item
+    GetSerialConsoleAccessStatusRequest:
+      type: object
+      title: GetSerialConsoleAccessStatusRequest
+      properties:
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     GetTransitGatewayAttachmentPropagationsRequest:
       type: object
       required:
@@ -79307,7 +79935,7 @@ components:
         Iops:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: '<p>The target IOPS rate of the volume. This parameter is valid only for <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes.</p> <p>The following are the supported values for each volume type:</p> <ul> <li> <p> <code>gp3</code>: 3,000-16,000 IOPS</p> </li> <li> <p> <code>io1</code>: 100-64,000 IOPS</p> </li> <li> <p> <code>io2</code>: 100-64,000 IOPS</p> </li> </ul> <p>Default: If no IOPS value is specified, the existing value is retained.</p>'
+            - description: '<p>The target IOPS rate of the volume. This parameter is valid only for <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes.</p> <p>The following are the supported values for each volume type:</p> <ul> <li> <p> <code>gp3</code>: 3,000-16,000 IOPS</p> </li> <li> <p> <code>io1</code>: 100-64,000 IOPS</p> </li> <li> <p> <code>io2</code>: 100-64,000 IOPS</p> </li> </ul> <p>Default: If no IOPS value is specified, the existing value is retained, unless a volume type is modified that supports different values.</p>'
         Throughput:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -81780,6 +82408,15 @@ components:
             - xml:
                 name: ruleNumber
               description: The rule number of the entry to replace.
+    ReplaceRootVolumeTaskState:
+      type: string
+      enum:
+        - pending
+        - in-progress
+        - failing
+        - succeeded
+        - failed
+        - failed-detached
     ReplaceRouteRequest:
       type: object
       required:

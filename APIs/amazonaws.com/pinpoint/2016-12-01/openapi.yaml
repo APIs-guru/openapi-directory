@@ -1290,7 +1290,15 @@ paths:
                     State:
                       allOf:
                         - $ref: '#/components/schemas/State'
-                        - description: '<p>The status of the journey. Valid values are:</p> <ul><li><p>DRAFT - Saves the journey and doesn''t publish it.</p></li> <li><p>ACTIVE - Saves and publishes the journey. Depending on the journey''s schedule, the journey starts running immediately or at the scheduled start time. If a journey''s status is ACTIVE, you can''t add, change, or remove activities from it.</p></li></ul> <p>The CANCELLED, COMPLETED, and CLOSED values are not supported in requests to create or update a journey. To cancel a journey, use the <link  linkend="apps-application-id-journeys-journey-id-state">Journey State</link> resource.</p>'
+                        - description: '<p>The status of the journey. Valid values are:</p> <ul><li><p>DRAFT - Saves the journey and doesn''t publish it.</p></li> <li><p>ACTIVE - Saves and publishes the journey. Depending on the journey''s schedule, the journey starts running immediately or at the scheduled start time. If a journey''s status is ACTIVE, you can''t add, change, or remove activities from it.</p></li></ul> <p>PAUSED, CANCELLED, COMPLETED, and CLOSED states are not supported in requests to create or update a journey. To cancel, pause, or resume a journey, use the <link  linkend="apps-application-id-journeys-journey-id-state">Journey State</link> resource.</p>'
+                    WaitForQuietTime:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - description: Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.
+                    RefreshOnSegmentUpdate:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - description: Specifies whether a journey should be refreshed on segment update.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5644,7 +5652,15 @@ paths:
                     State:
                       allOf:
                         - $ref: '#/components/schemas/State'
-                        - description: '<p>The status of the journey. Valid values are:</p> <ul><li><p>DRAFT - Saves the journey and doesn''t publish it.</p></li> <li><p>ACTIVE - Saves and publishes the journey. Depending on the journey''s schedule, the journey starts running immediately or at the scheduled start time. If a journey''s status is ACTIVE, you can''t add, change, or remove activities from it.</p></li></ul> <p>The CANCELLED, COMPLETED, and CLOSED values are not supported in requests to create or update a journey. To cancel a journey, use the <link  linkend="apps-application-id-journeys-journey-id-state">Journey State</link> resource.</p>'
+                        - description: '<p>The status of the journey. Valid values are:</p> <ul><li><p>DRAFT - Saves the journey and doesn''t publish it.</p></li> <li><p>ACTIVE - Saves and publishes the journey. Depending on the journey''s schedule, the journey starts running immediately or at the scheduled start time. If a journey''s status is ACTIVE, you can''t add, change, or remove activities from it.</p></li></ul> <p>PAUSED, CANCELLED, COMPLETED, and CLOSED states are not supported in requests to create or update a journey. To cancel, pause, or resume a journey, use the <link  linkend="apps-application-id-journeys-journey-id-state">Journey State</link> resource.</p>'
+                    WaitForQuietTime:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - description: Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.
+                    RefreshOnSegmentUpdate:
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - description: Specifies whether a journey should be refreshed on segment update.
   '/v1/recommenders/{recommender-id}':
     delete:
       operationId: DeleteRecommenderConfiguration
@@ -8998,7 +9014,7 @@ paths:
                     State:
                       allOf:
                         - $ref: '#/components/schemas/State'
-                        - description: '<p>The status of the journey. Currently, the only supported value is CANCELLED.</p> <p>If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey.</p> <p>After you cancel a journey, you can''t add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn''t perform any activities that haven''t started.</p>'
+                        - description: '<p>The status of the journey. Currently, Supported values are ACTIVE, PAUSED, and CANCELLED</p> <p>If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey.</p> <p>After you cancel a journey, you can''t add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn''t perform any activities that haven''t started.</p> <p>When the journey is paused, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Endpoints will stop entering journeys when the journey is paused and will resume entering the journey after the journey is resumed. For wait activities, wait time is paused when the journey is paused. Currently, PAUSED only supports journeys with a segment refresh interval.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -9381,6 +9397,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__integer'
             - description: The maximum number of messages that the journey can send each second.
+        EndpointReentryInterval:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'Minimum time that must pass before an endpoint can re-enter a given journey. The duration should use an ISO 8601 format, such as PT1H. '
       description: Specifies limits on the messages that a journey can send and the number of times participants can enter a journey.
     QuietTime:
       type: object
@@ -9438,6 +9458,7 @@ components:
         - COMPLETED
         - CANCELLED
         - CLOSED
+        - PAUSED
     CreatePushTemplateResponse:
       type: object
       required:
@@ -12422,7 +12443,15 @@ components:
         State:
           allOf:
             - $ref: '#/components/schemas/State'
-            - description: '<p>The status of the journey. Valid values are:</p> <ul><li><p>DRAFT - Saves the journey and doesn''t publish it.</p></li> <li><p>ACTIVE - Saves and publishes the journey. Depending on the journey''s schedule, the journey starts running immediately or at the scheduled start time. If a journey''s status is ACTIVE, you can''t add, change, or remove activities from it.</p></li></ul> <p>The CANCELLED, COMPLETED, and CLOSED values are not supported in requests to create or update a journey. To cancel a journey, use the <link  linkend="apps-application-id-journeys-journey-id-state">Journey State</link> resource.</p>'
+            - description: '<p>The status of the journey. Valid values are:</p> <ul><li><p>DRAFT - Saves the journey and doesn''t publish it.</p></li> <li><p>ACTIVE - Saves and publishes the journey. Depending on the journey''s schedule, the journey starts running immediately or at the scheduled start time. If a journey''s status is ACTIVE, you can''t add, change, or remove activities from it.</p></li></ul> <p>PAUSED, CANCELLED, COMPLETED, and CLOSED states are not supported in requests to create or update a journey. To cancel, pause, or resume a journey, use the <link  linkend="apps-application-id-journeys-journey-id-state">Journey State</link> resource.</p>'
+        WaitForQuietTime:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.
+        RefreshOnSegmentUpdate:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: Specifies whether a journey should be refreshed on segment update.
       description: Specifies the configuration and other settings for a journey.
     CreateJourneyRequest:
       type: object
@@ -12499,6 +12528,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/MapOf__string'
             - description: This object is not used or supported.
+        WaitForQuietTime:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.
+        RefreshOnSegmentUpdate:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: Specifies whether a journey should be refreshed on segment update.
       description: 'Provides information about the status, configuration, and other settings for a journey.'
     PushNotificationTemplateRequest:
       type: object
@@ -14735,7 +14772,7 @@ components:
         State:
           allOf:
             - $ref: '#/components/schemas/State'
-            - description: '<p>The status of the journey. Currently, the only supported value is CANCELLED.</p> <p>If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey.</p> <p>After you cancel a journey, you can''t add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn''t perform any activities that haven''t started.</p>'
+            - description: '<p>The status of the journey. Currently, Supported values are ACTIVE, PAUSED, and CANCELLED</p> <p>If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey.</p> <p>After you cancel a journey, you can''t add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn''t perform any activities that haven''t started.</p> <p>When the journey is paused, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Endpoints will stop entering journeys when the journey is paused and will resume entering the journey after the journey is resumed. For wait activities, wait time is paused when the journey is paused. Currently, PAUSED only supports journeys with a segment refresh interval.</p>'
       description: Changes the status of a journey.
     ListOfJourneyResponse:
       type: array

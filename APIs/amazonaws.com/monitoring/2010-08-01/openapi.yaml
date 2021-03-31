@@ -548,6 +548,116 @@ paths:
             type: string
             enum:
               - '2010-08-01'
+  /#Action=DeleteMetricStream:
+    get:
+      x-aws-operation-name: DeleteMetricStream
+      operationId: GET_DeleteMetricStream
+      description: Permanently deletes the metric stream that you specify.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteMetricStreamOutput'
+        '480':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+      parameters:
+        - name: Name
+          in: query
+          required: true
+          description: The name of the metric stream to delete.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteMetricStream
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteMetricStream
+      operationId: POST_DeleteMetricStream
+      description: Permanently deletes the metric stream that you specify.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteMetricStreamOutput'
+        '480':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteMetricStreamInput'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteMetricStream
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
   /#Action=DescribeAlarmHistory:
     get:
       x-aws-operation-name: DescribeAlarmHistory
@@ -2226,6 +2336,140 @@ paths:
             type: string
             enum:
               - '2010-08-01'
+  /#Action=GetMetricStream:
+    get:
+      x-aws-operation-name: GetMetricStream
+      operationId: GET_GetMetricStream
+      description: Returns information about the metric stream that you specify.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetMetricStreamOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: Name
+          in: query
+          required: true
+          description: The name of the metric stream to retrieve information about.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetMetricStream
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetMetricStream
+      operationId: POST_GetMetricStream
+      description: Returns information about the metric stream that you specify.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetMetricStreamOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetMetricStreamInput'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetMetricStream
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
   /#Action=GetMetricWidgetImage:
     get:
       x-aws-operation-name: GetMetricWidgetImage
@@ -2405,6 +2649,146 @@ paths:
             type: string
             enum:
               - ListDashboards
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
+  /#Action=ListMetricStreams:
+    get:
+      x-aws-operation-name: ListMetricStreams
+      operationId: GET_ListMetricStreams
+      description: Returns a list of metric streams in this account.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListMetricStreamsOutput'
+        '480':
+          description: InvalidNextToken
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: 'Include this value, if it was returned by the previous call, to get the next set of metric streams.'
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in one operation.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ListMetricStreams
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ListMetricStreams
+      operationId: POST_ListMetricStreams
+      description: Returns a list of metric streams in this account.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListMetricStreamsOutput'
+        '480':
+          description: InvalidNextToken
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+        '481':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ListMetricStreamsInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ListMetricStreams
         - name: Version
           in: query
           required: true
@@ -3199,7 +3583,7 @@ paths:
     get:
       x-aws-operation-name: PutMetricAlarm
       operationId: GET_PutMetricAlarm
-      description: '<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model.</p> <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p>The <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p>The <code>iam:CreateServiceLinkedRole</code> to create an alarm with Systems Manager OpsItem actions.</p> </li> </ul> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked rolea for you. The service-linked roles are called <code>AWSServiceRoleForCloudWatchEvents</code> and <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS service-linked role</a>.</p>'
+      description: '<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model.</p> <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p>The <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p>The <code>iam:CreateServiceLinkedRole</code> to create an alarm with Systems Manager OpsItem actions.</p> </li> </ul> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called <code>AWSServiceRoleForCloudWatchEvents</code> and <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS service-linked role</a>.</p>'
       responses:
         '200':
           description: Success
@@ -3235,7 +3619,7 @@ paths:
         - name: OKActions
           in: query
           required: false
-          description: '<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p>'
+          description: '<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Recover/1.0</code> </p>'
           schema:
             type: array
             items:
@@ -3445,7 +3829,7 @@ paths:
     post:
       x-aws-operation-name: PutMetricAlarm
       operationId: POST_PutMetricAlarm
-      description: '<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model.</p> <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p>The <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p>The <code>iam:CreateServiceLinkedRole</code> to create an alarm with Systems Manager OpsItem actions.</p> </li> </ul> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked rolea for you. The service-linked roles are called <code>AWSServiceRoleForCloudWatchEvents</code> and <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS service-linked role</a>.</p>'
+      description: '<p>Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model.</p> <p>Alarms based on anomaly detection models cannot have Auto Scaling actions.</p> <p>When this operation creates an alarm, the alarm state is immediately set to <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.</p> <p>When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.</p> <p>If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:</p> <ul> <li> <p>The <code>iam:CreateServiceLinkedRole</code> for all alarms with EC2 actions</p> </li> <li> <p>The <code>iam:CreateServiceLinkedRole</code> to create an alarm with Systems Manager OpsItem actions.</p> </li> </ul> <p>The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called <code>AWSServiceRoleForCloudWatchEvents</code> and <code>AWSServiceRoleForCloudWatchAlarms_ActionSSM</code>. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role">AWS service-linked role</a>.</p>'
       responses:
         '200':
           description: Success
@@ -3598,6 +3982,191 @@ paths:
             type: string
             enum:
               - '2010-08-01'
+  /#Action=PutMetricStream:
+    get:
+      x-aws-operation-name: PutMetricStream
+      operationId: GET_PutMetricStream
+      description: '<p>Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to AWS destinations including Amazon S3 and to many third-party solutions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Metric-Streams.html"> Using Metric Streams</a>.</p> <p>To create a metric stream, you must be logged on to an account that has the <code>iam:PassRole</code> permission and either the <code>CloudWatchFullAccess</code> policy or the <code>cloudwatch:PutMetricStream</code> permission.</p> <p>When you create or update a metric stream, you choose one of the following:</p> <ul> <li> <p>Stream metrics from all metric namespaces in the account.</p> </li> <li> <p>Stream metrics from all metric namespaces in the account, except for the namespaces that you list in <code>ExcludeFilters</code>.</p> </li> <li> <p>Stream metrics from only the metric namespaces that you list in <code>IncludeFilters</code>.</p> </li> </ul> <p>When you use <code>PutMetricStream</code> to create a new metric stream, the stream is created in the <code>running</code> state. If you use it to update an existing stream, the state of the stream is not changed.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PutMetricStreamOutput'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: Name
+          in: query
+          required: true
+          description: '<p>If you are creating a new metric stream, this is the name for the new stream. The name must be different than the names of other metric streams in this account and Region.</p> <p>If you are updating a metric stream, specify the name of that stream here.</p> <p>Valid characters are A-Z, a-z, 0-9, "-" and "_".</p>'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: IncludeFilters
+          in: query
+          required: false
+          description: '<p>If you specify this parameter, the stream sends only the metrics from the metric namespaces that you specify here.</p> <p>You cannot include <code>IncludeFilters</code> and <code>ExcludeFilters</code> in the same operation.</p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/MetricStreamFilter'
+        - name: ExcludeFilters
+          in: query
+          required: false
+          description: '<p>If you specify this parameter, the stream sends metrics from all metric namespaces except for the namespaces that you specify here.</p> <p>You cannot include <code>ExcludeFilters</code> and <code>IncludeFilters</code> in the same operation.</p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/MetricStreamFilter'
+        - name: FirehoseArn
+          in: query
+          required: true
+          description: The ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream. This Amazon Kinesis Firehose delivery stream must already exist and must be in the same account as the metric stream.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: RoleArn
+          in: query
+          required: true
+          description: '<p>The ARN of an IAM role that this metric stream will use to access Amazon Kinesis Firehose resources. This IAM role must already exist and must be in the same account as the metric stream. This IAM role must include the following permissions:</p> <ul> <li> <p>firehose:PutRecord</p> </li> <li> <p>firehose:PutRecordBatch</p> </li> </ul>'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: OutputFormat
+          in: query
+          required: true
+          description: 'The output format for the stream. Valid values are <code>json</code> and <code>opentelemetry0.7</code>. For more information about metric stream output formats, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html"> Metric streams output formats</a>.'
+          schema:
+            type: string
+            enum:
+              - json
+              - opentelemetry0.7
+            minLength: 1
+            maxLength: 255
+        - name: Tags
+          in: query
+          required: false
+          description: <p>A list of key-value pairs to associate with the metric stream. You can associate as many as 50 tags with a metric stream.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p>
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Tag'
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - PutMetricStream
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: PutMetricStream
+      operationId: POST_PutMetricStream
+      description: '<p>Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to AWS destinations including Amazon S3 and to many third-party solutions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Metric-Streams.html"> Using Metric Streams</a>.</p> <p>To create a metric stream, you must be logged on to an account that has the <code>iam:PassRole</code> permission and either the <code>CloudWatchFullAccess</code> policy or the <code>cloudwatch:PutMetricStream</code> permission.</p> <p>When you create or update a metric stream, you choose one of the following:</p> <ul> <li> <p>Stream metrics from all metric namespaces in the account.</p> </li> <li> <p>Stream metrics from all metric namespaces in the account, except for the namespaces that you list in <code>ExcludeFilters</code>.</p> </li> <li> <p>Stream metrics from only the metric namespaces that you list in <code>IncludeFilters</code>.</p> </li> </ul> <p>When you use <code>PutMetricStream</code> to create a new metric stream, the stream is created in the <code>running</code> state. If you use it to update an existing stream, the state of the stream is not changed.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PutMetricStreamOutput'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/PutMetricStreamInput'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - PutMetricStream
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
   /#Action=SetAlarmState:
     get:
       x-aws-operation-name: SetAlarmState
@@ -3707,6 +4276,226 @@ paths:
             type: string
             enum:
               - SetAlarmState
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
+  /#Action=StartMetricStreams:
+    get:
+      x-aws-operation-name: StartMetricStreams
+      operationId: GET_StartMetricStreams
+      description: Starts the streaming of metrics for one or more of your metric streams.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StartMetricStreamsOutput'
+        '480':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+      parameters:
+        - name: Names
+          in: query
+          required: true
+          description: '<p>The array of the names of metric streams to start streaming.</p> <p>This is an "all or nothing" operation. If you do not have permission to access all of the metric streams that you list here, then none of the streams that you list in the operation will start streaming.</p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/MetricStreamName'
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StartMetricStreams
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: StartMetricStreams
+      operationId: POST_StartMetricStreams
+      description: Starts the streaming of metrics for one or more of your metric streams.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StartMetricStreamsOutput'
+        '480':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/StartMetricStreamsInput'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StartMetricStreams
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
+  /#Action=StopMetricStreams:
+    get:
+      x-aws-operation-name: StopMetricStreams
+      operationId: GET_StopMetricStreams
+      description: Stops the streaming of metrics for one or more of your metric streams.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StopMetricStreamsOutput'
+        '480':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+      parameters:
+        - name: Names
+          in: query
+          required: true
+          description: '<p>The array of the names of metric streams to stop streaming.</p> <p>This is an "all or nothing" operation. If you do not have permission to access all of the metric streams that you list here, then none of the streams that you list in the operation will stop streaming.</p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/MetricStreamName'
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StopMetricStreams
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2010-08-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: StopMetricStreams
+      operationId: POST_StopMetricStreams
+      description: Stops the streaming of metrics for one or more of your metric streams.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StopMetricStreamsOutput'
+        '480':
+          description: InternalServiceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InternalServiceFault'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: MissingRequiredParameterException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/MissingRequiredParameterException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/StopMetricStreamsInput'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StopMetricStreams
         - name: Version
           in: query
           required: true
@@ -4071,6 +4860,9 @@ components:
       pattern: '[\x20-\x7E]+'
       minLength: 1
       maxLength: 128
+    DeleteMetricStreamOutput:
+      type: object
+      properties: {}
     DescribeAlarmHistoryOutput:
       type: object
       properties:
@@ -4264,6 +5056,49 @@ components:
       type: string
       pattern: 'p(\d{1,2}(\.\d{0,2})?|100)'
     InvalidParameterCombinationException: {}
+    GetMetricStreamOutput:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the metric stream.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamName'
+            - description: The name of the metric stream.
+        IncludeFilters:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamFilters'
+            - description: 'If this array of metric namespaces is present, then these namespaces are the only metric namespaces that are streamed by this metric stream.'
+        ExcludeFilters:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamFilters'
+            - description: 'If this array of metric namespaces is present, then these namespaces are the only metric namespaces that are not streamed by this metric stream. In this case, all other metric namespaces in the account are streamed by this metric stream.'
+        FirehoseArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the Amazon Kinesis Firehose delivery stream that is used by this metric stream.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the IAM role that is used by this metric stream.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamState'
+            - description: The state of the metric stream. The possible values are <code>running</code> and <code>stopped</code>.
+        CreationDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date that the metric stream was created.
+        LastUpdateDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date of the most recent update to the metric stream's configuration.
+        OutputFormat:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamOutputFormat'
+            - description: <p/>
     GetMetricWidgetImageOutput:
       type: object
       properties:
@@ -4282,6 +5117,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The token that marks the start of the next batch of returned results.
+    ListMetricStreamsOutput:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token that marks the start of the next batch of returned results. You can use this token in a subsequent operation to get the next batch of results.
+        Entries:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamEntries'
+            - description: The array of metric stream information.
     ListMetricsOutput:
       type: object
       properties:
@@ -4398,11 +5244,36 @@ components:
             - $ref: '#/components/schemas/StorageResolution'
             - description: '<p>Valid values are 1 and 60. Setting this to 1 specifies this metric as a high-resolution metric, so that CloudWatch stores the metric with sub-minute resolution down to one second. Setting this to 60 specifies this metric as a regular-resolution metric, which CloudWatch stores at 1-minute resolution. Currently, high resolution is available only for custom metrics. For more information about high-resolution metrics, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#high-resolution-metrics">High-Resolution Metrics</a> in the <i>Amazon CloudWatch User Guide</i>. </p> <p>This field is optional, if you do not specify it the default of 60 is used.</p>'
       description: Encapsulates the information sent to either create a metric or add new values to be aggregated into an existing metric.
+    PutMetricStreamOutput:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the metric stream.
+    MetricStreamFilter:
+      type: object
+      properties:
+        Namespace:
+          allOf:
+            - $ref: '#/components/schemas/Namespace'
+            - description: The name of the metric namespace in the filter.
+      description: This structure contains the name of one of the metric namespaces that is listed in a filter of a metric stream.
+    ConcurrentModificationException: {}
     InvalidFormatFault: {}
+    StartMetricStreamsOutput:
+      type: object
+      properties: {}
+    MetricStreamName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    StopMetricStreamsOutput:
+      type: object
+      properties: {}
     TagResourceOutput:
       type: object
       properties: {}
-    ConcurrentModificationException: {}
     UntagResourceOutput:
       type: object
       properties: {}
@@ -4894,6 +5765,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/InsightRuleNames'
             - description: 'An array of the rule names to delete. If you need to find out the names of your rules, use <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeInsightRules.html">DescribeInsightRules</a>.'
+    DeleteMetricStreamInput:
+      type: object
+      required:
+        - Name
+      title: DeleteMetricStreamInput
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamName'
+            - description: The name of the metric stream to delete.
     MaxRecords:
       type: integer
       minimum: 1
@@ -5333,6 +6214,29 @@ components:
             - description: 'The unit for a given metric. If you omit <code>Unit</code>, all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.'
     MetricLabel:
       type: string
+    GetMetricStreamInput:
+      type: object
+      required:
+        - Name
+      title: GetMetricStreamInput
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamName'
+            - description: The name of the metric stream to retrieve information about.
+    MetricStreamFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricStreamFilter'
+    MetricStreamState:
+      type: string
+    MetricStreamOutputFormat:
+      type: string
+      enum:
+        - json
+        - opentelemetry0.7
+      minLength: 1
+      maxLength: 255
     MetricWidget:
       type: string
     OutputFormat:
@@ -5487,6 +6391,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The token returned by a previous call to indicate that there is more data available.
+    ListMetricStreamsMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 500
+    ListMetricStreamsInput:
+      type: object
+      title: ListMetricStreamsInput
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'Include this value, if it was returned by the previous call, to get the next set of metric streams.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListMetricStreamsMaxResults'
+            - description: The maximum number of results to return in one operation.
+    MetricStreamEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricStreamEntry'
     RecentlyActive:
       type: string
       enum:
@@ -5794,6 +6718,42 @@ components:
       minimum: 1
     Stat:
       type: string
+    MetricStreamEntry:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the metric stream.
+        CreationDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date that the metric stream was originally created.
+        LastUpdateDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date that the configuration of this metric stream was most recently updated.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamName'
+            - description: The name of the metric stream.
+        FirehoseArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the Kinesis Firehose devlivery stream that is used for this metric stream.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamState'
+            - description: The current state of this stream. Valid values are <code>running</code> and <code>stopped</code>.
+        OutputFormat:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamOutputFormat'
+            - description: The output format of this metric stream. Valid values are <code>json</code> and <code>opentelemetry0.7</code>.
+      description: This structure contains the configuration information about one metric stream.
+    MetricStreamNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricStreamName'
     PutAnomalyDetectorInput:
       type: object
       required:
@@ -5922,7 +6882,7 @@ components:
         OKActions:
           allOf:
             - $ref: '#/components/schemas/ResourceList'
-            - description: '<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> </p>'
+            - description: '<p>The actions to execute when this alarm transitions to an <code>OK</code> state from any other state. Each action is specified as an Amazon Resource Name (ARN).</p> <p>Valid Values: <code>arn:aws:automate:<i>region</i>:ec2:stop</code> | <code>arn:aws:automate:<i>region</i>:ec2:terminate</code> | <code>arn:aws:automate:<i>region</i>:ec2:recover</code> | <code>arn:aws:automate:<i>region</i>:ec2:reboot</code> | <code>arn:aws:sns:<i>region</i>:<i>account-id</i>:<i>sns-topic-name</i> </code> | <code>arn:aws:autoscaling:<i>region</i>:<i>account-id</i>:scalingPolicy:<i>policy-id</i>:autoScalingGroupName/<i>group-friendly-name</i>:policyName/<i>policy-friendly-name</i> </code> </p> <p>Valid Values (for use with IAM roles): <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> | <code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Recover/1.0</code> </p>'
         AlarmActions:
           allOf:
             - $ref: '#/components/schemas/ResourceList'
@@ -6010,6 +6970,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/MetricData'
             - description: The data for the metric. The array can include no more than 20 metrics per call.
+    PutMetricStreamInput:
+      type: object
+      required:
+        - Name
+        - FirehoseArn
+        - RoleArn
+        - OutputFormat
+      title: PutMetricStreamInput
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamName'
+            - description: '<p>If you are creating a new metric stream, this is the name for the new stream. The name must be different than the names of other metric streams in this account and Region.</p> <p>If you are updating a metric stream, specify the name of that stream here.</p> <p>Valid characters are A-Z, a-z, 0-9, "-" and "_".</p>'
+        IncludeFilters:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamFilters'
+            - description: '<p>If you specify this parameter, the stream sends only the metrics from the metric namespaces that you specify here.</p> <p>You cannot include <code>IncludeFilters</code> and <code>ExcludeFilters</code> in the same operation.</p>'
+        ExcludeFilters:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamFilters'
+            - description: '<p>If you specify this parameter, the stream sends metrics from all metric namespaces except for the namespaces that you specify here.</p> <p>You cannot include <code>ExcludeFilters</code> and <code>IncludeFilters</code> in the same operation.</p>'
+        FirehoseArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream. This Amazon Kinesis Firehose delivery stream must already exist and must be in the same account as the metric stream.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: '<p>The ARN of an IAM role that this metric stream will use to access Amazon Kinesis Firehose resources. This IAM role must already exist and must be in the same account as the metric stream. This IAM role must include the following permissions:</p> <ul> <li> <p>firehose:PutRecord</p> </li> <li> <p>firehose:PutRecordBatch</p> </li> </ul>'
+        OutputFormat:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamOutputFormat'
+            - description: 'The output format for the stream. Valid values are <code>json</code> and <code>opentelemetry0.7</code>. For more information about metric stream output formats, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html"> Metric streams output formats</a>.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: <p>A list of key-value pairs to associate with the metric stream. You can associate as many as 50 tags with a metric stream.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.</p>
     SetAlarmStateInput:
       type: object
       required:
@@ -6034,6 +7031,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/StateReasonData'
             - description: '<p>The reason that this alarm is set to this specific state, in JSON format.</p> <p>For SNS or EC2 alarm actions, this is just informational. But for EC2 Auto Scaling or application Auto Scaling alarm actions, the Auto Scaling policy uses the information in this field to take the correct action.</p>'
+    StartMetricStreamsInput:
+      type: object
+      required:
+        - Names
+      title: StartMetricStreamsInput
+      properties:
+        Names:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamNames'
+            - description: '<p>The array of the names of metric streams to start streaming.</p> <p>This is an "all or nothing" operation. If you do not have permission to access all of the metric streams that you list here, then none of the streams that you list in the operation will start streaming.</p>'
+    StopMetricStreamsInput:
+      type: object
+      required:
+        - Names
+      title: StopMetricStreamsInput
+      properties:
+        Names:
+          allOf:
+            - $ref: '#/components/schemas/MetricStreamNames'
+            - description: '<p>The array of the names of metric streams to stop streaming.</p> <p>This is an "all or nothing" operation. If you do not have permission to access all of the metric streams that you list here, then none of the streams that you list in the operation will stop streaming.</p>'
     TagValue:
       type: string
       minLength: 0

@@ -6606,6 +6606,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/GetAccessKeyLastUsedResponse'
+        '480':
+          description: NoSuchEntityException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchEntityException'
       parameters:
         - name: AccessKeyId
           in: query
@@ -6649,6 +6655,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/GetAccessKeyLastUsedResponse'
+        '480':
+          description: NoSuchEntityException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchEntityException'
       requestBody:
         content:
           text/xml:

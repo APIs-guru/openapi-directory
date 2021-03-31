@@ -229,7 +229,7 @@ paths:
                   minLength: 1
                   maxLength: 255
                 Format:
-                  description: Specifies the file format of a dataset created from an S3 file or folder.
+                  description: The file format of a dataset that is created from an S3 file or folder.
                   type: string
                   enum:
                     - CSV
@@ -237,7 +237,7 @@ paths:
                     - PARQUET
                     - EXCEL
                 FormatOptions:
-                  description: 'Options that define the structure of either Csv, Excel, or JSON input.'
+                  description: 'Represents a set of options that define the structure of either comma-separated value (CSV), Excel, or JSON input.'
                   type: object
                   properties:
                     Json:
@@ -251,9 +251,9 @@ paths:
                     Csv:
                       allOf:
                         - $ref: '#/components/schemas/CsvOptions'
-                        - description: Options that define how Csv input is to be interpreted by DataBrew.
+                        - description: Options that define how CSV input is to be interpreted by DataBrew.
                 Input:
-                  description: 'Information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
+                  description: 'Represents information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
                   type: object
                   properties:
                     S3InputDefinition:
@@ -264,6 +264,26 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DataCatalogInputDefinition'
                         - description: The AWS Glue Data Catalog parameters for the data.
+                    DatabaseInputDefinition:
+                      allOf:
+                        - $ref: '#/components/schemas/DatabaseInputDefinition'
+                        - description: Connection information for dataset input files stored in a database.
+                PathOptions:
+                  description: Represents a set of options that define how DataBrew selects files for a given S3 path in a dataset.
+                  type: object
+                  properties:
+                    LastModifiedDateCondition:
+                      allOf:
+                        - $ref: '#/components/schemas/FilterExpression'
+                        - description: 'If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.'
+                    FilesLimit:
+                      allOf:
+                        - $ref: '#/components/schemas/FilesLimit'
+                        - description: 'If provided, this structure imposes a limit on a number of files that should be selected.'
+                    Parameters:
+                      allOf:
+                        - $ref: '#/components/schemas/PathParametersMap'
+                        - description: A structure that maps names of parameters used in the S3 path of a dataset to their definitions.
                 Tags:
                   description: Metadata tags to apply to this dataset.
                   type: object
@@ -413,7 +433,7 @@ paths:
                   type: integer
                   minimum: 0
                 OutputLocation:
-                  description: 'An Amazon S3 location (bucket name an object key) where DataBrew can read input data, or write output from a job.'
+                  description: 'Represents an Amazon S3 location (bucket name and object key) where DataBrew can read input data, or write output from a job.'
                   type: object
                   properties:
                     Bucket:
@@ -441,17 +461,17 @@ paths:
                   type: integer
                   minimum: 0
                 JobSample:
-                  description: 'Sample configuration for Profile Jobs only. Determines the number of rows on which the Profile job will be executed. If a JobSample value is not provided for profile jobs, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
+                  description: 'A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a <code>JobSample</code> value isn''t provided, the default is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.'
                   type: object
                   properties:
                     Mode:
                       allOf:
                         - $ref: '#/components/schemas/SampleMode'
-                        - description: '<p>Determines whether the profile job will be executed on the entire dataset or on a specified number of rows. Must be one of the following:</p> <ul> <li> <p>FULL_DATASET: Profile job will be executed on the entire dataset.</p> </li> <li> <p>CUSTOM_ROWS: Profile job will be executed on the number of rows specified in the Size parameter.</p> </li> </ul>'
+                        - description: '<p>A value that determines whether the profile job is run on the entire dataset or a specified number of rows. This value must be one of the following:</p> <ul> <li> <p>FULL_DATASET - The profile job is run on the entire dataset.</p> </li> <li> <p>CUSTOM_ROWS - The profile job is run on the number of rows specified in the <code>Size</code> parameter.</p> </li> </ul>'
                     Size:
                       allOf:
                         - $ref: '#/components/schemas/JobSize'
-                        - description: <p>Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will be executed on the the specified number of rows. The maximum value for size is Long.MAX_VALUE.</p> <p>Long.MAX_VALUE = 9223372036854775807</p>
+                        - description: <p>The <code>Size</code> parameter is only required when the mode is CUSTOM_ROWS. The profile job is run on the specified number of rows. The maximum value for size is Long.MAX_VALUE.</p> <p>Long.MAX_VALUE = 9223372036854775807</p>
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1104,7 +1124,7 @@ paths:
                 - Input
               properties:
                 Format:
-                  description: Specifies the file format of a dataset created from an S3 file or folder.
+                  description: The file format of a dataset that is created from an S3 file or folder.
                   type: string
                   enum:
                     - CSV
@@ -1112,7 +1132,7 @@ paths:
                     - PARQUET
                     - EXCEL
                 FormatOptions:
-                  description: 'Options that define the structure of either Csv, Excel, or JSON input.'
+                  description: 'Represents a set of options that define the structure of either comma-separated value (CSV), Excel, or JSON input.'
                   type: object
                   properties:
                     Json:
@@ -1126,9 +1146,9 @@ paths:
                     Csv:
                       allOf:
                         - $ref: '#/components/schemas/CsvOptions'
-                        - description: Options that define how Csv input is to be interpreted by DataBrew.
+                        - description: Options that define how CSV input is to be interpreted by DataBrew.
                 Input:
-                  description: 'Information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
+                  description: 'Represents information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
                   type: object
                   properties:
                     S3InputDefinition:
@@ -1139,6 +1159,26 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DataCatalogInputDefinition'
                         - description: The AWS Glue Data Catalog parameters for the data.
+                    DatabaseInputDefinition:
+                      allOf:
+                        - $ref: '#/components/schemas/DatabaseInputDefinition'
+                        - description: Connection information for dataset input files stored in a database.
+                PathOptions:
+                  description: Represents a set of options that define how DataBrew selects files for a given S3 path in a dataset.
+                  type: object
+                  properties:
+                    LastModifiedDateCondition:
+                      allOf:
+                        - $ref: '#/components/schemas/FilterExpression'
+                        - description: 'If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.'
+                    FilesLimit:
+                      allOf:
+                        - $ref: '#/components/schemas/FilesLimit'
+                        - description: 'If provided, this structure imposes a limit on a number of files that should be selected.'
+                    Parameters:
+                      allOf:
+                        - $ref: '#/components/schemas/PathParametersMap'
+                        - description: A structure that maps names of parameters used in the S3 path of a dataset to their definitions.
   '/jobs/{name}':
     delete:
       operationId: DeleteJob
@@ -2090,7 +2130,7 @@ paths:
                     ConditionExpressions:
                       allOf:
                         - $ref: '#/components/schemas/ConditionExpressionList'
-                        - description: '<p>One or more conditions that must be met, in order for the recipe step to succeed.</p> <note> <p>All of the conditions in the array must be met. In other words, all of the conditions must be combined using a logical AND operation.</p> </note>'
+                        - description: '<p>One or more conditions that must be met for the recipe step to succeed.</p> <note> <p>All of the conditions in the array must be met. In other words, all of the conditions must be combined using a logical AND operation.</p> </note>'
                 StepIndex:
                   description: 'The index from which to preview a step. This index is used to preview the result of steps that have already been applied, so that the resulting view frame is from earlier in the view frame stack.'
                   type: integer
@@ -2102,7 +2142,7 @@ paths:
                   minLength: 1
                   maxLength: 255
                 ViewFrame:
-                  description: Represents the data being being transformed during an action.
+                  description: Represents the data being transformed during an action.
                   type: object
                   properties:
                     StartColumnIndex:
@@ -2416,7 +2456,7 @@ paths:
                   type: integer
                   minimum: 0
                 OutputLocation:
-                  description: 'An Amazon S3 location (bucket name an object key) where DataBrew can read input data, or write output from a job.'
+                  description: 'Represents an Amazon S3 location (bucket name and object key) where DataBrew can read input data, or write output from a job.'
                   type: object
                   properties:
                     Bucket:
@@ -2437,17 +2477,17 @@ paths:
                   type: integer
                   minimum: 0
                 JobSample:
-                  description: 'Sample configuration for Profile Jobs only. Determines the number of rows on which the Profile job will be executed. If a JobSample value is not provided for profile jobs, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
+                  description: 'A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a <code>JobSample</code> value isn''t provided, the default is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.'
                   type: object
                   properties:
                     Mode:
                       allOf:
                         - $ref: '#/components/schemas/SampleMode'
-                        - description: '<p>Determines whether the profile job will be executed on the entire dataset or on a specified number of rows. Must be one of the following:</p> <ul> <li> <p>FULL_DATASET: Profile job will be executed on the entire dataset.</p> </li> <li> <p>CUSTOM_ROWS: Profile job will be executed on the number of rows specified in the Size parameter.</p> </li> </ul>'
+                        - description: '<p>A value that determines whether the profile job is run on the entire dataset or a specified number of rows. This value must be one of the following:</p> <ul> <li> <p>FULL_DATASET - The profile job is run on the entire dataset.</p> </li> <li> <p>CUSTOM_ROWS - The profile job is run on the number of rows specified in the <code>Size</code> parameter.</p> </li> </ul>'
                     Size:
                       allOf:
                         - $ref: '#/components/schemas/JobSize'
-                        - description: <p>Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will be executed on the the specified number of rows. The maximum value for size is Long.MAX_VALUE.</p> <p>Long.MAX_VALUE = 9223372036854775807</p>
+                        - description: <p>The <code>Size</code> parameter is only required when the mode is CUSTOM_ROWS. The profile job is run on the specified number of rows. The maximum value for size is Long.MAX_VALUE.</p> <p>Long.MAX_VALUE = 9223372036854775807</p>
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2646,28 +2686,28 @@ components:
         SheetNames:
           allOf:
             - $ref: '#/components/schemas/SheetNameList'
-            - description: 'Specifies one or more named sheets in the Excel file, which will be included in the dataset.'
+            - description: One or more named sheets in the Excel file that will be included in the dataset.
         SheetIndexes:
           allOf:
             - $ref: '#/components/schemas/SheetIndexList'
-            - description: 'Specifies one or more sheet numbers in the Excel file, which will be included in the dataset.'
+            - description: One or more sheet numbers in the Excel file that will be included in the dataset.
         HeaderRow:
           allOf:
             - $ref: '#/components/schemas/HeaderRow'
-            - description: 'A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.'
-      description: 'Options that define how DataBrew will interpret a Microsoft Excel file, when creating a dataset from that file.'
+            - description: 'A variable that specifies whether the first row in the file is parsed as the header. If this value is false, column names are auto-generated.'
+      description: Represents a set of options that define how DataBrew will interpret a Microsoft Excel file when creating a dataset from that file.
     CsvOptions:
       type: object
       properties:
         Delimiter:
           allOf:
             - $ref: '#/components/schemas/Delimiter'
-            - description: A single character that specifies the delimiter being used in the Csv file.
+            - description: A single character that specifies the delimiter being used in the CSV file.
         HeaderRow:
           allOf:
             - $ref: '#/components/schemas/HeaderRow'
-            - description: 'A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.'
-      description: Options that define how DataBrew will read a Csv file when creating a dataset from that file.
+            - description: 'A variable that specifies whether the first row in the file is parsed as the header. If this value is false, column names are auto-generated.'
+      description: Represents a set of options that define how DataBrew will read a comma-separated value (CSV) file when creating a dataset from that file.
     S3Location:
       type: object
       required:
@@ -2681,7 +2721,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Key'
             - description: The unique name of the object in the bucket.
-      description: 'An Amazon S3 location (bucket name an object key) where DataBrew can read input data, or write output from a job.'
+      description: 'Represents an Amazon S3 location (bucket name and object key) where DataBrew can read input data, or write output from a job.'
     DataCatalogInputDefinition:
       type: object
       required:
@@ -2705,6 +2745,63 @@ components:
             - $ref: '#/components/schemas/S3Location'
             - description: An Amazon location that AWS Glue Data Catalog can use as a temporary directory.
       description: 'Represents how metadata stored in the AWS Glue Data Catalog is defined in a DataBrew dataset. '
+    DatabaseInputDefinition:
+      type: object
+      required:
+        - GlueConnectionName
+        - DatabaseTableName
+      properties:
+        GlueConnectionName:
+          allOf:
+            - $ref: '#/components/schemas/GlueConnectionName'
+            - description: The AWS Glue Connection that stores the connection information for the target database.
+        DatabaseTableName:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseTableName'
+            - description: The table within the target database.
+        TempDirectory:
+          $ref: '#/components/schemas/S3Location'
+      description: Connection information for dataset input files stored in a database.
+    FilterExpression:
+      type: object
+      required:
+        - Expression
+        - ValuesMap
+      properties:
+        Expression:
+          allOf:
+            - $ref: '#/components/schemas/Expression'
+            - description: 'The expression which includes condition names followed by substitution variables, possibly grouped and combined with other conditions. For example, "(starts_with :prefix1 or starts_with :prefix2) and (ends_with :suffix1 or ends_with :suffix2)". Substitution variables should start with '':'' symbol.'
+        ValuesMap:
+          allOf:
+            - $ref: '#/components/schemas/ValuesMap'
+            - description: The map of substitution variable names to their values used in this filter expression.
+      description: Represents a structure for defining parameter conditions.
+    FilesLimit:
+      type: object
+      required:
+        - MaxFiles
+      properties:
+        MaxFiles:
+          allOf:
+            - $ref: '#/components/schemas/MaxFiles'
+            - description: The number of S3 files to select.
+        OrderedBy:
+          allOf:
+            - $ref: '#/components/schemas/OrderedBy'
+            - description: A criteria to use for S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as a sorting criteria. Currently it's the only allowed value.
+        Order:
+          allOf:
+            - $ref: '#/components/schemas/Order'
+            - description: 'A criteria to use for S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Anotherpossible value is ASCENDING.'
+      description: Represents a limit imposed on number of S3 files that should be selected for a dataset from a connected S3 path.
+    PathParametersMap:
+      type: object
+      description: A structure that map names of parameters used in the S3 path of a dataset to their definitions. A definition includes parameter type and conditions.
+      minProperties: 1
+      maxProperties: 10
+      additionalProperties:
+        $ref: '#/components/schemas/DatasetParameter'
     TagValue:
       type: string
       maxLength: 256
@@ -2775,7 +2872,7 @@ components:
         ConditionExpressions:
           allOf:
             - $ref: '#/components/schemas/ConditionExpressionList'
-            - description: '<p>One or more conditions that must be met, in order for the recipe step to succeed.</p> <note> <p>All of the conditions in the array must be met. In other words, all of the conditions must be combined using a logical AND operation.</p> </note>'
+            - description: '<p>One or more conditions that must be met for the recipe step to succeed.</p> <note> <p>All of the conditions in the array must be met. In other words, all of the conditions must be combined using a logical AND operation.</p> </note>'
       description: Represents a single step from a DataBrew recipe to be performed.
     CreateRecipeJobResponse:
       type: object
@@ -2814,8 +2911,8 @@ components:
         FormatOptions:
           allOf:
             - $ref: '#/components/schemas/OutputFormatOptions'
-            - description: Options that define how DataBrew formats job output files.
-      description: Parameters that specify how and where DataBrew will write the output generated by recipe jobs or profile jobs.
+            - description: Represents options that define how DataBrew formats job output files.
+      description: Represents options that specify how and where DataBrew writes the output generated by recipe jobs or profile jobs.
     RecipeName:
       type: string
       minLength: 1
@@ -2904,7 +3001,7 @@ components:
         Format:
           allOf:
             - $ref: '#/components/schemas/InputFormat'
-            - description: Specifies the file format of a dataset created from an S3 file or folder.
+            - description: The file format of a dataset that is created from an S3 file or folder.
         FormatOptions:
           $ref: '#/components/schemas/FormatOptions'
         Input:
@@ -2921,6 +3018,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Source'
             - description: 'The location of the data for this dataset, Amazon S3 or the AWS Glue Data Catalog.'
+        PathOptions:
+          allOf:
+            - $ref: '#/components/schemas/PathOptions'
+            - description: A set of options that defines how DataBrew interprets an S3 path of the dataset.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3577,7 +3678,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/TargetColumn'
             - description: A column to apply this condition to.
-      description: '<p>Represents an individual condition that evaluates to true or false.</p> <p>Conditions are used with recipe actions: The action is only performed for column values where the condition evaluates to true.</p> <p>If a recipe requires more than one condition, then the recipe must specify multiple <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before the recipe action is performed.</p>'
+      description: '<p>Represents an individual condition that evaluates to true or false.</p> <p>Conditions are used with recipe actions. The action is only performed for column values where the condition evaluates to true.</p> <p>If a recipe requires more than one condition, then the recipe must specify multiple <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before the recipe action is performed.</p>'
+    CreateColumn:
+      type: boolean
     DatasetName:
       type: string
       minLength: 1
@@ -3603,8 +3706,8 @@ components:
         Csv:
           allOf:
             - $ref: '#/components/schemas/CsvOptions'
-            - description: Options that define how Csv input is to be interpreted by DataBrew.
-      description: 'Options that define the structure of either Csv, Excel, or JSON input.'
+            - description: Options that define how CSV input is to be interpreted by DataBrew.
+      description: 'Represents a set of options that define the structure of either comma-separated value (CSV), Excel, or JSON input.'
     Input:
       type: object
       properties:
@@ -3616,7 +3719,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataCatalogInputDefinition'
             - description: The AWS Glue Data Catalog parameters for the data.
-      description: 'Information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
+        DatabaseInputDefinition:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseInputDefinition'
+            - description: Connection information for dataset input files stored in a database.
+      description: 'Represents information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
+    PathOptions:
+      type: object
+      properties:
+        LastModifiedDateCondition:
+          allOf:
+            - $ref: '#/components/schemas/FilterExpression'
+            - description: 'If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.'
+        FilesLimit:
+          allOf:
+            - $ref: '#/components/schemas/FilesLimit'
+            - description: 'If provided, this structure imposes a limit on a number of files that should be selected.'
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/PathParametersMap'
+            - description: A structure that maps names of parameters used in the S3 path of a dataset to their definitions.
+      description: Represents a set of options that define how DataBrew selects files for a given S3 path in a dataset.
     TagMap:
       type: object
       minProperties: 1
@@ -3637,11 +3760,15 @@ components:
         Format:
           allOf:
             - $ref: '#/components/schemas/InputFormat'
-            - description: Specifies the file format of a dataset created from an S3 file or folder.
+            - description: The file format of a dataset that is created from an S3 file or folder.
         FormatOptions:
           $ref: '#/components/schemas/FormatOptions'
         Input:
           $ref: '#/components/schemas/Input'
+        PathOptions:
+          allOf:
+            - $ref: '#/components/schemas/PathOptions'
+            - description: A set of options that defines how DataBrew interprets an S3 path of the dataset.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3674,12 +3801,12 @@ components:
         Mode:
           allOf:
             - $ref: '#/components/schemas/SampleMode'
-            - description: '<p>Determines whether the profile job will be executed on the entire dataset or on a specified number of rows. Must be one of the following:</p> <ul> <li> <p>FULL_DATASET: Profile job will be executed on the entire dataset.</p> </li> <li> <p>CUSTOM_ROWS: Profile job will be executed on the number of rows specified in the Size parameter.</p> </li> </ul>'
+            - description: '<p>A value that determines whether the profile job is run on the entire dataset or a specified number of rows. This value must be one of the following:</p> <ul> <li> <p>FULL_DATASET - The profile job is run on the entire dataset.</p> </li> <li> <p>CUSTOM_ROWS - The profile job is run on the number of rows specified in the <code>Size</code> parameter.</p> </li> </ul>'
         Size:
           allOf:
             - $ref: '#/components/schemas/JobSize'
-            - description: <p>Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will be executed on the the specified number of rows. The maximum value for size is Long.MAX_VALUE.</p> <p>Long.MAX_VALUE = 9223372036854775807</p>
-      description: 'Sample configuration for Profile Jobs only. Determines the number of rows on which the Profile job will be executed. If a JobSample value is not provided for profile jobs, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
+            - description: <p>The <code>Size</code> parameter is only required when the mode is CUSTOM_ROWS. The profile job is run on the specified number of rows. The maximum value for size is Long.MAX_VALUE.</p> <p>Long.MAX_VALUE = 9223372036854775807</p>
+      description: 'A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a <code>JobSample</code> value isn''t provided, the default is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.'
     CreateProfileJobRequest:
       type: object
       required:
@@ -3941,13 +4068,21 @@ components:
         Delimiter:
           allOf:
             - $ref: '#/components/schemas/Delimiter'
-            - description: A single character that specifies the delimiter used to create Csv job output.
-      description: Options that define how DataBrew will write a Csv file.
+            - description: A single character that specifies the delimiter used to create CSV job output.
+      description: Represents a set of options that define how DataBrew will write a comma-separated value (CSV) file.
     DatabaseName:
       type: string
       minLength: 1
       maxLength: 255
     TableName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    GlueConnectionName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    DatabaseTableName:
       type: string
       minLength: 1
       maxLength: 255
@@ -3961,6 +4096,7 @@ components:
       enum:
         - S3
         - DATA-CATALOG
+        - DATABASE
     Dataset:
       type: object
       required:
@@ -3986,11 +4122,11 @@ components:
         Format:
           allOf:
             - $ref: '#/components/schemas/InputFormat'
-            - description: Specifies the file format of a dataset created from an S3 file or folder.
+            - description: The file format of a dataset that is created from an S3 file or folder.
         FormatOptions:
           allOf:
             - $ref: '#/components/schemas/FormatOptions'
-            - description: Options that define how DataBrew interprets the data in the dataset.
+            - description: A set of options that define how DataBrew interprets the data in the dataset.
         Input:
           allOf:
             - $ref: '#/components/schemas/Input'
@@ -4007,6 +4143,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Source'
             - description: 'The location of the data for the dataset, either Amazon S3 or the AWS Glue Data Catalog.'
+        PathOptions:
+          allOf:
+            - $ref: '#/components/schemas/PathOptions'
+            - description: A set of options that defines how DataBrew interprets an S3 path of the dataset.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4020,6 +4160,75 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Dataset'
+    PathParameterName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    ParameterType:
+      type: string
+      enum:
+        - Datetime
+        - Number
+        - String
+    DatetimeOptions:
+      type: object
+      required:
+        - Format
+      properties:
+        Format:
+          allOf:
+            - $ref: '#/components/schemas/DatetimeFormat'
+            - description: 'Required option, that defines the datetime format used for a date parameter in the S3 path. Should use only supported datetime specifiers and separation characters, all litera a-z or A-Z character should be escaped with single quotes. E.g. "MM.dd.yyyy-''at''-HH:mm".'
+        TimezoneOffset:
+          allOf:
+            - $ref: '#/components/schemas/TimezoneOffset'
+            - description: 'Optional value for a timezone offset of the datetime parameter value in the S3 path. Shouldn''t be used if Format for this parameter includes timezone fields. If no offset specified, UTC is assumed.'
+        LocaleCode:
+          allOf:
+            - $ref: '#/components/schemas/LocaleCode'
+            - description: 'Optional value for a non-US locale code, needed for correct interpretation of some date formats.'
+      description: Represents additional options for correct interpretation of datetime parameters used in the S3 path of a dataset.
+    DatasetParameter:
+      type: object
+      required:
+        - Name
+        - Type
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/PathParameterName'
+            - description: The name of the parameter that is used in the dataset's S3 path.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ParameterType'
+            - description: 'The type of the dataset parameter, can be one of a ''String'', ''Number'' or ''Datetime''.'
+        DatetimeOptions:
+          allOf:
+            - $ref: '#/components/schemas/DatetimeOptions'
+            - description: Additional parameter options such as a format and a timezone. Required for datetime parameters.
+        CreateColumn:
+          allOf:
+            - $ref: '#/components/schemas/CreateColumn'
+            - description: Optional boolean value that defines whether the captured value of this parameter should be loaded as an additional column in the dataset.
+        Filter:
+          allOf:
+            - $ref: '#/components/schemas/FilterExpression'
+            - description: The optional filter expression structure to apply additional matching criteria to the parameter.
+      description: Represents a dataset paramater that defines type and conditions for a parameter in the S3 path of the dataset.
+    DatetimeFormat:
+      type: string
+      minLength: 2
+      maxLength: 100
+    TimezoneOffset:
+      type: string
+      pattern: '^(Z|[-+](\d|\d{2}|\d{2}:?\d{2}))$'
+      minLength: 1
+      maxLength: 6
+    LocaleCode:
+      type: string
+      pattern: '^[A-Za-z0-9_\.#@\-]+$'
+      minLength: 2
+      maxLength: 100
     DeleteDatasetRequest:
       type: object
       title: DeleteDatasetRequest
@@ -4125,6 +4334,27 @@ components:
         $ref: '#/components/schemas/SheetIndex'
       minItems: 1
       maxItems: 1
+    Expression:
+      type: string
+      pattern: '^[<>0-9A-Za-z_:)(!= ]+$'
+      minLength: 4
+      maxLength: 1024
+    MaxFiles:
+      type: integer
+      minimum: 1
+    OrderedBy:
+      type: string
+      enum:
+        - LAST_MODIFIED_DATE
+    Order:
+      type: string
+      enum:
+        - DESCENDING
+        - ASCENDING
+    ValuesMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ConditionValue'
     Job:
       type: object
       required:
@@ -4153,7 +4383,7 @@ components:
         EncryptionMode:
           allOf:
             - $ref: '#/components/schemas/EncryptionMode'
-            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
         Name:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -4201,7 +4431,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the role that will be assumed for this job.
+            - description: The Amazon Resource Name (ARN) of the role to be assumed for this job.
         Timeout:
           allOf:
             - $ref: '#/components/schemas/Timeout'
@@ -4213,7 +4443,7 @@ components:
         JobSample:
           allOf:
             - $ref: '#/components/schemas/JobSample'
-            - description: 'Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
+            - description: 'A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a <code>JobSample</code> value isn''t provided, the default value is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.'
       description: Represents all of the attributes of a DataBrew job.
     JobList:
       type: array
@@ -4281,7 +4511,7 @@ components:
         JobSample:
           allOf:
             - $ref: '#/components/schemas/JobSample'
-            - description: 'Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.'
+            - description: 'A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a <code>JobSample</code> value isn''t provided, the default is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.'
       description: Represents one run of a DataBrew job.
     JobRunList:
       type: array
@@ -4364,8 +4594,8 @@ components:
         Csv:
           allOf:
             - $ref: '#/components/schemas/CsvOutputOptions'
-            - description: Options that define how DataBrew writes Csv output.
-      description: Options that define the structure of Csv job output.
+            - description: Represents a set of options that define the structure of comma-separated value (CSV) job output.
+      description: Represents a set of options that define the structure of comma-separated (CSV) job output.
     ParameterValue:
       type: string
       minLength: 1
@@ -4426,7 +4656,7 @@ components:
         Sample:
           allOf:
             - $ref: '#/components/schemas/Sample'
-            - description: 'The sample size and sampling type to apply to the data. If this parameter isn''t specified, then the sample will consiste of the first 500 rows from the dataset.'
+            - description: 'The sample size and sampling type to apply to the data. If this parameter isn''t specified, then the sample consists of the first 500 rows from the dataset.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4508,7 +4738,7 @@ components:
         RecipeVersion:
           allOf:
             - $ref: '#/components/schemas/RecipeVersion'
-            - description: '<p>The identifier for the version for the recipe. Must be one of the following:</p> <ul> <li> <p>Numeric version (<code>X.Y</code>) - <code>X</code> and <code>Y</code> stand for major and minor version numbers. The maximum length of each is 6 digits, and neither can be negative values. Both <code>X</code> and <code>Y</code> are required, and "0.0" is not a valid version.</p> </li> <li> <p> <code>LATEST_WORKING</code> - the most recent valid version being developed in a DataBrew project.</p> </li> <li> <p> <code>LATEST_PUBLISHED</code> - the most recent published version.</p> </li> </ul>'
+            - description: '<p>The identifier for the version for the recipe. Must be one of the following:</p> <ul> <li> <p>Numeric version (<code>X.Y</code>) - <code>X</code> and <code>Y</code> stand for major and minor version numbers. The maximum length of each is 6 digits, and neither can be negative values. Both <code>X</code> and <code>Y</code> are required, and "0.0" isn''t a valid version.</p> </li> <li> <p> <code>LATEST_WORKING</code> - the most recent valid version being developed in a DataBrew project.</p> </li> <li> <p> <code>LATEST_PUBLISHED</code> - the most recent published version.</p> </li> </ul>'
       description: Represents one or more actions to be performed on a DataBrew dataset.
     RecipeVersionErrorDetail:
       type: object
@@ -4566,7 +4796,7 @@ components:
         CronExpression:
           allOf:
             - $ref: '#/components/schemas/CronExpression'
-            - description: 'The date(s) and time(s) when the job will run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>AWS Glue DataBrew Developer Guide</i>.'
+            - description: 'The dates and times when the job is to run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>AWS Glue DataBrew Developer Guide</i>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4596,7 +4826,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/HiddenColumnList'
             - description: A list of columns to hide in the view frame.
-      description: Represents the data being being transformed during an action.
+      description: Represents the data being transformed during an action.
     SendProjectSessionActionRequest:
       type: object
       title: SendProjectSessionActionRequest
@@ -4670,11 +4900,15 @@ components:
         Format:
           allOf:
             - $ref: '#/components/schemas/InputFormat'
-            - description: Specifies the file format of a dataset created from an S3 file or folder.
+            - description: The file format of a dataset that is created from an S3 file or folder.
         FormatOptions:
           $ref: '#/components/schemas/FormatOptions'
         Input:
           $ref: '#/components/schemas/Input'
+        PathOptions:
+          allOf:
+            - $ref: '#/components/schemas/PathOptions'
+            - description: A set of options that defines how DataBrew interprets an S3 path of the dataset.
     UpdateProfileJobRequest:
       type: object
       required:
@@ -4793,5 +5027,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CronExpression'
             - description: 'The date or dates and time or times when the jobs are to be run. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html">Cron expressions</a> in the <i>AWS Glue DataBrew Developer Guide</i>.'
+    ValueReference:
+      type: string
+      pattern: '^:[A-Za-z0-9_]+$'
+      minLength: 2
+      maxLength: 128
 security:
   - hmac: []
