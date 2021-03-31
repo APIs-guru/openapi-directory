@@ -5,7 +5,8 @@ schemes:
 host: api.wmata.com
 basePath: /Rail.svc
 info:
-  description: Rail line and station information, including locations, fares, times, and parking.
+  description: Rail line and station information, including locations, fares,
+    times, and parking.
   title: Rail Station Information
   version: "1.0"
   x-apisguru-categories:
@@ -74,7 +75,8 @@ paths:
 
         <td>\r
 
-        Array containing line information (<a href=\"#Line\">Line</a>).\r
+        Array containing line information (<a
+        href=\"#Line\">Line</a>).\r
 
         </td>\r
 
@@ -116,9 +118,11 @@ paths:
 
         \r
 
-        <td>End station code. For example, will be E10 (Greenbelt) for the\r
+        <td>End station code. For example, will be E10 (Greenbelt) for
+        the\r
 
-        Green Line, B11 (Glenmont) for the Red Line, etc. Use this value in\r
+        Green Line, B11 (Glenmont) for the Red Line, etc. Use this value
+        in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -132,11 +136,13 @@ paths:
 
         \r
 
-        <td>Intermediate terminal station code. During normal service, some\r
+        <td>Intermediate terminal station code. During normal service,
+        some\r
 
         trains on some lines might end their trip prior to the\r
 
-        StartStationCode or EndStationCode. A good example is on the Red\r
+        StartStationCode or EndStationCode. A good example is on the
+        Red\r
 
         Line where some trains stop at A11 (Grosvenor) or B08 (Silver\r
 
@@ -164,7 +170,8 @@ paths:
 
         \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
+        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
+        GR,\r
 
         or SV).</td>\r
 
@@ -178,9 +185,11 @@ paths:
 
         \r
 
-        <td>Start station code. For example, will be F11 (Branch Avenue)\r
+        <td>Start station code. For example, will be F11 (Branch
+        Avenue)\r
 
-        for the Green Line, A15 (Shady Grove) for the Red Line, etc. Use\r
+        for the Green Line, A15 (Shady Grove) for the Red Line, etc.
+        Use\r
 
         this value in other rail-related APIs to retrieve data about a\r
 
@@ -199,7 +208,8 @@ paths:
           description: Default response code.
           examples:
             application/xml: >-
-              <LinesResp xmlns="http://www.wmata.com" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+              <LinesResp xmlns="http://www.wmata.com"
+              xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
                   <Lines>
                       <Line>
                           <DisplayName>Green</DisplayName>
@@ -258,13 +268,15 @@ paths:
 
         \r
 
-        <p>Returns a set of ordered stations and distances between two stations on the\r
+        <p>Returns a set of ordered stations and distances between two
+        stations on the\r
 
         <em>same line</em>.</p>\r
 
         \r
 
-        <p>Note that this method is not suitable on its own as a pathfinding solution\r
+        <p>Note that this method is not suitable on its own as a
+        pathfinding solution\r
 
         between stations.</p>\r
 
@@ -348,7 +360,8 @@ paths:
 
         \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
+        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
+        GR,\r
 
         or SV) this station's platform is on.</td>\r
 
@@ -388,7 +401,8 @@ paths:
 
         \r
 
-        <td>Full name for this station, as shown on the WMATA website.</td>\r
+        <td>Full name for this station, as shown on the WMATA
+        website.</td>\r
 
         </tr>\r
 
@@ -398,7 +412,8 @@ paths:
       operationId: 5476364f031f5909e4fe3316
       parameters:
         - default: N06
-          description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
+          description: Station code for the origin station.  Use the Station List method
+            to return a list of all station codes.
           enum:
             - N06
           in: query
@@ -406,7 +421,8 @@ paths:
           required: true
           type: string
         - default: G05
-          description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
+          description: Station code for the origin station.  Use the Station List method
+            to return a list of all station codes.
           enum:
             - G05
           in: query
@@ -419,7 +435,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               
 
               <PathResp
@@ -814,14 +830,16 @@ paths:
       operationId: 5476364f031f5909e4fe331b
       parameters:
         - default: E10
-          description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
+          description: Station code for the origin station.  Use the Station List method
+            to return a list of all station codes.
           enum:
             - E10
           in: query
           name: FromStationCode
           type: string
         - default: J03
-          description: Station code for the destination station.  Use the Station List method to return a list of all station codes.
+          description: Station code for the destination station.  Use the Station List
+            method to return a list of all station codes.
           enum:
             - J03
           in: query
@@ -834,7 +852,8 @@ paths:
           description: Default response code.
           examples:
             application/xml: >-
-              <StationToStationInfoResp xmlns="http://www.wmata.com" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+              <StationToStationInfoResp xmlns="http://www.wmata.com"
+              xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
                   <StationToStationInfos>
                       <StationToStationInfo>
                           <CompositeMiles>25.41</CompositeMiles>
@@ -856,9 +875,11 @@ paths:
 
         \r
 
-        <p>Returns a list of nearby station entrances based on latitude, longitude, and\r
+        <p>Returns a list of nearby station entrances based on latitude,
+        longitude, and\r
 
-        radius (meters). Omit search parameters to return all station entrances.</p>\r
+        radius (meters). Omit search parameters to return all station
+        entrances.</p>\r
 
         \r
 
@@ -930,7 +951,8 @@ paths:
 
         <td>Additional information for the entrance, if available.\r
 
-        Currently available data usually shows the same value as the Name\r
+        Currently available data usually shows the same value as the
+        Name\r
 
         element.</td>\r
 
@@ -994,9 +1016,11 @@ paths:
 
         \r
 
-        <td>The station code associated with this entrance. Use this value\r
+        <td>The station code associated with this entrance. Use this
+        value\r
 
-        in other rail-related APIs to retrieve data about a station.</td>\r
+        in other rail-related APIs to retrieve data about a
+        station.</td>\r
 
         </tr>\r
 
@@ -1010,7 +1034,8 @@ paths:
 
         <td>For stations containing multiple platforms (e.g.: Gallery\r
 
-        Place, Fort Totten, L'Enfant Plaza, and Metro Center), the other\r
+        Place, Fort Totten, L'Enfant Plaza, and Metro Center), the
+        other\r
 
         station code.</td>\r
 
@@ -1022,21 +1047,24 @@ paths:
       operationId: 5476364f031f5909e4fe3317
       parameters:
         - default: 38.8978168
-          description: Center point Latitude, required if Longitude and Radius are specified.
+          description: Center point Latitude, required if Longitude and Radius are
+            specified.
           enum:
             - 38.8978168
           in: query
           name: Lat
           type: number
         - default: -77.0404246
-          description: Center point Longitude, required if Latitude and Radius are specified.
+          description: Center point Longitude, required if Latitude and Radius are
+            specified.
           enum:
             - -77.0404246
           in: query
           name: Lon
           type: number
         - default: 500
-          description: Radius (meters) to include in the search area, required if Latitude and Longitude are specified.
+          description: Radius (meters) to include in the search area, required if Latitude
+            and Longitude are specified.
           enum:
             - 500
           in: query
@@ -1284,7 +1312,8 @@ paths:
       operationId: 5476364f031f5909e4fe3318
       parameters:
         - default: A01
-          description: Station code.  Use the Station List method to return a list of all station codes.
+          description: Station code.  Use the Station List method to return a list of all
+            station codes.
           enum:
             - A01
           in: query
@@ -1297,7 +1326,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               <Station
                   xmlns="http://www.wmata.com"
                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -1581,7 +1610,8 @@ paths:
         </table>
       operationId: 5476364f031f5909e4fe3315
       parameters:
-        - description: Station code.  Use the Station List method to return a list of all station codes.
+        - description: Station code.  Use the Station List method to return a list of all
+            station codes.
           enum:
             - E08
             - F06
@@ -1623,17 +1653,21 @@ paths:
 
         \r
 
-        <p>Returns opening and scheduled first/last train times based on a given\r
+        <p>Returns opening and scheduled first/last train times based on
+        a given\r
 
-        StationCode. Omit the StationCode to return timing information for all\r
+        StationCode. Omit the StationCode to return timing information
+        for all\r
 
         stations.</p>\r
 
         \r
 
-        <p>Note that for stations with multiple platforms (e.g.: Metro Center, L'Enfant\r
+        <p>Note that for stations with multiple platforms (e.g.: Metro
+        Center, L'Enfant\r
 
-        Plaza, etc.), a distinct call is required for each StationCode to retrieve the\r
+        Plaza, etc.), a distinct call is required for each StationCode
+        to retrieve the\r
 
         full set of train times at such stations.</p>\r
 
@@ -1845,7 +1879,8 @@ paths:
 
         \r
 
-        <td>Station code for the train's destination. Use this value in\r
+        <td>Station code for the train's destination. Use this value
+        in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -1875,11 +1910,13 @@ paths:
 
         \r
 
-        <td>Last train leaves the station at this time. Format is HH:mm.\r
+        <td>Last train leaves the station at this time. Format is
+        HH:mm.\r
 
         Note that when the time is AM, it signifies the next day. For\r
 
-        example, a value of 02:30 under a Saturday element means the last\r
+        example, a value of 02:30 under a Saturday element means the
+        last\r
 
         train leaves on Sunday at 2:30 AM.</td>\r
 
@@ -1893,7 +1930,8 @@ paths:
 
         \r
 
-        <td>Station code for the train's destination. Use this value in\r
+        <td>Station code for the train's destination. Use this value
+        in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -1905,7 +1943,8 @@ paths:
       operationId: 5476364f031f5909e4fe331a
       parameters:
         - default: E10
-          description: Station code.  Use the Station List method to return a list of all station codes.
+          description: Station code.  Use the Station List method to return a list of all
+            station codes.
           enum:
             - E10
           in: query
@@ -2278,24 +2317,16 @@ paths:
         </table>
       operationId: 5476364f031f5909e4fe3319
       parameters:
-        - description: >-
+        - description: |-
             Two-letter line code abbreviation:
 
-
             <ul>
-
             <li>RD - Red</li>
-
             <li>YL - Yellow</li>
-
             <li>GR - Green</li>
-
             <li>BL - Blue</li>
-
             <li>OR - Orange</li>
-
             <li>SV - Silver</li>
-
             </ul>
           enum:
             - RD
@@ -2313,7 +2344,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               
 
               <StationsResp
@@ -2851,7 +2882,8 @@ paths:
 
         <td>\r
 
-        Array containing line information (<a href=\"#Line\">Line</a>).\r
+        Array containing line information (<a
+        href=\"#Line\">Line</a>).\r
 
         </td>\r
 
@@ -2893,9 +2925,11 @@ paths:
 
         \r
 
-        <td>End station code. For example, will be E10 (Greenbelt) for the\r
+        <td>End station code. For example, will be E10 (Greenbelt) for
+        the\r
 
-        Green Line, B11 (Glenmont) for the Red Line, etc. Use this value in\r
+        Green Line, B11 (Glenmont) for the Red Line, etc. Use this value
+        in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -2909,11 +2943,13 @@ paths:
 
         \r
 
-        <td>Intermediate terminal station code. During normal service, some\r
+        <td>Intermediate terminal station code. During normal service,
+        some\r
 
         trains on some lines might end their trip prior to the\r
 
-        StartStationCode or EndStationCode. A good example is on the Red\r
+        StartStationCode or EndStationCode. A good example is on the
+        Red\r
 
         Line where some trains stop at A11 (Grosvenor) or B08 (Silver\r
 
@@ -2941,7 +2977,8 @@ paths:
 
         \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
+        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
+        GR,\r
 
         or SV).</td>\r
 
@@ -2955,9 +2992,11 @@ paths:
 
         \r
 
-        <td>Start station code. For example, will be F11 (Branch Avenue)\r
+        <td>Start station code. For example, will be F11 (Branch
+        Avenue)\r
 
-        for the Green Line, A15 (Shady Grove) for the Red Line, etc. Use\r
+        for the Green Line, A15 (Shady Grove) for the Red Line, etc.
+        Use\r
 
         this value in other rail-related APIs to retrieve data about a\r
 
@@ -3020,13 +3059,15 @@ paths:
 
         \r
 
-        <p>Returns a set of ordered stations and distances between two stations on the\r
+        <p>Returns a set of ordered stations and distances between two
+        stations on the\r
 
         <em>same line</em>.</p>\r
 
         \r
 
-        <p>Note that this method is not suitable on its own as a pathfinding solution\r
+        <p>Note that this method is not suitable on its own as a
+        pathfinding solution\r
 
         between stations.</p>\r
 
@@ -3110,7 +3151,8 @@ paths:
 
         \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
+        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
+        GR,\r
 
         or SV) this station's platform is on.</td>\r
 
@@ -3150,7 +3192,8 @@ paths:
 
         \r
 
-        <td>Full name for this station, as shown on the WMATA website.</td>\r
+        <td>Full name for this station, as shown on the WMATA
+        website.</td>\r
 
         </tr>\r
 
@@ -3160,7 +3203,8 @@ paths:
       operationId: 5476364f031f5909e4fe330e
       parameters:
         - default: N06
-          description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
+          description: Station code for the origin station.  Use the Station List method
+            to return a list of all station codes.
           enum:
             - N06
           in: query
@@ -3168,7 +3212,8 @@ paths:
           required: true
           type: string
         - default: G05
-          description: Station code for the destination station.  Use the Station List method to return a list of all station codes.
+          description: Station code for the destination station.  Use the Station List
+            method to return a list of all station codes.
           enum:
             - G05
           in: query
@@ -3513,14 +3558,16 @@ paths:
       operationId: 5476364f031f5909e4fe3313
       parameters:
         - default: E10
-          description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
+          description: Station code for the origin station.  Use the Station List method
+            to return a list of all station codes.
           enum:
             - E10
           in: query
           name: FromStationCode
           type: string
         - default: J03
-          description: Station code for the destination station.  Use the Station List method to return a list of all station codes.
+          description: Station code for the destination station.  Use the Station List
+            method to return a list of all station codes.
           enum:
             - J03
           in: query
@@ -3549,9 +3596,11 @@ paths:
 
         \r
 
-        <p>Returns a list of nearby station entrances based on latitude, longitude, and\r
+        <p>Returns a list of nearby station entrances based on latitude,
+        longitude, and\r
 
-        radius (meters). Omit search parameters to return all station entrances.</p>\r
+        radius (meters). Omit search parameters to return all station
+        entrances.</p>\r
 
         \r
 
@@ -3623,7 +3672,8 @@ paths:
 
         <td>Additional information for the entrance, if available.\r
 
-        Currently available data usually shows the same value as the Name\r
+        Currently available data usually shows the same value as the
+        Name\r
 
         element.</td>\r
 
@@ -3687,9 +3737,11 @@ paths:
 
         \r
 
-        <td>The station code associated with this entrance. Use this value\r
+        <td>The station code associated with this entrance. Use this
+        value\r
 
-        in other rail-related APIs to retrieve data about a station.</td>\r
+        in other rail-related APIs to retrieve data about a
+        station.</td>\r
 
         </tr>\r
 
@@ -3703,7 +3755,8 @@ paths:
 
         <td>For stations containing multiple platforms (e.g.: Gallery\r
 
-        Place, Fort Totten, L'Enfant Plaza, and Metro Center), the other\r
+        Place, Fort Totten, L'Enfant Plaza, and Metro Center), the
+        other\r
 
         station code.</td>\r
 
@@ -3715,21 +3768,24 @@ paths:
       operationId: 5476364f031f5909e4fe330f
       parameters:
         - default: 38.8978168
-          description: Center point Latitude, required if Longitude and Radius are specified.
+          description: Center point Latitude, required if Longitude and Radius are
+            specified.
           enum:
             - 38.8978168
           in: query
           name: Lat
           type: number
         - default: -77.0404246
-          description: Center point Longitude, required if Latitude and Radius are specified.
+          description: Center point Longitude, required if Latitude and Radius are
+            specified.
           enum:
             - -77.0404246
           in: query
           name: Lon
           type: number
         - default: 500
-          description: Radius (meters) to include in the search area, required if Latitude and Longitude are specified.
+          description: Radius (meters) to include in the search area, required if Latitude
+            and Longitude are specified.
           enum:
             - 500
           in: query
@@ -3970,7 +4026,8 @@ paths:
       operationId: 5476364f031f5909e4fe3310
       parameters:
         - default: A01
-          description: Station code.  Use the Station List method to return a list of all station codes.
+          description: Station code.  Use the Station List method to return a list of all
+            station codes.
           enum:
             - A01
           in: query
@@ -4262,7 +4319,8 @@ paths:
         </table>
       operationId: 5476364f031f5909e4fe330d
       parameters:
-        - description: Station code.  Use the Station List method to return a list of all station codes.
+        - description: Station code.  Use the Station List method to return a list of all
+            station codes.
           enum:
             - E08
             - F06
@@ -4295,17 +4353,21 @@ paths:
 
         \r
 
-        <p>Returns opening and scheduled first/last train times based on a given\r
+        <p>Returns opening and scheduled first/last train times based on
+        a given\r
 
-        StationCode. Omit the StationCode to return timing information for all\r
+        StationCode. Omit the StationCode to return timing information
+        for all\r
 
         stations.</p>\r
 
         \r
 
-        <p>Note that for stations with multiple platforms (e.g.: Metro Center, L'Enfant\r
+        <p>Note that for stations with multiple platforms (e.g.: Metro
+        Center, L'Enfant\r
 
-        Plaza, etc.), a distinct call is required for each StationCode to retrieve the\r
+        Plaza, etc.), a distinct call is required for each StationCode
+        to retrieve the\r
 
         full set of train times at such stations.</p>\r
 
@@ -4517,7 +4579,8 @@ paths:
 
         \r
 
-        <td>Station code for the train's destination. Use this value in\r
+        <td>Station code for the train's destination. Use this value
+        in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -4547,11 +4610,13 @@ paths:
 
         \r
 
-        <td>Last train leaves the station at this time. Format is HH:mm.\r
+        <td>Last train leaves the station at this time. Format is
+        HH:mm.\r
 
         Note that when the time is AM, it signifies the next day. For\r
 
-        example, a value of 02:30 under a Saturday element means the last\r
+        example, a value of 02:30 under a Saturday element means the
+        last\r
 
         train leaves on Sunday at 2:30 AM.</td>\r
 
@@ -4565,7 +4630,8 @@ paths:
 
         \r
 
-        <td>Station code for the train's destination. Use this value in\r
+        <td>Station code for the train's destination. Use this value
+        in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -4577,7 +4643,8 @@ paths:
       operationId: 5476364f031f5909e4fe3312
       parameters:
         - default: E10
-          description: Station code.  Use the Station List method to return a list of all station codes.
+          description: Station code.  Use the Station List method to return a list of all
+            station codes.
           enum:
             - E10
           in: query
@@ -4894,24 +4961,16 @@ paths:
         </table>
       operationId: 5476364f031f5909e4fe3311
       parameters:
-        - description: >-
+        - description: |-
             Two-letter line code abbreviation:
 
-
             <ul>
-
             <li>RD - Red</li>
-
             <li>YL - Yellow</li>
-
             <li>GR - Green</li>
-
             <li>BL - Blue</li>
-
             <li>OR - Orange</li>
-
             <li>SV - Silver</li>
-
             </ul>
           enum:
             - RD

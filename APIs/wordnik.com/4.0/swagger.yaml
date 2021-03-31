@@ -102,7 +102,8 @@ paths:
       description: Requires a valid auth_token to be set.
       operationId: getLoggedInUser
       parameters:
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
+        - description: The auth token of the logged-in user, obtained by calling
+            /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
@@ -150,7 +151,10 @@ paths:
         - account
   "/word.json/{word}/audio":
     get:
-      description: The metadata includes a time-expiring fileUrl which allows reading the audio file directly from the API.  Currently only audio pronunciations from the American Heritage Dictionary in mp3 format are supported.
+      description: The metadata includes a time-expiring fileUrl which allows reading
+        the audio file directly from the API.  Currently only audio
+        pronunciations from the American Heritage Dictionary in mp3 format are
+        supported.
       operationId: getAudio
       parameters:
         - description: Word to get audio for.
@@ -239,7 +243,13 @@ paths:
           name: includeRelated
           required: false
           type: string
-        - description: "Source dictionary to return definitions from.  If 'all' is received, results are returned from all sources. If multiple values are received (e.g. 'century,wiktionary'), results are returned from the first specified dictionary that has definitions. If left blank, results are returned from the first dictionary that has definitions. By default, dictionaries are searched in this order: ahd, wiktionary, webster, century, wordnet"
+        - description: "Source dictionary to return definitions from.  If 'all' is
+            received, results are returned from all sources. If multiple values
+            are received (e.g. 'century,wiktionary'), results are returned from
+            the first specified dictionary that has definitions. If left blank,
+            results are returned from the first dictionary that has definitions.
+            By default, dictionaries are searched in this order: ahd,
+            wiktionary, webster, century, wordnet"
           enum:
             - all
             - ahd
@@ -256,7 +266,8 @@ paths:
           required: false
           type: array
         - default: "false"
-          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          description: If true will try to return the correct word root ('cats' -> 'cat').
+            If false returns exactly what was requested.
           enum:
             - "false"
             - "true"
@@ -293,7 +304,8 @@ paths:
           required: true
           type: string
         - default: "false"
-          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          description: If true will try to return the correct word root ('cats' -> 'cat').
+            If false returns exactly what was requested.
           enum:
             - "false"
             - "true"
@@ -330,7 +342,8 @@ paths:
           required: false
           type: string
         - default: "false"
-          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          description: If true will try to return the correct word root ('cats' -> 'cat').
+            If false returns exactly what was requested.
           enum:
             - "false"
             - "true"
@@ -370,7 +383,8 @@ paths:
           required: true
           type: string
         - default: "false"
-          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          description: If true will try to return the correct word root ('cats' -> 'cat').
+            If false returns exactly what was requested.
           enum:
             - "false"
             - "true"
@@ -410,7 +424,8 @@ paths:
           required: true
           type: string
         - default: "false"
-          description: If true will try to return a correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          description: If true will try to return a correct word root ('cats' -> 'cat').
+            If false returns exactly what was requested.
           enum:
             - "false"
             - "true"
@@ -418,7 +433,8 @@ paths:
           name: useCanonical
           required: false
           type: string
-        - description: "Get from a single dictionary. Valid options: ahd, century, wiktionary, webster, and wordnet."
+        - description: "Get from a single dictionary. Valid options: ahd, century,
+            wiktionary, webster, and wordnet."
           enum:
             - ahd
             - century
@@ -470,7 +486,8 @@ paths:
           required: false
           type: integer
         - default: "false"
-          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          description: If true will try to return the correct word root ('cats' -> 'cat').
+            If false returns exactly what was requested.
           enum:
             - "false"
             - "true"
@@ -498,7 +515,8 @@ paths:
           required: true
           type: string
         - default: "false"
-          description: If true will try to return a correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          description: If true will try to return a correct word root ('cats' -> 'cat').
+            If false returns exactly what was requested.
           enum:
             - "false"
             - "true"
@@ -556,7 +574,8 @@ paths:
           required: true
           type: string
         - default: "false"
-          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          description: If true will try to return the correct word root ('cats' -> 'cat').
+            If false returns exactly what was requested.
           enum:
             - "false"
             - "true"
@@ -632,7 +651,8 @@ paths:
           required: true
           type: string
         - default: "false"
-          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
+          description: If true will try to return the correct word root ('cats' -> 'cat').
+            If false returns exactly what was requested.
           enum:
             - "false"
             - "true"
@@ -657,7 +677,8 @@ paths:
           name: permalink
           required: true
           type: string
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
+        - description: The auth token of the logged-in user, obtained by calling
+            /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
@@ -677,7 +698,8 @@ paths:
           name: permalink
           required: true
           type: string
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
+        - description: The auth token of the logged-in user, obtained by calling
+            /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
@@ -704,7 +726,8 @@ paths:
           required: false
           schema:
             $ref: "#/definitions/WordList"
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
+        - description: The auth token of the logged-in user, obtained by calling
+            /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
@@ -733,7 +756,8 @@ paths:
             items:
               $ref: "#/definitions/StringValue"
             type: array
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
+        - description: The auth token of the logged-in user, obtained by calling
+            /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
@@ -783,7 +807,8 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
+        - description: The auth token of the logged-in user, obtained by calling
+            /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
@@ -814,7 +839,8 @@ paths:
             items:
               $ref: "#/definitions/StringValue"
             type: array
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
+        - description: The auth token of the logged-in user, obtained by calling
+            /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
@@ -836,7 +862,8 @@ paths:
           required: false
           schema:
             $ref: "#/definitions/WordList"
-        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
+        - description: The auth token of the logged-in user, obtained by calling
+            /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
@@ -859,12 +886,24 @@ paths:
           name: hasDictionaryDef
           required: false
           type: string
-        - description: CSV part-of-speech values to include (allowable values are noun, adjective, verb, adverb, interjection, pronoun, preposition, abbreviation, affix, article, auxiliary-verb, conjunction, definite-article, family-name, given-name, idiom, imperative, noun-plural, noun-posessive, past-participle, phrasal-prefix, proper-noun, proper-noun-plural, proper-noun-posessive, suffix, verb-intransitive, verb-transitive)
+        - description: CSV part-of-speech values to include (allowable values are noun,
+            adjective, verb, adverb, interjection, pronoun, preposition,
+            abbreviation, affix, article, auxiliary-verb, conjunction,
+            definite-article, family-name, given-name, idiom, imperative,
+            noun-plural, noun-posessive, past-participle, phrasal-prefix,
+            proper-noun, proper-noun-plural, proper-noun-posessive, suffix,
+            verb-intransitive, verb-transitive)
           in: query
           name: includePartOfSpeech
           required: false
           type: string
-        - description: CSV part-of-speech values to exclude (allowable values are noun, adjective, verb, adverb, interjection, pronoun, preposition, abbreviation, affix, article, auxiliary-verb, conjunction, definite-article, family-name, given-name, idiom, imperative, noun-plural, noun-posessive, past-participle, phrasal-prefix, proper-noun, proper-noun-plural, proper-noun-posessive, suffix, verb-intransitive, verb-transitive)
+        - description: CSV part-of-speech values to exclude (allowable values are noun,
+            adjective, verb, adverb, interjection, pronoun, preposition,
+            abbreviation, affix, article, auxiliary-verb, conjunction,
+            definite-article, family-name, given-name, idiom, imperative,
+            noun-plural, noun-posessive, past-participle, phrasal-prefix,
+            proper-noun, proper-noun-plural, proper-noun-posessive, suffix,
+            verb-intransitive, verb-transitive)
           in: query
           name: excludePartOfSpeech
           required: false
@@ -929,12 +968,24 @@ paths:
           name: hasDictionaryDef
           required: false
           type: string
-        - description: CSV part-of-speech values to include (allowable values are noun, adjective, verb, adverb, interjection, pronoun, preposition, abbreviation, affix, article, auxiliary-verb, conjunction, definite-article, family-name, given-name, idiom, imperative, noun-plural, noun-posessive, past-participle, phrasal-prefix, proper-noun, proper-noun-plural, proper-noun-posessive, suffix, verb-intransitive, verb-transitive)
+        - description: CSV part-of-speech values to include (allowable values are noun,
+            adjective, verb, adverb, interjection, pronoun, preposition,
+            abbreviation, affix, article, auxiliary-verb, conjunction,
+            definite-article, family-name, given-name, idiom, imperative,
+            noun-plural, noun-posessive, past-participle, phrasal-prefix,
+            proper-noun, proper-noun-plural, proper-noun-posessive, suffix,
+            verb-intransitive, verb-transitive)
           in: query
           name: includePartOfSpeech
           required: false
           type: string
-        - description: CSV part-of-speech values to exclude (allowable values are noun, adjective, verb, adverb, interjection, pronoun, preposition, abbreviation, affix, article, auxiliary-verb, conjunction, definite-article, family-name, given-name, idiom, imperative, noun-plural, noun-posessive, past-participle, phrasal-prefix, proper-noun, proper-noun-plural, proper-noun-posessive, suffix, verb-intransitive, verb-transitive)
+        - description: CSV part-of-speech values to exclude (allowable values are noun,
+            adjective, verb, adverb, interjection, pronoun, preposition,
+            abbreviation, affix, article, auxiliary-verb, conjunction,
+            definite-article, family-name, given-name, idiom, imperative,
+            noun-plural, noun-posessive, past-participle, phrasal-prefix,
+            proper-noun, proper-noun-plural, proper-noun-posessive, suffix,
+            verb-intransitive, verb-transitive)
           in: query
           name: excludePartOfSpeech
           required: false
@@ -1054,12 +1105,24 @@ paths:
           name: excludeSourceDictionaries
           required: false
           type: string
-        - description: Only include these comma-delimited parts of speech (allowable values are noun, adjective, verb, adverb, interjection, pronoun, preposition, abbreviation, affix, article, auxiliary-verb, conjunction, definite-article, family-name, given-name, idiom, imperative, noun-plural, noun-posessive, past-participle, phrasal-prefix, proper-noun, proper-noun-plural, proper-noun-posessive, suffix, verb-intransitive, verb-transitive)
+        - description: Only include these comma-delimited parts of speech (allowable
+            values are noun, adjective, verb, adverb, interjection, pronoun,
+            preposition, abbreviation, affix, article, auxiliary-verb,
+            conjunction, definite-article, family-name, given-name, idiom,
+            imperative, noun-plural, noun-posessive, past-participle,
+            phrasal-prefix, proper-noun, proper-noun-plural,
+            proper-noun-posessive, suffix, verb-intransitive, verb-transitive)
           in: query
           name: includePartOfSpeech
           required: false
           type: string
-        - description: Exclude these comma-delimited parts of speech (allowable values are noun, adjective, verb, adverb, interjection, pronoun, preposition, abbreviation, affix, article, auxiliary-verb, conjunction, definite-article, family-name, given-name, idiom, imperative, noun-plural, noun-posessive, past-participle, phrasal-prefix, proper-noun, proper-noun-plural, proper-noun-posessive, suffix, verb-intransitive, verb-transitive)
+        - description: Exclude these comma-delimited parts of speech (allowable values are
+            noun, adjective, verb, adverb, interjection, pronoun, preposition,
+            abbreviation, affix, article, auxiliary-verb, conjunction,
+            definite-article, family-name, given-name, idiom, imperative,
+            noun-plural, noun-posessive, past-participle, phrasal-prefix,
+            proper-noun, proper-noun-plural, proper-noun-posessive, suffix,
+            verb-intransitive, verb-transitive)
           in: query
           name: excludePartOfSpeech
           required: false
@@ -1164,12 +1227,24 @@ paths:
           name: caseSensitive
           required: false
           type: string
-        - description: Only include these comma-delimited parts of speech (allowable values are noun, adjective, verb, adverb, interjection, pronoun, preposition, abbreviation, affix, article, auxiliary-verb, conjunction, definite-article, family-name, given-name, idiom, imperative, noun-plural, noun-posessive, past-participle, phrasal-prefix, proper-noun, proper-noun-plural, proper-noun-posessive, suffix, verb-intransitive, verb-transitive)
+        - description: Only include these comma-delimited parts of speech (allowable
+            values are noun, adjective, verb, adverb, interjection, pronoun,
+            preposition, abbreviation, affix, article, auxiliary-verb,
+            conjunction, definite-article, family-name, given-name, idiom,
+            imperative, noun-plural, noun-posessive, past-participle,
+            phrasal-prefix, proper-noun, proper-noun-plural,
+            proper-noun-posessive, suffix, verb-intransitive, verb-transitive)
           in: query
           name: includePartOfSpeech
           required: false
           type: string
-        - description: Exclude these comma-delimited parts of speech (allowable values are noun, adjective, verb, adverb, interjection, pronoun, preposition, abbreviation, affix, article, auxiliary-verb, conjunction, definite-article, family-name, given-name, idiom, imperative, noun-plural, noun-posessive, past-participle, phrasal-prefix, proper-noun, proper-noun-plural, proper-noun-posessive, suffix, verb-intransitive, verb-transitive)
+        - description: Exclude these comma-delimited parts of speech (allowable values are
+            noun, adjective, verb, adverb, interjection, pronoun, preposition,
+            abbreviation, affix, article, auxiliary-verb, conjunction,
+            definite-article, family-name, given-name, idiom, imperative,
+            noun-plural, noun-posessive, past-participle, phrasal-prefix,
+            proper-noun, proper-noun-plural, proper-noun-posessive, suffix,
+            verb-intransitive, verb-transitive)
           in: query
           name: excludePartOfSpeech
           required: false

@@ -26,7 +26,8 @@ paths:
     get:
       operationId: TeamsAll
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -48,10 +49,13 @@ paths:
       summary: Teams (All)
   "/{format}/AreAnyGamesInProgress":
     get:
-      description: Returns <code>true</code> if there is at least one game being played at the time of the request or <code>false</code> if there are none.
+      description: Returns <code>true</code> if there is at least one game being
+        played at the time of the request or <code>false</code> if there are
+        none.
       operationId: AreGamesInProgress
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -74,7 +78,8 @@ paths:
     get:
       operationId: CurrentSeason
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -96,7 +101,8 @@ paths:
     get:
       operationId: PlayerDetailsByFreeAgent
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -120,7 +126,8 @@ paths:
     get:
       operationId: Schedules
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -130,7 +137,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>, <code>2018STAR</code>, <code>2019</code>, etc."
+        - description: "Year of the season (with optional season type).<br>Examples:
+            <code>2018</code>, <code>2018PRE</code>, <code>2018POST</code>,
+            <code>2018STAR</code>, <code>2019</code>, etc."
           in: path
           name: season
           required: true
@@ -150,7 +159,8 @@ paths:
     get:
       operationId: GamesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -162,7 +172,8 @@ paths:
             type: string
         - description: "The date of the game(s).
 
-            \ <br>Examples: <code>2018-JAN-31</code>, <code>2017-OCT-01</code>.
+            \ <br>Examples: <code>2018-JAN-31</code>,
+            <code>2017-OCT-01</code>.
 
             \ "
           in: path
@@ -184,7 +195,8 @@ paths:
     get:
       operationId: News
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -208,7 +220,8 @@ paths:
     get:
       operationId: NewsByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -220,7 +233,8 @@ paths:
             type: string
         - description: "The date of the news.
 
-            \ <br>Examples: <code>2018-JAN-31</code>, <code>2017-OCT-01</code>.
+            \ <br>Examples: <code>2018-JAN-31</code>,
+            <code>2017-OCT-01</code>.
 
             \ "
           in: path
@@ -242,7 +256,8 @@ paths:
     get:
       operationId: NewsByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -276,7 +291,8 @@ paths:
     get:
       operationId: PlayerDetailsByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -286,9 +302,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Player ID.
-
             Example:<code>30000007</code>.
           in: path
           name: playerid
@@ -307,7 +322,8 @@ paths:
     get:
       operationId: PlayerDetailsByActive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -331,7 +347,8 @@ paths:
     get:
       operationId: PlayersByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -365,7 +382,8 @@ paths:
     get:
       operationId: Stadiums
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -389,7 +407,8 @@ paths:
     get:
       operationId: Standings
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -423,7 +442,8 @@ paths:
     get:
       operationId: TeamGameStatsByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -435,7 +455,8 @@ paths:
             type: string
         - description: "The date of the game(s).
 
-            \ <br>Examples: <code>2018-JAN-31</code>, <code>2017-OCT-01</code>.
+            \ <br>Examples: <code>2018-JAN-31</code>,
+            <code>2017-OCT-01</code>.
 
             \ "
           in: path
@@ -457,7 +478,8 @@ paths:
     get:
       operationId: TeamSeasonStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -491,7 +513,8 @@ paths:
     get:
       operationId: TeamsActive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true

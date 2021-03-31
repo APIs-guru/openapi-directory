@@ -27,7 +27,8 @@ paths:
     get:
       operationId: PlayByPlay
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -37,7 +38,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: The GameID of an MLB game.  GameIDs can be found in the Games API.  Valid entries are <code>14620</code> or <code>16905</code>
+        - description: The GameID of an MLB game.  GameIDs can be found in the Games
+            API.  Valid entries are <code>14620</code> or <code>16905</code>
           in: path
           name: gameid
           required: true
@@ -55,7 +57,8 @@ paths:
     get:
       operationId: PlayByPlayDelta
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -65,9 +68,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.
           in: path
           name: date
@@ -75,7 +77,8 @@ paths:
           schema:
             type: string
         - description: >-
-            Only returns plays that have changed in the last X minutes.  You specify how many minutes in time to go back.  Valid entries are:
+            Only returns plays that have changed in the last X minutes.  You
+            specify how many minutes in time to go back.  Valid entries are:
 
             <code>1</code>, <code>2</code> ... <code>all</code>.
           in: path

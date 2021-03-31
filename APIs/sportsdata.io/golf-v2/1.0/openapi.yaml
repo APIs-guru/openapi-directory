@@ -26,7 +26,8 @@ paths:
     get:
       operationId: CurrentSeason
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -48,7 +49,8 @@ paths:
     get:
       operationId: DfsSlates
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -58,7 +60,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: The TournamentID of a tournament.  TournamentIDs can be found in the Tournaments API.  Valid entries are <code>58</code>, <code>61</code>, etc.
+        - description: The TournamentID of a tournament.  TournamentIDs can be found in
+            the Tournaments API.  Valid entries are <code>58</code>,
+            <code>61</code>, etc.
           in: path
           name: tournamentid
           required: true
@@ -78,7 +82,8 @@ paths:
     get:
       operationId: Injuries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -102,7 +107,8 @@ paths:
     get:
       operationId: InjuriesHistorical
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -126,7 +132,8 @@ paths:
     get:
       operationId: Leaderboard
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -136,7 +143,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: The TournamentID of a tournament.  TournamentIDs can be found in the Tournaments API.  Valid entries are <code>58</code>, <code>61</code>, etc.
+        - description: The TournamentID of a tournament.  TournamentIDs can be found in
+            the Tournaments API.  Valid entries are <code>58</code>,
+            <code>61</code>, etc.
           in: path
           name: tournamentid
           required: true
@@ -154,7 +163,8 @@ paths:
     get:
       operationId: News
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -178,7 +188,8 @@ paths:
     get:
       operationId: NewsByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -188,9 +199,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2015-JUL-31</code>, <code>2015-SEP-01</code>.
           in: path
           name: date
@@ -211,7 +221,8 @@ paths:
     get:
       operationId: NewsByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -221,9 +232,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Player ID.
-
             Example:<code>40000019</code>.
           in: path
           name: playerid
@@ -244,7 +254,8 @@ paths:
     get:
       operationId: Player
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -254,9 +265,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Player ID.
-
             Example:<code>40000019</code>.
           in: path
           name: playerid
@@ -275,7 +285,8 @@ paths:
     get:
       operationId: PlayerSeasonStatsWWorldGolfRankings
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -285,9 +296,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             Year of the season.
-
             <br>Examples: <code>2016</code>, <code>2017</code>.
           in: path
           name: season
@@ -308,7 +318,8 @@ paths:
     get:
       operationId: PlayerTournamentProjectedStatsWDraftkingsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -318,7 +329,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: The TournamentID of a tournament.  TournamentIDs can be found in the Tournaments API.  Valid entries are <code>78</code>, <code>79</code>, <code>80</code>, etc.
+        - description: The TournamentID of a tournament.  TournamentIDs can be found in
+            the Tournaments API.  Valid entries are <code>78</code>,
+            <code>79</code>, <code>80</code>, etc.
           in: path
           name: tournamentid
           required: true
@@ -338,7 +351,8 @@ paths:
     get:
       operationId: PlayerTournamentStatsByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -348,15 +362,16 @@ paths:
               - XML
               - JSON
             type: string
-        - description: The TournamentID of a tournament.  TournamentIDs can be found in the Tournaments API.  Valid entries are <code>58</code>, <code>61</code>, etc.
+        - description: The TournamentID of a tournament.  TournamentIDs can be found in
+            the Tournaments API.  Valid entries are <code>58</code>,
+            <code>61</code>, etc.
           in: path
           name: tournamentid
           required: true
           schema:
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Player ID.
-
             Example:<code>40000019</code>.
           in: path
           name: playerid
@@ -375,7 +390,8 @@ paths:
     get:
       operationId: Players
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -399,7 +415,8 @@ paths:
     get:
       operationId: Schedule
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -423,7 +440,8 @@ paths:
     get:
       operationId: ScheduleBySeason
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -433,9 +451,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             Year of the season.
-
             <br>Examples: <code>2016</code>, <code>2017</code>.
           in: path
           name: season

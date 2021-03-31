@@ -130,7 +130,11 @@ paths:
           schema:
             type: string
         - description: >
-            The exact `id` of the wine. Can be used multiple times (e.g `?wine_id=114959&wine_id=114952`) <br/> If you need to find the `wine_id` for your wines, use our <a href="https://api.globalwinescore.com/search/" target="_blank">search page</a>
+            The exact `id` of the wine. Can be used multiple times (e.g
+            `?wine_id=114959&wine_id=114952`) <br/> If you need to find the
+            `wine_id` for your wines, use our <a
+            href="https://api.globalwinescore.com/search/"
+            target="_blank">search page</a>
           example:
             - 114959
             - 114952
@@ -157,21 +161,25 @@ paths:
               - pink
             type: string
         - description: >
-            Only show the <a href="See https://en.wikipedia.org/wiki/En_primeur">en primeur</a> GlobalWineScores
+            Only show the <a href="See
+            https://en.wikipedia.org/wiki/En_primeur">en primeur</a>
+            GlobalWineScores
           in: query
           name: is_primeurs
           schema:
             default: false
             type: boolean
         - description: >
-            L-WIN wine identifier (See definition <a href="https://www.liv-ex.com/lwin/" target="_blank">here</a>)
+            L-WIN wine identifier (See definition <a
+            href="https://www.liv-ex.com/lwin/" target="_blank">here</a>)
           example: "1014033"
           in: query
           name: lwin
           schema:
             type: string
         - description: >
-            L-WIN wine/vintage identifier (See definition <a href="https://www.liv-ex.com/lwin/" target="_blank">here</a>)
+            L-WIN wine/vintage identifier (See definition <a
+            href="https://www.liv-ex.com/lwin/" target="_blank">here</a>)
           example: "10140332000"
           in: query
           name: lwin_11
@@ -208,7 +216,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >
+                  value: |
                     {
                       "count": 1,
                       "next": null,
@@ -241,7 +249,7 @@ paths:
             application/xml:
               examples:
                 response:
-                  value: >
+                  value: |
                     <root>
                       <count>1</count>
                       <next/>
@@ -288,7 +296,11 @@ paths:
           schema:
             type: string
         - description: >
-            The exact `id` of the wine. Can be used multiple times (e.g `?wine_id=114959&wine_id=114952`) <br/> If you need to find the `wine_id` for your wines, use our <a href="https://api.globalwinescore.com/search/" target="_blank">search page</a>
+            The exact `id` of the wine. Can be used multiple times (e.g
+            `?wine_id=114959&wine_id=114952`) <br/> If you need to find the
+            `wine_id` for your wines, use our <a
+            href="https://api.globalwinescore.com/search/"
+            target="_blank">search page</a>
           example:
             - 114959
             - 114952
@@ -315,21 +327,25 @@ paths:
               - pink
             type: string
         - description: >
-            Only show the <a href="See https://en.wikipedia.org/wiki/En_primeur">en primeur</a> GlobalWineScores
+            Only show the <a href="See
+            https://en.wikipedia.org/wiki/En_primeur">en primeur</a>
+            GlobalWineScores
           in: query
           name: is_primeurs
           schema:
             default: false
             type: boolean
         - description: >
-            L-WIN wine identifier (See definition <a href="https://www.liv-ex.com/lwin/" target="_blank">here</a>)
+            L-WIN wine identifier (See definition <a
+            href="https://www.liv-ex.com/lwin/" target="_blank">here</a>)
           example: "1014033"
           in: query
           name: lwin
           schema:
             type: string
         - description: >
-            L-WIN wine/vintage identifier (See definition <a href="https://www.liv-ex.com/lwin/" target="_blank">here</a>)
+            L-WIN wine/vintage identifier (See definition <a
+            href="https://www.liv-ex.com/lwin/" target="_blank">here</a>)
           example: "10140332000"
           in: query
           name: lwin_11
@@ -366,7 +382,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >
+                  value: |
                     {
                       "count": 1,
                       "next": null,
@@ -399,7 +415,7 @@ paths:
             application/xml:
               examples:
                 response:
-                  value: >
+                  value: |
                     <root>
                       <count>1</count>
                       <next/>

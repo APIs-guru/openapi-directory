@@ -26,7 +26,8 @@ paths:
     get:
       operationId: MembershipsActive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -50,7 +51,8 @@ paths:
     get:
       operationId: AreasCountries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -74,7 +76,8 @@ paths:
     get:
       operationId: BoxScore
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -84,7 +87,8 @@ paths:
               - xml
               - json
             type: string
-        - description: The GameID of a Soccer game.  GameIDs can be found in the Games API.  Valid entries are <code>702</code>, <code>1274</code>, etc.
+        - description: The GameID of a Soccer game.  GameIDs can be found in the Games
+            API.  Valid entries are <code>702</code>, <code>1274</code>, etc.
           in: path
           name: gameid
           required: true
@@ -102,7 +106,8 @@ paths:
     get:
       operationId: BoxScoresByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -112,9 +117,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
           in: path
           name: date
@@ -135,7 +139,8 @@ paths:
     get:
       operationId: BoxScoresByDateByCompetition
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -145,15 +150,17 @@ paths:
               - xml
               - json
             type: string
-        - description: "An indication of a soccer competition/league. This value can be the CompetitionId or the Competition Key. Possible values include: <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>, etc."
+        - description: "An indication of a soccer competition/league. This value can be
+            the CompetitionId or the Competition Key. Possible values include:
+            <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>,
+            etc."
           in: path
           name: competition
           required: true
           schema:
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
           in: path
           name: date
@@ -174,7 +181,8 @@ paths:
     get:
       operationId: BoxScoresByDateDelta
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -184,9 +192,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
           in: path
           name: date
@@ -194,7 +201,9 @@ paths:
           schema:
             type: string
         - description: >-
-            Only returns player statistics that have changed in the last X minutes.  You specify how many minutes in time to go back. Valid entries are:
+            Only returns player statistics that have changed in the last X
+            minutes.  You specify how many minutes in time to go back. Valid
+            entries are:
 
             <code>1</code>, <code>2</code> ... <code>all</code>.
           in: path
@@ -216,7 +225,8 @@ paths:
     get:
       operationId: BoxScoresDeltaByDateByCompetition
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -226,15 +236,17 @@ paths:
               - xml
               - json
             type: string
-        - description: "An indication of a soccer competition/league. This value can be the CompetitionId or the Competition Key. Possible values include: <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>, etc."
+        - description: "An indication of a soccer competition/league. This value can be
+            the CompetitionId or the Competition Key. Possible values include:
+            <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>,
+            etc."
           in: path
           name: competition
           required: true
           schema:
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
           in: path
           name: date
@@ -242,7 +254,9 @@ paths:
           schema:
             type: string
         - description: >-
-            Only returns player statistics that have changed in the last X minutes.  You specify how many minutes in time to go back. Valid entries are:
+            Only returns player statistics that have changed in the last X
+            minutes.  You specify how many minutes in time to go back. Valid
+            entries are:
 
             <code>1</code>, <code>2</code> ... <code>all</code>.
           in: path
@@ -264,7 +278,8 @@ paths:
     get:
       operationId: CompetitionFixturesLeagueDetails
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -274,7 +289,10 @@ paths:
               - xml
               - json
             type: string
-        - description: "An indication of a soccer competition/league. This value can be the CompetitionId or the Competition Key. Possible values include: <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>, etc."
+        - description: "An indication of a soccer competition/league. This value can be
+            the CompetitionId or the Competition Key. Possible values include:
+            <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>,
+            etc."
           in: path
           name: competition
           required: true
@@ -292,7 +310,8 @@ paths:
     get:
       operationId: CompetitionHierarchyLeagueHierarchy
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -316,7 +335,8 @@ paths:
     get:
       operationId: CompetitionsLeagues
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -340,7 +360,8 @@ paths:
     get:
       operationId: DfsSlatesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -349,9 +370,8 @@ paths:
               - json
               - xml
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2020-02-18</code>.
           in: path
           name: date
@@ -372,7 +392,8 @@ paths:
     get:
       operationId: GamesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -382,9 +403,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
           in: path
           name: date
@@ -405,7 +425,8 @@ paths:
     get:
       operationId: MembershipsHistorical
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -429,7 +450,8 @@ paths:
     get:
       operationId: MembershipsByCompetitionHistorical
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -439,7 +461,10 @@ paths:
               - xml
               - json
             type: string
-        - description: "An indication of a soccer competition/league. This value can be the CompetitionId or the Competition Key. Possible values include: <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>, etc."
+        - description: "An indication of a soccer competition/league. This value can be
+            the CompetitionId or the Competition Key. Possible values include:
+            <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>,
+            etc."
           in: path
           name: competition
           required: true
@@ -459,7 +484,8 @@ paths:
     get:
       operationId: MembershipsByTeamHistorical
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -469,9 +495,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Team ID. 
-
             Example:<code>516</code>.
           in: path
           name: teamid
@@ -492,7 +517,8 @@ paths:
     get:
       operationId: MembershipsByCompetitionActive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -502,7 +528,10 @@ paths:
               - xml
               - json
             type: string
-        - description: "An indication of a soccer competition/league. This value can be the CompetitionId or the Competition Key. Possible values include: <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>, etc."
+        - description: "An indication of a soccer competition/league. This value can be
+            the CompetitionId or the Competition Key. Possible values include:
+            <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>,
+            etc."
           in: path
           name: competition
           required: true
@@ -522,7 +551,8 @@ paths:
     get:
       operationId: MembershipsByTeamActive
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -532,9 +562,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Team ID. 
-
             Example:<code>516</code>.
           in: path
           name: teamid
@@ -555,7 +584,8 @@ paths:
     get:
       operationId: Player
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -565,9 +595,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Player ID.
-
             Example:<code>90026231</code>.
           in: path
           name: playerid
@@ -586,7 +615,8 @@ paths:
     get:
       operationId: PlayerGameStatsByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -596,9 +626,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
           in: path
           name: date
@@ -619,7 +648,8 @@ paths:
     get:
       operationId: PlayerGameStatsByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -629,18 +659,16 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
           in: path
           name: date
           required: true
           schema:
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Player ID.
-
             Example:<code>90026231</code>.
           in: path
           name: playerid
@@ -661,7 +689,8 @@ paths:
     get:
       operationId: PlayerSeasonStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -672,7 +701,8 @@ paths:
               - json
             type: string
         - description: >-
-            Unique FantasyData Round ID. RoundIDs can be found in the Competition Hierarchy (League Hierarchy). 
+            Unique FantasyData Round ID. RoundIDs can be found in the
+            Competition Hierarchy (League Hierarchy). 
 
             Examples: <code>1</code>, <code>2</code>, <code>3</code>, etc
           in: path
@@ -694,7 +724,8 @@ paths:
     get:
       operationId: PlayerSeasonStatsByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -705,7 +736,8 @@ paths:
               - json
             type: string
         - description: >-
-            Unique FantasyData Round ID. RoundIDs can be found in the Competition Hierarchy (League Hierarchy). 
+            Unique FantasyData Round ID. RoundIDs can be found in the
+            Competition Hierarchy (League Hierarchy). 
 
             Examples: <code>1</code>, <code>2</code>, <code>3</code>, etc
           in: path
@@ -713,9 +745,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Player ID.
-
             Example:<code>90026231</code>.
           in: path
           name: playerid
@@ -736,7 +767,8 @@ paths:
     get:
       operationId: PlayerSeasonStatsByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -747,7 +779,8 @@ paths:
               - json
             type: string
         - description: >-
-            Unique FantasyData Round ID. RoundIDs can be found in the Competition Hierarchy (League Hierarchy). 
+            Unique FantasyData Round ID. RoundIDs can be found in the
+            Competition Hierarchy (League Hierarchy). 
 
             Examples: <code>1</code>, <code>2</code>, <code>3</code>, etc
           in: path
@@ -755,9 +788,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Team ID. 
-
             Example:<code>516</code>.
           in: path
           name: team
@@ -778,7 +810,8 @@ paths:
     get:
       operationId: Players
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -802,7 +835,8 @@ paths:
     get:
       operationId: PlayersByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -812,9 +846,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Team ID. 
-
             Example:<code>516</code>.
           in: path
           name: teamid
@@ -835,7 +868,8 @@ paths:
     get:
       operationId: MembershipsRecentlyChanged
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -845,7 +879,10 @@ paths:
               - xml
               - json
             type: string
-        - description: "The number of days since memberships were updated. For example, if you pass <code>3</code>, you'll receive all memberships that have been updated in the past 3 days. Valid entries are: <code>1</code>, <code>2</code> ... <code>30</code>"
+        - description: "The number of days since memberships were updated. For example, if
+            you pass <code>3</code>, you'll receive all memberships that have
+            been updated in the past 3 days. Valid entries are: <code>1</code>,
+            <code>2</code> ... <code>30</code>"
           in: path
           name: days
           required: true
@@ -865,7 +902,8 @@ paths:
     get:
       operationId: Schedule
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -876,7 +914,8 @@ paths:
               - json
             type: string
         - description: >-
-            Unique FantasyData Round ID. RoundIDs can be found in the Competition Hierarchy (League Hierarchy). 
+            Unique FantasyData Round ID. RoundIDs can be found in the
+            Competition Hierarchy (League Hierarchy). 
 
             Examples: <code>1</code>, <code>2</code>, <code>3</code>, etc
           in: path
@@ -898,7 +937,8 @@ paths:
     get:
       operationId: SeasonTeams
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -909,7 +949,8 @@ paths:
               - json
             type: string
         - description: >-
-            Unique FantasyData Season ID. SeasonIDs can be found in the Competition Hierarchy (League Hierarchy). 
+            Unique FantasyData Season ID. SeasonIDs can be found in the
+            Competition Hierarchy (League Hierarchy). 
 
             Examples: <code>1</code>, <code>2</code>, <code>3</code>, etc
           in: path
@@ -931,7 +972,8 @@ paths:
     get:
       operationId: Standings
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -942,7 +984,8 @@ paths:
               - json
             type: string
         - description: >-
-            Unique FantasyData Round ID. RoundIDs can be found in the Competition Hierarchy (League Hierarchy). 
+            Unique FantasyData Round ID. RoundIDs can be found in the
+            Competition Hierarchy (League Hierarchy). 
 
             Examples: <code>1</code>, <code>2</code>, <code>3</code>, etc
           in: path
@@ -964,7 +1007,8 @@ paths:
     get:
       operationId: TeamGameStatsByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -974,9 +1018,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-02-27</code>, <code>2017-09-01</code>.
           in: path
           name: date
@@ -997,7 +1040,8 @@ paths:
     get:
       operationId: TeamSeasonStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1008,7 +1052,8 @@ paths:
               - json
             type: string
         - description: >-
-            Unique FantasyData Round ID. RoundIDs can be found in the Competition Hierarchy (League Hierarchy). 
+            Unique FantasyData Round ID. RoundIDs can be found in the
+            Competition Hierarchy (League Hierarchy). 
 
             Examples: <code>1</code>, <code>2</code>, <code>3</code>, etc
           in: path
@@ -1030,7 +1075,8 @@ paths:
     get:
       operationId: Teams
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1054,7 +1100,8 @@ paths:
     get:
       operationId: UpcomingDfsSlatesByCompetition
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1063,9 +1110,8 @@ paths:
               - json
               - xml
             type: string
-        - description: >-
+        - description: |-
             The id of the competition.
-
             <br>Examples: <code>3</code>
           in: path
           name: competitionId
@@ -1080,13 +1126,14 @@ paths:
                 items:
                   $ref: "#/components/schemas/DfsSlate"
                 type: array
-          description: ""
+          description: '{"$ref":"#/paths/~1{format}~1DfsSlatesByDate~1{date}/get/responses/200/description"}'
       summary: Upcoming Dfs Slates By Competition
   "/{format}/UpcomingScheduleByPlayer/{playerid}":
     get:
       operationId: UpcomingScheduleByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -1096,9 +1143,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Player ID.
-
             Example:<code>90026231</code>.
           in: path
           name: playerid
@@ -1119,7 +1165,8 @@ paths:
     get:
       operationId: Venues
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true

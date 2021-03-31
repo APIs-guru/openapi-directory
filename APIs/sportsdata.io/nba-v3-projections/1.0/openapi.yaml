@@ -26,7 +26,8 @@ paths:
     get:
       operationId: DfsSlatesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -36,9 +37,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-DEC-01</code>, <code>2018-FEB-15</code>.
           in: path
           name: date
@@ -59,7 +59,8 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByDateWInjuriesDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -69,7 +70,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "The date of the game(s). <br>Examples: <code>2015-JUL-31</code>, <code>2015-SEP-01</code>."
+        - description: "The date of the game(s). <br>Examples: <code>2015-JUL-31</code>,
+            <code>2015-SEP-01</code>."
           in: path
           name: date
           required: true
@@ -89,7 +91,8 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByPlayerWInjuriesDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -99,7 +102,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "The date of the game(s).<br>Examples: <code>2015-JUL-31</code>, <code>2015-SEP-01</code>."
+        - description: "The date of the game(s).<br>Examples: <code>2015-JUL-31</code>,
+            <code>2015-SEP-01</code>."
           in: path
           name: date
           required: true
@@ -123,7 +127,8 @@ paths:
     get:
       operationId: ProjectedPlayerSeasonStats
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -133,7 +138,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2019</code>, etc."
+        - description: "Year of the season (with optional season type).<br>Examples:
+            <code>2018</code>, <code>2019</code>, etc."
           in: path
           name: season
           required: true
@@ -153,7 +159,8 @@ paths:
     get:
       operationId: ProjectedPlayerSeasonStatsByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -163,7 +170,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2019</code>, etc."
+        - description: "Year of the season (with optional season type).<br>Examples:
+            <code>2018</code>, <code>2019</code>, etc."
           in: path
           name: season
           required: true
@@ -187,7 +195,8 @@ paths:
     get:
       operationId: ProjectedPlayerSeasonStatsByTeam
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -197,15 +206,15 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season (with optional season type).<br>Examples: <code>2018</code>, <code>2019</code>, etc."
+        - description: "Year of the season (with optional season type).<br>Examples:
+            <code>2018</code>, <code>2019</code>, etc."
           in: path
           name: season
           required: true
           schema:
             type: string
-        - description: >-
+        - description: |-
             The abbreviation of the requested team.
-
             <br>Examples: <code>MIA</code>, <code>PHI</code>.
           in: path
           name: team

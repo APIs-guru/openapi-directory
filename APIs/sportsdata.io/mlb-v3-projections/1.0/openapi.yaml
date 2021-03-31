@@ -27,7 +27,8 @@ paths:
     get:
       operationId: DfsSlatesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -37,9 +38,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             The date of the slates.
-
             <br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.
           in: path
           name: date
@@ -60,7 +60,8 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByDateWInjuriesLineupsDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -70,9 +71,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.
           in: path
           name: date
@@ -93,7 +93,8 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -103,18 +104,16 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             The date of the game(s).
-
             <br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.
           in: path
           name: date
           required: true
           schema:
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Player ID.
-
             Example:<code>10000507</code>.
           in: path
           name: playerid
@@ -130,12 +129,14 @@ paths:
                   $ref: "#/components/schemas/PlayerGameProjection"
                 type: array
           description: ""
-      summary: Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)
+      summary: Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS
+        Salaries)
   "/{format}/PlayerSeasonProjectionStats/{season}":
     get:
       operationId: ProjectedPlayerSeasonStatsWithAdp
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -145,9 +146,8 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
+        - description: |-
             Year of the season.
-
             <br>Examples: <code>2017</code>, <code>2018</code>.
           in: path
           name: season

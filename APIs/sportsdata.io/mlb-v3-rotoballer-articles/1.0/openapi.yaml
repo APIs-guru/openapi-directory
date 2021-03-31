@@ -26,7 +26,8 @@ paths:
     get:
       operationId: RotoballerArticles
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -50,7 +51,8 @@ paths:
     get:
       operationId: RotoballerArticlesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -60,9 +62,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             The date of the news.
-
             <br>Examples: <code>2017-JUL-31</code>, <code>2017-SEP-01</code>.
           in: path
           name: date
@@ -83,7 +84,8 @@ paths:
     get:
       operationId: RotoballerArticlesByPlayer
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or
+            <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -93,9 +95,8 @@ paths:
               - xml
               - json
             type: string
-        - description: >-
+        - description: |-
             Unique FantasyData Player ID.
-
             Example:<code>10000507</code>.
           in: path
           name: playerid

@@ -529,7 +529,8 @@ tags:
 
       - **end_date** (required, date) : End Date for the promotional code
     name: Promotional Codes
-  - description: The Addresses use google API for searching places, and also user favorite or best places.
+  - description: The Addresses use google API for searching places, and also user
+      favorite or best places.
     name: Adresses
   - description: >-
       Catchement area resource
@@ -567,30 +568,22 @@ tags:
 
       We provide json or geojson format
     name: Catchement Areas
-  - description: >-
+  - description: |-
       Product resource
-
 
       The product ressource has the following attributes :
 
-
       - **id** (required, unique, integer) : ID of the product
-
 
       - **product_type** (required, string) : Product type (See *TYPES*)
 
-
       - **name** (required, dastringte) : Name of product
-
 
       - **description** (required, string) : Description of product
 
-
       **TYPES** :
 
-
       - transport_person : On demand transport person
-
 
       - package_delivery : Package delivery
     name: Products
@@ -1080,15 +1073,12 @@ paths:
         - Accounts
   /addresses/places_autocomplete:
     post:
-      description: >-
+      description: |-
         For searching places just send the following attributes :
-
 
         - **longitude** (optional, float) : The location longitude for the seach
 
-
         - **latitude** (optional, float) : The location latitude for the seach
-
 
         - **search** (required, string) : The search text (most than 3 char)
       operationId: Get autocomplete places
@@ -1930,7 +1920,9 @@ paths:
   "/rides/{id}/reserve":
     post:
       description: >-
-        To book, the ride must belong to the connected user. The ride must have a main passenger at least, the booking user id and the payment hash must be set.
+        To book, the ride must belong to the connected user. The ride must
+        have a main passenger at least, the booking user id and the payment hash
+        must be set.
 
 
         **Must be authenticate**
