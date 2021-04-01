@@ -127,28 +127,24 @@ paths:
                 $ref: '#/components/schemas/ActivatePipelineOutput'
         '480':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '481':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineDeletedException'
         '482':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '483':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -188,28 +184,24 @@ paths:
                 $ref: '#/components/schemas/AddTagsOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '482':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '483':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -249,14 +241,12 @@ paths:
                 $ref: '#/components/schemas/CreatePipelineOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -296,28 +286,24 @@ paths:
                 $ref: '#/components/schemas/DeactivatePipelineOutput'
         '480':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '481':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineDeletedException'
         '482':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '483':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -353,21 +339,18 @@ paths:
           description: Success
         '480':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '481':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '482':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -407,28 +390,24 @@ paths:
                 $ref: '#/components/schemas/DescribeObjectsOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '482':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '483':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -474,28 +453,24 @@ paths:
                 $ref: '#/components/schemas/DescribePipelinesOutput'
         '480':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '481':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineDeletedException'
         '482':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '483':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -535,35 +510,30 @@ paths:
                 $ref: '#/components/schemas/EvaluateExpressionOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: TaskNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskNotFoundException'
         '482':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '483':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '484':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -603,28 +573,24 @@ paths:
                 $ref: '#/components/schemas/GetPipelineDefinitionOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '482':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '483':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -664,14 +630,12 @@ paths:
                 $ref: '#/components/schemas/ListPipelinesOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -717,21 +681,18 @@ paths:
                 $ref: '#/components/schemas/PollForTaskOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '482':
           description: TaskNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -771,28 +732,24 @@ paths:
                 $ref: '#/components/schemas/PutPipelineDefinitionOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '482':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '483':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -832,28 +789,24 @@ paths:
                 $ref: '#/components/schemas/QueryObjectsOutput'
         '480':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '481':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineDeletedException'
         '482':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '483':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -905,28 +858,24 @@ paths:
                 $ref: '#/components/schemas/RemoveTagsOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '482':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '483':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -966,35 +915,30 @@ paths:
                 $ref: '#/components/schemas/ReportTaskProgressOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '482':
           description: TaskNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskNotFoundException'
         '483':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '484':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -1034,14 +978,12 @@ paths:
                 $ref: '#/components/schemas/ReportTaskRunnerHeartbeatOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -1077,28 +1019,24 @@ paths:
           description: Success
         '480':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '481':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineDeletedException'
         '482':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '483':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -1138,35 +1076,30 @@ paths:
                 $ref: '#/components/schemas/SetTaskStatusOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: TaskNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskNotFoundException'
         '482':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '483':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '484':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -1206,28 +1139,24 @@ paths:
                 $ref: '#/components/schemas/ValidatePipelineDefinitionOutput'
         '480':
           description: InternalServiceError
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceError'
         '481':
           description: InvalidRequestException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '482':
           description: PipelineNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
         '483':
           description: PipelineDeletedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -1329,38 +1258,10 @@ components:
             - $ref: '#/components/schemas/timestamp'
             - description: 'The date and time to resume the pipeline. By default, the pipeline resumes from the last completed execution.'
       description: Contains the parameters for ActivatePipeline.
-    PipelineNotFoundException:
-      type: object
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/errorMessage'
-            - description: Description of the error message.
-      description: The specified pipeline was not found. Verify that you used the correct user and account identifiers.
-    PipelineDeletedException:
-      type: object
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/errorMessage'
-            - description: Description of the error message.
-      description: The specified pipeline has been deleted.
-    InternalServiceError:
-      type: object
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/errorMessage'
-            - description: Description of the error message.
-      description: An internal service error occurred.
-    InvalidRequestException:
-      type: object
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/errorMessage'
-            - description: Description of the error message.
-      description: 'The request was not valid. Verify that your request was properly formatted, that the signature was generated with the correct credentials, and that you haven''t exceeded any of the service limits for your account.'
+    PipelineNotFoundException: {}
+    PipelineDeletedException: {}
+    InternalServiceError: {}
+    InvalidRequestException: {}
     AddTagsOutput:
       type: object
       properties: {}
@@ -1539,14 +1440,7 @@ components:
             - $ref: '#/components/schemas/longString'
             - description: The expression to evaluate.
       description: Contains the parameters for EvaluateExpression.
-    TaskNotFoundException:
-      type: object
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/errorMessage'
-            - description: Description of the error message.
-      description: 'The specified task was not found. '
+    TaskNotFoundException: {}
     GetPipelineDefinitionOutput:
       type: object
       properties:
@@ -1975,8 +1869,6 @@ components:
             - $ref: '#/components/schemas/string'
             - description: A signature which can be used to verify the accuracy and authenticity of the information provided in the instance identity document.
       description: '<p><p>Identity information for the EC2 instance that is hosting the task runner. You can get this value by calling a metadata URI from the EC2 instance. For more information, see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html">Instance Metadata</a> in the <i>Amazon Elastic Compute Cloud User Guide.</i> Passing in this value proves that your task runner is running on an EC2 instance, and ensures the proper AWS Data Pipeline service charges are applied to your pipeline.</p></p>'
-    errorMessage:
-      type: string
     pipelineList:
       type: array
       items:
@@ -2196,6 +2088,8 @@ components:
         - FINISHED
         - FAILED
         - 'FALSE'
+    errorMessage:
+      type: string
     tagKey:
       type: string
       minLength: 1

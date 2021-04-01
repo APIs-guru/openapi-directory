@@ -523,6 +523,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OvertureService.AssociateMacSecKey:
+    post:
+      operationId: AssociateMacSecKey
+      description: '<p>Associates a MAC Security (MACsec) Connection Key Name (CKN)/ Connectivity Association Key (CAK) pair with an AWS Direct Connect dedicated connection.</p> <p>You must supply either the <code>secretARN,</code> or the CKN/CAK (<code>ckn</code> and <code>cak</code>) pair in the request.</p> <p>For information about MAC Security (MACsec) key considerations, see <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-key-consideration">MACsec pre-shared CKN/CAK key considerations </a> in the <i>AWS Direct Connect User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateMacSecKeyResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateMacSecKeyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OvertureService.AssociateMacSecKey
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=OvertureService.AssociateVirtualInterface:
     post:
       operationId: AssociateVirtualInterface
@@ -2386,6 +2431,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OvertureService.DisassociateMacSecKey:
+    post:
+      operationId: DisassociateMacSecKey
+      description: Removes the association between a MAC Security (MACsec) security key and an AWS Direct Connect dedicated connection.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateMacSecKeyResponse'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateMacSecKeyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OvertureService.DisassociateMacSecKey
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=OvertureService.ListVirtualInterfaceTestHistory:
     post:
       operationId: ListVirtualInterfaceTestHistory
@@ -2623,6 +2713,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=OvertureService.UpdateConnection:
+    post:
+      operationId: UpdateConnection
+      description: '<p>Updates the AWS Direct Connect dedicated connection configuration.</p> <p>You can update the following parameters for a connection:</p> <ul> <li> <p>The connection name</p> </li> <li> <p>The connection''s MAC Security (MACsec) encryption mode.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '480':
+          description: DirectConnectServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectServerException'
+        '481':
+          description: DirectConnectClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectConnectClientException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConnectionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - OvertureService.UpdateConnection
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=OvertureService.UpdateDirectConnectGatewayAssociation:
     post:
       operationId: UpdateDirectConnectGatewayAssociation
@@ -2671,7 +2806,7 @@ paths:
   /#X-Amz-Target=OvertureService.UpdateLag:
     post:
       operationId: UpdateLag
-      description: '<p>Updates the attributes of the specified link aggregation group (LAG).</p> <p>You can update the following attributes:</p> <ul> <li> <p>The name of the LAG.</p> </li> <li> <p>The value for the minimum number of connections that must be operational for the LAG itself to be operational. </p> </li> </ul> <p>When you create a LAG, the default value for the minimum number of operational connections is zero (0). If you update this value and the number of operational connections falls below the specified value, the LAG automatically goes down to avoid over-utilization of the remaining connections. Adjust this value with care, as it could force the LAG down if it is set higher than the current number of operational connections.</p>'
+      description: '<p>Updates the attributes of the specified link aggregation group (LAG).</p> <p>You can update the following LAG attributes:</p> <ul> <li> <p>The name of the LAG.</p> </li> <li> <p>The value for the minimum number of connections that must be operational for the LAG itself to be operational. </p> </li> <li> <p>The LAG''s MACsec encryption mode.</p> <p>AWS assigns this value to each connection which is part of the LAG.</p> </li> <li> <p>The tags</p> </li> </ul> <note> <p>If you adjust the threshold value for the minimum number of operational connections, ensure that the new value does not cause the LAG to fall below the threshold and become non-operational.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2912,6 +3047,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProviderName'
             - description: The name of the service provider associated with the connection.
+        macSecCapable:
+          allOf:
+            - $ref: '#/components/schemas/MacSecCapable'
+            - description: Indicates whether the connection supports MAC Security (MACsec).
+        portEncryptionStatus:
+          allOf:
+            - $ref: '#/components/schemas/PortEncryptionStatus'
+            - description: '<p>The MAC Security (MACsec) port link status of the connection.</p> <p>The valid values are <code>Encryption Up</code>, which means that there is an active Connection Key Name, or <code>Encryption Down</code>.</p>'
+        encryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMode'
+            - description: '<p>The MAC Security (MACsec) connection encryption mode.</p> <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>'
+        macSecKeys:
+          allOf:
+            - $ref: '#/components/schemas/MacSecKeyList'
+            - description: The MAC Security (MACsec) security keys associated with the connection.
       description: Information about an AWS Direct Connect connection.
     AllocateConnectionOnInterconnectRequest:
       type: object
@@ -3174,6 +3325,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectionId'
             - description: The ID of the interconnect or the LAG.
+    AssociateMacSecKeyResponse:
+      type: object
+      properties:
+        connectionId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionId'
+            - description: 'The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).'
+        macSecKeys:
+          allOf:
+            - $ref: '#/components/schemas/MacSecKeyList'
+            - description: The MAC Security (MACsec) security keys associated with the dedicated connection.
+    AssociateMacSecKeyRequest:
+      type: object
+      required:
+        - connectionId
+      title: AssociateMacSecKeyRequest
+      properties:
+        connectionId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionId'
+            - description: '<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p> <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve connection ID.</p>'
+        secretARN:
+          allOf:
+            - $ref: '#/components/schemas/SecretARN'
+            - description: '<p>The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key to associate with the dedicated connection.</p> <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve the MAC Security (MACsec) secret key.</p> <p>If you use this request parameter, you do not use the <code>ckn</code> and <code>cak</code> request parameters.</p>'
+        ckn:
+          allOf:
+            - $ref: '#/components/schemas/Ckn'
+            - description: '<p>The MAC Security (MACsec) CKN to associate with the dedicated connection.</p> <p>You can create the CKN/CAK pair using an industry standard tool.</p> <p> The valid values are 64 hexadecimal characters (0-9, A-E).</p> <p>If you use this request parameter, you must use the <code>cak</code> request parameter and not use the <code>secretARN</code> request parameter.</p>'
+        cak:
+          allOf:
+            - $ref: '#/components/schemas/Cak'
+            - description: '<p>The MAC Security (MACsec) CAK to associate with the dedicated connection.</p> <p>You can create the CKN/CAK pair using an industry standard tool.</p> <p> The valid values are 64 hexadecimal characters (0-9, A-E).</p> <p>If you use this request parameter, you must use the <code>ckn</code> request parameter and not use the <code>secretARN</code> request parameter.</p>'
     AssociateVirtualInterfaceRequest:
       type: object
       required:
@@ -3321,6 +3505,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProviderName'
             - description: The name of the service provider associated with the requested connection.
+        requestMACSec:
+          allOf:
+            - $ref: '#/components/schemas/RequestMACSec'
+            - description: '<p>Indicates whether you want the connection to support MAC Security (MACsec).</p> <p>MAC Security (MACsec) is only available on dedicated connections. For information about MAC Security (MACsec) prerequisties, see <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites">MACsec prerequisties</a> in the <i>AWS Direct Connect User Guide</i>.</p>'
     CreateDirectConnectGatewayResult:
       type: object
       properties:
@@ -3569,6 +3757,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProviderName'
             - description: The name of the service provider associated with the LAG.
+        macSecCapable:
+          allOf:
+            - $ref: '#/components/schemas/MacSecCapable'
+            - description: Indicates whether the LAG supports MAC Security (MACsec).
+        encryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMode'
+            - description: '<p>The LAG MAC Security (MACsec) encryption mode.</p> <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>'
+        macSecKeys:
+          allOf:
+            - $ref: '#/components/schemas/MacSecKeyList'
+            - description: The MAC Security (MACsec) security keys associated with the LAG.
       description: Information about a link aggregation group (LAG).
     CreateLagRequest:
       type: object
@@ -3611,6 +3811,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProviderName'
             - description: The name of the service provider associated with the LAG.
+        requestMACSec:
+          allOf:
+            - $ref: '#/components/schemas/RequestMACSec'
+            - description: '<p>Indicates whether the connection will support MAC Security (MACsec).</p> <note> <p>All connections in the LAG must be capable of supporting MAC Security (MACsec). For information about MAC Security (MACsec) prerequisties, see <a href="https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites">MACsec prerequisties</a> in the <i>AWS Direct Connect User Guide</i>.</p> </note>'
     CreatePrivateVirtualInterfaceRequest:
       type: object
       required:
@@ -4141,6 +4345,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/LagId'
             - description: The ID of the LAG.
+    DisassociateMacSecKeyResponse:
+      type: object
+      properties:
+        connectionId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionId'
+            - description: 'The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).'
+        macSecKeys:
+          allOf:
+            - $ref: '#/components/schemas/MacSecKeyList'
+            - description: The MAC Security (MACsec) security keys no longer associated with the dedicated connection.
+    DisassociateMacSecKeyRequest:
+      type: object
+      required:
+        - connectionId
+        - secretARN
+      title: DisassociateMacSecKeyRequest
+      properties:
+        connectionId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionId'
+            - description: '<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p> <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve connection ID.</p>'
+        secretARN:
+          allOf:
+            - $ref: '#/components/schemas/SecretARN'
+            - description: <p>The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.</p> <p>You can use <a>DescribeConnections</a> to retrieve the ARN of the MAC Security (MACsec) secret key.</p>
     ListVirtualInterfaceTestHistoryResponse:
       type: object
       properties:
@@ -4258,6 +4488,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The tag keys of the tags to remove.
+    UpdateConnectionRequest:
+      type: object
+      required:
+        - connectionId
+      title: UpdateConnectionRequest
+      properties:
+        connectionId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionId'
+            - description: <p>The ID of the dedicated connection.</p> <p>You can use <a>DescribeConnections</a> to retrieve the connection ID.</p>
+        connectionName:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionName'
+            - description: The name of the connection.
+        encryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMode'
+            - description: '<p>The connection MAC Security (MACsec) encryption mode.</p> <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>'
     UpdateDirectConnectGatewayAssociationResult:
       type: object
       properties:
@@ -4297,6 +4545,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Count'
             - description: The minimum number of physical connections that must be operational for the LAG itself to be operational.
+        encryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMode'
+            - description: <p>The LAG MAC Security (MACsec) encryption mode.</p> <p>AWS applies the value to all connections which are part of the LAG.</p>
     UpdateVirtualInterfaceAttributesRequest:
       type: object
       required:
@@ -4519,6 +4771,16 @@ components:
       type: string
     LagId:
       type: string
+    SecretARN:
+      type: string
+    Ckn:
+      type: string
+    Cak:
+      type: string
+    MacSecKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MacSecKey'
     VirtualInterfaceId:
       type: string
     GatewayIdentifier:
@@ -4554,6 +4816,10 @@ components:
       type: string
     PortSpeed:
       type: string
+    AvailableMacSecPortSpeeds:
+      type: array
+      items:
+        $ref: '#/components/schemas/PortSpeed'
     AvailablePortSpeeds:
       type: array
       items:
@@ -4678,6 +4944,12 @@ components:
         - 'no'
     ProviderName:
       type: string
+    MacSecCapable:
+      type: boolean
+    PortEncryptionStatus:
+      type: string
+    EncryptionMode:
+      type: string
     ConnectionList:
       type: array
       items:
@@ -4708,6 +4980,8 @@ components:
             - $ref: '#/components/schemas/CustomerAddress'
             - description: The IP address assigned to the customer interface.
       description: Information about a new BGP peer.
+    RequestMACSec:
+      type: boolean
     GatewayIdToAssociate:
       type: string
     DirectConnectGatewayAssociationProposal:
@@ -5094,6 +5368,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProviderList'
             - description: The name of the service provider for the location.
+        availableMacSecPortSpeeds:
+          allOf:
+            - $ref: '#/components/schemas/AvailableMacSecPortSpeeds'
+            - description: The available MAC Security (MACsec) port speeds for the location.
       description: Information about an AWS Direct Connect location.
     LocationList:
       type: array
@@ -5101,6 +5379,30 @@ components:
         $ref: '#/components/schemas/Location'
     MTU:
       type: integer
+    State:
+      type: string
+    StartOnDate:
+      type: string
+    MacSecKey:
+      type: object
+      properties:
+        secretARN:
+          allOf:
+            - $ref: '#/components/schemas/SecretARN'
+            - description: The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.
+        ckn:
+          allOf:
+            - $ref: '#/components/schemas/Ckn'
+            - description: The Connection Key Name (CKN) for the MAC Security secret key.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/State'
+            - description: '<p>The state of the MAC Security (MACsec) secret key.</p> <p>The possible values are:</p> <ul> <li> <p> <code>associating</code>: The MAC Security (MACsec) secret key is being validated and not yet associated with the connection or LAG.</p> </li> <li> <p> <code>associated</code>: The MAC Security (MACsec) secret key is validated and associated with the connection or LAG.</p> </li> <li> <p> <code>disassociating</code>: The MAC Security (MACsec) secret key is being disassociated from the connection or LAG</p> </li> <li> <p> <code>disassociated</code>: The MAC Security (MACsec) secret key is no longer associated with the connection or LAG.</p> </li> </ul>'
+        startOn:
+          allOf:
+            - $ref: '#/components/schemas/StartOnDate'
+            - description: The date that the MAC Security (MACsec) secret key takes effect. The value is displayed in UTC format.
+      description: Information about the MAC Security (MACsec) secret key.
     VirtualInterfaceName:
       type: string
     ResourceArn:

@@ -420,6 +420,169 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  /#Action=AuthorizeEndpointAccess:
+    get:
+      x-aws-operation-name: AuthorizeEndpointAccess
+      operationId: GET_AuthorizeEndpointAccess
+      description: Grants access to a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorization'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: EndpointAuthorizationsPerClusterLimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorizationsPerClusterLimitExceededFault'
+        '482':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '483':
+          description: EndpointAuthorizationAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorizationAlreadyExistsFault'
+        '484':
+          description: InvalidAuthorizationStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidAuthorizationStateFault'
+        '485':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+      parameters:
+        - name: ClusterIdentifier
+          in: query
+          required: false
+          description: The cluster identifier of the cluster to grant access to.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Account
+          in: query
+          required: true
+          description: The AWS account ID to grant access to.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: VpcIds
+          in: query
+          required: false
+          description: The virtual private cloud (VPC) identifiers to grant access to.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: VpcIdentifier
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AuthorizeEndpointAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: AuthorizeEndpointAccess
+      operationId: POST_AuthorizeEndpointAccess
+      description: Grants access to a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorization'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: EndpointAuthorizationsPerClusterLimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorizationsPerClusterLimitExceededFault'
+        '482':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '483':
+          description: EndpointAuthorizationAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorizationAlreadyExistsFault'
+        '484':
+          description: InvalidAuthorizationStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidAuthorizationStateFault'
+        '485':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizeEndpointAccessMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AuthorizeEndpointAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   /#Action=AuthorizeSnapshotAccess:
     get:
       x-aws-operation-name: AuthorizeSnapshotAccess
@@ -2266,6 +2429,231 @@ paths:
             type: string
             enum:
               - CreateClusterSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=CreateEndpointAccess:
+    get:
+      x-aws-operation-name: CreateEndpointAccess
+      operationId: GET_CreateEndpointAccess
+      description: Creates a Redshift-managed VPC endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAccess'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: AccessToClusterDeniedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessToClusterDeniedFault'
+        '482':
+          description: EndpointsPerClusterLimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointsPerClusterLimitExceededFault'
+        '483':
+          description: EndpointsPerAuthorizationLimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointsPerAuthorizationLimitExceededFault'
+        '484':
+          description: InvalidClusterSecurityGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterSecurityGroupStateFault'
+        '485':
+          description: ClusterSubnetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterSubnetGroupNotFoundFault'
+        '486':
+          description: EndpointAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAlreadyExistsFault'
+        '487':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '488':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '489':
+          description: UnauthorizedOperation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperation'
+      parameters:
+        - name: ClusterIdentifier
+          in: query
+          required: false
+          description: The cluster identifier of the cluster to access.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: ResourceOwner
+          in: query
+          required: false
+          description: The AWS account ID of the owner of the cluster. This is only required if the cluster is in another AWS account.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: EndpointName
+          in: query
+          required: true
+          description: '<p>The Redshift-managed VPC endpoint name.</p> <p>An endpoint name must contain 1-30 characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. The name can''t contain two consecutive hyphens or end with a hyphen.</p>'
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: SubnetGroupName
+          in: query
+          required: true
+          description: The subnet group from which Amazon Redshift chooses the subnet to deploy the endpoint.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: VpcSecurityGroupIds
+          in: query
+          required: false
+          description: 'The security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: VpcSecurityGroupId
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateEndpointAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateEndpointAccess
+      operationId: POST_CreateEndpointAccess
+      description: Creates a Redshift-managed VPC endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAccess'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: AccessToClusterDeniedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessToClusterDeniedFault'
+        '482':
+          description: EndpointsPerClusterLimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointsPerClusterLimitExceededFault'
+        '483':
+          description: EndpointsPerAuthorizationLimitExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointsPerAuthorizationLimitExceededFault'
+        '484':
+          description: InvalidClusterSecurityGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterSecurityGroupStateFault'
+        '485':
+          description: ClusterSubnetGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterSubnetGroupNotFoundFault'
+        '486':
+          description: EndpointAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAlreadyExistsFault'
+        '487':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '488':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '489':
+          description: UnauthorizedOperation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperation'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateEndpointAccessMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateEndpointAccess
         - name: Version
           in: query
           required: true
@@ -4256,6 +4644,139 @@ paths:
             type: string
             enum:
               - DeleteClusterSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=DeleteEndpointAccess:
+    get:
+      x-aws-operation-name: DeleteEndpointAccess
+      operationId: GET_DeleteEndpointAccess
+      description: Deletes a Redshift-managed VPC endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAccess'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidEndpointStateFault'
+        '482':
+          description: InvalidClusterSecurityGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterSecurityGroupStateFault'
+        '483':
+          description: EndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointNotFoundFault'
+        '484':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+      parameters:
+        - name: EndpointName
+          in: query
+          required: true
+          description: The Redshift-managed VPC endpoint to delete.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteEndpointAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteEndpointAccess
+      operationId: POST_DeleteEndpointAccess
+      description: Deletes a Redshift-managed VPC endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAccess'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidEndpointStateFault'
+        '482':
+          description: InvalidClusterSecurityGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterSecurityGroupStateFault'
+        '483':
+          description: EndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointNotFoundFault'
+        '484':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteEndpointAccessMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteEndpointAccess
         - name: Version
           in: query
           required: true
@@ -6404,6 +6925,272 @@ paths:
             type: string
             enum:
               - DescribeDefaultClusterParameters
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=DescribeEndpointAccess:
+    get:
+      x-aws-operation-name: DescribeEndpointAccess
+      operationId: GET_DescribeEndpointAccess
+      description: Describes a Redshift-managed VPC endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAccessList'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
+          description: EndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointNotFoundFault'
+      parameters:
+        - name: ClusterIdentifier
+          in: query
+          required: false
+          description: The cluster identifier associated with the described endpoint.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: ResourceOwner
+          in: query
+          required: false
+          description: The AWS account ID of the owner of the cluster.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: EndpointName
+          in: query
+          required: false
+          description: The name of the endpoint to be described.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: VpcId
+          in: query
+          required: false
+          description: The virtual private cloud (VPC) identifier with access to the cluster.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: MaxRecords
+          in: query
+          required: false
+          description: Reserved for Amazon Redshift internal use.
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: Reserved for Amazon Redshift internal use.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeEndpointAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeEndpointAccess
+      operationId: POST_DescribeEndpointAccess
+      description: Describes a Redshift-managed VPC endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAccessList'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
+          description: EndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeEndpointAccessMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeEndpointAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=DescribeEndpointAuthorization:
+    get:
+      x-aws-operation-name: DescribeEndpointAuthorization
+      operationId: GET_DescribeEndpointAuthorization
+      description: Describes an endpoint authorization.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorizationList'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      parameters:
+        - name: ClusterIdentifier
+          in: query
+          required: false
+          description: The cluster identifier of the cluster to access.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Account
+          in: query
+          required: false
+          description: 'The AWS account ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.'
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Grantee
+          in: query
+          required: false
+          description: 'Indicates whether to check authorization from a grantor or grantee point of view. If true, Amazon Redshift returns endpoint authorizations that you''ve been granted. If false (default), checks authorization from a grantor point of view.'
+          schema:
+            type: boolean
+        - name: MaxRecords
+          in: query
+          required: false
+          description: Reserved for Amazon Redshift internal use.
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: Reserved for Amazon Redshift internal use.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeEndpointAuthorization
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeEndpointAuthorization
+      operationId: POST_DescribeEndpointAuthorization
+      description: Describes an endpoint authorization.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorizationList'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeEndpointAuthorizationMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeEndpointAuthorization
         - name: Version
           in: query
           required: true
@@ -10944,6 +11731,162 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  /#Action=ModifyEndpointAccess:
+    get:
+      x-aws-operation-name: ModifyEndpointAccess
+      operationId: GET_ModifyEndpointAccess
+      description: Modifies a Redshift-managed VPC endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAccess'
+        '480':
+          description: InvalidClusterSecurityGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterSecurityGroupStateFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: InvalidEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidEndpointStateFault'
+        '483':
+          description: EndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointNotFoundFault'
+        '484':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '485':
+          description: UnauthorizedOperation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperation'
+      parameters:
+        - name: EndpointName
+          in: query
+          required: true
+          description: The endpoint to be modified.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: VpcSecurityGroupIds
+          in: query
+          required: false
+          description: The complete list of VPC security groups associated with the endpoint after the endpoint is modified.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: VpcSecurityGroupId
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyEndpointAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyEndpointAccess
+      operationId: POST_ModifyEndpointAccess
+      description: Modifies a Redshift-managed VPC endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAccess'
+        '480':
+          description: InvalidClusterSecurityGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterSecurityGroupStateFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: InvalidEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidEndpointStateFault'
+        '483':
+          description: EndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointNotFoundFault'
+        '484':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+        '485':
+          description: UnauthorizedOperation
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedOperation'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ModifyEndpointAccessMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyEndpointAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   /#Action=ModifyEventSubscription:
     get:
       x-aws-operation-name: ModifyEventSubscription
@@ -13404,6 +14347,187 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  /#Action=RevokeEndpointAccess:
+    get:
+      x-aws-operation-name: RevokeEndpointAccess
+      operationId: GET_RevokeEndpointAccess
+      description: Revokes access to a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorization'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidEndpointStateFault'
+        '482':
+          description: InvalidClusterSecurityGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterSecurityGroupStateFault'
+        '483':
+          description: EndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointNotFoundFault'
+        '484':
+          description: EndpointAuthorizationNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorizationNotFoundFault'
+        '485':
+          description: InvalidAuthorizationStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidAuthorizationStateFault'
+        '486':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+      parameters:
+        - name: ClusterIdentifier
+          in: query
+          required: false
+          description: The cluster to revoke access from.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Account
+          in: query
+          required: false
+          description: The AWS account ID whose access is to be revoked.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: VpcIds
+          in: query
+          required: false
+          description: The virtual private cloud (VPC) identifiers for which access is to be revoked.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: VpcIdentifier
+        - name: Force
+          in: query
+          required: false
+          description: 'Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RevokeEndpointAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: RevokeEndpointAccess
+      operationId: POST_RevokeEndpointAccess
+      description: Revokes access to a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorization'
+        '480':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '481':
+          description: InvalidEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidEndpointStateFault'
+        '482':
+          description: InvalidClusterSecurityGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterSecurityGroupStateFault'
+        '483':
+          description: EndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointNotFoundFault'
+        '484':
+          description: EndpointAuthorizationNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EndpointAuthorizationNotFoundFault'
+        '485':
+          description: InvalidAuthorizationStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidAuthorizationStateFault'
+        '486':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/RevokeEndpointAccessMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RevokeEndpointAccess
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   /#Action=RevokeSnapshotAccess:
     get:
       x-aws-operation-name: RevokeSnapshotAccess
@@ -13711,6 +14835,54 @@ components:
     InvalidClusterSecurityGroupStateFault: {}
     AuthorizationAlreadyExistsFault: {}
     AuthorizationQuotaExceededFault: {}
+    EndpointAuthorization:
+      type: object
+      properties:
+        Grantor:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID of the cluster owner.
+        Grantee:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID of the grantee of the cluster.
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster identifier.
+        AuthorizeTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The time (UTC) when the authorization was created.
+        ClusterStatus:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of the cluster.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/AuthorizationStatus'
+            - description: The status of the authorization action.
+        AllowedAllVPCs:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether all VPCs in the grantee account are allowed access to the cluster.
+        AllowedVPCs:
+          allOf:
+            - $ref: '#/components/schemas/VpcIdentifierList'
+            - description: The VPCs allowed access to the cluster.
+        EndpointCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of Redshift-managed VPC endpoints created for the authorization.
+      description: Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across AWS accounts.
+    String:
+      type: string
+      maxLength: 2147483647
+    ClusterNotFoundFault: {}
+    EndpointAuthorizationsPerClusterLimitExceededFault: {}
+    EndpointAuthorizationAlreadyExistsFault: {}
+    InvalidAuthorizationStateFault: {}
+    InvalidClusterStateFault: {}
     AuthorizeSnapshotAccessResult:
       type: object
       properties:
@@ -13758,9 +14930,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/BatchSnapshotOperationErrors'
             - description: A list of any errors returned.
-    String:
-      type: string
-      maxLength: 2147483647
     InvalidRetentionPeriodFault: {}
     BatchModifyClusterSnapshotsLimitExceededFault: {}
     ResizeProgressMessage:
@@ -13831,9 +15000,7 @@ components:
             - $ref: '#/components/schemas/DoubleOptional'
             - description: The percent of data transferred from source cluster to target cluster.
       description: Describes the result of a cluster resize operation.
-    ClusterNotFoundFault: {}
     ResizeNotFoundFault: {}
-    InvalidClusterStateFault: {}
     CopyClusterSnapshotResult:
       type: object
       properties:
@@ -13903,6 +15070,52 @@ components:
     ClusterSubnetGroupAlreadyExistsFault: {}
     ClusterSubnetGroupQuotaExceededFault: {}
     ClusterSubnetQuotaExceededFault: {}
+    EndpointAccess:
+      type: object
+      properties:
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster identifier of the cluster associated with the endpoint.
+        ResourceOwner:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID of the owner of the cluster.
+        SubnetGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The subnet group name where Amazon Redshift chooses to deploy the endpoint.
+        EndpointStatus:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of the endpoint.
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the endpoint.
+        EndpointCreateTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The time (UTC) that the endpoint was created.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The port number on which the cluster accepts incoming connections.
+        Address:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DNS address of the endpoint.
+        VpcSecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/VpcSecurityGroupMembershipList'
+            - description: The security groups associated with the endpoint.
+        VpcEndpoint:
+          $ref: '#/components/schemas/VpcEndpoint'
+      description: Describes a Redshift-managed VPC endpoint.
+    AccessToClusterDeniedFault: {}
+    EndpointsPerClusterLimitExceededFault: {}
+    EndpointsPerAuthorizationLimitExceededFault: {}
+    EndpointAlreadyExistsFault: {}
     CreateEventSubscriptionResult:
       type: object
       properties:
@@ -14118,6 +15331,8 @@ components:
         Snapshot:
           $ref: '#/components/schemas/Snapshot'
     InvalidClusterSubnetStateFault: {}
+    InvalidEndpointStateFault: {}
+    EndpointNotFoundFault: {}
     SubscriptionNotFoundFault: {}
     InvalidSubscriptionStateFault: {}
     InvalidHsmClientCertificateStateFault: {}
@@ -14259,6 +15474,28 @@ components:
       properties:
         DefaultClusterParameters:
           $ref: '#/components/schemas/DefaultClusterParameters'
+    EndpointAccessList:
+      type: object
+      properties:
+        EndpointAccessList:
+          allOf:
+            - $ref: '#/components/schemas/EndpointAccesses'
+            - description: The list of endpoints with access to the cluster.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Reserved for Amazon Redshift internal use.
+    EndpointAuthorizationList:
+      type: object
+      properties:
+        EndpointAuthorizationList:
+          allOf:
+            - $ref: '#/components/schemas/EndpointAuthorizations'
+            - description: The authorizations to an endpoint.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Reserved for Amazon Redshift internal use.
     EventCategoriesMessage:
       type: object
       properties:
@@ -14694,6 +15931,7 @@ components:
         ClusterSecurityGroup:
           $ref: '#/components/schemas/ClusterSecurityGroup'
     AuthorizationNotFoundFault: {}
+    EndpointAuthorizationNotFoundFault: {}
     RevokeSnapshotAccessResult:
       type: object
       properties:
@@ -14860,6 +16098,11 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The value of the attribute.
       description: Describes an attribute value.
+    AuthorizationStatus:
+      type: string
+      enum:
+        - Authorized
+        - Revoking
     AuthorizeClusterSecurityGroupIngressMessage:
       type: object
       required:
@@ -14907,6 +16150,31 @@ components:
             - $ref: '#/components/schemas/TagList'
             - description: The list of tags for the cluster security group.
       description: Describes a security group.
+    VpcIdentifierList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: VpcIdentifier
+    AuthorizeEndpointAccessMessage:
+      type: object
+      required:
+        - Account
+      title: AuthorizeEndpointAccessMessage
+      properties:
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster identifier of the cluster to grant access to.
+        Account:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID to grant access to.
+        VpcIds:
+          allOf:
+            - $ref: '#/components/schemas/VpcIdentifierList'
+            - description: The virtual private cloud (VPC) identifiers to grant access to.
     AuthorizeSnapshotAccessMessage:
       type: object
       required:
@@ -16150,6 +17418,33 @@ components:
             - $ref: '#/components/schemas/TagList'
             - description: A list of tag instances.
       description: <p/>
+    CreateEndpointAccessMessage:
+      type: object
+      required:
+        - EndpointName
+        - SubnetGroupName
+      title: CreateEndpointAccessMessage
+      properties:
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster identifier of the cluster to access.
+        ResourceOwner:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID of the owner of the cluster. This is only required if the cluster is in another AWS account.
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Redshift-managed VPC endpoint name.</p> <p>An endpoint name must contain 1-30 characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. The name can''t contain two consecutive hyphens or end with a hyphen.</p>'
+        SubnetGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The subnet group from which Amazon Redshift chooses the subnet to deploy the endpoint.
+        VpcSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/VpcSecurityGroupIdList'
+            - description: 'The security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.'
     SourceIdsList:
       type: array
       items:
@@ -16650,6 +17945,16 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The name of the cluster subnet group name to be deleted.
       description: <p/>
+    DeleteEndpointAccessMessage:
+      type: object
+      required:
+        - EndpointName
+      title: DeleteEndpointAccessMessage
+      properties:
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Redshift-managed VPC endpoint to delete.
     DeleteEventSubscriptionMessage:
       type: object
       required:
@@ -17017,6 +18322,58 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDefaultClusterParameters</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
       description: <p/>
+    DescribeEndpointAccessMessage:
+      type: object
+      title: DescribeEndpointAccessMessage
+      properties:
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster identifier associated with the described endpoint.
+        ResourceOwner:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID of the owner of the cluster.
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the endpoint to be described.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The virtual private cloud (VPC) identifier with access to the cluster.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: Reserved for Amazon Redshift internal use.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Reserved for Amazon Redshift internal use.
+    DescribeEndpointAuthorizationMessage:
+      type: object
+      title: DescribeEndpointAuthorizationMessage
+      properties:
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster identifier of the cluster to access.
+        Account:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The AWS account ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.'
+        Grantee:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'Indicates whether to check authorization from a grantor or grantee point of view. If true, Amazon Redshift returns endpoint authorizations that you''ve been granted. If false (default), checks authorization from a grantor point of view.'
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: Reserved for Amazon Redshift internal use.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Reserved for Amazon Redshift internal use.
     DescribeEventCategoriesMessage:
       type: object
       title: DescribeEventCategoriesMessage
@@ -17573,6 +18930,30 @@ components:
           - $ref: '#/components/schemas/VpcEndpoint'
           - xml:
               name: VpcEndpoint
+    VpcEndpoint:
+      type: object
+      properties:
+        VpcEndpointId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The VPC identifier that the endpoint is associated. '
+        NetworkInterfaces:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInterfaceList'
+            - description: 'One or more network interfaces of the endpoint. Also known as an interface endpoint. '
+      description: The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.
+    EndpointAccesses:
+      type: array
+      items:
+        $ref: '#/components/schemas/EndpointAccess'
+    EndpointAuthorizations:
+      type: array
+      items:
+        $ref: '#/components/schemas/EndpointAuthorization'
     Event:
       type: object
       properties:
@@ -18029,6 +19410,20 @@ components:
             - $ref: '#/components/schemas/SubnetIdentifierList'
             - description: An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single request.
       description: <p/>
+    ModifyEndpointAccessMessage:
+      type: object
+      required:
+        - EndpointName
+      title: ModifyEndpointAccessMessage
+      properties:
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The endpoint to be modified.
+        VpcSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/VpcSecurityGroupIdList'
+            - description: The complete list of VPC security groups associated with the endpoint after the endpoint is modified.
     ModifyEventSubscriptionMessage:
       type: object
       required:
@@ -18646,6 +20041,26 @@ components:
             - $ref: '#/components/schemas/String'
             - description: '<p>The AWS account number of the owner of the security group specified in the <code>EC2SecurityGroupName</code> parameter. The AWS access key ID is not an acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified, <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code> cannot be provided. </p> <p>Example: <code>111122223333</code> </p>'
       description: <p/>
+    RevokeEndpointAccessMessage:
+      type: object
+      title: RevokeEndpointAccessMessage
+      properties:
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster to revoke access from.
+        Account:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID whose access is to be revoked.
+        VpcIds:
+          allOf:
+            - $ref: '#/components/schemas/VpcIdentifierList'
+            - description: The virtual private cloud (VPC) identifiers for which access is to be revoked.
+        Force:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.'
     RevokeSnapshotAccessMessage:
       type: object
       required:
@@ -18821,22 +20236,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UsageLimit'
-    VpcEndpoint:
-      type: object
-      properties:
-        VpcEndpointId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
-        VpcId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The VPC identifier that the endpoint is associated. '
-        NetworkInterfaces:
-          allOf:
-            - $ref: '#/components/schemas/NetworkInterfaceList'
-            - description: 'One or more network interfaces of the endpoint. Also known as an interface endpoint. '
-      description: The connection endpoint for connecting an Amazon Redshift cluster through the proxy.
     VpcSecurityGroupMembership:
       type: object
       properties:

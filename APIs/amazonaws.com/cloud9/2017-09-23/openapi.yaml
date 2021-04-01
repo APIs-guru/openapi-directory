@@ -1141,6 +1141,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SubnetId'
             - description: The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with the Amazon EC2 instance.
+        imageId:
+          allOf:
+            - $ref: '#/components/schemas/ImageId'
+            - description: '<p>The identifier for the Amazon Machine Image (AMI) that''s used to create the EC2 instance. You can specify the AMI for the instance using an AMI alias or an AWS Systems Manager (SSM) path. The default AMI is used if the parameter isn''t explicitly assigned a value in the request. </p> <p> <b>AMI aliases </b> </p> <ul> <li> <p>Amazon Linux 2: <code>amazonlinux-2-x86_64</code> </p> </li> <li> <p>Ubuntu 18.04: <code>ubuntu-18.04-x86_64</code> </p> </li> <li> <p>Amazon Linux (default): <code>amazonlinux-1-x86_64</code> </p> </li> </ul> <p> <b>SSM paths</b> </p> <ul> <li> <p>Amazon Linux 2: <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64</code> </p> </li> <li> <p>Ubuntu 18.04: <code>resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64</code> </p> </li> <li> <p>Amazon Linux (default): <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64</code> </p> </li> </ul>'
         automaticStopTimeMinutes:
           allOf:
             - $ref: '#/components/schemas/AutomaticStopTimeMinutes'
@@ -1156,7 +1160,7 @@ components:
         connectionType:
           allOf:
             - $ref: '#/components/schemas/ConnectionType'
-            - description: The connection type used for connecting to an Amazon EC2 environment.
+            - description: '<p>The connection type used for connecting to an Amazon EC2 environment. Valid values are <code>CONNECT_SSH</code> (default) and <code>CONNECT_SSM</code> (connected through AWS Systems Manager).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html">Accessing no-ingress EC2 instances with AWS Systems Manager</a> in the <i>AWS Cloud9 User Guide</i>.</p>'
     BadRequestException: {}
     ConflictException: {}
     NotFoundException: {}
@@ -1166,6 +1170,8 @@ components:
     InternalServerErrorException: {}
     CreateEnvironmentMembershipResult:
       type: object
+      required:
+        - membership
       example:
         membership:
           environmentId: 8d9967e2f0624182b74e7690ad69ebEX
@@ -1279,6 +1285,9 @@ components:
             - description: The maximum number of environment members to get information about.
     DescribeEnvironmentStatusResult:
       type: object
+      required:
+        - status
+        - message
       example:
         message: Environment is ready to use
         status: ready
@@ -1507,11 +1516,15 @@ components:
       maxLength: 20
     SubnetId:
       type: string
-      minLength: 5
-      maxLength: 30
+      pattern: '^(subnet-[0-9a-f]{8}|subnet-[0-9a-f]{17})$'
+      minLength: 15
+      maxLength: 24
+    ImageId:
+      type: string
+      maxLength: 512
     UserArn:
       type: string
-      pattern: '^arn:aws:(iam|sts)::\d+:(root|(user\/[\w+=/:,.@-]{1,64}|federated-user\/[\w+=/:,.@-]{2,32}|assumed-role\/[\w+=:,.@-]{1,64}\/[\w+=,.@-]{1,64}))$'
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(iam|sts)::\d+:(root|(user\/[\w+=/:,.@-]{1,64}|federated-user\/[\w+=/:,.@-]{2,32}|assumed-role\/[\w+=:,.@-]{1,64}\/[\w+=,.@-]{1,64}))$'
     TagList:
       type: array
       items:
@@ -1525,6 +1538,11 @@ components:
         - read-only
     EnvironmentMember:
       type: object
+      required:
+        - permissions
+        - userId
+        - userArn
+        - environmentId
       properties:
         permissions:
           allOf:
@@ -1596,8 +1614,26 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'If the environment failed to delete, the Amazon Resource Name (ARN) of the related AWS resource.'
       description: Information about the current creation or deletion lifecycle state of an AWS Cloud9 development environment.
+    ManagedCredentialsStatus:
+      type: string
+      enum:
+        - ENABLED_ON_CREATE
+        - ENABLED_BY_OWNER
+        - DISABLED_BY_DEFAULT
+        - DISABLED_BY_OWNER
+        - DISABLED_BY_COLLABORATOR
+        - PENDING_REMOVAL_BY_COLLABORATOR
+        - PENDING_START_REMOVAL_BY_COLLABORATOR
+        - PENDING_REMOVAL_BY_OWNER
+        - PENDING_START_REMOVAL_BY_OWNER
+        - FAILED_REMOVAL_BY_COLLABORATOR
+        - FAILED_REMOVAL_BY_OWNER
     Environment:
       type: object
+      required:
+        - type
+        - arn
+        - ownerArn
       properties:
         id:
           allOf:
@@ -1618,7 +1654,7 @@ components:
         connectionType:
           allOf:
             - $ref: '#/components/schemas/ConnectionType'
-            - description: The connection type used for connecting to an Amazon EC2 environment.
+            - description: The connection type used for connecting to an Amazon EC2 environment. <code>CONNECT_SSH</code> is selected by default.
         arn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1631,10 +1667,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/EnvironmentLifecycle'
             - description: The state of the environment in its creation or deletion lifecycle.
+        managedCredentialsStatus:
+          allOf:
+            - $ref: '#/components/schemas/ManagedCredentialsStatus'
+            - description: '<p>Describes the status of AWS managed temporary credentials for the AWS Cloud9 environment. Available values are:</p> <ul> <li> <p> <code>ENABLED_ON_CREATE</code> </p> </li> <li> <p> <code>ENABLED_BY_OWNER</code> </p> </li> <li> <p> <code>DISABLED_BY_DEFAULT</code> </p> </li> <li> <p> <code>DISABLED_BY_OWNER</code> </p> </li> <li> <p> <code>DISABLED_BY_COLLABORATOR</code> </p> </li> <li> <p> <code>PENDING_REMOVAL_BY_COLLABORATOR</code> </p> </li> <li> <p> <code>PENDING_REMOVAL_BY_OWNER</code> </p> </li> <li> <p> <code>FAILED_REMOVAL_BY_COLLABORATOR</code> </p> </li> <li> <p> <code>ENABLED_BY_OWNER</code> </p> </li> <li> <p> <code>DISABLED_BY_DEFAULT</code> </p> </li> </ul>'
       description: Information about an AWS Cloud9 development environment.
     EnvironmentArn:
       type: string
-      pattern: 'arn:aws:cloud9:([a-z]{2}-[a-z]+-\d{1}):[0-9]{12}:environment:[a-zA-Z0-9]{8,32}'
+      pattern: 'arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):cloud9:([a-z]{2}-[a-z]+-\d{1}):[0-9]{12}:environment:[a-zA-Z0-9]{8,32}'
     EnvironmentIdList:
       type: array
       items:
@@ -1660,10 +1700,12 @@ components:
       type: string
       minLength: 1
       maxLength: 128
+      format: password
     TagValue:
       type: string
       minLength: 0
       maxLength: 256
+      format: password
     Tag:
       type: object
       required:

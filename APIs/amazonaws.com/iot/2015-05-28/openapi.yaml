@@ -14087,6 +14087,12 @@ paths:
             pattern: '[a-zA-Z0-9:_-]+'
             minLength: 1
             maxLength: 128
+        - name: usePrefixAttributeValue
+          in: query
+          required: false
+          description: '<p>When <code>true</code>, the action returns the thing resources with attribute values that start with the <code>attributeValue</code> provided.</p> <p>When <code>false</code>, or not present, the action returns only the thing resources with attribute values that match the entire <code>attributeValue</code> provided. </p>'
+          schema:
+            type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -24491,6 +24497,8 @@ components:
       type: object
       title: ListThingsInThingGroupRequest
       properties: {}
+    usePrefixAttributeValue:
+      type: boolean
     ListThingsRequest:
       type: object
       title: ListThingsRequest

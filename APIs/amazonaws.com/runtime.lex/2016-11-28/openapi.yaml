@@ -1184,6 +1184,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/BlobStream'
             - description: '<p> User input in PCM or Opus audio format or text format as described in the <code>Content-Type</code> HTTP header. </p> <p>You can stream audio data to Amazon Lex or you can create a local buffer that captures all of the audio data before sending. In general, you get better performance if you stream audio data rather than buffering the data locally.</p>'
+    SensitiveString:
+      type: string
+      minLength: 1
+      maxLength: 1366
+      format: password
+    SensitiveStringUnbounded:
+      type: string
+      format: password
     PostTextRequest:
       type: object
       required:

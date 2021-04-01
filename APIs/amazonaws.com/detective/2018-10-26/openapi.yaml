@@ -113,6 +113,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The Amazon Detective endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   /invitation:
     put:
@@ -196,6 +197,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Tags:
+                  description: 'The tags to assign to the new behavior graph. For each tag, you provide the tag key and the tag value.'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -696,6 +712,103 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Returns the tag values that are assigned to a behavior graph.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The ARN of the behavior graph for which to retrieve the tag values.
+          schema:
+            type: string
+            pattern: '^arn:aws[-\w]{0,10}?:detective:[-\w]{2,20}?:\d{12}?:graph:[abcdef\d]{32}?$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Applies tag values to a behavior graph.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The ARN of the behavior graph to assign the tags to.
+          schema:
+            type: string
+            pattern: '^arn:aws[-\w]{0,10}?:detective:[-\w]{2,20}?:\d{12}?:graph:[abcdef\d]{32}?$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: The tag values to assign to the behavior graph.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
   /invitation/removal:
     post:
       operationId: RejectInvitation
@@ -815,6 +928,61 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from a behavior graph.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The ARN of the behavior graph to remove the tags from.
+          schema:
+            type: string
+            pattern: '^arn:aws[-\w]{0,10}?:detective:[-\w]{2,20}?:\d{12}?:graph:[abcdef\d]{32}?$'
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys of the tags to remove from the behavior graph.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 1
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -878,6 +1046,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/GraphArn'
             - description: The ARN of the new behavior graph.
+    TagValue:
+      type: string
+      maxLength: 256
     ServiceQuotaExceededException: {}
     CreateMembersResponse:
       type: object
@@ -965,6 +1136,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'If there are more member accounts remaining in the results, then this is the pagination token to use to request the next page of member accounts.'
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tag values that are assigned to the behavior graph.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+      minLength: 1
+      maxLength: 128
     GraphArn:
       type: string
       pattern: '^arn:aws[-\w]{0,10}?:detective:[-\w]{2,20}?:\d{12}?:graph:[abcdef\d]{32}?$'
@@ -997,6 +1186,20 @@ components:
       maxItems: 50
     Boolean:
       type: boolean
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateGraphRequest:
+      type: object
+      title: CreateGraphRequest
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags to assign to the new behavior graph. For each tag, you provide the tag key and the tag value.'
     EmailMessage:
       type: string
       minLength: 1
@@ -1151,6 +1354,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MemberResultsLimit'
             - description: 'The maximum number of member accounts to include in the response. The total must be less than the overall limit on the number of results to return, which is currently 200.'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
     MemberStatus:
       type: string
       enum:
@@ -1241,6 +1448,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/AccountId'
             - description: <p>The account ID of the member account to try to enable.</p> <p>The account must be an invited member account with a status of <code>ACCEPTED_BUT_DISABLED</code>. </p>
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - Tags
+      title: TagResourceRequest
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tag values to assign to the behavior graph.
     UnprocessedReason:
       type: string
     UnprocessedAccount:
@@ -1255,5 +1478,9 @@ components:
             - $ref: '#/components/schemas/UnprocessedReason'
             - description: The reason that the member account request could not be processed.
       description: A member account that was included in a request but for which the request could not be processed.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
 security:
   - hmac: []
