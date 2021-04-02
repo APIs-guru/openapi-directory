@@ -193,7 +193,7 @@ paths:
   /#X-Amz-Target=AWSPriceListService.GetAttributeValues:
     post:
       operationId: GetAttributeValues
-      description: 'Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs">Offer File Definitions</a> in the <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html">AWS Billing and Cost Management User Guide</a>.'
+      description: 'Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/reading-an-offer.html#pps-defs">Offer File Definitions</a> in the <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-what-is.html">AWS Billing and Cost Management User Guide</a>.'
       responses:
         '200':
           description: Success
@@ -438,36 +438,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoxedInteger'
             - description: The maximum number of results that you want returned in the response.
-    InternalErrorException:
-      type: object
-      properties:
-        Message:
-          $ref: '#/components/schemas/errorMessage'
-      description: An error on the server occurred during the processing of your request. Try again later.
-    InvalidParameterException:
-      type: object
-      properties:
-        Message:
-          $ref: '#/components/schemas/errorMessage'
-      description: One or more parameters had an invalid value.
-    NotFoundException:
-      type: object
-      properties:
-        Message:
-          $ref: '#/components/schemas/errorMessage'
-      description: The requested resource can't be found.
-    InvalidNextTokenException:
-      type: object
-      properties:
-        Message:
-          $ref: '#/components/schemas/errorMessage'
-      description: The pagination token is invalid. Try again without a pagination token.
-    ExpiredNextTokenException:
-      type: object
-      properties:
-        Message:
-          $ref: '#/components/schemas/errorMessage'
-      description: The pagination token expired. Try again without a pagination token.
+    InternalErrorException: {}
+    InvalidParameterException: {}
+    NotFoundException: {}
+    InvalidNextTokenException: {}
+    ExpiredNextTokenException: {}
     GetAttributeValuesResponse:
       type: object
       example:
@@ -577,8 +552,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Service'
-    errorMessage:
-      type: string
     FilterType:
       type: string
       enum:

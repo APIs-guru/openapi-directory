@@ -886,6 +886,8 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/AccountList'
                   - description: The names of one or more AWS accounts for which you want to deploy stack set updates.
+              AccountsUrl:
+                $ref: '#/components/schemas/AccountsUrl'
               OrganizationalUnitIds:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
@@ -914,6 +916,8 @@ paths:
           schema:
             type: object
             properties:
+              RegionConcurrencyType:
+                $ref: '#/components/schemas/RegionConcurrencyType'
               RegionOrder:
                 allOf:
                   - $ref: '#/components/schemas/RegionList'
@@ -1522,6 +1526,8 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/AccountList'
                   - description: The names of one or more AWS accounts for which you want to deploy stack set updates.
+              AccountsUrl:
+                $ref: '#/components/schemas/AccountsUrl'
               OrganizationalUnitIds:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
@@ -1542,6 +1548,8 @@ paths:
           schema:
             type: object
             properties:
+              RegionConcurrencyType:
+                $ref: '#/components/schemas/RegionConcurrencyType'
               RegionOrder:
                 allOf:
                   - $ref: '#/components/schemas/RegionList'
@@ -3350,6 +3358,8 @@ paths:
           schema:
             type: object
             properties:
+              RegionConcurrencyType:
+                $ref: '#/components/schemas/RegionConcurrencyType'
               RegionOrder:
                 allOf:
                   - $ref: '#/components/schemas/RegionList'
@@ -6369,6 +6379,8 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/AccountList'
                   - description: The names of one or more AWS accounts for which you want to deploy stack set updates.
+              AccountsUrl:
+                $ref: '#/components/schemas/AccountsUrl'
               OrganizationalUnitIds:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
@@ -6397,6 +6409,8 @@ paths:
           schema:
             type: object
             properties:
+              RegionConcurrencyType:
+                $ref: '#/components/schemas/RegionConcurrencyType'
               RegionOrder:
                 allOf:
                   - $ref: '#/components/schemas/RegionList'
@@ -6641,6 +6655,8 @@ paths:
           schema:
             type: object
             properties:
+              RegionConcurrencyType:
+                $ref: '#/components/schemas/RegionConcurrencyType'
               RegionOrder:
                 allOf:
                   - $ref: '#/components/schemas/RegionList'
@@ -6690,6 +6706,8 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/AccountList'
                   - description: The names of one or more AWS accounts for which you want to deploy stack set updates.
+              AccountsUrl:
+                $ref: '#/components/schemas/AccountsUrl'
               OrganizationalUnitIds:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
@@ -7177,6 +7195,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Account'
+    AccountsUrl:
+      type: string
+      pattern: '(s3://|http(s?)://).+'
+      minLength: 1
+      maxLength: 5120
     OrganizationalUnitIdList:
       type: array
       items:
@@ -7184,6 +7207,11 @@ components:
     Region:
       type: string
       pattern: '^[a-zA-Z0-9-]{1,128}$'
+    RegionConcurrencyType:
+      type: string
+      enum:
+        - SEQUENTIAL
+        - PARALLEL
     RegionList:
       type: array
       items:
@@ -8441,6 +8469,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/AccountList'
             - description: The names of one or more AWS accounts for which you want to deploy stack set updates.
+        AccountsUrl:
+          $ref: '#/components/schemas/AccountsUrl'
         OrganizationalUnitIds:
           allOf:
             - $ref: '#/components/schemas/OrganizationalUnitIdList'
@@ -8449,6 +8479,8 @@ components:
     StackSetOperationPreferences:
       type: object
       properties:
+        RegionConcurrencyType:
+          $ref: '#/components/schemas/RegionConcurrencyType'
         RegionOrder:
           allOf:
             - $ref: '#/components/schemas/RegionList'

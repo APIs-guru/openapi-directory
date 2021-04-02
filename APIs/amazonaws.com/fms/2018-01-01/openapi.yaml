@@ -2335,6 +2335,10 @@ components:
             - $ref: '#/components/schemas/SecurityGroupRemediationActions'
             - description: Remediation options for the rule specified in the <code>ViolationTarget</code>.
       description: Details of the rule violation in a security group when compared to the master security group of the AWS Firewall Manager policy.
+    BasicInteger:
+      type: integer
+      minimum: -2147483648
+      maximum: 2147483647
     Boolean:
       type: boolean
     CIDR:
@@ -2359,10 +2363,12 @@ components:
         - RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP
         - SECURITY_GROUP_UNUSED
         - SECURITY_GROUP_REDUNDANT
+        - FMS_CREATED_SECURITY_GROUP_EDITED
         - MISSING_FIREWALL
         - MISSING_FIREWALL_SUBNET_IN_AZ
         - MISSING_EXPECTED_ROUTE_TABLE
         - NETWORK_FIREWALL_POLICY_MODIFIED
+        - RESOURCE_MISSING_DNS_FIREWALL
     ResourceType:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -2423,6 +2429,66 @@ components:
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=,+\-@]*)$'
       minLength: 1
       maxLength: 1024
+    DnsDuplicateRuleGroupViolation:
+      type: object
+      properties:
+        ViolationTarget:
+          allOf:
+            - $ref: '#/components/schemas/ViolationTarget'
+            - description: 'The ID of the VPC. '
+        ViolationTargetDescription:
+          allOf:
+            - $ref: '#/components/schemas/LengthBoundedString'
+            - description: A description of the violation that specifies the rule group and VPC.
+      description: 'A DNS Firewall rule group that Firewall Manager tried to associate with a VPC is already associated with the VPC and can''t be associated again. '
+    DnsRuleGroupLimitExceededViolation:
+      type: object
+      properties:
+        ViolationTarget:
+          allOf:
+            - $ref: '#/components/schemas/ViolationTarget'
+            - description: 'The ID of the VPC. '
+        ViolationTargetDescription:
+          allOf:
+            - $ref: '#/components/schemas/LengthBoundedString'
+            - description: A description of the violation that specifies the rule group and VPC.
+        NumberOfRuleGroupsAlreadyAssociated:
+          allOf:
+            - $ref: '#/components/schemas/BasicInteger'
+            - description: 'The number of rule groups currently associated with the VPC. '
+      description: 'The VPC that Firewall Manager was applying a DNS Fireall policy to reached the limit for associated DNS Firewall rule groups. Firewall Manager tried to associate another rule group with the VPC and failed due to the limit. '
+    DnsRuleGroupPriority:
+      type: integer
+      minimum: 0
+      maximum: 10000
+    DnsRuleGroupPriorities:
+      type: array
+      items:
+        $ref: '#/components/schemas/DnsRuleGroupPriority'
+    DnsRuleGroupPriorityConflictViolation:
+      type: object
+      properties:
+        ViolationTarget:
+          allOf:
+            - $ref: '#/components/schemas/ViolationTarget'
+            - description: 'The ID of the VPC. '
+        ViolationTargetDescription:
+          allOf:
+            - $ref: '#/components/schemas/LengthBoundedString'
+            - description: A description of the violation that specifies the VPC and the rule group that's already associated with it.
+        ConflictingPriority:
+          allOf:
+            - $ref: '#/components/schemas/DnsRuleGroupPriority'
+            - description: The priority setting of the two conflicting rule groups.
+        ConflictingPolicyId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: 'The ID of the Firewall Manager DNS Firewall policy that was already applied to the VPC. This policy contains the rule group that''s already associated with the VPC. '
+        UnavailablePriorities:
+          allOf:
+            - $ref: '#/components/schemas/DnsRuleGroupPriorities'
+            - description: 'The priorities of rule groups that are already associated with the VPC. To retry your operation, choose priority settings that aren''t in this list for the rule groups in your new DNS Firewall policy. '
+      description: 'A rule group that Firewall Manager tried to associate with a VPC has the same priority as a rule group that''s already associated. '
     PolicyComplianceStatusType:
       type: string
       enum:
@@ -2556,6 +2622,7 @@ components:
         - SECURITY_GROUPS_CONTENT_AUDIT
         - SECURITY_GROUPS_USAGE_AUDIT
         - NETWORK_FIREWALL
+        - DNS_FIREWALL
     ProtectionData:
       type: string
     ProtocolsListData:
@@ -2997,6 +3064,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/NetworkFirewallPolicyModifiedViolation'
             - description: 'Violation detail for an Network Firewall policy that indicates that a firewall policy in an individual account has been modified in a way that makes it noncompliant. For example, the individual account owner might have deleted a rule group, changed the priority of a stateless rule group, or changed a policy default action.'
+        DnsRuleGroupPriorityConflictViolation:
+          allOf:
+            - $ref: '#/components/schemas/DnsRuleGroupPriorityConflictViolation'
+            - description: 'Violation detail for a DNS Firewall policy that indicates that a rule group that Firewall Manager tried to associate with a VPC has the same priority as a rule group that''s already associated. '
+        DnsDuplicateRuleGroupViolation:
+          allOf:
+            - $ref: '#/components/schemas/DnsDuplicateRuleGroupViolation'
+            - description: 'Violation detail for a DNS Firewall policy that indicates that a rule group that Firewall Manager tried to associate with a VPC is already associated with the VPC and can''t be associated again. '
+        DnsRuleGroupLimitExceededViolation:
+          allOf:
+            - $ref: '#/components/schemas/DnsRuleGroupLimitExceededViolation'
+            - description: 'Violation details for a DNS Firewall policy that indicates that the VPC reached the limit for associated DNS Firewall rule groups. Firewall Manager tried to associate another rule group with the VPC and failed. '
       description: Violation detail based on resource type.
     ResourceViolations:
       type: array

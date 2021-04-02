@@ -3168,12 +3168,32 @@ components:
         - CODING_MODE_2_0
         - CODING_MODE_3_2_LFE
       description: Dolby Digital coding mode. Determines number of channels.
+    Ac3DynamicRangeCompressionLine:
+      type: string
+      enum:
+        - FILM_STANDARD
+        - FILM_LIGHT
+        - MUSIC_STANDARD
+        - MUSIC_LIGHT
+        - SPEECH
+        - NONE
+      description: 'Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the line operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
     Ac3DynamicRangeCompressionProfile:
       type: string
       enum:
         - FILM_STANDARD
         - NONE
-      description: 'If set to FILM_STANDARD, adds dynamic range compression signaling to the output bitstream as defined in the Dolby Digital specification.'
+      description: 'When you want to add Dolby dynamic range compression (DRC) signaling to your output stream, we recommend that you use the mode-specific settings instead of Dynamic range compression profile (DynamicRangeCompressionProfile). The mode-specific settings are Dynamic range compression profile, line mode (dynamicRangeCompressionLine) and Dynamic range compression profile, RF mode (dynamicRangeCompressionRf). Note that when you specify values for all three settings, MediaConvert ignores the value of this setting in favor of the mode-specific settings. If you do use this setting instead of the mode-specific settings, choose None (NONE) to leave out DRC signaling. Keep the default Film standard (FILM_STANDARD) to set the profile to Dolby''s film standard profile for all operating modes.'
+    Ac3DynamicRangeCompressionRf:
+      type: string
+      enum:
+        - FILM_STANDARD
+        - FILM_LIGHT
+        - MUSIC_STANDARD
+        - MUSIC_LIGHT
+        - SPEECH
+        - NONE
+      description: 'Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the RF operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
     Ac3LfeFilter:
       type: string
       enum:
@@ -3225,12 +3245,24 @@ components:
             - xml:
                 name: dialnorm
               description: 'Sets the dialnorm for the output. If blank and input audio is Dolby Digital, dialnorm will be passed through.'
+        DynamicRangeCompressionLine:
+          allOf:
+            - $ref: '#/components/schemas/Ac3DynamicRangeCompressionLine'
+            - xml:
+                name: dynamicRangeCompressionLine
+              description: 'Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the line operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
         DynamicRangeCompressionProfile:
           allOf:
             - $ref: '#/components/schemas/Ac3DynamicRangeCompressionProfile'
             - xml:
                 name: dynamicRangeCompressionProfile
-              description: 'If set to FILM_STANDARD, adds dynamic range compression signaling to the output bitstream as defined in the Dolby Digital specification.'
+              description: 'When you want to add Dolby dynamic range compression (DRC) signaling to your output stream, we recommend that you use the mode-specific settings instead of Dynamic range compression profile (DynamicRangeCompressionProfile). The mode-specific settings are Dynamic range compression profile, line mode (dynamicRangeCompressionLine) and Dynamic range compression profile, RF mode (dynamicRangeCompressionRf). Note that when you specify values for all three settings, MediaConvert ignores the value of this setting in favor of the mode-specific settings. If you do use this setting instead of the mode-specific settings, choose None (NONE) to leave out DRC signaling. Keep the default Film standard (FILM_STANDARD) to set the profile to Dolby''s film standard profile for all operating modes.'
+        DynamicRangeCompressionRf:
+          allOf:
+            - $ref: '#/components/schemas/Ac3DynamicRangeCompressionRf'
+            - xml:
+                name: dynamicRangeCompressionRf
+              description: 'Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the RF operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
         LfeFilter:
           allOf:
             - $ref: '#/components/schemas/Ac3LfeFilter'
@@ -3561,13 +3593,13 @@ components:
             - $ref: '#/components/schemas/Eac3DynamicRangeCompressionLine'
             - xml:
                 name: dynamicRangeCompressionLine
-              description: Specify the absolute peak level for a signal with dynamic range compression.
+              description: 'Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the line operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
         DynamicRangeCompressionRf:
           allOf:
             - $ref: '#/components/schemas/Eac3DynamicRangeCompressionRf'
             - xml:
                 name: dynamicRangeCompressionRf
-              description: Specify how the service limits the audio dynamic range when compressing the audio.
+              description: 'Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the RF operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
         LfeControl:
           allOf:
             - $ref: '#/components/schemas/Eac3LfeControl'
@@ -4923,6 +4955,12 @@ components:
             - xml:
                 name: ttmlDestinationSettings
               description: 'Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough).'
+        WebvttDestinationSettings:
+          allOf:
+            - $ref: '#/components/schemas/WebvttDestinationSettings'
+            - xml:
+                name: webvttDestinationSettings
+              description: WEBVTT Destination Settings
       description: Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext.
     CaptionDescription:
       type: object
@@ -5182,8 +5220,18 @@ components:
             - $ref: '#/components/schemas/TtmlStylePassthrough'
             - xml:
                 name: stylePassthrough
-              description: 'Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT) to the TTML output.'
+              description: 'Pass through style and position information from a TTML-like input source (TTML, IMSC, SMPTE-TT) to the TTML output.'
       description: 'Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough).'
+    WebvttDestinationSettings:
+      type: object
+      properties:
+        StylePassthrough:
+          allOf:
+            - $ref: '#/components/schemas/WebvttStylePassthrough'
+            - xml:
+                name: stylePassthrough
+              description: 'If your input captions format is teletext or teletext inside of STL, enable this setting to pass through style, color, and position information to your WebVTT output captions.'
+      description: WEBVTT Destination Settings
     CaptionSourceSettings:
       type: object
       properties:
@@ -5210,7 +5258,7 @@ components:
             - $ref: '#/components/schemas/FileSourceSettings'
             - xml:
                 name: fileSourceSettings
-              description: 'If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.'
+              description: 'If your input captions are SCC, SMI, SRT, STL, TTML, WebVTT, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.'
         SourceType:
           allOf:
             - $ref: '#/components/schemas/CaptionSourceType'
@@ -5327,17 +5375,17 @@ components:
               description: 'Ignore this setting unless your input captions format is SCC. To have the service compensate for differing frame rates between your input captions and input video, specify the frame rate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps.'
         SourceFile:
           allOf:
-            - $ref: '#/components/schemas/__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI'
+            - $ref: '#/components/schemas/__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT'
             - xml:
                 name: sourceFile
-              description: 'External caption file used for loading captions. Accepted file extensions are ''scc'', ''ttml'', ''dfxp'', ''stl'', ''srt'', ''xml'', and ''smi''.'
+              description: 'External caption file used for loading captions. Accepted file extensions are ''scc'', ''ttml'', ''dfxp'', ''stl'', ''srt'', ''xml'', ''smi'', and ''vtt''.'
         TimeDelta:
           allOf:
             - $ref: '#/components/schemas/__integerMinNegative2147483648Max2147483647'
             - xml:
                 name: timeDelta
               description: Specifies a time delta in seconds to offset the captions from the source file.
-      description: 'If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.'
+      description: 'If your input captions are SCC, SMI, SRT, STL, TTML, WebVTT, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.'
     CaptionSourceType:
       type: string
       enum:
@@ -5354,6 +5402,7 @@ components:
         - TELETEXT
         - NULL_SOURCE
         - IMSC
+        - WEBVTT
       description: Use Source (SourceType) to identify the format of your input captions.  The service cannot auto-detect caption format.
     TeletextSourceSettings:
       type: object
@@ -5580,6 +5629,12 @@ components:
         - MAIN_PROFILE
         - ON_DEMAND_PROFILE
       description: 'Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE).'
+    CmafPtsOffsetHandlingForBFrames:
+      type: string
+      enum:
+        - ZERO_BASED
+        - MATCH_INITIAL_PTS
+      description: 'Use this setting only when your output video stream has B-frames, which causes the initial presentation time stamp (PTS) to be offset from the initial decode time stamp (DTS). Specify how MediaConvert handles PTS when writing time stamps in output DASH manifests. Choose Match initial PTS (MATCH_INITIAL_PTS) when you want MediaConvert to use the initial PTS as the first time stamp in the manifest. Choose Zero-based (ZERO_BASED) to have MediaConvert ignore the initial PTS in the video stream and instead write the initial time stamp as zero in the manifest. For outputs that don''t have B-frames, the time stamps in your DASH manifests start at zero regardless of your choice here.'
     CmafSegmentControl:
       type: string
       enum:
@@ -5691,6 +5746,12 @@ components:
             - xml:
                 name: mpdProfile
               description: 'Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE).'
+        PtsOffsetHandlingForBFrames:
+          allOf:
+            - $ref: '#/components/schemas/CmafPtsOffsetHandlingForBFrames'
+            - xml:
+                name: ptsOffsetHandlingForBFrames
+              description: 'Use this setting only when your output video stream has B-frames, which causes the initial presentation time stamp (PTS) to be offset from the initial decode time stamp (DTS). Specify how MediaConvert handles PTS when writing time stamps in output DASH manifests. Choose Match initial PTS (MATCH_INITIAL_PTS) when you want MediaConvert to use the initial PTS as the first time stamp in the manifest. Choose Zero-based (ZERO_BASED) to have MediaConvert ignore the initial PTS in the video stream and instead write the initial time stamp as zero in the manifest. For outputs that don''t have B-frames, the time stamps in your DASH manifests start at zero regardless of your choice here.'
         SegmentControl:
           allOf:
             - $ref: '#/components/schemas/CmafSegmentControl'
@@ -5734,6 +5795,19 @@ components:
         - DEFAULT_CODEC_DURATION
         - MATCH_VIDEO_DURATION
       description: 'Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec.'
+    CmfcAudioTrackType:
+      type: string
+      enum:
+        - ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT
+        - ALTERNATE_AUDIO_AUTO_SELECT
+        - ALTERNATE_AUDIO_NOT_AUTO_SELECT
+      description: 'Use this setting to control the values that MediaConvert puts in your HLS parent playlist to control how the client player selects which audio track to play. The other options for this setting determine the values that MediaConvert writes for the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio variant. For more information about these attributes, see the Apple documentation article https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist. Choose Alternate audio, auto select, default (ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT) to set DEFAULT=YES and AUTOSELECT=YES. Choose this value for only one variant in your output group. Choose Alternate audio, auto select, not default (ALTERNATE_AUDIO_AUTO_SELECT) to set DEFAULT=NO and AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set DEFAULT=NO and AUTOSELECT=NO. When you don''t specify a value for this setting, MediaConvert defaults to Alternate audio, auto select, default. When there is more than one variant in your output group, you must explicitly choose a value for this setting.'
+    CmfcDescriptiveVideoServiceFlag:
+      type: string
+      enum:
+        - DONT_FLAG
+        - FLAG
+      description: 'Specify whether to flag this audio track as descriptive video service (DVS) in your HLS parent manifest. When you choose Flag (FLAG), MediaConvert includes the parameter CHARACTERISTICS="public.accessibility.describes-video" in the EXT-X-MEDIA entry for this track. When you keep the default choice, Don''t flag (DONT_FLAG), MediaConvert leaves this parameter out. The DVS flag can help with accessibility on Apple devices. For more information, see the Apple documentation.'
     CmfcIFrameOnlyManifest:
       type: string
       enum:
@@ -5761,6 +5835,30 @@ components:
             - xml:
                 name: audioDuration
               description: 'Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec.'
+        AudioGroupId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: audioGroupId
+              description: 'Specify the audio rendition group for this audio rendition. Specify up to one value for each audio output in your output group. This value appears in your HLS parent manifest in the EXT-X-MEDIA tag of TYPE=AUDIO, as the value for the GROUP-ID attribute. For example, if you specify "audio_aac_1" for Audio group ID, it appears in your manifest like this: #EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio_aac_1". Related setting: To associate the rendition group that this audio track belongs to with a video rendition, include the same value that you provide here for that video output''s setting Audio rendition sets (audioRenditionSets).'
+        AudioRenditionSets:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: audioRenditionSets
+              description: 'List the audio rendition groups that you want included with this video rendition. Use a comma-separated list. For example, say you want to include the audio rendition groups that have the audio group IDs "audio_aac_1" and "audio_dolby". Then you would specify this value: "audio_aac_1, audio_dolby". Related setting: The rendition groups that you include in your comma-separated list should all match values that you specify in the setting Audio group ID (AudioGroupId) for audio renditions in the same output group as this video rendition. Default behavior: If you don''t specify anything here and for Audio group ID, MediaConvert puts each audio variant in its own audio rendition group and associates it with every video variant. Each value in your list appears in your HLS parent manifest in the EXT-X-STREAM-INF tag as the value for the AUDIO attribute. To continue the previous example, say that the file name for the child manifest for your video rendition is "amazing_video_1.m3u8". Then, in your parent manifest, each value will appear on separate lines, like this: #EXT-X-STREAM-INF:AUDIO="audio_aac_1"... amazing_video_1.m3u8 #EXT-X-STREAM-INF:AUDIO="audio_dolby"... amazing_video_1.m3u8'
+        AudioTrackType:
+          allOf:
+            - $ref: '#/components/schemas/CmfcAudioTrackType'
+            - xml:
+                name: audioTrackType
+              description: 'Use this setting to control the values that MediaConvert puts in your HLS parent playlist to control how the client player selects which audio track to play. The other options for this setting determine the values that MediaConvert writes for the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio variant. For more information about these attributes, see the Apple documentation article https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist. Choose Alternate audio, auto select, default (ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT) to set DEFAULT=YES and AUTOSELECT=YES. Choose this value for only one variant in your output group. Choose Alternate audio, auto select, not default (ALTERNATE_AUDIO_AUTO_SELECT) to set DEFAULT=NO and AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set DEFAULT=NO and AUTOSELECT=NO. When you don''t specify a value for this setting, MediaConvert defaults to Alternate audio, auto select, default. When there is more than one variant in your output group, you must explicitly choose a value for this setting.'
+        DescriptiveVideoServiceFlag:
+          allOf:
+            - $ref: '#/components/schemas/CmfcDescriptiveVideoServiceFlag'
+            - xml:
+                name: descriptiveVideoServiceFlag
+              description: 'Specify whether to flag this audio track as descriptive video service (DVS) in your HLS parent manifest. When you choose Flag (FLAG), MediaConvert includes the parameter CHARACTERISTICS="public.accessibility.describes-video" in the EXT-X-MEDIA entry for this track. When you keep the default choice, Don''t flag (DONT_FLAG), MediaConvert leaves this parameter out. The DVS flag can help with accessibility on Apple devices. For more information, see the Apple documentation.'
         IFrameOnlyManifest:
           allOf:
             - $ref: '#/components/schemas/CmfcIFrameOnlyManifest'
@@ -7314,6 +7412,12 @@ components:
                 name: spekeKeyProvider
               description: 'If your output group type is HLS, DASH, or Microsoft Smooth, use these settings when doing DRM encryption with a SPEKE-compliant key provider.  If your output group type is CMAF, use the SpekeKeyProviderCmaf settings instead.'
       description: Specifies DRM settings for DASH outputs.
+    DashIsoGroupAudioChannelConfigSchemeIdUri:
+      type: string
+      enum:
+        - MPEG_CHANNEL_CONFIGURATION
+        - DOLBY_CHANNEL_CONFIGURATION
+      description: 'Use this setting only when your audio codec is a Dolby one (AC3, EAC3, or Atmos) and your downstream workflow requires that your DASH manifest use the Dolby channel configuration tag, rather than the MPEG one. For example, you might need to use this to make dynamic ad insertion work. Specify which audio channel configuration scheme ID URI MediaConvert writes in your DASH manifest. Keep the default value, MPEG channel configuration (MPEG_CHANNEL_CONFIGURATION), to have MediaConvert write this: urn:mpeg:mpegB:cicp:ChannelConfiguration. Choose Dolby channel configuration (DOLBY_CHANNEL_CONFIGURATION) to have MediaConvert write this instead: tag:dolby.com,2014:dash:audio_channel_configuration:2011.'
     __listOfDashAdditionalManifest:
       type: array
       items:
@@ -7330,6 +7434,12 @@ components:
         - MAIN_PROFILE
         - ON_DEMAND_PROFILE
       description: 'Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE).'
+    DashIsoPtsOffsetHandlingForBFrames:
+      type: string
+      enum:
+        - ZERO_BASED
+        - MATCH_INITIAL_PTS
+      description: 'Use this setting only when your output video stream has B-frames, which causes the initial presentation time stamp (PTS) to be offset from the initial decode time stamp (DTS). Specify how MediaConvert handles PTS when writing time stamps in output DASH manifests. Choose Match initial PTS (MATCH_INITIAL_PTS) when you want MediaConvert to use the initial PTS as the first time stamp in the manifest. Choose Zero-based (ZERO_BASED) to have MediaConvert ignore the initial PTS in the video stream and instead write the initial time stamp as zero in the manifest. For outputs that don''t have B-frames, the time stamps in your DASH manifests start at zero regardless of your choice here.'
     DashIsoSegmentControl:
       type: string
       enum:
@@ -7351,6 +7461,12 @@ components:
             - xml:
                 name: additionalManifests
               description: 'By default, the service creates one .mpd DASH manifest for each DASH ISO output group in your job. This default manifest references every output in the output group. To create additional DASH manifests that reference a subset of the outputs in the output group, specify a list of them here.'
+        AudioChannelConfigSchemeIdUri:
+          allOf:
+            - $ref: '#/components/schemas/DashIsoGroupAudioChannelConfigSchemeIdUri'
+            - xml:
+                name: audioChannelConfigSchemeIdUri
+              description: 'Use this setting only when your audio codec is a Dolby one (AC3, EAC3, or Atmos) and your downstream workflow requires that your DASH manifest use the Dolby channel configuration tag, rather than the MPEG one. For example, you might need to use this to make dynamic ad insertion work. Specify which audio channel configuration scheme ID URI MediaConvert writes in your DASH manifest. Keep the default value, MPEG channel configuration (MPEG_CHANNEL_CONFIGURATION), to have MediaConvert write this: urn:mpeg:mpegB:cicp:ChannelConfiguration. Choose Dolby channel configuration (DOLBY_CHANNEL_CONFIGURATION) to have MediaConvert write this instead: tag:dolby.com,2014:dash:audio_channel_configuration:2011.'
         BaseUrl:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -7405,6 +7521,12 @@ components:
             - xml:
                 name: mpdProfile
               description: 'Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE).'
+        PtsOffsetHandlingForBFrames:
+          allOf:
+            - $ref: '#/components/schemas/DashIsoPtsOffsetHandlingForBFrames'
+            - xml:
+                name: ptsOffsetHandlingForBFrames
+              description: 'Use this setting only when your output video stream has B-frames, which causes the initial presentation time stamp (PTS) to be offset from the initial decode time stamp (DTS). Specify how MediaConvert handles PTS when writing time stamps in output DASH manifests. Choose Match initial PTS (MATCH_INITIAL_PTS) when you want MediaConvert to use the initial PTS as the first time stamp in the manifest. Choose Zero-based (ZERO_BASED) to have MediaConvert ignore the initial PTS in the video stream and instead write the initial time stamp as zero in the manifest. For outputs that don''t have B-frames, the time stamps in your DASH manifests start at zero regardless of your choice here.'
         SegmentControl:
           allOf:
             - $ref: '#/components/schemas/DashIsoSegmentControl'
@@ -7846,7 +7968,7 @@ components:
         - MUSIC_STANDARD
         - MUSIC_LIGHT
         - SPEECH
-      description: Specify the absolute peak level for a signal with dynamic range compression.
+      description: 'Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the line operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
     Eac3DynamicRangeCompressionRf:
       type: string
       enum:
@@ -7856,7 +7978,7 @@ components:
         - MUSIC_STANDARD
         - MUSIC_LIGHT
         - SPEECH
-      description: Specify how the service limits the audio dynamic range when compressing the audio.
+      description: 'Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the RF operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.'
     Eac3LfeControl:
       type: string
       enum:
@@ -8000,9 +8122,9 @@ components:
         - UPCONVERT
         - DISABLED
       description: 'Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.'
-    __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI:
+    __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT:
       type: string
-      pattern: '^((s3://(.*?)\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI))|(https?://(.*?)\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI)(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
+      pattern: '^((s3://(.*?)\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI|vtt|VTT))|(https?://(.*?)\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI|vtt|VTT)(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
       minLength: 14
     __integerMin1Max10000000:
       type: integer
@@ -9061,6 +9183,12 @@ components:
         - RFC_6381
         - RFC_4281
       description: Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist generation.
+    HlsDescriptiveVideoServiceFlag:
+      type: string
+      enum:
+        - DONT_FLAG
+        - FLAG
+      description: 'Specify whether to flag this audio track as descriptive video service (DVS) in your HLS parent manifest. When you choose Flag (FLAG), MediaConvert includes the parameter CHARACTERISTICS="public.accessibility.describes-video" in the EXT-X-MEDIA entry for this track. When you keep the default choice, Don''t flag (DONT_FLAG), MediaConvert leaves this parameter out. The DVS flag can help with accessibility on Apple devices. For more information, see the Apple documentation.'
     HlsDirectoryStructure:
       type: string
       enum:
@@ -9370,7 +9498,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: audioGroupId
-              description: Specifies the group to which the audio Rendition belongs.
+              description: Specifies the group to which the audio rendition belongs.
         AudioOnlyContainer:
           allOf:
             - $ref: '#/components/schemas/HlsAudioOnlyContainer'
@@ -9389,6 +9517,12 @@ components:
             - xml:
                 name: audioTrackType
               description: 'Four types of audio-only tracks are supported: Audio-Only Variant Stream The client can play back this audio-only stream instead of video in low-bandwidth scenarios. Represented as an EXT-X-STREAM-INF in the HLS manifest. Alternate Audio, Auto Select, Default Alternate rendition that the client should try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=YES, AUTOSELECT=YES Alternate Audio, Auto Select, Not Default Alternate rendition that the client may try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=YES Alternate Audio, not Auto Select Alternate rendition that the client will not try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO'
+        DescriptiveVideoServiceFlag:
+          allOf:
+            - $ref: '#/components/schemas/HlsDescriptiveVideoServiceFlag'
+            - xml:
+                name: descriptiveVideoServiceFlag
+              description: 'Specify whether to flag this audio track as descriptive video service (DVS) in your HLS parent manifest. When you choose Flag (FLAG), MediaConvert includes the parameter CHARACTERISTICS="public.accessibility.describes-video" in the EXT-X-MEDIA entry for this track. When you keep the default choice, Don''t flag (DONT_FLAG), MediaConvert leaves this parameter out. The DVS flag can help with accessibility on Apple devices. For more information, see the Apple documentation.'
         IFrameOnlyManifest:
           allOf:
             - $ref: '#/components/schemas/HlsIFrameOnlyManifest'
@@ -11181,7 +11315,7 @@ components:
             - $ref: '#/components/schemas/__listOf__doubleMinNegative60Max6'
             - xml:
                 name: inputChannelsFineTune
-              description: 'Use this setting to specify your remix values when they have a decimal component, such as -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.'
+              description: 'Use this setting to specify your remix values when they have a decimal component, such as  -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.'
       description: OutputChannel mapping settings.
     VideoDetail:
       type: object
@@ -11714,7 +11848,7 @@ components:
       enum:
         - ENABLED
         - DISABLED
-      description: 'Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT) to the TTML output.'
+      description: 'Pass through style and position information from a TTML-like input source (TTML, IMSC, SMPTE-TT) to the TTML output.'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -12305,6 +12439,12 @@ components:
         - RIFF
         - RF64
       description: 'The service defaults to using RIFF for WAV outputs. If your output audio is likely to exceed 4 GB in file size, or if you otherwise need the extended support of the RF64 format, set your output WAV file format to RF64.'
+    WebvttStylePassthrough:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+      description: 'If your input captions format is teletext or teletext inside of STL, enable this setting to pass through style, color, and position information to your WebVTT output captions.'
     __doubleMinNegative60Max6:
       type: number
       format: double

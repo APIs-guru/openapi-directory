@@ -4134,6 +4134,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentClassifierMode'
             - description: 'Indicates the mode in which the classifier will be trained. The classifier can be trained in multi-class mode, which identifies one and only one class for each document, or multi-label mode, which identifies one or more labels for each document. In multi-label mode, multiple labels for an individual document are separated by a delimiter. The default delimiter between labels is a pipe (|).'
+        ModelKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
     ResourceInUseException: {}
     TooManyTagsException: {}
     TooManyRequestsException: {}
@@ -4174,6 +4178,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: 'Tags associated with the endpoint being created. A tag is a key-value pair that adds metadata to the endpoint. For example, a tag with "Sales" as the key might be added to an endpoint to indicate its use by the sales department. '
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
     ResourceNotFoundException: {}
     CreateEntityRecognizerResponse:
       type: object
@@ -4223,6 +4231,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom entity recognizer. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+        ModelKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
     DeleteDocumentClassifierResponse:
       type: object
       properties: {}
@@ -6060,6 +6072,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentClassifierMode'
             - description: Indicates the mode in which the specific classifier was trained. This also indicates the format of input documents and the format of the confusion matrix. Each classifier can only be trained in one mode and this cannot be changed once the classifier is trained.
+        ModelKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:</p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
       description: Provides information about a document classifier.
     DominantLanguageDetectionJobProperties:
       type: object
@@ -6144,6 +6160,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The date and time that the endpoint was last modified.
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
       description: Specifies information about the specified endpoint.
     EntitiesDetectionJobProperties:
       type: object
@@ -6256,6 +6276,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your custom entity recognizer. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+        ModelKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats: </p> <ul> <li> <p>KMS Key ID: <code>"1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> <li> <p>Amazon Resource Name (ARN) of a KMS Key: <code>"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"</code> </p> </li> </ul>'
       description: Describes information about an entity recognizer.
     EventsDetectionJobProperties:
       type: object

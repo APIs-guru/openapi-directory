@@ -1787,16 +1787,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/AssociateSubnetCidrBlockResult'
       parameters:
-        - name: SubnetId
-          in: query
-          required: true
-          description: The ID of your subnet.
-          schema:
-            type: string
         - name: Ipv6CidrBlock
           in: query
           required: true
           description: The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
+          schema:
+            type: string
+        - name: SubnetId
+          in: query
+          required: true
+          description: The ID of your subnet.
           schema:
             type: string
         - name: Action
@@ -8562,6 +8562,12 @@ paths:
           description: The AZ ID or the Local Zone ID of the subnet.
           schema:
             type: string
+        - name: CidrBlock
+          in: query
+          required: true
+          description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
+          schema:
+            type: string
         - name: Ipv6CidrBlock
           in: query
           required: false
@@ -8586,12 +8592,6 @@ paths:
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
           schema:
             type: boolean
-        - name: CidrBlock
-          in: query
-          required: true
-          description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
-          schema:
-            type: string
         - name: Action
           in: query
           required: true
@@ -26587,7 +26587,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone for the subnet. You can also use <code>availabilityZone</code> as the filter name.</p> </li> <li> <p> <code>availability-zone-id</code> - The ID of the Availability Zone for the subnet. You can also use <code>availabilityZoneId</code> as the filter name.</p> </li> <li> <p> <code>available-ip-address-count</code> - The number of IPv4 addresses in the subnet that are available.</p> </li> <li> <p> <code>cidr-block</code> - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet''s CIDR block for information to be returned for the subnet. You can also use <code>cidr</code> or <code>cidrBlock</code> as the filter names.</p> </li> <li> <p> <code>default-for-az</code> - Indicates whether this is the default subnet for the Availability Zone. You can also use <code>defaultForAz</code> as the filter name.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - An association ID for an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the subnet.</p> </li> <li> <p> <code>state</code> - The state of the subnet (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>subnet-arn</code> - The Amazon Resource Name (ARN) of the subnet.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the subnet.</p> </li> </ul>'
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone for the subnet. You can also use <code>availabilityZone</code> as the filter name.</p> </li> <li> <p> <code>availability-zone-id</code> - The ID of the Availability Zone for the subnet. You can also use <code>availabilityZoneId</code> as the filter name.</p> </li> <li> <p> <code>available-ip-address-count</code> - The number of IPv4 addresses in the subnet that are available.</p> </li> <li> <p> <code>cidr-block</code> - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet''s CIDR block for information to be returned for the subnet. You can also use <code>cidr</code> or <code>cidrBlock</code> as the filter names.</p> </li> <li> <p> <code>default-for-az</code> - Indicates whether this is the default subnet for the Availability Zone. You can also use <code>defaultForAz</code> as the filter name.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - An association ID for an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>outpost-arn</code> - The Amazon Resource Name (ARN) of the Outpost.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the subnet.</p> </li> <li> <p> <code>state</code> - The state of the subnet (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>subnet-arn</code> - The Amazon Resource Name (ARN) of the subnet.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the subnet.</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -33376,6 +33376,104 @@ paths:
             type: string
             enum:
               - GetEbsEncryptionByDefault
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=GetFlowLogsIntegrationTemplate:
+    get:
+      x-aws-operation-name: GetFlowLogsIntegrationTemplate
+      operationId: GET_GetFlowLogsIntegrationTemplate
+      description: '<p>Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data. Based on the information that you provide, we configure resources in the template to do the following:</p> <ul> <li> <p>Create a table in Athena that maps fields to a custom log format</p> </li> <li> <p>Create a Lambda function that updates the table with new partitions on a daily, weekly, or monthly basis</p> </li> <li> <p>Create a table partitioned between two timestamps in the past</p> </li> <li> <p>Create a set of named queries in Athena that you can use to get started quickly</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetFlowLogsIntegrationTemplateResult'
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: FlowLogId
+          in: query
+          required: true
+          description: The ID of the flow log.
+          schema:
+            type: string
+        - name: ConfigDeliveryS3DestinationArn
+          in: query
+          required: true
+          description: 'To store the CloudFormation template in Amazon S3, specify the location in Amazon S3.'
+          schema:
+            type: string
+        - name: IntegrateService
+          in: query
+          required: true
+          description: Information about the service integration.
+          schema:
+            type: object
+            properties:
+              AthenaIntegrations:
+                allOf:
+                  - $ref: '#/components/schemas/AthenaIntegrationsSet'
+                  - xml:
+                      name: AthenaIntegration
+                    description: Information about the integration with Amazon Athena.
+            description: Describes service integrations with VPC Flow logs.
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetFlowLogsIntegrationTemplate
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetFlowLogsIntegrationTemplate
+      operationId: POST_GetFlowLogsIntegrationTemplate
+      description: '<p>Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data. Based on the information that you provide, we configure resources in the template to do the following:</p> <ul> <li> <p>Create a table in Athena that maps fields to a custom log format</p> </li> <li> <p>Create a Lambda function that updates the table with new partitions on a daily, weekly, or monthly basis</p> </li> <li> <p>Create a table partitioned between two timestamps in the past</p> </li> <li> <p>Create a set of named queries in Athena that you can use to get started quickly</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetFlowLogsIntegrationTemplateResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetFlowLogsIntegrationTemplateRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetFlowLogsIntegrationTemplate
         - name: Version
           in: query
           required: true
@@ -53123,6 +53221,24 @@ components:
             - xml:
                 name: ebsEncryptionByDefault
               description: Indicates whether encryption by default is enabled.
+    GetFlowLogsIntegrationTemplateResult:
+      type: object
+      properties:
+        Result:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: result
+              description: The generated CloudFormation template.
+    AthenaIntegrationsSet:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/AthenaIntegration'
+          - xml:
+              name: item
+      minItems: 1
+      maxItems: 10
     GetGroupsForCapacityReservationResult:
       type: object
       properties:
@@ -56756,22 +56872,22 @@ components:
     AssociateSubnetCidrBlockRequest:
       type: object
       required:
-        - SubnetId
         - Ipv6CidrBlock
+        - SubnetId
       title: AssociateSubnetCidrBlockRequest
       properties:
-        SubnetId:
-          allOf:
-            - $ref: '#/components/schemas/SubnetId'
-            - xml:
-                name: subnetId
-              description: The ID of your subnet.
         Ipv6CidrBlock:
           allOf:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: ipv6CidrBlock
               description: The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
+        SubnetId:
+          allOf:
+            - $ref: '#/components/schemas/SubnetId'
+            - xml:
+                name: subnetId
+              description: The ID of your subnet.
     SubnetIpv6CidrBlockAssociation:
       type: object
       properties:
@@ -57041,6 +57157,39 @@ components:
         - association-failed
         - disassociating
         - disassociated
+    PartitionLoadFrequency:
+      type: string
+      enum:
+        - none
+        - daily
+        - weekly
+        - monthly
+    MillisecondDateTime:
+      type: string
+      format: date-time
+    AthenaIntegration:
+      type: object
+      required:
+        - IntegrationResultS3DestinationArn
+        - PartitionLoadFrequency
+      properties:
+        IntegrationResultS3DestinationArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The location in Amazon S3 to store the generated CloudFormation template.
+        PartitionLoadFrequency:
+          allOf:
+            - $ref: '#/components/schemas/PartitionLoadFrequency'
+            - description: The schedule for adding new partitions to the table.
+        PartitionStartDate:
+          allOf:
+            - $ref: '#/components/schemas/MillisecondDateTime'
+            - description: The start date for the partition.
+        PartitionEndDate:
+          allOf:
+            - $ref: '#/components/schemas/MillisecondDateTime'
+            - description: The end date for the partition.
+      description: Describes integration options for Amazon Athena.
     GroupIdStringList:
       type: array
       items:
@@ -58167,9 +58316,6 @@ components:
         - cancelled
         - pending
         - failed
-    MillisecondDateTime:
-      type: string
-      format: date-time
     EndDateType:
       type: string
       enum:
@@ -62646,8 +62792,8 @@ components:
     CreateSubnetRequest:
       type: object
       required:
-        - VpcId
         - CidrBlock
+        - VpcId
       title: CreateSubnetRequest
       properties:
         TagSpecifications:
@@ -62664,6 +62810,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The AZ ID or the Local Zone ID of the subnet.
+        CidrBlock:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
         Ipv6CidrBlock:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -62682,10 +62832,6 @@ components:
             - xml:
                 name: dryRun
               description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-        CidrBlock:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: 'The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.'
     ResourceIdList:
       type: array
       items:
@@ -69840,7 +69986,7 @@ components:
             - $ref: '#/components/schemas/FilterList'
             - xml:
                 name: Filter
-              description: '<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone for the subnet. You can also use <code>availabilityZone</code> as the filter name.</p> </li> <li> <p> <code>availability-zone-id</code> - The ID of the Availability Zone for the subnet. You can also use <code>availabilityZoneId</code> as the filter name.</p> </li> <li> <p> <code>available-ip-address-count</code> - The number of IPv4 addresses in the subnet that are available.</p> </li> <li> <p> <code>cidr-block</code> - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet''s CIDR block for information to be returned for the subnet. You can also use <code>cidr</code> or <code>cidrBlock</code> as the filter names.</p> </li> <li> <p> <code>default-for-az</code> - Indicates whether this is the default subnet for the Availability Zone. You can also use <code>defaultForAz</code> as the filter name.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - An association ID for an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the subnet.</p> </li> <li> <p> <code>state</code> - The state of the subnet (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>subnet-arn</code> - The Amazon Resource Name (ARN) of the subnet.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the subnet.</p> </li> </ul>'
+              description: '<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone for the subnet. You can also use <code>availabilityZone</code> as the filter name.</p> </li> <li> <p> <code>availability-zone-id</code> - The ID of the Availability Zone for the subnet. You can also use <code>availabilityZoneId</code> as the filter name.</p> </li> <li> <p> <code>available-ip-address-count</code> - The number of IPv4 addresses in the subnet that are available.</p> </li> <li> <p> <code>cidr-block</code> - The IPv4 CIDR block of the subnet. The CIDR block you specify must exactly match the subnet''s CIDR block for information to be returned for the subnet. You can also use <code>cidr</code> or <code>cidrBlock</code> as the filter names.</p> </li> <li> <p> <code>default-for-az</code> - Indicates whether this is the default subnet for the Availability Zone. You can also use <code>defaultForAz</code> as the filter name.</p> </li> <li> <p> <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.association-id</code> - An association ID for an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR block associated with the subnet.</p> </li> <li> <p> <code>outpost-arn</code> - The Amazon Resource Name (ARN) of the Outpost.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the subnet.</p> </li> <li> <p> <code>state</code> - The state of the subnet (<code>pending</code> | <code>available</code>).</p> </li> <li> <p> <code>subnet-arn</code> - The Amazon Resource Name (ARN) of the subnet.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the subnet.</p> </li> </ul>'
         SubnetIds:
           allOf:
             - $ref: '#/components/schemas/SubnetIdStringList'
@@ -73834,6 +73980,42 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    IntegrateServices:
+      type: object
+      properties:
+        AthenaIntegrations:
+          allOf:
+            - $ref: '#/components/schemas/AthenaIntegrationsSet'
+            - xml:
+                name: AthenaIntegration
+              description: Information about the integration with Amazon Athena.
+      description: Describes service integrations with VPC Flow logs.
+    GetFlowLogsIntegrationTemplateRequest:
+      type: object
+      required:
+        - FlowLogId
+        - ConfigDeliveryS3DestinationArn
+        - IntegrateServices
+      title: GetFlowLogsIntegrationTemplateRequest
+      properties:
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        FlowLogId:
+          allOf:
+            - $ref: '#/components/schemas/VpcFlowLogId'
+            - description: The ID of the flow log.
+        ConfigDeliveryS3DestinationArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'To store the CloudFormation template in Amazon S3, specify the location in Amazon S3.'
+        IntegrateServices:
+          allOf:
+            - $ref: '#/components/schemas/IntegrateServices'
+            - xml:
+                name: IntegrateService
+              description: Information about the service integration.
     GetGroupsForCapacityReservationRequestMaxResults:
       type: integer
       minimum: 1

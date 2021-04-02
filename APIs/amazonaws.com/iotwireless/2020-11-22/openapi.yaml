@@ -4065,6 +4065,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LoRaWANDevice'
             - description: Information about the wireless device.
+        Sidewalk:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkDevice'
+            - description: Sidewalk device object.
     GetWirelessDeviceStatisticsResponse:
       type: object
       properties:
@@ -4080,6 +4084,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LoRaWANDeviceMetadata'
             - description: Information about the wireless device's operations.
+        Sidewalk:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkDeviceMetadata'
+            - description: MetaData for Sidewalk device.
     GetWirelessGatewayResponse:
       type: object
       properties:
@@ -4140,6 +4148,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ISODateTimeString'
             - description: The date and time when the most recent uplink was received.
+        ConnectionStatus:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionStatus'
+            - description: The connection status of the wireless gateway.
     GetWirelessGatewayTaskResponse:
       type: object
       properties:
@@ -4456,6 +4468,39 @@ components:
             - description: The ARN of the thing to associate with the wireless gateway.
     AutoCreateTasks:
       type: boolean
+    BatteryLevel:
+      type: string
+      enum:
+        - normal
+        - low
+        - critical
+      description: Sidewalk device battery level.
+    SigningAlg:
+      type: string
+      enum:
+        - Ed25519
+        - P256r1
+      description: The certificate chain algorithm provided by sidewalk.
+    CertificateValue:
+      type: string
+      description: Certificate value.
+      minLength: 0
+      maxLength: 2048
+    CertificateList:
+      type: object
+      required:
+        - SigningAlg
+        - Value
+      properties:
+        SigningAlg:
+          allOf:
+            - $ref: '#/components/schemas/SigningAlg'
+            - description: The certificate chain algorithm provided by sidewalk.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/CertificateValue'
+            - description: The value of the chosen sidewalk certificate.
+      description: List of sidewalk certificates.
     CertificatePEM:
       type: string
       pattern: '[^-A-Za-z0-9\+/=]\|=[^=]\|=\{3,\}$\{1,4096\}'
@@ -4464,6 +4509,11 @@ components:
     ChannelMask:
       type: string
       maxLength: 2048
+    ConnectionStatus:
+      type: string
+      enum:
+        - Connected
+        - Disconnected
     Crc:
       type: integer
       minimum: 1
@@ -4919,6 +4969,11 @@ components:
       type: integer
       minimum: 0
       maximum: 2147483647
+    DeviceCertificateList:
+      type: array
+      description: List of device certificate chain.
+      items:
+        $ref: '#/components/schemas/CertificateList'
     DeviceProfile:
       type: object
       properties:
@@ -4939,6 +4994,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DeviceProfile'
+    DeviceState:
+      type: string
+      enum:
+        - Provisioned
+        - RegisteredNotSeen
+        - RegisteredReachable
+        - RegisteredUnreachable
+      description: Device state defines the device status of sidewalk device.
     PartnerAccountId:
       type: string
       maxLength: 256
@@ -4988,6 +5051,15 @@ components:
       type: string
       minLength: 1
       maxLength: 256
+    Event:
+      type: string
+      enum:
+        - discovered
+        - lost
+        - ack
+        - nack
+        - passthrough
+      description: Sidewalk device status notification.
     FNwkSIntKey:
       type: string
       pattern: '[a-fA-F0-9]{32}'
@@ -5141,6 +5213,22 @@ components:
       properties: {}
     ThingName:
       type: string
+    SidewalkDevice:
+      type: object
+      properties:
+        SidewalkId:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkId'
+            - description: The sidewalk device identification.
+        SidewalkManufacturingSn:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkManufacturingSn'
+            - description: The Sidewalk manufacturing series number.
+        DeviceCertificates:
+          allOf:
+            - $ref: '#/components/schemas/DeviceCertificateList'
+            - description: The sidewalk device certificates for Ed25519 and P256r1.
+      description: Sidewalk device object.
     GetWirelessDeviceStatisticsRequest:
       type: object
       title: GetWirelessDeviceStatisticsRequest
@@ -5176,6 +5264,26 @@ components:
             - $ref: '#/components/schemas/LoRaWANGatewayMetadataList'
             - description: Information about the gateways accessed by the device.
       description: LoRaWAN device metatdata.
+    SidewalkDeviceMetadata:
+      type: object
+      properties:
+        Rssi:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The RSSI value.
+        BatteryLevel:
+          allOf:
+            - $ref: '#/components/schemas/BatteryLevel'
+            - description: Sidewalk device battery level.
+        Event:
+          allOf:
+            - $ref: '#/components/schemas/Event'
+            - description: Sidewalk device status notification.
+        DeviceState:
+          allOf:
+            - $ref: '#/components/schemas/DeviceState'
+            - description: Device state defines the device status of sidewalk device.
+      description: MetaData for Sidewalk device.
     GetWirelessGatewayCertificateRequest:
       type: object
       title: GetWirelessGatewayCertificateRequest
@@ -5473,6 +5581,13 @@ components:
             - $ref: '#/components/schemas/ServiceProfileId'
             - description: The ID of the service profile.
       description: Information about a service profile.
+    SidewalkId:
+      type: string
+      description: The sidewalk device identification.
+      maxLength: 256
+    SidewalkManufacturingSn:
+      type: string
+      maxLength: 64
     SidewalkListDevice:
       type: object
       properties:
@@ -5480,6 +5595,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/AmazonId'
             - description: The Sidewalk Amazon ID.
+        SidewalkId:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkId'
+            - description: The sidewalk device identification.
+        SidewalkManufacturingSn:
+          allOf:
+            - $ref: '#/components/schemas/SidewalkManufacturingSn'
+            - description: The Sidewalk manufacturing series number.
+        DeviceCertificates:
+          allOf:
+            - $ref: '#/components/schemas/DeviceCertificateList'
+            - description: The sidewalk device certificates for Ed25519 and P256r1.
       description: Sidewalk object used by list functions.
     SidewalkUpdateAccount:
       type: object

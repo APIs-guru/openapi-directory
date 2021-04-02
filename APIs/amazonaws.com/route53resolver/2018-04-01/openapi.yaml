@@ -114,6 +114,81 @@ servers:
     description: The Route53Resolver endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=Route53Resolver.AssociateFirewallRuleGroup:
+    post:
+      operationId: AssociateFirewallRuleGroup
+      description: 'Associates a <a>FirewallRuleGroup</a> with a VPC, to provide DNS filtering for the VPC. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateFirewallRuleGroupResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateFirewallRuleGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.AssociateFirewallRuleGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Route53Resolver.AssociateResolverEndpointIpAddress:
     post:
       operationId: AssociateResolverEndpointIpAddress
@@ -343,6 +418,201 @@ paths:
             type: string
             enum:
               - Route53Resolver.AssociateResolverRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.CreateFirewallDomainList:
+    post:
+      operationId: CreateFirewallDomainList
+      description: 'Creates an empty firewall domain list for use in DNS Firewall rules. You can populate the domains for the new list with a file, using <a>ImportFirewallDomains</a>, or with domain strings, using <a>UpdateFirewallDomains</a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFirewallDomainListResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFirewallDomainListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.CreateFirewallDomainList
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.CreateFirewallRule:
+    post:
+      operationId: CreateFirewallRule
+      description: 'Creates a single DNS Firewall rule in the specified rule group, using the specified domain list.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFirewallRuleResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFirewallRuleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.CreateFirewallRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.CreateFirewallRuleGroup:
+    post:
+      operationId: CreateFirewallRuleGroup
+      description: 'Creates an empty DNS Firewall rule group for filtering DNS network traffic in a VPC. You can add rules to the new rule group by calling <a>CreateFirewallRule</a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFirewallRuleGroupResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFirewallRuleGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.CreateFirewallRuleGroup
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -588,6 +858,195 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.DeleteFirewallDomainList:
+    post:
+      operationId: DeleteFirewallDomainList
+      description: 'Deletes the specified domain list. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFirewallDomainListResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteFirewallDomainListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.DeleteFirewallDomainList
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.DeleteFirewallRule:
+    post:
+      operationId: DeleteFirewallRule
+      description: Deletes the specified firewall rule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFirewallRuleResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteFirewallRuleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.DeleteFirewallRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.DeleteFirewallRuleGroup:
+    post:
+      operationId: DeleteFirewallRuleGroup
+      description: 'Deletes the specified firewall rule group. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFirewallRuleGroupResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteFirewallRuleGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.DeleteFirewallRuleGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Route53Resolver.DeleteResolverEndpoint:
     post:
       operationId: DeleteResolverEndpoint
@@ -783,6 +1242,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.DisassociateFirewallRuleGroup:
+    post:
+      operationId: DisassociateFirewallRuleGroup
+      description: 'Disassociates a <a>FirewallRuleGroup</a> from a VPC, to remove DNS filtering from the VPC. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateFirewallRuleGroupResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateFirewallRuleGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.DisassociateFirewallRuleGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Route53Resolver.DisassociateResolverEndpointIpAddress:
     post:
       operationId: DisassociateResolverEndpointIpAddress
@@ -970,6 +1498,303 @@ paths:
             type: string
             enum:
               - Route53Resolver.DisassociateResolverRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.GetFirewallConfig:
+    post:
+      operationId: GetFirewallConfig
+      description: 'Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFirewallConfigResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetFirewallConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.GetFirewallConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.GetFirewallDomainList:
+    post:
+      operationId: GetFirewallDomainList
+      description: Retrieves the specified firewall domain list.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFirewallDomainListResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetFirewallDomainListRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.GetFirewallDomainList
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.GetFirewallRuleGroup:
+    post:
+      operationId: GetFirewallRuleGroup
+      description: 'Retrieves the specified firewall rule group. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFirewallRuleGroupResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetFirewallRuleGroupRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.GetFirewallRuleGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.GetFirewallRuleGroupAssociation:
+    post:
+      operationId: GetFirewallRuleGroupAssociation
+      description: 'Retrieves a firewall rule group association, which enables DNS filtering for a VPC with one rule group. A VPC can have more than one firewall rule group association, and a rule group can be associated with more than one VPC.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFirewallRuleGroupAssociationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetFirewallRuleGroupAssociationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.GetFirewallRuleGroupAssociation
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.GetFirewallRuleGroupPolicy:
+    post:
+      operationId: GetFirewallRuleGroupPolicy
+      description: 'Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFirewallRuleGroupPolicyResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetFirewallRuleGroupPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.GetFirewallRuleGroupPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1462,6 +2287,507 @@ paths:
             type: string
             enum:
               - Route53Resolver.GetResolverRulePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.ImportFirewallDomains:
+    post:
+      operationId: ImportFirewallDomains
+      description: '<p>Imports domain names from a file into a domain list, for use in a DNS firewall rule group. </p> <p>Each domain specification in your domain list must satisfy the following requirements: </p> <ul> <li> <p>It can optionally start with <code>*</code> (asterisk).</p> </li> <li> <p>With the exception of the optional starting asterisk, it must only contain the following characters: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>-</code> (hyphen).</p> </li> <li> <p>It must be from 1-255 characters in length. </p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportFirewallDomainsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportFirewallDomainsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.ImportFirewallDomains
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.ListFirewallConfigs:
+    post:
+      operationId: ListFirewallConfigs
+      description: '<p>Retrieves the firewall configurations that you have defined. DNS Firewall uses the configurations to manage firewall behavior for your VPCs. </p> <p>A single call might return only a partial list of the configurations. For information, see <code>MaxResults</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFirewallConfigsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFirewallConfigsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.ListFirewallConfigs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.ListFirewallDomainLists:
+    post:
+      operationId: ListFirewallDomainLists
+      description: '<p>Retrieves the firewall domain lists that you have defined. For each firewall domain list, you can retrieve the domains that are defined for a list by calling <a>ListFirewallDomains</a>. </p> <p>A single call to this list operation might return only a partial list of the domain lists. For information, see <code>MaxResults</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFirewallDomainListsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFirewallDomainListsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.ListFirewallDomainLists
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.ListFirewallDomains:
+    post:
+      operationId: ListFirewallDomains
+      description: '<p>Retrieves the domains that you have defined for the specified firewall domain list. </p> <p>A single call might return only a partial list of the domains. For information, see <code>MaxResults</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFirewallDomainsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFirewallDomainsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.ListFirewallDomains
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.ListFirewallRuleGroupAssociations:
+    post:
+      operationId: ListFirewallRuleGroupAssociations
+      description: '<p>Retrieves the firewall rule group associations that you have defined. Each association enables DNS filtering for a VPC with one rule group. </p> <p>A single call might return only a partial list of the associations. For information, see <code>MaxResults</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFirewallRuleGroupAssociationsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFirewallRuleGroupAssociationsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.ListFirewallRuleGroupAssociations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.ListFirewallRuleGroups:
+    post:
+      operationId: ListFirewallRuleGroups
+      description: '<p>Retrieves the minimal high-level information for the rule groups that you have defined. </p> <p>A single call might return only a partial list of the rule groups. For information, see <code>MaxResults</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFirewallRuleGroupsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFirewallRuleGroupsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.ListFirewallRuleGroups
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.ListFirewallRules:
+    post:
+      operationId: ListFirewallRules
+      description: '<p>Retrieves the firewall rules that you have defined for the specified firewall rule group. DNS Firewall uses the rules in a rule group to filter DNS network traffic for a VPC. </p> <p>A single call might return only a partial list of the rules. For information, see <code>MaxResults</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFirewallRulesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFirewallRulesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.ListFirewallRules
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2094,6 +3420,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.PutFirewallRuleGroupPolicy:
+    post:
+      operationId: PutFirewallRuleGroupPolicy
+      description: 'Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutFirewallRuleGroupPolicyResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutFirewallRuleGroupPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.PutFirewallRuleGroupPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Route53Resolver.PutResolverQueryLogConfigPolicy:
     post:
       operationId: PutResolverQueryLogConfigPolicy
@@ -2350,6 +3739,282 @@ paths:
             type: string
             enum:
               - Route53Resolver.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.UpdateFirewallConfig:
+    post:
+      operationId: UpdateFirewallConfig
+      description: 'Updates the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFirewallConfigResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFirewallConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.UpdateFirewallConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.UpdateFirewallDomains:
+    post:
+      operationId: UpdateFirewallDomains
+      description: 'Updates the firewall domain list from an array of domain specifications. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFirewallDomainsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFirewallDomainsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.UpdateFirewallDomains
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.UpdateFirewallRule:
+    post:
+      operationId: UpdateFirewallRule
+      description: 'Updates the specified firewall rule. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFirewallRuleResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFirewallRuleRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.UpdateFirewallRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Route53Resolver.UpdateFirewallRuleGroupAssociation:
+    post:
+      operationId: UpdateFirewallRuleGroupAssociation
+      description: 'Changes the association of a <a>FirewallRuleGroup</a> with a VPC. The association enables DNS filtering for the VPC. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFirewallRuleGroupAssociationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFirewallRuleGroupAssociationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Route53Resolver.UpdateFirewallRuleGroupAssociation
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2617,6 +4282,58 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AssociateFirewallRuleGroupResponse:
+      type: object
+      properties:
+        FirewallRuleGroupAssociation:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroupAssociation'
+            - description: 'The association that you just created. The association has an Id that you can use to identify it in other requests, like update and delete.'
+    AssociateFirewallRuleGroupRequest:
+      type: object
+      required:
+        - CreatorRequestId
+        - FirewallRuleGroupId
+        - VpcId
+        - Priority
+        - Name
+      title: AssociateFirewallRuleGroupRequest
+      properties:
+        CreatorRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CreatorRequestId'
+            - description: 'A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
+        FirewallRuleGroupId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the firewall rule group. '
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the VPC that you want to associate with the rule group. '
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/Priority'
+            - description: '<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.</p>'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'A name that lets you identify the association, to manage and use it.'
+        MutationProtection:
+          allOf:
+            - $ref: '#/components/schemas/MutationProtectionStatus'
+            - description: 'If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. When you create the association, the default setting is <code>DISABLED</code>. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of the tag keys and values that you want to associate with the rule group association. '
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    LimitExceededException: {}
+    ConflictException: {}
+    AccessDeniedException: {}
+    InternalServiceErrorException: {}
+    ThrottlingException: {}
     AssociateResolverEndpointIpAddressResponse:
       type: object
       properties:
@@ -2639,13 +4356,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/IpAddressUpdate'
             - description: 'Either the IPv4 address that you want to add to a Resolver endpoint or a subnet ID. If you specify a subnet ID, Resolver chooses an IP address for you from the available IPs in the specified subnet.'
-    ResourceNotFoundException: {}
     InvalidParameterException: {}
     InvalidRequestException: {}
     ResourceExistsException: {}
-    InternalServiceErrorException: {}
-    LimitExceededException: {}
-    ThrottlingException: {}
     AssociateResolverQueryLogConfigResponse:
       type: object
       properties:
@@ -2668,7 +4381,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
             - description: <p>The ID of an Amazon VPC that you want this query logging configuration to log queries for.</p> <note> <p>The VPCs and the query logging configuration must be in the same Region.</p> </note>
-    AccessDeniedException: {}
     AssociateResolverRuleResponse:
       type: object
       properties:
@@ -2696,6 +4408,116 @@ components:
             - $ref: '#/components/schemas/ResourceId'
             - description: The ID of the VPC that you want to associate the Resolver rule with.
     ResourceUnavailableException: {}
+    CreateFirewallDomainListResponse:
+      type: object
+      properties:
+        FirewallDomainList:
+          allOf:
+            - $ref: '#/components/schemas/FirewallDomainList'
+            - description: The domain list that you just created.
+    CreateFirewallDomainListRequest:
+      type: object
+      required:
+        - CreatorRequestId
+        - Name
+      title: CreateFirewallDomainListRequest
+      properties:
+        CreatorRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CreatorRequestId'
+            - description: 'A unique string that identifies the request and that allows you to retry failed requests without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: A name that lets you identify the domain list to manage and use it.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of the tag keys and values that you want to associate with the domain list. '
+    CreateFirewallRuleResponse:
+      type: object
+      properties:
+        FirewallRule:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRule'
+            - description: 'The firewall rule that you just created. '
+    CreateFirewallRuleRequest:
+      type: object
+      required:
+        - CreatorRequestId
+        - FirewallRuleGroupId
+        - FirewallDomainListId
+        - Priority
+        - Action
+        - Name
+      title: CreateFirewallRuleRequest
+      properties:
+        CreatorRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CreatorRequestId'
+            - description: 'A unique string that identifies the request and that allows you to retry failed requests without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. '
+        FirewallRuleGroupId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the firewall rule group where you want to create the rule. '
+        FirewallDomainListId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the domain list that you want to use in the rule. '
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/Priority'
+            - description: '<p>The setting that determines the processing order of the rule in the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.</p> <p>You must specify a unique priority for each rule in a rule group. To make it easier to insert rules later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for the rules in a rule group at any time.</p>'
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/Action'
+            - description: '<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule''s domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request and send metrics and log to Cloud Watch.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule''s <code>BlockResponse</code>. </p> </li> </ul>'
+        BlockResponse:
+          allOf:
+            - $ref: '#/components/schemas/BlockResponse'
+            - description: '<p>The way that you want DNS Firewall to block the request, used with the rule aciton setting <code>BLOCK</code>. </p> <ul> <li> <p> <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> </li> <li> <p> <code>NXDOMAIN</code> - Respond indicating that the domain name that''s in the query doesn''t exist.</p> </li> <li> <p> <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule''s <code>BlockOverride*</code> settings. </p> </li> </ul> <p>This setting is required if the rule action setting is <code>BLOCK</code>.</p>'
+        BlockOverrideDomain:
+          allOf:
+            - $ref: '#/components/schemas/BlockOverrideDomain'
+            - description: <p>The custom DNS record to send back in response to the query. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p> <p>This setting is required if the <code>BlockResponse</code> setting is <code>OVERRIDE</code>.</p>
+        BlockOverrideDnsType:
+          allOf:
+            - $ref: '#/components/schemas/BlockOverrideDnsType'
+            - description: <p>The DNS record's type. This determines the format of the record value that you provided in <code>BlockOverrideDomain</code>. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p> <p>This setting is required if the <code>BlockResponse</code> setting is <code>OVERRIDE</code>.</p>
+        BlockOverrideTtl:
+          allOf:
+            - $ref: '#/components/schemas/BlockOverrideTtl'
+            - description: '<p>The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p> <p>This setting is required if the <code>BlockResponse</code> setting is <code>OVERRIDE</code>.</p>'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: A name that lets you identify the rule in the rule group.
+    CreateFirewallRuleGroupResponse:
+      type: object
+      properties:
+        FirewallRuleGroup:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroup'
+            - description: 'A collection of rules used to filter DNS network traffic. '
+    CreateFirewallRuleGroupRequest:
+      type: object
+      required:
+        - CreatorRequestId
+        - Name
+      title: CreateFirewallRuleGroupRequest
+      properties:
+        CreatorRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CreatorRequestId'
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'A name that lets you identify the rule group, to manage and use it.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of the tag keys and values that you want to associate with the rule group. '
     CreateResolverEndpointResponse:
       type: object
       properties:
@@ -2810,6 +4632,62 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A list of the tag keys and values that you want to associate with the endpoint.
+    DeleteFirewallDomainListResponse:
+      type: object
+      properties:
+        FirewallDomainList:
+          allOf:
+            - $ref: '#/components/schemas/FirewallDomainList'
+            - description: 'The domain list that you just deleted. '
+    DeleteFirewallDomainListRequest:
+      type: object
+      required:
+        - FirewallDomainListId
+      title: DeleteFirewallDomainListRequest
+      properties:
+        FirewallDomainListId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the domain list that you want to delete. '
+    DeleteFirewallRuleResponse:
+      type: object
+      properties:
+        FirewallRule:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRule'
+            - description: The specification for the firewall rule that you just deleted.
+    DeleteFirewallRuleRequest:
+      type: object
+      required:
+        - FirewallRuleGroupId
+        - FirewallDomainListId
+      title: DeleteFirewallRuleRequest
+      properties:
+        FirewallRuleGroupId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the firewall rule group that you want to delete the rule from. '
+        FirewallDomainListId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the domain list that''s used in the rule. '
+    DeleteFirewallRuleGroupResponse:
+      type: object
+      properties:
+        FirewallRuleGroup:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroup'
+            - description: 'A collection of rules used to filter DNS network traffic. '
+    DeleteFirewallRuleGroupRequest:
+      type: object
+      required:
+        - FirewallRuleGroupId
+      title: DeleteFirewallRuleGroupRequest
+      properties:
+        FirewallRuleGroupId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the firewall rule group that you want to delete. '
     DeleteResolverEndpointResponse:
       type: object
       properties:
@@ -2862,6 +4740,23 @@ components:
             - $ref: '#/components/schemas/ResourceId'
             - description: The ID of the Resolver rule that you want to delete.
     ResourceInUseException: {}
+    DisassociateFirewallRuleGroupResponse:
+      type: object
+      properties:
+        FirewallRuleGroupAssociation:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroupAssociation'
+            - description: 'The firewall rule group association that you just removed. '
+    DisassociateFirewallRuleGroupRequest:
+      type: object
+      required:
+        - FirewallRuleGroupAssociationId
+      title: DisassociateFirewallRuleGroupRequest
+      properties:
+        FirewallRuleGroupAssociationId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The identifier of the <a>FirewallRuleGroupAssociation</a>. '
     DisassociateResolverEndpointIpAddressResponse:
       type: object
       properties:
@@ -2928,6 +4823,91 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
             - description: The ID of the Resolver rule that you want to disassociate from the specified VPC.
+    GetFirewallConfigResponse:
+      type: object
+      properties:
+        FirewallConfig:
+          allOf:
+            - $ref: '#/components/schemas/FirewallConfig'
+            - description: 'Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). '
+    GetFirewallConfigRequest:
+      type: object
+      required:
+        - ResourceId
+      title: GetFirewallConfigRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the Amazon virtual private cloud (VPC) that the configuration is for.
+    GetFirewallDomainListResponse:
+      type: object
+      properties:
+        FirewallDomainList:
+          allOf:
+            - $ref: '#/components/schemas/FirewallDomainList'
+            - description: 'The domain list that you requested. '
+    GetFirewallDomainListRequest:
+      type: object
+      required:
+        - FirewallDomainListId
+      title: GetFirewallDomainListRequest
+      properties:
+        FirewallDomainListId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the domain list. '
+    GetFirewallRuleGroupResponse:
+      type: object
+      properties:
+        FirewallRuleGroup:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroup'
+            - description: 'A collection of rules used to filter DNS network traffic. '
+    GetFirewallRuleGroupRequest:
+      type: object
+      required:
+        - FirewallRuleGroupId
+      title: GetFirewallRuleGroupRequest
+      properties:
+        FirewallRuleGroupId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the firewall rule group. '
+    GetFirewallRuleGroupAssociationResponse:
+      type: object
+      properties:
+        FirewallRuleGroupAssociation:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroupAssociation'
+            - description: 'The association that you requested. '
+    GetFirewallRuleGroupAssociationRequest:
+      type: object
+      required:
+        - FirewallRuleGroupAssociationId
+      title: GetFirewallRuleGroupAssociationRequest
+      properties:
+        FirewallRuleGroupAssociationId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The identifier of the <a>FirewallRuleGroupAssociation</a>. '
+    GetFirewallRuleGroupPolicyResponse:
+      type: object
+      properties:
+        FirewallRuleGroupPolicy:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroupPolicy'
+            - description: 'The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). '
+    GetFirewallRuleGroupPolicyRequest:
+      type: object
+      required:
+        - Arn
+      title: GetFirewallRuleGroupPolicyRequest
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN (Amazon Resource Name) for the rule group.
     GetResolverDnssecConfigResponse:
       type: object
       properties:
@@ -3065,6 +5045,219 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The ID of the Resolver rule that you want to get the Resolver rule policy for.
+    ImportFirewallDomainsResponse:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The Id of the firewall domain list that DNS Firewall just updated.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'The name of the domain list. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FirewallDomainListStatus'
+            - description: ' '
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: 'Additional information about the status of the list, if available.'
+    ImportFirewallDomainsRequest:
+      type: object
+      required:
+        - FirewallDomainListId
+        - Operation
+        - DomainFileUrl
+      title: ImportFirewallDomainsRequest
+      properties:
+        FirewallDomainListId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the domain list that you want to modify with the import operation.
+        Operation:
+          allOf:
+            - $ref: '#/components/schemas/FirewallDomainImportOperation'
+            - description: 'What you want DNS Firewall to do with the domains that are listed in the file. This must be set to <code>REPLACE</code>, which updates the domain list to exactly match the list in the file. '
+        DomainFileUrl:
+          allOf:
+            - $ref: '#/components/schemas/DomainListFileUrl'
+            - description: <p>The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (S3) that contains the list of domains to import.</p> <p>The file must be in an S3 bucket that's in the same Region as your DNS Firewall. The file must be a text file and must contain a single domain per line.</p>
+    ListFirewallConfigsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.'
+        FirewallConfigs:
+          allOf:
+            - $ref: '#/components/schemas/FirewallConfigList'
+            - description: 'The configurations for the firewall behavior provided by DNS Firewall for Amazon virtual private clouds (VPC). '
+    ListFirewallConfigsRequest:
+      type: object
+      title: ListFirewallConfigsRequest
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListFirewallConfigsMaxResult'
+            - description: '<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don''t specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>'
+    ListFirewallDomainListsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.'
+        FirewallDomainLists:
+          allOf:
+            - $ref: '#/components/schemas/FirewallDomainListMetadataList'
+            - description: '<p>A list of the domain lists that you have defined. </p> <p>This might be a parital list of the domain lists that you''ve defined. For information, see <code>MaxResults</code>. </p>'
+    ListFirewallDomainListsRequest:
+      type: object
+      title: ListFirewallDomainListsRequest
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don''t specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>'
+    ListFirewallDomainsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.'
+        Domains:
+          allOf:
+            - $ref: '#/components/schemas/FirewallDomains'
+            - description: '<p>A list of the domains in the firewall domain list. </p> <p>This might be a parital list of the domains that you''ve defined in the domain list. For information, see <code>MaxResults</code>. </p>'
+    ListFirewallDomainsRequest:
+      type: object
+      required:
+        - FirewallDomainListId
+      title: ListFirewallDomainsRequest
+      properties:
+        FirewallDomainListId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the domain list whose domains you want to retrieve. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListDomainMaxResults'
+            - description: '<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don''t specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>'
+    ListFirewallRuleGroupAssociationsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.'
+        FirewallRuleGroupAssociations:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroupAssociations'
+            - description: '<p>A list of your firewall rule group associations.</p> <p>This might be a partial list of the associations that you have defined. For information, see <code>MaxResults</code>. </p>'
+    ListFirewallRuleGroupAssociationsRequest:
+      type: object
+      title: ListFirewallRuleGroupAssociationsRequest
+      properties:
+        FirewallRuleGroupId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the firewall rule group that you want to retrieve the associations for. Leave this blank to retrieve associations for any rule group. '
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the VPC that you want to retrieve the associations for. Leave this blank to retrieve associations for any VPC. '
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/Priority'
+            - description: 'The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroupAssociationStatus'
+            - description: 'The association <code>Status</code> setting that you want DNS Firewall to filter on for the list. If you don''t specify this, then DNS Firewall returns all associations, regardless of status.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don''t specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>'
+    ListFirewallRuleGroupsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.'
+        FirewallRuleGroups:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroupMetadataList'
+            - description: '<p>A list of your firewall rule groups.</p> <p>This might be a partial list of the rule groups that you have defined. For information, see <code>MaxResults</code>. </p>'
+    ListFirewallRuleGroupsRequest:
+      type: object
+      title: ListFirewallRuleGroupsRequest
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don''t specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>'
+    ListFirewallRulesResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.'
+        FirewallRules:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRules'
+            - description: '<p>A list of the rules that you have defined. </p> <p>This might be a parital list of the firewall rules that you''ve defined. For information, see <code>MaxResults</code>. </p>'
+    ListFirewallRulesRequest:
+      type: object
+      required:
+        - FirewallRuleGroupId
+      title: ListFirewallRulesRequest
+      properties:
+        FirewallRuleGroupId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the firewall rule group that you want to retrieve the rules for. '
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/Priority'
+            - description: '<p>Optional additional filter for the rules to retrieve.</p> <p>The setting that determines the processing order of the rules in a rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.</p>'
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/Action'
+            - description: '<p>Optional additional filter for the rules to retrieve.</p> <p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule''s domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request to go through but send an alert to the logs.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. If this is specified, additional handling details are provided in the rule''s <code>BlockResponse</code> setting. </p> </li> </ul>'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don''t specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>'
     ListResolverDnssecConfigsResponse:
       type: object
       properties:
@@ -3334,6 +5527,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: '<p>For the first <code>ListTagsForResource</code> request, omit this value.</p> <p>If you have more than <code>MaxResults</code> tags, you can submit another <code>ListTagsForResource</code> request to get the next group of tags for the resource. In the next request, specify the value of <code>NextToken</code> from the previous response. </p>'
+    PutFirewallRuleGroupPolicyResponse:
+      type: object
+      properties:
+        ReturnValue:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: <p/>
+    PutFirewallRuleGroupPolicyRequest:
+      type: object
+      required:
+        - Arn
+        - FirewallRuleGroupPolicy
+      title: PutFirewallRuleGroupPolicyRequest
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN (Amazon Resource Name) for the rule group that you want to share.
+        FirewallRuleGroupPolicy:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroupPolicy'
+            - description: The AWS Identity and Access Management (AWS IAM) policy to attach to the rule group.
     PutResolverQueryLogConfigPolicyResponse:
       type: object
       properties:
@@ -3418,6 +5633,146 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The tags that you want to remove to the specified resource.
+    UpdateFirewallConfigResponse:
+      type: object
+      properties:
+        FirewallConfig:
+          allOf:
+            - $ref: '#/components/schemas/FirewallConfig'
+            - description: 'Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). '
+    UpdateFirewallConfigRequest:
+      type: object
+      required:
+        - ResourceId
+        - FirewallFailOpen
+      title: UpdateFirewallConfigRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the Amazon virtual private cloud (VPC) that the configuration is for.
+        FirewallFailOpen:
+          allOf:
+            - $ref: '#/components/schemas/FirewallFailOpenStatus'
+            - description: '<p>Determines how Route 53 Resolver handles queries during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply. </p> <ul> <li> <p>By default, fail open is disabled, which means the failure mode is closed. This approach favors security over availability. DNS Firewall blocks queries that it is unable to evaluate properly. </p> </li> <li> <p>If you enable this option, the failure mode is open. This approach favors availability over security. DNS Firewall allows queries to proceed if it is unable to properly evaluate them. </p> </li> </ul> <p>This behavior is only enforced for VPCs that have at least one DNS Firewall rule group association. </p>'
+    UpdateFirewallDomainsResponse:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The Id of the firewall domain list that DNS Firewall just updated.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'The name of the domain list. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FirewallDomainListStatus'
+            - description: ' '
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: 'Additional information about the status of the list, if available.'
+    UpdateFirewallDomainsRequest:
+      type: object
+      required:
+        - FirewallDomainListId
+        - Operation
+        - Domains
+      title: UpdateFirewallDomainsRequest
+      properties:
+        FirewallDomainListId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the domain list whose domains you want to update. '
+        Operation:
+          allOf:
+            - $ref: '#/components/schemas/FirewallDomainUpdateOperation'
+            - description: '<p>What you want DNS Firewall to do with the domains that you are providing: </p> <ul> <li> <p> <code>ADD</code> - Add the domains to the ones that are already in the domain list. </p> </li> <li> <p> <code>REMOVE</code> - Search the domain list for the domains and remove them from the list.</p> </li> <li> <p> <code>REPLACE</code> - Update the domain list to exactly match the list that you are providing. </p> </li> </ul>'
+        Domains:
+          allOf:
+            - $ref: '#/components/schemas/FirewallDomains'
+            - description: '<p>A list of domains to use in the update operation.</p> <p>Each domain specification in your domain list must satisfy the following requirements: </p> <ul> <li> <p>It can optionally start with <code>*</code> (asterisk).</p> </li> <li> <p>With the exception of the optional starting asterisk, it must only contain the following characters: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>-</code> (hyphen).</p> </li> <li> <p>It must be from 1-255 characters in length. </p> </li> </ul>'
+    UpdateFirewallRuleResponse:
+      type: object
+      properties:
+        FirewallRule:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRule'
+            - description: 'The firewall rule that you just updated. '
+    UpdateFirewallRuleRequest:
+      type: object
+      required:
+        - FirewallRuleGroupId
+        - FirewallDomainListId
+      title: UpdateFirewallRuleRequest
+      properties:
+        FirewallRuleGroupId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the firewall rule group for the rule. '
+        FirewallDomainListId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the domain list to use in the rule. '
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/Priority'
+            - description: '<p>The setting that determines the processing order of the rule in the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.</p> <p>You must specify a unique priority for each rule in a rule group. To make it easier to insert rules later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for the rules in a rule group at any time.</p>'
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/Action'
+            - description: '<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule''s domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request to go through but send an alert to the logs.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule''s <code>BlockResponse</code>. </p> </li> </ul>'
+        BlockResponse:
+          allOf:
+            - $ref: '#/components/schemas/BlockResponse'
+            - description: '<p>The way that you want DNS Firewall to block the request. Used for the rule action setting <code>BLOCK</code>.</p> <ul> <li> <p> <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> </li> <li> <p> <code>NXDOMAIN</code> - Respond indicating that the domain name that''s in the query doesn''t exist.</p> </li> <li> <p> <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule''s <code>BlockOverride*</code> settings. </p> </li> </ul>'
+        BlockOverrideDomain:
+          allOf:
+            - $ref: '#/components/schemas/BlockOverrideDomain'
+            - description: The custom DNS record to send back in response to the query. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.
+        BlockOverrideDnsType:
+          allOf:
+            - $ref: '#/components/schemas/BlockOverrideDnsType'
+            - description: The DNS record's type. This determines the format of the record value that you provided in <code>BlockOverrideDomain</code>. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.
+        BlockOverrideTtl:
+          allOf:
+            - $ref: '#/components/schemas/BlockOverrideTtl'
+            - description: 'The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the rule.
+    UpdateFirewallRuleGroupAssociationResponse:
+      type: object
+      properties:
+        FirewallRuleGroupAssociation:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroupAssociation'
+            - description: 'The association that you just updated. '
+    UpdateFirewallRuleGroupAssociationRequest:
+      type: object
+      required:
+        - FirewallRuleGroupAssociationId
+      title: UpdateFirewallRuleGroupAssociationRequest
+      properties:
+        FirewallRuleGroupAssociationId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The identifier of the <a>FirewallRuleGroupAssociation</a>. '
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/Priority'
+            - description: '<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.</p>'
+        MutationProtection:
+          allOf:
+            - $ref: '#/components/schemas/MutationProtectionStatus'
+            - description: 'If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the rule group association.
     UpdateResolverDnssecConfigResponse:
       type: object
       properties:
@@ -3487,7 +5842,17 @@ components:
       type: string
       minLength: 12
       maxLength: 32
+    Action:
+      type: string
+      enum:
+        - ALLOW
+        - BLOCK
+        - ALERT
     Arn:
+      type: string
+      minLength: 1
+      maxLength: 255
+    CreatorRequestId:
       type: string
       minLength: 1
       maxLength: 255
@@ -3495,6 +5860,78 @@ components:
       type: string
       minLength: 1
       maxLength: 64
+    Priority:
+      type: integer
+    Name:
+      type: string
+      pattern: '(?!^[0-9]+$)([a-zA-Z0-9\-_'' '']+)'
+      maxLength: 64
+    MutationProtectionStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      maxItems: 200
+    FirewallRuleGroupAssociation:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The identifier for the association.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the firewall rule group association.
+        FirewallRuleGroupId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the firewall rule group. '
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the VPC that is associated with the rule group. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the association.
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/Priority'
+            - description: 'The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. '
+        MutationProtection:
+          allOf:
+            - $ref: '#/components/schemas/MutationProtectionStatus'
+            - description: 'If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. '
+        ManagedOwnerName:
+          allOf:
+            - $ref: '#/components/schemas/ServicePrinciple'
+            - description: 'The owner of the association, used only for associations that are not managed by you. If you use AWS Firewall Manager to manage your DNS Firewalls, then this reports Firewall Manager as the managed owner.'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroupAssociationStatus'
+            - description: The current status of the association.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: 'Additional information about the status of the response, if available.'
+        CreatorRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CreatorRequestId'
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Rfc3339TimeString'
+            - description: 'The date and time that the association was created, in Unix time format and Coordinated Universal Time (UTC). '
+        ModificationTime:
+          allOf:
+            - $ref: '#/components/schemas/Rfc3339TimeString'
+            - description: 'The date and time that the association was last modified, in Unix time format and Coordinated Universal Time (UTC).'
+      description: 'An association between a firewall rul group and a VPC, which enables DNS filtering for the VPC. '
     IpAddressUpdate:
       type: object
       properties:
@@ -3595,10 +6032,6 @@ components:
             - $ref: '#/components/schemas/Rfc3339TimeString'
             - description: 'The date and time that the VPC was associated with the query logging configuration, in Unix time format and Coordinated Universal Time (UTC).'
       description: 'In the response to an <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverQueryLogConfig.html">AssociateResolverQueryLogConfig</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverQueryLogConfig.html">DisassociateResolverQueryLogConfig</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverQueryLogConfigAssociation.html">GetResolverQueryLogConfigAssociation</a>, or <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverQueryLogConfigAssociations.html">ListResolverQueryLogConfigAssociations</a>, request, a complex type that contains settings for a specified association between an Amazon VPC and a query logging configuration.'
-    Name:
-      type: string
-      pattern: '(?!^[0-9]+$)([a-zA-Z0-9\-_'' '']+)'
-      maxLength: 64
     ResolverRuleAssociation:
       type: object
       properties:
@@ -3627,14 +6060,172 @@ components:
             - $ref: '#/components/schemas/StatusMessage'
             - description: A detailed description of the status of the association between a Resolver rule and a VPC.
       description: 'In the response to an <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html">AssociateResolverRule</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverRule.html">DisassociateResolverRule</a>, or <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html">ListResolverRuleAssociations</a> request, provides information about an association between a Resolver rule and a VPC. The association determines which DNS queries that originate in the VPC are forwarded to your network. '
+    BlockOverrideDnsType:
+      type: string
+      enum:
+        - CNAME
+    BlockOverrideDomain:
+      type: string
+      minLength: 1
+      maxLength: 255
+    BlockOverrideTtl:
+      type: integer
+      minimum: 0
+      maximum: 604800
+    BlockResponse:
+      type: string
+      enum:
+        - NODATA
+        - NXDOMAIN
+        - OVERRIDE
     Boolean:
       type: boolean
     Count:
       type: integer
-    CreatorRequestId:
-      type: string
-      minLength: 1
-      maxLength: 255
+    FirewallDomainList:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the domain list. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the firewall domain list.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'The name of the domain list. '
+        DomainCount:
+          allOf:
+            - $ref: '#/components/schemas/Unsigned'
+            - description: The number of domain names that are specified in the domain list.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FirewallDomainListStatus'
+            - description: 'The status of the domain list. '
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: 'Additional information about the status of the list, if available.'
+        ManagedOwnerName:
+          allOf:
+            - $ref: '#/components/schemas/ServicePrinciple'
+            - description: 'The owner of the list, used only for lists that are not managed by you. For example, the managed domain list <code>AWSManagedDomainsMalwareDomainList</code> has the managed owner name <code>Route 53 Resolver DNS Firewall</code>.'
+        CreatorRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CreatorRequestId'
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Rfc3339TimeString'
+            - description: 'The date and time that the domain list was created, in Unix time format and Coordinated Universal Time (UTC). '
+        ModificationTime:
+          allOf:
+            - $ref: '#/components/schemas/Rfc3339TimeString'
+            - description: 'The date and time that the domain list was last modified, in Unix time format and Coordinated Universal Time (UTC). '
+      description: '<p>High level information about a list of firewall domains for use in a <a>FirewallRule</a>. This is returned by <a>GetFirewallDomainList</a>.</p> <p>To retrieve the domains that are defined for this domain list, call <a>ListFirewallDomains</a>.</p>'
+    FirewallRuleGroup:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the rule group. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN (Amazon Resource Name) of the rule group.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the rule group.
+        RuleCount:
+          allOf:
+            - $ref: '#/components/schemas/Unsigned'
+            - description: The number of rules in the rule group.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/FirewallRuleGroupStatus'
+            - description: 'The status of the domain list. '
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: 'Additional information about the status of the rule group, if available.'
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: 'The AWS account ID for the account that created the rule group. When a rule group is shared with your account, this is the account that has shared the rule group with you. '
+        CreatorRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CreatorRequestId'
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+        ShareStatus:
+          allOf:
+            - $ref: '#/components/schemas/ShareStatus'
+            - description: 'Whether the rule group is shared with other AWS accounts, or was shared with the current account by another AWS account. Sharing is configured through AWS Resource Access Manager (AWS RAM).'
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Rfc3339TimeString'
+            - description: 'The date and time that the rule group was created, in Unix time format and Coordinated Universal Time (UTC). '
+        ModificationTime:
+          allOf:
+            - $ref: '#/components/schemas/Rfc3339TimeString'
+            - description: 'The date and time that the rule group was last modified, in Unix time format and Coordinated Universal Time (UTC).'
+      description: 'High-level information for a firewall rule group. A firewall rule group is a collection of rules that DNS Firewall uses to filter DNS network traffic for a VPC. To retrieve the rules for the rule group, call <a>ListFirewallRules</a>.'
+    FirewallRule:
+      type: object
+      properties:
+        FirewallRuleGroupId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The unique identifier of the firewall rule group of the rule. '
+        FirewallDomainListId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the domain list that''s used in the rule. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'The name of the rule. '
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/Priority'
+            - description: 'The priority of the rule in the rule group. This value must be unique within the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.'
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/Action'
+            - description: '<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule''s domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request to go through but send an alert to the logs.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. If this is specified, additional handling details are provided in the rule''s <code>BlockResponse</code> setting. </p> </li> </ul>'
+        BlockResponse:
+          allOf:
+            - $ref: '#/components/schemas/BlockResponse'
+            - description: '<p>The way that you want DNS Firewall to block the request. Used for the rule action setting <code>BLOCK</code>.</p> <ul> <li> <p> <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> </li> <li> <p> <code>NXDOMAIN</code> - Respond indicating that the domain name that''s in the query doesn''t exist.</p> </li> <li> <p> <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule''s <code>BlockOverride*</code> settings. </p> </li> </ul>'
+        BlockOverrideDomain:
+          allOf:
+            - $ref: '#/components/schemas/BlockOverrideDomain'
+            - description: The custom DNS record to send back in response to the query. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.
+        BlockOverrideDnsType:
+          allOf:
+            - $ref: '#/components/schemas/BlockOverrideDnsType'
+            - description: The DNS record's type. This determines the format of the record value that you provided in <code>BlockOverrideDomain</code>. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.
+        BlockOverrideTtl:
+          allOf:
+            - $ref: '#/components/schemas/Unsigned'
+            - description: 'The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.'
+        CreatorRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CreatorRequestId'
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Rfc3339TimeString'
+            - description: 'The date and time that the rule was created, in Unix time format and Coordinated Universal Time (UTC). '
+        ModificationTime:
+          allOf:
+            - $ref: '#/components/schemas/Rfc3339TimeString'
+            - description: 'The date and time that the rule was last modified, in Unix time format and Coordinated Universal Time (UTC).'
+      description: A single firewall rule in a rule group.
     SecurityGroupIds:
       type: array
       items:
@@ -3650,11 +6241,6 @@ components:
         $ref: '#/components/schemas/IpAddressRequest'
       minItems: 1
       maxItems: 10
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
-      maxItems: 200
     ResolverQueryLogConfigName:
       type: string
       pattern: '(?!^[0-9]+$)([a-zA-Z0-9\-_'' '']+)'
@@ -3783,6 +6369,10 @@ components:
             - $ref: '#/components/schemas/Rfc3339TimeString'
             - description: 'The date and time that the Resolver rule was last updated, in Unix time format and Coordinated Universal Time (UTC).'
       description: 'For queries that originate in your VPC, detailed information about a Resolver rule, which specifies how to route DNS queries out of the VPC. The <code>ResolverRule</code> parameter appears in the response to a <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverRule.html">CreateResolverRule</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DeleteResolverRule.html">DeleteResolverRule</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_GetResolverRule.html">GetResolverRule</a>, <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRules.html">ListResolverRules</a>, or <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_UpdateResolverRule.html">UpdateResolverRule</a> request.'
+    DomainListFileUrl:
+      type: string
+      minLength: 1
+      maxLength: 1024
     FilterName:
       type: string
       minLength: 1
@@ -3811,6 +6401,163 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Filter'
+    FirewallFailOpenStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    FirewallConfig:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The Id of the firewall configuration.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the VPC that this firewall configuration applies to.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID of the owner of the VPC that this firewall configuration applies to.
+        FirewallFailOpen:
+          allOf:
+            - $ref: '#/components/schemas/FirewallFailOpenStatus'
+            - description: '<p>Determines how DNS Firewall operates during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply. </p> <ul> <li> <p>By default, fail open is disabled, which means the failure mode is closed. This approach favors security over availability. DNS Firewall returns a failure error when it is unable to properly evaluate a query. </p> </li> <li> <p>If you enable this option, the failure mode is open. This approach favors availability over security. DNS Firewall allows queries to proceed if it is unable to properly evaluate them. </p> </li> </ul> <p>This behavior is only enforced for VPCs that have at least one DNS Firewall rule group association. </p>'
+      description: 'Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). '
+    FirewallConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FirewallConfig'
+    FirewallDomainImportOperation:
+      type: string
+      enum:
+        - REPLACE
+    Unsigned:
+      type: integer
+    FirewallDomainListStatus:
+      type: string
+      enum:
+        - COMPLETE
+        - COMPLETE_IMPORT_FAILED
+        - IMPORTING
+        - DELETING
+        - UPDATING
+    StatusMessage:
+      type: string
+      maxLength: 255
+    ServicePrinciple:
+      type: string
+      minLength: 1
+      maxLength: 512
+    Rfc3339TimeString:
+      type: string
+      minLength: 20
+      maxLength: 40
+    FirewallDomainListMetadata:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the domain list. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the firewall domain list metadata.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'The name of the domain list. '
+        CreatorRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CreatorRequestId'
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+        ManagedOwnerName:
+          allOf:
+            - $ref: '#/components/schemas/ServicePrinciple'
+            - description: 'The owner of the list, used only for lists that are not managed by you. For example, the managed domain list <code>AWSManagedDomainsMalwareDomainList</code> has the managed owner name <code>Route 53 Resolver DNS Firewall</code>.'
+      description: '<p>Minimal high-level information for a firewall domain list. The action <a>ListFirewallDomainLists</a> returns an array of these objects. </p> <p>To retrieve full information for a firewall domain list, call <a>GetFirewallDomainList</a> and <a>ListFirewallDomains</a>.</p>'
+    FirewallDomainListMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FirewallDomainListMetadata'
+    FirewallDomainName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    FirewallDomainUpdateOperation:
+      type: string
+      enum:
+        - ADD
+        - REMOVE
+        - REPLACE
+    FirewallDomains:
+      type: array
+      items:
+        $ref: '#/components/schemas/FirewallDomainName'
+    FirewallRuleGroupStatus:
+      type: string
+      enum:
+        - COMPLETE
+        - DELETING
+        - UPDATING
+    ShareStatus:
+      type: string
+      enum:
+        - NOT_SHARED
+        - SHARED_WITH_ME
+        - SHARED_BY_ME
+    FirewallRuleGroupAssociationStatus:
+      type: string
+      enum:
+        - COMPLETE
+        - DELETING
+        - UPDATING
+    FirewallRuleGroupAssociations:
+      type: array
+      items:
+        $ref: '#/components/schemas/FirewallRuleGroupAssociation'
+    FirewallRuleGroupMetadata:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the rule group. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN (Amazon Resource Name) of the rule group.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the rule group.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: 'The AWS account ID for the account that created the rule group. When a rule group is shared with your account, this is the account that has shared the rule group with you. '
+        CreatorRequestId:
+          allOf:
+            - $ref: '#/components/schemas/CreatorRequestId'
+            - description: 'A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. '
+        ShareStatus:
+          allOf:
+            - $ref: '#/components/schemas/ShareStatus'
+            - description: 'Whether the rule group is shared with other AWS accounts, or was shared with the current account by another AWS account. Sharing is configured through AWS Resource Access Manager (AWS RAM).'
+      description: '<p>Minimal high-level information for a firewall rule group. The action <a>ListFirewallRuleGroups</a> returns an array of these objects. </p> <p>To retrieve full information for a firewall rule group, call <a>GetFirewallRuleGroup</a> and <a>ListFirewallRules</a>.</p>'
+    FirewallRuleGroupMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FirewallRuleGroupMetadata'
+    FirewallRuleGroupPolicy:
+      type: string
+      maxLength: 5000
+    FirewallRules:
+      type: array
+      items:
+        $ref: '#/components/schemas/FirewallRule'
     ResolverDnssecConfig:
       type: object
       properties:
@@ -3874,13 +6621,6 @@ components:
         - FAILED_RESOURCE_GONE
         - DELETING
         - DELETE_FAILED_FAS_EXPIRED
-    StatusMessage:
-      type: string
-      maxLength: 255
-    Rfc3339TimeString:
-      type: string
-      minLength: 20
-      maxLength: 40
     IpAddressResponse:
       type: object
       properties:
@@ -3917,12 +6657,20 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/IpAddressResponse'
+    ListDomainMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 5000
+    ListFirewallConfigsMaxResult:
+      type: integer
+      minimum: 5
+      maximum: 10
+    NextToken:
+      type: string
     MaxResults:
       type: integer
       minimum: 1
       maximum: 100
-    NextToken:
-      type: string
     ResolverDnssecConfigList:
       type: array
       items:
@@ -3983,12 +6731,6 @@ components:
         - CREATED
         - DELETING
         - FAILED
-    ShareStatus:
-      type: string
-      enum:
-        - NOT_SHARED
-        - SHARED_WITH_ME
-        - SHARED_BY_ME
     ResolverQueryLogConfigAssociationStatus:
       type: string
       enum:

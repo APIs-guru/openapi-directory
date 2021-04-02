@@ -2457,7 +2457,7 @@ paths:
   /#X-Amz-Target=AWSWAF_20190729.UpdateIPSet:
     post:
       operationId: UpdateIPSet
-      description: Updates the specified <a>IPSet</a>.
+      description: '<p>Updates the specified <a>IPSet</a>. </p> <note> <p>This operation completely replaces any IP address specifications that you already have in the IP set with the ones that you provide to this call. If you want to add to or modify the addresses that are already in the IP set, retrieve those by calling <a>GetIPSet</a>, update them, and provide the complete updated array of IP addresses to this call.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3231,6 +3231,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/RuleSummaries'
             - description: <p/>
+        LabelNamespace:
+          allOf:
+            - $ref: '#/components/schemas/LabelName'
+            - description: '<p>The label namespace prefix for this rule group. All labels added by rules in this rule group have this prefix. </p> <ul> <li> <p>The syntax for the label namespace prefix for a managed rule group is the following: </p> <p> <code>awswaf:managed:&lt;vendor&gt;:&lt;rule group name&gt;</code>:</p> </li> <li> <p>When a rule with a label matches a web request, AWS WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon: </p> <p> <code>&lt;label namespace&gt;:&lt;label from rule&gt;</code> </p> </li> </ul>'
+        AvailableLabels:
+          allOf:
+            - $ref: '#/components/schemas/LabelSummaries'
+            - description: The labels that one or more rules in this rule group add to matching web ACLs. These labels are defined in the <code>RuleLabels</code> for a <a>Rule</a>.
+        ConsumedLabels:
+          allOf:
+            - $ref: '#/components/schemas/LabelSummaries'
+            - description: 'The labels that one or more rules in this rule group match against in label match statements. These labels are defined in a <code>LabelMatchStatement</code> specification, in the <a>Statement</a> definition of a rule. '
     DescribeManagedRuleGroupRequest:
       type: object
       required:
@@ -4002,6 +4014,22 @@ components:
             - description: '<p>A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the web ACL, and then use them in the rules and default actions that you define in the web ACL. </p> <p>For information about customizing web requests and responses, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html">Customizing web requests and responses in AWS WAF</a> in the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> <p>For information about the limits on count and size for custom request and response settings, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/limits.html">AWS WAF quotas</a> in the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p>'
     Action:
       type: string
+    ActionValue:
+      type: string
+      enum:
+        - ALLOW
+        - BLOCK
+        - COUNT
+    ActionCondition:
+      type: object
+      required:
+        - Action
+      properties:
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/ActionValue'
+            - description: 'The action setting that a log record must contain in order to meet the condition. '
+      description: A single action condition for a <a>Condition</a> in a logging filter.
     All:
       type: object
       properties: {}
@@ -4185,6 +4213,33 @@ components:
         - LT
         - GE
         - GT
+    LabelNameCondition:
+      type: object
+      required:
+        - LabelName
+      properties:
+        LabelName:
+          allOf:
+            - $ref: '#/components/schemas/LabelName'
+            - description: 'The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. '
+      description: A single label name condition for a <a>Condition</a> in a logging filter.
+    Condition:
+      type: object
+      properties:
+        ActionCondition:
+          allOf:
+            - $ref: '#/components/schemas/ActionCondition'
+            - description: A single action condition.
+        LabelNameCondition:
+          allOf:
+            - $ref: '#/components/schemas/LabelNameCondition'
+            - description: A single label name condition.
+      description: A single match condition for a <a>Filter</a>.
+    Conditions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Condition'
+      minItems: 1
     CountAction:
       type: object
       properties:
@@ -4670,7 +4725,7 @@ components:
         - APPLICATION_JSON
     ResponseContent:
       type: string
-      pattern: .*
+      pattern: '[\s\S]*'
       minLength: 1
       maxLength: 10240
     LockToken:
@@ -4692,6 +4747,15 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RuleSummary'
+    LabelName:
+      type: string
+      pattern: '^[0-9A-Za-z_\-:]+$'
+      minLength: 1
+      maxLength: 1024
+    LabelSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/LabelSummary'
     ExcludedRule:
       type: object
       required:
@@ -4760,13 +4824,48 @@ components:
         InvalidFallbackBehavior:
           allOf:
             - $ref: '#/components/schemas/BodyParsingFallbackBehavior'
-            - description: '<p>The inspection behavior to fall back to if the JSON in the request body is invalid. For AWS WAF, invalid JSON is any content that isn''t complete syntactical JSON, content whose root node isn''t an object or an array, and duplicate keys in the content. </p> <p>You can specify the following fallback behaviors:</p> <ul> <li> <p> <code>MATCH</code> - Treat the web request as matching the rule statement. AWS WAF applies the rule action to the request.</p> </li> <li> <p> <code>NO_MATCH</code> - Treat the web request as not matching the rule statement.</p> </li> <li> <p> <code>EVALUATE_AS_STRING</code> - Inspect the body as plain text. This option applies the text transformations and inspection criteria that you defined for the JSON inspection to the body text string. </p> </li> </ul> <p>If you don''t provide this setting, when AWS WAF encounters invalid JSON, it parses and inspects what it can, up to the first invalid JSON that it encounters. </p>'
+            - description: '<p>What AWS WAF should do if it fails to completely parse the JSON body. The options are the following:</p> <ul> <li> <p> <code>EVALUATE_AS_STRING</code> - Inspect the body as plain text. AWS WAF applies the text transformations and inspection criteria that you defined for the JSON inspection to the body text string.</p> </li> <li> <p> <code>MATCH</code> - Treat the web request as matching the rule statement. AWS WAF applies the rule action to the request.</p> </li> <li> <p> <code>NO_MATCH</code> - Treat the web request as not matching the rule statement.</p> </li> </ul> <p>If you don''t provide this setting, AWS WAF parses and evaluates the content only up to the first parsing failure that it encounters. </p> <p>AWS WAF does its best to parse the entire JSON body, but might be forced to stop for reasons such as invalid characters, duplicate keys, truncation, and any content whose root node isn''t an object or an array. </p> <p>AWS WAF parses the JSON in the following examples as two valid key, value pairs: </p> <ul> <li> <p>Missing comma: <code>{"key1":"value1""key2":"value2"}</code> </p> </li> <li> <p>Missing colon: <code>{"key1":"value1","key2""value2"}</code> </p> </li> <li> <p>Extra colons: <code>{"key1"::"value1","key2""value2"}</code> </p> </li> </ul>'
       description: '<p>The body of a web request, inspected as JSON. The body immediately follows the request headers. This is used in the <a>FieldToMatch</a> specification.</p> <p>Use the specifications in this object to indicate which parts of the JSON body to inspect using the rule''s inspection criteria. AWS WAF inspects only the parts of the JSON that result from the matches that you indicate. </p>'
     FieldToMatchData:
       type: string
       pattern: .*\S.*
       minLength: 1
       maxLength: 64
+    FilterBehavior:
+      type: string
+      enum:
+        - KEEP
+        - DROP
+    FilterRequirement:
+      type: string
+      enum:
+        - MEETS_ALL
+        - MEETS_ANY
+    Filter:
+      type: object
+      required:
+        - Behavior
+        - Requirement
+        - Conditions
+      properties:
+        Behavior:
+          allOf:
+            - $ref: '#/components/schemas/FilterBehavior'
+            - description: 'How to handle logs that satisfy the filter''s conditions and requirement. '
+        Requirement:
+          allOf:
+            - $ref: '#/components/schemas/FilterRequirement'
+            - description: 'Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.'
+        Conditions:
+          allOf:
+            - $ref: '#/components/schemas/Conditions'
+            - description: Match conditions for the filter.
+      description: 'A single logging filter, used in <a>LoggingFilter</a>. '
+    Filters:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+      minItems: 1
     RulePriority:
       type: integer
       minimum: 0
@@ -4838,6 +4937,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExcludedRules'
             - description: 'The rules whose actions are set to <code>COUNT</code> by the web ACL, regardless of the action that is set on the rule. This effectively excludes the rule from acting on web requests. '
+        ScopeDownStatement:
+          $ref: '#/components/schemas/Statement'
       description: '<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p> <p>You can''t nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>'
     RuleGroupReferenceStatement:
       type: object
@@ -4947,7 +5048,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration. '
-      description: 'Defines an association between Amazon Kinesis Data Firehose destinations and a web ACL resource, for logging from AWS WAF. As part of the association, you can specify parts of the standard logging fields to keep out of the logs. '
+        LoggingFilter:
+          allOf:
+            - $ref: '#/components/schemas/LoggingFilter'
+            - description: 'Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation. '
+      description: 'Defines an association between Amazon Kinesis Data Firehose destinations and a web ACL resource, for logging from AWS WAF. As part of the association, you can specify parts of the standard logging fields to keep out of the logs and you can specify filters so that you log only a subset of the logging records. '
     PolicyString:
       type: string
       pattern: .*\S.*
@@ -5024,10 +5129,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/VisibilityConfig'
             - description: 'Defines and enables Amazon CloudWatch metrics and web request sample collection. '
+        LabelNamespace:
+          allOf:
+            - $ref: '#/components/schemas/LabelName'
+            - description: '<p>The label namespace prefix for this rule group. All labels added by rules in this rule group have this prefix. </p> <ul> <li> <p>The syntax for the label namespace prefix for your rule groups is the following: </p> <p> <code>awswaf:&lt;account ID&gt;:rulegroup:&lt;rule group name&gt;:</code> </p> </li> <li> <p>When a rule with a label matches a web request, AWS WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon: </p> <p> <code>&lt;label namespace&gt;:&lt;label from rule&gt;</code> </p> </li> </ul>'
         CustomResponseBodies:
           allOf:
             - $ref: '#/components/schemas/CustomResponseBodies'
             - description: '<p>A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the rule group, and then use them in the rules that you define in the rule group. </p> <p>For information about customizing web requests and responses, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html">Customizing web requests and responses in AWS WAF</a> in the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p> <p>For information about the limits on count and size for custom request and response settings, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/limits.html">AWS WAF quotas</a> in the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html">AWS WAF Developer Guide</a>. </p>'
+        AvailableLabels:
+          allOf:
+            - $ref: '#/components/schemas/LabelSummaries'
+            - description: The labels that one or more rules in this rule group add to matching web ACLs. These labels are defined in the <code>RuleLabels</code> for a <a>Rule</a>.
+        ConsumedLabels:
+          allOf:
+            - $ref: '#/components/schemas/LabelSummaries'
+            - description: 'The labels that one or more rules in this rule group match against in label match statements. These labels are defined in a <code>LabelMatchStatement</code> specification, in the <a>Statement</a> definition of a rule. '
       description: ' A rule group defines a collection of rules to inspect and control web requests that you can use in a <a>WebACL</a>. When you create a rule group, you define an immutable capacity limit. If you update a rule group, you must stay within the capacity. This allows others to reuse the rule group with confidence in its capacity requirements. '
     MetricName:
       type: string
@@ -5112,6 +5229,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Indicates whether this web ACL is managed by AWS Firewall Manager. If true, then only AWS Firewall Manager can delete the web ACL or any Firewall Manager rule groups in the web ACL. '
+        LabelNamespace:
+          allOf:
+            - $ref: '#/components/schemas/LabelName'
+            - description: '<p>The label namespace prefix for this web ACL. All labels added by rules in this web ACL have this prefix. </p> <ul> <li> <p>The syntax for the label namespace prefix for a web ACL is the following: </p> <p> <code>awswaf:&lt;account ID&gt;:webacl:&lt;web ACL name&gt;:</code> </p> </li> <li> <p>When a rule with a label matches a web request, AWS WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon: </p> <p> <code>&lt;label namespace&gt;:&lt;label from rule&gt;</code> </p> </li> </ul>'
         CustomResponseBodies:
           allOf:
             - $ref: '#/components/schemas/CustomResponseBodies'
@@ -5244,6 +5365,53 @@ components:
       pattern: '([/])|([/](([^~])|(~[01]))+)'
       minLength: 1
       maxLength: 512
+    Label:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/LabelName'
+            - description: 'The label string. '
+      description: 'A single label container. This is used as an element of a label array in multiple contexts, for example, in <code>RuleLabels</code> inside a <a>Rule</a> and in <code>Labels</code> inside a <a>SampledHTTPRequest</a>. '
+    LabelMatchKey:
+      type: string
+      pattern: '^[0-9A-Za-z_\-:]+$'
+      minLength: 1
+      maxLength: 1024
+    LabelMatchScope:
+      type: string
+      enum:
+        - LABEL
+        - NAMESPACE
+    LabelMatchStatement:
+      type: object
+      required:
+        - Scope
+        - Key
+      properties:
+        Scope:
+          allOf:
+            - $ref: '#/components/schemas/LabelMatchScope'
+            - description: 'Specify whether you want to match using the label name or just the namespace. '
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/LabelMatchKey'
+            - description: '<p>The string to match against. The setting you provide for this depends on the match statement''s <code>Scope</code> settings: </p> <ul> <li> <p>If the <code>Scope</code> indicates <code>LABEL</code>, then this specification must include the name and can include any number of preceding namespace specifications and prefix up to providing the fully qualified label name. </p> </li> <li> <p>If the <code>Scope</code> indicates <code>NAMESPACE</code>, then this specification can include any number of contiguous namespace strings, and can include the entire label namespace prefix from the rule group or web ACL where the label originates.</p> </li> </ul> <p>Labels are case sensitive and components of a label must be separated by colon, for example <code>NS1:NS2:name</code>.</p>'
+      description: '<p>A rule statement that defines a string match search against labels that have been added to the web request by rules that have already run in the web ACL. </p> <p>The label match statement provides the label or namespace string to search for. The label string can represent a part or all of the fully qualified label name that had been added to the web request. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. If you do not provide the fully qualified name in your label match string, AWS WAF performs the search for labels that were added in the same context as the label match statement. </p>'
+    LabelSummary:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/LabelName'
+            - description: An individual label specification.
+      description: '<p>List of labels used by one or more of the rules of a <a>RuleGroup</a>. This summary object is used for the following rule group lists: </p> <ul> <li> <p> <code>AvailableLabels</code> - Labels that rules add to matching requests. These labels are defined in the <code>RuleLabels</code> for a <a>Rule</a>. </p> </li> <li> <p> <code>ConsumedLabels</code> - Labels that rules match against. These labels are defined in a <code>LabelMatchStatement</code> specification, in the <a>Statement</a> definition of a rule. </p> </li> </ul>'
+    Labels:
+      type: array
+      items:
+        $ref: '#/components/schemas/Label'
     NextMarker:
       type: string
       pattern: .*\S.*
@@ -5306,26 +5474,21 @@ components:
       items:
         $ref: '#/components/schemas/FieldToMatch'
       maxItems: 100
-    ManagedRuleGroupSummary:
+    LoggingFilter:
       type: object
+      required:
+        - Filters
+        - DefaultBehavior
       properties:
-        VendorName:
+        Filters:
           allOf:
-            - $ref: '#/components/schemas/VendorName'
-            - description: 'The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.'
-        Name:
+            - $ref: '#/components/schemas/Filters'
+            - description: 'The filters that you want to apply to the logs. '
+        DefaultBehavior:
           allOf:
-            - $ref: '#/components/schemas/EntityName'
-            - description: 'The name of the managed rule group. You use this, along with the vendor name, to identify the rule group.'
-        Description:
-          allOf:
-            - $ref: '#/components/schemas/EntityDescription'
-            - description: 'The description of the managed rule group, provided by AWS Managed Rules or the AWS Marketplace seller who manages it.'
-      description: 'High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include AWS Managed Rules rule groups, which are free of charge to AWS WAF customers, and AWS Marketplace managed rule groups, which you can subscribe to through AWS Marketplace. '
-    NoneAction:
-      type: object
-      properties: {}
-      description: '<p>Specifies that AWS WAF should do nothing. This is generally used to try out a rule without performing any actions. You set the <code>OverrideAction</code> on the <a>Rule</a>. </p> <p>This is used in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>'
+            - $ref: '#/components/schemas/FilterBehavior'
+            - description: 'Default handling for logs that don''t match any of the specified filtering conditions. '
+      description: '<p>Filtering that specifies which web requests are kept in the logs and which are dropped, defined for a web ACL''s <a>LoggingConfiguration</a>. </p> <p>You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation. </p>'
     Statement:
       type: object
       properties:
@@ -5381,7 +5544,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/ManagedRuleGroupStatement'
             - description: '<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p> <p>You can''t nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>'
+        LabelMatchStatement:
+          allOf:
+            - $ref: '#/components/schemas/LabelMatchStatement'
+            - description: '<p>A rule statement that defines a string match search against labels that have been added to the web request by rules that have already run in the web ACL. </p> <p>The label match statement provides the label or namespace string to search for. The label string can represent a part or all of the fully qualified label name that had been added to the web request. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. If you do not provide the fully qualified name in your label match string, AWS WAF performs the search for labels that were added in the same context as the label match statement. </p>'
       description: 'The processing guidance for a <a>Rule</a>, used by AWS WAF to determine whether a web request matches the rule. '
+    ManagedRuleGroupSummary:
+      type: object
+      properties:
+        VendorName:
+          allOf:
+            - $ref: '#/components/schemas/VendorName'
+            - description: 'The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: 'The name of the managed rule group. You use this, along with the vendor name, to identify the rule group.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/EntityDescription'
+            - description: 'The description of the managed rule group, provided by AWS Managed Rules or the AWS Marketplace seller who manages it.'
+      description: 'High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include AWS Managed Rules rule groups, which are free of charge to AWS WAF customers, and AWS Marketplace managed rule groups, which you can subscribe to through AWS Marketplace. '
+    NoneAction:
+      type: object
+      properties: {}
+      description: '<p>Specifies that AWS WAF should do nothing. This is generally used to try out a rule without performing any actions. You set the <code>OverrideAction</code> on the <a>Rule</a>. </p> <p>This is used in the context of other settings, for example to specify values for <a>RuleAction</a> and web ACL <a>DefaultAction</a>. </p>'
     NotStatement:
       type: object
       required:
@@ -5511,6 +5698,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OverrideAction'
             - description: '<p>The override action to apply to the rules in a rule group. Used only for rule statements that reference a rule group, like <code>RuleGroupReferenceStatement</code> and <code>ManagedRuleGroupStatement</code>. </p> <p>Set the override action to none to leave the rule actions in effect. Set it to count to only count matches, regardless of the rule action settings. </p> <p>In a <a>Rule</a>, you must specify either this <code>OverrideAction</code> setting or the rule <code>Action</code> setting, but not both:</p> <ul> <li> <p>If the rule statement references a rule group, use this override action setting and not the action setting. </p> </li> <li> <p>If the rule statement does not reference a rule group, use the rule action setting and not this rule override action setting. </p> </li> </ul>'
+        RuleLabels:
+          allOf:
+            - $ref: '#/components/schemas/Labels'
+            - description: '<p>Labels to apply to web requests that match the rule match statement. AWS WAF applies fully qualified labels to matching web requests. A fully qualified label is the concatenation of a label namespace and a rule label. The rule''s rule group or web ACL defines the label namespace. </p> <p>Rules that run after this rule in the web ACL can match against these labels using a <code>LabelMatchStatement</code>.</p> <p>For each label, provide a case-sensitive string containing optional namespaces and a label name, according to the following guidelines:</p> <ul> <li> <p>Separate each component of the label with a colon. </p> </li> <li> <p>Each namespace or name can have up to 128 characters.</p> </li> <li> <p>You can specify up to 5 namespaces in a label.</p> </li> <li> <p>Don''t use the following reserved words in your label specification: <code>aws</code>, <code>waf</code>, <code>managed</code>, <code>rulegroup</code>, <code>webacl</code>, <code>regexpatternset</code>, or <code>ipset</code>.</p> </li> </ul> <p>For example, <code>myLabelName</code> or <code>nameSpace1:nameSpace2:myLabelName</code>. </p>'
         VisibilityConfig:
           allOf:
             - $ref: '#/components/schemas/VisibilityConfig'
@@ -5566,6 +5757,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResponseStatusCode'
             - description: The response code that was sent for the request.
+        Labels:
+          allOf:
+            - $ref: '#/components/schemas/Labels'
+            - description: '<p>Labels applied to the web request by matching rules. AWS WAF applies fully qualified labels to matching web requests. A fully qualified label is the concatenation of a label namespace and a rule label. The rule''s rule group or web ACL defines the label namespace. </p> <p>For example, <code>awswaf:111122223333:myRuleGroup:testRules:testNS1:testNS2:labelNameA</code> or <code>awswaf:managed:aws:managed-rule-set:header:encoding:utf8</code>. </p>'
       description: Represents a single sampled web request. The response from <a>GetSampledRequests</a> includes a <code>SampledHTTPRequests</code> complex type that appears as <code>SampledRequests</code> in the response syntax. <code>SampledHTTPRequests</code> contains an array of <code>SampledHTTPRequest</code> objects.
     Size:
       type: integer

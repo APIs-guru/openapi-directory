@@ -116,7 +116,7 @@ paths:
   '/identitypools/{IdentityPoolId}/bulkpublish':
     post:
       operationId: BulkPublish
-      description: '<p>Initiates a bulk publish of all existing datasets for an Identity Pool to the configured stream. Customers are limited to one successful bulk publish per 24 hours. Bulk publish is an asynchronous request, customers can see the status of the request via the GetBulkPublishDetails operation.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
+      description: '<p>Initiates a bulk publish of all existing datasets for an Identity Pool to the configured stream. Customers are limited to one successful bulk publish per 24 hours. Bulk publish is an asynchronous request, customers can see the status of the request via the GetBulkPublishDetails operation.</p><p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
       responses:
         '200':
           description: Success
@@ -124,34 +124,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BulkPublishResponse'
-        '400':
-          description: AlreadyStreamedException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AlreadyStreamedException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: DuplicateRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRequestException'
+        '485':
+          description: AlreadyStreamedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyStreamedException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -181,48 +189,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteDatasetResponse'
-        '400':
-          description: InvalidParameterException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '409':
-          description: ResourceConflictException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceConflictException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '485':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -269,41 +271,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DescribeDatasetResponse'
-        '400':
-          description: InvalidParameterException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -334,7 +331,7 @@ paths:
             maxLength: 128
     post:
       operationId: UpdateRecords
-      description: '<p>Posts updates to records and adds and deletes records for a dataset and user.</p> <p>The sync count in the record patch is your last known sync count for that record. The server will reject an UpdateRecords request with a ResourceConflictException if you try to patch a record with a new value but a stale sync count.</p> <p>For example, if the sync count on the server is 5 for a key called highScore and you try and submit a new highScore with sync count of 4, the request will be rejected. To obtain the current sync count for a record, call ListRecords. On a successful update of the record, the response returns the new sync count for that record. You should present that sync count the next time you try to update that same record. When the record does not exist, specify the sync count as 0.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>'
+      description: '<p>Posts updates to records and adds and deletes records for a dataset and user.</p> <p>The sync count in the record patch is your last known sync count for that record. The server will reject an UpdateRecords request with a ResourceConflictException if you try to patch a record with a new value but a stale sync count.</p><p>For example, if the sync count on the server is 5 for a key called highScore and you try and submit a new highScore with sync count of 4, the request will be rejected. To obtain the current sync count for a record, call ListRecords. On a successful update of the record, the response returns the new sync count for that record. You should present that sync count the next time you try to update that same record. When the record does not exist, specify the sync count as 0.</p> <p>This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.</p>'
       responses:
         '200':
           description: Success
@@ -342,44 +339,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdateRecordsResponse'
-        '400':
-          description: InvalidLambdaFunctionOutputException
-          x-aws-exception: true
+        '480':
+          description: InvalidParameterException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvalidLambdaFunctionOutputException'
-        '403':
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '483':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '409':
+        '484':
           description: ResourceConflictException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceConflictException'
-        '429':
+        '485':
+          description: InvalidLambdaFunctionOutputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidLambdaFunctionOutputException'
+        '486':
+          description: LambdaThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LambdaThrottledException'
+        '487':
           description: TooManyRequestsException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+        '488':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -451,41 +460,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DescribeIdentityPoolUsageResponse'
-        '400':
-          description: InvalidParameterException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -515,41 +519,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DescribeIdentityUsageResponse'
-        '400':
-          description: InvalidParameterException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -580,7 +579,7 @@ paths:
   '/identitypools/{IdentityPoolId}/getBulkPublishDetails':
     post:
       operationId: GetBulkPublishDetails
-      description: <p>Get the status of the last BulkPublish operation for an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
+      description: <p>Get the status of the last BulkPublish operation for an identity pool.</p><p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
       responses:
         '200':
           description: Success
@@ -588,30 +587,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetBulkPublishDetailsResponse'
-        '400':
-          description: InvalidParameterException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -637,7 +632,7 @@ paths:
   '/identitypools/{IdentityPoolId}/events':
     get:
       operationId: GetCognitoEvents
-      description: <p>Gets the events and the corresponding Lambda functions associated with an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
+      description: <p>Gets the events and the corresponding Lambda functions associated with an identity pool.</p><p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
       responses:
         '200':
           description: Success
@@ -645,41 +640,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetCognitoEventsResponse'
-        '400':
+        '480':
           description: InvalidParameterException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
-        '403':
-          description: NotAuthorizedException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
+        '482':
+          description: NotAuthorizedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -700,45 +690,40 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: SetCognitoEvents
-      description: '<p>Sets the AWS Lambda function for a given event type for an identity pool. This request only updates the key/value pair specified. Other key/values pairs are not updated. To remove a key value pair, pass a empty value for the particular key.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
+      description: '<p>Sets the AWS Lambda function for a given event type for an identity pool. This request only updates the key/value pair specified. Other key/values pairs are not updated. To remove a key value pair, pass a empty value for the particular key.</p><p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>'
       responses:
         '200':
           description: Success
-        '400':
+        '480':
           description: InvalidParameterException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
-        '403':
-          description: NotAuthorizedException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
+        '482':
+          description: NotAuthorizedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -767,7 +752,7 @@ paths:
   '/identitypools/{IdentityPoolId}/configuration':
     get:
       operationId: GetIdentityPoolConfiguration
-      description: <p>Gets the configuration settings of an identity pool.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
+      description: <p>Gets the configuration settings of an identity pool.</p><p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
       responses:
         '200':
           description: Success
@@ -775,41 +760,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetIdentityPoolConfigurationResponse'
-        '400':
-          description: InvalidParameterException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -830,7 +810,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: SetIdentityPoolConfiguration
-      description: <p>Sets the necessary configuration for push sync.</p> <p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
+      description: <p>Sets the necessary configuration for push sync.</p><p>This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.</p>
       responses:
         '200':
           description: Success
@@ -838,41 +818,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SetIdentityPoolConfigurationResponse'
-        '400':
-          description: ConcurrentModificationException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConcurrentModificationException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '485':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -929,34 +910,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListDatasetsResponse'
-        '400':
-          description: InvalidParameterException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
+        '481':
+          description: InvalidParameterException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -1007,34 +984,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListIdentityPoolUsageResponse'
-        '400':
-          description: InvalidParameterException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
+        '481':
+          description: InvalidParameterException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: nextToken
           in: query
@@ -1067,30 +1040,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListRecordsResponse'
-        '400':
+        '480':
           description: InvalidParameterException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
-        '403':
+        '481':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '429':
+        '482':
           description: TooManyRequestsException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
@@ -1158,7 +1127,7 @@ paths:
   '/identitypools/{IdentityPoolId}/identity/{IdentityId}/device':
     post:
       operationId: RegisterDevice
-      description: <p>Registers a device to receive push sync notifications.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
+      description: <p>Registers a device to receive push sync notifications.</p><p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
       responses:
         '200':
           description: Success
@@ -1166,41 +1135,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RegisterDeviceResponse'
-        '400':
-          description: InvalidConfigurationException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidConfigurationException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: InvalidConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -1252,7 +1222,7 @@ paths:
   '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/subscriptions/{DeviceId}':
     post:
       operationId: SubscribeToDataset
-      description: <p>Subscribes to receive notifications when a dataset is modified by another device.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
+      description: <p>Subscribes to receive notifications when a dataset is modified by another device.</p><p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
       responses:
         '200':
           description: Success
@@ -1260,41 +1230,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SubscribeToDatasetResponse'
-        '400':
-          description: InvalidConfigurationException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidConfigurationException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: InvalidConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -1341,7 +1312,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: UnsubscribeFromDataset
-      description: <p>Unsubscribes from receiving notifications when a dataset is modified by another device.</p> <p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
+      description: <p>Unsubscribes from receiving notifications when a dataset is modified by another device.</p><p>This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.</p>
       responses:
         '200':
           description: Success
@@ -1349,41 +1320,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnsubscribeFromDatasetResponse'
-        '400':
-          description: InvalidConfigurationException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidConfigurationException'
-        '403':
+        '480':
           description: NotAuthorizedException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotAuthorizedException'
-        '404':
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
           description: ResourceNotFoundException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '429':
-          description: TooManyRequestsException
-          x-aws-exception: true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooManyRequestsException'
-        '500':
+        '483':
           description: InternalErrorException
-          x-aws-exception: true
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: InvalidConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidConfigurationException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: IdentityPoolId
           in: path
@@ -1480,66 +1452,12 @@ components:
             - $ref: '#/components/schemas/IdentityPoolId'
             - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
       description: The output for the BulkPublish operation.
-    NotAuthorizedException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: The message returned by a NotAuthorizedException.
-      description: Thrown when a user is not authorized to access the requested resource.
-    InvalidParameterException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: Message returned by InvalidParameterException.
-      description: Thrown when a request parameter does not comply with the associated constraints.
-    ResourceNotFoundException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: Message returned by a ResourceNotFoundException.
-      description: Thrown if the resource doesn't exist.
-    InternalErrorException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: Message returned by InternalErrorException.
-      description: Indicates an internal service error.
-    DuplicateRequestException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: The message associated with the DuplicateRequestException exception.
-      description: An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool.
-    AlreadyStreamedException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: The message associated with the AlreadyStreamedException exception.
-      description: An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully.
+    NotAuthorizedException: {}
+    InvalidParameterException: {}
+    ResourceNotFoundException: {}
+    InternalErrorException: {}
+    DuplicateRequestException: {}
+    AlreadyStreamedException: {}
     DeleteDatasetResponse:
       type: object
       properties:
@@ -1548,26 +1466,8 @@ components:
             - $ref: '#/components/schemas/Dataset'
             - description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
       description: Response to a successful DeleteDataset request.
-    TooManyRequestsException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: Message returned by a TooManyRequestsException.
-      description: Thrown if the request is throttled.
-    ResourceConflictException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: The message returned by a ResourceConflictException.
-      description: Thrown if an update can't be applied because the resource was changed by another call and this would result in a conflict.
+    TooManyRequestsException: {}
+    ResourceConflictException: {}
     DescribeDatasetResponse:
       type: object
       properties:
@@ -1724,15 +1624,7 @@ components:
             - $ref: '#/components/schemas/DeviceId'
             - description: The unique ID generated for this device by Cognito.
       description: Response to a RegisterDevice request.
-    InvalidConfigurationException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: Message returned by InvalidConfigurationException.
+    InvalidConfigurationException: {}
     LambdaFunctionArn:
       type: string
     SetIdentityPoolConfigurationResponse:
@@ -1769,16 +1661,7 @@ components:
       enum:
         - ENABLED
         - DISABLED
-    ConcurrentModificationException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The message returned by a ConcurrentModicationException.
-      description: Thrown if there are parallel requests to modify a resource.
+    ConcurrentModificationException: {}
     SubscribeToDatasetResponse:
       type: object
       properties: {}
@@ -1823,38 +1706,9 @@ components:
             - $ref: '#/components/schemas/Date'
             - description: The last modified date of the client device.
       description: An update operation for a record.
-    LimitExceededException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: Message returned by LimitExceededException.
-      description: Thrown when the limit on the number of objects or operations has been exceeded.
-    InvalidLambdaFunctionOutputException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: A message returned when an InvalidLambdaFunctionOutputException occurs
-      description: The AWS Lambda function returned invalid output or an exception.
-    LambdaThrottledException:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          allOf:
-            - $ref: '#/components/schemas/ExceptionMessage'
-            - description: A message returned when an LambdaThrottledException is thrown
-      description: 'AWS Lambda throttled your account, please contact AWS Support'
-    ExceptionMessage:
-      type: string
+    LimitExceededException: {}
+    InvalidLambdaFunctionOutputException: {}
+    LambdaThrottledException: {}
     ApplicationArn:
       type: string
       pattern: 'arn:aws:sns:[-0-9a-z]+:\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+'
@@ -1897,8 +1751,6 @@ components:
             - $ref: '#/components/schemas/StreamingStatus'
             - description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
       description: Configuration options for configure Cognito streams.
-    String:
-      type: string
     IdentityId:
       type: string
       pattern: '[\w-]+:[0-9a-f-]+'
@@ -1912,6 +1764,8 @@ components:
     Date:
       type: string
       format: date-time
+    String:
+      type: string
     Long:
       type: integer
     Dataset:

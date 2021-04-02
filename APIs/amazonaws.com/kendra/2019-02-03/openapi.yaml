@@ -118,7 +118,7 @@ paths:
   /#X-Amz-Target=AWSKendraFrontendService.BatchDeleteDocument:
     post:
       operationId: BatchDeleteDocument
-      description: <p>Removes one or more documents from an index. The documents must have been added with the <a>BatchPutDocument</a> operation.</p> <p>The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages releated to the processing of the batch are sent to you CloudWatch log.</p>
+      description: <p>Removes one or more documents from an index. The documents must have been added with the <code>BatchPutDocument</code> operation.</p> <p>The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.</p>
       responses:
         '200':
           description: Success
@@ -418,7 +418,7 @@ paths:
   /#X-Amz-Target=AWSKendraFrontendService.CreateIndex:
     post:
       operationId: CreateIndex
-      description: '<p>Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the <code>Status</code> field returned from a call to . The <code>Status</code> field is set to <code>ACTIVE</code> when the index is ready to use.</p> <p>Once the index is active you can index your documents using the operation or using one of the supported data sources. </p>'
+      description: '<p>Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the <code>Status</code> field returned from a call to <code>DescribeIndex</code>. The <code>Status</code> field is set to <code>ACTIVE</code> when the index is ready to use.</p> <p>Once the index is active you can index your documents using the <code>BatchPutDocument</code> operation or using one of the supported data sources. </p>'
       responses:
         '200':
           description: Success
@@ -568,7 +568,7 @@ paths:
   /#X-Amz-Target=AWSKendraFrontendService.DeleteDataSource:
     post:
       operationId: DeleteDataSource
-      description: 'Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the <code>Status</code> field returned by a call to the operation is set to <code>DELETING</code>. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html">Deleting Data Sources</a>.'
+      description: 'Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the <code>Status</code> field returned by a call to the <code>DescribeDataSource</code> operation is set to <code>DELETING</code>. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html">Deleting Data Sources</a>.'
       responses:
         '200':
           description: Success
@@ -698,7 +698,7 @@ paths:
   /#X-Amz-Target=AWSKendraFrontendService.DeleteIndex:
     post:
       operationId: DeleteIndex
-      description: 'Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the <code>Status</code> field returned by a call to the <a>DescribeIndex</a> operation is set to <code>DELETING</code>.'
+      description: 'Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the <code>Status</code> field returned by a call to the <code>DescribeIndex</code> operation is set to <code>DELETING</code>.'
       responses:
         '200':
           description: Success
@@ -2191,7 +2191,7 @@ components:
         IndexId:
           allOf:
             - $ref: '#/components/schemas/IndexId'
-            - description: The identifier of the index to add the documents to. You need to create the index first using the <a>CreateIndex</a> operation.
+            - description: The identifier of the index to add the documents to. You need to create the index first using the <code>CreateIndex</code> operation.
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
@@ -2632,7 +2632,7 @@ components:
         CapacityUnits:
           allOf:
             - $ref: '#/components/schemas/CapacityUnitsConfiguration'
-            - description: 'For enterprise edtion indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.'
+            - description: 'For Enterprise edition indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.'
         UserTokenConfigurations:
           allOf:
             - $ref: '#/components/schemas/UserTokenConfigurationList'
@@ -2918,7 +2918,7 @@ components:
         IndexId:
           allOf:
             - $ref: '#/components/schemas/IndexId'
-            - description: The unique identifier of the index to search. The identifier is returned in the response from the operation.
+            - description: The unique identifier of the index to search. The identifier is returned in the response from the <code>CreateIndex</code> operation.
         QueryText:
           allOf:
             - $ref: '#/components/schemas/QueryText'
@@ -3011,7 +3011,7 @@ components:
         QueryId:
           allOf:
             - $ref: '#/components/schemas/QueryId'
-            - description: The identifier of the specific query for which you are submitting feedback. The query ID is returned in the response to the operation.
+            - description: The identifier of the specific query for which you are submitting feedback. The query ID is returned in the response to the <code>Query</code> operation.
         ClickFeedbackItems:
           allOf:
             - $ref: '#/components/schemas/ClickFeedbackList'
@@ -3118,7 +3118,7 @@ components:
         CapacityUnits:
           allOf:
             - $ref: '#/components/schemas/CapacityUnitsConfiguration'
-            - description: '<p>Sets the number of addtional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day.</p> <p>If you are using extra storage units, you can''t reduce the storage capacity below that required to meet the storage needs for your index.</p>'
+            - description: '<p>Sets the number of additional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day.</p> <p>If you are using extra storage units, you can''t reduce the storage capacity below that required to meet the storage needs for your index.</p>'
         UserTokenConfigurations:
           allOf:
             - $ref: '#/components/schemas/UserTokenConfigurationList'
@@ -3181,7 +3181,7 @@ components:
         AllowedGroupsColumnName:
           allOf:
             - $ref: '#/components/schemas/ColumnName'
-            - description: 'A list of groups, separated by semi-colons, that filters a query response based on user context. The document is only returned to users that are in one of the groups specified in the <code>UserContext</code> field of the <a>Query</a> operation.'
+            - description: 'A list of groups, separated by semi-colons, that filters a query response based on user context. The document is only returned to users that are in one of the groups specified in the <code>UserContext</code> field of the <code>Query</code> operation.'
       description: Provides information about the column that should be used for filtering the query response by groups.
     String:
       type: string
@@ -3361,7 +3361,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ErrorMessage'
             - description: An explanation for why the document couldn't be removed from the index.
-      description: Provides information about documents that could not be removed from an index by the <a>BatchDeleteDocument</a> operation.
+      description: Provides information about documents that could not be removed from an index by the <code>BatchDeleteDocument</code> operation.
     RoleArn:
       type: string
       pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
@@ -3450,7 +3450,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The Unix timestamp of the date and time that the result was clicked.
-      description: Gathers information about when a particular result was clicked by a user. Your application uses the <a>SubmitFeedback</a> operation to provide click information.
+      description: Gathers information about when a particular result was clicked by a user. Your application uses the <code>SubmitFeedback</code> operation to provide click information.
     ClickFeedbackList:
       type: array
       items:
@@ -3487,7 +3487,7 @@ components:
         FieldMappings:
           allOf:
             - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-            - description: An array of objects that map database column names to the corresponding fields in an index. You must first create the fields in the index using the <a>UpdateIndex</a> operation.
+            - description: An array of objects that map database column names to the corresponding fields in an index. You must first create the fields in the index using the <code>UpdateIndex</code> operation.
         ChangeDetectingColumns:
           allOf:
             - $ref: '#/components/schemas/ChangeDetectingColumns'
@@ -3517,7 +3517,7 @@ components:
         DataSourceFieldName:
           allOf:
             - $ref: '#/components/schemas/ConfluenceAttachmentFieldName'
-            - description: <p>The name of the field in the data source. </p> <p>You must first create the index field using the operation. </p>
+            - description: <p>The name of the field in the data source. </p> <p>You must first create the index field using the <code>UpdateIndex</code> operation. </p>
         DateFieldFormat:
           allOf:
             - $ref: '#/components/schemas/DataSourceDateFieldFormat'
@@ -3526,7 +3526,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexFieldName'
             - description: The name of the index field to map to the Confluence data source field. The index field type must match the Confluence field type.
-      description: <p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the operation. </p>
+      description: <p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the <code>UpdateIndex</code> operation. </p>
     ConfluenceAttachmentFieldName:
       type: string
       enum:
@@ -3564,7 +3564,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConfluenceBlogFieldMappingsList'
             - description: '<p>Defines how blog metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the <code>UpdateIndex</code> operation.</p> <p>If you specify the <code>BlogFieldMappings</code> parameter, you must specify at least one field mapping.</p>'
-      description: Specifies the blog settings for the Confluence data source. Blogs are always indexed unless filtered from the index by the <code>ExclusionPatterns</code> or <code>InclusionPatterns</code> fields in the data type.
+      description: Specifies the blog settings for the Confluence data source. Blogs are always indexed unless filtered from the index by the <code>ExclusionPatterns</code> or <code>InclusionPatterns</code> fields in the <code>ConfluenceConfiguration</code> type.
     ConfluenceBlogToIndexFieldMapping:
       type: object
       properties:
@@ -3580,7 +3580,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexFieldName'
             - description: The name of the index field to map to the Confluence data source field. The index field type must match the Confluence field type.
-      description: <p>Defines the mapping between a blog field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the operation. </p>
+      description: <p>Defines the mapping between a blog field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the <code>UpdateIndex</code> operation. </p>
     ConfluenceBlogFieldName:
       type: string
       enum:
@@ -3730,7 +3730,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexFieldName'
             - description: The name of the index field to map to the Confluence data source field. The index field type must match the Confluence field type.
-      description: <p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the operation. </p>
+      description: <p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the <code>UpdateIndex</code> operation. </p>
     ConfluencePageFieldName:
       type: string
       enum:
@@ -3772,7 +3772,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexFieldName'
             - description: The name of the index field to map to the Confluence data source field. The index field type must match the Confluence field type.
-      description: <p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the operation. </p>
+      description: <p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the <code>UpdateIndex</code> operation. </p>
     ConfluenceSpaceFieldName:
       type: string
       enum:
@@ -4049,7 +4049,7 @@ components:
         FieldMappings:
           allOf:
             - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-            - description: 'A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the operation before you map SharePoint attributes. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping Data Source Fields</a>.'
+            - description: 'A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the <code>UpdateIndex</code> operation before you map SharePoint attributes. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping Data Source Fields</a>.'
         DocumentTitleFieldName:
           allOf:
             - $ref: '#/components/schemas/DataSourceFieldName'
@@ -4110,7 +4110,7 @@ components:
         KnowledgeArticleConfiguration:
           allOf:
             - $ref: '#/components/schemas/SalesforceKnowledgeArticleConfiguration'
-            - description: 'Specifies configuration information for the knowlege article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.'
+            - description: 'Specifies configuration information for the knowledge article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.'
         ChatterFeedConfiguration:
           allOf:
             - $ref: '#/components/schemas/SalesforceChatterFeedConfiguration'
@@ -4195,6 +4195,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ServiceNowServiceCatalogConfiguration'
             - description: Provides configuration information for crawling service catalogs in the ServiceNow site.
+        AuthenticationType:
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowAuthenticationType'
+            - description: '<p>Determines the type of authentication used to connect to the ServiceNow instance. If you choose <code>HTTP_BASIC</code>, Amazon Kendra is authenticated using the user name and password provided in the AWS Secrets Manager secret in the <code>SecretArn</code> field. When you choose <code>OAUTH2</code>, Amazon Kendra is authenticated using the OAuth token and secret provided in the Secrets Manager secret, and the user name and password are used to determine which information Amazon Kendra has access to.</p> <p>When you use <code>OAUTH2</code> authentication, you must generate a token and a client secret using the ServiceNow console. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html">Using a ServiceNow data source</a>.</p>'
       description: Provides configuration information required to connect to a ServiceNow data source.
     GoogleDriveConfiguration:
       type: object
@@ -4216,7 +4220,7 @@ components:
         FieldMappings:
           allOf:
             - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-            - description: '<p>Defines mapping between a field in the Google Drive and a Amazon Kendra index field.</p> <p>If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the <a>UpdateIndex</a> operation.</p>'
+            - description: '<p>Defines mapping between a field in the Google Drive and a Amazon Kendra index field.</p> <p>If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the <code>UpdateIndex</code> operation.</p>'
         ExcludeMimeTypes:
           allOf:
             - $ref: '#/components/schemas/ExcludeMimeTypesList'
@@ -4273,8 +4277,8 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/DataSourceStatus'
-            - description: The status of the data source. When the status is <code>ATIVE</code> the data source is ready to use.
-      description: Summary information for a Amazon Kendra data source. Returned in a call to .
+            - description: The status of the data source. When the status is <code>ACTIVE</code> the data source is ready to use.
+      description: Summary information for a Amazon Kendra data source. Returned in a call to the <code>DescribeDataSource</code> operation.
     DataSourceSummaryList:
       type: array
       items:
@@ -4379,7 +4383,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexFieldName'
             - description: The name of the field in the index.
-      description: Maps a column or attribute in the data source to an index field. You must first create the fields in the index using the <a>UpdateIndex</a> operation.
+      description: Maps a column or attribute in the data source to an index field. You must first create the fields in the index using the <code>UpdateIndex</code> operation.
     SubnetIdList:
       type: array
       items:
@@ -5166,7 +5170,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/RelevanceType'
             - description: Whether to document was relevant or not relevant to the search.
-      description: Provides feedback on how relevant a document is to a search. Your application uses the <a>SubmitFeedback</a> operation to provide relevance information.
+      description: Provides feedback on how relevant a document is to a search. Your application uses the <code>SubmitFeedback</code> operation to provide relevance information.
     RelevanceFeedbackList:
       type: array
       items:
@@ -5232,7 +5236,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SalesforceCustomKnowledgeArticleTypeConfigurationList'
             - description: Provides configuration information for custom Salesforce knowledge articles.
-      description: 'Specifies configuration information for the knowlege article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both '
+      description: 'Specifies configuration information for the knowledge article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both '
     SalesforceStandardObjectAttachmentConfiguration:
       type: object
       properties:
@@ -5346,12 +5350,12 @@ components:
         DocumentTitleFieldName:
           allOf:
             - $ref: '#/components/schemas/DataSourceFieldName'
-            - description: The name of the field in the standard object table that contains the document titleB.
+            - description: The name of the field in the standard object table that contains the document title.
         FieldMappings:
           allOf:
             - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
             - description: One or more objects that map fields in the standard object to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.
-      description: Specifies confguration information for indexing a single standard object.
+      description: Specifies configuration information for indexing a single standard object.
     ScoreConfidence:
       type: string
       enum:
@@ -5365,6 +5369,11 @@ components:
       pattern: '[-0-9a-zA-Z]+'
       minLength: 1
       maxLength: 200
+    ServiceNowAuthenticationType:
+      type: string
+      enum:
+        - HTTP_BASIC
+        - OAUTH2
     ServiceNowBuildVersionType:
       type: string
       enum:
@@ -5404,6 +5413,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
             - description: Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.
+        FilterQuery:
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowKnowledgeArticleFilterQuery'
+            - description: '<p>A query that selects the knowledge articles to index. The query can return articles from multiple knowledge bases, and the knowledge bases can be public or private.</p> <p>The query string must be one generated by the ServiceNow console. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/servicenow-query.html">Specifying documents to index with a query</a>. </p>'
       description: Provides configuration information for crawling knowledge articles in the ServiceNow site.
     ServiceNowServiceCatalogConfiguration:
       type: object
@@ -5417,11 +5430,11 @@ components:
         IncludeAttachmentFilePatterns:
           allOf:
             - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-            - description: 'Determines the types of file attachments that are included in the index. '
+            - description: '<p>A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don''t match the patterns are excluded from the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the file name of the attachment.</p>'
         ExcludeAttachmentFilePatterns:
           allOf:
             - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-            - description: Determines the types of file attachments that are excluded from the index.
+            - description: '<p>A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don''t match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the file name of the attachment.</p>'
         DocumentDataFieldName:
           allOf:
             - $ref: '#/components/schemas/DataSourceFieldName'
@@ -5435,6 +5448,11 @@ components:
             - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
             - description: Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.
       description: Provides configuration information for crawling service catalog items in the ServiceNow site
+    ServiceNowKnowledgeArticleFilterQuery:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 2048
     SharePointVersion:
       type: string
       enum:
