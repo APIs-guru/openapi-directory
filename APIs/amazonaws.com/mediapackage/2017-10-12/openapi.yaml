@@ -3031,6 +3031,11 @@ components:
                 An Amazon Resource Name (ARN) of a Certificate Manager certificate
                 that MediaPackage will use for enforcing secure end-to-end data
                 transfer with the key provider service.
+        EncryptionContractConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionContractConfiguration'
+            - xml:
+                name: encryptionContractConfiguration
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3590,6 +3595,39 @@ components:
       type: object
       title: DescribeOriginEndpointRequest
       properties: {}
+    PresetSpeke20Audio:
+      enum:
+        - PRESET-AUDIO-1
+      type: string
+    PresetSpeke20Video:
+      enum:
+        - PRESET-VIDEO-1
+      type: string
+    EncryptionContractConfiguration:
+      required:
+        - PresetSpeke20Audio
+        - PresetSpeke20Video
+      type: object
+      properties:
+        PresetSpeke20Audio:
+          allOf:
+            - $ref: '#/components/schemas/PresetSpeke20Audio'
+            - xml:
+                name: presetSpeke20Audio
+              description: A collection of audio encryption presets.
+        PresetSpeke20Video:
+          allOf:
+            - $ref: '#/components/schemas/PresetSpeke20Video'
+            - xml:
+                name: presetSpeke20Video
+              description: A collection of video encryption presets.
+      description: |
+        Use encryptionContractConfiguration to configure one or more content encryption keys for your endpoints that use SPEKE 2.0. 
+        The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. 
+        To configure the encryption contract, specify which audio and video encryption presets to use.
+        Note the following considerations when using encryptionContractConfiguration:
+        encryptionContractConfiguration can be used for DASH endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification.
+        You must disable key rotation for this endpoint by setting keyRotationIntervalSeconds to 0.
     EncryptionMethod:
       enum:
         - AES_128

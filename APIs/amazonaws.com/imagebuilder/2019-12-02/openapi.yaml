@@ -188,7 +188,7 @@ paths:
                 imageBuildVersionArn:
                   description: The Amazon Resource Name (ARN) of the image whose creation you want to cancel.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
                 clientToken:
                   description: The idempotency token used to make this request idempotent.
                   type: string
@@ -317,7 +317,7 @@ paths:
                     - Windows
                     - Linux
                 supportedOsVersions:
-                  description: ' The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. '
+                  description: ' The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation.'
                   type: array
                   items:
                     $ref: '#/components/schemas/OsVersion'
@@ -446,7 +446,6 @@ paths:
                 - name
                 - semanticVersion
                 - components
-                - dockerfileTemplateData
                 - parentImage
                 - targetRepository
                 - clientToken
@@ -475,6 +474,18 @@ paths:
                   items:
                     $ref: '#/components/schemas/ComponentConfiguration'
                   minItems: 1
+                instanceConfiguration:
+                  description: Defines a custom source AMI and block device mapping configurations of an instance used for building and testing container images.
+                  type: object
+                  properties:
+                    image:
+                      allOf:
+                        - $ref: '#/components/schemas/NonEmptyString'
+                        - description: 'The AMI ID to use as the base image for a container build and test instance. If not specified, Image Builder will use the appropriate ECS-optimized AMI as a base image.'
+                    blockDeviceMappings:
+                      allOf:
+                        - $ref: '#/components/schemas/InstanceBlockDeviceMappings'
+                        - description: Defines the block devices to attach for building an instance from this Image Builder AMI.
                 dockerfileTemplateData:
                   description: The Dockerfile template used to build your image as an inline data blob.
                   type: string
@@ -545,7 +556,7 @@ paths:
   /CreateDistributionConfiguration:
     put:
       operationId: CreateDistributionConfiguration
-      description: 'Creates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline. '
+      description: Creates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline.
       responses:
         '200':
           description: Success
@@ -632,28 +643,28 @@ paths:
                 - clientToken
               properties:
                 name:
-                  description: ' The name of the distribution configuration. '
+                  description: ' The name of the distribution configuration.'
                   type: string
                   pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
                 description:
-                  description: ' The description of the distribution configuration. '
+                  description: ' The description of the distribution configuration.'
                   type: string
                   minLength: 1
                   maxLength: 1024
                 distributions:
-                  description: ' The distributions of the distribution configuration. '
+                  description: ' The distributions of the distribution configuration.'
                   type: array
                   items:
                     $ref: '#/components/schemas/Distribution'
                 tags:
-                  description: ' The tags of the distribution configuration. '
+                  description: ' The tags of the distribution configuration.'
                   type: object
                   minProperties: 1
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
-                  description: ' The idempotency token of the distribution configuration. '
+                  description: ' The idempotency token of the distribution configuration.'
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -668,7 +679,7 @@ paths:
   /CreateImage:
     put:
       operationId: CreateImage
-      description: ' Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration. '
+      description: ' Creates a new image. This request will create a new image along with all of the configured output resources defined in the distribution configuration.'
       responses:
         '200':
           description: Success
@@ -742,21 +753,21 @@ paths:
                 - clientToken
               properties:
                 imageRecipeArn:
-                  description: ' The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed. '
+                  description: ' The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.'
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 containerRecipeArn:
                   description: The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 distributionConfigurationArn:
-                  description: ' The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline. '
+                  description: ' The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline.'
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):distribution-configuration/[a-z0-9-_]+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):distribution-configuration/[a-z0-9-_]+$'
                 infrastructureConfigurationArn:
-                  description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that defines the environment in which your image will be built and tested. '
+                  description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that defines the environment in which your image will be built and tested.'
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
                 imageTestsConfiguration:
                   description: Image tests configuration.
                   type: object
@@ -770,17 +781,17 @@ paths:
                         - $ref: '#/components/schemas/ImageTestsTimeoutMinutes'
                         - description: The maximum time in minutes that tests are permitted to run.
                 enhancedImageMetadataEnabled:
-                  description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default. '
+                  description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
                   type: boolean
                 tags:
-                  description: ' The tags of the image. '
+                  description: ' The tags of the image.'
                   type: object
                   minProperties: 1
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
-                  description: ' The idempotency token used to make this request idempotent. '
+                  description: ' The idempotency token used to make this request idempotent.'
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -795,7 +806,7 @@ paths:
   /CreateImagePipeline:
     put:
       operationId: CreateImagePipeline
-      description: ' Creates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images. '
+      description: ' Creates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images.'
       responses:
         '200':
           description: Success
@@ -876,30 +887,30 @@ paths:
                 - clientToken
               properties:
                 name:
-                  description: ' The name of the image pipeline. '
+                  description: ' The name of the image pipeline.'
                   type: string
                   pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
                 description:
-                  description: ' The description of the image pipeline. '
+                  description: ' The description of the image pipeline.'
                   type: string
                   minLength: 1
                   maxLength: 1024
                 imageRecipeArn:
-                  description: ' The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline. '
+                  description: ' The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline.'
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 containerRecipeArn:
                   description: The Amazon Resource Name (ARN) of the container recipe that is used to configure images created by this container pipeline.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 infrastructureConfigurationArn:
-                  description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline. '
+                  description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline.'
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
                 distributionConfigurationArn:
-                  description: ' The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images created by this image pipeline. '
+                  description: ' The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images created by this image pipeline.'
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):distribution-configuration/[a-z0-9-_]+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):distribution-configuration/[a-z0-9-_]+$'
                 imageTestsConfiguration:
                   description: Image tests configuration.
                   type: object
@@ -913,10 +924,10 @@ paths:
                         - $ref: '#/components/schemas/ImageTestsTimeoutMinutes'
                         - description: The maximum time in minutes that tests are permitted to run.
                 enhancedImageMetadataEnabled:
-                  description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default. '
+                  description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
                   type: boolean
                 schedule:
-                  description: 'A schedule configures how often and when a pipeline will automatically create a new image. '
+                  description: A schedule configures how often and when a pipeline will automatically create a new image.
                   type: object
                   properties:
                     scheduleExpression:
@@ -932,20 +943,20 @@ paths:
                         - $ref: '#/components/schemas/PipelineExecutionStartCondition'
                         - description: 'The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic version filters on the source image or components in your image recipe, EC2 Image Builder will build a new image only when there are new versions of the image or components in your recipe that match the semantic version filter. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time. For semantic version syntax, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html">CreateComponent</a> in the <i> EC2 Image Builder API Reference</i>.'
                 status:
-                  description: ' The status of the image pipeline. '
+                  description: ' The status of the image pipeline.'
                   type: string
                   enum:
                     - DISABLED
                     - ENABLED
                 tags:
-                  description: ' The tags of the image pipeline. '
+                  description: ' The tags of the image pipeline.'
                   type: object
                   minProperties: 1
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
-                  description: ' The idempotency token used to make this request idempotent. '
+                  description: ' The idempotency token used to make this request idempotent.'
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -960,7 +971,7 @@ paths:
   /CreateImageRecipe:
     put:
       operationId: CreateImageRecipe
-      description: ' Creates a new image recipe. Image recipes define how images are configured, tested, and assessed. '
+      description: ' Creates a new image recipe. Image recipes define how images are configured, tested, and assessed.'
       responses:
         '200':
           description: Success
@@ -1049,36 +1060,36 @@ paths:
                 - clientToken
               properties:
                 name:
-                  description: ' The name of the image recipe. '
+                  description: ' The name of the image recipe.'
                   type: string
                   pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
                 description:
-                  description: ' The description of the image recipe. '
+                  description: ' The description of the image recipe.'
                   type: string
                   minLength: 1
                   maxLength: 1024
                 semanticVersion:
-                  description: 'The semantic version of the image recipe. '
+                  description: The semantic version of the image recipe.
                   type: string
                   pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
                 components:
-                  description: 'The components of the image recipe. '
+                  description: The components of the image recipe.
                   type: array
                   items:
                     $ref: '#/components/schemas/ComponentConfiguration'
                   minItems: 1
                 parentImage:
-                  description: 'The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x</code>. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder. '
+                  description: 'The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x</code>. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder.'
                   type: string
                   minLength: 1
                   maxLength: 1024
                 blockDeviceMappings:
-                  description: 'The block device mappings of the image recipe. '
+                  description: The block device mappings of the image recipe.
                   type: array
                   items:
                     $ref: '#/components/schemas/InstanceBlockDeviceMapping'
                 tags:
-                  description: ' The tags of the image recipe. '
+                  description: ' The tags of the image recipe.'
                   type: object
                   minProperties: 1
                   maxProperties: 50
@@ -1090,7 +1101,7 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 clientToken:
-                  description: 'The idempotency token used to make this request idempotent. '
+                  description: The idempotency token used to make this request idempotent.
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -1105,7 +1116,7 @@ paths:
   /CreateInfrastructureConfiguration:
     put:
       operationId: CreateInfrastructureConfiguration
-      description: ' Creates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested. '
+      description: ' Creates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested.'
       responses:
         '200':
           description: Success
@@ -1186,31 +1197,32 @@ paths:
                 - clientToken
               properties:
                 name:
-                  description: 'The name of the infrastructure configuration. '
+                  description: The name of the infrastructure configuration.
                   type: string
                   pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
                 description:
-                  description: 'The description of the infrastructure configuration. '
+                  description: The description of the infrastructure configuration.
                   type: string
                   minLength: 1
                   maxLength: 1024
                 instanceTypes:
-                  description: 'The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability. '
+                  description: The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability.
                   type: array
                   items:
                     $ref: '#/components/schemas/InstanceType'
                 instanceProfileName:
-                  description: 'The instance profile to associate with the instance used to customize your EC2 AMI. '
+                  description: The instance profile to associate with the instance used to customize your EC2 AMI.
                   type: string
+                  pattern: '^[\w+=,.@-]+$'
                   minLength: 1
-                  maxLength: 1024
+                  maxLength: 256
                 securityGroupIds:
-                  description: 'The security group IDs to associate with the instance used to customize your EC2 AMI. '
+                  description: The security group IDs to associate with the instance used to customize your EC2 AMI.
                   type: array
                   items:
                     $ref: '#/components/schemas/NonEmptyString'
                 subnetId:
-                  description: 'The subnet ID in which to place the instance used to customize your EC2 AMI. '
+                  description: The subnet ID in which to place the instance used to customize your EC2 AMI.
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -1223,17 +1235,17 @@ paths:
                         - $ref: '#/components/schemas/S3Logs'
                         - description: The Amazon S3 logging configuration.
                 keyPair:
-                  description: 'The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image. '
+                  description: The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image.
                   type: string
                   minLength: 1
                   maxLength: 1024
                 terminateInstanceOnFailure:
-                  description: 'The terminate instance on failure setting of the infrastructure configuration. Set to false if you want Image Builder to retain the instance used to configure your AMI if the build or test phase of your workflow fails. '
+                  description: The terminate instance on failure setting of the infrastructure configuration. Set to false if you want Image Builder to retain the instance used to configure your AMI if the build or test phase of your workflow fails.
                   type: boolean
                 snsTopicArn:
-                  description: 'The SNS topic on which to send image build events. '
+                  description: The SNS topic on which to send image build events.
                   type: string
-                  pattern: '^arn:aws[^:]*:sns:[^:]+:\d{12}:[a-zA-Z0-9-_]{1,256}$'
+                  pattern: '^arn:aws[^:]*:sns:[^:]+:[0-9]{12}:[a-zA-Z0-9-_]{1,256}$'
                 resourceTags:
                   description: The tags attached to the resource created by Image Builder.
                   type: object
@@ -1242,14 +1254,14 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 tags:
-                  description: 'The tags of the infrastructure configuration. '
+                  description: The tags of the infrastructure configuration.
                   type: object
                   minProperties: 1
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
-                  description: 'The idempotency token used to make this request idempotent. '
+                  description: The idempotency token used to make this request idempotent.
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -1264,7 +1276,7 @@ paths:
   /DeleteComponent#componentBuildVersionArn:
     delete:
       operationId: DeleteComponent
-      description: ' Deletes a component build version. '
+      description: ' Deletes a component build version.'
       responses:
         '200':
           description: Success
@@ -1318,10 +1330,10 @@ paths:
         - name: componentBuildVersionArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the component build version to delete. '
+          description: The Amazon Resource Name (ARN) of the component build version to delete.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1390,7 +1402,7 @@ paths:
           description: The Amazon Resource Name (ARN) of the container recipe to delete.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1402,7 +1414,7 @@ paths:
   /DeleteDistributionConfiguration#distributionConfigurationArn:
     delete:
       operationId: DeleteDistributionConfiguration
-      description: ' Deletes a distribution configuration. '
+      description: ' Deletes a distribution configuration.'
       responses:
         '200':
           description: Success
@@ -1456,10 +1468,10 @@ paths:
         - name: distributionConfigurationArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the distribution configuration to delete. '
+          description: The Amazon Resource Name (ARN) of the distribution configuration to delete.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):distribution-configuration/[a-z0-9-_]+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):distribution-configuration/[a-z0-9-_]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1471,7 +1483,7 @@ paths:
   /DeleteImage#imageBuildVersionArn:
     delete:
       operationId: DeleteImage
-      description: ' Deletes an image. '
+      description: ' Deletes an image.'
       responses:
         '200':
           description: Success
@@ -1525,10 +1537,10 @@ paths:
         - name: imageBuildVersionArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the image to delete. '
+          description: The Amazon Resource Name (ARN) of the image to delete.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1540,7 +1552,7 @@ paths:
   /DeleteImagePipeline#imagePipelineArn:
     delete:
       operationId: DeleteImagePipeline
-      description: ' Deletes an image pipeline. '
+      description: ' Deletes an image pipeline.'
       responses:
         '200':
           description: Success
@@ -1594,10 +1606,10 @@ paths:
         - name: imagePipelineArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the image pipeline to delete. '
+          description: The Amazon Resource Name (ARN) of the image pipeline to delete.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-pipeline/[a-z0-9-_]+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-pipeline/[a-z0-9-_]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1609,7 +1621,7 @@ paths:
   /DeleteImageRecipe#imageRecipeArn:
     delete:
       operationId: DeleteImageRecipe
-      description: ' Deletes an image recipe. '
+      description: ' Deletes an image recipe.'
       responses:
         '200':
           description: Success
@@ -1663,10 +1675,10 @@ paths:
         - name: imageRecipeArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the image recipe to delete. '
+          description: The Amazon Resource Name (ARN) of the image recipe to delete.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1678,7 +1690,7 @@ paths:
   /DeleteInfrastructureConfiguration#infrastructureConfigurationArn:
     delete:
       operationId: DeleteInfrastructureConfiguration
-      description: ' Deletes an infrastructure configuration. '
+      description: ' Deletes an infrastructure configuration.'
       responses:
         '200':
           description: Success
@@ -1732,10 +1744,10 @@ paths:
         - name: infrastructureConfigurationArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the infrastructure configuration to delete. '
+          description: The Amazon Resource Name (ARN) of the infrastructure configuration to delete.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1747,7 +1759,7 @@ paths:
   /GetComponent#componentBuildVersionArn:
     get:
       operationId: GetComponent
-      description: ' Gets a component object. '
+      description: ' Gets a component object.'
       responses:
         '200':
           description: Success
@@ -1798,7 +1810,7 @@ paths:
           description: The Amazon Resource Name (ARN) of the component that you want to retrieve. Regex requires "/\d+$" suffix.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/(?:(?:(\d+|x)\.(\d+|x)\.(\d+|x))|(?:\d+\.\d+\.\d+/\d+))$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/(?:(?:([0-9]+|x)\.([0-9]+|x)\.([0-9]+|x))|(?:[0-9]+\.[0-9]+\.[0-9]+/[0-9]+))$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1810,7 +1822,7 @@ paths:
   /GetComponentPolicy#componentArn:
     get:
       operationId: GetComponentPolicy
-      description: ' Gets a component policy. '
+      description: ' Gets a component policy.'
       responses:
         '200':
           description: Success
@@ -1858,10 +1870,10 @@ paths:
         - name: componentArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the component whose policy you want to retrieve. '
+          description: The Amazon Resource Name (ARN) of the component whose policy you want to retrieve.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1924,7 +1936,7 @@ paths:
           description: The Amazon Resource Name (ARN) of the container recipe to retrieve.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1987,7 +1999,7 @@ paths:
           description: The Amazon Resource Name (ARN) of the container recipe for the policy being requested.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1999,7 +2011,7 @@ paths:
   /GetDistributionConfiguration#distributionConfigurationArn:
     get:
       operationId: GetDistributionConfiguration
-      description: ' Gets a distribution configuration. '
+      description: ' Gets a distribution configuration.'
       responses:
         '200':
           description: Success
@@ -2047,10 +2059,10 @@ paths:
         - name: distributionConfigurationArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the distribution configuration that you want to retrieve. '
+          description: The Amazon Resource Name (ARN) of the distribution configuration that you want to retrieve.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):distribution-configuration/[a-z0-9-_]+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):distribution-configuration/[a-z0-9-_]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2062,7 +2074,7 @@ paths:
   /GetImage#imageBuildVersionArn:
     get:
       operationId: GetImage
-      description: ' Gets an image. '
+      description: ' Gets an image.'
       responses:
         '200':
           description: Success
@@ -2110,10 +2122,10 @@ paths:
         - name: imageBuildVersionArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the image that you want to retrieve. '
+          description: The Amazon Resource Name (ARN) of the image that you want to retrieve.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/(?:(?:(\d+|x)\.(\d+|x)\.(\d+|x))|(?:\d+\.\d+\.\d+/\d+))$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/(?:(?:([0-9]+|x)\.([0-9]+|x)\.([0-9]+|x))|(?:[0-9]+\.[0-9]+\.[0-9]+/[0-9]+))$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2125,7 +2137,7 @@ paths:
   /GetImagePipeline#imagePipelineArn:
     get:
       operationId: GetImagePipeline
-      description: ' Gets an image pipeline. '
+      description: ' Gets an image pipeline.'
       responses:
         '200':
           description: Success
@@ -2173,10 +2185,10 @@ paths:
         - name: imagePipelineArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the image pipeline that you want to retrieve. '
+          description: The Amazon Resource Name (ARN) of the image pipeline that you want to retrieve.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-pipeline/[a-z0-9-_]+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-pipeline/[a-z0-9-_]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2188,7 +2200,7 @@ paths:
   /GetImagePolicy#imageArn:
     get:
       operationId: GetImagePolicy
-      description: ' Gets an image policy. '
+      description: ' Gets an image policy.'
       responses:
         '200':
           description: Success
@@ -2236,10 +2248,10 @@ paths:
         - name: imageArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the image whose policy you want to retrieve. '
+          description: The Amazon Resource Name (ARN) of the image whose policy you want to retrieve.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2251,7 +2263,7 @@ paths:
   /GetImageRecipe#imageRecipeArn:
     get:
       operationId: GetImageRecipe
-      description: ' Gets an image recipe. '
+      description: ' Gets an image recipe.'
       responses:
         '200':
           description: Success
@@ -2299,10 +2311,10 @@ paths:
         - name: imageRecipeArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the image recipe that you want to retrieve. '
+          description: The Amazon Resource Name (ARN) of the image recipe that you want to retrieve.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2314,7 +2326,7 @@ paths:
   /GetImageRecipePolicy#imageRecipeArn:
     get:
       operationId: GetImageRecipePolicy
-      description: ' Gets an image recipe policy. '
+      description: ' Gets an image recipe policy.'
       responses:
         '200':
           description: Success
@@ -2362,10 +2374,10 @@ paths:
         - name: imageRecipeArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the image recipe whose policy you want to retrieve. '
+          description: The Amazon Resource Name (ARN) of the image recipe whose policy you want to retrieve.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2377,7 +2389,7 @@ paths:
   /GetInfrastructureConfiguration#infrastructureConfigurationArn:
     get:
       operationId: GetInfrastructureConfiguration
-      description: ' Gets an infrastructure configuration. '
+      description: ' Gets an infrastructure configuration.'
       responses:
         '200':
           description: Success
@@ -2425,10 +2437,10 @@ paths:
         - name: infrastructureConfigurationArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the infrastructure configuration that you want to retrieve. '
+          description: The Amazon Resource Name (ARN) of the infrastructure configuration that you want to retrieve.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2440,7 +2452,7 @@ paths:
   /ImportComponent:
     put:
       operationId: ImportComponent
-      description: 'Imports a component and transforms its data into a component document. '
+      description: Imports a component and transforms its data into a component document.
       responses:
         '200':
           description: Success
@@ -2524,7 +2536,7 @@ paths:
                 - clientToken
               properties:
                 name:
-                  description: ' The name of the component. '
+                  description: ' The name of the component.'
                   type: string
                   pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
                 semanticVersion:
@@ -2532,28 +2544,28 @@ paths:
                   type: string
                   pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
                 description:
-                  description: 'The description of the component. Describes the contents of the component. '
+                  description: The description of the component. Describes the contents of the component.
                   type: string
                   minLength: 1
                   maxLength: 1024
                 changeDescription:
-                  description: 'The change description of the component. Describes what change has been made in this version, or what makes this version different from other versions of this component. '
+                  description: 'The change description of the component. Describes what change has been made in this version, or what makes this version different from other versions of this component.'
                   type: string
                   minLength: 1
                   maxLength: 1024
                 type:
-                  description: 'The type of the component denotes whether the component is used to build the image or only to test it. '
+                  description: The type of the component denotes whether the component is used to build the image or only to test it.
                   type: string
                   enum:
                     - BUILD
                     - TEST
                 format:
-                  description: 'The format of the resource that you want to import as a component. '
+                  description: The format of the resource that you want to import as a component.
                   type: string
                   enum:
                     - SHELL
                 platform:
-                  description: 'The platform of the component. '
+                  description: The platform of the component.
                   type: string
                   enum:
                     - Windows
@@ -2564,22 +2576,22 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 uri:
-                  description: 'The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component. '
+                  description: 'The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.'
                   type: string
                 kmsKeyId:
-                  description: 'The ID of the KMS key that should be used to encrypt this component. '
+                  description: The ID of the KMS key that should be used to encrypt this component.
                   type: string
                   minLength: 1
                   maxLength: 1024
                 tags:
-                  description: 'The tags of the component. '
+                  description: The tags of the component.
                   type: object
                   minProperties: 1
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
-                  description: 'The idempotency token of the component. '
+                  description: The idempotency token of the component.
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -2594,7 +2606,7 @@ paths:
   /ListComponentBuildVersions:
     post:
       operationId: ListComponentBuildVersions
-      description: ' Returns the list of component build versions for the specified semantic version. '
+      description: ' Returns the list of component build versions for the specified semantic version.'
       responses:
         '200':
           description: Success
@@ -2667,16 +2679,16 @@ paths:
                 - componentVersionArn
               properties:
                 componentVersionArn:
-                  description: 'The component version Amazon Resource Name (ARN) whose versions you want to list. '
+                  description: The component version Amazon Resource Name (ARN) whose versions you want to list.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 maxResults:
-                  description: 'The maximum items to return in a request. '
+                  description: The maximum items to return in a request.
                   type: integer
                   minimum: 1
                   maximum: 25
                 nextToken:
-                  description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
                   type: string
                   minLength: 1
                   maxLength: 65535
@@ -2691,7 +2703,7 @@ paths:
   /ListComponents:
     post:
       operationId: ListComponents
-      description: 'Returns the list of component build versions for the specified semantic version. '
+      description: Returns the list of component build versions for the specified semantic version.
       responses:
         '200':
           description: Success
@@ -2762,14 +2774,14 @@ paths:
               type: object
               properties:
                 owner:
-                  description: 'The owner defines which components you want to list. By default, this request will only show components owned by your account. You can use this field to specify if you want to view components owned by yourself, by Amazon, or those components that have been shared with you by other customers. '
+                  description: 'The owner defines which components you want to list. By default, this request will only show components owned by your account. You can use this field to specify if you want to view components owned by yourself, by Amazon, or those components that have been shared with you by other customers.'
                   type: string
                   enum:
                     - Self
                     - Shared
                     - Amazon
                 filters:
-                  description: 'The filters. '
+                  description: The filters.
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -2779,12 +2791,12 @@ paths:
                   description: Returns the list of component build versions for the specified semantic version.
                   type: boolean
                 maxResults:
-                  description: 'The maximum items to return in a request. '
+                  description: The maximum items to return in a request.
                   type: integer
                   minimum: 1
                   maximum: 25
                 nextToken:
-                  description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
                   type: string
                   minLength: 1
                   maxLength: 65535
@@ -2904,7 +2916,7 @@ paths:
   /ListDistributionConfigurations:
     post:
       operationId: ListDistributionConfigurations
-      description: 'Returns a list of distribution configurations. '
+      description: Returns a list of distribution configurations.
       responses:
         '200':
           description: Success
@@ -2975,19 +2987,19 @@ paths:
               type: object
               properties:
                 filters:
-                  description: <p>The filters. </p> <ul> <li> <p> <code>name</code> - The name of this distribution configuration.</p> </li> </ul>
+                  description: <p>The filters.</p> <ul> <li> <p> <code>name</code> - The name of this distribution configuration.</p> </li> </ul>
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
                 maxResults:
-                  description: 'The maximum items to return in a request. '
+                  description: The maximum items to return in a request.
                   type: integer
                   minimum: 1
                   maximum: 25
                 nextToken:
-                  description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
                   type: string
                   minLength: 1
                   maxLength: 65535
@@ -3002,7 +3014,7 @@ paths:
   /ListImageBuildVersions:
     post:
       operationId: ListImageBuildVersions
-      description: ' Returns a list of image build versions. '
+      description: ' Returns a list of image build versions.'
       responses:
         '200':
           description: Success
@@ -3075,23 +3087,23 @@ paths:
                 - imageVersionArn
               properties:
                 imageVersionArn:
-                  description: 'The Amazon Resource Name (ARN) of the image whose build versions you want to retrieve. '
+                  description: The Amazon Resource Name (ARN) of the image whose build versions you want to retrieve.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 filters:
-                  description: 'The filters. '
+                  description: The filters.
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
                 maxResults:
-                  description: 'The maximum items to return in a request. '
+                  description: The maximum items to return in a request.
                   type: integer
                   minimum: 1
                   maximum: 25
                 nextToken:
-                  description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
                   type: string
                   minLength: 1
                   maxLength: 65535
@@ -3187,7 +3199,7 @@ paths:
                 imageBuildVersionArn:
                   description: Filter results for the ListImagePackages request by the Image Build Version ARN
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
                 maxResults:
                   description: The maxiumum number of results to return from the ListImagePackages request.
                   type: integer
@@ -3209,7 +3221,7 @@ paths:
   /ListImagePipelineImages:
     post:
       operationId: ListImagePipelineImages
-      description: ' Returns a list of images created by the specified pipeline. '
+      description: ' Returns a list of images created by the specified pipeline.'
       responses:
         '200':
           description: Success
@@ -3288,23 +3300,23 @@ paths:
                 - imagePipelineArn
               properties:
                 imagePipelineArn:
-                  description: 'The Amazon Resource Name (ARN) of the image pipeline whose images you want to view. '
+                  description: The Amazon Resource Name (ARN) of the image pipeline whose images you want to view.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-pipeline/[a-z0-9-_]+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-pipeline/[a-z0-9-_]+$'
                 filters:
-                  description: 'The filters. '
+                  description: The filters.
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
                 maxResults:
-                  description: 'The maximum items to return in a request. '
+                  description: The maximum items to return in a request.
                   type: integer
                   minimum: 1
                   maximum: 25
                 nextToken:
-                  description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
                   type: string
                   minLength: 1
                   maxLength: 65535
@@ -3319,7 +3331,7 @@ paths:
   /ListImagePipelines:
     post:
       operationId: ListImagePipelines
-      description: 'Returns a list of image pipelines. '
+      description: Returns a list of image pipelines.
       responses:
         '200':
           description: Success
@@ -3390,19 +3402,19 @@ paths:
               type: object
               properties:
                 filters:
-                  description: 'The filters. '
+                  description: The filters.
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
                 maxResults:
-                  description: 'The maximum items to return in a request. '
+                  description: The maximum items to return in a request.
                   type: integer
                   minimum: 1
                   maximum: 25
                 nextToken:
-                  description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
                   type: string
                   minLength: 1
                   maxLength: 65535
@@ -3417,7 +3429,7 @@ paths:
   /ListImageRecipes:
     post:
       operationId: ListImageRecipes
-      description: ' Returns a list of image recipes. '
+      description: ' Returns a list of image recipes.'
       responses:
         '200':
           description: Success
@@ -3488,26 +3500,26 @@ paths:
               type: object
               properties:
                 owner:
-                  description: 'The owner defines which image recipes you want to list. By default, this request will only show image recipes owned by your account. You can use this field to specify if you want to view image recipes owned by yourself, by Amazon, or those image recipes that have been shared with you by other customers. '
+                  description: 'The owner defines which image recipes you want to list. By default, this request will only show image recipes owned by your account. You can use this field to specify if you want to view image recipes owned by yourself, by Amazon, or those image recipes that have been shared with you by other customers.'
                   type: string
                   enum:
                     - Self
                     - Shared
                     - Amazon
                 filters:
-                  description: 'The filters. '
+                  description: The filters.
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
                 maxResults:
-                  description: 'The maximum items to return in a request. '
+                  description: The maximum items to return in a request.
                   type: integer
                   minimum: 1
                   maximum: 25
                 nextToken:
-                  description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
                   type: string
                   minLength: 1
                   maxLength: 65535
@@ -3522,7 +3534,7 @@ paths:
   /ListImages:
     post:
       operationId: ListImages
-      description: ' Returns the list of images that you have access to. '
+      description: ' Returns the list of images that you have access to.'
       responses:
         '200':
           description: Success
@@ -3593,14 +3605,14 @@ paths:
               type: object
               properties:
                 owner:
-                  description: 'The owner defines which images you want to list. By default, this request will only show images owned by your account. You can use this field to specify if you want to view images owned by yourself, by Amazon, or those images that have been shared with you by other customers. '
+                  description: 'The owner defines which images you want to list. By default, this request will only show images owned by your account. You can use this field to specify if you want to view images owned by yourself, by Amazon, or those images that have been shared with you by other customers.'
                   type: string
                   enum:
                     - Self
                     - Shared
                     - Amazon
                 filters:
-                  description: 'The filters. '
+                  description: The filters.
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -3610,12 +3622,12 @@ paths:
                   description: Requests a list of images with a specific recipe name.
                   type: boolean
                 maxResults:
-                  description: 'The maximum items to return in a request. '
+                  description: The maximum items to return in a request.
                   type: integer
                   minimum: 1
                   maximum: 25
                 nextToken:
-                  description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
                   type: string
                   minLength: 1
                   maxLength: 65535
@@ -3633,7 +3645,7 @@ paths:
   /ListInfrastructureConfigurations:
     post:
       operationId: ListInfrastructureConfigurations
-      description: ' Returns a list of infrastructure configurations. '
+      description: ' Returns a list of infrastructure configurations.'
       responses:
         '200':
           description: Success
@@ -3704,19 +3716,19 @@ paths:
               type: object
               properties:
                 filters:
-                  description: 'The filters. '
+                  description: The filters.
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
                 maxResults:
-                  description: 'The maximum items to return in a request. '
+                  description: The maximum items to return in a request.
                   type: integer
                   minimum: 1
                   maximum: 25
                 nextToken:
-                  description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+                  description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
                   type: string
                   minLength: 1
                   maxLength: 65535
@@ -3731,7 +3743,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: ' Returns the list of tags for the specified resource. '
+      description: ' Returns the list of tags for the specified resource.'
       responses:
         '200':
           description: Success
@@ -3761,10 +3773,10 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: 'The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve. '
+          description: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3775,7 +3787,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: ' Adds a tag to a resource. '
+      description: ' Adds a tag to a resource.'
       responses:
         '200':
           description: Success
@@ -3805,10 +3817,10 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: 'The Amazon Resource Name (ARN) of the resource that you want to tag. '
+          description: The Amazon Resource Name (ARN) of the resource that you want to tag.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
       requestBody:
         required: true
         content:
@@ -3819,7 +3831,7 @@ paths:
                 - tags
               properties:
                 tags:
-                  description: 'The tags to apply to the resource. '
+                  description: The tags to apply to the resource.
                   type: object
                   minProperties: 1
                   maxProperties: 50
@@ -3828,7 +3840,7 @@ paths:
   /PutComponentPolicy:
     put:
       operationId: PutComponentPolicy
-      description: ' Applies a policy to a component. We recommend that you call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutComponentPolicy</code>, you must also call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared. '
+      description: ' Applies a policy to a component. We recommend that you call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutComponentPolicy</code>, you must also call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared.'
       responses:
         '200':
           description: Success
@@ -3896,11 +3908,11 @@ paths:
                 - policy
               properties:
                 componentArn:
-                  description: 'The Amazon Resource Name (ARN) of the component that this policy should be applied to. '
+                  description: The Amazon Resource Name (ARN) of the component that this policy should be applied to.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
                 policy:
-                  description: 'The policy to apply. '
+                  description: The policy to apply.
                   type: string
                   minLength: 1
                   maxLength: 30000
@@ -3985,7 +3997,7 @@ paths:
                 containerRecipeArn:
                   description: The Amazon Resource Name (ARN) of the container recipe that this policy should be applied to.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 policy:
                   description: The policy to apply to the container recipe.
                   type: string
@@ -4002,7 +4014,7 @@ paths:
   /PutImagePolicy:
     put:
       operationId: PutImagePolicy
-      description: 'Applies a policy to an image. We recommend that you call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutImagePolicy</code>, you must also call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared. '
+      description: 'Applies a policy to an image. We recommend that you call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutImagePolicy</code>, you must also call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared.'
       responses:
         '200':
           description: Success
@@ -4070,11 +4082,11 @@ paths:
                 - policy
               properties:
                 imageArn:
-                  description: 'The Amazon Resource Name (ARN) of the image that this policy should be applied to. '
+                  description: The Amazon Resource Name (ARN) of the image that this policy should be applied to.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
                 policy:
-                  description: 'The policy to apply. '
+                  description: The policy to apply.
                   type: string
                   minLength: 1
                   maxLength: 30000
@@ -4089,7 +4101,7 @@ paths:
   /PutImageRecipePolicy:
     put:
       operationId: PutImageRecipePolicy
-      description: ' Applies a policy to an image recipe. We recommend that you call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutImageRecipePolicy</code>, you must also call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared. '
+      description: ' Applies a policy to an image recipe. We recommend that you call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html">CreateResourceShare</a> to share resources. If you call the Image Builder API <code>PutImageRecipePolicy</code>, you must also call the RAM API <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html">PromoteResourceShareCreatedFromPolicy</a> in order for the resource to be visible to all principals with whom the resource is shared.'
       responses:
         '200':
           description: Success
@@ -4157,11 +4169,11 @@ paths:
                 - policy
               properties:
                 imageRecipeArn:
-                  description: 'The Amazon Resource Name (ARN) of the image recipe that this policy should be applied to. '
+                  description: The Amazon Resource Name (ARN) of the image recipe that this policy should be applied to.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 policy:
-                  description: 'The policy to apply. '
+                  description: The policy to apply.
                   type: string
                   minLength: 1
                   maxLength: 30000
@@ -4176,7 +4188,7 @@ paths:
   /StartImagePipelineExecution:
     put:
       operationId: StartImagePipelineExecution
-      description: ' Manually triggers a pipeline to create an image. '
+      description: ' Manually triggers a pipeline to create an image.'
       responses:
         '200':
           description: Success
@@ -4250,11 +4262,11 @@ paths:
                 - clientToken
               properties:
                 imagePipelineArn:
-                  description: 'The Amazon Resource Name (ARN) of the image pipeline that you want to manually invoke. '
+                  description: The Amazon Resource Name (ARN) of the image pipeline that you want to manually invoke.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-pipeline/[a-z0-9-_]+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-pipeline/[a-z0-9-_]+$'
                 clientToken:
-                  description: 'The idempotency token used to make this request idempotent. '
+                  description: The idempotency token used to make this request idempotent.
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -4269,7 +4281,7 @@ paths:
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: ' Removes a tag from a resource. '
+      description: ' Removes a tag from a resource.'
       responses:
         '200':
           description: Success
@@ -4299,14 +4311,14 @@ paths:
         - name: resourceArn
           in: path
           required: true
-          description: 'The Amazon Resource Name (ARN) of the resource that you want to untag. '
+          description: The Amazon Resource Name (ARN) of the resource that you want to untag.
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
         - name: tagKeys
           in: query
           required: true
-          description: 'The tag keys to remove from the resource. '
+          description: The tag keys to remove from the resource.
           schema:
             type: array
             items:
@@ -4324,7 +4336,7 @@ paths:
   /UpdateDistributionConfiguration:
     put:
       operationId: UpdateDistributionConfiguration
-      description: ' Updates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline. '
+      description: ' Updates a new distribution configuration. Distribution configurations define and configure the outputs of your pipeline.'
       responses:
         '200':
           description: Success
@@ -4399,21 +4411,21 @@ paths:
                 - clientToken
               properties:
                 distributionConfigurationArn:
-                  description: 'The Amazon Resource Name (ARN) of the distribution configuration that you want to update. '
+                  description: The Amazon Resource Name (ARN) of the distribution configuration that you want to update.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):distribution-configuration/[a-z0-9-_]+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):distribution-configuration/[a-z0-9-_]+$'
                 description:
-                  description: 'The description of the distribution configuration. '
+                  description: The description of the distribution configuration.
                   type: string
                   minLength: 1
                   maxLength: 1024
                 distributions:
-                  description: 'The distributions of the distribution configuration. '
+                  description: The distributions of the distribution configuration.
                   type: array
                   items:
                     $ref: '#/components/schemas/Distribution'
                 clientToken:
-                  description: 'The idempotency token of the distribution configuration. '
+                  description: The idempotency token of the distribution configuration.
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -4428,7 +4440,7 @@ paths:
   /UpdateImagePipeline:
     put:
       operationId: UpdateImagePipeline
-      description: ' Updates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images. '
+      description: ' Updates a new image pipeline. Image pipelines enable you to automate the creation and distribution of images.'
       responses:
         '200':
           description: Success
@@ -4497,30 +4509,30 @@ paths:
                 - clientToken
               properties:
                 imagePipelineArn:
-                  description: 'The Amazon Resource Name (ARN) of the image pipeline that you want to update. '
+                  description: The Amazon Resource Name (ARN) of the image pipeline that you want to update.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-pipeline/[a-z0-9-_]+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-pipeline/[a-z0-9-_]+$'
                 description:
-                  description: 'The description of the image pipeline. '
+                  description: The description of the image pipeline.
                   type: string
                   minLength: 1
                   maxLength: 1024
                 imageRecipeArn:
-                  description: 'The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline. '
+                  description: The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 containerRecipeArn:
                   description: The Amazon Resource Name (ARN) of the container pipeline to update.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 infrastructureConfigurationArn:
-                  description: 'The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images updated by this image pipeline. '
+                  description: The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images updated by this image pipeline.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
                 distributionConfigurationArn:
-                  description: 'The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images updated by this image pipeline. '
+                  description: The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images updated by this image pipeline.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):distribution-configuration/[a-z0-9-_]+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):distribution-configuration/[a-z0-9-_]+$'
                 imageTestsConfiguration:
                   description: Image tests configuration.
                   type: object
@@ -4534,10 +4546,10 @@ paths:
                         - $ref: '#/components/schemas/ImageTestsTimeoutMinutes'
                         - description: The maximum time in minutes that tests are permitted to run.
                 enhancedImageMetadataEnabled:
-                  description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default. '
+                  description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
                   type: boolean
                 schedule:
-                  description: 'A schedule configures how often and when a pipeline will automatically create a new image. '
+                  description: A schedule configures how often and when a pipeline will automatically create a new image.
                   type: object
                   properties:
                     scheduleExpression:
@@ -4553,13 +4565,13 @@ paths:
                         - $ref: '#/components/schemas/PipelineExecutionStartCondition'
                         - description: 'The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic version filters on the source image or components in your image recipe, EC2 Image Builder will build a new image only when there are new versions of the image or components in your recipe that match the semantic version filter. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time. For semantic version syntax, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html">CreateComponent</a> in the <i> EC2 Image Builder API Reference</i>.'
                 status:
-                  description: 'The status of the image pipeline. '
+                  description: The status of the image pipeline.
                   type: string
                   enum:
                     - DISABLED
                     - ENABLED
                 clientToken:
-                  description: 'The idempotency token used to make this request idempotent. '
+                  description: The idempotency token used to make this request idempotent.
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -4574,7 +4586,7 @@ paths:
   /UpdateInfrastructureConfiguration:
     put:
       operationId: UpdateInfrastructureConfiguration
-      description: ' Updates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested. '
+      description: ' Updates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested.'
       responses:
         '200':
           description: Success
@@ -4643,31 +4655,32 @@ paths:
                 - clientToken
               properties:
                 infrastructureConfigurationArn:
-                  description: 'The Amazon Resource Name (ARN) of the infrastructure configuration that you want to update. '
+                  description: The Amazon Resource Name (ARN) of the infrastructure configuration that you want to update.
                   type: string
-                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
                 description:
-                  description: 'The description of the infrastructure configuration. '
+                  description: The description of the infrastructure configuration.
                   type: string
                   minLength: 1
                   maxLength: 1024
                 instanceTypes:
-                  description: 'The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability. '
+                  description: The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability.
                   type: array
                   items:
                     $ref: '#/components/schemas/InstanceType'
                 instanceProfileName:
-                  description: 'The instance profile to associate with the instance used to customize your EC2 AMI. '
+                  description: The instance profile to associate with the instance used to customize your EC2 AMI.
                   type: string
+                  pattern: '^[\w+=,.@-]+$'
                   minLength: 1
-                  maxLength: 1024
+                  maxLength: 256
                 securityGroupIds:
-                  description: 'The security group IDs to associate with the instance used to customize your EC2 AMI. '
+                  description: The security group IDs to associate with the instance used to customize your EC2 AMI.
                   type: array
                   items:
                     $ref: '#/components/schemas/NonEmptyString'
                 subnetId:
-                  description: 'The subnet ID to place the instance used to customize your EC2 AMI in. '
+                  description: The subnet ID to place the instance used to customize your EC2 AMI in.
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -4680,19 +4693,19 @@ paths:
                         - $ref: '#/components/schemas/S3Logs'
                         - description: The Amazon S3 logging configuration.
                 keyPair:
-                  description: 'The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image. '
+                  description: The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image.
                   type: string
                   minLength: 1
                   maxLength: 1024
                 terminateInstanceOnFailure:
-                  description: 'The terminate instance on failure setting of the infrastructure configuration. Set to false if you want Image Builder to retain the instance used to configure your AMI if the build or test phase of your workflow fails. '
+                  description: The terminate instance on failure setting of the infrastructure configuration. Set to false if you want Image Builder to retain the instance used to configure your AMI if the build or test phase of your workflow fails.
                   type: boolean
                 snsTopicArn:
-                  description: 'The SNS topic on which to send image build events. '
+                  description: The SNS topic on which to send image build events.
                   type: string
-                  pattern: '^arn:aws[^:]*:sns:[^:]+:\d{12}:[a-zA-Z0-9-_]{1,256}$'
+                  pattern: '^arn:aws[^:]*:sns:[^:]+:[0-9]{12}:[a-zA-Z0-9-_]{1,256}$'
                 clientToken:
-                  description: 'The idempotency token used to make this request idempotent. '
+                  description: The idempotency token used to make this request idempotent.
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -4833,16 +4846,20 @@ components:
         componentArn:
           allOf:
             - $ref: '#/components/schemas/ComponentVersionArnOrBuildVersionArn'
-            - description: 'The Amazon Resource Name (ARN) of the component. '
-      description: ' Configuration details of the component. '
-    ContainerRepositoryService:
-      type: string
-      enum:
-        - ECR
+            - description: The Amazon Resource Name (ARN) of the component.
+      description: ' Configuration details of the component.'
     NonEmptyString:
       type: string
       minLength: 1
       maxLength: 1024
+    InstanceBlockDeviceMappings:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceBlockDeviceMapping'
+    ContainerRepositoryService:
+      type: string
+      enum:
+        - ECR
     ResourceAlreadyExistsException: {}
     CreateDistributionConfigurationResponse:
       type: object
@@ -4850,15 +4867,15 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The request ID that uniquely identifies this request. '
+            - description: ' The request ID that uniquely identifies this request.'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token used to make this request idempotent. '
+            - description: ' The idempotency token used to make this request idempotent.'
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
-            - description: ' The Amazon Resource Name (ARN) of the distribution configuration that was created by this request. '
+            - description: ' The Amazon Resource Name (ARN) of the distribution configuration that was created by this request.'
     Distribution:
       type: object
       required:
@@ -4867,11 +4884,11 @@ components:
         region:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The target Region. '
+            - description: The target Region.
         amiDistributionConfiguration:
           allOf:
             - $ref: '#/components/schemas/AmiDistributionConfiguration'
-            - description: 'The specific AMI settings (for example, launch permissions, AMI tags). '
+            - description: 'The specific AMI settings; for example, launch permissions or AMI tags.'
         containerDistributionConfiguration:
           allOf:
             - $ref: '#/components/schemas/ContainerDistributionConfiguration'
@@ -4880,22 +4897,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/LicenseConfigurationArnList'
             - description: The License Manager Configuration to associate with the AMI in the specified Region.
-      description: ' Defines the settings for a specific Region. '
+        launchTemplateConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/LaunchTemplateConfigurationList'
+            - description: A group of launchTemplateConfiguration settings that apply to image distribution for specified accounts.
+      description: ' Defines the settings for a specific Region.'
     CreateImageResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The request ID that uniquely identifies this request. '
+            - description: ' The request ID that uniquely identifies this request.'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token used to make this request idempotent. '
+            - description: ' The idempotency token used to make this request idempotent.'
         imageBuildVersionArn:
           allOf:
             - $ref: '#/components/schemas/ImageBuildVersionArn'
-            - description: ' The Amazon Resource Name (ARN) of the image that was created by this request. '
+            - description: ' The Amazon Resource Name (ARN) of the image that was created by this request.'
     NullableBoolean:
       type: boolean
     ImageTestsTimeoutMinutes:
@@ -4908,15 +4929,15 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The request ID that uniquely identifies this request. '
+            - description: ' The request ID that uniquely identifies this request.'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token used to make this request idempotent. '
+            - description: ' The idempotency token used to make this request idempotent.'
         imagePipelineArn:
           allOf:
             - $ref: '#/components/schemas/ImagePipelineArn'
-            - description: ' The Amazon Resource Name (ARN) of the image pipeline that was created by this request. '
+            - description: ' The Amazon Resource Name (ARN) of the image pipeline that was created by this request.'
     Timezone:
       type: string
       pattern: '[a-zA-Z0-9]{2,}(?:\/[a-zA-z0-9-_+]+)*'
@@ -4933,15 +4954,15 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token used to make this request idempotent. '
+            - description: The idempotency token used to make this request idempotent.
         imageRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
-            - description: 'The Amazon Resource Name (ARN) of the image recipe that was created by this request. '
+            - description: The Amazon Resource Name (ARN) of the image recipe that was created by this request.
     InstanceBlockDeviceMapping:
       type: object
       properties:
@@ -4968,15 +4989,15 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token used to make this request idempotent. '
+            - description: The idempotency token used to make this request idempotent.
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
-            - description: 'The Amazon Resource Name (ARN) of the infrastructure configuration that was created by this request. '
+            - description: The Amazon Resource Name (ARN) of the infrastructure configuration that was created by this request.
     InstanceType:
       type: string
     S3Logs:
@@ -4997,11 +5018,11 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         componentBuildVersionArn:
           allOf:
             - $ref: '#/components/schemas/ComponentBuildVersionArn'
-            - description: 'The Amazon Resource Name (ARN) of the component build version that was deleted. '
+            - description: The Amazon Resource Name (ARN) of the component build version that was deleted.
     ResourceDependencyException: {}
     DeleteContainerRecipeResponse:
       type: object
@@ -5020,77 +5041,77 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
-            - description: 'The Amazon Resource Name (ARN) of the distribution configuration that was deleted. '
+            - description: The Amazon Resource Name (ARN) of the distribution configuration that was deleted.
     DeleteImageResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imageBuildVersionArn:
           allOf:
             - $ref: '#/components/schemas/ImageBuildVersionArn'
-            - description: 'The Amazon Resource Name (ARN) of the image that was deleted. '
+            - description: The Amazon Resource Name (ARN) of the image that was deleted.
     DeleteImagePipelineResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imagePipelineArn:
           allOf:
             - $ref: '#/components/schemas/ImagePipelineArn'
-            - description: 'The Amazon Resource Name (ARN) of the image pipeline that was deleted. '
+            - description: The Amazon Resource Name (ARN) of the image pipeline that was deleted.
     DeleteImageRecipeResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imageRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
-            - description: 'The Amazon Resource Name (ARN) of the image recipe that was deleted. '
+            - description: The Amazon Resource Name (ARN) of the image recipe that was deleted.
     DeleteInfrastructureConfigurationResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
-            - description: 'The Amazon Resource Name (ARN) of the infrastructure configuration that was deleted. '
+            - description: The Amazon Resource Name (ARN) of the infrastructure configuration that was deleted.
     GetComponentResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         component:
           allOf:
             - $ref: '#/components/schemas/Component'
-            - description: 'The component object associated with the specified ARN. '
+            - description: The component object associated with the specified ARN.
     GetComponentPolicyResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         policy:
           allOf:
             - $ref: '#/components/schemas/ResourcePolicyDocument'
-            - description: 'The component policy. '
+            - description: The component policy.
     ResourceNotFoundException: {}
     GetContainerRecipeResponse:
       type: object
@@ -5120,108 +5141,108 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         distributionConfiguration:
           allOf:
             - $ref: '#/components/schemas/DistributionConfiguration'
-            - description: 'The distribution configuration object. '
+            - description: The distribution configuration object.
     GetImageResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         image:
           allOf:
             - $ref: '#/components/schemas/Image'
-            - description: 'The image object. '
+            - description: The image object.
     GetImagePipelineResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imagePipeline:
           allOf:
             - $ref: '#/components/schemas/ImagePipeline'
-            - description: 'The image pipeline object. '
+            - description: The image pipeline object.
     GetImagePolicyResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         policy:
           allOf:
             - $ref: '#/components/schemas/ResourcePolicyDocument'
-            - description: 'The image policy object. '
+            - description: The image policy object.
     GetImageRecipeResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imageRecipe:
           allOf:
             - $ref: '#/components/schemas/ImageRecipe'
-            - description: 'The image recipe object. '
+            - description: The image recipe object.
     GetImageRecipePolicyResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         policy:
           allOf:
             - $ref: '#/components/schemas/ResourcePolicyDocument'
-            - description: 'The image recipe policy object. '
+            - description: The image recipe policy object.
     GetInfrastructureConfigurationResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         infrastructureConfiguration:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfiguration'
-            - description: 'The infrastructure configuration object. '
-      description: 'GetInfrastructureConfiguration response object. '
+            - description: The infrastructure configuration object.
+      description: GetInfrastructureConfiguration response object.
     ImportComponentResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token used to make this request idempotent. '
+            - description: The idempotency token used to make this request idempotent.
         componentBuildVersionArn:
           allOf:
             - $ref: '#/components/schemas/ComponentBuildVersionArn'
-            - description: 'The Amazon Resource Name (ARN) of the imported component. '
+            - description: The Amazon Resource Name (ARN) of the imported component.
     ListComponentBuildVersionsResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         componentSummaryList:
           allOf:
             - $ref: '#/components/schemas/ComponentSummaryList'
-            - description: 'The list of component summaries for the specified semantic version. '
+            - description: The list of component summaries for the specified semantic version.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
+            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
     InvalidPaginationTokenException: {}
     ListComponentsResponse:
       type: object
@@ -5229,27 +5250,27 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         componentVersionList:
           allOf:
             - $ref: '#/components/schemas/ComponentVersionList'
-            - description: 'The list of component semantic versions. '
+            - description: The list of component semantic versions.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
+            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
     Filter:
       type: object
       properties:
         name:
           allOf:
             - $ref: '#/components/schemas/FilterName'
-            - description: 'The name of the filter. Filter names are case-sensitive. '
+            - description: The name of the filter. Filter names are case-sensitive.
         values:
           allOf:
             - $ref: '#/components/schemas/FilterValues'
-            - description: 'The filter values. Filter values are case-sensitive. '
-      description: 'A filter name and value pair that is used to return a more specific list of results from a list operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs. '
+            - description: The filter values. Filter values are case-sensitive.
+      description: 'A filter name and value pair that is used to return a more specific list of results from a list operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.'
     ListContainerRecipesResponse:
       type: object
       properties:
@@ -5271,30 +5292,30 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         distributionConfigurationSummaryList:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationSummaryList'
-            - description: 'The list of distributions. '
+            - description: The list of distributions.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
+            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
     ListImageBuildVersionsResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imageSummaryList:
           allOf:
             - $ref: '#/components/schemas/ImageSummaryList'
-            - description: 'The list of image build versions. '
+            - description: The list of image build versions.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
+            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
     ListImagePackagesResponse:
       type: object
       properties:
@@ -5316,71 +5337,71 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imageSummaryList:
           allOf:
             - $ref: '#/components/schemas/ImageSummaryList'
-            - description: 'The list of images built by this pipeline. '
+            - description: The list of images built by this pipeline.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
+            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
     ListImagePipelinesResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imagePipelineList:
           allOf:
             - $ref: '#/components/schemas/ImagePipelineList'
-            - description: 'The list of image pipelines. '
+            - description: The list of image pipelines.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
+            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
     ListImageRecipesResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imageRecipeSummaryList:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeSummaryList'
-            - description: 'The list of image pipelines. '
+            - description: The list of image pipelines.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
+            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
     ListImagesResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imageVersionList:
           allOf:
             - $ref: '#/components/schemas/ImageVersionList'
-            - description: 'The list of image semantic versions. '
+            - description: The list of image semantic versions.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
+            - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
     ListInfrastructureConfigurationsResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         infrastructureConfigurationSummaryList:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationSummaryList'
-            - description: 'The list of infrastructure configurations. '
+            - description: The list of infrastructure configurations.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -5391,7 +5412,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags for the specified resource. '
+            - description: The tags for the specified resource.
     InvalidParameterException: {}
     PutComponentPolicyResponse:
       type: object
@@ -5399,11 +5420,11 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         componentArn:
           allOf:
             - $ref: '#/components/schemas/ComponentBuildVersionArn'
-            - description: 'The Amazon Resource Name (ARN) of the component that this policy was applied to. '
+            - description: The Amazon Resource Name (ARN) of the component that this policy was applied to.
     InvalidParameterValueException: {}
     PutContainerRecipePolicyResponse:
       type: object
@@ -5422,29 +5443,29 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imageArn:
           allOf:
             - $ref: '#/components/schemas/ImageBuildVersionArn'
-            - description: 'The Amazon Resource Name (ARN) of the image that this policy was applied to. '
+            - description: The Amazon Resource Name (ARN) of the image that this policy was applied to.
     PutImageRecipePolicyResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         imageRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
-            - description: 'The Amazon Resource Name (ARN) of the image recipe that this policy was applied to. '
+            - description: The Amazon Resource Name (ARN) of the image recipe that this policy was applied to.
     StartImagePipelineExecutionResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
@@ -5470,48 +5491,48 @@ components:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token used to make this request idempotent. '
+            - description: The idempotency token used to make this request idempotent.
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
-            - description: 'The Amazon Resource Name (ARN) of the distribution configuration that was updated by this request. '
+            - description: The Amazon Resource Name (ARN) of the distribution configuration that was updated by this request.
     UpdateImagePipelineResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token used to make this request idempotent. '
+            - description: The idempotency token used to make this request idempotent.
         imagePipelineArn:
           allOf:
             - $ref: '#/components/schemas/ImagePipelineArn'
-            - description: 'The Amazon Resource Name (ARN) of the image pipeline that was updated by this request. '
+            - description: The Amazon Resource Name (ARN) of the image pipeline that was updated by this request.
     UpdateInfrastructureConfigurationResponse:
       type: object
       properties:
         requestId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The request ID that uniquely identifies this request. '
+            - description: The request ID that uniquely identifies this request.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token used to make this request idempotent. '
+            - description: The idempotency token used to make this request idempotent.
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
-            - description: 'The Amazon Resource Name (ARN) of the infrastructure configuration that was updated by this request. '
+            - description: The Amazon Resource Name (ARN) of the infrastructure configuration that was updated by this request.
     AccountId:
       type: string
-      pattern: '^\d{12}$'
+      pattern: '^[0-9]{12}$'
     AccountList:
       type: array
       items:
@@ -5524,27 +5545,27 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/ImageStatus'
-            - description: 'The status of the image. '
+            - description: The status of the image.
         reason:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The reason for the image''s status. '
-      description: ' Image state shows the image status and the reason for that status. '
+            - description: The reason for the image's status.
+      description: ' Image state shows the image status and the reason for that status.'
     Ami:
       type: object
       properties:
         region:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The AWS Region of the EC2 AMI. '
+            - description: The AWS Region of the EC2 AMI.
         image:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The AMI ID of the EC2 AMI. '
+            - description: The AMI ID of the EC2 AMI.
         name:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The name of the EC2 AMI. '
+            - description: The name of the EC2 AMI.
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -5554,8 +5575,8 @@ components:
         accountId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The account ID of the owner of the AMI. '
-      description: ' Details of an EC2 AMI. '
+            - description: The account ID of the owner of the AMI.
+      description: ' Details of an EC2 AMI.'
     AmiNameString:
       type: string
       pattern: '^[-_A-Za-z0-9{][-_A-Za-z0-9\s:{}\.]+[-_A-Za-z0-9}]$'
@@ -5573,19 +5594,19 @@ components:
         userIds:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: 'The AWS account ID. '
+            - description: The AWS account ID.
         userGroups:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: 'The name of the group. '
-      description: 'Describes the configuration for a launch permission. The launch permission modification request is sent to the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">EC2 ModifyImageAttribute</a> API on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, set the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">EC2 ModifyImageAttribute</a>. '
+            - description: The name of the group.
+      description: 'Describes the configuration for a launch permission. The launch permission modification request is sent to the <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">EC2 ModifyImageAttribute</a> API on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, set the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html">EC2 ModifyImageAttribute</a>.'
     AmiDistributionConfiguration:
       type: object
       properties:
         name:
           allOf:
             - $ref: '#/components/schemas/AmiNameString'
-            - description: 'The name of the distribution configuration. '
+            - description: The name of the distribution configuration.
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -5593,20 +5614,20 @@ components:
         targetAccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: ' The ID of an account to which you want to distribute an image. '
+            - description: The ID of an account to which you want to distribute an image.
         amiTags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags to apply to AMIs distributed to this Region. '
+            - description: The tags to apply to AMIs distributed to this Region.
         kmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The KMS key identifier used to encrypt the distributed image. '
+            - description: The KMS key identifier used to encrypt the distributed image.
         launchPermission:
           allOf:
             - $ref: '#/components/schemas/LaunchPermissionConfiguration'
-            - description: ' Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances. '
-      description: ' Define and configure the output AMIs of the pipeline. '
+            - description: ' Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.'
+      description: ' Define and configure the output AMIs of the pipeline.'
     AmiList:
       type: array
       items:
@@ -5617,7 +5638,7 @@ components:
       type: boolean
     ImageBuildVersionArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
     ClientToken:
       type: string
       minLength: 1
@@ -5639,7 +5660,7 @@ components:
             - description: The idempotency token used to make this request idempotent.
     ImageBuilderArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\.(?:x|[0-9]+)\.(?:x|[0-9]+))(?:/[0-9]+)?)?$'
     ResourceName:
       type: string
       pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
@@ -5700,7 +5721,7 @@ components:
         supportedOsVersions:
           allOf:
             - $ref: '#/components/schemas/OsVersionList'
-            - description: 'The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. '
+            - description: 'The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation.'
         owner:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -5728,10 +5749,10 @@ components:
       description: A detailed view of a component.
     ComponentBuildVersionArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+$'
     ComponentVersionArnOrBuildVersionArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/(?:(?:(\d+|x)\.(\d+|x)\.(\d+|x))|(?:\d+\.\d+\.\d+/\d+))$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/(?:(?:([0-9]+|x)\.([0-9]+|x)\.([0-9]+|x))|(?:[0-9]+\.[0-9]+\.[0-9]+/[0-9]+))$'
     ComponentConfigurationList:
       type: array
       items:
@@ -5763,7 +5784,7 @@ components:
         supportedOsVersions:
           allOf:
             - $ref: '#/components/schemas/OsVersionList'
-            - description: 'The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. '
+            - description: 'The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation.'
         type:
           allOf:
             - $ref: '#/components/schemas/ComponentType'
@@ -5819,7 +5840,7 @@ components:
         supportedOsVersions:
           allOf:
             - $ref: '#/components/schemas/OsVersionList'
-            - description: ' The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. '
+            - description: 'he operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation.'
         type:
           allOf:
             - $ref: '#/components/schemas/ComponentType'
@@ -5835,7 +5856,7 @@ components:
       description: A high-level overview of a component semantic version.
     ComponentVersionArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
     ComponentVersionList:
       type: array
       items:
@@ -5897,6 +5918,18 @@ components:
       type: string
       enum:
         - DOCKER
+    InstanceConfiguration:
+      type: object
+      properties:
+        image:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The AMI ID to use as the base image for a container build and test instance. If not specified, Image Builder will use the appropriate ECS-optimized AMI as a base image.'
+        blockDeviceMappings:
+          allOf:
+            - $ref: '#/components/schemas/InstanceBlockDeviceMappings'
+            - description: Defines the block devices to attach for building an instance from this Image Builder AMI.
+      description: Defines a custom source AMI and block device mapping configurations of an instance used for building and testing container images.
     DockerFileTemplate:
       type: string
     ContainerRecipe:
@@ -5934,6 +5967,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComponentConfigurationList'
             - description: Components for build and test that are included in the container recipe.
+        instanceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/InstanceConfiguration'
+            - description: A group of options that can be used to configure an instance for building and testing container images.
         dockerfileTemplateData:
           allOf:
             - $ref: '#/components/schemas/DockerFileTemplate'
@@ -5969,7 +6006,7 @@ components:
       description: A container recipe.
     ContainerRecipeArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):container-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
     ContainerRecipeSummary:
       type: object
       properties:
@@ -6049,7 +6086,7 @@ components:
         supportedOsVersions:
           allOf:
             - $ref: '#/components/schemas/OsVersionList'
-            - description: ' The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. '
+            - description: ' The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation.'
         data:
           allOf:
             - $ref: '#/components/schemas/InlineComponentData'
@@ -6082,7 +6119,6 @@ components:
         - name
         - semanticVersion
         - components
-        - dockerfileTemplateData
         - parentImage
         - targetRepository
         - clientToken
@@ -6108,6 +6144,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComponentConfigurationList'
             - description: Components for build and test that are included in the container recipe.
+        instanceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/InstanceConfiguration'
+            - description: A group of options that can be used to configure an instance for building and testing container images.
         dockerfileTemplateData:
           allOf:
             - $ref: '#/components/schemas/InlineDockerFileTemplate'
@@ -6163,32 +6203,32 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
-            - description: ' The name of the distribution configuration. '
+            - description: ' The name of the distribution configuration.'
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The description of the distribution configuration. '
+            - description: ' The description of the distribution configuration.'
         distributions:
           allOf:
             - $ref: '#/components/schemas/DistributionList'
-            - description: ' The distributions of the distribution configuration. '
+            - description: ' The distributions of the distribution configuration.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags of the distribution configuration. '
+            - description: ' The tags of the distribution configuration.'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token of the distribution configuration. '
+            - description: ' The idempotency token of the distribution configuration.'
     DistributionConfigurationArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):distribution-configuration/[a-z0-9-_]+$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):distribution-configuration/[a-z0-9-_]+$'
     ImageRecipeArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-recipe/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
     InfrastructureConfigurationArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):infrastructure-configuration/[a-z0-9-_]+$'
     ImageTestsConfiguration:
       type: object
       properties:
@@ -6216,7 +6256,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PipelineExecutionStartCondition'
             - description: 'The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic version filters on the source image or components in your image recipe, EC2 Image Builder will build a new image only when there are new versions of the image or components in your recipe that match the semantic version filter. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time. For semantic version syntax, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html">CreateComponent</a> in the <i> EC2 Image Builder API Reference</i>.'
-      description: 'A schedule configures how often and when a pipeline will automatically create a new image. '
+      description: A schedule configures how often and when a pipeline will automatically create a new image.
     PipelineStatus:
       type: string
       enum:
@@ -6233,15 +6273,15 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
-            - description: ' The name of the image pipeline. '
+            - description: ' The name of the image pipeline.'
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The description of the image pipeline. '
+            - description: ' The description of the image pipeline.'
         imageRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
-            - description: ' The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline. '
+            - description: ' The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline.'
         containerRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ContainerRecipeArn'
@@ -6249,42 +6289,38 @@ components:
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
-            - description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline. '
+            - description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline.'
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
-            - description: ' The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images created by this image pipeline. '
+            - description: ' The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images created by this image pipeline.'
         imageTestsConfiguration:
           allOf:
             - $ref: '#/components/schemas/ImageTestsConfiguration'
-            - description: ' The image test configuration of the image pipeline. '
+            - description: ' The image test configuration of the image pipeline.'
         enhancedImageMetadataEnabled:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default. '
+            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
         schedule:
           allOf:
             - $ref: '#/components/schemas/Schedule'
-            - description: ' The schedule of the image pipeline. '
+            - description: ' The schedule of the image pipeline.'
         status:
           allOf:
             - $ref: '#/components/schemas/PipelineStatus'
-            - description: ' The status of the image pipeline. '
+            - description: ' The status of the image pipeline.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags of the image pipeline. '
+            - description: ' The tags of the image pipeline.'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token used to make this request idempotent. '
+            - description: ' The idempotency token used to make this request idempotent.'
     ImagePipelineArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-pipeline/[a-z0-9-_]+$'
-    InstanceBlockDeviceMappings:
-      type: array
-      items:
-        $ref: '#/components/schemas/InstanceBlockDeviceMapping'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-pipeline/[a-z0-9-_]+$'
     CreateImageRecipeRequest:
       type: object
       required:
@@ -6298,31 +6334,31 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
-            - description: ' The name of the image recipe. '
+            - description: ' The name of the image recipe.'
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The description of the image recipe. '
+            - description: ' The description of the image recipe.'
         semanticVersion:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
-            - description: 'The semantic version of the image recipe. '
+            - description: The semantic version of the image recipe.
         components:
           allOf:
             - $ref: '#/components/schemas/ComponentConfigurationList'
-            - description: 'The components of the image recipe. '
+            - description: The components of the image recipe.
         parentImage:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x</code>. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder. '
+            - description: 'The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x</code>. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder.'
         blockDeviceMappings:
           allOf:
             - $ref: '#/components/schemas/InstanceBlockDeviceMappings'
-            - description: 'The block device mappings of the image recipe. '
+            - description: The block device mappings of the image recipe.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags of the image recipe. '
+            - description: ' The tags of the image recipe.'
         workingDirectory:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6330,7 +6366,7 @@ components:
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token used to make this request idempotent. '
+            - description: The idempotency token used to make this request idempotent.
     CreateImageRequest:
       type: object
       required:
@@ -6341,7 +6377,7 @@ components:
         imageRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
-            - description: ' The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed. '
+            - description: ' The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.'
         containerRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ContainerRecipeArn'
@@ -6349,31 +6385,36 @@ components:
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
-            - description: ' The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline. '
+            - description: ' The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline.'
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
-            - description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that defines the environment in which your image will be built and tested. '
+            - description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that defines the environment in which your image will be built and tested.'
         imageTestsConfiguration:
           allOf:
             - $ref: '#/components/schemas/ImageTestsConfiguration'
-            - description: ' The image tests configuration of the image. '
+            - description: ' The image tests configuration of the image.'
         enhancedImageMetadataEnabled:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default. '
+            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: ' The tags of the image. '
+            - description: ' The tags of the image.'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: ' The idempotency token used to make this request idempotent. '
+            - description: ' The idempotency token used to make this request idempotent.'
     InstanceTypeList:
       type: array
       items:
         $ref: '#/components/schemas/InstanceType'
+    InstanceProfileNameType:
+      type: string
+      pattern: '^[\w+=,.@-]+$'
+      minLength: 1
+      maxLength: 256
     SecurityGroupIds:
       type: array
       items:
@@ -6388,7 +6429,7 @@ components:
       description: Logging configuration defines where Image Builder uploads your logs.
     SnsTopicArn:
       type: string
-      pattern: '^arn:aws[^:]*:sns:[^:]+:\d{12}:[a-zA-Z0-9-_]{1,256}$'
+      pattern: '^arn:aws[^:]*:sns:[^:]+:[0-9]{12}:[a-zA-Z0-9-_]{1,256}$'
     ResourceTagMap:
       type: object
       minProperties: 1
@@ -6406,43 +6447,43 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
-            - description: 'The name of the infrastructure configuration. '
+            - description: The name of the infrastructure configuration.
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The description of the infrastructure configuration. '
+            - description: The description of the infrastructure configuration.
         instanceTypes:
           allOf:
             - $ref: '#/components/schemas/InstanceTypeList'
-            - description: 'The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability. '
+            - description: The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability.
         instanceProfileName:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The instance profile to associate with the instance used to customize your EC2 AMI. '
+            - $ref: '#/components/schemas/InstanceProfileNameType'
+            - description: The instance profile to associate with the instance used to customize your EC2 AMI.
         securityGroupIds:
           allOf:
             - $ref: '#/components/schemas/SecurityGroupIds'
-            - description: 'The security group IDs to associate with the instance used to customize your EC2 AMI. '
+            - description: The security group IDs to associate with the instance used to customize your EC2 AMI.
         subnetId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The subnet ID in which to place the instance used to customize your EC2 AMI. '
+            - description: The subnet ID in which to place the instance used to customize your EC2 AMI.
         logging:
           allOf:
             - $ref: '#/components/schemas/Logging'
-            - description: 'The logging configuration of the infrastructure configuration. '
+            - description: The logging configuration of the infrastructure configuration.
         keyPair:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image. '
+            - description: The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image.
         terminateInstanceOnFailure:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: 'The terminate instance on failure setting of the infrastructure configuration. Set to false if you want Image Builder to retain the instance used to configure your AMI if the build or test phase of your workflow fails. '
+            - description: The terminate instance on failure setting of the infrastructure configuration. Set to false if you want Image Builder to retain the instance used to configure your AMI if the build or test phase of your workflow fails.
         snsTopicArn:
           allOf:
             - $ref: '#/components/schemas/SnsTopicArn'
-            - description: 'The SNS topic on which to send image build events. '
+            - description: The SNS topic on which to send image build events.
         resourceTags:
           allOf:
             - $ref: '#/components/schemas/ResourceTagMap'
@@ -6450,11 +6491,11 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags of the infrastructure configuration. '
+            - description: The tags of the infrastructure configuration.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token used to make this request idempotent. '
+            - description: The idempotency token used to make this request idempotent.
     DeleteComponentRequest:
       type: object
       title: DeleteComponentRequest
@@ -6489,6 +6530,12 @@ components:
         $ref: '#/components/schemas/LicenseConfigurationArn'
       minItems: 1
       maxItems: 50
+    LaunchTemplateConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LaunchTemplateConfiguration'
+      minItems: 1
+      maxItems: 100
     DistributionTimeoutMinutes:
       type: integer
       minimum: 30
@@ -6513,7 +6560,7 @@ components:
         distributions:
           allOf:
             - $ref: '#/components/schemas/DistributionList'
-            - description: The distributions of the distribution configuration.
+            - description: The distribution objects that apply Region-specific settings for the deployment of the image to targeted Regions.
         timeoutMinutes:
           allOf:
             - $ref: '#/components/schemas/DistributionTimeoutMinutes'
@@ -6693,7 +6740,7 @@ components:
         enhancedImageMetadataEnabled:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default. '
+            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
         imageRecipeArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -6813,7 +6860,7 @@ components:
       description: An image recipe.
     ImageVersionArnOrBuildVersionArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/(?:(?:(\d+|x)\.(\d+|x)\.(\d+|x))|(?:\d+\.\d+\.\d+/\d+))$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/(?:(?:([0-9]+|x)\.([0-9]+|x)\.([0-9]+|x))|(?:[0-9]+\.[0-9]+\.[0-9]+/[0-9]+))$'
     GetImageRequest:
       type: object
       title: GetImageRequest
@@ -6844,11 +6891,11 @@ components:
         enhancedImageMetadataEnabled:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default. '
+            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
         osVersion:
           allOf:
             - $ref: '#/components/schemas/OsVersion'
-            - description: 'The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019. '
+            - description: 'The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.'
         state:
           allOf:
             - $ref: '#/components/schemas/ImageState'
@@ -6898,7 +6945,7 @@ components:
       type: object
       title: GetInfrastructureConfigurationRequest
       properties: {}
-      description: ' GetInfrastructureConfiguration request object. '
+      description: ' GetInfrastructureConfiguration request object.'
     InfrastructureConfiguration:
       type: object
       properties:
@@ -6974,12 +7021,12 @@ components:
         amis:
           allOf:
             - $ref: '#/components/schemas/AmiList'
-            - description: 'The EC2 AMIs created by this image. '
+            - description: The EC2 AMIs created by this image.
         containers:
           allOf:
             - $ref: '#/components/schemas/ContainerList'
             - description: Container images that the pipeline has generated and stored in the output repository.
-      description: 'The resources produced by this image. '
+      description: The resources produced by this image.
     ImagePackage:
       type: object
       properties:
@@ -7076,7 +7123,7 @@ components:
         osVersion:
           allOf:
             - $ref: '#/components/schemas/OsVersion'
-            - description: 'The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019. '
+            - description: 'The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.'
         state:
           allOf:
             - $ref: '#/components/schemas/ImageState'
@@ -7128,7 +7175,7 @@ components:
         osVersion:
           allOf:
             - $ref: '#/components/schemas/OsVersion'
-            - description: ' The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019. '
+            - description: 'The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.'
         owner:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7140,7 +7187,7 @@ components:
       description: An image semantic version.
     ImageVersionArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
     ImageVersionList:
       type: array
       items:
@@ -7159,7 +7206,7 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
-            - description: ' The name of the component. '
+            - description: ' The name of the component.'
         semanticVersion:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
@@ -7167,23 +7214,23 @@ components:
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The description of the component. Describes the contents of the component. '
+            - description: The description of the component. Describes the contents of the component.
         changeDescription:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The change description of the component. Describes what change has been made in this version, or what makes this version different from other versions of this component. '
+            - description: 'The change description of the component. Describes what change has been made in this version, or what makes this version different from other versions of this component.'
         type:
           allOf:
             - $ref: '#/components/schemas/ComponentType'
-            - description: 'The type of the component denotes whether the component is used to build the image or only to test it. '
+            - description: The type of the component denotes whether the component is used to build the image or only to test it.
         format:
           allOf:
             - $ref: '#/components/schemas/ComponentFormat'
-            - description: 'The format of the resource that you want to import as a component. '
+            - description: The format of the resource that you want to import as a component.
         platform:
           allOf:
             - $ref: '#/components/schemas/Platform'
-            - description: 'The platform of the component. '
+            - description: The platform of the component.
         data:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7191,24 +7238,19 @@ components:
         uri:
           allOf:
             - $ref: '#/components/schemas/Uri'
-            - description: 'The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component. '
+            - description: 'The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.'
         kmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The ID of the KMS key that should be used to encrypt this component. '
+            - description: The ID of the KMS key that should be used to encrypt this component.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags of the component. '
+            - description: The tags of the component.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token of the component. '
-    InstanceProfileNameType:
-      type: string
-      pattern: '^[\w+=,.@-]+$'
-      minLength: 1
-      maxLength: 256
+            - description: The idempotency token of the component.
     InfrastructureConfigurationSummary:
       type: object
       properties:
@@ -7253,9 +7295,30 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/InfrastructureConfigurationSummary'
+    LaunchTemplateId:
+      type: string
+      pattern: '^lt-[a-z0-9-_]{17}$'
+    LaunchTemplateConfiguration:
+      type: object
+      required:
+        - launchTemplateId
+      properties:
+        launchTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/LaunchTemplateId'
+            - description: Identifies the EC2 launch template to use.
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The account ID that this configuration applies to.
+        setDefaultVersion:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Set the specified EC2 launch template as the default launch template for the specified account.
+      description: Identifies an EC2 launch template to use for a specific account.
     LicenseConfigurationArn:
       type: string
-      pattern: '^arn:aws[^:]*:license-manager:[^:]+:\d{12}:license-configuration:lic-[a-z0-9-_]{32}$'
+      pattern: '^arn:aws[^:]*:license-manager:[^:]+:[0-9]{12}:license-configuration:lic-[a-z0-9-_]{32}$'
     RestrictedInteger:
       type: integer
       minimum: 1
@@ -7273,15 +7336,15 @@ components:
         componentVersionArn:
           allOf:
             - $ref: '#/components/schemas/ComponentVersionArn'
-            - description: 'The component version Amazon Resource Name (ARN) whose versions you want to list. '
+            - description: The component version Amazon Resource Name (ARN) whose versions you want to list.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
-            - description: 'The maximum items to return in a request. '
+            - description: The maximum items to return in a request.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     Ownership:
       type: string
       enum:
@@ -7295,11 +7358,11 @@ components:
         owner:
           allOf:
             - $ref: '#/components/schemas/Ownership'
-            - description: 'The owner defines which components you want to list. By default, this request will only show components owned by your account. You can use this field to specify if you want to view components owned by yourself, by Amazon, or those components that have been shared with you by other customers. '
+            - description: 'The owner defines which components you want to list. By default, this request will only show components owned by your account. You can use this field to specify if you want to view components owned by yourself, by Amazon, or those components that have been shared with you by other customers.'
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: 'The filters. '
+            - description: The filters.
         byName:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -7307,11 +7370,11 @@ components:
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
-            - description: 'The maximum items to return in a request. '
+            - description: The maximum items to return in a request.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     ListContainerRecipesRequest:
       type: object
       title: ListContainerRecipesRequest
@@ -7339,15 +7402,15 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: <p>The filters. </p> <ul> <li> <p> <code>name</code> - The name of this distribution configuration.</p> </li> </ul>
+            - description: <p>The filters.</p> <ul> <li> <p> <code>name</code> - The name of this distribution configuration.</p> </li> </ul>
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
-            - description: 'The maximum items to return in a request. '
+            - description: The maximum items to return in a request.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     ListImageBuildVersionsRequest:
       type: object
       required:
@@ -7357,19 +7420,19 @@ components:
         imageVersionArn:
           allOf:
             - $ref: '#/components/schemas/ImageVersionArn'
-            - description: 'The Amazon Resource Name (ARN) of the image whose build versions you want to retrieve. '
+            - description: The Amazon Resource Name (ARN) of the image whose build versions you want to retrieve.
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: 'The filters. '
+            - description: The filters.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
-            - description: 'The maximum items to return in a request. '
+            - description: The maximum items to return in a request.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     ListImagePackagesRequest:
       type: object
       required:
@@ -7397,19 +7460,19 @@ components:
         imagePipelineArn:
           allOf:
             - $ref: '#/components/schemas/ImagePipelineArn'
-            - description: 'The Amazon Resource Name (ARN) of the image pipeline whose images you want to view. '
+            - description: The Amazon Resource Name (ARN) of the image pipeline whose images you want to view.
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: 'The filters. '
+            - description: The filters.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
-            - description: 'The maximum items to return in a request. '
+            - description: The maximum items to return in a request.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     ListImagePipelinesRequest:
       type: object
       title: ListImagePipelinesRequest
@@ -7417,15 +7480,15 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: 'The filters. '
+            - description: The filters.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
-            - description: 'The maximum items to return in a request. '
+            - description: The maximum items to return in a request.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     ListImageRecipesRequest:
       type: object
       title: ListImageRecipesRequest
@@ -7433,19 +7496,19 @@ components:
         owner:
           allOf:
             - $ref: '#/components/schemas/Ownership'
-            - description: 'The owner defines which image recipes you want to list. By default, this request will only show image recipes owned by your account. You can use this field to specify if you want to view image recipes owned by yourself, by Amazon, or those image recipes that have been shared with you by other customers. '
+            - description: 'The owner defines which image recipes you want to list. By default, this request will only show image recipes owned by your account. You can use this field to specify if you want to view image recipes owned by yourself, by Amazon, or those image recipes that have been shared with you by other customers.'
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: 'The filters. '
+            - description: The filters.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
-            - description: 'The maximum items to return in a request. '
+            - description: The maximum items to return in a request.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     ListImagesRequest:
       type: object
       title: ListImagesRequest
@@ -7453,11 +7516,11 @@ components:
         owner:
           allOf:
             - $ref: '#/components/schemas/Ownership'
-            - description: 'The owner defines which images you want to list. By default, this request will only show images owned by your account. You can use this field to specify if you want to view images owned by yourself, by Amazon, or those images that have been shared with you by other customers. '
+            - description: 'The owner defines which images you want to list. By default, this request will only show images owned by your account. You can use this field to specify if you want to view images owned by yourself, by Amazon, or those images that have been shared with you by other customers.'
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: 'The filters. '
+            - description: The filters.
         byName:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -7465,11 +7528,11 @@ components:
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
-            - description: 'The maximum items to return in a request. '
+            - description: The maximum items to return in a request.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
         includeDeprecated:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
@@ -7481,15 +7544,15 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: 'The filters. '
+            - description: The filters.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
-            - description: 'The maximum items to return in a request. '
+            - description: The maximum items to return in a request.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+            - description: A token to specify where to start paginating. This is the NextToken from a previously truncated response.
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -7504,11 +7567,11 @@ components:
         componentArn:
           allOf:
             - $ref: '#/components/schemas/ComponentBuildVersionArn'
-            - description: 'The Amazon Resource Name (ARN) of the component that this policy should be applied to. '
+            - description: The Amazon Resource Name (ARN) of the component that this policy should be applied to.
         policy:
           allOf:
             - $ref: '#/components/schemas/ResourcePolicyDocument'
-            - description: 'The policy to apply. '
+            - description: The policy to apply.
     PutContainerRecipePolicyRequest:
       type: object
       required:
@@ -7534,11 +7597,11 @@ components:
         imageArn:
           allOf:
             - $ref: '#/components/schemas/ImageBuildVersionArn'
-            - description: 'The Amazon Resource Name (ARN) of the image that this policy should be applied to. '
+            - description: The Amazon Resource Name (ARN) of the image that this policy should be applied to.
         policy:
           allOf:
             - $ref: '#/components/schemas/ResourcePolicyDocument'
-            - description: 'The policy to apply. '
+            - description: The policy to apply.
     PutImageRecipePolicyRequest:
       type: object
       required:
@@ -7549,11 +7612,11 @@ components:
         imageRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
-            - description: 'The Amazon Resource Name (ARN) of the image recipe that this policy should be applied to. '
+            - description: The Amazon Resource Name (ARN) of the image recipe that this policy should be applied to.
         policy:
           allOf:
             - $ref: '#/components/schemas/ResourcePolicyDocument'
-            - description: 'The policy to apply. '
+            - description: The policy to apply.
     StartImagePipelineExecutionRequest:
       type: object
       required:
@@ -7564,11 +7627,11 @@ components:
         imagePipelineArn:
           allOf:
             - $ref: '#/components/schemas/ImagePipelineArn'
-            - description: 'The Amazon Resource Name (ARN) of the image pipeline that you want to manually invoke. '
+            - description: The Amazon Resource Name (ARN) of the image pipeline that you want to manually invoke.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token used to make this request idempotent. '
+            - description: The idempotency token used to make this request idempotent.
     TagKeyList:
       type: array
       items:
@@ -7584,7 +7647,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: 'The tags to apply to the resource. '
+            - description: The tags to apply to the resource.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -7600,19 +7663,19 @@ components:
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
-            - description: 'The Amazon Resource Name (ARN) of the distribution configuration that you want to update. '
+            - description: The Amazon Resource Name (ARN) of the distribution configuration that you want to update.
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The description of the distribution configuration. '
+            - description: The description of the distribution configuration.
         distributions:
           allOf:
             - $ref: '#/components/schemas/DistributionList'
-            - description: 'The distributions of the distribution configuration. '
+            - description: The distributions of the distribution configuration.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token of the distribution configuration. '
+            - description: The idempotency token of the distribution configuration.
     UpdateImagePipelineRequest:
       type: object
       required:
@@ -7624,15 +7687,15 @@ components:
         imagePipelineArn:
           allOf:
             - $ref: '#/components/schemas/ImagePipelineArn'
-            - description: 'The Amazon Resource Name (ARN) of the image pipeline that you want to update. '
+            - description: The Amazon Resource Name (ARN) of the image pipeline that you want to update.
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The description of the image pipeline. '
+            - description: The description of the image pipeline.
         imageRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
-            - description: 'The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline. '
+            - description: The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline.
         containerRecipeArn:
           allOf:
             - $ref: '#/components/schemas/ContainerRecipeArn'
@@ -7640,31 +7703,31 @@ components:
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
-            - description: 'The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images updated by this image pipeline. '
+            - description: The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images updated by this image pipeline.
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
-            - description: 'The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images updated by this image pipeline. '
+            - description: The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images updated by this image pipeline.
         imageTestsConfiguration:
           allOf:
             - $ref: '#/components/schemas/ImageTestsConfiguration'
-            - description: 'The image test configuration of the image pipeline. '
+            - description: The image test configuration of the image pipeline.
         enhancedImageMetadataEnabled:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default. '
+            - description: ' Collects additional information about the image being created, including the operating system (OS) version and package list. This information is used to enhance the overall experience of using EC2 Image Builder. Enabled by default.'
         schedule:
           allOf:
             - $ref: '#/components/schemas/Schedule'
-            - description: 'The schedule of the image pipeline. '
+            - description: The schedule of the image pipeline.
         status:
           allOf:
             - $ref: '#/components/schemas/PipelineStatus'
-            - description: 'The status of the image pipeline. '
+            - description: The status of the image pipeline.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token used to make this request idempotent. '
+            - description: The idempotency token used to make this request idempotent.
     UpdateInfrastructureConfigurationRequest:
       type: object
       required:
@@ -7676,47 +7739,47 @@ components:
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
-            - description: 'The Amazon Resource Name (ARN) of the infrastructure configuration that you want to update. '
+            - description: The Amazon Resource Name (ARN) of the infrastructure configuration that you want to update.
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The description of the infrastructure configuration. '
+            - description: The description of the infrastructure configuration.
         instanceTypes:
           allOf:
             - $ref: '#/components/schemas/InstanceTypeList'
-            - description: 'The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability. '
+            - description: The instance types of the infrastructure configuration. You can specify one or more instance types to use for this build. The service will pick one of these instance types based on availability.
         instanceProfileName:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The instance profile to associate with the instance used to customize your EC2 AMI. '
+            - $ref: '#/components/schemas/InstanceProfileNameType'
+            - description: The instance profile to associate with the instance used to customize your EC2 AMI.
         securityGroupIds:
           allOf:
             - $ref: '#/components/schemas/SecurityGroupIds'
-            - description: 'The security group IDs to associate with the instance used to customize your EC2 AMI. '
+            - description: The security group IDs to associate with the instance used to customize your EC2 AMI.
         subnetId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The subnet ID to place the instance used to customize your EC2 AMI in. '
+            - description: The subnet ID to place the instance used to customize your EC2 AMI in.
         logging:
           allOf:
             - $ref: '#/components/schemas/Logging'
-            - description: 'The logging configuration of the infrastructure configuration. '
+            - description: The logging configuration of the infrastructure configuration.
         keyPair:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image. '
+            - description: The key pair of the infrastructure configuration. This can be used to log on to and debug the instance used to create your image.
         terminateInstanceOnFailure:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: 'The terminate instance on failure setting of the infrastructure configuration. Set to false if you want Image Builder to retain the instance used to configure your AMI if the build or test phase of your workflow fails. '
+            - description: The terminate instance on failure setting of the infrastructure configuration. Set to false if you want Image Builder to retain the instance used to configure your AMI if the build or test phase of your workflow fails.
         snsTopicArn:
           allOf:
             - $ref: '#/components/schemas/SnsTopicArn'
-            - description: 'The SNS topic on which to send image build events. '
+            - description: The SNS topic on which to send image build events.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'The idempotency token used to make this request idempotent. '
+            - description: The idempotency token used to make this request idempotent.
         resourceTags:
           allOf:
             - $ref: '#/components/schemas/ResourceTagMap'
