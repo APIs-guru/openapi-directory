@@ -3631,7 +3631,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IamArn'
             - description: ' The Amazon Resource Name (ARN) of the IAM role. '
-      description: ' The wrapper that contains AWS Audit Manager role information, such as the role type and IAM Amazon Resource Name (ARN). '
+      description: ' The wrapper that contains the AWS Audit Manager role information of the current user, such as the role type and IAM Amazon Resource Name (ARN). '
     TagValue:
       type: string
       pattern: '.{0,255}'
@@ -3737,6 +3737,8 @@ components:
       properties:
         assessment:
           $ref: '#/components/schemas/Assessment'
+        userRole:
+          $ref: '#/components/schemas/Role'
     GetAssessmentFrameworkResponse:
       type: object
       properties:
@@ -5122,8 +5124,8 @@ components:
         keywordValue:
           allOf:
             - $ref: '#/components/schemas/KeywordValue'
-            - description: ' The value of the keyword used to search AWS CloudTrail logs when mapping a control data source. '
-      description: ' The keyword to search for in AWS CloudTrail logs. '
+            - description: ' The value of the keyword used to search AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names when mapping a control data source. '
+      description: ' The keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names. '
     SourceFrequency:
       type: string
       enum:

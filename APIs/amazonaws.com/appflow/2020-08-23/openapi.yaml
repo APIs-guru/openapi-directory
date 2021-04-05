@@ -3827,6 +3827,19 @@ components:
         errorHandlingConfig:
           $ref: '#/components/schemas/ErrorHandlingConfig'
       description: ' The properties that are applied when Amazon Honeycode is used as a destination. '
+    ZendeskDestinationProperties:
+      type: object
+      required:
+        - object
+      properties:
+        object:
+          $ref: '#/components/schemas/Object'
+        idFieldNames:
+          $ref: '#/components/schemas/IdFieldNameList'
+        errorHandlingConfig:
+          $ref: '#/components/schemas/ErrorHandlingConfig'
+        writeOperationType:
+          $ref: '#/components/schemas/WriteOperationType'
     DestinationConnectorProperties:
       type: object
       properties:
@@ -3866,6 +3879,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/CustomerProfilesDestinationProperties'
             - description: ' The properties required to query Amazon Connect Customer Profiles. '
+        Zendesk:
+          $ref: '#/components/schemas/ZendeskDestinationProperties'
       description: ' This stores the information that is required to query a particular connector. '
     DestinationField:
       type: string

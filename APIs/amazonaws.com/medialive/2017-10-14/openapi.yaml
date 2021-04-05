@@ -925,6 +925,12 @@ paths:
                         - xml:
                             name: globalConfiguration
                           description: Configuration settings that apply to the event as a whole.
+                    MotionGraphicsConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/MotionGraphicsConfiguration'
+                        - xml:
+                            name: motionGraphicsConfiguration
+                          description: Settings for motion graphics.
                     NielsenConfiguration:
                       allOf:
                         - $ref: '#/components/schemas/NielsenConfiguration'
@@ -2323,6 +2329,12 @@ paths:
                         - xml:
                             name: globalConfiguration
                           description: Configuration settings that apply to the event as a whole.
+                    MotionGraphicsConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/MotionGraphicsConfiguration'
+                        - xml:
+                            name: motionGraphicsConfiguration
+                          description: Settings for motion graphics.
                     NielsenConfiguration:
                       allOf:
                         - $ref: '#/components/schemas/NielsenConfiguration'
@@ -5396,6 +5408,23 @@ components:
                 name: supportLowFramerateInputs
               description: Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
       description: Global Configuration
+    MotionGraphicsConfiguration:
+      type: object
+      required:
+        - MotionGraphicsSettings
+      properties:
+        MotionGraphicsInsertion:
+          allOf:
+            - $ref: '#/components/schemas/MotionGraphicsInsertion'
+            - xml:
+                name: motionGraphicsInsertion
+        MotionGraphicsSettings:
+          allOf:
+            - $ref: '#/components/schemas/MotionGraphicsSettings'
+            - xml:
+                name: motionGraphicsSettings
+              description: Motion Graphics Settings
+      description: Motion Graphics Configuration
     NielsenConfiguration:
       type: object
       properties:
@@ -9645,6 +9674,12 @@ components:
             - xml:
                 name: globalConfiguration
               description: Configuration settings that apply to the event as a whole.
+        MotionGraphicsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/MotionGraphicsConfiguration'
+            - xml:
+                name: motionGraphicsConfiguration
+              description: Settings for motion graphics.
         NielsenConfiguration:
           allOf:
             - $ref: '#/components/schemas/NielsenConfiguration'
@@ -13437,6 +13472,10 @@ components:
         - CHUNKED
         - NON_CHUNKED
       description: Hls Webdav Http Transfer Mode
+    HtmlMotionGraphicsSettings:
+      type: object
+      properties: {}
+      description: Html Motion Graphics Settings
     ImmediateModeScheduleActionStartSettings:
       type: object
       properties: {}
@@ -14393,6 +14432,58 @@ components:
       type: object
       properties: {}
       description: Media Package Output Settings
+    __longMin0Max86400000:
+      type: integer
+      description: Placeholder documentation for __longMin0Max86400000
+      minimum: 0
+      maximum: 86400000
+    MotionGraphicsActivateScheduleActionSettings:
+      type: object
+      properties:
+        Duration:
+          allOf:
+            - $ref: '#/components/schemas/__longMin0Max86400000'
+            - xml:
+                name: duration
+              description: Duration (in milliseconds) that motion graphics should render on to the video stream. Leaving out this property or setting to 0 will result in rendering continuing until a deactivate action is processed.
+        PasswordParam:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: passwordParam
+              description: Key used to extract the password from EC2 Parameter store
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: url
+              description: URI of the HTML5 content to be rendered into the live stream.
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: username
+              description: Documentation update needed
+      description: Settings to specify the rendering of motion graphics into the video stream.
+    MotionGraphicsInsertion:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: Motion Graphics Insertion
+    MotionGraphicsSettings:
+      type: object
+      properties:
+        HtmlMotionGraphicsSettings:
+          allOf:
+            - $ref: '#/components/schemas/HtmlMotionGraphicsSettings'
+            - xml:
+                name: htmlMotionGraphicsSettings
+      description: Motion Graphics Settings
+    MotionGraphicsDeactivateScheduleActionSettings:
+      type: object
+      properties: {}
+      description: Settings to specify the ending of rendering motion graphics into the video stream.
     Mp2CodingMode:
       type: string
       enum:
@@ -15429,6 +15520,18 @@ components:
             - xml:
                 name: activeInputSwitchActionName
               description: The name of the input switch schedule action that occurred most recently and that resulted in the switch to the current input attachment for this pipeline.
+        ActiveMotionGraphicsActionName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: activeMotionGraphicsActionName
+              description: The name of the motion graphics activate action that occurred most recently and that resulted in the current graphics URI for this pipeline.
+        ActiveMotionGraphicsUri:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: activeMotionGraphicsUri
+              description: The current URI being used for HTML5 motion graphics for this pipeline.
         PipelineId:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -15730,6 +15833,18 @@ components:
             - xml:
                 name: inputSwitchSettings
               description: Action to switch the input
+        MotionGraphicsImageActivateSettings:
+          allOf:
+            - $ref: '#/components/schemas/MotionGraphicsActivateScheduleActionSettings'
+            - xml:
+                name: motionGraphicsImageActivateSettings
+              description: Action to activate a motion graphics image overlay
+        MotionGraphicsImageDeactivateSettings:
+          allOf:
+            - $ref: '#/components/schemas/MotionGraphicsDeactivateScheduleActionSettings'
+            - xml:
+                name: motionGraphicsImageDeactivateSettings
+              description: Action to deactivate a motion graphics image overlay
         PauseStateSettings:
           allOf:
             - $ref: '#/components/schemas/PauseStateScheduleActionSettings'
