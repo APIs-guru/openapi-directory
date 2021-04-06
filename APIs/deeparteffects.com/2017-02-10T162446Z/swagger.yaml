@@ -62,9 +62,8 @@ paths:
             responseParameters:
               method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
-              application/json: >-
+              application/json: |-
                 #set($inputRoot = $input.path('$').data)
-
                 {
                   "status" : "$inputRoot.status",
                   "url" : "$inputRoot.filepath"
@@ -72,9 +71,8 @@ paths:
             statusCode: "200"
           "400":
             responseTemplates:
-              application/json: >-
+              application/json: |-
                 #set($inputRoot = $input.path('$'))
-
                 {
                   "message" : "Invalid request"
                 }
@@ -105,9 +103,8 @@ paths:
             responseParameters:
               method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
-              application/json: >-
+              application/json: |-
                 #set($inputRoot = $input.path('$'))
-
                 {
                   "styles": [
                 #foreach($style in $inputRoot.data)
@@ -117,8 +114,6 @@ paths:
                       "url" : "$style.url",
                       "description" : "$style.description"
                     }#if($foreach.hasNext),#end
-
-
                 		
                 #end
                   ]
@@ -156,9 +151,8 @@ paths:
         httpMethod: POST
         passthroughBehavior: when_no_templates
         requestTemplates:
-          application/json: >-
+          application/json: |-
             #set($inputRoot = $input.path('$'))
-
             {
               "apiKey" : "$context.identity.apiKey",
               #if("$!inputRoot.imageSize"!="")
@@ -181,18 +175,16 @@ paths:
             responseParameters:
               method.response.header.Access-Control-Allow-Origin: "'*'"
             responseTemplates:
-              application/json: >-
+              application/json: |-
                 #set($inputRoot = $input.path('$').data)
-
                 {
                   "submissionId" : "$inputRoot.identifier"
                 }
             statusCode: "200"
           "4\\d{2}":
             responseTemplates:
-              application/json: >-
+              application/json: |-
                 #set($inputRoot = $input.path('$'))
-
                 {
                   "message" : "Invalid request"
                 }
@@ -261,7 +253,8 @@ definitions:
         description: The unique identifier for a style
         type: string
       useOriginalColors:
-        description: Use this flag to use the original color from your photo for the artwork.
+        description: Use this flag to use the original color from your photo for the
+          artwork.
         type: boolean
     title: Request schema for a submission
     type: object
