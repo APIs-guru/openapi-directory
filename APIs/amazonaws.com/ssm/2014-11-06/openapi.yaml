@@ -3579,7 +3579,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.GetCommandInvocation:
     post:
       operationId: GetCommandInvocation
-      description: 'Returns detailed information about command execution for an invocation or plugin. '
+      description: '<p>Returns detailed information about command execution for an invocation or plugin.</p> <p> <code>GetCommandInvocation</code> only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use <a>ListCommandInvocations</a>. To get the command execution status across instances, use <a>ListCommands</a>.</p>'
       responses:
         '200':
           description: Success
@@ -4761,7 +4761,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.LabelParameterVersion:
     post:
       operationId: LabelParameterVersion
-      description: '<p>A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions. </p> <p>Parameter labels have the following requirements and restrictions.</p> <ul> <li> <p>A version of a parameter can have a maximum of 10 labels.</p> </li> <li> <p>You can''t attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can''t attach Production to version 2.</p> </li> <li> <p>You can move a label from one version of a parameter to another.</p> </li> <li> <p>You can''t create a label when you create a new parameter. You must attach a label to a specific version of a parameter.</p> </li> <li> <p>You can''t delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.</p> </li> <li> <p>A label can have a maximum of 100 characters.</p> </li> <li> <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).</p> </li> <li> <p>Labels can''t begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.</p> </li> </ul>'
+      description: '<p>A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions. </p> <p>Parameter labels have the following requirements and restrictions.</p> <ul> <li> <p>A version of a parameter can have a maximum of 10 labels.</p> </li> <li> <p>You can''t attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can''t attach Production to version 2.</p> </li> <li> <p>You can move a label from one version of a parameter to another.</p> </li> <li> <p>You can''t create a label when you create a new parameter. You must attach a label to a specific version of a parameter.</p> </li> <li> <p>If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.</p> </li> <li> <p>A label can have a maximum of 100 characters.</p> </li> <li> <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).</p> </li> <li> <p>Labels can''t begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -7029,6 +7029,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.UnlabelParameterVersion:
+    post:
+      operationId: UnlabelParameterVersion
+      description: Remove a label or labels from a parameter.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnlabelParameterVersionResult'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: TooManyUpdates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyUpdates'
+        '482':
+          description: ParameterNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterNotFound'
+        '483':
+          description: ParameterVersionNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterVersionNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnlabelParameterVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.UnlabelParameterVersion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonSSM.UpdateAssociation:
     post:
       operationId: UpdateAssociation
@@ -7943,7 +8000,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: '<p> One or more tags. The value parameter is required, but if you don''t want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. </p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>'
+            - description: <p>One or more tags. The value parameter is required.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>
     InvalidResourceType: {}
     InvalidResourceId: {}
     InternalServerError: {}
@@ -8950,7 +9007,7 @@ components:
         ReverseOrder:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: A boolean that indicates whether to list step executions in reverse order by start time. The default value is false.
+            - description: A boolean that indicates whether to list step executions in reverse order by start time. The default value is 'false'.
     AutomationExecutionNotFoundException: {}
     DescribeAvailablePatchesResult:
       type: object
@@ -9681,6 +9738,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: 'The number of instances with <code>NotApplicable</code> patches beyond the supported limit, which are not reported by name to Systems Manager Inventory.'
+        InstancesWithCriticalNonCompliantPatches:
+          allOf:
+            - $ref: '#/components/schemas/InstancesCount'
+            - description: 'The number of instances where patches that are specified as "Critical" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.'
+        InstancesWithSecurityNonCompliantPatches:
+          allOf:
+            - $ref: '#/components/schemas/InstancesCount'
+            - description: 'The number of instances where patches that are specified as "Security" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.'
+        InstancesWithOtherNonCompliantPatches:
+          allOf:
+            - $ref: '#/components/schemas/InstancesCount'
+            - description: The number of instances with patches installed that are specified as other than "Critical" or "Security" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.
     DescribePatchGroupStateRequest:
       type: object
       required:
@@ -9855,7 +9924,7 @@ components:
         DocumentName:
           allOf:
             - $ref: '#/components/schemas/DocumentName'
-            - description: 'The name of the document that was run. For example, AWS-RunShellScript.'
+            - description: 'The name of the document that was run. For example, <code>AWS-RunShellScript</code>.'
         DocumentVersion:
           allOf:
             - $ref: '#/components/schemas/DocumentVersion'
@@ -9867,7 +9936,7 @@ components:
         ResponseCode:
           allOf:
             - $ref: '#/components/schemas/ResponseCode'
-            - description: 'The error level response code for the plugin script. If the response code is -1, then the command has not started running on the instance, or it was not received by the instance.'
+            - description: 'The error level response code for the plugin script. If the response code is <code>-1</code>, then the command has not started running on the instance, or it was not received by the instance.'
         ExecutionStartDateTime:
           allOf:
             - $ref: '#/components/schemas/StringDateTime'
@@ -9875,35 +9944,35 @@ components:
         ExecutionElapsedTime:
           allOf:
             - $ref: '#/components/schemas/StringDateTime'
-            - description: Duration since ExecutionStartDateTime.
+            - description: Duration since <code>ExecutionStartDateTime</code>.
         ExecutionEndDateTime:
           allOf:
             - $ref: '#/components/schemas/StringDateTime'
-            - description: '<p>The date and time the plugin was finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the <code>InvokedAfter</code> filter.</p> <p> <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code> </p> <p>If the plugin has not started to run, the string is empty.</p>'
+            - description: '<p>The date and time the plugin finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the <code>InvokedAfter</code> filter.</p> <p> <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code> </p> <p>If the plugin has not started to run, the string is empty.</p>'
         Status:
           allOf:
             - $ref: '#/components/schemas/CommandInvocationStatus'
-            - description: The status of this invocation plugin. This status can be different than StatusDetails.
+            - description: The status of this invocation plugin. This status can be different than <code>StatusDetails</code>.
         StatusDetails:
           allOf:
             - $ref: '#/components/schemas/StatusDetails'
-            - description: '<p>A detailed status of the command execution for an invocation. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html">Understanding command statuses</a> in the <i>AWS Systems Manager User Guide</i>. StatusDetails can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to the instance.</p> </li> <li> <p>In Progress: The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Delayed: The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, because the instance was stopped, or for similar reasons. The system will try to send the command again.</p> </li> <li> <p>Success: The command or plugin ran successfully. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command''s MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: The command started to run on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed: The command wasn''t run successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable: The command can''t be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don''t count against the parent command''s MaxErrors limit and don''t contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>'
+            - description: '<p>A detailed status of the command execution for an invocation. <code>StatusDetails</code> includes more information than <code>Status</code> because it includes states resulting from error and concurrency control parameters. <code>StatusDetails</code> can show different results than <code>Status</code>. For more information about these statuses, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html">Understanding command statuses</a> in the <i>AWS Systems Manager User Guide</i>. <code>StatusDetails</code> can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to the instance.</p> </li> <li> <p>In Progress: The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Delayed: The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, because the instance was stopped, or for similar reasons. The system will try to send the command again.</p> </li> <li> <p>Success: The command or plugin ran successfully. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command''s <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: The command started to run on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed: The command wasn''t run successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable: The command can''t be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don''t count against the parent command''s <code>MaxErrors</code> limit and don''t contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Terminated: The parent command exceeded its <code>MaxErrors</code> limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>'
         StandardOutputContent:
           allOf:
             - $ref: '#/components/schemas/StandardOutputContent'
-            - description: 'The first 24,000 characters written by the plugin to stdout. If the command has not finished running, if ExecutionStatus is neither Succeeded nor Failed, then this string is empty.'
+            - description: 'The first 24,000 characters written by the plugin to <code>stdout</code>. If the command has not finished running, if <code>ExecutionStatus</code> is neither Succeeded nor Failed, then this string is empty.'
         StandardOutputUrl:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: 'The URL for the complete text written by the plugin to stdout in Amazon S3. If an S3 bucket was not specified, then this string is empty.'
+            - description: 'The URL for the complete text written by the plugin to <code>stdout</code> in Amazon Simple Storage Service (Amazon S3). If an S3 bucket was not specified, then this string is empty.'
         StandardErrorContent:
           allOf:
             - $ref: '#/components/schemas/StandardErrorContent'
-            - description: 'The first 8,000 characters written by the plugin to stderr. If the command has not finished running, then this string is empty.'
+            - description: 'The first 8,000 characters written by the plugin to <code>stderr</code>. If the command has not finished running, then this string is empty.'
         StandardErrorUrl:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: 'The URL for the complete text written by the plugin to stderr. If the command has not finished running, then this string is empty.'
+            - description: 'The URL for the complete text written by the plugin to <code>stderr</code>. If the command has not finished running, then this string is empty.'
         CloudWatchOutputConfig:
           allOf:
             - $ref: '#/components/schemas/CloudWatchOutputConfig'
@@ -9922,11 +9991,11 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: (Required) The ID of the managed instance targeted by the command. A managed instance can be an EC2 instance or an instance in your hybrid environment that is configured for Systems Manager.
+            - description: (Required) The ID of the managed instance targeted by the command. A managed instance can be an Amazon Elastic Compute Cloud (Amazon EC2) instance or an instance in your hybrid environment that is configured for AWS Systems Manager.
         PluginName:
           allOf:
             - $ref: '#/components/schemas/CommandPluginName'
-            - description: '<p>The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin are returned. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details.</p> <p>Plugin names are also referred to as <i>step names</i> in Systems Manager documents. For example, <code>aws:RunShellScript</code> is a plugin.</p>'
+            - description: '<p>The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details.</p> <p>Plugin names are also referred to as <i>step names</i> in Systems Manager documents. For example, <code>aws:RunShellScript</code> is a plugin.</p> <p>To find the <code>PluginName</code>, check the document content and find the name of the plugin. Alternatively, use <a>ListCommandInvocations</a> with the <code>CommandId</code> and <code>Details</code> parameters. The <code>PluginName</code> is the <code>Name</code> attribute of the <code>CommandPlugin</code> object in the <code>CommandPlugins</code> list.</p>'
     InvalidPluginName: {}
     InvocationDoesNotExist: {}
     GetConnectionStatusResponse:
@@ -10934,7 +11003,7 @@ components:
         Details:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '(Optional) If set this returns the response of the command executions and any command output. By default this is set to False. '
+            - description: '(Optional) If set this returns the response of the command executions and any command output. The default value is ''false''. '
     ListCommandsResult:
       type: object
       properties:
@@ -11471,7 +11540,7 @@ components:
         Overwrite:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Overwrite an existing parameter. If not specified, will default to "false".'
+            - description: Overwrite an existing parameter. The default value is 'false'.
         AllowedPattern:
           allOf:
             - $ref: '#/components/schemas/AllowedPattern'
@@ -11963,6 +12032,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: '<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target AWS Region. In this case, you could specify the following key-value pairs:</p> <ul> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li> <li> <p> <code>Key=Region,Value=us-east-2</code> </p> </li> </ul>'
+        ScheduledEndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time that the requester expects the runbook workflow related to the change request to complete. The time is an estimate only that the requester provides for reviewers.
+        ChangeDetails:
+          allOf:
+            - $ref: '#/components/schemas/ChangeDetailsValue'
+            - description: 'User-provided details about the change. If no details are provided, content specified in the <b>Template information</b> section of the associated change template is added.'
     AutomationDefinitionNotApprovedException: {}
     StartSessionResponse:
       type: object
@@ -12033,6 +12110,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/SessionId'
             - description: The ID of the session to terminate.
+    UnlabelParameterVersionResult:
+      type: object
+      properties:
+        RemovedLabels:
+          allOf:
+            - $ref: '#/components/schemas/ParameterLabelList'
+            - description: A list of all labels deleted from the parameter.
+        InvalidLabels:
+          allOf:
+            - $ref: '#/components/schemas/ParameterLabelList'
+            - description: The labels that are not attached to the given parameter version.
+    UnlabelParameterVersionRequest:
+      type: object
+      required:
+        - Name
+        - ParameterVersion
+        - Labels
+      title: UnlabelParameterVersionRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/PSParameterName'
+            - description: The parameter name of which you want to delete one or more labels.
+        ParameterVersion:
+          allOf:
+            - $ref: '#/components/schemas/PSParameterVersion'
+            - description: 'The specific version of the parameter which you want to delete one or more labels from. If it is not present, the call will fail.'
+        Labels:
+          allOf:
+            - $ref: '#/components/schemas/ParameterLabelList'
+            - description: One or more labels to delete from the specified parameter version.
     UpdateAssociationResult:
       type: object
       properties:
@@ -12173,7 +12281,7 @@ components:
         DocumentVersion:
           allOf:
             - $ref: '#/components/schemas/DocumentVersion'
-            - description: (Required) The latest version of the document that you want to update. The latest document version can be specified using the $LATEST variable or by the version number. Updating a previous version of a document is not supported.
+            - description: 'The version of the document that you want to update. Currently, Systems Manager supports updating only the latest version of the document. You can specify the version number of the latest version or use the <code>$LATEST</code> variable.'
         DocumentFormat:
           allOf:
             - $ref: '#/components/schemas/DocumentFormat'
@@ -13026,7 +13134,7 @@ components:
         ScheduleExpression:
           allOf:
             - $ref: '#/components/schemas/ScheduleExpression'
-            - description: A cron expression that specifies a schedule when the association runs.
+            - description: A cron expression that specifies a schedule when the association runs. The schedule runs in Coordinated Universal Time (UTC).
         AssociationName:
           allOf:
             - $ref: '#/components/schemas/AssociationName'
@@ -14174,6 +14282,10 @@ components:
       pattern: '^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$'
       minLength: 36
       maxLength: 36
+    ChangeDetailsValue:
+      type: string
+      minLength: 1
+      maxLength: 32768
     ClientToken:
       type: string
       minLength: 1
@@ -16749,6 +16861,12 @@ components:
       enum:
         - RebootIfNeeded
         - NoReboot
+    PatchCriticalNonCompliantCount:
+      type: integer
+    PatchSecurityNonCompliantCount:
+      type: integer
+    PatchOtherNonCompliantCount:
+      type: integer
     InstancePatchState:
       type: object
       required:
@@ -16835,6 +16953,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/RebootOption'
             - description: '<p>Indicates the reboot option specified in the patch baseline.</p> <note> <p>Reboot options apply to <code>Install</code> operations only. Reboots are not attempted for Patch Manager <code>Scan</code> operations.</p> </note> <ul> <li> <p> <b>RebootIfNeeded</b>: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of <code>InstalledPendingReboot</code>.</p> </li> <li> <p> <b>NoReboot</b>: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of <code>InstalledPendingReboot</code>. These patches might not be in effect until a reboot is performed.</p> </li> </ul>'
+        CriticalNonCompliantCount:
+          allOf:
+            - $ref: '#/components/schemas/PatchCriticalNonCompliantCount'
+            - description: 'The number of instances where patches that are specified as "Critical" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.'
+        SecurityNonCompliantCount:
+          allOf:
+            - $ref: '#/components/schemas/PatchSecurityNonCompliantCount'
+            - description: 'The number of instances where patches that are specified as "Security" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.'
+        OtherNonCompliantCount:
+          allOf:
+            - $ref: '#/components/schemas/PatchOtherNonCompliantCount'
+            - description: The number of instances with patches installed that are specified as other than "Critical" or "Security" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.
       description: 'Defines the high-level patch compliance state for a managed instance, providing information about the number of installed, missing, not applicable, and failed patches along with metadata about the operation when this information was gathered for the instance.'
     InstancePatchStateFilterKey:
       type: string

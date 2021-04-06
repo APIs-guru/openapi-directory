@@ -3826,7 +3826,7 @@ paths:
     get:
       x-aws-operation-name: CopyImage
       operationId: GET_CopyImage
-      description: '<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can''t copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost.</p> <p>To copy an AMI from one Region to another, specify the source Region using the <b>SourceRegion</b> parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>To copy an AMI from a Region to an Outpost, specify the source Region using the <b>SourceRegion</b> parameter, and specify the ARN of the destination Outpost using <b>DestinationOutpostArn</b>. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p/> <p>For more information about the prerequisites and limits when copying an AMI, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can''t copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html">CreateStoreImageTask</a>.</p> <p>To copy an AMI from one Region to another, specify the source Region using the <b>SourceRegion</b> parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>To copy an AMI from a Region to an Outpost, specify the source Region using the <b>SourceRegion</b> parameter, and specify the ARN of the destination Outpost using <b>DestinationOutpostArn</b>. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information about the prerequisites and limits when copying an AMI, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -3914,7 +3914,7 @@ paths:
     post:
       x-aws-operation-name: CopyImage
       operationId: POST_CopyImage
-      description: '<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can''t copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost.</p> <p>To copy an AMI from one Region to another, specify the source Region using the <b>SourceRegion</b> parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>To copy an AMI from a Region to an Outpost, specify the source Region using the <b>SourceRegion</b> parameter, and specify the ARN of the destination Outpost using <b>DestinationOutpostArn</b>. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p/> <p>For more information about the prerequisites and limits when copying an AMI, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can''t copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html">CreateStoreImageTask</a>.</p> <p>To copy an AMI from one Region to another, specify the source Region using the <b>SourceRegion</b> parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot.</p> <p>To copy an AMI from a Region to an Outpost, specify the source Region using the <b>SourceRegion</b> parameter, and specify the ARN of the destination Outpost using <b>DestinationOutpostArn</b>. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using <b>KmsKeyId</b>. Outposts do not support unencrypted snapshots. For more information, <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami"> Amazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information about the prerequisites and limits when copying an AMI, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html">Copying an AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -7876,6 +7876,107 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  /#Action=CreateRestoreImageTask:
+    get:
+      x-aws-operation-name: CreateRestoreImageTask
+      operationId: GET_CreateRestoreImageTask
+      description: '<p>Starts a task that restores an AMI from an S3 object that was previously created by using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html">CreateStoreImageTask</a>.</p> <p>To use this API, you must have the required permissions. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions">Permissions for storing and restoring AMIs using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html">Store and restore an AMI using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateRestoreImageTaskResult'
+      parameters:
+        - name: Bucket
+          in: query
+          required: true
+          description: The name of the S3 bucket that contains the stored AMI object.
+          schema:
+            type: string
+        - name: ObjectKey
+          in: query
+          required: true
+          description: The name of the stored AMI object in the bucket.
+          schema:
+            type: string
+        - name: Name
+          in: query
+          required: false
+          description: 'The name for the restored AMI. The name must be unique for AMIs in the Region for this account. If you do not provide a name, the new AMI gets the same name as the original AMI.'
+          schema:
+            type: string
+        - name: TagSpecification
+          in: query
+          required: false
+          description: '<p>The tags to apply to the AMI and snapshots on restoration. You can tag the AMI, the snapshots, or both.</p> <ul> <li> <p>To tag the AMI, the value for <code>ResourceType</code> must be <code>image</code>.</p> </li> <li> <p>To tag the snapshots, the value for <code>ResourceType</code> must be <code>snapshot</code>. The same tag is applied to all of the snapshots that are created.</p> </li> </ul>'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/TagSpecification'
+                - xml:
+                    name: item
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateRestoreImageTask
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateRestoreImageTask
+      operationId: POST_CreateRestoreImageTask
+      description: '<p>Starts a task that restores an AMI from an S3 object that was previously created by using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html">CreateStoreImageTask</a>.</p> <p>To use this API, you must have the required permissions. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions">Permissions for storing and restoring AMIs using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html">Store and restore an AMI using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateRestoreImageTaskResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateRestoreImageTaskRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateRestoreImageTask
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   /#Action=CreateRoute:
     get:
       x-aws-operation-name: CreateRoute
@@ -8519,6 +8620,101 @@ paths:
             type: string
             enum:
               - CreateSpotDatafeedSubscription
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=CreateStoreImageTask:
+    get:
+      x-aws-operation-name: CreateStoreImageTask
+      operationId: GET_CreateStoreImageTask
+      description: '<p>Stores an AMI as a single object in an S3 bucket.</p> <p>To use this API, you must have the required permissions. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions">Permissions for storing and restoring AMIs using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html">Store and restore an AMI using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateStoreImageTaskResult'
+      parameters:
+        - name: ImageId
+          in: query
+          required: true
+          description: The ID of the AMI.
+          schema:
+            type: string
+        - name: Bucket
+          in: query
+          required: true
+          description: 'The name of the S3 bucket in which the AMI object will be stored. The bucket must be in the Region in which the request is being made. The AMI object appears in the bucket only after the upload task has completed. '
+          schema:
+            type: string
+        - name: S3ObjectTag
+          in: query
+          required: false
+          description: 'The tags to apply to the AMI object that will be stored in the S3 bucket. '
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/S3ObjectTag'
+                - xml:
+                    name: item
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateStoreImageTask
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateStoreImageTask
+      operationId: POST_CreateStoreImageTask
+      description: '<p>Stores an AMI as a single object in an S3 bucket.</p> <p>To use this API, you must have the required permissions. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions">Permissions for storing and restoring AMIs using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html">Store and restore an AMI using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateStoreImageTaskResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateStoreImageTaskRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateStoreImageTask
         - name: Version
           in: query
           required: true
@@ -26564,6 +26760,114 @@ paths:
             type: string
             enum:
               - DescribeStaleSecurityGroups
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=DescribeStoreImageTasks:
+    get:
+      x-aws-operation-name: DescribeStoreImageTasks
+      operationId: GET_DescribeStoreImageTasks
+      description: '<p>Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don''t specify the AMIs, you get a paginated list of store tasks from the last 31 days.</p> <p>For each AMI task, the response indicates if the task is <code>InProgress</code>, <code>Completed</code>, or <code>Failed</code>. For tasks <code>InProgress</code>, the response shows the estimated progress as a percentage.</p> <p>Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed.</p> <p>To use this API, you must have the required permissions. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions">Permissions for storing and restoring AMIs using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html">Store and restore an AMI using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeStoreImageTasksResult'
+      parameters:
+        - name: ImageId
+          in: query
+          required: false
+          description: The AMI IDs for which to show progress. Up to 20 AMI IDs can be included in a request.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/ImageId'
+                - xml:
+                    name: item
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Filter
+          in: query
+          required: false
+          description: '<p>The filters.</p> <ul> <li> <p> <code>task-state</code> - Returns tasks in a certain state (<code>InProgress</code> | <code>Completed</code> | <code>Failed</code>)</p> </li> <li> <p> <code>bucket</code> - Returns task information for tasks that targeted a specific bucket. For the filter value, specify the bucket name.</p> </li> </ul>'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Filter'
+                - xml:
+                    name: Filter
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 1 and 200. You cannot specify this parameter and the <code>ImageIDs</code> parameter in the same call.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeStoreImageTasks
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeStoreImageTasks
+      operationId: POST_DescribeStoreImageTasks
+      description: '<p>Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don''t specify the AMIs, you get a paginated list of store tasks from the last 31 days.</p> <p>For each AMI task, the response indicates if the task is <code>InProgress</code>, <code>Completed</code>, or <code>Failed</code>. For tasks <code>InProgress</code>, the response shows the estimated progress as a percentage.</p> <p>Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed.</p> <p>To use this API, you must have the required permissions. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions">Permissions for storing and restoring AMIs using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html">Store and restore an AMI using S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeStoreImageTasksResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeStoreImageTasksRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeStoreImageTasks
         - name: Version
           in: query
           required: true
@@ -46662,6 +46966,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnassignIpv6AddressesResult'
       parameters:
+        - name: NetworkInterfaceId
+          in: query
+          required: true
+          description: The ID of the network interface.
+          schema:
+            type: string
         - name: Ipv6Addresses
           in: query
           required: true
@@ -46673,12 +46983,6 @@ paths:
                 - $ref: '#/components/schemas/String'
                 - xml:
                     name: item
-        - name: NetworkInterfaceId
-          in: query
-          required: true
-          description: The ID of the network interface.
-          schema:
-            type: string
         - name: Action
           in: query
           required: true
@@ -49120,6 +49424,15 @@ components:
                 name: term
               description: 'The number of months remaining in the reservation. For example, 2 is the second to the last month before the capacity reservation expires.'
       description: Describes the price for a Reserved Instance.
+    CreateRestoreImageTaskResult:
+      type: object
+      properties:
+        ImageId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: imageId
+              description: The AMI ID.
     CreateRouteResult:
       type: object
       properties:
@@ -49296,6 +49609,27 @@ components:
                 name: spotDatafeedSubscription
               description: The Spot Instance data feed subscription.
       description: Contains the output of CreateSpotDatafeedSubscription.
+    CreateStoreImageTaskResult:
+      type: object
+      properties:
+        ObjectKey:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: objectKey
+              description: The name of the stored AMI object in the S3 bucket.
+    S3ObjectTag:
+      type: object
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and can be up to 128 Unicode characters in length. May not begin with <code>aws</code>:.</p>'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and can be up to 256 Unicode characters in length.</p>'
+      description: 'The tags to apply to the AMI object that will be stored in the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html">Categorizing your storage using tags</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
     CreateSubnetResult:
       type: object
       example:
@@ -52207,6 +52541,21 @@ components:
             - xml:
                 name: staleSecurityGroupSet
               description: Information about the stale security groups.
+    DescribeStoreImageTasksResult:
+      type: object
+      properties:
+        StoreImageTaskResults:
+          allOf:
+            - $ref: '#/components/schemas/StoreImageTaskResultSet'
+            - xml:
+                name: storeImageTaskResultSet
+              description: The information about the AMI store tasks.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: nextToken
+              description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     DescribeSubnetsResult:
       type: object
       example:
@@ -62460,6 +62809,35 @@ components:
                 name: reservedInstancesId
               description: The ID of the active Standard Reserved Instance.
       description: Contains the parameters for CreateReservedInstancesListing.
+    CreateRestoreImageTaskRequest:
+      type: object
+      required:
+        - Bucket
+        - ObjectKey
+      title: CreateRestoreImageTaskRequest
+      properties:
+        Bucket:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the S3 bucket that contains the stored AMI object.
+        ObjectKey:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the stored AMI object in the bucket.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name for the restored AMI. The name must be unique for AMIs in the Region for this account. If you do not provide a name, the new AMI gets the same name as the original AMI.'
+        TagSpecifications:
+          allOf:
+            - $ref: '#/components/schemas/TagSpecificationList'
+            - xml:
+                name: TagSpecification
+              description: '<p>The tags to apply to the AMI and snapshots on restoration. You can tag the AMI, the snapshots, or both.</p> <ul> <li> <p>To tag the AMI, the value for <code>ResourceType</code> must be <code>image</code>.</p> </li> <li> <p>To tag the snapshots, the value for <code>ResourceType</code> must be <code>snapshot</code>. The same tag is applied to all of the snapshots that are created.</p> </li> </ul>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     CreateRouteRequest:
       type: object
       required:
@@ -62789,6 +63167,38 @@ components:
                 name: state
               description: The state of the Spot Instance data feed subscription.
       description: Describes the data feed for a Spot Instance.
+    S3ObjectTagList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/S3ObjectTag'
+          - xml:
+              name: item
+    CreateStoreImageTaskRequest:
+      type: object
+      required:
+        - ImageId
+        - Bucket
+      title: CreateStoreImageTaskRequest
+      properties:
+        ImageId:
+          allOf:
+            - $ref: '#/components/schemas/ImageId'
+            - description: The ID of the AMI.
+        Bucket:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the S3 bucket in which the AMI object will be stored. The bucket must be in the Region in which the request is being made. The AMI object appears in the bucket only after the upload task has completed. '
+        S3ObjectTags:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectTagList'
+            - xml:
+                name: S3ObjectTag
+              description: 'The tags to apply to the AMI object that will be stored in the S3 bucket. '
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     CreateSubnetRequest:
       type: object
       required:
@@ -69964,6 +70374,52 @@ components:
       items:
         allOf:
           - $ref: '#/components/schemas/StaleSecurityGroup'
+          - xml:
+              name: item
+    ImageIdList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/ImageId'
+          - xml:
+              name: item
+    DescribeStoreImageTasksRequestMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 200
+    DescribeStoreImageTasksRequest:
+      type: object
+      title: DescribeStoreImageTasksRequest
+      properties:
+        ImageIds:
+          allOf:
+            - $ref: '#/components/schemas/ImageIdList'
+            - xml:
+                name: ImageId
+              description: The AMI IDs for which to show progress. Up to 20 AMI IDs can be included in a request.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - xml:
+                name: Filter
+              description: '<p>The filters.</p> <ul> <li> <p> <code>task-state</code> - Returns tasks in a certain state (<code>InProgress</code> | <code>Completed</code> | <code>Failed</code>)</p> </li> <li> <p> <code>bucket</code> - Returns task information for tasks that targeted a specific bucket. For the filter value, specify the bucket name.</p> </li> </ul>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/DescribeStoreImageTasksRequestMaxResults'
+            - description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 1 and 200. You cannot specify this parameter and the <code>ImageIDs</code> parameter in the same call.'
+    StoreImageTaskResultSet:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/StoreImageTaskResult'
           - xml:
               name: item
     DescribeSubnetsMaxResults:
@@ -85494,6 +85950,52 @@ components:
             - xml:
                 name: force
               description: '<p>Forces the instances to stop. The instances do not have an opportunity to flush file system caches or file system metadata. If you use this option, you must perform file system check and repair procedures. This option is not recommended for Windows instances.</p> <p>Default: <code>false</code> </p>'
+    StoreImageTaskResult:
+      type: object
+      properties:
+        AmiId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: amiId
+              description: The ID of the AMI that is being stored.
+        TaskStartTime:
+          allOf:
+            - $ref: '#/components/schemas/MillisecondDateTime'
+            - xml:
+                name: taskStartTime
+              description: The time the task started.
+        Bucket:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: bucket
+              description: The name of the S3 bucket that contains the stored AMI object.
+        S3objectKey:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: s3objectKey
+              description: The name of the stored AMI object in the bucket.
+        ProgressPercentage:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: progressPercentage
+              description: The progress of the task as a percentage.
+        StoreTaskState:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: storeTaskState
+              description: 'The state of the store task (<code>InProgress</code>, <code>Completed</code>, or <code>Failed</code>).'
+        StoreTaskFailureReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: storeTaskFailureReason
+              description: 'If the tasks fails, the reason for the failure is returned. If the task succeeds, <code>null</code> is returned.'
+      description: 'The information about the AMI store task, including the progress of the task.'
     SubnetState:
       type: string
       enum:
@@ -86530,22 +87032,22 @@ components:
     UnassignIpv6AddressesRequest:
       type: object
       required:
-        - Ipv6Addresses
         - NetworkInterfaceId
+        - Ipv6Addresses
       title: UnassignIpv6AddressesRequest
       properties:
-        Ipv6Addresses:
-          allOf:
-            - $ref: '#/components/schemas/Ipv6AddressList'
-            - xml:
-                name: ipv6Addresses
-              description: The IPv6 addresses to unassign from the network interface.
         NetworkInterfaceId:
           allOf:
             - $ref: '#/components/schemas/NetworkInterfaceId'
             - xml:
                 name: networkInterfaceId
               description: The ID of the network interface.
+        Ipv6Addresses:
+          allOf:
+            - $ref: '#/components/schemas/Ipv6AddressList'
+            - xml:
+                name: ipv6Addresses
+              description: The IPv6 addresses to unassign from the network interface.
     UnassignPrivateIpAddressesRequest:
       type: object
       required:

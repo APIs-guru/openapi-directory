@@ -5809,7 +5809,7 @@ components:
               description: A collection of key-value pairs.
         Vpc:
           allOf:
-            - $ref: '#/components/schemas/VpcOutputSettings'
+            - $ref: '#/components/schemas/VpcOutputSettingsDescription'
             - xml:
                 name: vpc
               description: Settings for VPC output
@@ -6138,7 +6138,7 @@ components:
               description: A collection of key-value pairs.
         Vpc:
           allOf:
-            - $ref: '#/components/schemas/VpcOutputSettings'
+            - $ref: '#/components/schemas/VpcOutputSettingsDescription'
             - xml:
                 name: vpc
               description: Settings for VPC output
@@ -6930,7 +6930,7 @@ components:
               description: A collection of key-value pairs.
         Vpc:
           allOf:
-            - $ref: '#/components/schemas/VpcOutputSettings'
+            - $ref: '#/components/schemas/VpcOutputSettingsDescription'
             - xml:
                 name: vpc
               description: Settings for VPC output
@@ -7101,7 +7101,7 @@ components:
               description: A collection of key-value pairs.
         Vpc:
           allOf:
-            - $ref: '#/components/schemas/VpcOutputSettings'
+            - $ref: '#/components/schemas/VpcOutputSettingsDescription'
             - xml:
                 name: vpc
               description: Settings for VPC output
@@ -9764,27 +9764,32 @@ components:
       description: Placeholder documentation for Tags
       additionalProperties:
         $ref: '#/components/schemas/__string'
-    VpcOutputSettings:
+    VpcOutputSettingsDescription:
       type: object
-      required:
-        - SubnetIds
       properties:
-        PublicAddressAllocationIds:
+        AvailabilityZones:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
-                name: publicAddressAllocationIds
+                name: availabilityZones
               description: |
-                List of public address allocation ids to associate with ENIs that will be created in Output VPC.
-                Must specify one for SINGLE_PIPELINE, two for STANDARD channels
+                The Availability Zones where the vpc subnets are located.
+                The first Availability Zone applies to the first subnet in the list of subnets.
+                The second Availability Zone applies to the second subnet.
+        NetworkInterfaceIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: networkInterfaceIds
+              description: |
+                A list of Elastic Network Interfaces created by MediaLive in the customer's VPC
         SecurityGroupIds:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: securityGroupIds
               description: |
-                A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.
-                If none are specified then the VPC default security group will be used
+                A list of up EC2 VPC security group IDs attached to the Output VPC network interfaces.
         SubnetIds:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -9795,7 +9800,6 @@ components:
                 If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
       description: |
         The properties for a private VPC Output
-        When this property is specified, the output egress addresses will be created in a user specified VPC
     Channel:
       type: object
       properties:
@@ -9898,7 +9902,7 @@ components:
               description: A collection of key-value pairs.
         Vpc:
           allOf:
-            - $ref: '#/components/schemas/VpcOutputSettings'
+            - $ref: '#/components/schemas/VpcOutputSettingsDescription'
             - xml:
                 name: vpc
               description: Settings for VPC output
@@ -10004,7 +10008,7 @@ components:
               description: A collection of key-value pairs.
         Vpc:
           allOf:
-            - $ref: '#/components/schemas/VpcOutputSettings'
+            - $ref: '#/components/schemas/VpcOutputSettingsDescription'
             - xml:
                 name: vpc
               description: Settings for VPC output
@@ -10013,6 +10017,38 @@ components:
       type: object
       properties: {}
       description: Passthrough applies no color space conversion to the output
+    VpcOutputSettings:
+      type: object
+      required:
+        - SubnetIds
+      properties:
+        PublicAddressAllocationIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: publicAddressAllocationIds
+              description: |
+                List of public address allocation ids to associate with ENIs that will be created in Output VPC.
+                Must specify one for SINGLE_PIPELINE, two for STANDARD channels
+        SecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: securityGroupIds
+              description: |
+                A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.
+                If none are specified then the VPC default security group will be used
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: subnetIds
+              description: |
+                A list of VPC subnet IDs from the same VPC.
+                If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
+      description: |
+        The properties for a private VPC Output
+        When this property is specified, the output egress addresses will be created in a user specified VPC
     CreateChannelRequest:
       type: object
       title: CreateChannelRequest
