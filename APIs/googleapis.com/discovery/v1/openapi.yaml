@@ -6,7 +6,8 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Provides information about other Google APIs, such as what APIs are available, the resource, and method details for each API.
+  description: Provides information about other Google APIs, such as what APIs are
+    available, the resource, and method details for each API.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -114,7 +115,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -132,7 +135,8 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+      description: An opaque string that represents a user for quota purposes. Must
+        not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -210,11 +214,13 @@ components:
     JsonSchema:
       properties:
         $ref:
-          description: A reference to another schema. The value of this property is the "id" of another schema.
+          description: A reference to another schema. The value of this property is the
+            "id" of another schema.
           type: string
         additionalProperties:
           $ref: "#/components/schemas/JsonSchema"
-          description: If this is a schema for an object, this property is the schema for any additional properties with dynamic keys on this object.
+          description: If this is a schema for an object, this property is the schema for
+            any additional properties with dynamic keys on this object.
         annotations:
           description: Additional information about this property.
           properties:
@@ -233,21 +239,26 @@ components:
             type: string
           type: array
         enumDescriptions:
-          description: The descriptions for the enums. Each position maps to the corresponding value in the "enum" array.
+          description: The descriptions for the enums. Each position maps to the
+            corresponding value in the "enum" array.
           items:
             type: string
           type: array
         format:
-          description: "An additional regular expression or key that helps constrain the value. For more details see: http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5.23"
+          description: "An additional regular expression or key that helps constrain the
+            value. For more details see:
+            http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5.23"
           type: string
         id:
           description: Unique identifier for this schema.
           type: string
         items:
           $ref: "#/components/schemas/JsonSchema"
-          description: If this is a schema for an array, this property is the schema for each element in the array.
+          description: If this is a schema for an array, this property is the schema for
+            each element in the array.
         location:
-          description: Whether this parameter goes in the query or the path for REST requests.
+          description: Whether this parameter goes in the query or the path for REST
+            requests.
           type: string
         maximum:
           description: The maximum value of this parameter.
@@ -256,16 +267,23 @@ components:
           description: The minimum value of this parameter.
           type: string
         pattern:
-          description: "The regular expression this parameter must conform to. Uses Java 6 regex format: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html"
+          description: "The regular expression this parameter must conform to. Uses Java 6
+            regex format:
+            http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.ht\
+            ml"
           type: string
         properties:
           additionalProperties:
             $ref: "#/components/schemas/JsonSchema"
-            description: A single property of this object. The value is itself a JSON Schema object describing this property.
-          description: If this is a schema for an object, list the schema for each property of this object.
+            description: A single property of this object. The value is itself a JSON Schema
+              object describing this property.
+          description: If this is a schema for an object, list the schema for each
+            property of this object.
           type: object
         readOnly:
-          description: The value is read-only, generated by the service. The value cannot be modified by the client. If the value is included in a POST, PUT, or PATCH request, it is ignored by the service.
+          description: The value is read-only, generated by the service. The value cannot
+            be modified by the client. If the value is included in a POST, PUT,
+            or PATCH request, it is ignored by the service.
           type: boolean
         repeated:
           description: Whether this parameter may appear multiple times.
@@ -274,10 +292,14 @@ components:
           description: Whether the parameter is required.
           type: boolean
         type:
-          description: "The value type for this schema. A list of values can be found here: http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5.1"
+          description: "The value type for this schema. A list of values can be found
+            here:
+            http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5.1"
           type: string
         variant:
-          description: In a variant data type, the value of one property is used to determine how to interpret the entire entity. Its value must exist in a map of descriminant values to schema names.
+          description: In a variant data type, the value of one property is used to
+            determine how to interpret the entire entity. Its value must exist
+            in a map of descriminant values to schema names.
           properties:
             discriminant:
               description: The name of the type discriminant property.
@@ -324,7 +346,8 @@ components:
           description: The path for REST batch requests.
           type: string
         canonicalName:
-          description: Indicates how the API name should be capitalized and split into various parts. Useful for generating pretty class names.
+          description: Indicates how the API name should be capitalized and split into
+            various parts. Useful for generating pretty class names.
           type: string
         description:
           description: The description of this API.
@@ -341,7 +364,8 @@ components:
           readOnly: true
           type: string
         exponentialBackoffDefault:
-          description: Enable exponential backoff for suitable methods in the generated clients.
+          description: Enable exponential backoff for suitable methods in the generated
+            clients.
           type: boolean
         features:
           description: A list of supported features for this API.
@@ -380,7 +404,9 @@ components:
           description: The name of this API.
           type: string
         ownerDomain:
-          description: The domain of the owner of this API. Together with the ownerName and a packagePath values, this can be used to generate a library for this API which would have a unique fully qualified name.
+          description: The domain of the owner of this API. Together with the ownerName
+            and a packagePath values, this can be used to generate a library for
+            this API which would have a unique fully qualified name.
           type: string
         ownerName:
           description: The name of the owner of this API. See ownerDomain.
@@ -401,7 +427,8 @@ components:
         resources:
           additionalProperties:
             $ref: "#/components/schemas/RestResource"
-            description: An individual resource description. Contains methods and sub-resources related to this resource.
+            description: An individual resource description. Contains methods and
+              sub-resources related to this resource.
           description: The resources in this API.
           type: object
         revision:
@@ -434,13 +461,19 @@ components:
           description: Description of this method.
           type: string
         etagRequired:
-          description: Whether this method requires an ETag to be specified. The ETag is sent as an HTTP If-Match or If-None-Match header.
+          description: Whether this method requires an ETag to be specified. The ETag is
+            sent as an HTTP If-Match or If-None-Match header.
           type: boolean
+        flatPath:
+          description: The URI path of this REST method in (RFC 6570) format without level
+            2 features ({+var}). Supplementary to the path property.
+          type: string
         httpMethod:
           description: HTTP method used by this method.
           type: string
         id:
-          description: A unique ID for this method. This property can be used to match methods between different versions of Discovery.
+          description: A unique ID for this method. This property can be used to match
+            methods between different versions of Discovery.
           type: string
         mediaUpload:
           description: Media upload parameters.
@@ -464,7 +497,8 @@ components:
                       description: True if this endpoint supports uploading multipart media.
                       type: boolean
                     path:
-                      description: The URI path to be used for upload. Should be used in conjunction with the basePath property at the api-level.
+                      description: The URI path to be used for upload. Should be used in conjunction
+                        with the basePath property at the api-level.
                       type: string
                   type: object
                 simple:
@@ -475,13 +509,16 @@ components:
                       description: True if this endpoint supports upload multipart media.
                       type: boolean
                     path:
-                      description: The URI path to be used for upload. Should be used in conjunction with the basePath property at the api-level.
+                      description: The URI path to be used for upload. Should be used in conjunction
+                        with the basePath property at the api-level.
                       type: string
                   type: object
               type: object
           type: object
         parameterOrder:
-          description: Ordered list of required parameters, serves as a hint to clients on how to structure their method signatures. The array is ordered such that the "most-significant" parameter appears first.
+          description: Ordered list of required parameters, serves as a hint to clients on
+            how to structure their method signatures. The array is ordered such
+            that the "most-significant" parameter appears first.
           items:
             type: string
           type: array
@@ -492,7 +529,8 @@ components:
           description: Details for all parameters in this method.
           type: object
         path:
-          description: The URI path of this REST method. Should be used in conjunction with the basePath property at the api-level.
+          description: The URI path of this REST method. Should be used in conjunction
+            with the basePath property at the api-level.
           type: string
         request:
           description: The schema for the request.
@@ -526,7 +564,9 @@ components:
           description: Whether this method supports subscriptions.
           type: boolean
         useMediaDownloadService:
-          description: Indicates that downloads from this method should use the download service URL (i.e. "/download"). Only applies if the method supports media download.
+          description: Indicates that downloads from this method should use the download
+            service URL (i.e. "/download"). Only applies if the method supports
+            media download.
           type: boolean
       type: object
     RestResource:

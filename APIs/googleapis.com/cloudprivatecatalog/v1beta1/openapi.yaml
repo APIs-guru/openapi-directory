@@ -5,7 +5,8 @@ info:
   contact:
     name: Google
     url: https://google.com
-  description: Enable cloud users to discover enterprise catalogs and products in their organizations.
+  description: Enable cloud users to discover enterprise catalogs and products in
+    their organizations.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -34,14 +35,14 @@ tags:
 paths:
   "/v1beta1/{resource}/catalogs:search":
     get:
-      description: >-
+      description: |-
         Search Catalog resources that consumers have access to, within the
-
         scope of the consumer cloud resource hierarchy context.
       operationId: cloudprivatecatalog.organizations.catalogs.search
       parameters:
         - description: >-
-            Required. The name of the resource context. It can be in following formats:
+            Required. The name of the resource context. It can be in following
+            formats:
 
 
             * `projects/{project_id}`
@@ -61,7 +62,8 @@ paths:
           schema:
             type: integer
         - description: >-
-            A pagination token returned from a previous call to SearchCatalogs that
+            A pagination token returned from a previous call to SearchCatalogs
+            that
 
             indicates where this listing should continue from.
 
@@ -70,9 +72,8 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: >-
+        - description: |-
             The query to filter the catalogs. The supported queries are:
-
 
             * Get a single catalog: `name=catalogs/{catalog_id}`
           in: query
@@ -84,7 +85,8 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse"
+                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchCatalogsRespo\
+                  nse"
           description: Successful response
       security:
         - Oauth2:
@@ -107,15 +109,13 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{resource}/products:search":
     get:
-      description: >-
+      description: |-
         Search Product resources that consumers have access to, within the
-
         scope of the consumer cloud resource hierarchy context.
       operationId: cloudprivatecatalog.organizations.products.search
       parameters:
-        - description: >-
+        - description: |-
             Required. The name of the resource context. See
-
             SearchCatalogsRequest.resource for details.
           in: path
           name: resource
@@ -129,7 +129,8 @@ paths:
           schema:
             type: integer
         - description: >-
-            A pagination token returned from a previous call to SearchProducts that
+            A pagination token returned from a previous call to SearchProducts
+            that
 
             indicates where this listing should continue from.
 
@@ -138,18 +139,13 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: >-
+        - description: |-
             The query to filter the products.
 
-
             The supported queries are:
-
             * List products of all catalogs: empty
-
             * List products under a catalog: `parent=catalogs/{catalog_id}`
-
             * Get a product by name:
-
             `name=catalogs/{catalog_id}/products/{product_id}`
           in: query
           name: query
@@ -160,7 +156,8 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchProductsResponse"
+                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchProductsRespo\
+                  nse"
           description: Successful response
       security:
         - Oauth2:
@@ -183,15 +180,13 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{resource}/versions:search":
     get:
-      description: >-
+      description: |-
         Search Version resources that consumers have access to, within the
-
         scope of the consumer cloud resource hierarchy context.
       operationId: cloudprivatecatalog.organizations.versions.search
       parameters:
-        - description: >-
+        - description: |-
             Required. The name of the resource context. See
-
             SearchCatalogsRequest.resource for details.
           in: path
           name: resource
@@ -204,11 +199,9 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: >-
+        - description: |-
             A pagination token returned from a previous call to SearchVersions
-
             that indicates where this listing should continue from.
-
             This field is optional.
           in: query
           name: pageToken
@@ -236,7 +229,8 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse"
+                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchVersionsRespo\
+                  nse"
           description: Successful response
       security:
         - Oauth2:
@@ -298,7 +292,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -317,7 +313,9 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
@@ -336,9 +334,8 @@ components:
         type: string
   schemas:
     GoogleCloudPrivatecatalogV1beta1Catalog:
-      description: >-
+      description: |-
         The readonly representation of a catalog computed with a given resource
-
         context.
       properties:
         createTime:
@@ -349,11 +346,13 @@ components:
           description: Output only. The description of the catalog.
           type: string
         displayName:
-          description: Output only. The descriptive name of the catalog as it appears in UIs.
+          description: Output only. The descriptive name of the catalog as it appears in
+            UIs.
           type: string
         name:
           description: >-
-            Output only. The resource name of the target catalog, in the format of
+            Output only. The resource name of the target catalog, in the format
+            of
 
             `catalogs/{catalog_id}'.
           type: string
@@ -363,20 +362,16 @@ components:
           type: string
       type: object
     GoogleCloudPrivatecatalogV1beta1Product:
-      description: >-
+      description: |-
         The readonly representation of a product computed with a given resource
-
         context.
       properties:
         assetType:
-          description: >-
+          description: |-
             Output only. The type of the product asset. It can be one of the
-
             following values:
 
-
             * `google.deploymentmanager.Template`
-
             * `google.cloudprivatecatalog.ListingOnly`
           type: string
         createTime:
@@ -522,7 +517,8 @@ components:
           type: string
         name:
           description: >-
-            Output only. The resource name of the target product, in the format of
+            Output only. The resource name of the target product, in the format
+            of
 
             `products/a-z*[a-z0-9]'.
 
@@ -544,7 +540,8 @@ components:
           type: array
         nextPageToken:
           description: >-
-            A pagination token returned from a previous call to SearchCatalogs that
+            A pagination token returned from a previous call to SearchCatalogs
+            that
 
             indicates from where listing should continue.
 
@@ -556,7 +553,8 @@ components:
       properties:
         nextPageToken:
           description: >-
-            A pagination token returned from a previous call to SearchProducts that
+            A pagination token returned from a previous call to SearchProducts
+            that
 
             indicates from where listing should continue.
 
@@ -573,7 +571,8 @@ components:
       properties:
         nextPageToken:
           description: >-
-            A pagination token returned from a previous call to SearchVersions that
+            A pagination token returned from a previous call to SearchVersions
+            that
 
             indicates from where the listing should continue.
 
@@ -587,7 +586,8 @@ components:
       type: object
     GoogleCloudPrivatecatalogV1beta1Version:
       description: >-
-        The consumer representation of a version which is a child resource under a
+        The consumer representation of a version which is a child resource
+        under a
 
         `Product` with asset data.
       properties:
@@ -607,16 +607,15 @@ components:
           type: string
         description:
           description: >-
-            Output only. The user-supplied description of the version. Maximum of 256
+            Output only. The user-supplied description of the version. Maximum
+            of 256
 
             characters.
           type: string
         name:
-          description: >-
+          description: |-
             Output only. The resource name of the version, in the format
-
             `catalogs/{catalog_id}/products/{product_id}/versions/a-z*[a-z0-9]'.
-
 
             A unique identifier for the version under a product.
           type: string

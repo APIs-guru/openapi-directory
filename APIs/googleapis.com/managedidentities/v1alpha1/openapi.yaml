@@ -141,17 +141,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: The standard list filter.
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like "displayName=tokyo", and is documented in more detail in [AIP-160](https://google.aip.dev/160).
           in: query
           name: filter
           schema:
             type: string
-        - description: The standard list page size.
+        - description: The maximum number of results to return. If not set, the service will select a default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: The standard list page token.
+        - description: A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page.
           in: query
           name: pageToken
           schema:
@@ -1160,7 +1160,7 @@ components:
       description: Maintenance schedule which is exposed to customer and potentially end user, indicating published upcoming future maintenance schedule
       properties:
         canReschedule:
-          description: This field will be deprecated, and will be always set to true since reschedule can happen multiple times now.
+          description: This field is deprecated, and will be always set to true since reschedule can happen multiple times now. This field should not be removed until all service producers remove this for their customers.
           type: boolean
         endTime:
           description: The scheduled end time for the maintenance.
@@ -1697,7 +1697,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1705,6 +1705,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

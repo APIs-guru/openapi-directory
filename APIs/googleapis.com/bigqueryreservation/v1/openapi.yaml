@@ -33,7 +33,6 @@ info:
 externalDocs:
   url: https://cloud.google.com/bigquery/
 tags:
-  - name: operations
   - name: projects
 paths:
   "/v1/{name}":
@@ -73,21 +72,6 @@ paths:
           in: path
           name: name
           required: true
-          schema:
-            type: string
-        - description: The standard list filter.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
           schema:
             type: string
       responses:
@@ -842,13 +826,6 @@ components:
           readOnly: true
           type: string
       type: object
-    CreateSlotPoolMetadata:
-      description: The metadata for operation returned from ReservationService.CreateSlotPool.
-      properties:
-        slotPool:
-          description: Resource name of the slot pool that is being created. E.g., projects/myproject/locations/us-central1/reservations/foo/slotPools/123
-          type: string
-      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
@@ -877,18 +854,6 @@ components:
           description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
       type: object
-    ListOperationsResponse:
-      description: The response message for Operations.ListOperations.
-      properties:
-        nextPageToken:
-          description: The standard List next-page token.
-          type: string
-        operations:
-          description: A list of operations that matches the specified filter in the request.
-          items:
-            $ref: "#/components/schemas/Operation"
-          type: array
-      type: object
     ListReservationsResponse:
       description: The response for ReservationService.ListReservations.
       properties:
@@ -916,29 +881,6 @@ components:
         destinationId:
           description: "The new reservation ID, e.g.: `projects/myotherproject/locations/US/reservations/team2-prod`"
           type: string
-      type: object
-    Operation:
-      description: This resource represents a long-running operation that is the result of a network API call.
-      properties:
-        done:
-          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
-          type: boolean
-        error:
-          $ref: "#/components/schemas/Status"
-          description: The error result of the operation in case of failure or cancellation.
-        metadata:
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
-          type: object
-        name:
-          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
-          type: string
-        response:
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
-          type: object
       type: object
     Reservation:
       description: A reservation is a mechanism used to guarantee slots to users.
@@ -1032,7 +974,7 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1041,6 +983,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

@@ -39,10 +39,12 @@ tags:
 paths:
   "/v1/media/{resourceName}":
     get:
-      description: Downloads media. Download is supported on the URI `/v1/media/{+name}?alt=media`.
+      description: Downloads media. Download is supported on the URI
+        `/v1/media/{+name}?alt=media`.
       operationId: chat.media.download
       parameters:
-        - description: Name of the media that is being downloaded. See ReadRequest.resource_name.
+        - description: Name of the media that is being downloaded. See
+            ReadRequest.resource_name.
           in: path
           name: resourceName
           required: true
@@ -74,7 +76,9 @@ paths:
       description: Lists spaces the caller is a member of.
       operationId: chat.spaces.list
       parameters:
-        - description: Requested page size. The value is capped at 1000. Server may return fewer results than requested. If unspecified, server will default to 100.
+        - description: Requested page size. The value is capped at 1000. Server may return
+            fewer results than requested. If unspecified, server will default to
+            100.
           in: query
           name: pageSize
           schema:
@@ -110,7 +114,9 @@ paths:
       description: Deletes a message.
       operationId: chat.spaces.messages.delete
       parameters:
-        - description: 'Required. Resource name of the message to be deleted, in the form "spaces/*/messages/*" Example: spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4'
+        - description: 'Required. Resource name of the message to be deleted, in the form
+            "spaces/*/messages/*" Example:
+            spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4'
           in: path
           name: name
           required: true
@@ -126,10 +132,12 @@ paths:
       tags:
         - spaces
     get:
-      description: Gets the metadata of a message attachment. The attachment data is fetched using the media API.
+      description: Gets the metadata of a message attachment. The attachment data is
+        fetched using the media API.
       operationId: chat.spaces.messages.attachments.get
       parameters:
-        - description: Resource name of the attachment, in the form "spaces/*/messages/*/attachments/*".
+        - description: Resource name of the attachment, in the form
+            "spaces/*/messages/*/attachments/*".
           in: path
           name: name
           required: true
@@ -165,7 +173,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Required. The field paths to be updated, comma separated if there are multiple. Currently supported field paths: * text * cards"
+        - description: "Required. The field paths to be updated, comma separated if there
+            are multiple. Currently supported field paths: * text * cards"
           in: query
           name: updateMask
           schema:
@@ -189,13 +198,17 @@ paths:
       description: Lists human memberships in a space.
       operationId: chat.spaces.members.list
       parameters:
-        - description: 'Required. The resource name of the space for which membership list is to be fetched, in the form "spaces/*". Example: spaces/AAAAMpdlehY'
+        - description: 'Required. The resource name of the space for which membership list
+            is to be fetched, in the form "spaces/*". Example:
+            spaces/AAAAMpdlehY'
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Requested page size. The value is capped at 1000. Server may return fewer results than requested. If unspecified, server will default to 100.
+        - description: Requested page size. The value is capped at 1000. Server may return
+            fewer results than requested. If unspecified, server will default to
+            100.
           in: query
           name: pageSize
           schema:
@@ -243,13 +256,21 @@ paths:
       description: Creates a message.
       operationId: chat.spaces.messages.create
       parameters:
-        - description: 'Required. Space resource name, in the form "spaces/*". Example: spaces/AAAAMpdlehY'
+        - description: 'Required. Space resource name, in the form "spaces/*". Example:
+            spaces/AAAAMpdlehY'
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Opaque thread identifier string that can be specified to group messages into a single thread. If this is the first message with a given thread identifier, a new thread is created. Subsequent messages with the same thread identifier will be posted into the same thread. This relieves bots and webhooks from having to store the Hangouts Chat thread ID of a thread (created earlier by them) to post further updates to it. Has no effect if thread field, corresponding to an existing thread, is set in message.
+        - description: Opaque thread identifier string that can be specified to group
+            messages into a single thread. If this is the first message with a
+            given thread identifier, a new thread is created. Subsequent
+            messages with the same thread identifier will be posted into the
+            same thread. This relieves bots and webhooks from having to store
+            the Hangouts Chat thread ID of a thread (created earlier by them) to
+            post further updates to it. Has no effect if thread field,
+            corresponding to an existing thread, is set in message.
           in: query
           name: threadKey
           schema:
@@ -282,16 +303,25 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Legacy path for creating message. Calling these will result in a BadRequest response.
+      description: Legacy path for creating message. Calling these will result in a
+        BadRequest response.
       operationId: chat.spaces.webhooks
       parameters:
-        - description: 'Required. Space resource name, in the form "spaces/*". Example: spaces/AAAAMpdlehY'
+        - description: 'Required. Space resource name, in the form "spaces/*". Example:
+            spaces/AAAAMpdlehY'
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Opaque thread identifier string that can be specified to group messages into a single thread. If this is the first message with a given thread identifier, a new thread is created. Subsequent messages with the same thread identifier will be posted into the same thread. This relieves bots and webhooks from having to store the Hangouts Chat thread ID of a thread (created earlier by them) to post further updates to it. Has no effect if thread field, corresponding to an existing thread, is set in message.
+        - description: Opaque thread identifier string that can be specified to group
+            messages into a single thread. If this is the first message with a
+            given thread identifier, a new thread is created. Subsequent
+            messages with the same thread identifier will be posted into the
+            same thread. This relieves bots and webhooks from having to store
+            the Hangouts Chat thread ID of a thread (created earlier by them) to
+            post further updates to it. Has no effect if thread field,
+            corresponding to an existing thread, is set in message.
           in: query
           name: threadKey
           schema:
@@ -350,7 +380,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -368,7 +400,9 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
@@ -387,7 +421,10 @@ components:
         type: string
   schemas:
     ActionParameter:
-      description: "List of string parameters to supply when the action method is invoked. For example, consider three snooze buttons: snooze now, snooze 1 day, snooze next week. You might use action method = snooze(), passing the snooze type and snooze time in the list of string parameters."
+      description: "List of string parameters to supply when the action method is
+        invoked. For example, consider three snooze buttons: snooze now, snooze
+        1 day, snooze next week. You might use action method = snooze(), passing
+        the snooze type and snooze time in the list of string parameters."
       properties:
         key:
           description: The name of the parameter for the action script.
@@ -408,21 +445,30 @@ components:
             - REQUEST_CONFIG
           type: string
         url:
-          description: URL for users to auth or config. (Only for REQUEST_CONFIG response types.)
+          description: URL for users to auth or config. (Only for REQUEST_CONFIG response
+            types.)
           type: string
       type: object
     Annotation:
-      description: 'Annotations associated with the plain-text body of the message. Example plain-text message body: ``` Hello @FooBot how are you!" ``` The corresponding annotations metadata: ``` "annotations":[{ "type":"USER_MENTION", "startIndex":6, "length":7, "userMention": { "user": { "name":"users/107946847022116401880", "displayName":"FooBot", "avatarUrl":"https://goo.gl/aeDtrS", "type":"BOT" }, "type":"MENTION" } }] ```'
+      description: 'Annotations associated with the plain-text body of the message.
+        Example plain-text message body: ``` Hello @FooBot how are you!" ``` The
+        corresponding annotations metadata: ``` "annotations":[{
+        "type":"USER_MENTION", "startIndex":6, "length":7, "userMention": {
+        "user": { "name":"users/107946847022116401880", "displayName":"FooBot",
+        "avatarUrl":"https://goo.gl/aeDtrS", "type":"BOT" }, "type":"MENTION" }
+        }] ```'
       properties:
         length:
-          description: Length of the substring in the plain-text message body this annotation corresponds to.
+          description: Length of the substring in the plain-text message body this
+            annotation corresponds to.
           format: int32
           type: integer
         slashCommand:
           $ref: "#/components/schemas/SlashCommandMetadata"
           description: The metadata for a slash command.
         startIndex:
-          description: Start index (0-based, inclusive) in the plain-text message body this annotation corresponds to.
+          description: Start index (0-based, inclusive) in the plain-text message body
+            this annotation corresponds to.
           format: int32
           type: integer
         type:
@@ -441,7 +487,8 @@ components:
       properties:
         attachmentDataRef:
           $ref: "#/components/schemas/AttachmentDataRef"
-          description: A reference to the attachment data. This is used with the media API to download the attachment data.
+          description: A reference to the attachment data. This is used with the media API
+            to download the attachment data.
         contentName:
           description: The original file name for the content, not the full path.
           type: string
@@ -449,13 +496,16 @@ components:
           description: The content type (MIME type) of the file.
           type: string
         downloadUri:
-          description: Output only. The download URL which should be used to allow a human user to download the attachment. Bots should not use this URL to download attachment content.
+          description: Output only. The download URL which should be used to allow a human
+            user to download the attachment. Bots should not use this URL to
+            download attachment content.
           type: string
         driveDataRef:
           $ref: "#/components/schemas/DriveDataRef"
           description: A reference to the drive attachment. This is used with the Drive API.
         name:
-          description: Resource name of the attachment, in the form "spaces/*/messages/*/attachments/*".
+          description: Resource name of the attachment, in the form
+            "spaces/*/messages/*/attachments/*".
           type: string
         source:
           description: The source of the attachment.
@@ -465,14 +515,17 @@ components:
             - UPLOADED_CONTENT
           type: string
         thumbnailUri:
-          description: Output only. The thumbnail URL which should be used to preview the attachment to a human user. Bots should not use this URL to download attachment content.
+          description: Output only. The thumbnail URL which should be used to preview the
+            attachment to a human user. Bots should not use this URL to download
+            attachment content.
           type: string
       type: object
     AttachmentDataRef:
       description: A reference to the data of an attachment.
       properties:
         resourceName:
-          description: The resource name of the attachment data. This is used with the media API to download the attachment data.
+          description: The resource name of the attachment data. This is used with the
+            media API to download the attachment data.
           type: string
       type: object
     Button:
@@ -495,7 +548,8 @@ components:
           type: array
         header:
           $ref: "#/components/schemas/CardHeader"
-          description: The header of the card. A header usually contains a title and an image.
+          description: The header of the card. A header usually contains a title and an
+            image.
         name:
           description: Name of the card.
           type: string
@@ -506,7 +560,9 @@ components:
           type: array
       type: object
     CardAction:
-      description: "A card action is the action associated with the card. For an invoice card, a typical action would be: delete invoice, email invoice or open the invoice in browser."
+      description: "A card action is the action associated with the card. For an
+        invoice card, a typical action would be: delete invoice, email invoice
+        or open the invoice in browser."
       properties:
         actionLabel:
           description: The label used to be displayed in the action menu item.
@@ -531,7 +587,9 @@ components:
           description: The subtitle of the card header.
           type: string
         title:
-          description: "The title must be specified. The header has a fixed height: if both a title and subtitle is specified, each will take up 1 line. If only the title is specified, it will take up both lines."
+          description: "The title must be specified. The header has a fixed height: if
+            both a title and subtitle is specified, each will take up 1 line. If
+            only the title is specified, it will take up both lines."
           type: string
       type: object
     DeprecatedEvent:
@@ -539,9 +597,15 @@ components:
       properties:
         action:
           $ref: "#/components/schemas/FormAction"
-          description: The form action data associated with an interactive card that was clicked. Only populated for CARD_CLICKED events. See the [Interactive Cards guide](/hangouts/chat/how-tos/cards-onclick) for more information.
+          description: The form action data associated with an interactive card that was
+            clicked. Only populated for CARD_CLICKED events. See the
+            [Interactive Cards guide](/hangouts/chat/how-tos/cards-onclick) for
+            more information.
         configCompleteRedirectUrl:
-          description: The URL the bot should redirect the user to after they have completed an authorization or configuration flow outside of Google Chat. See the [Authorizing access to 3p services guide](/hangouts/chat/how-tos/auth-3p) for more information.
+          description: The URL the bot should redirect the user to after they have
+            completed an authorization or configuration flow outside of Google
+            Chat. See the [Authorizing access to 3p services
+            guide](/hangouts/chat/how-tos/auth-3p) for more information.
           type: string
         eventTime:
           description: The timestamp indicating when the event was dispatched.
@@ -554,10 +618,16 @@ components:
           $ref: "#/components/schemas/Space"
           description: The room or DM in which the event occurred.
         threadKey:
-          description: The bot-defined key for the thread related to the event. See the thread_key field of the `spaces.message.create` request for more information.
+          description: The bot-defined key for the thread related to the event. See the
+            thread_key field of the `spaces.message.create` request for more
+            information.
           type: string
         token:
-          description: A secret value that bots can use to verify if a request is from Google. The token is randomly generated by Google, remains static, and can be obtained from the Google Chat API configuration page in the Cloud Console. Developers can revoke/regenerate it if needed from the same page.
+          description: A secret value that bots can use to verify if a request is from
+            Google. The token is randomly generated by Google, remains static,
+            and can be obtained from the Google Chat API configuration page in
+            the Cloud Console. Developers can revoke/regenerate it if needed
+            from the same page.
           type: string
         type:
           description: The type of the event.
@@ -580,14 +650,23 @@ components:
           type: string
       type: object
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining
+        duplicated empty messages in your APIs. A typical example is to use it
+        as the request or the response type of an API method. For instance:
+        service Foo { rpc Bar(google.protobuf.Empty) returns
+        (google.protobuf.Empty); } The JSON representation for `Empty` is empty
+        JSON object `{}`."
       properties: {}
       type: object
     FormAction:
-      description: A form action describes the behavior when the form is submitted. For example, an Apps Script can be invoked to handle the form.
+      description: A form action describes the behavior when the form is submitted.
+        For example, an Apps Script can be invoked to handle the form.
       properties:
         actionMethodName:
-          description: The method name is used to identify which part of the form triggered the form submission. This information is echoed back to the bot as part of the card click event. The same method name can be used for several elements that trigger a common behavior if desired.
+          description: The method name is used to identify which part of the form
+            triggered the form submission. This information is echoed back to
+            the bot as part of the card click event. The same method name can be
+            used for several elements that trigger a common behavior if desired.
           type: string
         parameters:
           description: List of action parameters.
@@ -599,7 +678,10 @@ components:
       description: An image that is specified by a URL and can have an onclick action.
       properties:
         aspectRatio:
-          description: The aspect ratio of this image (width/height). This field allows clients to reserve the right height for the image while waiting for it to load. It's not meant to override the native aspect ratio of the image. If unset, the server fills it by prefetching the image.
+          description: The aspect ratio of this image (width/height). This field allows
+            clients to reserve the right height for the image while waiting for
+            it to load. It's not meant to override the native aspect ratio of
+            the image. If unset, the server fills it by prefetching the image.
           format: double
           type: number
         imageUrl:
@@ -613,7 +695,8 @@ components:
       description: An image button with an onclick action.
       properties:
         icon:
-          description: The icon specified by an enum that indices to an icon provided by Chat API.
+          description: The icon specified by an enum that indices to an icon provided by
+            Chat API.
           enum:
             - ICON_UNSPECIFIED
             - AIRPLANE
@@ -651,14 +734,16 @@ components:
           description: The icon specified by a URL.
           type: string
         name:
-          description: The name of this image_button which will be used for accessibility. Default value will be provided if developers don't specify.
+          description: The name of this image_button which will be used for accessibility.
+            Default value will be provided if developers don't specify.
           type: string
         onClick:
           $ref: "#/components/schemas/OnClick"
           description: The onclick action.
       type: object
     KeyValue:
-      description: A UI element contains a key (label) and a value (content). And this element may also contain some actions such as onclick button.
+      description: A UI element contains a key (label) and a value (content). And this
+        element may also contain some actions such as onclick button.
       properties:
         bottomLabel:
           description: The text of the bottom label. Formatted text supported.
@@ -667,13 +752,15 @@ components:
           $ref: "#/components/schemas/Button"
           description: A button that can be clicked to trigger an action.
         content:
-          description: The text of the content. Formatted text supported and always required.
+          description: The text of the content. Formatted text supported and always
+            required.
           type: string
         contentMultiline:
           description: If the content should be multiline.
           type: boolean
         icon:
-          description: An enum value that will be replaced by the Chat API with the corresponding icon image.
+          description: An enum value that will be replaced by the Chat API with the
+            corresponding icon image.
           enum:
             - ICON_UNSPECIFIED
             - AIRPLANE
@@ -712,7 +799,8 @@ components:
           type: string
         onClick:
           $ref: "#/components/schemas/OnClick"
-          description: The onclick action. Only the top label, bottom label and content region are clickable.
+          description: The onclick action. Only the top label, bottom label and content
+            region are clickable.
         topLabel:
           description: The text of the top label. Formatted text supported.
           type: string
@@ -725,13 +813,16 @@ components:
             $ref: "#/components/schemas/Membership"
           type: array
         nextPageToken:
-          description: Continuation token to retrieve the next page of results. It will be empty for the last page of results.
+          description: Continuation token to retrieve the next page of results. It will be
+            empty for the last page of results.
           type: string
       type: object
     ListSpacesResponse:
       properties:
         nextPageToken:
-          description: Continuation token to retrieve the next page of results. It will be empty for the last page of results. Tokens expire in an hour. An error is thrown if an expired token is passed.
+          description: Continuation token to retrieve the next page of results. It will be
+            empty for the last page of results. Tokens expire in an hour. An
+            error is thrown if an expired token is passed.
           type: string
         spaces:
           description: List of spaces in the requested (or first) page.
@@ -750,7 +841,8 @@ components:
       description: Represents a membership relation in Hangouts Chat.
       properties:
         createTime:
-          description: The creation time of the membership a.k.a the time at which the member joined the space, if applicable.
+          description: The creation time of the membership a.k.a the time at which the
+            member joined the space, if applicable.
           format: google-datetime
           type: string
         member:
@@ -772,7 +864,8 @@ components:
       properties:
         actionResponse:
           $ref: "#/components/schemas/ActionResponse"
-          description: Input only. Parameters that a bot can use to configure how its response is posted.
+          description: Input only. Parameters that a bot can use to configure how its
+            response is posted.
         annotations:
           description: Output only. Annotations associated with the text in this message.
           items:
@@ -787,21 +880,28 @@ components:
             $ref: "#/components/schemas/Attachment"
           type: array
         cards:
-          description: "Rich, formatted and interactive cards that can be used to display UI elements such as: formatted texts, buttons, clickable images. Cards are normally displayed below the plain-text body of the message."
+          description: "Rich, formatted and interactive cards that can be used to display
+            UI elements such as: formatted texts, buttons, clickable images.
+            Cards are normally displayed below the plain-text body of the
+            message."
           items:
             $ref: "#/components/schemas/Card"
           type: array
         createTime:
-          description: Output only. The time at which the message was created in Hangouts Chat server.
+          description: Output only. The time at which the message was created in Hangouts
+            Chat server.
           format: google-datetime
           type: string
         fallbackText:
-          description: A plain-text description of the message's cards, used when the actual cards cannot be displayed (e.g. mobile notifications).
+          description: A plain-text description of the message's cards, used when the
+            actual cards cannot be displayed (e.g. mobile notifications).
           type: string
         name:
           type: string
         previewText:
-          description: Text for generating preview chips. This text will not be displayed to the user, but any links to images, web pages, videos, etc. included here will generate preview chips.
+          description: Text for generating preview chips. This text will not be displayed
+            to the user, but any links to images, web pages, videos, etc.
+            included here will generate preview chips.
           type: string
         sender:
           $ref: "#/components/schemas/User"
@@ -837,7 +937,10 @@ components:
           type: string
       type: object
     Section:
-      description: A section contains a collection of widgets that are rendered (vertically) in the order that they are specified. Across all platforms, cards have a narrow fixed width, so there is currently no need for layout properties (e.g. float).
+      description: A section contains a collection of widgets that are rendered
+        (vertically) in the order that they are specified. Across all platforms,
+        cards have a narrow fixed width, so there is currently no need for
+        layout properties (e.g. float).
       properties:
         header:
           description: The header of the section, text formatted supported.
@@ -884,10 +987,13 @@ components:
       description: A room or DM in Hangouts Chat.
       properties:
         displayName:
-          description: Output only. The display name (only if the space is a room). Please note that this field might not be populated in direct messages between humans.
+          description: Output only. The display name (only if the space is a room). Please
+            note that this field might not be populated in direct messages
+            between humans.
           type: string
         name:
-          description: 'Resource name of the space, in the form "spaces/*". Example: spaces/AAAAMpdlehYs'
+          description: 'Resource name of the space, in the form "spaces/*". Example:
+            spaces/AAAAMpdlehYs'
           type: string
         singleUserBotDm:
           description: Whether the space is a DM between a bot and a single human.
@@ -896,7 +1002,8 @@ components:
           description: Whether the messages are threaded in this space.
           type: boolean
         type:
-          description: Output only. The type of a space. This is deprecated. Use `single_user_bot_dm` instead.
+          description: Output only. The type of a space. This is deprecated. Use
+            `single_user_bot_dm` instead.
           enum:
             - TYPE_UNSPECIFIED
             - ROOM
@@ -923,7 +1030,8 @@ components:
       description: A thread in Hangouts Chat.
       properties:
         name:
-          description: 'Resource name, in the form "spaces/*/threads/*". Example: spaces/AAAAMpdlehY/threads/UMxbHmzDlr4'
+          description: 'Resource name, in the form "spaces/*/threads/*". Example:
+            spaces/AAAAMpdlehY/threads/UMxbHmzDlr4'
           type: string
       type: object
     User:
@@ -967,7 +1075,8 @@ components:
       description: A widget is a UI element that presents texts, images, etc.
       properties:
         buttons:
-          description: A list of buttons. Buttons is also oneof data and only one of these fields should be set.
+          description: A list of buttons. Buttons is also oneof data and only one of these
+            fields should be set.
           items:
             $ref: "#/components/schemas/Button"
           type: array

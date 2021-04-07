@@ -7023,7 +7023,7 @@ components:
           description: The ID of the linked account.
           type: string
         services:
-          description: ' Acceptable values are: - "`shoppingAdsProductManagement`" - "`shoppingAdsOther`" - "`shoppingActionsProductManagement`" - "`shoppingActionsOrderManagement`" - "`shoppingActionsOther`" '
+          description: ' Acceptable values are: - "`shoppingAdsProductManagement`" - "`shoppingActionsProductManagement`" - "`shoppingActionsOrderManagement`" '
           items:
             type: string
           type: array
@@ -8636,7 +8636,7 @@ components:
           format: int64
           type: string
         ctr:
-          description: Number of clicks merchant's products receive (clicks) divided by the number of times the products are shown (impressions).
+          description: Click-through rate - the number of clicks merchant's products receive (clicks) divided by the number of times the products are shown (impressions).
           format: double
           type: number
         impressions:
@@ -10561,6 +10561,9 @@ components:
           items:
             type: string
           type: array
+        additionalSizeType:
+          description: Additional cut of the item. Used together with size_type to represent combined size types for apparel items.
+          type: string
         adsGrouping:
           description: Used to group items in an arbitrary way. Only for CPA%, discouraged otherwise.
           type: string
@@ -12081,7 +12084,7 @@ components:
           type: array
       type: object
     Segments:
-      description: Dimensions according to which metrics are segmented in the response. Values of product dimensions, e.g., offer id, reflect the state of a product at the time of the corresponding event, e.g., impression or order. Segment fields cannot be selected in queries without also selecting at least one metric field. Values are only set for dimensions requested explicitly in the request's search query.
+      description: "Dimensions according to which metrics are segmented in the response. Values of product dimensions, e.g., offer id, reflect the state of a product at the time of the corresponding event, e.g., impression or order. Segment fields cannot be selected in queries without also selecting at least one metric field. Values are only set for dimensions requested explicitly in the request's search query. Next id: 22"
       properties:
         date:
           $ref: "#/components/schemas/Date"

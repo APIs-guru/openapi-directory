@@ -6,7 +6,8 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Android Management API provides remote enterprise management of Android devices and apps.
+  description: The Android Management API provides remote enterprise management of
+    Android devices and apps.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -37,25 +38,30 @@ tags:
 paths:
   /v1/enterprises:
     get:
-      description: This feature is not generally available yet. Lists enterprises that are managed by an EMM. Only partial views are returned.
+      description: This feature is not generally available yet. Lists enterprises that
+        are managed by an EMM. Only partial views are returned.
       operationId: androidmanagement.enterprises.list
       parameters:
-        - description: This feature is not generally available yet. The requested page size. The actual page size may be fixed to a min or max value.
+        - description: This feature is not generally available yet. The requested page
+            size. The actual page size may be fixed to a min or max value.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: This feature is not generally available yet. A token identifying a page of results returned by the server.
+        - description: This feature is not generally available yet. A token identifying a
+            page of results returned by the server.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: Required. This feature is not generally available yet. The ID of the Cloud project of the EMM the enterprises belongs to.
+        - description: Required. This feature is not generally available yet. The ID of
+            the Cloud project of the EMM the enterprises belongs to.
           in: query
           name: projectId
           schema:
             type: string
-        - description: This feature is not generally available yet. View that specify that partial response should be returned.
+        - description: This feature is not generally available yet. View that specify that
+            partial response should be returned.
           in: query
           name: view
           schema:
@@ -90,10 +96,12 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an enterprise. This is the last step in the enterprise signup flow.
+      description: Creates an enterprise. This is the last step in the enterprise
+        signup flow.
       operationId: androidmanagement.enterprises.create
       parameters:
-        - description: This feature is not generally available yet. Whether the managed Google Play Agreement is presented and agreed.
+        - description: This feature is not generally available yet. Whether the managed
+            Google Play Agreement is presented and agreed.
           in: query
           name: agreementAccepted
           schema:
@@ -103,7 +111,8 @@ paths:
           name: enterpriseToken
           schema:
             type: string
-        - description: The ID of the Google Cloud Platform project which will own the enterprise.
+        - description: The ID of the Google Cloud Platform project which will own the
+            enterprise.
           in: query
           name: projectId
           schema:
@@ -149,12 +158,19 @@ paths:
       description: Creates an enterprise signup URL.
       operationId: androidmanagement.signupUrls.create
       parameters:
-        - description: The callback URL that the admin will be redirected to after successfully creating an enterprise. Before redirecting there the system will add a query parameter to this URL named enterpriseToken which will contain an opaque token to be used for the create enterprise request. The URL will be parsed then reformatted in order to add the enterpriseToken parameter, so there may be some minor formatting changes.
+        - description: The callback URL that the admin will be redirected to after
+            successfully creating an enterprise. Before redirecting there the
+            system will add a query parameter to this URL named enterpriseToken
+            which will contain an opaque token to be used for the create
+            enterprise request. The URL will be parsed then reformatted in order
+            to add the enterpriseToken parameter, so there may be some minor
+            formatting changes.
           in: query
           name: callbackUrl
           schema:
             type: string
-        - description: The ID of the Google Cloud Platform project which will own the enterprise.
+        - description: The ID of the Google Cloud Platform project which will own the
+            enterprise.
           in: query
           name: projectId
           schema:
@@ -178,7 +194,8 @@ paths:
       description: Deletes a web app.
       operationId: androidmanagement.enterprises.webApps.delete
       parameters:
-        - description: The name of the web app in the form enterprises/{enterpriseId}/webApps/{packageName}.
+        - description: The name of the web app in the form
+            enterprises/{enterpriseId}/webApps/{packageName}.
           in: path
           name: name
           required: true
@@ -197,7 +214,9 @@ paths:
               type: string
             type: array
           style: form
-        - description: Optional. A short message displayed to the user before wiping the work profile on personal devices. This has no effect on company owned devices. The maximum message length is 200 characters.
+        - description: Optional. A short message displayed to the user before wiping the
+            work profile on personal devices. This has no effect on company
+            owned devices. The maximum message length is 200 characters.
           in: query
           name: wipeReasonMessage
           schema:
@@ -220,7 +239,8 @@ paths:
       description: Gets a web app.
       operationId: androidmanagement.enterprises.webApps.get
       parameters:
-        - description: The name of the web app in the form enterprises/{enterpriseId}/webApp/{packageName}.
+        - description: The name of the web app in the form
+            enterprises/{enterpriseId}/webApp/{packageName}.
           in: path
           name: name
           required: true
@@ -271,13 +291,15 @@ paths:
       description: Updates a web app.
       operationId: androidmanagement.enterprises.webApps.patch
       parameters:
-        - description: The name of the web app in the form enterprises/{enterpriseId}/webApps/{packageName}.
+        - description: The name of the web app in the form
+            enterprises/{enterpriseId}/webApps/{packageName}.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The field mask indicating the fields to update. If not set, all modifiable fields will be modified.
+        - description: The field mask indicating the fields to update. If not set, all
+            modifiable fields will be modified.
           in: query
           name: updateMask
           schema:
@@ -315,7 +337,15 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns google.rpc.Code.UNIMPLEMENTED. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to Code.CANCELLED.
+      description: Starts asynchronous cancellation on a long-running operation. The
+        server makes a best effort to cancel the operation, but success is not
+        guaranteed. If the server doesn't support this method, it returns
+        google.rpc.Code.UNIMPLEMENTED. Clients can use Operations.GetOperation
+        or other methods to check whether the cancellation succeeded or whether
+        the operation completed despite cancellation. On successful
+        cancellation, the operation is not deleted; instead, it becomes an
+        operation with an Operation.error value with a google.rpc.Status.code of
+        1, corresponding to Code.CANCELLED.
       operationId: androidmanagement.enterprises.devices.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
@@ -352,10 +382,13 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Issues a command to a device. The Operation resource returned contains a Command in its metadata field. Use the get operation method to get the status of the command.
+      description: Issues a command to a device. The Operation resource returned
+        contains a Command in its metadata field. Use the get operation method
+        to get the status of the command.
       operationId: androidmanagement.enterprises.devices.issueCommand
       parameters:
-        - description: The name of the device in the form enterprises/{enterpriseId}/devices/{deviceId}.
+        - description: The name of the device in the form
+            enterprises/{enterpriseId}/devices/{deviceId}.
           in: path
           name: name
           required: true
@@ -391,7 +424,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The requested page size. The actual page size may be fixed to a min or max value.
+        - description: The requested page size. The actual page size may be fixed to a min
+            or max value.
           in: query
           name: pageSize
           schema:
@@ -480,7 +514,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The requested page size. The actual page size may be fixed to a min or max value.
+        - description: The requested page size. The actual page size may be fixed to a min
+            or max value.
           in: query
           name: pageSize
           schema:
@@ -527,7 +562,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: The requested page size. The actual page size may be fixed to a min or max value.
+        - description: The requested page size. The actual page size may be fixed to a min
+            or max value.
           in: query
           name: pageSize
           schema:
@@ -606,7 +642,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a web token to access an embeddable managed Google Play web UI for a given enterprise.
+      description: Creates a web token to access an embeddable managed Google Play web
+        UI for a given enterprise.
       operationId: androidmanagement.enterprises.webTokens.create
       parameters:
         - description: The name of the enterprise in the form enterprises/{enterpriseId}.
@@ -674,7 +711,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -692,7 +731,9 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
@@ -711,17 +752,29 @@ components:
         type: string
   schemas:
     AdvancedSecurityOverrides:
-      description: Security policies set to the most secure values by default. To maintain the security posture of a device, we don't recommend overriding any of the default values.
+      description: Security policies set to the most secure values by default. To
+        maintain the security posture of a device, we don't recommend overriding
+        any of the default values.
       properties:
         commonCriteriaMode:
-          description: "Controls Common Criteria Mode—security standards defined in the Common Criteria for Information Technology Security Evaluation (https://www.commoncriteriaportal.org/) (CC). Enabling Common Criteria Mode increases certain security components on a device, including AES-GCM encryption of Bluetooth Long Term Keys, and Wi-Fi configuration stores.Warning: Common Criteria Mode enforces a strict security model typically only required for IT products used in national security systems and other highly sensitive organizations. Standard device use may be affected. Only enabled if required."
+          description: "Controls Common Criteria Mode—security standards defined in the
+            Common Criteria for Information Technology Security Evaluation
+            (https://www.commoncriteriaportal.org/) (CC). Enabling Common
+            Criteria Mode increases certain security components on a device,
+            including AES-GCM encryption of Bluetooth Long Term Keys, and Wi-Fi
+            configuration stores.Warning: Common Criteria Mode enforces a strict
+            security model typically only required for IT products used in
+            national security systems and other highly sensitive organizations.
+            Standard device use may be affected. Only enabled if required."
           enum:
             - COMMON_CRITERIA_MODE_UNSPECIFIED
             - COMMON_CRITERIA_MODE_DISABLED
             - COMMON_CRITERIA_MODE_ENABLED
           type: string
         untrustedAppsPolicy:
-          description: The policy for untrusted apps (apps from unknown sources) enforced on the device. Replaces install_unknown_sources_allowed (deprecated).
+          description: The policy for untrusted apps (apps from unknown sources) enforced
+            on the device. Replaces install_unknown_sources_allowed
+            (deprecated).
           enum:
             - UNTRUSTED_APPS_POLICY_UNSPECIFIED
             - DISALLOW_INSTALL
@@ -740,10 +793,14 @@ components:
           type: string
       type: object
     ApiLevelCondition:
-      description: A compliance rule condition which is satisfied if the Android Framework API level on the device doesn't meet a minimum requirement. There can only be one rule with this type of condition per policy.
+      description: A compliance rule condition which is satisfied if the Android
+        Framework API level on the device doesn't meet a minimum requirement.
+        There can only be one rule with this type of condition per policy.
       properties:
         minApiLevel:
-          description: The minimum desired Android Framework API level. If the device doesn't meet the minimum requirement, this condition is satisfied. Must be greater than zero.
+          description: The minimum desired Android Framework API level. If the device
+            doesn't meet the minimum requirement, this condition is satisfied.
+            Must be greater than zero.
           format: int32
           type: integer
       type: object
@@ -751,10 +808,13 @@ components:
       description: Id to name association of a app track.
       properties:
         trackAlias:
-          description: The track name associated with the trackId, set in the Play Console. The name is modifiable from Play Console.
+          description: The track name associated with the trackId, set in the Play
+            Console. The name is modifiable from Play Console.
           type: string
         trackId:
-          description: The unmodifiable unique track identifier, taken from the releaseTrackId in the URL of the Play Console page that displays the app’s track information.
+          description: The unmodifiable unique track identifier, taken from the
+            releaseTrackId in the URL of the Play Console page that displays the
+            app’s track information.
           type: string
       type: object
     Application:
@@ -766,12 +826,14 @@ components:
             $ref: "#/components/schemas/AppTrackInfo"
           type: array
         managedProperties:
-          description: The set of managed properties available to be pre-configured for the app.
+          description: The set of managed properties available to be pre-configured for
+            the app.
           items:
             $ref: "#/components/schemas/ManagedProperty"
           type: array
         name:
-          description: The name of the app in the form enterprises/{enterpriseId}/applications/{package_name}.
+          description: The name of the app in the form
+            enterprises/{enterpriseId}/applications/{package_name}.
           type: string
         permissions:
           description: The permissions required by the app.
@@ -807,7 +869,8 @@ components:
       description: A permission required by the app.
       properties:
         description:
-          description: A longer description of the permission, providing more detail on what it affects. Localized.
+          description: A longer description of the permission, providing more detail on
+            what it affects. Localized.
           type: string
         name:
           description: The name of the permission. Localized.
@@ -820,7 +883,12 @@ components:
       description: Policy for an individual app.
       properties:
         accessibleTrackIds:
-          description: List of the app’s track IDs that a device belonging to the enterprise can access. If the list contains multiple track IDs, devices receive the latest version among all accessible tracks. If the list contains no track IDs, devices only have access to the app’s production track. More details about each track are available in AppTrackInfo.
+          description: List of the app’s track IDs that a device belonging to the
+            enterprise can access. If the list contains multiple track IDs,
+            devices receive the latest version among all accessible tracks. If
+            the list contains no track IDs, devices only have access to the
+            app’s production track. More details about each track are available
+            in AppTrackInfo.
           items:
             type: string
           type: array
@@ -833,14 +901,18 @@ components:
             - AUTO_UPDATE_HIGH_PRIORITY
           type: string
         connectedWorkAndPersonalApp:
-          description: Controls whether the app can communicate with itself across a device’s work and personal profiles, subject to user consent.
+          description: Controls whether the app can communicate with itself across a
+            device’s work and personal profiles, subject to user consent.
           enum:
             - CONNECTED_WORK_AND_PERSONAL_APP_UNSPECIFIED
             - CONNECTED_WORK_AND_PERSONAL_APP_DISALLOWED
             - CONNECTED_WORK_AND_PERSONAL_APP_ALLOWED
           type: string
         defaultPermissionPolicy:
-          description: The default policy for all permissions requested by the app. If specified, this overrides the policy-level default_permission_policy which applies to all apps. It does not override the permission_grants which applies to all apps.
+          description: The default policy for all permissions requested by the app. If
+            specified, this overrides the policy-level default_permission_policy
+            which applies to all apps. It does not override the
+            permission_grants which applies to all apps.
           enum:
             - PERMISSION_POLICY_UNSPECIFIED
             - PROMPT
@@ -861,7 +933,8 @@ components:
             type: string
           type: array
         disabled:
-          description: Whether the app is disabled. When disabled, the app data is still preserved.
+          description: Whether the app is disabled. When disabled, the app data is still
+            preserved.
           type: boolean
         installType:
           description: The type of installation to perform.
@@ -875,25 +948,44 @@ components:
             - KIOSK
           type: string
         lockTaskAllowed:
-          description: Whether the app is allowed to lock itself in full-screen mode. DEPRECATED. Use InstallType KIOSK or kioskCustomLauncherEnabled to to configure a dedicated device.
+          description: Whether the app is allowed to lock itself in full-screen mode.
+            DEPRECATED. Use InstallType KIOSK or kioskCustomLauncherEnabled to
+            to configure a dedicated device.
           type: boolean
         managedConfiguration:
           additionalProperties:
             description: Properties of the object.
-          description: "Managed configuration applied to the app. The format for the configuration is dictated by the ManagedProperty values supported by the app. Each field name in the managed configuration must match the key field of the ManagedProperty. The field value must be compatible with the type of the ManagedProperty: *type* *JSON value* BOOL true or false STRING string INTEGER number CHOICE string MULTISELECT array of strings HIDDEN string BUNDLE_ARRAY array of objects "
+          description: "Managed configuration applied to the app. The format for the
+            configuration is dictated by the ManagedProperty values supported by
+            the app. Each field name in the managed configuration must match the
+            key field of the ManagedProperty. The field value must be compatible
+            with the type of the ManagedProperty: *type* *JSON value* BOOL true
+            or false STRING string INTEGER number CHOICE string MULTISELECT
+            array of strings HIDDEN string BUNDLE_ARRAY array of objects "
           type: object
         managedConfigurationTemplate:
           $ref: "#/components/schemas/ManagedConfigurationTemplate"
-          description: The managed configurations template for the app, saved from the managed configurations iframe. This field is ignored if managed_configuration is set.
+          description: The managed configurations template for the app, saved from the
+            managed configurations iframe. This field is ignored if
+            managed_configuration is set.
         minimumVersionCode:
-          description: The minimum version of the app that runs on the device. If set, the device attempts to update the app to at least this version code. If the app is not up-to-date, the device will contain a NonComplianceDetail with non_compliance_reason set to APP_NOT_UPDATED. The app must already be published to Google Play with a version code greater than or equal to this value. At most 20 apps may specify a minimum version code per policy.
+          description: The minimum version of the app that runs on the device. If set, the
+            device attempts to update the app to at least this version code. If
+            the app is not up-to-date, the device will contain a
+            NonComplianceDetail with non_compliance_reason set to
+            APP_NOT_UPDATED. The app must already be published to Google Play
+            with a version code greater than or equal to this value. At most 20
+            apps may specify a minimum version code per policy.
           format: int32
           type: integer
         packageName:
-          description: The package name of the app. For example, com.google.android.youtube for the YouTube app.
+          description: The package name of the app. For example,
+            com.google.android.youtube for the YouTube app.
           type: string
         permissionGrants:
-          description: Explicit permission grants or denials for the app. These values override the default_permission_policy and permission_grants which apply to all apps.
+          description: Explicit permission grants or denials for the app. These values
+            override the default_permission_policy and permission_grants which
+            apply to all apps.
           items:
             $ref: "#/components/schemas/PermissionGrant"
           type: array
@@ -929,10 +1021,15 @@ components:
           description: Package name of the app.
           type: string
         packageSha256Hash:
-          description: The SHA-256 hash of the app's APK file, which can be used to verify the app hasn't been modified. Each byte of the hash value is represented as a two-digit hexadecimal number.
+          description: The SHA-256 hash of the app's APK file, which can be used to verify
+            the app hasn't been modified. Each byte of the hash value is
+            represented as a two-digit hexadecimal number.
           type: string
         signingKeyCertFingerprints:
-          description: The SHA-1 hash of each android.content.pm.Signature (https://developer.android.com/reference/android/content/pm/Signature.html) associated with the app package. Each byte of each hash value is represented as a two-digit hexadecimal number.
+          description: The SHA-1 hash of each android.content.pm.Signature
+            (https://developer.android.com/reference/android/content/pm/Signature.html)
+            associated with the app package. Each byte of each hash value is
+            represented as a two-digit hexadecimal number.
           items:
             type: string
           type: array
@@ -944,7 +1041,8 @@ components:
             - INSTALLED
           type: string
         versionCode:
-          description: The app version code, which can be used to determine whether one version is more recent than another.
+          description: The app version code, which can be used to determine whether one
+            version is more recent than another.
           format: int32
           type: integer
         versionName:
@@ -959,14 +1057,21 @@ components:
           type: boolean
       type: object
     BlockAction:
-      description: "An action to block access to apps and data on a fully managed device or in a work profile. This action also triggers a device or work profile to displays a user-facing notification with information (where possible) on how to correct the compliance issue. Note: wipeAction must also be specified."
+      description: "An action to block access to apps and data on a fully managed
+        device or in a work profile. This action also triggers a device or work
+        profile to displays a user-facing notification with information (where
+        possible) on how to correct the compliance issue. Note: wipeAction must
+        also be specified."
       properties:
         blockAfterDays:
-          description: Number of days the policy is non-compliant before the device or work profile is blocked. To block access immediately, set to 0. blockAfterDays must be less than wipeAfterDays.
+          description: Number of days the policy is non-compliant before the device or
+            work profile is blocked. To block access immediately, set to 0.
+            blockAfterDays must be less than wipeAfterDays.
           format: int32
           type: integer
         blockScope:
-          description: Specifies the scope of this BlockAction. Only applicable to devices that are company-owned.
+          description: Specifies the scope of this BlockAction. Only applicable to devices
+            that are company-owned.
           enum:
             - BLOCK_SCOPE_UNSPECIFIED
             - BLOCK_SCOPE_WORK_PROFILE
@@ -974,10 +1079,31 @@ components:
           type: string
       type: object
     ChoosePrivateKeyRule:
-      description: A rule for automatically choosing a private key and certificate to authenticate the device to a server.
+      description: Controls apps' access to private keys. The rule determines which
+        private key, if any, Android Device Policy grants to the specified app.
+        Access is granted either when the app calls
+        KeyChain.choosePrivateKeyAlias
+        (https://developer.android.com/reference/android/security/KeyChain#choosePrivateKeyAlias%28android.app.Activity,%20android.security.KeyChainAliasCallback,%20java.lang.String[],%20java.security.Principal[],%20java.lang.String,%20int,%20java.lang.String%29)
+        (or any overloads) to request a private key alias for a given URL, or
+        for rules that are not URL-specific (that is, if urlPattern is not set,
+        or set to the empty string or .*) on Android 11 and above, directly so
+        that the app can call KeyChain.getPrivateKey
+        (https://developer.android.com/reference/android/security/KeyChain#getPrivateKey%28android.content.Context,%20java.lang.String%29),
+        without first having to call KeyChain.choosePrivateKeyAlias.When an app
+        calls KeyChain.choosePrivateKeyAlias if more than one
+        choosePrivateKeyRules matches, the last matching rule defines which key
+        alias to return.
       properties:
         packageNames:
-          description: The package names for which outgoing requests are subject to this rule. If no package names are specified, then the rule applies to all packages. For each package name listed, the rule applies to that package and all other packages that shared the same Android UID. The SHA256 hash of the signing key signatures of each package_name will be verified against those provided by Play
+          description: The package names to which this rule applies. The hash of the
+            signing certificate for each app is verified against the hash
+            provided by Play. If no package names are specified, then the alias
+            is provided to all apps that call KeyChain.choosePrivateKeyAlias
+            (https://developer.android.com/reference/android/security/KeyChain#choosePrivateKeyAlias%28android.app.Activity,%20android.security.KeyChainAliasCallback,%20java.lang.String[],%20java.security.Principal[],%20java.lang.String,%20int,%20java.lang.String%29)
+            or any overloads (but not without calling
+            KeyChain.choosePrivateKeyAlias, even on Android 11 and above). Any
+            app with the same Android UID as a package specified here will have
+            access when they call KeyChain.choosePrivateKeyAlias.
           items:
             type: string
           type: array
@@ -985,22 +1111,29 @@ components:
           description: The alias of the private key to be used.
           type: string
         urlPattern:
-          description: The URL pattern to match against the URL of the outgoing request. The pattern may contain asterisk (*) wildcards. Any URL is matched if unspecified.
+          description: The URL pattern to match against the URL of the request. If not set
+            or empty, it matches all URLs. This uses the regular expression
+            syntax of java.util.regex.Pattern.
           type: string
       type: object
     Command:
       description: A command.
       properties:
         createTime:
-          description: The timestamp at which the command was created. The timestamp is automatically generated by the server.
+          description: The timestamp at which the command was created. The timestamp is
+            automatically generated by the server.
           format: google-datetime
           type: string
         duration:
-          description: The duration for which the command is valid. The command will expire if not executed by the device during this time. The default duration if unspecified is ten minutes. There is no maximum duration.
+          description: The duration for which the command is valid. The command will
+            expire if not executed by the device during this time. The default
+            duration if unspecified is ten minutes. There is no maximum
+            duration.
           format: google-duration
           type: string
         errorCode:
-          description: If the command failed, an error code explaining the failure. This is not set when the command is cancelled by the caller.
+          description: If the command failed, an error code explaining the failure. This
+            is not set when the command is cancelled by the caller.
           enum:
             - COMMAND_ERROR_CODE_UNSPECIFIED
             - UNKNOWN
@@ -1010,7 +1143,8 @@ components:
             - UNSUPPORTED
           type: string
         newPassword:
-          description: For commands of type RESET_PASSWORD, optionally specifies the new password.
+          description: For commands of type RESET_PASSWORD, optionally specifies the new
+            password.
           type: string
         resetPasswordFlags:
           description: For commands of type RESET_PASSWORD, optionally specifies flags.
@@ -1032,11 +1166,17 @@ components:
             - RELINQUISH_OWNERSHIP
           type: string
         userName:
-          description: The resource name of the user that owns the device in the form enterprises/{enterpriseId}/users/{userId}. This is automatically generated by the server based on the device the command is sent to.
+          description: The resource name of the user that owns the device in the form
+            enterprises/{enterpriseId}/users/{userId}. This is automatically
+            generated by the server based on the device the command is sent to.
           type: string
       type: object
     CommonCriteriaModeInfo:
-      description: Information about Common Criteria Mode—security standards defined in the Common Criteria for Information Technology Security Evaluation (https://www.commoncriteriaportal.org/) (CC).This information is only available if statusReportingSettings.commonCriteriaModeEnabled is true in the device's policy.
+      description: Information about Common Criteria Mode—security standards defined
+        in the Common Criteria for Information Technology Security Evaluation
+        (https://www.commoncriteriaportal.org/) (CC).This information is only
+        available if statusReportingSettings.commonCriteriaModeEnabled is true
+        in the device's policy.
       properties:
         commonCriteriaModeStatus:
           description: Whether Common Criteria Mode is enabled.
@@ -1047,19 +1187,31 @@ components:
           type: string
       type: object
     ComplianceRule:
-      description: A rule declaring which mitigating actions to take when a device is not compliant with its policy. For every rule, there is always an implicit mitigating action to set policy_compliant to false for the Device resource, and display a message on the device indicating that the device is not compliant with its policy. Other mitigating actions may optionally be taken as well, depending on the field values in the rule.
+      description: A rule declaring which mitigating actions to take when a device is
+        not compliant with its policy. For every rule, there is always an
+        implicit mitigating action to set policy_compliant to false for the
+        Device resource, and display a message on the device indicating that the
+        device is not compliant with its policy. Other mitigating actions may
+        optionally be taken as well, depending on the field values in the rule.
       properties:
         apiLevelCondition:
           $ref: "#/components/schemas/ApiLevelCondition"
-          description: A condition which is satisfied if the Android Framework API level on the device doesn't meet a minimum requirement.
+          description: A condition which is satisfied if the Android Framework API level
+            on the device doesn't meet a minimum requirement.
         disableApps:
-          description: If set to true, the rule includes a mitigating action to disable apps so that the device is effectively disabled, but app data is preserved. If the device is running an app in locked task mode, the app will be closed and a UI showing the reason for non-compliance will be displayed.
+          description: If set to true, the rule includes a mitigating action to disable
+            apps so that the device is effectively disabled, but app data is
+            preserved. If the device is running an app in locked task mode, the
+            app will be closed and a UI showing the reason for non-compliance
+            will be displayed.
           type: boolean
         nonComplianceDetailCondition:
           $ref: "#/components/schemas/NonComplianceDetailCondition"
-          description: A condition which is satisfied if there exists any matching NonComplianceDetail for the device.
+          description: A condition which is satisfied if there exists any matching
+            NonComplianceDetail for the device.
         packageNamesToDisable:
-          description: If set, the rule includes a mitigating action to disable apps specified in the list, but app data is preserved.
+          description: If set, the rule includes a mitigating action to disable apps
+            specified in the list, but app data is preserved.
           items:
             type: string
           type: array
@@ -1068,25 +1220,30 @@ components:
       description: Contact details for LaForge enterprises.
       properties:
         contactEmail:
-          description: Email address for a point of contact, which will be used to send important announcements related to managed Google Play.
+          description: Email address for a point of contact, which will be used to send
+            important announcements related to managed Google Play.
           type: string
         dataProtectionOfficerEmail:
-          description: The email of the data protection officer. The email is validated but not verified.
+          description: The email of the data protection officer. The email is validated
+            but not verified.
           type: string
         dataProtectionOfficerName:
           description: The name of the data protection officer.
           type: string
         dataProtectionOfficerPhone:
-          description: The phone number of the data protection officer The phone number is validated but not verified.
+          description: The phone number of the data protection officer The phone number is
+            validated but not verified.
           type: string
         euRepresentativeEmail:
-          description: The email of the EU representative. The email is validated but not verified.
+          description: The email of the EU representative. The email is validated but not
+            verified.
           type: string
         euRepresentativeName:
           description: The name of the EU representative.
           type: string
         euRepresentativePhone:
-          description: The phone number of the EU representative. The phone number is validated but not verified.
+          description: The phone number of the EU representative. The phone number is
+            validated but not verified.
           type: string
       type: object
     ContentProviderEndpoint:
@@ -1105,30 +1262,45 @@ components:
           type: string
       type: object
     Date:
-      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: A full date, with non-zero year, month, and day values A month and day value, with a zero year, such as an anniversary A year on its own, with zero month and day values A year and month value, with a zero day, such as a credit card expiration dateRelated types are google.type.TimeOfDay and google.protobuf.Timestamp."
+      description: "Represents a whole or partial calendar date, such as a birthday.
+        The time of day and time zone are either specified elsewhere or are
+        insignificant. The date is relative to the Gregorian Calendar. This can
+        represent one of the following: A full date, with non-zero year, month,
+        and day values A month and day value, with a zero year, such as an
+        anniversary A year on its own, with zero month and day values A year and
+        month value, with a zero day, such as a credit card expiration
+        dateRelated types are google.type.TimeOfDay and
+        google.protobuf.Timestamp."
       properties:
         day:
-          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+          description: Day of a month. Must be from 1 to 31 and valid for the year and
+            month, or 0 to specify a year by itself or a year and month where
+            the day isn't significant.
           format: int32
           type: integer
         month:
-          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year
+            without a month and day.
           format: int32
           type: integer
         year:
-          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date
+            without a year.
           format: int32
           type: integer
       type: object
     Device:
-      description: A device owned by an enterprise. Unless otherwise noted, all fields are read-only and can't be modified by enterprises.devices.patch.
+      description: A device owned by an enterprise. Unless otherwise noted, all fields
+        are read-only and can't be modified by enterprises.devices.patch.
       properties:
         apiLevel:
           description: The API level of the Android platform version running on the device.
           format: int32
           type: integer
         applicationReports:
-          description: Reports for apps installed on the device. This information is only available when application_reports_enabled is true in the device's policy.
+          description: Reports for apps installed on the device. This information is only
+            available when application_reports_enabled is true in the device's
+            policy.
           items:
             $ref: "#/components/schemas/ApplicationReport"
           type: array
@@ -1150,15 +1322,25 @@ components:
           type: string
         commonCriteriaModeInfo:
           $ref: "#/components/schemas/CommonCriteriaModeInfo"
-          description: Information about Common Criteria Mode—security standards defined in the Common Criteria for Information Technology Security Evaluation (https://www.commoncriteriaportal.org/) (CC).This information is only available if statusReportingSettings.commonCriteriaModeEnabled is true in the device's policy.
+          description: Information about Common Criteria Mode—security standards defined
+            in the Common Criteria for Information Technology Security
+            Evaluation (https://www.commoncriteriaportal.org/) (CC).This
+            information is only available if
+            statusReportingSettings.commonCriteriaModeEnabled is true in the
+            device's policy.
         deviceSettings:
           $ref: "#/components/schemas/DeviceSettings"
-          description: Device settings information. This information is only available if deviceSettingsEnabled is true in the device's policy.
+          description: Device settings information. This information is only available if
+            deviceSettingsEnabled is true in the device's policy.
         disabledReason:
           $ref: "#/components/schemas/UserFacingMessage"
-          description: If the device state is DISABLED, an optional message that is displayed on the device indicating the reason the device is disabled. This field can be modified by a patch request.
+          description: If the device state is DISABLED, an optional message that is
+            displayed on the device indicating the reason the device is
+            disabled. This field can be modified by a patch request.
         displays:
-          description: Detailed information about displays on the device. This information is only available if displayInfoEnabled is true in the device's policy.
+          description: Detailed information about displays on the device. This information
+            is only available if displayInfoEnabled is true in the device's
+            policy.
           items:
             $ref: "#/components/schemas/Display"
           type: array
@@ -1167,16 +1349,20 @@ components:
           format: google-datetime
           type: string
         enrollmentTokenData:
-          description: If the device was enrolled with an enrollment token with additional data provided, this field contains that data.
+          description: If the device was enrolled with an enrollment token with additional
+            data provided, this field contains that data.
           type: string
         enrollmentTokenName:
-          description: If the device was enrolled with an enrollment token, this field contains the name of the token.
+          description: If the device was enrolled with an enrollment token, this field
+            contains the name of the token.
           type: string
         hardwareInfo:
           $ref: "#/components/schemas/HardwareInfo"
           description: Detailed information about the device hardware.
         hardwareStatusSamples:
-          description: Hardware status samples in chronological order. This information is only available if hardwareStatusEnabled is true in the device's policy.
+          description: Hardware status samples in chronological order. This information is
+            only available if hardwareStatusEnabled is true in the device's
+            policy.
           items:
             $ref: "#/components/schemas/HardwareStatus"
           type: array
@@ -1193,26 +1379,32 @@ components:
           format: google-datetime
           type: string
         managementMode:
-          description: The type of management mode Android Device Policy takes on the device. This influences which policy settings are supported.
+          description: The type of management mode Android Device Policy takes on the
+            device. This influences which policy settings are supported.
           enum:
             - MANAGEMENT_MODE_UNSPECIFIED
             - DEVICE_OWNER
             - PROFILE_OWNER
           type: string
         memoryEvents:
-          description: Events related to memory and storage measurements in chronological order. This information is only available if memoryInfoEnabled is true in the device's policy.
+          description: Events related to memory and storage measurements in chronological
+            order. This information is only available if memoryInfoEnabled is
+            true in the device's policy.
           items:
             $ref: "#/components/schemas/MemoryEvent"
           type: array
         memoryInfo:
           $ref: "#/components/schemas/MemoryInfo"
-          description: Memory information. This information is only available if memoryInfoEnabled is true in the device's policy.
+          description: Memory information. This information is only available if
+            memoryInfoEnabled is true in the device's policy.
         name:
-          description: The name of the device in the form enterprises/{enterpriseId}/devices/{deviceId}.
+          description: The name of the device in the form
+            enterprises/{enterpriseId}/devices/{deviceId}.
           type: string
         networkInfo:
           $ref: "#/components/schemas/NetworkInfo"
-          description: Device network information. This information is only available if networkInfoEnabled is true in the device's policy.
+          description: Device network information. This information is only available if
+            networkInfoEnabled is true in the device's policy.
         nonComplianceDetails:
           description: Details about policy settings that the device is not compliant with.
           items:
@@ -1229,26 +1421,43 @@ components:
           description: Whether the device is compliant with its policy.
           type: boolean
         policyName:
-          description: The name of the policy applied to the device, in the form enterprises/{enterpriseId}/policies/{policyId}. If not specified, the policy_name for the device's user is applied. This field can be modified by a patch request. You can specify only the policyId when calling enterprises.devices.patch, as long as the policyId doesn’t contain any slashes. The rest of the policy name is inferred.
+          description: The name of the policy applied to the device, in the form
+            enterprises/{enterpriseId}/policies/{policyId}. If not specified,
+            the policy_name for the device's user is applied. This field can be
+            modified by a patch request. You can specify only the policyId when
+            calling enterprises.devices.patch, as long as the policyId doesn’t
+            contain any slashes. The rest of the policy name is inferred.
           type: string
         powerManagementEvents:
-          description: Power management events on the device in chronological order. This information is only available if powerManagementEventsEnabled is true in the device's policy.
+          description: Power management events on the device in chronological order. This
+            information is only available if powerManagementEventsEnabled is
+            true in the device's policy.
           items:
             $ref: "#/components/schemas/PowerManagementEvent"
           type: array
         previousDeviceNames:
-          description: If the same physical device has been enrolled multiple times, this field contains its previous device names. The serial number is used as the unique identifier to determine if the same physical device has enrolled previously. The names are in chronological order.
+          description: If the same physical device has been enrolled multiple times, this
+            field contains its previous device names. The serial number is used
+            as the unique identifier to determine if the same physical device
+            has enrolled previously. The names are in chronological order.
           items:
             type: string
           type: array
         securityPosture:
           $ref: "#/components/schemas/SecurityPosture"
-          description: Device's security posture value that reflects how secure the device is.
+          description: Device's security posture value that reflects how secure the device
+            is.
         softwareInfo:
           $ref: "#/components/schemas/SoftwareInfo"
-          description: Detailed information about the device software. This information is only available if softwareInfoEnabled is true in the device's policy.
+          description: Detailed information about the device software. This information is
+            only available if softwareInfoEnabled is true in the device's
+            policy.
         state:
-          description: The state to be applied to the device. This field can be modified by a patch request. Note that when calling enterprises.devices.patch, ACTIVE and DISABLED are the only allowable values. To enter the device into a DELETED state, call enterprises.devices.delete.
+          description: The state to be applied to the device. This field can be modified
+            by a patch request. Note that when calling
+            enterprises.devices.patch, ACTIVE and DISABLED are the only
+            allowable values. To enter the device into a DELETED state, call
+            enterprises.devices.delete.
           enum:
             - DEVICE_STATE_UNSPECIFIED
             - ACTIVE
@@ -1259,20 +1468,25 @@ components:
         systemProperties:
           additionalProperties:
             type: string
-          description: Map of selected system properties name and value related to the device. This information is only available if systemPropertiesEnabled is true in the device's policy.
+          description: Map of selected system properties name and value related to the
+            device. This information is only available if
+            systemPropertiesEnabled is true in the device's policy.
           type: object
         user:
           $ref: "#/components/schemas/User"
           description: The user who owns the device.
         userName:
-          description: The resource name of the user that owns this device in the form enterprises/{enterpriseId}/users/{userId}.
+          description: The resource name of the user that owns this device in the form
+            enterprises/{enterpriseId}/users/{userId}.
           type: string
       type: object
     DeviceSettings:
       description: Information about security related device settings on device.
       properties:
         adbEnabled:
-          description: Whether ADB (https://developer.android.com/studio/command-line/adb.html) is enabled on the device.
+          description: Whether ADB
+            (https://developer.android.com/studio/command-line/adb.html) is
+            enabled on the device.
           type: boolean
         developmentSettingsEnabled:
           description: Whether developer mode is enabled on the device.
@@ -1298,7 +1512,9 @@ components:
           description: Whether installing apps from unknown sources is enabled.
           type: boolean
         verifyAppsEnabled:
-          description: Whether Verify Apps (Google Play Protect (https://support.google.com/googleplay/answer/2812853)) is enabled on the device.
+          description: Whether Verify Apps (Google Play Protect
+            (https://support.google.com/googleplay/answer/2812853)) is enabled
+            on the device.
           type: boolean
       type: object
     Display:
@@ -1338,47 +1554,85 @@ components:
           type: integer
       type: object
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for Empty is empty JSON object {}."
+      description: "A generic empty message that you can re-use to avoid defining
+        duplicated empty messages in your APIs. A typical example is to use it
+        as the request or the response type of an API method. For instance:
+        service Foo { rpc Bar(google.protobuf.Empty) returns
+        (google.protobuf.Empty); } The JSON representation for Empty is empty
+        JSON object {}."
       properties: {}
       type: object
     EnrollmentToken:
       description: An enrollment token.
       properties:
         additionalData:
-          description: Optional, arbitrary data associated with the enrollment token. This could contain, for example, the ID of an org unit the device is assigned to after enrollment. After a device enrolls with the token, this data will be exposed in the enrollment_token_data field of the Device resource. The data must be 1024 characters or less; otherwise, the creation request will fail.
+          description: Optional, arbitrary data associated with the enrollment token. This
+            could contain, for example, the ID of an org unit the device is
+            assigned to after enrollment. After a device enrolls with the token,
+            this data will be exposed in the enrollment_token_data field of the
+            Device resource. The data must be 1024 characters or less;
+            otherwise, the creation request will fail.
           type: string
         allowPersonalUsage:
-          description: "Controls whether personal usage is allowed on a device provisioned with this enrollment token.For company-owned devices: Enabling personal usage allows the user to set up a work profile on the device. Disabling personal usage requires the user provision the device as a fully managed device.For personally-owned devices: Enabling personal usage allows the user to set up a work profile on the device. Disabling personal usage will prevent the device from provisioning. Personal usage cannot be disabled on personally-owned device."
+          description: "Controls whether personal usage is allowed on a device provisioned
+            with this enrollment token.For company-owned devices: Enabling
+            personal usage allows the user to set up a work profile on the
+            device. Disabling personal usage requires the user provision the
+            device as a fully managed device.For personally-owned devices:
+            Enabling personal usage allows the user to set up a work profile on
+            the device. Disabling personal usage will prevent the device from
+            provisioning. Personal usage cannot be disabled on personally-owned
+            device."
           enum:
             - ALLOW_PERSONAL_USAGE_UNSPECIFIED
             - PERSONAL_USAGE_ALLOWED
             - PERSONAL_USAGE_DISALLOWED
           type: string
         duration:
-          description: The length of time the enrollment token is valid, ranging from 1 minute to 90 days. If not specified, the default duration is 1 hour.
+          description: The length of time the enrollment token is valid, ranging from 1
+            minute to 90 days. If not specified, the default duration is 1 hour.
           format: google-duration
           type: string
         expirationTimestamp:
-          description: The expiration time of the token. This is a read-only field generated by the server.
+          description: The expiration time of the token. This is a read-only field
+            generated by the server.
           format: google-datetime
           type: string
         name:
-          description: The name of the enrollment token, which is generated by the server during creation, in the form enterprises/{enterpriseId}/enrollmentTokens/{enrollmentTokenId}.
+          description: The name of the enrollment token, which is generated by the server
+            during creation, in the form
+            enterprises/{enterpriseId}/enrollmentTokens/{enrollmentTokenId}.
           type: string
         oneTimeOnly:
-          description: Whether the enrollment token is for one time use only. If the flag is set to true, only one device can use it for registration.
+          description: Whether the enrollment token is for one time use only. If the flag
+            is set to true, only one device can use it for registration.
           type: boolean
         policyName:
-          description: The name of the policy initially applied to the enrolled device, in the form enterprises/{enterpriseId}/policies/{policyId}. If not specified, the policy_name for the device’s user is applied. If user_name is also not specified, enterprises/{enterpriseId}/policies/default is applied by default. When updating this field, you can specify only the policyId as long as the policyId doesn’t contain any slashes. The rest of the policy name will be inferred.
+          description: The name of the policy initially applied to the enrolled device, in
+            the form enterprises/{enterpriseId}/policies/{policyId}. If not
+            specified, the policy_name for the device’s user is applied. If
+            user_name is also not specified,
+            enterprises/{enterpriseId}/policies/default is applied by default.
+            When updating this field, you can specify only the policyId as long
+            as the policyId doesn’t contain any slashes. The rest of the policy
+            name will be inferred.
           type: string
         qrCode:
-          description: A JSON string whose UTF-8 representation can be used to generate a QR code to enroll a device with this enrollment token. To enroll a device using NFC, the NFC record must contain a serialized java.util.Properties representation of the properties in the JSON.
+          description: A JSON string whose UTF-8 representation can be used to generate a
+            QR code to enroll a device with this enrollment token. To enroll a
+            device using NFC, the NFC record must contain a serialized
+            java.util.Properties representation of the properties in the JSON.
           type: string
         user:
           $ref: "#/components/schemas/User"
-          description: The user associated with this enrollment token. If it's specified when the enrollment token is created and the user does not exist, the user will be created. This field must not contain personally identifiable information. Only the account_identifier field needs to be set.
+          description: The user associated with this enrollment token. If it's specified
+            when the enrollment token is created and the user does not exist,
+            the user will be created. This field must not contain personally
+            identifiable information. Only the account_identifier field needs to
+            be set.
         value:
-          description: The token value that's passed to the device and authorizes the device to enroll. This is a read-only field generated by the server.
+          description: The token value that's passed to the device and authorizes the
+            device to enroll. This is a read-only field generated by the server.
           type: string
       type: object
     Enterprise:
@@ -1389,7 +1643,8 @@ components:
           type: boolean
         contactInfo:
           $ref: "#/components/schemas/ContactInfo"
-          description: This feature is not generally available yet. The enterprise contact info of an EMM owned enterprise
+          description: This feature is not generally available yet. The enterprise contact
+            info of an EMM owned enterprise
         enabledNotificationTypes:
           description: The types of Google Pub/Sub notifications enabled for the enterprise.
           items:
@@ -1406,16 +1661,24 @@ components:
           type: string
         logo:
           $ref: "#/components/schemas/ExternalData"
-          description: "An image displayed as a logo during device provisioning. Supported types are: image/bmp, image/gif, image/x-ico, image/jpeg, image/png, image/webp, image/vnd.wap.wbmp, image/x-adobe-dng."
+          description: "An image displayed as a logo during device provisioning. Supported
+            types are: image/bmp, image/gif, image/x-ico, image/jpeg, image/png,
+            image/webp, image/vnd.wap.wbmp, image/x-adobe-dng."
         name:
-          description: The name of the enterprise which is generated by the server during creation, in the form enterprises/{enterpriseId}.
+          description: The name of the enterprise which is generated by the server during
+            creation, in the form enterprises/{enterpriseId}.
           type: string
         primaryColor:
-          description: "A color in RGB format that indicates the predominant color to display in the device management app UI. The color components are stored as follows: (red << 16) | (green << 8) | blue, where the value of each component is between 0 and 255, inclusive."
+          description: "A color in RGB format that indicates the predominant color to
+            display in the device management app UI. The color components are
+            stored as follows: (red << 16) | (green << 8) | blue, where the
+            value of each component is between 0 and 255, inclusive."
           format: int32
           type: integer
         pubsubTopic:
-          description: The topic that Cloud Pub/Sub notifications are published to, in the form projects/{project}/topics/{topic}. This field is only required if Pub/Sub notifications are enabled.
+          description: The topic that Cloud Pub/Sub notifications are published to, in the
+            form projects/{project}/topics/{topic}. This field is only required
+            if Pub/Sub notifications are enabled.
           type: string
         signinDetails:
           description: Sign-in details of the enterprise.
@@ -1423,42 +1686,68 @@ components:
             $ref: "#/components/schemas/SigninDetail"
           type: array
         termsAndConditions:
-          description: Terms and conditions that must be accepted when provisioning a device for this enterprise. A page of terms is generated for each value in this list.
+          description: Terms and conditions that must be accepted when provisioning a
+            device for this enterprise. A page of terms is generated for each
+            value in this list.
           items:
             $ref: "#/components/schemas/TermsAndConditions"
           type: array
       type: object
     ExternalData:
-      description: Data hosted at an external location. The data is to be downloaded by Android Device Policy and verified against the hash.
+      description: Data hosted at an external location. The data is to be downloaded
+        by Android Device Policy and verified against the hash.
       properties:
         sha256Hash:
-          description: The base-64 encoded SHA-256 hash of the content hosted at url. If the content doesn't match this hash, Android Device Policy won't use the data.
+          description: The base-64 encoded SHA-256 hash of the content hosted at url. If
+            the content doesn't match this hash, Android Device Policy won't use
+            the data.
           type: string
         url:
-          description: The absolute URL to the data, which must use either the http or https scheme. Android Device Policy doesn't provide any credentials in the GET request, so the URL must be publicly accessible. Including a long, random component in the URL may be used to prevent attackers from discovering the URL.
+          description: The absolute URL to the data, which must use either the http or
+            https scheme. Android Device Policy doesn't provide any credentials
+            in the GET request, so the URL must be publicly accessible.
+            Including a long, random component in the URL may be used to prevent
+            attackers from discovering the URL.
           type: string
       type: object
     FreezePeriod:
-      description: "A system freeze period. When a device’s clock is within the freeze period, all incoming system updates (including security patches) are blocked and won’t be installed. When a device is outside the freeze period, normal update behavior applies. Leap years are ignored in freeze period calculations, in particular: * If Feb. 29th is set as the start or end date of a freeze period, the freeze period will start or end on Feb. 28th instead. * When a device’s system clock reads Feb. 29th, it’s treated as Feb. 28th. * When calculating the number of days in a freeze period or the time between two freeze periods, Feb. 29th is ignored and not counted as a day."
+      description: "A system freeze period. When a device’s clock is within the freeze
+        period, all incoming system updates (including security patches) are
+        blocked and won’t be installed. When a device is outside the freeze
+        period, normal update behavior applies. Leap years are ignored in freeze
+        period calculations, in particular: * If Feb. 29th is set as the start
+        or end date of a freeze period, the freeze period will start or end on
+        Feb. 28th instead. * When a device’s system clock reads Feb. 29th, it’s
+        treated as Feb. 28th. * When calculating the number of days in a freeze
+        period or the time between two freeze periods, Feb. 29th is ignored and
+        not counted as a day."
       properties:
         endDate:
           $ref: "#/components/schemas/Date"
-          description: 'The end date (inclusive) of the freeze period. Must be no later than 90 days from the start date. If the end date is earlier than the start date, the freeze period is considered wrapping year-end. Note: year must not be set. For example, {"month": 1,"date": 30}.'
+          description: 'The end date (inclusive) of the freeze period. Must be no later
+            than 90 days from the start date. If the end date is earlier than
+            the start date, the freeze period is considered wrapping year-end.
+            Note: year must not be set. For example, {"month": 1,"date": 30}.'
         startDate:
           $ref: "#/components/schemas/Date"
-          description: 'The start date (inclusive) of the freeze period. Note: year must not be set. For example, {"month": 1,"date": 30}.'
+          description: 'The start date (inclusive) of the freeze period. Note: year must
+            not be set. For example, {"month": 1,"date": 30}.'
       type: object
     HardwareInfo:
-      description: Information about device hardware. The fields related to temperature thresholds are only available if hardwareStatusEnabled is true in the device's policy.
+      description: Information about device hardware. The fields related to
+        temperature thresholds are only available if hardwareStatusEnabled is
+        true in the device's policy.
       properties:
         batteryShutdownTemperatures:
-          description: Battery shutdown temperature thresholds in Celsius for each battery on the device.
+          description: Battery shutdown temperature thresholds in Celsius for each battery
+            on the device.
           items:
             format: float
             type: number
           type: array
         batteryThrottlingTemperatures:
-          description: Battery throttling temperature thresholds in Celsius for each battery on the device.
+          description: Battery throttling temperature thresholds in Celsius for each
+            battery on the device.
           items:
             format: float
             type: number
@@ -1467,13 +1756,15 @@ components:
           description: Brand of the device. For example, Google.
           type: string
         cpuShutdownTemperatures:
-          description: CPU shutdown temperature thresholds in Celsius for each CPU on the device.
+          description: CPU shutdown temperature thresholds in Celsius for each CPU on the
+            device.
           items:
             format: float
             type: number
           type: array
         cpuThrottlingTemperatures:
-          description: CPU throttling temperature thresholds in Celsius for each CPU on the device.
+          description: CPU throttling temperature thresholds in Celsius for each CPU on
+            the device.
           items:
             format: float
             type: number
@@ -1482,13 +1773,15 @@ components:
           description: Baseband version. For example, MDM9625_104662.22.05.34p.
           type: string
         gpuShutdownTemperatures:
-          description: GPU shutdown temperature thresholds in Celsius for each GPU on the device.
+          description: GPU shutdown temperature thresholds in Celsius for each GPU on the
+            device.
           items:
             format: float
             type: number
           type: array
         gpuThrottlingTemperatures:
-          description: GPU throttling temperature thresholds in Celsius for each GPU on the device.
+          description: GPU throttling temperature thresholds in Celsius for each GPU on
+            the device.
           items:
             format: float
             type: number
@@ -1519,10 +1812,12 @@ components:
           type: array
       type: object
     HardwareStatus:
-      description: Hardware status. Temperatures may be compared to the temperature thresholds available in hardwareInfo to determine hardware health.
+      description: Hardware status. Temperatures may be compared to the temperature
+        thresholds available in hardwareInfo to determine hardware health.
       properties:
         batteryTemperatures:
-          description: Current battery temperatures in Celsius for each battery on the device.
+          description: Current battery temperatures in Celsius for each battery on the
+            device.
           items:
             format: float
             type: number
@@ -1534,7 +1829,9 @@ components:
             type: number
           type: array
         cpuUsages:
-          description: CPU usages in percentage for each core available on the device. Usage is 0 for each unplugged core. Empty array implies that CPU usage is not supported in the system.
+          description: CPU usages in percentage for each core available on the device.
+            Usage is 0 for each unplugged core. Empty array implies that CPU
+            usage is not supported in the system.
           items:
             format: float
             type: number
@@ -1544,7 +1841,8 @@ components:
           format: google-datetime
           type: string
         fanSpeeds:
-          description: Fan speeds in RPM for each fan on the device. Empty array means that there are no fans or fan speed is not supported on the system.
+          description: Fan speeds in RPM for each fan on the device. Empty array means
+            that there are no fans or fan speed is not supported on the system.
           items:
             format: float
             type: number
@@ -1570,17 +1868,25 @@ components:
           format: google-datetime
           type: string
         data:
-          description: Optionally, a machine-readable value to be read by the EMM. For example, setting values that the admin can choose to query against in the EMM console (e.g. “notify me if the battery_warning data < 10”).
+          description: Optionally, a machine-readable value to be read by the EMM. For
+            example, setting values that the admin can choose to query against
+            in the EMM console (e.g. “notify me if the battery_warning data <
+            10”).
           type: string
         key:
-          description: The key for the app state. Acts as a point of reference for what the app is providing state for. For example, when providing managed configuration feedback, this key could be the managed configuration key.
+          description: The key for the app state. Acts as a point of reference for what
+            the app is providing state for. For example, when providing managed
+            configuration feedback, this key could be the managed configuration
+            key.
           type: string
         lastUpdateTime:
           description: The time the app state was most recently updated.
           format: google-datetime
           type: string
         message:
-          description: Optionally, a free-form message string to explain the app state. If the state was triggered by a particular value (e.g. a managed configuration value), it should be included in the message.
+          description: Optionally, a free-form message string to explain the app state. If
+            the state was triggered by a particular value (e.g. a managed
+            configuration value), it should be included in the message.
           type: string
         severity:
           description: The severity of the app state.
@@ -1591,7 +1897,9 @@ components:
           type: string
       type: object
     KioskCustomization:
-      description: Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK.
+      description: Settings controlling the behavior of a device in kiosk mode. To
+        enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an
+        app in the policy with installType KIOSK.
       properties:
         deviceSettings:
           description: Specifies whether the Settings app is allowed in kiosk mode.
@@ -1601,14 +1909,16 @@ components:
             - SETTINGS_ACCESS_BLOCKED
           type: string
         powerButtonActions:
-          description: Sets the behavior of a device in kiosk mode when a user presses and holds (long-presses) the Power button.
+          description: Sets the behavior of a device in kiosk mode when a user presses and
+            holds (long-presses) the Power button.
           enum:
             - POWER_BUTTON_ACTIONS_UNSPECIFIED
             - POWER_BUTTON_AVAILABLE
             - POWER_BUTTON_BLOCKED
           type: string
         statusBar:
-          description: Specifies whether system info and notifications are disabled in kiosk mode.
+          description: Specifies whether system info and notifications are disabled in
+            kiosk mode.
           enum:
             - STATUS_BAR_UNSPECIFIED
             - NOTIFICATIONS_AND_SYSTEM_INFO_ENABLED
@@ -1616,14 +1926,18 @@ components:
             - SYSTEM_INFO_ONLY
           type: string
         systemErrorWarnings:
-          description: Specifies whether system error dialogs for crashed or unresponsive apps are blocked in kiosk mode. When blocked, the system will force-stop the app as if the user chooses the "close app" option on the UI.
+          description: Specifies whether system error dialogs for crashed or unresponsive
+            apps are blocked in kiosk mode. When blocked, the system will
+            force-stop the app as if the user chooses the "close app" option on
+            the UI.
           enum:
             - SYSTEM_ERROR_WARNINGS_UNSPECIFIED
             - ERROR_AND_WARNINGS_ENABLED
             - ERROR_AND_WARNINGS_MUTED
           type: string
         systemNavigation:
-          description: Specifies which navigation features are enabled (e.g. Home, Overview buttons) in kiosk mode.
+          description: Specifies which navigation features are enabled (e.g. Home,
+            Overview buttons) in kiosk mode.
           enum:
             - SYSTEM_NAVIGATION_UNSPECIFIED
             - NAVIGATION_ENABLED
@@ -1651,7 +1965,8 @@ components:
           type: string
       type: object
     ListEnterprisesResponse:
-      description: This feature is not generally available yet. Response to a request to list enterprises.
+      description: This feature is not generally available yet. Response to a request
+        to list enterprises.
       properties:
         enterprises:
           description: This feature is not generally available yet. The list of enterprises.
@@ -1659,7 +1974,8 @@ components:
             $ref: "#/components/schemas/Enterprise"
           type: array
         nextPageToken:
-          description: This feature is not generally available yet. If there are more results, a token to retrieve next page of results.
+          description: This feature is not generally available yet. If there are more
+            results, a token to retrieve next page of results.
           type: string
       type: object
     ListOperationsResponse:
@@ -1669,7 +1985,8 @@ components:
           description: The standard List next-page token.
           type: string
         operations:
-          description: A list of operations that matches the specified filter in the request.
+          description: A list of operations that matches the specified filter in the
+            request.
           items:
             $ref: "#/components/schemas/Operation"
           type: array
@@ -1699,12 +2016,14 @@ components:
           type: array
       type: object
     ManagedConfigurationTemplate:
-      description: The managed configurations template for the app, saved from the managed configurations iframe.
+      description: The managed configurations template for the app, saved from the
+        managed configurations iframe.
       properties:
         configurationVariables:
           additionalProperties:
             type: string
-          description: Optional, a map containing configuration variables defined for the configuration.
+          description: Optional, a map containing configuration variables defined for the
+            configuration.
           type: object
         templateId:
           description: The ID of the managed configurations template.
@@ -1714,9 +2033,11 @@ components:
       description: Managed property.
       properties:
         defaultValue:
-          description: The default value of the property. BUNDLE_ARRAY properties don't have a default value.
+          description: The default value of the property. BUNDLE_ARRAY properties don't
+            have a default value.
         description:
-          description: A longer description of the property, providing more detail of what it affects. Localized.
+          description: A longer description of the property, providing more detail of what
+            it affects. Localized.
           type: string
         entries:
           description: For CHOICE or MULTISELECT properties, the list of possible entries.
@@ -1724,10 +2045,12 @@ components:
             $ref: "#/components/schemas/ManagedPropertyEntry"
           type: array
         key:
-          description: The unique key that the app uses to identify the property, e.g. "com.google.android.gm.fieldname".
+          description: The unique key that the app uses to identify the property, e.g.
+            "com.google.android.gm.fieldname".
           type: string
         nestedProperties:
-          description: For BUNDLE_ARRAY properties, the list of nested properties. A BUNDLE_ARRAY property is at most two levels deep.
+          description: For BUNDLE_ARRAY properties, the list of nested properties. A
+            BUNDLE_ARRAY property is at most two levels deep.
           items:
             $ref: "#/components/schemas/ManagedProperty"
           type: array
@@ -1755,14 +2078,17 @@ components:
           description: The human-readable name of the value. Localized.
           type: string
         value:
-          description: The machine-readable value of the entry, which should be used in the configuration. Not localized.
+          description: The machine-readable value of the entry, which should be used in
+            the configuration. Not localized.
           type: string
       type: object
     MemoryEvent:
       description: An event related to memory and storage measurements.
       properties:
         byteCount:
-          description: The number of free bytes in the medium, or for EXTERNAL_STORAGE_DETECTED, the total capacity in bytes of the storage medium.
+          description: The number of free bytes in the medium, or for
+            EXTERNAL_STORAGE_DETECTED, the total capacity in bytes of the
+            storage medium.
           format: int64
           type: string
         createTime:
@@ -1802,10 +2128,13 @@ components:
           description: MEID number of the CDMA device. For example, A00000292788E1.
           type: string
         networkOperatorName:
-          description: Alphabetic name of current registered operator. For example, Vodafone.
+          description: Alphabetic name of current registered operator. For example,
+            Vodafone.
           type: string
         telephonyInfos:
-          description: Provides telephony information associated with each SIM card on the device. Only supported on fully managed devices starting from Android API level 23.
+          description: Provides telephony information associated with each SIM card on the
+            device. Only supported on fully managed devices starting from
+            Android API level 23.
           items:
             $ref: "#/components/schemas/TelephonyInfo"
           type: array
@@ -1817,12 +2146,23 @@ components:
       description: Provides detail about non-compliance with a policy setting.
       properties:
         currentValue:
-          description: If the policy setting could not be applied, the current value of the setting on the device.
+          description: If the policy setting could not be applied, the current value of
+            the setting on the device.
         fieldPath:
-          description: "For settings with nested fields, if a particular nested field is out of compliance, this specifies the full path to the offending field. The path is formatted in the same way the policy JSON field would be referenced in JavaScript, that is: 1) For object-typed fields, the field name is followed by a dot then by a subfield name. 2) For array-typed fields, the field name is followed by the array index enclosed in brackets. For example, to indicate a problem with the url field in the externalData field in the 3rd application, the path would be applications[2].externalData.url"
+          description: "For settings with nested fields, if a particular nested field is
+            out of compliance, this specifies the full path to the offending
+            field. The path is formatted in the same way the policy JSON field
+            would be referenced in JavaScript, that is: 1) For object-typed
+            fields, the field name is followed by a dot then by a subfield name.
+            2) For array-typed fields, the field name is followed by the array
+            index enclosed in brackets. For example, to indicate a problem with
+            the url field in the externalData field in the 3rd application, the
+            path would be applications[2].externalData.url"
           type: string
         installationFailureReason:
-          description: If package_name is set and the non-compliance reason is APP_NOT_INSTALLED or APP_NOT_UPDATED, the detailed reason the app can't be installed or updated.
+          description: If package_name is set and the non-compliance reason is
+            APP_NOT_INSTALLED or APP_NOT_UPDATED, the detailed reason the app
+            can't be installed or updated.
           enum:
             - INSTALLATION_FAILURE_REASON_UNSPECIFIED
             - INSTALLATION_FAILURE_REASON_UNKNOWN
@@ -1852,17 +2192,24 @@ components:
             - APP_NOT_UPDATED
           type: string
         packageName:
-          description: The package name indicating which app is out of compliance, if applicable.
+          description: The package name indicating which app is out of compliance, if
+            applicable.
           type: string
         settingName:
-          description: The name of the policy setting. This is the JSON field name of a top-level Policy field.
+          description: The name of the policy setting. This is the JSON field name of a
+            top-level Policy field.
           type: string
       type: object
     NonComplianceDetailCondition:
-      description: A compliance rule condition which is satisfied if there exists any matching NonComplianceDetail for the device. A NonComplianceDetail matches a NonComplianceDetailCondition if all the fields which are set within the NonComplianceDetailCondition match the corresponding NonComplianceDetail fields.
+      description: A compliance rule condition which is satisfied if there exists any
+        matching NonComplianceDetail for the device. A NonComplianceDetail
+        matches a NonComplianceDetailCondition if all the fields which are set
+        within the NonComplianceDetailCondition match the corresponding
+        NonComplianceDetail fields.
       properties:
         nonComplianceReason:
-          description: The reason the device is not in compliance with the setting. If not set, then this condition matches any reason.
+          description: The reason the device is not in compliance with the setting. If not
+            set, then this condition matches any reason.
           enum:
             - NON_COMPLIANCE_REASON_UNSPECIFIED
             - API_LEVEL
@@ -1877,10 +2224,13 @@ components:
             - APP_NOT_UPDATED
           type: string
         packageName:
-          description: The package name of the app that's out of compliance. If not set, then this condition matches any package name.
+          description: The package name of the app that's out of compliance. If not set,
+            then this condition matches any package name.
           type: string
         settingName:
-          description: The name of the policy setting. This is the JSON field name of a top-level Policy field. If not set, then this condition matches any setting name.
+          description: The name of the policy setting. This is the JSON field name of a
+            top-level Policy field. If not set, then this condition matches any
+            setting name.
           type: string
       type: object
     OncCertificateProvider:
@@ -1896,10 +2246,13 @@ components:
           description: This feature is not generally available.
       type: object
     Operation:
-      description: This resource represents a long-running operation that is the result of a network API call.
+      description: This resource represents a long-running operation that is the
+        result of a network API call.
       properties:
         done:
-          description: If the value is false, it means the operation is still in progress. If true, the operation is completed, and either error or response is available.
+          description: If the value is false, it means the operation is still in progress.
+            If true, the operation is completed, and either error or response is
+            available.
           type: boolean
         error:
           $ref: "#/components/schemas/Status"
@@ -1907,15 +2260,29 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          description: Service-specific metadata associated with the operation. It
+            typically contains progress information and common metadata such as
+            create time. Some services might not provide such metadata. Any
+            method that returns a long-running operation should document the
+            metadata type, if any.
           type: object
         name:
-          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the name should be a resource name ending with operations/{unique_id}.
+          description: The server-assigned name, which is only unique within the same
+            service that originally returns it. If you use the default HTTP
+            mapping, the name should be a resource name ending with
+            operations/{unique_id}.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
+          description: The normal response of the operation in case of success. If the
+            original method returns no data on success, such as Delete, the
+            response is google.protobuf.Empty. If the original method is
+            standard Get/Create/Update, the response should be the resource. For
+            other methods, the response should have the type XxxResponse, where
+            Xxx is the original method name. For example, if the original method
+            name is TakeSnapshot(), the inferred response type is
+            TakeSnapshotResponse.
           type: object
       type: object
     PackageNameList:
@@ -1931,7 +2298,9 @@ components:
       description: Requirements for the password used to unlock a device.
       properties:
         maximumFailedPasswordsForWipe:
-          description: Number of incorrect device-unlock passwords that can be entered before a device is wiped. A value of 0 means there is no restriction.
+          description: Number of incorrect device-unlock passwords that can be entered
+            before a device is wiped. A value of 0 means there is no
+            restriction.
           format: int32
           type: integer
         passwordExpirationTimeout:
@@ -1939,35 +2308,46 @@ components:
           format: google-duration
           type: string
         passwordHistoryLength:
-          description: The length of the password history. After setting this field, the user won't be able to enter a new password that is the same as any password in the history. A value of 0 means there is no restriction.
+          description: The length of the password history. After setting this field, the
+            user won't be able to enter a new password that is the same as any
+            password in the history. A value of 0 means there is no restriction.
           format: int32
           type: integer
         passwordMinimumLength:
-          description: The minimum allowed password length. A value of 0 means there is no restriction. Only enforced when password_quality is NUMERIC, NUMERIC_COMPLEX, ALPHABETIC, ALPHANUMERIC, or COMPLEX.
+          description: The minimum allowed password length. A value of 0 means there is no
+            restriction. Only enforced when password_quality is NUMERIC,
+            NUMERIC_COMPLEX, ALPHABETIC, ALPHANUMERIC, or COMPLEX.
           format: int32
           type: integer
         passwordMinimumLetters:
-          description: Minimum number of letters required in the password. Only enforced when password_quality is COMPLEX.
+          description: Minimum number of letters required in the password. Only enforced
+            when password_quality is COMPLEX.
           format: int32
           type: integer
         passwordMinimumLowerCase:
-          description: Minimum number of lower case letters required in the password. Only enforced when password_quality is COMPLEX.
+          description: Minimum number of lower case letters required in the password. Only
+            enforced when password_quality is COMPLEX.
           format: int32
           type: integer
         passwordMinimumNonLetter:
-          description: Minimum number of non-letter characters (numerical digits or symbols) required in the password. Only enforced when password_quality is COMPLEX.
+          description: Minimum number of non-letter characters (numerical digits or
+            symbols) required in the password. Only enforced when
+            password_quality is COMPLEX.
           format: int32
           type: integer
         passwordMinimumNumeric:
-          description: Minimum number of numerical digits required in the password. Only enforced when password_quality is COMPLEX.
+          description: Minimum number of numerical digits required in the password. Only
+            enforced when password_quality is COMPLEX.
           format: int32
           type: integer
         passwordMinimumSymbols:
-          description: Minimum number of symbols required in the password. Only enforced when password_quality is COMPLEX.
+          description: Minimum number of symbols required in the password. Only enforced
+            when password_quality is COMPLEX.
           format: int32
           type: integer
         passwordMinimumUpperCase:
-          description: Minimum number of upper case letters required in the password. Only enforced when password_quality is COMPLEX.
+          description: Minimum number of upper case letters required in the password. Only
+            enforced when password_quality is COMPLEX.
           format: int32
           type: integer
         passwordQuality:
@@ -1990,7 +2370,12 @@ components:
             - SCOPE_PROFILE
           type: string
         requirePasswordUnlock:
-          description: The length of time after a device or work profile is unlocked using a strong form of authentication (password, PIN, pattern) that it can be unlocked using any other authentication method (e.g. fingerprint, trust agents, face). After the specified time period elapses, only strong forms of authentication can be used to unlock the device or work profile.
+          description: The length of time after a device or work profile is unlocked using
+            a strong form of authentication (password, PIN, pattern) that it can
+            be unlocked using any other authentication method (e.g. fingerprint,
+            trust agents, face). After the specified time period elapses, only
+            strong forms of authentication can be used to unlock the device or
+            work profile.
           enum:
             - REQUIRE_PASSWORD_UNLOCK_UNSPECIFIED
             - USE_DEFAULT_DEVICE_TIMEOUT
@@ -2001,7 +2386,9 @@ components:
       description: Configuration for an Android permission and its grant state.
       properties:
         permission:
-          description: The Android permission or group, e.g. android.permission.READ_CALENDAR or android.permission_group.CALENDAR.
+          description: The Android permission or group, e.g.
+            android.permission.READ_CALENDAR or
+            android.permission_group.CALENDAR.
           type: string
         policy:
           description: The policy for granting the permission.
@@ -2013,24 +2400,39 @@ components:
           type: string
       type: object
     PersistentPreferredActivity:
-      description: "A default activity for handling intents that match a particular intent filter. Note: To set up a kiosk, use InstallType to KIOSK rather than use persistent preferred activities."
+      description: "A default activity for handling intents that match a particular
+        intent filter. Note: To set up a kiosk, use InstallType to KIOSK rather
+        than use persistent preferred activities."
       properties:
         actions:
-          description: The intent actions to match in the filter. If any actions are included in the filter, then an intent's action must be one of those values for it to match. If no actions are included, the intent action is ignored.
+          description: The intent actions to match in the filter. If any actions are
+            included in the filter, then an intent's action must be one of those
+            values for it to match. If no actions are included, the intent
+            action is ignored.
           items:
             type: string
           type: array
         categories:
-          description: The intent categories to match in the filter. An intent includes the categories that it requires, all of which must be included in the filter in order to match. In other words, adding a category to the filter has no impact on matching unless that category is specified in the intent.
+          description: The intent categories to match in the filter. An intent includes
+            the categories that it requires, all of which must be included in
+            the filter in order to match. In other words, adding a category to
+            the filter has no impact on matching unless that category is
+            specified in the intent.
           items:
             type: string
           type: array
         receiverActivity:
-          description: The activity that should be the default intent handler. This should be an Android component name, e.g. com.android.enterprise.app/.MainActivity. Alternatively, the value may be the package name of an app, which causes Android Device Policy to choose an appropriate activity from the app to handle the intent.
+          description: The activity that should be the default intent handler. This should
+            be an Android component name, e.g.
+            com.android.enterprise.app/.MainActivity. Alternatively, the value
+            may be the package name of an app, which causes Android Device
+            Policy to choose an appropriate activity from the app to handle the
+            intent.
           type: string
       type: object
     PersonalApplicationPolicy:
-      description: Policies for apps in the personal profile of a company-owned device with a work profile.
+      description: Policies for apps in the personal profile of a company-owned device
+        with a work profile.
       properties:
         installType:
           description: The type of installation to perform.
@@ -2044,7 +2446,8 @@ components:
           type: string
       type: object
     PersonalUsagePolicies:
-      description: Policies controlling personal usage on a company-owned device with a work profile.
+      description: Policies controlling personal usage on a company-owned device with
+        a work profile.
       properties:
         accountTypesWithManagementDisabled:
           description: Account types that can't be managed by the user.
@@ -2055,7 +2458,8 @@ components:
           description: Whether camera is disabled.
           type: boolean
         maxDaysWithWorkOff:
-          description: Controls how long the work profile can stay off. The duration must be at least 3 days.
+          description: Controls how long the work profile can stay off. The duration must
+            be at least 3 days.
           format: int32
           type: integer
         personalApplications:
@@ -2064,7 +2468,8 @@ components:
             $ref: "#/components/schemas/PersonalApplicationPolicy"
           type: array
         personalPlayStoreMode:
-          description: Used together with personalApplications to control how apps in the personal profile are allowed or blocked.
+          description: Used together with personalApplications to control how apps in the
+            personal profile are allowed or blocked.
           enum:
             - PLAY_STORE_MODE_UNSPECIFIED
             - BLACKLIST
@@ -2076,7 +2481,8 @@ components:
           type: boolean
       type: object
     Policy:
-      description: A policy resource represents a group of settings that govern the behavior of a managed device and the apps installed on it.
+      description: A policy resource represents a group of settings that govern the
+        behavior of a managed device and the apps installed on it.
       properties:
         accountTypesWithManagementDisabled:
           description: Account types that can't be managed by the user.
@@ -2087,16 +2493,23 @@ components:
           description: Whether adding new users and profiles is disabled.
           type: boolean
         adjustVolumeDisabled:
-          description: Whether adjusting the master volume is disabled. Also mutes the device.
+          description: Whether adjusting the master volume is disabled. Also mutes the
+            device.
           type: boolean
         advancedSecurityOverrides:
           $ref: "#/components/schemas/AdvancedSecurityOverrides"
-          description: Security policies set to the most secure values by default. To maintain the security posture of a device, we don't recommend overriding any of the default values.
+          description: Security policies set to the most secure values by default. To
+            maintain the security posture of a device, we don't recommend
+            overriding any of the default values.
         alwaysOnVpnPackage:
           $ref: "#/components/schemas/AlwaysOnVpnPackage"
-          description: Configuration for an always-on VPN connection. Use with vpn_config_disabled to prevent modification of this setting.
+          description: Configuration for an always-on VPN connection. Use with
+            vpn_config_disabled to prevent modification of this setting.
         androidDevicePolicyTracks:
-          description: The app tracks for Android Device Policy the device can access. The device receives the latest version among all accessible tracks. If no tracks are specified, then the device only uses the production track.
+          description: The app tracks for Android Device Policy the device can access. The
+            device receives the latest version among all accessible tracks. If
+            no tracks are specified, then the device only uses the production
+            track.
           items:
             enum:
               - APP_TRACK_UNSPECIFIED
@@ -2105,7 +2518,8 @@ components:
             type: string
           type: array
         appAutoUpdatePolicy:
-          description: The app auto update policy, which controls when automatic app updates can be applied.
+          description: The app auto update policy, which controls when automatic app
+            updates can be applied.
           enum:
             - APP_AUTO_UPDATE_POLICY_UNSPECIFIED
             - CHOICE_TO_THE_USER
@@ -2119,17 +2533,24 @@ components:
             $ref: "#/components/schemas/ApplicationPolicy"
           type: array
         autoDateAndTimeZone:
-          description: Whether auto date, time, and time zone are enabled on a company-owned device. If this is set, then autoTimeRequired is ignored.
+          description: Whether auto date, time, and time zone are enabled on a
+            company-owned device. If this is set, then autoTimeRequired is
+            ignored.
           enum:
             - AUTO_DATE_AND_TIME_ZONE_UNSPECIFIED
             - AUTO_DATE_AND_TIME_ZONE_USER_CHOICE
             - AUTO_DATE_AND_TIME_ZONE_ENFORCED
           type: string
         autoTimeRequired:
-          description: Whether auto time is required, which prevents the user from manually setting the date and time. If autoDateAndTimeZone is set, this field is ignored.
+          description: Whether auto time is required, which prevents the user from
+            manually setting the date and time. If autoDateAndTimeZone is set,
+            this field is ignored.
           type: boolean
         blockApplicationsEnabled:
-          description: Whether applications other than the ones configured in applications are blocked from being installed. When set, applications that were installed under a previous policy but no longer appear in the policy are automatically uninstalled.
+          description: Whether applications other than the ones configured in applications
+            are blocked from being installed. When set, applications that were
+            installed under a previous policy but no longer appear in the policy
+            are automatically uninstalled.
           type: boolean
         bluetoothConfigDisabled:
           description: Whether configuring bluetooth is disabled.
@@ -2138,7 +2559,9 @@ components:
           description: Whether bluetooth contact sharing is disabled.
           type: boolean
         bluetoothDisabled:
-          description: Whether bluetooth is disabled. Prefer this setting over bluetooth_config_disabled because bluetooth_config_disabled can be bypassed by the user.
+          description: Whether bluetooth is disabled. Prefer this setting over
+            bluetooth_config_disabled because bluetooth_config_disabled can be
+            bypassed by the user.
           type: boolean
         cameraDisabled:
           description: Whether all cameras on the device are disabled.
@@ -2147,12 +2570,17 @@ components:
           description: Whether configuring cell broadcast is disabled.
           type: boolean
         choosePrivateKeyRules:
-          description: Rules for automatically choosing a private key and certificate to authenticate the device to a server. The rules are ordered by increasing precedence, so if an outgoing request matches more than one rule, the last rule defines which private key to use.
+          description: Rules for determining apps' access to private keys. See
+            ChoosePrivateKeyRule for details.
           items:
             $ref: "#/components/schemas/ChoosePrivateKeyRule"
           type: array
         complianceRules:
-          description: Rules declaring which mitigating actions to take when a device is not compliant with its policy. When the conditions for multiple rules are satisfied, all of the mitigating actions for the rules are taken. There is a maximum limit of 100 rules. Use policy enforcement rules instead.
+          description: Rules declaring which mitigating actions to take when a device is
+            not compliant with its policy. When the conditions for multiple
+            rules are satisfied, all of the mitigating actions for the rules are
+            taken. There is a maximum limit of 100 rules. Use policy enforcement
+            rules instead.
           items:
             $ref: "#/components/schemas/ComplianceRule"
           type: array
@@ -2193,12 +2621,17 @@ components:
           description: Whether factory resetting from settings is disabled.
           type: boolean
         frpAdminEmails:
-          description: Email addresses of device administrators for factory reset protection. When the device is factory reset, it will require one of these admins to log in with the Google account email and password to unlock the device. If no admins are specified, the device won't provide factory reset protection.
+          description: Email addresses of device administrators for factory reset
+            protection. When the device is factory reset, it will require one of
+            these admins to log in with the Google account email and password to
+            unlock the device. If no admins are specified, the device won't
+            provide factory reset protection.
           items:
             type: string
           type: array
         funDisabled:
-          description: Whether the user is allowed to have fun. Controls whether the Easter egg game in Settings is disabled.
+          description: Whether the user is allowed to have fun. Controls whether the
+            Easter egg game in Settings is disabled.
           type: boolean
         installAppsDisabled:
           description: Whether user installation of apps is disabled.
@@ -2227,11 +2660,17 @@ components:
             type: string
           type: array
         kioskCustomLauncherEnabled:
-          description: Whether the kiosk custom launcher is enabled. This replaces the home screen with a launcher that locks down the device to the apps installed via the applications setting. Apps appear on a single page in alphabetical order. Use kioskCustomization to further configure the kiosk device behavior.
+          description: Whether the kiosk custom launcher is enabled. This replaces the
+            home screen with a launcher that locks down the device to the apps
+            installed via the applications setting. Apps appear on a single page
+            in alphabetical order. Use kioskCustomization to further configure
+            the kiosk device behavior.
           type: boolean
         kioskCustomization:
           $ref: "#/components/schemas/KioskCustomization"
-          description: Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK.
+          description: Settings controlling the behavior of a device in kiosk mode. To
+            enable kiosk mode, set kioskCustomLauncherEnabled to true or specify
+            an app in the policy with installType KIOSK.
         locationMode:
           description: The degree of location detection enabled.
           enum:
@@ -2246,9 +2685,11 @@ components:
           type: string
         longSupportMessage:
           $ref: "#/components/schemas/UserFacingMessage"
-          description: A message displayed to the user in the device administators settings screen.
+          description: A message displayed to the user in the device administators
+            settings screen.
         maximumTimeToLock:
-          description: Maximum time in milliseconds for user activity until the device locks. A value of 0 means there is no restriction.
+          description: Maximum time in milliseconds for user activity until the device
+            locks. A value of 0 means there is no restriction.
           format: int64
           type: string
         minimumApiLevel:
@@ -2265,10 +2706,18 @@ components:
           description: Whether the user mounting physical external media is disabled.
           type: boolean
         name:
-          description: The name of the policy in the form enterprises/{enterpriseId}/policies/{policyId}.
+          description: The name of the policy in the form
+            enterprises/{enterpriseId}/policies/{policyId}.
           type: string
         networkEscapeHatchEnabled:
-          description: Whether the network escape hatch is enabled. If a network connection can't be made at boot time, the escape hatch prompts the user to temporarily connect to a network in order to refresh the device policy. After applying policy, the temporary network will be forgotten and the device will continue booting. This prevents being unable to connect to a network if there is no suitable network in the last policy and the device boots into an app in lock task mode, or the user is otherwise unable to reach device settings.
+          description: Whether the network escape hatch is enabled. If a network
+            connection can't be made at boot time, the escape hatch prompts the
+            user to temporarily connect to a network in order to refresh the
+            device policy. After applying policy, the temporary network will be
+            forgotten and the device will continue booting. This prevents being
+            unable to connect to a network if there is no suitable network in
+            the last policy and the device boots into an app in lock task mode,
+            or the user is otherwise unable to reach device settings.
           type: boolean
         networkResetDisabled:
           description: Whether resetting network settings is disabled.
@@ -2281,7 +2730,8 @@ components:
         openNetworkConfiguration:
           additionalProperties:
             description: Properties of the object.
-          description: Network configuration for the device. See configure networks for more information.
+          description: Network configuration for the device. See configure networks for
+            more information.
           type: object
         outgoingBeamDisabled:
           description: Whether using NFC to beam data from apps is disabled.
@@ -2290,24 +2740,38 @@ components:
           description: Whether outgoing calls are disabled.
           type: boolean
         passwordPolicies:
-          description: Password requirement policies. Different policies can be set for work profile or fully managed devices by setting the password_scope field in the policy.
+          description: Password requirement policies. Different policies can be set for
+            work profile or fully managed devices by setting the password_scope
+            field in the policy.
           items:
             $ref: "#/components/schemas/PasswordRequirements"
           type: array
         passwordRequirements:
           $ref: "#/components/schemas/PasswordRequirements"
-          description: Password requirements. The field password_requirements.require_password_unlock must not be set. DEPRECATED - Use password_policies.
+          description: Password requirements. The field
+            password_requirements.require_password_unlock must not be set.
+            DEPRECATED - Use password_policies.Note:Complexity-based values of
+            PasswordQuality, that is, COMPLEXITY_LOW, COMPLEXITY_MEDIUM, and
+            COMPLEXITY_HIGH, cannot be used here.
         permissionGrants:
-          description: Explicit permission or group grants or denials for all apps. These values override the default_permission_policy.
+          description: Explicit permission or group grants or denials for all apps. These
+            values override the default_permission_policy.
           items:
             $ref: "#/components/schemas/PermissionGrant"
           type: array
         permittedAccessibilityServices:
           $ref: "#/components/schemas/PackageNameList"
-          description: Specifies permitted accessibility services. If the field is not set, any accessibility service can be used. If the field is set, only the accessibility services in this list and the system's built-in accessibility service can be used. In particular, if the field is set to empty, only the system's built-in accessibility servicess can be used.
+          description: Specifies permitted accessibility services. If the field is not
+            set, any accessibility service can be used. If the field is set,
+            only the accessibility services in this list and the system's
+            built-in accessibility service can be used. In particular, if the
+            field is set to empty, only the system's built-in accessibility
+            servicess can be used.
         permittedInputMethods:
           $ref: "#/components/schemas/PackageNameList"
-          description: If present, only the input methods provided by packages in this list are permitted. If this field is present, but the list is empty, then only system input methods are permitted.
+          description: If present, only the input methods provided by packages in this
+            list are permitted. If this field is present, but the list is empty,
+            then only system input methods are permitted.
         persistentPreferredActivities:
           description: Default intent handler activities.
           items:
@@ -2317,23 +2781,34 @@ components:
           $ref: "#/components/schemas/PersonalUsagePolicies"
           description: Policies managing personal usage on a company-owned device.
         playStoreMode:
-          description: This mode controls which apps are available to the user in the Play Store and the behavior on the device when apps are removed from the policy.
+          description: This mode controls which apps are available to the user in the Play
+            Store and the behavior on the device when apps are removed from the
+            policy.
           enum:
             - PLAY_STORE_MODE_UNSPECIFIED
             - WHITELIST
             - BLACKLIST
           type: string
         policyEnforcementRules:
-          description: Rules that define the behavior when a particular policy can not be applied on device
+          description: Rules that define the behavior when a particular policy can not be
+            applied on device
           items:
             $ref: "#/components/schemas/PolicyEnforcementRule"
           type: array
         privateKeySelectionEnabled:
-          description: Allows showing UI on a device for a user to choose a private key alias if there are no matching rules in ChoosePrivateKeyRules. For devices below Android P, setting this may leave enterprise keys vulnerable.
+          description: Allows showing UI on a device for a user to choose a private key
+            alias if there are no matching rules in ChoosePrivateKeyRules. For
+            devices below Android P, setting this may leave enterprise keys
+            vulnerable.
           type: boolean
         recommendedGlobalProxy:
           $ref: "#/components/schemas/ProxyInfo"
-          description: The network-independent global HTTP proxy. Typically proxies should be configured per-network in open_network_configuration. However for unusual configurations like general internal filtering a global HTTP proxy may be useful. If the proxy is not accessible, network access may break. The global proxy is only a recommendation and some apps may ignore it.
+          description: The network-independent global HTTP proxy. Typically proxies should
+            be configured per-network in open_network_configuration. However for
+            unusual configurations like general internal filtering a global HTTP
+            proxy may be useful. If the proxy is not accessible, network access
+            may break. The global proxy is only a recommendation and some apps
+            may ignore it.
         removeUserDisabled:
           description: Whether removing other users is disabled.
           type: boolean
@@ -2359,21 +2834,30 @@ components:
           type: boolean
         shortSupportMessage:
           $ref: "#/components/schemas/UserFacingMessage"
-          description: A message displayed to the user in the settings screen wherever functionality has been disabled by the admin. If the message is longer than 200 characters it may be truncated.
+          description: A message displayed to the user in the settings screen wherever
+            functionality has been disabled by the admin. If the message is
+            longer than 200 characters it may be truncated.
         skipFirstUseHintsEnabled:
-          description: Flag to skip hints on the first use. Enterprise admin can enable the system recommendation for apps to skip their user tutorial and other introductory hints on first start-up.
+          description: Flag to skip hints on the first use. Enterprise admin can enable
+            the system recommendation for apps to skip their user tutorial and
+            other introductory hints on first start-up.
           type: boolean
         smsDisabled:
           description: Whether sending and receiving SMS messages is disabled.
           type: boolean
         statusBarDisabled:
-          description: Whether the status bar is disabled. This disables notifications, quick settings, and other screen overlays that allow escape from full-screen mode. DEPRECATED. To disable the status bar on a kiosk device, use InstallType KIOSK or kioskCustomLauncherEnabled.
+          description: Whether the status bar is disabled. This disables notifications,
+            quick settings, and other screen overlays that allow escape from
+            full-screen mode. DEPRECATED. To disable the status bar on a kiosk
+            device, use InstallType KIOSK or kioskCustomLauncherEnabled.
           type: boolean
         statusReportingSettings:
           $ref: "#/components/schemas/StatusReportingSettings"
           description: Status reporting settings
         stayOnPluggedModes:
-          description: The battery plugged in modes for which the device stays on. When using this setting, it is recommended to clear maximum_time_to_lock so that the device doesn't lock itself while it stays on.
+          description: The battery plugged in modes for which the device stays on. When
+            using this setting, it is recommended to clear maximum_time_to_lock
+            so that the device doesn't lock itself while it stays on.
           items:
             enum:
               - BATTERY_PLUGGED_MODE_UNSPECIFIED
@@ -2384,7 +2868,9 @@ components:
           type: array
         systemUpdate:
           $ref: "#/components/schemas/SystemUpdate"
-          description: The system update policy, which controls how OS updates are applied. If the update type is WINDOWED, the update window will automatically apply to Play app updates as well.
+          description: The system update policy, which controls how OS updates are
+            applied. If the update type is WINDOWED, the update window will
+            automatically apply to Play app updates as well.
         tetheringConfigDisabled:
           description: Whether configuring tethering and portable hotspots is disabled.
           type: boolean
@@ -2392,7 +2878,8 @@ components:
           description: Whether user uninstallation of applications is disabled.
           type: boolean
         unmuteMicrophoneDisabled:
-          description: Whether the microphone is muted and adjusting microphone volume is disabled.
+          description: Whether the microphone is muted and adjusting microphone volume is
+            disabled.
           type: boolean
         usbFileTransferDisabled:
           description: Whether transferring files over USB is disabled.
@@ -2401,7 +2888,8 @@ components:
           description: Whether USB storage is enabled. Deprecated.
           type: boolean
         version:
-          description: The version of the policy. This is a read-only field. The version is incremented each time the policy is updated.
+          description: The version of the policy. This is a read-only field. The version
+            is incremented each time the policy is updated.
           format: int64
           type: string
         vpnConfigDisabled:
@@ -2415,28 +2903,36 @@ components:
           type: boolean
       type: object
     PolicyEnforcementRule:
-      description: A rule that defines the actions to take if a device or work profile is not compliant with the policy specified in settingName.
+      description: A rule that defines the actions to take if a device or work profile
+        is not compliant with the policy specified in settingName.
       properties:
         blockAction:
           $ref: "#/components/schemas/BlockAction"
-          description: "An action to block access to apps and data on a fully managed device or in a work profile. This action also triggers a user-facing notification with information (where possible) on how to correct the compliance issue. Note: wipeAction must also be specified."
+          description: "An action to block access to apps and data on a fully managed
+            device or in a work profile. This action also triggers a user-facing
+            notification with information (where possible) on how to correct the
+            compliance issue. Note: wipeAction must also be specified."
         settingName:
-          description: The top-level policy to enforce. For example, applications or passwordPolicies.
+          description: The top-level policy to enforce. For example, applications or
+            passwordPolicies.
           type: string
         wipeAction:
           $ref: "#/components/schemas/WipeAction"
-          description: "An action to reset a fully managed device or delete a work profile. Note: blockAction must also be specified."
+          description: "An action to reset a fully managed device or delete a work
+            profile. Note: blockAction must also be specified."
       type: object
     PostureDetail:
       description: Additional details regarding the security posture of the device.
       properties:
         advice:
-          description: Corresponding admin-facing advice to mitigate this security risk and improve the security posture of the device.
+          description: Corresponding admin-facing advice to mitigate this security risk
+            and improve the security posture of the device.
           items:
             $ref: "#/components/schemas/UserFacingMessage"
           type: array
         securityRisk:
-          description: A specific security risk that negatively affects the security posture of the device.
+          description: A specific security risk that negatively affects the security
+            posture of the device.
           enum:
             - SECURITY_RISK_UNSPECIFIED
             - UNKNOWN_OS
@@ -2447,7 +2943,8 @@ components:
       description: A power management event.
       properties:
         batteryLevel:
-          description: For BATTERY_LEVEL_COLLECTED events, the battery level as a percentage.
+          description: For BATTERY_LEVEL_COLLECTED events, the battery level as a
+            percentage.
           format: float
           type: number
         createTime:
@@ -2468,10 +2965,13 @@ components:
           type: string
       type: object
     ProxyInfo:
-      description: Configuration info for an HTTP proxy. For a direct proxy, set the host, port, and excluded_hosts fields. For a PAC script proxy, set the pac_uri field.
+      description: Configuration info for an HTTP proxy. For a direct proxy, set the
+        host, port, and excluded_hosts fields. For a PAC script proxy, set the
+        pac_uri field.
       properties:
         excludedHosts:
-          description: For a direct proxy, the hosts for which the proxy is bypassed. The host names may contain wildcards such as *.example.com.
+          description: For a direct proxy, the hosts for which the proxy is bypassed. The
+            host names may contain wildcards such as *.example.com.
           items:
             type: string
           type: array
@@ -2487,7 +2987,8 @@ components:
           type: integer
       type: object
     SecurityPosture:
-      description: The security posture of the device, as determined by the current device state and the policies applied.
+      description: The security posture of the device, as determined by the current
+        device state and the policies applied.
       properties:
         devicePosture:
           description: Device's security posture value.
@@ -2520,37 +3021,59 @@ components:
       description: A resource containing sign in details for an enterprise.
       properties:
         allowPersonalUsage:
-          description: "Controls whether personal usage is allowed on a device provisioned with this enrollment token.For company-owned devices: Enabling personal usage allows the user to set up a work profile on the device. Disabling personal usage requires the user provision the device as a fully managed device.For personally-owned devices: Enabling personal usage allows the user to set up a work profile on the device. Disabling personal usage will prevent the device from provisioning. Personal usage cannot be disabled on personally-owned device."
+          description: "Controls whether personal usage is allowed on a device provisioned
+            with this enrollment token.For company-owned devices: Enabling
+            personal usage allows the user to set up a work profile on the
+            device. Disabling personal usage requires the user provision the
+            device as a fully managed device.For personally-owned devices:
+            Enabling personal usage allows the user to set up a work profile on
+            the device. Disabling personal usage will prevent the device from
+            provisioning. Personal usage cannot be disabled on personally-owned
+            device."
           enum:
             - ALLOW_PERSONAL_USAGE_UNSPECIFIED
             - PERSONAL_USAGE_ALLOWED
             - PERSONAL_USAGE_DISALLOWED
           type: string
         qrCode:
-          description: A JSON string whose UTF-8 representation can be used to generate a QR code to enroll a device with this enrollment token. To enroll a device using NFC, the NFC record must contain a serialized java.util.Properties representation of the properties in the JSON. This is a read-only field generated by the server.
+          description: A JSON string whose UTF-8 representation can be used to generate a
+            QR code to enroll a device with this enrollment token. To enroll a
+            device using NFC, the NFC record must contain a serialized
+            java.util.Properties representation of the properties in the JSON.
+            This is a read-only field generated by the server.
           type: string
         signinEnrollmentToken:
-          description: An enterprise wide enrollment token used to trigger custom sign-in flow. This is a read-only field generated by the server.
+          description: An enterprise wide enrollment token used to trigger custom sign-in
+            flow. This is a read-only field generated by the server.
           type: string
         signinUrl:
-          description: Sign-in URL for authentication when device is provisioned with a sign-in enrollment token. The sign-in endpoint should finish authentication flow with a URL in the form of https://enterprise.google.com/android/enroll?et= for a successful login, or https://enterprise.google.com/android/enroll/invalid for a failed login.
+          description: Sign-in URL for authentication when device is provisioned with a
+            sign-in enrollment token. The sign-in endpoint should finish
+            authentication flow with a URL in the form of
+            https://enterprise.google.com/android/enroll?et= for a successful
+            login, or https://enterprise.google.com/android/enroll/invalid for a
+            failed login.
           type: string
       type: object
     SignupUrl:
       description: An enterprise signup URL.
       properties:
         name:
-          description: The name of the resource. Use this value in the signupUrl field when calling enterprises.create to complete the enterprise signup flow.
+          description: The name of the resource. Use this value in the signupUrl field
+            when calling enterprises.create to complete the enterprise signup
+            flow.
           type: string
         url:
-          description: A URL where an enterprise admin can register their enterprise. The page can't be rendered in an iframe.
+          description: A URL where an enterprise admin can register their enterprise. The
+            page can't be rendered in an iframe.
           type: string
       type: object
     SoftwareInfo:
       description: Information about device software.
       properties:
         androidBuildNumber:
-          description: Android build ID string meant for displaying to the user. For example, shamu-userdebug 6.0.1 MOB30I 2756745 dev-keys.
+          description: Android build ID string meant for displaying to the user. For
+            example, shamu-userdebug 6.0.1 MOB30I 2756745 dev-keys.
           type: string
         androidBuildTime:
           description: Build time.
@@ -2570,7 +3093,10 @@ components:
           description: The system bootloader version number, e.g. 0.6.7.
           type: string
         deviceBuildSignature:
-          description: SHA-256 hash of android.content.pm.Signature (https://developer.android.com/reference/android/content/pm/Signature.html) associated with the system package, which can be used to verify that the system build hasn't been modified.
+          description: SHA-256 hash of android.content.pm.Signature
+            (https://developer.android.com/reference/android/content/pm/Signature.html)
+            associated with the system package, which can be used to verify that
+            the system build hasn't been modified.
           type: string
         deviceKernelVersion:
           description: Kernel version, for example, 2.6.32.9-g103d848.
@@ -2586,21 +3112,29 @@ components:
           description: Information about a potential pending system update.
       type: object
     Status:
-      description: "The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors)."
+      description: "The Status type defines a logical error model that is suitable for
+        different programming environments, including REST APIs and RPC APIs. It
+        is used by gRPC (https://github.com/grpc). Each Status message contains
+        three pieces of data: error code, error message, and error details.You
+        can find out more about this error model and how to work with it in the
+        API Design Guide (https://cloud.google.com/apis/design/errors)."
       properties:
         code:
           description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          description: A list of messages that carry the error details. There is a common
+            set of message types for APIs to use.
           items:
             additionalProperties:
               description: Properties of the object. Contains field @type with type URL.
             type: object
           type: array
         message:
-          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          description: A developer-facing error message, which should be in English. Any
+            user-facing error message should be localized and sent in the
+            google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     StatusReportingSettings:
@@ -2608,7 +3142,8 @@ components:
       properties:
         applicationReportingSettings:
           $ref: "#/components/schemas/ApplicationReportingSettings"
-          description: Application reporting settings. Only applicable if application_reports_enabled is true.
+          description: Application reporting settings. Only applicable if
+            application_reports_enabled is true.
         applicationReportsEnabled:
           description: Whether app reports are enabled.
           type: boolean
@@ -2619,10 +3154,12 @@ components:
           description: Whether device settings reporting is enabled.
           type: boolean
         displayInfoEnabled:
-          description: Whether displays reporting is enabled. Report data is not available for personally owned devices with work profiles.
+          description: Whether displays reporting is enabled. Report data is not available
+            for personally owned devices with work profiles.
           type: boolean
         hardwareStatusEnabled:
-          description: Whether hardware status reporting is enabled. Report data is not available for personally owned devices with work profiles.
+          description: Whether hardware status reporting is enabled. Report data is not
+            available for personally owned devices with work profiles.
           type: boolean
         memoryInfoEnabled:
           description: Whether memory reporting is enabled.
@@ -2631,7 +3168,8 @@ components:
           description: Whether network info reporting is enabled.
           type: boolean
         powerManagementEventsEnabled:
-          description: Whether power management event reporting is enabled. Report data is not available for personally owned devices with work profiles.
+          description: Whether power management event reporting is enabled. Report data is
+            not available for personally owned devices with work profiles.
           type: boolean
         softwareInfoEnabled:
           description: Whether software info reporting is enabled.
@@ -2644,16 +3182,27 @@ components:
       description: Configuration for managing system updates
       properties:
         endMinutes:
-          description: If the type is WINDOWED, the end of the maintenance window, measured as the number of minutes after midnight in device's local time. This value must be between 0 and 1439, inclusive. If this value is less than start_minutes, then the maintenance window spans midnight. If the maintenance window specified is smaller than 30 minutes, the actual window is extended to 30 minutes beyond the start time.
+          description: If the type is WINDOWED, the end of the maintenance window,
+            measured as the number of minutes after midnight in device's local
+            time. This value must be between 0 and 1439, inclusive. If this
+            value is less than start_minutes, then the maintenance window spans
+            midnight. If the maintenance window specified is smaller than 30
+            minutes, the actual window is extended to 30 minutes beyond the
+            start time.
           format: int32
           type: integer
         freezePeriods:
-          description: An annually repeating time period in which over-the-air (OTA) system updates are postponed to freeze the OS version running on a device. To prevent freezing the device indefinitely, each freeze period must be separated by at least 60 days.
+          description: An annually repeating time period in which over-the-air (OTA)
+            system updates are postponed to freeze the OS version running on a
+            device. To prevent freezing the device indefinitely, each freeze
+            period must be separated by at least 60 days.
           items:
             $ref: "#/components/schemas/FreezePeriod"
           type: array
         startMinutes:
-          description: If the type is WINDOWED, the start of the maintenance window, measured as the number of minutes after midnight in the device's local time. This value must be between 0 and 1439, inclusive.
+          description: If the type is WINDOWED, the start of the maintenance window,
+            measured as the number of minutes after midnight in the device's
+            local time. This value must be between 0 and 1439, inclusive.
           format: int32
           type: integer
         type:
@@ -2669,11 +3218,15 @@ components:
       description: Information about a potential pending system update.
       properties:
         updateReceivedTime:
-          description: The time when the update was first available. A zero value indicates that this field is not set. This field is set only if an update is available (that is, updateStatus is neither UPDATE_STATUS_UNKNOWN nor UP_TO_DATE).
+          description: The time when the update was first available. A zero value
+            indicates that this field is not set. This field is set only if an
+            update is available (that is, updateStatus is neither
+            UPDATE_STATUS_UNKNOWN nor UP_TO_DATE).
           format: google-datetime
           type: string
         updateStatus:
-          description: "The status of an update: whether an update exists and what type it is."
+          description: "The status of an update: whether an update exists and what type it
+            is."
           enum:
             - UPDATE_STATUS_UNKNOWN
             - UP_TO_DATE
@@ -2683,7 +3236,9 @@ components:
           type: string
       type: object
     TelephonyInfo:
-      description: Telephony information associated with a given SIM card on the device. Only supported on fully managed devices starting from Android API level 23.
+      description: Telephony information associated with a given SIM card on the
+        device. Only supported on fully managed devices starting from Android
+        API level 23.
       properties:
         carrierName:
           description: The carrier name associated with this SIM card.
@@ -2697,7 +3252,8 @@ components:
       properties:
         content:
           $ref: "#/components/schemas/UserFacingMessage"
-          description: A well-formatted HTML string. It will be parsed on the client with android.text.Html#fromHtml.
+          description: A well-formatted HTML string. It will be parsed on the client with
+            android.text.Html#fromHtml.
         header:
           $ref: "#/components/schemas/UserFacingMessage"
           description: A short header which appears above the HTML content.
@@ -2706,19 +3262,29 @@ components:
       description: A user belonging to an enterprise.
       properties:
         accountIdentifier:
-          description: A unique identifier you create for this user, such as user342 or asset#44418. This field must be set when the user is created and can't be updated. This field must not contain personally identifiable information (PII). This identifier must be 1024 characters or less; otherwise, the update policy request will fail.
+          description: A unique identifier you create for this user, such as user342 or
+            asset#44418. This field must be set when the user is created and
+            can't be updated. This field must not contain personally
+            identifiable information (PII). This identifier must be 1024
+            characters or less; otherwise, the update policy request will fail.
           type: string
       type: object
     UserFacingMessage:
-      description: Provides a user-facing message with locale info. The maximum message length is 4096 characters.
+      description: Provides a user-facing message with locale info. The maximum
+        message length is 4096 characters.
       properties:
         defaultMessage:
-          description: The default message displayed if no localized message is specified or the user's locale doesn't match with any of the localized messages. A default message must be provided if any localized messages are provided.
+          description: The default message displayed if no localized message is specified
+            or the user's locale doesn't match with any of the localized
+            messages. A default message must be provided if any localized
+            messages are provided.
           type: string
         localizedMessages:
           additionalProperties:
             type: string
-          description: A map containing pairs, where locale is a well-formed BCP 47 language (https://www.w3.org/International/articles/language-tags/) code, such as en-US, es-ES, or fr.
+          description: A map containing pairs, where locale is a well-formed BCP 47
+            language (https://www.w3.org/International/articles/language-tags/)
+            code, such as en-US, es-ES, or fr.
           type: object
       type: object
     WebApp:
@@ -2738,16 +3304,22 @@ components:
             $ref: "#/components/schemas/WebAppIcon"
           type: array
         name:
-          description: The name of the web app, which is generated by the server during creation in the form enterprises/{enterpriseId}/webApps/{packageName}.
+          description: The name of the web app, which is generated by the server during
+            creation in the form
+            enterprises/{enterpriseId}/webApps/{packageName}.
           type: string
         startUrl:
-          description: The start URL, i.e. the URL that should load when the user opens the application.
+          description: The start URL, i.e. the URL that should load when the user opens
+            the application.
           type: string
         title:
-          description: The title of the web app as displayed to the user (e.g., amongst a list of other applications, or as a label for an icon).
+          description: The title of the web app as displayed to the user (e.g., amongst a
+            list of other applications, or as a label for an icon).
           type: string
         versionCode:
-          description: The current version of the app.Note that the version can automatically increase during the lifetime of the web app, while Google does internal housekeeping to keep the web app up-to-date.
+          description: The current version of the app.Note that the version can
+            automatically increase during the lifetime of the web app, while
+            Google does internal housekeeping to keep the web app up-to-date.
           format: int64
           type: string
       type: object
@@ -2755,14 +3327,24 @@ components:
       description: "An icon for a web app. Supported formats are: png, jpg and webp."
       properties:
         imageData:
-          description: 'The actual bytes of the image in a base64url encoded string (c.f. RFC4648, section 5 "Base 64 Encoding with URL and Filename Safe Alphabet"). - The image type can be png or jpg. - The image should ideally be square. - The image should ideally have a size of 512x512. '
+          description: 'The actual bytes of the image in a base64url encoded string (c.f.
+            RFC4648, section 5 "Base 64 Encoding with URL and Filename Safe
+            Alphabet"). - The image type can be png or jpg. - The image should
+            ideally be square. - The image should ideally have a size of
+            512x512. '
           type: string
       type: object
     WebToken:
       description: A web token used to access the managed Google Play iframe.
       properties:
         enabledFeatures:
-          description: "The features to enable. Use this if you want to control exactly which feature(s) will be activated; leave empty to allow all features.Restrictions / things to note: - If no features are listed here, all features are enabled — this is the default behavior where you give access to all features to your admins. - This must not contain any FEATURE_UNSPECIFIED values. - Repeated values are ignored "
+          description: "The features to enable. Use this if you want to control exactly
+            which feature(s) will be activated; leave empty to allow all
+            features.Restrictions / things to note: - If no features are listed
+            here, all features are enabled — this is the default behavior where
+            you give access to all features to your admins. - This must not
+            contain any FEATURE_UNSPECIFIED values. - Repeated values are
+            ignored "
           items:
             enum:
               - FEATURE_UNSPECIFIED
@@ -2774,13 +3356,19 @@ components:
             type: string
           type: array
         name:
-          description: The name of the web token, which is generated by the server during creation in the form enterprises/{enterpriseId}/webTokens/{webTokenId}.
+          description: The name of the web token, which is generated by the server during
+            creation in the form
+            enterprises/{enterpriseId}/webTokens/{webTokenId}.
           type: string
         parentFrameUrl:
-          description: The URL of the parent frame hosting the iframe with the embedded UI. To prevent XSS, the iframe may not be hosted at other URLs. The URL must use the https scheme.
+          description: The URL of the parent frame hosting the iframe with the embedded
+            UI. To prevent XSS, the iframe may not be hosted at other URLs. The
+            URL must use the https scheme.
           type: string
         permissions:
-          description: Permissions available to an admin in the embedded UI. An admin must have all of these permissions in order to view the UI. This field is deprecated.
+          description: Permissions available to an admin in the embedded UI. An admin must
+            have all of these permissions in order to view the UI. This field is
+            deprecated.
           items:
             enum:
               - WEB_TOKEN_PERMISSION_UNSPECIFIED
@@ -2788,17 +3376,23 @@ components:
             type: string
           type: array
         value:
-          description: The token value which is used in the hosting page to generate the iframe with the embedded UI. This is a read-only field generated by the server.
+          description: The token value which is used in the hosting page to generate the
+            iframe with the embedded UI. This is a read-only field generated by
+            the server.
           type: string
       type: object
     WipeAction:
-      description: "An action to reset a fully managed device or delete a work profile. Note: blockAction must also be specified."
+      description: "An action to reset a fully managed device or delete a work
+        profile. Note: blockAction must also be specified."
       properties:
         preserveFrp:
-          description: Whether the factory-reset protection data is preserved on the device. This setting doesn’t apply to work profiles.
+          description: Whether the factory-reset protection data is preserved on the
+            device. This setting doesn’t apply to work profiles.
           type: boolean
         wipeAfterDays:
-          description: Number of days the policy is non-compliant before the device or work profile is wiped. wipeAfterDays must be greater than blockAfterDays.
+          description: Number of days the policy is non-compliant before the device or
+            work profile is wiped. wipeAfterDays must be greater than
+            blockAfterDays.
           format: int32
           type: integer
       type: object

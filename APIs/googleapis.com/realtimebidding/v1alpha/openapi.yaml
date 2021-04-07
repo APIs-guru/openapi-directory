@@ -186,7 +186,7 @@ components:
       description: The bidding function to be executed as part of the TURTLEDOVE simulation experiment bidding flow.
       properties:
         biddingFunction:
-          description: "The raw Javascript source code of the bidding function. The function takes in a Javascript object, `inputs`, that contains the following named fields: `openrtbContextualBidRequest` OR `googleContextualBidRequest`, `customContextualSignal`, `interestBasedBidData`, `interestGroupData`, `recentImpressionAges`, and returns the bid price CPM (double). Example: ``` /* Returns a bid price CPM (double). * * @param {Object} inputs an object with the * following named fields: * - openrtbContextualBidRequest * OR googleContextualBidRequest * - customContextualSignal * - interestBasedBidData * - interestGroupData * - recentImpressionAges */ function biddingFunction(inputs) { ... return inputs.interestBasedBidData.cpm * inputs.customContextualSignals.placementMultiplier; } ```"
+          description: The raw Javascript source code of the bidding function.
           type: string
         name:
           description: "The name of the bidding function that must follow the pattern: `bidders/{bidder_account_id}/biddingFunctions/{bidding_function_name}`."

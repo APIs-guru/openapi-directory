@@ -6,7 +6,12 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Perspective Comment Analyzer API provides information about the potential impact of a comment on a conversation (e.g. it can provide a score for the "toxicity" of a comment). Users can leverage the "SuggestCommentScore" method to submit corrections to improve Perspective over time. Users can set the "doNotStore" flag to ensure that all submitted comments are automatically deleted after scores are returned.
+  description: The Perspective Comment Analyzer API provides information about the
+    potential impact of a comment on a conversation (e.g. it can provide a score
+    for the "toxicity" of a comment). Users can leverage the
+    "SuggestCommentScore" method to submit corrections to improve Perspective
+    over time. Users can set the "doNotStore" flag to ensure that all submitted
+    comments are automatically deleted after scores are returned.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -144,7 +149,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -162,7 +169,9 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
@@ -190,29 +199,52 @@ components:
           $ref: "#/components/schemas/TextEntry"
           description: The comment to analyze.
         communityId:
-          description: Optional identifier associating this AnalyzeCommentRequest with a particular client's community. Different communities may have different norms and rules. Specifying this value enables us to explore building community-specific models for clients.
+          description: Optional identifier associating this AnalyzeCommentRequest with a
+            particular client's community. Different communities may have
+            different norms and rules. Specifying this value enables us to
+            explore building community-specific models for clients.
           type: string
         context:
           $ref: "#/components/schemas/Context"
           description: The context of the comment.
         doNotStore:
-          description: Do not store the comment or context sent in this request. By default, the service may store comments/context for debugging purposes.
+          description: Do not store the comment or context sent in this request. By
+            default, the service may store comments/context for debugging
+            purposes.
           type: boolean
         languages:
-          description: The language(s) of the comment and context. If none are specified, we attempt to automatically detect the language. Specifying multiple languages means the text contains multiple lanugages. Both ISO and BCP-47 language codes are accepted. The server returns an error if no language was specified and language detection fails. The server also returns an error if the languages (either specified by the caller, or auto-detected) are not *all* supported by the service.
+          description: The language(s) of the comment and context. If none are specified,
+            we attempt to automatically detect the language. Specifying multiple
+            languages means the text contains multiple lanugages. Both ISO and
+            BCP-47 language codes are accepted. The server returns an error if
+            no language was specified and language detection fails. The server
+            also returns an error if the languages (either specified by the
+            caller, or auto-detected) are not *all* supported by the service.
           items:
             type: string
           type: array
         requestedAttributes:
           additionalProperties:
             $ref: "#/components/schemas/AttributeParameters"
-          description: Specification of requested attributes. The AttributeParameters serve as configuration for each associated attribute. The map keys are attribute names. The available attributes may be different on each RFE installation, and can be seen by calling ListAttributes (see above). For the prod installation, known as Perspective API, at blade:commentanalyzer-esf and commentanalyzer.googleapis.com, see go/checker-models (internal) and https://github.com/conversationai/perspectiveapi/blob/master/2-api/models.md#all-attribute-types.
+          description: Specification of requested attributes. The AttributeParameters
+            serve as configuration for each associated attribute. The map keys
+            are attribute names. The available attributes may be different on
+            each RFE installation, and can be seen by calling ListAttributes
+            (see above). For the prod installation, known as Perspective API, at
+            blade:commentanalyzer-esf and commentanalyzer.googleapis.com, see
+            go/checker-models (internal) and
+            https://github.com/conversationai/perspectiveapi/blob/master/2-api/models.md#all-attribute-types.
           type: object
         sessionId:
-          description: Session ID. Used to join related RPCs into a single session. For example, an interactive tool that calls both the AnalyzeComment and SuggestCommentScore RPCs should set all invocations of both RPCs to the same Session ID, typically a random 64-bit integer.
+          description: Session ID. Used to join related RPCs into a single session. For
+            example, an interactive tool that calls both the AnalyzeComment and
+            SuggestCommentScore RPCs should set all invocations of both RPCs to
+            the same Session ID, typically a random 64-bit integer.
           type: string
         spanAnnotations:
-          description: An advisory parameter that will return span annotations if the model is capable of providing scores with sub-comment resolution. This will likely increase the size of the returned message.
+          description: An advisory parameter that will return span annotations if the
+            model is capable of providing scores with sub-comment resolution.
+            This will likely increase the size of the returned message.
           type: boolean
       type: object
     AnalyzeCommentResponse:
@@ -221,41 +253,59 @@ components:
         attributeScores:
           additionalProperties:
             $ref: "#/components/schemas/AttributeScores"
-          description: Scores for the requested attributes. The map keys are attribute names (same as the requested_attribute field in AnalyzeCommentRequest, for example "ATTACK_ON_AUTHOR", "INFLAMMATORY", etc).
+          description: Scores for the requested attributes. The map keys are attribute
+            names (same as the requested_attribute field in
+            AnalyzeCommentRequest, for example "ATTACK_ON_AUTHOR",
+            "INFLAMMATORY", etc).
           type: object
         clientToken:
           description: Same token from the original AnalyzeCommentRequest.
           type: string
         detectedLanguages:
-          description: Contains the languages detected from the text content, sorted in order of likelihood.
+          description: Contains the languages detected from the text content, sorted in
+            order of likelihood.
           items:
             type: string
           type: array
         languages:
-          description: 'The language(s) used by CommentAnalyzer service to choose which Model to use when analyzing the comment. Might better be called "effective_languages". The logic used to make the choice is as follows: if !Request.languages.empty() effective_languages = Request.languages else effective_languages = detected_languages[0]'
+          description: 'The language(s) used by CommentAnalyzer service to choose which
+            Model to use when analyzing the comment. Might better be called
+            "effective_languages". The logic used to make the choice is as
+            follows: if !Request.languages.empty() effective_languages =
+            Request.languages else effective_languages = detected_languages[0]'
           items:
             type: string
           type: array
       type: object
     ArticleAndParentComment:
-      description: A type of context specific to a comment left on a single-threaded comment message board, where comments are either a top level comment or the child of a top level comment.
+      description: A type of context specific to a comment left on a single-threaded
+        comment message board, where comments are either a top level comment or
+        the child of a top level comment.
       properties:
         article:
           $ref: "#/components/schemas/TextEntry"
-          description: The source content about which the comment was made (article text, article summary, video transcript, etc).
+          description: The source content about which the comment was made (article text,
+            article summary, video transcript, etc).
         parentComment:
           $ref: "#/components/schemas/TextEntry"
-          description: Refers to text that is a direct parent of the source comment, such as in a one-deep threaded message board. This field will only be present for comments that are replies to other comments and will not be populated for direct comments on the article_text.
+          description: Refers to text that is a direct parent of the source comment, such
+            as in a one-deep threaded message board. This field will only be
+            present for comments that are replies to other comments and will not
+            be populated for direct comments on the article_text.
       type: object
     AttributeParameters:
       description: Configurable parameters for attribute scoring.
       properties:
         scoreThreshold:
-          description: Don't return scores for this attribute that are below this threshold. If unset, a default threshold will be applied. A FloatValue wrapper is used to distinguish between 0 vs. default/unset.
+          description: Don't return scores for this attribute that are below this
+            threshold. If unset, a default threshold will be applied. A
+            FloatValue wrapper is used to distinguish between 0 vs.
+            default/unset.
           format: float
           type: number
         scoreType:
-          description: What type of scores to return. If unset, defaults to probability scores.
+          description: What type of scores to return. If unset, defaults to probability
+            scores.
           enum:
             - SCORE_TYPE_UNSPECIFIED
             - PROBABILITY
@@ -265,7 +315,8 @@ components:
           type: string
       type: object
     AttributeScores:
-      description: This holds score values for a single attribute. It contains both per-span scores as well as an overall summary score..
+      description: This holds score values for a single attribute. It contains both
+        per-span scores as well as an overall summary score..
       properties:
         spanScores:
           description: Per-span scores.
@@ -277,13 +328,20 @@ components:
           description: Overall score for comment as a whole.
       type: object
     Context:
-      description: "Context is typically something that a Comment is referencing or replying to (such as an article, or previous comment). Note: Populate only ONE OF the following fields. The oneof syntax cannot be used because that would require nesting entries inside another message and breaking backwards compatibility. The server will return an error if more than one of the following fields is present."
+      description: "Context is typically something that a Comment is referencing or
+        replying to (such as an article, or previous comment). Note: Populate
+        only ONE OF the following fields. The oneof syntax cannot be used
+        because that would require nesting entries inside another message and
+        breaking backwards compatibility. The server will return an error if
+        more than one of the following fields is present."
       properties:
         articleAndParentComment:
           $ref: "#/components/schemas/ArticleAndParentComment"
-          description: Information about the source for which the original comment was made, and any parent comment info.
+          description: Information about the source for which the original comment was
+            made, and any parent comment info.
         entries:
-          description: A list of messages. For example, a linear comments section or forum thread.
+          description: A list of messages. For example, a linear comments section or forum
+            thread.
           items:
             $ref: "#/components/schemas/TextEntry"
           type: array
@@ -309,7 +367,11 @@ components:
       description: This is a single score for a given span of text.
       properties:
         begin:
-          description: '"begin" and "end" describe the span of the original text that the attribute score applies to. The values are the UTF-16 codepoint range. "end" is exclusive. For example, with the text "Hi there", the begin/end pair (0,2) describes the text "Hi". If "begin" and "end" are unset, the score applies to the full text.'
+          description: '"begin" and "end" describe the span of the original text that the
+            attribute score applies to. The values are the UTF-16 codepoint
+            range. "end" is exclusive. For example, with the text "Hi there",
+            the begin/end pair (0,2) describes the text "Hi". If "begin" and
+            "end" are unset, the score applies to the full text.'
           format: int32
           type: integer
         end:
@@ -325,7 +387,20 @@ components:
         attributeScores:
           additionalProperties:
             $ref: "#/components/schemas/AttributeScores"
-          description: Attribute scores for the comment. The map keys are attribute names, same as the requested_attribute field in AnalyzeCommentRequest (for example "ATTACK_ON_AUTHOR", "INFLAMMATORY", etc.). This field has the same type as the `attribute_scores` field in AnalyzeCommentResponse. To specify an overall attribute score for the entire comment as a whole, use the `summary_score` field of the mapped AttributeScores object. To specify scores on specific subparts of the comment, use the `span_scores` field. All SpanScore objects must have begin and end fields set. All Score objects must be explicitly set (for binary classification, use the score values 0 and 1). If Score objects don't include a ScoreType, `PROBABILITY` is assumed. `attribute_scores` must not be empty. The mapped AttributeScores objects also must not be empty. An `INVALID_ARGUMENT` error is returned for all malformed requests.
+          description: Attribute scores for the comment. The map keys are attribute names,
+            same as the requested_attribute field in AnalyzeCommentRequest (for
+            example "ATTACK_ON_AUTHOR", "INFLAMMATORY", etc.). This field has
+            the same type as the `attribute_scores` field in
+            AnalyzeCommentResponse. To specify an overall attribute score for
+            the entire comment as a whole, use the `summary_score` field of the
+            mapped AttributeScores object. To specify scores on specific
+            subparts of the comment, use the `span_scores` field. All SpanScore
+            objects must have begin and end fields set. All Score objects must
+            be explicitly set (for binary classification, use the score values 0
+            and 1). If Score objects don't include a ScoreType, `PROBABILITY` is
+            assumed. `attribute_scores` must not be empty. The mapped
+            AttributeScores objects also must not be empty. An
+            `INVALID_ARGUMENT` error is returned for all malformed requests.
           type: object
         clientToken:
           description: Opaque token that is echoed from the request to the response.
@@ -334,18 +409,26 @@ components:
           $ref: "#/components/schemas/TextEntry"
           description: The comment being scored.
         communityId:
-          description: Optional identifier associating this comment score suggestion with a particular sub-community. Different communities may have different norms and rules. Specifying this value enables training community-specific models.
+          description: Optional identifier associating this comment score suggestion with
+            a particular sub-community. Different communities may have different
+            norms and rules. Specifying this value enables training
+            community-specific models.
           type: string
         context:
           $ref: "#/components/schemas/Context"
           description: The context of the comment.
         languages:
-          description: The language(s) of the comment and context. If none are specified, we attempt to automatically detect the language. Both ISO and BCP-47 language codes are accepted.
+          description: The language(s) of the comment and context. If none are specified,
+            we attempt to automatically detect the language. Both ISO and BCP-47
+            language codes are accepted.
           items:
             type: string
           type: array
         sessionId:
-          description: Session ID. Used to join related RPCs into a single session. For example, an interactive tool that calls both the AnalyzeComment and SuggestCommentScore RPCs should set all invocations of both RPCs to the same Session ID, typically a random 64-bit integer.
+          description: Session ID. Used to join related RPCs into a single session. For
+            example, an interactive tool that calls both the AnalyzeComment and
+            SuggestCommentScore RPCs should set all invocations of both RPCs to
+            the same Session ID, typically a random 64-bit integer.
           type: string
       type: object
     SuggestCommentScoreResponse:
@@ -386,7 +469,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -394,6 +477,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

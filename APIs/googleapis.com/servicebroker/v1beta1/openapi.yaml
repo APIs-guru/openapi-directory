@@ -5,11 +5,9 @@ info:
   contact:
     name: Google
     url: https://google.com
-  description: >
+  description: |
     The Google Cloud Platform Service Broker API provides Google hosted
-
     implementation of the Open Service Broker API
-
     (https://www.openservicebrokerapi.org/).
   license:
     name: Creative Commons Attribution 3.0
@@ -39,27 +37,19 @@ tags:
 paths:
   "/v1beta1/{name}":
     delete:
-      description: >-
+      description: |-
         Unbinds from a service instance.
-
         For synchronous/asynchronous request details see CreateServiceInstance
-
         method.
-
         If binding does not exist HTTP 410 status will be returned.
       operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.delete
       parameters:
-        - description: >-
+        - description: |-
             Name must match
-
             `projects/[PROJECT_ID]/brokers/[BROKER_ID]/`
-
             `v2/service_instances/[INSTANCE_ID]/service_bindings/[BINDING_ID]`
-
             or
-
             `projects/[PROJECT_ID]/brokers/[BROKER_ID]/`
-
             `/instances/[INSTANCE_ID]/bindings/[BINDING_ID]`.
           in: path
           name: name
@@ -77,9 +67,8 @@ paths:
           name: planId
           schema:
             type: string
-        - description: >-
+        - description: |-
             Additional query parameter hints.
-
             The service id of the service instance.
           in: query
           name: serviceId
@@ -90,7 +79,8 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__DeleteBindingResponse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__DeleteBindingRespo\
+                  nse"
           description: Successful response
       security:
         - Oauth2:
@@ -150,9 +140,8 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
     patch:
-      description: >-
+      description: |-
         Updates an existing service instance.
-
         See CreateServiceInstance for possible response codes.
       operationId: servicebroker.projects.brokers.v2.service_instances.patch
       parameters:
@@ -181,7 +170,8 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__UpdateServiceInstanceResponse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__UpdateServiceInsta\
+                  nceResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -192,9 +182,8 @@ paths:
         - projects
   "/v1beta1/{name}/last_operation":
     get:
-      description: >-
+      description: |-
         Returns the state of the last operation for the binding.
-
         Only last (or current) operation can be polled.
       operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.getLast_operation
       parameters:
@@ -209,7 +198,8 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: >-
-            If `operation` was returned during mutation operation, this field must be
+            If `operation` was returned during mutation operation, this field
+            must be
 
             populated with the provided value.
           in: query
@@ -257,15 +247,11 @@ paths:
       description: Lists all the bindings in the instance.
       operationId: servicebroker.projects.brokers.instances.bindings.list
       parameters:
-        - description: >-
+        - description: |-
             Parent must match
-
             `projects/[PROJECT_ID]/brokers/[BROKER_ID]/` +
-
             `v2/service_instances/[INSTANCE_ID]`
-
             or
-
             `projects/[PROJECT_ID]/brokers/[BROKER_ID]/instances/[INSTANCE_ID]`.
           in: path
           name: parent
@@ -274,7 +260,8 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: >-
-            Specifies the number of results to return per page. If there are fewer
+            Specifies the number of results to return per page. If there are
+            fewer
 
             elements than the specified number, returns all elements.
 
@@ -283,9 +270,8 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: >-
+        - description: |-
             Specifies a page token to use. Set `pageToken` to a `nextPageToken`
-
             returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
@@ -296,7 +282,8 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListBindingsResponse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListBindingsRespon\
+                  se"
           description: Successful response
       security:
         - Oauth2:
@@ -330,7 +317,8 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: >-
-            Specifies the number of results to return per page. If there are fewer
+            Specifies the number of results to return per page. If there are
+            fewer
 
             elements than the specified number, returns all elements.
 
@@ -339,9 +327,8 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: >-
+        - description: |-
             Specifies a page token to use. Set `pageToken` to a `nextPageToken`
-
             returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
@@ -352,7 +339,8 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListBrokersResponse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListBrokersRespons\
+                  e"
           description: Successful response
       security:
         - Oauth2:
@@ -405,11 +393,9 @@ paths:
         - projects
   "/v1beta1/{parent}/instances":
     get:
-      description: >-
+      description: |-
         Lists all the instances in the brokers
-
         This API is an extension and not part of the OSB spec.
-
         Hence the path is a standard Google API URL.
       operationId: servicebroker.projects.brokers.instances.list
       parameters:
@@ -421,7 +407,8 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: >-
-            Specifies the number of results to return per page. If there are fewer
+            Specifies the number of results to return per page. If there are
+            fewer
 
             elements than the specified number, returns all elements.
 
@@ -430,9 +417,8 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: >-
+        - description: |-
             Specifies a page token to use. Set `pageToken` to a `nextPageToken`
-
             returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
@@ -443,7 +429,8 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListServiceInstancesResponse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListServiceInstanc\
+                  esResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -479,7 +466,8 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
     put:
       description: >-
-        CreateBinding generates a service binding to an existing service instance.
+        CreateBinding generates a service binding to an existing service
+        instance.
 
         See ProviServiceInstance for async operation details.
       operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.create
@@ -496,11 +484,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: >-
+        - description: |-
             The id of the binding. Must be unique within GCP project.
-
             Maximum length is 64, GUID recommended.
-
             Required.
           in: path
           name: binding_id
@@ -523,7 +509,8 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__CreateBindingResponse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__CreateBindingRespo\
+                  nse"
           description: Successful response
       security:
         - Oauth2:
@@ -534,11 +521,9 @@ paths:
         - projects
   "/v1beta1/{parent}/v2/catalog":
     get:
-      description: >-
+      description: |-
         Lists all the Services registered with this broker for consumption for
-
         given service registry broker, which contains an set of services.
-
         Note, that Service producer API is separate from Broker API.
       operationId: servicebroker.projects.brokers.v2.catalog.list
       parameters:
@@ -550,7 +535,8 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: >-
-            Specifies the number of results to return per page. If there are fewer
+            Specifies the number of results to return per page. If there are
+            fewer
 
             elements than the specified number, returns all elements.
 
@@ -559,9 +545,8 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: >-
+        - description: |-
             Specifies a page token to use. Set `pageToken` to a `nextPageToken`
-
             returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
@@ -572,7 +557,8 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListCatalogResponse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListCatalogRespons\
+                  e"
           description: Successful response
       security:
         - Oauth2:
@@ -640,11 +626,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: >-
+        - description: |-
             The id of the service instance. Must be unique within GCP project.
-
             Maximum length is 64, GUID recommended.
-
             Required.
           in: path
           name: instance_id
@@ -653,7 +637,8 @@ paths:
             type: string
           x-reservedExpansion: true
         - description: >-
-            Value indicating that API client supports asynchronous operations. If
+            Value indicating that API client supports asynchronous operations.
+            If
 
             Broker cannot execute the request synchronously HTTP 422 code will be
 
@@ -680,7 +665,8 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__CreateServiceInstanceResponse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__CreateServiceInsta\
+                  nceResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -768,7 +754,8 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
     post:
       description: >-
-        Sets the access control policy on the specified resource. Replaces any
+        Sets the access control policy on the specified resource. Replaces
+        any
 
         existing policy.
 
@@ -835,7 +822,8 @@ paths:
       operationId: servicebroker.testIamPermissions
       parameters:
         - description: >-
-            REQUIRED: The resource for which the policy detail is being requested.
+            REQUIRED: The resource for which the policy detail is being
+            requested.
 
             See the operation documentation for the appropriate value for this field.
           in: path
@@ -904,7 +892,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -923,7 +913,9 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
@@ -954,16 +946,15 @@ components:
           additionalProperties:
             description: Properties of the object.
           description: >-
-            A JSON object that contains data for platform resources associated with
+            A JSON object that contains data for platform resources associated
+            with
 
             the binding to be created.
           type: object
         binding_id:
-          description: >-
+          description: |-
             The id of the binding. Must be unique within GCP project.
-
             Maximum length is 64, GUID recommended.
-
             Required.
           type: string
         createTime:
@@ -972,7 +963,8 @@ components:
           type: string
         deploymentName:
           description: >-
-            Output only. String containing the Deployment Manager deployment name that was created
+            Output only. String containing the Deployment Manager deployment
+            name that was created
 
             for this binding,
           type: string
@@ -982,11 +974,9 @@ components:
           description: Configuration options for the service binding.
           type: object
         plan_id:
-          description: >-
+          description: |-
             The ID of the plan. See `Service` and `Plan` resources for details.
-
             Maximum length is 64, GUID recommended.
-
             Required.
           type: string
         resourceName:
@@ -996,20 +986,16 @@ components:
             projects/project_id/brokers/broker_id/service_instances/instance_id/bindings/binding_id.
           type: string
         service_id:
-          description: >-
+          description: |-
             The id of the service. Must be a valid identifier of a service
-
             contained in the list from a `ListServices()` call.
-
             Maximum length is 64, GUID recommended.
-
             Required.
           type: string
       type: object
     GoogleCloudServicebrokerV1beta1__Broker:
-      description: >-
+      description: |-
         Broker represents a consumable collection of Service Registry catalogs
-
         exposed as an OSB Broker.
       properties:
         createTime:
@@ -1017,13 +1003,10 @@ components:
           format: google-datetime
           type: string
         name:
-          description: >-
+          description: |-
             Name of the broker in the format:
-
             <projects>/<project-id>/brokers/<broker>.
-
             This allows for multiple brokers per project which can be used to
-
             enable having custom brokers per GKE cluster, for example.
           type: string
         title:
@@ -1049,7 +1032,8 @@ components:
           type: object
         description:
           description: >-
-            Used to communicate description of the response. Usually for non-standard
+            Used to communicate description of the response. Usually for
+            non-standard
 
             error codes.
 
@@ -1057,7 +1041,8 @@ components:
           type: string
         operation:
           description: >-
-            If broker executes operation asynchronously, this is the operation ID that
+            If broker executes operation asynchronously, this is the operation
+            ID that
 
             can be polled to check the completion status of said operation.
 
@@ -1065,7 +1050,8 @@ components:
           type: string
         route_service_url:
           description: >-
-            A URL to which the platform may proxy requests for the address sent with
+            A URL to which the platform may proxy requests for the address sent
+            with
 
             bind_resource.route
           type: string
@@ -1085,7 +1071,8 @@ components:
       properties:
         description:
           description: >-
-            Used to communicate description of the response. Usually for non-standard
+            Used to communicate description of the response. Usually for
+            non-standard
 
             error codes.
 
@@ -1093,7 +1080,8 @@ components:
           type: string
         operation:
           description: >-
-            If broker executes operation asynchronously, this is the operation ID that
+            If broker executes operation asynchronously, this is the operation
+            ID that
 
             can be polled to check the completion status of said operation.
 
@@ -1101,7 +1089,8 @@ components:
           type: string
       type: object
     GoogleCloudServicebrokerV1beta1__DashboardClient:
-      description: Message containing information required to activate Dashboard SSO feature.
+      description: Message containing information required to activate Dashboard SSO
+        feature.
       properties:
         id:
           description: The id of the Oauth client that the dashboard will use.
@@ -1121,7 +1110,8 @@ components:
       properties:
         description:
           description: >-
-            Used to communicate description of the response. Usually for non-standard
+            Used to communicate description of the response. Usually for
+            non-standard
 
             error codes.
 
@@ -1129,7 +1119,8 @@ components:
           type: string
         operation:
           description: >-
-            If broker executes operation asynchronously, this is the operation ID that
+            If broker executes operation asynchronously, this is the operation
+            ID that
 
             can be polled to check the completion status of said operation.
           type: string
@@ -1139,7 +1130,8 @@ components:
       properties:
         description:
           description: >-
-            Used to communicate description of the response. Usually for non-standard
+            Used to communicate description of the response. Usually for
+            non-standard
 
             error codes.
 
@@ -1147,7 +1139,8 @@ components:
           type: string
         operation:
           description: >-
-            If broker executes operation asynchronously, this is the operation ID that
+            If broker executes operation asynchronously, this is the operation
+            ID that
 
             can be polled to check the completion status of said operation.
           type: string
@@ -1162,13 +1155,15 @@ components:
           type: object
         deploymentName:
           description: >-
-            String containing the Deployment Manager deployment name that was created
+            String containing the Deployment Manager deployment name that was
+            created
 
             for this binding,
           type: string
         description:
           description: >-
-            Used to communicate description of the response. Usually for non-standard
+            Used to communicate description of the response. Usually for
+            non-standard
 
             error codes.
 
@@ -1182,7 +1177,8 @@ components:
           type: string
         route_service_url:
           description: >-
-            A URL to which the platform may proxy requests for the address sent with
+            A URL to which the platform may proxy requests for the address sent
+            with
 
             bind_resource.route
           type: string
@@ -1207,7 +1203,8 @@ components:
           type: array
         description:
           description: >-
-            Used to communicate description of the response. Usually for non-standard
+            Used to communicate description of the response. Usually for
+            non-standard
 
             error codes.
 
@@ -1215,7 +1212,8 @@ components:
           type: string
         nextPageToken:
           description: >-
-            This token allows you to get the next page of results for list requests.
+            This token allows you to get the next page of results for list
+            requests.
 
             If the number of results is larger than `pageSize`, use the `nextPageToken`
 
@@ -1236,7 +1234,8 @@ components:
           type: array
         nextPageToken:
           description: >-
-            This token allows you to get the next page of results for list requests.
+            This token allows you to get the next page of results for list
+            requests.
 
             If the number of results is larger than `pageSize`, use the `nextPageToken`
 
@@ -1252,7 +1251,8 @@ components:
       properties:
         description:
           description: >-
-            Used to communicate description of the response. Usually for non-standard
+            Used to communicate description of the response. Usually for
+            non-standard
 
             error codes.
 
@@ -1260,7 +1260,8 @@ components:
           type: string
         nextPageToken:
           description: >-
-            This token allows you to get the next page of results for list requests.
+            This token allows you to get the next page of results for list
+            requests.
 
             If the number of results is larger than `pageSize`, use the `nextPageToken`
 
@@ -1281,7 +1282,8 @@ components:
       properties:
         description:
           description: >-
-            Used to communicate description of the response. Usually for non-standard
+            Used to communicate description of the response. Usually for
+            non-standard
 
             error codes.
 
@@ -1294,7 +1296,8 @@ components:
           type: array
         nextPageToken:
           description: >-
-            This token allows you to get the next page of results for list requests.
+            This token allows you to get the next page of results for list
+            requests.
 
             If the number of results is larger than `pageSize`, use the `nextPageToken`
 
@@ -1312,9 +1315,8 @@ components:
           description: Optional description of the Operation state.
           type: string
         state:
-          description: >-
+          description: |-
             The state of the operation.
-
             Valid values are: "in progress", "succeeded", and "failed".
           type: string
       type: object
@@ -1323,7 +1325,8 @@ components:
       properties:
         bindable:
           description: >-
-            Specifies whether instances of the service can be bound to applications.
+            Specifies whether instances of the service can be bound to
+            applications.
 
             If not specified, `Service.bindable` will be presumed.
           type: boolean
@@ -1335,16 +1338,16 @@ components:
           type: boolean
         id:
           description: >-
-            ID is a globally unique identifier used to uniquely identify the plan.
+            ID is a globally unique identifier used to uniquely identify the
+            plan.
 
             User must make no presumption about the format of this field.
           type: string
         metadata:
           additionalProperties:
             description: Properties of the object.
-          description: >-
+          description: |-
             A list of metadata for a service offering.
-
             Metadata is an arbitrary JSON object.
           type: object
         name:
@@ -1375,7 +1378,8 @@ components:
       properties:
         bindable:
           description: >-
-            Specifies whether instances of the service can be bound to applications.
+            Specifies whether instances of the service can be bound to
+            applications.
 
             Required.
           type: boolean
@@ -1393,7 +1397,8 @@ components:
           type: string
         id:
           description: >-
-            ID is a globally unique identifier used to uniquely identify the service.
+            ID is a globally unique identifier used to uniquely identify the
+            service.
 
             ID is an opaque string.
           type: string
@@ -1403,9 +1408,8 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object.
-          description: >-
+          description: |-
             A list of metadata for a service offering.
-
             Metadata is an arbitrary JSON object.
           type: object
         name:
@@ -1426,16 +1430,16 @@ components:
           description: Whether the service supports upgrade/downgrade for some plans.
           type: boolean
         plans:
-          description: >-
+          description: |-
             A list of plans for this service.
-
             At least one plan is required.
           items:
             $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__Plan"
           type: array
         tags:
           description: >-
-            Tags provide a flexible mechanism to expose a classification, attribute, or
+            Tags provide a flexible mechanism to expose a classification,
+            attribute, or
 
             base technology of a service.
           items:
@@ -1443,13 +1447,15 @@ components:
           type: array
       type: object
     GoogleCloudServicebrokerV1beta1__ServiceInstance:
-      description: Message describing inputs to Provision and Update Service instance requests.
+      description: Message describing inputs to Provision and Update Service instance
+        requests.
       properties:
         context:
           additionalProperties:
             description: Properties of the object.
           description: >-
-            Platform specific contextual information under which the service instance
+            Platform specific contextual information under which the service
+            instance
 
             is to be provisioned. This replaces organization_guid and space_guid.
 
@@ -1463,27 +1469,28 @@ components:
           type: string
         deploymentName:
           description: >-
-            Output only. String containing the Deployment Manager deployment name that was created
+            Output only. String containing the Deployment Manager deployment
+            name that was created
 
             for this instance,
           type: string
         description:
           description: >-
-            To return errors when GetInstance call is done via HTTP to be unified with
+            To return errors when GetInstance call is done via HTTP to be
+            unified with
 
             other methods.
           type: string
         instance_id:
-          description: >-
+          description: |-
             The id of the service instance. Must be unique within GCP project.
-
             Maximum length is 64, GUID recommended.
-
             Required.
           type: string
         organization_guid:
           description: >-
-            The platform GUID for the organization under which the service is to be
+            The platform GUID for the organization under which the service is
+            to be
 
             provisioned.
 
@@ -1492,46 +1499,41 @@ components:
         parameters:
           additionalProperties:
             description: Properties of the object.
-          description: >-
+          description: |-
             Configuration options for the service instance.
-
             Parameters is JSON object serialized to string.
           type: object
         plan_id:
-          description: >-
+          description: |-
             The ID of the plan. See `Service` and `Plan` resources for details.
-
             Maximum length is 64, GUID recommended.
-
             Required.
           type: string
         previous_values:
           additionalProperties:
             description: Properties of the object.
           description: >-
-            Used only in UpdateServiceInstance request to optionally specify previous
+            Used only in UpdateServiceInstance request to optionally specify
+            previous
 
             fields.
           type: object
         resourceName:
-          description: >-
+          description: |-
             Output only. The resource name of the instance, e.g.
-
             projects/project_id/brokers/broker_id/service_instances/instance_id
           type: string
         service_id:
-          description: >-
+          description: |-
             The id of the service. Must be a valid identifier of a service
-
             contained in the list from a `ListServices()` call.
-
             Maximum length is 64, GUID recommended.
-
             Required.
           type: string
         space_guid:
           description: >-
-            The identifier for the project space within the platform organization.
+            The identifier for the project space within the platform
+            organization.
 
             Required.
           type: string
@@ -1541,7 +1543,8 @@ components:
       properties:
         description:
           description: >-
-            Used to communicate description of the response. Usually for non-standard
+            Used to communicate description of the response. Usually for
+            non-standard
 
             error codes.
 
@@ -1549,7 +1552,8 @@ components:
           type: string
         operation:
           description: >-
-            If broker executes operation asynchronously, this is the operation ID that
+            If broker executes operation asynchronously, this is the operation
+            ID that
 
             can be polled to check the completion status of said operation.
           type: string
@@ -1569,7 +1573,8 @@ components:
             independently.
         members:
           description: >+
-            Specifies the identities requesting access for a Cloud Platform resource.
+            Specifies the identities requesting access for a Cloud Platform
+            resource.
 
             `members` can have the following values:
 
@@ -1617,15 +1622,15 @@ components:
             type: string
           type: array
         role:
-          description: >-
+          description: |-
             Role that is assigned to `members`.
-
             For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
     GoogleIamV1__Policy:
       description: >-
-        An Identity and Access Management (IAM) policy, which specifies access
+        An Identity and Access Management (IAM) policy, which specifies
+        access
 
         controls for Google Cloud resources.
 
@@ -1703,7 +1708,8 @@ components:
       properties:
         bindings:
           description: >-
-            Associates a list of `members` to a `role`. Optionally, may specify a
+            Associates a list of `members` to a `role`. Optionally, may specify
+            a
 
             `condition` that determines how and when the `bindings` are applied. Each
 
@@ -1782,7 +1788,8 @@ components:
         policy:
           $ref: "#/components/schemas/GoogleIamV1__Policy"
           description: >-
-            REQUIRED: The complete policy to be applied to the `resource`. The size of
+            REQUIRED: The complete policy to be applied to the `resource`. The
+            size of
 
             the policy is limited to a few 10s of KB. An empty policy is a
 
@@ -1795,7 +1802,8 @@ components:
       properties:
         permissions:
           description: >-
-            The set of permissions to check for the `resource`. Permissions with
+            The set of permissions to check for the `resource`. Permissions
+            with
 
             wildcards (such as '*' or 'storage.*') are not allowed. For more
 
@@ -1810,9 +1818,8 @@ components:
       description: Response message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: >-
+          description: |-
             A subset of `TestPermissionsRequest.permissions` that the caller is
-
             allowed.
           items:
             type: string
@@ -1820,7 +1827,8 @@ components:
       type: object
     GoogleProtobuf__Empty:
       description: >-
-        A generic empty message that you can re-use to avoid defining duplicated
+        A generic empty message that you can re-use to avoid defining
+        duplicated
 
         empty messages in your APIs. A typical example is to use it as the request
 
@@ -1834,7 +1842,7 @@ components:
       properties: {}
       type: object
     GoogleType__Expr:
-      description: >-
+      description: |-
         Represents an expression text. Example:
 
             title: "User account presence"
@@ -1843,33 +1851,30 @@ components:
       properties:
         description:
           description: >-
-            An optional description of the expression. This is a longer text which
+            An optional description of the expression. This is a longer text
+            which
 
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
-          description: >-
+          description: |-
             Textual representation of an expression in
-
             Common Expression Language syntax.
 
-
             The application context of the containing message determines which
-
             well-known feature set of CEL is supported.
           type: string
         location:
           description: >-
-            An optional string indicating the location of the expression for error
+            An optional string indicating the location of the expression for
+            error
 
             reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: >-
+          description: |-
             An optional title for the expression, i.e. a short string describing
-
             its purpose. This can be used e.g. in UIs which allow to enter the
-
             expression.
           type: string
       type: object

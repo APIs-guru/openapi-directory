@@ -1250,11 +1250,15 @@ components:
           format: google-datetime
           type: string
         gettable:
-          description: True if the project can be retrieved using GetProject. No other operations on the project are guaranteed to work until the project creation is complete.
+          description: True if the project can be retrieved using `GetProject`. No other operations on the project are guaranteed to work until the project creation is complete.
           type: boolean
         ready:
           description: True if the project creation process is complete.
           type: boolean
+      type: object
+    CreateTagBindingMetadata:
+      description: Runtime operation information for creating a TagValue.
+      properties: {}
       type: object
     CreateTagKeyMetadata:
       description: Runtime operation information for creating a TagKey.
@@ -1265,15 +1269,19 @@ components:
       properties: {}
       type: object
     DeleteFolderMetadata:
-      description: A status object which is used as the `metadata` field for the Operation returned by DeleteFolder.
+      description: A status object which is used as the `metadata` field for the `Operation` returned by `DeleteFolder`.
       properties: {}
       type: object
     DeleteOrganizationMetadata:
-      description: A status object which is used as the `metadata` field for the Operation returned by DeleteOrganization.
+      description: A status object which is used as the `metadata` field for the operation returned by DeleteOrganization.
       properties: {}
       type: object
     DeleteProjectMetadata:
-      description: A status object which is used as the `metadata` field for the Operation returned by DeleteProject.
+      description: A status object which is used as the `metadata` field for the Operation returned by `DeleteProject`.
+      properties: {}
+      type: object
+    DeleteTagBindingMetadata:
+      description: Runtime operation information for deleting a TagBinding.
       properties: {}
       type: object
     DeleteTagKeyMetadata:
@@ -1517,7 +1525,7 @@ components:
           type: array
       type: object
     MoveFolderMetadata:
-      description: Metadata pertaining to the Folder move process.
+      description: Metadata pertaining to the folder move process.
       properties:
         destinationParent:
           description: The resource name of the folder or organization to move the folder to.
@@ -1780,7 +1788,7 @@ components:
           type: array
       type: object
     UndeleteFolderMetadata:
-      description: A status object which is used as the `metadata` field for the Operation returned by UndeleteFolder.
+      description: A status object which is used as the `metadata` field for the `Operation` returned by `UndeleteFolder`.
       properties: {}
       type: object
     UndeleteOrganizationMetadata:
@@ -1788,7 +1796,7 @@ components:
       properties: {}
       type: object
     UndeleteProjectMetadata:
-      description: A status object which is used as the `metadata` field for the Operation returned by UndeleteProject.
+      description: A status object which is used as the `metadata` field for the Operation returned by `UndeleteProject`.
       properties: {}
       type: object
     UndeleteProjectRequest:

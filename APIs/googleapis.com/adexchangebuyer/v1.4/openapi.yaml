@@ -1502,23 +1502,15 @@ components:
           items:
             properties:
               bidProtocol:
-                description: >-
+                description: |-
                   The protocol that the bidder endpoint is using. OpenRTB protocols with prefix PROTOCOL_OPENRTB_PROTOBUF use proto buffer, otherwise use JSON.  Allowed values:  
-
                   - PROTOCOL_ADX 
-
                   - PROTOCOL_OPENRTB_2_2 
-
                   - PROTOCOL_OPENRTB_2_3 
-
                   - PROTOCOL_OPENRTB_2_4 
-
                   - PROTOCOL_OPENRTB_2_5 
-
                   - PROTOCOL_OPENRTB_PROTOBUF_2_3 
-
                   - PROTOCOL_OPENRTB_PROTOBUF_2_4 
-
                   - PROTOCOL_OPENRTB_PROTOBUF_2_5
                 type: string
               maximumQps:
@@ -1526,15 +1518,11 @@ components:
                 format: int32
                 type: integer
               region:
-                description: >-
+                description: |-
                   The geographical region the Ad Exchange should send requests from. Only used by some quota systems, but always setting the value is recommended. Allowed values:  
-
                   - ASIA 
-
                   - EUROPE 
-
                   - US_EAST 
-
                   - US_WEST
                 type: string
               url:
@@ -2822,9 +2810,8 @@ components:
           type: string
       type: object
     Product:
-      description: >-
+      description: |-
         A product is segment of inventory that a seller wishes to sell. It is associated with certain terms and targeting information which helps buyer know more about the inventory. Each field in a product can have one of the following setting:
-
 
         (readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.
       properties:
@@ -2923,9 +2910,8 @@ components:
           type: string
       type: object
     Proposal:
-      description: >-
+      description: |-
         Represents a proposal in the marketplace. A proposal is the unit of negotiation between a seller and a buyer and contains deals which are served. Each field in a proposal can have one of the following setting:
-
 
         (readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.
       properties:

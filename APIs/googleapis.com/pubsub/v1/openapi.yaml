@@ -1782,7 +1782,7 @@ components:
           $ref: "#/components/schemas/PushConfig"
           description: If push delivery is used with this subscription, this field is used to configure it. An empty `pushConfig` signifies that the subscriber will pull and ack messages using API methods.
         retainAckedMessages:
-          description: Indicates whether to retain acknowledged messages. If true, then messages are not expunged from the subscription's backlog, even if they are acknowledged, until they fall out of the `message_retention_duration` window. This must be true if you would like to [Seek to a timestamp] (https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time).
+          description: Indicates whether to retain acknowledged messages. If true, then messages are not expunged from the subscription's backlog, even if they are acknowledged, until they fall out of the `message_retention_duration` window. This must be true if you would like to [`Seek` to a timestamp] (https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time) in the past to replay previously-acknowledged messages.
           type: boolean
         retryPolicy:
           $ref: "#/components/schemas/RetryPolicy"
@@ -1909,7 +1909,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/pubsub: View and manage Pub/Sub topics and subscriptions
       type: oauth2
     Oauth2c:
@@ -1918,7 +1918,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
             https://www.googleapis.com/auth/pubsub: View and manage Pub/Sub topics and subscriptions
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

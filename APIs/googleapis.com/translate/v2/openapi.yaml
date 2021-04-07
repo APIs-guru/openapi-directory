@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: >-
+  description: |-
     The Google Cloud Translation API lets websites and programs integrate with
         Google Translate programmatically.
   license:
@@ -44,9 +44,8 @@ paths:
       description: Translates input text, returning translated text.
       operationId: language.translations.list
       parameters:
-        - description: >-
+        - description: |-
             The input text to translate. Repeat this parameter to perform translation
-
             operations on multiple text inputs.
           explode: true
           in: query
@@ -57,9 +56,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: >-
+        - description: |-
             The language to use for translation of the input text, set to one of the
-
             language codes listed in Language Support.
           in: query
           name: target
@@ -75,9 +73,8 @@ paths:
               type: string
             type: array
           style: form
-        - description: >-
+        - description: |-
             The format of the source text, in either HTML (default) or plain-text. A
-
             value of "html" indicates HTML and a value of "text" indicates plain-text.
           in: query
           name: format
@@ -86,21 +83,17 @@ paths:
               - html
               - text
             type: string
-        - description: >-
+        - description: |-
             The `model` type requested for this translation. Valid values are
-
             listed in public documentation.
           in: query
           name: model
           schema:
             type: string
-        - description: >-
+        - description: |-
             The language of the source text, set to one of the language codes listed in
-
             Language Support. If the source language is not specified, the API will
-
             attempt to identify the source language automatically and return it within
-
             the response.
           in: query
           name: source
@@ -169,9 +162,8 @@ paths:
       description: Detects the language of text within a request.
       operationId: language.detections.list
       parameters:
-        - description: >-
+        - description: |-
             The input text upon which to perform language detection. Repeat this
-
             parameter to perform language detection on multiple text inputs.
           explode: true
           in: query
@@ -250,9 +242,8 @@ paths:
           name: model
           schema:
             type: string
-        - description: >-
+        - description: |-
             The language to use to return localized, human readable names of supported
-
             languages.
           in: query
           name: target
@@ -382,9 +373,8 @@ components:
       description: The request message for language detection.
       properties:
         q:
-          description: >-
+          description: |-
             The input text upon which to perform language detection. Repeat this
-
             parameter to perform language detection on multiple text inputs.
           items:
             type: string
@@ -418,9 +408,8 @@ components:
       description: The request message for discovering supported languages.
       properties:
         target:
-          description: >-
+          description: |-
             The language to use to return localized, human readable names of supported
-
             languages.
           type: string
       type: object
@@ -435,11 +424,9 @@ components:
     LanguagesResource:
       properties:
         language:
-          description: >-
+          description: |-
             Supported language code, generally consisting of its ISO 639-1
-
             identifier. (E.g. 'en', 'ja'). In certain cases, BCP-47 codes including
-
             language + region identifiers are returned (e.g. 'zh-TW' and 'zh-CH')
           type: string
         name:
@@ -450,39 +437,32 @@ components:
       description: The main translation request message for the Cloud Translation API.
       properties:
         format:
-          description: >-
+          description: |-
             The format of the source text, in either HTML (default) or plain-text. A
-
             value of "html" indicates HTML and a value of "text" indicates plain-text.
           type: string
         model:
-          description: >-
+          description: |-
             The `model` type requested for this translation. Valid values are
-
             listed in public documentation.
           type: string
         q:
-          description: >-
+          description: |-
             The input text to translate. Repeat this parameter to perform translation
-
             operations on multiple text inputs.
           items:
             type: string
           type: array
         source:
-          description: >-
+          description: |-
             The language of the source text, set to one of the language codes listed in
-
             Language Support. If the source language is not specified, the API will
-
             attempt to identify the source language automatically and return it within
-
             the response.
           type: string
         target:
-          description: >-
+          description: |-
             The language to use for translation of the input text, set to one of the
-
             language codes listed in Language Support.
           type: string
       type: object
@@ -498,21 +478,16 @@ components:
     TranslationsResource:
       properties:
         detectedSourceLanguage:
-          description: >-
+          description: |-
             The source language of the initial request, detected automatically, if
-
             no source language was passed within the initial request. If the
-
             source language was passed, auto-detection of the language will not
-
             occur and this field will be empty.
           type: string
         model:
-          description: >-
+          description: |-
             The `model` type used for this translation. Valid values are
-
             listed in public documentation. Can be different from requested `model`.
-
             Present only if specific model type was explicitly requested.
           type: string
         translatedText:

@@ -4356,15 +4356,11 @@ components:
           description: Deprecated - use canCreateDrives instead.
           type: boolean
         domainSharingPolicy:
-          description: >-
+          description: |-
             The domain sharing policy for the current user. Possible values are:  
-
             - allowed 
-
             - allowedWithWarning 
-
             - incomingOnly 
-
             - disallowed
           type: string
         driveThemes:
@@ -4494,11 +4490,9 @@ components:
           format: int64
           type: string
         quotaType:
-          description: >-
+          description: |-
             The type of the user's storage quota. Possible values are:  
-
             - LIMITED 
-
             - UNLIMITED
           type: string
         remainingChangeIds:
@@ -4550,13 +4544,10 @@ components:
           items:
             properties:
               category:
-                description: >-
+                description: |-
                   Category of the icon. Allowed values are:  
-
                   - application - icon for the application 
-
                   - document - icon for a file associated with the app 
-
                   - documentShared - icon for a shared file associated with the app
                 type: string
               iconUrl:
@@ -4876,11 +4867,9 @@ components:
           description: A link back to this comment.
           type: string
         status:
-          description: >-
+          description: |-
             The status of this comment. Status can be changed by posting a reply to a comment with the desired status.  
-
             - "open" - The comment is still open. 
-
             - "resolved" - The comment has been resolved by one of its replies.
           type: string
       type: object
@@ -4937,11 +4926,9 @@ components:
           description: The ID of the reply.
           type: string
         verb:
-          description: >-
+          description: |-
             The action this reply performed to the parent comment. When creating a new reply this is the action to be perform to the parent comment. Possible values are:  
-
             - "resolve" - To resolve a comment. 
-
             - "reopen" - To reopen (un-resolve) a comment.
           type: string
       type: object
@@ -5496,9 +5483,8 @@ components:
             $ref: "#/components/schemas/User"
           type: array
         parents:
-          description: >-
+          description: |-
             Collection of parent folders which contain this file.
-
             If not specified as part of an insert request, the file will be placed directly in the user's My Drive folder. If not specified as part of a copy request, the file will inherit any discoverable parents of the source file. Update requests can also use the addParents and removeParents parameters to modify the parents list.
           items:
             $ref: "#/components/schemas/ParentReference"
@@ -5724,17 +5710,12 @@ components:
           description: The ETag of the permission.
           type: string
         expirationDate:
-          description: >-
+          description: |-
             The time at which this permission will expire (RFC 3339 date-time). Expiration dates have the following restrictions:  
-
             - They cannot be set on shared drive items 
-
             - They can only be set on user and group permissions 
-
             - The date must be in the future 
-
             - The date cannot be more than a year in the future 
-
             - The date can only be set on drive.permissions.update or drive.permissions.patch requests
           format: date-time
           type: string
@@ -5764,23 +5745,17 @@ components:
                 description: The ID of the item from which this permission is inherited. This is an output-only field.
                 type: string
               permissionType:
-                description: >-
+                description: |-
                   The permission type for this user. While new values may be added in future, the following are currently possible:  
-
                   - file 
-
                   - member
                 type: string
               role:
-                description: >-
+                description: |-
                   The primary role for this user. While new values may be added in the future, the following are currently possible:  
-
                   - organizer 
-
                   - fileOrganizer 
-
                   - writer 
-
                   - reader
                 type: string
             type: object
@@ -5789,17 +5764,12 @@ components:
           description: A link to the profile photo, if available.
           type: string
         role:
-          description: >-
+          description: |-
             The primary role for this user. While new values may be supported in the future, the following are currently allowed:  
-
             - owner 
-
             - organizer 
-
             - fileOrganizer 
-
             - writer 
-
             - reader
           type: string
         selfLink:
@@ -5829,15 +5799,11 @@ components:
             type: object
           type: array
         type:
-          description: >-
+          description: |-
             The account type. Allowed values are:  
-
             - user 
-
             - group 
-
             - domain 
-
             - anyone
           type: string
         value:
@@ -5884,17 +5850,12 @@ components:
           type: string
       type: object
     Property:
-      description: >-
+      description: |-
         A key-value pair attached to a file that is either public or private to an application.
-
         The following limits apply to file properties:  
-
         - Maximum of 100 properties total per file
-
         - Maximum of 30 private properties per app
-
         - Maximum of 30 public properties
-
         - Maximum of 124 bytes size limit on (key + value) string in UTF-8 encoding for a single property.
       properties:
         etag:

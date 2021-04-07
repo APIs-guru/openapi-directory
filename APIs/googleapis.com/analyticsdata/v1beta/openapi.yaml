@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://analyticsdata.googleapis.com/$discovery/rest?version=v1beta
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: analyticsdata
-  x-preferred: true
 externalDocs:
   url: https://developers.google.com/analytics/devguides/reporting/data/v1/
 tags:
@@ -517,7 +517,7 @@ components:
           type: string
       type: object
     Dimension:
-      description: Dimensions are attributes of your data. For example, the dimension city indicates the city from which an event originates. Dimension values in report responses are strings; for example, city could be "Paris" or "New York". Requests are allowed up to 8 dimensions.
+      description: Dimensions are attributes of your data. For example, the dimension city indicates the city from which an event originates. Dimension values in report responses are strings; for example, city could be "Paris" or "New York". Requests are allowed up to 9 dimensions.
       properties:
         dimensionExpression:
           $ref: "#/components/schemas/DimensionExpression"

@@ -1217,6 +1217,9 @@ components:
           description: The time this information was last changed at the source. This is an upstream timestamp from the underlying information source - e.g. Ubuntu security tracker.
           format: google-datetime
           type: string
+        vendor:
+          description: The name of the vendor of the product.
+          type: string
       type: object
     Details:
       description: Details of an attestation occurrence.
@@ -2211,7 +2214,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -2219,6 +2222,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

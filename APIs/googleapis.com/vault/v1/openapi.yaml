@@ -40,7 +40,8 @@ paths:
       description: Lists matters the user has access to.
       operationId: vault.matters.list
       parameters:
-        - description: The number of matters to return in the response. Default and maximum are 100.
+        - description: The number of matters to return in the response. Default and
+            maximum are 100.
           in: query
           name: pageSize
           schema:
@@ -50,7 +51,8 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: If set, list only matters with that specific state. The default is listing matters of all states.
+        - description: If set, list only matters with that specific state. The default is
+            listing matters of all states.
           in: query
           name: state
           schema:
@@ -100,7 +102,9 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new matter with the given name and description. The initial state is open, and the owner is the method caller. Returns the created matter with default view.
+      description: Creates a new matter with the given name and description. The
+        initial state is open, and the owner is the method caller. Returns the
+        created matter with default view.
       operationId: vault.matters.create
       requestBody:
         content:
@@ -196,7 +200,9 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     put:
-      description: Updates the specified matter. This updates only the name and description of the matter, identified by matter ID. Changes to any other fields are ignored. Returns the default view of the matter.
+      description: Updates the specified matter. This updates only the name and
+        description of the matter, identified by matter ID. Changes to any other
+        fields are ignored. Returns the default view of the matter.
       operationId: vault.matters.update
       parameters:
         - description: The matter ID.
@@ -383,7 +389,8 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/matters/{matterId}/holds":
     get:
-      description: Lists holds within a matter. An empty page token in ListHoldsResponse denotes no more holds to list.
+      description: Lists holds within a matter. An empty page token in
+        ListHoldsResponse denotes no more holds to list.
       operationId: vault.matters.holds.list
       parameters:
         - description: The matter ID.
@@ -392,12 +399,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: The number of holds to return in the response, between 0 and 100 inclusive. Leaving this empty, or as 0, is the same as page_size = 100.
+        - description: The number of holds to return in the response, between 0 and 100
+            inclusive. Leaving this empty, or as 0, is the same as page_size =
+            100.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: The pagination token as returned in the response. An empty token means start from the beginning.
+        - description: The pagination token as returned in the response. An empty token
+            means start from the beginning.
           in: query
           name: pageToken
           schema:
@@ -557,7 +567,9 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     put:
-      description: Updates the OU and/or query parameters of a hold. You cannot add accounts to a hold that covers an OU, nor can you add OUs to a hold that covers individual accounts. Accounts listed in the hold will be ignored.
+      description: Updates the OU and/or query parameters of a hold. You cannot add
+        accounts to a hold that covers an OU, nor can you add OUs to a hold that
+        covers individual accounts. Accounts listed in the hold will be ignored.
       operationId: vault.matters.holds.update
       parameters:
         - description: The matter ID.
@@ -593,7 +605,9 @@ paths:
         - matters
   "/v1/matters/{matterId}/holds/{holdId}/accounts":
     get:
-      description: Lists HeldAccounts for a hold. This will only list individually specified held accounts. If the hold is on an OU, then use Admin SDK to enumerate its members.
+      description: Lists HeldAccounts for a hold. This will only list individually
+        specified held accounts. If the hold is on an OU, then use Admin SDK to
+        enumerate its members.
       operationId: vault.matters.holds.accounts.list
       parameters:
         - description: The matter ID.
@@ -639,7 +653,9 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Adds a HeldAccount to a hold. Accounts can only be added to a hold that has no held_org_unit set. Attempting to add an account to an OU-based hold will result in an error.
+      description: Adds a HeldAccount to a hold. Accounts can only be added to a hold
+        that has no held_org_unit set. Attempting to add an account to an
+        OU-based hold will result in an error.
       operationId: vault.matters.holds.accounts.create
       parameters:
         - description: The matter ID.
@@ -675,7 +691,8 @@ paths:
         - matters
   "/v1/matters/{matterId}/holds/{holdId}/accounts/{accountId}":
     delete:
-      description: Removes a HeldAccount from a hold. If this request leaves the hold with no held accounts, the hold will not apply to any accounts.
+      description: Removes a HeldAccount from a hold. If this request leaves the hold
+        with no held accounts, the hold will not apply to any accounts.
       operationId: vault.matters.holds.accounts.delete
       parameters:
         - description: The matter ID.
@@ -736,7 +753,9 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Adds HeldAccounts to a hold. Returns a list of accounts that have been successfully added. Accounts can only be added to an existing account-based hold.
+      description: Adds HeldAccounts to a hold. Returns a list of accounts that have
+        been successfully added. Accounts can only be added to an existing
+        account-based hold.
       operationId: vault.matters.holds.addHeldAccounts
       parameters:
         - description: The matter ID.
@@ -784,7 +803,9 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Removes HeldAccounts from a hold. Returns a list of statuses in the same order as the request. If this request leaves the hold with no held accounts, the hold will not apply to any accounts.
+      description: Removes HeldAccounts from a hold. Returns a list of statuses in the
+        same order as the request. If this request leaves the hold with no held
+        accounts, the hold will not apply to any accounts.
       operationId: vault.matters.holds.removeHeldAccounts
       parameters:
         - description: The matter ID.
@@ -820,10 +841,12 @@ paths:
         - matters
   "/v1/matters/{matterId}/savedQueries":
     get:
-      description: Lists saved queries within a matter. An empty page token in ListSavedQueriesResponse denotes no more saved queries to list.
+      description: Lists saved queries within a matter. An empty page token in
+        ListSavedQueriesResponse denotes no more saved queries to list.
       operationId: vault.matters.savedQueries.list
       parameters:
-        - description: The matter ID of the parent matter for which the saved queries are to be retrieved.
+        - description: The matter ID of the parent matter for which the saved queries are
+            to be retrieved.
           in: path
           name: matterId
           required: true
@@ -834,7 +857,8 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: The pagination token as returned in the previous response. An empty token means start from the beginning.
+        - description: The pagination token as returned in the previous response. An empty
+            token means start from the beginning.
           in: query
           name: pageToken
           schema:
@@ -873,7 +897,8 @@ paths:
       description: Creates a saved query.
       operationId: vault.matters.savedQueries.create
       parameters:
-        - description: The matter ID of the parent matter for which the saved query is to be created.
+        - description: The matter ID of the parent matter for which the saved query is to
+            be created.
           in: path
           name: matterId
           required: true
@@ -903,7 +928,8 @@ paths:
       description: Deletes a saved query by Id.
       operationId: vault.matters.savedQueries.delete
       parameters:
-        - description: The matter ID of the parent matter for which the saved query is to be deleted.
+        - description: The matter ID of the parent matter for which the saved query is to
+            be deleted.
           in: path
           name: matterId
           required: true
@@ -933,7 +959,8 @@ paths:
       description: Retrieves a saved query by Id.
       operationId: vault.matters.savedQueries.get
       parameters:
-        - description: The matter ID of the parent matter for which the saved query is to be retrieved.
+        - description: The matter ID of the parent matter for which the saved query is to
+            be retrieved.
           in: path
           name: matterId
           required: true
@@ -1073,7 +1100,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Counts the artifacts within the context of a matter and returns a detailed breakdown of metrics.
+      description: Counts the artifacts within the context of a matter and returns a
+        detailed breakdown of metrics.
       operationId: vault.matters.count
       parameters:
         - description: The matter ID.
@@ -1229,7 +1257,10 @@ paths:
         - matters
   "/v1/{name}":
     delete:
-      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
+      description: Deletes a long-running operation. This method indicates that the
+        client is no longer interested in the operation result. It does not
+        cancel the operation. If the server doesn't support this method, it
+        returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: vault.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
@@ -1248,7 +1279,15 @@ paths:
       tags:
         - operations
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      description: "Lists operations that match the specified filter in the request.
+        If the server doesn't support this method, it returns `UNIMPLEMENTED`.
+        NOTE: the `name` binding allows API services to override the binding to
+        use different resource name schemes, such as `users/*/operations`. To
+        override the binding, API services can add a binding such as
+        `\"/v1/{name=users/*}/operations\"` to their service configuration. For
+        backwards compatibility, the default name includes the operations
+        collection id, however overriding users must ensure the name binding is
+        the parent resource, without the operations collection id."
       operationId: vault.operations.list
       parameters:
         - description: The name of the operation's parent resource.
@@ -1307,7 +1346,15 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+      description: Starts asynchronous cancellation on a long-running operation. The
+        server makes a best effort to cancel the operation, but success is not
+        guaranteed. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation
+        or other methods to check whether the cancellation succeeded or whether
+        the operation completed despite cancellation. On successful
+        cancellation, the operation is not deleted; instead, it becomes an
+        operation with an Operation.error value with a google.rpc.Status.code of
+        1, corresponding to `Code.CANCELLED`.
       operationId: vault.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
@@ -1370,7 +1417,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -1388,7 +1437,9 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
@@ -1444,7 +1495,8 @@ components:
           type: array
       type: object
     AddHeldAccountResult:
-      description: A status detailing the status of each account creation, and the HeldAccount, if successful.
+      description: A status detailing the status of each account creation, and the
+        HeldAccount, if successful.
       properties:
         account:
           $ref: "#/components/schemas/HeldAccount"
@@ -1457,12 +1509,14 @@ components:
       description: Add a list of accounts to a hold.
       properties:
         accountIds:
-          description: Account IDs to identify which accounts to add. Only account_ids or only emails should be specified, but not both.
+          description: Account IDs to identify which accounts to add. Only account_ids or
+            only emails should be specified, but not both.
           items:
             type: string
           type: array
         emails:
-          description: Emails to identify which accounts to add. Only emails or only account_ids should be specified, but not both.
+          description: Emails to identify which accounts to add. Only emails or only
+            account_ids should be specified, but not both.
           items:
             type: string
           type: array
@@ -1477,16 +1531,20 @@ components:
           type: array
       type: object
     AddMatterPermissionsRequest:
-      description: Add an account with the permission specified. The role cannot be owner. If an account already has a role in the matter, it will be overwritten.
+      description: Add an account with the permission specified. The role cannot be
+        owner. If an account already has a role in the matter, it will be
+        overwritten.
       properties:
         ccMe:
-          description: Only relevant if send_emails is true. True to CC requestor in the email message. False to not CC requestor.
+          description: Only relevant if send_emails is true. True to CC requestor in the
+            email message. False to not CC requestor.
           type: boolean
         matterPermission:
           $ref: "#/components/schemas/MatterPermission"
           description: The MatterPermission to add.
         sendEmails:
-          description: True to send notification email to the added account. False to not send notification email.
+          description: True to send notification email to the added account. False to not
+            send notification email.
           type: boolean
       type: object
     CancelOperationRequest:
@@ -1508,13 +1566,16 @@ components:
       description: An export file on cloud storage
       properties:
         bucketName:
-          description: The cloud storage bucket name of this export file. Can be used in cloud storage JSON/XML API, but not to list the bucket contents. Instead, you can get individual export files by object name.
+          description: The cloud storage bucket name of this export file. Can be used in
+            cloud storage JSON/XML API, but not to list the bucket contents.
+            Instead, you can get individual export files by object name.
           type: string
         md5Hash:
           description: The md5 hash of the file.
           type: string
         objectName:
-          description: The cloud storage object name of this export file. Can be used in cloud storage JSON/XML API.
+          description: The cloud storage object name of this export file. Can be used in
+            cloud storage JSON/XML API.
           type: string
         size:
           description: The size of the export file.
@@ -1541,7 +1602,8 @@ components:
           description: Details pertaining to Groups holds. If set, corpus must be Groups.
         hangoutsChatQuery:
           $ref: "#/components/schemas/HeldHangoutsChatQuery"
-          description: Details pertaining to Hangouts Chat holds. If set, corpus must be Hangouts Chat.
+          description: Details pertaining to Hangouts Chat holds. If set, corpus must be
+            Hangouts Chat.
         mailQuery:
           $ref: "#/components/schemas/HeldMailQuery"
           description: Details pertaining to mail holds. If set, corpus must be mail.
@@ -1591,7 +1653,8 @@ components:
           $ref: "#/components/schemas/MailCountResult"
           description: Count metrics of Mail.
         totalCount:
-          description: Total count of artifacts. For mail and groups, artifacts refers to messages.
+          description: Total count of artifacts. For mail and groups, artifacts refers to
+            messages.
           format: int64
           type: string
       type: object
@@ -1599,7 +1662,8 @@ components:
       description: The options for Drive export.
       properties:
         includeAccessInfo:
-          description: Set to true to include access level information for users with indirect access to files.
+          description: Set to true to include access level information for users with
+            indirect access to files.
           type: boolean
       type: object
     DriveOptions:
@@ -1612,12 +1676,18 @@ components:
           description: Set to true to include Team Drive.
           type: boolean
         versionDate:
-          description: Search the versions of the Drive file as of the reference date. These timestamps are in GMT and rounded down to the given date.
+          description: Search the versions of the Drive file as of the reference date.
+            These timestamps are in GMT and rounded down to the given date.
           format: google-datetime
           type: string
       type: object
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining
+        duplicated empty messages in your APIs. A typical example is to use it
+        as the request or the response type of an API method. For instance:
+        service Foo { rpc Bar(google.protobuf.Empty) returns
+        (google.protobuf.Empty); } The JSON representation for `Empty` is empty
+        JSON object `{}`."
       properties: {}
       type: object
     Export:
@@ -1712,16 +1782,20 @@ components:
             $ref: "#/components/schemas/AccountCountError"
           type: array
         accountCounts:
-          description: Subtotal count per matching account that have more than zero messages.
+          description: Subtotal count per matching account that have more than zero
+            messages.
           items:
             $ref: "#/components/schemas/AccountCount"
           type: array
         matchingAccountsCount:
-          description: Total number of accounts that can be queried and have more than zero messages.
+          description: Total number of accounts that can be queried and have more than
+            zero messages.
           format: int64
           type: string
         nonQueryableAccounts:
-          description: When data scope is HELD_DATA in the request Query, these accounts in the request are not queried because they are not on hold. For other data scope, this field is not set.
+          description: When data scope is HELD_DATA in the request Query, these accounts
+            in the request are not queried because they are not on hold. For
+            other data scope, this field is not set.
           items:
             type: string
           type: array
@@ -1769,13 +1843,16 @@ components:
           type: boolean
       type: object
     HeldAccount:
-      description: An account being held in a particular hold. This structure is immutable. This can be either a single user or a google group, depending on the corpus.
+      description: An account being held in a particular hold. This structure is
+        immutable. This can be either a single user or a google group, depending
+        on the corpus.
       properties:
         accountId:
           description: The account's ID as provided by the Admin SDK.
           type: string
         email:
-          description: The primary email address of the account. If used as an input, this takes precedence over account ID.
+          description: The primary email address of the account. If used as an input, this
+            takes precedence over account ID.
           type: string
         firstName:
           description: Output only. The first name of the account holder.
@@ -1802,11 +1879,13 @@ components:
       description: Query options for group holds.
       properties:
         endTime:
-          description: The end time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
+          description: The end time range for the search query. These timestamps are in
+            GMT and rounded down to the start of the given date.
           format: google-datetime
           type: string
         startTime:
-          description: The start time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
+          description: The start time range for the search query. These timestamps are in
+            GMT and rounded down to the start of the given date.
           format: google-datetime
           type: string
         terms:
@@ -1824,11 +1903,13 @@ components:
       description: Query options for mail holds.
       properties:
         endTime:
-          description: The end time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
+          description: The end time range for the search query. These timestamps are in
+            GMT and rounded down to the start of the given date.
           format: google-datetime
           type: string
         startTime:
-          description: The start time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
+          description: The start time range for the search query. These timestamps are in
+            GMT and rounded down to the start of the given date.
           format: google-datetime
           type: string
         terms:
@@ -1836,7 +1917,8 @@ components:
           type: string
       type: object
     HeldOrgUnit:
-      description: A organizational unit being held in a particular hold. This structure is immutable.
+      description: A organizational unit being held in a particular hold. This
+        structure is immutable.
       properties:
         holdTime:
           description: When the org unit was put on hold. This property is immutable.
@@ -1850,7 +1932,8 @@ components:
       description: Query options for Voice holds.
       properties:
         coveredData:
-          description: Data covered by this rule. Should be non-empty. Order does not matter and duplicates will be ignored.
+          description: Data covered by this rule. Should be non-empty. Order does not
+            matter and duplicates will be ignored.
           items:
             enum:
               - COVERED_DATA_UNSPECIFIED
@@ -1861,10 +1944,15 @@ components:
           type: array
       type: object
     Hold:
-      description: Represents a hold within Vault. A hold restricts purging of artifacts based on the combination of the query and accounts restrictions. A hold can be configured to either apply to an explicitly configured set of accounts, or can be applied to all members of an organizational unit.
+      description: Represents a hold within Vault. A hold restricts purging of
+        artifacts based on the combination of the query and accounts
+        restrictions. A hold can be configured to either apply to an explicitly
+        configured set of accounts, or can be applied to all members of an
+        organizational unit.
       properties:
         accounts:
-          description: If set, the hold applies to the enumerated accounts and org_unit must be empty.
+          description: If set, the hold applies to the enumerated accounts and org_unit
+            must be empty.
           items:
             $ref: "#/components/schemas/HeldAccount"
           type: array
@@ -1886,10 +1974,13 @@ components:
           type: string
         orgUnit:
           $ref: "#/components/schemas/HeldOrgUnit"
-          description: If set, the hold applies to all members of the organizational unit and accounts must be empty. This property is mutable. For groups holds, set the accounts field.
+          description: If set, the hold applies to all members of the organizational unit
+            and accounts must be empty. This property is mutable. For groups
+            holds, set the accounts field.
         query:
           $ref: "#/components/schemas/CorpusQuery"
-          description: The corpus-specific query. If set, the corpusQuery must match corpus type.
+          description: The corpus-specific query. If set, the corpusQuery must match
+            corpus type.
         updateTime:
           description: The last time this hold was modified.
           format: google-datetime
@@ -1925,7 +2016,8 @@ components:
             $ref: "#/components/schemas/Hold"
           type: array
         nextPageToken:
-          description: Page token to retrieve the next page of results in the list. If this is empty, then there are no more holds to list.
+          description: Page token to retrieve the next page of results in the list. If
+            this is empty, then there are no more holds to list.
           type: string
       type: object
     ListMattersResponse:
@@ -1947,7 +2039,8 @@ components:
           description: The standard List next-page token.
           type: string
         operations:
-          description: A list of operations that matches the specified filter in the request.
+          description: A list of operations that matches the specified filter in the
+            request.
           items:
             $ref: "#/components/schemas/Operation"
           type: array
@@ -1956,7 +2049,8 @@ components:
       description: Definition of the response for method ListSaveQuery.
       properties:
         nextPageToken:
-          description: Page token to retrieve the next page of results in the list. If this is empty, then there are no more saved queries to list.
+          description: Page token to retrieve the next page of results in the list. If
+            this is empty, then there are no more saved queries to list.
           type: string
         savedQueries:
           description: List of output saved queries.
@@ -1973,16 +2067,20 @@ components:
             $ref: "#/components/schemas/AccountCountError"
           type: array
         accountCounts:
-          description: Subtotal count per matching account that have more than zero messages.
+          description: Subtotal count per matching account that have more than zero
+            messages.
           items:
             $ref: "#/components/schemas/AccountCount"
           type: array
         matchingAccountsCount:
-          description: Total number of accounts that can be queried and have more than zero messages.
+          description: Total number of accounts that can be queried and have more than
+            zero messages.
           format: int64
           type: string
         nonQueryableAccounts:
-          description: When data scope is HELD_DATA in the request Query, these accounts in the request are not queried because they are not on hold. For other data scope, this field is not set.
+          description: When data scope is HELD_DATA in the request Query, these accounts
+            in the request are not queried because they are not on hold. For
+            other data scope, this field is not set.
           items:
             type: string
           type: array
@@ -2019,10 +2117,13 @@ components:
           description: The description of the matter.
           type: string
         matterId:
-          description: The matter ID which is generated by the server. Should be blank when creating a new matter.
+          description: The matter ID which is generated by the server. Should be blank
+            when creating a new matter.
           type: string
         matterPermissions:
-          description: List of users and access to the matter. Currently there is no programmer defined limit on the number of permissions a matter can have.
+          description: List of users and access to the matter. Currently there is no
+            programmer defined limit on the number of permissions a matter can
+            have.
           items:
             $ref: "#/components/schemas/MatterPermission"
           type: array
@@ -2039,7 +2140,9 @@ components:
           type: string
       type: object
     MatterPermission:
-      description: Currently each matter only has one owner, and all others are collaborators. When an account is purged, its corresponding MatterPermission resources cease to exist.
+      description: Currently each matter only has one owner, and all others are
+        collaborators. When an account is purged, its corresponding
+        MatterPermission resources cease to exist.
       properties:
         accountId:
           description: The account ID, as provided by Admin SDK.
@@ -2053,10 +2156,13 @@ components:
           type: string
       type: object
     Operation:
-      description: This resource represents a long-running operation that is the result of a network API call.
+      description: This resource represents a long-running operation that is the
+        result of a network API call.
       properties:
         done:
-          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          description: If the value is `false`, it means the operation is still in
+            progress. If `true`, the operation is completed, and either `error`
+            or `response` is available.
           type: boolean
         error:
           $ref: "#/components/schemas/Status"
@@ -2064,15 +2170,29 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          description: Service-specific metadata associated with the operation. It
+            typically contains progress information and common metadata such as
+            create time. Some services might not provide such metadata. Any
+            method that returns a long-running operation should document the
+            metadata type, if any.
           type: object
         name:
-          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          description: The server-assigned name, which is only unique within the same
+            service that originally returns it. If you use the default HTTP
+            mapping, the `name` should be a resource name ending with
+            `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal response of the operation in case of success. If the
+            original method returns no data on success, such as `Delete`, the
+            response is `google.protobuf.Empty`. If the original method is
+            standard `Get`/`Create`/`Update`, the response should be the
+            resource. For other methods, the response should have the type
+            `XxxResponse`, where `Xxx` is the original method name. For example,
+            if the original method name is `TakeSnapshot()`, the inferred
+            response type is `TakeSnapshotResponse`.
           type: object
       type: object
     OrgUnitInfo:
@@ -2087,7 +2207,8 @@ components:
       properties:
         accountInfo:
           $ref: "#/components/schemas/AccountInfo"
-          description: When 'ACCOUNT' is chosen as search method, account_info needs to be specified.
+          description: When 'ACCOUNT' is chosen as search method, account_info needs to be
+            specified.
         corpus:
           description: The corpus to search.
           enum:
@@ -2110,20 +2231,26 @@ components:
           $ref: "#/components/schemas/DriveOptions"
           description: For Drive search, specify more options in this field.
         endTime:
-          description: The end time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
+          description: The end time range for the search query. These timestamps are in
+            GMT and rounded down to the start of the given date.
           format: google-datetime
           type: string
         hangoutsChatInfo:
           $ref: "#/components/schemas/HangoutsChatInfo"
-          description: When 'ROOM' is chosen as search method, hangout_chats_info needs to be specified. (read-only)
+          description: When 'ROOM' is chosen as search method, hangout_chats_info needs to
+            be specified. (read-only)
         hangoutsChatOptions:
           $ref: "#/components/schemas/HangoutsChatOptions"
-          description: For hangouts chat search, specify more options in this field. (read-only)
+          description: For hangouts chat search, specify more options in this field.
+            (read-only)
         mailOptions:
           $ref: "#/components/schemas/MailOptions"
           description: For mail search, specify more options in this field.
         method:
-          description: The search method to use. This field is similar to the search_method field but is introduced to support shared drives. It supports all search method types. In case the search_method is TEAM_DRIVE the response of this field will be SHARED_DRIVE only.
+          description: The search method to use. This field is similar to the
+            search_method field but is introduced to support shared drives. It
+            supports all search method types. In case the search_method is
+            TEAM_DRIVE the response of this field will be SHARED_DRIVE only.
           enum:
             - SEARCH_METHOD_UNSPECIFIED
             - ACCOUNT
@@ -2135,7 +2262,8 @@ components:
           type: string
         orgUnitInfo:
           $ref: "#/components/schemas/OrgUnitInfo"
-          description: When 'ORG_UNIT' is chosen as as search method, org_unit_info needs to be specified.
+          description: When 'ORG_UNIT' is chosen as as search method, org_unit_info needs
+            to be specified.
         searchMethod:
           description: The search method to use.
           enum:
@@ -2149,19 +2277,23 @@ components:
           type: string
         sharedDriveInfo:
           $ref: "#/components/schemas/SharedDriveInfo"
-          description: When 'SHARED_DRIVE' is chosen as search method, shared_drive_info needs to be specified.
+          description: When 'SHARED_DRIVE' is chosen as search method, shared_drive_info
+            needs to be specified.
         startTime:
-          description: The start time range for the search query. These timestamps are in GMT and rounded down to the start of the given date.
+          description: The start time range for the search query. These timestamps are in
+            GMT and rounded down to the start of the given date.
           format: google-datetime
           type: string
         teamDriveInfo:
           $ref: "#/components/schemas/TeamDriveInfo"
-          description: When 'TEAM_DRIVE' is chosen as search method, team_drive_info needs to be specified.
+          description: When 'TEAM_DRIVE' is chosen as search method, team_drive_info needs
+            to be specified.
         terms:
           description: The corpus-specific search operators used to generate search results.
           type: string
         timeZone:
-          description: The time zone name. It should be an IANA TZ name, such as "America/Los_Angeles". For more information, see Time Zone.
+          description: The time zone name. It should be an IANA TZ name, such as
+            "America/Los_Angeles". For more information, see Time Zone.
           type: string
         voiceOptions:
           $ref: "#/components/schemas/VoiceOptions"
@@ -2180,7 +2312,8 @@ components:
       description: Response for batch delete held accounts.
       properties:
         statuses:
-          description: A list of statuses for deleted accounts. Results have the same order as the request.
+          description: A list of statuses for deleted accounts. Results have the same
+            order as the request.
           items:
             $ref: "#/components/schemas/Status"
           type: array
@@ -2207,18 +2340,22 @@ components:
       description: Definition of the saved query.
       properties:
         createTime:
-          description: Output only. The server generated timestamp at which saved query was created.
+          description: Output only. The server generated timestamp at which saved query
+            was created.
           format: google-datetime
           type: string
         displayName:
           description: Name of the saved query.
           type: string
         matterId:
-          description: Output only. The matter ID of the associated matter. The server does not look at this field during create and always uses matter id in the URL.
+          description: Output only. The matter ID of the associated matter. The server
+            does not look at this field during create and always uses matter id
+            in the URL.
           type: string
         query:
           $ref: "#/components/schemas/Query"
-          description: The underlying Query object which contains all the information of the saved query.
+          description: The underlying Query object which contains all the information of
+            the saved query.
         savedQueryId:
           description: A unique identifier for the saved query.
           type: string
@@ -2233,21 +2370,30 @@ components:
           type: array
       type: object
     Status:
-      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      description: "The `Status` type defines a logical error model that is suitable
+        for different programming environments, including REST APIs and RPC
+        APIs. It is used by [gRPC](https://github.com/grpc). Each `Status`
+        message contains three pieces of data: error code, error message, and
+        error details. You can find out more about this error model and how to
+        work with it in the [API Design
+        Guide](https://cloud.google.com/apis/design/errors)."
       properties:
         code:
           description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          description: A list of messages that carry the error details. There is a common
+            set of message types for APIs to use.
           items:
             additionalProperties:
               description: Properties of the object. Contains field @type with type URL.
             type: object
           type: array
         message:
-          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          description: A developer-facing error message, which should be in English. Any
+            user-facing error message should be localized and sent in the
+            google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     TeamDriveInfo:

@@ -4917,13 +4917,10 @@ components:
           description: Link for this experiment. This field is read-only.
           type: string
         servingFramework:
-          description: >-
+          description: |-
             The framework used to serve the experiment variations and evaluate the results. One of:  
-
             - REDIRECT: Google Analytics redirects traffic to different variation pages, reports the chosen variation and evaluates the results.
-
             - API: Google Analytics chooses and reports the variation to serve and evaluates the results; the caller is responsible for serving the selected variation.
-
             - EXTERNAL: The variations will be served externally and the chosen variation reported to Google Analytics. The caller is responsible for serving the selected variation and evaluating the results.
           type: string
         snippet:
@@ -5161,179 +5158,93 @@ components:
           description: Filter expression value
           type: string
         field:
-          description: >-
+          description: |-
             Field to filter. Possible values:  
-
             - Content and Traffic  
-
             - PAGE_REQUEST_URI, 
-
             - PAGE_HOSTNAME, 
-
             - PAGE_TITLE, 
-
             - REFERRAL, 
-
             - COST_DATA_URI (Campaign target URL), 
-
             - HIT_TYPE, 
-
             - INTERNAL_SEARCH_TERM, 
-
             - INTERNAL_SEARCH_TYPE, 
-
             - SOURCE_PROPERTY_TRACKING_ID,   
-
             - Campaign or AdGroup  
-
             - CAMPAIGN_SOURCE, 
-
             - CAMPAIGN_MEDIUM, 
-
             - CAMPAIGN_NAME, 
-
             - CAMPAIGN_AD_GROUP, 
-
             - CAMPAIGN_TERM, 
-
             - CAMPAIGN_CONTENT, 
-
             - CAMPAIGN_CODE, 
-
             - CAMPAIGN_REFERRAL_PATH,   
-
             - E-Commerce  
-
             - TRANSACTION_COUNTRY, 
-
             - TRANSACTION_REGION, 
-
             - TRANSACTION_CITY, 
-
             - TRANSACTION_AFFILIATION (Store or order location), 
-
             - ITEM_NAME, 
-
             - ITEM_CODE, 
-
             - ITEM_VARIATION, 
-
             - TRANSACTION_ID, 
-
             - TRANSACTION_CURRENCY_CODE, 
-
             - PRODUCT_ACTION_TYPE,   
-
             - Audience/Users  
-
             - BROWSER, 
-
             - BROWSER_VERSION, 
-
             - BROWSER_SIZE, 
-
             - PLATFORM, 
-
             - PLATFORM_VERSION, 
-
             - LANGUAGE, 
-
             - SCREEN_RESOLUTION, 
-
             - SCREEN_COLORS, 
-
             - JAVA_ENABLED (Boolean Field), 
-
             - FLASH_VERSION, 
-
             - GEO_SPEED (Connection speed), 
-
             - VISITOR_TYPE, 
-
             - GEO_ORGANIZATION (ISP organization), 
-
             - GEO_DOMAIN, 
-
             - GEO_IP_ADDRESS, 
-
             - GEO_IP_VERSION,   
-
             - Location  
-
             - GEO_COUNTRY, 
-
             - GEO_REGION, 
-
             - GEO_CITY,   
-
             - Event  
-
             - EVENT_CATEGORY, 
-
             - EVENT_ACTION, 
-
             - EVENT_LABEL,   
-
             - Other  
-
             - CUSTOM_FIELD_1, 
-
             - CUSTOM_FIELD_2, 
-
             - USER_DEFINED_VALUE,   
-
             - Application  
-
             - APP_ID, 
-
             - APP_INSTALLER_ID, 
-
             - APP_NAME, 
-
             - APP_VERSION, 
-
             - SCREEN, 
-
             - IS_APP (Boolean Field), 
-
             - IS_FATAL_EXCEPTION (Boolean Field), 
-
             - EXCEPTION_DESCRIPTION,   
-
             - Mobile device  
-
             - IS_MOBILE (Boolean Field, Deprecated. Use DEVICE_CATEGORY=mobile), 
-
             - IS_TABLET (Boolean Field, Deprecated. Use DEVICE_CATEGORY=tablet), 
-
             - DEVICE_CATEGORY, 
-
             - MOBILE_HAS_QWERTY_KEYBOARD (Boolean Field), 
-
             - MOBILE_HAS_NFC_SUPPORT (Boolean Field), 
-
             - MOBILE_HAS_CELLULAR_RADIO (Boolean Field), 
-
             - MOBILE_HAS_WIFI_SUPPORT (Boolean Field), 
-
             - MOBILE_BRAND_NAME, 
-
             - MOBILE_MODEL_NAME, 
-
             - MOBILE_MARKETING_NAME, 
-
             - MOBILE_POINTING_METHOD,   
-
             - Social  
-
             - SOCIAL_NETWORK, 
-
             - SOCIAL_ACTION, 
-
             - SOCIAL_ACTION_TARGET,   
-
             - Custom dimension  
-
             - CUSTOM_DIMENSION (See accompanying field index),
           type: string
         fieldIndex:
@@ -5999,9 +5910,8 @@ components:
           readOnly: true
           type: string
         currency:
-          description: >-
+          description: |-
             The currency type associated with this view (profile), defaults to USD. The supported values are:
-
             USD, JPY, EUR, GBP, AUD, KRW, BRL, CNY, DKK, RUB, SEK, NOK, PLN, TRY, TWD, HKD, THB, IDR, ARS, MXN, VND, PHP, INR, CHF, CAD, CZK, NZD, HUF, BGN, LTL, ZAR, UAH, AED, BOB, CLP, COP, EGP, HRK, ILS, MAD, MYR, PEN, PKR, RON, RSD, SAR, SGD, VEF, LVL
           type: string
         defaultPage:
@@ -6108,11 +6018,9 @@ components:
           $ref: "#/components/schemas/ProfileRef"
           description: View (Profile) for this link.
         rank:
-          description: >-
+          description: |-
             The rank of this profile filter link relative to the other filters linked to the same profile.
-
             For readonly (i.e., list and get) operations, the rank always starts at 1.
-
             For write (i.e., create, update, or delete) operations, you may specify a value between 0 and 255 inclusively, [0, 255]. In order to insert a link at the end of the list, either don't specify a rank or set a rank to a number greater than the largest rank in the list. In order to insert a link to the beginning of the list specify a rank that is less than or equal to 1. The new link will move all existing filters with the same or lower rank down the list. After the link is inserted/updated/deleted all profile filter links will be renumbered starting at 1.
           format: int32
           type: integer
@@ -6841,17 +6749,14 @@ components:
           readOnly: true
           type: string
         dataRetentionResetOnNewActivity:
-          description: >-
+          description: |-
             Set to true to reset the retention period of the user identifier with each new event from that user (thus setting the expiration date to current time plus retention period).
-
             Set to false to delete data associated with the user identifier automatically after the rentention period.
-
             This property cannot be set on insert.
           type: boolean
         dataRetentionTtl:
-          description: >-
+          description: |-
             The length of time for which user and event data is retained.
-
             This property cannot be set on insert.
           type: string
         defaultProfileId:

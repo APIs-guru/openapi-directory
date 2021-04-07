@@ -775,13 +775,6 @@ components:
           readOnly: true
           type: string
       type: object
-    CreateSlotPoolMetadata:
-      description: The metadata for operation returned from ReservationService.CreateSlotPool.
-      properties:
-        slotPool:
-          description: Resource name of the slot pool that is being created. E.g., projects/myproject/locations/us-central1/reservations/foo/slotPools/123
-          type: string
-      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
@@ -922,7 +915,7 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -931,6 +924,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/bigquery: View and manage your data in Google BigQuery
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

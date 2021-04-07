@@ -48,7 +48,8 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: A pagination token returned from a previous call to ListCustomers that indicates where this listing should continue from.
+        - description: A pagination token returned from a previous call to ListCustomers
+            that indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -163,7 +164,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
+      description: Gets the access control policy for a resource. Returns an empty
+        policy if the resource exists and does not have a policy set.
       operationId: prod_tt_sasportal.policies.get
       requestBody:
         content:
@@ -198,7 +200,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      description: Sets the access control policy on the specified resource. Replaces
+        any existing policy.
       operationId: prod_tt_sasportal.policies.set
       requestBody:
         content:
@@ -480,13 +483,16 @@ paths:
       description: Lists deployments.
       operationId: prod_tt_sasportal.nodes.nodes.deployments.list
       parameters:
-        - description: Required. The parent resource name, for example, "nodes/1", customer/1/nodes/2.
+        - description: Required. The parent resource name, for example, "nodes/1",
+            customer/1/nodes/2.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: 'The filter expression. The filter should have the following format: "DIRECT_CHILDREN" or format: "direct_children". The filter is case insensitive. If empty, then no deployments are filtered.'
+        - description: 'The filter expression. The filter should have the following
+            format: "DIRECT_CHILDREN" or format: "direct_children". The filter
+            is case insensitive. If empty, then no deployments are filtered.'
           in: query
           name: filter
           schema:
@@ -496,7 +502,8 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: A pagination token returned from a previous call to ListDeployments that indicates where this listing should continue from.
+        - description: A pagination token returned from a previous call to ListDeployments
+            that indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -531,7 +538,8 @@ paths:
       description: Creates a new deployment.
       operationId: prod_tt_sasportal.nodes.nodes.deployments.create
       parameters:
-        - description: Required. The parent resource name where the deployment is to be created.
+        - description: Required. The parent resource name where the deployment is to be
+            created.
           in: path
           name: parent
           required: true
@@ -567,17 +575,21 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The filter expression. The filter should have one of the following formats: "sn=123454" or "display_name=MyDevice". sn corresponds to serial number of the device. The filter is case insensitive.'
+        - description: 'The filter expression. The filter should have one of the following
+            formats: "sn=123454" or "display_name=MyDevice". sn corresponds to
+            serial number of the device. The filter is case insensitive.'
           in: query
           name: filter
           schema:
             type: string
-        - description: The maximum number of devices to return in the response. If empty or zero, all devices will be listed. Must be in the range [0, 1000].
+        - description: The maximum number of devices to return in the response. If empty
+            or zero, all devices will be listed. Must be in the range [0, 1000].
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A pagination token returned from a previous call to ListDevices that indicates where this listing should continue from.
+        - description: A pagination token returned from a previous call to ListDevices
+            that indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -690,7 +702,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The filter expression. The filter should have the following format: "DIRECT_CHILDREN" or format: "direct_children". The filter is case insensitive. If empty, then no nodes are filtered.'
+        - description: 'The filter expression. The filter should have the following
+            format: "DIRECT_CHILDREN" or format: "direct_children". The filter
+            is case insensitive. If empty, then no nodes are filtered.'
           in: query
           name: filter
           schema:
@@ -700,7 +714,8 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: A pagination token returned from a previous call to ListNodes that indicates where this listing should continue from.
+        - description: A pagination token returned from a previous call to ListNodes that
+            indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -800,7 +815,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -818,7 +835,9 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
@@ -840,7 +859,11 @@ components:
       description: Associates `members` with a `role`.
       properties:
         members:
-          description: "The identities the role is assigned to. It can have the following values: * `{user_email}`: An email address that represents a specific Google account. For example: `alice@gmail.com`. * `{group_email}`: An email address that represents a Google group. For example, `viewers@gmail.com`."
+          description: "The identities the role is assigned to. It can have the following
+            values: * `{user_email}`: An email address that represents a
+            specific Google account. For example: `alice@gmail.com`. *
+            `{group_email}`: An email address that represents a Google group.
+            For example, `viewers@gmail.com`."
           items:
             type: string
           type: array
@@ -863,18 +886,22 @@ components:
       description: Request for CreateSignedDevice.
       properties:
         encodedDevice:
-          description: Required. JSON Web Token signed using a CPI private key. Payload must be the JSON encoding of the device. The user_id field must be set.
+          description: Required. JSON Web Token signed using a CPI private key. Payload
+            must be the JSON encoding of the device. The user_id field must be
+            set.
           format: byte
           type: string
         installerId:
-          description: Required. Unique installer id (CPI ID) from the Certified Professional Installers database.
+          description: Required. Unique installer id (CPI ID) from the Certified
+            Professional Installers database.
           type: string
       type: object
     SasPortalCustomer:
       description: Entity representing a SAS customer.
       properties:
         displayName:
-          description: Required. Name of the organization that the customer entity represents.
+          description: Required. Name of the organization that the customer entity
+            represents.
           type: string
         name:
           description: Output only. Resource name of the customer.
@@ -912,7 +939,8 @@ components:
           readOnly: true
           type: string
         sasUserIds:
-          description: User ID used by the devices belonging to this deployment. Each deployment should be associated with one unique user ID.
+          description: User ID used by the devices belonging to this deployment. Each
+            deployment should be associated with one unique user ID.
           items:
             type: string
           type: array
@@ -921,7 +949,8 @@ components:
       properties:
         activeConfig:
           $ref: "#/components/schemas/SasPortalDeviceConfig"
-          description: Output only. Current configuration of the device as registered to the SAS.
+          description: Output only. Current configuration of the device as registered to
+            the SAS.
         currentChannels:
           description: Output only. Current channels with scores.
           items:
@@ -930,7 +959,8 @@ components:
           type: array
         deviceMetadata:
           $ref: "#/components/schemas/SasPortalDeviceMetadata"
-          description: Device parameters that can be overridden by both SAS Portal and SAS registration requests.
+          description: Device parameters that can be overridden by both SAS Portal and SAS
+            registration requests.
         displayName:
           description: Device display name.
           type: string
@@ -969,7 +999,8 @@ components:
       description: Information about the device's air interface.
       properties:
         radioTechnology:
-          description: Conditional. This field specifies the radio access technology that is used for the CBSD.
+          description: Conditional. This field specifies the radio access technology that
+            is used for the CBSD.
           enum:
             - RADIO_TECHNOLOGY_UNSPECIFIED
             - E_UTRA
@@ -982,7 +1013,9 @@ components:
             - TARANA_WIRELESS
           type: string
         supportedSpec:
-          description: Optional. This field is related to the `radioTechnology` and provides the air interface specification that the CBSD is compliant with at the time of registration.
+          description: Optional. This field is related to the `radioTechnology` and
+            provides the air interface specification that the CBSD is compliant
+            with at the time of registration.
           type: string
       type: object
     SasPortalDeviceConfig:
@@ -1035,7 +1068,9 @@ components:
           type: string
       type: object
     SasPortalDeviceGrant:
-      description: Device grant. It is an authorization provided by the Spectrum Access System to a device to transmit using specified operating parameters after a successful heartbeat by the device.
+      description: Device grant. It is an authorization provided by the Spectrum
+        Access System to a device to transmit using specified operating
+        parameters after a successful heartbeat by the device.
       properties:
         channelType:
           description: Type of channel used.
@@ -1055,7 +1090,10 @@ components:
           description: Grant Id.
           type: string
         maxEirp:
-          description: Maximum Equivalent Isotropically Radiated Power (EIRP) permitted by the grant. The maximum EIRP is in units of dBm/MHz. The value of `maxEirp` represents the average (RMS) EIRP that would be measured by the procedure defined in FCC part 96.41(e)(3).
+          description: Maximum Equivalent Isotropically Radiated Power (EIRP) permitted by
+            the grant. The maximum EIRP is in units of dBm/MHz. The value of
+            `maxEirp` represents the average (RMS) EIRP that would be measured
+            by the procedure defined in FCC part 96.41(e)(3).
           format: double
           type: number
         moveList:
@@ -1113,7 +1151,12 @@ components:
           description: The frequency range that the move list affects.
       type: object
     SasPortalEmpty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining
+        duplicated empty messages in your APIs. A typical example is to use it
+        as the request or the response type of an API method. For instance:
+        service Foo { rpc Bar(google.protobuf.Empty) returns
+        (google.protobuf.Empty); } The JSON representation for `Empty` is empty
+        JSON object `{}`."
       properties: {}
       type: object
     SasPortalFrequencyRange:
@@ -1150,33 +1193,54 @@ components:
       description: Information about the device installation parameters.
       properties:
         antennaAzimuth:
-          description: Boresight direction of the horizontal plane of the antenna in degrees with respect to true north. The value of this parameter is an integer with a value between 0 and 359 inclusive. A value of 0 degrees means true north; a value of 90 degrees means east. This parameter is optional for Category A devices and conditional for Category B devices.
+          description: Boresight direction of the horizontal plane of the antenna in
+            degrees with respect to true north. The value of this parameter is
+            an integer with a value between 0 and 359 inclusive. A value of 0
+            degrees means true north; a value of 90 degrees means east. This
+            parameter is optional for Category A devices and conditional for
+            Category B devices.
           format: int32
           type: integer
         antennaBeamwidth:
-          description: 3-dB antenna beamwidth of the antenna in the horizontal-plane in degrees. This parameter is an unsigned integer having a value between 0 and 360 (degrees) inclusive; it is optional for Category A devices and conditional for Category B devices.
+          description: 3-dB antenna beamwidth of the antenna in the horizontal-plane in
+            degrees. This parameter is an unsigned integer having a value
+            between 0 and 360 (degrees) inclusive; it is optional for Category A
+            devices and conditional for Category B devices.
           format: int32
           type: integer
         antennaDowntilt:
-          description: Antenna downtilt in degrees and is an integer with a value between -90 and +90 inclusive; a negative value means the antenna is tilted up (above horizontal). This parameter is optional for Category A devices and conditional for Category B devices.
+          description: Antenna downtilt in degrees and is an integer with a value between
+            -90 and +90 inclusive; a negative value means the antenna is tilted
+            up (above horizontal). This parameter is optional for Category A
+            devices and conditional for Category B devices.
           format: int32
           type: integer
         antennaGain:
-          description: Peak antenna gain in dBi. This parameter is an integer with a value between -127 and +128 (dBi) inclusive.
+          description: Peak antenna gain in dBi. This parameter is an integer with a value
+            between -127 and +128 (dBi) inclusive.
           format: int32
           type: integer
         antennaModel:
-          description: If an external antenna is used, the antenna model is optionally provided in this field. The string has a maximum length of 128 octets.
+          description: If an external antenna is used, the antenna model is optionally
+            provided in this field. The string has a maximum length of 128
+            octets.
           type: string
         cpeCbsdIndication:
-          description: If present, this parameter specifies whether the CBSD is a CPE-CBSD or not.
+          description: If present, this parameter specifies whether the CBSD is a CPE-CBSD
+            or not.
           type: boolean
         eirpCapability:
-          description: This parameter is the maximum device EIRP in units of dBm/10MHz and is an integer with a value between -127 and +47 (dBm/10 MHz) inclusive. If not included, SAS interprets it as maximum allowable EIRP in units of dBm/10MHz for device category.
+          description: This parameter is the maximum device EIRP in units of dBm/10MHz and
+            is an integer with a value between -127 and +47 (dBm/10 MHz)
+            inclusive. If not included, SAS interprets it as maximum allowable
+            EIRP in units of dBm/10MHz for device category.
           format: int32
           type: integer
         height:
-          description: Device antenna height in meters. When the `heightType` parameter value is "AGL", the antenna height should be given relative to ground level. When the `heightType` parameter value is "AMSL", it is given with respect to WGS84 datum.
+          description: Device antenna height in meters. When the `heightType` parameter
+            value is "AGL", the antenna height should be given relative to
+            ground level. When the `heightType` parameter value is "AMSL", it is
+            given with respect to WGS84 datum.
           format: double
           type: number
         heightType:
@@ -1187,22 +1251,33 @@ components:
             - HEIGHT_TYPE_AMSL
           type: string
         horizontalAccuracy:
-          description: A positive number in meters to indicate accuracy of the device antenna horizontal location. This optional parameter should only be present if its value is less than the FCC requirement of 50 meters.
+          description: A positive number in meters to indicate accuracy of the device
+            antenna horizontal location. This optional parameter should only be
+            present if its value is less than the FCC requirement of 50 meters.
           format: double
           type: number
         indoorDeployment:
-          description: "Whether the device antenna is indoor or not. `true`: indoor. `false`: outdoor."
+          description: "Whether the device antenna is indoor or not. `true`: indoor.
+            `false`: outdoor."
           type: boolean
         latitude:
-          description: Latitude of the device antenna location in degrees relative to the WGS 84 datum. The allowed range is from -90.000000 to +90.000000. Positive values represent latitudes north of the equator; negative values south of the equator.
+          description: Latitude of the device antenna location in degrees relative to the
+            WGS 84 datum. The allowed range is from -90.000000 to +90.000000.
+            Positive values represent latitudes north of the equator; negative
+            values south of the equator.
           format: double
           type: number
         longitude:
-          description: Longitude of the device antenna location in degrees relative to the WGS 84 datum. The allowed range is from -180.000000 to +180.000000. Positive values represent longitudes east of the prime meridian; negative values west of the prime meridian.
+          description: Longitude of the device antenna location in degrees relative to the
+            WGS 84 datum. The allowed range is from -180.000000 to +180.000000.
+            Positive values represent longitudes east of the prime meridian;
+            negative values west of the prime meridian.
           format: double
           type: number
         verticalAccuracy:
-          description: A positive number in meters to indicate accuracy of the device antenna vertical location. This optional parameter should only be present if its value is less than the FCC requirement of 3 meters.
+          description: A positive number in meters to indicate accuracy of the device
+            antenna vertical location. This optional parameter should only be
+            present if its value is less than the FCC requirement of 3 meters.
           format: double
           type: number
       type: object
@@ -1215,7 +1290,9 @@ components:
             $ref: "#/components/schemas/SasPortalCustomer"
           type: array
         nextPageToken:
-          description: A pagination token returned from a previous call to ListCustomers that indicates from where listing should continue. If the field is missing or empty, it means there are no more customers.
+          description: A pagination token returned from a previous call to ListCustomers
+            that indicates from where listing should continue. If the field is
+            missing or empty, it means there are no more customers.
           type: string
       type: object
     SasPortalListDeploymentsResponse:
@@ -1227,7 +1304,9 @@ components:
             $ref: "#/components/schemas/SasPortalDeployment"
           type: array
         nextPageToken:
-          description: A pagination token returned from a previous call to ListDeployments that indicates from where listing should continue. If the field is missing or empty, it means there are no more deployments.
+          description: A pagination token returned from a previous call to ListDeployments
+            that indicates from where listing should continue. If the field is
+            missing or empty, it means there are no more deployments.
           type: string
       type: object
     SasPortalListDevicesResponse:
@@ -1239,14 +1318,18 @@ components:
             $ref: "#/components/schemas/SasPortalDevice"
           type: array
         nextPageToken:
-          description: A pagination token returned from a previous call to ListDevices that indicates from where listing should continue. If the field is missing or empty, it means there is no more devices.
+          description: A pagination token returned from a previous call to ListDevices
+            that indicates from where listing should continue. If the field is
+            missing or empty, it means there is no more devices.
           type: string
       type: object
     SasPortalListNodesResponse:
       description: Response for ListNodes.
       properties:
         nextPageToken:
-          description: A pagination token returned from a previous call to ListNodes that indicates from where listing should continue. If the field is missing or empty, it means there is no more nodes.
+          description: A pagination token returned from a previous call to ListNodes that
+            indicates from where listing should continue. If the field is
+            missing or empty, it means there is no more nodes.
           type: string
         nodes:
           description: The nodes that match the request.
@@ -1258,21 +1341,24 @@ components:
       description: Request for MoveDeployment.
       properties:
         destination:
-          description: Required. The name of the new parent resource node or customer to reparent the deployment under.
+          description: Required. The name of the new parent resource node or customer to
+            reparent the deployment under.
           type: string
       type: object
     SasPortalMoveDeviceRequest:
       description: Request for MoveDevice.
       properties:
         destination:
-          description: Required. The name of the new parent resource node or customer to reparent the device under.
+          description: Required. The name of the new parent resource node or customer to
+            reparent the device under.
           type: string
       type: object
     SasPortalMoveNodeRequest:
       description: Request for MoveNode.
       properties:
         destination:
-          description: Required. The name of the new parent resource node or customer to reparent the node under.
+          description: Required. The name of the new parent resource node or customer to
+            reparent the node under.
           type: string
       type: object
     SasPortalNode:
@@ -1291,10 +1377,13 @@ components:
           type: array
       type: object
     SasPortalOperation:
-      description: This resource represents a long-running operation that is the result of a network API call.
+      description: This resource represents a long-running operation that is the
+        result of a network API call.
       properties:
         done:
-          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          description: If the value is `false`, it means the operation is still in
+            progress. If `true`, the operation is completed, and either `error`
+            or `response` is available.
           type: boolean
         error:
           $ref: "#/components/schemas/SasPortalStatus"
@@ -1302,15 +1391,29 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          description: Service-specific metadata associated with the operation. It
+            typically contains progress information and common metadata such as
+            create time. Some services might not provide such metadata. Any
+            method that returns a long-running operation should document the
+            metadata type, if any.
           type: object
         name:
-          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          description: The server-assigned name, which is only unique within the same
+            service that originally returns it. If you use the default HTTP
+            mapping, the `name` should be a resource name ending with
+            `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal response of the operation in case of success. If the
+            original method returns no data on success, such as `Delete`, the
+            response is `google.protobuf.Empty`. If the original method is
+            standard `Get`/`Create`/`Update`, the response should be the
+            resource. For other methods, the response should have the type
+            `XxxResponse`, where `Xxx` is the original method name. For example,
+            if the original method name is `TakeSnapshot()`, the inferred
+            response type is `TakeSnapshotResponse`.
           type: object
       type: object
     SasPortalPolicy:
@@ -1322,7 +1425,15 @@ components:
             $ref: "#/components/schemas/SasPortalAssignment"
           type: array
         etag:
-          description: "The etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the etag in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An etag is returned in the response to GetPolicy, and systems are expected to put that etag in the request to SetPolicy to ensure that their change will be applied to the same version of the policy. If no etag is provided in the call to GetPolicy, then the existing policy is overwritten blindly."
+          description: "The etag is used for optimistic concurrency control as a way to
+            help prevent simultaneous updates of a policy from overwriting each
+            other. It is strongly suggested that systems make use of the etag in
+            the read-modify-write cycle to perform policy updates in order to
+            avoid race conditions: An etag is returned in the response to
+            GetPolicy, and systems are expected to put that etag in the request
+            to SetPolicy to ensure that their change will be applied to the same
+            version of the policy. If no etag is provided in the call to
+            GetPolicy, then the existing policy is overwritten blindly."
           format: byte
           type: string
       type: object
@@ -1333,7 +1444,8 @@ components:
           $ref: "#/components/schemas/SasPortalPolicy"
           description: Required. The policy to be applied to the `resource`.
         resource:
-          description: Required. The resource for which the policy is being specified. This policy replaces any existing policy.
+          description: Required. The resource for which the policy is being specified.
+            This policy replaces any existing policy.
           type: string
       type: object
     SasPortalSignDeviceRequest:
@@ -1341,24 +1453,34 @@ components:
       properties:
         device:
           $ref: "#/components/schemas/SasPortalDevice"
-          description: Required. The device to sign. The device fields name, fcc_id and serial_number must be set. The user_id field must be set.
+          description: Required. The device to sign. The device fields name, fcc_id and
+            serial_number must be set. The user_id field must be set.
       type: object
     SasPortalStatus:
-      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      description: "The `Status` type defines a logical error model that is suitable
+        for different programming environments, including REST APIs and RPC
+        APIs. It is used by [gRPC](https://github.com/grpc). Each `Status`
+        message contains three pieces of data: error code, error message, and
+        error details. You can find out more about this error model and how to
+        work with it in the [API Design
+        Guide](https://cloud.google.com/apis/design/errors)."
       properties:
         code:
           description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          description: A list of messages that carry the error details. There is a common
+            set of message types for APIs to use.
           items:
             additionalProperties:
               description: Properties of the object. Contains field @type with type URL.
             type: object
           type: array
         message:
-          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          description: A developer-facing error message, which should be in English. Any
+            user-facing error message should be localized and sent in the
+            google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     SasPortalTestPermissionsRequest:
@@ -1386,21 +1508,26 @@ components:
       description: Request for UpdateSignedDevice.
       properties:
         encodedDevice:
-          description: Required. The JSON Web Token signed using a CPI private key. Payload must be the JSON encoding of the device. The user_id field must be set.
+          description: Required. The JSON Web Token signed using a CPI private key.
+            Payload must be the JSON encoding of the device. The user_id field
+            must be set.
           format: byte
           type: string
         installerId:
-          description: Required. Unique installer ID (CPI ID) from the Certified Professional Installers database.
+          description: Required. Unique installer ID (CPI ID) from the Certified
+            Professional Installers database.
           type: string
       type: object
     SasPortalValidateInstallerRequest:
       description: Request for ValidateInstaller.
       properties:
         encodedSecret:
-          description: Required. JSON Web Token signed using a CPI private key. Payload must include a "secret" claim whose value is the secret.
+          description: Required. JSON Web Token signed using a CPI private key. Payload
+            must include a "secret" claim whose value is the secret.
           type: string
         installerId:
-          description: Required. Unique installer id (CPI ID) from the Certified Professional Installers database.
+          description: Required. Unique installer id (CPI ID) from the Certified
+            Professional Installers database.
           type: string
         secret:
           description: Required. Secret returned by the GenerateSecret.
@@ -1417,7 +1544,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1425,6 +1552,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/userinfo.email: View your email address
+            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

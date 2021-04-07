@@ -71,10 +71,13 @@ paths:
         - calendars
   "/calendars/{calendarId}":
     delete:
-      description: Deletes a secondary calendar. Use calendars.clear for clearing all events on primary calendars.
+      description: Deletes a secondary calendar. Use calendars.clear for clearing all
+        events on primary calendars.
       operationId: calendar.calendars.delete
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -94,7 +97,9 @@ paths:
       description: Returns metadata for a calendar.
       operationId: calendar.calendars.get
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -130,7 +135,9 @@ paths:
       description: Updates metadata for a calendar. This method supports patch semantics.
       operationId: calendar.calendars.patch
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -159,7 +166,9 @@ paths:
       description: Updates metadata for a calendar.
       operationId: calendar.calendars.update
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -189,13 +198,17 @@ paths:
       description: Returns the rules in the access control list for the calendar.
       operationId: calendar.acl.list
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
           schema:
             type: string
-        - description: Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+        - description: Maximum number of entries returned on one result page. By default
+            the value is 100 entries. The page size can never be larger than 250
+            entries. Optional.
           in: query
           name: maxResults
           schema:
@@ -206,13 +219,20 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.
+        - description: Whether to include deleted ACLs in the result. Deleted ACLs are
+            represented by role equal to "none". Deleted ACLs will always be
+            included if syncToken is provided. Optional. The default is False.
           in: query
           name: showDeleted
           schema:
             type: boolean
         - description: >-
-            Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
+            Token obtained from the nextSyncToken field returned on the last
+            page of results from the previous list request. It makes the result
+            of this list request contain only entries that have changed since
+            then. All entries deleted since the previous list request will
+            always be in the result set and it is not allowed to set showDeleted
+            to False.
 
             If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
 
@@ -249,13 +269,16 @@ paths:
       description: Creates an access control rule.
       operationId: calendar.acl.insert
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
           schema:
             type: string
-        - description: Whether to send notifications about the calendar sharing change. Optional. The default is True.
+        - description: Whether to send notifications about the calendar sharing change.
+            Optional. The default is True.
           in: query
           name: sendNotifications
           schema:
@@ -292,13 +315,17 @@ paths:
       description: Watch for changes to ACL resources.
       operationId: calendar.acl.watch
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
           schema:
             type: string
-        - description: Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+        - description: Maximum number of entries returned on one result page. By default
+            the value is 100 entries. The page size can never be larger than 250
+            entries. Optional.
           in: query
           name: maxResults
           schema:
@@ -309,13 +336,20 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.
+        - description: Whether to include deleted ACLs in the result. Deleted ACLs are
+            represented by role equal to "none". Deleted ACLs will always be
+            included if syncToken is provided. Optional. The default is False.
           in: query
           name: showDeleted
           schema:
             type: boolean
         - description: >-
-            Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
+            Token obtained from the nextSyncToken field returned on the last
+            page of results from the previous list request. It makes the result
+            of this list request contain only entries that have changed since
+            then. All entries deleted since the previous list request will
+            always be in the result set and it is not allowed to set showDeleted
+            to False.
 
             If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
 
@@ -350,7 +384,9 @@ paths:
       description: Deletes an access control rule.
       operationId: calendar.acl.delete
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -376,7 +412,9 @@ paths:
       description: Returns an access control rule.
       operationId: calendar.acl.get
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -418,7 +456,9 @@ paths:
       description: Updates an access control rule. This method supports patch semantics.
       operationId: calendar.acl.patch
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -430,7 +470,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Whether to send notifications about the calendar sharing change. Note that there are no notifications on access removal. Optional. The default is True.
+        - description: Whether to send notifications about the calendar sharing change.
+            Note that there are no notifications on access removal. Optional.
+            The default is True.
           in: query
           name: sendNotifications
           schema:
@@ -458,7 +500,9 @@ paths:
       description: Updates an access control rule.
       operationId: calendar.acl.update
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -470,7 +514,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Whether to send notifications about the calendar sharing change. Note that there are no notifications on access removal. Optional. The default is True.
+        - description: Whether to send notifications about the calendar sharing change.
+            Note that there are no notifications on access removal. Optional.
+            The default is True.
           in: query
           name: sendNotifications
           schema:
@@ -504,10 +550,13 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Clears a primary calendar. This operation deletes all events associated with the primary calendar of an account.
+      description: Clears a primary calendar. This operation deletes all events
+        associated with the primary calendar of an account.
       operationId: calendar.calendars.clear
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -528,35 +577,49 @@ paths:
       description: Returns events on the specified calendar.
       operationId: calendar.events.list
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
           schema:
             type: string
-        - description: Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).
+        - description: Deprecated and ignored. A value will always be returned in the
+            email field for the organizer, creator and attendees, even if no
+            real email address is available (i.e. a generated, non-working value
+            will be provided).
           in: query
           name: alwaysIncludeEmail
           schema:
             type: boolean
-        - description: Specifies event ID in the iCalendar format to be included in the response. Optional.
+        - description: Specifies event ID in the iCalendar format to be included in the
+            response. Optional.
           in: query
           name: iCalUID
           schema:
             type: string
-        - description: The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
+        - description: The maximum number of attendees to include in the response. If
+            there are more than the specified number of attendees, only the
+            participant is returned. Optional.
           in: query
           name: maxAttendees
           schema:
             minimum: 1
             type: integer
-        - description: Maximum number of events returned on one result page. The number of events in the resulting page may be less than this value, or none at all, even if there are more events matching the query. Incomplete pages can be detected by a non-empty nextPageToken field in the response. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
+        - description: Maximum number of events returned on one result page. The number of
+            events in the resulting page may be less than this value, or none at
+            all, even if there are more events matching the query. Incomplete
+            pages can be detected by a non-empty nextPageToken field in the
+            response. By default the value is 250 events. The page size can
+            never be larger than 2500 events. Optional.
           in: query
           name: maxResults
           schema:
             minimum: 1
             type: integer
-        - description: The order of the events returned in the result. Optional. The default is an unspecified, stable order.
+        - description: The order of the events returned in the result. Optional. The
+            default is an unspecified, stable order.
           in: query
           name: orderBy
           schema:
@@ -569,7 +632,9 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Extended properties constraint specified as propertyName=value. Matches only private properties. This parameter might be repeated multiple times to return events that match all given constraints.
+        - description: Extended properties constraint specified as propertyName=value.
+            Matches only private properties. This parameter might be repeated
+            multiple times to return events that match all given constraints.
           explode: true
           in: query
           name: privateExtendedProperty
@@ -578,12 +643,15 @@ paths:
               type: string
             type: array
           style: form
-        - description: Free text search terms to find events that match these terms in any field, except for extended properties. Optional.
+        - description: Free text search terms to find events that match these terms in any
+            field, except for extended properties. Optional.
           in: query
           name: q
           schema:
             type: string
-        - description: Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.
+        - description: Extended properties constraint specified as propertyName=value.
+            Matches only shared properties. This parameter might be repeated
+            multiple times to return events that match all given constraints.
           explode: true
           in: query
           name: sharedExtendedProperty
@@ -592,23 +660,38 @@ paths:
               type: string
             type: array
           style: form
-        - description: Whether to include deleted events (with status equals "cancelled") in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.
+        - description: Whether to include deleted events (with status equals "cancelled")
+            in the result. Cancelled instances of recurring events (but not the
+            underlying recurring event) will still be included if showDeleted
+            and singleEvents are both False. If showDeleted and singleEvents are
+            both True, only single instances of deleted events (but not the
+            underlying recurring events) are returned. Optional. The default is
+            False.
           in: query
           name: showDeleted
           schema:
             type: boolean
-        - description: Whether to include hidden invitations in the result. Optional. The default is False.
+        - description: Whether to include hidden invitations in the result. Optional. The
+            default is False.
           in: query
           name: showHiddenInvitations
           schema:
             type: boolean
-        - description: Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False.
+        - description: Whether to expand recurring events into instances and only return
+            single one-off events and instances of recurring events, but not the
+            underlying recurring events themselves. Optional. The default is
+            False.
           in: query
           name: singleEvents
           schema:
             type: boolean
         - description: >-
-            Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
+            Token obtained from the nextSyncToken field returned on the last
+            page of results from the previous list request. It makes the result
+            of this list request contain only entries that have changed since
+            then. All events deleted since the previous list request will always
+            be in the result set and it is not allowed to set showDeleted to
+            False.
 
             There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
 
@@ -638,22 +721,36 @@ paths:
           name: syncToken
           schema:
             type: string
-        - description: Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin.
+        - description: Upper bound (exclusive) for an event's start time to filter by.
+            Optional. The default is not to filter by start time. Must be an
+            RFC3339 timestamp with mandatory time zone offset, for example,
+            2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
+            provided but are ignored. If timeMin is set, timeMax must be greater
+            than timeMin.
           in: query
           name: timeMax
           schema:
             type: string
-        - description: Lower bound (exclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax.
+        - description: Lower bound (exclusive) for an event's end time to filter by.
+            Optional. The default is not to filter by end time. Must be an
+            RFC3339 timestamp with mandatory time zone offset, for example,
+            2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
+            provided but are ignored. If timeMax is set, timeMin must be smaller
+            than timeMax.
           in: query
           name: timeMin
           schema:
             type: string
-        - description: Time zone used in the response. Optional. The default is the time zone of the calendar.
+        - description: Time zone used in the response. Optional. The default is the time
+            zone of the calendar.
           in: query
           name: timeZone
           schema:
             type: string
-        - description: Lower bound for an event's last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.
+        - description: Lower bound for an event's last modification time (as a RFC3339
+            timestamp) to filter by. When specified, entries deleted since this
+            time will always be included regardless of showDeleted. Optional.
+            The default is not to filter by last modification time.
           in: query
           name: updatedMin
           schema:
@@ -696,20 +793,28 @@ paths:
       description: Creates an event.
       operationId: calendar.events.insert
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
           schema:
             type: string
-        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
+        - description: Version number of conference data supported by the API client.
+            Version 0 assumes no conference data support and ignores conference
+            data in the event's body. Version 1 enables support for copying of
+            ConferenceData as well as for creating new conferences using the
+            createRequest field of conferenceData. The default is 0.
           in: query
           name: conferenceDataVersion
           schema:
             maximum: 1
             minimum: 0
             type: integer
-        - description: The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
+        - description: The maximum number of attendees to include in the response. If
+            there are more than the specified number of attendees, only the
+            participant is returned. Optional.
           in: query
           name: maxAttendees
           schema:
@@ -724,7 +829,8 @@ paths:
           name: sendNotifications
           schema:
             type: boolean
-        - description: Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
+        - description: Whether to send notifications about the creation of the new event.
+            Note that some emails might still be sent. The default is false.
           in: query
           name: sendUpdates
           schema:
@@ -733,7 +839,8 @@ paths:
               - externalOnly
               - none
             type: string
-        - description: Whether API client performing operation supports event attachments. Optional. The default is False.
+        - description: Whether API client performing operation supports event attachments.
+            Optional. The default is False.
           in: query
           name: supportsAttachments
           schema:
@@ -771,23 +878,31 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Imports an event. This operation is used to add a private copy of an existing event to a calendar.
+      description: Imports an event. This operation is used to add a private copy of
+        an existing event to a calendar.
       operationId: calendar.events.import
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
           schema:
             type: string
-        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
+        - description: Version number of conference data supported by the API client.
+            Version 0 assumes no conference data support and ignores conference
+            data in the event's body. Version 1 enables support for copying of
+            ConferenceData as well as for creating new conferences using the
+            createRequest field of conferenceData. The default is 0.
           in: query
           name: conferenceDataVersion
           schema:
             maximum: 1
             minimum: 0
             type: integer
-        - description: Whether API client performing operation supports event attachments. Optional. The default is False.
+        - description: Whether API client performing operation supports event attachments.
+            Optional. The default is False.
           in: query
           name: supportsAttachments
           schema:
@@ -828,7 +943,9 @@ paths:
       description: Creates an event based on a simple text string.
       operationId: calendar.events.quickAdd
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -849,7 +966,8 @@ paths:
           name: sendNotifications
           schema:
             type: boolean
-        - description: Guests who should receive notifications about the creation of the new event.
+        - description: Guests who should receive notifications about the creation of the
+            new event.
           in: query
           name: sendUpdates
           schema:
@@ -889,35 +1007,49 @@ paths:
       description: Watch for changes to Events resources.
       operationId: calendar.events.watch
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
           schema:
             type: string
-        - description: Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).
+        - description: Deprecated and ignored. A value will always be returned in the
+            email field for the organizer, creator and attendees, even if no
+            real email address is available (i.e. a generated, non-working value
+            will be provided).
           in: query
           name: alwaysIncludeEmail
           schema:
             type: boolean
-        - description: Specifies event ID in the iCalendar format to be included in the response. Optional.
+        - description: Specifies event ID in the iCalendar format to be included in the
+            response. Optional.
           in: query
           name: iCalUID
           schema:
             type: string
-        - description: The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
+        - description: The maximum number of attendees to include in the response. If
+            there are more than the specified number of attendees, only the
+            participant is returned. Optional.
           in: query
           name: maxAttendees
           schema:
             minimum: 1
             type: integer
-        - description: Maximum number of events returned on one result page. The number of events in the resulting page may be less than this value, or none at all, even if there are more events matching the query. Incomplete pages can be detected by a non-empty nextPageToken field in the response. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
+        - description: Maximum number of events returned on one result page. The number of
+            events in the resulting page may be less than this value, or none at
+            all, even if there are more events matching the query. Incomplete
+            pages can be detected by a non-empty nextPageToken field in the
+            response. By default the value is 250 events. The page size can
+            never be larger than 2500 events. Optional.
           in: query
           name: maxResults
           schema:
             minimum: 1
             type: integer
-        - description: The order of the events returned in the result. Optional. The default is an unspecified, stable order.
+        - description: The order of the events returned in the result. Optional. The
+            default is an unspecified, stable order.
           in: query
           name: orderBy
           schema:
@@ -930,7 +1062,9 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Extended properties constraint specified as propertyName=value. Matches only private properties. This parameter might be repeated multiple times to return events that match all given constraints.
+        - description: Extended properties constraint specified as propertyName=value.
+            Matches only private properties. This parameter might be repeated
+            multiple times to return events that match all given constraints.
           explode: true
           in: query
           name: privateExtendedProperty
@@ -939,12 +1073,15 @@ paths:
               type: string
             type: array
           style: form
-        - description: Free text search terms to find events that match these terms in any field, except for extended properties. Optional.
+        - description: Free text search terms to find events that match these terms in any
+            field, except for extended properties. Optional.
           in: query
           name: q
           schema:
             type: string
-        - description: Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.
+        - description: Extended properties constraint specified as propertyName=value.
+            Matches only shared properties. This parameter might be repeated
+            multiple times to return events that match all given constraints.
           explode: true
           in: query
           name: sharedExtendedProperty
@@ -953,23 +1090,38 @@ paths:
               type: string
             type: array
           style: form
-        - description: Whether to include deleted events (with status equals "cancelled") in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.
+        - description: Whether to include deleted events (with status equals "cancelled")
+            in the result. Cancelled instances of recurring events (but not the
+            underlying recurring event) will still be included if showDeleted
+            and singleEvents are both False. If showDeleted and singleEvents are
+            both True, only single instances of deleted events (but not the
+            underlying recurring events) are returned. Optional. The default is
+            False.
           in: query
           name: showDeleted
           schema:
             type: boolean
-        - description: Whether to include hidden invitations in the result. Optional. The default is False.
+        - description: Whether to include hidden invitations in the result. Optional. The
+            default is False.
           in: query
           name: showHiddenInvitations
           schema:
             type: boolean
-        - description: Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False.
+        - description: Whether to expand recurring events into instances and only return
+            single one-off events and instances of recurring events, but not the
+            underlying recurring events themselves. Optional. The default is
+            False.
           in: query
           name: singleEvents
           schema:
             type: boolean
         - description: >-
-            Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
+            Token obtained from the nextSyncToken field returned on the last
+            page of results from the previous list request. It makes the result
+            of this list request contain only entries that have changed since
+            then. All events deleted since the previous list request will always
+            be in the result set and it is not allowed to set showDeleted to
+            False.
 
             There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
 
@@ -999,22 +1151,36 @@ paths:
           name: syncToken
           schema:
             type: string
-        - description: Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin.
+        - description: Upper bound (exclusive) for an event's start time to filter by.
+            Optional. The default is not to filter by start time. Must be an
+            RFC3339 timestamp with mandatory time zone offset, for example,
+            2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
+            provided but are ignored. If timeMin is set, timeMax must be greater
+            than timeMin.
           in: query
           name: timeMax
           schema:
             type: string
-        - description: Lower bound (exclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax.
+        - description: Lower bound (exclusive) for an event's end time to filter by.
+            Optional. The default is not to filter by end time. Must be an
+            RFC3339 timestamp with mandatory time zone offset, for example,
+            2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be
+            provided but are ignored. If timeMax is set, timeMin must be smaller
+            than timeMax.
           in: query
           name: timeMin
           schema:
             type: string
-        - description: Time zone used in the response. Optional. The default is the time zone of the calendar.
+        - description: Time zone used in the response. Optional. The default is the time
+            zone of the calendar.
           in: query
           name: timeZone
           schema:
             type: string
-        - description: Lower bound for an event's last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.
+        - description: Lower bound for an event's last modification time (as a RFC3339
+            timestamp) to filter by. When specified, entries deleted since this
+            time will always be included regardless of showDeleted. Optional.
+            The default is not to filter by last modification time.
           in: query
           name: updatedMin
           schema:
@@ -1055,7 +1221,9 @@ paths:
       description: Deletes an event.
       operationId: calendar.events.delete
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -1076,7 +1244,8 @@ paths:
           name: sendNotifications
           schema:
             type: boolean
-        - description: Guests who should receive notifications about the deletion of the event.
+        - description: Guests who should receive notifications about the deletion of the
+            event.
           in: query
           name: sendUpdates
           schema:
@@ -1103,7 +1272,9 @@ paths:
       description: Returns an event.
       operationId: calendar.events.get
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -1115,18 +1286,24 @@ paths:
           required: true
           schema:
             type: string
-        - description: Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).
+        - description: Deprecated and ignored. A value will always be returned in the
+            email field for the organizer, creator and attendees, even if no
+            real email address is available (i.e. a generated, non-working value
+            will be provided).
           in: query
           name: alwaysIncludeEmail
           schema:
             type: boolean
-        - description: The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
+        - description: The maximum number of attendees to include in the response. If
+            there are more than the specified number of attendees, only the
+            participant is returned. Optional.
           in: query
           name: maxAttendees
           schema:
             minimum: 1
             type: integer
-        - description: Time zone used in the response. Optional. The default is the time zone of the calendar.
+        - description: Time zone used in the response. Optional. The default is the time
+            zone of the calendar.
           in: query
           name: timeZone
           schema:
@@ -1169,7 +1346,9 @@ paths:
       description: Updates an event. This method supports patch semantics.
       operationId: calendar.events.patch
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -1181,19 +1360,28 @@ paths:
           required: true
           schema:
             type: string
-        - description: Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).
+        - description: Deprecated and ignored. A value will always be returned in the
+            email field for the organizer, creator and attendees, even if no
+            real email address is available (i.e. a generated, non-working value
+            will be provided).
           in: query
           name: alwaysIncludeEmail
           schema:
             type: boolean
-        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
+        - description: Version number of conference data supported by the API client.
+            Version 0 assumes no conference data support and ignores conference
+            data in the event's body. Version 1 enables support for copying of
+            ConferenceData as well as for creating new conferences using the
+            createRequest field of conferenceData. The default is 0.
           in: query
           name: conferenceDataVersion
           schema:
             maximum: 1
             minimum: 0
             type: integer
-        - description: The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
+        - description: The maximum number of attendees to include in the response. If
+            there are more than the specified number of attendees, only the
+            participant is returned. Optional.
           in: query
           name: maxAttendees
           schema:
@@ -1208,7 +1396,8 @@ paths:
           name: sendNotifications
           schema:
             type: boolean
-        - description: Guests who should receive notifications about the event update (for example, title changes, etc.).
+        - description: Guests who should receive notifications about the event update (for
+            example, title changes, etc.).
           in: query
           name: sendUpdates
           schema:
@@ -1217,7 +1406,8 @@ paths:
               - externalOnly
               - none
             type: string
-        - description: Whether API client performing operation supports event attachments. Optional. The default is False.
+        - description: Whether API client performing operation supports event attachments.
+            Optional. The default is False.
           in: query
           name: supportsAttachments
           schema:
@@ -1249,7 +1439,9 @@ paths:
       description: Updates an event.
       operationId: calendar.events.update
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -1261,19 +1453,28 @@ paths:
           required: true
           schema:
             type: string
-        - description: Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).
+        - description: Deprecated and ignored. A value will always be returned in the
+            email field for the organizer, creator and attendees, even if no
+            real email address is available (i.e. a generated, non-working value
+            will be provided).
           in: query
           name: alwaysIncludeEmail
           schema:
             type: boolean
-        - description: Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
+        - description: Version number of conference data supported by the API client.
+            Version 0 assumes no conference data support and ignores conference
+            data in the event's body. Version 1 enables support for copying of
+            ConferenceData as well as for creating new conferences using the
+            createRequest field of conferenceData. The default is 0.
           in: query
           name: conferenceDataVersion
           schema:
             maximum: 1
             minimum: 0
             type: integer
-        - description: The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
+        - description: The maximum number of attendees to include in the response. If
+            there are more than the specified number of attendees, only the
+            participant is returned. Optional.
           in: query
           name: maxAttendees
           schema:
@@ -1288,7 +1489,8 @@ paths:
           name: sendNotifications
           schema:
             type: boolean
-        - description: Guests who should receive notifications about the event update (for example, title changes, etc.).
+        - description: Guests who should receive notifications about the event update (for
+            example, title changes, etc.).
           in: query
           name: sendUpdates
           schema:
@@ -1297,7 +1499,8 @@ paths:
               - externalOnly
               - none
             type: string
-        - description: Whether API client performing operation supports event attachments. Optional. The default is False.
+        - description: Whether API client performing operation supports event attachments.
+            Optional. The default is False.
           in: query
           name: supportsAttachments
           schema:
@@ -1330,7 +1533,9 @@ paths:
       description: Returns instances of the specified recurring event.
       operationId: calendar.events.instances
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -1342,18 +1547,25 @@ paths:
           required: true
           schema:
             type: string
-        - description: Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).
+        - description: Deprecated and ignored. A value will always be returned in the
+            email field for the organizer, creator and attendees, even if no
+            real email address is available (i.e. a generated, non-working value
+            will be provided).
           in: query
           name: alwaysIncludeEmail
           schema:
             type: boolean
-        - description: The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
+        - description: The maximum number of attendees to include in the response. If
+            there are more than the specified number of attendees, only the
+            participant is returned. Optional.
           in: query
           name: maxAttendees
           schema:
             minimum: 1
             type: integer
-        - description: Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.
+        - description: Maximum number of events returned on one result page. By default
+            the value is 250 events. The page size can never be larger than 2500
+            events. Optional.
           in: query
           name: maxResults
           schema:
@@ -1369,22 +1581,29 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Whether to include deleted events (with status equals "cancelled") in the result. Cancelled instances of recurring events will still be included if singleEvents is False. Optional. The default is False.
+        - description: Whether to include deleted events (with status equals "cancelled")
+            in the result. Cancelled instances of recurring events will still be
+            included if singleEvents is False. Optional. The default is False.
           in: query
           name: showDeleted
           schema:
             type: boolean
-        - description: Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset.
+        - description: Upper bound (exclusive) for an event's start time to filter by.
+            Optional. The default is not to filter by start time. Must be an
+            RFC3339 timestamp with mandatory time zone offset.
           in: query
           name: timeMax
           schema:
             type: string
-        - description: Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset.
+        - description: Lower bound (inclusive) for an event's end time to filter by.
+            Optional. The default is not to filter by end time. Must be an
+            RFC3339 timestamp with mandatory time zone offset.
           in: query
           name: timeMin
           schema:
             type: string
-        - description: Time zone used in the response. Optional. The default is the time zone of the calendar.
+        - description: Time zone used in the response. Optional. The default is the time
+            zone of the calendar.
           in: query
           name: timeZone
           schema:
@@ -1436,7 +1655,8 @@ paths:
       description: Moves an event to another calendar, i.e. changes an event's organizer.
       operationId: calendar.events.move
       parameters:
-        - description: Calendar identifier of the source calendar where the event currently is on.
+        - description: Calendar identifier of the source calendar where the event
+            currently is on.
           in: path
           name: calendarId
           required: true
@@ -1448,7 +1668,8 @@ paths:
           required: true
           schema:
             type: string
-        - description: Calendar identifier of the target calendar where the event is to be moved to.
+        - description: Calendar identifier of the target calendar where the event is to be
+            moved to.
           in: query
           name: destination
           required: true
@@ -1463,7 +1684,8 @@ paths:
           name: sendNotifications
           schema:
             type: boolean
-        - description: Guests who should receive notifications about the change of the event's organizer.
+        - description: Guests who should receive notifications about the change of the
+            event's organizer.
           in: query
           name: sendUpdates
           schema:
@@ -1603,13 +1825,16 @@ paths:
       description: Returns the calendars on the user's calendar list.
       operationId: calendar.calendarList.list
       parameters:
-        - description: Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+        - description: Maximum number of entries returned on one result page. By default
+            the value is 100 entries. The page size can never be larger than 250
+            entries. Optional.
           in: query
           name: maxResults
           schema:
             minimum: 1
             type: integer
-        - description: The minimum access role for the user in the returned entries. Optional. The default is no restriction.
+        - description: The minimum access role for the user in the returned entries.
+            Optional. The default is no restriction.
           in: query
           name: minAccessRole
           schema:
@@ -1624,7 +1849,8 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Whether to include deleted calendar list entries in the result. Optional. The default is False.
+        - description: Whether to include deleted calendar list entries in the result.
+            Optional. The default is False.
           in: query
           name: showDeleted
           schema:
@@ -1635,7 +1861,14 @@ paths:
           schema:
             type: boolean
         - description: >-
-            Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.
+            Token obtained from the nextSyncToken field returned on the last
+            page of results from the previous list request. It makes the result
+            of this list request contain only entries that have changed since
+            then. If only read-only fields such as calendar properties or ACLs
+            have changed, the entry won't be returned. All entries deleted and
+            hidden since the previous list request will always be in the result
+            set and it is not allowed to set showDeleted neither showHidden to
+            False.
 
             To ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.
 
@@ -1678,7 +1911,10 @@ paths:
       description: Inserts an existing calendar into the user's calendar list.
       operationId: calendar.calendarList.insert
       parameters:
-        - description: Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
+        - description: Whether to use the foregroundColor and backgroundColor fields to
+            write the calendar colors (RGB). If this feature is used, the
+            index-based colorId field will be set to the best matching option
+            automatically. Optional. The default is False.
           in: query
           name: colorRgbFormat
           schema:
@@ -1715,13 +1951,16 @@ paths:
       description: Watch for changes to CalendarList resources.
       operationId: calendar.calendarList.watch
       parameters:
-        - description: Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+        - description: Maximum number of entries returned on one result page. By default
+            the value is 100 entries. The page size can never be larger than 250
+            entries. Optional.
           in: query
           name: maxResults
           schema:
             minimum: 1
             type: integer
-        - description: The minimum access role for the user in the returned entries. Optional. The default is no restriction.
+        - description: The minimum access role for the user in the returned entries.
+            Optional. The default is no restriction.
           in: query
           name: minAccessRole
           schema:
@@ -1736,7 +1975,8 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Whether to include deleted calendar list entries in the result. Optional. The default is False.
+        - description: Whether to include deleted calendar list entries in the result.
+            Optional. The default is False.
           in: query
           name: showDeleted
           schema:
@@ -1747,7 +1987,14 @@ paths:
           schema:
             type: boolean
         - description: >-
-            Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.
+            Token obtained from the nextSyncToken field returned on the last
+            page of results from the previous list request. It makes the result
+            of this list request contain only entries that have changed since
+            then. If only read-only fields such as calendar properties or ACLs
+            have changed, the entry won't be returned. All entries deleted and
+            hidden since the previous list request will always be in the result
+            set and it is not allowed to set showDeleted neither showHidden to
+            False.
 
             To ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.
 
@@ -1788,7 +2035,9 @@ paths:
       description: Removes a calendar from the user's calendar list.
       operationId: calendar.calendarList.delete
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -1808,7 +2057,9 @@ paths:
       description: Returns a calendar from the user's calendar list.
       operationId: calendar.calendarList.get
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
@@ -1841,16 +2092,22 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Updates an existing calendar on the user's calendar list. This method supports patch semantics.
+      description: Updates an existing calendar on the user's calendar list. This
+        method supports patch semantics.
       operationId: calendar.calendarList.patch
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
           schema:
             type: string
-        - description: Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
+        - description: Whether to use the foregroundColor and backgroundColor fields to
+            write the calendar colors (RGB). If this feature is used, the
+            index-based colorId field will be set to the best matching option
+            automatically. Optional. The default is False.
           in: query
           name: colorRgbFormat
           schema:
@@ -1878,13 +2135,18 @@ paths:
       description: Updates an existing calendar on the user's calendar list.
       operationId: calendar.calendarList.update
       parameters:
-        - description: Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
+        - description: Calendar identifier. To retrieve calendar IDs call the
+            calendarList.list method. If you want to access the primary calendar
+            of the currently logged in user, use the "primary" keyword.
           in: path
           name: calendarId
           required: true
           schema:
             type: string
-        - description: Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
+        - description: Whether to use the foregroundColor and backgroundColor fields to
+            write the calendar colors (RGB). If this feature is used, the
+            index-based colorId field will be set to the best matching option
+            automatically. Optional. The default is False.
           in: query
           name: colorRgbFormat
           schema:
@@ -1913,7 +2175,9 @@ paths:
       description: Returns all user settings for the authenticated user.
       operationId: calendar.settings.list
       parameters:
-        - description: Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+        - description: Maximum number of entries returned on one result page. By default
+            the value is 100 entries. The page size can never be larger than 250
+            entries. Optional.
           in: query
           name: maxResults
           schema:
@@ -1925,7 +2189,10 @@ paths:
           schema:
             type: string
         - description: >-
-            Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
+            Token obtained from the nextSyncToken field returned on the last
+            page of results from the previous list request. It makes the result
+            of this list request contain only entries that have changed since
+            then.
 
             If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
 
@@ -1979,7 +2246,9 @@ paths:
       description: Watch for changes to Settings resources.
       operationId: calendar.settings.watch
       parameters:
-        - description: Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+        - description: Maximum number of entries returned on one result page. By default
+            the value is 100 entries. The page size can never be larger than 250
+            entries. Optional.
           in: query
           name: maxResults
           schema:
@@ -1991,7 +2260,10 @@ paths:
           schema:
             type: string
         - description: >-
-            Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
+            Token obtained from the nextSyncToken field returned on the last
+            page of results from the previous list request. It makes the result
+            of this list request contain only entries that have changed since
+            then.
 
             If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
 
@@ -2087,7 +2359,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -2105,7 +2379,8 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+      description: An opaque string that represents a user for quota purposes. Must
+        not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -2132,10 +2407,14 @@ components:
           description: Type of the collection ("calendar#acl").
           type: string
         nextPageToken:
-          description: Token used to access the next page of this result. Omitted if no further results are available, in which case nextSyncToken is provided.
+          description: Token used to access the next page of this result. Omitted if no
+            further results are available, in which case nextSyncToken is
+            provided.
           type: string
         nextSyncToken:
-          description: Token used at a later point in time to retrieve only the entries that have changed since this result was returned. Omitted if further results are available, in which case nextPageToken is provided.
+          description: Token used at a later point in time to retrieve only the entries
+            that have changed since this result was returned. Omitted if further
+            results are available, in which case nextPageToken is provided.
           type: string
       type: object
     AclRule:
@@ -2144,7 +2423,8 @@ components:
           description: ETag of the resource.
           type: string
         id:
-          description: Identifier of the Access Control List (ACL) rule. See Sharing calendars.
+          description: Identifier of the Access Control List (ACL) rule. See Sharing
+            calendars.
           type: string
         kind:
           default: calendar#aclRule
@@ -2180,7 +2460,8 @@ components:
                 - "domain" - Limits the scope to a domain.  Note: The permissions granted to the "default", or public, scope apply to any user, authenticated or not.
               type: string
             value:
-              description: The email address of a user or group, or the name of a domain, depending on the scope type. Omitted for type "default".
+              description: The email address of a user or group, or the name of a domain,
+                depending on the scope type. Omitted for type "default".
               type: string
           type: object
       type: object
@@ -2188,7 +2469,8 @@ components:
       properties:
         conferenceProperties:
           $ref: "#/components/schemas/ConferenceProperties"
-          description: Conferencing properties for this calendar, for example what types of conferences are allowed.
+          description: Conferencing properties for this calendar, for example what types
+            of conferences are allowed.
         description:
           description: Description of the calendar. Optional.
           type: string
@@ -2196,7 +2478,8 @@ components:
           description: ETag of the resource.
           type: string
         id:
-          description: Identifier of the calendar. To retrieve IDs call the calendarList.list() method.
+          description: Identifier of the calendar. To retrieve IDs call the
+            calendarList.list() method.
           type: string
         kind:
           default: calendar#calendar
@@ -2209,7 +2492,8 @@ components:
           description: Title of the calendar.
           type: string
         timeZone:
-          description: The time zone of the calendar. (Formatted as an IANA Time Zone Database name, e.g. "Europe/Zurich".) Optional.
+          description: The time zone of the calendar. (Formatted as an IANA Time Zone
+            Database name, e.g. "Europe/Zurich".) Optional.
           type: string
       type: object
     CalendarList:
@@ -2227,17 +2511,22 @@ components:
           description: Type of the collection ("calendar#calendarList").
           type: string
         nextPageToken:
-          description: Token used to access the next page of this result. Omitted if no further results are available, in which case nextSyncToken is provided.
+          description: Token used to access the next page of this result. Omitted if no
+            further results are available, in which case nextSyncToken is
+            provided.
           type: string
         nextSyncToken:
-          description: Token used at a later point in time to retrieve only the entries that have changed since this result was returned. Omitted if further results are available, in which case nextPageToken is provided.
+          description: Token used at a later point in time to retrieve only the entries
+            that have changed since this result was returned. Omitted if further
+            results are available, in which case nextPageToken is provided.
           type: string
       type: object
     CalendarListEntry:
       properties:
         accessRole:
           description: >-
-            The effective access role that the authenticated user has on the calendar. Read-only. Possible values are:  
+            The effective access role that the authenticated user has on the
+            calendar. Read-only. Possible values are:  
 
             - "freeBusyReader" - Provides read access to free/busy information. 
 
@@ -2248,22 +2537,32 @@ components:
             - "owner" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs.
           type: string
         backgroundColor:
-          description: The main color of the calendar in the hexadecimal format "#0088aa". This property supersedes the index-based colorId property. To set or change this property, you need to specify colorRgbFormat=true in the parameters of the insert, update and patch methods. Optional.
+          description: The main color of the calendar in the hexadecimal format "#0088aa".
+            This property supersedes the index-based colorId property. To set or
+            change this property, you need to specify colorRgbFormat=true in the
+            parameters of the insert, update and patch methods. Optional.
           type: string
         colorId:
-          description: The color of the calendar. This is an ID referring to an entry in the calendar section of the colors definition (see the colors endpoint). This property is superseded by the backgroundColor and foregroundColor properties and can be ignored when using these properties. Optional.
+          description: The color of the calendar. This is an ID referring to an entry in
+            the calendar section of the colors definition (see the colors
+            endpoint). This property is superseded by the backgroundColor and
+            foregroundColor properties and can be ignored when using these
+            properties. Optional.
           type: string
         conferenceProperties:
           $ref: "#/components/schemas/ConferenceProperties"
-          description: Conferencing properties for this calendar, for example what types of conferences are allowed.
+          description: Conferencing properties for this calendar, for example what types
+            of conferences are allowed.
         defaultReminders:
-          description: The default reminders that the authenticated user has for this calendar.
+          description: The default reminders that the authenticated user has for this
+            calendar.
           items:
             $ref: "#/components/schemas/EventReminder"
           type: array
         deleted:
           default: false
-          description: Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
+          description: Whether this calendar list entry has been deleted from the calendar
+            list. Read-only. Optional. The default is False.
           type: boolean
         description:
           description: Description of the calendar. Optional. Read-only.
@@ -2272,11 +2571,17 @@ components:
           description: ETag of the resource.
           type: string
         foregroundColor:
-          description: The foreground color of the calendar in the hexadecimal format "#ffffff". This property supersedes the index-based colorId property. To set or change this property, you need to specify colorRgbFormat=true in the parameters of the insert, update and patch methods. Optional.
+          description: The foreground color of the calendar in the hexadecimal format
+            "#ffffff". This property supersedes the index-based colorId
+            property. To set or change this property, you need to specify
+            colorRgbFormat=true in the parameters of the insert, update and
+            patch methods. Optional.
           type: string
         hidden:
           default: false
-          description: Whether the calendar has been hidden from the list. Optional. The attribute is only returned when the calendar is hidden, in which case the value is true.
+          description: Whether the calendar has been hidden from the list. Optional. The
+            attribute is only returned when the calendar is hidden, in which
+            case the value is true.
           type: boolean
         id:
           description: Identifier of the calendar.
@@ -2286,10 +2591,12 @@ components:
           description: Type of the resource ("calendar#calendarListEntry").
           type: string
         location:
-          description: Geographic location of the calendar as free-form text. Optional. Read-only.
+          description: Geographic location of the calendar as free-form text. Optional.
+            Read-only.
           type: string
         notificationSettings:
-          description: The notifications that the authenticated user is receiving for this calendar.
+          description: The notifications that the authenticated user is receiving for this
+            calendar.
           properties:
             notifications:
               description: The list of notifications set for this calendar.
@@ -2299,17 +2606,20 @@ components:
           type: object
         primary:
           default: false
-          description: Whether the calendar is the primary calendar of the authenticated user. Read-only. Optional. The default is False.
+          description: Whether the calendar is the primary calendar of the authenticated
+            user. Read-only. Optional. The default is False.
           type: boolean
         selected:
           default: false
-          description: Whether the calendar content shows up in the calendar UI. Optional. The default is False.
+          description: Whether the calendar content shows up in the calendar UI. Optional.
+            The default is False.
           type: boolean
         summary:
           description: Title of the calendar. Read-only.
           type: string
         summaryOverride:
-          description: The summary that the authenticated user has set for this calendar. Optional.
+          description: The summary that the authenticated user has set for this calendar.
+            Optional.
           type: string
         timeZone:
           description: The time zone of the calendar. Optional. Read-only.
@@ -2319,7 +2629,8 @@ components:
       properties:
         method:
           description: >-
-            The method used to deliver the notification. The possible value is:  
+            The method used to deliver the notification. The possible value
+            is:  
 
             - "email" - Notifications are sent via email.  
 
@@ -2348,7 +2659,8 @@ components:
           description: The address where notifications are delivered for this channel.
           type: string
         expiration:
-          description: Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
+          description: Date and time of notification channel expiration, expressed as a
+            Unix timestamp, in milliseconds. Optional.
           format: int64
           type: string
         id:
@@ -2356,28 +2668,34 @@ components:
           type: string
         kind:
           default: api#channel
-          description: Identifies this as a notification channel used to watch for changes to a resource, which is "api#channel".
+          description: Identifies this as a notification channel used to watch for changes
+            to a resource, which is "api#channel".
           type: string
         params:
           additionalProperties:
             description: Declares a new parameter by name.
             type: string
-          description: Additional parameters controlling delivery channel behavior. Optional.
+          description: Additional parameters controlling delivery channel behavior.
+            Optional.
           type: object
         payload:
           description: A Boolean value to indicate whether payload is wanted. Optional.
           type: boolean
         resourceId:
-          description: An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
+          description: An opaque ID that identifies the resource being watched on this
+            channel. Stable across different API versions.
           type: string
         resourceUri:
           description: A version-specific identifier for the watched resource.
           type: string
         token:
-          description: An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
+          description: An arbitrary string delivered to the target address with each
+            notification delivered over this channel. Optional.
           type: string
         type:
-          description: The type of delivery mechanism used for this channel. Valid values are "web_hook" (or "webhook"). Both values refer to a channel where Http requests are used to deliver messages.
+          description: The type of delivery mechanism used for this channel. Valid values
+            are "web_hook" (or "webhook"). Both values refer to a channel where
+            Http requests are used to deliver messages.
           type: string
       type: object
     ColorDefinition:
@@ -2386,7 +2704,8 @@ components:
           description: The background color associated with this color definition.
           type: string
         foreground:
-          description: The foreground color that can be used to write on top of a background with 'background' color.
+          description: The foreground color that can be used to write on top of a
+            background with 'background' color.
           type: string
       type: object
     Colors:
@@ -2395,20 +2714,25 @@ components:
           additionalProperties:
             $ref: "#/components/schemas/ColorDefinition"
             description: A calendar color defintion.
-          description: A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its color field. Read-only.
+          description: A global palette of calendar colors, mapping from the color ID to
+            its definition. A calendarListEntry resource refers to one of these
+            color IDs in its color field. Read-only.
           type: object
         event:
           additionalProperties:
             $ref: "#/components/schemas/ColorDefinition"
             description: An event color definition.
-          description: A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its color field. Read-only.
+          description: A global palette of event colors, mapping from the color ID to its
+            definition. An event resource may refer to one of these color IDs in
+            its color field. Read-only.
           type: object
         kind:
           default: calendar#colors
           description: Type of the resource ("calendar#colors").
           type: string
         updated:
-          description: Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
+          description: Last modification time of the color palette (as a RFC3339
+            timestamp). Read-only.
           format: date-time
           type: string
       type: object
@@ -2441,12 +2765,15 @@ components:
         createRequest:
           $ref: "#/components/schemas/CreateConferenceRequest"
           description: >-
-            A request to generate a new conference and attach it to the event. The data is generated asynchronously. To see whether the data is present check the status field.
+            A request to generate a new conference and attach it to the event.
+            The data is generated asynchronously. To see whether the data is
+            present check the status field.
 
             Either conferenceSolution and at least one entryPoint, or createRequest is required.
         entryPoints:
           description: >-
-            Information about individual conference entry points, such as URLs or phone numbers.
+            Information about individual conference entry points, such as URLs
+            or phone numbers.
 
             All of them must belong to the same conference.
 
@@ -2455,11 +2782,14 @@ components:
             $ref: "#/components/schemas/EntryPoint"
           type: array
         notes:
-          description: Additional notes (such as instructions from the domain administrator, legal notices) to display to the user. Can contain HTML. The maximum length is 2048 characters. Optional.
+          description: Additional notes (such as instructions from the domain
+            administrator, legal notices) to display to the user. Can contain
+            HTML. The maximum length is 2048 characters. Optional.
           type: string
         parameters:
           $ref: "#/components/schemas/ConferenceParameters"
-          description: Additional properties related to a conference. An example would be a solution-specific setting for enabling video streaming.
+          description: Additional properties related to a conference. An example would be
+            a solution-specific setting for enabling video streaming.
         signature:
           description: >-
             The signature of the conference data.
@@ -2488,7 +2818,8 @@ components:
       properties:
         allowedConferenceSolutionTypes:
           description: >-
-            The types of conference solutions that are supported for this calendar.
+            The types of conference solutions that are supported for this
+            calendar.
 
             The possible values are:  
 
@@ -2523,7 +2854,8 @@ components:
           type: string
         key:
           $ref: "#/components/schemas/ConferenceSolutionKey"
-          description: The key which can uniquely identify the conference solution for this event.
+          description: The key which can uniquely identify the conference solution for
+            this event.
         name:
           description: The user-visible name of this solution. Not localized.
           type: string
@@ -2566,14 +2898,17 @@ components:
       properties:
         accessCode:
           description: >-
-            The access code to access the conference. The maximum length is 128 characters.
+            The access code to access the conference. The maximum length is 128
+            characters.
 
             When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin} fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
 
             Optional.
           type: string
         entryPointFeatures:
-          description: Features of the entry point, such as being toll or toll-free. One entry point can have multiple features. However, toll and toll-free cannot be both set on the same entry point.
+          description: Features of the entry point, such as being toll or toll-free. One
+            entry point can have multiple features. However, toll and toll-free
+            cannot be both set on the same entry point.
           items:
             type: string
           type: array
@@ -2593,7 +2928,8 @@ components:
           type: string
         label:
           description: >-
-            The label for the URI. Visible to end users. Not localized. The maximum length is 512 characters.
+            The label for the URI. Visible to end users. Not localized. The
+            maximum length is 512 characters.
 
             Examples:  
 
@@ -2609,7 +2945,8 @@ components:
           type: string
         meetingCode:
           description: >-
-            The meeting code to access the conference. The maximum length is 128 characters.
+            The meeting code to access the conference. The maximum length is
+            128 characters.
 
             When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin} fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
 
@@ -2617,13 +2954,15 @@ components:
           type: string
         passcode:
           description: >-
-            The passcode to access the conference. The maximum length is 128 characters.
+            The passcode to access the conference. The maximum length is 128
+            characters.
 
             When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin} fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
           type: string
         password:
           description: >-
-            The password to access the conference. The maximum length is 128 characters.
+            The password to access the conference. The maximum length is 128
+            characters.
 
             When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin} fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
 
@@ -2631,7 +2970,8 @@ components:
           type: string
         pin:
           description: >-
-            The PIN to access the conference. The maximum length is 128 characters.
+            The PIN to access the conference. The maximum length is 128
+            characters.
 
             When creating new conference data, populate only the subset of {meetingCode, accessCode, passcode, password, pin} fields that match the terminology that the conference provider uses. Only the populated fields should be displayed.
 
@@ -2639,7 +2979,8 @@ components:
           type: string
         regionCode:
           description: >-
-            The CLDR/ISO 3166 region code for the country associated with this phone access. Example: "SE" for Sweden.
+            The CLDR/ISO 3166 region code for the country associated with this
+            phone access. Example: "SE" for Sweden.
 
             Calendar backend will populate this field only for EntryPointType.PHONE.
           type: string
@@ -2680,11 +3021,13 @@ components:
       properties:
         anyoneCanAddSelf:
           default: false
-          description: Whether anyone can invite themselves to the event (currently works for Google+ events only). Optional. The default is False.
+          description: Whether anyone can invite themselves to the event (currently works
+            for Google+ events only). Optional. The default is False.
           type: boolean
         attachments:
           description: >-
-            File attachments for the event. Currently only Google Drive attachments are supported.
+            File attachments for the event. Currently only Google Drive
+            attachments are supported.
 
             In order to modify attachments the supportsAttachments request parameter should be set to true.
 
@@ -2693,20 +3036,33 @@ components:
             $ref: "#/components/schemas/EventAttachment"
           type: array
         attendees:
-          description: The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users. Service accounts need to use domain-wide delegation of authority to populate the attendee list.
+          description: The attendees of the event. See the Events with attendees guide for
+            more information on scheduling events with other calendar users.
+            Service accounts need to use domain-wide delegation of authority to
+            populate the attendee list.
           items:
             $ref: "#/components/schemas/EventAttendee"
           type: array
         attendeesOmitted:
           default: false
-          description: Whether attendees may have been omitted from the event's representation. When retrieving an event, this may be due to a restriction specified by the maxAttendee query parameter. When updating an event, this can be used to only update the participant's response. Optional. The default is False.
+          description: Whether attendees may have been omitted from the event's
+            representation. When retrieving an event, this may be due to a
+            restriction specified by the maxAttendee query parameter. When
+            updating an event, this can be used to only update the participant's
+            response. Optional. The default is False.
           type: boolean
         colorId:
-          description: The color of the event. This is an ID referring to an entry in the event section of the colors definition (see the  colors endpoint). Optional.
+          description: The color of the event. This is an ID referring to an entry in the
+            event section of the colors definition (see the  colors endpoint).
+            Optional.
           type: string
         conferenceData:
           $ref: "#/components/schemas/ConferenceData"
-          description: The conference-related information, such as details of a Google Meet conference. To create new conference details use the createRequest field. To persist your changes, remember to set the conferenceDataVersion request parameter to 1 for all event modification requests.
+          description: The conference-related information, such as details of a Google
+            Meet conference. To create new conference details use the
+            createRequest field. To persist your changes, remember to set the
+            conferenceDataVersion request parameter to 1 for all event
+            modification requests.
         created:
           description: Creation time of the event (as a RFC3339 timestamp). Read-only.
           format: date-time
@@ -2721,11 +3077,13 @@ components:
               description: The creator's email address, if available.
               type: string
             id:
-              description: The creator's Profile ID, if available. It corresponds to the id field in the People collection of the Google+ API
+              description: The creator's Profile ID, if available. It corresponds to the id
+                field in the People collection of the Google+ API
               type: string
             self:
               default: false
-              description: Whether the creator corresponds to the calendar on which this copy of the event appears. Read-only. The default is False.
+              description: Whether the creator corresponds to the calendar on which this copy
+                of the event appears. Read-only. The default is False.
               type: boolean
           type: object
         description:
@@ -2733,21 +3091,22 @@ components:
           type: string
         end:
           $ref: "#/components/schemas/EventDateTime"
-          description: The (exclusive) end time of the event. For a recurring event, this is the end time of the first instance.
+          description: The (exclusive) end time of the event. For a recurring event, this
+            is the end time of the first instance.
         endTimeUnspecified:
           default: false
-          description: Whether the end time is actually unspecified. An end time is still provided for compatibility reasons, even if this attribute is set to True. The default is False.
+          description: Whether the end time is actually unspecified. An end time is still
+            provided for compatibility reasons, even if this attribute is set to
+            True. The default is False.
           type: boolean
         etag:
           description: ETag of the resource.
           type: string
         eventType:
           default: default
-          description: >-
+          description: |-
             Specific type of the event. Read-only. Possible values are:  
-
             - "default" - A regular event or not further specified. 
-
             - "outOfOffice" - An out-of-office event.
           type: string
         extendedProperties:
@@ -2757,17 +3116,21 @@ components:
               additionalProperties:
                 description: The name of the private property and the corresponding value.
                 type: string
-              description: Properties that are private to the copy of the event that appears on this calendar.
+              description: Properties that are private to the copy of the event that appears
+                on this calendar.
               type: object
             shared:
               additionalProperties:
                 description: The name of the shared property and the corresponding value.
                 type: string
-              description: Properties that are shared between copies of the event on other attendees' calendars.
+              description: Properties that are shared between copies of the event on other
+                attendees' calendars.
               type: object
           type: object
         gadget:
-          description: A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
+          description: A gadget that extends this event. Gadgets are deprecated; this
+            structure is instead only used for returning birthday calendar
+            metadata.
           properties:
             display:
               description: >-
@@ -2778,7 +3141,8 @@ components:
                 - "chip" - The gadget displays when the event is clicked.
               type: string
             height:
-              description: The gadget's height in pixels. The height must be an integer greater than 0. Optional. Deprecated.
+              description: The gadget's height in pixels. The height must be an integer
+                greater than 0. Optional. Deprecated.
               format: int32
               type: integer
             iconLink:
@@ -2800,37 +3164,47 @@ components:
               description: The gadget's type. Deprecated.
               type: string
             width:
-              description: The gadget's width in pixels. The width must be an integer greater than 0. Optional. Deprecated.
+              description: The gadget's width in pixels. The width must be an integer greater
+                than 0. Optional. Deprecated.
               format: int32
               type: integer
           type: object
         guestsCanInviteOthers:
           default: true
-          description: Whether attendees other than the organizer can invite others to the event. Optional. The default is True.
+          description: Whether attendees other than the organizer can invite others to the
+            event. Optional. The default is True.
           type: boolean
         guestsCanModify:
           default: false
-          description: Whether attendees other than the organizer can modify the event. Optional. The default is False.
+          description: Whether attendees other than the organizer can modify the event.
+            Optional. The default is False.
           type: boolean
         guestsCanSeeOtherGuests:
           default: true
-          description: Whether attendees other than the organizer can see who the event's attendees are. Optional. The default is True.
+          description: Whether attendees other than the organizer can see who the event's
+            attendees are. Optional. The default is True.
           type: boolean
         hangoutLink:
-          description: An absolute link to the Google+ hangout associated with this event. Read-only.
+          description: An absolute link to the Google+ hangout associated with this event.
+            Read-only.
           type: string
         htmlLink:
-          description: An absolute link to this event in the Google Calendar Web UI. Read-only.
+          description: An absolute link to this event in the Google Calendar Web UI.
+            Read-only.
           type: string
         iCalUID:
           description: >-
-            Event unique identifier as defined in RFC5545. It is used to uniquely identify events accross calendaring systems and must be supplied when importing events via the import method.
+            Event unique identifier as defined in RFC5545. It is used to
+            uniquely identify events accross calendaring systems and must be
+            supplied when importing events via the import method.
 
             Note that the icalUID and the id are not identical and only one of them should be supplied at event creation time. One difference in their semantics is that in recurring events, all occurrences of one event have different ids while they all share the same icalUIDs.
           type: string
         id:
           description: >-
-            Opaque identifier of the event. When creating new single or recurring events, you can specify their IDs. Provided IDs must follow these rules:  
+            Opaque identifier of the event. When creating new single or
+            recurring events, you can specify their IDs. Provided IDs must
+            follow these rules:  
 
             - characters allowed in the ID are those used in base32hex encoding, i.e. lowercase letters a-v and digits 0-9, see section 3.1.2 in RFC2938 
 
@@ -2851,45 +3225,67 @@ components:
           type: string
         locked:
           default: false
-          description: Whether this is a locked event copy where no changes can be made to the main event fields "summary", "description", "location", "start", "end" or "recurrence". The default is False. Read-Only.
+          description: Whether this is a locked event copy where no changes can be made to
+            the main event fields "summary", "description", "location", "start",
+            "end" or "recurrence". The default is False. Read-Only.
           type: boolean
         organizer:
-          description: The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
+          description: The organizer of the event. If the organizer is also an attendee,
+            this is indicated with a separate entry in attendees with the
+            organizer field set to True. To change the organizer, use the move
+            operation. Read-only, except when importing an event.
           properties:
             displayName:
               description: The organizer's name, if available.
               type: string
             email:
-              description: The organizer's email address, if available. It must be a valid email address as per RFC5322.
+              description: The organizer's email address, if available. It must be a valid
+                email address as per RFC5322.
               type: string
             id:
-              description: The organizer's Profile ID, if available. It corresponds to the id field in the People collection of the Google+ API
+              description: The organizer's Profile ID, if available. It corresponds to the id
+                field in the People collection of the Google+ API
               type: string
             self:
               default: false
-              description: Whether the organizer corresponds to the calendar on which this copy of the event appears. Read-only. The default is False.
+              description: Whether the organizer corresponds to the calendar on which this
+                copy of the event appears. Read-only. The default is False.
               type: boolean
           type: object
         originalStartTime:
           $ref: "#/components/schemas/EventDateTime"
-          description: For an instance of a recurring event, this is the time at which this event would start according to the recurrence data in the recurring event identified by recurringEventId. It uniquely identifies the instance within the recurring event series even if the instance was moved to a different time. Immutable.
+          description: For an instance of a recurring event, this is the time at which
+            this event would start according to the recurrence data in the
+            recurring event identified by recurringEventId. It uniquely
+            identifies the instance within the recurring event series even if
+            the instance was moved to a different time. Immutable.
         privateCopy:
           default: false
-          description: If set to True, Event propagation is disabled. Note that it is not the same thing as Private event properties. Optional. Immutable. The default is False.
+          description: If set to True, Event propagation is disabled. Note that it is not
+            the same thing as Private event properties. Optional. Immutable. The
+            default is False.
           type: boolean
         recurrence:
-          description: List of RRULE, EXRULE, RDATE and EXDATE lines for a recurring event, as specified in RFC5545. Note that DTSTART and DTEND lines are not allowed in this field; event start and end times are specified in the start and end fields. This field is omitted for single events or instances of recurring events.
+          description: List of RRULE, EXRULE, RDATE and EXDATE lines for a recurring
+            event, as specified in RFC5545. Note that DTSTART and DTEND lines
+            are not allowed in this field; event start and end times are
+            specified in the start and end fields. This field is omitted for
+            single events or instances of recurring events.
           items:
             type: string
           type: array
         recurringEventId:
-          description: For an instance of a recurring event, this is the id of the recurring event to which this instance belongs. Immutable.
+          description: For an instance of a recurring event, this is the id of the
+            recurring event to which this instance belongs. Immutable.
           type: string
         reminders:
           description: Information about the event's reminders for the authenticated user.
           properties:
             overrides:
-              description: If the event doesn't use the default reminders, this lists the reminders specific to the event, or, if not set, indicates that no reminders are set for this event. The maximum number of override reminders is 5.
+              description: If the event doesn't use the default reminders, this lists the
+                reminders specific to the event, or, if not set, indicates that
+                no reminders are set for this event. The maximum number of
+                override reminders is 5.
               items:
                 $ref: "#/components/schemas/EventReminder"
               type: array
@@ -2902,18 +3298,24 @@ components:
           format: int32
           type: integer
         source:
-          description: Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
+          description: Source from which the event was created. For example, a web page,
+            an email message or any document identifiable by an URL with HTTP or
+            HTTPS scheme. Can only be seen or modified by the creator of the
+            event.
           properties:
             title:
-              description: Title of the source; for example a title of a web page or an email subject.
+              description: Title of the source; for example a title of a web page or an email
+                subject.
               type: string
             url:
-              description: URL of the source pointing to a resource. The URL scheme must be HTTP or HTTPS.
+              description: URL of the source pointing to a resource. The URL scheme must be
+                HTTP or HTTPS.
               type: string
           type: object
         start:
           $ref: "#/components/schemas/EventDateTime"
-          description: The (inclusive) start time of the event. For a recurring event, this is the start time of the first instance.
+          description: The (inclusive) start time of the event. For a recurring event,
+            this is the start time of the first instance.
         status:
           description: >-
             Status of the event. Optional. Possible values are:  
@@ -2942,14 +3344,16 @@ components:
         transparency:
           default: opaque
           description: >-
-            Whether the event blocks time on the calendar. Optional. Possible values are:  
+            Whether the event blocks time on the calendar. Optional. Possible
+            values are:  
 
             - "opaque" - Default value. The event does block time on the calendar. This is equivalent to setting Show me as to Busy in the Calendar UI. 
 
             - "transparent" - The event does not block time on the calendar. This is equivalent to setting Show me as to Available in the Calendar UI.
           type: string
         updated:
-          description: Last modification time of the event (as a RFC3339 timestamp). Read-only.
+          description: Last modification time of the event (as a RFC3339 timestamp).
+            Read-only.
           format: date-time
           type: string
         visibility:
@@ -3007,23 +3411,29 @@ components:
           type: string
         email:
           description: >-
-            The attendee's email address, if available. This field must be present when adding an attendee. It must be a valid email address as per RFC5322.
+            The attendee's email address, if available. This field must be
+            present when adding an attendee. It must be a valid email address as
+            per RFC5322.
 
             Required when adding an attendee.
           type: string
         id:
-          description: The attendee's Profile ID, if available. It corresponds to the id field in the People collection of the Google+ API
+          description: The attendee's Profile ID, if available. It corresponds to the id
+            field in the People collection of the Google+ API
           type: string
         optional:
           default: false
           description: Whether this is an optional attendee. Optional. The default is False.
           type: boolean
         organizer:
-          description: Whether the attendee is the organizer of the event. Read-only. The default is False.
+          description: Whether the attendee is the organizer of the event. Read-only. The
+            default is False.
           type: boolean
         resource:
           default: false
-          description: Whether the attendee is a resource. Can only be set when the attendee is added to the event for the first time. Subsequent modifications are ignored. Optional. The default is False.
+          description: Whether the attendee is a resource. Can only be set when the
+            attendee is added to the event for the first time. Subsequent
+            modifications are ignored. Optional. The default is False.
           type: boolean
         responseStatus:
           description: >-
@@ -3039,7 +3449,8 @@ components:
           type: string
         self:
           default: false
-          description: Whether this entry represents the calendar on which this copy of the event appears. Read-only. The default is False.
+          description: Whether this entry represents the calendar on which this copy of
+            the event appears. Read-only. The default is False.
           type: boolean
       type: object
     EventDateTime:
@@ -3049,28 +3460,33 @@ components:
           format: date
           type: string
         dateTime:
-          description: The time, as a combined date-time value (formatted according to RFC3339). A time zone offset is required unless a time zone is explicitly specified in timeZone.
+          description: The time, as a combined date-time value (formatted according to
+            RFC3339). A time zone offset is required unless a time zone is
+            explicitly specified in timeZone.
           format: date-time
           type: string
         timeZone:
-          description: The time zone in which the time is specified. (Formatted as an IANA Time Zone Database name, e.g. "Europe/Zurich".) For recurring events this field is required and specifies the time zone in which the recurrence is expanded. For single events this field is optional and indicates a custom time zone for the event start/end.
+          description: The time zone in which the time is specified. (Formatted as an IANA
+            Time Zone Database name, e.g. "Europe/Zurich".) For recurring events
+            this field is required and specifies the time zone in which the
+            recurrence is expanded. For single events this field is optional and
+            indicates a custom time zone for the event start/end.
           type: string
       type: object
     EventReminder:
       properties:
         method:
-          description: >-
+          description: |-
             The method used by this reminder. Possible values are:  
-
             - "email" - Reminders are sent via email. 
-
             - "popup" - Reminders are sent via a UI popup.  
-
             Required when adding a reminder.
           type: string
         minutes:
           description: >-
-            Number of minutes before the start of the event when the reminder should trigger. Valid values are between 0 and 40320 (4 weeks in minutes).
+            Number of minutes before the start of the event when the reminder
+            should trigger. Valid values are between 0 and 40320 (4 weeks in
+            minutes).
 
             Required when adding a reminder.
           format: int32
@@ -3080,7 +3496,8 @@ components:
       properties:
         accessRole:
           description: >-
-            The user's access role for this calendar. Read-only. Possible values are:  
+            The user's access role for this calendar. Read-only. Possible
+            values are:  
 
             - "none" - The user has no access. 
 
@@ -3093,7 +3510,10 @@ components:
             - "owner" - The user has ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs.
           type: string
         defaultReminders:
-          description: The default reminders on the calendar for the authenticated user. These reminders apply to all events on this calendar that do not explicitly override them (i.e. do not have reminders.useDefault set to True).
+          description: The default reminders on the calendar for the authenticated user.
+            These reminders apply to all events on this calendar that do not
+            explicitly override them (i.e. do not have reminders.useDefault set
+            to True).
           items:
             $ref: "#/components/schemas/EventReminder"
           type: array
@@ -3113,10 +3533,14 @@ components:
           description: Type of the collection ("calendar#events").
           type: string
         nextPageToken:
-          description: Token used to access the next page of this result. Omitted if no further results are available, in which case nextSyncToken is provided.
+          description: Token used to access the next page of this result. Omitted if no
+            further results are available, in which case nextSyncToken is
+            provided.
           type: string
         nextSyncToken:
-          description: Token used at a later point in time to retrieve only the entries that have changed since this result was returned. Omitted if further results are available, in which case nextPageToken is provided.
+          description: Token used at a later point in time to retrieve only the entries
+            that have changed since this result was returned. Omitted if further
+            results are available, in which case nextPageToken is provided.
           type: string
         summary:
           description: Title of the calendar. Read-only.
@@ -3125,14 +3549,16 @@ components:
           description: The time zone of the calendar. Read-only.
           type: string
         updated:
-          description: Last modification time of the calendar (as a RFC3339 timestamp). Read-only.
+          description: Last modification time of the calendar (as a RFC3339 timestamp).
+            Read-only.
           format: date-time
           type: string
       type: object
     FreeBusyCalendar:
       properties:
         busy:
-          description: List of time ranges during which this calendar should be regarded as busy.
+          description: List of time ranges during which this calendar should be regarded
+            as busy.
           items:
             $ref: "#/components/schemas/TimePeriod"
           type: array
@@ -3158,11 +3584,14 @@ components:
     FreeBusyRequest:
       properties:
         calendarExpansionMax:
-          description: Maximal number of calendars for which FreeBusy information is to be provided. Optional. Maximum value is 50.
+          description: Maximal number of calendars for which FreeBusy information is to be
+            provided. Optional. Maximum value is 50.
           format: int32
           type: integer
         groupExpansionMax:
-          description: Maximal number of calendar identifiers to be provided for a single group. Optional. An error is returned for a group with more members than this value. Maximum value is 100.
+          description: Maximal number of calendar identifiers to be provided for a single
+            group. Optional. An error is returned for a group with more members
+            than this value. Maximum value is 100.
           format: int32
           type: integer
         items:
@@ -3229,7 +3658,9 @@ components:
           description: Type of the resource ("calendar#setting").
           type: string
         value:
-          description: Value of the user setting. The format of the value depends on the ID of the setting. It must always be a UTF-8 string of length up to 1024 characters.
+          description: Value of the user setting. The format of the value depends on the
+            ID of the setting. It must always be a UTF-8 string of length up to
+            1024 characters.
           type: string
       type: object
     Settings:
@@ -3247,10 +3678,14 @@ components:
           description: Type of the collection ("calendar#settings").
           type: string
         nextPageToken:
-          description: Token used to access the next page of this result. Omitted if no further results are available, in which case nextSyncToken is provided.
+          description: Token used to access the next page of this result. Omitted if no
+            further results are available, in which case nextSyncToken is
+            provided.
           type: string
         nextSyncToken:
-          description: Token used at a later point in time to retrieve only the entries that have changed since this result was returned. Omitted if further results are available, in which case nextPageToken is provided.
+          description: Token used at a later point in time to retrieve only the entries
+            that have changed since this result was returned. Omitted if further
+            results are available, in which case nextPageToken is provided.
           type: string
       type: object
     TimePeriod:
@@ -3271,10 +3706,12 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/calendar: See, edit, share, and permanently delete all the calendars you can access using Google Calendar
+            https://www.googleapis.com/auth/calendar: See, edit, share, and permanently
+              delete all the calendars you can access using Google Calendar
             https://www.googleapis.com/auth/calendar.events: View and edit events on all your calendars
             https://www.googleapis.com/auth/calendar.events.readonly: View events on all your calendars
-            https://www.googleapis.com/auth/calendar.readonly: See and download any calendar you can access using your Google Calendar
+            https://www.googleapis.com/auth/calendar.readonly: See and download any calendar
+              you can access using your Google Calendar
             https://www.googleapis.com/auth/calendar.settings.readonly: View your Calendar settings
       type: oauth2
     Oauth2c:
@@ -3283,10 +3720,12 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/calendar: See, edit, share, and permanently delete all the calendars you can access using Google Calendar
+            https://www.googleapis.com/auth/calendar: See, edit, share, and permanently
+              delete all the calendars you can access using Google Calendar
             https://www.googleapis.com/auth/calendar.events: View and edit events on all your calendars
             https://www.googleapis.com/auth/calendar.events.readonly: View events on all your calendars
-            https://www.googleapis.com/auth/calendar.readonly: See and download any calendar you can access using your Google Calendar
+            https://www.googleapis.com/auth/calendar.readonly: See and download any calendar
+              you can access using your Google Calendar
             https://www.googleapis.com/auth/calendar.settings.readonly: View your Calendar settings
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

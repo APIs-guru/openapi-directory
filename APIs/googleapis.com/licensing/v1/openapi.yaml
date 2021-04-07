@@ -6,7 +6,8 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Google Enterprise License Manager API's allows you to license apps for all the users of a domain managed by you.
+  description: The Google Enterprise License Manager API's allows you to license
+    apps for all the users of a domain managed by you.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -48,13 +49,15 @@ paths:
       description: Assign a license.
       operationId: licensing.licenseAssignments.insert
       parameters:
-        - description: A product's unique identifier. For more information about products in this version of the API, see Products and SKUs.
+        - description: A product's unique identifier. For more information about products
+            in this version of the API, see Products and SKUs.
           in: path
           name: productId
           required: true
           schema:
             type: string
-        - description: A product SKU's unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.
+        - description: A product SKU's unique identifier. For more information about
+            available SKUs in this version of the API, see Products and SKUs.
           in: path
           name: skuId
           required: true
@@ -84,19 +87,26 @@ paths:
       description: Revoke a license.
       operationId: licensing.licenseAssignments.delete
       parameters:
-        - description: A product's unique identifier. For more information about products in this version of the API, see Products and SKUs.
+        - description: A product's unique identifier. For more information about products
+            in this version of the API, see Products and SKUs.
           in: path
           name: productId
           required: true
           schema:
             type: string
-        - description: A product SKU's unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.
+        - description: A product SKU's unique identifier. For more information about
+            available SKUs in this version of the API, see Products and SKUs.
           in: path
           name: skuId
           required: true
           schema:
             type: string
-        - description: The user's current primary email address. If the user's email address changes, use the new email address in your API requests. Since a `userId` is subject to change, do not use a `userId` value as a key for persistent data. This key could break if the current user's email address changes. If the `userId` is suspended, the license status changes.
+        - description: The user's current primary email address. If the user's email
+            address changes, use the new email address in your API requests.
+            Since a `userId` is subject to change, do not use a `userId` value
+            as a key for persistent data. This key could break if the current
+            user's email address changes. If the `userId` is suspended, the
+            license status changes.
           in: path
           name: userId
           required: true
@@ -120,19 +130,26 @@ paths:
       description: Get a specific user's license by product SKU.
       operationId: licensing.licenseAssignments.get
       parameters:
-        - description: A product's unique identifier. For more information about products in this version of the API, see Products and SKUs.
+        - description: A product's unique identifier. For more information about products
+            in this version of the API, see Products and SKUs.
           in: path
           name: productId
           required: true
           schema:
             type: string
-        - description: A product SKU's unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.
+        - description: A product SKU's unique identifier. For more information about
+            available SKUs in this version of the API, see Products and SKUs.
           in: path
           name: skuId
           required: true
           schema:
             type: string
-        - description: The user's current primary email address. If the user's email address changes, use the new email address in your API requests. Since a `userId` is subject to change, do not use a `userId` value as a key for persistent data. This key could break if the current user's email address changes. If the `userId` is suspended, the license status changes.
+        - description: The user's current primary email address. If the user's email
+            address changes, use the new email address in your API requests.
+            Since a `userId` is subject to change, do not use a `userId` value
+            as a key for persistent data. This key could break if the current
+            user's email address changes. If the `userId` is suspended, the
+            license status changes.
           in: path
           name: userId
           required: true
@@ -165,22 +182,30 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Reassign a user's product SKU with a different SKU in the same product. This method supports patch semantics.
+      description: Reassign a user's product SKU with a different SKU in the same
+        product. This method supports patch semantics.
       operationId: licensing.licenseAssignments.patch
       parameters:
-        - description: A product's unique identifier. For more information about products in this version of the API, see Products and SKUs.
+        - description: A product's unique identifier. For more information about products
+            in this version of the API, see Products and SKUs.
           in: path
           name: productId
           required: true
           schema:
             type: string
-        - description: A product SKU's unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.
+        - description: A product SKU's unique identifier. For more information about
+            available SKUs in this version of the API, see Products and SKUs.
           in: path
           name: skuId
           required: true
           schema:
             type: string
-        - description: The user's current primary email address. If the user's email address changes, use the new email address in your API requests. Since a `userId` is subject to change, do not use a `userId` value as a key for persistent data. This key could break if the current user's email address changes. If the `userId` is suspended, the license status changes.
+        - description: The user's current primary email address. If the user's email
+            address changes, use the new email address in your API requests.
+            Since a `userId` is subject to change, do not use a `userId` value
+            as a key for persistent data. This key could break if the current
+            user's email address changes. If the `userId` is suspended, the
+            license status changes.
           in: path
           name: userId
           required: true
@@ -209,19 +234,26 @@ paths:
       description: Reassign a user's product SKU with a different SKU in the same product.
       operationId: licensing.licenseAssignments.update
       parameters:
-        - description: A product's unique identifier. For more information about products in this version of the API, see Products and SKUs.
+        - description: A product's unique identifier. For more information about products
+            in this version of the API, see Products and SKUs.
           in: path
           name: productId
           required: true
           schema:
             type: string
-        - description: A product SKU's unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.
+        - description: A product SKU's unique identifier. For more information about
+            available SKUs in this version of the API, see Products and SKUs.
           in: path
           name: skuId
           required: true
           schema:
             type: string
-        - description: The user's current primary email address. If the user's email address changes, use the new email address in your API requests. Since a `userId` is subject to change, do not use a `userId` value as a key for persistent data. This key could break if the current user's email address changes. If the `userId` is suspended, the license status changes.
+        - description: The user's current primary email address. If the user's email
+            address changes, use the new email address in your API requests.
+            Since a `userId` is subject to change, do not use a `userId` value
+            as a key for persistent data. This key could break if the current
+            user's email address changes. If the `userId` is suspended, the
+            license status changes.
           in: path
           name: userId
           required: true
@@ -251,32 +283,41 @@ paths:
       description: List all users assigned licenses for a specific product SKU.
       operationId: licensing.licenseAssignments.listForProductAndSku
       parameters:
-        - description: A product's unique identifier. For more information about products in this version of the API, see Products and SKUs.
+        - description: A product's unique identifier. For more information about products
+            in this version of the API, see Products and SKUs.
           in: path
           name: productId
           required: true
           schema:
             type: string
-        - description: A product SKU's unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.
+        - description: A product SKU's unique identifier. For more information about
+            available SKUs in this version of the API, see Products and SKUs.
           in: path
           name: skuId
           required: true
           schema:
             type: string
-        - description: Customer's `customerId`. A previous version of this API accepted the primary domain name as a value for this field. If the customer is suspended, the server returns an error.
+        - description: Customer's `customerId`. A previous version of this API accepted
+            the primary domain name as a value for this field. If the customer
+            is suspended, the server returns an error.
           in: query
           name: customerId
           required: true
           schema:
             type: string
-        - description: The `maxResults` query string determines how many entries are returned on each page of a large response. This is an optional parameter. The value must be a positive number.
+        - description: The `maxResults` query string determines how many entries are
+            returned on each page of a large response. This is an optional
+            parameter. The value must be a positive number.
           in: query
           name: maxResults
           schema:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Token to fetch the next page of data. The `maxResults` query string is related to the `pageToken` since `maxResults` determines how many entries are returned on each page. This is an optional query string. If not specified, the server returns the first page.
+        - description: Token to fetch the next page of data. The `maxResults` query string
+            is related to the `pageToken` since `maxResults` determines how many
+            entries are returned on each page. This is an optional query string.
+            If not specified, the server returns the first page.
           in: query
           name: pageToken
           schema:
@@ -312,26 +353,34 @@ paths:
       description: List all users assigned licenses for a specific product SKU.
       operationId: licensing.licenseAssignments.listForProduct
       parameters:
-        - description: A product's unique identifier. For more information about products in this version of the API, see Products and SKUs.
+        - description: A product's unique identifier. For more information about products
+            in this version of the API, see Products and SKUs.
           in: path
           name: productId
           required: true
           schema:
             type: string
-        - description: Customer's `customerId`. A previous version of this API accepted the primary domain name as a value for this field. If the customer is suspended, the server returns an error.
+        - description: Customer's `customerId`. A previous version of this API accepted
+            the primary domain name as a value for this field. If the customer
+            is suspended, the server returns an error.
           in: query
           name: customerId
           required: true
           schema:
             type: string
-        - description: The `maxResults` query string determines how many entries are returned on each page of a large response. This is an optional parameter. The value must be a positive number.
+        - description: The `maxResults` query string determines how many entries are
+            returned on each page of a large response. This is an optional
+            parameter. The value must be a positive number.
           in: query
           name: maxResults
           schema:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Token to fetch the next page of data. The `maxResults` query string is related to the `pageToken` since `maxResults` determines how many entries are returned on each page. This is an optional query string. If not specified, the server returns the first page.
+        - description: Token to fetch the next page of data. The `maxResults` query string
+            is related to the `pageToken` since `maxResults` determines how many
+            entries are returned on each page. This is an optional query string.
+            If not specified, the server returns the first page.
           in: query
           name: pageToken
           schema:
@@ -402,7 +451,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -420,7 +471,9 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
@@ -439,7 +492,12 @@ components:
         type: string
   schemas:
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining
+        duplicated empty messages in your APIs. A typical example is to use it
+        as the request or the response type of an API method. For instance:
+        service Foo { rpc Bar(google.protobuf.Empty) returns
+        (google.protobuf.Empty); } The JSON representation for `Empty` is empty
+        JSON object `{}`."
       properties: {}
       type: object
     LicenseAssignment:
@@ -450,10 +508,12 @@ components:
           type: string
         kind:
           default: licensing#licenseAssignment
-          description: Identifies the resource as a LicenseAssignment, which is `licensing#licenseAssignment`.
+          description: Identifies the resource as a LicenseAssignment, which is
+            `licensing#licenseAssignment`.
           type: string
         productId:
-          description: A product's unique identifier. For more information about products in this version of the API, see Product and SKU IDs.
+          description: A product's unique identifier. For more information about products
+            in this version of the API, see Product and SKU IDs.
           type: string
         productName:
           description: Display Name of the product.
@@ -462,13 +522,19 @@ components:
           description: Link to this page.
           type: string
         skuId:
-          description: A product SKU's unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs.
+          description: A product SKU's unique identifier. For more information about
+            available SKUs in this version of the API, see Products and SKUs.
           type: string
         skuName:
           description: Display Name of the sku of the product.
           type: string
         userId:
-          description: The user's current primary email address. If the user's email address changes, use the new email address in your API requests. Since a `userId` is subject to change, do not use a `userId` value as a key for persistent data. This key could break if the current user's email address changes. If the `userId` is suspended, the license status changes.
+          description: The user's current primary email address. If the user's email
+            address changes, use the new email address in your API requests.
+            Since a `userId` is subject to change, do not use a `userId` value
+            as a key for persistent data. This key could break if the current
+            user's email address changes. If the `userId` is suspended, the
+            license status changes.
           type: string
       type: object
     LicenseAssignmentInsert:
@@ -493,7 +559,11 @@ components:
           description: Identifies the resource as a collection of LicenseAssignments.
           type: string
         nextPageToken:
-          description: The token that you must submit in a subsequent request to retrieve additional license results matching your query parameters. The `maxResults` query string is related to the `nextPageToken` since `maxResults` determines how many entries are returned on each next page.
+          description: The token that you must submit in a subsequent request to retrieve
+            additional license results matching your query parameters. The
+            `maxResults` query string is related to the `nextPageToken` since
+            `maxResults` determines how many entries are returned on each next
+            page.
           type: string
       type: object
   securitySchemes:

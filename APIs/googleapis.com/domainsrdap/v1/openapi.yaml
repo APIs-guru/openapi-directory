@@ -6,7 +6,8 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Read-only public API that lets users search for information about domain names.
+  description: Read-only public API that lets users search for information about
+    domain names.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -41,7 +42,8 @@ tags:
 paths:
   "/v1/autnum/{autnumId}":
     get:
-      description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
+      description: The RDAP API recognizes this command from the RDAP specification
+        but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.autnum.get
       parameters:
         - in: path
@@ -104,7 +106,8 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1/domains:
     get:
-      description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
+      description: The RDAP API recognizes this command from the RDAP specification
+        but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.getDomains
       responses:
         "200":
@@ -129,7 +132,8 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1/entities:
     get:
-      description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
+      description: The RDAP API recognizes this command from the RDAP specification
+        but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.getEntities
       responses:
         "200":
@@ -154,7 +158,8 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/entity/{entityId}":
     get:
-      description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
+      description: The RDAP API recognizes this command from the RDAP specification
+        but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.entity.get
       parameters:
         - in: path
@@ -210,7 +215,8 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1/ip:
     get:
-      description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
+      description: The RDAP API recognizes this command from the RDAP specification
+        but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.getIp
       responses:
         "200":
@@ -235,7 +241,8 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/ip/{ipId}/{ipId1}":
     get:
-      description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
+      description: The RDAP API recognizes this command from the RDAP specification
+        but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.ip.get
       parameters:
         - in: path
@@ -271,7 +278,8 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/nameserver/{nameserverId}":
     get:
-      description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
+      description: The RDAP API recognizes this command from the RDAP specification
+        but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.nameserver.get
       parameters:
         - in: path
@@ -302,7 +310,8 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1/nameservers:
     get:
-      description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
+      description: The RDAP API recognizes this command from the RDAP specification
+        but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.getNameservers
       responses:
         "200":
@@ -365,7 +374,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -383,7 +394,9 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
@@ -402,17 +415,36 @@ components:
         type: string
   schemas:
     HttpBody:
-      description: "Message that represents an arbitrary HTTP body. It should only be used for payload formats that can't be represented as JSON, such as raw binary or an HTML page. This message can be used both in streaming and non-streaming API methods in the request as well as the response. It can be used as a top-level request field, which is convenient if one wants to extract parameters from either the URL or HTTP template into the request fields and also want access to the raw HTTP body. Example: message GetResourceRequest { // A unique request id. string request_id = 1; // The raw HTTP body is bound to this field. google.api.HttpBody http_body = 2; } service ResourceService { rpc GetResource(GetResourceRequest) returns (google.api.HttpBody); rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty); } Example with streaming methods: service CaldavService { rpc GetCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); rpc UpdateCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); } Use of this type only changes how the request and response bodies are handled, all other features will continue to work unchanged."
+      description: "Message that represents an arbitrary HTTP body. It should only be
+        used for payload formats that can't be represented as JSON, such as raw
+        binary or an HTML page. This message can be used both in streaming and
+        non-streaming API methods in the request as well as the response. It can
+        be used as a top-level request field, which is convenient if one wants
+        to extract parameters from either the URL or HTTP template into the
+        request fields and also want access to the raw HTTP body. Example:
+        message GetResourceRequest { // A unique request id. string request_id =
+        1; // The raw HTTP body is bound to this field. google.api.HttpBody
+        http_body = 2; } service ResourceService { rpc
+        GetResource(GetResourceRequest) returns (google.api.HttpBody); rpc
+        UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty); }
+        Example with streaming methods: service CaldavService { rpc
+        GetCalendar(stream google.api.HttpBody) returns (stream
+        google.api.HttpBody); rpc UpdateCalendar(stream google.api.HttpBody)
+        returns (stream google.api.HttpBody); } Use of this type only changes
+        how the request and response bodies are handled, all other features will
+        continue to work unchanged."
       properties:
         contentType:
-          description: The HTTP Content-Type header value specifying the content type of the body.
+          description: The HTTP Content-Type header value specifying the content type of
+            the body.
           type: string
         data:
           description: The HTTP request/response body as raw binary.
           format: byte
           type: string
         extensions:
-          description: Application specific response metadata. Must be set in the first response for streaming APIs.
+          description: Application specific response metadata. Must be set in the first
+            response for streaming APIs.
           items:
             additionalProperties:
               description: Properties of the object. Contains field @type with type URL.
@@ -420,7 +452,8 @@ components:
           type: array
       type: object
     Link:
-      description: Links object defined in [section 4.2 of RFC 7483](https://tools.ietf.org/html/rfc7483#section-4.2).
+      description: Links object defined in [section 4.2 of RFC
+        7483](https://tools.ietf.org/html/rfc7483#section-4.2).
       properties:
         href:
           description: 'Target URL of a link. Example: "http://example.com/previous".'
@@ -441,11 +474,13 @@ components:
           description: 'Content type of the link. Example: "application/json".'
           type: string
         value:
-          description: 'URL giving context for the link. Example: "http://example.com/current".'
+          description: 'URL giving context for the link. Example:
+            "http://example.com/current".'
           type: string
       type: object
     Notice:
-      description: Notices object defined in [section 4.3 of RFC 7483](https://tools.ietf.org/html/rfc7483#section-4.3).
+      description: Notices object defined in [section 4.3 of RFC
+        7483](https://tools.ietf.org/html/rfc7483#section-4.3).
       properties:
         description:
           description: Description of the notice.
@@ -461,7 +496,11 @@ components:
           description: 'Title of a notice. Example: "Terms of Service".'
           type: string
         type:
-          description: 'Type values defined in [section 10.2.1 of RFC 7483](https://tools.ietf.org/html/rfc7483#section-10.2.1) specific to a whole response: "result set truncated due to authorization", "result set truncated due to excessive load", "result set truncated due to unexplainable reasons".'
+          description: 'Type values defined in [section 10.2.1 of RFC
+            7483](https://tools.ietf.org/html/rfc7483#section-10.2.1) specific
+            to a whole response: "result set truncated due to authorization",
+            "result set truncated due to excessive load", "result set truncated
+            due to unexplainable reasons".'
           type: string
       type: object
     RdapResponse:
@@ -480,7 +519,9 @@ components:
           $ref: "#/components/schemas/HttpBody"
           description: HTTP response with content type set to "application/json+rdap".
         lang:
-          description: Error language code. Error response info fields are defined in [section 6 of RFC 7483](https://tools.ietf.org/html/rfc7483#section-6).
+          description: Error language code. Error response info fields are defined in
+            [section 6 of RFC
+            7483](https://tools.ietf.org/html/rfc7483#section-6).
           type: string
         notices:
           description: Notices applying to this response.

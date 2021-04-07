@@ -327,13 +327,6 @@ components:
           description: The resource name of the created evaluation.
           type: string
       type: object
-    GoogleCloudDocumentaiUiv1beta3SampleDatasetMetadata:
-      description: The long running operation metadata for SampleDataset.
-      properties:
-        commonMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
-      type: object
     GoogleCloudDocumentaiUiv1beta3SetDefaultProcessorVersionMetadata:
       description: The long running operation metadata for set default processor version method.
       properties:
@@ -1210,7 +1203,7 @@ components:
           format: float
           type: number
         y:
-          description: Y coordinate.
+          description: Y coordinate (starts from the top of the image).
           format: float
           type: number
       type: object
@@ -1269,7 +1262,7 @@ components:
           format: int32
           type: integer
         y:
-          description: Y coordinate.
+          description: Y coordinate (starts from the top of the image).
           format: int32
           type: integer
       type: object
@@ -2046,7 +2039,7 @@ components:
           format: float
           type: number
         y:
-          description: Y coordinate.
+          description: Y coordinate (starts from the top of the image).
           format: float
           type: number
       type: object
@@ -2176,7 +2169,7 @@ components:
           format: int32
           type: integer
         y:
-          description: Y coordinate.
+          description: Y coordinate (starts from the top of the image).
           format: int32
           type: integer
       type: object

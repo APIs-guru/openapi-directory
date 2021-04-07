@@ -718,7 +718,7 @@ components:
       properties:
         adaptation:
           $ref: "#/components/schemas/SpeechAdaptation"
-          description: Speech adaptation configuration improves the accuracy of speech recognition. When speech adaptation is set it supersedes the `speech_contexts` field. For more information, see the [speech adaptation](https://cloud.google.com/speech-to-text/docs/context-strength) documentation.
+          description: Speech adaptation configuration improves the accuracy of speech recognition. When speech adaptation is set it supersedes the `speech_contexts` field. For more information, see the [speech adaptation](https://cloud.google.com/speech-to-text/docs/adaptation) documentation.
         alternativeLanguageCodes:
           description: "A list of up to 3 additional [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tags, listing possible alternative languages of the supplied audio. See [Language Support](https://cloud.google.com/speech-to-text/docs/languages) for a list of the currently supported language codes. If alternative languages are listed, recognition result will contain recognition in the most likely language detected including the main language_code. The recognition result will include the language tag of the language detected in the audio. Note: This feature is only supported for Voice Command and Voice Search use cases and performance may vary for other use cases (e.g., phone call transcription)."
           items:
@@ -743,6 +743,12 @@ components:
           type: boolean
         enableSpeakerDiarization:
           description: "If 'true', enables speaker detection for each recognized word in the top alternative of the recognition result using a speaker_tag provided in the WordInfo. Note: Use diarization_config instead."
+          type: boolean
+        enableSpokenEmojis:
+          description: The spoken emoji behavior for the call If not set, uses default behavior based on model of choice If 'true', adds spoken emoji formatting for the request. This will replace spoken emojis with the corresponding Unicode symbols in the final transcript. If 'false', spoken emojis are not replaced.
+          type: boolean
+        enableSpokenPunctuation:
+          description: The spoken punctuation behavior for the call If not set, uses default behavior based on model of choice e.g. command_and_search will enable spoken punctuation by default If 'true', replaces spoken punctuation with the corresponding symbols in the request. For example, "how are you question mark" becomes "how are you?". See https://cloud.google.com/speech-to-text/docs/spoken-punctuation for support. If 'false', spoken punctuation is not replaced.
           type: boolean
         enableWordConfidence:
           description: If `true`, the top result includes a list of words and the confidence for those words. If `false`, no word-level confidence information is returned. The default is `false`.
@@ -784,7 +790,7 @@ components:
           format: int32
           type: integer
         speechContexts:
-          description: Array of SpeechContext. A means to provide context to assist the speech recognition. For more information, see [speech adaptation](https://cloud.google.com/speech-to-text/docs/context-strength).
+          description: Array of SpeechContext. A means to provide context to assist the speech recognition. For more information, see [speech adaptation](https://cloud.google.com/speech-to-text/docs/adaptation).
           items:
             $ref: "#/components/schemas/SpeechContext"
           type: array
@@ -1012,7 +1018,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1020,6 +1026,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

@@ -107,17 +107,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: The standard list filter.
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like "displayName=tokyo", and is documented in more detail in [AIP-160](https://google.aip.dev/160).
           in: query
           name: filter
           schema:
             type: string
-        - description: The standard list page size.
+        - description: The maximum number of results to return. If not set, the service will select a default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: The standard list page token.
+        - description: A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page.
           in: query
           name: pageToken
           schema:
@@ -763,6 +763,15 @@ components:
         acceleratorType:
           description: Required. The type of hardware accelerators associated with this node.
           type: string
+        apiVersion:
+          description: Output only. The API version that created this Node.
+          enum:
+            - API_VERSION_UNSPECIFIED
+            - V1_ALPHA1
+            - V1
+            - V2_ALPHA1
+          readOnly: true
+          type: string
         cidrBlock:
           description: The CIDR block that the TPU node will use when selecting an IP address. This CIDR block must be a /29 block; the Compute Engine networks API forbids a smaller block, and using a larger block would be wasteful (a node can only consume one IP address). Errors will occur if the CIDR block has already been used for a currently existing TPU node, the CIDR block conflicts with any subnetworks in the user's provided network, or the provided network is peered with another network that is using that CIDR block.
           type: string
@@ -964,6 +973,7 @@ components:
             - EXECUTE_TIMED_OUT
             - MESH_BUILD_FAIL
             - HBM_OUT_OF_MEMORY
+            - PROJECT_ABUSE
           type: string
         workerId:
           description: A string used to uniquely distinguish a worker within a TPU node.
@@ -986,7 +996,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -994,6 +1004,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

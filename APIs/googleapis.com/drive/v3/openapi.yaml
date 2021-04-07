@@ -3063,9 +3063,8 @@ components:
         appProperties:
           additionalProperties:
             type: string
-          description: >-
+          description: |-
             A collection of arbitrary key-value pairs which are private to the requesting app.
-
             Entries with null values are cleared in update and copy requests. These properties can only be retrieved using an authenticated request. An authenticated request uses an access token obtained with a OAuth 2 client ID. You cannot use an API key to retrieve private properties.
           type: object
         capabilities:
@@ -3223,15 +3222,13 @@ components:
           description: The final component of fullFileExtension. This is only available for files with binary content in Google Drive.
           type: string
         folderColorRgb:
-          description: >-
+          description: |-
             The color for a folder as an RGB hex string. The supported colors are published in the folderColorPalette field of the About resource.
-
             If an unsupported color is specified, the closest color in the palette will be used instead.
           type: string
         fullFileExtension:
-          description: >-
+          description: |-
             The full file extension extracted from the name field. May contain multiple concatenated extensions, such as "tar.gz". This is only available for files with binary content in Google Drive.
-
             This is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension.
           type: string
         hasAugmentedPermissions:
@@ -3353,11 +3350,9 @@ components:
           description: The MD5 checksum for the content of the file. This is only applicable to files with binary content in Google Drive.
           type: string
         mimeType:
-          description: >-
+          description: |-
             The MIME type of the file.
-
             Google Drive will attempt to automatically detect an appropriate value from uploaded content if no value is provided. The value cannot be changed unless a new revision is uploaded.
-
             If a file is created with a Google Doc MIME type, the uploaded content will be imported if possible. The supported import formats are published in the About resource.
           type: string
         modifiedByMe:
@@ -3368,9 +3363,8 @@ components:
           format: date-time
           type: string
         modifiedTime:
-          description: >-
+          description: |-
             The last time the file was modified by anyone (RFC 3339 date-time).
-
             Note that setting modifiedTime will also update modifiedByMeTime for the user.
           format: date-time
           type: string
@@ -3389,9 +3383,8 @@ components:
             $ref: "#/components/schemas/User"
           type: array
         parents:
-          description: >-
+          description: |-
             The IDs of the parent folders which contain the file.
-
             If not specified as part of a create request, the file will be placed directly in the user's My Drive folder. If not specified as part of a copy request, the file will inherit any discoverable parents of the source file. Update requests must use the addParents and removeParents parameters to modify the parents list.
           items:
             type: string
@@ -3409,9 +3402,8 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: >-
+          description: |-
             A collection of arbitrary key-value pairs which are visible to all apps.
-
             Entries with null values are cleared in update and copy requests.
           type: object
         quotaBytesUsed:
@@ -3555,15 +3547,11 @@ components:
           description: Whether the account associated with this permission has been deleted. This field only pertains to user and group permissions.
           type: boolean
         displayName:
-          description: >-
+          description: |-
             The "pretty" name of the value of the permission. The following is a list of examples for each type of permission:  
-
             - user - User's full name, as defined for their Google account, such as "Joe Smith." 
-
             - group - Name of the Google Group, such as "The Company Administrators." 
-
             - domain - String domain name, such as "thecompany.com." 
-
             - anyone - No displayName is present.
           type: string
         domain:
@@ -3573,13 +3561,10 @@ components:
           description: The email address of the user or group to which this permission refers.
           type: string
         expirationTime:
-          description: >-
+          description: |-
             The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:  
-
             - They can only be set on user and group permissions 
-
             - The time must be in the future 
-
             - The time cannot be more than a year in the future
           format: date-time
           type: string
@@ -3601,25 +3586,18 @@ components:
                 description: The ID of the item from which this permission is inherited. This is an output-only field.
                 type: string
               permissionType:
-                description: >-
+                description: |-
                   The permission type for this user. While new values may be added in future, the following are currently possible:  
-
                   - file 
-
                   - member
                 type: string
               role:
-                description: >-
+                description: |-
                   The primary role for this user. While new values may be added in the future, the following are currently possible:  
-
                   - organizer 
-
                   - fileOrganizer 
-
                   - writer 
-
                   - commenter 
-
                   - reader
                 type: string
             type: object
@@ -3628,19 +3606,13 @@ components:
           description: A link to the user's profile photo, if available.
           type: string
         role:
-          description: >-
+          description: |-
             The role granted by this permission. While new values may be supported in the future, the following are currently allowed:  
-
             - owner 
-
             - organizer 
-
             - fileOrganizer 
-
             - writer 
-
             - commenter 
-
             - reader
           type: string
         teamDrivePermissionDetails:
@@ -3662,15 +3634,11 @@ components:
             type: object
           type: array
         type:
-          description: >-
+          description: |-
             The type of the grantee. Valid values are:  
-
             - user 
-
             - group 
-
             - domain 
-
             - anyone  When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn't extra information required for a anyone type.
           type: string
         view:
@@ -3697,11 +3665,9 @@ components:
       description: A reply to a comment on a file.
       properties:
         action:
-          description: >-
+          description: |-
             The action the reply performed to the parent comment. Valid values are:  
-
             - resolve 
-
             - reopen
           type: string
         author:
@@ -3761,9 +3727,8 @@ components:
           description: The ID of the revision.
           type: string
         keepForever:
-          description: >-
+          description: |-
             Whether to keep this revision forever, even if it is no longer the head revision. If not set, the revision will be automatically purged 30 days after newer content is uploaded. This can be set on a maximum of 200 revisions for a file.
-
             This field is only applicable to files with binary content in Drive.
           type: boolean
         kind:

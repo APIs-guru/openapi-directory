@@ -44,7 +44,9 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Clears all completed tasks from the specified task list. The affected tasks will be marked as 'hidden' and no longer be returned by default when retrieving all tasks for a task list.
+      description: Clears all completed tasks from the specified task list. The
+        affected tasks will be marked as 'hidden' and no longer be returned by
+        default when retrieving all tasks for a task list.
       operationId: tasks.tasks.clear
       parameters:
         - description: Task list identifier.
@@ -74,27 +76,34 @@ paths:
           required: true
           schema:
             type: string
-        - description: Upper bound for a task's completion date (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by completion date.
+        - description: Upper bound for a task's completion date (as a RFC 3339 timestamp)
+            to filter by. Optional. The default is not to filter by completion
+            date.
           in: query
           name: completedMax
           schema:
             type: string
-        - description: Lower bound for a task's completion date (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by completion date.
+        - description: Lower bound for a task's completion date (as a RFC 3339 timestamp)
+            to filter by. Optional. The default is not to filter by completion
+            date.
           in: query
           name: completedMin
           schema:
             type: string
-        - description: Upper bound for a task's due date (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by due date.
+        - description: Upper bound for a task's due date (as a RFC 3339 timestamp) to
+            filter by. Optional. The default is not to filter by due date.
           in: query
           name: dueMax
           schema:
             type: string
-        - description: Lower bound for a task's due date (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by due date.
+        - description: Lower bound for a task's due date (as a RFC 3339 timestamp) to
+            filter by. Optional. The default is not to filter by due date.
           in: query
           name: dueMin
           schema:
             type: string
-        - description: "Maximum number of task lists returned on one page. Optional. The default is 20 (max allowed: 100)."
+        - description: "Maximum number of task lists returned on one page. Optional. The
+            default is 20 (max allowed: 100)."
           in: query
           name: maxResults
           schema:
@@ -104,22 +113,29 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Flag indicating whether completed tasks are returned in the result. Optional. The default is True. Note that showHidden must also be True to show tasks completed in first party clients, such as the web UI and Google's mobile apps.
+        - description: Flag indicating whether completed tasks are returned in the result.
+            Optional. The default is True. Note that showHidden must also be
+            True to show tasks completed in first party clients, such as the web
+            UI and Google's mobile apps.
           in: query
           name: showCompleted
           schema:
             type: boolean
-        - description: Flag indicating whether deleted tasks are returned in the result. Optional. The default is False.
+        - description: Flag indicating whether deleted tasks are returned in the result.
+            Optional. The default is False.
           in: query
           name: showDeleted
           schema:
             type: boolean
-        - description: Flag indicating whether hidden tasks are returned in the result. Optional. The default is False.
+        - description: Flag indicating whether hidden tasks are returned in the result.
+            Optional. The default is False.
           in: query
           name: showHidden
           schema:
             type: boolean
-        - description: Lower bound for a task's last modification time (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by last modification time.
+        - description: Lower bound for a task's last modification time (as a RFC 3339
+            timestamp) to filter by. Optional. The default is not to filter by
+            last modification time.
           in: query
           name: updatedMin
           schema:
@@ -164,12 +180,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: Parent task identifier. If the task is created at the top level, this parameter is omitted. Optional.
+        - description: Parent task identifier. If the task is created at the top level,
+            this parameter is omitted. Optional.
           in: query
           name: parent
           schema:
             type: string
-        - description: Previous sibling task identifier. If the task is created at the first position among its siblings, this parameter is omitted. Optional.
+        - description: Previous sibling task identifier. If the task is created at the
+            first position among its siblings, this parameter is omitted.
+            Optional.
           in: query
           name: previous
           schema:
@@ -350,7 +369,9 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Moves the specified task to another position in the task list. This can include putting it as a child task under a new parent and/or move it to a different position among its sibling tasks.
+      description: Moves the specified task to another position in the task list. This
+        can include putting it as a child task under a new parent and/or move it
+        to a different position among its sibling tasks.
       operationId: tasks.tasks.move
       parameters:
         - description: Task list identifier.
@@ -365,12 +386,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: New parent task identifier. If the task is moved to the top level, this parameter is omitted. Optional.
+        - description: New parent task identifier. If the task is moved to the top level,
+            this parameter is omitted. Optional.
           in: query
           name: parent
           schema:
             type: string
-        - description: New previous sibling task identifier. If the task is moved to the first position among its siblings, this parameter is omitted. Optional.
+        - description: New previous sibling task identifier. If the task is moved to the
+            first position among its siblings, this parameter is omitted.
+            Optional.
           in: query
           name: previous
           schema:
@@ -394,7 +418,8 @@ paths:
       description: Returns all the authenticated user's task lists.
       operationId: tasks.tasklists.list
       parameters:
-        - description: "Maximum number of task lists returned on one page. Optional. The default is 20 (max allowed: 100)."
+        - description: "Maximum number of task lists returned on one page. Optional. The
+            default is 20 (max allowed: 100)."
           in: query
           name: maxResults
           schema:
@@ -435,7 +460,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new task list and adds it to the authenticated user's task lists.
+      description: Creates a new task list and adds it to the authenticated user's
+        task lists.
       operationId: tasks.tasklists.insert
       requestBody:
         content:
@@ -518,7 +544,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the authenticated user's specified task list. This method supports patch semantics.
+      description: Updates the authenticated user's specified task list. This method
+        supports patch semantics.
       operationId: tasks.tasklists.patch
       parameters:
         - description: Task list identifier.
@@ -615,7 +642,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -633,7 +662,9 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
@@ -654,19 +685,26 @@ components:
     Task:
       properties:
         completed:
-          description: Completion date of the task (as a RFC 3339 timestamp). This field is omitted if the task has not been completed.
+          description: Completion date of the task (as a RFC 3339 timestamp). This field
+            is omitted if the task has not been completed.
           type: string
         deleted:
-          description: Flag indicating whether the task has been deleted. The default is False.
+          description: Flag indicating whether the task has been deleted. The default is
+            False.
           type: boolean
         due:
-          description: Due date of the task (as a RFC 3339 timestamp). Optional. The due date only records date information; the time portion of the timestamp is discarded when setting the due date. It isn't possible to read or write the time that a task is due via the API.
+          description: Due date of the task (as a RFC 3339 timestamp). Optional. The due
+            date only records date information; the time portion of the
+            timestamp is discarded when setting the due date. It isn't possible
+            to read or write the time that a task is due via the API.
           type: string
         etag:
           description: ETag of the resource.
           type: string
         hidden:
-          description: Flag indicating whether the task is hidden. This is the case if the task had been marked completed when the task list was last cleared. The default is False. This field is read-only.
+          description: Flag indicating whether the task is hidden. This is the case if the
+            task had been marked completed when the task list was last cleared.
+            The default is False. This field is read-only.
           type: boolean
         id:
           description: Task identifier.
@@ -693,13 +731,22 @@ components:
           description: Notes describing the task. Optional.
           type: string
         parent:
-          description: Parent task identifier. This field is omitted if it is a top-level task. This field is read-only. Use the "move" method to move the task under a different parent or to the top level.
+          description: Parent task identifier. This field is omitted if it is a top-level
+            task. This field is read-only. Use the "move" method to move the
+            task under a different parent or to the top level.
           type: string
         position:
-          description: String indicating the position of the task among its sibling tasks under the same parent task or at the top level. If this string is greater than another task's corresponding position string according to lexicographical ordering, the task is positioned after the other task under the same parent task (or at the top level). This field is read-only. Use the "move" method to move the task to another position.
+          description: String indicating the position of the task among its sibling tasks
+            under the same parent task or at the top level. If this string is
+            greater than another task's corresponding position string according
+            to lexicographical ordering, the task is positioned after the other
+            task under the same parent task (or at the top level). This field is
+            read-only. Use the "move" method to move the task to another
+            position.
           type: string
         selfLink:
-          description: URL pointing to this task. Used to retrieve, update, or delete this task.
+          description: URL pointing to this task. Used to retrieve, update, or delete this
+            task.
           type: string
         status:
           description: Status of the task. This is either "needsAction" or "completed".
@@ -723,7 +770,8 @@ components:
           description: Type of the resource. This is always "tasks#taskList".
           type: string
         selfLink:
-          description: URL pointing to this task list. Used to retrieve, update, or delete this task list.
+          description: URL pointing to this task list. Used to retrieve, update, or delete
+            this task list.
           type: string
         title:
           description: Title of the task list.

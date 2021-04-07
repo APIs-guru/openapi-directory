@@ -6,7 +6,8 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Views Abusive Experience Report data, and gets a list of sites that have a significant number of abusive experiences.
+  description: Views Abusive Experience Report data, and gets a list of sites that
+    have a significant number of abusive experiences.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -65,7 +66,8 @@ paths:
       description: Gets a site's Abusive Experience Report summary.
       operationId: abusiveexperiencereport.sites.get
       parameters:
-        - description: "Required. The name of the site whose summary to get, e.g. `sites/http%3A%2F%2Fwww.google.com%2F`. Format: `sites/{site}`"
+        - description: "Required. The name of the site whose summary to get, e.g.
+            `sites/http%3A%2F%2Fwww.google.com%2F`. Format: `sites/{site}`"
           in: path
           name: name
           required: true
@@ -132,7 +134,9 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      description: API key. Your API key identifies your project and provides you with
+        API access, quota, and reports. Required unless you provide an OAuth 2.0
+        token.
       in: query
       name: key
       schema:
@@ -150,7 +154,9 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications.
+        Can be any arbitrary string assigned to a user, but should not exceed 40
+        characters.
       in: query
       name: quotaUser
       schema:
@@ -179,11 +185,15 @@ components:
             - FAILING
           type: string
         enforcementTime:
-          description: The time at which [enforcement](https://support.google.com/webtools/answer/7538608) against the site began or will begin. Not set when the filter_status is OFF.
+          description: The time at which
+            [enforcement](https://support.google.com/webtools/answer/7538608)
+            against the site began or will begin. Not set when the filter_status
+            is OFF.
           format: google-datetime
           type: string
         filterStatus:
-          description: The site's [enforcement status](https://support.google.com/webtools/answer/7538608).
+          description: The site's [enforcement
+            status](https://support.google.com/webtools/answer/7538608).
           enum:
             - UNKNOWN
             - ON
@@ -196,7 +206,11 @@ components:
           format: google-datetime
           type: string
         reportUrl:
-          description: A link to the full Abusive Experience Report for the site. Not set in ViolatingSitesResponse. Note that you must complete the [Search Console verification process](https://support.google.com/webmasters/answer/9008080) for the site before you can access the full report.
+          description: A link to the full Abusive Experience Report for the site. Not set
+            in ViolatingSitesResponse. Note that you must complete the [Search
+            Console verification
+            process](https://support.google.com/webmasters/answer/9008080) for
+            the site before you can access the full report.
           type: string
         reviewedSite:
           description: The name of the reviewed site, e.g. `google.com`.
